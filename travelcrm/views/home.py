@@ -1,0 +1,121 @@
+# -*-coding: utf-8-*-
+
+from pyramid.httpexceptions import (
+    HTTPFound,
+)
+from pyramid.security import (
+    remember,
+    forget,
+    authenticated_userid
+)
+from pyramid.view import view_config
+from pyramid.view import forbidden_view_config
+
+from ..resources import Root
+from ..models import User
+
+from ..forms.auth import LoginForm
+
+
+class Home(object):
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    @view_config(
+        request_method='GET',
+        context='..resources.Root',
+        renderer='travelcrm:templates/auth#login.pt',
+        layout='main_layout',
+        permission='view'
+    )
+    def index(self):
+        return {}
+
+    @view_config(
+        name='forgot',
+        request_method='GET',
+        context='..resources.Root',
+        renderer='travelcrm:templates/auth#forgot.pt',
+        layout='auth_layout'
+    )
+    def forgot(self):
+        # TODO: complete forgot functionality
+        return {}
+
+    @forbidden_view_config(
+        request_method="GET",
+        renderer="travelcrm:templates/auth#login.pt",
+        layout='auth_layout'
+    )
+    @view_config(
+        name='auth',
+        request_method='GET',
+        context='..resources.Root',
+        renderer='travelcrm:templates/auth#login.pt',
+        layout='auth_layout'
+    )
+    def auth(self):
+        if authenticated_userid(self.request):
+            return HTTPFound(
+                location=self.request.resource_url(self.context)
+            )
+
+        forgot_url = self.request.resource_url(
+            Root(self.request),
+            'forgot'
+        )
+        auth_url = self.request.resource_url(
+            Root(self.request),
+            'auth'
+        )
+        return {
+            'forgot_url': forgot_url,
+            'auth_url': auth_url
+        }
+
+    @view_config(
+        name='auth',
+        request_method='POST',
+        context='..resources.Root',
+        renderer='json',
+    )
+    def _auth(self):
+        _ = self.request.translate
+        schema = LoginForm()
+
+        controls = schema.deserialize(self.request.params)
+        user = User.by_username(controls.get('username'))
+
+        if (user
+            and user.validate_password(controls.get('password'))
+            and user.resource.is_active()
+            and user.groups
+        ):
+            self.request.response.headers = remember(self.request, user.rid)
+            return {
+                'redirect': self.request.resource_url(self.context),
+                'success_message': _(u"Success, wait...")
+            }
+        return {
+            'error_message': _(u'Invalid username or password'),
+        }
+
+    @view_config(
+        name='logout',
+        request_method='GET',
+        context='..resources.Root',
+        renderer='travelcrm:templates/auth#logout.pt'
+    )
+    def logout(self):
+        return {}
+
+    @view_config(
+        name='logout',
+        request_method='POST',
+        context='..resources.Root'
+    )
+    def _logout(self):
+        redirect_url = self.request.resource_url(Root(self.request))
+        return HTTPFound(location=redirect_url, headers=forget(self.request))

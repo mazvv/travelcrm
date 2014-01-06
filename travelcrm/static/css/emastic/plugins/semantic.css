@@ -1,0 +1,12 @@
+/* Just name all ID elements you will need in your site
+
+Emastic suports DIV inside DIV with same width.
+
+<div id="sideNav">
+<div class="dl20"> Hello World! </div>
+<div class="dl10"> Hello CSS! </div>
+<div>
+
+ */
+ 
+#header, #sideNav, #footer {float:left; display:inline;}

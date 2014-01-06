@@ -1,0 +1,151 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="travelcrm">
+
+    <tal:block metal:define-macro="index">
+        <div class="easyui-panel _container unselectable"
+            data-options="fit:true,border:false,iconCls:'fa fa-table'"
+            title="Employees"
+            i18n:attributes="title"
+            tal:define="
+                url request.resource_url(context, 'list');
+                uuid h.get_oid();
+                id_datagrid uuid;
+                id_datagrid_toolbar '{uuid}-toolbar'.format(uuid=uuid)">
+            <table metal:use-macro="datagrid.datagrid">
+                <metal:block metal:fill-slot="fields">
+                    <th data-options="field:'resourcetype.humanize',sortable:true,width:200" i18n:translate="">humanize</th>
+                    <th data-options="field:'resourcetype.name',sortable:true,width:200" i18n:translate="">name</th>
+                </metal:block>
+            </table>
+            
+            <div metal:use-macro="datagrid.toolbar">
+                <metal:block metal:fill-slot="actions">
+                    <a href="#" class="button primary _dialog_open" tal:attributes="data-url request.resource_url(context, 'resource_type', 'add')"><span class="fa fa-plus"></span> <span  i18n:translate="">Add New</span></a>
+                    <div class="button-group">
+                        <a href="#" class="button _dialog_open _with_row" tal:attributes="data-url request.resource_url(context, 'resource_type', 'edit')"><span class="fa fa-pencil"></span> <span  i18n:translate="">Edit</span></a>
+                        <a href="#" class="button danger _dialog_open _with_rows" tal:attributes="data-url request.resource_url(context, 'delete')"><span class="fa fa-times"></span> <span  i18n:translate="">Delete</span></a>
+                    </div>
+                </metal:block>
+            </div>
+        </div>
+    </tal:block>
+
+    <tal:block metal:define-macro="add">
+        <div class="dl40 easyui-dialog"
+            title="Add Resource Type"
+            i18n:attributes="title"
+            data-options="modal:true,draggable:false,resizable:false,iconCls:'fa fa-pencil-square-o'">
+            <form class="_ajax" tal:attributes="action request.url" method="post" autocomplete="off">
+                <div class="form-field">
+                    <div class="dl15">
+                        <label class="required" i18n:translate="" for="humanize">humanize</label>
+                    </div>
+                    <div class="ml15">
+                        <input type="text" name="humanize" class="text w20" value="" id="humanize"/>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        <label class="required" i18n:translate="" for="name">name</label>
+                    </div>
+                    <div class="ml15">
+                        <input type="text" name="name" class="text w20" value="" id="name"/>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        <label class="required" i18n:translate="" for="resource">resource</label>
+                    </div>
+                    <div class="ml15">
+                        <input type="text" name="resource" class="text w20" value="" id="resource"/>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        <label i18n:translate="" for="description">description</label>
+                    </div>
+                    <div class="ml15">
+                        <textarea name="description" class="text w20" id="deacription" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form-field" tal:define="value None;oid 'status';name 'status'">
+                    <div class="dl15">
+                        <label i18n:translate="" for="${oid}">status</label>
+                    </div>
+                    <div class="ml15">
+                        <metal:block metal:use-macro="fields.status"></metal:block>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <div class="dl20 status-bar"></div>
+                    <div class="ml20 tr button-group">
+                        <input type="submit" class="button" name="save" value="Save" i18n:attributes="value"/>
+                        <input type="reset" class="button danger" name="cancel" value="Cancel" i18n:attributes="value"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </tal:block>
+
+    <tal:block metal:define-macro="edit">
+        <div class="dl40 easyui-dialog"
+            title="Edit Resource Type"
+            i18n:attributes="title"
+            data-options="modal:true,draggable:false,resizable:false,iconCls:'fa fa-pencil-square-o'">
+            <form class="_ajax" tal:attributes="action request.url" method="post" autocomplete="off">
+                <div class="form-field">
+                    <div class="dl15">
+                        <label class="required" i18n:translate="" for="humanize">humanize</label>
+                    </div>
+                    <div class="ml15">
+                        <input type="text" name="humanize" class="text w20" value="" id="humanize" tal:attributes="value item.humanize"/>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        <label class="required" i18n:translate="" for="name">name</label>
+                    </div>
+                    <div class="ml15">
+                        <input type="text" name="name" class="text w20" value="" id="name" tal:attributes="value item.name"/>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        <label class="required" i18n:translate="" for="resource">resource</label>
+                    </div>
+                    <div class="ml15">
+                        <input type="text" name="resource" class="text w20" value="" id="resource" tal:attributes="value item.resource_full"/>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        <label i18n:translate="" for="description">description</label>
+                    </div>
+                    <div class="ml15">
+                        <textarea name="description" class="text w20" id="deacription" tal:content="item.description" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form-field" tal:define="value item.resource_obj.status;oid 'status';name 'status'">
+                    <div class="dl15">
+                        <label i18n:translate="" for="${oid}">status</label>
+                    </div>
+                    <div class="ml15">
+                        <metal:block metal:use-macro="fields.status"></metal:block>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <div class="dl20 status-bar"></div>
+                    <div class="ml20 tr button-group">
+                        <input type="submit" class="button" name="save" value="Save" i18n:attributes="value"/>
+                        <input type="reset" class="button danger" name="cancel" value="Cancel" i18n:attributes="value"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </tal:block>
+
+</html>

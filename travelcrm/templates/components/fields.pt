@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="travelcrm">
+
+    <metal:block metal:define-macro="status">
+        <!--!
+            Parameters:
+                value
+                name
+                oid
+        -->
+        <select class="easyui-combobox text w10" name="${name}" id="${oid}"
+            data-options="panelHeight:'auto',editable:false">
+            <option tal:repeat="option [(0, 'active'), (1, 'disabled'), (2, 'draft'), (3, 'error')]" 
+                selected="selected"
+                tal:attributes="value option[0]; selected option[0] == value or None"
+                tal:content="option[1]"></option>
+        </select>
+    </metal:block>
+
+    <metal:block metal:define-macro="resources_types">
+        <!--!
+            Parameters:
+                value
+                name
+                oid
+        -->
+        <select class="easyui-combobox text w20" name="${name}" id="${oid}"
+            data-options="valueField:'rid',textField:'name',url:'/resources_types/combobox'">
+        </select>
+    </metal:block>
+
+</html>

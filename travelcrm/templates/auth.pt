@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="travelcrm">
+    <tal:block metal:define-macro="login">
+        <tal:block metal:use-macro="main_template">
+            <tal:block metal:fill-slot="window">
+                <div 
+                    class="easyui-window dl30" title="Autorization"
+                    data-options="closable:false,minimizable:false,maximizable:false,collapsible:false,draggable:false,resizable:false,iconCls:'fa fa-user'"
+                    i18n:attributes="title">
+                    <form tal:attributes="action auth_url" class="_ajax" method="post" autocomplete="off">
+                        <div class="form-field">
+                            <div class="dl10">
+                                <label i18n:translate="" for="username">username</label>
+                            </div>
+                            <div class="ml10 tr">
+                                <input type="text" name="username" class="text w15" placeholder="My Username" value="" i18n:attributes="placeholder" id="username"/>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <div class="dl10">
+                                <label i18n:translate="" for="password">password</label>
+                            </div>
+                            <div class="ml10 tr">
+                                <input type="password" name="password" class="text w15" value="my password" id="password"/>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <a tal:attributes="href forgot_url" i18n:translate="">Forgot password?</a>
+                        </div>
+                        <div class="form-buttons">
+                            <div class="dl20 status-bar">
+                                <i class="fa fa-info-circle fa-lg"></i> <span i18n:translate="" tal:omit-tag="">Please, enter username and password</span>
+                            </div>
+                            <div class="ml20 tr">
+                                <input type="submit" class="button" name="login" value="Login" i18n:attributes="value"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </tal:block>
+        </tal:block>
+    </tal:block>
+    
+    <tal:block metal:define-macro="logout">
+        <div class="dl30 easyui-dialog"
+            title="Logout Confirmation"
+            i18n:attributes="title"
+            data-options="modal:true,draggable:false,resizable:false,iconCls:'fa fa-sign-out'">
+            <form tal:attributes="action '/logout'" method="post" autocomplete="off">
+                <div class="p1 tc">
+                    <i class="fa fa-info-circle fa-lg"></i> <span i18n:translate="">Do you really want to logout?</span>
+                </div>
+                <div class="form-buttons">
+                    <div class="dl20 status-bar"></div>
+                    <div class="ml20 tr button-group">
+                        <input type="submit" class="button" name="save" value="Logout" i18n:attributes="value"/>
+                        <input type="reset" class="button danger" name="cancel" value="Cancel" i18n:attributes="value"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </tal:block>
+    
+</html>

@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="admin">
+    
+    <tal:block metal:define-macro="header">
+        <div class="dl20 logo">
+            <span class="logo-big">Travel<span class="lipstick">CRM</span></span>
+        </div>
+        <div class="dr10 tr" tal:condition="hasattr(context, 'is_logged') and context.is_logged()">
+            <div class="logout">
+                <a href="/logout" class="dashed-link _dialog_open" tal:attributes="data-url '/logout'" i18n:translate="">logout</a>
+                <span class="fa fa-sign-out"></span>
+            </div>
+        </div>
+    </tal:block>
+    
+    <tal:block metal:define-macro="footer">
+        <div class="main tc">
+            &copy;2013 Travelcrm | ver. ${h.get_package_version('travelcrm')}
+        </div>
+    </tal:block>
+    
+    <tal:block metal:define-macro="navigation" tal:define="key None">
+        <tal:block metal:define-macro="navigation_items" tal:repeat="item navigation[key]">
+            <tal:block tal:switch="navigation.get(item.rid) is None">
+                <div tal:omit-tag="not key">
+                    <a tal:case="True" href="#" class="${'easyui-linkbutton' if not item._groups_navigations_rid else 'easyui-menubutton'} _tab_open"
+                        tal:attributes="id '_navigation_item_%d' % item.rid; iconCls item.icon_cls"
+                        data-url="${item.url}" data-index="${item.url}" data-title="${item.name}" data-options="plain:true">
+                        <span tal:content="item.name" tal:omit-tag="key"/>
+                    </a>
+                    <a tal:case="False" href="#" class="easyui-menubutton _tab_open"
+                        tal:attributes="id '_navigation_item_%d' % item.rid; iconCls item.icon_cls"
+                        data-options="menu:'${'#_navigation_submenu_%d' % item.rid}'"
+                        data-url="${item.url}" data-index="${item.url}" data-title="${item.name}">
+                        <span tal:content="item.name" tal:omit-tag="key"/>
+                    </a>
+                </div>
+            </tal:block>
+            <div tal:define="key item.rid"
+                tal:attributes="id '_navigation_submenu_%d' % item.rid"
+                tal:condition="navigation.get(item.rid)"
+                class="w150p">
+                <tal:block metal:use-macro="template.macros['navigation_items']"/>
+            </div>
+        </tal:block>
+    </tal:block>
+    
+</html>

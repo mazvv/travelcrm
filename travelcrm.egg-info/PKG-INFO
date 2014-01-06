@@ -1,0 +1,35 @@
+Metadata-Version: 1.0
+Name: travelcrm
+Version: 0.6-dev
+Summary: travelcrm
+Home-page: http://www.travelcrm.org.ua
+Author: Vitalii Mazur
+Author-email: vitalii.mazur@gmail.com
+License: UNKNOWN
+Description: travelcrm README
+        ==================
+        
+        Getting Started
+        ---------------
+        
+        - cd <directory containing this file>
+        
+        - $VENV/bin/python setup.py develop
+        
+        - $VENV/bin/initialize_travelcrm_db development.ini
+        
+        - $VENV/bin/pserve development.ini
+        
+        
+        
+        0.0
+        ---
+        
+        -  Initial version
+        
+Keywords: web wsgi bfg pylons pyramid
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Framework :: Pyramid
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application

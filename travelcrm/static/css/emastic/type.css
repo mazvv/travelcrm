@@ -1,0 +1,52 @@
+
+body { font:75%/1.5em Arial, Helvetica, sans-serif;
+font-size-adjust:none;
+font-style:normal;
+font-variant:normal;
+font-weight:normal;
+ }
+
+p { padding:0 0 1.5em 1em;color:#111; word-spacing:0.08em;   letter-spacing:0.03em; }
+p img       { float: left; margin: 0 1em 1em 0; padding: 0; }
+p img.right { float: right; margin: 0 0 1em 1em;  }
+
+h1,h2{ font-weight:normal; color: #333; font-family:Georgia, "Times New Roman", serif; letter-spacing: 2px; word-spacing:0.1em;  }
+h3,h4,h5,h6 { font-weight: normal; color: #333; font-family:Georgia, "Times New Roman", serif; }
+
+
+h1 { font-size: 2.2em;  margin-bottom: 0.682em; }
+h2 { font-size: 1.9em;  margin-bottom: 0.79em; }
+h3 { font-size: 1.7em;  margin-bottom: 0.882em; }
+h4 { font-size: 1.4em;  margin-bottom: 1.071em; }
+h5,h6 { font-size: 1.3em;  margin-bottom: 1,154em; }
+
+
+li ul, 
+li ol  { margin:0 1.5em; }
+ul, ol { margin: 0 1.5em 1.5em 1.5em; }
+
+
+dl { margin: 0 0 1.5em 0; }
+dl dt { font-weight: bold; }
+dl dd { margin-left: 1.5em; }
+
+a { color: #035292; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+abbr, acronym { border-bottom: 1px dotted #000; }
+address { margin-top: 1.5em; font-style: italic; }
+del { color: #000; }
+
+
+blockquote { padding-left:1.5em; margin: 1.5em; border-left:3px solid #ccc; font-style:italic;  }
+strong { font-weight: bold; }
+em, dfn { font-style: italic; }
+dfn { font-weight: bold; }
+pre, code { margin: 1.5em 0; white-space: pre; }
+pre, code, tt { font: 1em monospace; line-height: 1.5; } 
+tt { display: block; margin: 1.5em 0; }
+hr {margin-bottom:1.5em;}
+
+
+

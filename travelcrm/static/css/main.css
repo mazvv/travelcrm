@@ -1,0 +1,360 @@
+@CHARSET "UTF-8";
+@IMPORT url("./emastic/reset.css");
+@IMPORT url("./emastic/type.css");
+@IMPORT url("./emastic/grid.css");
+@IMPORT url("./emastic/plugins/absolute-grid.css");
+@IMPORT url("./emastic/plugins/percent-grid.css");
+@IMPORT url("./emastic/plugins/gadgets.css");
+@IMPORT url("./gh-buttons.css");
+@IMPORT url("./font-awesome.min.css");
+
+/**
+font-color: #555555;
+red: #900;
+background footer: #2b394a;
+page background: #f4f4f4;
+**/
+
+/** emastic hacks **/
+.main{
+    width: 110em;
+    max-width: 110em;
+}
+
+html, body{
+	color: #555;
+}
+a{
+	color: #000;
+	outline: none;
+	text-decoration: none;
+}
+
+#_page_{
+	background-color: #f4f4f4;
+}
+
+#_head_{
+	height: 78px;
+	background-color: #e9e9e9;
+}
+#_top_{
+	height: 44px;
+	background-color: #2b394a;
+}
+#_navigation_{
+    background-color: #eee;
+    padding: 3px 0px;
+    border-bottom: 1px dashed #2b394a;
+}
+
+#_main_{
+	background: #e9e9e9;
+}
+
+#_footer_{
+	height: 30px;
+	line-height: 30px;
+	background-color: #2b394a;
+	color: #fff;
+}
+.logo{
+    color: #ffffff !important;
+    padding-top: 1em;
+}
+.logo .logo-big{
+    font-size: 24px;
+}
+.logout{
+	color: #ffffff;
+	margin-top: 1.0em;
+}
+.logout a{
+	margin-right: 5px;
+	color: #ffffff !important;
+}
+.h100{
+	height: 100%;
+}
+table {
+	margin: 0;
+}
+._container .unselectable{
+	-webkit-user-select: none;        
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.hidden{
+	display: None
+}
+
+/** paddings **/
+.p1 {
+    padding: 1em;
+}
+
+/** margins **/
+.mb1 {
+    margin-bottom: 1em;
+}
+
+
+/**jeasyui override **/
+.combo-text{
+	outline: none;
+	padding-left: 2px;
+}
+
+.combobox-item{
+	padding: 1px 2px 1px 2px;
+}
+
+.combobox-item-hover{
+	cursor: pointer;
+}
+
+.combobox-item-selected{
+	background: #ccc;
+	color:#fff;
+}
+
+.spinner-text{
+	outline: none;
+	padding-left:2px;
+}
+
+.datagrid-toolbar{
+	height:auto;
+}
+
+.datagrid-row-selected{
+	background: #eee;
+	color:#000;
+}
+
+.datagrid-row-collapse{
+	background-position: -50px 0px;
+}
+
+.datagrid-row-expand{
+	background-position: -32px 0px;
+}
+
+.datagrid-row:hover{
+	cursor: pointer;
+}
+
+.datagrid-header-row td{
+	border-bottom: none;
+}
+.tree-node-selected{
+	background: #eee;
+}
+
+a:hover.l-btn-plain{
+	background: transparent;
+}
+
+.pagination-num{
+	text-align: center;
+}
+
+.layout-expand .panel-header{
+	border-top-width: 0px;
+}
+
+.panel-icon.fa{
+	line-height: 18px;
+}
+
+.panel-header .panel-title{
+    font-size: 14px;
+}
+
+.tree-file, .tree-folder, .tree-folder-open{
+	background: none;
+	display: inline-block;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 18px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	vertical-align: middle;
+	font-size: 14px;
+}
+
+.tree-file:before{
+    content: "\f15b";
+}
+
+.tree-folder:before{
+    content: "\f07b";
+}
+
+.tree-folder-open:before{
+    content: "\f07c";
+}
+
+.tree-node-selected{
+    color: #000000;
+}
+
+/* navigation */
+#_navigation_ .easyui-linkbutton{
+	margin-right: 10px;
+}
+#_navigation_ span.l-btn-icon-left{
+	padding: 0;
+}
+#_navigation_ span.l-btn-text{
+	font-size: 14px;
+}
+#_navigation_ span.l-btn-text.fa span{
+	padding-left: 5px;
+}
+
+/* form */
+form{
+	margin-bottom: 0px;
+	padding-top: 5px;
+}
+.form-field{
+    padding: 5px 10px;
+    margin-bottom: 1px;
+}
+.form-field label{
+	margin-top: 0.25em;
+	position: absolute;
+}
+.form-field label.required:after{
+    content: "*";
+    color: red;
+    margin-left: 5px;
+}
+
+.form-field:hover{
+    background: #f3f3f3;
+}
+.form-field textarea{
+    display: block;
+}
+.form-buttons{
+    margin-top: 5px;
+	border-top: 1px solid #D1D1D1;
+	padding: 5px 10px;
+	background: #fafafa;
+	height: 26px;
+}
+.form-buttons .status-bar{
+    line-height: 26px;
+}
+.form-buttons .button-group.tr{
+	float: right;
+}
+form a{
+    text-decoration: none;
+    border-bottom: 1px dashed;
+}
+form a:hover{
+    border: none;
+}
+.input-icon-after {
+	position: relative;
+}
+.input-icon-after .text{
+	padding-right: 20px;
+}
+.input-icon-after .fa{
+	position: absolute;
+	right: 1px;
+	top: -2px;
+	width: 18px;
+	height: 20px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #f3f3f3;
+	line-height: 20px;
+} 
+
+/** required **/
+.required:after{
+	content:'*';
+	color: #900;
+}
+
+/** errors **/
+.error .fa{
+    color: #900;
+}
+.status-bar.error{
+    color: #900;
+}
+.form-field.error{
+    background-color: #a0302a;
+    cursor: help;
+}
+.form-field.error label{
+    color: #ffffff;
+}
+.form-field.error .required:after{
+	color: #ffffff;
+}
+
+/** inputs **/
+input{
+	outline: none;
+}
+.text{
+    border: 1px solid #D1D1D1;
+    padding: 0.3em 0.2em;
+    font-size: 100%;
+    font-family: sans-serif;
+    outline: none;
+    margin: 0px;
+}
+.text.w10{
+    width: 10em;
+}
+.text.w15{
+    width: 15em;
+}
+.text.w20{
+    width: 20em;
+}
+
+
+/** datagrid labels **/
+.label{
+	padding: 0px 2px;
+	font-size: 90%;
+}
+.label.active{
+	color: #fff;
+	background-color: #558347;
+}
+.label.draft{
+    color: #fff;
+    background-color: #808080;
+}
+.label.disabled{
+    color: #fff;
+    background-color: #dc143c;
+}
+.label.error{
+    color: #fff;
+    background-color: #900;
+}
+
+/** datagrid **/
+.datagrid-toolbar{
+	padding: 4px;
+}
+
+
+/** scrollbars **/
+::-webkit-scrollbar {width: 8px;}
+::-webkit-scrollbar-button {width: 8px;height:0px;}
+::-webkit-scrollbar-track {background:#fafafa;border: skinny plain lightgray;box-shadow: 0px 0px 3px #dfdfdf inset;border-radius:0px;}
+::-webkit-scrollbar-thumb {background:#ccc;border: skinny plain gray;border-radius:0px;}

@@ -1,0 +1,52 @@
+/* CSS Document */
+.rc {-moz-border-radius: 10px;  -webkit-border-radius: 10px;  border:1px solid #fff; }
+.fr {border:1px solid #ccc; padding:0.25em;}
+
+.byline {
+font-family: "Lucida Grande", Tahoma;
+	font-size: 0.865em;
+	font-weight: lighter;
+	font-variant: normal;
+	text-transform: uppercase;
+	color: #666666;
+	letter-spacing: 0.4em;
+	display: block;
+	margin-bottom: 1.734em;
+	padding:0em 0em 0em 1em;
+	}
+	
+.and {font-family: Baskerville, "Goudy Old Style", "Palatino", "Book Antiqua", serif;
+	font-style: italic;
+	color: #777;
+	}
+ 
+ 
+
+.tc {text-align:center;}
+.tr {text-align:right;}
+.tl {text-align:left;}
+.b{ font-weight:bold;}
+.pl1{padding-left:1em;}
+.pl2{padding-left:2em;}
+.pl3{padding-left:3em;}
+
+
+.water{color:#5582d1;}
+.earth{color:#4e3e2c;}
+.air{color:#f1fff7;}
+.fire{ color:#ff8a19;}
+ /* drinks food */
+ .wine{color:#4a040a;}
+ .beer{color:#F0C030;}
+ .caffe{color:#473523;}
+ .caffe-cream{color:#b68d3d;}
+ .espresso{color:#2c1901;}
+ .caramel{color:#ab671f;}
+ .chocolate{color:#290200;}
+ .black-pepper{color:#444334;}
+ .pepper-lite{color:#8d8a72;}
+ 
+ .lipstick{color:#c20c0c;}
+ .oldbook{font-family:"Book Antiqua","Warnock Pro","Goudy Old Style","Palatino",Georgia,serif;}
+.note{font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; font-size:0.9em; margin:0.1em; color:#333;} 
+.mono{font-family:"Courier New", Courier, monospace;}

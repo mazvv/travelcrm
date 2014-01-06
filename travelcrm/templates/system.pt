@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="travelcrm">
+    <tal:block metal:define-macro="system_info_dialog">
+        <div class="dl30 easyui-dialog" title="System Info" i18n:attributes="title"
+            data-options="modal:true,draggable:false,resizable:false,iconCls:'fa fa-info-circle'">
+            <div class="p1">
+                <div class="tc fs110">
+                    <span tal:content="message"></span>
+                </div>
+            </div>
+        </div>
+    </tal:block>
+</html>
