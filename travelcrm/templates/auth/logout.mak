@@ -1,0 +1,21 @@
+<div class="dl30 easyui-dialog"
+    title="${_(u'Logout Confirmation')}"
+    data-options="
+    	modal:true,
+    	draggable:false,
+    	resizable:false,
+    	iconCls:'fa fa-sign-out'
+    ">
+    ${h.tags.form('/logout', autocomplete="off")}
+        <div class="p1 tc">
+            <i class="fa fa-info-circle fa-lg"></i> <span>${_(u"Do you really want to logout?")}</span>
+        </div>
+        <div class="form-buttons">
+            <div class="dl20 status-bar"></div>
+            <div class="ml20 tr button-group">
+            	${h.tags.submit('logout', _(u"Logout"), class_="button")}
+            	${h.tags.submit('cancel', _(u"Cancel"), class_="button danger", type="reset")}
+            </div>
+        </div>
+    ${h.tags.end_form()}
+</div>
