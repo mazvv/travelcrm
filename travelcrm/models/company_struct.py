@@ -12,46 +12,46 @@ from sqlalchemy.orm import (
 )
 
 from ..models import (
-    Base,
-    DBSession
+    DBSession,
+    Base
 )
 
 
 class CompanyStruct(Base):
-    __tablename__ = '_companies_structures'
+    __tablename__ = 'companies_structures'
 
-    rid = Column(
+    id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_companies_structures",
+            'resources.id',
+            name="fk_resources_id_companies_structures",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    _companies_rid = Column(
+    companies_id = Column(
         Integer,
         ForeignKey(
-            '_companies.rid',
-            name="fk_companies_rid_companies_structures",
+            'companies.id',
+            name="fk_companies_id_companies_structures",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    _companies_structures_rid = Column(
+    parent_id = Column(
         Integer(),
         ForeignKey(
-            '_companies_structures.rid',
-            name='fk_companies_structures_companies_structures_rid',
+            'companies_structures.id',
+            name='fk_companies_structures_parent_id',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
@@ -75,7 +75,6 @@ class CompanyStruct(Base):
             'company_structs',
             uselist=True,
             lazy='dynamic',
-            cascade="all,delete"
         ),
         uselist=False
     )
@@ -84,25 +83,26 @@ class CompanyStruct(Base):
         'CompanyStruct',
         backref=backref(
             'parent',
-            remote_side=[rid]
+            remote_side=[id]
         ),
         uselist=True,
         lazy='dynamic',
-        cascade="all,delete"
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
     def condition_root_level(cls):
-        return cls._companies_structures_rid == None
+        return cls.parent_id == None
 
     @classmethod
-    def condition_parent_rid(cls, _companies_structures_rid):
-        return cls._companies_structures_rid == _companies_structures_rid
+    def condition_parent_id(cls, parent_id):
+        return cls.parent_id == parent_id
 
     @classmethod
-    def condition_company_rid(cls, _companies_rid):
-        return cls._companies_rid == _companies_rid
+    def condition_company_id(cls, companies_id):
+        return cls.companies_id == companies_id

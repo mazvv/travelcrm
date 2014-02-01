@@ -21,29 +21,29 @@ from ..models.user import User
 
 
 class ResourceLog(Base):
-    __tablename__ = '_resources_logs'
+    __tablename__ = 'resources_logs'
 
     # column definitions
-    rid = Column(
+    id = Column(
         Integer(),
         primary_key=True,
         autoincrement=True,
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer(),
         ForeignKey(
-            '_resources.rid',
-            name='fk_resources_rid_resources_log',
+            'resources.id',
+            name='fk_resources_id_resources_log',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
         ),
         nullable=False
     )
-    modifier_users_rid = Column(
+    modifier_id = Column(
         Integer(),
-        ForeignKey('_users.rid',
-            name='fk_modifier_users_rid_resources_log',
+        ForeignKey('users.id',
+            name='fk_modifier_users_id_resources_log',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
@@ -72,7 +72,7 @@ class ResourceLog(Base):
 
     modifier = relationship(
         'User',
-        primaryjoin='ResourceLog.modifier_users_rid==User.rid',
+        primaryjoin='ResourceLog.modifier_id==User.id',
         backref=backref(
             'resources_logs',
             uselist=True,
@@ -82,26 +82,28 @@ class ResourceLog(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
     def query_last_max_entries(cls):
         max_entries_subquery = (
             DBSession.query(
-                func.max(cls.rid)
+                func.max(cls.id)
             )
-            .group_by(cls._resources_rid)
+            .group_by(cls.resources_id)
             .subquery()
         )
         max_entries_query = (
             DBSession.query(
-                cls._resources_rid.label('rid'),
+                cls.resources_id.label('id'),
                 cls.modifydt,
-                User._resources_rid.label('modifier_resource_rid'),
+                User.resources_id.label('modifier_resource_id'),
                 User.username.label('modifier'),
             )
             .join(User, cls.modifier)
-            .filter(cls.rid.in_(max_entries_subquery))
+            .filter(cls.id.in_(max_entries_subquery))
         )
         return max_entries_query

@@ -9,11 +9,8 @@ from ..models import DBSession
 from ..models.company import Company
 from ..models.company_struct import CompanyStruct
 from ..models.resource import Resource
-
-from ..forms.companies_structures import (
-    AddForm,
-    EditForm,
-)
+from ..lib.bl.companies_structures import CompaniesStructuresQueryBuilder
+from ..forms.companies_structures import CompanyStructureSchema
 
 
 log = logging.getLogger(__name__)
@@ -28,11 +25,12 @@ class CompaniesStructures(object):
     @view_config(
         context='..resources.companies_structures.CompaniesStructures',
         request_method='GET',
-        renderer='travelcrm:templates/companies_structures#index.pt',
+        renderer='travelcrm:templates/companies_structures/index.mak',
         permission='view'
     )
     def index(self):
-        return {}
+        company = Company.get(self.request.params.get('id'))
+        return {'company': company}
 
     @view_config(
         name='list',
@@ -43,29 +41,40 @@ class CompaniesStructures(object):
         permission='view'
     )
     def list(self):
-        struct_resource_rid = self.request.params.get('id')
-        sort = self.request.params.get('sort')
-        order = self.request.params.get('order', 'asc')
-        page = self.request.params.get('page')
-        rows = self.request.params.get('rows')
-        if struct_resource_rid:
-            resource = Resource.by_rid(struct_resource_rid)
-            self.context.set_struct_rid(resource.company_struct.rid)
-        json_data = self.context.get_json_page(sort, order, page, rows)
-        if struct_resource_rid:
-            return json_data.get('rows')
-        return json_data
+        parent_id = self.request.params.get('id')
+        companies_id = self.request.params.get('companies_id')
+
+        qb = CompaniesStructuresQueryBuilder()
+        qb.filter_company_id(companies_id)
+        qb.filter_parent_id(
+            parent_id,
+            with_chain=self.request.params.get('with_chain')
+        )
+        qb.sort_query(
+            self.request.params.get('sort'),
+            self.request.params.get('order', 'asc')
+        )
+        if self.request.params.get('rows'):
+            qb.page_query(
+                int(self.request.params.get('rows')),
+                int(self.request.params.get('page', 1))
+            )
+        return qb.get_serialized()
 
     @view_config(
         name='add',
         context='..resources.companies_structures.CompanyStructure',
         request_method='GET',
-        renderer='travelcrm:templates/companies_structures#form.pt',
+        renderer='travelcrm:templates/companies_structures/form.mak',
         permission='add'
     )
     def add(self):
-        company = Company.by_rid(self.request.params.get('rid'))
-        return {'company': company}
+        _ = self.request.translate
+        company = Company.get(self.request.params.get('companies_id'))
+        return {
+            'company': company,
+            'title': _(u"Add Company Structure")
+        }
 
     @view_config(
         name='add',
@@ -76,16 +85,14 @@ class CompaniesStructures(object):
     )
     def _add(self):
         _ = self.request.translate
-        schema = AddForm().bind(request=self.request)
+        schema = CompanyStructureSchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
             company_struct = CompanyStruct(
                 name=controls.get('name'),
-                _companies_rid=controls.get('_companies_rid'),
-                _companies_structures_rid=controls.get(
-                    '_companies_structures_rid'
-                ),
+                companies_id=controls.get('companies_id'),
+                parent_id=controls.get('parent_id'),
                 resource=self.context.create_resource(controls.get('status'))
             )
             DBSession.add(company_struct)
@@ -100,14 +107,18 @@ class CompaniesStructures(object):
         name='edit',
         context='..resources.companies_structures.CompanyStructure',
         request_method='GET',
-        renderer='travelcrm:templates/companies_structures#form.pt',
+        renderer='travelcrm:templates/companies_structures/form.mak',
         permission='edit'
     )
     def edit(self):
-        resource = Resource.by_rid(self.request.params.get('rid'))
-        item = resource.company_struct
-        company = item.company
-        return {'item': item, 'company': company}
+        _ = self.request.translate
+        struct = CompanyStruct.get(self.request.params.get('id'))
+        company = struct.company
+        return {
+            'title': _(u"Edit Company Structure"),
+            'item': struct,
+            'company': company
+        }
 
     @view_config(
         name='edit',
@@ -118,13 +129,14 @@ class CompaniesStructures(object):
     )
     def _edit(self):
         _ = self.request.translate
-        schema = EditForm().bind(request=self.request)
-        resource = Resource.by_rid(self.request.params.get('rid'))
-        company = resource.company
+        schema = CompanyStructureSchema().bind(request=self.request)
+        company_struct = CompanyStruct.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            company.name = controls.get('name')
-            company.resource.status = controls.get('status')
+            company_struct.name = controls.get('name')
+            company_struct.companies_id = controls.get('companies_id')
+            company_struct.parent_id = controls.get('parent_id')
+            company_struct.resource.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -133,15 +145,32 @@ class CompaniesStructures(object):
             }
 
     @view_config(
+        name='copy',
+        context='..resources.companies_structures.CompanyStructure',
+        request_method='GET',
+        renderer='travelcrm:templates/companies_structures/form.mak',
+        permission='add'
+    )
+    def copy(self):
+        _ = self.request.translate
+        struct = CompanyStruct.get(self.request.params.get('id'))
+        company = struct.company
+        return {
+            'title': _(u"Copy Company Structure"),
+            'item': struct,
+            'company': company
+        }
+
+    @view_config(
         name='delete',
         context='..resources.companies_structures.CompaniesStructures',
         request_method='GET',
-        renderer='travelcrm:templates/companies_structures#delete.pt',
+        renderer='travelcrm:templates/companies_structures/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'rid': self.request.params.get('rid')
+            'id': self.request.params.get('id')
         }
 
     @view_config(
@@ -153,51 +182,8 @@ class CompaniesStructures(object):
     )
     def _delete(self):
         _ = self.request.translate
-        for rid in self.request.params.getall('rid'):
-            resource = Resource.by_rid(rid)
-            if resource:
-                DBSession.delete(resource)
+        for id in self.request.params.getall('id'):
+            company_struct = CompanyStruct.get(id)
+            if company_struct:
+                DBSession.delete(company_struct)
         return {'success_message': _(u'Deleted')}
-
-    @view_config(
-        name='combotree',
-        context='..resources.companies_structures.CompaniesStructures',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _combotree(self):
-        _companies_rid = self.request.params.get('rid')
-        _structures = (
-            DBSession.query(CompanyStruct)
-            .filter(CompanyStruct._companies_rid == _companies_rid)
-            .order_by(CompanyStruct.name)
-        )
-        structures = {}
-        roots = []
-
-        for item in _structures:
-            item_children = structures.setdefault(
-                item._companies_structures_rid, []
-            )
-            item_children.append(item)
-            structures[item._companies_structures_rid] = item_children
-            if not item._companies_structures_rid:
-                roots.append(item)
-
-        def tree(node):
-            result = {
-                'id': node.rid,
-                'text': node.name,
-            }
-            if structures.get(node.rid):
-                result['state'] = 'closed'
-                result['children'] = [
-                    tree(item)
-                    for item
-                    in structures.get(node.rid)
-                ]
-            return result
-
-        result = [tree(item) for item in roots]
-        return result

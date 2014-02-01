@@ -21,10 +21,3 @@ def localizer(event):
 def helpers(event):
     request = event['request']
     event.update({'h': h, '_': request.translate})
-
-
-def add_components(event):
-    fields = (
-        get_renderer('templates/components/fields.pt').implementation()
-    )
-    event.update({'fields': fields})

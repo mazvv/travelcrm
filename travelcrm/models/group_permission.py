@@ -17,32 +17,32 @@ from ..models import (
 
 
 class GroupPermision(Base):
-    __tablename__ = '_groups_permisions'
+    __tablename__ = 'groups_permisions'
     __table_args__ = (
         Index('idx_group_permissions_permissions', 'permissions'),
     )
 
-    rid = Column(
+    id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    _resources_types_rid = Column(
+    resources_types_id = Column(
         Integer,
         ForeignKey(
-            '_resources_types.rid',
-            name="fk_resources_type_rid_groups_permissions",
+            'resources_types.id',
+            name="fk_resources_type_id_groups_permissions",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    _groups_rid = Column(
+    groups_id = Column(
         Integer,
         ForeignKey(
-            '_groups.rid',
-            name="fk_groups_rid_groups_permissions",
+            'groups.id',
+            name="fk_groups_id_groups_permissions",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -64,9 +64,11 @@ class GroupPermision(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
-    def condition_by_resources_types_rid(cls, _resources_types_rid):
-        return cls._resources_types_rid == _resources_types_rid
+    def condition_by_resources_types_id(cls, resources_types_id):
+        return cls.resources_types_id == resources_types_id

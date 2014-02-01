@@ -7,12 +7,9 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.resource_type import ResourceType
-from ..models.resource import Resource
+from ..lib.bl.resources_types import ResourcesTypesQueryBuilder
 
-from ..forms.resources_types import (
-    AddForm,
-    EditForm
-)
+from ..forms.resources_types import ResourceTypeSchema
 
 
 log = logging.getLogger(__name__)
@@ -27,7 +24,7 @@ class ResourcesTypes(object):
     @view_config(
         context='..resources.resources_types.ResourcesTypes',
         request_method='GET',
-        renderer='travelcrm:templates/resources_types#index.pt',
+        renderer='travelcrm:templates/resources_types/index.mak',
         permission='view'
     )
     def index(self):
@@ -42,21 +39,32 @@ class ResourcesTypes(object):
         renderer='json'
     )
     def list(self):
-        sort = self.request.params.get('sort')
-        order = self.request.params.get('order', 'asc')
-        page = self.request.params.get('page')
-        rows = self.request.params.get('rows')
-        return self.context.get_json_page(sort, order, page, rows)
+        qb = ResourcesTypesQueryBuilder()
+        qb.sort_query(
+            self.request.params.get('sort'),
+            self.request.params.get('order', 'asc')
+        )
+        qb.page_query(
+            int(self.request.params.get('rows')),
+            int(self.request.params.get('page'))
+        )
+        return {
+            'total': qb.get_count(),
+            'rows': qb.get_serialized()
+        }
 
     @view_config(
         name='add',
         context='..resources.resources_types.ResourceType',
         request_method='GET',
-        renderer='travelcrm:templates/resources_types#form.pt',
+        renderer='travelcrm:templates/resources_types/form.mak',
         permission='add'
     )
     def add(self):
-        return {}
+        _ = self.request.translate
+        return {
+            'title': _(u"Add Resources Type")
+        }
 
     @view_config(
         name="add",
@@ -66,7 +74,7 @@ class ResourcesTypes(object):
         permission="add"
     )
     def _add(self):
-        schema = AddForm().bind(request=self.request)
+        schema = ResourceTypeSchema().bind(request=self.request)
         _ = self.request.translate
         try:
             controls = schema.deserialize(self.request.params)
@@ -91,15 +99,15 @@ class ResourcesTypes(object):
         name='edit',
         context='..resources.resources_types.ResourceType',
         request_method='GET',
-        renderer='travelcrm:templates/resources_types#form.pt',
+        renderer='travelcrm:templates/resources_types/form.mak',
         permission='edit'
     )
     def edit(self):
         _ = self.request.translate
-        resource = Resource.by_rid(self.request.params.get('rid'))
+        resources_type = ResourceType.get(self.request.params.get('id'))
         return {
-            'item': resource.resource_type_obj,
-            'title': _(u"Edit Resource Type")
+            'item': resources_type,
+            'title': _(u"Edit Resources Type")
         }
 
     @view_config(
@@ -111,16 +119,15 @@ class ResourcesTypes(object):
     )
     def _edit(self):
         _ = self.request.translate
-        schema = EditForm().bind(request=self.request)
-        resource = Resource.by_rid(self.request.params.get('rid'))
-        resource_type = resource.resource_type_obj
+        schema = ResourceTypeSchema().bind(request=self.request)
+        resources_type = ResourceType.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            resource_type.humanize = controls.get('humanize')
-            resource_type.name = controls.get('name')
-            resource_type.resource = controls.get('resource')
-            resource_type.description = controls.get('description')
-            resource_type.resource_obj.status = controls.get('status')
+            resources_type.humanize = controls.get('humanize')
+            resources_type.name = controls.get('name')
+            resources_type.resource = controls.get('resource')
+            resources_type.description = controls.get('description')
+            resources_type.resource_obj.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -132,15 +139,15 @@ class ResourcesTypes(object):
         name='copy',
         context='..resources.resources_types.ResourceType',
         request_method='GET',
-        renderer='travelcrm:templates/resources_types#form.pt',
+        renderer='travelcrm:templates/resources_types/form.mak',
         permission='add'
     )
     def copy(self):
         _ = self.request.translate
-        resource = Resource.by_rid(self.request.params.get('rid'))
+        resources_type = ResourceType.get(self.request.params.get('id'))
         return {
-            'item': resource.resource_type_obj,
-            'title': _(u"Copy Resource Type")
+            'item': resources_type,
+            'title': _(u"Copy Resources Type")
         }
 
     @view_config(
@@ -157,12 +164,12 @@ class ResourcesTypes(object):
         name='delete',
         context='..resources.resources_types.ResourcesTypes',
         request_method='GET',
-        renderer='travelcrm:templates/resources_types#delete.pt',
+        renderer='travelcrm:templates/resources_types/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'rid': self.request.params.get('rid')
+            'id': self.request.params.get('id')
         }
 
     @view_config(
@@ -174,29 +181,8 @@ class ResourcesTypes(object):
     )
     def _delete(self):
         _ = self.request.translate
-        for rid in self.request.params.getall('rid'):
-            resource = Resource.by_rid(rid)
-            if resource:
-                DBSession.delete(resource)
+        for id in self.request.params.getall('id'):
+            resources_type = ResourceType.get(id)
+            if resources_type:
+                DBSession.delete(resources_type)
         return {'success_message': _(u'Deleted')}
-
-
-    @view_config(
-        name="combobox",
-        context="..resources.resources_types.ResourcesTypes",
-        request_method="POST",
-        renderer='json',
-        permission="view"
-    )
-    def _combobox(self):
-        items = (
-            DBSession.query(
-                ResourceType.rid,
-                ResourceType.humanize
-            )
-            .order_by(ResourceType.humanize)
-        )
-        return [
-            {'rid': item.rid, 'name': item.humanize}
-            for item in items
-        ]

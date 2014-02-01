@@ -26,6 +26,14 @@ class Regions(SecuredBase):
         self.__parent__ = Admin(request)
         self.request = request
 
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('view', _(u'view')),
+            ('delete', _(u'delete')),
+        ]
+
 
 @implementer(IResource)
 class Region(ResourceBase):
@@ -35,3 +43,11 @@ class Region(ResourceBase):
     def __init__(self, request):
         self.__parent__ = Regions(request)
         self.request = request
+
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('add', _(u'add')),
+            ('edit', _(u'edit')),
+        ]

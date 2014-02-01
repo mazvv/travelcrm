@@ -6,7 +6,6 @@ from pyramid_layout.panel import panel_config
 
 from ..models.user import User
 from ..models.resource import Resource
-from ..models.group_navigation import GroupNavigation
 
 
 @panel_config(
@@ -30,8 +29,8 @@ def footer(context, request):
     renderer='travelcrm:templates/panels/common#navigation.pt'
 )
 def navigation(context, request):
-    users_rid = authenticated_userid(request)
-    user = User.by_rid(users_rid)
+    user_id = authenticated_userid(request)
+    user = User.get(user_id)
 
     # TODO: make it for multigroup users
     group = user.groups[0]
@@ -45,7 +44,7 @@ def navigation(context, request):
     )
     navigation = {}
     for item in _navigation:
-        item_children = navigation.setdefault(item._groups_navigations_rid, [])
+        item_children = navigation.setdefault(item.parent_id, [])
         item_children.append(item)
-        navigation[item._groups_navigations_rid] = item_children
+        navigation[item.parent_id] = item_children
     return {'navigation': navigation}

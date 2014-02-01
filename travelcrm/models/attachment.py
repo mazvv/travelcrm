@@ -1,32 +1,31 @@
 # -*-coding: utf-8 -*-
 
-from travelcrm.models import (
-    Base, 
-    DBSession
+from ..models import (
+    DBSession,
+    Base
 )
 
 from sqlalchemy import (
     Column,
     Integer,
-    String,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
 
 
 class Attachment(Base):
-    __tablename__ = '_attachments'
+    __tablename__ = 'attachments'
 
-    rid = Column(
+    id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_attachments",
+            'resources.id',
+            name="fk_resources_id_attachments",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -42,5 +41,5 @@ class Attachment(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        return DBSession.query(cls).get(id)

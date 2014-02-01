@@ -26,7 +26,7 @@ requires = [
     'python-dateutil',
     'psycopg2',
     'pyramid_beaker',
-    'whoosh>=2.5.6'
+    'whoosh>=2.5.6',
 ]
 
 setup(

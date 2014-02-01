@@ -69,14 +69,14 @@ def get_resource_permissions(resource):
     """retrieve permissions for resource
     """
     rt = get_resource_type_by_resource(resource)
-    user = User.by_rid(authenticated_userid(resource.request))
+    user = User.get(authenticated_userid(resource.request))
     # TODO: make it possible for several groups
     group = user.groups[0]
     permissions = (
         group.permissions
         .with_entities(GroupPermision.permissions)
         .filter(
-            GroupPermision.condition_by_resources_types_rid(rt.rid)
+            GroupPermision.condition_by_resources_types_id(rt.id)
         )
         .scalar()
     )

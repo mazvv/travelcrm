@@ -2,14 +2,10 @@
 
 import colander
 
-from . import ResourceForm
+from . import ResourceSchema
 
 
-class AddForm(ResourceForm):
+class CompanySchema(ResourceSchema):
     name = colander.SchemaNode(
         colander.String(),
     )
-
-
-class EditForm(AddForm):
-    pass

@@ -15,9 +15,6 @@ from ..resources import (
     ResourceBase,
 )
 
-from ..models.resource import Resource
-from ..models.resource_type import ResourceType as _ResourceType
-
 
 @implementer(IResource)
 @implementer(IResourcesContainer)
@@ -25,30 +22,17 @@ class ResourcesTypes(ResourcesContainerBase):
 
     __name__ = 'resources_types'
 
-    _fields = {
-        'resourcetype.name': _ResourceType.name,
-        'resourcetype.humanize': _ResourceType.humanize,
-        'resourcetype.module': _ResourceType.module,
-        'resourcetype.description': _ResourceType.description,
-    }
-
     def __init__(self, request):
         self.__parent__ = Root(request)
         self.request = request
 
-    def get_query_base(self):
-        base_query = self._get_query_base()
-        query = base_query.join(
-            _ResourceType,
-            Resource.resource_type_obj
-        )
-        fields = [
-            field.label(label_name)
-            for label_name, field
-            in self._fields.iteritems()
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('view', _(u'view')),
+            ('delete', _(u'delete')),
         ]
-        query = query.add_columns(*fields)
-        return query
 
 
 @implementer(IResource)
@@ -59,3 +43,11 @@ class ResourceType(ResourceBase):
     def __init__(self, request):
         self.__parent__ = ResourcesTypes(request)
         self.request = request
+
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('add', _(u'add')),
+            ('edit', _(u'edit')),
+        ]

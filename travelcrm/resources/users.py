@@ -2,38 +2,37 @@
 
 from zope.interface import implementer
 
-from finbroker.interfaces import (
+from ..interfaces import (
     IResource,
     IResourcesContainer,
 )
-from finbroker.resources import (
-    Admin,
-    ResourceClassNotFound,
-    get_resource_class,
+from ..resources import (
+    Root,
 )
 
-from finbroker.admin.resources import (
-    SecuredBase,
-    ResourceBase
+from ..resources import (
+    ResourcesContainerBase,
+    ResourceBase,
 )
 
 
 @implementer(IResource)
 @implementer(IResourcesContainer)
-class Users(SecuredBase):
+class Users(ResourcesContainerBase):
 
     __name__ = 'users'
 
     def __init__(self, request):
-        self.__parent__ = Admin(request)
+        self.__parent__ = Root(request)
         self.request = request
 
-    def __getitem__(self, key):
-        try:
-            resource_type = get_resource_class(key)
-            return resource_type(self.request)
-        except ResourceClassNotFound:
-            raise KeyError
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('view', _(u'view')),
+            ('delete', _(u'delete')),
+        ]
 
 
 @implementer(IResource)
@@ -45,5 +44,10 @@ class User(ResourceBase):
         self.__parent__ = Users(request)
         self.request = request
 
-    def __getitem__(self, key):
-        raise KeyError
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('add', _(u'add')),
+            ('edit', _(u'edit')),
+        ]

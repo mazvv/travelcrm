@@ -3,7 +3,7 @@
 import colander
 
 
-class ResourceForm(colander.MappingSchema):
+class ResourceSchema(colander.Schema):
     status = colander.SchemaNode(
         colander.Integer(),
     )

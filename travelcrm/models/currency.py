@@ -4,7 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    ForeignKey
+    ForeignKey,
     )
 from sqlalchemy.orm import (
     relationship,
@@ -12,24 +12,24 @@ from sqlalchemy.orm import (
 )
 
 from ..models import (
-    Base,
-    DBSession
+    DBSession,
+    Base
 )
 
 
 class Currency(Base):
-    __tablename__ = '_currencies'
+    __tablename__ = 'currencies'
 
-    rid = Column(
+    id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_currencies",
+            'resources.id',
+            name="fk_resources_id_currencies",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -53,14 +53,7 @@ class Currency(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
-
-    @classmethod
-    def by_resource_rid(cls, rid):
-        return DBSession.query(cls).filter(cls._resources_rid == rid).first()
-
-    @classmethod
-    def by_code(cls, code):
-        return DBSession.query(cls).filter(cls.code == code).first()
-
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)

@@ -15,15 +15,15 @@ from ..models import (
 )
 
 
-_users_groups = Table(
-    '_users_groups',
+users_groups = Table(
+    'users_groups',
     Base.metadata,
     Column(
-        '_users_rid',
+        'users_id',
         Integer,
         ForeignKey(
-            '_users.rid',
-            name="fk_users_rid",
+            'users.id',
+            name="fk_users_groups_users_id",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -31,11 +31,11 @@ _users_groups = Table(
         primary_key=True
     ),
     Column(
-        '_groups_rid',
+        'groups_id',
         Integer,
         ForeignKey(
-            '_groups.rid',
-            name="fk_groups_rid",
+            'groups.id',
+            name="fk_users_groups_groups_id",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True
@@ -46,18 +46,18 @@ _users_groups = Table(
 
 
 class User(Base):
-    __tablename__ = '_users'
+    __tablename__ = 'users'
 
-    rid = Column(
+    id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_users",
+            'resources.id',
+            name="fk_resources_id_users",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -81,7 +81,7 @@ class User(Base):
 
     groups = relationship(
         'Group',
-        secondary=_users_groups,
+        secondary=users_groups,
         backref=backref('users', order_by='User.username'),
         order_by='Group.name',
         lazy='dynamic'
@@ -90,13 +90,15 @@ class User(Base):
     resource = relationship(
         'Resource',
         backref=backref('user', uselist=False),
-        foreign_keys=[_resources_rid],
+        foreign_keys=[resources_id],
         uselist=False
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
     def by_username(cls, username):

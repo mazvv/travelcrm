@@ -44,31 +44,31 @@ _STATUS = namedtuple('STATUS', _statuses.values())(*_statuses.keys())
 
 
 class Resource(Base):
-    __tablename__ = '_resources'
+    __tablename__ = 'resources'
 
     STATUS = _STATUS
 
     # column definitions
-    rid = Column(
+    id = Column(
         Integer(),
         primary_key=True,
         autoincrement=True,
     )
-    _resources_types_rid = Column(
+    resources_types_id = Column(
         Integer(),
         ForeignKey(
-            '_resources_types.rid',
-            name='fk_resources_types_rid_resources',
+            'resources_types.id',
+            name='fk_resources_types_id_resources',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
         ),
         nullable=False
     )
-    _owner_users_rid = Column(
+    owner_id = Column(
         Integer(),
-        ForeignKey('_users.rid',
-            name='fk_owner_users_rid_resources',
+        ForeignKey('users.id',
+            name='fk_owner_id_resources',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
@@ -83,13 +83,13 @@ class Resource(Base):
     resource_type = relationship(
         'ResourceType',
         backref=backref('resources', uselist=True, lazy='dynamic'),
-        foreign_keys=[_resources_types_rid],
+        foreign_keys=[resources_types_id],
         uselist=False
     )
     owner = relationship(
         'User',
         backref=backref('resources', uselist=True, lazy='dynamic'),
-        foreign_keys=[_owner_users_rid],
+        foreign_keys=[owner_id],
         uselist=False
     )
 
@@ -105,8 +105,10 @@ class Resource(Base):
         self.status = status
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     def is_active(self):
         return self.status == Resource.STATUS.active
@@ -133,8 +135,8 @@ class Resource(Base):
 
     def logging(self):
         request = threadlocal.get_current_request()
-        users_rid = authenticated_userid(request)
-        modifier = User.by_rid(users_rid)
+        users_id = authenticated_userid(request)
+        modifier = User.get(users_id)
         assert modifier is not None, type(modifier)
         self.resources_logs.append(
             ResourceLog(
@@ -144,8 +146,8 @@ class Resource(Base):
 
     def __repr__(self):
         return (
-            "%s (rid=%d, _resources_types_rid=%d)"
-            % (self.__class__.__name__, self.rid, self._resources_types_rid)
+            "%s (id=%d, resources_types_id=%d)"
+            % (self.__class__.__name__, self.id, self.resources_types_id)
         )
 
 

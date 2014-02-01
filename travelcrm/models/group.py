@@ -15,18 +15,18 @@ from ..models import (
 
 
 class Group(Base):
-    __tablename__ = '_groups'
+    __tablename__ = 'groups'
 
-    rid = Column(
+    id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_groups",
+            'resources.id',
+            name="fk_resources_id_groups",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -46,5 +46,7 @@ class Group(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)

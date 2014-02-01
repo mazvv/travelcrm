@@ -12,24 +12,24 @@ from sqlalchemy.orm import (
 )
 
 from ..models import (
-    Base,
-    DBSession
+    DBSession,
+    Base
 )
 
 
 class Company(Base):
-    __tablename__ = '_companies'
+    __tablename__ = 'companies'
 
-    rid = Column(
+    id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_companies",
+            'resources.id',
+            name="fk_resources_id_companies",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -49,5 +49,7 @@ class Company(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)

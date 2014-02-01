@@ -4,7 +4,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Table,
     ForeignKey,
     )
 from sqlalchemy.orm import relationship, backref
@@ -17,34 +16,34 @@ from ..models import (
 
 
 class Employee(Base):
-    __tablename__ = '_employees'
+    __tablename__ = 'employees'
 
-    rid = Column(
+    id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_employees",
+            'resources.id',
+            name="fk_resources_id_employees",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    _photo_attachments_rid = Column(
+    attachments_id = Column(
         Integer,
         ForeignKey(
-            '_attachments.rid',
-            name="fk_photo_attachments_rid_employees",
+            'attachments.id',
+            name="fk_attachments_id_employees",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
-        nullable=False,
+        nullable=True,
     )
     first_name = Column(
         String(length=32),
@@ -70,14 +69,16 @@ class Employee(Base):
         backref=backref('employee', uselist=False, cascade="all,delete"),
         uselist=False,
     )
-    
-    @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
 
     @hybrid_property
     def name(self):
         return u"{first_name} {last_name}".format(
-            first_name=self.first_name, 
+            first_name=self.first_name,
             last_name=self.last_name
         )
+
+    @classmethod
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)

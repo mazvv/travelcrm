@@ -15,12 +15,13 @@ from sqlalchemy.orm import (
 )
 
 from ..models import (
-    DBSession, Base
+    DBSession,
+    Base
 )
 
 
 class ResourceType(Base):
-    __tablename__ = '_resources_types'
+    __tablename__ = 'resources_types'
     __table_args__ = (
         UniqueConstraint(
             'module',
@@ -31,17 +32,17 @@ class ResourceType(Base):
     )
 
     # column definitions
-    rid = Column(
+    id = Column(
         Integer(),
         primary_key=True,
         nullable=False,
         autoincrement=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_resources_types",
+            'resources.id',
+            name="fk_resources_id_resources_types",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -81,13 +82,16 @@ class ResourceType(Base):
         backref=backref(
             'resource_type_obj', uselist=False, cascade="all,delete"
         ),
-        foreign_keys=[_resources_rid],
+        cascade="all,delete",
+        foreign_keys=[resources_id],
         uselist=False
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
     def by_name(cls, name):
@@ -133,11 +137,11 @@ class ResourceType(Base):
 
     def __repr__(self):
         return (
-            "%s (rid=%s, _resources_rid=%s, context=%s)"
+            "%s (id=%s, resources_id=%s, context=%s)"
             % (
                self.__class__.__name__,
-               self.rid,
-               self._resources_rid,
+               self.id,
+               self.resources_id,
                self.resource
             )
         )

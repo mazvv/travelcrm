@@ -3,7 +3,7 @@
 import colander
 
 
-class LoginForm(colander.MappingSchema):
+class LoginSchema(colander.Schema):
     username = colander.SchemaNode(
         colander.String(),
         missing=u''
@@ -11,4 +11,11 @@ class LoginForm(colander.MappingSchema):
     password = colander.SchemaNode(
         colander.String(),
         missing=u'',
+    )
+
+
+class ForgotSchema(colander.Schema):
+    email = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Email(),
     )

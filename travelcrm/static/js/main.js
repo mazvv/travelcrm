@@ -199,13 +199,15 @@ $(document).on("click", '._dialog_open', function(event){
     		open_dialog('/system_need_select_row');
     		return;
     	}
-    	url = url + '?rid=' + row.rid;
+    	if(url.indexOf('?') == -1) url = url + '?id=' + row.id;
+    	else url = url + '&id=' + row.id;
     } else if($(this).hasClass('_with_rows')){
     	var rows = get_checked(container, get_container_type(container))
 		if(rows.length>0){
-		    var rids = Array();
-		    $.each(rows, function(i, row){rids.push(row.rid);});
-			url = url + '?rid=' + rids.join();
+		    var ids = Array();
+		    $.each(rows, function(i, row){ids.push(row.id);});
+	    	if(url.indexOf('?') == -1) url = url + '?id=' + ids.join();
+	    	else url = url + '&id=' + ids.join();
 		} else {
 		    open_dialog('/system_need_select_rows');
 	    	    return;
@@ -249,13 +251,13 @@ $(document).on("click", '._action', function(event){
     		open_dialog('/system_need_select_row');
     		return;
     	}
-    	params['rid'] = row.rid
+    	params['id'] = row.id
     } else if($(this).hasClass('_with_rows')){
     	var rows = get_checked(container, get_container_type(container))
 		if(rows.length>0){
-		    var rids = Array();
-		    $.each(rows, function(i, row){rids.push(row.rid);});
-			params['rid'] = rids.join();
+		    var ids = Array();
+		    $.each(rows, function(i, row){ids.push(row.id);});
+			params['id'] = ids.join();
 		} else {
 		    open_dialog('/system_need_select_rows');
 	    	    return;

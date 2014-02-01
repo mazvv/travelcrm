@@ -88,6 +88,13 @@ table {
 .hidden{
 	display: None
 }
+hr.dashed{
+	margin: 5px 0px 5px 0px;
+	padding: 0;
+	border: none;
+	border-bottom: 1px dashed #d3d3d3;
+	height: 1px;
+}
 
 /** paddings **/
 .p1 {
@@ -225,8 +232,7 @@ form{
     margin-bottom: 1px;
 }
 .form-field label{
-	margin-top: 0.25em;
-	position: absolute;
+	line-height: 25px;
 }
 .form-field label.required:after{
     content: "*";
@@ -279,8 +285,7 @@ form a:hover{
 } 
 
 /** required **/
-.required:after{
-	content:'*';
+.required .required-symbol{
 	color: #900;
 }
 
@@ -323,6 +328,12 @@ input{
 .text.w20{
     width: 20em;
 }
+.text.w25{
+    width: 25em;
+}
+.text.w30{
+    width: 30em;
+}
 
 
 /** datagrid labels **/
@@ -350,8 +361,9 @@ input{
 /** datagrid **/
 .datagrid-toolbar{
 	padding: 4px;
+	height: 25px;
+	line-height: 25px;
 }
-
 
 /** scrollbars **/
 ::-webkit-scrollbar {width: 8px;}

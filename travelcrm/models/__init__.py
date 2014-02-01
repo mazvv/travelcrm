@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import datetime
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import (
     scoped_session,
@@ -26,3 +27,9 @@ from attachment import Attachment
 from employee import Employee
 from company import Company
 from company_struct import CompanyStruct
+from company_position import CompanyPosition
+from position_permision import PositionPermision
+from position_navigation import PositionNavigation
+from employee_appointment import (
+    EmployeeAppointmentHeader, EmployeeAppointmentRows
+)

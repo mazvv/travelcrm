@@ -13,35 +13,35 @@ from sqlalchemy.orm import (
 )
 
 from ..models import (
-    Base,
-    DBSession
+    DBSession,
+    Base
 )
 
 
 class Region(Base):
-    __tablename__ = '_regions'
+    __tablename__ = 'regions'
 
-    rid = Column(
+    id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_regions",
+            'resources.id',
+            name="fk_resources_id_regions",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    _regions_rid = Column(
+    parent_id = Column(
         Integer(),
         ForeignKey(
-            '_regions.rid',
-            name='fk_regions_regions_rid',
+            'regions.id',
+            name='fk_regions_parent_id',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
@@ -62,7 +62,7 @@ class Region(Base):
         'Region',
         backref=backref(
             'parent',
-            remote_side=[rid]
+            remote_side=[id]
         ),
         uselist=True,
         order_by='Region.name',
@@ -70,9 +70,7 @@ class Region(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
-
-    @classmethod
-    def by_resource_rid(cls, rid):
-        return DBSession.query(cls).filter(cls._resources_rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)

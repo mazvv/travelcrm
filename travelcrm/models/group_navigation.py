@@ -19,40 +19,39 @@ from ..models import (
 
 
 class GroupNavigation(Base):
-    __tablename__ = '_groups_navigations'
+    __tablename__ = 'groups_navigations'
 
-    # column definitions
-    rid = Column(
+    id = Column(
         Integer(),
         primary_key=True,
         autoincrement=True,
     )
-    _resources_rid = Column(
+    resources_id = Column(
         Integer,
         ForeignKey(
-            '_resources.rid',
-            name="fk_resources_rid_groups_navigations",
+            'resources.id',
+            name="fk_resources_id_groups_navigations",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    _groups_rid = Column(
+    groups_id = Column(
         Integer(),
         ForeignKey(
-            '_groups.rid',
-            name='fk_groups_navigations_groups_rid',
+            'groups.id',
+            name='fk_groups_navigations_groups_id',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
         )
     )
-    _groups_navigations_rid = Column(
+    parent_id = Column(
         Integer(),
         ForeignKey(
-            '_groups_navigations.rid',
-            name='fk_groups_navigations_groups_navigations_rid',
+            'groups_navigations.id',
+            name='fk_parent_id_groups_navigations',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
@@ -85,8 +84,8 @@ class GroupNavigation(Base):
             'group_navigations',
             uselist=True,
             lazy='dynamic',
-            order_by='asc(GroupNavigation._groups_navigations_rid)\
-            .nullsfirst(), GroupNavigation.position',
+            order_by='asc(GroupNavigation.parent_id).nullsfirst(),'
+            'GroupNavigation.position',
         ),
         uselist=False
     )
@@ -95,7 +94,7 @@ class GroupNavigation(Base):
         'GroupNavigation',
         backref=backref(
             'parent',
-            remote_side=[rid]
+            remote_side=[id]
         ),
         uselist=True,
         order_by='GroupNavigation.position',
@@ -103,20 +102,18 @@ class GroupNavigation(Base):
     )
 
     @classmethod
-    def by_rid(cls, rid):
-        return DBSession.query(cls).filter(cls.rid == rid).first()
-
-    @classmethod
-    def by_resource_rid(cls, rid):
-        return DBSession.query(cls).filter(cls._resources_rid == rid).first()
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
     def condition_root_level(cls):
-        return cls._groups_navigations_rid == None
+        return cls.parent_id == None
 
     @classmethod
-    def condition_parent_rid(cls, _groups_navigations_rid):
-        return cls._groups_navigations_rid == _groups_navigations_rid
+    def condition_parent_id(cls, parent_id):
+        return cls.parent_id == parent_id
 
     def change_position(self, action):
         assert action in ['up', 'down'], u"Action must be 'up' or 'down'"
@@ -125,8 +122,8 @@ class GroupNavigation(Base):
             group_navigation = (
                 query.filter(
                     GroupNavigation.position < self.position,
-                    GroupNavigation.condition_parent_rid(
-                        self._groups_navigations_rid
+                    GroupNavigation.condition_parent_id(
+                        self.parent_id
                     )
                 )
                 .order_by(desc(GroupNavigation.position))
@@ -136,8 +133,8 @@ class GroupNavigation(Base):
             group_navigation = (
                 query.filter(
                     GroupNavigation.position > self.position,
-                    GroupNavigation.condition_parent_rid(
-                        self._groups_navigations_rid
+                    GroupNavigation.condition_parent_id(
+                        self.parent_id
                     )
                 )
                 .order_by(GroupNavigation.position)
@@ -148,5 +145,3 @@ class GroupNavigation(Base):
             position = group_navigation.position
             group_navigation.position = self.position
             self.position = position
-            DBSession.add(group_navigation)
-            DBSession.add(self)

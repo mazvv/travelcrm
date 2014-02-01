@@ -2,21 +2,33 @@
 
 import colander
 
-from . import ResourceForm
+from . import ResourceSchema
 
 
-class AddForm(ResourceForm):
-    _companies_rid = colander.SchemaNode(
+@colander.deferred
+def parent_validator(node, kw):
+    request = kw.get('request')
+    _ = request.translate
+
+    def validator(node, value):
+        if request.params.get('id') and str(value) == request.params.get('id'):
+            raise colander.Invalid(
+                node,
+                _(u'Can not be parent of self'),
+            )
+    return validator
+
+
+class CompanyStructureSchema(ResourceSchema):
+    companies_id = colander.SchemaNode(
         colander.Integer()
     )
-    _companies_structures_rid = colander.SchemaNode(
+    parent_id = colander.SchemaNode(
         colander.Integer(),
-        missing=None
+        missing=None,
+        validator=parent_validator
     )
     name = colander.SchemaNode(
         colander.String(),
+        validator=colander.Length(max=128)
     )
-
-
-class EditForm(AddForm):
-    pass

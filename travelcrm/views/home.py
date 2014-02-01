@@ -1,5 +1,6 @@
 # -*-coding: utf-8-*-
 
+import colander
 from pyramid.httpexceptions import (
     HTTPFound,
 )
@@ -14,7 +15,10 @@ from pyramid.view import forbidden_view_config
 from ..resources import Root
 from ..models import User
 
-from ..forms.auth import LoginForm
+from ..forms.auth import (
+    LoginSchema,
+    ForgotSchema
+)
 
 
 class Home(object):
@@ -26,8 +30,7 @@ class Home(object):
     @view_config(
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth#login.pt',
-        layout='main_layout',
+        renderer='travelcrm:templates/home.mak',
         permission='view'
     )
     def index(self):
@@ -37,24 +40,46 @@ class Home(object):
         name='forgot',
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth#forgot.pt',
-        layout='auth_layout'
+        renderer='travelcrm:templates/auth/forgot.mak',
     )
     def forgot(self):
-        # TODO: complete forgot functionality
-        return {}
+        auth_url = self.request.resource_url(
+            Root(self.request),
+            'auth'
+        )
+        return {'auth_url': auth_url}
+
+    @view_config(
+        name='forgot',
+        request_method='POST',
+        context='..resources.Root',
+        renderer='json',
+    )
+    def _forgot(self):
+        # TODO: complete this functionality
+        _ = self.request.translate
+        schema = ForgotSchema()
+        try:
+            schema.deserialize(self.request.params)
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }
+        return {
+            'success_message': _(u'Check your email'),
+            'close': False
+        }
 
     @forbidden_view_config(
         request_method="GET",
-        renderer="travelcrm:templates/auth#login.pt",
-        layout='auth_layout'
+        renderer="travelcrm:templates/auth/login.mak",
     )
     @view_config(
         name='auth',
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth#login.pt',
-        layout='auth_layout'
+        renderer='travelcrm:templates/auth/login.mak',
     )
     def auth(self):
         if authenticated_userid(self.request):
@@ -83,7 +108,7 @@ class Home(object):
     )
     def _auth(self):
         _ = self.request.translate
-        schema = LoginForm()
+        schema = LoginSchema()
 
         controls = schema.deserialize(self.request.params)
         user = User.by_username(controls.get('username'))
@@ -93,7 +118,7 @@ class Home(object):
             and user.resource.is_active()
             and user.groups
         ):
-            self.request.response.headers = remember(self.request, user.rid)
+            self.request.response.headers = remember(self.request, user.id)
             return {
                 'redirect': self.request.resource_url(self.context),
                 'success_message': _(u"Success, wait...")
@@ -106,7 +131,7 @@ class Home(object):
         name='logout',
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth#logout.pt'
+        renderer='travelcrm:templates/auth/logout.mak'
     )
     def logout(self):
         return {}

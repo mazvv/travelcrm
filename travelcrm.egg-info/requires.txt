@@ -1,5 +1,5 @@
 pyramid
-pyramid_chameleon
+pyramid_mako
 pyramid_debugtoolbar
 pyramid_tm
 SQLAlchemy
@@ -16,3 +16,4 @@ python-dateutil
 psycopg2
 pyramid_beaker
 whoosh>=2.5.6
+wtforms>=1.0.5

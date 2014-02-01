@@ -56,11 +56,6 @@ def main(global_config, **settings):
         'pyramid.events.BeforeRender'
     )
 
-    config.add_subscriber(
-        '.subscribers.add_components',
-        'pyramid.events.BeforeRender'
-    )
-
     config.add_static_view('css', 'static/css', cache_max_age=3600)
     config.add_static_view('js', 'static/js', cache_max_age=3600)
 

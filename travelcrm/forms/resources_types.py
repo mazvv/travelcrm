@@ -3,7 +3,7 @@
 import colander
 import importlib
 
-from . import ResourceForm
+from . import ResourceSchema
 from ..models.resource_type import ResourceType
 
 
@@ -35,7 +35,7 @@ def name_validator(node, kw):
         resource_type = ResourceType.by_name(value)
         if (
             resource_type
-            and str(resource_type._resources_rid) != request.params.get('rid')
+            and str(resource_type.id) != request.params.get('id')
         ):
             raise colander.Invalid(
                 node,
@@ -53,7 +53,7 @@ def humanize_validator(node, kw):
         resource_type = ResourceType.by_humanize(value)
         if (
             resource_type
-            and str(resource_type._resources_rid) != request.params.get('rid')
+            and str(resource_type.id) != request.params.get('id')
         ):
             raise colander.Invalid(
                 node,
@@ -62,7 +62,7 @@ def humanize_validator(node, kw):
     return colander.All(colander.Length(max=128), validator,)
 
 
-class AddForm(ResourceForm):
+class ResourceTypeSchema(ResourceSchema):
     humanize = colander.SchemaNode(
         colander.String(),
         validator=humanize_validator
@@ -80,7 +80,3 @@ class AddForm(ResourceForm):
         validator=colander.Length(max=128),
         missing=u''
     )
-
-
-class EditForm(AddForm):
-    pass

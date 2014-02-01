@@ -19,30 +19,30 @@
     
     <tal:block metal:define-macro="footer">
         <div class="main tc">
-            &copy;2013 Travelcrm | ver. ${h.get_package_version('travelcrm')}
+            &copy;2013 Travelcrm | ver. ${h.common.get_package_version('travelcrm')}
         </div>
     </tal:block>
     
     <tal:block metal:define-macro="navigation" tal:define="key None">
         <tal:block metal:define-macro="navigation_items" tal:repeat="item navigation[key]">
-            <tal:block tal:switch="navigation.get(item.rid) is None">
+            <tal:block tal:switch="navigation.get(item.id) is None">
                 <div tal:omit-tag="not key">
-                    <a tal:case="True" href="#" class="${'easyui-linkbutton' if not item._groups_navigations_rid else 'easyui-menubutton'} _tab_open"
-                        tal:attributes="id '_navigation_item_%d' % item.rid; iconCls item.icon_cls"
+                    <a tal:case="True" href="#" class="${'easyui-linkbutton' if not item.parent_id else 'easyui-menubutton'} _tab_open"
+                        tal:attributes="id '_navigation_item_%d' % item.id; iconCls item.icon_cls"
                         data-url="${item.url}" data-index="${item.url}" data-title="${item.name}" data-options="plain:true">
                         <span tal:content="item.name" tal:omit-tag="key"/>
                     </a>
                     <a tal:case="False" href="#" class="easyui-menubutton _tab_open"
-                        tal:attributes="id '_navigation_item_%d' % item.rid; iconCls item.icon_cls"
-                        data-options="menu:'${'#_navigation_submenu_%d' % item.rid}'"
+                        tal:attributes="id '_navigation_item_%d' % item.id; iconCls item.icon_cls"
+                        data-options="menu:'${'#_navigation_submenu_%d' % item.id}'"
                         data-url="${item.url}" data-index="${item.url}" data-title="${item.name}">
                         <span tal:content="item.name" tal:omit-tag="key"/>
                     </a>
                 </div>
             </tal:block>
-            <div tal:define="key item.rid"
-                tal:attributes="id '_navigation_submenu_%d' % item.rid"
-                tal:condition="navigation.get(item.rid)"
+            <div tal:define="key item.id"
+                tal:attributes="id '_navigation_submenu_%d' % item.id"
+                tal:condition="navigation.get(item.id)"
                 class="w150p">
                 <tal:block metal:use-macro="template.macros['navigation_items']"/>
             </div>
