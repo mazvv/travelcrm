@@ -30,11 +30,11 @@
 
     <div class="datagrid-toolbar" id="positions-navigations-dg-tb">
         <div class="actions button-container">
-            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'position_navigation', 'add', query={'companies_positions_id': company_position.id})}">
+            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add', query={'companies_positions_id': company_position.id})}">
                 <span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
             </a>
             <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'position_navigation', 'edit')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
                     <span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
                 </a>
                 <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'company_structure', 'copy')}">
@@ -45,10 +45,10 @@
                 </a>
             </div>
             <div class="button-group">
-                <a href="#" class="button _action _with_row" data-url="${request.resource_url(_context, 'position_navigation', 'up')}">
+                <a href="#" class="button _action _with_row" data-url="${request.resource_url(_context, 'up')}">
                     <span class="fa fa-arrow-up"></span> <span>${_(u"Up")}</span>
                 </a>
-                <a href="#" class="button _action _with_row" data-url="${request.resource_url(_context, 'position_navigation', 'down')}">
+                <a href="#" class="button _action _with_row" data-url="${request.resource_url(_context, 'down')}">
                     <span class="fa fa-arrow-down"></span> <span>${_(u"Down")}</span>
                 </a>
             </div>

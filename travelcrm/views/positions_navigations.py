@@ -67,7 +67,7 @@ class PositionsNavigation(object):
 
     @view_config(
         name='add',
-        context='..resources.positions_navigations.PositionNavigation',
+        context='..resources.positions_navigations.PositionsNavigations',
         request_method='GET',
         renderer='travelcrm:templates/positions_navigations/form.mak',
         permission='add'
@@ -84,7 +84,7 @@ class PositionsNavigation(object):
 
     @view_config(
         name='add',
-        context='..resources.positions_navigations.PositionNavigation',
+        context='..resources.positions_navigations.PositionsNavigations',
         request_method='POST',
         renderer='json',
         permission='add'
@@ -117,7 +117,7 @@ class PositionsNavigation(object):
 
     @view_config(
         name='edit',
-        context='..resources.positions_navigations.PositionNavigation',
+        context='..resources.positions_navigations.PositionsNavigations',
         request_method='GET',
         renderer='travelcrm:templates/positions_navigations/form.mak',
         permission='edit'
@@ -136,7 +136,7 @@ class PositionsNavigation(object):
 
     @view_config(
         name='edit',
-        context='..resources.positions_navigations.PositionNavigation',
+        context='..resources.positions_navigations.PositionsNavigations',
         request_method='POST',
         renderer='json',
         permission='edit'
@@ -193,7 +193,7 @@ class PositionsNavigation(object):
 
     @view_config(
         name='up',
-        context='..resources.positions_navigations.PositionNavigation',
+        context='..resources.positions_navigations.PositionsNavigations',
         request_method='POST',
         renderer='json',
         permission='edit'
@@ -207,7 +207,7 @@ class PositionsNavigation(object):
 
     @view_config(
         name='down',
-        context='..resources.positions_navigations.PositionNavigation',
+        context='..resources.positions_navigations.PositionsNavigations',
         request_method='POST',
         renderer='json',
         permission='edit'

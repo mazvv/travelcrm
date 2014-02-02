@@ -64,6 +64,17 @@ class User(Base):
         ),
         nullable=False,
     )
+    employees_id = Column(
+        Integer,
+        ForeignKey(
+            'employees.id',
+            name="fk_employees_id_users",
+            ondelete='cascade',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
     username = Column(
         String(length=32),
         nullable=False,
@@ -79,14 +90,11 @@ class User(Base):
         nullable=False
     )
 
-    groups = relationship(
-        'Group',
-        secondary=users_groups,
-        backref=backref('users', order_by='User.username'),
-        order_by='Group.name',
-        lazy='dynamic'
+    employee = relationship(
+        'Employee',
+        backref=backref('user', uselist=False, cascade='all,delete'),
+        uselist=False
     )
-
     resource = relationship(
         'Resource',
         backref=backref('user', uselist=False),

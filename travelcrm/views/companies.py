@@ -56,7 +56,7 @@ class Companies(object):
 
     @view_config(
         name='add',
-        context='..resources.companies.Company',
+        context='..resources.companies.Companies',
         request_method='GET',
         renderer='travelcrm:templates/companies/form.mak',
         permission='add'
@@ -66,7 +66,7 @@ class Companies(object):
 
     @view_config(
         name='add',
-        context='..resources.companies.Company',
+        context='..resources.companies.Companies',
         request_method='POST',
         renderer='json',
         permission='add'
@@ -91,7 +91,7 @@ class Companies(object):
 
     @view_config(
         name='edit',
-        context='..resources.companies.Company',
+        context='..resources.companies.Companies',
         request_method='GET',
         renderer='travelcrm:templates/companies/form.mak',
         permission='edit'
@@ -103,7 +103,7 @@ class Companies(object):
 
     @view_config(
         name='edit',
-        context='..resources.companies.Company',
+        context='..resources.companies.Companies',
         request_method='POST',
         renderer='json',
         permission='edit'

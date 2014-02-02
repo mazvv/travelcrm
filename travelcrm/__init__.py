@@ -61,3 +61,11 @@ def main(global_config, **settings):
 
     config.scan()
     return config.make_wsgi_app()
+
+
+def _register_apps(config):
+    config.registry.registerUtility()
+
+
+def _register_resources_types(config):
+    pass

@@ -2,29 +2,36 @@
 
 import logging
 import colander
+import datetime
 
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.employee import Employee
-from ..lib.bl.employees import EmployeesQueryBuilder
+from ..models.employee_appointment import (
+    EmployeeAppointmentH,
+    EmployeeAppointmentR
+)
+from ..lib.bl.employees_appointments import EmployeesAppointmentsQueryBuilder
 
-from ..forms.employees import EmployeeSchema
+from ..forms.employees_appointments import (
+    EmployeeAppointmentRowSchema,
+    EmployeeAppointmentSchema
+)
 
 
 log = logging.getLogger(__name__)
 
 
-class Employees(object):
+class EmployeesAppointments(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='GET',
-        renderer='travelcrm:templates/employees/index.mak',
+        renderer='travelcrm:templates/employees_appointments/index.mak',
         permission='view'
     )
     def index(self):
@@ -32,14 +39,14 @@ class Employees(object):
 
     @view_config(
         name='list',
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = EmployeesQueryBuilder()
+        qb = EmployeesAppointmentsQueryBuilder()
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -55,35 +62,39 @@ class Employees(object):
 
     @view_config(
         name='add',
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='GET',
-        renderer='travelcrm:templates/employees/form.mak',
+        renderer='travelcrm:templates/employees_appointments/form.mak',
         permission='add'
     )
     def add(self):
         _ = self.request.translate
-        return {'title': _(u'Add Employee')}
+        return {'title': _(u'Add Employees Appointments')}
 
     @view_config(
         name='add',
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
         _ = self.request.translate
-        schema = EmployeeSchema().bind(request=self.request)
+        schema = EmployeeAppointmentSchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            employee = Employee(
-                first_name=controls.get('first_name'),
-                last_name=controls.get('last_name'),
-                second_name=controls.get('second_name'),
+            doc = EmployeeAppointmentH(
+                appointment_date=datetime.date.today(),
                 resource=self.context.create_resource(controls.get('status'))
             )
-            DBSession.add(employee)
+            doc.rows.append(
+                EmployeeAppointmentR(
+                    employees_id=2,
+                    companies_positions_id=4
+                )
+            )
+            DBSession.add(doc)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -93,9 +104,9 @@ class Employees(object):
 
     @view_config(
         name='edit',
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='GET',
-        renderer='travelcrm:templates/employees/form.mak',
+        renderer='travelcrm:templates/employees_appointments/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -105,7 +116,7 @@ class Employees(object):
 
     @view_config(
         name='edit',
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='POST',
         renderer='json',
         permission='edit'
@@ -128,10 +139,40 @@ class Employees(object):
             }
 
     @view_config(
-        name='delete',
-        context='..resources.employees.Employees',
+        name='add_row',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='GET',
-        renderer='travelcrm:templates/employees/delete.mak',
+        renderer='travelcrm:templates/employees_appointments/form_row.mak',
+        permission='add'
+    )
+    def add_row(self):
+        _ = self.request.translate
+        return {'title': _(u'Add Row')}
+
+    @view_config(
+        name='add_row',
+        context='..resources.employees_appointments.EmployeesAppointments',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _add_row(self):
+        _ = self.request.translate
+        schema = EmployeeAppointmentRowSchema().bind(request=self.request)
+        try:
+            schema.deserialize(self.request.params)
+            return {'success_message': _(u'Saved')}
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }
+
+    @view_config(
+        name='delete',
+        context='..resources.employees_appointments.EmployeesAppointments',
+        request_method='GET',
+        renderer='travelcrm:templates/employees_appointments/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -141,7 +182,7 @@ class Employees(object):
 
     @view_config(
         name='delete',
-        context='..resources.employees.Employees',
+        context='..resources.employees_appointments.EmployeesAppointments',
         request_method='POST',
         renderer='json',
         permission='delete'
