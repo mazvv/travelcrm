@@ -1,16 +1,11 @@
 # -*coding: utf-8-*-
-'''
-Created on 28 дек. 2013 г.
-
-@author: mazvv
-'''
 import importlib
 
 from pyramid.security import authenticated_userid
 
 from ..models.user import User
 from ..models.resource_type import ResourceType
-from ..models.group_permission import GroupPermision
+from ..models.position_permision import PositionPermision
 
 
 class ResourceClassNotFound(Exception):
@@ -63,21 +58,3 @@ def get_resource_type_by_resource(resource):
         resource.__class__.__module__,
         resource.__class__.__name__
     )
-
-
-def get_resource_permissions(resource):
-    """retrieve permissions for resource
-    """
-    rt = get_resource_type_by_resource(resource)
-    user = User.get(authenticated_userid(resource.request))
-    # TODO: make it possible for several groups
-    group = user.groups[0]
-    permissions = (
-        group.permissions
-        .with_entities(GroupPermision.permissions)
-        .filter(
-            GroupPermision.condition_by_resources_types_id(rt.id)
-        )
-        .scalar()
-    )
-    return permissions

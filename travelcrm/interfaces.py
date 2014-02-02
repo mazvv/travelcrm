@@ -4,13 +4,13 @@ from zope.interface import (
 )
 
 
-class IResource(Interface):
-    """ Resource """
+class IApp(Interface):
+    """ Application """
+
+
+class IResourceType(Interface):
+    """ Resource Type """
 
     def allowed_permisions():
         """ Get allowed permission for resource
         """
-
-
-class IResourcesContainer(Interface):
-    """ Container of resources """

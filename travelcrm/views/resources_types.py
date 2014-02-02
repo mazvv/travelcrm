@@ -55,7 +55,7 @@ class ResourcesTypes(object):
 
     @view_config(
         name='add',
-        context='..resources.resources_types.ResourceType',
+        context='..resources.resources_types.ResourcesTypes',
         request_method='GET',
         renderer='travelcrm:templates/resources_types/form.mak',
         permission='add'
@@ -68,7 +68,7 @@ class ResourcesTypes(object):
 
     @view_config(
         name="add",
-        context="..resources.resources_types.ResourceType",
+        context="..resources.resources_types.ResourcesTypes",
         request_method="POST",
         renderer='json',
         permission="add"
@@ -97,7 +97,7 @@ class ResourcesTypes(object):
 
     @view_config(
         name='edit',
-        context='..resources.resources_types.ResourceType',
+        context='..resources.resources_types.ResourcesTypes',
         request_method='GET',
         renderer='travelcrm:templates/resources_types/form.mak',
         permission='edit'
@@ -112,7 +112,7 @@ class ResourcesTypes(object):
 
     @view_config(
         name="edit",
-        context="..resources.resources_types.ResourceType",
+        context="..resources.resources_types.ResourcesTypes",
         request_method="POST",
         renderer='json',
         permission="edit"
@@ -137,7 +137,7 @@ class ResourcesTypes(object):
 
     @view_config(
         name='copy',
-        context='..resources.resources_types.ResourceType',
+        context='..resources.resources_types.ResourcesTypes',
         request_method='GET',
         renderer='travelcrm:templates/resources_types/form.mak',
         permission='add'
@@ -152,7 +152,7 @@ class ResourcesTypes(object):
 
     @view_config(
         name='copy',
-        context='..resources.resources_types.ResourceType',
+        context='..resources.resources_types.ResourcesTypes',
         request_method='POST',
         renderer='json',
         permission='add'

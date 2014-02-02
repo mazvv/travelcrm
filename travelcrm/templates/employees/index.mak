@@ -27,14 +27,14 @@
 
     <div class="datagrid-toolbar" id="employees-dg-tb">
         <div class="actions button-container dl50">
-            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'employee', 'add')}">
+            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add')}">
             	<span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
            	</a>
             <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'employee', 'edit')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
                 	<span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
                 </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'employee', 'copy')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'copy')}">
                     <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
                 </a>
             </div>

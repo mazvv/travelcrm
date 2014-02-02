@@ -95,6 +95,10 @@ hr.dashed{
 	border-bottom: 1px dashed #d3d3d3;
 	height: 1px;
 }
+.project-link{
+	color: #fff;
+	text-decoration: underline;
+}
 
 /** paddings **/
 .p1 {
@@ -363,6 +367,12 @@ input{
 	padding: 4px;
 	height: 25px;
 	line-height: 25px;
+}
+
+/** document rows **/
+.document-rows{
+	margin-top: 0.5em;
+	border-top: 1px dashed #ccc;
 }
 
 /** scrollbars **/

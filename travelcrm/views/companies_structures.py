@@ -63,7 +63,7 @@ class CompaniesStructures(object):
 
     @view_config(
         name='add',
-        context='..resources.companies_structures.CompanyStructure',
+        context='..resources.companies_structures.CompaniesStructures',
         request_method='GET',
         renderer='travelcrm:templates/companies_structures/form.mak',
         permission='add'
@@ -78,7 +78,7 @@ class CompaniesStructures(object):
 
     @view_config(
         name='add',
-        context='..resources.companies_structures.CompanyStructure',
+        context='..resources.companies_structures.CompaniesStructures',
         request_method='POST',
         renderer='json',
         permission='add'
@@ -105,7 +105,7 @@ class CompaniesStructures(object):
 
     @view_config(
         name='edit',
-        context='..resources.companies_structures.CompanyStructure',
+        context='..resources.companies_structures.CompaniesStructures',
         request_method='GET',
         renderer='travelcrm:templates/companies_structures/form.mak',
         permission='edit'
@@ -122,7 +122,7 @@ class CompaniesStructures(object):
 
     @view_config(
         name='edit',
-        context='..resources.companies_structures.CompanyStructure',
+        context='..resources.companies_structures.CompaniesStructures',
         request_method='POST',
         renderer='json',
         permission='edit'
@@ -146,7 +146,7 @@ class CompaniesStructures(object):
 
     @view_config(
         name='copy',
-        context='..resources.companies_structures.CompanyStructure',
+        context='..resources.companies_structures.CompaniesStructures',
         request_method='GET',
         renderer='travelcrm:templates/companies_structures/form.mak',
         permission='add'

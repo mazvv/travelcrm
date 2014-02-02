@@ -58,7 +58,7 @@ class CompaniesPositions(object):
 
     @view_config(
         name='add',
-        context='..resources.companies_positions.CompanyPosition',
+        context='..resources.companies_positions.CompaniesPositions',
         request_method='GET',
         renderer='travelcrm:templates/companies_positions/form.mak',
         permission='add'
@@ -73,7 +73,7 @@ class CompaniesPositions(object):
 
     @view_config(
         name='add',
-        context='..resources.companies_positions.CompanyPosition',
+        context='..resources.companies_positions.CompaniesPositions',
         request_method='POST',
         renderer='json',
         permission='add'
@@ -98,7 +98,7 @@ class CompaniesPositions(object):
 
     @view_config(
         name='edit',
-        context='..resources.companies_positions.CompanyPosition',
+        context='..resources.companies_positions.CompaniesPositions',
         request_method='GET',
         renderer='travelcrm:templates/companies_positions/form.mak',
         permission='edit'
@@ -115,7 +115,7 @@ class CompaniesPositions(object):
 
     @view_config(
         name='edit',
-        context='..resources.companies_positions.CompanyPosition',
+        context='..resources.companies_positions.CompaniesPositions',
         request_method='POST',
         renderer='json',
         permission='edit'
@@ -139,7 +139,7 @@ class CompaniesPositions(object):
 
     @view_config(
         name='copy',
-        context='..resources.companies_positions.CompanyPosition',
+        context='..resources.companies_positions.CompaniesPositions',
         request_method='GET',
         renderer='travelcrm:templates/companies_structures/form.mak',
         permission='add'

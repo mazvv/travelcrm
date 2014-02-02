@@ -4,22 +4,19 @@
 from zope.interface import implementer
 
 from ..interfaces import (
-    IResource,
-    IResourcesContainer,
+    IResourceType,
 )
 from ..resources import (
     Root,
 )
 
 from ..resources import (
-    ResourcesContainerBase,
-    ResourceBase,
+    ResourceTypeBase,
 )
 
 
-@implementer(IResource)
-@implementer(IResourcesContainer)
-class CompaniesPositions(ResourcesContainerBase):
+@implementer(IResourceType)
+class CompaniesPositions(ResourceTypeBase):
 
     __name__ = 'companies_positions'
 
@@ -32,23 +29,7 @@ class CompaniesPositions(ResourcesContainerBase):
         _ = self.request.translate
         return [
             ('view', _(u'view')),
-            ('delete', _(u'delete')),
-        ]
-
-
-@implementer(IResource)
-class CompanyPosition(ResourceBase):
-
-    __name__ = 'company_position'
-
-    def __init__(self, request):
-        self.__parent__ = CompaniesPositions(request)
-        self.request = request
-
-    @property
-    def allowed_permisions(self):
-        _ = self.request.translate
-        return [
             ('add', _(u'add')),
             ('edit', _(u'edit')),
+            ('delete', _(u'delete')),
         ]

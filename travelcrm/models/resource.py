@@ -29,7 +29,7 @@ from ..lib.resources_utils import (
     get_resource_class_module,
     get_resource_class_name,
 )
-from ..interfaces import IResource
+from ..interfaces import IResourceType
 
 
 _statuses = {
@@ -94,7 +94,7 @@ class Resource(Base):
     )
 
     def __init__(self, resource_type_cls, status=0):
-        assert verifyClass(IResource, resource_type_cls), \
+        assert verifyClass(IResourceType, resource_type_cls), \
             type(resource_type_cls)
 
         resource_cls_module = get_resource_class_module(resource_type_cls)

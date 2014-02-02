@@ -72,10 +72,7 @@ class Employee(Base):
 
     @hybrid_property
     def name(self):
-        return u"{first_name} {last_name}".format(
-            first_name=self.first_name,
-            last_name=self.last_name
-        )
+        return self.last_name + " " + self.first_name
 
     @classmethod
     def get(cls, id):

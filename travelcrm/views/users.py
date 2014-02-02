@@ -6,25 +6,28 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.employee import Employee
-from ..lib.bl.employees import EmployeesQueryBuilder
+from ..models.user import User
+from ..lib.bl.users import UsersQueryBuilder
 
-from ..forms.employees import EmployeeSchema
+from ..forms.users import (
+    UserSchemaAdd,
+    UserSchemaEdit
+)
 
 
 log = logging.getLogger(__name__)
 
 
-class Employees(object):
+class Users(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='GET',
-        renderer='travelcrm:templates/employees/index.mak',
+        renderer='travelcrm:templates/users/index.mak',
         permission='view'
     )
     def index(self):
@@ -32,14 +35,14 @@ class Employees(object):
 
     @view_config(
         name='list',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = EmployeesQueryBuilder()
+        qb = UsersQueryBuilder()
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -55,35 +58,35 @@ class Employees(object):
 
     @view_config(
         name='add',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='GET',
-        renderer='travelcrm:templates/employees/form.mak',
+        renderer='travelcrm:templates/users/form.mak',
         permission='add'
     )
     def add(self):
         _ = self.request.translate
-        return {'title': _(u'Add Employee')}
+        return {'title': _(u'Add User')}
 
     @view_config(
         name='add',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
         _ = self.request.translate
-        schema = EmployeeSchema().bind(request=self.request)
+        schema = UserSchemaAdd().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            employee = Employee(
-                first_name=controls.get('first_name'),
-                last_name=controls.get('last_name'),
-                second_name=controls.get('second_name'),
+            user = User(
+                username=controls.get('username'),
+                password=controls.get('password'),
+                employees_id=controls.get('employees_id'),
                 resource=self.context.create_resource(controls.get('status'))
             )
-            DBSession.add(employee)
+            DBSession.add(user)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -93,33 +96,34 @@ class Employees(object):
 
     @view_config(
         name='edit',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='GET',
-        renderer='travelcrm:templates/employees/form.mak',
+        renderer='travelcrm:templates/users/form.mak',
         permission='edit'
     )
     def edit(self):
         _ = self.request.translate
-        employee = Employee.get(self.request.params.get('id'))
-        return {'item': employee, 'title': _(u'Edit Employee')}
+        user = User.get(self.request.params.get('id'))
+        return {'item': user, 'title': _(u'Edit User')}
 
     @view_config(
         name='edit',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
         _ = self.request.translate
-        schema = EmployeeSchema().bind(request=self.request)
-        employee = Employee.get(self.request.params.get('id'))
+        schema = UserSchemaEdit().bind(request=self.request)
+        user = User.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            employee.first_name = controls.get('first_name')
-            employee.last_name = controls.get('last_name')
-            employee.second_name = controls.get('second_name')
-            employee.resource.status = controls.get('status')
+            user.username = controls.get('username')
+            user.employees_is = controls.get('employees_id')
+            user.resource.status = controls.get('status')
+            if controls.get('password'):
+                user.password = controls.get('password')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -129,9 +133,9 @@ class Employees(object):
 
     @view_config(
         name='delete',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='GET',
-        renderer='travelcrm:templates/employees/delete.mak',
+        renderer='travelcrm:templates/users/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -141,7 +145,7 @@ class Employees(object):
 
     @view_config(
         name='delete',
-        context='..resources.employees.Employees',
+        context='..resources.users.Users',
         request_method='POST',
         renderer='json',
         permission='delete'
@@ -149,7 +153,7 @@ class Employees(object):
     def _delete(self):
         _ = self.request.translate
         for id in self.request.params.getall('id'):
-            employee = Employee.get(id)
-            if employee:
-                DBSession.delete(employee)
+            user = User.get(id)
+            if user:
+                DBSession.delete(user)
         return {'success_message': _(u'Deleted')}

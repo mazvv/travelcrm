@@ -4,23 +4,21 @@
 from zope.interface import implementer
 
 from ..interfaces import (
-    IResource,
-    IResourcesContainer,
+    IResourceType,
 )
 from ..resources import (
     Root,
 )
 
 from ..resources import (
-    ResourcesContainerBase,
+    ResourceTypeBase,
 )
 
 
-@implementer(IResource)
-@implementer(IResourcesContainer)
-class EmployeesAppointments(ResourcesContainerBase):
+@implementer(IResourceType)
+class EmployeesAppointments(ResourceTypeBase):
 
-    __name__ = 'employees'
+    __name__ = 'employees_appointments'
 
     def __init__(self, request):
         self.__parent__ = Root(request)
@@ -31,5 +29,7 @@ class EmployeesAppointments(ResourcesContainerBase):
         _ = self.request.translate
         return [
             ('view', _(u'view')),
+            ('add', _(u'add')),
+            ('edit', _(u'edit')),
             ('delete', _(u'delete')),
         ]

@@ -29,14 +29,14 @@
 
     <div class="datagrid-toolbar" id="companies-structures-dg-tb">
         <div class="actions button-container">
-            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'company_structure', 'add', query={'companies_id': company.id})}">
+            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add', query={'companies_id': company.id})}">
                 <span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
             </a>
             <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'company_structure', 'edit')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
                     <span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
                 </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'company_structure', 'copy')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'copy')}">
                     <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
                 </a>
                 <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete')}">

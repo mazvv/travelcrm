@@ -16,11 +16,8 @@ Base = declarative_base()
 
 from resource_type import ResourceType
 from resource import Resource
-from group import Group
 from user import User
 from resource_log import ResourceLog
-from group_navigation import GroupNavigation
-from group_permission import GroupPermision
 from region import Region
 from currency import Currency
 from attachment import Attachment
@@ -31,5 +28,6 @@ from company_position import CompanyPosition
 from position_permision import PositionPermision
 from position_navigation import PositionNavigation
 from employee_appointment import (
-    EmployeeAppointmentHeader, EmployeeAppointmentRows
+    EmployeeAppointmentH,
+    EmployeeAppointmentR
 )

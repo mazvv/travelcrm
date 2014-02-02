@@ -28,7 +28,7 @@ def status_field(value=None, name='status'):
 
 
 def company_structures_combotree_field(
-    companies_id, value=None, name='parent_id'
+    companies_id, value=None, name='parent_id', options=None
 ):
     data_options = """
         url: '/companies_structures/list',
@@ -57,6 +57,10 @@ def company_structures_combotree_field(
                 }
             }
         """ % value
+    if options:
+        data_options += """,
+            %s
+        """ % options
 
     return tags.text(name, value, class_="easyui-combotree text w20",
         data_options=data_options
@@ -128,5 +132,76 @@ def company_position_navigations_combotree_field(
         """ % value
 
     return tags.text(name, value, class_="easyui-combotree text w20",
+        data_options=data_options
+    )
+
+
+def employees_combobox_field(
+    value=None, name='employees_id'
+):
+    data_options = """
+        url: '/employees/list',
+        valueField: 'id',
+        textField: 'name',
+        editable: false,
+        onBeforeLoad: function(param){
+            param.sort = 'name';
+            param.rows = 0;
+            param.page = 1;
+        },
+        loadFilter: function(data){
+            return data.rows;
+        }
+    """
+    return tags.text(name, value, class_="easyui-combobox text w20",
+        data_options=data_options
+    )
+
+
+def companies_combobox_field(
+    value=None, name='companies_id', options=None
+):
+    data_options = """
+        url: '/companies/list',
+        valueField: 'id',
+        textField: 'company_name',
+        editable: false,
+        onBeforeLoad: function(param){
+            param.sort = 'company_name';
+            param.rows = 0;
+            param.page = 1;
+        },
+        loadFilter: function(data){
+            return data.rows;
+        }
+    """
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    return tags.text(name, value, class_="easyui-combobox text w20",
+        data_options=data_options
+    )
+
+
+def companies_positions_combobox_field(
+    companies_structures_id, value=None, name='companies_positions_id'
+):
+    data_options = """
+        url: '/companies_positions/list',
+        valueField: 'id',
+        textField: 'position_name',
+        editable: false,
+        onBeforeLoad: function(param){
+            param.sort = 'position_name';
+            param.rows = 0;
+            param.page = 1;
+            param.struct_id = %s
+        },
+        loadFilter: function(data){
+            return data.rows;
+        }
+    """ % companies_structures_id
+    return tags.text(name, value, class_="easyui-combobox text w20",
         data_options=data_options
     )

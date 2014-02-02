@@ -27,14 +27,14 @@
 
     <div class="datagrid-toolbar" id="companies-positions-dg-tb">
         <div class="actions button-container dl40">
-            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'company_position', 'add', query={'companies_id': company.id})}">
+            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add', query={'companies_id': company.id})}">
             	<span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
            	</a>
             <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'company_position', 'edit')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
                 	<span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
                 </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'company_position', 'copy')}">
+                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'copy')}">
                     <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
                 </a>
                 <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'positions_permisions')}">
