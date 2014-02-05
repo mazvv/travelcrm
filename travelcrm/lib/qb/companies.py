@@ -1,6 +1,5 @@
 # -*coding: utf-8-*-
 
-# -*coding: utf-8-*-
 from sqlalchemy import func
 
 from . import ResourcesQueryBuilder
@@ -38,3 +37,4 @@ class CompaniesQueryBuilder(ResourcesQueryBuilder):
             subq, subq.c.companies_id == Company.id
         )
         self.query = self.query.add_columns(subq.c.structs_quan)
+

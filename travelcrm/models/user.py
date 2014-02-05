@@ -15,36 +15,6 @@ from ..models import (
 )
 
 
-users_groups = Table(
-    'users_groups',
-    Base.metadata,
-    Column(
-        'users_id',
-        Integer,
-        ForeignKey(
-            'users.id',
-            name="fk_users_groups_users_id",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True,
-        ),
-        primary_key=True
-    ),
-    Column(
-        'groups_id',
-        Integer,
-        ForeignKey(
-            'groups.id',
-            name="fk_users_groups_groups_id",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True
-        ),
-        primary_key=True
-    ),
-)
-
-
 class User(Base):
     __tablename__ = 'users'
 

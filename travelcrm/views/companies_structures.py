@@ -9,7 +9,7 @@ from ..models import DBSession
 from ..models.company import Company
 from ..models.company_struct import CompanyStruct
 from ..models.resource import Resource
-from ..lib.bl.companies_structures import CompaniesStructuresQueryBuilder
+from ..lib.qb.companies_structures import CompaniesStructuresQueryBuilder
 from ..forms.companies_structures import CompanyStructureSchema
 
 

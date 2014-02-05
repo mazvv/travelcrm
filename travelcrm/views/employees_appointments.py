@@ -11,7 +11,7 @@ from ..models.employee_appointment import (
     EmployeeAppointmentH,
     EmployeeAppointmentR
 )
-from ..lib.bl.employees_appointments import EmployeesAppointmentsQueryBuilder
+from ..lib.qb.employees_appointments import EmployeesAppointmentsQueryBuilder
 
 from ..forms.employees_appointments import (
     EmployeeAppointmentRowSchema,

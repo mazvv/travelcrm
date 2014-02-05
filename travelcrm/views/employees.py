@@ -7,7 +7,7 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.employee import Employee
-from ..lib.bl.employees import EmployeesQueryBuilder
+from ..lib.qb.employees import EmployeesQueryBuilder
 
 from ..forms.employees import EmployeeSchema
 

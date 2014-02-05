@@ -1,6 +1,7 @@
 # -*coding: utf-8-*-
 
 from . import ResourcesQueryBuilder
+
 from ...models.resource import Resource
 from ...models.company_position import CompanyPosition
 

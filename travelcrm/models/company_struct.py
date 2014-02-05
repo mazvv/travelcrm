@@ -106,3 +106,26 @@ class CompanyStruct(Base):
     @classmethod
     def condition_company_id(cls, companies_id):
         return cls.companies_id == companies_id
+
+    def get_all_descendants(self):
+        all_structs = self.company.company_structs
+        structs = {}
+
+        for item in all_structs:
+            item_children = structs.setdefault(item.parent_id, [])
+            item_children.append(item)
+            structs[item.parent_id] = item_children
+
+        def recurse_accumulate(item, result):
+            if structs.get(item.id):
+                for item in structs.get(item.id):
+                    result.append(item)
+                    recurse_accumulate(item, result)
+            return result
+
+        if structs.get(self.id):
+            result = []
+            return recurse_accumulate(self, result)
+
+    def __repr__(self):
+        return u"<CompanyStruct id=%d>" % self.id

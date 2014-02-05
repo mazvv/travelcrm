@@ -9,7 +9,7 @@ from ..models import DBSession
 from ..models.company_position import CompanyPosition
 from ..models.resource_type import ResourceType
 from ..models.position_permision import PositionPermision
-from ..lib.bl.positions_permisions import PositionsPermisionsQueryBuilder
+from ..lib.qb.positions_permisions import PositionsPermisionsQueryBuilder
 from ..forms.positions_permisions import PositionPermisionSchema
 
 from ..lib.resources_utils import get_resource_class

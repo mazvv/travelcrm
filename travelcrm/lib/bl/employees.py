@@ -2,60 +2,34 @@
 
 from sqlalchemy import desc
 
-from . import ResourcesQueryBuilder
-
 from ...models import DBSession
-from ...models.resource import Resource
+from ...models.user import User
 from ...models.employee import Employee
 from ...models.employee_appointment import (
     EmployeeAppointmentH,
     EmployeeAppointmentR
 )
-from ...models.company_position import CompanyPosition
 from ...models.position_permision import PositionPermision
-
-from .users import get_auth_user
+from ...models.company import Company
+from ...models.company_struct import CompanyStruct
+from ...models.company_position import CompanyPosition
 from ..resources_utils import get_resource_type_by_resource
 
 
-class EmployeesQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Employee.id,
-        '_id': Employee.id,
-        'first_name': Employee.first_name,
-        'last_name': Employee.last_name,
-        'name': Employee.name
-    }
-
-    def __init__(self):
-        super(EmployeesQueryBuilder, self).__init__()
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
-        self.query = self.query.join(Employee, Resource.employee)
-        self.query = self.query.add_columns(*fields)
-
-
-def get_auth_employee(request):
-    user = get_auth_user(request)
-    if user:
-        return user.employee
-
-
 def get_employee_position(employee, date=None):
-    """ get employee position by date
-    if date not given, return current position
-    """
     assert isinstance(employee, Employee), type(employee)
-    company_position = (
+    query = (
         DBSession.query(CompanyPosition)
         .join(EmployeeAppointmentR, CompanyPosition.employees_appointments)
         .join(EmployeeAppointmentH, EmployeeAppointmentR.header)
         .filter(EmployeeAppointmentR.condition_employee_id(employee.id))
-        .order_by(desc(EmployeeAppointmentH.appointment_date))
-        .first()
     )
-    return company_position
+    if date:
+        query = query.filter(
+            EmployeeAppointmentH.appointment_date <= date
+        )
+    query = query.order_by(desc(EmployeeAppointmentH.appointment_date))
+    return query.first()
 
 
 def get_employee_permisions(employee, resource):
@@ -67,7 +41,43 @@ def get_employee_permisions(employee, resource):
         employee_position.permisions.filter(
             PositionPermision.condition_resource_type_id(rt.id)
         )
-        .with_entities(PositionPermision.permisions)
-        .scalar()
+        .first()
     )
     return permisions
+
+
+def query_employee_scope(employee, resource):
+    permisions = get_employee_permisions(employee, resource)
+    if (
+        permisions.scope_type == 'company'
+        and not permisions.companies_structures_id
+    ):
+        company_position = permisions.company_position
+        company = company_position.company_struct.company
+        # TODO: check logic if user has new appointment
+        return (
+            DBSession.query(User.id)
+            .join(CompanyPosition, EmployeeAppointmentR.company_position)
+            .join(CompanyStruct, CompanyPosition.company_struct)
+            .join(Company, CompanyStruct.company)
+            .join(User, EmployeeAppointmentR.employees_id == User.employees_id)
+            .filter(Company.id == company.id)
+        )
+    elif(
+        permisions.scope_type == 'company'
+        and permisions.companies_structures_id
+    ):
+        company_struct = permisions.company_position.company_struct
+        return (
+            DBSession.query(User.id)
+            .join(CompanyPosition, EmployeeAppointmentR.company_position)
+            .join(CompanyStruct, CompanyPosition.company_struct)
+            .join(User, EmployeeAppointmentR.employees_id == User.employees_id)
+            .filter(
+                CompanyStruct.id.in_(
+                    [item.id for item in company_struct.get_all_descendants()]
+                )
+            )
+        )
+    else:
+        return None

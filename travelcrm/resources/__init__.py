@@ -15,10 +15,10 @@ from ..lib.resources_utils import (
     get_resource_class,
     ResourceClassNotFound,
 )
-from ..lib.bl.employees import (
+from ..lib.security_utils import (
     get_auth_employee,
-    get_employee_permisions
 )
+from ..lib.bl.employees import get_employee_permisions
 
 from ..models.resource import Resource
 from ..models.user import User
@@ -41,7 +41,7 @@ class SecuredBase(object):
         employee = get_auth_employee(self.request)
         permisions = get_employee_permisions(employee, self)
         acls = [
-            (Allow, Authenticated, permisions),
+            (Allow, Authenticated, permisions.permisions),
             (Deny, Authenticated, ALL_PERMISSIONS)
         ]
         return acls

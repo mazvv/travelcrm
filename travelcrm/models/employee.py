@@ -13,6 +13,10 @@ from ..models import (
     DBSession,
     Base
 )
+from ..models.employee_appointment import (
+    EmployeeAppointmentR,
+    EmployeeAppointmentH
+)
 
 
 class Employee(Base):

@@ -7,7 +7,7 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.company import Company
-from ..lib.bl.companies import CompaniesQueryBuilder
+from ..lib.qb.companies import CompaniesQueryBuilder
 
 from ..forms.companies import CompanySchema
 

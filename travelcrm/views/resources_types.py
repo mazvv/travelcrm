@@ -7,7 +7,7 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.resource_type import ResourceType
-from ..lib.bl.resources_types import ResourcesTypesQueryBuilder
+from ..lib.qb.resources_types import ResourcesTypesQueryBuilder
 
 from ..forms.resources_types import ResourceTypeSchema
 

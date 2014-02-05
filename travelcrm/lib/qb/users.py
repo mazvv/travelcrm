@@ -1,7 +1,6 @@
 # -*coding: utf-8-*-
 
 from sqlalchemy.orm import aliased
-from pyramid.security import authenticated_userid
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
@@ -29,7 +28,3 @@ class UsersQueryBuilder(ResourcesQueryBuilder):
             self.get_fields()
         )
         self.query = self.query.add_columns(*fields)
-
-
-def get_auth_user(request):
-    return User.get(authenticated_userid(request))

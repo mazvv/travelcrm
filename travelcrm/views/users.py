@@ -7,7 +7,7 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.user import User
-from ..lib.bl.users import UsersQueryBuilder
+from ..lib.qb.users import UsersQueryBuilder
 
 from ..forms.users import (
     UserSchemaAdd,

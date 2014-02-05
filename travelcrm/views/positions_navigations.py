@@ -8,10 +8,10 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.company_position import CompanyPosition
 from ..models.position_navigation import PositionNavigation
-from ..lib.bl.positions_navigations import (
+from ..lib.qb.positions_navigations import (
     PositionsNavigationsQueryBuilder,
-    get_next_position
 )
+from ..lib.bl.positions_navigations import get_next_position
 from ..forms.positions_navigations import PositionNavigationSchema
 
 
