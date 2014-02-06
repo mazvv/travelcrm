@@ -12,7 +12,7 @@ from ..models.position_permision import PositionPermision
 from ..lib.qb.positions_permisions import PositionsPermisionsQueryBuilder
 from ..forms.positions_permisions import PositionPermisionSchema
 
-from ..lib.resources_utils import get_resource_class
+from ..lib.utils.resources_utils import get_resource_class
 
 
 log = logging.getLogger(__name__)

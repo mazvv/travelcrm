@@ -13,8 +13,8 @@ class CompaniesPositionsQueryBuilder(ResourcesQueryBuilder):
         'position_name': CompanyPosition.name,
     }
 
-    def __init__(self):
-        super(CompaniesPositionsQueryBuilder, self).__init__()
+    def __init__(self, context):
+        super(CompaniesPositionsQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )

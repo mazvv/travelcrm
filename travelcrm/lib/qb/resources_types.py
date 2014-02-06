@@ -15,8 +15,8 @@ class ResourcesTypesQueryBuilder(ResourcesQueryBuilder):
         'rt_description': ResourceType.description,
     }
 
-    def __init__(self):
-        super(ResourcesTypesQueryBuilder, self).__init__()
+    def __init__(self, context):
+        super(ResourcesTypesQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )

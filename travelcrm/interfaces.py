@@ -1,16 +1,11 @@
 # -*-coding: utf-8 -*-
 from zope.interface import (
     Interface,
+    Attribute,
 )
-
-
-class IApp(Interface):
-    """ Application """
 
 
 class IResourceType(Interface):
     """ Resource Type """
 
-    def allowed_permisions():
-        """ Get allowed permission for resource
-        """
+    allowed_permisions = Attribute("Allowed permission for resource")

@@ -4,6 +4,7 @@ encoding//travelcrm/forms/auth.py=utf-8
 encoding//travelcrm/forms/companies.py=utf-8
 encoding//travelcrm/forms/companies_positions.py=utf-8
 encoding//travelcrm/forms/companies_structures.py=utf-8
+encoding//travelcrm/forms/currencies.py=utf-8
 encoding//travelcrm/forms/employees.py=utf-8
 encoding//travelcrm/forms/employees_appointments.py=utf-8
 encoding//travelcrm/forms/positions_navigations.py=utf-8

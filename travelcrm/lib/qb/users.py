@@ -1,7 +1,5 @@
 # -*coding: utf-8-*-
 
-from sqlalchemy.orm import aliased
-
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.user import User
@@ -15,13 +13,12 @@ class UsersQueryBuilder(ResourcesQueryBuilder):
         'employee_name': Employee.name,
     }
 
-    def __init__(self):
-        super(UsersQueryBuilder, self).__init__()
-        aUser = aliased(User)
+    def __init__(self, context):
+        super(UsersQueryBuilder, self).__init__(context)
         self.query = (
             self.query
-            .join(aUser, Resource.user)
-            .join(Employee, aUser.employee)
+            .join(User, Resource.user)
+            .join(Employee, User.employee)
         )
         self._fields['username'] = User.username
         fields = ResourcesQueryBuilder.get_fields_with_labels(

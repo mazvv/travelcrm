@@ -6,25 +6,25 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.employee import Employee
-from ..lib.qb.employees import EmployeesQueryBuilder
+from ..models.currency import Currency
+from ..lib.qb.currencies import CurrenciesQueryBuilder
 
-from ..forms.employees import EmployeeSchema
+from ..forms.currencies import CurrencySchema
 
 
 log = logging.getLogger(__name__)
 
 
-class Employees(object):
+class Currencies(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='GET',
-        renderer='travelcrm:templates/employees/index.mak',
+        renderer='travelcrm:templates/currencies/index.mak',
         permission='view'
     )
     def index(self):
@@ -32,14 +32,14 @@ class Employees(object):
 
     @view_config(
         name='list',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = EmployeesQueryBuilder(self.context)
+        qb = CurrenciesQueryBuilder(self.context)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -55,35 +55,33 @@ class Employees(object):
 
     @view_config(
         name='add',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='GET',
-        renderer='travelcrm:templates/employees/form.mak',
+        renderer='travelcrm:templates/currencies/form.mak',
         permission='add'
     )
     def add(self):
         _ = self.request.translate
-        return {'title': _(u'Add Employee')}
+        return {'title': _(u'Add Currency')}
 
     @view_config(
         name='add',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
         _ = self.request.translate
-        schema = EmployeeSchema().bind(request=self.request)
+        schema = CurrencySchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            employee = Employee(
-                first_name=controls.get('first_name'),
-                last_name=controls.get('last_name'),
-                second_name=controls.get('second_name'),
+            currency = Currency(
+                iso_code=controls.get('iso_code'),
                 resource=self.context.create_resource(controls.get('status'))
             )
-            DBSession.add(employee)
+            DBSession.add(currency)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -93,33 +91,31 @@ class Employees(object):
 
     @view_config(
         name='edit',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='GET',
-        renderer='travelcrm:templates/employees/form.mak',
+        renderer='travelcrm:templates/currencies/form.mak',
         permission='edit'
     )
     def edit(self):
         _ = self.request.translate
-        employee = Employee.get(self.request.params.get('id'))
-        return {'item': employee, 'title': _(u'Edit Employee')}
+        currency = Currency.get(self.request.params.get('id'))
+        return {'item': currency, 'title': _(u'Edit Currency')}
 
     @view_config(
         name='edit',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
         _ = self.request.translate
-        schema = EmployeeSchema().bind(request=self.request)
-        employee = Employee.get(self.request.params.get('id'))
+        schema = CurrencySchema().bind(request=self.request)
+        currency = Currency.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            employee.first_name = controls.get('first_name')
-            employee.last_name = controls.get('last_name')
-            employee.second_name = controls.get('second_name')
-            employee.resource.status = controls.get('status')
+            currency.iso_code = controls.get('iso_code')
+            currency.resource.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -129,9 +125,9 @@ class Employees(object):
 
     @view_config(
         name='delete',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='GET',
-        renderer='travelcrm:templates/employees/delete.mak',
+        renderer='travelcrm:templates/currencies/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -141,7 +137,7 @@ class Employees(object):
 
     @view_config(
         name='delete',
-        context='..resources.employees.Employees',
+        context='..resources.currencies.Currencies',
         request_method='POST',
         renderer='json',
         permission='delete'
@@ -149,7 +145,7 @@ class Employees(object):
     def _delete(self):
         _ = self.request.translate
         for id in self.request.params.getall('id'):
-            employee = Employee.get(id)
-            if employee:
-                DBSession.delete(employee)
+            currency = Currency.get(id)
+            if currency:
+                DBSession.delete(currency)
         return {'success_message': _(u'Deleted')}

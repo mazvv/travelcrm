@@ -42,7 +42,7 @@ class Users(object):
         permission='view'
     )
     def list(self):
-        qb = UsersQueryBuilder()
+        qb = UsersQueryBuilder(self.context)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')

@@ -19,8 +19,8 @@ class EmployeesAppointmentsQueryBuilder(ResourcesQueryBuilder):
         'appointment_date': EmployeeAppointmentH.appointment_date,
     }
 
-    def __init__(self):
-        super(EmployeesAppointmentsQueryBuilder, self).__init__()
+    def __init__(self, context):
+        super(EmployeesAppointmentsQueryBuilder, self).__init__(context)
         subquery = (
             DBSession.query(
                 EmployeeAppointmentR.employees_appointments_h_id.label(

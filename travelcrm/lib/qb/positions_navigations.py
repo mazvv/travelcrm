@@ -22,8 +22,8 @@ class PositionsNavigationsQueryBuilder(ResourcesQueryBuilder):
         'parent_id': PositionNavigation.parent_id.label('parent_id')
     }
 
-    def __init__(self):
-        super(PositionsNavigationsQueryBuilder, self).__init__()
+    def __init__(self, context):
+        super(PositionsNavigationsQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )

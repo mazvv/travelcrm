@@ -16,8 +16,8 @@ class CompaniesQueryBuilder(ResourcesQueryBuilder):
         'company_name': Company.name,
     }
 
-    def __init__(self):
-        super(CompaniesQueryBuilder, self).__init__()
+    def __init__(self, context):
+        super(CompaniesQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )

@@ -48,7 +48,7 @@ class PositionsNavigation(object):
             self.request.params.get('companies_positions_id')
         )
 
-        qb = PositionsNavigationsQueryBuilder()
+        qb = PositionsNavigationsQueryBuilder(self.context)
         qb.filter_company_position_id(companies_positions_id)
         qb.filter_parent_id(
             parent_id,

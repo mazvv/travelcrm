@@ -25,7 +25,7 @@ from ..models import (
 from ..models.resource_type import ResourceType
 from ..models.resource_log import ResourceLog
 from ..models.user import User
-from ..lib.resources_utils import (
+from ..lib.utils.resources_utils import (
     get_resource_class_module,
     get_resource_class_name,
 )

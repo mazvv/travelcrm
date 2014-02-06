@@ -46,7 +46,7 @@ class EmployeesAppointments(object):
         permission='view'
     )
     def list(self):
-        qb = EmployeesAppointmentsQueryBuilder()
+        qb = EmployeesAppointmentsQueryBuilder(self.context)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')

@@ -3,7 +3,6 @@
 from sqlalchemy import desc
 
 from ...models import DBSession
-from ...models.user import User
 from ...models.employee import Employee
 from ...models.employee_appointment import (
     EmployeeAppointmentH,
@@ -13,7 +12,7 @@ from ...models.position_permision import PositionPermision
 from ...models.company import Company
 from ...models.company_struct import CompanyStruct
 from ...models.company_position import CompanyPosition
-from ..resources_utils import get_resource_type_by_resource
+from ..utils.resources_utils import get_resource_type_by_resource
 
 
 def get_employee_position(employee, date=None):
@@ -56,11 +55,10 @@ def query_employee_scope(employee, resource):
         company = company_position.company_struct.company
         # TODO: check logic if user has new appointment
         return (
-            DBSession.query(User.id)
+            DBSession.query(EmployeeAppointmentR.employee_id)
             .join(CompanyPosition, EmployeeAppointmentR.company_position)
             .join(CompanyStruct, CompanyPosition.company_struct)
             .join(Company, CompanyStruct.company)
-            .join(User, EmployeeAppointmentR.employees_id == User.employees_id)
             .filter(Company.id == company.id)
         )
     elif(
@@ -69,10 +67,9 @@ def query_employee_scope(employee, resource):
     ):
         company_struct = permisions.company_position.company_struct
         return (
-            DBSession.query(User.id)
+            DBSession.query(EmployeeAppointmentR.employee_id)
             .join(CompanyPosition, EmployeeAppointmentR.company_position)
             .join(CompanyStruct, CompanyPosition.company_struct)
-            .join(User, EmployeeAppointmentR.employees_id == User.employees_id)
             .filter(
                 CompanyStruct.id.in_(
                     [item.id for item in company_struct.get_all_descendants()]

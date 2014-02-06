@@ -4,6 +4,7 @@ from abc import ABCMeta
 
 from datetime import datetime, date
 from sqlalchemy import desc, asc
+from sqlalchemy.orm import aliased
 from babel.dates import format_datetime, format_date
 from zope.interface.verify import verifyObject
 
@@ -11,10 +12,18 @@ from ...interfaces import IResourceType
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.user import User
+from ...models.employee import Employee
 from ...models.resource_log import ResourceLog
 
-from ..common_utils import get_locale_name
-from ..security_utils import get_auth_employee
+from ..utils.common_utils import get_locale_name
+from ..utils.security_utils import get_auth_employee
+
+from ..bl.employees import query_employee_scope
+
+
+# alised
+aUser = aliased(User)
+aEmployee = aliased(Employee)
 
 
 class NotValidContextError(Exception):
@@ -102,18 +111,21 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
     __base_fields = {
         'rid': Resource.id.label('rid'),
         'status': Resource.status.label('status'),
-        'owner': User.username.label('owner'),
+        'owner': aEmployee.name.label('owner'),
+        'owner_username': aUser.username.label('owner_username'),
         'modifydt': __log_subquery.c.modifydt.label('modifydt'),
         'modifier': __log_subquery.c.modifier.label('modifier'),
     }
-    _fields = {}
 
     def __init__(self, context=None):
+        
         if context and not verifyObject(IResourceType, context):
             raise NotValidContextError()
+
         self.query = (
             DBSession.query(*self.get_base_fields().values())
-            .join(User, Resource.owner)
+            .join(aUser, Resource.owner)
+            .join(aEmployee, aUser.employees_id == aEmployee.id)
             .outerjoin(
                 self.__log_subquery,
                 Resource.id == self.__log_subquery.c.id
@@ -124,7 +136,7 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
             query = query_employee_scope(employee, context)
             if query:
                 subq = query_employee_scope(employee, context).subquery()
-                self.query = self.query.join(subq, subq.c.id == User.id)
+                self.query = self.query.join(subq, subq.c.id == aUser.id)
 
     def get_base_fields(self):
         return self.__base_fields

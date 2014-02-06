@@ -1,11 +1,7 @@
 # -*coding: utf-8-*-
 import importlib
 
-from pyramid.security import authenticated_userid
-
-from ..models.user import User
-from ..models.resource_type import ResourceType
-from ..models.position_permision import PositionPermision
+from ...models.resource_type import ResourceType
 
 
 class ResourceClassNotFound(Exception):

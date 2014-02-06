@@ -39,7 +39,7 @@ class ResourcesTypes(object):
         renderer='json'
     )
     def list(self):
-        qb = ResourcesTypesQueryBuilder()
+        qb = ResourcesTypesQueryBuilder(self.context)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')

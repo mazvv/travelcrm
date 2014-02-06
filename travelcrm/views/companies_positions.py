@@ -40,7 +40,7 @@ class CompaniesPositions(object):
         permission='view'
     )
     def list(self):
-        qb = CompaniesPositionsQueryBuilder()
+        qb = CompaniesPositionsQueryBuilder(self.context)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')

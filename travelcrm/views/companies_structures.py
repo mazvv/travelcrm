@@ -44,7 +44,7 @@ class CompaniesStructures(object):
         parent_id = self.request.params.get('id')
         companies_id = self.request.params.get('companies_id')
 
-        qb = CompaniesStructuresQueryBuilder()
+        qb = CompaniesStructuresQueryBuilder(self.context)
         qb.filter_company_id(companies_id)
         qb.filter_parent_id(
             parent_id,

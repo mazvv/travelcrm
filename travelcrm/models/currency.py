@@ -41,11 +41,6 @@ class Currency(Base):
         nullable=False,
         unique=True
     )
-    name = Column(
-        String(length=32),
-        nullable=False
-    )
-
     resource = relationship(
         'Resource',
         backref=backref('currency', uselist=False),

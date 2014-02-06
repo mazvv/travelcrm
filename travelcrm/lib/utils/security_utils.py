@@ -2,7 +2,7 @@
 
 from pyramid.security import authenticated_userid
 
-from ..models.user import User
+from ...models.user import User
 
 
 def get_auth_employee(request):

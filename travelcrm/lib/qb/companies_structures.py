@@ -20,8 +20,8 @@ class CompaniesStructuresQueryBuilder(ResourcesQueryBuilder):
         'parent_id': CompanyStruct.parent_id.label('parent_id')
     }
 
-    def __init__(self):
-        super(CompaniesStructuresQueryBuilder, self).__init__()
+    def __init__(self, context):
+        super(CompaniesStructuresQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )

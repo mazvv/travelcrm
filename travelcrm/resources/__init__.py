@@ -11,11 +11,11 @@ from pyramid.security import (
     authenticated_userid
 )
 
-from ..lib.resources_utils import (
+from ..lib.utils.resources_utils import (
     get_resource_class,
     ResourceClassNotFound,
 )
-from ..lib.security_utils import (
+from ..lib.utils.security_utils import (
     get_auth_employee,
 )
 from ..lib.bl.employees import get_employee_permisions
@@ -39,9 +39,13 @@ class SecuredBase(object):
     @property
     def __acl__(self):
         employee = get_auth_employee(self.request)
-        permisions = get_employee_permisions(employee, self)
+        permisions = None
+        if employee:
+            employee_permisions = get_employee_permisions(employee, self)
+            if employee_permisions:
+                permisions = employee_permisions.permisions 
         acls = [
-            (Allow, Authenticated, permisions.permisions),
+            (Allow, Authenticated, permisions),
             (Deny, Authenticated, ALL_PERMISSIONS)
         ]
         return acls
