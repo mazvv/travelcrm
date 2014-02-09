@@ -5,6 +5,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
+    UniqueConstraint,
     )
 from sqlalchemy.orm import (
     relationship,
@@ -18,18 +19,25 @@ from ..models import (
 
 
 class Currency(Base):
-    __tablename__ = 'currencies'
+    __tablename__ = 'currency'
+    __table_args__ = (
+        UniqueConstraint(
+            'iso_code',
+            name='unique_idx_currency_iso_code',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    resources_id = Column(
+    resource_id = Column(
         Integer,
         ForeignKey(
-            'resources.id',
-            name="fk_resources_id_currencies",
+            'resource.id',
+            name="fk_resource_id_currency",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -39,7 +47,6 @@ class Currency(Base):
     iso_code = Column(
         String(length=3),
         nullable=False,
-        unique=True
     )
     resource = relationship(
         'Resource',

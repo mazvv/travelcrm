@@ -4,8 +4,8 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Table,
     ForeignKey,
+    UniqueConstraint,
     )
 from sqlalchemy.orm import relationship, backref
 
@@ -16,29 +16,41 @@ from ..models import (
 
 
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
+    __table_args__ = (
+        UniqueConstraint(
+            'email',
+            name='unique_idx_users_email',
+            use_alter=True,
+        ),
+        UniqueConstraint(
+            'username',
+            name='unique_idx_users_username',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    resources_id = Column(
+    resource_id = Column(
         Integer,
         ForeignKey(
-            'resources.id',
-            name="fk_resources_id_users",
+            'resource.id',
+            name="fk_resource_id_user",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    employees_id = Column(
+    employee_id = Column(
         Integer,
         ForeignKey(
-            'employees.id',
-            name="fk_employees_id_users",
+            'employee.id',
+            name="fk_employee_id_user",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -48,12 +60,10 @@ class User(Base):
     username = Column(
         String(length=32),
         nullable=False,
-        unique=True
     )
     email = Column(
         String(length=128),
         nullable=True,
-        unique=True
     )
     password = Column(
         String(length=128),
@@ -68,7 +78,6 @@ class User(Base):
     resource = relationship(
         'Resource',
         backref=backref('user', uselist=False),
-        foreign_keys=[resources_id],
         uselist=False
     )
 

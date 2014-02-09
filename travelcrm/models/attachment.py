@@ -14,18 +14,18 @@ from sqlalchemy.orm import relationship, backref
 
 
 class Attachment(Base):
-    __tablename__ = 'attachments'
+    __tablename__ = 'attachment'
 
     id = Column(
         Integer,
         primary_key=True,
         autoincrement=True
     )
-    resources_id = Column(
+    resource_id = Column(
         Integer,
         ForeignKey(
-            'resources.id',
-            name="fk_resources_id_attachments",
+            'resource.id',
+            name="fk_resources_id_attachment",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,

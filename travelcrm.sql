@@ -41,16 +41,16 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: attachments; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: attachment; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE attachments (
+CREATE TABLE attachment (
     id integer NOT NULL,
-    resources_id integer NOT NULL
+    resource_id integer NOT NULL
 );
 
 
-ALTER TABLE public.attachments OWNER TO mazvv;
+ALTER TABLE public.attachment OWNER TO mazvv;
 
 --
 -- Name: _attachments_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -70,92 +70,21 @@ ALTER TABLE public._attachments_rid_seq OWNER TO mazvv;
 -- Name: _attachments_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _attachments_rid_seq OWNED BY attachments.id;
+ALTER SEQUENCE _attachments_rid_seq OWNED BY attachment.id;
 
 
 --
--- Name: companies; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: currency; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE companies (
+CREATE TABLE currency (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
-    name character varying(32) NOT NULL
+    resource_id integer NOT NULL,
+    iso_code character varying(3) NOT NULL
 );
 
 
-ALTER TABLE public.companies OWNER TO mazvv;
-
---
--- Name: _companies_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE _companies_rid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public._companies_rid_seq OWNER TO mazvv;
-
---
--- Name: _companies_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE _companies_rid_seq OWNED BY companies.id;
-
-
---
--- Name: companies_structures; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE companies_structures (
-    id integer NOT NULL,
-    resources_id integer NOT NULL,
-    companies_id integer NOT NULL,
-    parent_id integer,
-    name character varying(32) NOT NULL
-);
-
-
-ALTER TABLE public.companies_structures OWNER TO mazvv;
-
---
--- Name: _companies_structures_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE _companies_structures_rid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public._companies_structures_rid_seq OWNER TO mazvv;
-
---
--- Name: _companies_structures_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE _companies_structures_rid_seq OWNED BY companies_structures.id;
-
-
---
--- Name: currencies; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE currencies (
-    id integer NOT NULL,
-    resources_id integer NOT NULL,
-    iso_code character varying(3) NOT NULL,
-    name character varying(32) NOT NULL
-);
-
-
-ALTER TABLE public.currencies OWNER TO mazvv;
+ALTER TABLE public.currency OWNER TO mazvv;
 
 --
 -- Name: _currencies_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -175,24 +104,24 @@ ALTER TABLE public._currencies_rid_seq OWNER TO mazvv;
 -- Name: _currencies_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _currencies_rid_seq OWNED BY currencies.id;
+ALTER SEQUENCE _currencies_rid_seq OWNED BY currency.id;
 
 
 --
--- Name: employees; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE employees (
+CREATE TABLE employee (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
-    attachments_id integer,
+    resource_id integer NOT NULL,
+    attachment_id integer,
     first_name character varying(32) NOT NULL,
     last_name character varying(32) NOT NULL,
     second_name character varying(32)
 );
 
 
-ALTER TABLE public.employees OWNER TO mazvv;
+ALTER TABLE public.employee OWNER TO mazvv;
 
 --
 -- Name: _employees_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -212,130 +141,22 @@ ALTER TABLE public._employees_rid_seq OWNER TO mazvv;
 -- Name: _employees_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _employees_rid_seq OWNED BY employees.id;
+ALTER SEQUENCE _employees_rid_seq OWNED BY employee.id;
 
 
 --
--- Name: groups_navigations; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: region; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE groups_navigations (
+CREATE TABLE region (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
-    groups_id integer,
-    parent_id integer,
-    name character varying(32) NOT NULL,
-    url character varying(128) NOT NULL,
-    icon_cls character varying(32),
-    "position" integer NOT NULL
-);
-
-
-ALTER TABLE public.groups_navigations OWNER TO mazvv;
-
---
--- Name: _groups_navigations_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE _groups_navigations_rid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public._groups_navigations_rid_seq OWNER TO mazvv;
-
---
--- Name: _groups_navigations_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE _groups_navigations_rid_seq OWNED BY groups_navigations.id;
-
-
---
--- Name: groups_permisions; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE groups_permisions (
-    id integer NOT NULL,
-    resources_types_id integer NOT NULL,
-    groups_id integer NOT NULL,
-    permissions character varying[]
-);
-
-
-ALTER TABLE public.groups_permisions OWNER TO mazvv;
-
---
--- Name: _groups_permisions_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE _groups_permisions_rid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public._groups_permisions_rid_seq OWNER TO mazvv;
-
---
--- Name: _groups_permisions_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE _groups_permisions_rid_seq OWNED BY groups_permisions.id;
-
-
---
--- Name: groups; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE groups (
-    id integer NOT NULL,
-    resources_id integer NOT NULL,
-    name character varying(32) NOT NULL
-);
-
-
-ALTER TABLE public.groups OWNER TO mazvv;
-
---
--- Name: _groups_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE _groups_rid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public._groups_rid_seq OWNER TO mazvv;
-
---
--- Name: _groups_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE _groups_rid_seq OWNED BY groups.id;
-
-
---
--- Name: regions; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE regions (
-    id integer NOT NULL,
-    resources_id integer NOT NULL,
+    resource_id integer NOT NULL,
     parent_id integer,
     name character varying(32) NOT NULL
 );
 
 
-ALTER TABLE public.regions OWNER TO mazvv;
+ALTER TABLE public.region OWNER TO mazvv;
 
 --
 -- Name: _regions_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -355,23 +176,23 @@ ALTER TABLE public._regions_rid_seq OWNER TO mazvv;
 -- Name: _regions_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _regions_rid_seq OWNED BY regions.id;
+ALTER SEQUENCE _regions_rid_seq OWNED BY region.id;
 
 
 --
--- Name: resources_logs; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_log; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE resources_logs (
+CREATE TABLE resource_log (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
-    modifier_id integer NOT NULL,
+    resource_id integer NOT NULL,
+    employee_id integer NOT NULL,
     comment character varying(512),
     modifydt timestamp without time zone
 );
 
 
-ALTER TABLE public.resources_logs OWNER TO mazvv;
+ALTER TABLE public.resource_log OWNER TO mazvv;
 
 --
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -391,22 +212,22 @@ ALTER TABLE public._resources_logs_rid_seq OWNER TO mazvv;
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _resources_logs_rid_seq OWNED BY resources_logs.id;
+ALTER SEQUENCE _resources_logs_rid_seq OWNED BY resource_log.id;
 
 
 --
--- Name: resources; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE resources (
+CREATE TABLE resource (
     id integer NOT NULL,
-    resources_types_id integer NOT NULL,
+    resource_type_id integer NOT NULL,
     status integer,
-    owner_id integer NOT NULL
+    structure_id integer NOT NULL
 );
 
 
-ALTER TABLE public.resources OWNER TO mazvv;
+ALTER TABLE public.resource OWNER TO mazvv;
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -426,16 +247,16 @@ ALTER TABLE public._resources_rid_seq OWNER TO mazvv;
 -- Name: _resources_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _resources_rid_seq OWNED BY resources.id;
+ALTER SEQUENCE _resources_rid_seq OWNED BY resource.id;
 
 
 --
--- Name: resources_types; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE resources_types (
+CREATE TABLE resource_type (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
+    resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     humanize character varying(32) NOT NULL,
     resource_name character varying(32) NOT NULL,
@@ -445,7 +266,7 @@ CREATE TABLE resources_types (
 );
 
 
-ALTER TABLE public.resources_types OWNER TO mazvv;
+ALTER TABLE public.resource_type OWNER TO mazvv;
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -465,24 +286,24 @@ ALTER TABLE public._resources_types_rid_seq OWNER TO mazvv;
 -- Name: _resources_types_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _resources_types_rid_seq OWNED BY resources_types.id;
+ALTER SEQUENCE _resources_types_rid_seq OWNED BY resource_type.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: user; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE users (
+CREATE TABLE "user" (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
+    resource_id integer NOT NULL,
     username character varying(32) NOT NULL,
     email character varying(128),
     password character varying(128) NOT NULL,
-    employees_id integer
+    employee_id integer NOT NULL
 );
 
 
-ALTER TABLE public.users OWNER TO mazvv;
+ALTER TABLE public."user" OWNER TO mazvv;
 
 --
 -- Name: _users_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -502,7 +323,7 @@ ALTER TABLE public._users_rid_seq OWNER TO mazvv;
 -- Name: _users_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE _users_rid_seq OWNED BY users.id;
+ALTER SEQUENCE _users_rid_seq OWNED BY "user".id;
 
 
 --
@@ -517,18 +338,45 @@ CREATE TABLE alembic_version (
 ALTER TABLE public.alembic_version OWNER TO mazvv;
 
 --
--- Name: companies_positions; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: appointment_header; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE companies_positions (
+CREATE TABLE appointment_header (
     id integer NOT NULL,
-    resources_id integer NOT NULL,
+    resource_id integer NOT NULL,
+    appointment_date date
+);
+
+
+ALTER TABLE public.appointment_header OWNER TO mazvv;
+
+--
+-- Name: appointment_row; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE appointment_row (
+    id integer NOT NULL,
+    appointment_header_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    position_id integer NOT NULL
+);
+
+
+ALTER TABLE public.appointment_row OWNER TO mazvv;
+
+--
+-- Name: position; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE "position" (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
     structure_id integer NOT NULL,
     name character varying(32) NOT NULL
 );
 
 
-ALTER TABLE public.companies_positions OWNER TO mazvv;
+ALTER TABLE public."position" OWNER TO mazvv;
 
 --
 -- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -548,21 +396,8 @@ ALTER TABLE public.companies_positions_id_seq OWNER TO mazvv;
 -- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE companies_positions_id_seq OWNED BY companies_positions.id;
+ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
-
---
--- Name: employees_appointments_h; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE employees_appointments_h (
-    id integer NOT NULL,
-    resources_id integer NOT NULL,
-    appointment_date date
-);
-
-
-ALTER TABLE public.employees_appointments_h OWNER TO mazvv;
 
 --
 -- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -582,22 +417,8 @@ ALTER TABLE public.employees_appointments_h_id_seq OWNER TO mazvv;
 -- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE employees_appointments_h_id_seq OWNED BY employees_appointments_h.id;
+ALTER SEQUENCE employees_appointments_h_id_seq OWNED BY appointment_header.id;
 
-
---
--- Name: employees_appointments_r; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE employees_appointments_r (
-    id integer NOT NULL,
-    employees_appointments_h_id integer NOT NULL,
-    employees_id integer NOT NULL,
-    companies_positions_id integer NOT NULL
-);
-
-
-ALTER TABLE public.employees_appointments_r OWNER TO mazvv;
 
 --
 -- Name: employees_appointments_r_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -617,26 +438,42 @@ ALTER TABLE public.employees_appointments_r_id_seq OWNER TO mazvv;
 -- Name: employees_appointments_r_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE employees_appointments_r_id_seq OWNED BY employees_appointments_r.id;
+ALTER SEQUENCE employees_appointments_r_id_seq OWNED BY appointment_row.id;
 
 
 --
--- Name: positions_navigations; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: navigation; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE positions_navigations (
+CREATE TABLE navigation (
     id integer NOT NULL,
-    companies_positions_id integer,
+    position_id integer,
     parent_id integer,
     name character varying(32) NOT NULL,
     url character varying(128) NOT NULL,
     icon_cls character varying(32),
-    "position" integer NOT NULL,
-    resources_id integer NOT NULL
+    sort_order integer NOT NULL,
+    resource_id integer NOT NULL
 );
 
 
-ALTER TABLE public.positions_navigations OWNER TO mazvv;
+ALTER TABLE public.navigation OWNER TO mazvv;
+
+--
+-- Name: permision; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE permision (
+    id integer NOT NULL,
+    resource_type_id integer NOT NULL,
+    position_id integer NOT NULL,
+    permisions character varying[],
+    structure_id integer,
+    scope_type character varying(12)
+);
+
+
+ALTER TABLE public.permision OWNER TO mazvv;
 
 --
 -- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -656,24 +493,8 @@ ALTER TABLE public.positions_navigations_id_seq OWNER TO mazvv;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE positions_navigations_id_seq OWNED BY positions_navigations.id;
+ALTER SEQUENCE positions_navigations_id_seq OWNED BY navigation.id;
 
-
---
--- Name: positions_permisions; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE positions_permisions (
-    id integer NOT NULL,
-    resources_types_id integer NOT NULL,
-    companies_positions_id integer NOT NULL,
-    permisions character varying[],
-    companies_structures_id integer,
-    scope_type character varying(12)
-);
-
-
-ALTER TABLE public.positions_permisions OWNER TO mazvv;
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -693,145 +514,140 @@ ALTER TABLE public.positions_permisions_id_seq OWNER TO mazvv;
 -- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE positions_permisions_id_seq OWNED BY positions_permisions.id;
+ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
 
 --
--- Name: users_groups; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE users_groups (
-    users_id integer NOT NULL,
-    groups_id integer NOT NULL
+CREATE TABLE structure (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    parent_id integer,
+    name character varying(32) NOT NULL
 );
 
 
-ALTER TABLE public.users_groups OWNER TO mazvv;
+ALTER TABLE public.structure OWNER TO mazvv;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY attachments ALTER COLUMN id SET DEFAULT nextval('_attachments_rid_seq'::regclass);
+CREATE SEQUENCE structures_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('_companies_rid_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY companies_positions ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
-
+ALTER TABLE public.structures_id_seq OWNER TO mazvv;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies_structures ALTER COLUMN id SET DEFAULT nextval('_companies_structures_rid_seq'::regclass);
+ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY currencies ALTER COLUMN id SET DEFAULT nextval('_currencies_rid_seq'::regclass);
+ALTER TABLE ONLY appointment_header ALTER COLUMN id SET DEFAULT nextval('employees_appointments_h_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY employees ALTER COLUMN id SET DEFAULT nextval('_employees_rid_seq'::regclass);
+ALTER TABLE ONLY appointment_row ALTER COLUMN id SET DEFAULT nextval('employees_appointments_r_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY employees_appointments_h ALTER COLUMN id SET DEFAULT nextval('employees_appointments_h_id_seq'::regclass);
+ALTER TABLE ONLY attachment ALTER COLUMN id SET DEFAULT nextval('_attachments_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY employees_appointments_r ALTER COLUMN id SET DEFAULT nextval('employees_appointments_r_id_seq'::regclass);
+ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('_currencies_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('_groups_rid_seq'::regclass);
+ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('_employees_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY groups_navigations ALTER COLUMN id SET DEFAULT nextval('_groups_navigations_rid_seq'::regclass);
+ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navigations_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY groups_permisions ALTER COLUMN id SET DEFAULT nextval('_groups_permisions_rid_seq'::regclass);
+ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('positions_permisions_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY positions_navigations ALTER COLUMN id SET DEFAULT nextval('positions_navigations_id_seq'::regclass);
+ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY positions_permisions ALTER COLUMN id SET DEFAULT nextval('positions_permisions_id_seq'::regclass);
+ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('_regions_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY regions ALTER COLUMN id SET DEFAULT nextval('_regions_rid_seq'::regclass);
+ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('_resources_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources ALTER COLUMN id SET DEFAULT nextval('_resources_rid_seq'::regclass);
+ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('_resources_logs_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources_logs ALTER COLUMN id SET DEFAULT nextval('_resources_logs_rid_seq'::regclass);
+ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('_resources_types_rid_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources_types ALTER COLUMN id SET DEFAULT nextval('_resources_types_rid_seq'::regclass);
+ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('_users_rid_seq'::regclass);
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('_users_rid_seq'::regclass);
 
 
 --
@@ -842,52 +658,17 @@ SELECT pg_catalog.setval('_attachments_rid_seq', 1, false);
 
 
 --
--- Name: _companies_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('_companies_rid_seq', 13, true);
-
-
---
--- Name: _companies_structures_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('_companies_structures_rid_seq', 32, true);
-
-
---
 -- Name: _currencies_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_currencies_rid_seq', 8, true);
+SELECT pg_catalog.setval('_currencies_rid_seq', 48, true);
 
 
 --
 -- Name: _employees_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_employees_rid_seq', 5, true);
-
-
---
--- Name: _groups_navigations_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('_groups_navigations_rid_seq', 27, true);
-
-
---
--- Name: _groups_permisions_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('_groups_permisions_rid_seq', 35, true);
-
-
---
--- Name: _groups_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('_groups_rid_seq', 5, true);
+SELECT pg_catalog.setval('_employees_rid_seq', 6, true);
 
 
 --
@@ -901,28 +682,28 @@ SELECT pg_catalog.setval('_regions_rid_seq', 6, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 4835, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 4924, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 793, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 863, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 67, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 68, true);
 
 
 --
 -- Name: _users_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_users_rid_seq', 19, true);
+SELECT pg_catalog.setval('_users_rid_seq', 22, true);
 
 
 --
@@ -930,41 +711,33 @@ SELECT pg_catalog.setval('_users_rid_seq', 19, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-1dfcc639ee50
+1e1476800d39
 \.
 
 
 --
--- Data for Name: attachments; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: appointment_header; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY attachments (id, resources_id) FROM stdin;
+COPY appointment_header (id, resource_id, appointment_date) FROM stdin;
+1	789	2014-02-02
 \.
 
 
 --
--- Data for Name: companies; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: appointment_row; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY companies (id, resources_id, name) FROM stdin;
-4	717	K & S Travel
-5	729	Rainbow Travel
-7	744	Case & Chem Travel
-8	745	Thomas Cook, Travel Company
-9	746	TUI Travel
-10	747	Carnival Corp.
-11	750	Desert Adventures Tourism LLC
-13	759	OutDoor Center
-3	716	Main Company
+COPY appointment_row (id, appointment_header_id, employee_id, position_id) FROM stdin;
+1	1	2	4
 \.
 
 
 --
--- Data for Name: companies_positions; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: attachment; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY companies_positions (id, resources_id, structure_id, name) FROM stdin;
-4	772	32	Main Developer
+COPY attachment (id, resource_id) FROM stdin;
 \.
 
 
@@ -976,53 +749,26 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 4, true);
 
 
 --
--- Data for Name: companies_structures; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY companies_structures (id, resources_id, companies_id, parent_id, name) FROM stdin;
-1	718	3	\N	Head Office
-6	725	3	\N	Odessa filial
-7	726	3	\N	Kiev filial
-9	728	3	\N	Lviv filial
-31	763	3	\N	Dnepr Filial
-32	771	3	1	Administrators
+COPY currency (id, resource_id, iso_code) FROM stdin;
+10	804	USD
+43	848	UAH
+44	849	RUB
+45	850	EUR
 \.
 
 
 --
--- Data for Name: currencies; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY currencies (id, resources_id, iso_code, name) FROM stdin;
-1	286	UAH	ua hrivna
-2	287	USD	usd dollar
-3	288	RUB	ru ruble
-4	289	CAD	canada dollar
-5	290	PLN	poland zloty
-6	291	GBP	gb pound
-7	292	CHF	switziland frank
-8	306	EUR	euro
-\.
-
-
---
--- Data for Name: employees; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY employees (id, resources_id, attachments_id, first_name, last_name, second_name) FROM stdin;
+COPY employee (id, resource_id, attachment_id, first_name, last_name, second_name) FROM stdin;
 2	784	\N	Vitalii	Mazur	
 3	785	\N	Ruslan	Ostapenko	
 4	786	\N	Oleg	Pogorelov	
 5	787	\N	Irina	Mazur	V.
-\.
-
-
---
--- Data for Name: employees_appointments_h; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY employees_appointments_h (id, resources_id, appointment_date) FROM stdin;
-1	789	2014-02-02
 \.
 
 
@@ -1034,15 +780,6 @@ SELECT pg_catalog.setval('employees_appointments_h_id_seq', 1, true);
 
 
 --
--- Data for Name: employees_appointments_r; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY employees_appointments_r (id, employees_appointments_h_id, employees_id, companies_positions_id) FROM stdin;
-1	1	2	4
-\.
-
-
---
 -- Name: employees_appointments_r_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
@@ -1050,42 +787,48 @@ SELECT pg_catalog.setval('employees_appointments_r_id_seq', 1, true);
 
 
 --
--- Data for Name: groups; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY groups (id, resources_id, name) FROM stdin;
-\.
-
-
---
--- Data for Name: groups_navigations; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY groups_navigations (id, resources_id, groups_id, parent_id, name, url, icon_cls, "position") FROM stdin;
-\.
-
-
---
--- Data for Name: groups_permisions; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY groups_permisions (id, resources_types_id, groups_id, permissions) FROM stdin;
-\.
-
-
---
--- Data for Name: positions_navigations; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY positions_navigations (id, companies_positions_id, parent_id, name, url, icon_cls, "position", resources_id) FROM stdin;
+COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id) FROM stdin;
 9	4	8	Resource Types	/resources_types	\N	1	779
-8	4	\N	System	/	fa fa-cog	3	778
 7	4	\N	Home	/	fa fa-home	1	777
 10	4	\N	HR	/	fa fa-group	2	780
 14	4	10	Employees Appointments	/employees_appointments	\N	2	791
 15	4	8	Users	/users	\N	2	792
-16	4	8	Companies	/companies	\N	3	793
 13	4	10	Employees	/employees	\N	1	790
+17	4	8	Currencies	/currencies	\N	3	802
+8	4	\N	System	/	fa fa-cog	4	778
+18	4	\N	Company	/	fa fa-building-o	3	837
+20	4	18	Positions	/positions	\N	2	863
+19	4	18	Structures	/structures	\N	1	838
+\.
+
+
+--
+-- Data for Name: permision; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY permision (id, resource_type_id, position_id, permisions, structure_id, scope_type) FROM stdin;
+22	2	4	{view,add,edit,delete}	\N	all
+35	65	4	{view,add,edit,delete}	\N	all
+34	61	4	{view,add,edit,delete}	\N	all
+32	59	4	{view,add,edit,delete}	\N	all
+30	55	4	{view,add,edit,delete}	\N	all
+24	12	4	{view,add,edit,delete}	\N	all
+38	41	4	{view,add,edit,delete}	\N	all
+37	67	4	{view,add,edit,delete}	\N	all
+26	47	4	{view,add,edit,delete}	\N	all
+21	1	4	{view}	\N	all
+\.
+
+
+--
+-- Data for Name: position; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY "position" (id, resource_id, structure_id, name) FROM stdin;
+4	772	32	Main Developer
 \.
 
 
@@ -1093,39 +836,21 @@ COPY positions_navigations (id, companies_positions_id, parent_id, name, url, ic
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 16, true);
-
-
---
--- Data for Name: positions_permisions; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY positions_permisions (id, resources_types_id, companies_positions_id, permisions, companies_structures_id, scope_type) FROM stdin;
-22	2	4	{view,add,edit,delete}	\N	all
-35	65	4	{view,add,edit,delete}	\N	all
-34	61	4	{view,add,edit,delete}	\N	all
-32	59	4	{view,add,edit,delete}	\N	all
-30	55	4	{view,add,edit,delete}	\N	all
-26	47	4	{view,add,edit,delete}	\N	all
-24	12	4	{view,add,edit,delete}	\N	all
-37	67	4	{view,add,edit}	\N	all
-21	1	4	{view}	\N	all
-28	49	4	{view,delete}	\N	all
-\.
+SELECT pg_catalog.setval('positions_navigations_id_seq', 20, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 37, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 38, true);
 
 
 --
--- Data for Name: regions; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY regions (id, resources_id, parent_id, name) FROM stdin;
+COPY region (id, resource_id, parent_id, name) FROM stdin;
 1	277	\N	Украина
 2	278	\N	Россия
 3	279	1	Киев
@@ -1136,107 +861,118 @@ COPY regions (id, resources_id, parent_id, name) FROM stdin;
 
 
 --
--- Data for Name: resources; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: resource; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY resources (id, resources_types_id, status, owner_id) FROM stdin;
-728	55	0	2
-745	49	0	2
-746	49	0	2
-747	49	0	2
-784	47	0	2
-785	47	0	2
-787	47	0	2
-786	47	0	2
-769	12	0	2
-30	12	1	2
-31	12	0	2
-32	12	0	2
-33	12	0	2
-34	12	0	2
-35	12	0	2
-36	12	0	2
-772	59	0	2
-788	12	0	2
-706	12	0	2
-771	55	0	2
-734	55	0	2
-750	49	0	2
-759	49	0	2
-729	49	0	2
-716	49	0	2
-717	49	0	2
-789	67	0	2
-708	12	0	2
-773	12	0	2
-743	55	0	2
-790	65	0	2
-763	55	0	2
-718	49	0	2
-723	12	0	2
-791	65	0	2
-775	12	0	2
-37	12	0	2
-38	12	0	2
-39	12	0	2
-40	12	0	2
-43	12	0	2
-10	12	0	2
-792	65	0	2
-12	12	0	2
-14	12	0	2
-44	12	0	2
-16	12	0	2
-45	12	0	2
-2	2	0	2
-3	2	0	2
-84	2	0	2
-83	2	1	2
-301	43	0	2
-300	43	0	2
-793	65	0	2
-764	12	0	2
-274	12	0	2
-283	12	0	2
-296	12	0	2
-777	65	0	2
-778	65	0	2
-779	65	0	2
-780	65	0	2
-286	41	0	2
-287	41	0	2
-288	41	0	2
-289	41	0	2
-290	41	0	2
-291	41	0	2
-292	41	0	2
-306	41	0	2
-277	39	0	2
-279	39	0	2
-280	39	0	2
-281	39	0	2
-278	39	1	2
-282	39	1	2
-725	55	0	2
-726	55	0	2
-744	49	0	2
+COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
+863	65	0	32
+728	55	0	32
+784	47	0	32
+785	47	0	32
+787	47	0	32
+786	47	0	32
+802	65	0	32
+769	12	0	32
+30	12	1	32
+31	12	0	32
+32	12	0	32
+33	12	0	32
+34	12	0	32
+35	12	0	32
+36	12	0	32
+837	65	0	32
+848	41	0	32
+849	41	0	32
+850	41	0	32
+851	41	0	32
+852	41	0	32
+772	59	0	32
+788	12	0	32
+706	12	0	32
+804	41	0	32
+771	55	0	32
+838	65	0	32
+734	55	0	32
+853	41	0	32
+789	67	0	32
+773	12	0	32
+854	2	0	32
+855	2	0	32
+743	55	0	32
+790	65	0	32
+763	55	0	32
+723	12	0	32
+791	65	0	32
+775	12	0	32
+37	12	0	32
+38	12	0	32
+39	12	0	32
+40	12	0	32
+43	12	0	32
+10	12	0	32
+792	65	0	32
+12	12	0	32
+14	12	0	32
+44	12	0	32
+16	12	0	32
+45	12	0	32
+2	2	0	32
+3	2	0	32
+84	2	0	32
+83	2	1	32
+856	2	0	32
+764	12	0	32
+274	12	0	32
+283	12	0	32
+777	65	0	32
+778	65	0	32
+779	65	0	32
+780	65	0	32
+286	41	0	32
+287	41	0	32
+288	41	0	32
+289	41	0	32
+290	41	0	32
+291	41	0	32
+292	41	0	32
+306	41	0	32
+277	39	0	32
+279	39	0	32
+280	39	0	32
+281	39	0	32
+278	39	1	32
+282	39	1	32
+857	55	0	32
+858	55	0	32
+859	55	0	32
+860	55	0	32
+861	55	0	32
+794	55	0	32
+800	55	0	32
+801	55	0	32
+725	55	0	32
+726	55	0	32
 \.
 
 
 --
--- Data for Name: resources_logs; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY resources_logs (id, resources_id, modifier_id, comment, modifydt) FROM stdin;
+COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 142	83	2	\N	2013-12-07 16:38:38.11618
 143	84	2	\N	2013-12-07 16:39:56.788641
 144	3	2	\N	2013-12-07 16:41:27.65259
 145	2	2	\N	2013-12-07 16:41:31.748494
 146	83	2	\N	2013-12-07 16:58:05.802634
 147	83	2	\N	2013-12-07 17:00:14.544264
-4770	750	2	\N	2014-01-11 19:11:27.979876
+4836	794	2	\N	2014-02-05 19:54:07.5415
+4845	283	2	\N	2014-02-06 11:38:41.090464
+4846	802	2	\N	2014-02-06 12:14:50.840972
 2	10	2	\N	2013-11-16 19:00:14.24272
+4880	837	2	\N	2014-02-08 12:44:09.181087
 4	12	2	\N	2013-11-16 19:00:15.497284
+4922	838	2	\N	2014-02-09 11:00:53.283205
 6	14	2	\N	2013-11-16 19:00:16.696731
 8	16	2	\N	2013-11-16 19:00:17.960761
 12	30	2	\N	2013-11-23 19:26:00.193553
@@ -1304,13 +1040,15 @@ COPY resources_logs (id, resources_id, modifier_id, comment, modifydt) FROM stdi
 130	10	2	\N	2013-12-06 21:10:25.807719
 4796	769	2	\N	2014-01-22 22:21:45.451623
 4820	16	2	\N	2014-02-01 21:09:43.821944
-4771	750	2	\N	2014-01-11 19:16:04.780716
-4798	716	2	\N	2014-01-25 16:04:57.379717
 4821	785	2	\N	2014-02-01 21:23:03.546657
 4822	784	2	\N	2014-02-01 21:23:07.460721
 4823	786	2	\N	2014-02-01 21:23:12.871915
 4824	787	2	\N	2014-02-01 21:23:26.294657
-4825	746	2	\N	2014-02-01 21:30:30.08985
+4843	800	2	\N	2014-02-05 19:58:31.619612
+4844	801	2	\N	2014-02-05 19:58:49.632624
+4847	804	2	\N	2014-02-06 12:27:24.361214
+4881	838	2	\N	2014-02-08 12:46:41.342097
+4923	863	2	\N	2014-02-09 11:06:45.876408
 361	274	2	\N	2013-12-14 17:16:08.962259
 365	277	2	\N	2013-12-14 18:56:05.189747
 366	278	2	\N	2013-12-14 18:56:17.77025
@@ -1323,7 +1061,9 @@ COPY resources_logs (id, resources_id, modifier_id, comment, modifydt) FROM stdi
 373	278	2	\N	2013-12-14 19:14:33.853691
 374	282	2	\N	2013-12-14 19:14:41.964012
 375	283	2	\N	2013-12-14 19:16:35.738242
+4882	706	2	\N	2014-02-08 19:59:59.160282
 377	283	2	\N	2013-12-14 19:18:21.622933
+4924	838	2	\N	2014-02-09 12:20:11.632022
 386	286	2	\N	2013-12-14 20:46:34.653533
 387	287	2	\N	2013-12-14 20:46:47.37835
 388	288	2	\N	2013-12-14 20:47:08.024243
@@ -1335,13 +1075,6 @@ COPY resources_logs (id, resources_id, modifier_id, comment, modifydt) FROM stdi
 4800	771	2	\N	2014-01-25 16:05:38.705799
 4801	772	2	\N	2014-01-25 16:06:28.321244
 4826	788	2	\N	2014-02-01 22:03:21.899916
-402	296	2	\N	2013-12-15 14:57:26.846239
-408	300	2	\N	2013-12-15 15:48:08.698038
-409	300	2	\N	2013-12-15 15:59:24.316288
-410	300	2	\N	2013-12-15 16:16:20.700714
-411	301	2	\N	2013-12-15 16:16:51.189423
-412	300	2	\N	2013-12-15 16:19:25.308741
-413	300	2	\N	2013-12-15 16:19:30.382192
 422	306	2	\N	2013-12-15 21:45:32.990838
 4802	773	2	\N	2014-01-25 23:45:37.762081
 4827	789	2	\N	2014-02-02 16:45:11.830435
@@ -1351,13 +1084,21 @@ COPY resources_logs (id, resources_id, modifier_id, comment, modifydt) FROM stdi
 4830	790	2	\N	2014-02-02 17:53:42.973553
 4831	791	2	\N	2014-02-02 17:54:20.864462
 4832	792	2	\N	2014-02-02 17:54:57.706749
+4887	787	2	\N	2014-02-08 21:26:40.607951
 4806	777	2	\N	2014-01-26 18:18:05.196211
 4807	778	2	\N	2014-01-26 18:18:24.059336
 4808	779	2	\N	2014-01-26 18:18:45.188271
 4809	780	2	\N	2014-01-26 18:20:19.519217
-4833	793	2	\N	2014-02-02 18:36:15.702691
+4888	786	2	\N	2014-02-08 21:26:45.138217
+4889	785	2	\N	2014-02-08 21:26:48.602711
+4890	784	2	\N	2014-02-08 21:26:51.98617
+4893	848	2	\N	2014-02-08 21:32:08.207947
+4894	849	2	\N	2014-02-08 21:32:14.802948
+4895	850	2	\N	2014-02-08 21:32:25.105565
 4834	790	2	\N	2014-02-02 18:39:14.383473
-4781	759	2	\N	2014-01-12 14:43:37.177188
+4896	851	2	\N	2014-02-08 21:32:32.471247
+4897	852	2	\N	2014-02-08 21:36:44.493917
+4898	853	2	\N	2014-02-08 21:39:09.10029
 4812	784	2	\N	2014-01-26 21:12:24.209136
 4813	784	2	\N	2014-01-26 21:13:10.546575
 4814	784	2	\N	2014-01-26 21:13:20.058093
@@ -1366,514 +1107,451 @@ COPY resources_logs (id, resources_id, modifier_id, comment, modifydt) FROM stdi
 4817	786	2	\N	2014-01-26 21:15:00.370561
 4818	784	2	\N	2014-01-26 21:20:14.635984
 4819	784	2	\N	2014-01-26 21:20:34.941868
+4899	804	2	\N	2014-02-08 21:40:56.593482
+4900	854	2	\N	2014-02-08 21:47:34.439997
+4901	855	2	\N	2014-02-08 21:54:55.399628
+4902	856	2	\N	2014-02-08 21:59:04.719245
 4789	763	2	\N	2014-01-12 19:51:49.157909
+4903	854	2	\N	2014-02-08 22:16:58.906498
+4904	3	2	\N	2014-02-08 22:17:06.939369
+4905	854	2	\N	2014-02-08 22:20:32.280238
+4906	784	2	\N	2014-02-08 22:21:01.290541
+4907	785	2	\N	2014-02-08 22:21:05.110163
+4908	786	2	\N	2014-02-08 22:21:09.110319
 4790	764	2	\N	2014-01-12 20:33:53.3138
+4909	723	2	\N	2014-02-08 22:28:37.868751
+4910	857	2	\N	2014-02-09 00:41:07.487567
+4911	858	2	\N	2014-02-09 00:41:26.234037
+4912	859	2	\N	2014-02-09 00:41:48.428505
+4913	860	2	\N	2014-02-09 00:42:12.938208
+4914	857	2	\N	2014-02-09 00:42:31.066281
+4915	861	2	\N	2014-02-09 00:42:52.234296
+4917	764	2	\N	2014-02-09 00:53:58.264629
+4918	769	2	\N	2014-02-09 00:57:04.796409
+4919	775	2	\N	2014-02-09 00:57:24.917548
+4920	788	2	\N	2014-02-09 00:57:42.02056
+4921	838	2	\N	2014-02-09 01:11:46.633177
 4120	16	2	\N	2014-01-01 13:19:09.979922
 4131	14	2	\N	2014-01-01 18:45:07.902745
 4144	706	2	\N	2014-01-03 16:12:41.015146
 4145	706	2	\N	2014-01-03 16:13:23.197097
-4732	708	2	\N	2014-01-04 11:40:10.44979
-4733	708	2	\N	2014-01-04 12:38:12.601503
-4737	716	2	\N	2014-01-04 19:45:33.799638
-4738	717	2	\N	2014-01-04 19:47:17.449977
-4739	718	2	\N	2014-01-04 20:53:19.171091
 4744	723	2	\N	2014-01-04 23:58:55.624453
 4746	725	2	\N	2014-01-05 01:09:00.405742
 4747	726	2	\N	2014-01-05 01:09:15.602018
 4749	728	2	\N	2014-01-05 01:13:50.125212
-4751	729	2	\N	2014-01-05 12:33:41.287842
 4756	734	2	\N	2014-01-05 12:36:48.48575
 4765	743	2	\N	2014-01-05 13:20:17.173661
-4766	744	2	\N	2014-01-09 21:48:12.51608
-4767	745	2	\N	2014-01-09 21:53:45.746623
-4768	746	2	\N	2014-01-09 21:53:59.747431
-4769	747	2	\N	2014-01-09 21:54:24.766992
 \.
 
 
 --
--- Data for Name: resources_types; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY resources_types (id, resources_id, name, humanize, resource_name, module, settings, description) FROM stdin;
-43	296	currencies_rates	Currencies Rates	CurrenciesRates	finbroker.admin.resources.currencies_rates	\N	\N
+COPY resource_type (id, resource_id, name, humanize, resource_name, module, settings, description) FROM stdin;
 39	274	regions	Regions	Regions	finbroker.admin.resources.regions	\N	\N
-41	283	currencies	Currencies	Currencies	finbroker.admin.resources.currencies	\N	\N
 2	10	users	Users	Users	travelcrm.resources.users	\N	Users list
 12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	\N	Resources types list
 47	706	employees	Employees	Employees	travelcrm.resources.employees	\N	Employees Container Datagrid
-49	708	companies	Companies	Companies	travelcrm.resources.companies	\N	Companies container
-55	723	companies_structures	Companies Structures	CompaniesStructures	travelcrm.resources.companies_structures	\N	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so
-59	764	companies_positions	Companies Positions	CompaniesPositions	travelcrm.resources.companies_positions	\N	Companies positions is a point of company structure where emplyees can be appointed
-61	769	positions_permisions	Positions Permisions	PositionsPermisions	travelcrm.resources.positions_permisions	\N	Permisions list of company structure position. It's list of resources and permisions
 1	773		Home	Root	travelcrm.resources	\N	Home Page of Travelcrm
-65	775	positions_navigations	Positions Navigations	PositionsNavigations	travelcrm.resources.positions_navigations	\N	Navigations list of company structure position.
-67	788	employees_appointments	Employees Appointments	EmployeesAppointments	travelcrm.resources.employees_appointments	\N	Employees to positions of company appointments
+41	283	currencies	Currencies	Currencies	travelcrm.resources.currencies	\N	
+55	723	structures	Structures	Structures	travelcrm.resources.structures	\N	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so
+59	764	positions	Positions	Positions	travelcrm.resources.positions	\N	Companies positions is a point of company structure where emplyees can be appointed
+61	769	permisions	Permisions	Permisions	travelcrm.resources.permisions	\N	Permisions list of company structure position. It's list of resources and permisions
+65	775	navigations	Navigations	Navigations	travelcrm.resources.navigations	\N	Navigations list of company structure position.
+67	788	appointments	Appointments	Appointments	travelcrm.resources.appointments	\N	Employees to positions of company appointments
 \.
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: structure; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY users (id, resources_id, username, email, password, employees_id) FROM stdin;
+COPY structure (id, resource_id, parent_id, name) FROM stdin;
+32	725	\N	Head Office
+2	858	\N	Kiev Office
+3	859	2	Sales Department
+4	860	32	Marketing Dep.
+1	857	32	Software Dev. Dep.
+5	861	32	CEO
+\.
+
+
+--
+-- Name: structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('structures_id_seq', 6, true);
+
+
+--
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
 2	3	mazvv	vitalii.mazur@gmail.com	mazvv	2
+20	854	mazira	\N	mazira	5
 \.
 
 
 --
--- Data for Name: users_groups; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Name: appointment_header_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-COPY users_groups (users_id, groups_id) FROM stdin;
-\.
+ALTER TABLE ONLY appointment_header
+    ADD CONSTRAINT appointment_header_pk PRIMARY KEY (id);
 
 
 --
--- Name: _attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: appointment_row_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY attachments
-    ADD CONSTRAINT _attachments_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY appointment_row
+    ADD CONSTRAINT appointment_row_pk PRIMARY KEY (id);
 
 
 --
--- Name: _companies_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: attachment_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY companies
-    ADD CONSTRAINT _companies_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY attachment
+    ADD CONSTRAINT attachment_pk PRIMARY KEY (id);
 
 
 --
--- Name: _companies_structures_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: currency_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY companies_structures
-    ADD CONSTRAINT _companies_structures_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT currency_pk PRIMARY KEY (id);
 
 
 --
--- Name: _currencies_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY currencies
-    ADD CONSTRAINT _currencies_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT employee_pk PRIMARY KEY (id);
 
 
 --
--- Name: _employees_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: navigation_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY employees
-    ADD CONSTRAINT _employees_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT navigation_pk PRIMARY KEY (id);
 
 
 --
--- Name: _groups_navigations_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: permision_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY groups_navigations
-    ADD CONSTRAINT _groups_navigations_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT permision_pk PRIMARY KEY (id);
 
 
 --
--- Name: _groups_permisions_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: position_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY groups_permisions
-    ADD CONSTRAINT _groups_permisions_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT position_pk PRIMARY KEY (id);
 
 
 --
--- Name: _groups_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: region_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT _groups_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY region
+    ADD CONSTRAINT region_pk PRIMARY KEY (id);
 
 
 --
--- Name: _regions_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_log_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY regions
-    ADD CONSTRAINT _regions_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY resource_log
+    ADD CONSTRAINT resource_log_pk PRIMARY KEY (id);
 
 
 --
--- Name: _resources_logs_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY resources_logs
-    ADD CONSTRAINT _resources_logs_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY resource
+    ADD CONSTRAINT resource_pk PRIMARY KEY (id);
 
 
 --
--- Name: _resources_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_type_name_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY resources
-    ADD CONSTRAINT _resources_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_name_key UNIQUE (name);
 
 
 --
--- Name: _resources_types_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_type_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY resources_types
-    ADD CONSTRAINT _resources_types_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_pk PRIMARY KEY (id);
 
 
 --
--- Name: _users_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY users_groups
-    ADD CONSTRAINT _users_groups_pkey PRIMARY KEY (users_id, groups_id);
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT structure_pk PRIMARY KEY (id);
 
 
 --
--- Name: _users_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY users
-    ADD CONSTRAINT _users_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT unique_idx_currency_iso_code UNIQUE (iso_code);
 
 
 --
--- Name: companies_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY companies_positions
-    ADD CONSTRAINT companies_positions_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT unique_idx_resource_type_module UNIQUE (module, resource_name);
 
 
 --
--- Name: currencies_iso_code_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY currencies
-    ADD CONSTRAINT currencies_iso_code_key UNIQUE (iso_code);
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT unique_idx_resource_type_name UNIQUE (name);
 
 
 --
--- Name: employees_appointments_h_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY employees_appointments_h
-    ADD CONSTRAINT employees_appointments_h_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT unique_idx_users_email UNIQUE (email);
 
 
 --
--- Name: employees_appointments_r_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY employees_appointments_r
-    ADD CONSTRAINT employees_appointments_r_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT unique_idx_users_username UNIQUE (username);
 
 
 --
--- Name: groups_name_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: user_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT groups_name_key UNIQUE (name);
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_pk PRIMARY KEY (id);
 
 
 --
--- Name: positions_navigations_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_appointment_header_id_appointment_row; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY positions_navigations
-    ADD CONSTRAINT positions_navigations_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY appointment_row
+    ADD CONSTRAINT fk_appointment_header_id_appointment_row FOREIGN KEY (appointment_header_id) REFERENCES appointment_header(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: positions_permisions_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_attachment_id_employee; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY positions_permisions
-    ADD CONSTRAINT positions_permisions_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT fk_attachment_id_employee FOREIGN KEY (attachment_id) REFERENCES attachment(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: resources_types_humanize_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_employee_id_appointment_row; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources_types
-    ADD CONSTRAINT resources_types_humanize_key UNIQUE (humanize);
+ALTER TABLE ONLY appointment_row
+    ADD CONSTRAINT fk_employee_id_appointment_row FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: resources_types_name_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources_types
-    ADD CONSTRAINT resources_types_name_key UNIQUE (name);
+ALTER TABLE ONLY resource_log
+    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: unique_idx_resources_types_module; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources_types
-    ADD CONSTRAINT unique_idx_resources_types_module UNIQUE (module, resource_name);
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT fk_employee_id_user FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: users_email_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_email_key UNIQUE (email);
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_navigation_position_id FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_username_key UNIQUE (username);
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_parent_id_navigation FOREIGN KEY (parent_id) REFERENCES navigation(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: idx_group_permissions_permissions; Type: INDEX; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-CREATE INDEX idx_group_permissions_permissions ON groups_permisions USING btree (permissions);
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: companies_positions_structure_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_position_id_appointment_row; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies_positions
-    ADD CONSTRAINT companies_positions_structure_id_fkey FOREIGN KEY (structure_id) REFERENCES companies_structures(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY appointment_row
+    ADD CONSTRAINT fk_position_id_appointment_row FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_attachments_id_employees; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY employees
-    ADD CONSTRAINT fk_attachments_id_employees FOREIGN KEY (attachments_id) REFERENCES attachments(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT fk_position_id_permision FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_companies_id_companies_structures; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies_structures
-    ADD CONSTRAINT fk_companies_id_companies_structures FOREIGN KEY (companies_id) REFERENCES companies(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT fk_position_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_companies_positions_id_positions_permisions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_appointment_header; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY positions_permisions
-    ADD CONSTRAINT fk_companies_positions_id_positions_permisions FOREIGN KEY (companies_positions_id) REFERENCES companies_positions(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY appointment_header
+    ADD CONSTRAINT fk_resource_id_appointment_header FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_companies_structures_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies_structures
-    ADD CONSTRAINT fk_companies_structures_parent_id FOREIGN KEY (parent_id) REFERENCES companies_structures(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT fk_resource_id_currency FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_groups_id_groups_permisions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY groups_permisions
-    ADD CONSTRAINT fk_groups_id_groups_permisions FOREIGN KEY (groups_id) REFERENCES groups(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT fk_resource_id_employee FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_groups_navigations_groups_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY groups_navigations
-    ADD CONSTRAINT fk_groups_navigations_groups_id FOREIGN KEY (groups_id) REFERENCES groups(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT fk_resource_id_position FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_modifier_users_id_resources_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_position_navigation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources_logs
-    ADD CONSTRAINT fk_modifier_users_id_resources_log FOREIGN KEY (modifier_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_resource_id_position_navigation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_owner_id_resources; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY resources
-    ADD CONSTRAINT fk_owner_id_resources FOREIGN KEY (owner_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY resource_log
+    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_parent_id_groups_navigations; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY groups_navigations
-    ADD CONSTRAINT fk_parent_id_groups_navigations FOREIGN KEY (parent_id) REFERENCES groups_navigations(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT fk_resource_id_resource_type FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_positions_permisions_companies_structures_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY positions_permisions
-    ADD CONSTRAINT fk_positions_permisions_companies_structures_id FOREIGN KEY (companies_structures_id) REFERENCES companies_structures(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT fk_resource_id_structure FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_regions_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY regions
-    ADD CONSTRAINT fk_regions_parent_id FOREIGN KEY (parent_id) REFERENCES regions(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT fk_resource_id_user FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_resources_id_attachments; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY attachments
-    ADD CONSTRAINT fk_resources_id_attachments FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT fk_resource_type_id_permission FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_resources_id_companies; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies
-    ADD CONSTRAINT fk_resources_id_companies FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY resource
+    ADD CONSTRAINT fk_resource_type_id_resource FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_resources_id_companies_positions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resources_id_attachment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies_positions
-    ADD CONSTRAINT fk_resources_id_companies_positions FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY attachment
+    ADD CONSTRAINT fk_resources_id_attachment FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_resources_id_companies_structures; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY companies_structures
-    ADD CONSTRAINT fk_resources_id_companies_structures FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY resource
+    ADD CONSTRAINT fk_structure_id_resource FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: fk_resources_id_currencies; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY currencies
-    ADD CONSTRAINT fk_resources_id_currencies FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_employees; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employees
-    ADD CONSTRAINT fk_resources_id_employees FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_groups; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT fk_resources_id_groups FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_groups_navigations; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY groups_navigations
-    ADD CONSTRAINT fk_resources_id_groups_navigations FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_regions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY regions
-    ADD CONSTRAINT fk_resources_id_regions FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_resources_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY resources_logs
-    ADD CONSTRAINT fk_resources_id_resources_log FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_resources_types; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY resources_types
-    ADD CONSTRAINT fk_resources_id_resources_types FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_users; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT fk_resources_id_users FOREIGN KEY (resources_id) REFERENCES resources(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_type_id_groups_permisions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY groups_permisions
-    ADD CONSTRAINT fk_resources_type_id_groups_permisions FOREIGN KEY (resources_types_id) REFERENCES resources_types(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_type_id_positions_permissions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY positions_permisions
-    ADD CONSTRAINT fk_resources_type_id_positions_permissions FOREIGN KEY (resources_types_id) REFERENCES resources_types(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_types_id_resources; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY resources
-    ADD CONSTRAINT fk_resources_types_id_resources FOREIGN KEY (resources_types_id) REFERENCES resources_types(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_users_groups_groups_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY users_groups
-    ADD CONSTRAINT fk_users_groups_groups_id FOREIGN KEY (groups_id) REFERENCES groups(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_users_groups_users_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY users_groups
-    ADD CONSTRAINT fk_users_groups_users_id FOREIGN KEY (users_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT fk_structure_parent_id FOREIGN KEY (parent_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

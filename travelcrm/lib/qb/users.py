@@ -8,8 +8,8 @@ from ...models.employee import Employee
 
 class UsersQueryBuilder(ResourcesQueryBuilder):
     _fields = {
-        'id': Employee.id,
-        '_id': Employee.id,
+        'id': User.id,
+        '_id': User.id,
         'employee_name': Employee.name,
     }
 

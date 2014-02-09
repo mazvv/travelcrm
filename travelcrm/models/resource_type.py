@@ -21,12 +21,17 @@ from ..models import (
 
 
 class ResourceType(Base):
-    __tablename__ = 'resources_types'
+    __tablename__ = 'resource_type'
     __table_args__ = (
         UniqueConstraint(
             'module',
             'resource_name',
-            name='unique_idx_resources_types_module',
+            name='unique_idx_resource_type_module',
+            use_alter=True,
+        ),
+        UniqueConstraint(
+            'name',
+            name='unique_idx_resource_type_name',
             use_alter=True,
         ),
     )
@@ -38,11 +43,11 @@ class ResourceType(Base):
         nullable=False,
         autoincrement=True
     )
-    resources_id = Column(
+    resource_id = Column(
         Integer,
         ForeignKey(
-            'resources.id',
-            name="fk_resources_id_resources_types",
+            'resource.id',
+            name="fk_resource_id_resource_type",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -57,7 +62,6 @@ class ResourceType(Base):
     humanize = Column(
         String(length=32),
         nullable=False,
-        unique=True
     )
     _resource = Column(
         'resource_name',
@@ -83,7 +87,7 @@ class ResourceType(Base):
             'resource_type_obj', uselist=False, cascade="all,delete"
         ),
         cascade="all,delete",
-        foreign_keys=[resources_id],
+        foreign_keys=[resource_id],
         uselist=False
     )
 
@@ -137,11 +141,11 @@ class ResourceType(Base):
 
     def __repr__(self):
         return (
-            "%s (id=%s, resources_id=%s, context=%s)"
+            "%s (id=%s, resource_id=%s, context=%s)"
             % (
                self.__class__.__name__,
                self.id,
-               self.resources_id,
+               self.resource_id,
                self.resource
             )
         )

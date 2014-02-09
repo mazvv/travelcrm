@@ -13,36 +13,32 @@ from ..models import (
     DBSession,
     Base
 )
-from ..models.employee_appointment import (
-    EmployeeAppointmentR,
-    EmployeeAppointmentH
-)
 
 
 class Employee(Base):
-    __tablename__ = 'employees'
+    __tablename__ = 'employee'
 
     id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    resources_id = Column(
+    resource_id = Column(
         Integer,
         ForeignKey(
-            'resources.id',
-            name="fk_resources_id_employees",
+            'resource.id',
+            name="fk_resource_id_employee",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    attachments_id = Column(
+    attachment_id = Column(
         Integer,
         ForeignKey(
-            'attachments.id',
-            name="fk_attachments_id_employees",
+            'attachment.id',
+            name="fk_attachment_id_employee",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,

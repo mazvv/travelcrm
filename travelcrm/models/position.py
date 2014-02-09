@@ -4,9 +4,8 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    ForeignKey,
+    ForeignKey
     )
-
 from sqlalchemy.orm import (
     relationship,
     backref
@@ -18,8 +17,8 @@ from ..models import (
 )
 
 
-class Region(Base):
-    __tablename__ = 'region'
+class Position(Base):
+    __tablename__ = 'position'
 
     id = Column(
         Integer,
@@ -30,43 +29,45 @@ class Region(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_region",
+            name="fk_resource_id_position",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    parent_id = Column(
+    structure_id = Column(
         Integer(),
         ForeignKey(
-            'region.id',
-            name='fk_region_parent_id',
+            'structure.id',
+            name='fk_position_structure_id',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
-        )
+        ),
+        nullable=False,
     )
     name = Column(
         String(length=32),
-        nullable=False,
+        nullable=False
     )
 
     resource = relationship(
         'Resource',
-        backref=backref('region', uselist=False),
+        backref=backref(
+            'position', uselist=False, cascade="all,delete"
+        ),
+        cascade="all,delete",
         uselist=False
     )
 
-    children = relationship(
-        'Region',
+    structure = relationship(
+        'Structure',
         backref=backref(
-            'parent',
-            remote_side=[id]
+            'positions', uselist=True, cascade="all,delete"
         ),
-        uselist=True,
-        order_by='Region.name',
-        lazy='dynamic'
+        cascade="all,delete",
+        uselist=False
     )
 
     @classmethod
@@ -74,3 +75,7 @@ class Region(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def condition_structure_id(cls, structure_id):
+        return cls.structure_id == structure_id

@@ -15,10 +15,11 @@ from ..lib.utils.resources_utils import (
     get_resource_class,
     ResourceClassNotFound,
 )
-from ..lib.utils.security_utils import (
-    get_auth_employee,
+from ..lib.utils.security_utils import get_auth_employee
+from ..lib.bl.employees import (
+    get_employee_permisions,
+    get_employee_structure
 )
-from ..lib.bl.employees import get_employee_permisions
 
 from ..models.resource import Resource
 from ..models.user import User
@@ -43,7 +44,7 @@ class SecuredBase(object):
         if employee:
             employee_permisions = get_employee_permisions(employee, self)
             if employee_permisions:
-                permisions = employee_permisions.permisions 
+                permisions = employee_permisions.permisions
         acls = [
             (Allow, Authenticated, permisions),
             (Deny, Authenticated, ALL_PERMISSIONS)
@@ -64,8 +65,10 @@ class SecuredBase(object):
 class ResourceTypeBase(SecuredBase):
 
     def create_resource(self, status):
-        resource = Resource(self.__class__, status)
-        resource.owner_id = authenticated_userid(self.request)
+        auth_employee = get_auth_employee(self.request)
+        assert auth_employee, "Not auth user can't create resource"
+        owner_structure = get_employee_structure(auth_employee)
+        resource = Resource(self.__class__, owner_structure, status)
         return resource
 
     @property

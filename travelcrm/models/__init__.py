@@ -9,7 +9,12 @@ from sqlalchemy.orm import (
 )
 from zope.sqlalchemy import ZopeTransactionExtension
 
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+DBSession = scoped_session(
+    sessionmaker(
+        extension=ZopeTransactionExtension(),
+        autoflush=False,
+    ),
+)
 
 
 Base = declarative_base()
@@ -22,12 +27,11 @@ from region import Region
 from currency import Currency
 from attachment import Attachment
 from employee import Employee
-from company import Company
-from company_struct import CompanyStruct
-from company_position import CompanyPosition
-from position_permision import PositionPermision
-from position_navigation import PositionNavigation
-from employee_appointment import (
-    EmployeeAppointmentH,
-    EmployeeAppointmentR
+from structure import Structure
+from position import Position
+from permision import Permision
+from navigation import Navigation
+from appointment import (
+    AppointmentHeader,
+    AppointmentRow,
 )

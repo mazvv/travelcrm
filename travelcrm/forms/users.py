@@ -5,19 +5,19 @@ import colander
 from . import ResourceSchema
 
 
-class UserSchemaAdd(ResourceSchema):
+class UserAddSchema(ResourceSchema):
     username = colander.SchemaNode(
         colander.String(),
     )
     password = colander.SchemaNode(
         colander.String(),
     )
-    employees_id = colander.SchemaNode(
+    employee_id = colander.SchemaNode(
         colander.Integer(),
     )
 
 
-class UserSchemaEdit(UserSchemaAdd):
+class UserEditSchema(UserAddSchema):
     password = colander.SchemaNode(
         colander.String(),
         missing=""

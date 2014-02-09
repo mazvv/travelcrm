@@ -17,9 +17,7 @@ def yes_no_field(value=None, name='yes_no'):
 def status_field(value=None, name='status'):
     choices = [
         (0, 'active'),
-        (1, 'disabled'),
-        (2, 'draft'),
-        (3, 'error'),
+        (1, 'archive'),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w15',
@@ -27,15 +25,14 @@ def status_field(value=None, name='status'):
     )
 
 
-def company_structures_combotree_field(
-    companies_id, value=None, name='parent_id', options=None
+def structures_combotree_field(
+    value=None, name='parent_id', options=None
 ):
     data_options = """
-        url: '/companies_structures/list',
+        url: '/structures/list',
         onBeforeLoad: function(node, param){
-            param.companies_id = %s;
-            param.sort = 'struct_name';
-    """ % companies_id
+            param.sort = 'structure_name';
+    """
     if value:
         data_options += """
             if(!node){
@@ -68,7 +65,7 @@ def company_structures_combotree_field(
 
 
 def resources_types_combobox_field(
-    value=None, name='resources_types_id'
+    value=None, name='resource_type_id'
 ):
     data_options = """
         url: '/resources_types/list',
@@ -100,15 +97,15 @@ def permisions_yes_no_field(value=None, permision="view", name='permisions'):
     )
 
 
-def company_position_navigations_combotree_field(
-    companies_positions_id, value=None, name='parent_id'
+def navigations_combotree_field(
+    position_id, value=None, name='parent_id'
 ):
     data_options = """
-        url: '/positions_navigations/list',
+        url: '/navigations/list',
         onBeforeLoad: function(node, param){
-            param.companies_positions_id = %s;
-            param.sort = 'name';
-    """ % companies_positions_id
+            param.position_id = %s;
+            param.sort = 'sort_order';
+    """ % position_id
     if value:
         data_options += """
             if(!node){
@@ -137,7 +134,7 @@ def company_position_navigations_combotree_field(
 
 
 def employees_combobox_field(
-    value=None, name='employees_id'
+    value=None, name='employee_id'
 ):
     data_options = """
         url: '/employees/list',
@@ -158,37 +155,11 @@ def employees_combobox_field(
     )
 
 
-def companies_combobox_field(
-    value=None, name='companies_id', options=None
+def positions_combobox_field(
+    structure_id, value=None, name='position_id'
 ):
     data_options = """
-        url: '/companies/list',
-        valueField: 'id',
-        textField: 'company_name',
-        editable: false,
-        onBeforeLoad: function(param){
-            param.sort = 'company_name';
-            param.rows = 0;
-            param.page = 1;
-        },
-        loadFilter: function(data){
-            return data.rows;
-        }
-    """
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    return tags.text(name, value, class_="easyui-combobox text w20",
-        data_options=data_options
-    )
-
-
-def companies_positions_combobox_field(
-    companies_structures_id, value=None, name='companies_positions_id'
-):
-    data_options = """
-        url: '/companies_positions/list',
+        url: '/positions/list',
         valueField: 'id',
         textField: 'position_name',
         editable: false,
@@ -196,12 +167,25 @@ def companies_positions_combobox_field(
             param.sort = 'position_name';
             param.rows = 0;
             param.page = 1;
-            param.struct_id = %s
+            param.structure_id = %s
         },
         loadFilter: function(data){
             return data.rows;
         }
-    """ % companies_structures_id
+    """ % structure_id
     return tags.text(name, value, class_="easyui-combobox text w20",
         data_options=data_options
+    )
+
+
+def permisions_scope_type(
+    value='structure', name='scope_type'
+):
+    choices = [
+        ("all", 'all'),
+        ("structure", 'structure'),
+    ]
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w5',
+        data_options="panelHeight:'auto'"
     )

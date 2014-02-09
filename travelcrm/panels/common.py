@@ -5,8 +5,6 @@ from pyramid.security import authenticated_userid
 from pyramid_layout.panel import panel_config
 
 from ..models.user import User
-from ..models.resource import Resource
-
 from ..lib.bl.employees import get_employee_position
 
 
@@ -36,7 +34,7 @@ def navigation(context, request):
     employee = user.employee
     employee_position = get_employee_position(employee)
 
-    _navigations = employee_position.positions_navigations
+    _navigations = employee_position.navigations
     navigation = {}
     for item in _navigations:
         item_children = navigation.setdefault(item.parent_id, [])

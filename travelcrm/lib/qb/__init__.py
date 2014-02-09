@@ -12,18 +12,13 @@ from ...interfaces import IResourceType
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.user import User
-from ...models.employee import Employee
+from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
 from ..utils.common_utils import get_locale_name
 from ..utils.security_utils import get_auth_employee
 
 from ..bl.employees import query_employee_scope
-
-
-# alised
-aUser = aliased(User)
-aEmployee = aliased(Employee)
 
 
 class NotValidContextError(Exception):
@@ -111,21 +106,19 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
     __base_fields = {
         'rid': Resource.id.label('rid'),
         'status': Resource.status.label('status'),
-        'owner': aEmployee.name.label('owner'),
-        'owner_username': aUser.username.label('owner_username'),
         'modifydt': __log_subquery.c.modifydt.label('modifydt'),
         'modifier': __log_subquery.c.modifier.label('modifier'),
     }
 
     def __init__(self, context=None):
-        
+
         if context and not verifyObject(IResourceType, context):
             raise NotValidContextError()
 
+        aStructure = aliased(Structure)
         self.query = (
             DBSession.query(*self.get_base_fields().values())
-            .join(aUser, Resource.owner)
-            .join(aEmployee, aUser.employees_id == aEmployee.id)
+            .join(aStructure, Resource.owner_structure)
             .outerjoin(
                 self.__log_subquery,
                 Resource.id == self.__log_subquery.c.id
@@ -136,7 +129,7 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
             query = query_employee_scope(employee, context)
             if query:
                 subq = query_employee_scope(employee, context).subquery()
-                self.query = self.query.join(subq, subq.c.id == aUser.id)
+                self.query = self.query.join(subq, subq.c.id == aStructure.id)
 
     def get_base_fields(self):
         return self.__base_fields

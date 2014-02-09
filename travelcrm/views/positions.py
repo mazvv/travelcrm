@@ -6,28 +6,24 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.user import User
-from ..lib.qb.users import UsersQueryBuilder
-
-from ..forms.users import (
-    UserAddSchema,
-    UserEditSchema
-)
+from ..models.position import Position
+from ..lib.qb.positions import PositionsQueryBuilder
+from ..forms.positions import PositionSchema
 
 
 log = logging.getLogger(__name__)
 
 
-class Users(object):
+class Positions(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
         request_method='GET',
-        renderer='travelcrm:templates/users/index.mak',
+        renderer='travelcrm:templates/positions/index.mak',
         permission='view'
     )
     def index(self):
@@ -35,18 +31,20 @@ class Users(object):
 
     @view_config(
         name='list',
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = UsersQueryBuilder(self.context)
+        qb = PositionsQueryBuilder(self.context)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
         )
+        if self.request.params.get('struct_id'):
+            qb.filter_structure_id(self.request.params.get('struct_id'))
         qb.page_query(
             int(self.request.params.get('rows')),
             int(self.request.params.get('page'))
@@ -58,35 +56,35 @@ class Users(object):
 
     @view_config(
         name='add',
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
         request_method='GET',
-        renderer='travelcrm:templates/users/form.mak',
+        renderer='travelcrm:templates/positions/form.mak',
         permission='add'
     )
     def add(self):
         _ = self.request.translate
-        return {'title': _(u'Add User')}
+        return {
+            'title': _(u"Add Company Position")
+        }
 
     @view_config(
         name='add',
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
         _ = self.request.translate
-        schema = UserAddSchema().bind(request=self.request)
-
+        schema = PositionSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
-            user = User(
-                username=controls.get('username'),
-                password=controls.get('password'),
-                employee_id=controls.get('employee_id'),
+            position = Position(
+                name=controls.get('name'),
+                structure_id=controls.get('structure_id'),
                 resource=self.context.create_resource(controls.get('status'))
             )
-            DBSession.add(user)
+            DBSession.add(position)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -96,34 +94,36 @@ class Users(object):
 
     @view_config(
         name='edit',
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
         request_method='GET',
-        renderer='travelcrm:templates/users/form.mak',
+        renderer='travelcrm:templates/positions/form.mak',
         permission='edit'
     )
     def edit(self):
         _ = self.request.translate
-        user = User.get(self.request.params.get('id'))
-        return {'item': user, 'title': _(u'Edit User')}
+        position = Position.get(self.request.params.get('id'))
+        return {
+            'title': _(u"Edit Company Position"),
+            'item': position,
+        }
 
     @view_config(
         name='edit',
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
         _ = self.request.translate
-        schema = UserEditSchema().bind(request=self.request)
-        user = User.get(self.request.params.get('id'))
+        schema = PositionSchema().bind(request=self.request)
+        structure = Structure.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            user.username = controls.get('username')
-            user.employee_is = controls.get('employee_id')
-            user.resource.status = controls.get('status')
-            if controls.get('password'):
-                user.password = controls.get('password')
+            structure.name = controls.get('name')
+            structure.companies_id = controls.get('companies_id')
+            structure.parent_id = controls.get('parent_id'),
+            company_struct.resource.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -132,20 +132,37 @@ class Users(object):
             }
 
     @view_config(
-        name='delete',
-        context='..resources.users.Users',
+        name='copy',
+        context='..resources.positions.Positions',
         request_method='GET',
-        renderer='travelcrm:templates/users/delete.mak',
-        permission='delete'
+        renderer='travelcrm:templates/companies_structures/form.mak',
+        permission='add'
     )
-    def delete(self):
+    def copy(self):
+        _ = self.request.translate
+        struct = Structure.get(self.request.params.get('id'))
+        company = struct.company
         return {
-            'rid': self.request.params.get('rid')
+            'title': _(u"Copy Company Structure"),
+            'item': struct,
+            'company': company
         }
 
     @view_config(
         name='delete',
-        context='..resources.users.Users',
+        context='..resources.positions.Positions',
+        request_method='GET',
+        renderer='travelcrm:templates/companies_structures/delete.mak',
+        permission='delete'
+    )
+    def delete(self):
+        return {
+            'id': self.request.params.get('id')
+        }
+
+    @view_config(
+        name='delete',
+        context='..resources.positions.Positions',
         request_method='POST',
         renderer='json',
         permission='delete'
@@ -153,7 +170,7 @@ class Users(object):
     def _delete(self):
         _ = self.request.translate
         for id in self.request.params.getall('id'):
-            user = User.get(id)
-            if user:
-                DBSession.delete(user)
+            company_position = Position.get(id)
+            if company_position:
+                DBSession.delete(company_position)
         return {'success_message': _(u'Deleted')}

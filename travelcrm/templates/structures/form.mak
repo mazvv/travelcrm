@@ -9,26 +9,18 @@
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"employees id"), True, "employee_id")}
+                 ${h.tags.title(_(u"name"), True, "name")}
             </div>
             <div class="ml15">
-               ${h.fields.employees_combobox_field(item.employee_id if item else None, "employee_id")}
+                ${h.tags.text("name", item.name if item else None, class_="text w20")}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"username"), False, "username")}
+                ${h.tags.title(_(u"parent structure"), False, "parent_id")}
             </div>
             <div class="ml15">
-                ${h.tags.text("username", item.username if item else None, class_="text w20")}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"password"), False if item else True, "password")}
-            </div>
-            <div class="ml15">
-                ${h.tags.password("password", None, class_="text w20")}
+                ${h.fields.structures_combotree_field(item.parent_id if item else None)}
             </div>
         </div>
         <div class="form-field">
@@ -45,6 +37,6 @@
                 ${h.tags.submit('save', _(u"Save"), class_="button")}
                 ${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
             </div>
-        </div>
+        </div>    
     ${h.tags.end_form()}
 </div>

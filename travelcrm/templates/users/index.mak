@@ -21,7 +21,7 @@
             <th data-options="field:'username',sortable:true,width:200">${_(u"username")}</th>
             <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'owner',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"owner")}</strong></th>
+            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
     </table>
 
@@ -30,14 +30,9 @@
             <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add')}">
             	<span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
            	</a>
-            <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
-                	<span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
-                </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'copy')}">
-                    <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
-                </a>
-            </div>
+            <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
+            	<span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
+            </a>
             <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete')}">
             	<span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
             </a>

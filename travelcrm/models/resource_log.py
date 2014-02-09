@@ -17,11 +17,11 @@ from ..models import (
     DBSession,
     Base
 )
-from ..models.user import User
+from ..models.employee import Employee
 
 
 class ResourceLog(Base):
-    __tablename__ = 'resources_logs'
+    __tablename__ = 'resource_log'
 
     # column definitions
     id = Column(
@@ -29,21 +29,21 @@ class ResourceLog(Base):
         primary_key=True,
         autoincrement=True,
     )
-    resources_id = Column(
+    resource_id = Column(
         Integer(),
         ForeignKey(
-            'resources.id',
-            name='fk_resources_id_resources_log',
+            'resource.id',
+            name='fk_resource_id_resource_log',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
         ),
         nullable=False
     )
-    modifier_id = Column(
+    employee_id = Column(
         Integer(),
-        ForeignKey('users.id',
-            name='fk_modifier_users_id_resources_log',
+        ForeignKey('employee.id',
+            name='fk_employee_id_resource_log',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
@@ -71,8 +71,7 @@ class ResourceLog(Base):
     )
 
     modifier = relationship(
-        'User',
-        primaryjoin='ResourceLog.modifier_id==User.id',
+        'Employee',
         backref=backref(
             'resources_logs',
             uselist=True,
@@ -93,17 +92,16 @@ class ResourceLog(Base):
             DBSession.query(
                 func.max(cls.id)
             )
-            .group_by(cls.resources_id)
+            .group_by(cls.resource_id)
             .subquery()
         )
         max_entries_query = (
             DBSession.query(
-                cls.resources_id.label('id'),
+                cls.resource_id.label('id'),
                 cls.modifydt,
-                User.resources_id.label('modifier_resource_id'),
-                User.username.label('modifier'),
+                Employee.name.label('modifier'),
             )
-            .join(User, cls.modifier)
+            .join(Employee, cls.modifier)
             .filter(cls.id.in_(max_entries_subquery))
         )
         return max_entries_query
