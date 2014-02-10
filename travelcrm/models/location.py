@@ -1,16 +1,13 @@
-# -*-coding: utf-8 -*-
+# -*-coding: utf-8-*-
 
 from sqlalchemy import (
     Column,
     Integer,
     String,
     ForeignKey,
-    UniqueConstraint,
     )
-from sqlalchemy.orm import (
-    relationship,
-    backref
-)
+from sqlalchemy.orm import relationship, backref
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from ..models import (
     DBSession,
@@ -18,42 +15,36 @@ from ..models import (
 )
 
 
-class Currency(Base):
-    __tablename__ = 'currency'
-    __table_args__ = (
-        UniqueConstraint(
-            'iso_code',
-            name='unique_idx_currency_iso_code',
-            use_alter=True,
-        ),
-    )
+class Location(Base):
+    __tablename__ = 'location'
 
     id = Column(
         Integer,
-        primary_key=True,
-        autoincrement=True
+        autoincrement=True,
+        primary_key=True
     )
     resource_id = Column(
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_currency",
+            name="fk_resource_id_location",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    iso_code = Column(
-        String(length=3),
-        nullable=False,
-    )
+
     resource = relationship(
         'Resource',
-        backref=backref('currency', uselist=False, cascade="all,delete"),
+        backref=backref('location', uselist=False, cascade="all,delete"),
         cascade="all,delete",
-        uselist=False
+        uselist=False,
     )
+
+    @hybrid_property
+    def name(self):
+        return self.last_name + " " + self.first_name
 
     @classmethod
     def get(cls, id):

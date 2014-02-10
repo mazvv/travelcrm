@@ -126,7 +126,7 @@ class PositionsPermisions(object):
             )
             if not permision:
                 permision = Permision(
-                    positions_id=controls.get(
+                    position_id=controls.get(
                         'position_id'
                     ),
                     resource_type_id=controls.get('resource_type_id')

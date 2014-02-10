@@ -26,7 +26,7 @@ def footer(context, request):
 
 @panel_config(
     'navigation_panel',
-    renderer='travelcrm:templates/panels/common#navigation.pt'
+    renderer='travelcrm:templates/panels/common#navigation.mak'
 )
 def navigation(context, request):
     user_id = authenticated_userid(request)
