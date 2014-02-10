@@ -327,6 +327,39 @@ ALTER SEQUENCE _users_rid_seq OWNED BY "user".id;
 
 
 --
+-- Name: address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE address (
+    id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+ALTER TABLE public.address OWNER TO mazvv;
+
+--
+-- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE address_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.address_id_seq OWNER TO mazvv;
+
+--
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE address_id_seq OWNED BY address.id;
+
+
+--
 -- Name: alembic_version; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -400,6 +433,74 @@ ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
 
 --
+-- Name: contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE contact (
+    id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+ALTER TABLE public.contact OWNER TO mazvv;
+
+--
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE contact_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.contact_id_seq OWNER TO mazvv;
+
+--
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
+
+
+--
+-- Name: country; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE country (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    iso_code character varying(2) NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.country OWNER TO mazvv;
+
+--
+-- Name: country_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE country_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.country_id_seq OWNER TO mazvv;
+
+--
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE country_id_seq OWNED BY country.id;
+
+
+--
 -- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
 --
 
@@ -442,6 +543,39 @@ ALTER SEQUENCE employees_appointments_r_id_seq OWNED BY appointment_row.id;
 
 
 --
+-- Name: location; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE location (
+    id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+ALTER TABLE public.location OWNER TO mazvv;
+
+--
+-- Name: location_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE location_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.location_id_seq OWNER TO mazvv;
+
+--
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE location_id_seq OWNED BY location.id;
+
+
+--
 -- Name: navigation; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -474,6 +608,42 @@ CREATE TABLE permision (
 
 
 ALTER TABLE public.permision OWNER TO mazvv;
+
+--
+-- Name: person; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE person (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    first_name character varying(32) NOT NULL,
+    last_name character varying(32),
+    second_name character varying(32)
+);
+
+
+ALTER TABLE public.person OWNER TO mazvv;
+
+--
+-- Name: person_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE person_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.person_id_seq OWNER TO mazvv;
+
+--
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE person_id_seq OWNED BY person.id;
+
 
 --
 -- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -556,6 +726,13 @@ ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY appointment_header ALTER COLUMN id SET DEFAULT nextval('employees_appointments_h_id_seq'::regclass);
 
 
@@ -577,6 +754,20 @@ ALTER TABLE ONLY attachment ALTER COLUMN id SET DEFAULT nextval('_attachments_ri
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('_currencies_rid_seq'::regclass);
 
 
@@ -591,6 +782,13 @@ ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('_employees_rid_se
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navigations_id_seq'::regclass);
 
 
@@ -599,6 +797,13 @@ ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navig
 --
 
 ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('positions_permisions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
 
 
 --
@@ -661,7 +866,7 @@ SELECT pg_catalog.setval('_attachments_rid_seq', 1, false);
 -- Name: _currencies_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_currencies_rid_seq', 48, true);
+SELECT pg_catalog.setval('_currencies_rid_seq', 49, true);
 
 
 --
@@ -682,21 +887,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 6, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 4924, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 4948, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 863, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 884, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 68, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 70, true);
 
 
 --
@@ -707,11 +912,26 @@ SELECT pg_catalog.setval('_users_rid_seq', 22, true);
 
 
 --
+-- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY address (id, resource_id) FROM stdin;
+\.
+
+
+--
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('address_id_seq', 1, false);
+
+
+--
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
 COPY alembic_version (version_num) FROM stdin;
-1e1476800d39
+1298c1e80a35
 \.
 
 
@@ -749,6 +969,42 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 4, true);
 
 
 --
+-- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY contact (id, resource_id) FROM stdin;
+\.
+
+
+--
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('contact_id_seq', 1, false);
+
+
+--
+-- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY country (id, resource_id, iso_code, name) FROM stdin;
+3	878	UA	Ukraine
+4	880	EG	Egypt
+5	881	TR	Turkey
+6	882	GB	United Kingdom
+7	883	US	United States
+8	884	TH	Thailand
+\.
+
+
+--
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('country_id_seq', 8, true);
+
+
+--
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -768,7 +1024,6 @@ COPY employee (id, resource_id, attachment_id, first_name, last_name, second_nam
 2	784	\N	Vitalii	Mazur	
 3	785	\N	Ruslan	Ostapenko	
 4	786	\N	Oleg	Pogorelov	
-5	787	\N	Irina	Mazur	V.
 \.
 
 
@@ -787,21 +1042,41 @@ SELECT pg_catalog.setval('employees_appointments_r_id_seq', 1, true);
 
 
 --
+-- Data for Name: location; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY location (id, resource_id) FROM stdin;
+\.
+
+
+--
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('location_id_seq', 1, false);
+
+
+--
 -- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
 COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id) FROM stdin;
 9	4	8	Resource Types	/resources_types	\N	1	779
 7	4	\N	Home	/	fa fa-home	1	777
-10	4	\N	HR	/	fa fa-group	2	780
 14	4	10	Employees Appointments	/employees_appointments	\N	2	791
 15	4	8	Users	/users	\N	2	792
 13	4	10	Employees	/employees	\N	1	790
-17	4	8	Currencies	/currencies	\N	3	802
-8	4	\N	System	/	fa fa-cog	4	778
-18	4	\N	Company	/	fa fa-building-o	3	837
 20	4	18	Positions	/positions	\N	2	863
 19	4	18	Structures	/structures	\N	1	838
+18	4	\N	Company	/	fa fa-building-o	4	837
+10	4	\N	HR	/	fa fa-group	3	780
+21	4	\N	Clients	/	fa fa-briefcase	2	864
+22	4	21	Persons	/persons	\N	1	866
+8	4	\N	System	/	fa fa-cog	6	778
+23	4	\N	Directories	/	fa fa-book	5	873
+25	4	23	Regions	/regions	\N	3	879
+17	4	23	Currencies	/currencies	\N	1	802
+24	4	23	Countries	/countries	\N	3	874
 \.
 
 
@@ -819,8 +1094,28 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 38	41	4	{view,add,edit,delete}	\N	all
 37	67	4	{view,add,edit,delete}	\N	all
 26	47	4	{view,add,edit,delete}	\N	all
+39	69	4	{view,add,edit,delete}	\N	all
+40	39	4	{view,add,edit,delete}	\N	all
+41	70	4	{view,add,edit,delete}	\N	all
 21	1	4	{view}	\N	all
 \.
+
+
+--
+-- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY person (id, resource_id, first_name, last_name, second_name) FROM stdin;
+4	870	Greg	Johnson	
+5	871	John	Doe	
+\.
+
+
+--
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('person_id_seq', 5, true);
 
 
 --
@@ -836,14 +1131,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 20, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 25, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 38, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 41, true);
 
 
 --
@@ -866,10 +1161,10 @@ COPY region (id, resource_id, parent_id, name) FROM stdin;
 
 COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 863	65	0	32
+875	70	0	32
 728	55	0	32
 784	47	0	32
 785	47	0	32
-787	47	0	32
 786	47	0	32
 802	65	0	32
 769	12	0	32
@@ -886,6 +1181,8 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 850	41	0	32
 851	41	0	32
 852	41	0	32
+864	65	0	32
+876	41	0	32
 772	59	0	32
 788	12	0	32
 706	12	0	32
@@ -894,10 +1191,13 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 838	65	0	32
 734	55	0	32
 853	41	0	32
+865	12	0	32
+866	65	0	32
 789	67	0	32
 773	12	0	32
 854	2	0	32
 855	2	0	32
+878	70	0	32
 743	55	0	32
 790	65	0	32
 763	55	0	32
@@ -921,6 +1221,8 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 84	2	0	32
 83	2	1	32
 856	2	0	32
+870	69	0	32
+879	65	0	32
 764	12	0	32
 274	12	0	32
 283	12	0	32
@@ -950,6 +1252,15 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 794	55	0	32
 800	55	0	32
 801	55	0	32
+871	69	0	32
+880	70	0	32
+881	70	0	32
+882	70	0	32
+883	70	0	32
+884	70	0	32
+872	12	0	32
+873	65	0	32
+874	65	0	32
 725	55	0	32
 726	55	0	32
 \.
@@ -1043,7 +1354,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4821	785	2	\N	2014-02-01 21:23:03.546657
 4822	784	2	\N	2014-02-01 21:23:07.460721
 4823	786	2	\N	2014-02-01 21:23:12.871915
-4824	787	2	\N	2014-02-01 21:23:26.294657
 4843	800	2	\N	2014-02-05 19:58:31.619612
 4844	801	2	\N	2014-02-05 19:58:49.632624
 4847	804	2	\N	2014-02-06 12:27:24.361214
@@ -1076,15 +1386,18 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4801	772	2	\N	2014-01-25 16:06:28.321244
 4826	788	2	\N	2014-02-01 22:03:21.899916
 422	306	2	\N	2013-12-15 21:45:32.990838
+4925	864	2	\N	2014-02-09 12:31:10.556265
 4802	773	2	\N	2014-01-25 23:45:37.762081
+4926	864	2	\N	2014-02-09 12:32:19.155301
 4827	789	2	\N	2014-02-02 16:45:11.830435
+4927	865	2	\N	2014-02-09 13:26:19.008763
 4804	775	2	\N	2014-01-26 15:30:50.636495
+4928	866	2	\N	2014-02-09 13:26:48.246588
 4828	3	2	\N	2014-02-02 17:45:50.239397
 4829	780	2	\N	2014-02-02 17:53:21.606939
 4830	790	2	\N	2014-02-02 17:53:42.973553
 4831	791	2	\N	2014-02-02 17:54:20.864462
 4832	792	2	\N	2014-02-02 17:54:57.706749
-4887	787	2	\N	2014-02-08 21:26:40.607951
 4806	777	2	\N	2014-01-26 18:18:05.196211
 4807	778	2	\N	2014-01-26 18:18:24.059336
 4808	779	2	\N	2014-01-26 18:18:45.188271
@@ -1092,12 +1405,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4888	786	2	\N	2014-02-08 21:26:45.138217
 4889	785	2	\N	2014-02-08 21:26:48.602711
 4890	784	2	\N	2014-02-08 21:26:51.98617
+4929	870	2	\N	2014-02-09 14:57:54.403714
 4893	848	2	\N	2014-02-08 21:32:08.207947
 4894	849	2	\N	2014-02-08 21:32:14.802948
 4895	850	2	\N	2014-02-08 21:32:25.105565
 4834	790	2	\N	2014-02-02 18:39:14.383473
 4896	851	2	\N	2014-02-08 21:32:32.471247
 4897	852	2	\N	2014-02-08 21:36:44.493917
+4930	871	2	\N	2014-02-09 16:04:05.85568
 4898	853	2	\N	2014-02-08 21:39:09.10029
 4812	784	2	\N	2014-01-26 21:12:24.209136
 4813	784	2	\N	2014-01-26 21:13:10.546575
@@ -1107,10 +1422,18 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4817	786	2	\N	2014-01-26 21:15:00.370561
 4818	784	2	\N	2014-01-26 21:20:14.635984
 4819	784	2	\N	2014-01-26 21:20:34.941868
+4931	274	2	\N	2014-02-10 08:49:31.501202
 4899	804	2	\N	2014-02-08 21:40:56.593482
+4932	872	2	\N	2014-02-10 14:29:53.759164
+4933	873	2	\N	2014-02-10 14:36:29.132134
+4934	874	2	\N	2014-02-10 14:36:56.817818
+4935	802	2	\N	2014-02-10 14:37:05.778544
 4900	854	2	\N	2014-02-08 21:47:34.439997
 4901	855	2	\N	2014-02-08 21:54:55.399628
+4936	875	2	\N	2014-02-10 15:58:53.177719
+4937	875	2	\N	2014-02-10 15:59:03.43204
 4902	856	2	\N	2014-02-08 21:59:04.719245
+4938	876	2	\N	2014-02-10 16:19:24.400952
 4789	763	2	\N	2014-01-12 19:51:49.157909
 4903	854	2	\N	2014-02-08 22:16:58.906498
 4904	3	2	\N	2014-02-08 22:17:06.939369
@@ -1120,16 +1443,25 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4908	786	2	\N	2014-02-08 22:21:09.110319
 4790	764	2	\N	2014-01-12 20:33:53.3138
 4909	723	2	\N	2014-02-08 22:28:37.868751
+4940	878	2	\N	2014-02-10 16:40:47.442615
 4910	857	2	\N	2014-02-09 00:41:07.487567
 4911	858	2	\N	2014-02-09 00:41:26.234037
 4912	859	2	\N	2014-02-09 00:41:48.428505
 4913	860	2	\N	2014-02-09 00:42:12.938208
 4914	857	2	\N	2014-02-09 00:42:31.066281
 4915	861	2	\N	2014-02-09 00:42:52.234296
+4941	879	2	\N	2014-02-10 21:17:56.627306
 4917	764	2	\N	2014-02-09 00:53:58.264629
 4918	769	2	\N	2014-02-09 00:57:04.796409
 4919	775	2	\N	2014-02-09 00:57:24.917548
 4920	788	2	\N	2014-02-09 00:57:42.02056
+4942	878	2	\N	2014-02-10 22:47:18.374976
+4943	880	2	\N	2014-02-10 22:48:37.279277
+4944	881	2	\N	2014-02-10 22:49:24.829434
+4945	882	2	\N	2014-02-10 22:49:56.066237
+4946	883	2	\N	2014-02-10 22:50:06.121122
+4947	884	2	\N	2014-02-10 22:50:26.035905
+4948	884	2	\N	2014-02-10 22:53:06.689693
 4921	838	2	\N	2014-02-09 01:11:46.633177
 4120	16	2	\N	2014-01-01 13:19:09.979922
 4131	14	2	\N	2014-01-01 18:45:07.902745
@@ -1149,7 +1481,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, settings, description) FROM stdin;
-39	274	regions	Regions	Regions	finbroker.admin.resources.regions	\N	\N
 2	10	users	Users	Users	travelcrm.resources.users	\N	Users list
 12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	\N	Resources types list
 47	706	employees	Employees	Employees	travelcrm.resources.employees	\N	Employees Container Datagrid
@@ -1160,6 +1491,9 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 61	769	permisions	Permisions	Permisions	travelcrm.resources.permisions	\N	Permisions list of company structure position. It's list of resources and permisions
 65	775	navigations	Navigations	Navigations	travelcrm.resources.navigations	\N	Navigations list of company structure position.
 67	788	appointments	Appointments	Appointments	travelcrm.resources.appointments	\N	Employees to positions of company appointments
+69	865	persons	Persons	Persons	travelcrm.resources.persons	\N	Persons list is a list of clients or potential clients
+39	274	regions	Regions	Regions	travelcrm.resources.regions	\N	
+70	872	countries	Countries	Countries	travelcrm.resources.countries	\N	Countries directory
 \.
 
 
@@ -1190,8 +1524,15 @@ SELECT pg_catalog.setval('structures_id_seq', 6, true);
 
 COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
 2	3	mazvv	vitalii.mazur@gmail.com	mazvv	2
-20	854	mazira	\N	mazira	5
 \.
+
+
+--
+-- Name: address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
 
 
 --
@@ -1219,6 +1560,22 @@ ALTER TABLE ONLY attachment
 
 
 --
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY contact
+    ADD CONSTRAINT contact_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: country_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY country
+    ADD CONSTRAINT country_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: currency_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1235,6 +1592,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: location_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT location_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: navigation_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1248,6 +1613,14 @@ ALTER TABLE ONLY navigation
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT permision_pk PRIMARY KEY (id);
+
+
+--
+-- Name: person_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_pkey PRIMARY KEY (id);
 
 
 --
@@ -1464,6 +1837,14 @@ ALTER TABLE ONLY currency
 
 ALTER TABLE ONLY employee
     ADD CONSTRAINT fk_resource_id_employee FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT fk_resource_id_person FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
