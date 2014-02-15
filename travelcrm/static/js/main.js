@@ -233,6 +233,12 @@ function get_checked(container, container_type){
 	return null;
 }
 
+function get_current_container(){
+    if(containers.length > 0)
+	return containers[containers.length - 1];
+    return null;
+}
+
 function get_container_type(container){
 	var container_type = null;
 	if(container.find('.easyui-datagrid').length > 0) container_type = 'datagrid';
@@ -266,26 +272,3 @@ $(document).on("click", '._action', function(event){
     add_container(container);
     $.post(url, params).always(function(){refresh_container();});
 });
-
-function dateformatter(date){  
-    var y = date.getFullYear();  
-    var m = date.getMonth()+1;  
-    var d = date.getDate();  
-    return (d<10?('0'+d):d)+'.'+(m<10?('0'+m):m)+'.'+y;  
-}
-
-function dateparser(s){  
-    if (!s) return new Date();  
-    var ss = s.split('.');  
-    var y = parseInt(ss[2],10);  
-    var m = parseInt(ss[1],10);  
-    var d = parseInt(ss[0],10);  
-    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){  
-        return new Date(y,m-1,d);  
-    } else {  
-        return new Date();  
-    }  
-}
-
-$.fn.datebox.defaults.formatter = dateformatter;
-$.fn.datebox.defaults.parser = dateparser;

@@ -43,8 +43,6 @@ class Positions(object):
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
         )
-        if self.request.params.get('struct_id'):
-            qb.filter_structure_id(self.request.params.get('struct_id'))
         qb.page_query(
             int(self.request.params.get('rows')),
             int(self.request.params.get('page'))

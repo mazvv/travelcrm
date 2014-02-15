@@ -4,65 +4,39 @@
         modal:true,
         draggable:false,
         resizable:false,
-        iconCls:'fa fa-pencil-square-o',
-        onBeforeDestroy: function(){
-            var container = containers[containers.length - 1];
-            var container_dg = container.find('.easyui-datagrid');
-            var rows = container_dg.datagrid('getRows');
-            var index = rows.length + 1;
-            var employees_id = $('<input>').attr('name', 'employees_id_' + index).attr('type', 'hidden').val($('#employees_id').val());
-            var companies_positions_id = $('<input>').attr('name', 'companies_positions_id_' + index).attr('type', 'hidden').val($('#companies_positions_id').val());
-            container.append(employees_id);
-            container.append(companies_positions_id);
-        }
+        iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+    ${h.tags.form(request.url, class_="_ajax _container_storage", autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"employee"), True, "employees_id")}
+                ${h.tags.title(_(u"employee"), True, "employee_id")}
             </div>
             <div class="ml15">
-                ${h.fields.employees_combobox_field(item.employees_id if item else None, "employees_id")}
+                ${h.fields.employees_combobox_field(item.employee_id if item else None, "employee_id")}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"company"), False, "companies_id")}
+                ${h.tags.title(_(u"company structure"), False, "structure_id")}
             </div>
             <div class="ml15">
                 <%
                     data_options = """
                         onSelect: function(record){
-                            $('#companies_id').val(record.id);
-                            $('#companies_structures_id').combotree('reload');
+                            $('#structure_id').val(record.id);
+                            $('#position_id').combobox('reload');
                         }
                     """
                 %>
-                ${h.fields.companies_combobox_field(item.companies_id if item else None, "companies_id", options=data_options)}
+                ${h.fields.structures_combotree_field(None, "structure_id", options=data_options)}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"company structure"), False, "companies_structures_id")}
+                ${h.tags.title(_(u"company position"), True, "position_id")}
             </div>
             <div class="ml15">
-                <%
-                    data_options = """
-                        onSelect: function(record){
-                            $('#companies_structures_id').val(record.id);
-                            $('#companies_positions_id').combobox('reload');
-                        }
-                    """
-                %>
-                ${h.fields.company_structures_combotree_field('$("#companies_id").val()', None, "companies_structures_id", options=data_options)}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"company position"), True, "companies_positions_id")}
-            </div>
-            <div class="ml15">
-                ${h.fields.companies_positions_combobox_field('$("#companies_structures_id").val()', None, "companies_positions_id")}
+                ${h.fields.positions_combobox_field('$("#structure_id").val()', None, "position_id")}
             </div>
         </div>
         <div class="form-buttons">

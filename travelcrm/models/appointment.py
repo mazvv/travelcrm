@@ -5,6 +5,8 @@ from sqlalchemy import (
     Integer,
     Date,
     ForeignKey,
+    String,
+    event,
     func
 )
 from sqlalchemy.orm import relationship, backref
@@ -97,6 +99,9 @@ class AppointmentRow(Base):
         ),
         nullable=False,
     )
+    uuid = Column(
+        String,
+    )
 
     header = relationship(
         'AppointmentHeader',
@@ -133,3 +138,14 @@ class AppointmentRow(Base):
     @classmethod
     def condition_employee_id(cls, employee_id):
         return cls.employee_id == employee_id
+
+    @classmethod
+    def condition_uuid(cls, uuid):
+        return cls.uuid == uuid
+
+
+def appointment_row_event(mapper, connection, target):
+    if target.appointment_header_id:
+        target.uuid = None
+
+event.listen(AppointmentRow, 'after_update', appointment_row_event)
