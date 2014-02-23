@@ -5,8 +5,6 @@ from sqlalchemy import (
     Integer,
     Date,
     ForeignKey,
-    String,
-    event,
     func
 )
 from sqlalchemy.orm import relationship, backref
@@ -17,8 +15,8 @@ from ..models import (
 )
 
 
-class AppointmentHeader(Base):
-    __tablename__ = 'appointment_header'
+class Appointment(Base):
+    __tablename__ = 'appointment'
 
     id = Column(
         Integer,
@@ -29,7 +27,7 @@ class AppointmentHeader(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_appointment_header",
+            name="fk_resource_id_appointment",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
@@ -56,96 +54,3 @@ class AppointmentHeader(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
-
-
-class AppointmentRow(Base):
-    __tablename__ = 'appointment_row'
-
-    id = Column(
-        Integer,
-        autoincrement=True,
-        primary_key=True
-    )
-    appointment_header_id = Column(
-        Integer,
-        ForeignKey(
-            'appointment_header.id',
-            name="fk_appointment_header_id_appointment_row",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True,
-        ),
-        nullable=False,
-    )
-    employee_id = Column(
-        Integer,
-        ForeignKey(
-            'employee.id',
-            name="fk_employee_id_appointment_row",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True,
-        ),
-        nullable=False,
-    )
-    position_id = Column(
-        Integer,
-        ForeignKey(
-            'position.id',
-            name="fk_position_id_appointment_row",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True,
-        ),
-        nullable=False,
-    )
-    uuid = Column(
-        String,
-    )
-
-    header = relationship(
-        'AppointmentHeader',
-        backref=backref(
-            'rows', uselist=True, cascade="all,delete"
-        ),
-        uselist=False,
-    )
-    employee = relationship(
-        'Employee',
-        backref=backref(
-            'appointments',
-            uselist=True,
-            lazy='dynamic'
-        ),
-        uselist=False
-    )
-    position = relationship(
-        'Position',
-        backref=backref(
-            'appointments',
-            uselist=True,
-            lazy='dynamic'
-        ),
-        uselist=False
-    )
-
-    @classmethod
-    def get(cls, id):
-        if id is None:
-            return None
-        return DBSession.query(cls).get(id)
-
-    @classmethod
-    def condition_employee_id(cls, employee_id):
-        return cls.employee_id == employee_id
-
-    @classmethod
-    def condition_uuid(cls, uuid):
-        return cls.uuid == uuid
-
-
-def appointment_row_event(mapper, connection, target):
-    if target.appointment_header_id:
-        target.uuid = None
-
-event.listen(AppointmentRow, 'after_update', appointment_row_event)

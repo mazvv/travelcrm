@@ -6,6 +6,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.resource_url(_context, 'delete_row'), class_="_ajax", autocomplete="off", hidden_fields=[('id', id) for id in request.params.get('id').split(',')])}
+        ${h.tags.hidden('tid', tid)}
         <div class="p1">
             <div class="mb1">
                 <i class="fa fa-info-circle fa-lg"></i> 

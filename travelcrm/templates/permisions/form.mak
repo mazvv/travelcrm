@@ -22,7 +22,7 @@
                 ${h.tags.title(_(u"scope type"), False, "scope_type")}
             </div>
             <div class="ml15">
-                ${h.fields.permisions_scope_type(item.scope_type if item else 'structure', 'scope_type')}
+                ${h.fields.permisions_scope_type_field(item.scope_type if item else 'structure', 'scope_type')}
             </div>
         </div>
         <div class="form-field">

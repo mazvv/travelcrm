@@ -147,12 +147,8 @@ function datagrid_resource_status_format(value){
     switch (value){
     	case 0:
     		return $('<div>').append(status.addClass('active').html('active')).html();
-    	case 1:
-    		return $('<div>').append(status.addClass('disabled').html('disabled')).html();
-    	case 2:
-    		return $('<div>').append(status.addClass('draft').html('draft')).html();
     	default:
-    		return $('<div>').append(status.addClass('error').html('error')).html();
+    		return $('<div>').append(status.addClass('archive').html('archive')).html();
     }
 }
 
@@ -192,6 +188,7 @@ $(document).on("click", '._tab_open', function(event){
 $(document).on("click", '._dialog_open', function(event){
     event.preventDefault();
     var url = $(this).data('url');
+    var param_name = ($(this).data('param-name'))?$(this).data('param-name'):'id';
     var container = $(this).closest('._container');
     if($(this).hasClass('_with_row')){
     	var row = get_selected(container, get_container_type(container))
@@ -199,15 +196,15 @@ $(document).on("click", '._dialog_open', function(event){
     		open_dialog('/system_need_select_row');
     		return;
     	}
-    	if(url.indexOf('?') == -1) url = url + '?id=' + row.id;
-    	else url = url + '&id=' + row.id;
+    	if(url.indexOf('?') == -1) url = url + '?' + param_name + '=' + row[param_name];
+    	else url = url + '&' + param_name + '=' + row[param_name];
     } else if($(this).hasClass('_with_rows')){
     	var rows = get_checked(container, get_container_type(container))
 		if(rows.length>0){
-		    var ids = Array();
-		    $.each(rows, function(i, row){ids.push(row.id);});
-	    	if(url.indexOf('?') == -1) url = url + '?id=' + ids.join();
-	    	else url = url + '&id=' + ids.join();
+		    var params = Array();
+		    $.each(rows, function(i, row){params.push(row[param_name]);});
+	    	if(url.indexOf('?') == -1) url = url + '?' + param_name + '=' + params.join();
+	    	else url = url + '&' + param_name + '=' + params.join();
 		} else {
 		    open_dialog('/system_need_select_rows');
 	    	    return;

@@ -28,7 +28,7 @@
                         }
                     """
                 %>
-                ${h.fields.structures_combotree_field(None, "structure_id", options=data_options)}
+                ${h.fields.structures_combotree_field(item.position.structure_id if item else None, "structure_id", options=data_options)}
             </div>
         </div>
         <div class="form-field">
@@ -36,7 +36,7 @@
                 ${h.tags.title(_(u"company position"), True, "position_id")}
             </div>
             <div class="ml15">
-                ${h.fields.positions_combobox_field('$("#structure_id").val()', None, "position_id")}
+                ${h.fields.positions_combobox_field('$("#structure_id").val()', item.position_id if item else None, "position_id")}
             </div>
         </div>
         <div class="form-buttons">

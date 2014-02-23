@@ -5,7 +5,7 @@ from sqlalchemy import engine_from_config
 
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
-from pyramid.session import UnencryptedCookieSessionFactoryConfig
+from pyramid_beaker import session_factory_from_settings
 
 from .models import (
     DBSession,
@@ -25,12 +25,9 @@ def main(global_config, **settings):
     engine = engine_from_config(settings, 'sqlalchemy.')
     Base.metadata.bind = engine
 
-    session_factory = UnencryptedCookieSessionFactoryConfig(
-        settings.get('auth.secret')
-    )
-
+    session_factory = session_factory_from_settings(settings)
     authentication = AuthTktAuthenticationPolicy(
-        settings.get('auth.secret'),
+        settings.get('session.secret'),
     )
     authorization = ACLAuthorizationPolicy()
 

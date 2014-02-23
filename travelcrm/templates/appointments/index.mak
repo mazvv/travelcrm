@@ -34,13 +34,10 @@
                 <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
                 	<span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
                 </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'copy')}">
-                    <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
-                </a>
+	            <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete')}">
+	                <span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
+	            </a>
             </div>
-            <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete')}">
-            	<span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
-            </a>
         </div>
         <div class="ml50 tr">
             <strong>${h.tags.title(_(u"Search"), False, "search")}</strong>

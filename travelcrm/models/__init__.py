@@ -31,12 +31,12 @@ from structure import Structure
 from position import Position
 from permision import Permision
 from navigation import Navigation
-from appointment import (
-    AppointmentHeader,
-    AppointmentRow,
-)
+from appointment import Appointment
+from appointment_row import AppointmentRow
+from tappointment_row import TAppointmentRow
 from person import Person
 from country import Country
 from address import Address
 from contact import Contact
 from location import Location
+from temporal import Temporal

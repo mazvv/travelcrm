@@ -4,10 +4,8 @@ from sqlalchemy import desc
 
 from ...models import DBSession
 from ...models.employee import Employee
-from ...models.appointment import (
-    AppointmentHeader,
-    AppointmentRow
-)
+from ...models.appointment import Appointment
+from ...models.appointment_row import AppointmentRow
 from ...models.permision import Permision
 from ...models.structure import Structure
 from ...models.position import Position
@@ -19,14 +17,14 @@ def get_employee_position(employee, date=None):
     query = (
         DBSession.query(Position)
         .join(AppointmentRow, Position.appointments)
-        .join(AppointmentHeader, AppointmentRow.header)
+        .join(Appointment, AppointmentRow.appointment)
         .filter(AppointmentRow.condition_employee_id(employee.id))
     )
     if date:
         query = query.filter(
-            AppointmentHeader.appointment_date <= date
+            Appointment.appointment_date <= date
         )
-    query = query.order_by(desc(AppointmentHeader.appointment_date))
+    query = query.order_by(desc(Appointment.appointment_date))
     return query.first()
 
 

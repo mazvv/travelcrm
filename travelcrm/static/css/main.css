@@ -110,7 +110,6 @@ hr.dashed{
     margin-bottom: 1em;
 }
 
-
 /**jeasyui override **/
 .combo-text{
 	outline: none;
@@ -183,7 +182,8 @@ a:hover.l-btn-plain{
     font-size: 14px;
 }
 
-.tree-file, .tree-folder, .tree-folder-open{
+.tree-file, .tree-folder, .tree-folder-open,
+.datebox .combo-arrow{
 	background: none;
 	display: inline-block;
 	font-family: FontAwesome;
@@ -207,9 +207,11 @@ a:hover.l-btn-plain{
 .tree-folder-open:before{
     content: "\f07c";
 }
-
 .tree-node-selected{
     color: #000000;
+}
+.datebox .combo-arrow:before{
+    content: "\f073";
 }
 
 /* navigation */
@@ -235,6 +237,9 @@ form{
     padding: 5px 10px;
     margin-bottom: 1px;
 }
+.form-field:child-last{
+	margin-bottom: 6px;
+}
 .form-field label{
 	line-height: 25px;
 }
@@ -251,12 +256,12 @@ form{
     display: block;
 }
 .form-buttons{
-    margin-top: 5px;
 	border-top: 1px solid #D1D1D1;
 	padding: 5px 10px;
 	background: #fafafa;
 	height: 26px;
 }
+.
 .form-buttons .status-bar{
     line-height: 26px;
 }
@@ -349,17 +354,9 @@ input{
 	color: #fff;
 	background-color: #558347;
 }
-.label.draft{
+.label.archive{
     color: #fff;
-    background-color: #808080;
-}
-.label.disabled{
-    color: #fff;
-    background-color: #dc143c;
-}
-.label.error{
-    color: #fff;
-    background-color: #900;
+    background-color: #555;
 }
 
 /** datagrid **/
@@ -375,8 +372,37 @@ input{
 	border-top: 1px dashed #ccc;
 }
 
+.document-rows:after .form-buttons{
+	margin-top: 0em !important;
+}
+
 /** scrollbars **/
 ::-webkit-scrollbar {width: 8px;}
 ::-webkit-scrollbar-button {width: 8px;height:0px;}
 ::-webkit-scrollbar-track {background:#fafafa;border: skinny plain lightgray;box-shadow: 0px 0px 3px #dfdfdf inset;border-radius:0px;}
 ::-webkit-scrollbar-thumb {background:#ccc;border: skinny plain gray;border-radius:0px;}
+
+
+/** searchbar **/
+.searchbar {
+	position: relative;
+}
+.searchbar label{
+	margin-right: 5px;
+}
+.searchbar .fa{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	cursor: pointer;
+}
+.searchbar .searchbox{
+	padding-right: 44px;
+}
+.searchbar .search-tools{
+	position: absolute;
+	right: 6px;
+	top: 1px;
+	height: 22px;
+	border-left: 1px solid #eee;
+}

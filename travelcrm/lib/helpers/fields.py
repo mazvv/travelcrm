@@ -1,6 +1,16 @@
 # -*coding: utf-8-*-
 
+from datetime import (
+    date,
+    datetime
+)
+from babel.dates import (
+    format_datetime,
+    format_date
+)
 from webhelpers.html import tags
+
+from ..utils.common_utils import get_locale_name
 
 
 def yes_no_field(value=None, name='yes_no'):
@@ -178,7 +188,7 @@ def positions_combobox_field(
     )
 
 
-def permisions_scope_type(
+def permisions_scope_type_field(
     value='structure', name='scope_type'
 ):
     choices = [
@@ -188,4 +198,28 @@ def permisions_scope_type(
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
         data_options="panelHeight:'auto'"
+    )
+
+
+def date_field(value, name, options=None):
+    if not value:
+        value = date.today()
+    data_options = "editable:false"
+    if options:
+        data_options += ",%s" % options
+    value = format_date(value, format="short", locale=get_locale_name())
+    return tags.text(name, value, class_="easyui-datebox text w10",
+        data_options=data_options
+    )
+
+
+def datetime_field(value, name, options=None):
+    if not value:
+        value = date.now()
+    data_options = "editable:false"
+    if options:
+        data_options += ",%s" % options
+    value = format_datetime(value, format="short", locale=get_locale_name())
+    return tags.text(name, value, class_="easyui-datetimebox text w10",
+        data_options=data_options
     )
