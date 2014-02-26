@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.region import Region
 from ..lib.qb.regions import RegionsQueryBuilder
+
 from ..forms.regions import RegionSchema
 
 
@@ -38,23 +39,22 @@ class Regions(object):
         permission='view'
     )
     def list(self):
-        parent_id = self.request.params.get('id')
-
-        qb = StructuresQueryBuilder(self.context)
-        qb.filter_parent_id(
-            parent_id,
-            with_chain=self.request.params.get('with_chain')
+        qb = RegionsQueryBuilder(self.context)
+        qb.search_simple(
+            self.request.params.get('search'),
         )
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
         )
-        if self.request.params.get('rows'):
-            qb.page_query(
-                int(self.request.params.get('rows')),
-                int(self.request.params.get('page', 1))
-            )
-        return qb.get_serialized()
+        qb.page_query(
+            int(self.request.params.get('rows')),
+            int(self.request.params.get('page'))
+        )
+        return {
+            'total': qb.get_count(),
+            'rows': qb.get_serialized()
+        }
 
     @view_config(
         name='add',
@@ -65,9 +65,7 @@ class Regions(object):
     )
     def add(self):
         _ = self.request.translate
-        return {
-            'title': _(u"Add Company Structure")
-        }
+        return {'title': _(u'Add Region')}
 
     @view_config(
         name='add',
@@ -78,16 +76,16 @@ class Regions(object):
     )
     def _add(self):
         _ = self.request.translate
-        schema = StructureSchema().bind(request=self.request)
+        schema = RegionSchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            structure = Structure(
+            region = Region(
+                country_id=controls.get('country_id'),
                 name=controls.get('name'),
-                parent_id=controls.get('parent_id'),
                 resource=self.context.create_resource(controls.get('status'))
             )
-            DBSession.add(structure)
+            DBSession.add(region)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -104,11 +102,8 @@ class Regions(object):
     )
     def edit(self):
         _ = self.request.translate
-        structure = Structure.get(self.request.params.get('id'))
-        return {
-            'title': _(u"Edit Company Structure"),
-            'item': structure,
-        }
+        region = Region.get(self.request.params.get('id'))
+        return {'item': region, 'title': _(u'Edit Region')}
 
     @view_config(
         name='edit',
@@ -119,34 +114,19 @@ class Regions(object):
     )
     def _edit(self):
         _ = self.request.translate
-        schema = StructureSchema().bind(request=self.request)
-        structure = Structure.get(self.request.params.get('id'))
+        schema = RegionSchema().bind(request=self.request)
+        region = Region.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            structure.name = controls.get('name')
-            structure.parent_id = controls.get('parent_id')
-            structure.resource.status = controls.get('status')
+            region.country_id = controls.get('country_id')
+            region.name = controls.get('name')
+            region.resource.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),
                 'errors': e.asdict()
             }
-
-    @view_config(
-        name='copy',
-        context='..resources.regions.Regions',
-        request_method='GET',
-        renderer='travelcrm:templates/regions/form.mak',
-        permission='add'
-    )
-    def copy(self):
-        _ = self.request.translate
-        structure = Structure.get(self.request.params.get('id'))
-        return {
-            'title': _(u"Copy Company Structure"),
-            'item': structure,
-        }
 
     @view_config(
         name='delete',
@@ -157,7 +137,7 @@ class Regions(object):
     )
     def delete(self):
         return {
-            'id': self.request.params.get('id')
+            'rid': self.request.params.get('rid')
         }
 
     @view_config(
@@ -170,7 +150,7 @@ class Regions(object):
     def _delete(self):
         _ = self.request.translate
         for id in self.request.params.getall('id'):
-            structure = Structure.get(id)
-            if structure:
-                DBSession.delete(structure)
+            region = Region.get(id)
+            if region:
+                DBSession.delete(region)
         return {'success_message': _(u'Deleted')}

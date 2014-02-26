@@ -12,7 +12,15 @@
         	pagination:true,fit:true,pageSize:50,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-            selectOnCheck:false,toolbar:'#employees-dg-tb'
+            selectOnCheck:false,toolbar:'#employees-dg-tb',
+            onBeforeLoad: function(param){
+            	var dg = $(this);
+            	var searchbar = $(this).closest('._container').find('.searchbar');
+            	console.log(searchbar.find('input'));
+            	$.each(searchbar.find('input'), function(i, el){
+            		param[$(el).attr('name')] = $(el).val();
+            	});
+            }
         " width="100%">
         <thead>
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
@@ -26,7 +34,7 @@
     </table>
 
     <div class="datagrid-toolbar" id="employees-dg-tb">
-        <div class="actions button-container dl50">
+        <div class="actions button-container dl45">
             <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add')}">
             	<span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
            	</a>
@@ -42,9 +50,15 @@
             	<span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
             </a>
         </div>
-        <div class="ml50 tr">
-            <strong>${h.tags.title(_(u"Search"), False, "search")}</strong>
-            ${h.tags.text("search", None, class_="text w25")}
+        <div class="ml45 tr">
+            <div class="searchbar">
+	            <strong>${h.tags.title(_(u"Search"), False, "search")}</strong>
+	            ${h.tags.text("search", None, class_="text w25 searchbox _searchbox")}
+	            <div class="search-tools">
+		            <span class="fa fa-filter easyui-tooltip" title="${_(u'advanced')}"></span>
+		            <span class="fa fa-search easyui-tooltip" title="${_(u'search')}"></span>
+	            </div>
+            </div>
         </div>
     </div>
 </div>

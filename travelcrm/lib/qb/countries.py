@@ -12,6 +12,10 @@ class CountriesQueryBuilder(ResourcesQueryBuilder):
         'iso_code': Country.iso_code,
         'country_name': Country.name
     }
+    _simple_search_fields = [
+        Country.iso_code,
+        Country.name
+    ]
 
     def __init__(self, context):
         super(CountriesQueryBuilder, self).__init__(context)

@@ -6,7 +6,6 @@ from sqlalchemy import (
     String,
     ForeignKey,
     UniqueConstraint,
-    event,
 )
 from sqlalchemy.orm import (
     relationship,
@@ -16,10 +15,6 @@ from sqlalchemy.orm import (
 from ..models import (
     DBSession,
     Base
-)
-from ..search.currency import (
-    schema,
-    get_currency_index
 )
 
 
@@ -65,24 +60,3 @@ class Currency(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
-
-
-def add_to_search_index_event(mapper, connection, target):
-    ix = get_currency_index()
-    writer = ix.writer()
-    writer.add_document(
-        id=unicode(target.id),
-        iso_code=target.iso_code,
-        owner_structure=target.resource.owner_structure.name,
-        status=unicode(target.resource.status),
-    )
-
-
-def delete_from_search_index_event(mapper, connection, target):
-    ix = get_currency_index()
-    target.logging()
-
-
-event.listen(Currency, 'after_insert', add_to_search_index_event)
-event.listen(Currency, 'after_update', add_to_search_index_event)
-event.listen(Currency, 'after_delete', delete_from_search_index_event)

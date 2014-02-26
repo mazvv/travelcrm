@@ -37,36 +37,35 @@ class Region(Base):
         ),
         nullable=False,
     )
-    parent_id = Column(
+    country_id = Column(
         Integer(),
         ForeignKey(
-            'region.id',
-            name='fk_region_parent_id',
+            'country.id',
+            name='fk_region_country_id',
             onupdate='cascade',
             ondelete='cascade',
             use_alter=True,
-        )
+        ),
+        nullable=False,
     )
     name = Column(
         String(length=32),
         nullable=False,
     )
-
     resource = relationship(
         'Resource',
         backref=backref('region', uselist=False),
         uselist=False
     )
-
-    children = relationship(
-        'Region',
+    country = relationship(
+        'Country',
         backref=backref(
-            'parent',
-            remote_side=[id]
+            'regions',
+            uselist=True,
+            cascade='all,delete',
+            lazy="dynamic"
         ),
-        uselist=True,
-        order_by='Region.name',
-        lazy='dynamic'
+        uselist=False
     )
 
     @classmethod

@@ -223,3 +223,25 @@ def datetime_field(value, name, options=None):
     return tags.text(name, value, class_="easyui-datetimebox text w10",
         data_options=data_options
     )
+
+
+def countries_combobox_field(
+    value=None, name='country_id'
+):
+    data_options = """
+        url: '/countries/list',
+        valueField: 'id',
+        textField: 'country_name',
+        editable: false,
+        onBeforeLoad: function(param){
+            param.sort = 'country_name';
+            param.rows = 0;
+            param.page = 1;
+        },
+        loadFilter: function(data){
+            return data.rows;
+        }
+    """
+    return tags.text(name, value, class_="easyui-combobox text w20",
+        data_options=data_options
+    )

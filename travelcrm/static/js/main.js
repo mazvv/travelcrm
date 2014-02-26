@@ -257,7 +257,7 @@ $(document).on("click", '._action', function(event){
     	params['id'] = row.id
     } else if($(this).hasClass('_with_rows')){
     	var rows = get_checked(container, get_container_type(container))
-		if(rows.length>0){
+		if(rows.length > 0){
 		    var ids = Array();
 		    $.each(rows, function(i, row){ids.push(row.id);});
 			params['id'] = ids.join();
@@ -268,4 +268,16 @@ $(document).on("click", '._action', function(event){
     }
     add_container(container);
     $.post(url, params).always(function(){refresh_container();});
+});
+
+$(document).on('keyup', '._searchbox', function(e){
+    if(e.keyCode == 13){
+    	var container = $(this).closest('._container');
+    	var container_type = get_container_type(container);
+    	if(container_type == 'datagrid')
+    		container.find('.easyui-datagrid').datagrid('load');
+    	if(container_type == 'treegrid')
+    		container.find('.easyui-treegrid').treegrid('load');
+    	return;
+    }
 });

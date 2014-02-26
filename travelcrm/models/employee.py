@@ -5,7 +5,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.hybrid import hybrid_property
 

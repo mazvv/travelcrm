@@ -40,3 +40,8 @@ from address import Address
 from contact import Contact
 from location import Location
 from temporal import Temporal
+from advsource import Advsource
+from hotelcat import Hotelcat
+from roomcat import Roomcat
+from accomodation import Accomodation
+from foodcat import Foodcat

@@ -3,7 +3,7 @@
 from abc import ABCMeta
 
 from datetime import datetime, date
-from sqlalchemy import desc, asc
+from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
 from babel.dates import format_datetime, format_date
 from zope.interface.verify import verifyObject
@@ -44,7 +44,10 @@ class GeneralQueryBuilder(object):
     __metaclass__ = ABCMeta
 
     _fields = {}
-
+    _searcher = None
+    _simple_search_fields = []
+    _advanced_search_fields = []
+    
     """ Need to implement self.query
     """
 
@@ -69,6 +72,15 @@ class GeneralQueryBuilder(object):
 
     def get_fields(self):
         return self._fields
+
+    def search_simple(self, term):
+        term = term.strip()
+        if term:
+            term = "%s%%" % term
+            condition = or_(
+                *map(lambda item: item.ilike(term), self._simple_search_fields)
+            )
+            self.query = self.query.filter(condition)
 
     def sort_query(self, sort, order):
         all_fields = {}

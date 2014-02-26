@@ -1,5 +1,7 @@
 # -*coding: utf-8-*-
 
+from sqlalchemy import or_
+
 from . import ResourcesQueryBuilder
 
 from ...models.resource import Resource
@@ -14,6 +16,11 @@ class EmployeesQueryBuilder(ResourcesQueryBuilder):
         'last_name': Employee.last_name,
         'name': Employee.name
     }
+    
+    _simple_search_fields = [
+        Employee.first_name, 
+        Employee.last_name
+    ]
 
     def __init__(self, context):
         super(EmployeesQueryBuilder, self).__init__(context)

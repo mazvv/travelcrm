@@ -12,7 +12,15 @@
         	pagination:true,fit:true,pageSize:50,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-            selectOnCheck:false,toolbar:'#currencies-dg-tb'
+            selectOnCheck:false,toolbar:'#currencies-dg-tb',
+            onBeforeLoad: function(param){
+                var dg = $(this);
+                var searchbar = $(this).closest('._container').find('.searchbar');
+                console.log(searchbar.find('input'));
+                $.each(searchbar.find('input'), function(i, el){
+                    param[$(el).attr('name')] = $(el).val();
+                });
+            }
         " width="100%">
         <thead>
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>

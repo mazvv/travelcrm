@@ -151,7 +151,7 @@ ALTER SEQUENCE _employees_rid_seq OWNED BY employee.id;
 CREATE TABLE region (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    parent_id integer,
+    country_id integer NOT NULL,
     name character varying(32) NOT NULL
 );
 
@@ -398,6 +398,40 @@ ALTER SEQUENCE _users_rid_seq OWNED BY "user".id;
 
 
 --
+-- Name: accomodation; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE accomodation (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.accomodation OWNER TO mazvv;
+
+--
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE accomodation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.accomodation_id_seq OWNER TO mazvv;
+
+--
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
+
+
+--
 -- Name: address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -428,6 +462,40 @@ ALTER TABLE public.address_id_seq OWNER TO mazvv;
 --
 
 ALTER SEQUENCE address_id_seq OWNED BY address.id;
+
+
+--
+-- Name: advsource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE advsource (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.advsource OWNER TO mazvv;
+
+--
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE advsource_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.advsource_id_seq OWNER TO mazvv;
+
+--
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
@@ -614,6 +682,74 @@ ALTER SEQUENCE employees_appointments_r_id_seq OWNED BY appointment_row.id;
 
 
 --
+-- Name: foodcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE foodcat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.foodcat OWNER TO mazvv;
+
+--
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE foodcat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.foodcat_id_seq OWNER TO mazvv;
+
+--
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
+
+
+--
+-- Name: hotelcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE hotelcat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.hotelcat OWNER TO mazvv;
+
+--
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE hotelcat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hotelcat_id_seq OWNER TO mazvv;
+
+--
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
+
+
+--
 -- Name: location; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -759,6 +895,40 @@ ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
 
 --
+-- Name: roomcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE roomcat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.roomcat OWNER TO mazvv;
+
+--
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE roomcat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.roomcat_id_seq OWNER TO mazvv;
+
+--
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
+
+
+--
 -- Name: structure; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -811,7 +981,21 @@ ALTER TABLE ONLY _temporal ALTER COLUMN id SET DEFAULT nextval('_temporal_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
 
 
 --
@@ -861,6 +1045,20 @@ ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('_currencies_rid_s
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('_employees_rid_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
 
 
 --
@@ -930,6 +1128,13 @@ ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('_resources_t
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_seq'::regclass);
 
 
@@ -965,28 +1170,28 @@ SELECT pg_catalog.setval('_employees_rid_seq', 8, true);
 -- Name: _regions_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_regions_rid_seq', 6, true);
+SELECT pg_catalog.setval('_regions_rid_seq', 11, true);
 
 
 --
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 4977, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5106, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 894, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 988, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 70, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 75, true);
 
 
 --
@@ -1103,6 +1308,37 @@ SELECT pg_catalog.setval('_users_rid_seq', 23, true);
 
 
 --
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY accomodation (id, resource_id, name) FROM stdin;
+1	957	MB
+2	958	HV
+3	959	BGL
+4	960	BG
+5	961	Chale
+6	962	Cabana
+7	963	Cottage
+8	964	Executive floor
+9	965	SGL
+10	966	DBL
+11	967	TRPL
+12	968	QDPL
+13	969	ExB
+14	970	Chld
+15	971	ВО
+16	972	ROH
+\.
+
+
+--
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('accomodation_id_seq', 16, true);
+
+
+--
 -- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -1118,11 +1354,31 @@ SELECT pg_catalog.setval('address_id_seq', 1, false);
 
 
 --
+-- Data for Name: advsource; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY advsource (id, resource_id, name) FROM stdin;
+1	903	Search Engines
+2	904	Google.com
+3	905	Yahoo.com
+4	906	Recommendation
+5	907	Second appeal
+\.
+
+
+--
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('advsource_id_seq', 5, true);
+
+
+--
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
 COPY alembic_version (version_num) FROM stdin;
-27e30fbd2f89
+b1c088a47b6
 \.
 
 
@@ -1236,6 +1492,60 @@ SELECT pg_catalog.setval('employees_appointments_r_id_seq', 26, true);
 
 
 --
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY foodcat (id, resource_id, name) FROM stdin;
+1	973	ОВ
+2	974	NA
+3	975	BB
+4	976	HB
+5	977	HB+
+6	978	FB
+7	979	FB+
+8	980	EXTFB
+9	981	Mini all inclusive
+10	982	ALL
+11	983	Continental Breakfast
+12	984	English breakfast
+13	985	American breakfast
+14	986	HCAL
+15	987	UAL
+16	988	UAI
+\.
+
+
+--
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('foodcat_id_seq', 16, true);
+
+
+--
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY hotelcat (id, resource_id, name) FROM stdin;
+1	912	1*
+2	913	2*
+3	914	3*
+4	915	4*
+5	916	5*
+6	917	HV-1
+7	918	HV-2
+8	919	De Luxe
+\.
+
+
+--
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('hotelcat_id_seq', 8, true);
+
+
+--
 -- Data for Name: location; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -1261,16 +1571,22 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 13	4	10	Employees	/employees	\N	1	790
 20	4	18	Positions	/positions	\N	2	863
 19	4	18	Structures	/structures	\N	1	838
-18	4	\N	Company	/	fa fa-building-o	4	837
-10	4	\N	HR	/	fa fa-group	3	780
 21	4	\N	Clients	/	fa fa-briefcase	2	864
 22	4	21	Persons	/persons	\N	1	866
-8	4	\N	System	/	fa fa-cog	6	778
-23	4	\N	Directories	/	fa fa-book	5	873
 25	4	23	Regions	/regions	\N	3	879
 17	4	23	Currencies	/currencies	\N	1	802
 24	4	23	Countries	/countries	\N	3	874
 14	4	10	Employees Appointments	/appointments	\N	2	791
+8	4	\N	System	/	fa fa-cog	7	778
+23	4	\N	Directories	/	fa fa-book	6	873
+18	4	\N	Company	/	fa fa-building-o	5	837
+10	4	\N	HR	/	fa fa-group	4	780
+26	4	\N	Marketing	/	fa fa-bullhorn	3	900
+27	4	26	Advertising Sources	/advsources	\N	1	902
+28	4	23	Hotels Categories	/hotelcats	\N	4	910
+29	4	23	Rooms Categories	/roomcats	\N	5	911
+30	4	23	Accomodations	/accomodations	\N	7	955
+31	4	23	Food Categories	/foodcats	\N	6	956
 \.
 
 
@@ -1291,6 +1607,11 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 39	69	4	{view,add,edit,delete}	\N	all
 40	39	4	{view,add,edit,delete}	\N	all
 41	70	4	{view,add,edit,delete}	\N	all
+42	71	4	{view,add,edit,delete}	\N	all
+43	72	4	{view,add,edit,delete}	\N	all
+44	73	4	{view,add,edit,delete}	\N	all
+45	74	4	{view,add,edit,delete}	\N	all
+46	75	4	{view,add,edit,delete}	\N	all
 21	1	4	{view}	\N	all
 \.
 
@@ -1327,27 +1648,25 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 25, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 31, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 41, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 46, true);
 
 
 --
 -- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY region (id, resource_id, parent_id, name) FROM stdin;
-1	277	\N	Украина
-2	278	\N	Россия
-3	279	1	Киев
-4	280	1	Одеса
-5	281	1	Львов
-6	282	2	Москва
+COPY region (id, resource_id, country_id, name) FROM stdin;
+7	895	3	Kiev region
+8	896	3	Lviv region
+9	897	4	Hurgada
+10	898	5	Kemer
 \.
 
 
@@ -1359,6 +1678,7 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 863	65	0	32
 875	70	0	32
 885	47	0	32
+895	39	0	32
 728	55	0	32
 784	47	0	32
 786	47	0	32
@@ -1380,6 +1700,8 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 864	65	0	32
 876	41	0	32
 886	59	0	32
+896	39	0	32
+897	39	0	32
 772	59	0	32
 788	12	0	32
 706	12	0	32
@@ -1387,6 +1709,11 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 771	55	0	32
 838	65	0	32
 734	55	0	32
+898	39	0	32
+899	39	0	32
+900	65	0	32
+901	12	0	32
+902	65	0	32
 853	41	0	32
 865	12	0	32
 866	65	0	32
@@ -1394,11 +1721,20 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 887	69	0	32
 773	12	0	32
 892	67	1	32
+903	71	0	32
+904	71	0	32
+905	71	0	32
+906	71	0	32
+907	71	0	32
 854	2	0	32
 855	2	0	32
 878	70	0	32
 893	47	0	32
 894	2	0	32
+908	12	0	32
+909	12	0	32
+910	65	0	32
+911	65	0	32
 743	55	0	32
 790	65	0	32
 763	55	0	32
@@ -1421,10 +1757,77 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 3	2	0	32
 84	2	0	32
 83	2	1	32
+940	73	1	32
+941	73	1	32
+942	73	1	32
+943	73	1	32
+944	73	1	32
+945	73	1	32
+946	73	1	32
+947	73	1	32
+948	73	1	32
+949	73	1	32
+950	73	1	32
+951	73	1	32
+952	73	1	32
+939	73	1	32
+938	73	1	32
+937	73	1	32
+936	73	1	32
+935	73	1	32
+934	73	1	32
+933	73	1	32
+932	73	1	32
+931	73	1	32
+930	73	1	32
+929	73	1	32
+928	73	1	32
+927	73	1	32
+926	73	1	32
+925	73	1	32
+924	73	1	32
+923	73	1	32
+922	73	1	32
+921	73	1	32
+920	73	1	32
+919	72	1	32
+918	72	1	32
+917	72	1	32
+916	72	1	32
+915	72	1	32
+914	72	1	32
+913	72	1	32
+912	72	1	32
 856	2	0	32
 870	69	0	32
 879	65	0	32
+953	12	0	32
+954	12	0	32
 764	12	0	32
+955	65	0	32
+956	65	0	32
+957	74	0	32
+958	74	0	32
+959	74	0	32
+960	74	0	32
+961	74	0	32
+962	74	0	32
+963	74	0	32
+964	74	0	32
+965	74	0	32
+966	74	0	32
+967	74	0	32
+968	74	0	32
+969	74	0	32
+970	74	0	32
+971	74	0	32
+972	74	0	32
+973	75	0	32
+974	75	0	32
+975	75	0	32
+976	75	0	32
+977	75	0	32
+978	75	0	32
 274	12	0	32
 283	12	0	32
 777	65	0	32
@@ -1445,6 +1848,16 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 281	39	0	32
 278	39	1	32
 282	39	1	32
+979	75	0	32
+980	75	0	32
+981	75	0	32
+982	75	0	32
+983	75	0	32
+984	75	0	32
+985	75	0	32
+986	75	0	32
+987	75	0	32
+988	75	0	32
 857	55	0	32
 858	55	0	32
 859	55	0	32
@@ -1585,6 +1998,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 377	283	2	\N	2013-12-14 19:18:21.622933
 4924	838	2	\N	2014-02-09 12:20:11.632022
 4953	886	2	\N	2014-02-14 21:25:53.089098
+4978	893	2	\N	2014-02-24 11:11:03.613711
 386	286	2	\N	2013-12-14 20:46:34.653533
 387	287	2	\N	2013-12-14 20:46:47.37835
 388	288	2	\N	2013-12-14 20:47:08.024243
@@ -1602,6 +2016,9 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4926	864	2	\N	2014-02-09 12:32:19.155301
 4827	789	2	\N	2014-02-02 16:45:11.830435
 4954	887	2	\N	2014-02-15 12:32:09.199652
+4979	885	2	\N	2014-02-24 12:50:26.694026
+4980	786	2	\N	2014-02-24 12:50:29.953348
+4981	784	2	\N	2014-02-24 12:50:33.322359
 4927	865	2	\N	2014-02-09 13:26:19.008763
 4804	775	2	\N	2014-01-26 15:30:50.636495
 4928	866	2	\N	2014-02-09 13:26:48.246588
@@ -1610,6 +2027,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4830	790	2	\N	2014-02-02 17:53:42.973553
 4831	791	2	\N	2014-02-02 17:54:20.864462
 4832	792	2	\N	2014-02-02 17:54:57.706749
+4982	895	2	\N	2014-02-25 19:06:42.158245
 4806	777	2	\N	2014-01-26 18:18:05.196211
 4807	778	2	\N	2014-01-26 18:18:24.059336
 4808	779	2	\N	2014-01-26 18:18:45.188271
@@ -1618,6 +2036,13 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4890	784	2	\N	2014-02-08 21:26:51.98617
 4929	870	2	\N	2014-02-09 14:57:54.403714
 4967	892	2	\N	2014-02-22 17:14:02.512772
+4983	896	2	\N	2014-02-25 19:37:56.226615
+4984	897	2	\N	2014-02-25 19:38:21.395798
+4985	898	2	\N	2014-02-25 19:38:30.353048
+4986	899	2	\N	2014-02-25 19:39:23.588225
+4987	900	2	\N	2014-02-25 19:43:55.188369
+4988	901	2	\N	2014-02-25 19:47:57.884012
+4989	902	2	\N	2014-02-25 19:54:09.470994
 4893	848	2	\N	2014-02-08 21:32:08.207947
 4894	849	2	\N	2014-02-08 21:32:14.802948
 4895	850	2	\N	2014-02-08 21:32:25.105565
@@ -1626,6 +2051,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4897	852	2	\N	2014-02-08 21:36:44.493917
 4930	871	2	\N	2014-02-09 16:04:05.85568
 4968	892	2	\N	2014-02-22 17:18:17.771894
+4990	902	2	\N	2014-02-25 22:32:43.788139
 4898	853	2	\N	2014-02-08 21:39:09.10029
 4812	784	2	\N	2014-01-26 21:12:24.209136
 4813	784	2	\N	2014-01-26 21:13:10.546575
@@ -1637,17 +2063,133 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4931	274	2	\N	2014-02-10 08:49:31.501202
 4969	893	2	\N	2014-02-22 17:26:37.296722
 4970	894	2	\N	2014-02-22 17:27:40.771678
+4991	903	2	\N	2014-02-25 22:43:46.101171
+4992	904	2	\N	2014-02-25 22:43:53.30222
+4993	905	2	\N	2014-02-25 22:44:00.024066
+4994	906	2	\N	2014-02-25 22:44:13.035203
+4995	907	2	\N	2014-02-25 22:44:59.159297
 4899	804	2	\N	2014-02-08 21:40:56.593482
 4932	872	2	\N	2014-02-10 14:29:53.759164
 4933	873	2	\N	2014-02-10 14:36:29.132134
 4934	874	2	\N	2014-02-10 14:36:56.817818
 4935	802	2	\N	2014-02-10 14:37:05.778544
+4996	908	2	\N	2014-02-25 23:15:44.304324
+4997	909	2	\N	2014-02-25 23:16:53.455486
+4998	910	2	\N	2014-02-25 23:17:30.650965
+4999	911	2	\N	2014-02-25 23:17:53.999146
+5000	912	2	\N	2014-02-25 23:21:05.038132
+5001	913	2	\N	2014-02-25 23:21:10.720503
+5002	914	2	\N	2014-02-25 23:21:15.803027
+5003	915	2	\N	2014-02-25 23:21:21.245593
+5004	916	2	\N	2014-02-25 23:21:27.843749
+5005	917	2	\N	2014-02-25 23:21:40.705852
+5006	918	2	\N	2014-02-25 23:21:45.161533
+5007	918	2	\N	2014-02-25 23:21:53.74917
+5008	918	2	\N	2014-02-25 23:21:57.599668
+5009	919	2	\N	2014-02-25 23:22:22.789803
+5010	920	2	\N	2014-02-25 23:22:49.704809
+5011	921	2	\N	2014-02-25 23:22:59.534922
+5012	922	2	\N	2014-02-25 23:23:04.765473
+5013	923	2	\N	2014-02-25 23:23:16.649188
+5014	924	2	\N	2014-02-25 23:23:30.151925
+5015	925	2	\N	2014-02-25 23:25:11.120354
+5016	926	2	\N	2014-02-25 23:26:11.314153
+5017	927	2	\N	2014-02-25 23:26:34.378644
+5018	928	2	\N	2014-02-25 23:26:49.163639
+5019	929	2	\N	2014-02-25 23:27:07.84413
+5020	930	2	\N	2014-02-25 23:27:30.797684
+5021	931	2	\N	2014-02-25 23:27:45.611037
+5022	932	2	\N	2014-02-25 23:28:05.678992
+5023	933	2	\N	2014-02-25 23:28:21.001129
+5024	934	2	\N	2014-02-25 23:28:33.132182
+5025	935	2	\N	2014-02-25 23:28:49.565248
+5026	936	2	\N	2014-02-25 23:29:05.034117
+5027	937	2	\N	2014-02-25 23:29:16.11101
+5028	938	2	\N	2014-02-25 23:29:28.82178
+5029	939	2	\N	2014-02-25 23:29:41.159219
+5030	940	2	\N	2014-02-25 23:29:57.589154
+5031	941	2	\N	2014-02-25 23:30:12.260571
+5032	942	2	\N	2014-02-25 23:30:25.705958
+5033	943	2	\N	2014-02-25 23:30:39.278491
+5034	944	2	\N	2014-02-25 23:30:54.230938
+5035	945	2	\N	2014-02-25 23:31:08.136642
+5036	946	2	\N	2014-02-25 23:31:21.084682
+5037	947	2	\N	2014-02-25 23:31:35.443235
+5038	948	2	\N	2014-02-25 23:31:50.036032
+5039	949	2	\N	2014-02-25 23:32:16.232207
+5040	950	2	\N	2014-02-25 23:32:51.784126
+5041	951	2	\N	2014-02-25 23:33:02.423499
 4900	854	2	\N	2014-02-08 21:47:34.439997
 4901	855	2	\N	2014-02-08 21:54:55.399628
 4936	875	2	\N	2014-02-10 15:58:53.177719
 4937	875	2	\N	2014-02-10 15:59:03.43204
+5042	952	2	\N	2014-02-25 23:33:14.57009
+5043	939	2	\N	2014-02-25 23:33:37.281163
+5044	938	2	\N	2014-02-25 23:33:44.033176
+5045	937	2	\N	2014-02-25 23:33:51.697991
+5046	936	2	\N	2014-02-25 23:33:56.981908
+5047	935	2	\N	2014-02-25 23:34:03.037741
+5048	934	2	\N	2014-02-25 23:34:22.408043
+5049	933	2	\N	2014-02-25 23:34:27.937885
+5050	932	2	\N	2014-02-25 23:34:34.767736
+5051	931	2	\N	2014-02-25 23:34:39.075165
+5052	930	2	\N	2014-02-25 23:34:43.896812
+5053	929	2	\N	2014-02-25 23:34:48.70472
+5054	928	2	\N	2014-02-25 23:34:54.494127
+5055	927	2	\N	2014-02-25 23:35:00.125101
+5056	926	2	\N	2014-02-25 23:35:05.399995
+5057	925	2	\N	2014-02-25 23:35:10.409443
+5058	924	2	\N	2014-02-25 23:35:16.447517
+5059	923	2	\N	2014-02-25 23:35:21.959285
+5060	922	2	\N	2014-02-25 23:35:27.383937
+5061	921	2	\N	2014-02-25 23:35:31.660307
+5062	920	2	\N	2014-02-25 23:35:36.517478
+5063	919	2	\N	2014-02-25 23:35:43.645366
+5064	918	2	\N	2014-02-25 23:35:47.480218
+5065	917	2	\N	2014-02-25 23:35:52.042922
+5066	916	2	\N	2014-02-25 23:35:57.409224
+5067	915	2	\N	2014-02-25 23:36:01.802966
+5068	914	2	\N	2014-02-25 23:36:05.670476
+5069	913	2	\N	2014-02-25 23:36:10.129284
+5070	912	2	\N	2014-02-25 23:36:14.468359
 4902	856	2	\N	2014-02-08 21:59:04.719245
 4938	876	2	\N	2014-02-10 16:19:24.400952
+5071	953	2	\N	2014-02-26 23:25:15.548581
+5072	954	2	\N	2014-02-26 23:25:55.407709
+5073	955	2	\N	2014-02-26 23:26:48.626397
+5074	956	2	\N	2014-02-26 23:27:06.354467
+5075	957	2	\N	2014-02-26 23:28:34.003373
+5076	958	2	\N	2014-02-26 23:28:45.594179
+5077	959	2	\N	2014-02-26 23:28:57.004231
+5078	960	2	\N	2014-02-26 23:29:08.086342
+5079	961	2	\N	2014-02-26 23:29:17.646283
+5080	962	2	\N	2014-02-26 23:29:26.175631
+5081	963	2	\N	2014-02-26 23:29:35.761623
+5082	964	2	\N	2014-02-26 23:29:46.892804
+5083	965	2	\N	2014-02-26 23:29:54.140342
+5084	966	2	\N	2014-02-26 23:30:01.375033
+5085	967	2	\N	2014-02-26 23:30:08.774222
+5086	968	2	\N	2014-02-26 23:30:17.802323
+5087	969	2	\N	2014-02-26 23:30:29.097872
+5088	970	2	\N	2014-02-26 23:30:38.081009
+5089	971	2	\N	2014-02-26 23:30:52.902609
+5090	972	2	\N	2014-02-26 23:31:01.483484
+5091	973	2	\N	2014-02-26 23:31:31.71567
+5092	974	2	\N	2014-02-26 23:32:04.226285
+5093	975	2	\N	2014-02-26 23:32:13.646357
+5094	976	2	\N	2014-02-26 23:32:24.624636
+5095	977	2	\N	2014-02-26 23:32:34.606814
+5096	978	2	\N	2014-02-26 23:32:43.318943
+5097	979	2	\N	2014-02-26 23:32:54.081989
+5098	980	2	\N	2014-02-26 23:33:04.823892
+5099	981	2	\N	2014-02-26 23:33:16.574818
+5100	982	2	\N	2014-02-26 23:33:28.270884
+5101	983	2	\N	2014-02-26 23:33:40.854578
+5102	984	2	\N	2014-02-26 23:33:57.05943
+5103	985	2	\N	2014-02-26 23:34:08.238483
+5104	986	2	\N	2014-02-26 23:34:19.593553
+5105	987	2	\N	2014-02-26 23:34:29.757456
+5106	988	2	\N	2014-02-26 23:34:37.99873
 4789	763	2	\N	2014-01-12 19:51:49.157909
 4903	854	2	\N	2014-02-08 22:16:58.906498
 4904	3	2	\N	2014-02-08 22:17:06.939369
@@ -1708,7 +2250,60 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 69	865	persons	Persons	Persons	travelcrm.resources.persons	\N	Persons list is a list of clients or potential clients
 39	274	regions	Regions	Regions	travelcrm.resources.regions	\N	
 70	872	countries	Countries	Countries	travelcrm.resources.countries	\N	Countries directory
+71	901	advsources	Advertise Sources	Advsources	travelcrm.resources.advsources	\N	Types of advertises
+72	908	hotelcats	Hotels Categories	Hotelcats	travelcrm.resources.hotelcats	\N	Hotels categories
+73	909	roomcats	Rooms Categories	Roomcats	travelcrm.resources.roomcats	\N	Categories of the rooms
+74	953	accomodations	Accomodations	Accomodations	travelcrm.resources.accomodations	\N	Accomodations Types list
+75	954	foodcats	Food Categories	Foodcats	travelcrm.resources.foodcats	\N	Food types in hotels
 \.
+
+
+--
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY roomcat (id, resource_id, name) FROM stdin;
+1	920	STD
+2	921	BDR
+3	922	BDRM
+4	923	Superior
+5	924	Studio
+6	925	Family Room
+7	926	Family Studio
+8	927	Extra Bed
+9	928	Suite
+10	929	Suite Mini
+11	930	Junior Suite
+12	931	De Luxe
+13	932	Executive Suite
+14	933	Suite Senior
+15	934	Business
+16	935	Honeymoon Room
+17	936	Connected Rooms
+18	937	Duplex
+19	938	Apartment
+20	939	President
+21	940	Balcony
+22	941	City View
+23	942	Beach View
+24	943	Pool View
+25	944	Garden View
+26	945	Ocean View
+27	946	Land View
+28	947	Dune View
+29	948	Mountain View
+30	949	Park View
+31	950	SV (Sea view)
+32	951	SSV (Side Sea view)
+33	952	Inside View
+\.
+
+
+--
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('roomcat_id_seq', 33, true);
 
 
 --
@@ -1759,11 +2354,27 @@ ALTER TABLE ONLY _temporal
 
 
 --
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY accomodation
+    ADD CONSTRAINT accomodation_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
 ALTER TABLE ONLY address
     ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY advsource
+    ADD CONSTRAINT advsource_pkey PRIMARY KEY (id);
 
 
 --
@@ -1820,6 +2431,22 @@ ALTER TABLE ONLY currency
 
 ALTER TABLE ONLY employee
     ADD CONSTRAINT employee_pk PRIMARY KEY (id);
+
+
+--
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY foodcat
+    ADD CONSTRAINT foodcat_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY hotelcat
+    ADD CONSTRAINT hotelcat_pkey PRIMARY KEY (id);
 
 
 --
@@ -1900,6 +2527,14 @@ ALTER TABLE ONLY resource_type
 
 ALTER TABLE ONLY resource_type
     ADD CONSTRAINT resource_type_pk PRIMARY KEY (id);
+
+
+--
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY roomcat
+    ADD CONSTRAINT roomcat_pkey PRIMARY KEY (id);
 
 
 --
@@ -2055,6 +2690,30 @@ ALTER TABLE ONLY "position"
 
 
 --
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT fk_region_country_id FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY accomodation
+    ADD CONSTRAINT fk_resource_id_accomodation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY advsource
+    ADD CONSTRAINT fk_resource_id_advsource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
 -- Name: fk_resource_id_appointment_header; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -2076,6 +2735,22 @@ ALTER TABLE ONLY currency
 
 ALTER TABLE ONLY employee
     ADD CONSTRAINT fk_resource_id_employee FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY foodcat
+    ADD CONSTRAINT fk_resource_id_foodcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY hotelcat
+    ADD CONSTRAINT fk_resource_id_hotelcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -2103,6 +2778,14 @@ ALTER TABLE ONLY navigation
 
 
 --
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
 -- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -2116,6 +2799,14 @@ ALTER TABLE ONLY resource_log
 
 ALTER TABLE ONLY resource_type
     ADD CONSTRAINT fk_resource_id_resource_type FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY roomcat
+    ADD CONSTRAINT fk_resource_id_roomcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
