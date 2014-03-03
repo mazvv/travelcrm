@@ -25,6 +25,31 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
+-- Name: contact_type_enum; Type: TYPE; Schema: public; Owner: mazvv
+--
+
+CREATE TYPE contact_type_enum AS ENUM (
+    'phone',
+    'email',
+    'skype'
+);
+
+
+ALTER TYPE public.contact_type_enum OWNER TO mazvv;
+
+--
+-- Name: genders_enum; Type: TYPE; Schema: public; Owner: mazvv
+--
+
+CREATE TYPE genders_enum AS ENUM (
+    'male',
+    'female'
+);
+
+
+ALTER TYPE public.genders_enum OWNER TO mazvv;
+
+--
 -- Name: visibility_enum; Type: TYPE; Schema: public; Owner: mazvv
 --
 
@@ -327,6 +352,43 @@ ALTER SEQUENCE _tappointment_row_id_seq OWNED BY _tappointment_row.id;
 
 
 --
+-- Name: _tcontact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE _tcontact (
+    id integer NOT NULL,
+    temporal_id integer NOT NULL,
+    contact_type contact_type_enum NOT NULL,
+    contact character varying NOT NULL,
+    deleted boolean,
+    main_id integer
+);
+
+
+ALTER TABLE public._tcontact OWNER TO mazvv;
+
+--
+-- Name: _tcontact_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE _tcontact_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public._tcontact_id_seq OWNER TO mazvv;
+
+--
+-- Name: _tcontact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE _tcontact_id_seq OWNED BY _tcontact.id;
+
+
+--
 -- Name: _temporal; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -528,7 +590,7 @@ ALTER TABLE public.appointment OWNER TO mazvv;
 
 CREATE TABLE appointment_row (
     id integer NOT NULL,
-    appointment_id integer,
+    appointment_id integer NOT NULL,
     employee_id integer NOT NULL,
     position_id integer NOT NULL
 );
@@ -577,7 +639,8 @@ ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
 CREATE TABLE contact (
     id integer NOT NULL,
-    resource_id integer NOT NULL
+    contact character varying NOT NULL,
+    contact_type contact_type_enum NOT NULL
 );
 
 
@@ -825,11 +888,25 @@ CREATE TABLE person (
     resource_id integer NOT NULL,
     first_name character varying(32) NOT NULL,
     last_name character varying(32),
-    second_name character varying(32)
+    second_name character varying(32),
+    birthday date,
+    gender genders_enum
 );
 
 
 ALTER TABLE public.person OWNER TO mazvv;
+
+--
+-- Name: person_contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE person_contact (
+    person_id integer NOT NULL,
+    contact_id integer NOT NULL
+);
+
+
+ALTER TABLE public.person_contact OWNER TO mazvv;
 
 --
 -- Name: person_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -968,6 +1045,13 @@ ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
 --
 
 ALTER TABLE ONLY _tappointment_row ALTER COLUMN id SET DEFAULT nextval('_tappointment_row_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY _tcontact ALTER COLUMN id SET DEFAULT nextval('_tcontact_id_seq'::regclass);
 
 
 --
@@ -1177,21 +1261,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 11, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5106, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5134, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 988, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 999, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 75, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 76, true);
 
 
 --
@@ -1199,12 +1283,6 @@ SELECT pg_catalog.setval('_resources_types_rid_seq', 75, true);
 --
 
 COPY _tappointment_row (id, employee_id, position_id, main_id, temporal_id, deleted) FROM stdin;
-30	4	4	\N	50	t
-29	7	5	\N	50	t
-31	4	4	\N	50	t
-32	7	5	\N	50	f
-33	7	5	\N	51	f
-34	7	5	\N	66	f
 \.
 
 
@@ -1216,80 +1294,97 @@ SELECT pg_catalog.setval('_tappointment_row_id_seq', 34, true);
 
 
 --
+-- Data for Name: _tcontact; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY _tcontact (id, temporal_id, contact_type, contact, deleted, main_id) FROM stdin;
+1	1	phone	+380681983869	f	\N
+2	1	email	vitalii.mazur@gmail.com	f	\N
+3	1	phone	sadaf sadfsd	f	\N
+4	2	phone	;'l;lk;lk;	f	\N
+5	3	phone	+380681983869	t	\N
+7	3	email	vitalii.mazur@gmail.com	f	\N
+6	3	phone	+380681983869	f	\N
+9	4	phone	vitalii.mazur@gmail.com	t	\N
+8	4	phone	+380681983869	t	\N
+10	4	phone	54645132123	t	\N
+11	5	phone	+380681983869	f	\N
+12	6	email	vitalii.mazur@gmail.com	f	\N
+13	6	skype	dorianyats	f	\N
+14	11	phone	+380681983873	f	\N
+15	19	phone	+380681983873	f	\N
+16	19	email	iren.mazur@gmail.com	f	\N
+19	22	phone	+381681983873	f	\N
+27	26	phone	+380681983869	f	\N
+28	26	email	vitalii.mazur@gmail.com	f	\N
+29	26	skype	dorianyats	f	\N
+32	29	phone	12346545	f	\N
+34	32	phone	+380681983869	f	\N
+35	32	email	vitalii.mazur@gmail.com	f	\N
+36	32	skype	dorianyats	f	\N
+40	34	email	vitalii.mazur@gmail.com	f	\N
+41	35	phone	+380681983869	f	\N
+42	35	email	vitalii.mazur@gmail.com	f	\N
+43	35	skype	dorianyats	f	\N
+44	36	phone	+380681983873	t	\N
+45	36	phone	+380681983873	t	\N
+46	37	skype	xcvbxcvbxcv	t	\N
+\.
+
+
+--
+-- Name: _tcontact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('_tcontact_id_seq', 47, true);
+
+
+--
 -- Data for Name: _temporal; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
 COPY _temporal (id, createdt, modifydt) FROM stdin;
-1	\N	2014-02-21 19:14:35.480088
-2	\N	2014-02-21 19:29:44.141296
-3	\N	2014-02-21 19:38:31.05904
-4	\N	2014-02-21 21:30:42.269034
-5	\N	2014-02-21 22:02:44.05625
-6	\N	2014-02-21 22:11:52.624773
-7	\N	2014-02-21 22:37:54.58309
-8	\N	2014-02-21 22:39:36.896895
-9	\N	2014-02-21 22:41:08.142622
-10	\N	2014-02-21 22:41:13.60703
-11	\N	2014-02-21 22:43:06.798704
-12	\N	2014-02-21 22:44:52.111579
-13	\N	2014-02-21 22:45:50.706658
-14	\N	2014-02-21 22:46:40.280149
-15	\N	2014-02-21 22:46:48.833905
-16	\N	2014-02-21 22:46:52.99968
-17	\N	2014-02-21 22:46:56.121413
-18	\N	2014-02-21 22:47:07.984399
-19	\N	2014-02-21 22:47:39.534264
-20	\N	2014-02-21 22:59:23.194179
-21	\N	2014-02-21 23:00:49.443738
-22	\N	2014-02-21 23:00:54.615633
-23	\N	2014-02-21 23:01:03.38473
-24	\N	2014-02-21 23:01:08.047909
-25	\N	2014-02-21 23:07:57.259068
-26	\N	2014-02-21 23:10:20.372763
-27	\N	2014-02-21 23:11:15.790498
-28	\N	2014-02-21 23:11:19.286692
-29	\N	2014-02-21 23:21:58.597552
-30	\N	2014-02-21 23:29:36.518646
-31	\N	2014-02-21 23:31:12.42578
-32	\N	2014-02-21 23:40:19.453852
-33	\N	2014-02-21 23:42:19.856058
-34	\N	2014-02-21 23:47:30.112405
-35	\N	2014-02-21 23:58:18.800475
-36	\N	2014-02-22 09:37:45.207584
-37	\N	2014-02-22 09:48:33.074967
-38	\N	2014-02-22 10:38:15.783394
-39	\N	2014-02-22 10:40:22.268073
-40	\N	2014-02-22 11:57:25.152649
-41	\N	2014-02-22 15:28:50.893398
-42	\N	2014-02-22 15:59:30.767628
-43	\N	2014-02-22 16:02:22.805093
-44	\N	2014-02-22 16:02:42.570091
-45	\N	2014-02-22 16:03:57.909981
-46	\N	2014-02-22 16:04:09.956859
-47	\N	2014-02-22 16:04:22.018288
-48	\N	2014-02-22 16:04:55.013205
-49	\N	2014-02-22 16:05:13.425788
-50	\N	2014-02-22 16:39:59.961218
-51	\N	2014-02-22 16:45:47.293794
-52	\N	2014-02-22 16:47:42.406325
-53	\N	2014-02-22 16:47:55.133901
-54	\N	2014-02-22 16:48:12.24975
-55	\N	2014-02-22 16:57:55.199854
-56	\N	2014-02-22 16:59:59.918119
-57	\N	2014-02-22 17:02:08.263595
-58	\N	2014-02-22 17:02:25.783007
-59	\N	2014-02-22 17:03:12.375813
-60	\N	2014-02-22 17:03:41.672123
-61	\N	2014-02-22 17:08:53.795341
-62	\N	2014-02-22 17:10:37.116347
-63	\N	2014-02-22 17:11:56.432408
-64	\N	2014-02-22 17:12:41.957648
-65	\N	2014-02-22 17:13:34.053819
-66	\N	2014-02-22 17:13:52.693704
-67	\N	2014-02-22 17:16:16.728085
-68	\N	2014-02-22 17:18:08.190877
-69	\N	2014-02-22 17:18:12.714147
-70	\N	2014-02-22 17:23:06.192671
+1	\N	2014-03-02 12:16:07.833883
+2	\N	2014-03-02 12:47:22.304384
+3	\N	2014-03-02 12:48:36.241876
+4	\N	2014-03-02 12:50:41.685846
+5	\N	2014-03-02 13:20:18.416808
+6	\N	2014-03-02 13:20:55.183989
+7	\N	2014-03-02 13:21:47.624372
+8	\N	2014-03-02 13:22:02.098652
+9	\N	2014-03-02 13:29:20.999308
+10	\N	2014-03-02 13:30:30.140158
+11	\N	2014-03-02 13:43:29.335021
+12	\N	2014-03-02 13:44:23.789512
+13	\N	2014-03-02 13:44:49.93306
+14	\N	2014-03-02 14:01:49.501363
+15	\N	2014-03-02 14:02:30.651692
+16	\N	2014-03-02 14:03:25.193367
+17	\N	2014-03-02 14:03:57.605595
+18	\N	2014-03-02 14:04:09.961526
+19	\N	2014-03-02 14:06:48.117559
+20	\N	2014-03-02 14:08:32.493909
+21	\N	2014-03-02 14:09:35.381369
+22	\N	2014-03-02 14:09:47.554578
+23	\N	2014-03-02 14:10:01.809685
+24	\N	2014-03-02 14:11:41.827964
+25	\N	2014-03-02 14:11:57.622049
+26	\N	2014-03-02 14:25:07.890608
+27	\N	2014-03-02 14:26:19.81933
+28	\N	2014-03-02 14:26:30.516835
+29	\N	2014-03-02 14:29:32.479434
+30	\N	2014-03-02 14:29:53.586292
+31	\N	2014-03-02 14:30:04.800283
+32	\N	2014-03-02 14:30:33.031611
+33	\N	2014-03-02 14:31:16.603864
+34	\N	2014-03-02 14:31:24.612921
+35	\N	2014-03-02 14:33:36.507878
+36	\N	2014-03-02 17:05:01.596174
+37	\N	2014-03-02 17:22:33.776131
+38	\N	2014-03-02 17:22:56.059971
+39	\N	2014-03-02 17:23:07.037903
+40	\N	2014-03-02 18:27:58.483841
+41	\N	2014-03-02 18:32:43.706011
 \.
 
 
@@ -1378,7 +1473,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 5, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-b1c088a47b6
+17e6c3846c86
 \.
 
 
@@ -1421,7 +1516,10 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 5, true);
 -- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY contact (id, resource_id) FROM stdin;
+COPY contact (id, contact, contact_type) FROM stdin;
+16	+380681983869	phone
+17	vitalii.mazur@gmail.com	email
+18	dorianyats	skype
 \.
 
 
@@ -1429,7 +1527,7 @@ COPY contact (id, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 1, false);
+SELECT pg_catalog.setval('contact_id_seq', 19, true);
 
 
 --
@@ -1571,22 +1669,24 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 13	4	10	Employees	/employees	\N	1	790
 20	4	18	Positions	/positions	\N	2	863
 19	4	18	Structures	/structures	\N	1	838
-21	4	\N	Clients	/	fa fa-briefcase	2	864
 22	4	21	Persons	/persons	\N	1	866
 25	4	23	Regions	/regions	\N	3	879
 17	4	23	Currencies	/currencies	\N	1	802
 24	4	23	Countries	/countries	\N	3	874
 14	4	10	Employees Appointments	/appointments	\N	2	791
-8	4	\N	System	/	fa fa-cog	7	778
-23	4	\N	Directories	/	fa fa-book	6	873
-18	4	\N	Company	/	fa fa-building-o	5	837
-10	4	\N	HR	/	fa fa-group	4	780
-26	4	\N	Marketing	/	fa fa-bullhorn	3	900
 27	4	26	Advertising Sources	/advsources	\N	1	902
 28	4	23	Hotels Categories	/hotelcats	\N	4	910
 29	4	23	Rooms Categories	/roomcats	\N	5	911
 30	4	23	Accomodations	/accomodations	\N	7	955
 31	4	23	Food Categories	/foodcats	\N	6	956
+8	4	\N	System	/	fa fa-cog	8	778
+23	4	\N	Directories	/	fa fa-book	7	873
+18	4	\N	Company	/	fa fa-building-o	6	837
+10	4	\N	HR	/	fa fa-group	5	780
+26	4	\N	Marketing	/	fa fa-bullhorn	4	900
+21	4	\N	Clients	/	fa fa-briefcase	3	864
+32	4	\N	Sales	/	fa fa-legal	2	998
+33	4	32	Communications	/communication	\N	1	999
 \.
 
 
@@ -1620,10 +1720,22 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 -- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY person (id, resource_id, first_name, last_name, second_name) FROM stdin;
-4	870	Greg	Johnson	
-5	871	John	Doe	
-6	887	Peter	Parker	
+COPY person (id, resource_id, first_name, last_name, second_name, birthday, gender) FROM stdin;
+4	870	Greg	Johnson		\N	\N
+5	871	John	Doe		\N	\N
+6	887	Peter	Parker		\N	\N
+14	997	Vitalii	Mazur		2014-03-02	\N
+\.
+
+
+--
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY person_contact (person_id, contact_id) FROM stdin;
+14	16
+14	17
+14	18
 \.
 
 
@@ -1631,7 +1743,7 @@ COPY person (id, resource_id, first_name, last_name, second_name) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('person_id_seq', 6, true);
+SELECT pg_catalog.setval('person_id_seq', 14, true);
 
 
 --
@@ -1648,14 +1760,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 31, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 33, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 46, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 47, true);
 
 
 --
@@ -1679,6 +1791,8 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 875	70	0	32
 885	47	0	32
 895	39	0	32
+998	65	0	32
+999	65	0	32
 728	55	0	32
 784	47	0	32
 786	47	0	32
@@ -1877,6 +1991,7 @@ COPY resource (id, resource_type_id, status, structure_id) FROM stdin;
 874	65	0	32
 725	55	0	32
 726	55	0	32
+997	69	0	32
 \.
 
 
@@ -2219,6 +2334,12 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4948	884	2	\N	2014-02-10 22:53:06.689693
 4921	838	2	\N	2014-02-09 01:11:46.633177
 4949	764	2	\N	2014-02-11 19:47:14.055452
+5129	997	2	\N	2014-03-02 14:34:15.721348
+5130	997	2	\N	2014-03-02 17:22:53.946618
+5131	997	2	\N	2014-03-02 17:23:05.245562
+5132	998	2	\N	2014-03-02 17:40:41.982664
+5133	999	2	\N	2014-03-02 18:13:12.823006
+5134	999	2	\N	2014-03-02 18:18:41.164422
 4120	16	2	\N	2014-01-01 13:19:09.979922
 4131	14	2	\N	2014-01-01 18:45:07.902745
 4144	706	2	\N	2014-01-03 16:12:41.015146
@@ -2343,6 +2464,14 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 
 ALTER TABLE ONLY _tappointment_row
     ADD CONSTRAINT _tappointment_row_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: _tcontact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY _tcontact
+    ADD CONSTRAINT _tcontact_pkey PRIMARY KEY (id);
 
 
 --
@@ -2471,6 +2600,14 @@ ALTER TABLE ONLY navigation
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT permision_pk PRIMARY KEY (id);
+
+
+--
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT person_contact_pkey PRIMARY KEY (person_id, contact_id);
 
 
 --
@@ -2639,6 +2776,14 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY _tappointment_row
     ADD CONSTRAINT fk_main_id_appointment_row_id FOREIGN KEY (main_id) REFERENCES appointment_row(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_main_id_contact_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY _tcontact
+    ADD CONSTRAINT fk_main_id_contact_id FOREIGN KEY (main_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -2866,11 +3011,35 @@ ALTER TABLE ONLY structure
 
 
 --
+-- Name: fk_tcontact_id_temporal_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY _tcontact
+    ADD CONSTRAINT fk_tcontact_id_temporal_id FOREIGN KEY (temporal_id) REFERENCES _temporal(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
 -- Name: fk_temporal_id_temporal_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY _tappointment_row
     ADD CONSTRAINT fk_temporal_id_temporal_id FOREIGN KEY (temporal_id) REFERENCES _temporal(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: person_contact_contact_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT person_contact_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: person_contact_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT person_contact_person_id_fkey FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

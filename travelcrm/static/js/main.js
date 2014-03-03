@@ -34,44 +34,31 @@ function show_form_errors(form, errors){
 	clear_form_errors(form);
 	if(is_form_errors(errors)){
 	    $.each(errors, function(input_name, error) {
-	    	set_field_error_status(form, input_name);
-	    	set_field_error_tooltip(form, input_name, error);
+	    	set_field_error_status(form, input_name, error);
 	    });
 	}
 }
 
-function set_field_error_status(form, input_name){
+function set_field_error_status(form, input_name, error){
 	if(form.find('[name=' + input_name + ']').length > 0)
-		form.find('[name=' + input_name + ']').closest('.form-field').addClass('error');
+		form.find('[name=' + input_name + ']').after(get_error_tooltip(error));
 	else if(form.find('[comboname=' + input_name + ']').length > 0)
-		form.find('[comboname=' + input_name + ']').closest('.form-field').addClass('error');
+		form.find('[comboname=' + input_name + ']').after(get_error_tooltip(error));
 }
 
-function set_field_error_tooltip(form, input_name, error){
-	var obj = null;
-	if(form.find('[name=' + input_name + ']').length > 0)
-		obj = form.find('[name=' + input_name + ']');
-	else if(form.find('[comboname=' + input_name + ']').length > 0)
-		obj = form.find('[comboname=' + input_name + ']');
-	if (obj)
-		form.find('[name=' + input_name + ']').closest('.form-field').tooltip(
-	    	{
-	    		content: error, 
-	    		position: 'right',
-	    		onShow: function(){
-	    	        $(this).tooltip('tip').css({
-	    	            backgroundColor: '#000',
-	    	            borderColor: '#000',
-	    	            color: '#fff'
-	    	        });
-	    	    }
-	    	}
-	    );
+function get_error_tooltip(error){
+	var span = $('<span class="error fa fa-exclamation-circle">');
+	span.tooltip(
+    	{
+    		content: error, 
+    		position: 'right',
+    	}
+    );
+	return span;
 }
 
 function clear_form_errors(form){
-    form.find('.error').tooltip('destroy');
-    form.find('.error').removeClass('error');
+    form.find('span.error').remove();
 }
 
 $(document).on('click', 'form._ajax input[type=reset]',

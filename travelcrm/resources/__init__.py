@@ -27,14 +27,6 @@ from ..models.user import User
 log = logging.getLogger(__name__)
 
 
-class AppBase(object):
-
-    def __init__(self, request):
-        self.request = request
-        self.__name__ = self.__class__.__name__.lower()
-        self.__parent__ = Root(request)
-
-
 class SecuredBase(object):
 
     @property

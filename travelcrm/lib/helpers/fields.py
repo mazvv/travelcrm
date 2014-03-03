@@ -245,3 +245,31 @@ def countries_combobox_field(
     return tags.text(name, value, class_="easyui-combobox text w20",
         data_options=data_options
     )
+
+
+def gender_combobox_field(
+    value=None, name='gender'
+):
+    choices = [
+        ('', '--None--'),
+        ('female', 'female'),
+        ('male', 'male'),
+    ]
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options="panelHeight:'auto',editable:false"
+    )
+
+
+def contact_type_combobox_field(
+    value=None, name='contact_type'
+):
+    choices = [
+        ('phone', 'phone'),
+        ('email', 'email'),
+        ('skype', 'skype'),
+    ]
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options="panelHeight:'auto',editable:false"
+    )

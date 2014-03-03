@@ -4,6 +4,7 @@ import common
 import fields
 from webhelpers.html import tags
 from webhelpers.html import builder
+from webhelpers import util
 
 
 # need it to possibility use of data-options

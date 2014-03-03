@@ -38,6 +38,7 @@ from person import Person
 from country import Country
 from address import Address
 from contact import Contact
+from tcontact import TContact
 from location import Location
 from temporal import Temporal
 from advsource import Advsource

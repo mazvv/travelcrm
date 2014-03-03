@@ -5,9 +5,9 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+)
+from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.hybrid import hybrid_property
 
 from ..models import (
     DBSession,
@@ -23,27 +23,17 @@ class Contact(Base):
         autoincrement=True,
         primary_key=True
     )
-    resource_id = Column(
-        Integer,
-        ForeignKey(
-            'resource.id',
-            name="fk_resource_id_person",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True,
+    contact_type = Column(
+        ENUM(
+            u'phone', u'email', u'skype',
+            name='contact_type_enum', create_type=True,
         ),
         nullable=False,
     )
-    resource = relationship(
-        'Resource',
-        backref=backref('contact', uselist=False, cascade="all,delete"),
-        cascade="all,delete",
-        uselist=False,
+    contact = Column(
+        String,
+        nullable=False,
     )
-
-    @hybrid_property
-    def name(self):
-        return self.last_name + " " + self.first_name
 
     @classmethod
     def get(cls, id):

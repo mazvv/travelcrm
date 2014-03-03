@@ -110,6 +110,11 @@ hr.dashed{
     margin-bottom: 1em;
 }
 
+/** borders **/
+.top-line{
+    border-top: 1px dashed #eee;
+}
+
 /**jeasyui override **/
 .combo-text{
 	outline: none;
@@ -231,13 +236,18 @@ a:hover.l-btn-plain{
 /* form */
 form{
 	margin-bottom: 0px;
-	padding-top: 5px;
 }
 .form-field{
     padding: 5px 10px;
     margin-bottom: 1px;
 }
-.form-field:child-last{
+.form-field:hover{
+    background: #f3f3f3;
+}
+.form-field:first-child{
+    margin-top: 6px;
+}
+.form-field:last-child{
 	margin-bottom: 6px;
 }
 .form-field label{
@@ -249,9 +259,6 @@ form{
     margin-left: 5px;
 }
 
-.form-field:hover{
-    background: #f3f3f3;
-}
 .form-field textarea{
     display: block;
 }
@@ -264,6 +271,7 @@ form{
 .
 .form-buttons .status-bar{
     line-height: 26px;
+    vertical-align: middle;
 }
 .form-buttons .button-group.tr{
 	float: right;
@@ -305,15 +313,12 @@ form a:hover{
 .status-bar.error{
     color: #900;
 }
-.form-field.error{
-    background-color: #a0302a;
-    cursor: help;
-}
-.form-field.error label{
-    color: #ffffff;
-}
-.form-field.error .required:after{
-	color: #ffffff;
+span.error.fa{
+	font-size: 16px;
+	margin-left: 5px;
+	color: #900;
+	cursor: pointer;
+	vertical-align: middle;
 }
 
 /** inputs **/

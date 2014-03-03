@@ -28,6 +28,7 @@ requires = [
     'pyramid_beaker',
     'whoosh>=2.5.6',
     'Babel>=0.9.6',
+    'phonenumbers>=6.0.0',
 ]
 
 setup(
