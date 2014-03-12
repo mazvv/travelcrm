@@ -16,10 +16,11 @@ class EmployeesQueryBuilder(ResourcesQueryBuilder):
         'last_name': Employee.last_name,
         'name': Employee.name
     }
-    
+
     _simple_search_fields = [
-        Employee.first_name, 
-        Employee.last_name
+        Employee.first_name,
+        Employee.last_name,
+        Employee.name,
     ]
 
     def __init__(self, context):
@@ -29,3 +30,7 @@ class EmployeesQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Employee, Resource.employee)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Employee.id == id)

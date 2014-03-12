@@ -22,3 +22,7 @@ class ResourcesTypesQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(ResourceType, Resource.resource_type_obj)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(ResourceType.id == id)

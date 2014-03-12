@@ -31,7 +31,7 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
 
 class PersonsContactsQueryBuilder(ContactsQueryBuilder):
 
-    def filter_contactor(self, person_id):
+    def filter_relation(self, person_id):
         self.query = (
             self.query
             .join(Person, Contact.person)

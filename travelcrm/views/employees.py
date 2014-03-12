@@ -41,7 +41,10 @@ class Employees(object):
     def list(self):
         qb = EmployeesQueryBuilder(self.context)
         qb.search_simple(
-            self.request.params.get('search'),
+            self.request.params.get('q'),
+        )
+        qb.filter_id(
+            self.request.params.get('id')
         )
         qb.sort_query(
             self.request.params.get('sort'),

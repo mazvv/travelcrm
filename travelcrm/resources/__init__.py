@@ -8,7 +8,8 @@ from pyramid.security import (
     Authenticated,
     Deny,
     ALL_PERMISSIONS,
-    authenticated_userid
+    authenticated_userid,
+    has_permission,
 )
 
 from ..lib.utils.resources_utils import (
@@ -31,12 +32,7 @@ class SecuredBase(object):
 
     @property
     def __acl__(self):
-        employee = get_auth_employee(self.request)
-        permisions = None
-        if employee:
-            employee_permisions = get_employee_permisions(employee, self)
-            if employee_permisions:
-                permisions = employee_permisions.permisions
+        permisions = SecuredBase.get_permisions(self, self.request)
         acls = [
             (Allow, Authenticated, permisions),
             (Deny, Authenticated, ALL_PERMISSIONS)
@@ -49,6 +45,17 @@ class SecuredBase(object):
             return resource_type(self.request)
         except ResourceClassNotFound:
             raise KeyError
+
+    def has_permision(self, permision):
+        return has_permission(permision, self, self.request)
+
+    @staticmethod
+    def get_permisions(obj, request):
+        employee = get_auth_employee(request)
+        if employee:
+            employee_permisions = get_employee_permisions(employee, obj)
+            if employee_permisions:
+                return employee_permisions.permisions
 
     def is_logged(self):
         return authenticated_userid(self.request)

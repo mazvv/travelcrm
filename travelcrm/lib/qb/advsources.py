@@ -22,3 +22,7 @@ class AdvsourcesQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Advsource, Resource.advsource)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Advsource.id == id)

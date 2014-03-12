@@ -32,6 +32,7 @@ a{
 
 #_page_{
 	background-color: #f4f4f4;
+	min-width: 1128px;
 }
 
 #_head_{
@@ -185,6 +186,8 @@ a:hover.l-btn-plain{
 
 .panel-header .panel-title{
     font-size: 14px;
+    height: inherit;
+    line-height: inherit;    
 }
 
 .tree-file, .tree-folder, .tree-folder-open,
@@ -268,10 +271,10 @@ form{
 	background: #fafafa;
 	height: 26px;
 }
-.
 .form-buttons .status-bar{
-    line-height: 26px;
-    vertical-align: middle;
+	height: 26px;
+	line-height: 26px;
+	vertical-align: middle;
 }
 .form-buttons .button-group.tr{
 	float: right;
@@ -327,7 +330,7 @@ input{
 }
 .text{
     border: 1px solid #D1D1D1;
-    padding: 0.3em 0.2em;
+    padding: 3px 2px;
     font-size: 100%;
     font-family: sans-serif;
     outline: none;
@@ -367,8 +370,8 @@ input{
 /** datagrid **/
 .datagrid-toolbar{
 	padding: 4px;
-	height: 25px;
-	line-height: 25px;
+	height: 26px;
+	line-height: 26px;
 }
 
 /** document rows **/
@@ -389,25 +392,41 @@ input{
 
 
 /** searchbar **/
-.searchbar {
+.searchbar{
 	position: relative;
 }
 .searchbar label{
 	margin-right: 5px;
+	font-weight: bold;
 }
-.searchbar .fa{
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	cursor: pointer;
-}
-.searchbar .searchbox{
-	padding-right: 44px;
-}
-.searchbar .search-tools{
+.searchbar span.field-actions{
 	position: absolute;
-	right: 6px;
-	top: 1px;
-	height: 22px;
-	border-left: 1px solid #eee;
+	top: 2px;
+	right: 0px;
+}
+
+
+/** fields **/
+span.field-actions{
+	display: inline-block;
+	line-height: 20px;
+	border: 1px solid #d3d3d3;
+	border-left-width: 0px;
+	background-color: #f3f3f3;
+	vertical-align: middle;
+}
+span.field-actions span.field-action{
+	display: inline-block;
+	font-size: 14px;
+	width:20px;
+	text-align: center;
+	border-left: 1px dashed #d3d3d3;
+	cursor: pointer;
+	opacity:0.5;
+}
+span.field-actions span.field-action:hover{
+	opacity:0.9;
+}
+span.field-actions span.field-action:first-child {
+	border-left: none;
 }

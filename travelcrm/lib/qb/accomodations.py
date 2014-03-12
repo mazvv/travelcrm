@@ -22,3 +22,7 @@ class AccomodationsQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Accomodation, Resource.accomodation)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Accomodation.id == id)

@@ -26,7 +26,7 @@ class ContactsQueryBuilder(GeneralQueryBuilder):
         )
         self.query = DBSession.query(*fields)
 
-    def filter_contactor(self, contactor_id):
+    def filter_relation(self, relation_id):
         """ Need to implement it
         Example for person:
         self.query = (
@@ -37,7 +37,7 @@ class ContactsQueryBuilder(GeneralQueryBuilder):
         """
         raise NotImplementedError()
 
-    def union_temporal(self, temporal_id, contactor_id):
+    def union_temporal(self, temporal_id, relation_id):
         fields = self._fields.copy()
         fields['id'] = -TContact.id
         fields['_id'] = TContact.id
@@ -53,7 +53,7 @@ class ContactsQueryBuilder(GeneralQueryBuilder):
         )
         subq = subq.subquery()
 
-        self.filter_contactor(contactor_id)
+        self.filter_relation(relation_id)
         self.query = self.query.filter(~Contact.id.in_(subq))
         union_query = (
             DBSession.query(*fields)

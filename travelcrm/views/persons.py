@@ -159,8 +159,8 @@ class Persons(object):
                 if contact.deleted and contact.main_id:
                     DBSession.delete(contact.main)
                 elif contact.main_id:
-                    contact.main.position_id = contact.position_id
-                    contact.main.employee_id = contact.employee_id
+                    contact.main.contact_type = contact.contact_type
+                    contact.main.contact = contact.contact
                 else:
                     person.contacts.append(
                         Contact(

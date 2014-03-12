@@ -19,3 +19,7 @@ class CurrenciesQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Currency, Resource.currency)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Currency.id == id)

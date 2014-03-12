@@ -1,3 +1,8 @@
+<%namespace file="../common/search.mak" import="searchbar"/>
+<%namespace file="../common/buttons.mak" import="action_button"/>
+<%
+	h_id = h.common.gen_id()
+%>
 <div class="easyui-panel _container unselectable"
     data-options="
         fit:true,
@@ -6,13 +11,21 @@
     "
     title="${_(u'Resources Types')}">
     <table class="easyui-datagrid"
-        id="resources-types-dg"
+        id="dg-${h_id}"
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-            selectOnCheck:false,toolbar:'#resources-types-dg-tb'
+            selectOnCheck:false,toolbar:'#dg-tb-${h_id}'
+            onBeforeLoad: function(param){
+                var dg = $(this);
+                var searchbar = $(this).closest('._container').find('.searchbar');
+                console.log(searchbar.find('input'));
+                $.each(searchbar.find('input'), function(i, el){
+                    param[$(el).attr('name')] = $(el).val();
+                });
+            }
         " width="100%">
         <thead>
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
@@ -25,22 +38,29 @@
         </thead>
     </table>
 
-    <div class="datagrid-toolbar" id="resources-types-dg-tb">
-        <div class="actions button-container">
-            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add')}">
-                <span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
-            </a>
+    <div class="datagrid-toolbar" id="dg-tb-${h_id}">
+        <div class="actions button-container dl45">
+            ${action_button(
+            	_context, request.resource_url(_context, 'add'), 'add', 
+            	'primary _dialog_open', 'fa fa-plus', _(u'Add New')
+            )}
             <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
-                    <span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
-                </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'copy')}">
-                    <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
-                </a>
-                <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete')}">
-                    <span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
-                </a>
+           		${action_button(
+           			_context, request.resource_url(_context, 'edit'), 'edit', 
+           			'_dialog_open _with_row', 'fa fa-pencil', _(u'Edit')
+           		)}
+           		${action_button(
+           			_context, request.resource_url(_context, 'edit'), 'edit', 
+           			'_dialog_open _with_row', 'fa fa-copy', _(u'Copy')
+           		)}
+           		${action_button(
+           			_context, request.resource_url(_context, 'delete'), 'delete', 
+           			'danger _dialog_open _with_rows', 'fa fa-times', _(u'Delete')
+           		)}
             </div>
+        </div>
+        <div class="ml45 tr">
+            ${searchbar()}
         </div>
     </div>
 </div>

@@ -54,3 +54,12 @@ def get_resource_type_by_resource(resource):
         resource.__class__.__module__,
         resource.__class__.__name__
     )
+
+
+def get_resource_type_by_resource_cls(cls):
+    """retrieve resource type from DB by module and class name
+    """
+    return ResourceType.by_resource_name(
+        cls.__module__,
+        cls.__name__
+    )

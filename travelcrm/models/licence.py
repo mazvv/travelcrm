@@ -3,9 +3,9 @@
 from sqlalchemy import (
     Column,
     Integer,
-    DateTime,
+    String,
+    Date,
     ForeignKey,
-    func
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -15,8 +15,8 @@ from ..models import (
 )
 
 
-class Communication(Base):
-    __tablename__ = 'communication'
+class Licence(Base):
+    __tablename__ = 'licence'
 
     id = Column(
         Integer,
@@ -27,24 +27,28 @@ class Communication(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_communication",
+            name="fk_resource_id_hotelcat",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,
         ),
         nullable=False,
     )
-    communication_dt = Column(
-        DateTime,
-        default=func.now()
+    licence_num = Column(
+        String,
+        nullable=False,
+    )
+    date_from = Column(
+        Date,
+        nullable=False
+    )
+    date_to = Column(
+        Date,
+        nullable=False
     )
     resource = relationship(
         'Resource',
-        backref=backref(
-            'appointment',
-            uselist=False,
-            cascade="all,delete"
-        ),
+        backref=backref('licence', uselist=False, cascade="all,delete"),
         cascade="all,delete",
         uselist=False,
     )

@@ -22,3 +22,7 @@ class FoodcatsQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Foodcat, Resource.foodcat)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Foodcat.id == id)

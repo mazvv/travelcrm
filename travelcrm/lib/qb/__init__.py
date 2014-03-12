@@ -1,5 +1,6 @@
 # -*-coding: utf-8-*-
 
+from collections import OrderedDict
 from abc import ABCMeta
 
 from datetime import datetime, date
@@ -47,7 +48,7 @@ class GeneralQueryBuilder(object):
     _searcher = None
     _simple_search_fields = []
     _advanced_search_fields = []
-    
+
     """ Need to implement self.query
     """
 
@@ -74,8 +75,8 @@ class GeneralQueryBuilder(object):
         return self._fields
 
     def search_simple(self, term):
-        term = term.strip()
-        if term:
+        if term and term.strip():
+            term = term.strip()
             term = "%s%%" % term
             condition = or_(
                 *map(lambda item: item.ilike(term), self._simple_search_fields)
@@ -115,12 +116,12 @@ class GeneralQueryBuilder(object):
 class ResourcesQueryBuilder(GeneralQueryBuilder):
 
     __log_subquery = ResourceLog.query_last_max_entries().subquery()
-    __base_fields = {
+    __base_fields = OrderedDict({
         'rid': Resource.id.label('rid'),
         'status': Resource.status.label('status'),
         'modifydt': __log_subquery.c.modifydt.label('modifydt'),
         'modifier': __log_subquery.c.modifier.label('modifier'),
-    }
+    })
 
     def __init__(self, context=None):
 

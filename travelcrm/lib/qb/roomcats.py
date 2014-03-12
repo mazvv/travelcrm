@@ -22,3 +22,7 @@ class RoomcatsQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Roomcat, Resource.roomcat)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Roomcat.id == id)

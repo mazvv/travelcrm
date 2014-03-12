@@ -9,14 +9,18 @@ function delete_container(){
 	containers.pop();
 	return;
 }
-function refresh_container(){
-	var container = containers.pop();
-	try{
-	    container.find('.easyui-datagrid').datagrid('reload');
-    	container.find('.easyui-treegrid').treegrid('reload');
-	} 
-	finally {
-		return;
+function refresh_container(container){
+	if(!container)
+		container = containers.pop();
+	var container_type = get_container_type(container)
+	if(container_type == 'datagrid'){
+		container.find('.easyui-datagrid').datagrid('reload');
+	}
+	else if(container_type == 'treegrid'){
+		container.find('.easyui-treegrid').treegrid('reload');
+	}
+	else if(container_type == 'combobox'){
+		container.find('.easyui-combobox').combobox('reload');
 	}
 }
 
@@ -34,31 +38,19 @@ function show_form_errors(form, errors){
 	clear_form_errors(form);
 	if(is_form_errors(errors)){
 	    $.each(errors, function(input_name, error) {
-	    	set_field_error_status(form, input_name, error);
+	    	set_field_error(form, input_name, error);
 	    });
 	}
 }
 
-function set_field_error_status(form, input_name, error){
-	if(form.find('[name=' + input_name + ']').length > 0)
-		form.find('[name=' + input_name + ']').after(get_error_tooltip(error));
-	else if(form.find('[comboname=' + input_name + ']').length > 0)
-		form.find('[comboname=' + input_name + ']').after(get_error_tooltip(error));
-}
-
-function get_error_tooltip(error){
-	var span = $('<span class="error fa fa-exclamation-circle">');
-	span.tooltip(
-    	{
-    		content: error, 
-    		position: 'right',
-    	}
-    );
-	return span;
+function set_field_error(form, input_name, error){
+	var selector = "[data-name='" + input_name + "']";
+	form.find(selector).tooltip({content: error, position: 'right'});
+	form.find(selector).show();
 }
 
 function clear_form_errors(form){
-    form.find('span.error').remove();
+    form.find('span.error').hide();
 }
 
 $(document).on('click', 'form._ajax input[type=reset]',
@@ -92,7 +84,7 @@ function submit(form){
                 show_status_bar_info(form.find('.status-bar'), 'success', json.success_message);
                 if(is_undefined(json.close) || json.close == true){
 	                form.closest('.easyui-dialog').dialog('destroy');
-	                refresh_container();
+	                refresh_container(null);
                 }
             }
         },
@@ -227,6 +219,8 @@ function get_container_type(container){
 	var container_type = null;
 	if(container.find('.easyui-datagrid').length > 0) container_type = 'datagrid';
 	else if(container.find('.easyui-treegrid').length > 0) container_type = 'treegrid';
+	else if(container.find('.easyui-combobox').length > 0) container_type = 'combobox';
+	else if(container.find('.easyui-combotree').length > 0) container_type = 'combotree';	
 	return container_type;
 }
 
@@ -254,17 +248,50 @@ $(document).on("click", '._action', function(event){
 		}
     }
     add_container(container);
-    $.post(url, params).always(function(){refresh_container();});
+    $.post(url, params).always(function(){refresh_container(null);});
 });
 
 $(document).on('keyup', '._searchbox', function(e){
     if(e.keyCode == 13){
     	var container = $(this).closest('._container');
-    	var container_type = get_container_type(container);
-    	if(container_type == 'datagrid')
-    		container.find('.easyui-datagrid').datagrid('load');
-    	if(container_type == 'treegrid')
-    		container.find('.easyui-treegrid').treegrid('load');
+    	refresh_container(container);
     	return;
     }
+});
+
+$(document).on('click', '.searchbar ._runsearch', function(e){
+	var container = $(this).closest('._container');
+	refresh_container(container);
+	return;
+});
+
+$(document).on('click', '._clearfield', function(event){
+	event.preventDefault();
+	var container = $(this).closest('._container');
+	var container_type = get_container_type(container);
+	if(container_type == 'combobox'){
+		container.find('.easyui-combobox').combobox('clear');
+	}
+});
+
+$(document).on('click', '._accumulator', function(event){
+	event.preventDefault();
+	var container = $(this).closest('._container');
+	var container_type = get_container_type(container);
+	if(container_type == 'combobox'){
+		var name = container.find('.easyui-combobox').data('name');
+		var val = container.find('.easyui-combobox').combobox('getValue');
+		if(val){
+			var inputs = container.find('input[name=' + name + '][value=' + val + ']');
+			if(!inputs.length){
+				var input = $('<input type="hidden">');
+				input.attr('name', name);
+				input.val(val);
+				container.append(input);
+				var parent_container = container.parent().closest('._container');
+				refresh_container(parent_container);
+			}
+			container.find('.easyui-combobox').combobox('clear');
+		}
+	}
 });

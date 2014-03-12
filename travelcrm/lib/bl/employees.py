@@ -1,5 +1,7 @@
 # -*coding: utf-8-*-
 
+from types import ClassType
+
 from sqlalchemy import desc
 
 from ...models import DBSession
@@ -9,7 +11,10 @@ from ...models.appointment_row import AppointmentRow
 from ...models.permision import Permision
 from ...models.structure import Structure
 from ...models.position import Position
-from ..utils.resources_utils import get_resource_type_by_resource
+from ..utils.resources_utils import (
+    get_resource_type_by_resource,
+    get_resource_type_by_resource_cls
+)
 
 
 def get_employee_position(employee, date=None):
@@ -36,8 +41,12 @@ def get_employee_structure(employee, date=None):
 
 def get_employee_permisions(employee, resource):
     """retrieve permissions for resource
+    resource can be instance of context or context class
     """
-    rt = get_resource_type_by_resource(resource)
+    if isinstance(resource, (type, ClassType)):
+        rt = get_resource_type_by_resource_cls(resource)
+    else:
+        rt = get_resource_type_by_resource(resource)
     employee_position = get_employee_position(employee)
     permisions = (
         employee_position.permisions.filter(

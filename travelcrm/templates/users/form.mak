@@ -9,10 +9,11 @@
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"employees id"), True, "employee_id")}
+                ${h.tags.title(_(u"employee"), True, "employee_id")}
             </div>
             <div class="ml15">
-               ${h.fields.employees_combobox_field(item.employee_id if item else None, "employee_id")}
+               ${h.fields.employees_combobox_field(request=request, value=item.employee_id if item else None)}
+               ${h.common.error_container(name='employee_id')}
             </div>
         </div>
         <div class="form-field">
@@ -21,6 +22,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("username", item.username if item else None, class_="text w20")}
+                ${h.common.error_container(name='username')}
             </div>
         </div>
         <div class="form-field">
@@ -29,6 +31,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.password("password", None, class_="text w20")}
+                ${h.common.error_container(name='password')}
             </div>
         </div>
         <div class="form-field">
@@ -37,6 +40,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.status_field(item.resource.status if item else None)}
+                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

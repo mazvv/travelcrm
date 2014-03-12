@@ -22,3 +22,7 @@ class HotelcatsQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Hotelcat, Resource.hotelcat)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Hotelcat.id == id)

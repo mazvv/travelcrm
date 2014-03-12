@@ -24,3 +24,7 @@ class CountriesQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(Country, Resource.country)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        if id:
+            self.query = self.query.filter(Advsource.id == id)

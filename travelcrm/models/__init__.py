@@ -46,3 +46,8 @@ from hotelcat import Hotelcat
 from roomcat import Roomcat
 from accomodation import Accomodation
 from foodcat import Foodcat
+from bperson import BPerson
+from tbperson import TBPerson
+from touroperator import Touroperator
+from licence import Licence
+from tlicence import TLicence
