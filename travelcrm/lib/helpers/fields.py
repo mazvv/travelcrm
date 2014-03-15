@@ -157,22 +157,32 @@ def employees_combobox_field(
     _ = request.translate
     permisions = Employees.get_permisions(Employees, request)
     toolbar_id = 'cg-tb-%s' % gen_id()
+    toolbar = []
     if 'add' in permisions:
-        toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML.tag(
-                'a', href='#', class_='_dialog_open fa fa-plus',
-                c=_('add new'), **{'data-url': '/employees/add'}
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='_dialog_open fa fa-plus easyui-tooltip',
+                title=_(u'add new'), **{'data-url': '/employees/add'}
             )
         )
-    else:
-        toolbar = None
+    if 'edit' in permisions:
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='_dialog_open _with_row fa fa-pencil easyui-tooltip',
+                title=_(u'edit selected'), **{'data-url': '/employees/edit'}
+            )
+        )
+
     fields = [[
         {'field': 'name', 'title': _(u"name"), 'sortable': True, 'width': 200}
     ]]
 
     data_options = """
         url: '/employees/list',
+        fitColumns: true,
+        scrollbarSize: 7,
         border: false,
         delay: 500,
         idField: 'id',
@@ -204,6 +214,11 @@ def employees_combobox_field(
         data_options += """,
             %s
         """ % options
+    if toolbar:
+        toolbar = HTML.tag(
+            'div', class_='combogrid-toolbar', id=toolbar_id,
+            c=HTML(*toolbar)
+        )
     return HTML.tag(
         'div', class_='_container',
         c=HTML(
@@ -212,7 +227,7 @@ def employees_combobox_field(
                 class_="easyui-combogrid text w20",
                 data_options=data_options,
             ),
-            toolbar
+            toolbar if toolbar else ''
         )
     )
 

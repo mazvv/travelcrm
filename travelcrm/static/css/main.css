@@ -221,6 +221,28 @@ a:hover.l-btn-plain{
 .datebox .combo-arrow:before{
     content: "\f073";
 }
+.datagrid-toolbar.combogrid-toolbar{
+	height: 16px;
+	line-height: 16px;
+	border: none;
+}
+.datagrid-toolbar.combogrid-toolbar a{
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	line-height: 16px;
+    background-color: #ececec;
+	text-align: center;
+	opacity: 0.8;
+	margin-left: 4px;
+}
+.datagrid-toolbar.combogrid-toolbar a:first-child{
+	margin-left: 0px;
+}
+.datagrid-toolbar.combogrid-toolbar a:hover{
+	text-decoration: none;
+	opacity: 1;
+}
 
 /* navigation */
 #_navigation_ .easyui-linkbutton{

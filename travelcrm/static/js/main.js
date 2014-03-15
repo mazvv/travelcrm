@@ -1,3 +1,11 @@
+/**
+Rules:
+
+Containers
+----------
+1. ID must begins with cont
+**/
+
 var containers = Array();
 
 function add_container(obj){
@@ -5,23 +13,31 @@ function add_container(obj){
 	containers.push(container);
 	return; 
 }
+
 function delete_container(){
 	containers.pop();
 	return;
 }
+
 function refresh_container(container){
 	if(!container)
 		container = containers.pop();
 	var container_type = get_container_type(container)
-	if(container_type == 'datagrid'){
-		container.find('.easyui-datagrid').datagrid('reload');
+	switch(container_type){
+		case('datagrid'):
+			container.find('.easyui-datagrid').datagrid('reload');
+			break;
+		case ('treegrid'):
+			container.find('.easyui-treegrid').treegrid('reload');
+		    break;
+		case('combobox'):
+		    container.find('.easyui-combobox').combobox('reload');
+            break;
+		case('combogrid'):
+		    container.find('.easyui-combogrid').combogrid('reload');
+            break;
 	}
-	else if(container_type == 'treegrid'){
-		container.find('.easyui-treegrid').treegrid('reload');
-	}
-	else if(container_type == 'combobox'){
-		container.find('.easyui-combobox').combobox('reload');
-	}
+
 }
 
 function is_undefined(val){
@@ -202,10 +218,14 @@ function get_selected(container, container_type){
 }
 
 function get_checked(container, container_type){
-	if(container_type == 'datagrid')
-		return container.find('.easyui-datagrid').datagrid('getChecked');
-	if(container_type == 'treegrid')
-		return container.find('.easyui-treegrid').treegrid('getChecked');
+    switch(container_type){
+		case('datagrid'):
+		    return container.find('.easyui-datagrid').datagrid('getChecked');
+		case('treegrid'):
+		    return container.find('.easyui-treegrid').treegrid('getChecked');
+		default:
+		    return null;
+	}
 	return null;
 }
 
@@ -220,7 +240,8 @@ function get_container_type(container){
 	if(container.find('.easyui-datagrid').length > 0) container_type = 'datagrid';
 	else if(container.find('.easyui-treegrid').length > 0) container_type = 'treegrid';
 	else if(container.find('.easyui-combobox').length > 0) container_type = 'combobox';
-	else if(container.find('.easyui-combotree').length > 0) container_type = 'combotree';	
+	else if(container.find('.easyui-combotree').length > 0) container_type = 'combotree';
+	else if(container.find('.easyui-combogrid').length > 0) container_type = 'combogrid';
 	return container_type;
 }
 

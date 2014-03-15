@@ -29,5 +29,5 @@ def error_container(name):
     )
 
 
-def gen_id(limit=6):
-    return u_gen_id(limit)
+def gen_id(prefix=u'obj', limit=6):
+    return u_gen_id(prefix, limit)

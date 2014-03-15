@@ -19,10 +19,10 @@ def get_locale_name():
     return _get_settings_value('pyramid.default_locale_name')
 
 
-def gen_id(limit=6):
+def gen_id(prefix='', limit=6):
     s = list(str(int(uuid4())))
     random.shuffle(s)
-    return ''.join(s[:limit])
+    return u"%s%s" % (prefix, ''.join(s[:limit]))
 
 
 def get_translate():
