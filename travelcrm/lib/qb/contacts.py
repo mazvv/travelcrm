@@ -1,16 +1,18 @@
 # -*coding: utf-8-*-
 
 from abc import ABCMeta
-from collections import OrderedDict
+from collections import (
+    OrderedDict,
+    Iterable
+)
 
-from . import GeneralQueryBuilder
+from . import ResourcesQueryBuilder
 
-from ...models import DBSession
+from ...models.resource import Resource
 from ...models.contact import Contact
-from ...models.tcontact import TContact
 
 
-class ContactsQueryBuilder(GeneralQueryBuilder):
+class ContactsQueryBuilder(ResourcesQueryBuilder):
     __metaclass__ = ABCMeta
 
     _fields = OrderedDict({
@@ -20,44 +22,15 @@ class ContactsQueryBuilder(GeneralQueryBuilder):
         'contact': Contact.contact,
     })
 
-    def __init__(self):
-        fields = GeneralQueryBuilder.get_fields_with_labels(
+    def __init__(self, context):
+        super(ContactsQueryBuilder, self).__init__(context)
+        fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
-        self.query = DBSession.query(*fields)
+        self.query = self.query.join(Contact, Resource.contact)
+        self.query = self.query.add_columns(*fields)
 
-    def filter_relation(self, relation_id):
-        """ Need to implement it
-        Example for person:
-        self.query = (
-            self.query
-            .join(Person, Contact.person)
-            .filter(Person.id == contactor_id)
-        )
-        """
-        raise NotImplementedError()
-
-    def union_temporal(self, temporal_id, relation_id):
-        fields = self._fields.copy()
-        fields['id'] = -TContact.id
-        fields['_id'] = TContact.id
-        fields['contact_type'] = TContact.contact_type
-        fields['contact'] = TContact.contact
-
-        fields = GeneralQueryBuilder.get_fields_with_labels(fields)
-
-        subq = DBSession.query(TContact.main_id)
-        subq = subq.filter(
-            TContact.temporal_id == temporal_id,
-            TContact.main_id != None
-        )
-        subq = subq.subquery()
-
-        self.filter_relation(relation_id)
-        self.query = self.query.filter(~Contact.id.in_(subq))
-        union_query = (
-            DBSession.query(*fields)
-            .filter(TContact.temporal_id == temporal_id)
-            .filter(TContact.deleted == False)
-        )
-        self.query = self.query.union(union_query)
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(Contact.id.in_(id))

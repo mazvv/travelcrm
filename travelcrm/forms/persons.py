@@ -9,9 +9,6 @@ from . import (
 
 
 class PersonSchema(ResourceSchema):
-    tid = colander.SchemaNode(
-        colander.Integer(),
-    )
     first_name = colander.SchemaNode(
         colander.String(),
     )

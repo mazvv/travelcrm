@@ -1,5 +1,5 @@
 <div class="dl40 easyui-dialog"
-    title="${_(u'Delete Countries')}"
+    title="${_(u'Delete Rooms Categories')}"
     data-options="
         modal:true,
         resizable:false,
@@ -13,7 +13,7 @@
             </div>
             <div>
                 <span class="lipstick">${_(u"ATTENTION:")}</span>
-                ${_(u"it's highly not recommend to delete countries. it may have destructive aftermath!")}
+                ${_(u"it's highly not recommend to delete rooms categories. it may have destructive aftermath!")}
             </div>
         </div>
         <div class="form-buttons">

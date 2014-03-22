@@ -1,3 +1,4 @@
+<%namespace file="../common/grid_selectors.mak" import="contacts_selector"/>
 <div class="dl50 easyui-dialog"
     title="${title}"
     data-options="
@@ -7,7 +8,6 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-        ${h.tags.hidden('tid', tid)}
         <div class="easyui-tabs h100" data-options="border:false,height:300">
             <div title="${_(u'Main')}">
 		        <div class="form-field">
@@ -16,6 +16,7 @@
 		            </div>
 		            <div class="ml15">
 		                ${h.tags.text("first_name", item.first_name if item else None, class_="text w20")}
+		                ${h.common.error_container(name='first_name')}
 		            </div>
 		        </div>
 		        <div class="form-field">
@@ -24,6 +25,7 @@
 		            </div>
 		            <div class="ml15">
 		                ${h.tags.text("second_name", item.second_name if item else None, class_="text w20")}
+		                ${h.common.error_container(name='second_name')}
 		            </div>
 		        </div>
 		        <div class="form-field">
@@ -32,6 +34,7 @@
 		            </div>
 		            <div class="ml15">
 		                ${h.tags.text("last_name", item.last_name if item else None, class_="text w20")}
+		                ${h.common.error_container(name='last_name')}
 		            </div>
 		        </div>
 		        <div class="form-field">
@@ -40,6 +43,7 @@
 		            </div>
 		            <div class="ml15">
 		                ${h.fields.gender_combobox_field(item.gender if item else None)}
+		                ${h.common.error_container(name='gender')}
 		            </div>
 		        </div>
 				<div class="form-field">
@@ -48,6 +52,7 @@
 				    </div>
 				    <div class="ml15">
 						${h.fields.date_field(item.birthday if item else None, 'birthday')}
+						${h.common.error_container(name='birthday')}
 				    </div>
 				</div>
 				<div class="form-field">
@@ -56,95 +61,17 @@
 					</div>
 					<div class="ml15">
 						${h.fields.status_field(item.resource.status if item else None)}
+						${h.common.error_container(name='status')}
 					</div>
 				</div>
 		    </div>
 		    <div title="${_(u'Contacts')}">
-			    <div class="_container" style="height:270px;">
-			        <table class="easyui-datagrid"
-			            id="contacts-dg"
-			            data-options="
-			                url:'${request.resource_url(_context, 'contacts')}',border:false,
-			                pagination:true,fit:true,pageSize:50,singleSelect:true,
-			                rownumbers:true,sortName:'id',sortOrder:'desc',
-			                pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-			                selectOnCheck:false,toolbar:'#contacts-dg-tb',
-			                onBeforeLoad: function(param){
-			                    param.tid = '${tid}';
-			                    % if item:
-			                    param.person_id = ${item.id};
-			                    % endif
-			                }
-			            " width="100%">
-			            <thead>
-			                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
-			                <th data-options="field:'contact',sortable:true,width:250">${_(u"contact")}</th>
-			                <th data-options="field:'contact_type',sortable:true,width:150">${_(u"type")}</th>
-			            </thead>
-			        </table>
-			    
-			        <div class="datagrid-toolbar" id="contacts-dg-tb">
-			            <div class="actions button-container">
-			                <div class="button-group minor-group">
-			                    <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add_contact', query={'tid': tid})}">
-			                        <span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
-			                    </a>
-			                </div>
-			                <div class="button-group minor-group">
-			                    <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit_contact', query={'tid': tid})}">
-			                        <span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
-			                    </a>
-			                    <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete_contact', query={'tid': tid})}">
-			                        <span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
-			                    </a>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-		        
+		        ${contacts_selector(
+		            values=([contact.id for contact in item.contacts] if item else []),
+		            can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+		        )}
 		    </div>
             <div title="${_(u'Passports')}">
-                <div class="_container" style="height:270px;">
-                    <table class="easyui-datagrid"
-                        id="contacts-dg"
-                        data-options="
-                            url:'${request.resource_url(_context, 'passports')}',border:false,
-                            pagination:true,fit:true,pageSize:50,singleSelect:true,
-                            rownumbers:true,sortName:'id',sortOrder:'desc',
-                            pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-                            selectOnCheck:false,toolbar:'#contacts-dg-tb',
-                            onBeforeLoad: function(param){
-                                param.tid = '${tid}';
-                                % if item:
-                                param.person_id = ${item.id};
-                                % endif
-                            }
-                        " width="100%">
-                        <thead>
-                            <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
-                            <th data-options="field:'contact',sortable:true,width:250">${_(u"contact")}</th>
-                            <th data-options="field:'contact_type',sortable:true,width:150">${_(u"type")}</th>
-                        </thead>
-                    </table>
-                
-                    <div class="datagrid-toolbar" id="contacts-dg-tb">
-                        <div class="actions button-container">
-                            <div class="button-group minor-group">
-                                <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add_contact', query={'tid': tid})}">
-                                    <span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
-                                </a>
-                            </div>
-                            <div class="button-group minor-group">
-                                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit_contact', query={'tid': tid})}">
-                                    <span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
-                                </a>
-                                <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete_contact', query={'tid': tid})}">
-                                    <span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div title="${_(u'Preferences')}">
             </div>

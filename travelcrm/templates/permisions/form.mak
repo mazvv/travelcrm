@@ -23,6 +23,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.permisions_scope_type_field(item.scope_type if item else 'structure', 'scope_type')}
+                ${h.common.error_container(name='scope_type')}
             </div>
         </div>
         <div class="form-field">
@@ -31,6 +32,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.structures_combotree_field(item.structure_id if item else None, name="structure_id")}
+                ${h.common.error_container(name='structure_id')}
             </div>
         </div>
         <div class="form-buttons">

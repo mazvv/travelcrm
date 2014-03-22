@@ -16,6 +16,7 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
     }
 
     _simple_search_fields = [
+        Person.name,
         Person.first_name,
         Person.last_name,
     ]

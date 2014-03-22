@@ -13,6 +13,10 @@ class PositionsQueryBuilder(ResourcesQueryBuilder):
         'position_name': Position.name,
     }
 
+    _simple_search_fields = [
+        Position.name,
+    ]
+
     def __init__(self, context):
         super(PositionsQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(

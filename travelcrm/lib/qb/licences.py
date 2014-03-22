@@ -1,6 +1,9 @@
 # -*coding: utf-8-*-
 
-from collections import OrderedDict
+from collections import (
+    OrderedDict,
+    Iterable
+)
 
 from sqlalchemy.orm import class_mapper
 from sqlalchemy.orm.properties import RelationshipProperty
@@ -47,7 +50,7 @@ class LicencesQueryBuilder(ResourcesQueryBuilder):
             u"Can't find given ref_name %{ref_name}".format(ref_name)
         )
 
-    def filter_id(self, ids):
-        assert isinstance(ids, (str, unicode)) or ids is None
-        if ids:
-            self.query = self.query.filter(Licence.id.in_(ids.split(',')))
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(Licence.id.in_(id))

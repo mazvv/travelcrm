@@ -13,6 +13,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("humanize", item.humanize if item else None, class_="text w20")}
+                ${h.common.error_container(name='humanize')}
             </div>
         </div>
         <div class="form-field">
@@ -21,6 +22,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.common.error_container(name='name')}
             </div>
         </div>
         <div class="form-field">
@@ -29,14 +31,16 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("resource", item.resource_full if item else None, class_="text w20")}
+                ${h.common.error_container(name='resource')}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                 ${h.tags.title(_(u"resource"), False, "resource")}
+                 ${h.tags.title(_(u"description"), False, "description")}
             </div>
             <div class="ml15">
                 ${h.tags.textarea("description", item.description if item else None, class_="text w20", rows=4)}
+                ${h.common.error_container(name='description')}
             </div>
         </div>
         <div class="form-field">
@@ -45,6 +49,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.status_field(item.resource_obj.status if item else None)}
+                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

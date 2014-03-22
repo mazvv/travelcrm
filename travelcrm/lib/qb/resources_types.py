@@ -14,6 +14,11 @@ class ResourcesTypesQueryBuilder(ResourcesQueryBuilder):
         'rt_module': ResourceType.module,
         'rt_description': ResourceType.description,
     }
+    _simple_search_fields = [
+        ResourceType.name,
+        ResourceType.humanize,
+        ResourceType.module,
+    ]
 
     def __init__(self, context):
         super(ResourcesTypesQueryBuilder, self).__init__(context)

@@ -27,7 +27,13 @@ ${h.tags.Doctype().html5()}
             </div>
             <div id="_navigation_">
                 <div class="main">
-                    ${panel('navigation_panel')}
+                    <div class="easyui-panel"
+                        style="background-color: transparent;"
+                        data-options="
+                            href:'/system_navigation',
+                            border:false
+                    ">
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,7 +57,7 @@ ${h.tags.Doctype().html5()}
                     </div>
                 </div>
             </div>
-            <div id="_dialog"></div>
+            <div id="_dialog_"></div>
         </div>
     </body>
 </html>

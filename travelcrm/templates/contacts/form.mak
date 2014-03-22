@@ -9,26 +9,29 @@
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"licence num"), True, "licence_num")}
+                ${h.tags.title(_(u"contact type"), True, "contact_type")}
             </div>
             <div class="ml15">
-                ${h.tags.text("licence_num", item.licence_num if item else None, class_="text w20")}
+                ${h.fields.contact_type_combobox_field(item.contact_type if item else None, 'contact_type')}
+                ${h.common.error_container(name='contact_type')}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"date from"), True, "date_from")}
+                ${h.tags.title(_(u"contact"), True, "contact")}
             </div>
             <div class="ml15">
-                ${h.fields.date_field(item.date_from if item else None, "date_from")}
+                ${h.tags.text("contact", item.contact if item else None, class_="text w20")}
+                ${h.common.error_container(name='contact')}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"date to"), True, "date_to")}
+                ${h.tags.title(_(u"status"), True, "status")}
             </div>
             <div class="ml15">
-                ${h.fields.date_field(item.date_to if item else None, "date_to")}
+                ${h.fields.status_field(item.resource.status if item else None)}
+                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

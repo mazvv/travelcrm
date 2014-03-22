@@ -13,6 +13,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("iso_code", item.iso_code if item else None, class_="text w20")}
+                ${h.common.error_container(name='iso_code')}
             </div>
         </div>
         <div class="form-field">
@@ -21,6 +22,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.common.error_container(name='name')}
             </div>
         </div>
         <div class="form-field">
@@ -29,6 +31,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.status_field(item.resource.status if item else None)}
+                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

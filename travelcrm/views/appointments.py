@@ -9,8 +9,6 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.appointment import Appointment
 from ..models.appointment_row import AppointmentRow
-from ..models.tappointment_row import TAppointmentRow
-from ..models.temporal import Temporal
 
 from ..lib.qb.appointments import (
     AppointmentsQueryBuilder,

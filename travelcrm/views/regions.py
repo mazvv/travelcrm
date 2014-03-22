@@ -41,7 +41,7 @@ class Regions(object):
     def list(self):
         qb = RegionsQueryBuilder(self.context)
         qb.search_simple(
-            self.request.params.get('search'),
+            self.request.params.get('q'),
         )
         qb.sort_query(
             self.request.params.get('sort'),

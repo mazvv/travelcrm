@@ -117,6 +117,10 @@ hr.dashed{
 }
 
 /**jeasyui override **/
+.combo{
+	height: 20px;
+}
+
 .combo-text{
 	outline: none;
 	padding-left: 2px;
@@ -393,7 +397,6 @@ input{
 .datagrid-toolbar{
 	padding: 4px;
 	height: 26px;
-	line-height: 26px;
 }
 
 /** document rows **/
@@ -427,6 +430,10 @@ input{
 	right: 0px;
 }
 
+/** buttons **/
+.button .fa{
+	margin-right: 4px;
+}
 
 /** fields **/
 span.field-actions{

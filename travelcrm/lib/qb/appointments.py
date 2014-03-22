@@ -14,7 +14,6 @@ from ...models.position import Position
 from ...models.structure import Structure
 from ...models.appointment import Appointment
 from ...models.appointment_row import AppointmentRow
-from ...models.tappointment_row import TAppointmentRow
 
 
 class AppointmentsQueryBuilder(ResourcesQueryBuilder):
@@ -78,31 +77,3 @@ class AppointmentsRowsQueryBuilder(GeneralQueryBuilder):
             .join(Position, AppointmentRow.position)
             .join(Structure, Position.structure)
         )
-
-    def union_temporal(self, temporal_id, appointment_id):
-        fields = self._fields.copy()
-        fields['id'] = -TAppointmentRow.id
-        fields['_id'] = TAppointmentRow.id
-
-        fields = GeneralQueryBuilder.get_fields_with_labels(fields)
-
-        subq = DBSession.query(TAppointmentRow.main_id)
-        subq = subq.filter(
-            TAppointmentRow.temporal_id == temporal_id,
-            TAppointmentRow.main_id != None
-        )
-        subq = subq.subquery()
-
-        self.query = self.query.filter(
-            AppointmentRow.appointment_id == appointment_id,
-            ~ AppointmentRow.id.in_(subq)
-        )
-        union_query = (
-            DBSession.query(*fields)
-            .join(Employee, TAppointmentRow.employee)
-            .join(Position, TAppointmentRow.position)
-            .join(Structure, Position.structure)
-            .filter(TAppointmentRow.temporal_id == temporal_id)
-            .filter(TAppointmentRow.deleted == False)
-        )
-        self.query = self.query.union(union_query)

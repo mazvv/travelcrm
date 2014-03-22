@@ -14,6 +14,10 @@ class PermisionsQueryBuilder(ResourcesQueryBuilder):
         'rt_humanize': ResourceType.humanize,
     }
 
+    _simple_search_fields = [
+        ResourceType.humanize,
+    ]
+
     def __init__(self, position_id):
         super(PermisionsQueryBuilder, self).__init__()
         subq = (

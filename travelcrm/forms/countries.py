@@ -8,9 +8,9 @@ from . import ResourceSchema
 class CountrySchema(ResourceSchema):
     iso_code = colander.SchemaNode(
         colander.String(),
-        validator=colander.Length(max=2),
+        validator=colander.Length(min=2, max=2),
     )
     name = colander.SchemaNode(
         colander.String(),
-        validator=colander.Length(max=32),
+        validator=colander.Length(min=2, max=32),
     )

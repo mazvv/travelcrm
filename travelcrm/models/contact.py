@@ -23,6 +23,17 @@ class Contact(Base):
         autoincrement=True,
         primary_key=True
     )
+    resource_id = Column(
+        Integer,
+        ForeignKey(
+            'resource.id',
+            name="fk_resource_id_contact",
+            ondelete='cascade',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
     contact_type = Column(
         ENUM(
             u'phone', u'email', u'skype',
@@ -33,6 +44,12 @@ class Contact(Base):
     contact = Column(
         String,
         nullable=False,
+    )
+    resource = relationship(
+        'Resource',
+        backref=backref('contact', uselist=False, cascade="all,delete"),
+        cascade="all,delete",
+        uselist=False,
     )
 
     @classmethod

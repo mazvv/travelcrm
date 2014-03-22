@@ -40,6 +40,9 @@ class Currencies(object):
     )
     def list(self):
         qb = CurrenciesQueryBuilder(self.context)
+        qb.search_simple(
+            self.request.params.get('q'),
+        )
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -132,7 +135,7 @@ class Currencies(object):
     )
     def delete(self):
         return {
-            'rid': self.request.params.get('rid')
+            'id': self.request.params.get('id')
         }
 
     @view_config(
