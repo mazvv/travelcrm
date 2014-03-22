@@ -22,10 +22,9 @@
 <%def name="navigation(navigation)">
     <%def name="navigation_item(item, key)">
         % if navigation.get(item.id) is None:
-            <a href="#" class="${'easyui-linkbutton' if not item.parent_id else 'easyui-menubutton'} _tab_open"
+            <a href="#" class="${'easyui-linkbutton' if not item.parent_id else 'easyui-menubutton'} _action"
                 id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
-                data-url="${item.url}" data-index="${item.url}" 
-                data-title="${item.name}" data-options="plain:true">
+                data-options="plain:true,action:'tab_open',url:'${item.url}',title:'${item.name}'">
                 % if key:
                     ${item.name}
                 % else:
@@ -33,10 +32,9 @@
                 % endif
             </a>            
         % else:
-            <a href="#" class="easyui-menubutton _tab_open" 
+            <a href="#" class="easyui-menubutton _action" 
                 id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
-                data-options="menu:'${'#_navigation_submenu_%d' % item.id}'"
-                data-url="${item.url}" data-index="${item.url}" data-title="${item.name}">
+                data-options="menu:'${'#_navigation_submenu_%d' % item.id}',action:'tab_open',url:'${item.url}',title:'${item.name}'">
                 % if key:
                     ${item.name}
                 % else:

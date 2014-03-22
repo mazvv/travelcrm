@@ -82,3 +82,10 @@ class Root(SecuredBase):
 
     def __init__(self, request):
         self.request = request
+
+    @property
+    def allowed_permisions(self):
+        _ = self.request.translate
+        return [
+            ('view', _(u'view')),
+        ]

@@ -54,7 +54,7 @@ class BPerson(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_person",
+            name="fk_resource_id_bperson",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,

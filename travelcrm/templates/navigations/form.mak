@@ -13,6 +13,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.common.error_container(name='name')}
             </div>
         </div>
         <div class="form-field">
@@ -21,6 +22,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.navigations_combotree_field(position.id, item.parent_id if item else None)}
+                ${h.common.error_container(name='parent_id')}
             </div>
         </div>
         <div class="form-field">
@@ -29,6 +31,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("url", item.url if item else None, class_="text w20")}
+                ${h.common.error_container(name='url')}
             </div>
         </div>
         <div class="form-field">
@@ -37,6 +40,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("icon_cls", item.icon_cls if item else None, class_="text w20")}
+                ${h.common.error_container(name='icon_cls')}
             </div>
         </div>
         <div class="form-field">
@@ -45,6 +49,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.status_field(item.resource.status if item else None)}
+                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

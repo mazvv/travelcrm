@@ -23,11 +23,27 @@ def get_package_version(package_name):
 
 def error_container(name):
     return HTML.tag(
-        'span', 
-        class_='error fa fa-exclamation-circle hidden', 
+        'span',
+        class_='error fa fa-exclamation-circle hidden',
         **{'data-name': name}
     )
 
 
 def gen_id(prefix=u'obj', limit=6):
     return u_gen_id(prefix, limit)
+
+
+def button(context, permision, caption, **kwargs):
+    html = ''
+    if context.has_permision(permision):
+        caption = HTML.tag('span', c=caption)
+        icon = ''
+        if 'icon' in kwargs:
+            icon = HTML.tag('span', class_=kwargs.pop('icon'))
+        button_class = "button _action " + kwargs.pop('class', '')
+        button_class = button_class.strip()
+        html = HTML.tag(
+            'a', class_=button_class,
+            c=HTML(icon, caption), **kwargs
+        )
+    return html

@@ -1,3 +1,7 @@
+<%
+    _id = h.common.gen_id()
+    _tb_id = "tb-%s" % _id
+%>
 <div class="dl60 easyui-dialog _container"
     data-options="
         border:false,
@@ -6,14 +10,15 @@
         iconCls:'fa fa-table'
     "
     title="${_(u'Position Navigations')} | ${position.name}">
-    <table class="easyui-treegrid" id="navigations-dg"
+    <table class="easyui-treegrid" 
+        id="${_id}"
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
-            rownumbers:true,iconCls:'fa fa-table',sortName:'sort_order',sortOrder:'asc',
+            rownumbers:true,sortName:'sort_order',sortOrder:'asc',
             pageList:[50,100,500],idField:'_id',treeField:'name',
-            checkOnSelect:false,selectOnCheck:false,toolbar:'#navigations-dg-tb',
-            onBeforeLoad:function(row, param){
+            checkOnSelect:false,selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(node, param){
                 param.position_id = ${position.id};
             }
         " width="100%">
@@ -28,31 +33,40 @@
         </thead>
     </table>
 
-    <div class="datagrid-toolbar" id="navigations-dg-tb">
+    <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container">
-            <a href="#" class="button primary _dialog_open" data-url="${request.resource_url(_context, 'add', query={'position_id': position.id})}">
-                <span class="fa fa-plus"></span> <span>${_(u"Add New")}</span>
+            % if _context.has_permision('add'):
+            <a id="btn" href="#" class="button primary _action" 
+                data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add', query={'position_id': position.id})}'">
+                <span class="fa fa-plus"></span>${_(u'Add New')}
             </a>
+            % endif
             <div class="button-group">
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'edit')}">
-                    <span class="fa fa-pencil"></span> <span>${_(u"Edit")}</span>
+                % if _context.has_permision('edit'):
+                <a id="btn" href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
+                    <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
-                <a href="#" class="button _dialog_open _with_row" data-url="${request.resource_url(_context, 'company_structure', 'copy')}">
-                    <span class="fa fa-copy"></span> <span>${_(u"Copy")}</span>
+                <a id="btn" href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'copy')}'">
+                    <span class="fa fa-copy"></span>${_(u'Copy')}
                 </a>
-                <a href="#" class="button danger _dialog_open _with_rows" data-url="${request.resource_url(_context, 'delete')}">
-                    <span class="fa fa-times"></span> <span>${_(u"Delete")}</span>
+                <a id="btn" href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'up')}'">
+                    <span class="fa fa-arrow-up"></span>${_(u'Up')}
                 </a>
-            </div>
-            <div class="button-group">
-                <a href="#" class="button _action _with_row" data-url="${request.resource_url(_context, 'up')}">
-                    <span class="fa fa-arrow-up"></span> <span>${_(u"Up")}</span>
+                <a id="btn" href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'down')}'">
+                    <span class="fa fa-arrow-down"></span>${_(u'Down')}
                 </a>
-                <a href="#" class="button _action _with_row" data-url="${request.resource_url(_context, 'down')}">
-                    <span class="fa fa-arrow-down"></span> <span>${_(u"Down")}</span>
+                % endif
+                % if _context.has_permision('delete'):
+                <a id="btn" href="#" class="button danger _action" 
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
+                    <span class="fa fa-times"></span>${_(u'Delete')}
                 </a>
+                % endif
             </div>
         </div>
     </div>
-
 </div>

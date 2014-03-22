@@ -1,17 +1,17 @@
-/**
-Rules:
-
-Containers
-----------
-1. ID must begins with cont
-**/
-
 var containers = Array();
 
-function add_container(obj){
-	var container = obj.closest('._container');
-	containers.push(container);
+function add_container(options){
+	if(options.container){
+		containers.push(options.container)
+	}
 	return; 
+}
+
+function get_container(){
+	if(containers.length > 0){
+		return containers[containers.length - 1]
+	}
+	return null;
 }
 
 function delete_container(){
@@ -22,19 +22,20 @@ function delete_container(){
 function refresh_container(container){
 	if(!container)
 		container = containers.pop();
-	var container_type = get_container_type(container)
+	var container = $(container);
+	var container_type = get_container_type($(container));
 	switch(container_type){
 		case('datagrid'):
-			container.find('.easyui-datagrid').datagrid('reload');
+			container.datagrid('reload');
 			break;
 		case ('treegrid'):
-			container.find('.easyui-treegrid').treegrid('reload');
+			container.treegrid('reload');
 		    break;
 		case('combobox'):
-		    container.find('.easyui-combobox').combobox('reload');
+		    container.combobox('reload');
             break;
 		case('combogrid'):
-		    container.find('.easyui-combogrid').combogrid('reload');
+		    container.combogrid('reload');
             break;
 	}
 
@@ -151,168 +152,150 @@ function datagrid_resource_cell_styler(){
     return 'background-color:#ededed';
 }
 
-function open_dialog(url){
-	$('#_dialog').load(url,
-		function(data){
-			$('#_dialog').html(data);
-			$.parser.parse('#_dialog');
-		}
-	);
+$(document).on("click", '._action', function(event){
+    event.preventDefault();
+	var options = $.parser.parseOptions(this);
+
+	switch(options.action){
+		case('tab_open'):
+		    tab_open(options);
+		    break;
+		case('dialog_open'):
+		    dialog_open(options);
+		    break;
+		case('refresh'):
+		    add_container(options);
+		    refresh_container(null);
+		    break;
+		case('container_action'):
+		    container_action(options);
+		    break;
+	}
+});
+
+function container_action(options){
+	add_container(options);
+	var url = get_action_url(options);
+	$.post(url).always(function(){refresh_container(null);});
 }
 
-$(document).on("click", '._tab_open', function(event){
-	event.preventDefault();
-	var url = $(this).data('url');
-	var title = $(this).data('title');
+function tab_open(options){
+	var url = options.url;
+	var title = options.title;
 	var main_tabs = $('#_tabs_');
 	if(main_tabs.tabs('exists', title)){
 		main_tabs.tabs('select', title);
 	} else {
 		main_tabs.tabs('add', {
-			title: title, 
+			title: title,
 			selected: true,
 			closable: true,
 			href: url,
 		});
-		var tab = main_tabs.tabs('getTab', title);
-		var container = tab.find('._container');
-		$('<div id="_dialog_' + main_tabs.tabs('getTabIndex', tab) + '_"></div>').appendTo(container);
 	}
-});
+}
 
-$(document).on("click", '._dialog_open', function(event){
-    event.preventDefault();
-    var url = $(this).data('url');
-    var param_name = ($(this).data('param-name'))?$(this).data('param-name'):'id';
-    var container = $(this).closest('._container');
-    if($(this).hasClass('_with_row')){
-    	var row = get_selected(container, get_container_type(container))
-    	if(!row) {
-    		open_dialog('/system_need_select_row');
-    		return;
-    	}
-    	if(url.indexOf('?') == -1) url = url + '?' + param_name + '=' + row[param_name];
-    	else url = url + '&' + param_name + '=' + row[param_name];
-    } else if($(this).hasClass('_with_rows')){
-    	var rows = get_checked(container, get_container_type(container))
-		if(rows.length>0){
+function dialog_open(options){
+	add_container(options);
+	var url = get_action_url(options);
+	_dialog_open(url);
+}
+
+function get_action_url(options){
+	var container = $(get_container());
+	var url = options.url;
+    var param_name = options.param?options.param:'id';
+	switch(options.property){
+		case('with_row'):
+		    var row = get_selected(container);
+    	    if(!row) {
+    		    _dialog_open('/system_need_select_row');
+    		    return;
+    	    }
+    	    if(url.indexOf('?') == -1) url = url + '?' + param_name + '=' + row[param_name];
+    	    else url = url + '&' + param_name + '=' + row[param_name];
+		    break;
+		case('with_rows'):
+		    var rows = get_checked(container);
+	 	    if(!rows.length){
+			    _dialog_open('/system_need_select_rows');
+				return;
+		    }
 		    var params = Array();
 		    $.each(rows, function(i, row){params.push(row[param_name]);});
 	    	if(url.indexOf('?') == -1) url = url + '?' + param_name + '=' + params.join();
 	    	else url = url + '&' + param_name + '=' + params.join();
-		} else {
-		    open_dialog('/system_need_select_rows');
-	    	    return;
-		}
-    }
-    open_dialog(url);
-    add_container($(this));
-});
-
-function get_selected(container, container_type){
-	if(container_type == 'datagrid')
-		return container.find('.easyui-datagrid').datagrid('getSelected');
-	if(container_type == 'treegrid')
-		return container.find('.easyui-treegrid').treegrid('getSelected');
-	return null;
-}
-
-function get_checked(container, container_type){
-    switch(container_type){
-		case('datagrid'):
-		    return container.find('.easyui-datagrid').datagrid('getChecked');
-		case('treegrid'):
-		    return container.find('.easyui-treegrid').treegrid('getChecked');
-		default:
-		    return null;
+		    break;
 	}
-	return null;
+	return url;
 }
 
-function get_current_container(){
-    if(containers.length > 0)
-	return containers[containers.length - 1];
-    return null;
+function get_selected(container){
+	var container_type = get_container_type(container);
+	var row = null;
+	switch(container_type){
+		case('datagrid'):
+		    row = container.datagrid('getSelected');
+		    break;
+		case('treegrid'):
+		    row = container.treegrid('getSelected');
+		    break;
+	}
+	return row;
+}
+
+function get_checked(container){
+	var container_type = get_container_type(container);
+	var rows = null;
+	switch(container_type){
+		case('datagrid'):
+		    rows = container.datagrid('getChecked');
+		    break;
+		case('treegrid'):
+		    rows = container.treegrid('getChecked');
+		    break;
+	}
+	return rows;
 }
 
 function get_container_type(container){
 	var container_type = null;
-	if(container.find('.easyui-datagrid').length > 0) container_type = 'datagrid';
-	else if(container.find('.easyui-treegrid').length > 0) container_type = 'treegrid';
-	else if(container.find('.easyui-combobox').length > 0) container_type = 'combobox';
-	else if(container.find('.easyui-combotree').length > 0) container_type = 'combotree';
-	else if(container.find('.easyui-combogrid').length > 0) container_type = 'combogrid';
+	if(container.hasClass('easyui-datagrid')) container_type = 'datagrid';
+	else if(container.hasClass('easyui-treegrid')) container_type = 'treegrid';
+	else if(container.hasClass('easyui-combobox')) container_type = 'combobox';
+	else if(container.hasClass('easyui-combotree')) container_type = 'combotree';
+	else if(container.hasClass('easyui-combogrid')) container_type = 'combogrid';
 	return container_type;
 }
 
-$(document).on("click", '._action', function(event){
-    event.preventDefault();
-    var url = $(this).data('url');
-    var container = $(this).closest('._container');
-    var params = {}
-    if($(this).hasClass('_with_row')){
-    	var row = get_selected(container, get_container_type(container))
-    	if(!row) {
-    		open_dialog('/system_need_select_row');
-    		return;
-    	}
-    	params['id'] = row.id
-    } else if($(this).hasClass('_with_rows')){
-    	var rows = get_checked(container, get_container_type(container))
-		if(rows.length > 0){
-		    var ids = Array();
-		    $.each(rows, function(i, row){ids.push(row.id);});
-			params['id'] = ids.join();
-		} else {
-		    open_dialog('/system_need_select_rows');
-	    	    return;
+function _dialog_open(url){
+	$('#_dialog_').load(url,
+		function(data){
+			$('#_dialog_').html(data);
+			$.parser.parse('#_dialog_');
 		}
-    }
-    add_container(container);
-    $.post(url, params).always(function(){refresh_container(null);});
-});
+	);
+}
 
-$(document).on('keyup', '._searchbox', function(e){
-    if(e.keyCode == 13){
-    	var container = $(this).closest('._container');
-    	refresh_container(container);
-    	return;
-    }
-});
+function is_int(val){
+	var intRegex = /^\d+$/;
+	if(intRegex.test(val)) return true;
+	return false;
+}
 
-$(document).on('click', '.searchbar ._runsearch', function(e){
-	var container = $(this).closest('._container');
-	refresh_container(container);
-	return;
-});
-
-$(document).on('click', '._clearfield', function(event){
-	event.preventDefault();
-	var container = $(this).closest('._container');
-	var container_type = get_container_type(container);
-	if(container_type == 'combobox'){
-		container.find('.easyui-combobox').combobox('clear');
+function format_contact_type(value){
+	var span = $('<span class="fa">');
+	switch(value){
+		case('phone'):
+		    span.addClass('fa-phone');
+		    break;
+		case('email'):
+		    span.addClass('fa-envelope');
+		    break; 
+		case('skype'):
+		    span.addClass('fa-skype');
+		    break; 
 	}
-});
-
-$(document).on('click', '._accumulator', function(event){
-	event.preventDefault();
-	var container = $(this).closest('._container');
-	var container_type = get_container_type(container);
-	if(container_type == 'combobox'){
-		var name = container.find('.easyui-combobox').data('name');
-		var val = container.find('.easyui-combobox').combobox('getValue');
-		if(val){
-			var inputs = container.find('input[name=' + name + '][value=' + val + ']');
-			if(!inputs.length){
-				var input = $('<input type="hidden">');
-				input.attr('name', name);
-				input.val(val);
-				container.append(input);
-				var parent_container = container.parent().closest('._container');
-				refresh_container(parent_container);
-			}
-			container.find('.easyui-combobox').combobox('clear');
-		}
-	}
-});
+	span = $('<div>').append(span);
+	return span.html();
+}

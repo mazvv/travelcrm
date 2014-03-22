@@ -1,12 +1,13 @@
 # -*coding: utf-8-*-
 
+from collections import Iterable
+
 from . import ResourcesQueryBuilder
 from .contacts import ContactsQueryBuilder
 
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.bperson import BPerson
-from ...models.tbperson import TBPerson
 from ...models.contact import Contact
 
 
@@ -32,41 +33,7 @@ class BPersonsQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.join(BPerson, Resource.bperson)
         self.query = self.query.add_columns(*fields)
 
-    def filter_relation(self, relation_id):
-        raise NotImplementedError()
-
-    def union_temporal(self, temporal_id, relation_id):
-        fields = self._fields.copy()
-        fields['id'] = -BPerson.id
-        fields['_id'] = BPerson.id
-        fields['name'] = BPerson.name
-        fields['position_name'] = BPerson.position_name
-
-        fields = ResourcesQueryBuilder.get_fields_with_labels(fields)
-
-        subq = DBSession.query(TBPerson.main_id)
-        subq = subq.filter(
-            TBPerson.temporal_id == temporal_id,
-            TBPerson.main_id != None
-        )
-        subq = subq.subquery()
-
-        self.filter_relation(relation_id)
-        self.query = self.query.filter(~BPerson.id.in_(subq))
-        union_query = (
-            DBSession.query(*fields)
-            .join(TBPerson, BPerson.temporals)
-            .filter(TBPerson.temporal_id == temporal_id)
-            .filter(TBPerson.deleted == False)
-        )
-        self.query = self.query.union(union_query)
-
-
-class BPersonsContactsQueryBuilder(ContactsQueryBuilder):
-
-    def filter_relation(self, bperson_id):
-        self.query = (
-            self.query
-            .join(BPerson, Contact.bperson)
-            .filter(BPerson.id == bperson_id)
-        )
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(BPerson.id.in_(id))

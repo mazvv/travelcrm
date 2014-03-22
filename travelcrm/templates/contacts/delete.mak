@@ -1,17 +1,14 @@
 <div class="dl40 easyui-dialog"
-    title="${_(u'Delete Licence')}"
+    title="${_(u'Delete Licences')}"
     data-options="
         modal:true,
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.resource_url(_context, 'delete_bperson'), class_="_ajax", autocomplete="off", hidden_fields=[('id', id) for id in request.params.get('id').split(',')])}
-        ${h.tags.hidden('tid', tid)}
+    ${h.tags.form(request.resource_url(_context, 'delete'), class_="_ajax", autocomplete="off", hidden_fields=[('id', id) for id in request.params.get('id').split(',')])}
         <div class="p1">
-            <div class="mb1">
-                <i class="fa fa-info-circle fa-lg"></i> 
-                ${_(u"Do you realy want to delete checked items?")}
-            </div>
+	        <i class="fa fa-info-circle fa-lg"></i> 
+	        ${_(u"Do you realy want to delete checked items?")}
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>

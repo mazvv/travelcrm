@@ -13,11 +13,13 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.common.error_container(name='name')}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"status"), True, "status")}
+                ${h.common.error_container(name='status')}
             </div>
             <div class="ml15">
                 ${h.fields.status_field(item.resource.status if item else None)}

@@ -12,6 +12,10 @@ class CurrenciesQueryBuilder(ResourcesQueryBuilder):
         'iso_code': Currency.iso_code,
     }
 
+    _simple_search_fields = [
+        Currency.iso_code,
+    ]
+
     def __init__(self, context):
         super(CurrenciesQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(

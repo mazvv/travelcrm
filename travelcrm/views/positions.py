@@ -39,6 +39,9 @@ class Positions(object):
     )
     def list(self):
         qb = PositionsQueryBuilder(self.context)
+        qb.search_simple(
+            self.request.params.get('q'),
+        )
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -115,13 +118,12 @@ class Positions(object):
     def _edit(self):
         _ = self.request.translate
         schema = PositionSchema().bind(request=self.request)
-        structure = Structure.get(self.request.params.get('id'))
+        position = Position.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            structure.name = controls.get('name')
-            structure.companies_id = controls.get('companies_id')
-            structure.parent_id = controls.get('parent_id'),
-            company_struct.resource.status = controls.get('status')
+            position.name = controls.get('name')
+            position.structure_id = controls.get('structure_id')
+            position.resource.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -138,12 +140,10 @@ class Positions(object):
     )
     def copy(self):
         _ = self.request.translate
-        struct = Structure.get(self.request.params.get('id'))
-        company = struct.company
+        position = Position.get(self.request.params.get('id'))
         return {
-            'title': _(u"Copy Company Structure"),
-            'item': struct,
-            'company': company
+            'title': _(u"Copy Company Position"),
+            'item': position,
         }
 
     @view_config(
@@ -168,7 +168,7 @@ class Positions(object):
     def _delete(self):
         _ = self.request.translate
         for id in self.request.params.getall('id'):
-            company_position = Position.get(id)
-            if company_position:
-                DBSession.delete(company_position)
+            position = Position.get(id)
+            if position:
+                DBSession.delete(position)
         return {'success_message': _(u'Deleted')}

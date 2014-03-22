@@ -19,10 +19,7 @@ def contact_validator(node, kw):
     return colander.All(*validators)
 
 
-class TContactSchema(colander.Schema):
-    tid = colander.SchemaNode(
-        colander.Integer(),
-    )
+class ContactSchema(colander.Schema):
     contact_type = colander.SchemaNode(
         colander.String(),
         validators=colander.OneOf([u'phone', u'email', u'skype'])

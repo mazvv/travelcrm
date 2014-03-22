@@ -13,6 +13,7 @@
             </div>
             <div class="ml15">
                 ${h.tags.text("licence_num", item.licence_num if item else None, class_="text w20")}
+                ${h.common.error_container(name='licence_num')}
             </div>
         </div>
         <div class="form-field">
@@ -21,6 +22,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.date_field(item.date_from if item else None, "date_from")}
+                ${h.common.error_container(name='date_from')}
             </div>
         </div>
         <div class="form-field">
@@ -29,6 +31,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.date_field(item.date_to if item else None, "date_to")}
+                ${h.common.error_container(name='date_to')}
             </div>
         </div>
         <div class="form-field">
@@ -37,6 +40,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.status_field(item.resource.status if item else None)}
+                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">
