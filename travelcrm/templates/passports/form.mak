@@ -1,0 +1,72 @@
+<div class="dl40 easyui-dialog"
+    title="${title}"
+    data-options="
+        modal:true,
+        draggable:false,
+        resizable:false,
+        iconCls:'fa fa-pencil-square-o'
+    ">
+    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"passport type"), True, "passport type")}
+            </div>
+            <div class="ml15">
+                ${h.fields.passport_type_field(request, item.passport_type if item else None)}
+                ${h.common.error_container(name='passport_type')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"passport num"), True, "num")}
+            </div>
+            <div class="ml15">
+                ${h.tags.text("num", item.num if item else None, class_="text w20")}
+                ${h.common.error_container(name='num')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"country"), True, "country")}
+            </div>
+            <div class="ml15">
+                ${h.fields.countries_combobox_field(request, item.country_id if item else None)}
+                ${h.common.error_container(name='country_id')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"end date"), False, "end_date")}
+            </div>
+            <div class="ml15">
+                ${h.fields.date_field(item.end_date if item else None, "end_date")}
+                ${h.common.error_container(name='end_date')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"description"), False, "descr")}
+            </div>
+            <div class="ml15">
+                ${h.tags.textarea('descr', item.descr if item else None, class_="text w20", rows=5)}
+                ${h.common.error_container(name='descr')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"status"), True, "status")}
+            </div>
+            <div class="ml15">
+                ${h.fields.status_field(item.resource.status if item else None)}
+                ${h.common.error_container(name='status')}
+            </div>
+        </div>
+        <div class="form-buttons">
+            <div class="dl20 status-bar"></div>
+            <div class="ml20 tr button-group">
+                ${h.tags.submit('save', _(u"Save"), class_="button")}
+                ${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
+            </div>
+        </div>
+    ${h.tags.end_form()}
+</div>
