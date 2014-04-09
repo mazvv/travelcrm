@@ -44,6 +44,12 @@ class BPersons(object):
         qb.search_simple(
             self.request.params.get('q'),
         )
+        qb.advanced_search(
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
+            status=self.request.params.get('status'),
+        )
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
@@ -104,7 +110,11 @@ class BPersons(object):
                     .all()
                 )
             DBSession.add(bperson)
-            return {'success_message': _(u'Saved')}
+            DBSession.flush()
+            return {
+                'success_message': _(u'Saved'),
+                'response': bperson.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),
@@ -156,7 +166,10 @@ class BPersons(object):
                 )
             else:
                 bperson.contacts = []
-            return {'success_message': _(u'Saved')}
+            return {
+                'success_message': _(u'Saved'),
+                'response': bperson.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

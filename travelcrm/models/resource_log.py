@@ -100,6 +100,7 @@ class ResourceLog(Base):
                 cls.resource_id.label('id'),
                 cls.modifydt,
                 Employee.name.label('modifier'),
+                Employee.id.label('modifier_id'),
             )
             .join(Employee, cls.modifier)
             .filter(cls.id.in_(max_entries_subquery))

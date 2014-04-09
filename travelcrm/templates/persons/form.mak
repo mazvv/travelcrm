@@ -1,5 +1,7 @@
 <%namespace file="../common/grid_selectors.mak" import="contacts_selector"/>
-<div class="dl50 easyui-dialog"
+<%namespace file="../common/grid_selectors.mak" import="passports_selector"/>
+<%namespace file="../common/grid_selectors.mak" import="addresses_selector"/>
+<div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -72,6 +74,16 @@
 		        )}
 		    </div>
             <div title="${_(u'Passports')}">
+		        ${passports_selector(
+		            values=([passport.id for passport in item.passports] if item else []),
+		            can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+		        )}
+            </div>
+            <div title="${_(u'Addresses')}">
+                ${addresses_selector(
+                    values=([address.id for address in item.addresses] if item else []),
+                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+                )}
             </div>
             <div title="${_(u'Preferences')}">
             </div>

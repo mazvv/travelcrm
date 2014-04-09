@@ -34,6 +34,21 @@ class Location(Base):
         ),
         nullable=False,
     )
+    region_id = Column(
+        Integer(),
+        ForeignKey(
+            'region.id',
+            name='fk_region_id_location',
+            onupdate='cascade',
+            ondelete='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
+    name = Column(
+        String(length=32),
+        nullable=False
+    )
 
     resource = relationship(
         'Resource',
@@ -41,10 +56,16 @@ class Location(Base):
         cascade="all,delete",
         uselist=False,
     )
-
-    @hybrid_property
-    def name(self):
-        return self.last_name + " " + self.first_name
+    region = relationship(
+        'Region',
+        backref=backref(
+            'locations',
+            uselist=True,
+            cascade='all,delete',
+            lazy="dynamic"
+        ),
+        uselist=False
+    )
 
     @classmethod
     def get(cls, id):

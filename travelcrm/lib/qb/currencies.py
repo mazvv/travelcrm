@@ -1,4 +1,5 @@
 # -*coding: utf-8-*-
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
@@ -25,5 +26,6 @@ class CurrenciesQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.add_columns(*fields)
 
     def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
-            self.query = self.query.filter(Currency.id == id)
+            self.query = self.query.filter(Currency.id.in_(id))

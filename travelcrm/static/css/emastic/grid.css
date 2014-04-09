@@ -21,7 +21,8 @@ width:70em;margin:0 auto;text-align:left;  }
 .dl60,
 .dl65,
 .dl70,
-.dl75{float:left; display: inline; }
+.dl75
+.dl80{float:left; display: inline; }
 
 .dr1,
 .dr2,
@@ -59,6 +60,7 @@ width:70em;margin:0 auto;text-align:left;  }
 .dl65, .dr65{width:65em;}
 .dl70, .dr70{width:70em;}
 .dl75, .dr75{width:75em;}
+.dl80, .dr80{width:80em;}
 
 
 .ml5{margin-left:5em;}

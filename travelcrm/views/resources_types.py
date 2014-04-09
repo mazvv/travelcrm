@@ -43,6 +43,15 @@ class ResourcesTypes(object):
         qb.search_simple(
             self.request.params.get('q')
         )
+        qb.advanced_search(
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
+            status=self.request.params.get('status'),
+        )
+        id = self.request.params.get('id')
+        if id:
+            qb.filter_id(id.split(','))
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -91,7 +100,11 @@ class ResourcesTypes(object):
                 )
             )
             DBSession.add(resource_type)
-            return {'success_message': _(u'Saved')}
+            DBSession.flush()
+            return {
+                'success_message': _(u'Saved'),
+                'response': resource_type.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),
@@ -131,7 +144,10 @@ class ResourcesTypes(object):
             resources_type.resource = controls.get('resource')
             resources_type.description = controls.get('description')
             resources_type.resource_obj.status = controls.get('status')
-            return {'success_message': _(u'Saved')}
+            return {
+                'success_message': _(u'Saved'),
+                'response': resources_type.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

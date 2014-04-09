@@ -82,7 +82,6 @@ class Licences(object):
     def _add(self):
         _ = self.request.translate
         schema = LicenceSchema().bind(request=self.request)
-
         try:
             controls = schema.deserialize(self.request.params)
             licence = Licence(
@@ -92,8 +91,10 @@ class Licences(object):
                 resource=self.context.create_resource(controls.get('status'))
             )
             DBSession.add(licence)
+            DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
+                'response': licence.id
             }
         except colander.Invalid, e:
             return {
@@ -133,7 +134,10 @@ class Licences(object):
             licence.date_from = controls.get('date_from')
             licence.date_to = controls.get('date_to')
             licence.resource.status = controls.get('status')
-            return {'success_message': _(u'Saved')}
+            return {
+                'success_message': _(u'Saved'),
+                'response': licence.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

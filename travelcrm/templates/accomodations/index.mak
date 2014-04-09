@@ -2,6 +2,7 @@
 <%
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
+    _s_id = "s-%s" % _id
 %>
 <div class="easyui-panel unselectable"
     data-options="
@@ -60,7 +61,37 @@
             </div>
         </div>
         <div class="ml45 tr">
-            ${searchbar(_id)}
+            ${searchbar(_id, _s_id, advanced_search)}
         </div>
     </div>
 </div>
+
+
+<%def name="advanced_search(id)">
+    <div class="advanced-search tl" id = "${id}">
+        <div>
+            ${h.tags.title(_(u"updated"))}
+        </div>
+        <div>
+            ${h.fields.date_field(None, "updated_from")}
+            <span class="p1">-</span>
+            ${h.fields.date_field(None, "updated_to")}
+        </div>
+        <div class="mt05">
+            ${h.tags.title(_(u"modifier"))}
+        </div>
+        <div>
+            ${h.fields.employees_combobox_field(request, None, 'modifier_id')}
+        </div>
+        <div class="mt05">
+            ${h.tags.title(_(u"status"))}
+        </div>
+        <div>
+            ${h.fields.status_field(None)}
+        </div>
+        <div class="ml20 tr button-group minor-group mt1">
+            <a href="#" class="button _advanced_search_submit">${_(u"Find")}</a>
+            <a href="#" class="button danger _advanced_search_clear">${_(u"Clear")}</a>
+        </div>
+    </div>
+</%def>

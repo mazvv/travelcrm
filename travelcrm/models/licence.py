@@ -27,7 +27,7 @@ class Licence(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_hotelcat",
+            name="fk_resource_id_licence",
             ondelete='cascade',
             onupdate='cascade',
             use_alter=True,

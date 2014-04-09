@@ -42,6 +42,15 @@ class Positions(object):
         qb.search_simple(
             self.request.params.get('q'),
         )
+        qb.advanced_search(
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
+            status=self.request.params.get('status'),
+        )
+        id = self.request.params.get('id')
+        if id:
+            qb.filter_id(id.split(','))
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -86,7 +95,11 @@ class Positions(object):
                 resource=self.context.create_resource(controls.get('status'))
             )
             DBSession.add(position)
-            return {'success_message': _(u'Saved')}
+            DBSession.flush()
+            return {
+                'success_message': _(u'Saved'),
+                'response': position.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),
@@ -124,7 +137,10 @@ class Positions(object):
             position.name = controls.get('name')
             position.structure_id = controls.get('structure_id')
             position.resource.status = controls.get('status')
-            return {'success_message': _(u'Saved')}
+            return {
+                'success_message': _(u'Saved'),
+                'response': position.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

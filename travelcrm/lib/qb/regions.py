@@ -1,4 +1,5 @@
 # -*coding: utf-8-*-
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
@@ -11,7 +12,8 @@ class RegionsQueryBuilder(ResourcesQueryBuilder):
         'id': Region.id,
         '_id': Region.id,
         'region_name': Region.name,
-        'country_name': Country.name
+        'country_name': Country.name,
+        'full_region_name': Region.name + ' (' + Country.name + ')'
     }
     _simple_search_fields = [
         Region.name,
@@ -26,3 +28,8 @@ class RegionsQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.join(Region, Resource.region)
         self.query = self.query.join(Country, Region.country)
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(Region.id.in_(id))

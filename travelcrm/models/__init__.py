@@ -46,3 +46,8 @@ from foodcat import Foodcat
 from bperson import BPerson
 from touroperator import Touroperator
 from licence import Licence
+from passport import Passport
+from hotel import Hotel
+from tour import Tour
+from tour_point import TourPoint
+from tour_deal import TourDeal

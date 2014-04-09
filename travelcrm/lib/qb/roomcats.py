@@ -1,4 +1,5 @@
 # -*coding: utf-8-*-
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
@@ -24,5 +25,6 @@ class RoomcatsQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.add_columns(*fields)
 
     def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
-            self.query = self.query.filter(Roomcat.id == id)
+            self.query = self.query.filter(Roomcat.id.in_(id))

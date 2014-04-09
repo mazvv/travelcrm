@@ -35,7 +35,8 @@ function refresh_container(container){
 		    container.combobox('reload');
             break;
 		case('combogrid'):
-		    container.combogrid('reload');
+			var grid = container.combogrid('grid');
+		    grid.datagrid('reload');
             break;
 	}
 
@@ -62,7 +63,10 @@ function show_form_errors(form, errors){
 
 function set_field_error(form, input_name, error){
 	var selector = "[data-name='" + input_name + "']";
-	form.find(selector).tooltip({content: error, position: 'right'});
+	if(form.find(selector).hasClass('as-text'))
+		form.find(selector + ' span').html(error);
+	else
+		form.find(selector).tooltip({content: error, position: 'right'});
 	form.find(selector).show();
 }
 
@@ -101,6 +105,9 @@ function submit(form){
                 show_status_bar_info(form.find('.status-bar'), 'success', json.success_message);
                 if(is_undefined(json.close) || json.close == true){
 	                form.closest('.easyui-dialog').dialog('destroy');
+	                if(!is_undefined(json.response)){
+	                	save_container_response(json.response);
+	                }
 	                refresh_container(null);
                 }
             }
@@ -115,6 +122,13 @@ function submit(form){
             show_status_bar_info(form.find('.status-bar'), 'error', 'Oops... Problems during request');
         }
     });
+}
+
+function save_container_response(data){
+	var container = get_container();
+	console.log(container);
+	$(container).data('response', data);
+	return;
 }
 
 function show_status_bar_info(status_bar, info_type, message){
@@ -170,6 +184,9 @@ $(document).on("click", '._action', function(event){
 		case('container_action'):
 		    container_action(options);
 		    break;
+		case('container_picker'):
+		    container_picker(options);
+		    break;
 	}
 });
 
@@ -177,6 +194,19 @@ function container_action(options){
 	add_container(options);
 	var url = get_action_url(options);
 	$.post(url).always(function(){refresh_container(null);});
+}
+
+function container_picker(options){
+	add_container(options);
+	var container = $(get_container());
+	row = get_selected(container);
+	if(!row) {
+	    _dialog_open('/system_need_select_row');
+	    return;
+    }
+	container.closest('.easyui-dialog').dialog('destroy');
+	delete_container();
+	save_container_response(row.id);
 }
 
 function tab_open(options){
@@ -240,6 +270,10 @@ function get_selected(container){
 		case('treegrid'):
 		    row = container.treegrid('getSelected');
 		    break;
+		case('combogrid'):
+			var grid = container.combogrid('grid');
+		    row = grid.datagrid('getSelected');
+		    break;
 	}
 	return row;
 }
@@ -298,4 +332,48 @@ function format_contact_type(value){
 	}
 	span = $('<div>').append(span);
 	return span.html();
+}
+
+function clear_inputs(selector){
+	$(selector).find('.easyui-datebox').datebox('clear');
+	$(selector).find('.easyui-datetimebox').datetimebox('clear');
+	$(selector).find('.easyui-combobox').combobox('clear');
+	$(selector).find('.easyui-combogrid').combogrid('clear');
+	$(selector).find('.easyui-combotree').combotree('clear');
+}
+
+function add_datebox_clear_btn(selector){
+	var datebox_buttons = $.extend([], $.fn.datebox.defaults.buttons);
+	datebox_buttons.splice(1, 0, {
+		text: 'Clear',
+		handler: function(target){
+			$(target).datebox('clear');
+		}
+	});
+	$(selector).datebox({
+		buttons: datebox_buttons
+	});	
+}
+
+function add_datetimebox_clear_btn(selector){
+	var datetimebox_buttons = $.extend([], $.fn.datetimebox.defaults.buttons);
+	datetimebox_buttons.splice(1, 0, {
+		text: 'Clear',
+		handler: function(target){
+			$(target).datetimebox('clear');
+		}
+	});
+	$(selector).datetimebox({
+		buttons: datetimebox_buttons
+	});	
+}
+
+
+function get_higher_zindex(){
+	var highest = -999;
+	$("*").each(function() {
+	    var current = parseInt($(this).css("z-index"), 10);
+	    if(current && highest < current) highest = current;
+	});
+	return highest;
 }

@@ -91,8 +91,10 @@ class Contacts(object):
                 resource=self.context.create_resource(controls.get('status'))
             )
             DBSession.add(contact)
+            DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
+                'response': contact.id
             }
         except colander.Invalid, e:
             return {
@@ -131,7 +133,10 @@ class Contacts(object):
             contact.contact_type = controls.get('contact_type')
             contact.contact = controls.get('contact')
             contact.resource.status = controls.get('status')
-            return {'success_message': _(u'Saved')}
+            return {
+                'success_message': _(u'Saved'),
+                'response': contact.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

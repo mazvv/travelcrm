@@ -34,10 +34,39 @@ class Address(Base):
         ),
         nullable=False,
     )
-
+    location_id = Column(
+        Integer,
+        ForeignKey(
+            'location.id',
+            name="fk_location_id_address",
+            ondelete='cascade',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
+    zip_code = Column(
+        String(length=12),
+        nullable=False,
+    )
+    address = Column(
+        String(length=255),
+        nullable=False,
+    )
     resource = relationship(
         'Resource',
         backref=backref('address', uselist=False, cascade="all,delete"),
+        cascade="all,delete",
+        uselist=False,
+    )
+    location = relationship(
+        'Location',
+        backref=backref(
+            'addresses',
+            uselist=True,
+            cascade="all,delete",
+            lazy="dynamic"
+        ),
         cascade="all,delete",
         uselist=False,
     )

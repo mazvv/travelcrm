@@ -1,4 +1,5 @@
 # -*coding: utf-8-*-
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
@@ -32,3 +33,8 @@ class UsersQueryBuilder(ResourcesQueryBuilder):
             .join(Employee, User.employee)
         )
         self.query = self.query.add_columns(*fields)
+
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(User.id.in_(id))

@@ -1,13 +1,10 @@
 # -*coding: utf-8-*-
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
-from .licences import LicencesQueryBuilder
-from .bpersons import BPersonsQueryBuilder
 
 from ...models.resource import Resource
 from ...models.touroperator import Touroperator
-from ...models.licence import Licence
-from ...models.bperson import BPerson
 
 
 class TouroperatorsQueryBuilder(ResourcesQueryBuilder):
@@ -30,25 +27,6 @@ class TouroperatorsQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.add_columns(*fields)
 
     def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
-            self.query = self.query.filter(Touroperator.id == id)
-
-
-class TouroperatorsLicencesQueryBuilder(LicencesQueryBuilder):
-
-    def filter_relation(self, touroperator_id):
-        self.query = (
-            self.query
-            .join(Touroperator, Licence.touroperator)
-            .filter(Touroperator.id == touroperator_id)
-        )
-
-
-class TouroperatorsBPersonsQueryBuilder(BPersonsQueryBuilder):
-
-    def filter_relation(self, touroperator_id):
-        self.query = (
-            self.query
-            .join(Touroperator, BPerson.touroperator)
-            .filter(Touroperator.id == touroperator_id)
-        )
+            self.query = self.query.filter(Touroperator.id.in_(id))

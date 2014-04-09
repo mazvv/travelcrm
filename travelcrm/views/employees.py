@@ -43,9 +43,15 @@ class Employees(object):
         qb.search_simple(
             self.request.params.get('q'),
         )
-        qb.filter_id(
-            self.request.params.get('id')
+        qb.advanced_search(
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
+            status=self.request.params.get('status'),
         )
+        id = self.request.params.get('id')
+        if id:
+            qb.filter_id(id.split(','))
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -90,7 +96,11 @@ class Employees(object):
                 resource=self.context.create_resource(controls.get('status'))
             )
             DBSession.add(employee)
-            return {'success_message': _(u'Saved')}
+            DBSession.flush()
+            return {
+                'success_message': _(u'Saved'),
+                'response': employee.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),
@@ -126,7 +136,10 @@ class Employees(object):
             employee.last_name = controls.get('last_name')
             employee.second_name = controls.get('second_name')
             employee.resource.status = controls.get('status')
-            return {'success_message': _(u'Saved')}
+            return {
+                'success_message': _(u'Saved'),
+                'response': employee.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

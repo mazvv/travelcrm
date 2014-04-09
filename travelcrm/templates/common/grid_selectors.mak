@@ -1,164 +1,3 @@
-<%def name="contacts_selector(name='contact_id', values=[], can_edit=True)">
-	<%
-		_func_id = h.common.gen_id()
-		_id = h.common.gen_id()
-		_storage_id = h.common.gen_id()
-		_tb_id = "tb-%s" % _id
-	%>
-	% if can_edit:
-	<script type="text/javascript">
-		function add_${_func_id}(input_id){
-			var id = $('#' + input_id).combogrid('getValue');
-			if(is_int(id)){
-				var input = $('<input type="hidden" name="${name}">').val(id);
-				input.appendTo('#${_storage_id}');
-				$('#' + input_id).combogrid('clear');
-				$('#${_id}').datagrid('reload');
-			}
-			return false;
-		}
-		function delete_${_func_id}(grid_id){
-			var rows = get_checked($('#' + grid_id));
-			$.each(rows, function(i, row){
-				$('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
-			});
-			$('#' + grid_id).datagrid('reload');
-			return false;
-		}
-	</script>
-	% endif
-	<table class="easyui-datagrid"
-		id="${_id}"
-		data-options="
-			url:'/contacts/list',border:false,
-			fit:true,singleSelect:true,
-			rownumbers:true,sortName:'id',sortOrder:'desc',
-			idField:'_id',checkOnSelect:false,
-			selectOnCheck:false,toolbar:'#${_tb_id}',
-			onBeforeLoad: function(param){
-				var id = [0];
-				$.each($('#${_storage_id} input[name=${name}]'), function(i, el){
-					id.push($(el).val());
-				});
-				param.id = id.join();                            
-				param.rows = 0;
-				param.page = 0;
-			}
-		" width="100%">
-		<thead>
-			% if can_edit:
-			    <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
-			% endif
-			<th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
-			<th align="center" data-options="field:'contact_type',width:20,formatter:function(value){return format_contact_type(value);}"></th>
-			<th data-options="field:'contact',sortable:true,width:200">${_(u"contact")}</th>
-		</thead>
-	</table>
-	<div id="${_storage_id}">
-        % for contact in values:
-            ${h.tags.hidden(name, contact)}
-        % endfor
-	</div>
-	% if can_edit:
-	<div class="datagrid-toolbar" id="${_tb_id}">
-		<div class="actions button-container">
-			<div style="display: inline-block;padding-top:2px;">
-				<%
-					f_id = h.common.gen_id()
-				%>
-				${h.fields.contacts_combobox_field(request, None, f_id, id=f_id)}
-			</div>
-			<div class="button-group minor-group">
-				<a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>
-				<a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
-			</div>
-		</div>
-	</div>
-	% endif
-</%def>
-    
-
-<%def name="licences_selector(name='licence_id', values=[], can_edit=True)">
-    <%
-        _func_id = h.common.gen_id()
-        _id = h.common.gen_id()
-        _storage_id = h.common.gen_id()
-        _tb_id = "tb-%s" % _id
-    %>
-    % if can_edit:
-    <script type="text/javascript">
-        function add_${_func_id}(input_id){
-            var id = $('#' + input_id).combogrid('getValue');
-            if(is_int(id)){
-                var input = $('<input type="hidden" name="${name}">').val(id);
-                input.appendTo('#${_storage_id}');
-                $('#' + input_id).combogrid('clear');
-                $('#${_id}').datagrid('reload');
-            }
-            return false;
-        }
-        function delete_${_func_id}(grid_id){
-            var rows = get_checked($('#' + grid_id));
-            $.each(rows, function(i, row){
-                $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
-            });
-            $('#' + grid_id).datagrid('reload');
-            return false;
-        }
-    </script>
-    % endif
-    <table class="easyui-datagrid"
-        id="${_id}"
-        data-options="
-            url:'/licences/list',border:false,
-            fit:true,singleSelect:true,
-            rownumbers:true,sortName:'id',sortOrder:'desc',
-            idField:'_id',checkOnSelect:false,
-            selectOnCheck:false,toolbar:'#${_tb_id}',
-            onBeforeLoad: function(param){
-                var id = [0];
-                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
-                    id.push($(el).val());
-                });
-                param.id = id.join();                            
-                param.rows = 0;
-                param.page = 0;
-            }
-        " width="100%">
-        <thead>
-            % if can_edit:
-                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
-            % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
-            <th data-options="field:'licence_num',sortable:true,width:200">${_(u"licence num")}</th>
-            <th data-options="field:'date_from',sortable:true,width:120">${_(u"date from")}</th>
-            <th data-options="field:'date_to',sortable:true,width:120">${_(u"date to")}</th>
-        </thead>
-    </table>
-    <div id="${_storage_id}">
-        % for licence in values:
-            ${h.tags.hidden(name, licence)}
-        % endfor
-    </div>
-    % if can_edit:
-    <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container">
-            <div style="display: inline-block;padding-top:2px;">
-                <%
-                    f_id = h.common.gen_id()
-                %>
-                ${h.fields.licences_combobox_field(request, None, f_id, id=f_id)}
-            </div>
-            <div class="button-group minor-group">
-                <a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>
-                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
-            </div>
-        </div>
-    </div>
-    % endif
-</%def>
-
-
 <%def name="bpersons_selector(name='bperson_id', values=[], can_edit=True)">
     <%
         _func_id = h.common.gen_id()
@@ -237,3 +76,671 @@
     </div>
     % endif
 </%def>
+
+
+<%def name="tour_points_selector(name='tour_point_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+	    function add_${_func_id}(id){
+	        if(is_int(id)){
+	            var input = $('<input type="hidden" name="${name}">').val(id);
+	            input.appendTo('#${_storage_id}');
+	        }
+	        return false;
+	    }
+        function delete_${_func_id}(grid_id){
+	        var rows = get_checked($('#' + grid_id));
+	        if(rows.length > 0){
+	            $.each(rows, function(i, row){
+	                $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+	            });
+	            $('#' + grid_id).datagrid('reload');
+	        }
+	        return false;
+        }
+    </script>
+    % endif
+    <script type="text/javascript">
+        function formatter_${_func_id}(index, row){
+            return '<table width="100%">'
+            + '<tr>'
+            + '<td width="25%">${_(u'location')}</td>'
+            + '<td>' + row.full_location_name + '</td>'
+            + '</tr>' 
+            + '<tr>'
+            + '<td width="25%">${_(u'hotel')}</td>'
+            + '<td>' + row.full_hotel_name + ' / ' 
+            + row.accomodation_name + ' / ' 
+            + row.roomcat_name + ' / '
+            + row.foodcat_name + '</td>'
+            + '</tr>' 
+            + '<tr>'
+            + '<td width="25%">${_(u'dates')}</td>'
+            + '<td>' + row.point_start_dt + ' - ' + row.point_end_dt + '</td>'
+            + '</tr>'
+            + '<tr>'
+            + '<td width="25%">${_(u'deascription')}</td>'
+            + '<td>' + row.description + '</td>'
+            + '</tr>' 
+            '</table>';
+        }
+    </script>
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/tours/points',border:false,
+            singleSelect:true,
+            rownumbers:true,sortName:'point_start_dt',sortOrder:'asc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+		    view: detailview,
+		    detailFormatter: function(index, row){
+		        return formatter_${_func_id}(index, row)
+		    },          
+            onBeforeLoad: function(param){
+                var response = $(this).data('response');
+                if(response !== ''){
+                    add_${_func_id}(response);
+                    $(this).data('response', '');
+                }
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%" height="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'country_name',sortable:true,width:150">${_(u"country")}</th>
+            <th data-options="field:'full_hotel_name',sortable:true,width:200">${_(u"hotel")}</th>
+            <th data-options="field:'point_start_dt',sortable:true,width:120">${_(u"start")}</th>
+            <th data-options="field:'point_end_dt',sortable:true,width:120">${_(u"end")}</th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for point in values:
+            ${h.tags.hidden(name, point)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <%
+                f_id = h.common.gen_id()
+            %>
+            <div class="button-group minor-group">
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/tours/add_point'
+                    ">
+                    ${_(u"Add")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/tours/edit_point',property:'with_row'
+                    ">
+                    ${_(u"Edit")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+
+
+<%def name="persons_selector(name='person_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+        function add_${_func_id}(input_id){
+            var id = $('#' + input_id).combogrid('getValue');
+            if(is_int(id)){
+                var input = $('<input type="hidden" name="${name}">').val(id);
+                input.appendTo('#${_storage_id}');
+                $('#' + input_id).combogrid('clear');
+                $('#${_id}').datagrid('reload');
+            }
+            return false;
+        }
+        function delete_${_func_id}(grid_id){
+            var rows = get_checked($('#' + grid_id));
+            $.each(rows, function(i, row){
+                $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+            });
+            $('#' + grid_id).datagrid('reload');
+            return false;
+        }
+    </script>
+    % endif
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/persons/list',border:false,
+            fit:true,singleSelect:true,
+            rownumbers:true,sortName:'id',sortOrder:'desc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(param){
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for person in values:
+            ${h.tags.hidden(name, person)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <div style="display: inline-block;padding-top:2px;">
+                <%
+                    f_id = h.common.gen_id()
+                %>
+                ${h.fields.persons_combobox_field(request, None, f_id, id=f_id)}
+            </div>
+            <div class="button-group minor-group">
+                <a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+
+
+<%def name="tours_selector(name='tour_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+        function add_${_func_id}(id){
+            if(is_int(id)){
+                var input = $('<input type="hidden" name="${name}">').val(id);
+                input.appendTo('#${_storage_id}');
+            }
+            return false;
+        }
+        function delete_${_func_id}(grid_id){
+            var rows = get_checked($('#' + grid_id));
+            if(rows.length > 0){
+                $.each(rows, function(i, row){
+                    $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+                });
+                $('#' + grid_id).datagrid('reload');
+            }
+            return false;
+        }
+    </script>
+    % endif
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/tours/list',border:false,
+            fit:true,singleSelect:true,
+            rownumbers:true,sortName:'start_dt',sortOrder:'asc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(param){
+                var response = $(this).data('response');
+                if(response !== ''){
+                    add_${_func_id}(response);
+                    $(this).data('response', '');
+                }
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'touroperator_name',sortable:true,width:140">${_(u"touroperator")}</th>
+            <th data-options="field:'country',sortable:true,width:100">${_(u"country")}</th>
+            <th data-options="field:'hotel_cat',sortable:true,width:60">${_(u"hotel cat")}</th>
+            <th data-options="field:'price',sortable:true,width:80,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
+            <th data-options="field:'start_dt',sortable:true,width:80">${_(u"start")}</th>
+            <th data-options="field:'end_dt',sortable:true,width:80">${_(u"end")}</th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for point in values:
+            ${h.tags.hidden(name, point)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <%
+                f_id = h.common.gen_id()
+            %>
+            <div class="button-group minor-group">
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/tours/add'
+                    ">
+                    ${_(u"Add")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/tours/edit',property:'with_row'
+                    ">
+                    ${_(u"Edit")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+
+
+<%def name="licences_selector(name='licence_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+        function add_${_func_id}(id){
+            if(is_int(id)){
+                var input = $('<input type="hidden" name="${name}">').val(id);
+                input.appendTo('#${_storage_id}');
+            }
+            return false;
+        }
+        function delete_${_func_id}(grid_id){
+            var rows = get_checked($('#' + grid_id));
+            if(rows.length > 0){
+                $.each(rows, function(i, row){
+                    $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+                });
+                $('#' + grid_id).datagrid('reload');
+            }
+            return false;
+        }
+    </script>
+    % endif
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/licences/list',border:false,
+            fit:true,singleSelect:true,
+            rownumbers:true,sortName:'date_to',sortOrder:'desc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(param){
+                var response = $(this).data('response');
+                if(response !== ''){
+                    add_${_func_id}(response);
+                    $(this).data('response', '');
+                }
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'licence_num',sortable:true,width:140">${_(u"licence num")}</th>
+            <th data-options="field:'date_from',sortable:true,width:80">${_(u"date from")}</th>
+            <th data-options="field:'date_to',sortable:true,width:80">${_(u"date to")}</th>
+            <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for point in values:
+            ${h.tags.hidden(name, point)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <%
+                f_id = h.common.gen_id()
+            %>
+            <div class="button-group minor-group">
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/licences/add'
+                    ">
+                    ${_(u"Add")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/licences/edit',property:'with_row'
+                    ">
+                    ${_(u"Edit")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+
+
+<%def name="contacts_selector(name='contact_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+        function add_${_func_id}(id){
+            if(is_int(id)){
+                var input = $('<input type="hidden" name="${name}">').val(id);
+                input.appendTo('#${_storage_id}');
+            }
+            return false;
+        }
+        function delete_${_func_id}(grid_id){
+            var rows = get_checked($('#' + grid_id));
+            if(rows.length > 0){
+                $.each(rows, function(i, row){
+                    $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+                });
+                $('#' + grid_id).datagrid('reload');
+            }
+            return false;
+        }
+    </script>
+    % endif
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/contacts/list',border:false,
+            fit:true,singleSelect:true,
+            rownumbers:true,sortName:'id',sortOrder:'desc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(param){
+                var response = $(this).data('response');
+                if(response !== ''){
+                    add_${_func_id}(response);
+                    $(this).data('response', '');
+                }
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th align="center" data-options="field:'contact_type',width:20,formatter:function(value){return format_contact_type(value);}"></th>
+            <th data-options="field:'contact',sortable:true,width:200">${_(u"contact")}</th>
+            <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for point in values:
+            ${h.tags.hidden(name, point)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <%
+                f_id = h.common.gen_id()
+            %>
+            <div class="button-group minor-group">
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/contacts/add'
+                    ">
+                    ${_(u"Add")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/contacts/edit',property:'with_row'
+                    ">
+                    ${_(u"Edit")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+
+<%def name="passports_selector(name='passport_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+        function add_${_func_id}(id){
+            if(is_int(id)){
+                var input = $('<input type="hidden" name="${name}">').val(id);
+                input.appendTo('#${_storage_id}');
+            }
+            return false;
+        }
+        function delete_${_func_id}(grid_id){
+            var rows = get_checked($('#' + grid_id));
+            if(rows.length > 0){
+                $.each(rows, function(i, row){
+                    $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+                });
+                $('#' + grid_id).datagrid('reload');
+            }
+            return false;
+        }
+    </script>
+    % endif
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/passports/list',border:false,
+            fit:true,singleSelect:true,
+            rownumbers:true,sortName:'id',sortOrder:'desc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(param){
+                var response = $(this).data('response');
+                if(response !== ''){
+                    add_${_func_id}(response);
+                    $(this).data('response', '');
+                }
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'passport_num',sortable:true,width:200">${_(u"passport num")}</th>
+            <th data-options="field:'passport_type',sortable:true,width:100">${_(u"type")}</th>
+            <th data-options="field:'end_date',width:80">${_(u"end date")}</th>
+            <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for id in values:
+            ${h.tags.hidden(name, id)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <%
+                f_id = h.common.gen_id()
+            %>
+            <div class="button-group minor-group">
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/passports/add'
+                    ">
+                    ${_(u"Add")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/passports/edit',property:'with_row'
+                    ">
+                    ${_(u"Edit")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+
+
+<%def name="addresses_selector(name='address_id', values=[], can_edit=True)">
+    <%
+        _func_id = h.common.gen_id()
+        _id = h.common.gen_id()
+        _storage_id = h.common.gen_id()
+        _tb_id = "tb-%s" % _id
+    %>
+    % if can_edit:
+    <script type="text/javascript">
+        function add_${_func_id}(id){
+            if(is_int(id)){
+                var input = $('<input type="hidden" name="${name}">').val(id);
+                input.appendTo('#${_storage_id}');
+            }
+            return false;
+        }
+        function delete_${_func_id}(grid_id){
+            var rows = get_checked($('#' + grid_id));
+            if(rows.length > 0){
+                $.each(rows, function(i, row){
+                    $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+                });
+                $('#' + grid_id).datagrid('reload');
+            }
+            return false;
+        }
+    </script>
+    % endif
+    <table class="easyui-datagrid"
+        id="${_id}"
+        data-options="
+            url:'/addresses/list',border:false,
+            fit:true,singleSelect:true,
+            rownumbers:true,sortName:'id',sortOrder:'desc',
+            idField:'_id',checkOnSelect:false,
+            selectOnCheck:false,toolbar:'#${_tb_id}',
+            onBeforeLoad: function(param){
+                var response = $(this).data('response');
+                if(response !== ''){
+                    add_${_func_id}(response);
+                    $(this).data('response', '');
+                }
+                var id = [0];
+                $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
+                    id.push($(el).val());
+                });
+                param.id = id.join();                            
+                param.rows = 0;
+                param.page = 0;
+            }
+        " width="100%">
+        <thead>
+            % if can_edit:
+                <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
+            % endif
+            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'full_location_name',sortable:true,width:200">${_(u"location")}</th>
+            <th data-options="field:'zip_code',sortable:true,width:100">${_(u"zip code")}</th>
+            <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+        </thead>
+    </table>
+    <div id="${_storage_id}">
+        % for id in values:
+            ${h.tags.hidden(name, id)}
+        % endfor
+    </div>
+    % if can_edit:
+    <div class="datagrid-toolbar" id="${_tb_id}">
+        <div class="actions button-container">
+            <%
+                f_id = h.common.gen_id()
+            %>
+            <div class="button-group minor-group">
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/addresses/add'
+                    ">
+                    ${_(u"Add")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/addresses/edit',property:'with_row'
+                    ">
+                    ${_(u"Edit")}</a>
+                <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
+            </div>
+        </div>
+    </div>
+    % endif
+</%def>
+

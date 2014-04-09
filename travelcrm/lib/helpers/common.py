@@ -1,6 +1,7 @@
 # -*coding: utf-8-*-
 
 import pkg_resources
+import json
 
 from webhelpers.html import tags
 from webhelpers.html import HTML
@@ -21,10 +22,12 @@ def get_package_version(package_name):
         return version
 
 
-def error_container(name):
+def error_container(name, as_text=False):
     return HTML.tag(
         'span',
-        class_='error fa fa-exclamation-circle hidden',
+        class_='error %s hidden'
+        % ('fa fa-arrow-circle-down as-text' if as_text else 'fa fa-exclamation-circle'),
+        c=HTML.tag('span'),
         **{'data-name': name}
     )
 
@@ -47,3 +50,7 @@ def button(context, permision, caption, **kwargs):
             c=HTML(icon, caption), **kwargs
         )
     return html
+
+
+def jsonify(val):
+    return json.dumps(val)

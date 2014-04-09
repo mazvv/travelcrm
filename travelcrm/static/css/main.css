@@ -110,6 +110,18 @@ hr.dashed{
 .mb1 {
     margin-bottom: 1em;
 }
+.mt1 {
+    margin-top: 1em;
+}
+.mr1 {
+    margin-right: 1em;
+}
+.mt05 {
+    margin-top: 0.5em;
+}
+.mr05 {
+    margin-right: 0.5em;
+}
 
 /** borders **/
 .top-line{
@@ -349,6 +361,16 @@ span.error.fa{
 	cursor: pointer;
 	vertical-align: middle;
 }
+span.error.as-text, span.error.as-text span{
+	line-height: 22px;
+	height: 22px;
+	vertical-align: middle;
+}
+span.error.as-text span{
+	color: #900;
+	font-size: 12px;
+	margin-left: 5px;
+}
 
 /** inputs **/
 input{
@@ -361,6 +383,9 @@ input{
     font-family: sans-serif;
     outline: none;
     margin: 0px;
+}
+.text.w5{
+    width: 5em;
 }
 .text.w10{
     width: 10em;
@@ -377,7 +402,6 @@ input{
 .text.w30{
     width: 30em;
 }
-
 
 /** datagrid labels **/
 .label{
@@ -420,14 +444,26 @@ input{
 .searchbar{
 	position: relative;
 }
-.searchbar label{
-	margin-right: 5px;
-	font-weight: bold;
-}
 .searchbar span.field-actions{
 	position: absolute;
 	top: 2px;
 	right: 0px;
+}
+.searchbar .advanced-search{
+	position: absolute;
+	border: 1px solid #d1d1d1;
+	top: 23px;
+	right: 0px;
+	z-index: 2;
+	background-color: #fff;
+	width: 354px;
+	display: none;
+	padding: 5px 5px 0px 5px;
+}
+.searchbar .advanced-search .fields-container{
+	height: auto;
+	max-height: 280px;
+	overflow-y: scroll; 
 }
 
 /** buttons **/

@@ -2,11 +2,13 @@
 
 from collections import OrderedDict
 from abc import ABCMeta
+from decimal import Decimal
 
 from datetime import datetime, date
 from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
-from babel.dates import format_datetime, format_date
+from babel.dates import format_datetime, format_date, parse_date
+from babel.numbers import format_decimal
 from zope.interface.verify import verifyObject
 
 from ...interfaces import IResourceType
@@ -16,7 +18,7 @@ from ...models.user import User
 from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
-from ..utils.common_utils import get_locale_name
+from ..utils.common_utils import get_locale_name, cast_int
 from ..utils.security_utils import get_auth_employee
 
 from ..bl.employees import query_employee_scope
@@ -37,6 +39,10 @@ def query_row_serialize_format(row):
         if isinstance(value, datetime):
             res_row[key] = format_datetime(
                 value, format="short", locale=locale_name
+            )
+        if isinstance(value, Decimal):
+            res_row[key] = format_decimal(
+                value, locale=locale_name
             )
     return res_row
 
@@ -155,3 +161,34 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
             all_fields, sort, order
         )
         self.query = self.query.order_by(sort_order)
+
+    def advanced_search(self, updated_from, updated_to, modifier_id, status):
+        self._filter_updated_date(updated_from, updated_to)
+        self._filter_modifier(modifier_id)
+        self._filter_status(status)
+
+    def _filter_updated_date(self, updated_from, updated_to):
+        if updated_from:
+            self.query = self.query.filter(
+                self.__log_subquery.c.modifydt >= parse_date(
+                    updated_from, locale=get_locale_name()
+                )
+            )
+        if updated_to:
+            self.query = self.query.filter(
+                self.__log_subquery.c.modifydt <= parse_date(
+                    updated_to, locale=get_locale_name()
+                )
+            )
+
+    def _filter_modifier(self, modifier_id):
+        if modifier_id:
+            self.query = self.query.filter(
+                self.__log_subquery.c.modifier_id == cast_int(modifier_id)
+            )
+
+    def _filter_status(self, status):
+        if status:
+            self.query = self.query.filter(
+                Resource.status == status
+            )

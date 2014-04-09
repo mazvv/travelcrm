@@ -1,6 +1,5 @@
 # -*coding: utf-8-*-
-
-from sqlalchemy import or_
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 
@@ -32,5 +31,6 @@ class EmployeesQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.add_columns(*fields)
 
     def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
-            self.query = self.query.filter(Employee.id == id)
+            self.query = self.query.filter(Employee.id.in_(id))

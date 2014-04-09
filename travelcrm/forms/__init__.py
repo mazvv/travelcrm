@@ -8,7 +8,10 @@ from colander import (
     null,
     _
 )
-from babel.dates import parse_date
+from babel.dates import (
+    parse_date,
+    parse_time
+)
 
 from ..lib.utils.common_utils import get_locale_name
 
@@ -20,6 +23,24 @@ class ResourceSchema(colander.Schema):
 
 
 class Date(ColanderDate):
+
+    def deserialize(self, node, cstruct):
+        if not cstruct:
+            return null
+        try:
+            result = parse_date(cstruct, locale=get_locale_name())
+        except:
+            raise Invalid(
+                node,
+                _(
+                    self.err_template,
+                    mapping={'val': cstruct}
+                )
+            )
+        return result
+
+
+class DateTime(ColanderDate):
 
     def deserialize(self, node, cstruct):
         if not cstruct:

@@ -18,11 +18,11 @@ def resource_validator(node, kw):
         try:
             mod = importlib.import_module(module)
             if not hasattr(mod, attr):
-                raise colander.Invalid(_(u"Resource does not exist"))
+                raise colander.Invalid(node, _(u"Resource does not exist"))
         except ImportError:
-            raise colander.Invalid(_(u"Resource module does not exist"))
+            raise colander.Invalid(node, _(u"Resource module does not exist"))
         except:
-            raise colander.Invalid(_(u"Check module name"))
+            raise colander.Invalid(node, _(u"Check module name"))
     return colander.All(colander.Length(max=128), validator,)
 
 

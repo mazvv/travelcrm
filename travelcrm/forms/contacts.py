@@ -2,7 +2,7 @@
 
 import colander
 
-from . import PhoneNumber
+from . import PhoneNumber, ResourceSchema
 
 
 @colander.deferred
@@ -19,7 +19,7 @@ def contact_validator(node, kw):
     return colander.All(*validators)
 
 
-class ContactSchema(colander.Schema):
+class ContactSchema(ResourceSchema):
     contact_type = colander.SchemaNode(
         colander.String(),
         validators=colander.OneOf([u'phone', u'email', u'skype'])

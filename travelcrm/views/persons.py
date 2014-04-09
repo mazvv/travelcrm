@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.person import Person
 from ..models.contact import Contact
+from ..models.passport import Passport
 from ..lib.qb.persons import PersonsQueryBuilder
 
 from ..forms.persons import PersonSchema
@@ -43,6 +44,12 @@ class Persons(object):
         qb = PersonsQueryBuilder(self.context)
         qb.search_simple(
             self.request.params.get('q'),
+        )
+        qb.advanced_search(
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
+            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -103,8 +110,22 @@ class Persons(object):
                     )
                     .all()
                 )
+            if self.request.params.getall('passport_id'):
+                person.passports = (
+                    DBSession.query(Passport)
+                    .filter(
+                        Passport.id.in_(
+                            self.request.params.getall('passport_id')
+                        )
+                    )
+                    .all()
+                )
             DBSession.add(person)
-            return {'success_message': _(u'Saved')}
+            DBSession.flush()
+            return {
+                'success_message': _(u'Saved'),
+                'response': person.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),
@@ -157,7 +178,22 @@ class Persons(object):
                 )
             else:
                 person.contacts = []
-            return {'success_message': _(u'Saved')}
+            if self.request.params.getall('passport_id'):
+                person.passports = (
+                    DBSession.query(Passport)
+                    .filter(
+                        Passport.id.in_(
+                            self.request.params.getall('passport_id')
+                        )
+                    )
+                    .all()
+                )
+            else:
+                person.passports = []
+            return {
+                'success_message': _(u'Saved'),
+                'response': person.id
+            }
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

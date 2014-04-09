@@ -44,6 +44,58 @@ person_contact = Table(
 )
 
 
+person_passport = Table(
+    'person_passport',
+    Base.metadata,
+    Column(
+        'person_id',
+        Integer,
+        ForeignKey(
+            'person.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'passport_id',
+        Integer,
+        ForeignKey(
+            'passport.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
+)
+
+
+person_address = Table(
+    'person_address',
+    Base.metadata,
+    Column(
+        'person_id',
+        Integer,
+        ForeignKey(
+            'person.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'address_id',
+        Integer,
+        ForeignKey(
+            'address.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
+)
+
+
 class Person(Base):
     __tablename__ = 'person'
 
@@ -92,6 +144,21 @@ class Person(Base):
     contacts = relationship(
         'Contact',
         secondary=person_contact,
+        backref=backref('person', uselist=False),
+        cascade="all,delete",
+        uselist=True,
+    )
+    passports = relationship(
+        'Passport',
+        secondary=person_passport,
+        backref=backref('person', uselist=False),
+        cascade="all,delete",
+        uselist=True,
+    )
+
+    addresses = relationship(
+        'Address',
+        secondary=person_address,
         backref=backref('person', uselist=False),
         cascade="all,delete",
         uselist=True,

@@ -1,6 +1,6 @@
 <%namespace file="../common/grid_selectors.mak" import="bpersons_selector"/>
 <%namespace file="../common/grid_selectors.mak" import="licences_selector"/>
-<div class="dl50 easyui-dialog"
+<div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,

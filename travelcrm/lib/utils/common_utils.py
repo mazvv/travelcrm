@@ -28,3 +28,10 @@ def gen_id(prefix='', limit=6):
 def get_translate():
     request = get_current_request()
     return request.translate
+
+
+def cast_int(val):
+    try:
+        return int(val)
+    except ValueError:
+        return None

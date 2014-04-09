@@ -1,10 +1,9 @@
 # -*coding: utf-8-*-
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
-from .contacts import ContactsQueryBuilder
 
 from ...models.resource import Resource
-from ...models.contact import Contact
 from ...models.person import Person
 
 
@@ -29,12 +28,7 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.join(Person, Resource.person)
         self.query = self.query.add_columns(*fields)
 
-
-class PersonsContactsQueryBuilder(ContactsQueryBuilder):
-
-    def filter_relation(self, person_id):
-        self.query = (
-            self.query
-            .join(Person, Contact.person)
-            .filter(Person.id == person_id)
-        )
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(Person.id.in_(id))

@@ -1,5 +1,5 @@
 <%namespace file="../common/grid_selectors.mak" import="contacts_selector"/>
-<div class="dl50 easyui-dialog"
+<div class="dl55 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -39,7 +39,7 @@
 		        </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"position name"), False, "position_name")}
+                        ${h.tags.title(_(u"position name"), True, "position_name")}
                     </div>
                     <div class="ml15">
                         ${h.tags.text("position_name", item.position_name if item else None, class_="text w20")}

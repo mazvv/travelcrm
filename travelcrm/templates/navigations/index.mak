@@ -52,11 +52,11 @@
                     <span class="fa fa-copy"></span>${_(u'Copy')}
                 </a>
                 <a id="btn" href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'up')}'">
+                    data-options="container:'#${_id}',action:'container_action',property:'with_row',url:'${request.resource_url(_context, 'up')}'">
                     <span class="fa fa-arrow-up"></span>${_(u'Up')}
                 </a>
                 <a id="btn" href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'down')}'">
+                    data-options="container:'#${_id}',action:'container_action',property:'with_row',url:'${request.resource_url(_context, 'down')}'">
                     <span class="fa fa-arrow-down"></span>${_(u'Down')}
                 </a>
                 % endif
