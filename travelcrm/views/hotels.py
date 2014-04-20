@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.hotel import Hotel
 from ..lib.qb.hotels import HotelsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.hotels import HotelSchema
 
@@ -73,7 +74,6 @@ class Hotels(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Hotel')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Hotels(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = HotelSchema().bind(request=self.request)
 
         try:
@@ -115,7 +114,6 @@ class Hotels(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         hotel = Hotel.get(self.request.params.get('id'))
         return {'item': hotel, 'title': _(u'Edit Hotel')}
 
@@ -127,7 +125,6 @@ class Hotels(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = HotelSchema().bind(request=self.request)
         hotel = Hotel.get(self.request.params.get('id'))
         try:
@@ -154,7 +151,6 @@ class Hotels(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         hotel = Hotel.get(self.request.params.get('id'))
         return {
             'item': hotel,
@@ -191,7 +187,6 @@ class Hotels(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             hotel = Hotel.get(id)
             if hotel:

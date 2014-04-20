@@ -1,7 +1,7 @@
 if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = 'Bladsy';
 	$.fn.pagination.defaults.afterPageText = 'Van {pages}';
-	$.fn.pagination.defaults.displayMsg = 'Wys (from) tot (to) van (total) items';
+	$.fn.pagination.defaults.displayMsg = '(from) tot (to) van (total)';
 }
 if ($.fn.datagrid){
 	$.fn.datagrid.defaults.loadMsg = 'Verwerking, wag asseblief ...';

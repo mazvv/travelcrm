@@ -130,7 +130,6 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
     })
 
     def __init__(self, context=None):
-
         if context and not verifyObject(IResourceType, context):
             raise NotValidContextError()
 

@@ -34,8 +34,8 @@
             <th data-options="field:'country',sortable:true,width:100">${_(u"country")}</th>
             <th data-options="field:'hotel_cat',sortable:true,width:60">${_(u"hotel cat")}</th>
             <th data-options="field:'price',sortable:true,width:80,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
-            <th data-options="field:'start_dt',sortable:true,width:80">${_(u"start")}</th>
-            <th data-options="field:'end_dt',sortable:true,width:80">${_(u"end")}</th>
+            <th data-options="field:'start_date',sortable:true,width:80">${_(u"start")}</th>
+            <th data-options="field:'end_date',sortable:true,width:80">${_(u"end")}</th>
             <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>

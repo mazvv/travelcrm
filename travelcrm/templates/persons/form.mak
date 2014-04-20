@@ -89,8 +89,6 @@
             </div>
             <div title="${_(u'History')}">
             </div>		    
-            <div title="${_(u'Billing')}">
-            </div>          
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>

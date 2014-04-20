@@ -11,6 +11,7 @@ from ..models.licence import Licence
 from ..models.bperson import BPerson
 from ..models.contact import Contact
 from ..lib.qb.touroperators import TouroperatorsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 from ..forms.touroperators import TouroperatorSchema
 
 
@@ -75,7 +76,6 @@ class Touroperators(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Touroperator'),
         }
@@ -88,7 +88,6 @@ class Touroperators(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = TouroperatorSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -136,7 +135,6 @@ class Touroperators(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         touroperator = Touroperator.get(self.request.params.get('id'))
         return {
             'item': touroperator,
@@ -151,7 +149,6 @@ class Touroperators(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = TouroperatorSchema().bind(request=self.request)
         touroperator = Touroperator.get(self.request.params.get('id'))
         try:
@@ -200,7 +197,6 @@ class Touroperators(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         touroperator = Touroperator.get(self.request.params.get('id'))
         return {
             'item': touroperator,
@@ -237,7 +233,6 @@ class Touroperators(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             touroperator = Touroperator.get(id)
             if touroperator:

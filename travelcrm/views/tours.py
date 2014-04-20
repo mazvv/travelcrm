@@ -8,11 +8,12 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.tour import Tour
 from ..models.tour_point import TourPoint
+from ..models.person import Person
 from ..lib.qb.tours import (
     ToursQueryBuilder,
     ToursPointsQueryBuilder,
 )
-
+from ..lib.utils.common_utils import translate as _
 from ..forms.tours import (
     TourSchema,
     TourPointSchema
@@ -80,7 +81,6 @@ class Tours(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Tour'),
         }
@@ -93,25 +93,29 @@ class Tours(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = TourSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params.mixed())
             tour = Tour(
+                deal_date=controls.get('deal_date'),
                 touroperator_id=controls.get('touroperator_id'),
+                customer_id=controls.get('customer_id'),
                 adults=controls.get('adults'),
                 children=controls.get('children'),
                 price=controls.get('price'),
                 currency_id=controls.get('currency_id'),
                 start_location_id=controls.get('start_location_id'),
                 end_location_id=controls.get('end_location_id'),
-                start_dt=controls.get('start_dt'),
-                end_dt=controls.get('end_dt'),
+                start_date=controls.get('start_date'),
+                end_date=controls.get('end_date'),
                 resource=self.context.create_resource(controls.get('status'))
             )
-            for point in controls.get('tour_point_id', []):
-                point = TourPoint.get(point)
+            for id in controls.get('tour_point_id'):
+                point = TourPoint.get(id)
                 tour.points.append(point)
+            for id in controls.get('person_id'):
+                person = Person.get(id)
+                tour.persons.append(person)
             DBSession.add(tour)
             DBSession.flush()
             return {
@@ -132,11 +136,10 @@ class Tours(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         tour = Tour.get(self.request.params.get('id'))
         return {
             'item': tour,
-            'title': _(u'Edit Business Person'),
+            'title': _(u'Edit Tour'),
         }
 
     @view_config(
@@ -147,25 +150,30 @@ class Tours(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = TourSchema().bind(request=self.request)
         tour = Tour.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params.mixed())
+            tour.deal_date = controls.get('deal_date')
             tour.touroperator_id = controls.get('touroperator_id')
+            tour.customer_id = controls.get('customer_id')
             tour.adults = controls.get('adults')
             tour.children = controls.get('children')
             tour.price = controls.get('price')
             tour.currency_id = controls.get('currency_id')
             tour.start_location_id = controls.get('start_location_id')
             tour.end_location_id = controls.get('end_location_id')
-            tour.start_dt = controls.get('start_dt')
-            tour.end_dt = controls.get('end_dt')
+            tour.start_date = controls.get('start_date')
+            tour.end_date = controls.get('end_date')
             tour.resource.status = controls.get('status')
             tour.points = []
+            tour.persons = []
             for point in controls.get('tour_point_id', []):
                 point = TourPoint.get(point)
                 tour.points.append(point)
+            for id in controls.get('person_id'):
+                person = Person.get(id)
+                tour.persons.append(person)
             return {
                 'success_message': _(u'Saved'),
                 'response': tour.id
@@ -184,11 +192,10 @@ class Tours(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         tour = Tour.get(self.request.params.get('id'))
         return {
             'item': tour,
-            'title': _(u"Copy Business Person")
+            'title': _(u"Copy Tour")
         }
 
     @view_config(
@@ -221,7 +228,6 @@ class Tours(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             tour = Tour.get(id)
             if tour:
@@ -265,7 +271,6 @@ class Tours(object):
         permission='add'
     )
     def add_point(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Tour Point'),
         }
@@ -278,7 +283,6 @@ class Tours(object):
         permission='add'
     )
     def _add_point(self):
-        _ = self.request.translate
         schema = TourPointSchema().bind(request=self.request)
 
         try:
@@ -289,8 +293,8 @@ class Tours(object):
                 accomodation_id=controls.get('accomodation_id'),
                 foodcat_id=controls.get('foodcat_id'),
                 roomcat_id=controls.get('roomcat_id'),
-                start_dt=controls.get('start_dt'),
-                end_dt=controls.get('end_dt'),
+                start_date=controls.get('start_date'),
+                end_date=controls.get('end_date'),
                 description=controls.get('description'),
             )
             DBSession.add(point)
@@ -313,7 +317,6 @@ class Tours(object):
         permission='edit'
     )
     def edit_point(self):
-        _ = self.request.translate
         point = TourPoint.get(self.request.params.get('id'))
         return {
             'item': point,
@@ -328,7 +331,6 @@ class Tours(object):
         permission='edit'
     )
     def _edit_point(self):
-        _ = self.request.translate
         schema = TourPointSchema().bind(request=self.request)
         point = TourPoint.get(self.request.params.get('id'))
         try:
@@ -338,8 +340,8 @@ class Tours(object):
             point.accomodation_id = controls.get('accomodation_id')
             point.foodcat_id = controls.get('foodcat_id')
             point.roomcat_id = controls.get('roomcat_id')
-            point.start_dt = controls.get('start_dt')
-            point.end_dt = controls.get('end_dt')
+            point.start_date = controls.get('start_date')
+            point.end_date = controls.get('end_date')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {

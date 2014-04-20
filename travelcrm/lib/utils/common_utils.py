@@ -3,10 +3,11 @@
 import random
 from uuid import uuid4
 
-from pyramid.threadlocal import (
-    get_current_registry,
-    get_current_request
-)
+from pyramid.threadlocal import get_current_registry
+from pyramid.threadlocal import get_current_request
+from pyramid.interfaces import ITranslationDirectories
+
+from pyramid.i18n import make_localizer, get_localizer
 
 
 def _get_settings_value(name):
@@ -25,9 +26,19 @@ def gen_id(prefix='', limit=6):
     return u"%s%s" % (prefix, ''.join(s[:limit]))
 
 
-def get_translate():
+def _get_localizer_for_locale_name(locale_name):
+    registry = get_current_registry()
+    tdirs = registry.queryUtility(ITranslationDirectories, default=[])
+    return make_localizer(locale_name, tdirs)
+
+
+def translate(*args, **kwargs):
     request = get_current_request()
-    return request.translate
+    if request is None:
+        localizer = _get_localizer_for_locale_name('en')
+    else:
+        localizer = get_localizer(request)
+    return localizer.translate(*args, **kwargs)
 
 
 def cast_int(val):

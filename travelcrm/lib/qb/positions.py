@@ -5,12 +5,17 @@ from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.position import Position
 
+from ..bl.structures import query_recursive_tree
+
 
 class PositionsQueryBuilder(ResourcesQueryBuilder):
+    _subq_structures_recursive = query_recursive_tree().subquery()
     _fields = {
         'id': Position.id,
         '_id': Position.id,
         'position_name': Position.name,
+        'structure_id': Position.structure_id,
+        'structure_path': _subq_structures_recursive.c.name_path
     }
 
     _simple_search_fields = [
@@ -24,6 +29,10 @@ class PositionsQueryBuilder(ResourcesQueryBuilder):
         )
         self.query = self.query.join(
             Position, Resource.position
+        )
+        self.query = self.query.join(
+            self._subq_structures_recursive,
+            self._subq_structures_recursive.c.id == Position.structure_id
         )
         self.query = self.query.add_columns(*fields)
 

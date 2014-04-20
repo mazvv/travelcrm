@@ -1,44 +1,42 @@
+﻿/**
+ * jQuery EasyUI 1.3.6
+ * 
+ * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
+ *
+ * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
+ * To use it on other terms please contact us at info@jeasyui.com
+ *
+ */
 /**
  * combobox - jQuery EasyUI
- * 
- * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
- *
- * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: info@jeasyui.com
- * http://www.gnu.org/licenses/gpl.txt
- * http://www.jeasyui.com/license_commercial.php
  * 
  * Dependencies:
  *   combo
  * 
  */
 (function($){
-	function findRowBy(target, value, param, isGroup){
+	var COMBOBOX_SERNO = 0;
+	
+	function getRowIndex(target, value){
 		var state = $.data(target, 'combobox');
 		var opts = state.options;
-		if (isGroup){
-			return _findRow(state.groups, param, value);
-		} else {
-			return _findRow(state.data, (param ? param : state.options.valueField), value);
-		}
-		
-		function _findRow(data,key,value){
-			for(var i=0; i<data.length; i++){
-				var row = data[i];
-				if (row[key] == value){return row}
+		var data = state.data;
+		for(var i=0; i<data.length; i++){
+			if (data[i][opts.valueField] == value){
+				return i;
 			}
-			return null;
 		}
+		return -1;
 	}
 	
 	/**
 	 * scroll panel to display the specified item
 	 */
 	function scrollTo(target, value){
+		var opts = $.data(target, 'combobox').options;
 		var panel = $(target).combo('panel');
-		var row = findRowBy(target, value);
-		if (row){
-			var item = $('#'+row.domId);
+		var item = opts.finder.getEl(target, value);
+		if (item.length){
 			if (item.position().top <= 0){
 				var h = panel.scrollTop() + item.position().top;
 				panel.scrollTop(h);
@@ -81,7 +79,7 @@
 		}
 		if (item.length){
 			item.addClass('combobox-item-hover');
-			var row = findRowBy(target, item.attr('id'), 'domId');
+			var row = opts.finder.getRow(target, item);
 			if (row){
 				scrollTo(target, row[opts.valueField]);
 				if (opts.selectOnNavigation){
@@ -104,7 +102,7 @@
 				values = [value];
 			}
 			setValues(target, values);
-			opts.onSelect.call(target, findRowBy(target, value));
+			opts.onSelect.call(target, opts.finder.getRow(target, value));
 		}
 	}
 	
@@ -118,7 +116,7 @@
 		if (index >= 0){
 			values.splice(index, 1);
 			setValues(target, values);
-			opts.onUnselect.call(target, findRowBy(target, value));
+			opts.onUnselect.call(target, opts.finder.getRow(target, value));
 		}
 	}
 	
@@ -134,10 +132,10 @@
 		for(var i=0; i<values.length; i++){
 			var v = values[i];
 			var s = v;
-			var row = findRowBy(target, v);
+			opts.finder.getEl(target, v).addClass('combobox-item-selected');
+			var row = opts.finder.getRow(target, v);
 			if (row){
 				s = row[opts.textField];
-				$('#'+row.domId).addClass('combobox-item-selected');
 			}
 			vv.push(v);
 			ss.push(s);
@@ -152,7 +150,6 @@
 	/**
 	 * load data, the old list items will be removed.
 	 */
-	var itemIndex = 1;
 	function loadData(target, data, remainText){
 		var state = $.data(target, 'combobox');
 		var opts = state.options;
@@ -172,9 +169,8 @@
 			if (g){
 				if (group != g){
 					group = g;
-					var grow = {value:g, domId:('_easyui_combobox_'+itemIndex++)};
-					state.groups.push(grow);
-					dd.push('<div id="' + grow.domId + '" class="combobox-group">');
+					state.groups.push(g);
+					dd.push('<div id="' + (state.groupIdPrefix+'_'+(state.groups.length-1)) + '" class="combobox-group">');
 					dd.push(opts.groupFormatter ? opts.groupFormatter.call(target, g) : g);
 					dd.push('</div>');
 				}
@@ -183,8 +179,7 @@
 			}
 			
 			var cls = 'combobox-item' + (row.disabled ? ' combobox-item-disabled' : '') + (g ? ' combobox-gitem' : '');
-			row.domId = '_easyui_combobox_' + itemIndex++;
-			dd.push('<div id="' + row.domId + '" class="' + cls + '">');
+			dd.push('<div id="' + (state.itemIdPrefix+'_'+i) + '" class="' + cls + '">');
 			dd.push(opts.formatter ? opts.formatter.call(target, row) : s);
 			dd.push('</div>');
 			
@@ -248,30 +243,33 @@
 			request(target, null, {q:q}, true);
 		} else {
 			var panel = $(target).combo('panel');
+			panel.find('div.combobox-item-selected,div.combobox-item-hover').removeClass('combobox-item-selected combobox-item-hover');
 			panel.find('div.combobox-item,div.combobox-group').hide();
 			var data = state.data;
-			var group = undefined;
-			for(var i=0; i<data.length; i++){
-				var row = data[i];
-				if (opts.filter.call(target, q, row)){
-					var v = row[opts.valueField];
-					var s = row[opts.textField];
-					var g = row[opts.groupField];
-					var item = $('#'+row.domId).show();
-					if (s.toLowerCase() == q.toLowerCase()){
-//						setValues(target, [v], true);
-						setValues(target, [v]);
-						item.addClass('combobox-item-selected');
-					}
-					if (opts.groupField && group != g){
-						var grow = findRowBy(target, g, 'value', true);
-						if (grow){
-							$('#'+grow.domId).show();
+			var vv = [];
+			var qq = opts.multiple ? q.split(opts.separator) : [q];
+			$.map(qq, function(q){
+				q = $.trim(q);
+				var group = undefined;
+				for(var i=0; i<data.length; i++){
+					var row = data[i];
+					if (opts.filter.call(target, q, row)){
+						var v = row[opts.valueField];
+						var s = row[opts.textField];
+						var g = row[opts.groupField];
+						var item = opts.finder.getEl(target, v).show();
+						if (s.toLowerCase() == q.toLowerCase()){
+							vv.push(v);
+							item.addClass('combobox-item-selected');
 						}
-						group = g;
+						if (opts.groupField && group != g){
+							$('#'+state.groupIdPrefix+'_'+$.inArray(g, state.groups)).show();
+							group = g;
+						}
 					}
 				}
-			}
+			});
+			setValues(target, vv, true);
 		}
 	}
 	
@@ -280,38 +278,42 @@
 		var opts = t.combobox('options');
 		var panel = t.combobox('panel');
 		var item = panel.children('div.combobox-item-hover');
-		if (!item.length){
-			item = panel.children('div.combobox-item-selected');
-		}
-		if (!item.length){return}
-		var row = findRowBy(target, item.attr('id'), 'domId');
-		if (!row){return}
-		var value = row[opts.valueField];
-		if (opts.multiple){
-			if (item.hasClass('combobox-item-selected')){
-				t.combobox('unselect', value);
+		if (item.length){
+			var row = opts.finder.getRow(target, item);
+			var value = row[opts.valueField];
+			if (opts.multiple){
+				if (item.hasClass('combobox-item-selected')){
+					t.combobox('unselect', value);
+				} else {
+					t.combobox('select', value);
+				}
 			} else {
 				t.combobox('select', value);
 			}
-		} else {
-			t.combobox('select', value);
-			t.combobox('hidePanel');
 		}
 		var vv = [];
-		var values = t.combobox('getValues');
-		for(var i=0; i<values.length; i++){
-			if (findRowBy(target, values[i])){
-				vv.push(values[i]);
+		$.map(t.combobox('getValues'), function(v){
+			if (getRowIndex(target, v) >= 0){
+				vv.push(v);
 			}
-		}
+		});
 		t.combobox('setValues', vv);
+		if (!opts.multiple){
+			t.combobox('hidePanel');
+		}
 	}
 	
 	/**
 	 * create the component
 	 */
 	function create(target){
-		var opts = $.data(target, 'combobox').options;
+		var state = $.data(target, 'combobox');
+		var opts = state.options;
+		
+		COMBOBOX_SERNO++;
+		state.itemIdPrefix = '_easyui_combobox_i' + COMBOBOX_SERNO;
+		state.groupIdPrefix = '_easyui_combobox_g' + COMBOBOX_SERNO;
+		
 		$(target).addClass('combobox-f');
 		$(target).combo($.extend({}, opts, {
 			onShowPanel: function(){
@@ -334,7 +336,7 @@
 		}).bind('click', function(e){
 			var item = $(e.target).closest('div.combobox-item');
 			if (!item.length || item.hasClass('combobox-item-disabled')){return}
-			var row = findRowBy(target, item.attr('id'), 'domId');
+			var row = opts.finder.getRow(target, item);
 			if (!row){return}
 			var value = row[opts.valueField];
 			if (opts.multiple){
@@ -472,8 +474,8 @@
 		function _parseItem(el, group){
 			var t = $(el);
 			var row = {};
-			row[opts.valueField] = t.attr('value')!=undefined ? t.attr('value') : t.html();
-			row[opts.textField] = t.html();
+			row[opts.valueField] = t.attr('value')!=undefined ? t.attr('value') : t.text();
+			row[opts.textField] = t.text();
 			row['selected'] = t.is(':selected');
 			row['disabled'] = t.is(':disabled');
 			if (group){
@@ -528,6 +530,18 @@
 		},
 		loadFilter: function(data){
 			return data;
+		},
+		finder:{
+			getEl:function(target, value){
+				var index = getRowIndex(target, value);
+				var id = $.data(target, 'combobox').itemIdPrefix + '_' + index;
+				return $('#'+id);
+			},
+			getRow:function(target, p){
+				var state = $.data(target, 'combobox');
+				var index = (p instanceof jQuery) ? p.attr('id').substr(state.itemIdPrefix.length+1) : getRowIndex(target, p);
+				return state.data[parseInt(index)];
+			}
 		},
 		
 		onBeforeLoad: function(param){},

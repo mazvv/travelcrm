@@ -9,7 +9,9 @@ from ..models import DBSession
 from ..models.person import Person
 from ..models.contact import Contact
 from ..models.passport import Passport
+from ..models.address import Address
 from ..lib.qb.persons import PersonsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.persons import PersonSchema
 
@@ -75,7 +77,6 @@ class Persons(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Person'),
         }
@@ -88,7 +89,6 @@ class Persons(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = PersonSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -120,6 +120,16 @@ class Persons(object):
                     )
                     .all()
                 )
+            if self.request.params.getall('address_id'):
+                person.addresses = (
+                    DBSession.query(Address)
+                    .filter(
+                        Address.id.in_(
+                            self.request.params.getall('address_id')
+                        )
+                    )
+                    .all()
+                )
             DBSession.add(person)
             DBSession.flush()
             return {
@@ -140,7 +150,6 @@ class Persons(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         person = Person.get(self.request.params.get('id'))
         return {
             'item': person,
@@ -155,7 +164,6 @@ class Persons(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = PersonSchema().bind(request=self.request)
         person = Person.get(self.request.params.get('id'))
         try:
@@ -190,6 +198,18 @@ class Persons(object):
                 )
             else:
                 person.passports = []
+            if self.request.params.getall('address_id'):
+                person.addresses = (
+                    DBSession.query(Address)
+                    .filter(
+                        Address.id.in_(
+                            self.request.params.getall('address_id')
+                        )
+                    )
+                    .all()
+                )
+            else:
+                person.addresses = []
             return {
                 'success_message': _(u'Saved'),
                 'response': person.id
@@ -220,7 +240,6 @@ class Persons(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             person = Person.get(id)
             if person:

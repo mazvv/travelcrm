@@ -2,10 +2,6 @@
 
 import json
 
-from datetime import (
-    date,
-    datetime
-)
 from babel.dates import (
     format_datetime,
     format_date
@@ -34,6 +30,8 @@ from ..utils.common_utils import (
     get_locale_name,
     gen_id,
 )
+from ..utils.common_utils import translate as _
+from ..bl.tasks import PRIORITIES
 
 
 def yes_no_field(value=None, name='yes_no'):
@@ -170,7 +168,6 @@ def navigations_combotree_field(
 def employees_combobox_field(
     request, value=None, name='employee_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Employees.get_permisions(Employees, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -307,7 +304,7 @@ def permisions_scope_type_field(
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto'"
+        data_options="panelHeight:'auto',editable:false"
     )
 
 
@@ -327,6 +324,20 @@ def date_field(value, name, options=None):
             add_datebox_clear_btn("#%s");
         </script>
     """) % id
+
+
+def time_field(value, name, options=None):
+    id = gen_id()
+    data_options = "showSeconds:false,width:60"
+    if options:
+        data_options += ",%s" % options
+    if value:
+        value = format_date(value, format="short", locale=get_locale_name())
+    html = tags.text(
+        name, value, class_="easyui-timespinner text w10",
+        id=id, **{'data-options': data_options}
+    )
+    return html
 
 
 def datetime_field(value, name, options=None):
@@ -380,7 +391,6 @@ def contact_type_combobox_field(
 def licences_combobox_field(
     request, value=None, name='licence_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Licences.get_permisions(Licences, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -490,7 +500,6 @@ def licences_combobox_field(
 def bpersons_combobox_field(
     request, value=None, name='bperson_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = BPersons.get_permisions(BPersons, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -599,7 +608,6 @@ def bpersons_combobox_field(
 def contacts_combobox_field(
     request, value=None, name='contact_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Contacts.get_permisions(Contacts, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -709,7 +717,6 @@ def contacts_combobox_field(
 def hotelcats_combobox_field(
     request, value=None, name='hotelcat_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Hotelcats.get_permisions(Hotelcats, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -819,7 +826,6 @@ def hotelcats_combobox_field(
 def countries_combobox_field(
     request, value=None, name='country_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Countries.get_permisions(Countries, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -929,7 +935,6 @@ def countries_combobox_field(
 def regions_combobox_field(
     request, value=None, name='region_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Regions.get_permisions(Regions, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1039,7 +1044,6 @@ def regions_combobox_field(
 def locations_combobox_field(
     request, value=None, name='location_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Locations.get_permisions(Locations, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1149,7 +1153,6 @@ def locations_combobox_field(
 def touroperators_combobox_field(
     request, value=None, name='touroperator_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Touroperators.get_permisions(Touroperators, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1259,7 +1262,6 @@ def touroperators_combobox_field(
 def accomodations_combobox_field(
     request, value=None, name='accomodation_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Accomodations.get_permisions(Accomodations, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1369,7 +1371,6 @@ def accomodations_combobox_field(
 def foodcats_combobox_field(
     request, value=None, name='foodcat_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Foodcats.get_permisions(Foodcats, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1479,7 +1480,6 @@ def foodcats_combobox_field(
 def roomcats_combobox_field(
     request, value=None, name='roomcat_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Roomcats.get_permisions(Roomcats, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1589,7 +1589,6 @@ def roomcats_combobox_field(
 def hotels_combobox_field(
     request, value=None, name='hotel_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Hotels.get_permisions(Hotels, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1699,7 +1698,6 @@ def hotels_combobox_field(
 def currencies_combobox_field(
     request, value=None, name='currency_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Currencies.get_permisions(Currencies, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1809,7 +1807,6 @@ def currencies_combobox_field(
 def persons_combobox_field(
     request, value=None, name='person_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Persons.get_permisions(Persons, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -1918,7 +1915,6 @@ def persons_combobox_field(
 def tours_combobox_field(
     request, value=None, name='tour_id', id=None, options=None
 ):
-    _ = request.translate
     permisions = Tours.get_permisions(Tours, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
@@ -2032,7 +2028,6 @@ def tours_combobox_field(
 
 
 def passport_type_field(request, value=None, name='passport_type'):
-    _ = request.translate
     choices = [
         ('citizen', _(u'citizen')),
         ('foreign', _(u'foreign')),
@@ -2040,4 +2035,13 @@ def passport_type_field(request, value=None, name='passport_type'):
     return tags.select(
         name, value, choices, class_='easyui-combobox text w15',
         data_options="panelHeight:'auto',editable:false"
+    )
+
+
+def tasks_priority_combobox_field(
+    request, value=None, name='priority'
+):
+    return tags.select(
+        name, value, PRIORITIES, class_='easyui-combobox text w10',
+        data_options="panelHeight:'auto',editable:false,width:126"
     )

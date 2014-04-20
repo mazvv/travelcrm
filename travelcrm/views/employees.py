@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.employee import Employee
 from ..lib.qb.employees import EmployeesQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.employees import EmployeeSchema
 
@@ -73,7 +74,6 @@ class Employees(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Employee')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Employees(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = EmployeeSchema().bind(request=self.request)
 
         try:
@@ -115,7 +114,6 @@ class Employees(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         employee = Employee.get(self.request.params.get('id'))
         return {'item': employee, 'title': _(u'Edit Employee')}
 
@@ -127,7 +125,6 @@ class Employees(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = EmployeeSchema().bind(request=self.request)
         employee = Employee.get(self.request.params.get('id'))
         try:
@@ -166,7 +163,6 @@ class Employees(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             employee = Employee.get(id)
             if employee:

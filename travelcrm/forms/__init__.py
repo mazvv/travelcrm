@@ -58,6 +58,26 @@ class DateTime(ColanderDate):
         return result
 
 
+class Time(ColanderDate):
+
+    def deserialize(self, node, cstruct):
+        if not cstruct:
+            return null
+        try:
+            # Now Babel does not understand time without seconds
+            cstruct = "%s:00" % cstruct
+            result = parse_time(cstruct, locale=get_locale_name())
+        except:
+            raise Invalid(
+                node,
+                _(
+                    self.err_template,
+                    mapping={'val': cstruct}
+                )
+            )
+        return result
+
+
 class PhoneNumber(object):
 
     def __call__(self, node, value):

@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.advsource import Advsource
 from ..lib.qb.advsources import AdvsourcesQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.advsources import AdvsourceSchema
 
@@ -73,7 +74,6 @@ class Advsources(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Advertising Source')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Advsources(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = AdvsourceSchema().bind(request=self.request)
 
         try:
@@ -113,7 +112,6 @@ class Advsources(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         advsource = Advsource.get(self.request.params.get('id'))
         return {'item': advsource, 'title': _(u'Edit Advertising Source')}
 
@@ -125,7 +123,6 @@ class Advsources(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = AdvsourceSchema().bind(request=self.request)
         advsource = Advsource.get(self.request.params.get('id'))
         try:
@@ -162,7 +159,6 @@ class Advsources(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             advsource = Advsource.get(id)
             if advsource:

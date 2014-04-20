@@ -6,6 +6,7 @@ from . import (
     ResourcesQueryBuilder,
     GeneralQueryBuilder
 )
+
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.tour import Tour
@@ -23,16 +24,41 @@ from ...models.currency import Currency
 
 
 class ToursQueryBuilder(ResourcesQueryBuilder):
+    _subq = (
+        DBSession.query(
+            TourPoint.tour_id,
+            func.array_to_string(
+                func.array_agg(distinct(Hotelcat.name)),
+                ', '
+            )
+            .label('hotel_cat'),
+            func.array_to_string(
+                func.array_agg(distinct(Country.name)),
+                ', '
+            )
+            .label('country'),
+        )
+        .join(Location, TourPoint.location)
+        .join(Region, Location.region)
+        .join(Country, Region.country)
+        .outerjoin(Hotel, TourPoint.hotel)
+        .outerjoin(Hotelcat, Hotel.hotelcat)
+        .group_by(TourPoint.tour_id)
+        .subquery()
+    )
+
     _fields = {
         'id': Tour.id,
         '_id': Tour.id,
         'touroperator_name': Touroperator.name,
+        'hotel_cat': _subq.c.hotel_cat,
+        'country': _subq.c.country,
         'price': Tour.price,
         'currency': Currency.iso_code,
         'adults': Tour.adults,
         'children': Tour.children,
-        'start_dt': cast(Tour.start_dt, DATE),
-        'end_dt': cast(Tour.end_dt, DATE)
+        'start_date': cast(Tour.start_date, DATE),
+        'end_date': cast(Tour.end_date, DATE)
     }
 
     _simple_search_fields = [
@@ -41,30 +67,6 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
 
     def __init__(self, context):
         super(ToursQueryBuilder, self).__init__(context)
-        subq = (
-            DBSession.query(
-                TourPoint.tour_id,
-                func.array_to_string(
-                    func.array_agg(distinct(Hotelcat.name)),
-                    ', '
-                )
-                .label('hotel_cat'),
-                func.array_to_string(
-                    func.array_agg(distinct(Country.name)),
-                    ', '
-                )
-                .label('country'),
-            )
-            .join(Location, TourPoint.location)
-            .join(Region, Location.region)
-            .join(Country, Region.country)
-            .outerjoin(Hotel, TourPoint.hotel)
-            .outerjoin(Hotelcat, Hotel.hotelcat)
-            .group_by(TourPoint.tour_id)
-            .subquery()
-        )
-        self._fields['hotel_cat'] = subq.c.hotel_cat
-        self._fields['country'] = subq.c.country
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
@@ -73,7 +75,7 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
             .join(Tour, Resource.tour)
             .join(Touroperator, Tour.touroperator)
             .join(Currency, Tour.currency)
-            .join(subq, Tour.id == subq.c.tour_id)
+            .join(self._subq, Tour.id == self._subq.c.tour_id)
         )
         self.query = self.query.add_columns(*fields)
 
@@ -97,8 +99,8 @@ class ToursPointsQueryBuilder(GeneralQueryBuilder):
         'accomodation_name': Accomodation.name,
         'roomcat_name': Roomcat.name,
         'foodcat_name': Foodcat.name,
-        'point_start_dt': TourPoint.start_dt,
-        'point_end_dt': TourPoint.end_dt,
+        'point_start_date': TourPoint.start_date,
+        'point_end_date': TourPoint.end_date,
         'description': TourPoint.description
     }
 

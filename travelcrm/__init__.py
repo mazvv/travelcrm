@@ -44,11 +44,6 @@ def main(global_config, **settings):
         'travelcrm:locale',
     )
     config.add_subscriber(
-        '.subscribers.localizer',
-        'pyramid.events.NewRequest'
-    )
-
-    config.add_subscriber(
         '.subscribers.helpers',
         'pyramid.events.BeforeRender'
     )

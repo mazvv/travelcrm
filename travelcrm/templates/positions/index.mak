@@ -30,7 +30,8 @@
         <thead>
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
-            <th data-options="field:'position_name',sortable:true,width:300">${_(u"name")}</th>
+            <th data-options="field:'position_name',sortable:true,width:250">${_(u"name")}</th>
+            <th data-options="field:'structure_path',sortable:true,width:300,formatter:function(value,row,index){return value.join(' &rarr; ');}">${_(u"structure")}</th>
             <th data-options="field:'status',width:50,formatter:function(value,row,index){return datagrid_resource_status_format(value);},styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"status")}</strong></th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>

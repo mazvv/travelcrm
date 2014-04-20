@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.region import Region
 from ..lib.qb.regions import RegionsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.regions import RegionSchema
 
@@ -73,7 +74,6 @@ class Regions(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Region')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Regions(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = RegionSchema().bind(request=self.request)
 
         try:
@@ -114,7 +113,6 @@ class Regions(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         region = Region.get(self.request.params.get('id'))
         return {'item': region, 'title': _(u'Edit Region')}
 
@@ -126,7 +124,6 @@ class Regions(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = RegionSchema().bind(request=self.request)
         region = Region.get(self.request.params.get('id'))
         try:
@@ -164,7 +161,6 @@ class Regions(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             region = Region.get(id)
             if region:

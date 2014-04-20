@@ -29,11 +29,11 @@ class ResourceType(Base):
             name='unique_idx_resource_type_module',
             use_alter=True,
         ),
-        UniqueConstraint(
-            'name',
-            name='unique_idx_resource_type_name',
-            use_alter=True,
-        ),
+        #UniqueConstraint(
+        #    'name',
+        #    name='unique_idx_resource_type_name',
+        #    use_alter=True,
+        #),
     )
 
     # column definitions

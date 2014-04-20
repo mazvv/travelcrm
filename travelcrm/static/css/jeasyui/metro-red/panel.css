@@ -1,6 +1,11 @@
 .panel {
   overflow: hidden;
   text-align: left;
+  margin: 0;
+  border: 0;
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .panel-header,
 .panel-body {
@@ -19,7 +24,8 @@
 }
 .panel-body {
   overflow: auto;
-  border-top-width: 0px;
+  border-top-width: 0;
+  padding: 0;
 }
 .panel-body-noheader {
   border-top-width: 1px;

@@ -50,4 +50,6 @@ from passport import Passport
 from hotel import Hotel
 from tour import Tour
 from tour_point import TourPoint
-from tour_deal import TourDeal
+from bank import Bank
+from bank_detail import BankDetail
+from task import Task

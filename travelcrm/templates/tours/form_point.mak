@@ -54,20 +54,20 @@
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"start"), True, "start_dt")}
+                ${h.tags.title(_(u"start"), True, "start_date")}
             </div>
             <div class="ml15">
-                ${h.fields.datetime_field(item.start_dt if item else None, 'start_dt')}
-                ${h.common.error_container(name='start_dt')}
+                ${h.fields.date_field(item.start_date if item else None, 'start_date')}
+                ${h.common.error_container(name='start_date')}
             </div>
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"end"), True, "end_dt")}
+                ${h.tags.title(_(u"end"), True, "end_date")}
             </div>
             <div class="ml15">
-                ${h.fields.datetime_field(item.end_dt if item else None, 'end_dt')}
-                ${h.common.error_container(name='end_dt')}
+                ${h.fields.date_field(item.end_date if item else None, 'end_date')}
+                ${h.common.error_container(name='end_date')}
             </div>
         </div>
         <div class="form-field">

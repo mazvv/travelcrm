@@ -42,18 +42,10 @@
 .pagination span {
   font-size: 12px;
 }
-a.pagination-link {
-  padding: 1px;
-}
-a.pagination-link span.l-btn-left {
-  padding-left: 0;
-}
-a.pagination-link span span.l-btn-text {
+.pagination-link .l-btn-text {
   width: 24px;
   text-align: center;
-}
-a:hover.pagination-link {
-  padding: 0;
+  margin: 0;
 }
 .pagination-first {
   background: url('images/pagination_icons.png') no-repeat 0 center;

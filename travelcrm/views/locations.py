@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.location import Location
 from ..lib.qb.locations import LocationsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.locations import LocationSchema
 
@@ -73,7 +74,6 @@ class Locations(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Location')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Locations(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = LocationSchema().bind(request=self.request)
 
         try:
@@ -114,7 +113,6 @@ class Locations(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         location = Location.get(self.request.params.get('id'))
         return {'item': location, 'title': _(u'Edit Location')}
 
@@ -126,7 +124,6 @@ class Locations(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = LocationSchema().bind(request=self.request)
         location = Location.get(self.request.params.get('id'))
         try:
@@ -152,7 +149,6 @@ class Locations(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         location = Location.get(self.request.params.get('id'))
         return {
             'item': location,
@@ -189,7 +185,6 @@ class Locations(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             location = Location.get(id)
             if location:

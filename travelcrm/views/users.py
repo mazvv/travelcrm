@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.user import User
 from ..lib.qb.users import UsersQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.users import (
     UserAddSchema,
@@ -76,7 +77,6 @@ class Users(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add User')}
 
     @view_config(
@@ -87,7 +87,6 @@ class Users(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = UserAddSchema().bind(request=self.request)
 
         try:
@@ -118,7 +117,6 @@ class Users(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         user = User.get(self.request.params.get('id'))
         return {'item': user, 'title': _(u'Edit User')}
 
@@ -130,7 +128,6 @@ class Users(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = UserEditSchema().bind(request=self.request)
         user = User.get(self.request.params.get('id'))
         try:
@@ -170,7 +167,6 @@ class Users(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             user = User.get(id)
             if user:

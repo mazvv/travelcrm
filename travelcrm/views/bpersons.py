@@ -9,6 +9,7 @@ from ..models import DBSession
 from ..models.bperson import BPerson
 from ..models.contact import Contact
 from ..lib.qb.bpersons import BPersonsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.bpersons import BPersonSchema
 
@@ -74,7 +75,6 @@ class BPersons(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Business Person'),
         }
@@ -87,7 +87,6 @@ class BPersons(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = BPersonSchema().bind(request=self.request)
 
         try:
@@ -129,7 +128,6 @@ class BPersons(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         bperson = BPerson.get(self.request.params.get('id'))
         return {
             'item': bperson,
@@ -144,7 +142,6 @@ class BPersons(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = BPersonSchema().bind(request=self.request)
         bperson = BPerson.get(self.request.params.get('id'))
         try:
@@ -184,7 +181,6 @@ class BPersons(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         bperson = BPerson.get(self.request.params.get('id'))
         return {
             'item': bperson,
@@ -221,7 +217,6 @@ class BPersons(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             bperson = BPerson.get(id)
             if bperson:

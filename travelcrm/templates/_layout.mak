@@ -13,6 +13,7 @@ ${h.tags.Doctype().html5()}
             request.static_url('travelcrm:static/js/jquery-1.10.2.min.js'), 
             request.static_url('travelcrm:static/js/jquery-migrate-1.2.1.min.js'),
             request.static_url('travelcrm:static/js/jeasyui/jquery.easyui.min.js'),
+            request.static_url('travelcrm:static/js/jquery-te-1.4.0.min.js'),
             request.static_url('travelcrm:static/js/jeasyui/locale/easyui-lang-en.js'),
             request.static_url('travelcrm:static/js/main.js')
         )}
@@ -31,7 +32,8 @@ ${h.tags.Doctype().html5()}
                         style="background-color: transparent;"
                         data-options="
                             href:'/system_navigation',
-                            border:false
+                            border:false,
+                            loadingMessage: '',
                     ">
                     </div>
                 </div>
@@ -42,14 +44,15 @@ ${h.tags.Doctype().html5()}
         </div>
         <div id="_content_" class="main" data-options="region:'center', border:false">
             <div class="easyui-layout" data-options="fit:true">
-                <div id="_tasks_" class="dl30" title="${_(u'Tools')}"
+                <div id="_tasks_" class="dl35"
                     data-options="region:'east', 
                         border:false, 
                         split:true, 
-                        collapsible: true, 
-                        iconCls: 'fa fa-cogs'
                 ">
-                    tasks manager
+                    <div id="_tools_" class="easyui-accordion" data-options="fit:true,border:false">
+                        <div title="${_(u"Tasks")}" data-options="iconCls:'fa fa-calendar-o',href:'/tasks'">
+                        </div>
+                    </div>
                 </div>
                 <div id="_main_" data-options="region:'center', border:false">
                     <div id="_tabs_" class="easyui-tabs" data-options="fit:true,border:false">

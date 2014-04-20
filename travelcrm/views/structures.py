@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.structure import Structure
 from ..lib.qb.structures import StructuresQueryBuilder
+from ..lib.utils.common_utils import translate as _
 from ..forms.structures import StructureSchema
 
 
@@ -64,7 +65,6 @@ class Structures(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u"Add Company Structure")
         }
@@ -77,7 +77,6 @@ class Structures(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = StructureSchema().bind(request=self.request)
 
         try:
@@ -103,7 +102,6 @@ class Structures(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         structure = Structure.get(self.request.params.get('id'))
         return {
             'title': _(u"Edit Company Structure"),
@@ -118,7 +116,6 @@ class Structures(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = StructureSchema().bind(request=self.request)
         structure = Structure.get(self.request.params.get('id'))
         try:
@@ -141,7 +138,6 @@ class Structures(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         structure = Structure.get(self.request.params.get('id'))
         return {
             'title': _(u"Copy Company Structure"),
@@ -168,7 +164,6 @@ class Structures(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             structure = Structure.get(id)
             if structure:

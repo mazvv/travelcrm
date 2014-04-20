@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.accomodation import Accomodation
 from ..lib.qb.accomodations import AccomodationsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.accomodations import AccomodationSchema
 
@@ -73,7 +74,6 @@ class Accomodations(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Hotel Category')}
 
     @view_config(
@@ -84,9 +84,7 @@ class Accomodations(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = AccomodationSchema().bind(request=self.request)
-
         try:
             controls = schema.deserialize(self.request.params)
             accomodation = Accomodation(
@@ -113,7 +111,6 @@ class Accomodations(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         accomodation = Accomodation.get(self.request.params.get('id'))
         return {'item': accomodation, 'title': _(u'Edit Hotel Category')}
 
@@ -125,7 +122,6 @@ class Accomodations(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = AccomodationSchema().bind(request=self.request)
         accomodation = Accomodation.get(self.request.params.get('id'))
         try:
@@ -162,7 +158,6 @@ class Accomodations(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             accomodation = Accomodation.get(id)
             if accomodation:

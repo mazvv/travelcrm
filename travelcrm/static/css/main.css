@@ -7,6 +7,7 @@
 @IMPORT url("./emastic/plugins/gadgets.css");
 @IMPORT url("./gh-buttons.css");
 @IMPORT url("./font-awesome.min.css");
+@IMPORT url("./jquery-te-1.4.0.css");
 
 /**
 font-color: #555555;
@@ -17,13 +18,13 @@ page background: #f4f4f4;
 
 /** emastic hacks **/
 .main{
-    width: 110em;
-    max-width: 110em;
+    width: 115em;
+    max-width: 115em;
 }
-
 html, body{
 	color: #555;
 }
+
 a{
 	color: #000;
 	outline: none;
@@ -48,7 +49,11 @@ a{
     padding: 3px 0px;
     border-bottom: 1px dashed #2b394a;
 }
-
+#_content_{
+	box-shadow: 0px 0px 6px 0px rgba(119, 119, 119, 0.44);
+	-moz-box-shadow: 0px 0px 6px 0px rgba(119, 119, 119, 0.44);
+	-webkit-box-shadow: 0px 0px 6px 0px rgba(119, 119, 119, 0.44);
+}
 #_main_{
 	background: #e9e9e9;
 }
@@ -104,6 +109,9 @@ hr.dashed{
 /** paddings **/
 .p1 {
     padding: 1em;
+}
+.pt1{
+	padding-top: 1em;
 }
 
 /** margins **/
@@ -163,10 +171,6 @@ hr.dashed{
 .datagrid-row-selected{
 	background: #eee;
 	color:#000;
-}
-
-.datagrid-row-collapse{
-	background-position: -50px 0px;
 }
 
 .datagrid-row-expand{
@@ -259,19 +263,25 @@ a:hover.l-btn-plain{
 	text-decoration: none;
 	opacity: 1;
 }
+.accordion .accordion-header-selected .panel-title{
+	color: black;
+	font-weight: normal;
+}
+.accordion .accordion-header-selected{
+	background-color: #ececec;
+}
 
 /* navigation */
-#_navigation_ .easyui-linkbutton{
-	margin-right: 10px;
-}
-#_navigation_ span.l-btn-icon-left{
-	padding: 0;
+#_navigation_ .easyui-linkbutton, #_navigation_ .easyui-menubutton{
+	margin-right: 15px;
 }
 #_navigation_ span.l-btn-text{
 	font-size: 14px;
 }
-#_navigation_ span.l-btn-text.fa span{
-	padding-left: 5px;
+#_navigation_ .l-btn-icon{
+	font-size: 16px;
+	text-align: center;
+	margin-right: 5px;
 }
 
 /* form */
@@ -416,6 +426,10 @@ input{
     color: #fff;
     background-color: #555;
 }
+.label.green{
+	color: #fff;
+	background-color: green;
+}
 
 /** datagrid **/
 .datagrid-toolbar{
@@ -494,4 +508,49 @@ span.field-actions span.field-action:hover{
 }
 span.field-actions span.field-action:first-child {
 	border-left: none;
+}
+
+/** grid **/
+.grid-details, .grid-details tr, .grid-details td{
+	border: none;
+}
+
+
+/** jqte **/
+.jqte *{
+    font-size: 12px;
+}
+.jqte a, .jqte a:hover{
+	text-decoration: none;
+}
+.jqte{
+	margin: 0;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+	border: 0px;
+	box-shadow: none;
+}
+.jqte_editor, .jqte_source{
+    padding: 5px;	
+}
+.jqte_focused{
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    border: 0px;
+    box-shadow: none;
+}
+.jqte_tool a{
+	border: 1px solid transparent;
+}
+.jqte_editor, .jqte_source{
+    max-height:300px;
+}
+.jqte_source, .jqte_source textarea{
+	padding: 5px;
+	background: transparent;
+	font-size: 12px;
 }

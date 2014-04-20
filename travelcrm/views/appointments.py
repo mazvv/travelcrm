@@ -14,7 +14,10 @@ from ..lib.qb.appointments import (
     AppointmentsQueryBuilder,
     AppointmentsRowsQueryBuilder
 )
-from ..lib.utils.common_utils import get_locale_name
+from ..lib.utils.common_utils import (
+    get_locale_name,
+    translate as _
+)
 from ..forms.appointments import (
     AppointmentSchema,
     TAppointmentRowSchema,
@@ -70,7 +73,6 @@ class Appointments(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         temporal = Temporal()
         DBSession.add(temporal)
         return {
@@ -86,7 +88,6 @@ class Appointments(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = AppointmentSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -123,7 +124,6 @@ class Appointments(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         doc = Appointment.get(self.request.params.get('id'))
         temporal = Temporal()
         DBSession.add(temporal)
@@ -141,7 +141,6 @@ class Appointments(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = AppointmentSchema().bind(request=self.request)
         doc = Appointment.get(self.request.params.get('id'))
         try:
@@ -192,7 +191,6 @@ class Appointments(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             appointment = Appointment.get(id)
             if appointment:
@@ -233,7 +231,6 @@ class Appointments(object):
         permission='add'
     )
     def add_row(self):
-        _ = self.request.translate
         return {'title': _(u'Add Row')}
 
     @view_config(
@@ -244,7 +241,6 @@ class Appointments(object):
         permission='add'
     )
     def _add_row(self):
-        _ = self.request.translate
         schema = TAppointmentRowSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -270,7 +266,6 @@ class Appointments(object):
         permission='edit'
     )
     def edit_row(self):
-        _ = self.request.translate
         id = self.request.params.get('id')
         id = int(id)
         if id < 0:
@@ -290,7 +285,6 @@ class Appointments(object):
         permission='edit'
     )
     def _edit_row(self):
-        _ = self.request.translate
         id = int(self.request.params.get('id'))
         row = (
             TAppointmentRow.get(abs(id)) if id < 0 else AppointmentRow.get(id)
@@ -334,7 +328,6 @@ class Appointments(object):
         permission='delete'
     )
     def _delete_row(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             id = int(id)
             row = (

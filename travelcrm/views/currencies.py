@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.currency import Currency
 from ..lib.qb.currencies import CurrenciesQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.currencies import CurrencySchema
 
@@ -73,7 +74,6 @@ class Currencies(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Currency')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Currencies(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = CurrencySchema().bind(request=self.request)
 
         try:
@@ -113,7 +112,6 @@ class Currencies(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         currency = Currency.get(self.request.params.get('id'))
         return {'item': currency, 'title': _(u'Edit Currency')}
 
@@ -125,7 +123,6 @@ class Currencies(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = CurrencySchema().bind(request=self.request)
         currency = Currency.get(self.request.params.get('id'))
         try:
@@ -162,7 +159,6 @@ class Currencies(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             currency = Currency.get(id)
             if currency:

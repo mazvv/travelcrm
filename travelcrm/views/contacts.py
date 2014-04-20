@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.contact import Contact
 from ..lib.qb.contacts import ContactsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.contacts import ContactSchema
 
@@ -67,7 +68,6 @@ class Contacts(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Contact'),
         }
@@ -80,7 +80,6 @@ class Contacts(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = ContactSchema().bind(request=self.request)
 
         try:
@@ -110,7 +109,6 @@ class Contacts(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         contact = Contact.get(self.request.params.get('id'))
         return {
             'item': contact,
@@ -125,7 +123,6 @@ class Contacts(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = ContactSchema().bind(request=self.request)
         contact = Contact.get(self.request.params.get('id'))
         try:
@@ -151,7 +148,6 @@ class Contacts(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         contact = Contact.get(self.request.params.get('id'))
         return {
             'item': contact,
@@ -188,7 +184,6 @@ class Contacts(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             contact = Contact.get(id)
             if contact:

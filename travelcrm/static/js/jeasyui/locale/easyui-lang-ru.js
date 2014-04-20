@@ -1,7 +1,7 @@
 if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = 'Страница';
 	$.fn.pagination.defaults.afterPageText = 'из {pages}';
-	$.fn.pagination.defaults.displayMsg = 'Просмотр {from} до {to} из {total} записей';
+	$.fn.pagination.defaults.displayMsg = '{from} до {to} из {total}';
 }
 if ($.fn.datagrid){
 	$.fn.datagrid.defaults.loadMsg = 'Обрабатывается, пожалуйста ждите ...';

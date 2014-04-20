@@ -7,11 +7,9 @@ from ..interfaces import (
 )
 from ..resources import (
     Root,
-)
-
-from ..resources import (
     ResourceTypeBase,
 )
+from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
@@ -25,7 +23,6 @@ class Users(ResourceTypeBase):
 
     @property
     def allowed_permisions(self):
-        _ = self.request.translate
         return [
             ('view', _(u'view')),
             ('add', _(u'add')),

@@ -17,6 +17,7 @@ from ..lib.utils.resources_utils import (
     ResourceClassNotFound,
 )
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.common_utils import translate as _
 from ..lib.bl.employees import (
     get_employee_permisions,
     get_employee_structure
@@ -85,7 +86,6 @@ class Root(SecuredBase):
 
     @property
     def allowed_permisions(self):
-        _ = self.request.translate
         return [
             ('view', _(u'view')),
         ]

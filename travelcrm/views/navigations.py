@@ -12,6 +12,7 @@ from ..lib.qb.navigations import (
     NavigationsQueryBuilder,
 )
 from ..lib.bl.navigations import get_next_position
+from ..lib.utils.common_utils import translate as _
 from ..forms.navigations import NavigationSchema
 
 
@@ -73,7 +74,6 @@ class Navigations(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         position = Position.get(
             self.request.params.get('position_id')
         )
@@ -90,7 +90,6 @@ class Navigations(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = NavigationSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -122,7 +121,6 @@ class Navigations(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         navigation = Navigation.get(
             self.request.params.get('id')
         )
@@ -141,7 +139,6 @@ class Navigations(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = NavigationSchema().bind(request=self.request)
         navigation = Navigation.get(
             self.request.params.get('id')
@@ -183,7 +180,6 @@ class Navigations(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             navigation = Navigation.get(id)
             if navigation:

@@ -4,7 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    DateTime,
+    Date,
     ForeignKey,
     )
 from sqlalchemy.orm import relationship, backref
@@ -87,12 +87,12 @@ class TourPoint(Base):
     description = Column(
         String(length=255),
     )
-    start_dt = Column(
-        DateTime,
+    start_date = Column(
+        Date,
         nullable=False,
     )
-    end_dt = Column(
-        DateTime,
+    end_date = Column(
+        Date,
         nullable=False,
     )
     tour = relationship(
@@ -102,7 +102,7 @@ class TourPoint(Base):
             uselist=True,
             cascade="all,delete",
             lazy="dynamic",
-            order_by='TourPoint.start_dt',
+            order_by='TourPoint.start_date',
         ),
         cascade="all,delete",
         uselist=False,

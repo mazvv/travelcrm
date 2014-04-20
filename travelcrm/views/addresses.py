@@ -8,6 +8,8 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.address import Address
 from ..lib.qb.addresses import AddressesQueryBuilder
+from ..lib.utils.common_utils import translate as _
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.addresses import AddressSchema
 
@@ -67,7 +69,6 @@ class Addresses(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Address'),
         }
@@ -80,7 +81,6 @@ class Addresses(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = AddressSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -110,7 +110,6 @@ class Addresses(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         address = Address.get(self.request.params.get('id'))
         return {
             'item': address,
@@ -125,7 +124,6 @@ class Addresses(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = AddressSchema().bind(request=self.request)
         address = Address.get(self.request.params.get('id'))
         try:
@@ -152,7 +150,6 @@ class Addresses(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         address = Address.get(self.request.params.get('id'))
         return {
             'item': address,
@@ -189,7 +186,6 @@ class Addresses(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             address = Address.get(id)
             if address:

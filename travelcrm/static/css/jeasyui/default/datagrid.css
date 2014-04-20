@@ -32,7 +32,7 @@
   position: absolute;
   top: 50%;
   margin-top: -20px;
-  padding: 12px 5px 10px 30px;
+  padding: 10px 5px 10px 30px;
   width: auto;
   height: 16px;
   border-width: 2px;
@@ -252,7 +252,7 @@
   cursor: default;
 }
 .datagrid-row-selected {
-  background: #FBEC88;
+  background: #ffe48d;
   color: #000000;
 }
 .datagrid-body .datagrid-editable .datagrid-editable-input {

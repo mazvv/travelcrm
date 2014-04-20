@@ -14,6 +14,7 @@ from pyramid.view import forbidden_view_config
 
 from ..resources import Root
 from ..models import User
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.auth import (
     LoginSchema,
@@ -57,7 +58,6 @@ class Home(object):
     )
     def _forgot(self):
         # TODO: complete this functionality
-        _ = self.request.translate
         schema = ForgotSchema()
         try:
             schema.deserialize(self.request.params)
@@ -107,7 +107,6 @@ class Home(object):
         renderer='json',
     )
     def _auth(self):
-        _ = self.request.translate
         schema = LoginSchema()
 
         controls = schema.deserialize(self.request.params)

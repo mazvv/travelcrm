@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.resource_type import ResourceType
 from ..lib.qb.resources_types import ResourcesTypesQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.resources_types import ResourceTypeSchema
 
@@ -73,7 +74,6 @@ class ResourcesTypes(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u"Add Resources Type")
         }
@@ -87,7 +87,6 @@ class ResourcesTypes(object):
     )
     def _add(self):
         schema = ResourceTypeSchema().bind(request=self.request)
-        _ = self.request.translate
         try:
             controls = schema.deserialize(self.request.params)
             resource_type = ResourceType(
@@ -119,7 +118,6 @@ class ResourcesTypes(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         resources_type = ResourceType.get(self.request.params.get('id'))
         return {
             'item': resources_type,
@@ -134,7 +132,6 @@ class ResourcesTypes(object):
         permission="edit"
     )
     def _edit(self):
-        _ = self.request.translate
         schema = ResourceTypeSchema().bind(request=self.request)
         resources_type = ResourceType.get(self.request.params.get('id'))
         try:
@@ -162,7 +159,6 @@ class ResourcesTypes(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         resources_type = ResourceType.get(self.request.params.get('id'))
         return {
             'item': resources_type,
@@ -199,7 +195,6 @@ class ResourcesTypes(object):
         permission="delete"
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             resources_type = ResourceType.get(id)
             if resources_type:

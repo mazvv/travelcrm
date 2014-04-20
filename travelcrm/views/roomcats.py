@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.roomcat import Roomcat
 from ..lib.qb.roomcats import RoomcatsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.roomcats import RoomcatSchema
 
@@ -73,7 +74,6 @@ class Roomcats(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Room Category')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Roomcats(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = RoomcatSchema().bind(request=self.request)
 
         try:
@@ -113,7 +112,6 @@ class Roomcats(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         roomcat = Roomcat.get(self.request.params.get('id'))
         return {'item': roomcat, 'title': _(u'Edit Room Category')}
 
@@ -125,7 +123,6 @@ class Roomcats(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = RoomcatSchema().bind(request=self.request)
         roomcat = Roomcat.get(self.request.params.get('id'))
         try:
@@ -162,7 +159,6 @@ class Roomcats(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             roomcat = Roomcat.get(id)
             if roomcat:

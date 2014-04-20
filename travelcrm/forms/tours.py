@@ -3,8 +3,8 @@
 import colander
 
 from . import (
+    Date,
     ResourceSchema,
-    DateTime,
 )
 from ..lib.utils.common_utils import cast_int
 
@@ -24,11 +24,17 @@ def adult_validator(node, kw):
 
 
 class TourSchema(ResourceSchema):
+    deal_date = colander.SchemaNode(
+        Date()
+    )
+    customer_id = colander.SchemaNode(
+        colander.Integer(),
+    )
     touroperator_id = colander.SchemaNode(
         colander.Integer(),
     )
     price = colander.SchemaNode(
-        colander.Decimal(),
+        colander.Money(),
     )
     adults = colander.SchemaNode(
         colander.Integer(),
@@ -46,13 +52,16 @@ class TourSchema(ResourceSchema):
     end_location_id = colander.SchemaNode(
         colander.Integer(),
     )
-    start_dt = colander.SchemaNode(
-        DateTime()
+    start_date = colander.SchemaNode(
+        Date()
     )
-    end_dt = colander.SchemaNode(
-        DateTime()
+    end_date = colander.SchemaNode(
+        Date()
     )
     tour_point_id = colander.SchemaNode(
+        colander.Set(),
+    )
+    person_id = colander.SchemaNode(
         colander.Set(),
     )
 
@@ -64,6 +73,15 @@ class TourSchema(ResourceSchema):
             val = cstruct['tour_point_id']
             cstruct['tour_point_id'] = list()
             cstruct['tour_point_id'].append(val)
+
+        if (
+            'person_id' in cstruct
+            and not isinstance(cstruct.get('person_id'), list)
+        ):
+            val = cstruct['person_id']
+            cstruct['person_id'] = list()
+            cstruct['person_id'].append(val)
+
         return super(TourSchema, self).deserialize(cstruct)
 
 
@@ -87,11 +105,11 @@ class TourPointSchema(colander.Schema):
         colander.Integer(),
         missing=None
     )
-    start_dt = colander.SchemaNode(
-        DateTime()
+    start_date = colander.SchemaNode(
+        Date()
     )
-    end_dt = colander.SchemaNode(
-        DateTime()
+    end_date = colander.SchemaNode(
+        Date()
     )
     description = colander.SchemaNode(
         colander.String(),

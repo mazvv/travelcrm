@@ -3,15 +3,42 @@
 from sqlalchemy import (
     Column,
     Integer,
-    DateTime,
+    Date,
     Numeric,
     ForeignKey,
-    )
+    Table,
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
     DBSession,
     Base
+)
+
+
+tour_person = Table(
+    'tour_person',
+    Base.metadata,
+    Column(
+        'tour_id',
+        Integer,
+        ForeignKey(
+            'tour.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'person_id',
+        Integer,
+        ForeignKey(
+            'person.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
 )
 
 
@@ -22,6 +49,21 @@ class Tour(Base):
         Integer,
         autoincrement=True,
         primary_key=True
+    )
+    deal_date = Column(
+        Date,
+        nullable=False,
+    )
+    resource_id = Column(
+        Integer,
+        ForeignKey(
+            'resource.id',
+            name="fk_resource_id_tour",
+            ondelete='cascade',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
     )
     touroperator_id = Column(
         Integer,
@@ -34,8 +76,19 @@ class Tour(Base):
         ),
         nullable=False,
     )
+    customer_id = Column(
+        Integer,
+        ForeignKey(
+            'person.id',
+            name="fk_customer_id_tour",
+            ondelete='cascade',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
     price = Column(
-        Numeric(16, 4),
+        Numeric(16, 2),
         nullable=False
     )
     currency_id = Column(
@@ -79,15 +132,31 @@ class Tour(Base):
         ),
         nullable=False,
     )
-    start_dt = Column(
-        DateTime,
+    start_date = Column(
+        Date,
         nullable=False,
     )
-    end_dt = Column(
-        DateTime,
+    end_date = Column(
+        Date,
         nullable=False,
     )
-
+    resource = relationship(
+        'Resource',
+        backref=backref('tour', uselist=False, cascade="all,delete"),
+        cascade="all,delete",
+        uselist=False,
+    )
+    customer = relationship(
+        'Person',
+        backref=backref(
+            'customers_tours',
+            uselist=True,
+            cascade="all,delete",
+            lazy="dynamic"
+        ),
+        cascade="all,delete",
+        uselist=True,
+    )
     touroperator = relationship(
         'Touroperator',
         backref=backref(
@@ -133,6 +202,18 @@ class Tour(Base):
         foreign_keys=[end_location_id],
         cascade="all,delete",
         uselist=False,
+    )
+    persons = relationship(
+        'Person',
+        secondary=tour_person,
+        backref=backref(
+            'tours',
+            uselist=True,
+            cascade="all,delete",
+            lazy="dynamic"
+        ),
+        cascade="all,delete",
+        uselist=True,
     )
 
     @classmethod

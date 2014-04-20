@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.licence import Licence
 from ..lib.qb.licences import LicencesQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.licences import LicenceSchema
 
@@ -67,7 +68,6 @@ class Licences(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Licence'),
         }
@@ -80,7 +80,6 @@ class Licences(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = LicenceSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -110,7 +109,6 @@ class Licences(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         licence = Licence.get(self.request.params.get('id'))
         return {
             'item': licence,
@@ -125,7 +123,6 @@ class Licences(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = LicenceSchema().bind(request=self.request)
         licence = Licence.get(self.request.params.get('id'))
         try:
@@ -152,7 +149,6 @@ class Licences(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         licence = Licence.get(self.request.params.get('id'))
         return {
             'item': licence,
@@ -189,7 +185,6 @@ class Licences(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             licence = Licence.get(id)
             if licence:

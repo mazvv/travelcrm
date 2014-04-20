@@ -1,12 +1,10 @@
 ﻿/**
- * jQuery EasyUI 1.3.5
+ * jQuery EasyUI 1.3.6
  * 
- * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
- * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: info@jeasyui.com
- * http://www.gnu.org/licenses/gpl.txt
- * http://www.jeasyui.com/license_commercial.php
+ * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
+ * To use it on other terms please contact us at info@jeasyui.com
  *
  */
 (function($){
@@ -95,7 +93,7 @@ var _13=$(_11).val();
 var _14=_d(_11,_13);
 if(!_14){
 _12.value="";
-$(_11).val("");
+$(_11).spinner("setValue","");
 return;
 }
 var _15=_d(_11,_12.min);
@@ -112,7 +110,7 @@ tt.push(_17(_14.getSeconds()));
 }
 var val=tt.join(_12.separator);
 _12.value=val;
-$(_11).val(val);
+$(_11).spinner("setValue",val);
 function _17(_18){
 return (_18<10?"0":"")+_18;
 };
@@ -152,8 +150,8 @@ if(_20){
 $.extend(_20.options,_1d);
 }else{
 $.data(this,"timespinner",{options:$.extend({},$.fn.timespinner.defaults,$.fn.timespinner.parseOptions(this),_1d)});
-_1(this);
 }
+_1(this);
 });
 };
 $.fn.timespinner.methods={options:function(jq){

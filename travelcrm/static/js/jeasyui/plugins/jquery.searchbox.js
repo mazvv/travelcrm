@@ -1,12 +1,10 @@
 ﻿/**
- * jQuery EasyUI 1.3.5
+ * jQuery EasyUI 1.3.6
  * 
- * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
- * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: info@jeasyui.com
- * http://www.gnu.org/licenses/gpl.txt
- * http://www.jeasyui.com/license_commercial.php
+ * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
+ * To use it on other terms please contact us at info@jeasyui.com
  *
  */
 (function($){
@@ -42,7 +40,7 @@ _b._outerHeight(sb.height());
 _a._outerHeight(sb.height());
 var _d=_b.find("span.l-btn-left");
 _d._outerHeight(sb.height());
-_d.find("span.l-btn-text,span.m-btn-downarrow").css({height:_d.height()+"px",lineHeight:_d.height()+"px"});
+_d.find("span.l-btn-text").css({height:_d.height()+"px",lineHeight:_d.height()+"px"});
 sb.insertAfter(_7);
 };
 function _e(_f){
@@ -78,7 +76,10 @@ var _19=$.data(_18,"searchbox");
 var _1a=_19.options;
 var _1b=_19.searchbox.find("input.searchbox-text");
 var _1c=_19.searchbox.find(".searchbox-button");
-_1b.unbind(".searchbox").bind("blur.searchbox",function(e){
+_1b.unbind(".searchbox");
+_1c.unbind(".searchbox");
+if(!_1a.disabled){
+_1b.bind("blur.searchbox",function(e){
 _1a.value=$(this).val();
 if(_1a.value==""){
 $(this).val(_1a.prompt);
@@ -99,41 +100,65 @@ _1a.searcher.call(_18,_1a.value,_1b._propAttr("name"));
 return false;
 }
 });
-_1c.unbind(".searchbox").bind("click.searchbox",function(){
+_1c.bind("click.searchbox",function(){
 _1a.searcher.call(_18,_1a.value,_1b._propAttr("name"));
 }).bind("mouseenter.searchbox",function(){
 $(this).addClass("searchbox-button-hover");
 }).bind("mouseleave.searchbox",function(){
 $(this).removeClass("searchbox-button-hover");
 });
+}
 };
-function _1d(_1e){
-var _1f=$.data(_1e,"searchbox");
-var _20=_1f.options;
-var _21=_1f.searchbox.find("input.searchbox-text");
-if(_20.value==""){
-_21.val(_20.prompt);
-_21.addClass("searchbox-prompt");
+function _1d(_1e,_1f){
+var _20=$.data(_1e,"searchbox");
+var _21=_20.options;
+var _22=_20.searchbox.find("input.searchbox-text");
+var mb=_20.searchbox.find("a.searchbox-menu");
+if(_1f){
+_21.disabled=true;
+$(_1e).attr("disabled",true);
+_22.attr("disabled",true);
+if(mb.length){
+mb.menubutton("disable");
+}
 }else{
-_21.val(_20.value);
-_21.removeClass("searchbox-prompt");
+_21.disabled=false;
+$(_1e).removeAttr("disabled");
+_22.removeAttr("disabled");
+if(mb.length){
+mb.menubutton("enable");
+}
 }
 };
-$.fn.searchbox=function(_22,_23){
-if(typeof _22=="string"){
-return $.fn.searchbox.methods[_22](this,_23);
+function _23(_24){
+var _25=$.data(_24,"searchbox");
+var _26=_25.options;
+var _27=_25.searchbox.find("input.searchbox-text");
+_26.originalValue=_26.value;
+if(_26.value){
+_27.val(_26.value);
+_27.removeClass("searchbox-prompt");
+}else{
+_27.val(_26.prompt);
+_27.addClass("searchbox-prompt");
 }
-_22=_22||{};
+};
+$.fn.searchbox=function(_28,_29){
+if(typeof _28=="string"){
+return $.fn.searchbox.methods[_28](this,_29);
+}
+_28=_28||{};
 return this.each(function(){
-var _24=$.data(this,"searchbox");
-if(_24){
-$.extend(_24.options,_22);
+var _2a=$.data(this,"searchbox");
+if(_2a){
+$.extend(_2a.options,_28);
 }else{
-_24=$.data(this,"searchbox",{options:$.extend({},$.fn.searchbox.defaults,$.fn.searchbox.parseOptions(this),_22),searchbox:_1(this)});
+_2a=$.data(this,"searchbox",{options:$.extend({},$.fn.searchbox.defaults,$.fn.searchbox.parseOptions(this),_28),searchbox:_1(this)});
 }
 _e(this);
-_1d(this);
+_23(this);
 _17(this);
+_1d(this,_2a.options.disabled);
 _6(this);
 });
 };
@@ -145,40 +170,59 @@ return $.data(jq[0],"searchbox").menu;
 return $.data(jq[0],"searchbox").searchbox.find("input.searchbox-text");
 },getValue:function(jq){
 return $.data(jq[0],"searchbox").options.value;
-},setValue:function(jq,_25){
+},setValue:function(jq,_2b){
 return jq.each(function(){
-$(this).searchbox("options").value=_25;
-$(this).searchbox("textbox").val(_25);
+$(this).searchbox("options").value=_2b;
+$(this).searchbox("textbox").val(_2b);
 $(this).searchbox("textbox").blur();
+});
+},clear:function(jq){
+return jq.each(function(){
+$(this).searchbox("setValue","");
+});
+},reset:function(jq){
+return jq.each(function(){
+var _2c=$(this).searchbox("options");
+$(this).searchbox("setValue",_2c.originalValue);
 });
 },getName:function(jq){
 return $.data(jq[0],"searchbox").searchbox.find("input.searchbox-text").attr("name");
-},selectName:function(jq,_26){
+},selectName:function(jq,_2d){
 return jq.each(function(){
-var _27=$.data(this,"searchbox").menu;
-if(_27){
-_27.children("div.menu-item[name=\""+_26+"\"]").triggerHandler("click");
+var _2e=$.data(this,"searchbox").menu;
+if(_2e){
+_2e.children("div.menu-item[name=\""+_2d+"\"]").triggerHandler("click");
 }
 });
 },destroy:function(jq){
 return jq.each(function(){
-var _28=$(this).searchbox("menu");
-if(_28){
-_28.menu("destroy");
+var _2f=$(this).searchbox("menu");
+if(_2f){
+_2f.menu("destroy");
 }
 $.data(this,"searchbox").searchbox.remove();
 $(this).remove();
 });
-},resize:function(jq,_29){
+},resize:function(jq,_30){
 return jq.each(function(){
-_6(this,_29);
+_6(this,_30);
+});
+},disable:function(jq){
+return jq.each(function(){
+_1d(this,true);
+_17(this);
+});
+},enable:function(jq){
+return jq.each(function(){
+_1d(this,false);
+_17(this);
 });
 }};
-$.fn.searchbox.parseOptions=function(_2a){
-var t=$(_2a);
-return $.extend({},$.parser.parseOptions(_2a,["width","height","prompt","menu"]),{value:t.val(),searcher:(t.attr("searcher")?eval(t.attr("searcher")):undefined)});
+$.fn.searchbox.parseOptions=function(_31){
+var t=$(_31);
+return $.extend({},$.parser.parseOptions(_31,["width","height","prompt","menu"]),{value:(t.val()||undefined),disabled:(t.attr("disabled")?true:undefined),searcher:(t.attr("searcher")?eval(t.attr("searcher")):undefined)});
 };
-$.fn.searchbox.defaults={width:"auto",height:22,prompt:"",value:"",menu:null,searcher:function(_2b,_2c){
+$.fn.searchbox.defaults={width:"auto",height:22,prompt:"",value:"",menu:null,disabled:false,searcher:function(_32,_33){
 }};
 })(jQuery);
 

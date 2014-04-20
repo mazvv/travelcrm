@@ -11,7 +11,7 @@ from ..models.resource_type import ResourceType
 from ..models.permision import Permision
 from ..lib.qb.permisions import PermisionsQueryBuilder
 from ..forms.permisions import PermisionSchema
-
+from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 
 
@@ -67,7 +67,6 @@ class PositionsPermisions(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         position = Position.get(
             self.request.params.get('position_id')
         )
@@ -108,7 +107,6 @@ class PositionsPermisions(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = PermisionSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)

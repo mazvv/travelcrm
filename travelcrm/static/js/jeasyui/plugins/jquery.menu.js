@@ -1,12 +1,10 @@
 ﻿/**
- * jQuery EasyUI 1.3.5
+ * jQuery EasyUI 1.3.6
  * 
- * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
- * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: info@jeasyui.com
- * http://www.gnu.org/licenses/gpl.txt
- * http://www.jeasyui.com/license_commercial.php
+ * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
+ * To use it on other terms please contact us at info@jeasyui.com
  *
  */
 (function($){
@@ -14,87 +12,95 @@ function _1(_2){
 $(_2).appendTo("body");
 $(_2).addClass("menu-top");
 $(document).unbind(".menu").bind("mousedown.menu",function(e){
-var _3=$("body>div.menu:visible");
-var m=$(e.target).closest("div.menu",_3);
+var m=$(e.target).closest("div.menu,div.combo-p");
 if(m.length){
 return;
 }
 $("body>div.menu-top:visible").menu("hide");
 });
-var _4=_5($(_2));
-for(var i=0;i<_4.length;i++){
-_6(_4[i]);
+var _3=_4($(_2));
+for(var i=0;i<_3.length;i++){
+_5(_3[i]);
 }
-function _5(_7){
-var _8=[];
-_7.addClass("menu");
-_8.push(_7);
-if(!_7.hasClass("menu-content")){
-_7.children("div").each(function(){
-var _9=$(this).children("div");
-if(_9.length){
-_9.insertAfter(_2);
-this.submenu=_9;
-var mm=_5(_9);
-_8=_8.concat(mm);
+function _4(_6){
+var _7=[];
+_6.addClass("menu");
+_7.push(_6);
+if(!_6.hasClass("menu-content")){
+_6.children("div").each(function(){
+var _8=$(this).children("div");
+if(_8.length){
+_8.insertAfter(_2);
+this.submenu=_8;
+var mm=_4(_8);
+_7=_7.concat(mm);
 }
 });
 }
-return _8;
+return _7;
 };
-function _6(_a){
-var _b=$.parser.parseOptions(_a[0],["width"]).width;
-if(_a.hasClass("menu-content")){
-_a[0].originalWidth=_b||_a._outerWidth();
+function _5(_9){
+var wh=$.parser.parseOptions(_9[0],["width","height"]);
+_9[0].originalHeight=wh.height||0;
+if(_9.hasClass("menu-content")){
+_9[0].originalWidth=wh.width||_9._outerWidth();
 }else{
-_a[0].originalWidth=_b||0;
-_a.children("div").each(function(){
-var _c=$(this);
-var _d=$.extend({},$.parser.parseOptions(this,["name","iconCls","href",{separator:"boolean"}]),{disabled:(_c.attr("disabled")?true:undefined)});
-if(_d.separator){
-_c.addClass("menu-sep");
+_9[0].originalWidth=wh.width||0;
+_9.children("div").each(function(){
+var _a=$(this);
+var _b=$.extend({},$.parser.parseOptions(this,["name","iconCls","href",{separator:"boolean"}]),{disabled:(_a.attr("disabled")?true:undefined)});
+if(_b.separator){
+_a.addClass("menu-sep");
 }
-if(!_c.hasClass("menu-sep")){
-_c[0].itemName=_d.name||"";
-_c[0].itemHref=_d.href||"";
-var _e=_c.addClass("menu-item").html();
-_c.empty().append($("<div class=\"menu-text\"></div>").html(_e));
-if(_d.iconCls){
-$("<div class=\"menu-icon\"></div>").addClass(_d.iconCls).appendTo(_c);
+if(!_a.hasClass("menu-sep")){
+_a[0].itemName=_b.name||"";
+_a[0].itemHref=_b.href||"";
+var _c=_a.addClass("menu-item").html();
+_a.empty().append($("<div class=\"menu-text\"></div>").html(_c));
+if(_b.iconCls){
+$("<div class=\"menu-icon\"></div>").addClass(_b.iconCls).appendTo(_a);
 }
-if(_d.disabled){
-_f(_2,_c[0],true);
+if(_b.disabled){
+_d(_2,_a[0],true);
 }
-if(_c[0].submenu){
-$("<div class=\"menu-rightarrow\"></div>").appendTo(_c);
+if(_a[0].submenu){
+$("<div class=\"menu-rightarrow\"></div>").appendTo(_a);
 }
-_10(_2,_c);
+_e(_2,_a);
 }
 });
-$("<div class=\"menu-line\"></div>").prependTo(_a);
+$("<div class=\"menu-line\"></div>").prependTo(_9);
 }
-_11(_2,_a);
-_a.hide();
-_12(_2,_a);
+_f(_2,_9);
+_9.hide();
+_10(_2,_9);
 };
 };
-function _11(_13,_14){
-var _15=$.data(_13,"menu").options;
-var _16=_14.attr("style");
-_14.css({display:"block",left:-10000,height:"auto",overflow:"hidden"});
-var _17=0;
-_14.find("div.menu-text").each(function(){
-if(_17<$(this)._outerWidth()){
-_17=$(this)._outerWidth();
+function _f(_11,_12){
+var _13=$.data(_11,"menu").options;
+var _14=_12.attr("style")||"";
+_12.css({display:"block",left:-10000,height:"auto",overflow:"hidden"});
+var el=_12[0];
+var _15=el.originalWidth||0;
+if(!_15){
+_15=0;
+_12.find("div.menu-text").each(function(){
+if(_15<$(this)._outerWidth()){
+_15=$(this)._outerWidth();
 }
 $(this).closest("div.menu-item")._outerHeight($(this)._outerHeight()+2);
 });
-_17+=65;
-_14._outerWidth(Math.max((_14[0].originalWidth||0),_17,_15.minWidth));
-_14.children("div.menu-line")._outerHeight(_14.outerHeight());
-_14.attr("style",_16);
+_15+=40;
+}
+_15=Math.max(_15,_13.minWidth);
+var _16=el.originalHeight||_12.outerHeight();
+var _17=Math.max(el.originalHeight,_12.outerHeight())-2;
+_12._outerWidth(_15)._outerHeight(_16);
+_12.children("div.menu-line")._outerHeight(_17);
+_14+=";width:"+el.style.width+";height:"+el.style.height;
+_12.attr("style",_14);
 };
-function _12(_18,_19){
+function _10(_18,_19){
 var _1a=$.data(_18,"menu");
 _19.unbind(".menu").bind("mouseenter.menu",function(){
 if(_1a.timer){
@@ -109,7 +115,7 @@ _1b(_18);
 }
 });
 };
-function _10(_1c,_1d){
+function _e(_1c,_1d){
 if(!_1d.hasClass("menu-item")){
 return;
 }
@@ -180,9 +186,15 @@ if(_2a.alignTo){
 var at=$(_2a.alignTo);
 _28=at.offset().left;
 top=at.offset().top+at._outerHeight();
+if(_2a.align=="right"){
+_28+=at.outerWidth()-_29.outerWidth();
+}
 }
 if(_28+_29.outerWidth()>$(window)._outerWidth()+$(document)._scrollLeft()){
 _28=$(window)._outerWidth()+$(document).scrollLeft()-_29.outerWidth()-5;
+}
+if(_28<0){
+_28=0;
 }
 if(top+_29.outerHeight()>$(window)._outerHeight()+$(document).scrollTop()){
 top=$(window)._outerHeight()+$(document).scrollTop()-_29.outerHeight()-5;
@@ -249,7 +261,7 @@ _32($(_2f));
 tmp.remove();
 return _31;
 };
-function _f(_35,_36,_37){
+function _d(_35,_36,_37){
 var t=$(_36);
 if(!t.hasClass("menu-item")){
 return;
@@ -308,11 +320,11 @@ if(_3a.handler){
 _3d[0].onclick=eval(_3a.handler);
 }
 if(_3a.disabled){
-_f(_39,_3d[0],true);
+_d(_39,_3d[0],true);
 }
-_10(_39,_3d);
-_12(_39,_3b);
-_11(_39,_3b);
+_e(_39,_3d);
+_10(_39,_3b);
+_f(_39,_3b);
 };
 function _3e(_3f,_40){
 function _41(el){
@@ -375,53 +387,51 @@ $(_48.target).children("div.menu-text").html(_48.text);
 });
 },setIcon:function(jq,_49){
 return jq.each(function(){
-var _4a=$(this).menu("getItem",_49.target);
-if(_4a.iconCls){
-$(_4a.target).children("div.menu-icon").removeClass(_4a.iconCls).addClass(_49.iconCls);
-}else{
+$(_49.target).children("div.menu-icon").remove();
+if(_49.iconCls){
 $("<div class=\"menu-icon\"></div>").addClass(_49.iconCls).appendTo(_49.target);
 }
 });
-},getItem:function(jq,_4b){
-var t=$(_4b);
-var _4c={target:_4b,id:t.attr("id"),text:$.trim(t.children("div.menu-text").html()),disabled:t.hasClass("menu-item-disabled"),name:_4b.itemName,href:_4b.itemHref,onclick:_4b.onclick};
-var _4d=t.children("div.menu-icon");
-if(_4d.length){
+},getItem:function(jq,_4a){
+var t=$(_4a);
+var _4b={target:_4a,id:t.attr("id"),text:$.trim(t.children("div.menu-text").html()),disabled:t.hasClass("menu-item-disabled"),name:_4a.itemName,href:_4a.itemHref,onclick:_4a.onclick};
+var _4c=t.children("div.menu-icon");
+if(_4c.length){
 var cc=[];
-var aa=_4d.attr("class").split(" ");
+var aa=_4c.attr("class").split(" ");
 for(var i=0;i<aa.length;i++){
 if(aa[i]!="menu-icon"){
 cc.push(aa[i]);
 }
 }
-_4c.iconCls=cc.join(" ");
+_4b.iconCls=cc.join(" ");
 }
-return _4c;
-},findItem:function(jq,_4e){
-return _2e(jq[0],_4e);
-},appendItem:function(jq,_4f){
+return _4b;
+},findItem:function(jq,_4d){
+return _2e(jq[0],_4d);
+},appendItem:function(jq,_4e){
 return jq.each(function(){
-_38(this,_4f);
+_38(this,_4e);
 });
-},removeItem:function(jq,_50){
+},removeItem:function(jq,_4f){
 return jq.each(function(){
-_3e(this,_50);
+_3e(this,_4f);
 });
-},enableItem:function(jq,_51){
+},enableItem:function(jq,_50){
 return jq.each(function(){
-_f(this,_51,false);
+_d(this,_50,false);
 });
-},disableItem:function(jq,_52){
+},disableItem:function(jq,_51){
 return jq.each(function(){
-_f(this,_52,true);
+_d(this,_51,true);
 });
 }};
-$.fn.menu.parseOptions=function(_53){
-return $.extend({},$.parser.parseOptions(_53,["left","top",{minWidth:"number",hideOnUnhover:"boolean"}]));
+$.fn.menu.parseOptions=function(_52){
+return $.extend({},$.parser.parseOptions(_52,["left","top",{minWidth:"number",hideOnUnhover:"boolean"}]));
 };
-$.fn.menu.defaults={zIndex:110000,left:0,top:0,minWidth:120,hideOnUnhover:true,onShow:function(){
+$.fn.menu.defaults={zIndex:110000,left:0,top:0,alignTo:null,align:"left",minWidth:120,hideOnUnhover:true,onShow:function(){
 },onHide:function(){
-},onClick:function(_54){
+},onClick:function(_53){
 }};
 })(jQuery);
 

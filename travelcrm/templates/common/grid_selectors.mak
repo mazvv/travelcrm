@@ -108,27 +108,48 @@
     % endif
     <script type="text/javascript">
         function formatter_${_func_id}(index, row){
-            return '<table width="100%">'
-            + '<tr>'
-            + '<td width="25%">${_(u'location')}</td>'
-            + '<td>' + row.full_location_name + '</td>'
-            + '</tr>' 
-            + '<tr>'
-            + '<td width="25%">${_(u'hotel')}</td>'
-            + '<td>' + row.full_hotel_name + ' / ' 
-            + row.accomodation_name + ' / ' 
-            + row.roomcat_name + ' / '
-            + row.foodcat_name + '</td>'
-            + '</tr>' 
-            + '<tr>'
-            + '<td width="25%">${_(u'dates')}</td>'
-            + '<td>' + row.point_start_dt + ' - ' + row.point_end_dt + '</td>'
-            + '</tr>'
-            + '<tr>'
-            + '<td width="25%">${_(u'deascription')}</td>'
-            + '<td>' + row.description + '</td>'
-            + '</tr>' 
-            '</table>';
+        	var html = '<table width="100%" class="grid-details">';
+        	html += '<tr>'
+	            + '<td width="25%" class="b">${_(u'location')}</td>'
+	            + '<td>' + row.full_location_name + '</td>'
+	            + '</tr>';
+	        if(row.full_hotel_name){
+	            html += '<tr>'
+	                + '<td width="25%" class="b">${_(u'hotel')}</td>'
+	                + '<td>' + row.full_hotel_name + '</td>'
+	                + '</tr>';
+	        }
+	        if(row.accomodation_name){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'accomodation')}</td>'
+                    + '<td>' + row.accomodation_name + '</td>'
+                    + '</tr>';
+	        }
+            if(row.roomcat_name){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'room category')}</td>'
+                    + '<td>' + row.roomcat_name + '</td>'
+                    + '</tr>';
+            }
+            if(row.foodcat_name){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'food category')}</td>'
+                    + '<td>' + row.foodcat_name + '</td>'
+                    + '</tr>';
+            }
+            html += '<tr>'
+                + '<td width="25%" class="b">${_(u'dates')}</td>'
+                + '<td>' + row.point_start_date 
+                + ' - ' + row.point_end_date + '</td>'
+                + '</tr>';
+            if(row.description){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'description')}</td>'
+                    + '<td>' + row.description + '</td>'
+                    + '</tr>';
+            }
+            html += '</table>';
+            return html;
         }
     </script>
     <table class="easyui-datagrid"
@@ -136,7 +157,7 @@
         data-options="
             url:'/tours/points',border:false,
             singleSelect:true,
-            rownumbers:true,sortName:'point_start_dt',sortOrder:'asc',
+            rownumbers:true,sortName:'point_start_date',sortOrder:'asc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
 		    view: detailview,
@@ -165,8 +186,8 @@
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'country_name',sortable:true,width:150">${_(u"country")}</th>
             <th data-options="field:'full_hotel_name',sortable:true,width:200">${_(u"hotel")}</th>
-            <th data-options="field:'point_start_dt',sortable:true,width:120">${_(u"start")}</th>
-            <th data-options="field:'point_end_dt',sortable:true,width:120">${_(u"end")}</th>
+            <th data-options="field:'point_start_date',sortable:true,width:100">${_(u"start")}</th>
+            <th data-options="field:'point_end_date',sortable:true,width:100">${_(u"end")}</th>
         </thead>
     </table>
     <div id="${_storage_id}">
@@ -176,7 +197,7 @@
     </div>
     % if can_edit:
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container">
+        <div class="actions button-container dl35">
             <%
                 f_id = h.common.gen_id()
             %>
@@ -193,6 +214,9 @@
                     ${_(u"Edit")}</a>
                 <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
             </div>
+        </div>
+        <div class="ml35 tr" style="padding-top:5px;">
+            ${h.common.error_container(name=name)}
         </div>
     </div>
     % endif
@@ -228,6 +252,31 @@
         }
     </script>
     % endif
+    <script type="text/javascript">
+        function formatter_${_func_id}(index, row){
+            var html = '<table width="100%" class="grid-details">';
+            if(row.phone){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'phone')}</td>'
+                    + '<td>' + row.phone + '</td>'
+                    + '</tr>';
+            }
+            if(row.email){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'email')}</td>'
+                    + '<td>' + row.email + '</td>'
+                    + '</tr>';
+            }
+            if(row.skype){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'skype')}</td>'
+                    + '<td>' + row.skype + '</td>'
+                    + '</tr>';
+            }
+            html += '</table>';
+            return html;
+        }
+    </script>
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
@@ -236,6 +285,10 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            detailFormatter: function(index, row){
+                return formatter_${_func_id}(index, row);
+            },          
             onBeforeLoad: function(param){
                 var id = [0];
                 $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
@@ -252,6 +305,8 @@
             % endif
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
+            <th data-options="field:'birthday',sortable:true,width:100">${_(u"birthday")}</th>
+            <th data-options="field:'age',sortable:true,width:100">${_(u"age")}</th>
         </thead>
     </table>
     <div id="${_storage_id}">
@@ -261,7 +316,7 @@
     </div>
     % if can_edit:
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container">
+        <div class="actions button-container dl35">
             <div style="display: inline-block;padding-top:2px;">
                 <%
                     f_id = h.common.gen_id()
@@ -272,6 +327,9 @@
                 <a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>
                 <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
             </div>
+        </div>
+        <div class="ml35 tr" style="padding-top: 5px;">
+            ${h.common.error_container(name=name)}
         </div>
     </div>
     % endif

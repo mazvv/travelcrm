@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.passport import Passport
 from ..lib.qb.passports import PassportsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.passports import PassportSchema
 
@@ -67,7 +68,6 @@ class Passports(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {
             'title': _(u'Add Passport'),
         }
@@ -80,7 +80,6 @@ class Passports(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = PassportSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
@@ -112,7 +111,6 @@ class Passports(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         passport = Passport.get(self.request.params.get('id'))
         return {
             'item': passport,
@@ -127,16 +125,15 @@ class Passports(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = PassportSchema().bind(request=self.request)
         passport = Passport.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            passport.num=controls.get('num')
-            passport.country_id=controls.get('country_id')
-            passport.passport_type=controls.get('passport_type')
-            passport.end_date=controls.get('end_date')
-            passport.descr=controls.get('descr')
+            passport.num = controls.get('num')
+            passport.country_id = controls.get('country_id')
+            passport.passport_type = controls.get('passport_type')
+            passport.end_date = controls.get('end_date')
+            passport.descr = controls.get('descr')
             passport.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
@@ -156,7 +153,6 @@ class Passports(object):
         permission='add'
     )
     def copy(self):
-        _ = self.request.translate
         passport = Passport.get(self.request.params.get('id'))
         return {
             'item': passport,
@@ -193,7 +189,6 @@ class Passports(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             passport = Passport.get(id)
             if passport:

@@ -1,4 +1,5 @@
 <%namespace file="../common/grid_selectors.mak" import="tour_points_selector"/>
+<%namespace file="../common/grid_selectors.mak" import="persons_selector"/>
 <div class="dl65 easyui-dialog"
     title="${title}"
     data-options="
@@ -10,6 +11,15 @@
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
         <div class="easyui-tabs h100" data-options="border:false,height:400">
             <div title="${_(u'Main')}">
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"deal date"), True, "deal_date")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.date_field(item.deal_date if item else None, 'deal_date')}
+                        ${h.common.error_container(name='deal_date')}
+                    </div>
+                </div>
 		        <div class="form-field">
 		            <div class="dl15">
 		                ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
@@ -19,6 +29,15 @@
 		                ${h.common.error_container(name='touroperator_id')}
 		            </div>
 		        </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"customer"), True, "customer_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.persons_combobox_field(request, item.customer_id if item else None, name="customer_id")}
+                        ${h.common.error_container(name="customer_id")}
+                    </div>
+                </div>
                 <div class="form-field">
                     <div class="dl15">
                         ${h.tags.title(_(u"adults"), True, "adults")}
@@ -55,24 +74,24 @@
 		                ${h.common.error_container(name='currency_id')}
 		            </div>
 		        </div>
-				<div class="form-field">
-					<div class="dl15">
-						${h.tags.title(_(u"status"), True, "status")}
-					</div>
-					<div class="ml15">
-						${h.fields.status_field(item.resource.status if item else None)}
-						${h.common.error_container(name='status')}
-					</div>
-				</div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"status"), True, "status")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.status_field(item.resource.status if item else None)}
+                        ${h.common.error_container(name='status')}
+                    </div>
+                </div>
 		    </div>
 		    <div title="${_(u'Route')}">
                 <div class="form-field">
                     <div class="dl10">
-                        ${h.tags.title(_(u"start"), True, "start_dt")}
+                        ${h.tags.title(_(u"start"), True, "start_date")}
                     </div>
                     <div class="dl20">
-                        ${h.fields.datetime_field(item.start_dt if item else None, 'start_dt')}
-                        ${h.common.error_container(name='start_dt')}
+                        ${h.fields.date_field(item.start_date if item else None, 'start_date')}
+                        ${h.common.error_container(name='start_date')}
                     </div>
                     <div class="dl10">
                         ${h.tags.title(_(u"start point"), True, "start_location_id")}
@@ -84,11 +103,11 @@
                 </div>
                 <div class="form-field">
                     <div class="dl10">
-                        ${h.tags.title(_(u"end"), True, "end_dt")}
+                        ${h.tags.title(_(u"end"), True, "end_date")}
                     </div>
                     <div class="dl20">
-                        ${h.fields.datetime_field(item.end_dt if item else None, 'end_dt')}
-                        ${h.common.error_container(name='end_dt')}
+                        ${h.fields.date_field(item.end_date if item else None, 'end_date')}
+                        ${h.common.error_container(name='end_date')}
                     </div>
                     <div class="dl10">
                         ${h.tags.title(_(u"end point"), True, "end_location_id")}
@@ -98,12 +117,17 @@
                         ${h.common.error_container(name='end_location_id')}
                     </div>
                 </div>
-                ${h.common.error_container(name='tour_point_id', as_text=True)}
                 ${tour_points_selector(
                     values=([point.id for point in item.points] if item else []),
                     can_edit=(_context.has_permision('edit') if item else _context.has_permision('add')) 
                 )}
 		    </div>
+            <div title="${_(u'Members')}">
+                ${persons_selector(
+                    values=([person.id for person in item.persons] if item else []),
+                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+                )}
+            </div>
 		    <div title="${_(u'Specials')}">
 		    </div>
         </div>

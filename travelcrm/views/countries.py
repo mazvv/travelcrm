@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.country import Country
 from ..lib.qb.countries import CountriesQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 from ..forms.countries import CountrySchema
 
@@ -73,7 +74,6 @@ class Countries(object):
         permission='add'
     )
     def add(self):
-        _ = self.request.translate
         return {'title': _(u'Add Country')}
 
     @view_config(
@@ -84,7 +84,6 @@ class Countries(object):
         permission='add'
     )
     def _add(self):
-        _ = self.request.translate
         schema = CountrySchema().bind(request=self.request)
 
         try:
@@ -114,7 +113,6 @@ class Countries(object):
         permission='edit'
     )
     def edit(self):
-        _ = self.request.translate
         country = Country.get(self.request.params.get('id'))
         return {'item': country, 'title': _(u'Edit Country')}
 
@@ -126,7 +124,6 @@ class Countries(object):
         permission='edit'
     )
     def _edit(self):
-        _ = self.request.translate
         schema = CountrySchema().bind(request=self.request)
         country = Country.get(self.request.params.get('id'))
         try:
@@ -164,7 +161,6 @@ class Countries(object):
         permission='delete'
     )
     def _delete(self):
-        _ = self.request.translate
         for id in self.request.params.getall('id'):
             country = Country.get(id)
             if country:

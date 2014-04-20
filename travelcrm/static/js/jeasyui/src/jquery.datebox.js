@@ -1,12 +1,14 @@
+﻿/**
+ * jQuery EasyUI 1.3.6
+ * 
+ * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
+ *
+ * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
+ * To use it on other terms please contact us at info@jeasyui.com
+ *
+ */
 /**
  * datebox - jQuery EasyUI
- * 
- * Copyright (c) 2009-2013 www.jeasyui.com. All rights reserved.
- *
- * Licensed under the GPL or commercial licenses
- * To use it on other terms please contact us: info@jeasyui.com
- * http://www.gnu.org/licenses/gpl.txt
- * http://www.jeasyui.com/license_commercial.php
  * 
  * Dependencies:
  * 	 calendar
@@ -24,7 +26,8 @@
 		$(target).addClass('datebox-f').combo($.extend({}, opts, {
 			onShowPanel:function(){
 				setCalendar();
-				setValue(target, $(target).datebox('getText'));
+				setValue(target, $(target).datebox('getText'), true);
+//				setValue(target, $(target).datebox('getText'));
 				opts.onShowPanel.call(target);
 			}
 		}));
@@ -36,15 +39,31 @@
 		if (!state.calendar){
 			createCalendar();
 		}
+		setValue(target, opts.value);
 		
 		function createCalendar(){
 			var panel = $(target).combo('panel').css('overflow','hidden');
+			panel.panel('options').onBeforeDestroy = function(){
+				var sc = $(this).find('.calendar-shared');
+				if (sc.length){
+					sc.insertBefore(sc[0].pholder);
+				}
+			};
 			var cc = $('<div class="datebox-calendar-inner"></div>').appendTo(panel);
 			if (opts.sharedCalendar){
-				state.calendar = $(opts.sharedCalendar).appendTo(cc);
-				if (!state.calendar.hasClass('calendar')){
-					state.calendar.calendar();
+				var sc = $(opts.sharedCalendar);
+				if (!sc[0].pholder){
+					sc[0].pholder = $('<div class="calendar-pholder" style="display:none"></div>').insertAfter(sc);
 				}
+				sc.addClass('calendar-shared').appendTo(cc);
+				if (!sc.hasClass('calendar')){
+					sc.calendar();
+				}
+				state.calendar = sc;
+//				state.calendar = $(opts.sharedCalendar).appendTo(cc);
+//				if (!state.calendar.hasClass('calendar')){
+//					state.calendar.calendar();
+//				}
 			} else {
 				state.calendar = $('<div></div>').appendTo(cc).calendar();
 			}
@@ -53,12 +72,12 @@
 				border:false,
 				onSelect:function(date){
 					var opts = $(this.target).datebox('options');
-					setValue(this.target, opts.formatter(date));
+					setValue(this.target, opts.formatter.call(this.target, date));
 					$(this.target).combo('hidePanel');
 					opts.onSelect.call(target, date);
 				}
 			});
-			setValue(target, opts.value);
+//			setValue(target, opts.value);
 			
 			var button = $('<div class="datebox-button"><table cellspacing="0" cellpadding="0" style="width:100%"><tr></tr></table></div>').appendTo(panel);
 			var tr = button.find('tr');
@@ -94,7 +113,7 @@
 	 * called when user inputs some value in text box
 	 */
 	function doQuery(target, q){
-		setValue(target, q);
+		setValue(target, q, true);
 	}
 	
 	/**
@@ -103,16 +122,27 @@
 	function doEnter(target){
 		var state = $.data(target, 'datebox');
 		var opts = state.options;
-		var value = opts.formatter(state.calendar.calendar('options').current);
-		setValue(target, value);
-		$(target).combo('hidePanel');
+		var current = state.calendar.calendar('options').current;
+		if (current){
+			setValue(target, opts.formatter.call(target, current));
+			$(target).combo('hidePanel');
+		}
 	}
 	
-	function setValue(target, value){
+	function setValue(target, value, remainText){
 		var state = $.data(target, 'datebox');
 		var opts = state.options;
-		$(target).combo('setValue', value).combo('setText', value);
-		state.calendar.calendar('moveTo', opts.parser(value));
+		var calendar = state.calendar;
+		$(target).combo('setValue', value);
+		calendar.calendar('moveTo', opts.parser.call(target, value));
+		if (!remainText){
+			if (value){
+				value = opts.formatter.call(target, calendar.calendar('options').current);
+				$(target).combo('setValue', value).combo('setText', value);
+			} else {
+				$(target).combo('setText', value);
+			}
+		}
 	}
 	
 	$.fn.datebox = function(options, param){

@@ -4,6 +4,10 @@
   padding: 3px;
   padding-right: 0px;
 }
+.combobox-item-disabled {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
 .combobox-gitem {
   padding-left: 10px;
 }
