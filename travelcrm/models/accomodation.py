@@ -5,7 +5,8 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+    UniqueConstraint,
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -16,6 +17,13 @@ from ..models import (
 
 class Accomodation(Base):
     __tablename__ = 'accomodation'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            name='unique_idx_accomodation_name',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -27,7 +35,7 @@ class Accomodation(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_accomodation",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),

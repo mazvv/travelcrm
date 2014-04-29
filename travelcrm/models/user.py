@@ -6,7 +6,7 @@ from sqlalchemy import (
     String,
     ForeignKey,
     UniqueConstraint,
-    )
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
