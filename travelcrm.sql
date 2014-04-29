@@ -1743,14 +1743,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 23, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5535, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5536, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1304, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1305, true);
 
 
 --
@@ -2456,6 +2456,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 905	71	32	\N
 906	71	32	\N
 907	71	32	\N
+1305	93	32	f
 1168	41	32	\N
 1040	47	32	\N
 1041	47	32	\N
@@ -3163,6 +3164,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5306	1101	2	\N	2014-03-22 21:00:48.529148
 5307	1102	2	\N	2014-03-22 21:01:34.517288
 5491	1260	2	\N	2014-04-28 12:59:00.104464
+5536	1305	2	\N	2014-04-29 18:26:56.143932
 5492	1261	2	\N	2014-04-28 13:04:58.29173
 5256	1067	2	\N	2014-03-16 19:34:31.935568
 5494	1263	2	\N	2014-04-28 13:08:06.602496
@@ -3344,6 +3346,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, prior
 14	1301	2	Restrictions in foreign keys	2014-05-10	\N	Rework foreign keys in DB, make it restricted to avoid critical aftermath after resources deletion.	3	1
 15	1302	2	Translate CRM for RU, UA	2014-05-09	\N	\N	2	1
 16	1303	2	Widgets functionality	2014-05-10	\N	Make widgets functionality for Home or other places	1	3
+17	1305	2	Fulltext search functionality	2014-05-10	\N	Make full text search functionality	2	3
 10	1297	2	Invoices and Contracts	2014-05-10	\N	To provide Billing functionality:<p><ol><li>Add Invoice creattion functionality from sales documents</li><li>Add Contract creation using structures Banks Details</li></ol></p>	2	2
 \.
 
@@ -3352,7 +3355,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, prior
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 16, true);
+SELECT pg_catalog.setval('task_id_seq', 17, true);
 
 
 --

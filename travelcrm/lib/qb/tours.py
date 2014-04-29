@@ -1,6 +1,9 @@
 # -*coding: utf-8-*-
 from collections import Iterable
-from sqlalchemy import func, cast, DATE, distinct
+
+from babel.dates import parse_date
+from sqlalchemy import func, cast, DATE, distinct, or_
+from sqlalchemy.dialects.postgresql import Any
 
 from . import (
     ResourcesQueryBuilder,
@@ -21,10 +24,12 @@ from ...models.roomcat import Roomcat
 from ...models.hotelcat import Hotelcat
 from ...models.hotel import Hotel
 from ...models.currency import Currency
+from ...models.person import Person
+from ...lib.utils.common_utils import get_locale_name
 
 
 class ToursQueryBuilder(ResourcesQueryBuilder):
-    _subq = (
+    _subq_points = (
         DBSession.query(
             TourPoint.tour_id,
             func.array_to_string(
@@ -37,6 +42,10 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
                 ', '
             )
             .label('country'),
+            func.array_agg(distinct(Country.id)).label('country_arr'),
+            func.array_agg(distinct(Hotelcat.id)).label('hotelcat_arr'),
+            func.array_agg(distinct(Hotel.id)).label('hotel_arr'),
+            func.array_agg(distinct(Region.id)).label('region_arr'),
         )
         .join(Location, TourPoint.location)
         .join(Region, Location.region)
@@ -47,12 +56,22 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         .subquery()
     )
 
+    _subq_members = (
+        DBSession.query(
+            Tour.id.label('tour_id'),
+            func.array_agg(distinct(Person.id)).label('person_arr'),
+        )
+        .join(Person, Tour.persons)
+        .group_by(Tour.id)
+        .subquery()
+    )
+
     _fields = {
         'id': Tour.id,
         '_id': Tour.id,
         'touroperator_name': Touroperator.name,
-        'hotel_cat': _subq.c.hotel_cat,
-        'country': _subq.c.country,
+        'hotel_cat': _subq_points.c.hotel_cat,
+        'country': _subq_points.c.country,
         'price': Tour.price,
         'currency': Currency.iso_code,
         'adults': Tour.adults,
@@ -75,7 +94,8 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
             .join(Tour, Resource.tour)
             .join(Touroperator, Tour.touroperator)
             .join(Currency, Tour.currency)
-            .join(self._subq, Tour.id == self._subq.c.tour_id)
+            .join(self._subq_points, Tour.id == self._subq_points.c.tour_id)
+            .join(self._subq_members, Tour.id == self._subq_members.c.tour_id)
         )
         self.query = self.query.add_columns(*fields)
 
@@ -83,6 +103,82 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
             self.query = self.query.filter(Tour.id.in_(id))
+
+    def advanced_search(self, updated_from, updated_to, modifier_id, **kwargs):
+        super(ToursQueryBuilder, self).advanced_search(
+            updated_from, updated_to, modifier_id
+        )
+        if 'person_id' in kwargs:
+            self._filter_person(kwargs.get('person_id'))
+        if 'hotel_id' in kwargs:
+            self._filter_hotel(kwargs.get('hotel_id'))
+        if 'hotelcat_id' in kwargs:
+            self._filter_hotelcat(kwargs.get('hotelcat_id'))
+        if 'country_id' in kwargs:
+            self._filter_country(kwargs.get('country_id'))
+        if 'region_id' in kwargs:
+            self._filter_region(kwargs.get('region_id'))
+        if 'price_from' in kwargs or 'price_to' in kwargs:
+            self._filter_price(
+                kwargs.get('price_from'), kwargs.get('price_to')
+            )
+        if 'tour_from' in kwargs or 'tour_to' in kwargs:
+            self._filter_tour_date(
+                kwargs.get('tour_from'), kwargs.get('tour_to')
+            )
+
+    def _filter_person(self, person_id):
+        if person_id:
+            self.query = self.query.filter(
+                or_(
+                    Any(int(person_id), self._subq_members.c.person_arr),
+                    Tour.customer_id == person_id
+                )
+            )
+
+    def _filter_hotel(self, hotel_id):
+        if hotel_id:
+            self.query = self.query.filter(
+                Any(int(hotel_id), self._subq_points.c.hotel_arr),
+            )
+
+    def _filter_hotelcat(self, hotelcat_id):
+        if hotelcat_id:
+            self.query = self.query.filter(
+                Any(int(hotelcat_id), self._subq_points.c.hotelcat_arr),
+            )
+
+    def _filter_country(self, country_id):
+        if country_id:
+            self.query = self.query.filter(
+                Any(int(country_id), self._subq_points.c.country_arr),
+            )
+
+    def _filter_region(self, region_id):
+        if region_id:
+            self.query = self.query.filter(
+                Any(int(region_id), self._subq_points.c.region_arr),
+            )
+
+    def _filter_price(self, price_from, price_to):
+        if price_from:
+            self.query = self.query.filter(Tour.price >= price_from)
+        if price_to:
+            self.query = self.query.filter(Tour.price <= price_to)
+
+    def _filter_tour_date(self, date_from, date_to):
+        if date_from:
+            self.query = self.query.filter(
+                Tour.start_date >= parse_date(
+                    date_from, locale=get_locale_name()
+                )
+            )
+        if date_to:
+            self.query = self.query.filter(
+                Tour.end_date <= parse_date(
+                    date_to, locale=get_locale_name()
+                )
+            )
 
 
 class ToursPointsQueryBuilder(GeneralQueryBuilder):

@@ -72,7 +72,13 @@
             <div class="search">
                 ${searchbar(_id, _s_id)}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
-		            <div>
+                    <div>
+                        ${h.tags.title(_(u"customer or member"))}
+                    </div>
+                    <div>
+                        ${h.fields.persons_combobox_field(request, None, 'person_id', show_toolbar=False)}
+                    </div>
+		            <div class="mt05">
 		                ${h.tags.title(_(u"hotel"))}
 		            </div>
 		            <div>
