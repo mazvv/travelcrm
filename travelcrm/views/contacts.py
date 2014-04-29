@@ -87,7 +87,7 @@ class Contacts(object):
             contact = Contact(
                 contact_type=controls.get('contact_type'),
                 contact=controls.get('contact'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(contact)
             DBSession.flush()
@@ -129,7 +129,6 @@ class Contacts(object):
             controls = schema.deserialize(self.request.params)
             contact.contact_type = controls.get('contact_type')
             contact.contact = controls.get('contact')
-            contact.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': contact.id

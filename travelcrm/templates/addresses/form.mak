@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -25,22 +25,13 @@
                 ${h.common.error_container(name='zip_code')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"address"), True, "address")}
             </div>
             <div class="ml15">
                 ${h.tags.textarea('address', item.address if item else None, class_="text w20", rows=5)}
                 ${h.common.error_container(name='address')}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
-            </div>
-            <div class="ml15">
-                ${h.fields.status_field(item.resource.status if item else None)}
-                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

@@ -25,22 +25,13 @@
                 ${h.common.error_container(name='date_from')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"date to"), True, "date_to")}
             </div>
             <div class="ml15">
                 ${h.fields.date_field(item.date_to if item else None, "date_to")}
                 ${h.common.error_container(name='date_to')}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
-            </div>
-            <div class="ml15">
-                ${h.fields.status_field(item.resource.status if item else None)}
-                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

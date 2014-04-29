@@ -124,7 +124,6 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
     __log_subquery = ResourceLog.query_last_max_entries().subquery()
     __base_fields = OrderedDict({
         'rid': Resource.id.label('rid'),
-        'status': Resource.status.label('status'),
         'modifydt': __log_subquery.c.modifydt.label('modifydt'),
         'modifier': __log_subquery.c.modifier.label('modifier'),
     })
@@ -161,10 +160,9 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
         )
         self.query = self.query.order_by(sort_order)
 
-    def advanced_search(self, updated_from, updated_to, modifier_id, status):
+    def advanced_search(self, updated_from, updated_to, modifier_id):
         self._filter_updated_date(updated_from, updated_to)
         self._filter_modifier(modifier_id)
-        self._filter_status(status)
 
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
@@ -184,10 +182,4 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
         if modifier_id:
             self.query = self.query.filter(
                 self.__log_subquery.c.modifier_id == cast_int(modifier_id)
-            )
-
-    def _filter_status(self, status):
-        if status:
-            self.query = self.query.filter(
-                Resource.status == status
             )

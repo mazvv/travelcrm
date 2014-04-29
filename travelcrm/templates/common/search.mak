@@ -1,4 +1,4 @@
-<%def name="searchbar(container, advanced_id=None, func=None)">
+<%def name="searchbar(container, advanced_id=None)">
     <div class="searchbar" style="padding-top: 2px;">
         ${h.tags.text("q", None, class_="text w30 searchbox", onkeyup="onkeyup_%s(event);" % container)}
         <span class="field-actions">
@@ -6,14 +6,13 @@
 				  title="${_(u'search')}"
 				  data-options="container: '#${container}', action: 'refresh'">
 			</span>
-			% if advanced_id and func:
+			% if advanced_id:
             <script type="text/javascript">
                 function show_advanced_${container}(e){
                 	if($('#${advanced_id}').is(':visible'))
                 		$('#${advanced_id}').css('z-index', 1);
                 	else{
                 		var zindex = get_higher_zindex();
-                		console.log(zindex);
                 	    $('#${advanced_id}').css('z-index', zindex + 1);
                     }
                 	$('#${advanced_id}').toggle();
@@ -46,8 +45,5 @@
 			    if(e.keyCode == 13) refresh_container('#${container}');  
 			}
 	    </script>
-	    % if advanced_id and func:
-	       ${func(advanced_id)}
-	    % endif
 	</div>
 </%def>

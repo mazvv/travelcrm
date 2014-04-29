@@ -6,7 +6,6 @@ from sqlalchemy import (
     String,
     Date,
     DateTime,
-    Boolean,
     Table,
     ForeignKey,
 )
@@ -14,8 +13,10 @@ from sqlalchemy.orm import relationship, backref
 
 from ..models import (
     DBSession,
-    Base
+    Base,
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 task_resource = Table(
@@ -46,6 +47,20 @@ task_resource = Table(
 
 class Task(Base):
     __tablename__ = 'task'
+
+    PRIORITY = [
+        ('minor', _(u'minor')),
+        ('normal', _(u'normal')),
+        ('major', _(u'major')),
+        ('critical', _(u'critical'))
+    ]
+    STATUS = [
+        ('undefined', _(u'undefined')),
+        ('in_work', _(u'in work')),
+        ('on_hold', _(u'on hold')),
+        ('requirements', _(u'requirements')),
+        ('closed', _(u'closed')),
+    ]
 
     id = Column(
         Integer,
@@ -89,12 +104,12 @@ class Task(Base):
         String,
     )
     priority = Column(
-        Integer,
+        EnumIntType(PRIORITY),
         nullable=False,
     )
-    closed = Column(
-        Boolean,
-        default=False
+    status = Column(
+        EnumIntType(STATUS),
+        nullable=False,
     )
     resource = relationship(
         'Resource',

@@ -59,6 +59,9 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
         Person.name,
         Person.first_name,
         Person.last_name,
+        _subq.c.phone,
+        _subq.c.email,
+        _subq.c.skype,
     ]
 
     def __init__(self, context):

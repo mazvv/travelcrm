@@ -1,6 +1,6 @@
 <%namespace file="../common/grid_selectors.mak" import="tour_points_selector"/>
 <%namespace file="../common/grid_selectors.mak" import="persons_selector"/>
-<div class="dl65 easyui-dialog"
+<div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -18,6 +18,15 @@
                     <div class="ml15">
                         ${h.fields.date_field(item.deal_date if item else None, 'deal_date')}
                         ${h.common.error_container(name='deal_date')}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"advertise"), True, "advsource_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.advsources_combobox_field(request, item.advsource_id if item else None)}
+                        ${h.common.error_container(name='advsource_id')}
                     </div>
                 </div>
 		        <div class="form-field">
@@ -74,15 +83,6 @@
 		                ${h.common.error_container(name='currency_id')}
 		            </div>
 		        </div>
-                <div class="form-field">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"status"), True, "status")}
-                    </div>
-                    <div class="ml15">
-                        ${h.fields.status_field(item.resource.status if item else None)}
-                        ${h.common.error_container(name='status')}
-                    </div>
-                </div>
 		    </div>
 		    <div title="${_(u'Route')}">
                 <div class="form-field">
@@ -128,8 +128,6 @@
                     can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
                 )}
             </div>
-		    <div title="${_(u'Specials')}">
-		    </div>
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>

@@ -114,7 +114,6 @@ class Home(object):
 
         if (user
             and user.validate_password(controls.get('password'))
-            and user.resource.is_active()
             and user.employee
         ):
             self.request.response.headers = remember(self.request, user.id)

@@ -18,6 +18,7 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib.utils.common_utils import translate as _
 
 
 class ResourceType(Base):
@@ -29,14 +30,18 @@ class ResourceType(Base):
             name='unique_idx_resource_type_module',
             use_alter=True,
         ),
-        #UniqueConstraint(
-        #    'name',
-        #    name='unique_idx_resource_type_name',
-        #    use_alter=True,
-        #),
+        UniqueConstraint(
+            'name',
+            name='unique_idx_resource_type_name',
+            use_alter=True,
+        ),
     )
 
-    # column definitions
+    STATUS = [
+        ('undefined', _(u'undefined')),
+        ('disabled', _(u'disabled')),
+    ]
+
     id = Column(
         Integer(),
         primary_key=True,
@@ -57,7 +62,6 @@ class ResourceType(Base):
     name = Column(
         String(length=32),
         nullable=False,
-        unique=True
     )
     humanize = Column(
         String(length=32),

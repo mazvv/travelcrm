@@ -87,6 +87,17 @@ class Tour(Base):
         ),
         nullable=False,
     )
+    advsource_id = Column(
+        Integer,
+        ForeignKey(
+            'advsource.id',
+            name="fk_advsource_id_tour",
+            ondelete='cascade',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
     price = Column(
         Numeric(16, 2),
         nullable=False
@@ -170,6 +181,17 @@ class Tour(Base):
     )
     currency = relationship(
         'Currency',
+        backref=backref(
+            'tours',
+            uselist=True,
+            cascade="all,delete",
+            lazy="dynamic"
+        ),
+        cascade="all,delete",
+        uselist=False,
+    )
+    advsource = relationship(
+        'Advsource',
         backref=backref(
             'tours',
             uselist=True,

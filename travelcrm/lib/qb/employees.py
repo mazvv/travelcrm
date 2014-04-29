@@ -13,7 +13,8 @@ class EmployeesQueryBuilder(ResourcesQueryBuilder):
         '_id': Employee.id,
         'first_name': Employee.first_name,
         'last_name': Employee.last_name,
-        'name': Employee.name
+        'dismissal_date': Employee.dismissal_date,
+        'name': Employee.name,
     }
 
     _simple_search_fields = [

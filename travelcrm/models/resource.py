@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 
-from collections import namedtuple
 from zope.interface.verify import verifyClass
 
 from pyramid import threadlocal
 
 from sqlalchemy import (
     Integer,
+    Boolean,
     Column,
     ForeignKey,
     event,
@@ -29,14 +29,6 @@ from ..lib.utils.resources_utils import (
 )
 from ..lib.utils.security_utils import get_auth_employee
 from ..interfaces import IResourceType
-
-
-_statuses = {
-    0: 'active',
-    1: 'archive',
-}
-
-STATUS = namedtuple('STATUS', _statuses.values())(*_statuses.keys())
 
 
 class Resource(Base):
@@ -69,9 +61,9 @@ class Resource(Base):
         ),
         nullable=False
     )
-    status = Column(
-        Integer(),
-        default=STATUS.active
+    protected = Column(
+        Boolean,
+        default=False,
     )
 
     resource_type = relationship(
@@ -87,7 +79,7 @@ class Resource(Base):
         uselist=False
     )
 
-    def __init__(self, resource_type_cls, owner_structure, status=0):
+    def __init__(self, resource_type_cls, owner_structure):
         assert verifyClass(IResourceType, resource_type_cls), \
             type(resource_type_cls)
         assert isinstance(owner_structure, Structure), type(owner_structure)
@@ -97,26 +89,12 @@ class Resource(Base):
             resource_cls_module, resource_cls_name
         )
         self.owner_structure = owner_structure
-        self.status = status
 
     @classmethod
     def get(cls, id):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
-
-    def is_active(self):
-        return self.status == STATUS.active
-
-    def set_status_active(self):
-        self.status = STATUS.active
-
-    def set_status_archive(self):
-        self.status = STATUS.archive
-
-    @classmethod
-    def condition_active(cls):
-        return cls.status == STATUS.active
 
     def logging(self):
         request = threadlocal.get_current_request()

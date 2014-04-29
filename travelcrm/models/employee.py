@@ -1,9 +1,13 @@
 # -*-coding: utf-8-*-
 
+from datetime import datetime
+
 from sqlalchemy import (
     Column,
     Integer,
     String,
+    Date,
+    Table,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
@@ -12,6 +16,84 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from ..models import (
     DBSession,
     Base
+)
+
+
+employee_contact = Table(
+    'employee_contact',
+    Base.metadata,
+    Column(
+        'employee_id',
+        Integer,
+        ForeignKey(
+            'employee.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'contact_id',
+        Integer,
+        ForeignKey(
+            'contact.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
+)
+
+
+employee_passport = Table(
+    'employee_passport',
+    Base.metadata,
+    Column(
+        'employee_id',
+        Integer,
+        ForeignKey(
+            'employee.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'passport_id',
+        Integer,
+        ForeignKey(
+            'passport.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
+)
+
+
+employee_address = Table(
+    'employee_address',
+    Base.metadata,
+    Column(
+        'employee_id',
+        Integer,
+        ForeignKey(
+            'employee.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'address_id',
+        Integer,
+        ForeignKey(
+            'address.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
 )
 
 
@@ -34,16 +116,8 @@ class Employee(Base):
         ),
         nullable=False,
     )
-    attachment_id = Column(
-        Integer,
-        ForeignKey(
-            'attachment.id',
-            name="fk_attachment_id_employee",
-            ondelete='cascade',
-            onupdate='cascade',
-            use_alter=True,
-        ),
-        nullable=True,
+    photo = Column(
+        String,
     )
     first_name = Column(
         String(length=32),
@@ -56,18 +130,39 @@ class Employee(Base):
     second_name = Column(
         String(length=32),
     )
-
+    itn = Column(
+        String(length=32),
+    )
+    dismissal_date = Column(
+        Date,
+    )
     resource = relationship(
         'Resource',
         backref=backref('employee', uselist=False, cascade="all,delete"),
         cascade="all,delete",
         uselist=False,
     )
+    contacts = relationship(
+        'Contact',
+        secondary=employee_contact,
+        backref=backref('employee', uselist=False),
+        cascade="all,delete",
+        uselist=True,
+    )
+    passports = relationship(
+        'Passport',
+        secondary=employee_passport,
+        backref=backref('employee', uselist=False),
+        cascade="all,delete",
+        uselist=True,
+    )
 
-    photo = relationship(
-        'Attachment',
-        backref=backref('employee', uselist=False, cascade="all,delete"),
-        uselist=False,
+    addresses = relationship(
+        'Address',
+        secondary=employee_address,
+        backref=backref('employee', uselist=False),
+        cascade="all,delete",
+        uselist=True,
     )
 
     @hybrid_property
@@ -79,3 +174,9 @@ class Employee(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    def is_currently_dismissed(self):
+        return (
+            self.dismissal_date != None
+            and self.dismissal_date < datetime.now()
+        )

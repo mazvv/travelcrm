@@ -3,6 +3,7 @@ import json
 
 import common
 import fields
+import permisions
 from webhelpers.html import tags
 from webhelpers.html import builder
 from webhelpers import util

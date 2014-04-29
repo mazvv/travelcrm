@@ -21,8 +21,7 @@
             selectOnCheck:false,toolbar:'#${_tb_id}',
             onBeforeLoad: function(param){
                 var dg = $(this);
-                var searchbar = $('#${_tb_id}').find('.searchbar');
-                $.each(searchbar.find('input'), function(i, el){
+                $.each($('#${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
                 });
                 param.position_id = ${position.id};
@@ -32,21 +31,29 @@
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'rt_humanize',sortable:true,width:150">${_(u"resource type")}</th>
             <th data-options="field:'permisions',width:200">permissions</th>
-            <th data-options="field:'structure_id',width:200,formatter:function(value,row,index){if(row.scope_type == 'all') return row.scope_type; return value;}">${_(u"structure")}</th>
+            <th data-options="field:'structure_path',sortable:true,width:200,formatter:function(value,row,index){return (value)?value.join(' &rarr; '):'';}">${_(u"structure")}</th>
         </thead>
     </table>
 
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container dl20">
-            % if _context.has_permision('edit'):
-            <a id="btn" href="#" class="button _action"
-                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit', query=[('position_id', position.id)])}'">
-                <span class="fa fa-pencil"></span>${_(u'Edit Permissions')}
-            </a>
-            % endif
+        <div class="actions button-container dl25">
+            <div class="button-group">
+				% if _context.has_permision('edit'):
+				<a href="#" class="button _action"
+				    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit', query=[('position_id', position.id)])}'">
+				    <span class="fa fa-pencil"></span>${_(u'Edit Permissions')}
+				</a>
+				<a href="#" class="button _action"
+				    data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'copy', query=[('position_id', position.id)])}'">
+				    <span class="fa fa-copy"></span>${_(u'Copy From ...')}
+				</a>
+				% endif
+            </div>
         </div>
-        <div class="ml20 tr">
-            ${searchbar(_id)}
+        <div class="ml25 tr">
+            <div class="search">
+                ${searchbar(_id)}
+            </div>
         </div>
     </div>
 </div>

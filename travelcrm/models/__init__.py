@@ -32,7 +32,6 @@ from position import Position
 from permision import Permision
 from navigation import Navigation
 from appointment import Appointment
-from appointment_row import AppointmentRow
 from person import Person
 from country import Country
 from address import Address

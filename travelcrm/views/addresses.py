@@ -88,7 +88,7 @@ class Addresses(object):
                 location_id=controls.get('location_id'),
                 zip_code=controls.get('zip_code'),
                 address=controls.get('address'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(address)
             DBSession.flush()
@@ -131,7 +131,6 @@ class Addresses(object):
             address.location_id = controls.get('location_id')
             address.zip_code = controls.get('zip_code')
             address.address = controls.get('address')
-            address.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': address.id

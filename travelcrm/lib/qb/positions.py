@@ -1,5 +1,7 @@
 # -*coding: utf-8-*-
 
+from collections import Iterable
+
 from . import ResourcesQueryBuilder
 
 from ...models.resource import Resource
@@ -40,3 +42,8 @@ class PositionsQueryBuilder(ResourcesQueryBuilder):
         self.query = self.query.filter(
             Position.condition_structure_id(structure_id)
         )
+
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(Position.id.in_(id))

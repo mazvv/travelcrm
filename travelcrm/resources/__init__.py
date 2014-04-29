@@ -64,11 +64,11 @@ class SecuredBase(object):
 
 class ResourceTypeBase(SecuredBase):
 
-    def create_resource(self, status):
+    def create_resource(self):
         auth_employee = get_auth_employee(self.request)
         assert auth_employee, "Not auth user can't create resource"
         owner_structure = get_employee_structure(auth_employee)
-        resource = Resource(self.__class__, owner_structure, status)
+        resource = Resource(self.__class__, owner_structure)
         return resource
 
     @property

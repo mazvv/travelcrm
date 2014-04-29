@@ -49,7 +49,6 @@ class Banks(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -91,7 +90,7 @@ class Banks(object):
             controls = schema.deserialize(self.request.params)
             bank = Bank(
                 name=controls.get('name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             if self.request.params.getall('address_id'):
                 bank.addresses = (
@@ -139,7 +138,6 @@ class Banks(object):
         try:
             controls = schema.deserialize(self.request.params)
             bank.name = controls.get('name')
-            bank.resource.status = controls.get('status')
             if self.request.params.getall('address_id'):
                 bank.addresses = (
                     DBSession.query(Address)

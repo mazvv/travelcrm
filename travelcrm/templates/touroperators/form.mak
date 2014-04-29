@@ -1,5 +1,6 @@
 <%namespace file="../common/grid_selectors.mak" import="bpersons_selector"/>
 <%namespace file="../common/grid_selectors.mak" import="licences_selector"/>
+<%namespace file="../common/grid_selectors.mak" import="banks_details_selector"/>
 <div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
@@ -20,15 +21,6 @@
 		                ${h.common.error_container(name='name')}
 		            </div>
 		        </div>
-				<div class="form-field">
-					<div class="dl15">
-						${h.tags.title(_(u"status"), True, "status")}
-						${h.common.error_container(name='status')}
-					</div>
-					<div class="ml15">
-						${h.fields.status_field(item.resource.status if item else None)}
-					</div>
-				</div>
 		    </div>
 		    <div title="${_(u'Licences')}">
                 ${licences_selector(
@@ -42,8 +34,12 @@
                     can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
                 )}
             </div>
-            <div title="${_(u'Billing')}">
-            </div>          
+            <div title="${_(u'Banks Details')}">
+                ${banks_details_selector(
+                    values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
+                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+                )}
+            </div>
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>

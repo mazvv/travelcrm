@@ -48,7 +48,6 @@ class Positions(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -92,7 +91,7 @@ class Positions(object):
             position = Position(
                 name=controls.get('name'),
                 structure_id=controls.get('structure_id'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(position)
             DBSession.flush()
@@ -134,7 +133,6 @@ class Positions(object):
             controls = schema.deserialize(self.request.params)
             position.name = controls.get('name')
             position.structure_id = controls.get('structure_id')
-            position.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': position.id

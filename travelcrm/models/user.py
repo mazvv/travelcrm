@@ -95,5 +95,13 @@ class User(Base):
     def by_email(cls, email):
         return DBSession.query(cls).filter(cls.email == email).first()
 
+    @classmethod
+    def by_employee_id(cls, employee_id):
+        return (
+            DBSession.query(cls)
+            .filter(cls.employee_id == employee_id)
+            .first()
+        )
+
     def validate_password(self, password):
         return self.password == password

@@ -48,7 +48,6 @@ class Countries(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -91,7 +90,7 @@ class Countries(object):
             country = Country(
                 iso_code=controls.get('iso_code'),
                 name=controls.get('name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(country)
             DBSession.flush()
@@ -130,7 +129,6 @@ class Countries(object):
             controls = schema.deserialize(self.request.params)
             country.iso_code = controls.get('iso_code')
             country.name = controls.get('name')
-            country.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': country.id

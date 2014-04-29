@@ -21,14 +21,13 @@ requires = [
     'wsgithumb',
     'alembic',
     'webhelpers',
-    'lxml',
     'pyramid_layout',
-    'python-dateutil',
     'psycopg2',
     'pyramid_beaker',
     'whoosh>=2.5.6',
     'Babel>=0.9.6',
     'phonenumbers>=6.0.0',
+    'pyramid_storage>=0.0.5'
 ]
 
 setup(

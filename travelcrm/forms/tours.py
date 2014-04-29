@@ -6,13 +6,14 @@ from . import (
     Date,
     ResourceSchema,
 )
+from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred
-def adult_validator(node, kw):
+def adults_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         if (value + int(cast_int(request.params.get('children')))) == 0:
@@ -23,11 +24,45 @@ def adult_validator(node, kw):
     return validator
 
 
+@colander.deferred
+def person_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        members_count = (
+            int(cast_int(request.params.get('children')))
+            + int(cast_int(request.params.get('adults')))
+        )
+        if len(value) < members_count:
+            raise colander.Invalid(
+                node,
+                _(u'Members count must be %s') % members_count,
+            )
+    return validator
+
+
+@colander.deferred
+def customer_validator(node, kw):
+
+    def validator(node, value):
+        person = Person.get(value)
+        if not person.contacts or not person.passports or not person.addresses:
+            raise colander.Invalid(
+                node,
+                _(u'Customer must have contacts, passports and address')
+            )
+    return validator
+
+
 class TourSchema(ResourceSchema):
     deal_date = colander.SchemaNode(
         Date()
     )
     customer_id = colander.SchemaNode(
+        colander.Integer(),
+        validator=customer_validator,
+    )
+    advsource_id = colander.SchemaNode(
         colander.Integer(),
     )
     touroperator_id = colander.SchemaNode(
@@ -38,7 +73,7 @@ class TourSchema(ResourceSchema):
     )
     adults = colander.SchemaNode(
         colander.Integer(),
-        validator=adult_validator
+        validator=adults_validator,
     )
     children = colander.SchemaNode(
         colander.Integer(),
@@ -63,6 +98,7 @@ class TourSchema(ResourceSchema):
     )
     person_id = colander.SchemaNode(
         colander.Set(),
+        validator=person_validator
     )
 
     def deserialize(self, cstruct):

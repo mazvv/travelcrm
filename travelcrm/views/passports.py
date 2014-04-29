@@ -89,7 +89,7 @@ class Passports(object):
                 passport_type=controls.get('passport_type'),
                 end_date=controls.get('end_date'),
                 descr=controls.get('descr'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(passport)
             DBSession.flush()
@@ -134,7 +134,6 @@ class Passports(object):
             passport.passport_type = controls.get('passport_type')
             passport.end_date = controls.get('end_date')
             passport.descr = controls.get('descr')
-            passport.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': passport.id

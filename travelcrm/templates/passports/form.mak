@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"passport type"), True, "passport type")}
             </div>
             <div class="ml15">
-                ${h.fields.passport_type_field(request, item.passport_type if item else None)}
+                ${h.fields.passport_type_field(item.passport_type if item else None)}
                 ${h.common.error_container(name='passport_type')}
             </div>
         </div>
@@ -43,22 +43,13 @@
                 ${h.common.error_container(name='end_date')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"description"), False, "descr")}
             </div>
             <div class="ml15">
                 ${h.tags.textarea('descr', item.descr if item else None, class_="text w20", rows=5)}
                 ${h.common.error_container(name='descr')}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
-            </div>
-            <div class="ml15">
-                ${h.fields.status_field(item.resource.status if item else None)}
-                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

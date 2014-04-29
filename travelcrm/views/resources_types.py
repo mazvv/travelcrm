@@ -48,7 +48,6 @@ class ResourcesTypes(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -94,9 +93,7 @@ class ResourcesTypes(object):
                 name=controls.get('name'),
                 resource=controls.get('resource'),
                 description=controls.get('description'),
-                resource_obj=self.context.create_resource(
-                    controls.get('status')
-                )
+                resource_obj=self.context.create_resource()
             )
             DBSession.add(resource_type)
             DBSession.flush()
@@ -140,7 +137,6 @@ class ResourcesTypes(object):
             resources_type.name = controls.get('name')
             resources_type.resource = controls.get('resource')
             resources_type.description = controls.get('description')
-            resources_type.resource_obj.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': resources_type.id

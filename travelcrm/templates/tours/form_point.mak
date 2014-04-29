@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -70,7 +70,7 @@
                 ${h.common.error_container(name='end_date')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"description"), False, "description")}
             </div>

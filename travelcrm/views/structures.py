@@ -7,6 +7,9 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.structure import Structure
+from ..models.contact import Contact
+from ..models.address import Address
+from ..models.bank_detail import BankDetail
 from ..lib.qb.structures import StructuresQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.structures import StructureSchema
@@ -80,12 +83,21 @@ class Structures(object):
         schema = StructureSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             structure = Structure(
                 name=controls.get('name'),
                 parent_id=controls.get('parent_id'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
+            for id in controls.get('contact_id'):
+                contact = Contact.get(id)
+                structure.contacts.append(contact)
+            for id in controls.get('address_id'):
+                address = Address.get(id)
+                structure.addresses.append(address)
+            for id in controls.get('bank_detail_id'):
+                bank_detail = BankDetail.get(id)
+                structure.banks_details.append(bank_detail)
             DBSession.add(structure)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
@@ -119,10 +131,21 @@ class Structures(object):
         schema = StructureSchema().bind(request=self.request)
         structure = Structure.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             structure.name = controls.get('name')
             structure.parent_id = controls.get('parent_id')
-            structure.resource.status = controls.get('status')
+            structure.contacts = []
+            structure.addresses = []
+            structure.banks_details = []
+            for id in controls.get('contact_id'):
+                contact = Contact.get(id)
+                structure.contacts.append(contact)
+            for id in controls.get('address_id'):
+                address = Address.get(id)
+                structure.addresses.append(address)
+            for id in controls.get('bank_detail_id'):
+                bank_detail = BankDetail.get(id)
+                structure.banks_details.append(bank_detail)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -143,6 +166,16 @@ class Structures(object):
             'title': _(u"Copy Company Structure"),
             'item': structure,
         }
+
+    @view_config(
+        name='copy',
+        context='..resources.structures.Structures',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
 
     @view_config(
         name='delete',

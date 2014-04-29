@@ -51,7 +51,6 @@ class Users(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -95,7 +94,7 @@ class Users(object):
                 username=controls.get('username'),
                 password=controls.get('password'),
                 employee_id=controls.get('employee_id'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(user)
             DBSession.flush()
@@ -134,7 +133,6 @@ class Users(object):
             controls = schema.deserialize(self.request.params)
             user.username = controls.get('username')
             user.employee_is = controls.get('employee_id')
-            user.resource.status = controls.get('status')
             if controls.get('password'):
                 user.password = controls.get('password')
             return {

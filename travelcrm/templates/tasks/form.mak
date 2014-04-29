@@ -23,7 +23,7 @@
 		                ${h.tags.title(_(u"performer"), True, "employee_id")}
 		            </div>
 		            <div class="ml15">
-		                ${h.fields.employees_combobox_field(request, item.employee_id if item else None)}
+		                ${h.fields.employees_combobox_field(request, item.employee_id if item else None, show_toolbar=False)}
 		                ${h.common.error_container(name='employee_id')}
 		            </div>
 		        </div>
@@ -51,28 +51,19 @@
 		                ${h.tags.title(_(u"priority"), True, "priority")}
 		            </div>
 		            <div class="ml15">
-		                ${h.fields.tasks_priority_combobox_field(request, item.priority if item else None)}
+		                ${h.fields.tasks_priority_combobox_field(item.priority if item else None)}
 		                ${h.common.error_container(name='priority')}
 		            </div>
 		        </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"closed"), True, "closed")}
+                        ${h.tags.title(_(u"status"), True, "status")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.yes_no_field(int(item.closed) if item else None, 'closed')}
-                        ${h.common.error_container(name='closed')}
+                        ${h.fields.tasks_status_combobox_field(item.status if item else None)}
+                        ${h.common.error_container(name='status')}
                     </div>
                 </div>
-		        <div class="form-field">
-		            <div class="dl15">
-		                ${h.tags.title(_(u"status"), True, "status")}
-		            </div>
-		            <div class="ml15">
-		                ${h.fields.status_field(item.resource.status if item else None)}
-		                ${h.common.error_container(name='status')}
-		            </div>
-		        </div>
             </div>
             <div title="${_(u'Description')}">
                 ${h.tags.textarea('descr', item.descr if item else None, id="task-rich-text-editor")}

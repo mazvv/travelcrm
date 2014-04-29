@@ -87,7 +87,7 @@ class Licences(object):
                 licence_num=controls.get('licence_num'),
                 date_from=controls.get('date_from'),
                 date_to=controls.get('date_to'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(licence)
             DBSession.flush()
@@ -130,7 +130,6 @@ class Licences(object):
             licence.licence_num = controls.get('licence_num')
             licence.date_from = controls.get('date_from')
             licence.date_to = controls.get('date_to')
-            licence.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': licence.id

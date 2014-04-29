@@ -9,7 +9,7 @@ from ..models import DBSession
 from ..models.touroperator import Touroperator
 from ..models.licence import Licence
 from ..models.bperson import BPerson
-from ..models.contact import Contact
+from ..models.bank_detail import BankDetail
 from ..lib.qb.touroperators import TouroperatorsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.touroperators import TouroperatorSchema
@@ -50,7 +50,6 @@ class Touroperators(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -90,31 +89,20 @@ class Touroperators(object):
     def _add(self):
         schema = TouroperatorSchema().bind(request=self.request)
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             touroperator = Touroperator(
                 name=controls.get('name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
-            if self.request.params.getall('licence_id'):
-                touroperator.licences = (
-                    DBSession.query(Licence)
-                    .filter(
-                        Licence.id.in_(
-                            self.request.params.getall('licence_id')
-                        )
-                    )
-                    .all()
-                )
-            if self.request.params.getall('bperson_id'):
-                touroperator.bpersons = (
-                    DBSession.query(BPerson)
-                    .filter(
-                        BPerson.id.in_(
-                            self.request.params.getall('bperson_id')
-                        )
-                    )
-                    .all()
-                )
+            for id in controls.get('licence_id'):
+                licence = Licence.get(id)
+                touroperator.licences.append(licence)
+            for id in controls.get('bperson_id'):
+                bperson = BPerson.get(id)
+                touroperator.bpersons.append(bperson)
+            for id in controls.get('bank_detail_id'):
+                bank_detail = BankDetail.get(id)
+                touroperator.banks_details.append(bank_detail)
             DBSession.add(touroperator)
             DBSession.flush()
             return {
@@ -152,33 +140,20 @@ class Touroperators(object):
         schema = TouroperatorSchema().bind(request=self.request)
         touroperator = Touroperator.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             touroperator.name = controls.get('name')
-            touroperator.resource.status = controls.get('status')
-            if self.request.params.getall('licence_id'):
-                touroperator.licences = (
-                    DBSession.query(Licence)
-                    .filter(
-                        Licence.id.in_(
-                            self.request.params.getall('licence_id')
-                        )
-                    )
-                    .all()
-                )
-            else:
-                touroperator.licences = []
-            if self.request.params.getall('bperson_id'):
-                touroperator.bpersons = (
-                    DBSession.query(BPerson)
-                    .filter(
-                        BPerson.id.in_(
-                            self.request.params.getall('bperson_id')
-                        )
-                    )
-                    .all()
-                )
-            else:
-                touroperator.bpersons = []
+            touroperator.licences = []
+            touroperator.bpersons = []
+            touroperator.banks_details = []
+            for id in controls.get('licence_id'):
+                licence = Licence.get(id)
+                touroperator.licences.append(licence)
+            for id in controls.get('bperson_id'):
+                bperson = BPerson.get(id)
+                touroperator.bpersons.append(bperson)
+            for id in controls.get('bank_detail_id'):
+                bank_detail = BankDetail.get(id)
+                touroperator.banks_details.append(bank_detail)
             return {
                 'success_message': _(u'Saved'),
                 'response': touroperator.id,
@@ -188,30 +163,6 @@ class Touroperators(object):
                 'error_message': _(u'Please, check errors'),
                 'errors': e.asdict()
             }
-
-    @view_config(
-        name='copy',
-        context='..resources.touroperators.Touroperators',
-        request_method='GET',
-        renderer='travelcrm:templates/touroperators/form.mak',
-        permission='add'
-    )
-    def copy(self):
-        touroperator = Touroperator.get(self.request.params.get('id'))
-        return {
-            'item': touroperator,
-            'title': _(u"Copy Touroperator")
-        }
-
-    @view_config(
-        name='copy',
-        context='..resources.touroperators.Touroperators',
-        request_method='POST',
-        renderer='json',
-        permission='add'
-    )
-    def _copy(self):
-        return self._add()
 
     @view_config(
         name='delete',

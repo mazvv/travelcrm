@@ -1,79 +1,58 @@
 # -*coding: utf-8-*-
 
-from collections import OrderedDict
-from sqlalchemy import func
-
-from . import (
-    GeneralQueryBuilder,
-    ResourcesQueryBuilder
-)
-from ...models import DBSession
+from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.employee import Employee
 from ...models.position import Position
-from ...models.structure import Structure
 from ...models.appointment import Appointment
-from ...models.appointment_row import AppointmentRow
+
+from ..bl.structures import query_recursive_tree
 
 
 class AppointmentsQueryBuilder(ResourcesQueryBuilder):
+    _subq_structures_recursive = query_recursive_tree().subquery()
     _fields = {
         'id': Appointment.id,
         '_id': Appointment.id,
-        'appointment_date': Appointment.appointment_date,
+        'date': Appointment.date,
+        'employee_name': Employee.name,
+        'position_name': Position.name,
+        'structure_path': _subq_structures_recursive.c.name_path
     }
+    _simple_search_fields = [
+        Employee.first_name,
+        Employee.last_name,
+        Position.name,
+        _subq_structures_recursive.c.name,
+    ]
 
     def __init__(self, context):
         super(AppointmentsQueryBuilder, self).__init__(context)
-        subquery = (
-            DBSession.query(
-                AppointmentRow.appointment_id.label(
-                    'header_id'
-                ),
-                func.array_to_string(
-                    func.array_agg(Employee.name), ', '
-                )
-                .label('employees')
-            )
-            .join(
-                Employee, AppointmentRow.employee
-            )
-            .group_by(AppointmentRow.appointment_id)
-            .subquery()
-        )
-        self.query = (
-            self.query
-            .join(
-                Appointment, Resource.appointment
-            )
-            .join(subquery, subquery.c.header_id == Appointment.id)
-        )
-        self._fields['employees'] = subquery.c.employees
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
+        self.query = self.query.join(
+            Appointment, Resource.appointment
+        )
+        self.query = self.query.join(
+            Position, Appointment.position
+        )
+        self.query = self.query.join(
+            Employee, Appointment.employee
+        )
+        self.query = self.query.join(
+            self._subq_structures_recursive,
+            self._subq_structures_recursive.c.id == Position.structure_id
+        )
         self.query = self.query.add_columns(*fields)
 
-
-class AppointmentsRowsQueryBuilder(GeneralQueryBuilder):
-    _fields = OrderedDict({
-        'id': AppointmentRow.id,
-        '_id': AppointmentRow.id,
-        'employee_name': Employee.name,
-        'position_name': Position.name,
-        'employee_id': Employee.id,
-        'position_id': Position.id,
-        'structure_id': Structure.id,
-        'structure_name': Structure.name,
-    })
-
-    def __init__(self):
-        fields = GeneralQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+    def filter_structure_id(self, structure_id):
+        self.query = self.query.filter(
+            Position.condition_structure_id(structure_id)
         )
-        self.query = (
-            DBSession.query(*fields)
-            .join(Employee, AppointmentRow.employee)
-            .join(Position, AppointmentRow.position)
-            .join(Structure, Position.structure)
-        )
+
+    def filter_employee_id(self, employee_id):
+        if employee_id:
+            self.query = self.query.filter(
+                Appointment.condition_employee_id(employee_id)
+            )

@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -25,22 +25,13 @@
                 ${h.common.error_container(name='hotelcat_id')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"location"), False, "location_id")}
             </div>
             <div class="ml15">
                 ${h.fields.locations_combobox_field(request, item.location_id if item else None)}
                 ${h.common.error_container(name='location_id')}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
-            </div>
-            <div class="ml15">
-                ${h.fields.status_field(item.resource.status if item else None)}
-                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

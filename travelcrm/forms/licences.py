@@ -4,12 +4,12 @@ import colander
 from babel.dates import parse_date
 
 from . import Date, ResourceSchema
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred
 def date_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         if value >= parse_date(request.params.get('date_to')):

@@ -7,7 +7,6 @@ from sqlalchemy import desc
 from ...models import DBSession
 from ...models.employee import Employee
 from ...models.appointment import Appointment
-from ...models.appointment_row import AppointmentRow
 from ...models.permision import Permision
 from ...models.structure import Structure
 from ...models.position import Position
@@ -19,17 +18,18 @@ from ..utils.resources_utils import (
 
 def get_employee_position(employee, date=None):
     assert isinstance(employee, Employee), type(employee)
+    if employee.is_currently_dismissed():
+        return None
     query = (
         DBSession.query(Position)
-        .join(AppointmentRow, Position.appointments)
-        .join(Appointment, AppointmentRow.appointment)
-        .filter(AppointmentRow.condition_employee_id(employee.id))
+        .join(Appointment, Position.appointments)
+        .filter(Appointment.condition_employee_id(employee.id))
     )
     if date:
         query = query.filter(
-            Appointment.appointment_date <= date
+            Appointment.date <= date
         )
-    query = query.order_by(desc(Appointment.appointment_date))
+    query = query.order_by(desc(Appointment.date))
     return query.first()
 
 
@@ -76,3 +76,12 @@ def query_employee_scope(employee, resource):
     else:
         # has any permissions
         return DBSession.query(Structure.id).filter(Structure.id == None)
+
+
+def get_employee_last_appointment(employee_id):
+    employee = Employee.get(employee_id)
+    if employee:
+        appointment = (
+            employee.appointments.order_by(desc(Appointment.date)).first()
+        )
+        return appointment

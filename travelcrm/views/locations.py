@@ -48,7 +48,6 @@ class Locations(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -91,7 +90,7 @@ class Locations(object):
             location = Location(
                 region_id=controls.get('region_id'),
                 name=controls.get('name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(location)
             DBSession.flush()
@@ -130,7 +129,6 @@ class Locations(object):
             controls = schema.deserialize(self.request.params)
             location.region_id = controls.get('region_id')
             location.name = controls.get('name')
-            location.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': location.id

@@ -13,7 +13,7 @@
             </div>
             <div>
                 <span class="lipstick">${_(u"ATTENTION:")}</span>
-                ${_(u"it's highly not recommend to delete bank details. it may have destructive aftermath!")}
+                ${_(u"it's highly not recommend to delete persons. it may have destructive aftermath!")}
             </div>
         </div>
         <div class="form-buttons">

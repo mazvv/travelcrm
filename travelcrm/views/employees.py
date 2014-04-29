@@ -7,6 +7,9 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.employee import Employee
+from ..models.contact import Contact
+from ..models.passport import Passport
+from ..models.address import Address
 from ..lib.qb.employees import EmployeesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -48,7 +51,6 @@ class Employees(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -87,13 +89,31 @@ class Employees(object):
         schema = EmployeeSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             employee = Employee(
                 first_name=controls.get('first_name'),
                 last_name=controls.get('last_name'),
                 second_name=controls.get('second_name'),
-                resource=self.context.create_resource(controls.get('status'))
+                itn=controls.get('itn'),
+                dismissal_date=controls.get('dismissal_date'),
+                resource=self.context.create_resource()
             )
+            if controls.get('photo'):
+                employee.photo = self.request.storage.save(
+                    controls.get('photo'),
+                    folder='employee',
+                    randomize=True
+                )
+            for id in controls.get('contact_id'):
+                contact = Contact.get(id)
+                employee.contacts.append(contact)
+            for id in controls.get('passport_id'):
+                passport = Passport.get(id)
+                employee.passports.append(passport)
+            for id in controls.get('address_id'):
+                address = Address.get(id)
+                employee.addresses.append(address)
+
             DBSession.add(employee)
             DBSession.flush()
             return {
@@ -128,11 +148,33 @@ class Employees(object):
         schema = EmployeeSchema().bind(request=self.request)
         employee = Employee.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             employee.first_name = controls.get('first_name')
             employee.last_name = controls.get('last_name')
             employee.second_name = controls.get('second_name')
-            employee.resource.status = controls.get('status')
+            employee.itn = controls.get('itn')
+            employee.dismissal_date = controls.get('dismissal_date')
+            if controls.get('photo') != None:
+                employee.photo = self.request.storage.save(
+                    controls.get('photo'),
+                    folder='employee',
+                    randomize=True
+                )
+            if controls.get('delete_photo'):
+                employee.photo = None
+            employee.contacts = []
+            employee.passports = []
+            employee.addresses = []
+            for id in controls.get('contact_id'):
+                contact = Contact.get(id)
+                employee.contacts.append(contact)
+            for id in controls.get('passport_id'):
+                passport = Passport.get(id)
+                employee.passports.append(passport)
+            for id in controls.get('address_id'):
+                address = Address.get(id)
+                employee.addresses.append(address)
+
             return {
                 'success_message': _(u'Saved'),
                 'response': employee.id

@@ -49,7 +49,6 @@ class BPersons(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -96,7 +95,7 @@ class BPersons(object):
                 last_name=controls.get('last_name'),
                 second_name=controls.get('second_name'),
                 position_name=controls.get('position_name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             if self.request.params.getall('contact_id'):
                 bperson.contacts = (
@@ -150,7 +149,6 @@ class BPersons(object):
             bperson.last_name = controls.get('last_name')
             bperson.second_name = controls.get('second_name')
             bperson.position_name = controls.get('position_name')
-            bperson.resource.status = controls.get('status')
             if self.request.params.getall('contact_id'):
                 bperson.contacts = (
                     DBSession.query(Contact)

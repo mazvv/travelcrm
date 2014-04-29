@@ -48,7 +48,6 @@ class Currencies(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -90,7 +89,7 @@ class Currencies(object):
             controls = schema.deserialize(self.request.params)
             currency = Currency(
                 iso_code=controls.get('iso_code'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(currency)
             DBSession.flush()
@@ -128,7 +127,6 @@ class Currencies(object):
         try:
             controls = schema.deserialize(self.request.params)
             currency.iso_code = controls.get('iso_code')
-            currency.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': currency.id

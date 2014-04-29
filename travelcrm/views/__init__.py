@@ -8,6 +8,7 @@ from pyramid.security import authenticated_userid
 
 from ..models.user import User
 from ..lib.bl.employees import get_employee_position
+from ..lib.utils.common_utils import translate as _
 
 
 @view_config(
@@ -17,7 +18,6 @@ from ..lib.bl.employees import get_employee_position
     renderer='travelcrm:templates/system#system_info_dialog.mak'
 )
 def system_need_select_row(context, request):
-    _ = request.translate
     return {
         'title': _(u'System Info'),
         'message': _(u'Need to select row')
@@ -31,7 +31,6 @@ def system_need_select_row(context, request):
     renderer='travelcrm:templates/system#system_info_dialog.mak'
 )
 def system_need_select_rows(context, request):
-    _ = request.translate
     return {
         'title': _(u'System Info'),
         'message': _(u'Need to check rows')
@@ -44,7 +43,6 @@ def system_need_select_rows(context, request):
     renderer="travelcrm:templates/system#system_info_dialog.mak",
 )
 def system_resource_forbidden(context, request):
-    _ = request.translate
     return {
         'title': _(u'Seccurity Info'),
         'message': _(u'You have no permissions to do this action')

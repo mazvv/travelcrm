@@ -46,3 +46,7 @@ def cast_int(val):
         return int(val)
     except ValueError:
         return None
+
+
+def get_company_name():
+    return _get_settings_value('company.name')

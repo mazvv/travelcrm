@@ -26,7 +26,7 @@
                 ${h.tags.password("password", None, class_="text w15")}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
         	${h.tags.link_to(_(u"Forgot password?"), forgot_url)}
         </div>
         <div class="form-buttons">

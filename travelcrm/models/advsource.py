@@ -50,3 +50,7 @@ class Advsource(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_name(cls, name):
+        return DBSession.query(cls).filter(cls.name == name).first()

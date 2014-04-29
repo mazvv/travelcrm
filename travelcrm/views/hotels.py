@@ -48,7 +48,6 @@ class Hotels(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -92,7 +91,7 @@ class Hotels(object):
                 name=controls.get('name'),
                 hotelcat_id=controls.get('hotelcat_id'),
                 location_id=controls.get('location_id'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(hotel)
             DBSession.flush()
@@ -132,7 +131,6 @@ class Hotels(object):
             hotel.name = controls.get('name')
             hotel.hotelcat_id = controls.get('hotelcat_id')
             hotel.location_id = controls.get('location_id')
-            hotel.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': hotel.id

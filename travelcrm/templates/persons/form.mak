@@ -10,7 +10,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-        <div class="easyui-tabs h100" data-options="border:false,height:300">
+        <div class="easyui-tabs h100" data-options="border:false,height:400">
             <div title="${_(u'Main')}">
 		        <div class="form-field">
 		            <div class="dl15">
@@ -56,15 +56,6 @@
 						${h.fields.date_field(item.birthday if item else None, 'birthday')}
 						${h.common.error_container(name='birthday')}
 				    </div>
-				</div>
-				<div class="form-field">
-					<div class="dl15">
-						${h.tags.title(_(u"status"), True, "status")}
-					</div>
-					<div class="ml15">
-						${h.fields.status_field(item.resource.status if item else None)}
-						${h.common.error_container(name='status')}
-					</div>
 				</div>
 		    </div>
 		    <div title="${_(u'Contacts')}">

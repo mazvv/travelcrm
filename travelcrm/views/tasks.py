@@ -29,7 +29,12 @@ class Tasks(object):
         permission='view'
     )
     def index(self):
-        return {}
+        status = Task.STATUS
+        priority = Task.PRIORITY
+        return {
+            'status': status,
+            'priority': priority
+        }
 
     @view_config(
         name='list',
@@ -48,7 +53,6 @@ class Tasks(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -102,8 +106,8 @@ class Tasks(object):
                 reminder=reminder,
                 descr=controls.get('descr'),
                 priority=controls.get('priority'),
-                closed=controls.get('closed'),
-                resource=self.context.create_resource(controls.get('status'))
+                status=controls.get('status'),
+                resource=self.context.create_resource()
             )
             DBSession.add(task)
             DBSession.flush()
@@ -126,7 +130,7 @@ class Tasks(object):
     )
     def edit(self):
         task = Task.get(self.request.params.get('id'))
-        return {'item': task, 'title': _(u'Edit Hotel Category')}
+        return {'item': task, 'title': _(u'Edit Task')}
 
     @view_config(
         name='edit',
@@ -153,8 +157,7 @@ class Tasks(object):
             task.reminder = reminder
             task.descr = controls.get('descr')
             task.priority = controls.get('priority')
-            task.closed = controls.get('closed')
-            task.resource.status = controls.get('status')
+            task.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id

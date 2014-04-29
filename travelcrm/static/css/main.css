@@ -14,6 +14,14 @@ font-color: #555555;
 red: #900;
 background footer: #2b394a;
 page background: #f4f4f4;
+
+-- statuses
+default - #999
+primary - #31c0be
+success - #60cd9b
+info - #66b5d7
+warning - #eec95a
+danger - #e87352
 **/
 
 /** emastic hacks **/
@@ -30,7 +38,12 @@ a{
 	outline: none;
 	text-decoration: none;
 }
-
+ol, ul{
+	margin: 0px 0px 0px 20px;
+}
+p{
+	padding: 3px 0px;
+}
 #_page_{
 	background-color: #f4f4f4;
 	min-width: 1128px;
@@ -66,7 +79,7 @@ a{
 }
 .logo{
     color: #ffffff !important;
-    padding-top: 1em;
+    padding-top: 5px;
 }
 .logo .logo-big{
     font-size: 24px;
@@ -124,11 +137,17 @@ hr.dashed{
 .mr1 {
     margin-right: 1em;
 }
+.ml1 {
+    margin-left: 1em;
+}
 .mt05 {
     margin-top: 0.5em;
 }
 .mr05 {
     margin-right: 0.5em;
+}
+.mb05 {
+	margin-bottom: 0.5em;
 }
 
 /** borders **/
@@ -241,20 +260,26 @@ a:hover.l-btn-plain{
 .datebox .combo-arrow:before{
     content: "\f073";
 }
-.datagrid-toolbar.combogrid-toolbar{
-	height: 16px;
-	line-height: 16px;
+.combogrid-toolbar{
+	height: 18px;
+	line-height: 18px;
 	border: none;
-}
-.datagrid-toolbar.combogrid-toolbar a{
 	display: inline-block;
-	height: 16px;
-	width: 16px;
-	line-height: 16px;
+}
+.combogrid-toolbar a{
+	height: 18px;
+	width: 18px;
+	line-height: 18px;
     background-color: #ececec;
 	text-align: center;
 	opacity: 0.8;
 	margin-left: 4px;
+	border: none;
+}
+.combogrid-toolbar a:hover{
+	text-decoration: none;
+	background-color: #000;
+	color: #fff;
 }
 .datagrid-toolbar.combogrid-toolbar a:first-child{
 	margin-left: 0px;
@@ -290,7 +315,6 @@ form{
 }
 .form-field{
     padding: 5px 10px;
-    margin-bottom: 1px;
 }
 .form-field:hover{
     background: #f3f3f3;
@@ -455,7 +479,7 @@ input{
 
 
 /** searchbar **/
-.searchbar{
+.search{
 	position: relative;
 }
 .searchbar span.field-actions{
@@ -463,9 +487,10 @@ input{
 	top: 2px;
 	right: 0px;
 }
-.searchbar .advanced-search{
+.search .advanced-search{
 	position: absolute;
 	border: 1px solid #d1d1d1;
+	background: transparent url(./img/adv-search-bg.png) repeat;
 	top: 23px;
 	right: 0px;
 	z-index: 2;
@@ -474,7 +499,7 @@ input{
 	display: none;
 	padding: 5px 5px 0px 5px;
 }
-.searchbar .advanced-search .fields-container{
+.search .advanced-search .fields-container{
 	height: auto;
 	max-height: 280px;
 	overflow-y: scroll; 
@@ -553,4 +578,64 @@ span.field-actions span.field-action:first-child {
 	padding: 5px;
 	background: transparent;
 	font-size: 12px;
+}
+
+/** info block **/
+.info-block{
+	padding: 10px;
+	margin-top: 10px;
+	background: transparent url(./img/adv-search-bg.png) repeat;
+}
+
+/** labels **/
+.task-status, .task-priority{
+	padding: 1px 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;	
+}
+.task-status.undefined, .task-priority.minor{
+	background-color: #999;
+	color: #fff;
+}
+.task-status.in_work, .task-priority.major{
+	background-color: #31c0be;
+	color: #fff;
+}
+.task-status.on_hold, .task-priority.normal{
+    background-color: #66b5d7;
+    color: #fff;
+}
+.task-status.requirements{
+	background-color: #eec95a;
+}
+.task-status.closed{
+	background-color: #60cd9b;
+	color: #fff;
+}
+.task-priority.critical{
+	background-color: #e87352;
+	color: #fff;
+}
+
+/** images **/
+div.image-thumb{
+    width:110px;
+    height:110px;
+    background-color: #fafafa;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 110px;
+}
+
+/** employee info **/
+.employee-info{
+	color: #fff;
+	margin-top: 3px;
+}
+.employee-info img{
+	display: inline-block;
+	margin-top: 4px;
+	margin-right: 10px;
 }

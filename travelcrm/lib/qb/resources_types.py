@@ -9,10 +9,10 @@ class ResourcesTypesQueryBuilder(ResourcesQueryBuilder):
     _fields = {
         'id': ResourceType.id,
         '_id': ResourceType.id,
-        'rt_name': ResourceType.name,
-        'rt_humanize': ResourceType.humanize,
-        'rt_module': ResourceType.module,
-        'rt_description': ResourceType.description,
+        'name': ResourceType.name,
+        'humanize': ResourceType.humanize,
+        'module': ResourceType.module,
+        'description': ResourceType.description,
     }
     _simple_search_fields = [
         ResourceType.name,

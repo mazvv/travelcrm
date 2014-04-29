@@ -48,7 +48,6 @@ class Foodcats(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -90,7 +89,7 @@ class Foodcats(object):
             controls = schema.deserialize(self.request.params)
             foodcat = Foodcat(
                 name=controls.get('name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(foodcat)
             DBSession.flush()
@@ -128,7 +127,6 @@ class Foodcats(object):
         try:
             controls = schema.deserialize(self.request.params)
             foodcat.name = controls.get('name')
-            foodcat.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': foodcat.id

@@ -5,12 +5,12 @@ import importlib
 
 from . import ResourceSchema
 from ..models.resource_type import ResourceType
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred
 def resource_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         path = value.split('.')
@@ -23,19 +23,41 @@ def resource_validator(node, kw):
             raise colander.Invalid(node, _(u"Resource module does not exist"))
         except:
             raise colander.Invalid(node, _(u"Check module name"))
+
+        resource_type = ResourceType.by_resource_name(module, attr)
+        if (
+            resource_type
+            and (
+                str(resource_type.id) != request.params.get('id')
+                or (
+                    str(resource_type.id) == request.params.get('id')
+                    and request.view_name == 'copy'
+                )
+            )
+        ):
+            raise colander.Invalid(
+                node,
+                _(u'Resource Type with the same resource exists'),
+            )
+
     return colander.All(colander.Length(max=128), validator,)
 
 
 @colander.deferred
 def name_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         resource_type = ResourceType.by_name(value)
         if (
             resource_type
-            and str(resource_type.id) != request.params.get('id')
+            and (
+                str(resource_type.id) != request.params.get('id')
+                or (
+                    str(resource_type.id) == request.params.get('id')
+                    and request.view_name == 'copy'
+                )
+            )
         ):
             raise colander.Invalid(
                 node,
@@ -47,13 +69,18 @@ def name_validator(node, kw):
 @colander.deferred
 def humanize_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         resource_type = ResourceType.by_humanize(value)
         if (
             resource_type
-            and str(resource_type.id) != request.params.get('id')
+            and (
+                str(resource_type.id) != request.params.get('id')
+                or (
+                    str(resource_type.id) == request.params.get('id')
+                    and request.view_name == 'copy'
+                )
+            )
         ):
             raise colander.Invalid(
                 node,

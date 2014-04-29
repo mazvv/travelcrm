@@ -50,6 +50,7 @@ def main(global_config, **settings):
 
     config.add_static_view('css', 'static/css', cache_max_age=3600)
     config.add_static_view('js', 'static/js', cache_max_age=3600)
+    config.add_thumb_view('thumbs')
 
     config.scan()
     return config.make_wsgi_app()

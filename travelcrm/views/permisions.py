@@ -1,8 +1,9 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
+import colander
+from sqlalchemy.orm.session import make_transient
 from pyramid.view import view_config
 
 from ..models import DBSession
@@ -10,7 +11,7 @@ from ..models.position import Position
 from ..models.resource_type import ResourceType
 from ..models.permision import Permision
 from ..lib.qb.permisions import PermisionsQueryBuilder
-from ..forms.permisions import PermisionSchema
+from ..forms.permisions import PermisionSchema, PermisionCopySchema
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 
@@ -45,6 +46,9 @@ class PositionsPermisions(object):
     def list(self):
         qb = PermisionsQueryBuilder(
             self.request.params.get('position_id')
+        )
+        qb.search_simple(
+            self.request.params.get('q')
         )
         qb.sort_query(
             self.request.params.get('sort'),
@@ -141,6 +145,60 @@ class PositionsPermisions(object):
                 permision.structure_id = None
             DBSession.add(permision)
             return {'success_message': _(u'Saved')}
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }
+
+    @view_config(
+        name='copy',
+        context='..resources.permisions.Permisions',
+        request_method='GET',
+        renderer='travelcrm:templates/permisions/copy.mak',
+        permission='edit'
+    )
+    def copy(self):
+        position = Position.get(self.request.params.get('position_id'))
+        return {
+            'position': position,
+            'title': _(u"Copy Permissions From Position")
+        }
+
+    @view_config(
+        name='copy',
+        context='..resources.permisions.Permisions',
+        request_method='POST',
+        renderer='json',
+        permission='edit'
+    )
+    def _copy(self):
+        schema = PermisionCopySchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            (
+                DBSession.query(Permision)
+                .filter(
+                    Permision.condition_position_id(
+                        controls.get('position_id')
+                    )
+                )
+                .delete()
+            )
+            permisions_from = (
+                DBSession.query(Permision)
+                .filter(
+                    Permision.condition_position_id(
+                        controls.get('from_position_id')
+                    )
+                )
+            )
+            for permision in permisions_from:
+                make_transient(permision)
+                permision.id = None
+                permision.position_id = controls.get('position_id')
+                DBSession.add(permision)
+            return {'success_message': _(u'Copied')}
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

@@ -1,5 +1,7 @@
 # -*-coding: utf-8-*-
 
+from cgi import FieldStorage
+
 import colander
 import phonenumbers
 from colander import (
@@ -17,9 +19,7 @@ from ..lib.utils.common_utils import get_locale_name
 
 
 class ResourceSchema(colander.Schema):
-    status = colander.SchemaNode(
-        colander.Integer(),
-    )
+    pass
 
 
 class Date(ColanderDate):
@@ -100,3 +100,16 @@ class PhoneNumber(object):
                     mapping={'val': value}
                 )
             )
+
+
+class File(colander.SchemaType):
+
+    def serialize(self, node, appstruct):
+        if appstruct is colander.null:
+            return colander.null
+        return appstruct
+
+    def deserialize(self, node, cstruct):
+        if cstruct is None or not isinstance(cstruct, FieldStorage):
+            return colander.null
+        return cstruct

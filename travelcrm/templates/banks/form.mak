@@ -8,7 +8,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-        <div class="easyui-tabs h100" data-options="border:false,height:200">
+        <div class="easyui-tabs h100" data-options="border:false,height:300">
             <div title="${_(u'Main')}">
 		        <div class="form-field">
 		            <div class="dl15">
@@ -17,15 +17,6 @@
 		            <div class="ml15">
 		                ${h.tags.text("name", item.name if item else None, class_="text w20")}
 		                ${h.common.error_container(name='name')}
-		            </div>
-		        </div>
-		        <div class="form-field">
-		            <div class="dl15">
-		                ${h.tags.title(_(u"status"), True, "status")}
-		            </div>
-		            <div class="ml15">
-		                ${h.fields.status_field(item.resource.status if item else None)}
-		                ${h.common.error_container(name='status')}
 		            </div>
 		        </div>
             </div>

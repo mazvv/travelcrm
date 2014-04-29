@@ -12,10 +12,6 @@ class ResourceTypeNotFound(Exception):
     pass
 
 
-class ResourceTypeIsNotActive(Exception):
-    pass
-
-
 def get_resource_class_module(cls):
     """ get module name by resource class
     """
@@ -36,9 +32,6 @@ def get_resource_class(key):
     retrieve class name and module name from DB and get glass from module
     """
     rt = ResourceType.by_name(key)
-    if rt and not rt.resource_obj.is_active():
-        # TODO: make it more civilian
-        raise ResourceTypeIsNotActive()
     try:
         rt_module = importlib.import_module(rt.module)
         resource = getattr(rt_module, rt.resource)

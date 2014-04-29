@@ -34,22 +34,13 @@
                 ${h.common.error_container(name='resource')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                  ${h.tags.title(_(u"description"), False, "description")}
             </div>
             <div class="ml15">
                 ${h.tags.textarea("description", item.description if item else None, class_="text w20", rows=4)}
                 ${h.common.error_container(name='description')}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
-            </div>
-            <div class="ml15">
-                ${h.fields.status_field(item.resource_obj.status if item else None)}
-                ${h.common.error_container(name='status')}
             </div>
         </div>
         <div class="form-buttons">

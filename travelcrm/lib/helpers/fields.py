@@ -10,6 +10,7 @@ from webhelpers.html import tags
 from webhelpers.html import HTML
 
 from ...resources.employees import Employees
+from ...resources.positions import Positions
 from ...resources.licences import Licences
 from ...resources.bpersons import BPersons
 from ...resources.contacts import Contacts
@@ -24,35 +25,25 @@ from ...resources.foodcats import Foodcats
 from ...resources.hotels import Hotels
 from ...resources.currencies import Currencies
 from ...resources.persons import Persons
-from ...resources.tours import Tours
+from ...resources.advsources import Advsources
+from ...resources.banks import Banks
+
+from ...models.task import Task
 
 from ..utils.common_utils import (
     get_locale_name,
     gen_id,
 )
 from ..utils.common_utils import translate as _
-from ..bl.tasks import PRIORITIES
 
 
 def yes_no_field(value=None, name='yes_no'):
     choices = [
-        (0, 'no'),
-        (1, 'yes'),
+        (0, _(u'no')),
+        (1, _(u'yes')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto',editable:false"
-    )
-
-
-def status_field(value=None, name='status'):
-    choices = [
-        ('', '--None--'),
-        (0, 'active'),
-        (1, 'archive'),
-    ]
-    return tags.select(
-        name, value, choices, class_='easyui-combobox text w15',
         data_options="panelHeight:'auto',editable:false"
     )
 
@@ -120,12 +111,12 @@ def resources_types_combobox_field(
 
 def permisions_yes_no_field(value=None, permision="view", name='permisions'):
     choices = [
-        ("", 'no'),
-        (permision, 'yes'),
+        ("", _(u'no')),
+        (permision, _(u'yes')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto'"
+        data_options="panelHeight:'auto',editable:false"
     )
 
 
@@ -166,7 +157,8 @@ def navigations_combotree_field(
 
 
 def employees_combobox_field(
-    request, value=None, name='employee_id', id=None, options=None
+    request, value=None, name='employee_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Employees.get_permisions(Employees, request)
     obj_id = id or gen_id()
@@ -220,7 +212,6 @@ def employees_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -250,7 +241,6 @@ def employees_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -258,7 +248,7 @@ def employees_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -268,42 +258,131 @@ def employees_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
-def positions_combobox_field(
-    structure_id, value=None, name='position_id'
+def positions_combogrid_field(
+    request, value=None, name='position_id',
+    id=None, show_toolbar=True, options=None
 ):
+    permisions = Positions.get_permisions(Positions, request)
+    obj_id = id or gen_id()
+    toolbar_id = 'tb-%s' % obj_id
+    toolbar = []
+    if 'add' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/positions/add'"
+                % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-plus easyui-tooltip _action',
+                title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'edit' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/positions/edit',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-pencil easyui-tooltip _action',
+                title=_(u'edit selected'),
+                **kwargs
+            )
+        )
+
+    fields = """[[{
+        field: 'position_name', title: '%(title)s',
+        sortable: true, width: 200,
+        formatter: function(value,row,index){
+            return '<span class="b">' + value + '</span><br/>'
+            + row.structure_path.join(' &rarr; ');
+        }
+    }]]""" % {'title': _(u'name')}
+
     data_options = """
         url: '/positions/list',
-        valueField: 'id',
+        fitColumns: true,
+        scrollbarSize: 7,
+        border: false,
+        delay: 500,
+        idField: 'id',
         textField: 'position_name',
-        editable: false,
+        mode: 'remote',
+        sortName: 'id',
+        sortOrder: 'desc',
+        columns: %(columns)s,
+        pageSize: 50,
+        showHeader: false,
+        view: bufferview,
         onBeforeLoad: function(param){
-            param.sort = 'position_name';
-            param.rows = 0;
-            param.page = 1;
-            param.structure_id = %s
+            var this_selector = '#%(obj_id)s';
+            var response_id = $(this_selector).data('response');
+            var id = %(id)s;
+            console.log(this_selector);
+            if(response_id){
+                param.id = response_id;
+                param.q = '';
+            }
+            else if(id && typeof(param.q) == 'undefined'){
+                param.id = id;
+            }
+            if(!param.page){
+                param.page = 1;
+                param.rows = 50;
+            }
         },
-        loadFilter: function(data){
-            return data.rows;
+        onLoadSuccess: function(){
+            var this_selector = '#%(obj_id)s';
+            var response_id = $(this_selector).data('response');
+            if(response_id){
+                $(this_selector).combogrid('clear');
+                $(this_selector).combogrid('setValue', response_id);
+                $(this_selector).data('response', '');
+            }
         }
-    """ % structure_id
-    return tags.text(name, value, class_="easyui-combobox text w20",
-                     data_options=data_options
-                     )
+    """ % ({
+        'columns': fields,
+        'id': json.dumps(value),
+        'obj_id': obj_id,
+    })
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    if toolbar:
+        toolbar = HTML.tag(
+            'span', class_='combogrid-toolbar', id=toolbar_id,
+            c=HTML(*toolbar)
+        )
+    return HTML(
+        tags.text(
+            name, value,
+            id=obj_id,
+            class_="easyui-combogrid text w20",
+            data_options=data_options,
+        ),
+        toolbar if (toolbar and show_toolbar) else ''
+    )
 
 
 def permisions_scope_type_field(
     value='structure', name='scope_type'
 ):
     choices = [
-        ("all", 'all'),
-        ("structure", 'structure'),
+        ("all", _(u'all')),
+        ("structure", _(u'structure')),
     ]
     return tags.select(
-        name, value, choices, class_='easyui-combobox text w5',
+        name, value, choices, class_='easyui-combobox text w10',
         data_options="panelHeight:'auto',editable:false"
     )
 
@@ -365,8 +444,8 @@ def gender_combobox_field(
 ):
     choices = [
         ('', '--None--'),
-        ('female', 'female'),
-        ('male', 'male'),
+        ('female', _(u'female')),
+        ('male', _(u'male')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
@@ -378,9 +457,9 @@ def contact_type_combobox_field(
     value=None, name='contact_type'
 ):
     choices = [
-        ('phone', 'phone'),
-        ('email', 'email'),
-        ('skype', 'skype'),
+        ('phone', _(u'phone')),
+        ('email', _(u'email')),
+        ('skype', _(u'skype')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
@@ -389,7 +468,8 @@ def contact_type_combobox_field(
 
 
 def licences_combobox_field(
-    request, value=None, name='licence_id', id=None, options=None
+    request, value=None, name='licence_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Licences.get_permisions(Licences, request)
     obj_id = id or gen_id()
@@ -444,7 +524,6 @@ def licences_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -475,7 +554,6 @@ def licences_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -483,7 +561,7 @@ def licences_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -493,12 +571,13 @@ def licences_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def bpersons_combobox_field(
-    request, value=None, name='bperson_id', id=None, options=None
+    request, value=None, name='bperson_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = BPersons.get_permisions(BPersons, request)
     obj_id = id or gen_id()
@@ -553,7 +632,6 @@ def bpersons_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -583,7 +661,6 @@ def bpersons_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -591,7 +668,7 @@ def bpersons_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -601,12 +678,13 @@ def bpersons_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def contacts_combobox_field(
-    request, value=None, name='contact_id', id=None, options=None
+    request, value=None, name='contact_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Contacts.get_permisions(Contacts, request)
     obj_id = id or gen_id()
@@ -662,7 +740,6 @@ def contacts_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -692,7 +769,6 @@ def contacts_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -700,7 +776,7 @@ def contacts_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -710,12 +786,13 @@ def contacts_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def hotelcats_combobox_field(
-    request, value=None, name='hotelcat_id', id=None, options=None
+    request, value=None, name='hotelcat_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Hotelcats.get_permisions(Hotelcats, request)
     obj_id = id or gen_id()
@@ -771,7 +848,6 @@ def hotelcats_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -801,7 +877,6 @@ def hotelcats_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -809,7 +884,7 @@ def hotelcats_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -819,12 +894,13 @@ def hotelcats_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def countries_combobox_field(
-    request, value=None, name='country_id', id=None, options=None
+    request, value=None, name='country_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Countries.get_permisions(Countries, request)
     obj_id = id or gen_id()
@@ -880,7 +956,6 @@ def countries_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -910,7 +985,6 @@ def countries_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -918,7 +992,7 @@ def countries_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -928,12 +1002,13 @@ def countries_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def regions_combobox_field(
-    request, value=None, name='region_id', id=None, options=None
+    request, value=None, name='region_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Regions.get_permisions(Regions, request)
     obj_id = id or gen_id()
@@ -989,7 +1064,6 @@ def regions_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1019,7 +1093,6 @@ def regions_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1027,7 +1100,7 @@ def regions_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1037,12 +1110,13 @@ def regions_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def locations_combobox_field(
-    request, value=None, name='location_id', id=None, options=None
+    request, value=None, name='location_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Locations.get_permisions(Locations, request)
     obj_id = id or gen_id()
@@ -1098,7 +1172,6 @@ def locations_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1128,7 +1201,6 @@ def locations_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1136,7 +1208,7 @@ def locations_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1146,12 +1218,13 @@ def locations_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def touroperators_combobox_field(
-    request, value=None, name='touroperator_id', id=None, options=None
+    request, value=None, name='touroperator_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Touroperators.get_permisions(Touroperators, request)
     obj_id = id or gen_id()
@@ -1207,7 +1280,6 @@ def touroperators_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1237,7 +1309,6 @@ def touroperators_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1245,7 +1316,7 @@ def touroperators_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1255,12 +1326,13 @@ def touroperators_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def accomodations_combobox_field(
-    request, value=None, name='accomodation_id', id=None, options=None
+    request, value=None, name='accomodation_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Accomodations.get_permisions(Accomodations, request)
     obj_id = id or gen_id()
@@ -1316,7 +1388,6 @@ def accomodations_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1346,7 +1417,6 @@ def accomodations_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1354,7 +1424,7 @@ def accomodations_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1364,12 +1434,13 @@ def accomodations_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def foodcats_combobox_field(
-    request, value=None, name='foodcat_id', id=None, options=None
+    request, value=None, name='foodcat_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Foodcats.get_permisions(Foodcats, request)
     obj_id = id or gen_id()
@@ -1425,7 +1496,6 @@ def foodcats_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1455,7 +1525,6 @@ def foodcats_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1463,7 +1532,7 @@ def foodcats_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1473,12 +1542,13 @@ def foodcats_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def roomcats_combobox_field(
-    request, value=None, name='roomcat_id', id=None, options=None
+    request, value=None, name='roomcat_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Roomcats.get_permisions(Roomcats, request)
     obj_id = id or gen_id()
@@ -1534,7 +1604,6 @@ def roomcats_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1564,7 +1633,6 @@ def roomcats_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1572,7 +1640,7 @@ def roomcats_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1582,12 +1650,13 @@ def roomcats_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def hotels_combobox_field(
-    request, value=None, name='hotel_id', id=None, options=None
+    request, value=None, name='hotel_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Hotels.get_permisions(Hotels, request)
     obj_id = id or gen_id()
@@ -1643,7 +1712,6 @@ def hotels_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1673,7 +1741,6 @@ def hotels_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1681,7 +1748,7 @@ def hotels_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1691,12 +1758,13 @@ def hotels_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def currencies_combobox_field(
-    request, value=None, name='currency_id', id=None, options=None
+    request, value=None, name='currency_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Currencies.get_permisions(Currencies, request)
     obj_id = id or gen_id()
@@ -1752,7 +1820,6 @@ def currencies_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1782,7 +1849,6 @@ def currencies_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1790,7 +1856,7 @@ def currencies_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1800,12 +1866,13 @@ def currencies_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
 def persons_combobox_field(
-    request, value=None, name='person_id', id=None, options=None
+    request, value=None, name='person_id',
+    id=None, show_toolbar=True, options=None
 ):
     permisions = Persons.get_permisions(Persons, request)
     obj_id = id or gen_id()
@@ -1860,7 +1927,6 @@ def persons_combobox_field(
         pageSize: 50,
         showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -1890,7 +1956,6 @@ def persons_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -1898,7 +1963,7 @@ def persons_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -1908,21 +1973,22 @@ def persons_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
-def tours_combobox_field(
-    request, value=None, name='tour_id', id=None, options=None
+def advsources_combobox_field(
+    request, value=None, name='advsource_id',
+    id=None, show_toolbar=True, options=None
 ):
-    permisions = Tours.get_permisions(Tours, request)
+    permisions = Advsources.get_permisions(Advsources, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/tours/add'"
+                "container:'#%s',action:'dialog_open',url:'/advsources/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1936,7 +2002,7 @@ def tours_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/tours/edit',"
+                "container:'#%s',action:'dialog_open',url:'/advsources/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1948,34 +2014,26 @@ def tours_combobox_field(
             )
         )
 
-    fields = [[
-        {'field': 'locations', 'title': _(u"locations"),
-            'sortable': True, 'width': 200},
-        {'field': 'hotels', 'title': _(u"hotels"),
-            'sortable': True, 'width': 200},
-        {'field': 'start_dt', 'title': _(u"start"),
-            'sortable': True, 'width': 60},
-        {'field': 'end_dt', 'title': _(u"end"),
-            'sortable': True, 'width': 60},
-    ]]
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
 
     data_options = """
-        url: '/tours/list',
-        panelWidth: 700,
+        url: '/advsources/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
         delay: 500,
         idField: 'id',
-        textField: 'locations',
+        textField: 'name',
         mode: 'remote',
         sortName: 'id',
         sortOrder: 'desc',
         columns: %(columns)s,
         pageSize: 50,
-        showHeader: true,
+        showHeader: false,
         view: bufferview,
-        toolbar: '#%(tb_id)s',
         onBeforeLoad: function(param){
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
@@ -2005,7 +2063,6 @@ def tours_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'tb_id': toolbar_id
     })
     if options:
         data_options += """,
@@ -2013,7 +2070,7 @@ def tours_combobox_field(
         """ % options
     if toolbar:
         toolbar = HTML.tag(
-            'div', class_='combogrid-toolbar', id=toolbar_id,
+            'span', class_='combogrid-toolbar', id=toolbar_id,
             c=HTML(*toolbar)
         )
     return HTML(
@@ -2023,25 +2080,144 @@ def tours_combobox_field(
             class_="easyui-combogrid text w20",
             data_options=data_options,
         ),
-        toolbar if toolbar else ''
+        toolbar if (toolbar and show_toolbar) else ''
     )
 
 
-def passport_type_field(request, value=None, name='passport_type'):
+def passport_type_field(
+    value=None, name='passport_type'
+):
     choices = [
         ('citizen', _(u'citizen')),
         ('foreign', _(u'foreign')),
     ]
     return tags.select(
-        name, value, choices, class_='easyui-combobox text w15',
-        data_options="panelHeight:'auto',editable:false"
+        name, value, choices, class_='easyui-combobox text w20',
+        data_options="panelHeight:'auto',editable:false,width:246"
     )
 
 
 def tasks_priority_combobox_field(
-    request, value=None, name='priority'
+    value=None, name='priority'
 ):
     return tags.select(
-        name, value, PRIORITIES, class_='easyui-combobox text w10',
+        name, value, Task.PRIORITY, class_='easyui-combobox text w10',
         data_options="panelHeight:'auto',editable:false,width:126"
+    )
+
+
+def tasks_status_combobox_field(
+    value=None, name='status'
+):
+    return tags.select(
+        name, value, Task.STATUS, class_='easyui-combobox text w10',
+        data_options="panelHeight:'auto',editable:false,width:126"
+    )
+
+
+def banks_combobox_field(
+    request, value=None, name='bank_id',
+    id=None, show_toolbar=True, options=None
+):
+    permisions = Banks.get_permisions(Banks, request)
+    obj_id = id or gen_id()
+    toolbar_id = 'tb-%s' % obj_id
+    toolbar = []
+    if 'add' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/banks/add'"
+                % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-plus easyui-tooltip _action',
+                title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'edit' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/banks/edit',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-pencil easyui-tooltip _action',
+                title=_(u'edit selected'),
+                **kwargs
+            )
+        )
+
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+
+    data_options = """
+        url: '/banks/list',
+        fitColumns: true,
+        scrollbarSize: 7,
+        border: false,
+        delay: 500,
+        idField: 'id',
+        textField: 'name',
+        mode: 'remote',
+        sortName: 'id',
+        sortOrder: 'desc',
+        columns: %(columns)s,
+        pageSize: 50,
+        showHeader: false,
+        view: bufferview,
+        onBeforeLoad: function(param){
+            var this_selector = '#%(obj_id)s';
+            var response_id = $(this_selector).data('response');
+            var id = %(id)s;
+            console.log(this_selector);
+            if(response_id){
+                param.id = response_id;
+                param.q = '';
+            }
+            else if(id && typeof(param.q) == 'undefined'){
+                param.id = id;
+            }
+            if(!param.page){
+                param.page = 1;
+                param.rows = 50;
+            }
+        },
+        onLoadSuccess: function(){
+            var this_selector = '#%(obj_id)s';
+            var response_id = $(this_selector).data('response');
+            if(response_id){
+                $(this_selector).combogrid('clear');
+                $(this_selector).combogrid('setValue', response_id);
+                $(this_selector).data('response', '');
+            }
+        }
+    """ % ({
+        'columns': json.dumps(fields),
+        'id': json.dumps(value),
+        'obj_id': obj_id,
+    })
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    if toolbar:
+        toolbar = HTML.tag(
+            'span', class_='combogrid-toolbar', id=toolbar_id,
+            c=HTML(*toolbar)
+        )
+    return HTML(
+        tags.text(
+            name, value,
+            id=obj_id,
+            class_="easyui-combogrid text w20",
+            data_options=data_options,
+        ),
+        toolbar if (toolbar and show_toolbar) else ''
     )

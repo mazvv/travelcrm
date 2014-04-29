@@ -60,3 +60,7 @@ class Currency(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_iso_code(cls, iso_code):
+        return DBSession.query(cls).filter(cls.iso_code == iso_code).first()

@@ -152,23 +152,17 @@ function show_status_bar_info(status_bar, info_type, message){
 	status_bar.html(icon).append('&nbsp;' + message);
 }
 
-function datagrid_resource_status_format(value){
-    var status = $('<span>').addClass('label');
-    switch (value){
-    	case 0:
-    		return $('<div>').append(status.addClass('active').html('active')).html();
-    	default:
-    		return $('<div>').append(status.addClass('archive').html('archive')).html();
-    }
-}
-
 function datagrid_resource_cell_styler(){
     return 'background-color:#ededed';
 }
 
 $(document).on("click", '._action', function(event){
     event.preventDefault();
-	var options = $.parser.parseOptions(this);
+    action(this);
+});
+
+function action(obj){
+	var options = $.parser.parseOptions(obj);
 
 	switch(options.action){
 		case('tab_open'):
@@ -188,7 +182,7 @@ $(document).on("click", '._action', function(event){
 		    container_picker(options);
 		    break;
 	}
-});
+}
 
 function container_action(options){
 	add_container(options);
@@ -376,4 +370,15 @@ function get_higher_zindex(){
 	    if(current && highest < current) highest = current;
 	});
 	return highest;
+}
+
+function getKeyByValue(obj, value) {
+	var key = null;
+	for (var name in obj) {
+		if (obj.hasOwnProperty(name) && obj[name] === value) {
+			key = name;
+			break;
+		}
+	}
+	return key;
 }

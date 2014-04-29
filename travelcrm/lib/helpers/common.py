@@ -7,7 +7,10 @@ from webhelpers.html import tags
 from webhelpers.html import HTML
 from webhelpers.misc import NotGiven
 
-from ..utils.common_utils import gen_id as u_gen_id
+from ..utils.common_utils import (
+    gen_id as u_gen_id,
+    get_company_name as u_get_company_name
+)
 
 
 def reset(name, value=None, id=NotGiven, **attrs):
@@ -54,3 +57,7 @@ def button(context, permision, caption, **kwargs):
 
 def jsonify(val):
     return json.dumps(val)
+
+
+def get_company_name():
+    return u_get_company_name()

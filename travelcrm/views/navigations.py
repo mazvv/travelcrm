@@ -2,7 +2,7 @@
 
 import logging
 import colander
-
+from sqlalchemy.orm.session import make_transient
 from pyramid.view import view_config
 
 from ..models import DBSession
@@ -13,7 +13,7 @@ from ..lib.qb.navigations import (
 )
 from ..lib.bl.navigations import get_next_position
 from ..lib.utils.common_utils import translate as _
-from ..forms.navigations import NavigationSchema
+from ..forms.navigations import NavigationSchema, NavigationCopySchema
 
 
 log = logging.getLogger(__name__)
@@ -103,7 +103,7 @@ class Navigations(object):
                     controls.get('position_id'),
                     controls.get('parent_id')
                 ),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(navigation)
             return {'success_message': _(u'Saved')}
@@ -152,7 +152,6 @@ class Navigations(object):
             navigation.url = controls.get('url')
             navigation.icon_cls = controls.get('icon_cls')
             navigation.parent_id = controls.get('parent_id')
-            navigation.resource.status = controls.get('status')
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -213,3 +212,57 @@ class Navigations(object):
         )
         if navigation:
             navigation.change_position('down')
+
+    @view_config(
+        name='copy',
+        context='..resources.navigations.Navigations',
+        request_method='GET',
+        renderer='travelcrm:templates/navigations/copy.mak',
+        permission='edit'
+    )
+    def copy(self):
+        position = Position.get(self.request.params.get('position_id'))
+        return {
+            'position': position,
+            'title': _(u"Copy Menu From Position")
+        }
+
+    @view_config(
+        name='copy',
+        context='..resources.navigations.Navigations',
+        request_method='POST',
+        renderer='json',
+        permission='edit'
+    )
+    def _copy(self):
+        schema = NavigationCopySchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            (
+                DBSession.query(Navigation)
+                .filter(
+                    Navigation.condition_position_id(
+                        controls.get('position_id')
+                    )
+                )
+                .delete()
+            )
+            navigations_from = (
+                DBSession.query(Navigation)
+                .filter(
+                    Navigation.condition_position_id(
+                        controls.get('from_position_id')
+                    )
+                )
+            )
+            for navigation in navigations_from:
+                make_transient(navigation)
+                navigation.id = None
+                navigation.position_id = controls.get('position_id')
+                DBSession.add(navigation)
+            return {'success_message': _(u'Copied')}
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }

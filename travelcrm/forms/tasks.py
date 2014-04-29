@@ -7,13 +7,13 @@ from . import (
     Date,
     Time,
 )
-from ..lib.bl.tasks import PRIORITIES
+from ..models.task import Task
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred
 def reminder_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         if (
@@ -57,10 +57,10 @@ class TaskSchema(ResourceSchema):
         missing=None,
     )
     priority = colander.SchemaNode(
-        colander.Integer(),
-        validator=colander.OneOf([id for id, name in PRIORITIES])
+        colander.String(),
+        validator=colander.OneOf(map(lambda x: x[0], Task.PRIORITY))
     )
-    closed = colander.SchemaNode(
-        colander.Boolean(),
-        missing=False
+    status = colander.SchemaNode(
+        colander.String(),
+        validator=colander.OneOf(map(lambda x: x[0], Task.STATUS))
     )

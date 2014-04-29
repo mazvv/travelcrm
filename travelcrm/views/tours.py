@@ -55,7 +55,6 @@ class Tours(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -98,6 +97,7 @@ class Tours(object):
             controls = schema.deserialize(self.request.params.mixed())
             tour = Tour(
                 deal_date=controls.get('deal_date'),
+                advsource_id=controls.get('advsource_id'),
                 touroperator_id=controls.get('touroperator_id'),
                 customer_id=controls.get('customer_id'),
                 adults=controls.get('adults'),
@@ -108,7 +108,7 @@ class Tours(object):
                 end_location_id=controls.get('end_location_id'),
                 start_date=controls.get('start_date'),
                 end_date=controls.get('end_date'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             for id in controls.get('tour_point_id'):
                 point = TourPoint.get(id)
@@ -155,6 +155,7 @@ class Tours(object):
         try:
             controls = schema.deserialize(self.request.params.mixed())
             tour.deal_date = controls.get('deal_date')
+            tour.advsource_id = controls.get('advsource_id')
             tour.touroperator_id = controls.get('touroperator_id')
             tour.customer_id = controls.get('customer_id')
             tour.adults = controls.get('adults')
@@ -165,7 +166,6 @@ class Tours(object):
             tour.end_location_id = controls.get('end_location_id')
             tour.start_date = controls.get('start_date')
             tour.end_date = controls.get('end_date')
-            tour.resource.status = controls.get('status')
             tour.points = []
             tour.persons = []
             for point in controls.get('tour_point_id', []):

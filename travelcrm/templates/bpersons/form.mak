@@ -46,15 +46,6 @@
                         ${h.common.error_container(name='position_name')}
                     </div>
                 </div>
-				<div class="form-field">
-					<div class="dl15">
-						${h.tags.title(_(u"status"), True, "status")}
-					</div>
-					<div class="ml15">
-						${h.fields.status_field(item.resource.status if item else None)}
-						${h.common.error_container(name='status')}
-					</div>
-				</div>
 		    </div>
 		    <div title="${_(u'Contacts')}">
                 ${contacts_selector(

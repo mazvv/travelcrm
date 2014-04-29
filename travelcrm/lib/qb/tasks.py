@@ -15,7 +15,7 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
         'deadline': Task.deadline,
         'employee': Task.employee_id,
         'priority': Task.priority,
-        'closed': Task.closed,
+        'status': Task.status,
         'descr': Task.descr
     }
 

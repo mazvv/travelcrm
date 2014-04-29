@@ -43,15 +43,6 @@
                 ${h.common.error_container(name='icon_cls')}
             </div>
         </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
-            </div>
-            <div class="ml15">
-                ${h.fields.status_field(item.resource.status if item else None)}
-                ${h.common.error_container(name='status')}
-            </div>
-        </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">

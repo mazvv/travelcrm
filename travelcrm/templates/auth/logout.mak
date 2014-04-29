@@ -11,10 +11,10 @@
             <i class="fa fa-info-circle fa-lg"></i> <span>${_(u"Do you really want to logout?")}</span>
         </div>
         <div class="form-buttons">
-            <div class="dl20 status-bar"></div>
-            <div class="ml20 tr button-group">
+            <div class="dl10 status-bar"></div>
+            <div class="ml10 tr button-group">
             	${h.tags.submit('logout', _(u"Logout"), class_="button")}
-            	${h.tags.submit('cancel', _(u"Cancel"), class_="button danger", type="reset")}
+            	${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
             </div>
         </div>
     ${h.tags.end_form()}

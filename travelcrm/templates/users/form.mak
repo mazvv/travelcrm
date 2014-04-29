@@ -1,4 +1,5 @@
-<div class="dl40 easyui-dialog"
+<%namespace file="../common/infoblock.mak" import="infoblock"/>
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -25,6 +26,9 @@
                 ${h.common.error_container(name='username')}
             </div>
         </div>
+        % if item:
+            ${infoblock(_(u"If you do not change password, take this fields empty"))}
+        % endif
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"password"), False if item else True, "password")}
@@ -34,13 +38,13 @@
                 ${h.common.error_container(name='password')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
-                ${h.tags.title(_(u"status"), True, "status")}
+                ${h.tags.title(_(u"confirm password"), False if item else True, "password_confirm")}
             </div>
             <div class="ml15">
-                ${h.fields.status_field(item.resource.status if item else None)}
-                ${h.common.error_container(name='status')}
+                ${h.tags.password("password_confirm", None, class_="text w20")}
+                ${h.common.error_container(name='password_confirm')}
             </div>
         </div>
         <div class="form-buttons">

@@ -48,7 +48,6 @@ class Accomodations(object):
             updated_from=self.request.params.get('updated_from'),
             updated_to=self.request.params.get('updated_to'),
             modifier_id=self.request.params.get('modifier_id'),
-            status=self.request.params.get('status'),
         )
         id = self.request.params.get('id')
         if id:
@@ -89,7 +88,7 @@ class Accomodations(object):
             controls = schema.deserialize(self.request.params)
             accomodation = Accomodation(
                 name=controls.get('name'),
-                resource=self.context.create_resource(controls.get('status'))
+                resource=self.context.create_resource()
             )
             DBSession.add(accomodation)
             DBSession.flush()
@@ -127,7 +126,6 @@ class Accomodations(object):
         try:
             controls = schema.deserialize(self.request.params)
             accomodation.name = controls.get('name')
-            accomodation.resource.status = controls.get('status')
             return {
                 'success_message': _(u'Saved'),
                 'response': accomodation.id,

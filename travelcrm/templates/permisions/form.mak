@@ -26,7 +26,7 @@
                 ${h.common.error_container(name='scope_type')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"scope structure"), False, "structure_id")}
             </div>

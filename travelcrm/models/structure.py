@@ -4,6 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
+    Table,
     ForeignKey
     )
 from sqlalchemy.orm import (
@@ -14,6 +15,84 @@ from sqlalchemy.orm import (
 from ..models import (
     DBSession,
     Base
+)
+
+
+structure_contact = Table(
+    'structure_contact',
+    Base.metadata,
+    Column(
+        'structure_id',
+        Integer,
+        ForeignKey(
+            'structure.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'contact_id',
+        Integer,
+        ForeignKey(
+            'contact.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
+)
+
+
+structure_bank_detail = Table(
+    'structure_bank_detail',
+    Base.metadata,
+    Column(
+        'structure_id',
+        Integer,
+        ForeignKey(
+            'structure.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'bank_detail_id',
+        Integer,
+        ForeignKey(
+            'bank_detail.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
+)
+
+
+structure_address = Table(
+    'structure_address',
+    Base.metadata,
+    Column(
+        'structure_id',
+        Integer,
+        ForeignKey(
+            'structure.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'address_id',
+        Integer,
+        ForeignKey(
+            'address.id',
+            ondelete='cascade',
+            onupdate='cascade'
+        ),
+        primary_key=True,
+    )
 )
 
 
@@ -67,6 +146,27 @@ class Structure(Base):
         ),
         uselist=True,
         lazy='dynamic',
+    )
+    contacts = relationship(
+        'Contact',
+        secondary=structure_contact,
+        backref=backref('structure', uselist=False),
+        cascade="all,delete",
+        uselist=True,
+    )
+    addresses = relationship(
+        'Address',
+        secondary=structure_address,
+        backref=backref('structure', uselist=False),
+        cascade="all,delete",
+        uselist=True,
+    )
+    banks_details = relationship(
+        'BankDetail',
+        secondary=structure_bank_detail,
+        backref=backref('structure', uselist=False),
+        cascade="all,delete",
+        uselist=True,
     )
 
     @classmethod

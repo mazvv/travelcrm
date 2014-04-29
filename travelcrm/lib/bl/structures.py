@@ -35,3 +35,15 @@ def query_recursive_tree():
         .filter(s.parent_id == st.c.id)
     )
     return DBSession.query(structure_tree)
+
+
+def get_structure_name_path(structure):
+    assert isinstance(structure, Structure), u'Must be Structure instance'
+    subq = query_recursive_tree().subquery()
+    path = (
+        DBSession.query(subq.c.name_path)
+        .filter(subq.c.id == structure.id)
+        .scalar()
+    )
+    if path:
+        return path

@@ -1,15 +1,14 @@
 # -*-coding: utf-8 -*-
 
 import colander
-from babel.dates import parse_date
 
-from . import Date, ResourceSchema
+from . import ResourceSchema
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred
 def date_validator(node, kw):
     request = kw.get('request')
-    _ = request.translate
 
     def validator(node, value):
         if not value and request.params.get('passport_type') == 'foreign':
