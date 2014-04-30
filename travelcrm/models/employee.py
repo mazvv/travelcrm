@@ -27,8 +27,10 @@ employee_contact = Table(
         Integer,
         ForeignKey(
             'employee.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_employee_id_employee_contact',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -37,8 +39,10 @@ employee_contact = Table(
         Integer,
         ForeignKey(
             'contact.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_contact_id_employee_contact',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -53,8 +57,10 @@ employee_passport = Table(
         Integer,
         ForeignKey(
             'employee.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_employee_id_employee_passport',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -63,8 +69,10 @@ employee_passport = Table(
         Integer,
         ForeignKey(
             'passport.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_passport_id_employee_passport',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -79,8 +87,10 @@ employee_address = Table(
         Integer,
         ForeignKey(
             'employee.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_employee_id_employee_address',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -89,8 +99,10 @@ employee_address = Table(
         Integer,
         ForeignKey(
             'address.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_address_id_employee_address',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -110,7 +122,7 @@ class Employee(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_employee",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -138,21 +150,31 @@ class Employee(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('employee', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'employee',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
     contacts = relationship(
         'Contact',
         secondary=employee_contact,
-        backref=backref('employee', uselist=False),
+        backref=backref(
+            'employee',
+            uselist=False
+        ),
         cascade="all,delete",
         uselist=True,
     )
     passports = relationship(
         'Passport',
         secondary=employee_passport,
-        backref=backref('employee', uselist=False),
+        backref=backref(
+            'employee',
+            uselist=False
+        ),
         cascade="all,delete",
         uselist=True,
     )
@@ -160,7 +182,10 @@ class Employee(Base):
     addresses = relationship(
         'Address',
         secondary=employee_address,
-        backref=backref('employee', uselist=False),
+        backref=backref(
+            'employee',
+            uselist=False
+        ),
         cascade="all,delete",
         uselist=True,
     )

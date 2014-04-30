@@ -5,7 +5,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+)
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.hybrid import hybrid_property
 
@@ -28,7 +28,7 @@ class Address(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_address",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -39,7 +39,7 @@ class Address(Base):
         ForeignKey(
             'location.id',
             name="fk_location_id_address",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -55,7 +55,11 @@ class Address(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('address', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'address',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
@@ -64,10 +68,8 @@ class Address(Base):
         backref=backref(
             'addresses',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
 

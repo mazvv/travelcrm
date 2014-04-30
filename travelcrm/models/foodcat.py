@@ -5,7 +5,8 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+    UniqueConstraint,
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -16,6 +17,13 @@ from ..models import (
 
 class Foodcat(Base):
     __tablename__ = 'foodcat'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            name='unique_idx_name_foodcat',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -27,7 +35,7 @@ class Foodcat(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_foodcat",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -40,7 +48,11 @@ class Foodcat(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('foodcat', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'foodcat',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )

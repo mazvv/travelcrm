@@ -5,7 +5,8 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+    UniqueConstraint,
+)
 
 from sqlalchemy.orm import (
     relationship,
@@ -20,6 +21,14 @@ from ..models import (
 
 class Region(Base):
     __tablename__ = 'region'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            'country_id',
+            name='unique_idx_name_country_id_region',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -31,7 +40,7 @@ class Region(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_region",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -43,7 +52,7 @@ class Region(Base):
             'country.id',
             name='fk_region_country_id',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False,
@@ -62,7 +71,6 @@ class Region(Base):
         backref=backref(
             'regions',
             uselist=True,
-            cascade='all,delete',
             lazy="dynamic"
         ),
         uselist=False

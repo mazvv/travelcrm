@@ -30,8 +30,8 @@ class Navigation(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_position_navigation",
-            ondelete='cascade',
+            name="fk_resource_id_navigation",
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -43,7 +43,7 @@ class Navigation(Base):
             'position.id',
             name='fk_navigation_position_id',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         )
     )
@@ -53,7 +53,7 @@ class Navigation(Base):
             'navigation.id',
             name='fk_parent_id_navigation',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         )
     )

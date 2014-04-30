@@ -27,8 +27,10 @@ task_resource = Table(
         Integer,
         ForeignKey(
             'task.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_task_id_task_resource',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -37,8 +39,10 @@ task_resource = Table(
         Integer,
         ForeignKey(
             'resource.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_resource_id_task_resource',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -72,7 +76,7 @@ class Task(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_task",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -83,7 +87,7 @@ class Task(Base):
         ForeignKey(
             'employee.id',
             name="fk_employee_id_task",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -113,7 +117,11 @@ class Task(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('task', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'task',
+            uselist=False,
+            cascade="all,delete"
+        ),
         foreign_keys=[resource_id],
         cascade="all,delete",
         uselist=False,
@@ -121,8 +129,10 @@ class Task(Base):
     task_resource = relationship(
         'Resource',
         secondary=task_resource,
-        backref=backref('resource_task', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'resource_task',
+            uselist=False
+        ),
         uselist=True,
     )
     employee = relationship(
@@ -130,7 +140,6 @@ class Task(Base):
         backref=backref(
             'tasks',
             uselist=True,
-            cascade='all,delete',
             lazy="dynamic"
         ),
         uselist=False

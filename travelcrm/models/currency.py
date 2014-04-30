@@ -38,7 +38,7 @@ class Currency(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_currency",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -50,7 +50,11 @@ class Currency(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('currency', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'currency',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False
     )

@@ -28,7 +28,7 @@ class Contact(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_contact",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -47,7 +47,11 @@ class Contact(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('contact', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'contact',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )

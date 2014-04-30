@@ -48,7 +48,11 @@ class Accomodation(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('accomodation', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'accomodation',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )

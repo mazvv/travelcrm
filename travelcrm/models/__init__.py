@@ -25,7 +25,6 @@ from user import User
 from resource_log import ResourceLog
 from region import Region
 from currency import Currency
-from attachment import Attachment
 from employee import Employee
 from structure import Structure
 from position import Position

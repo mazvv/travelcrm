@@ -4,8 +4,9 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    ForeignKey
-    )
+    ForeignKey,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import (
     relationship,
     backref
@@ -19,6 +20,14 @@ from ..models import (
 
 class Position(Base):
     __tablename__ = 'position'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            'structure_id',
+            name='unique_idx_name_strcuture_id_position',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -30,7 +39,7 @@ class Position(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_position",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -42,7 +51,7 @@ class Position(Base):
             'structure.id',
             name='fk_position_structure_id',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False,
@@ -55,7 +64,9 @@ class Position(Base):
     resource = relationship(
         'Resource',
         backref=backref(
-            'position', uselist=False, cascade="all,delete"
+            'position',
+            uselist=False,
+            cascade="all,delete"
         ),
         cascade="all,delete",
         uselist=False
@@ -64,9 +75,9 @@ class Position(Base):
     structure = relationship(
         'Structure',
         backref=backref(
-            'positions', uselist=True, cascade="all,delete"
+            'positions',
+            uselist=True,
         ),
-        cascade="all,delete",
         uselist=False
     )
 

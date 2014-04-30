@@ -29,7 +29,7 @@ class Appointment(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_appointment",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -44,7 +44,7 @@ class Appointment(Base):
         ForeignKey(
             'employee.id',
             name="fk_employee_id_appointment",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -55,7 +55,7 @@ class Appointment(Base):
         ForeignKey(
             'position.id',
             name="fk_position_id_appointment",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -70,7 +70,7 @@ class Appointment(Base):
         ForeignKey(
             'currency.id',
             name="fk_currency_id_appointment",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),

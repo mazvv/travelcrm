@@ -40,7 +40,7 @@ class User(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_user",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -51,7 +51,7 @@ class User(Base):
         ForeignKey(
             'employee.id',
             name="fk_employee_id_user",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -72,7 +72,11 @@ class User(Base):
 
     employee = relationship(
         'Employee',
-        backref=backref('user', uselist=False, cascade='all,delete'),
+        backref=backref(
+            'user',
+            uselist=False,
+            cascade='all,delete'
+        ),
         uselist=False
     )
     resource = relationship(

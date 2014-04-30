@@ -46,7 +46,7 @@ class Resource(Base):
             'resource_type.id',
             name='fk_resource_type_id_resource',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False
@@ -56,7 +56,7 @@ class Resource(Base):
         ForeignKey('structure.id',
             name='fk_structure_id_resource',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False
@@ -68,13 +68,21 @@ class Resource(Base):
 
     resource_type = relationship(
         'ResourceType',
-        backref=backref('resources', uselist=True, lazy='dynamic'),
+        backref=backref(
+            'resources',
+            uselist=True,
+            lazy='dynamic'
+        ),
         foreign_keys=[resource_type_id],
         uselist=False
     )
     owner_structure = relationship(
         'Structure',
-        backref=backref('resources', uselist=True, lazy='dynamic'),
+        backref=backref(
+            'resources',
+            uselist=True,
+            lazy='dynamic'
+        ),
         foreign_keys=[structure_id],
         uselist=False
     )

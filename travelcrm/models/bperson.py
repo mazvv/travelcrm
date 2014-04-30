@@ -24,8 +24,10 @@ bperson_contact = Table(
         Integer,
         ForeignKey(
             'bperson.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_bperson_id_bperson_contact',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -34,8 +36,10 @@ bperson_contact = Table(
         Integer,
         ForeignKey(
             'contact.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_contact_id_bperson_contact',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -55,7 +59,7 @@ class BPerson(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_bperson",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -76,15 +80,21 @@ class BPerson(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('bperson', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'bperson',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
     contacts = relationship(
         'Contact',
         secondary=bperson_contact,
-        backref=backref('bperson', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'bperson',
+            uselist=False
+        ),
         uselist=True,
     )
 

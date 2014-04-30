@@ -35,7 +35,7 @@ class ResourceLog(Base):
             'resource.id',
             name='fk_resource_id_resource_log',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False
@@ -45,7 +45,7 @@ class ResourceLog(Base):
         ForeignKey('employee.id',
             name='fk_employee_id_resource_log',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False

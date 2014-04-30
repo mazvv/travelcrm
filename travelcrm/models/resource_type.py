@@ -53,7 +53,7 @@ class ResourceType(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_resource_type",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -88,7 +88,9 @@ class ResourceType(Base):
     resource_obj = relationship(
         'Resource',
         backref=backref(
-            'resource_type_obj', uselist=False, cascade="all,delete"
+            'resource_type_obj',
+            uselist=False,
+            cascade="all,delete"
         ),
         cascade="all,delete",
         foreign_keys=[resource_id],

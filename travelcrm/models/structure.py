@@ -26,8 +26,10 @@ structure_contact = Table(
         Integer,
         ForeignKey(
             'structure.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_structure_id_structure_contact',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -36,8 +38,10 @@ structure_contact = Table(
         Integer,
         ForeignKey(
             'contact.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_contact_id_structure_contact',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -52,8 +56,10 @@ structure_bank_detail = Table(
         Integer,
         ForeignKey(
             'structure.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_structure_id_structure_bank_detail',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -62,8 +68,10 @@ structure_bank_detail = Table(
         Integer,
         ForeignKey(
             'bank_detail.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_bank_detail_id_structure_bank_detail',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -78,8 +86,10 @@ structure_address = Table(
         Integer,
         ForeignKey(
             'structure.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_structure_id_structure_address',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -88,8 +98,10 @@ structure_address = Table(
         Integer,
         ForeignKey(
             'address.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_address_id_structure_address',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -109,7 +121,7 @@ class Structure(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_structure",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -121,7 +133,7 @@ class Structure(Base):
             'structure.id',
             name='fk_structure_parent_id',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         )
     )
@@ -132,7 +144,11 @@ class Structure(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('structure', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'structure',
+            uselist=False,
+            cascade="all,delete"
+        ),
         foreign_keys=[resource_id],
         cascade="all,delete",
         uselist=False
@@ -150,22 +166,28 @@ class Structure(Base):
     contacts = relationship(
         'Contact',
         secondary=structure_contact,
-        backref=backref('structure', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'structure',
+            uselist=False
+        ),
         uselist=True,
     )
     addresses = relationship(
         'Address',
         secondary=structure_address,
-        backref=backref('structure', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'structure',
+            uselist=False
+        ),
         uselist=True,
     )
     banks_details = relationship(
         'BankDetail',
         secondary=structure_bank_detail,
-        backref=backref('structure', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'structure',
+            uselist=False
+        ),
         uselist=True,
     )
 

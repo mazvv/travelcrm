@@ -5,6 +5,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
+    UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship, backref
@@ -17,6 +18,13 @@ from ..models import (
 
 class Permision(Base):
     __tablename__ = 'permision'
+    __table_args__ = (
+        UniqueConstraint(
+            'resource_type_id',
+            'position_id',
+            name='unique_idx_resource_type_id_position_id_permision'
+        ),
+    )
 
     id = Column(
         Integer,
@@ -57,7 +65,7 @@ class Permision(Base):
             'structure.id',
             name='fk_permision_structure_id',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         )
     )
@@ -71,25 +79,21 @@ class Permision(Base):
         ),
         uselist=False
     )
-
     resource_type = relationship(
         'ResourceType',
         backref=backref(
             'resource_type_permisions',
             uselist=True,
             lazy='dynamic',
-            cascade="all,delete"
         ),
         uselist=False
     )
-
     structure = relationship(
         'Structure',
         backref=backref(
             'permisions',
             uselist=True,
             lazy='dynamic',
-            cascade="all,delete"
         ),
         uselist=False
     )

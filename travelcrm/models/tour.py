@@ -24,8 +24,10 @@ tour_person = Table(
         Integer,
         ForeignKey(
             'tour.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_tour_id_tour_person',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -34,8 +36,10 @@ tour_person = Table(
         Integer,
         ForeignKey(
             'person.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_person_id_tour_person',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -59,7 +63,7 @@ class Tour(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_tour",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -69,8 +73,8 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'touroperator.id',
-            name="fk_touroperator_id_tour_point",
-            ondelete='cascade',
+            name="fk_touroperator_id_tour",
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -81,7 +85,7 @@ class Tour(Base):
         ForeignKey(
             'person.id',
             name="fk_customer_id_tour",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -92,7 +96,7 @@ class Tour(Base):
         ForeignKey(
             'advsource.id',
             name="fk_advsource_id_tour",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -107,7 +111,7 @@ class Tour(Base):
         ForeignKey(
             'currency.id',
             name="fk_currency_id_tour",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -126,7 +130,7 @@ class Tour(Base):
         ForeignKey(
             'location.id',
             name="fk_start_location_id_tour",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -137,7 +141,7 @@ class Tour(Base):
         ForeignKey(
             'location.id',
             name="fk_end_location_id_tour",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -153,7 +157,11 @@ class Tour(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('tour', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'tour',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
@@ -162,10 +170,8 @@ class Tour(Base):
         backref=backref(
             'customers_tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=True,
     )
     touroperator = relationship(
@@ -173,10 +179,8 @@ class Tour(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     currency = relationship(
@@ -184,10 +188,8 @@ class Tour(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     advsource = relationship(
@@ -195,10 +197,8 @@ class Tour(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     start_location = relationship(
@@ -206,11 +206,9 @@ class Tour(Base):
         backref=backref(
             'tours_starts',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
         foreign_keys=[start_location_id],
-        cascade="all,delete",
         uselist=False,
     )
     end_location = relationship(
@@ -218,11 +216,9 @@ class Tour(Base):
         backref=backref(
             'tours_ends',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
         foreign_keys=[end_location_id],
-        cascade="all,delete",
         uselist=False,
     )
     persons = relationship(
@@ -231,10 +227,8 @@ class Tour(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=True,
     )
 

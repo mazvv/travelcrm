@@ -33,7 +33,6 @@ encoding//travelcrm/forms/users.py=utf-8
 encoding//travelcrm/interfaces.py=utf-8
 encoding//travelcrm/layouts.py=utf-8
 encoding//travelcrm/models/__init__.py=utf-8
-encoding//travelcrm/models/attachment.py=utf-8
 encoding//travelcrm/models/currency.py=utf-8
 encoding//travelcrm/models/navigation.py=utf-8
 encoding//travelcrm/models/position.py=utf-8

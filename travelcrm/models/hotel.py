@@ -5,7 +5,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -27,7 +27,7 @@ class Hotel(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_hotel",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -38,7 +38,7 @@ class Hotel(Base):
         ForeignKey(
             'hotelcat.id',
             name="fk_hotelcat_id_hotel",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -49,7 +49,7 @@ class Hotel(Base):
         ForeignKey(
             'location.id',
             name="fk_location_id_hotel",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -61,7 +61,11 @@ class Hotel(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('hotel', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'hotel',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
@@ -70,7 +74,6 @@ class Hotel(Base):
         backref=backref(
             'hotels',
             uselist=True,
-            cascade='all,delete',
             lazy="dynamic"
         ),
         uselist=False
@@ -80,7 +83,6 @@ class Hotel(Base):
         backref=backref(
             'hotels',
             uselist=True,
-            cascade='all,delete',
             lazy="dynamic"
         ),
         uselist=False

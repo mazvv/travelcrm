@@ -5,7 +5,7 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -27,7 +27,7 @@ class BankDetail(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_bank_detail",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -38,7 +38,7 @@ class BankDetail(Base):
         ForeignKey(
             'currency.id',
             name="fk_currency_id_bank_detail",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -49,7 +49,7 @@ class BankDetail(Base):
         ForeignKey(
             'bank.id',
             name="fk_bank_id_bank_detail",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -69,7 +69,11 @@ class BankDetail(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('bank_detail', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'bank_detail',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
@@ -78,10 +82,8 @@ class BankDetail(Base):
         backref=backref(
             'banks_details',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     bank = relationship(
@@ -89,10 +91,8 @@ class BankDetail(Base):
         backref=backref(
             'banks_details',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
 

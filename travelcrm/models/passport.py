@@ -29,7 +29,7 @@ class Passport(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_passport",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -40,7 +40,7 @@ class Passport(Base):
         ForeignKey(
             'country.id',
             name="fk_country_id_passport",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -66,7 +66,11 @@ class Passport(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('passport', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'passport',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
@@ -75,7 +79,6 @@ class Passport(Base):
         backref=backref(
             'passports',
             uselist=True,
-            cascade='all,delete',
             lazy="dynamic"
         ),
         uselist=False

@@ -4,8 +4,9 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    ForeignKey,
     Table,
+    ForeignKey,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -23,8 +24,10 @@ bank_address = Table(
         Integer,
         ForeignKey(
             'bank.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_bank_id_bank_address',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -33,8 +36,10 @@ bank_address = Table(
         Integer,
         ForeignKey(
             'address.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_address_id_bank_address',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -43,6 +48,13 @@ bank_address = Table(
 
 class Bank(Base):
     __tablename__ = 'bank'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            name='unique_idx_name_bank',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -54,7 +66,7 @@ class Bank(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_bank",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -67,15 +79,21 @@ class Bank(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('bank', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'bank',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
     addresses = relationship(
         'Address',
         secondary=bank_address,
-        backref=backref('bank', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'bank',
+            uselist=False,
+        ),
         uselist=True,
     )
 

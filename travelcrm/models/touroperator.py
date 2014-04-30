@@ -6,6 +6,7 @@ from sqlalchemy import (
     String,
     Table,
     ForeignKey,
+    UniqueConstraint,
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -23,8 +24,10 @@ touroperator_bperson = Table(
         Integer,
         ForeignKey(
             'touroperator.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_touroperator_id_touroperator_bperson',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -33,8 +36,10 @@ touroperator_bperson = Table(
         Integer,
         ForeignKey(
             'bperson.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_bperson_id_touroperator_bperson',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -49,8 +54,10 @@ touroperator_licence = Table(
         Integer,
         ForeignKey(
             'touroperator.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_touroperator_id_touroperator_licence',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -59,8 +66,10 @@ touroperator_licence = Table(
         Integer,
         ForeignKey(
             'licence.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_licence_id_touroperator_licence',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -75,8 +84,10 @@ touroperator_bank_detail = Table(
         Integer,
         ForeignKey(
             'touroperator.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_touroperator_id_touroperator_bank_detail',
+            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -85,8 +96,10 @@ touroperator_bank_detail = Table(
         Integer,
         ForeignKey(
             'bank_detail.id',
-            ondelete='cascade',
-            onupdate='cascade'
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_bank_detail_id_touroperator_bank_detail',
+            use_alter=True,
         ),
         primary_key=True,
     )
@@ -95,6 +108,13 @@ touroperator_bank_detail = Table(
 
 class Touroperator(Base):
     __tablename__ = 'touroperator'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            name='unique_idx_name_touroperator',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -106,7 +126,7 @@ class Touroperator(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_touroperator",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -118,29 +138,39 @@ class Touroperator(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('touroperator', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'touroperator',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
     bpersons = relationship(
         'BPerson',
         secondary=touroperator_bperson,
-        backref=backref('touroperator', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'touroperator',
+            uselist=False,
+        ),
         uselist=True,
     )
     licences = relationship(
         'Licence',
         secondary=touroperator_licence,
-        backref=backref('touroperator', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'touroperator',
+            uselist=False,
+        ),
         uselist=True,
     )
     banks_details = relationship(
         'BankDetail',
         secondary=touroperator_bank_detail,
-        backref=backref('touroperator', uselist=False),
-        cascade="all,delete",
+        backref=backref(
+            'touroperator',
+            uselist=False,
+        ),
         uselist=True,
     )
 

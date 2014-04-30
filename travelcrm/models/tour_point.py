@@ -6,7 +6,7 @@ from sqlalchemy import (
     String,
     Date,
     ForeignKey,
-    )
+)
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -38,7 +38,7 @@ class TourPoint(Base):
         ForeignKey(
             'location.id',
             name="fk_location_id_tour_point",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -49,7 +49,7 @@ class TourPoint(Base):
         ForeignKey(
             'hotel.id',
             name="fk_hotel_id_tour_point",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -59,7 +59,7 @@ class TourPoint(Base):
         ForeignKey(
             'accomodation.id',
             name="fk_accomodation_id_tour_point",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -69,7 +69,7 @@ class TourPoint(Base):
         ForeignKey(
             'foodcat.id',
             name="fk_foodcat_id_tour_point",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -79,7 +79,7 @@ class TourPoint(Base):
         ForeignKey(
             'roomcat.id',
             name="fk_roomcat_id_tour_point",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -100,11 +100,9 @@ class TourPoint(Base):
         backref=backref(
             'points',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic",
             order_by='TourPoint.start_date',
         ),
-        cascade="all,delete",
         uselist=False,
     )
     hotel = relationship(
@@ -112,10 +110,8 @@ class TourPoint(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     accomodation = relationship(
@@ -123,10 +119,8 @@ class TourPoint(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     roomcat = relationship(
@@ -134,10 +128,8 @@ class TourPoint(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     foodcat = relationship(
@@ -145,10 +137,8 @@ class TourPoint(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
     location = relationship(
@@ -156,10 +146,8 @@ class TourPoint(Base):
         backref=backref(
             'tours',
             uselist=True,
-            cascade="all,delete",
             lazy="dynamic"
         ),
-        cascade="all,delete",
         uselist=False,
     )
 

@@ -28,7 +28,7 @@ class Licence(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_licence",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -48,7 +48,11 @@ class Licence(Base):
     )
     resource = relationship(
         'Resource',
-        backref=backref('licence', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'licence',
+            uselist=False,
+            cascade="all,delete",
+        ),
         cascade="all,delete",
         uselist=False,
     )

@@ -5,9 +5,9 @@ from sqlalchemy import (
     Integer,
     String,
     ForeignKey,
-    )
+    UniqueConstraint,
+)
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.hybrid import hybrid_property
 
 from ..models import (
     DBSession,
@@ -17,6 +17,14 @@ from ..models import (
 
 class Location(Base):
     __tablename__ = 'location'
+    __table_args__ = (
+        UniqueConstraint(
+            'name',
+            'region_id',
+            name='unique_idx_name_region_id_location',
+            use_alter=True,
+        ),
+    )
 
     id = Column(
         Integer,
@@ -28,7 +36,7 @@ class Location(Base):
         ForeignKey(
             'resource.id',
             name="fk_resource_id_location",
-            ondelete='cascade',
+            ondelete='restrict',
             onupdate='cascade',
             use_alter=True,
         ),
@@ -40,7 +48,7 @@ class Location(Base):
             'region.id',
             name='fk_region_id_location',
             onupdate='cascade',
-            ondelete='cascade',
+            ondelete='restrict',
             use_alter=True,
         ),
         nullable=False,
@@ -52,7 +60,11 @@ class Location(Base):
 
     resource = relationship(
         'Resource',
-        backref=backref('location', uselist=False, cascade="all,delete"),
+        backref=backref(
+            'location',
+            uselist=False,
+            cascade="all,delete"
+        ),
         cascade="all,delete",
         uselist=False,
     )
@@ -61,7 +73,6 @@ class Location(Base):
         backref=backref(
             'locations',
             uselist=True,
-            cascade='all,delete',
             lazy="dynamic"
         ),
         uselist=False
