@@ -78,39 +78,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: attachment; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE attachment (
-    id integer NOT NULL,
-    resource_id integer NOT NULL
-);
-
-
-ALTER TABLE public.attachment OWNER TO mazvv;
-
---
--- Name: _attachments_rid_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE _attachments_rid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public._attachments_rid_seq OWNER TO mazvv;
-
---
--- Name: _attachments_rid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE _attachments_rid_seq OWNED BY attachment.id;
-
-
---
 -- Name: currency; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1512,13 +1479,6 @@ ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('employees_appo
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY attachment ALTER COLUMN id SET DEFAULT nextval('_attachments_rid_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
---
-
 ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
 
 
@@ -1712,17 +1672,10 @@ ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('_users_rid_seq'::re
 
 
 --
--- Name: _attachments_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('_attachments_rid_seq', 1, false);
-
-
---
 -- Name: _currencies_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_currencies_rid_seq', 55, true);
+SELECT pg_catalog.setval('_currencies_rid_seq', 57, true);
 
 
 --
@@ -1743,14 +1696,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 23, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5536, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5542, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1305, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1311, true);
 
 
 --
@@ -1803,6 +1756,8 @@ SELECT pg_catalog.setval('accomodation_id_seq', 16, true);
 
 COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 10	1288	14	02312	Bogdana Hmelnickogo Str
+13	1308	5	12354	asdf asdf asdfsadf
+14	1309	14	12345	dsfg sdfg sdfg sdfgsdfgdsf
 \.
 
 
@@ -1810,7 +1765,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('address_id_seq', 10, true);
+SELECT pg_catalog.setval('address_id_seq', 14, true);
 
 
 --
@@ -1839,7 +1794,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-d7b5e91f921
+2fddfccc6bfd
 \.
 
 
@@ -1848,16 +1803,8 @@ d7b5e91f921
 --
 
 COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary, date) FROM stdin;
-1	789	43	2	4	1000.00	2014-02-02
-6	892	53	7	5	4500.00	2014-02-22
-\.
-
-
---
--- Data for Name: attachment; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY attachment (id, resource_id) FROM stdin;
+1	789	54	2	4	1000.00	2014-02-02
+6	892	54	7	5	4500.00	2014-02-22
 \.
 
 
@@ -1998,6 +1945,8 @@ COPY currency (id, resource_id, iso_code) FROM stdin;
 50	1060	KZT
 52	1168	BYR
 54	1240	EUR
+56	1310	UAH
+57	1311	USD
 \.
 
 
@@ -2390,6 +2339,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1303	93	32	f
 728	55	32	\N
 784	47	32	\N
+1306	90	32	f
 786	47	32	\N
 802	65	32	\N
 769	12	32	\N
@@ -2434,6 +2384,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1292	83	32	f
 1304	87	32	f
 1011	12	32	\N
+1307	90	32	f
 1185	39	32	\N
 1198	12	32	\N
 1205	89	32	\N
@@ -2457,6 +2408,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 906	71	32	\N
 907	71	32	\N
 1305	93	32	f
+1308	90	32	f
 1168	41	32	\N
 1040	47	32	\N
 1041	47	32	\N
@@ -2507,6 +2459,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 44	12	32	\N
 16	12	32	\N
 45	12	32	\N
+1309	90	32	f
 2	2	32	\N
 3	2	32	\N
 84	2	32	\N
@@ -2590,6 +2543,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 969	74	32	\N
 970	74	32	\N
 971	74	32	\N
+1310	41	32	f
 973	75	32	\N
 975	75	32	\N
 976	75	32	\N
@@ -2657,6 +2611,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1297	93	32	f
 1300	93	32	f
 1302	93	32	f
+1311	41	32	f
 1062	55	32	\N
 1078	12	32	\N
 1192	86	32	\N
@@ -2755,6 +2710,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5459	1227	2	\N	2014-04-19 13:04:24.512333
 5467	1230	2	\N	2014-04-23 11:53:28.979784
 5468	1230	2	\N	2014-04-23 11:53:45.572462
+5537	1306	2	\N	2014-04-30 11:04:50.581045
 66	16	2	\N	2013-11-30 12:57:27.26941
 67	31	2	\N	2013-11-30 14:25:42.040654
 68	32	2	\N	2013-11-30 14:27:55.708736
@@ -2799,6 +2755,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5144	1004	2	\N	2014-03-04 21:08:53.227171
 5145	1005	2	\N	2014-03-04 21:09:15.542733
 5471	1240	2	\N	2014-04-26 13:10:19.27836
+5538	1307	2	\N	2014-04-30 11:08:33.655971
 361	274	2	\N	2013-12-14 17:16:08.962259
 365	277	2	\N	2013-12-14 18:56:05.189747
 366	278	2	\N	2013-12-14 18:56:17.77025
@@ -2840,6 +2797,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5156	1004	2	\N	2014-03-04 21:36:16.322673
 5432	1210	2	\N	2014-04-12 13:10:08.842351
 5472	1241	2	\N	2014-04-26 19:16:28.009797
+5539	1308	2	\N	2014-04-30 11:20:34.938154
 422	306	2	\N	2013-12-15 21:45:32.990838
 4925	864	2	\N	2014-02-09 12:31:10.556265
 4802	773	2	\N	2014-01-25 23:45:37.762081
@@ -2858,6 +2816,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5465	1230	2	\N	2014-04-19 21:03:03.225866
 5508	1277	2	\N	2014-04-29 10:08:17.485661
 5509	1278	2	\N	2014-04-29 10:09:19.421905
+5540	1309	2	\N	2014-04-30 11:32:51.070911
 4927	865	2	\N	2014-02-09 13:26:19.008763
 4804	775	2	\N	2014-01-26 15:30:50.636495
 4928	866	2	\N	2014-02-09 13:26:48.246588
@@ -2878,6 +2837,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5437	1213	2	\N	2014-04-12 14:32:08.840037
 5466	1227	2	\N	2014-04-19 21:37:55.580038
 5474	1243	2	\N	2014-04-26 22:38:44.326007
+5541	1310	2	\N	2014-04-30 22:45:27.579715
 5370	1159	2	\N	2014-04-02 19:52:15.193771
 4806	777	2	\N	2014-01-26 18:18:05.196211
 4807	778	2	\N	2014-01-26 18:18:24.059336
@@ -2899,6 +2859,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5199	3	2	\N	2014-03-12 12:05:31.953558
 5438	1214	2	\N	2014-04-12 14:36:07.046988
 5475	1244	2	\N	2014-04-26 22:39:00.40778
+5542	1311	2	\N	2014-04-30 22:45:36.089534
 4894	849	2	\N	2014-02-08 21:32:14.802948
 4834	790	2	\N	2014-02-02 18:39:14.383473
 4896	851	2	\N	2014-02-08 21:32:32.471247
@@ -3459,8 +3420,8 @@ COPY touroperator_licence (touroperator_id, licence_id) FROM stdin;
 --
 
 COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
-2	3	mazvv	vitalii.mazur@gmail.com	mazvv	2
 23	894	maziv	\N	maziv_maziv	7
+2	3	admin	vitalii.mazur@gmail.com	adminadmin	2
 \.
 
 
@@ -3494,14 +3455,6 @@ ALTER TABLE ONLY advsource
 
 ALTER TABLE ONLY appointment
     ADD CONSTRAINT appointment_header_pk PRIMARY KEY (id);
-
-
---
--- Name: attachment_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY attachment
-    ADD CONSTRAINT attachment_pk PRIMARY KEY (id);
 
 
 --
@@ -3729,14 +3682,6 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: resource_type_name_key; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY resource_type
-    ADD CONSTRAINT resource_type_name_key UNIQUE (name);
-
-
---
 -- Name: resource_type_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -3849,11 +3794,107 @@ ALTER TABLE ONLY touroperator
 
 
 --
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY accomodation
+    ADD CONSTRAINT unique_idx_accomodation_name UNIQUE (name);
+
+
+--
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY country
+    ADD CONSTRAINT unique_idx_country_iso_code UNIQUE (iso_code);
+
+
+--
 -- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
     ADD CONSTRAINT unique_idx_currency_iso_code UNIQUE (iso_code);
+
+
+--
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY advsource
+    ADD CONSTRAINT unique_idx_name_advsource UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY bank
+    ADD CONSTRAINT unique_idx_name_bank UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT unique_idx_name_country_id_region UNIQUE (name, country_id);
+
+
+--
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY foodcat
+    ADD CONSTRAINT unique_idx_name_foodcat UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY hotelcat
+    ADD CONSTRAINT unique_idx_name_hotelcat UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT unique_idx_name_region_id_location UNIQUE (name, region_id);
+
+
+--
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY roomcat
+    ADD CONSTRAINT unique_idx_name_roomcat UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT unique_idx_name_strcuture_id_position UNIQUE (name, structure_id);
+
+
+--
+-- Name: unique_idx_name_touroperator; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY touroperator
+    ADD CONSTRAINT unique_idx_name_touroperator UNIQUE (name);
+
+
+--
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT unique_idx_resource_type_id_position_id_permision UNIQUE (resource_type_id, position_id);
 
 
 --
@@ -3897,91 +3938,155 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: bank_address_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY bank_address
-    ADD CONSTRAINT bank_address_address_id_fkey FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: bank_address_bank_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY bank_address
-    ADD CONSTRAINT bank_address_bank_id_fkey FOREIGN KEY (bank_id) REFERENCES bank(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: bperson_contact_bperson_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY bperson_contact
-    ADD CONSTRAINT bperson_contact_bperson_id_fkey FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: bperson_contact_contact_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY bperson_contact
-    ADD CONSTRAINT bperson_contact_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: employee_address_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employee_address
-    ADD CONSTRAINT employee_address_address_id_fkey FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: employee_address_employee_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employee_address
-    ADD CONSTRAINT employee_address_employee_id_fkey FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: employee_contact_contact_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employee_contact
-    ADD CONSTRAINT employee_contact_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: employee_contact_employee_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employee_contact
-    ADD CONSTRAINT employee_contact_employee_id_fkey FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: employee_passport_employee_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employee_passport
-    ADD CONSTRAINT employee_passport_employee_id_fkey FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: employee_passport_passport_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY employee_passport
-    ADD CONSTRAINT employee_passport_passport_id_fkey FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
 -- Name: fk_accomodation_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY tour_point
-    ADD CONSTRAINT fk_accomodation_id_tour_point FOREIGN KEY (accomodation_id) REFERENCES accomodation(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_accomodation_id_tour_point FOREIGN KEY (accomodation_id) REFERENCES accomodation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bank_address
+    ADD CONSTRAINT fk_address_id_bank_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_address
+    ADD CONSTRAINT fk_address_id_employee_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_address
+    ADD CONSTRAINT fk_address_id_person_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure_address
+    ADD CONSTRAINT fk_address_id_structure_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_advsource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_advsource_id_tour FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure_bank_detail
+    ADD CONSTRAINT fk_bank_detail_id_structure_bank_detail FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_detail_id_touroperator_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_bank_detail
+    ADD CONSTRAINT fk_bank_detail_id_touroperator_bank_detail FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bank_address
+    ADD CONSTRAINT fk_bank_id_bank_address FOREIGN KEY (bank_id) REFERENCES bank(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT fk_bank_id_bank_detail FOREIGN KEY (bank_id) REFERENCES bank(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bperson_contact
+    ADD CONSTRAINT fk_bperson_id_bperson_contact FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bperson_id_touroperator_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_bperson
+    ADD CONSTRAINT fk_bperson_id_touroperator_bperson FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bperson_contact
+    ADD CONSTRAINT fk_contact_id_bperson_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_contact
+    ADD CONSTRAINT fk_contact_id_employee_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT fk_contact_id_person_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure_contact
+    ADD CONSTRAINT fk_contact_id_structure_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY passport
+    ADD CONSTRAINT fk_country_id_passport FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_currency_id_appointment FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT fk_currency_id_bank_detail FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -3989,7 +4094,47 @@ ALTER TABLE ONLY tour_point
 --
 
 ALTER TABLE ONLY tour
-    ADD CONSTRAINT fk_currency_id_tour FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_currency_id_tour FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_customer_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_customer_id_tour FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_employee_id_appointment FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_address
+    ADD CONSTRAINT fk_employee_id_employee_address FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_contact
+    ADD CONSTRAINT fk_employee_id_employee_contact FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_passport
+    ADD CONSTRAINT fk_employee_id_employee_passport FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -3997,7 +4142,15 @@ ALTER TABLE ONLY tour
 --
 
 ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY task
+    ADD CONSTRAINT fk_employee_id_task FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4005,7 +4158,7 @@ ALTER TABLE ONLY resource_log
 --
 
 ALTER TABLE ONLY "user"
-    ADD CONSTRAINT fk_employee_id_user FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_employee_id_user FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4013,7 +4166,7 @@ ALTER TABLE ONLY "user"
 --
 
 ALTER TABLE ONLY tour
-    ADD CONSTRAINT fk_end_location_id_tour FOREIGN KEY (end_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_end_location_id_tour FOREIGN KEY (end_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4021,7 +4174,7 @@ ALTER TABLE ONLY tour
 --
 
 ALTER TABLE ONLY tour_point
-    ADD CONSTRAINT fk_foodcat_id_tour_point FOREIGN KEY (foodcat_id) REFERENCES foodcat(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_foodcat_id_tour_point FOREIGN KEY (foodcat_id) REFERENCES foodcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4029,7 +4182,39 @@ ALTER TABLE ONLY tour_point
 --
 
 ALTER TABLE ONLY tour_point
-    ADD CONSTRAINT fk_hotel_id_tour_point FOREIGN KEY (hotel_id) REFERENCES hotel(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_hotel_id_tour_point FOREIGN KEY (hotel_id) REFERENCES hotel(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT fk_hotelcat_id_hotel FOREIGN KEY (hotelcat_id) REFERENCES hotelcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_licence_id_touroperator_licence; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_licence
+    ADD CONSTRAINT fk_licence_id_touroperator_licence FOREIGN KEY (licence_id) REFERENCES licence(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT fk_location_id_address FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4037,7 +4222,7 @@ ALTER TABLE ONLY tour_point
 --
 
 ALTER TABLE ONLY tour_point
-    ADD CONSTRAINT fk_location_id_tour_point FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_location_id_tour_point FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4045,7 +4230,7 @@ ALTER TABLE ONLY tour_point
 --
 
 ALTER TABLE ONLY navigation
-    ADD CONSTRAINT fk_navigation_position_id FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_navigation_position_id FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4053,7 +4238,23 @@ ALTER TABLE ONLY navigation
 --
 
 ALTER TABLE ONLY navigation
-    ADD CONSTRAINT fk_parent_id_navigation FOREIGN KEY (parent_id) REFERENCES navigation(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_parent_id_navigation FOREIGN KEY (parent_id) REFERENCES navigation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_passport
+    ADD CONSTRAINT fk_passport_id_employee_passport FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_passport
+    ADD CONSTRAINT fk_passport_id_person_passport FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4061,7 +4262,47 @@ ALTER TABLE ONLY navigation
 --
 
 ALTER TABLE ONLY permision
-    ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_address
+    ADD CONSTRAINT fk_person_id_person_address FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT fk_person_id_person_contact FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_passport
+    ADD CONSTRAINT fk_person_id_person_passport FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_tour_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour_person
+    ADD CONSTRAINT fk_person_id_tour_person FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_position_id_appointment FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4077,7 +4318,7 @@ ALTER TABLE ONLY permision
 --
 
 ALTER TABLE ONLY "position"
-    ADD CONSTRAINT fk_position_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_position_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4085,7 +4326,15 @@ ALTER TABLE ONLY "position"
 --
 
 ALTER TABLE ONLY region
-    ADD CONSTRAINT fk_region_country_id FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_region_country_id FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT fk_region_id_location FOREIGN KEY (region_id) REFERENCES region(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4093,7 +4342,15 @@ ALTER TABLE ONLY region
 --
 
 ALTER TABLE ONLY accomodation
-    ADD CONSTRAINT fk_resource_id_accomodation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_accomodation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT fk_resource_id_address FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4101,15 +4358,31 @@ ALTER TABLE ONLY accomodation
 --
 
 ALTER TABLE ONLY advsource
-    ADD CONSTRAINT fk_resource_id_advsource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_advsource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
--- Name: fk_resource_id_appointment_header; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY appointment
-    ADD CONSTRAINT fk_resource_id_appointment_header FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_appointment FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bank
+    ADD CONSTRAINT fk_resource_id_bank FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT fk_resource_id_bank_detail FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4117,7 +4390,7 @@ ALTER TABLE ONLY appointment
 --
 
 ALTER TABLE ONLY bperson
-    ADD CONSTRAINT fk_resource_id_bperson FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_bperson FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4125,7 +4398,7 @@ ALTER TABLE ONLY bperson
 --
 
 ALTER TABLE ONLY contact
-    ADD CONSTRAINT fk_resource_id_contact FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_contact FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4133,7 +4406,7 @@ ALTER TABLE ONLY contact
 --
 
 ALTER TABLE ONLY country
-    ADD CONSTRAINT fk_resource_id_country FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_country FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4141,7 +4414,7 @@ ALTER TABLE ONLY country
 --
 
 ALTER TABLE ONLY currency
-    ADD CONSTRAINT fk_resource_id_currency FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_currency FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4149,7 +4422,7 @@ ALTER TABLE ONLY currency
 --
 
 ALTER TABLE ONLY employee
-    ADD CONSTRAINT fk_resource_id_employee FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_employee FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4157,7 +4430,15 @@ ALTER TABLE ONLY employee
 --
 
 ALTER TABLE ONLY foodcat
-    ADD CONSTRAINT fk_resource_id_foodcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_foodcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT fk_resource_id_hotel FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4165,7 +4446,7 @@ ALTER TABLE ONLY foodcat
 --
 
 ALTER TABLE ONLY hotelcat
-    ADD CONSTRAINT fk_resource_id_hotelcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_hotelcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4173,7 +4454,7 @@ ALTER TABLE ONLY hotelcat
 --
 
 ALTER TABLE ONLY licence
-    ADD CONSTRAINT fk_resource_id_licence FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_licence FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4181,7 +4462,23 @@ ALTER TABLE ONLY licence
 --
 
 ALTER TABLE ONLY location
-    ADD CONSTRAINT fk_resource_id_location FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_location FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_resource_id_navigation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY passport
+    ADD CONSTRAINT fk_resource_id_passport FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4189,7 +4486,7 @@ ALTER TABLE ONLY location
 --
 
 ALTER TABLE ONLY person
-    ADD CONSTRAINT fk_resource_id_person FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_person FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4197,15 +4494,7 @@ ALTER TABLE ONLY person
 --
 
 ALTER TABLE ONLY "position"
-    ADD CONSTRAINT fk_resource_id_position FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resource_id_position_navigation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY navigation
-    ADD CONSTRAINT fk_resource_id_position_navigation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_position FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4213,7 +4502,7 @@ ALTER TABLE ONLY navigation
 --
 
 ALTER TABLE ONLY region
-    ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4221,7 +4510,7 @@ ALTER TABLE ONLY region
 --
 
 ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4229,7 +4518,7 @@ ALTER TABLE ONLY resource_log
 --
 
 ALTER TABLE ONLY resource_type
-    ADD CONSTRAINT fk_resource_id_resource_type FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_resource_type FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4237,7 +4526,7 @@ ALTER TABLE ONLY resource_type
 --
 
 ALTER TABLE ONLY roomcat
-    ADD CONSTRAINT fk_resource_id_roomcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_roomcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4245,7 +4534,31 @@ ALTER TABLE ONLY roomcat
 --
 
 ALTER TABLE ONLY structure
-    ADD CONSTRAINT fk_resource_id_structure FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_structure FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY task
+    ADD CONSTRAINT fk_resource_id_task FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY task_resource
+    ADD CONSTRAINT fk_resource_id_task_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_resource_id_tour FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4253,7 +4566,7 @@ ALTER TABLE ONLY structure
 --
 
 ALTER TABLE ONLY touroperator
-    ADD CONSTRAINT fk_resource_id_touroperator FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_touroperator FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4261,7 +4574,7 @@ ALTER TABLE ONLY touroperator
 --
 
 ALTER TABLE ONLY "user"
-    ADD CONSTRAINT fk_resource_id_user FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_id_user FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4277,15 +4590,7 @@ ALTER TABLE ONLY permision
 --
 
 ALTER TABLE ONLY resource
-    ADD CONSTRAINT fk_resource_type_id_resource FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fk_resources_id_attachment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY attachment
-    ADD CONSTRAINT fk_resources_id_attachment FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_resource_type_id_resource FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4293,7 +4598,7 @@ ALTER TABLE ONLY attachment
 --
 
 ALTER TABLE ONLY tour_point
-    ADD CONSTRAINT fk_roomcat_id_tour_point FOREIGN KEY (roomcat_id) REFERENCES roomcat(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_roomcat_id_tour_point FOREIGN KEY (roomcat_id) REFERENCES roomcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4301,7 +4606,7 @@ ALTER TABLE ONLY tour_point
 --
 
 ALTER TABLE ONLY tour
-    ADD CONSTRAINT fk_start_location_id_tour FOREIGN KEY (start_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_start_location_id_tour FOREIGN KEY (start_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4309,7 +4614,31 @@ ALTER TABLE ONLY tour
 --
 
 ALTER TABLE ONLY resource
-    ADD CONSTRAINT fk_structure_id_resource FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_structure_id_resource FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure_address
+    ADD CONSTRAINT fk_structure_id_structure_address FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure_bank_detail
+    ADD CONSTRAINT fk_structure_id_structure_bank_detail FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure_contact
+    ADD CONSTRAINT fk_structure_id_structure_contact FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4317,7 +4646,23 @@ ALTER TABLE ONLY resource
 --
 
 ALTER TABLE ONLY structure
-    ADD CONSTRAINT fk_structure_parent_id FOREIGN KEY (parent_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_structure_parent_id FOREIGN KEY (parent_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY task_resource
+    ADD CONSTRAINT fk_task_id_task_resource FOREIGN KEY (task_id) REFERENCES task(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tour_id_tour_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour_person
+    ADD CONSTRAINT fk_tour_id_tour_person FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -4329,187 +4674,35 @@ ALTER TABLE ONLY tour_point
 
 
 --
--- Name: fk_touroperator_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_touroperator_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY tour
-    ADD CONSTRAINT fk_touroperator_id_tour_point FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_touroperator_id_tour FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
--- Name: person_address_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY person_address
-    ADD CONSTRAINT person_address_address_id_fkey FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: person_address_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY person_address
-    ADD CONSTRAINT person_address_person_id_fkey FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: person_contact_contact_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY person_contact
-    ADD CONSTRAINT person_contact_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: person_contact_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY person_contact
-    ADD CONSTRAINT person_contact_person_id_fkey FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: person_passport_passport_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY person_passport
-    ADD CONSTRAINT person_passport_passport_id_fkey FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: person_passport_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY person_passport
-    ADD CONSTRAINT person_passport_person_id_fkey FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: structure_address_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY structure_address
-    ADD CONSTRAINT structure_address_address_id_fkey FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: structure_address_structure_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY structure_address
-    ADD CONSTRAINT structure_address_structure_id_fkey FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: structure_bank_detail_bank_detail_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY structure_bank_detail
-    ADD CONSTRAINT structure_bank_detail_bank_detail_id_fkey FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: structure_bank_detail_structure_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY structure_bank_detail
-    ADD CONSTRAINT structure_bank_detail_structure_id_fkey FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: structure_contact_contact_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY structure_contact
-    ADD CONSTRAINT structure_contact_contact_id_fkey FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: structure_contact_structure_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY structure_contact
-    ADD CONSTRAINT structure_contact_structure_id_fkey FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: task_resource_resource_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY task_resource
-    ADD CONSTRAINT task_resource_resource_id_fkey FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: task_resource_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY task_resource
-    ADD CONSTRAINT task_resource_task_id_fkey FOREIGN KEY (task_id) REFERENCES task(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: tour_person_person_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY tour_person
-    ADD CONSTRAINT tour_person_person_id_fkey FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: tour_person_tour_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY tour_person
-    ADD CONSTRAINT tour_person_tour_id_fkey FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: touroperator_bank_detail_bank_detail_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_touroperator_id_touroperator_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY touroperator_bank_detail
-    ADD CONSTRAINT touroperator_bank_detail_bank_detail_id_fkey FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_touroperator_id_touroperator_bank_detail FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
--- Name: touroperator_bank_detail_touroperator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY touroperator_bank_detail
-    ADD CONSTRAINT touroperator_bank_detail_touroperator_id_fkey FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: touroperator_bperson_touroperator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_touroperator_id_touroperator_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY touroperator_bperson
-    ADD CONSTRAINT touroperator_bperson_touroperator_id_fkey FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_touroperator_id_touroperator_bperson FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
--- Name: touroperator_licence_licence_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY touroperator_licence
-    ADD CONSTRAINT touroperator_licence_licence_id_fkey FOREIGN KEY (licence_id) REFERENCES licence(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: touroperator_licence_touroperator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_touroperator_id_touroperator_licence; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY touroperator_licence
-    ADD CONSTRAINT touroperator_licence_touroperator_id_fkey FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: touroperator_tourouperator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY touroperator_bperson
-    ADD CONSTRAINT touroperator_tourouperator_id_fkey FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT fk_touroperator_id_touroperator_licence FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
