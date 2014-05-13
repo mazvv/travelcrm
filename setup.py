@@ -27,12 +27,14 @@ requires = [
     'whoosh>=2.5.6',
     'Babel>=0.9.6',
     'phonenumbers>=6.0.0',
-    'pyramid_storage>=0.0.5'
+    'pyramid_storage>=0.0.5',
+    'Sphinx>=1.2.2',
+    'sphinx-bootstrap-theme>=0.4.0',
 ]
 
 setup(
     name='travelcrm',
-    version='0.6-dev',
+    version='0.6.1-dev',
     description='travelcrm',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[

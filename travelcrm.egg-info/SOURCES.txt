@@ -1,4 +1,5 @@
 CHANGES.txt
+LICENSE.txt
 MANIFEST.in
 README.txt
 alembic.ini
@@ -24,6 +25,7 @@ travelcrm/forms/advsources.py
 travelcrm/forms/appointments.py
 travelcrm/forms/auth.py
 travelcrm/forms/banks.py
+travelcrm/forms/banks_details.py
 travelcrm/forms/bpersons.py
 travelcrm/forms/contacts.py
 travelcrm/forms/countries.py
@@ -55,12 +57,14 @@ travelcrm/lib/bl/structures.py
 travelcrm/lib/helpers/__init__.py
 travelcrm/lib/helpers/common.py
 travelcrm/lib/helpers/fields.py
+travelcrm/lib/helpers/permisions.py
 travelcrm/lib/qb/__init__.py
 travelcrm/lib/qb/accomodations.py
 travelcrm/lib/qb/addresses.py
 travelcrm/lib/qb/advsources.py
 travelcrm/lib/qb/appointments.py
 travelcrm/lib/qb/banks.py
+travelcrm/lib/qb/banks_details.py
 travelcrm/lib/qb/bpersons.py
 travelcrm/lib/qb/contacts.py
 travelcrm/lib/qb/countries.py
@@ -93,11 +97,9 @@ travelcrm/models/accomodation.py
 travelcrm/models/address.py
 travelcrm/models/advsource.py
 travelcrm/models/appointment.py
-travelcrm/models/attachment.py
 travelcrm/models/bank.py
 travelcrm/models/bank_detail.py
 travelcrm/models/bperson.py
-travelcrm/models/client.py
 travelcrm/models/contact.py
 travelcrm/models/country.py
 travelcrm/models/currency.py
@@ -131,6 +133,7 @@ travelcrm/resources/addresses.py
 travelcrm/resources/advsources.py
 travelcrm/resources/appointments.py
 travelcrm/resources/banks.py
+travelcrm/resources/banks_details.py
 travelcrm/resources/bpersons.py
 travelcrm/resources/contacts.py
 travelcrm/resources/countries.py
@@ -172,6 +175,7 @@ travelcrm/static/css/emastic/plugins/semantic.css
 travelcrm/static/css/img/adv-search-bg.png
 travelcrm/static/css/img/favicon.ico
 travelcrm/static/css/img/jquery-te.png
+travelcrm/static/css/img/logo.png
 travelcrm/static/css/jeasyui/black/accordion.css
 travelcrm/static/css/jeasyui/black/calendar.css
 travelcrm/static/css/jeasyui/black/combo.css
@@ -780,6 +784,8 @@ travelcrm/templates/auth/logout.mak
 travelcrm/templates/banks/delete.mak
 travelcrm/templates/banks/form.mak
 travelcrm/templates/banks/index.mak
+travelcrm/templates/banks_details/delete.mak
+travelcrm/templates/banks_details/form.mak
 travelcrm/templates/bpersons/delete.mak
 travelcrm/templates/bpersons/form.mak
 travelcrm/templates/bpersons/index.mak
@@ -818,7 +824,6 @@ travelcrm/templates/navigations/index.mak
 travelcrm/templates/panels/common.mak
 travelcrm/templates/passports/delete.mak
 travelcrm/templates/passports/form.mak
-travelcrm/templates/passports/index.mak
 travelcrm/templates/permisions/copy.mak
 travelcrm/templates/permisions/delete.mak
 travelcrm/templates/permisions/form.mak
@@ -862,6 +867,7 @@ travelcrm/views/addresses.py
 travelcrm/views/advsources.py
 travelcrm/views/appointments.py
 travelcrm/views/banks.py
+travelcrm/views/banks_details.py
 travelcrm/views/bpersons.py
 travelcrm/views/contacts.py
 travelcrm/views/countries.py
