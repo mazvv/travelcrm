@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Установка &mdash; TravelCRM v0.6.1-dev documentation</title>
+    <link rel="stylesheet" href="_static/solar.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.6.1-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TravelCRM v0.6.1-dev documentation" href="index.html" />
+    <link rel="prev" title="Документация TravelCRM" href="index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<link href="_static/solarized-dark.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Документация TravelCRM"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">TravelCRM v0.6.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Установка</a><ul>
+<li><a class="reference internal" href="#id2">Требования</a></li>
+<li><a class="reference internal" href="#unix-linux">Установка на Unix/Linux</a></li>
+<li><a class="reference internal" href="#setuptools">Ручная установка setuptools</a></li>
+<li><a class="reference internal" href="#virtualenv">Установка virtualenv</a></li>
+<li><a class="reference internal" href="#id3">Создание виртуальной среды</a></li>
+<li><a class="reference internal" href="#travelcrm">Установка TravelCRM в виртуальную среду</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Документация TravelCRM</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/install.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>Установка<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>Требования<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Для успешной установки TravelCRM необходимо установить Python версии 2.7.
+Возможна установка на Python 2.6, но она потребует некоторых навыков
+программирования на Python.
+Подробнее об установке Python на свой компьютер можно ознакомиться в
+<a class="reference external" href="https://docs.python.org/2/using/index.html">официальной документации Python</a>.</p>
+<p>PostgreSQL 9.*, для более ранних версий не тестировалось.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Автор тестировал TravelCRM на Linux Fedora Core, Python 2.7 и
+Centos 5, Python 2.6; PostgreSQL 9.1 и PostgreSQL 9.3
+На Windows не тестировалось.</p>
+</div>
+</div>
+<div class="section" id="unix-linux">
+<h2>Установка на Unix/Linux<a class="headerlink" href="#unix-linux" title="Permalink to this headline">¶</a></h2>
+<p>Самым лучшим методом установки TravelCRM является установка в виртуальной
+среде Python, что обеспечивает локальную независимость пакетов Python от
+любых, глобально установленных системных пакетов Python.</p>
+<p>Это может быть сделано с помощью пакета virtualenv .
+Использование virtualenv также поможет избежать глобальной установки TravelCRM и
+всех необходимых для его работы пакетов, что исключает риски повреждения системной
+установки Python.</p>
+<p>Чтобы настроить virtualenv в которую будет установлен TravelCRM,
+сначала убедитесь, что установлен пакет setuptools. Самый простой способ - это
+выполнить команду импорта setuptools:</p>
+<div class="highlight-python"><pre>$ python2.7 -c 'import setuptools'</pre>
+</div>
+<p>Если результатом этой комманды будет пустая строка, то setuptools уже установлен,
+если же будет получен результат вида:</p>
+<div class="highlight-python"><pre>Traceback (most recent call last):
+   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ImportError: No module named setuptools</pre>
+</div>
+<p>то необходимо установить setuptools вручную</p>
+</div>
+<div class="section" id="setuptools">
+<h2>Ручная установка setuptools<a class="headerlink" href="#setuptools" title="Permalink to this headline">¶</a></h2>
+<p>Для установки setuptools руками, скачайте ez_setup.py и запустите его, используя
+установленный интерпретатор Python:</p>
+<div class="highlight-python"><pre>$ python ez_setup.py</pre>
+</div>
+<p>Эта комманда выполнит установку setuptools на компьютер в глобальную установку Python.
+Если во время выполнения возникнет ошибка доступа, то используйте комманду:</p>
+<div class="highlight-python"><pre>$ sudo python ez_setup.py</pre>
+</div>
+<p>или выполните установку как пользователь root.</p>
+</div>
+<div class="section" id="virtualenv">
+<h2>Установка virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>После установки setuptools, необходимо установить пакет virtualenv. Для этого
+достаточно запустить комманду установки:</p>
+<div class="highlight-python"><pre>$ easy_install virtualenv</pre>
+</div>
+<p>Если во время установки поизошли ошибки доступа, попробуйте использовать:</p>
+<div class="highlight-python"><pre>$ sudo easy_install virtualenv</pre>
+</div>
+<p>или повторить установку как пользователь root.</p>
+</div>
+<div class="section" id="id3">
+<h2>Создание виртуальной среды<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>После успешной установки virtualenv можно создавать виртуальную среду Python.
+Прежде всего создайте директорию, в которую хотите разместить свою уставку
+TravelCRM:</p>
+<div class="highlight-python"><pre>mkdir ~/Projects/virtenv</pre>
+</div>
+<p>создаем в этой директории виртуальную установку Python:</p>
+<div class="highlight-python"><pre>virtualenv --no-site-packages ~/Projects/virtenv</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Опция &#8211;no-site-packages обеспечивает полную изоляцию вашей виртуальной среды
+от глобальной установки Python</p>
+</div>
+</div>
+<div class="section" id="travelcrm">
+<h2>Установка TravelCRM в виртуальную среду<a class="headerlink" href="#travelcrm" title="Permalink to this headline">¶</a></h2>
+<p>Прежде всего нужно <a class="reference external" href="https://bitbucket.org/mazvv/travelcrm/downloads">скачать TravelCRM</a>
+и распаковать в директории с вашей виртуальной средой:</p>
+<div class="highlight-python"><pre>cd ~/Projects/virtenv
+wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6-dev.tar.gz
+tar -xzvf travelcrm-0.6-dev.tar.gz``</pre>
+</div>
+<p>Для установки выполните комманду:</p>
+<div class="highlight-python"><pre>./bin/python ./travelcrm-0.6-dev/setup.py develop</pre>
+</div>
+<p>Комманда установки автоматически установит все зависимые пакеты.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Документация TravelCRM"
+             >previous</a> |</li>
+        <li><a href="index.html">TravelCRM v0.6.1-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Vitalii Mazur.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.Theme by <a href="http://github.com/vkvn">vkvn</a>
+    </div>
+  </body>
+</html>
