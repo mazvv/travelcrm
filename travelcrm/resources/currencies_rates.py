@@ -1,4 +1,6 @@
 # -*-coding: utf-8 -*-
+
+
 from zope.interface import implementer
 
 from ..interfaces import (
@@ -14,9 +16,9 @@ from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
-class Tours(ResourceTypeBase):
+class CurrenciesRates(ResourceTypeBase):
 
-    __name__ = 'tours'
+    __name__ = 'currencies_rates'
 
     def __init__(self, request):
         self.__parent__ = Root(request)
@@ -29,6 +31,4 @@ class Tours(ResourceTypeBase):
             ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
-            ('invoice', _(u'invoice')),
-            ('contract', _(u'contract')),
         ]

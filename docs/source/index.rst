@@ -12,6 +12,7 @@
    :maxdepth: 2
 
    install
+   changes
 
 
 Indices and tables

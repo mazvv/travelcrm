@@ -6,27 +6,26 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.bank import Bank
-from ..models.address import Address
-from ..lib.qb.banks import BanksQueryBuilder
+from ..models.currency_rate import CurrencyRate
+from ..lib.qb.currencies_rates import CurrenciesRatesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.banks import BankSchema
+from ..forms.currencies_rates import CurrencyRateSchema
 
 
 log = logging.getLogger(__name__)
 
 
-class Banks(object):
+class CurrenciesRates(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='GET',
-        renderer='travelcrm:templates/banks/index.mak',
+        renderer='travelcrm:templates/currencies_rates/index.mak',
         permission='view'
     )
     def index(self):
@@ -34,21 +33,19 @@ class Banks(object):
 
     @view_config(
         name='list',
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = BanksQueryBuilder(self.context)
+        qb = CurrenciesRatesQueryBuilder(self.context)
         qb.search_simple(
             self.request.params.get('q'),
         )
         qb.advanced_search(
-            updated_from=self.request.params.get('updated_from'),
-            updated_to=self.request.params.get('updated_to'),
-            modifier_id=self.request.params.get('modifier_id'),
+            **self.request.params.mixed()
         )
         id = self.request.params.get('id')
         if id:
@@ -68,45 +65,37 @@ class Banks(object):
 
     @view_config(
         name='add',
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/currencies_rates/form.mak',
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Bank')}
+        return {'title': _(u'Add Currency Rate')}
 
     @view_config(
         name='add',
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
-        schema = BankSchema().bind(request=self.request)
+        schema = CurrencyRateSchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            bank = Bank(
-                name=controls.get('name'),
+            currency_rate = CurrencyRate(
+                currency_id=controls.get('currency_id'),
+                rate=controls.get('rate'),
+                date=controls.get('date'),
                 resource=self.context.create_resource()
             )
-            if self.request.params.getall('address_id'):
-                bank.addresses = (
-                    DBSession.query(Bank)
-                    .filter(
-                        Bank.id.in_(
-                            self.request.params.getall('address_id')
-                        )
-                    )
-                    .all()
-                )
-            DBSession.add(bank)
+            DBSession.add(currency_rate)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': bank.id
+                'response': currency_rate.id
             }
         except colander.Invalid, e:
             return {
@@ -116,43 +105,33 @@ class Banks(object):
 
     @view_config(
         name='edit',
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/currencies_rates/form.mak',
         permission='edit'
     )
     def edit(self):
-        bank = Bank.get(self.request.params.get('id'))
-        return {'item': bank, 'title': _(u'Edit Bank')}
+        currency_rate = CurrencyRate.get(self.request.params.get('id'))
+        return {'item': currency_rate, 'title': _(u'Edit Currency Rate')}
 
     @view_config(
         name='edit',
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
-        schema = BankSchema().bind(request=self.request)
-        bank = Bank.get(self.request.params.get('id'))
+        schema = CurrencyRateSchema().bind(request=self.request)
+        currency_rate = CurrencyRate.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            bank.name = controls.get('name')
-            if self.request.params.getall('address_id'):
-                bank.addresses = (
-                    DBSession.query(Address)
-                    .filter(
-                        Address.id.in_(
-                            self.request.params.getall('address_id')
-                        )
-                    )
-                    .all()
-                )
-            else:
-                bank.addresses = []
+            currency_rate.currency_id = controls.get('currency_id')
+            currency_rate.rate = controls.get('rate')
+            currency_rate.date = controls.get('date')
             return {
                 'success_message': _(u'Saved'),
-                'response': bank.id
+                'response': currency_rate.id
             }
         except colander.Invalid, e:
             return {
@@ -161,10 +140,34 @@ class Banks(object):
             }
 
     @view_config(
-        name='delete',
-        context='..resources.banks.Banks',
+        name='copy',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='GET',
-        renderer='travelcrm:templates/banks/delete.mak',
+        renderer='travelcrm:templates/currencies_rates/form.mak',
+        permission='add'
+    )
+    def copy(self):
+        currency_rate = CurrencyRate.get(self.request.params.get('id'))
+        return {
+            'item': currency_rate,
+            'title': _(u"Copy Rate")
+        }
+
+    @view_config(
+        name='copy',
+        context='..resources.currencies_rates.CurrenciesRates',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
+        name='delete',
+        context='..resources.currencies_rates.CurrenciesRates',
+        request_method='GET',
+        renderer='travelcrm:templates/currencies_rates/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -174,14 +177,14 @@ class Banks(object):
 
     @view_config(
         name='delete',
-        context='..resources.banks.Banks',
+        context='..resources.currencies_rates.CurrenciesRates',
         request_method='POST',
         renderer='json',
         permission='delete'
     )
     def _delete(self):
         for id in self.request.params.getall('id'):
-            bank = Bank.get(id)
-            if bank:
-                DBSession.delete(bank)
+            currency_rate = CurrencyRate.get(id)
+            if currency_rate:
+                DBSession.delete(currency_rate)
         return {'success_message': _(u'Deleted')}

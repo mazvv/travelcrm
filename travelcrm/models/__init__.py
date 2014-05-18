@@ -51,3 +51,5 @@ from tour_point import TourPoint
 from bank import Bank
 from bank_detail import BankDetail
 from task import Task
+from service import Service
+from currency_rate import CurrencyRate

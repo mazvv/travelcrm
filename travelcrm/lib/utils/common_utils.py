@@ -50,3 +50,7 @@ def cast_int(val):
 
 def get_company_name():
     return _get_settings_value('company.name')
+
+
+def get_base_currency():
+    return _get_settings_value('company.base_currency')

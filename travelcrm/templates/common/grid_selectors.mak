@@ -280,6 +280,18 @@
                     + '<td>' + row.skype + '</td>'
                     + '</tr>';
             }
+            if(row.customer_citizen_passport){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'citizen passport')}</td>'
+                    + '<td>' + row.customer_citizen_passport + '</td>'
+                    + '</tr>';
+            }
+            if(row.customer_foreign_passport){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'foreign passport')}</td>'
+                    + '<td>' + row.customer_foreign_passport + '</td>'
+                    + '</tr>';
+            }
             html += '</table>';
             return html;
         }

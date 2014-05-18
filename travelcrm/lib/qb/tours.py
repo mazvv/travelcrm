@@ -2,7 +2,7 @@
 from collections import Iterable
 
 from babel.dates import parse_date
-from sqlalchemy import func, cast, DATE, distinct, or_
+from sqlalchemy import func, cast, DATE, distinct, desc, or_, and_, literal
 from sqlalchemy.dialects.postgresql import Any
 
 from . import (
@@ -25,7 +25,10 @@ from ...models.hotelcat import Hotelcat
 from ...models.hotel import Hotel
 from ...models.currency import Currency
 from ...models.person import Person
-from ...lib.utils.common_utils import get_locale_name
+from ...models.currency_rate import CurrencyRate
+
+from ...lib.bl.persons import query_person_contacts, query_person_passports
+from ...lib.utils.common_utils import get_locale_name, get_base_currency
 
 
 class ToursQueryBuilder(ResourcesQueryBuilder):
@@ -66,18 +69,48 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         .subquery()
     )
 
+    _subq_currencies_rates = (
+        DBSession.query(
+            CurrencyRate.rate,
+            CurrencyRate.date,
+        )
+        .distinct(CurrencyRate.currency_id)
+        .filter(
+            CurrencyRate.currency_id == Tour.currency_id,
+            CurrencyRate.date <= Tour.deal_date,
+        )
+        .join(Currency, CurrencyRate.currency)
+        .order_by(CurrencyRate.currency_id, desc(CurrencyRate.date))
+        .subquery()
+    )
+
+    _subq_customer_contacts = query_person_contacts().subquery()
+    _subq_customer_passports = query_person_passports().subquery()
+
     _fields = {
         'id': Tour.id,
         '_id': Tour.id,
+        'deal_date': Tour.deal_date,
         'touroperator_name': Touroperator.name,
         'hotel_cat': _subq_points.c.hotel_cat,
         'country': _subq_points.c.country,
         'price': Tour.price,
         'currency': Currency.iso_code,
+        'base_price': (
+            Tour.price * func.coalesce(_subq_currencies_rates.c.rate, 1)
+        ),
+        'rate': func.coalesce(_subq_currencies_rates.c.rate, 1),
+        'rate_date': _subq_currencies_rates.c.date,
         'adults': Tour.adults,
         'children': Tour.children,
         'start_date': cast(Tour.start_date, DATE),
-        'end_date': cast(Tour.end_date, DATE)
+        'end_date': cast(Tour.end_date, DATE),
+        'customer': Person.name,
+        'customer_phone': _subq_customer_contacts.c.phone,
+        'customer_skype': _subq_customer_contacts.c.skype,
+        'customer_email': _subq_customer_contacts.c.email,
+        'customer_citizen_passport': _subq_customer_passports.c.citizen,
+        'customer_foreign_passport': _subq_customer_passports.c.foreign,
     }
 
     _simple_search_fields = [
@@ -86,16 +119,26 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
 
     def __init__(self, context):
         super(ToursQueryBuilder, self).__init__(context)
+        self._fields['base_currency'] = literal(get_base_currency())
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
         self.query = (
             self.query
             .join(Tour, Resource.tour)
+            .join(Person, Tour.customer)
             .join(Touroperator, Tour.touroperator)
             .join(Currency, Tour.currency)
             .join(self._subq_points, Tour.id == self._subq_points.c.tour_id)
             .join(self._subq_members, Tour.id == self._subq_members.c.tour_id)
+            .outerjoin(
+                self._subq_customer_contacts,
+                Tour.customer_id == self._subq_customer_contacts.c.person_id
+            )
+            .outerjoin(
+                self._subq_customer_passports,
+                Tour.customer_id == self._subq_customer_passports.c.person_id
+            )
         )
         self.query = self.query.add_columns(*fields)
 

@@ -1,0 +1,97 @@
+# -*-coding: utf-8-*-
+
+from sqlalchemy import (
+    Column,
+    Integer,
+    Date,
+    Numeric,
+    ForeignKey,
+    UniqueConstraint,
+)
+from sqlalchemy.orm import relationship, backref
+
+from ..models import (
+    DBSession,
+    Base
+)
+
+
+class CurrencyRate(Base):
+    __tablename__ = 'currency_rate'
+    __table_args__ = (
+        UniqueConstraint(
+            'currency_id',
+            'date',
+            name='unique_idx_currency_rate_currency_id_date',
+            use_alter=True,
+        ),
+    )
+
+    id = Column(
+        Integer,
+        autoincrement=True,
+        primary_key=True
+    )
+    resource_id = Column(
+        Integer,
+        ForeignKey(
+            'resource.id',
+            name="fk_resource_id_tour",
+            ondelete='restrict',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
+    date = Column(
+        Date,
+        nullable=False,
+    )
+    currency_id = Column(
+        Integer,
+        ForeignKey(
+            'currency.id',
+            name="fk_currency_id_tour",
+            ondelete='restrict',
+            onupdate='cascade',
+            use_alter=True,
+        ),
+        nullable=False,
+    )
+    rate = Column(
+        Numeric(16, 2),
+        nullable=False
+    )
+    resource = relationship(
+        'Resource',
+        backref=backref(
+            'currency_rate',
+            uselist=False,
+            cascade="all,delete"
+        ),
+        cascade="all,delete",
+        uselist=False,
+    )
+    currency = relationship(
+        'Currency',
+        backref=backref(
+            'currency_rates',
+            uselist=True,
+            lazy="dynamic"
+        ),
+        uselist=False,
+    )
+
+    @classmethod
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
+
+    @classmethod
+    def get_by_currency(cls, currency_id, date=None):
+        conditions = [cls.currency_id == currency_id]
+        if date:
+            conditions.append(cls.date == date)
+            return DBSession.query(cls).filter(*conditions).first()
+        return DBSession.query(cls).filter(*conditions).all()

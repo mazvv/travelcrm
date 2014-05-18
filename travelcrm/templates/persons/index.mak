@@ -32,6 +32,18 @@
                     + '<td>' + row.skype + '</td>'
                     + '</tr>';
             }
+            if(row.citizen_passport){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'citizen passport')}</td>'
+                    + '<td>' + row.citizen_passport + '</td>'
+                    + '</tr>';
+            }
+            if(row.foreign_passport){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'foreign passport')}</td>'
+                    + '<td>' + row.foreign_passport + '</td>'
+                    + '</tr>';
+            }
             html += '</table>';
             return html;
         }
@@ -49,7 +61,6 @@
                 return formatter_${_id}(index, row);
             },          
             onBeforeLoad: function(param){
-                var dg = $(this);
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
                 });

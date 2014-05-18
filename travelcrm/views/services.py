@@ -6,27 +6,26 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.bank import Bank
-from ..models.address import Address
-from ..lib.qb.banks import BanksQueryBuilder
+from ..models.service import Service
+from ..lib.qb.services import ServicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.banks import BankSchema
+from ..forms.services import ServiceSchema
 
 
 log = logging.getLogger(__name__)
 
 
-class Banks(object):
+class Services(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='GET',
-        renderer='travelcrm:templates/banks/index.mak',
+        renderer='travelcrm:templates/services/index.mak',
         permission='view'
     )
     def index(self):
@@ -34,14 +33,14 @@ class Banks(object):
 
     @view_config(
         name='list',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = BanksQueryBuilder(self.context)
+        qb = ServicesQueryBuilder(self.context)
         qb.search_simple(
             self.request.params.get('q'),
         )
@@ -68,45 +67,36 @@ class Banks(object):
 
     @view_config(
         name='add',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/services/form.mak',
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Bank')}
+        return {'title': _(u'Add Service')}
 
     @view_config(
         name='add',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
-        schema = BankSchema().bind(request=self.request)
+        schema = ServiceSchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            bank = Bank(
+            service = Service(
                 name=controls.get('name'),
+                descr=controls.get('descr'),
                 resource=self.context.create_resource()
             )
-            if self.request.params.getall('address_id'):
-                bank.addresses = (
-                    DBSession.query(Bank)
-                    .filter(
-                        Bank.id.in_(
-                            self.request.params.getall('address_id')
-                        )
-                    )
-                    .all()
-                )
-            DBSession.add(bank)
+            DBSession.add(service)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': bank.id
+                'response': service.id
             }
         except colander.Invalid, e:
             return {
@@ -116,43 +106,32 @@ class Banks(object):
 
     @view_config(
         name='edit',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/services/form.mak',
         permission='edit'
     )
     def edit(self):
-        bank = Bank.get(self.request.params.get('id'))
-        return {'item': bank, 'title': _(u'Edit Bank')}
+        service = Service.get(self.request.params.get('id'))
+        return {'item': service, 'title': _(u'Edit Service')}
 
     @view_config(
         name='edit',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
-        schema = BankSchema().bind(request=self.request)
-        bank = Bank.get(self.request.params.get('id'))
+        schema = ServiceSchema().bind(request=self.request)
+        service = Service.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            bank.name = controls.get('name')
-            if self.request.params.getall('address_id'):
-                bank.addresses = (
-                    DBSession.query(Address)
-                    .filter(
-                        Address.id.in_(
-                            self.request.params.getall('address_id')
-                        )
-                    )
-                    .all()
-                )
-            else:
-                bank.addresses = []
+            service.name = controls.get('name')
+            service.descr = controls.get('descr')
             return {
                 'success_message': _(u'Saved'),
-                'response': bank.id
+                'response': service.id
             }
         except colander.Invalid, e:
             return {
@@ -162,9 +141,9 @@ class Banks(object):
 
     @view_config(
         name='delete',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='GET',
-        renderer='travelcrm:templates/banks/delete.mak',
+        renderer='travelcrm:templates/services/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -174,14 +153,14 @@ class Banks(object):
 
     @view_config(
         name='delete',
-        context='..resources.banks.Banks',
+        context='..resources.services.Services',
         request_method='POST',
         renderer='json',
         permission='delete'
     )
     def _delete(self):
         for id in self.request.params.getall('id'):
-            bank = Bank.get(id)
-            if bank:
-                DBSession.delete(bank)
+            service = Service.get(id)
+            if service:
+                DBSession.delete(service)
         return {'success_message': _(u'Deleted')}

@@ -44,6 +44,7 @@ travelcrm/forms/positions.py
 travelcrm/forms/regions.py
 travelcrm/forms/resources_types.py
 travelcrm/forms/roomcats.py
+travelcrm/forms/services.py
 travelcrm/forms/structures.py
 travelcrm/forms/tasks.py
 travelcrm/forms/touroperators.py
@@ -83,6 +84,7 @@ travelcrm/lib/qb/positions.py
 travelcrm/lib/qb/regions.py
 travelcrm/lib/qb/resources_types.py
 travelcrm/lib/qb/roomcats.py
+travelcrm/lib/qb/services.py
 travelcrm/lib/qb/structures.py
 travelcrm/lib/qb/tasks.py
 travelcrm/lib/qb/touroperators.py
@@ -119,6 +121,7 @@ travelcrm/models/resource.py
 travelcrm/models/resource_log.py
 travelcrm/models/resource_type.py
 travelcrm/models/roomcat.py
+travelcrm/models/service.py
 travelcrm/models/structure.py
 travelcrm/models/task.py
 travelcrm/models/tour.py
@@ -152,6 +155,7 @@ travelcrm/resources/positions.py
 travelcrm/resources/regions.py
 travelcrm/resources/resources_types.py
 travelcrm/resources/roomcats.py
+travelcrm/resources/services.py
 travelcrm/resources/structures.py
 travelcrm/resources/tasks.py
 travelcrm/resources/touroperators.py
@@ -843,6 +847,9 @@ travelcrm/templates/resources_types/index.mak
 travelcrm/templates/roomcats/delete.mak
 travelcrm/templates/roomcats/form.mak
 travelcrm/templates/roomcats/index.mak
+travelcrm/templates/services/delete.mak
+travelcrm/templates/services/form.mak
+travelcrm/templates/services/index.mak
 travelcrm/templates/structures/delete.mak
 travelcrm/templates/structures/form.mak
 travelcrm/templates/structures/index.mak
@@ -887,6 +894,7 @@ travelcrm/views/positions.py
 travelcrm/views/regions.py
 travelcrm/views/resources_types.py
 travelcrm/views/roomcats.py
+travelcrm/views/services.py
 travelcrm/views/structures.py
 travelcrm/views/tasks.py
 travelcrm/views/touroperators.py

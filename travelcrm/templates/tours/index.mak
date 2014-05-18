@@ -11,6 +11,57 @@
     	iconCls:'fa fa-table'
     "
     title="${_(u'Tours')}">
+    <script type="text/javascript">
+        function formatter_${_id}(index, row){
+            var html = '<table width="100%" class="grid-details">';
+            html += '<tr>'
+                + '<td width="25%" class="b">${_(u'date')}</td>'
+                + '<td>' + row.deal_date + '</td>'
+                + '</tr>';
+            html += '<tr>'
+                + '<td width="25%" class="b">${_(u'customer')}</td>'
+                + '<td>' + row.customer + '</td>'
+                + '</tr>';
+            if(row.customer_phone){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'customer phone')}</td>'
+                    + '<td>' + row.customer_phone + '</td>'
+                    + '</tr>';
+            }
+            if(row.customer_email){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'customer email')}</td>'
+                    + '<td>' + row.customer_email + '</td>'
+                    + '</tr>';
+            }
+            if(row.customer_skype){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'customer skype')}</td>'
+                    + '<td>' + row.skype + '</td>'
+                    + '</tr>';
+            }
+            if(row.customer_citizen_passport){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'citizen passport')}</td>'
+                    + '<td>' + row.customer_citizen_passport + '</td>'
+                    + '</tr>';
+            }
+            if(row.customer_foreign_passport){
+                html += '<tr>'
+                    + '<td width="25%" class="b">${_(u'foreign passport')}</td>'
+                    + '<td>' + row.customer_foreign_passport + '</td>'
+                    + '</tr>';
+            }
+            html += '<tr>'
+                + '<td width="25%" class="b">${_(u'base price')}</td>'
+                + '<td>' + row.base_price + ' ' + row.base_currency
+                + ' ( ${_(u'exchange rate')}: ' + row.rate + ' ' + row.base_currency 
+                + (row.date?(' ' + row.date):'') + ' )' + '</td>'
+                + '</tr>';
+            html += '</table>';
+            return html;
+        }
+    </script>
     <table class="easyui-datagrid"
     	id="${_id}"
         data-options="
@@ -19,6 +70,10 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            detailFormatter: function(index, row){
+                return formatter_${_id}(index, row);
+            },          
             onBeforeLoad: function(param){
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
@@ -33,7 +88,7 @@
             <th data-options="field:'touroperator_name',sortable:true,width:140">${_(u"touroperator")}</th>
             <th data-options="field:'country',sortable:true,width:100">${_(u"country")}</th>
             <th data-options="field:'hotel_cat',sortable:true,width:60">${_(u"hotel cat")}</th>
-            <th data-options="field:'price',sortable:true,width:80,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
+            <th data-options="field:'price',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'start_date',sortable:true,width:80">${_(u"start")}</th>
             <th data-options="field:'end_date',sortable:true,width:80">${_(u"end")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
@@ -64,6 +119,20 @@
                 <a href="#" class="button danger _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
                     <span class="fa fa-times"></span>${_(u'Delete')}
+                </a>
+                % endif
+            </div>
+            <div class="button-group">
+                % if _context.has_permision('invoice'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
+                    <span class="fa fa-file-o"></span>${_(u'Invoice')}
+                </a>
+                % endif
+                % if _context.has_permision('contract'):
+                <a href="#" class="button _action" 
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
+                    <span class="fa fa-file-text-o"></span>${_(u'Contract')}
                 </a>
                 % endif
             </div>

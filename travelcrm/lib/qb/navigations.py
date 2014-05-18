@@ -1,6 +1,6 @@
 # -*coding: utf-8-*-
 
-from sqlalchemy import literal, or_, func
+from sqlalchemy import literal, or_
 
 from . import (
     ResourcesQueryBuilder,
