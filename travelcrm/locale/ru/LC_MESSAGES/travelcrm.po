@@ -1,0 +1,2309 @@
+# Russian translations for travelcrm.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the travelcrm project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: travelcrm 0.6.1-dev\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2014-05-19 17:08+0300\n"
+"PO-Revision-Date: 2014-05-19 17:08+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+
+#: travelcrm/forms/__init__.py:89
+msgid "Phone must be in format +XXXXXXXXXXX and contains country code"
+msgstr ""
+
+#: travelcrm/forms/__init__.py:98
+msgid "Phone is not valid"
+msgstr ""
+
+#: travelcrm/forms/accomodations.py:22 travelcrm/forms/roomcats.py:22
+#: travelcrm/forms/touroperators.py:22
+msgid "Room category with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/advsources.py:22
+msgid "Advertise source with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/appointments.py:24
+msgid "Appointment with bigger date already exists"
+msgstr ""
+
+#: travelcrm/forms/banks.py:22
+msgid "Bank with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/countries.py:22
+msgid "Country with the same iso code exists"
+msgstr ""
+
+#: travelcrm/forms/currencies.py:23
+msgid "Currency with the same iso code exists"
+msgstr ""
+
+#: travelcrm/forms/currencies_rates.py:32
+msgid "Currency rate for this date exists"
+msgstr ""
+
+#: travelcrm/forms/currencies_rates.py:45
+msgid "This is base currency"
+msgstr ""
+
+#: travelcrm/forms/currencies_rates.py:57
+msgid "Must be more then 0"
+msgstr ""
+
+#: travelcrm/forms/employees.py:25
+#, python-format
+msgid "Max Image Size for Upload is %s"
+msgstr ""
+
+#: travelcrm/forms/employees.py:33
+msgid "Only images allowed"
+msgstr ""
+
+#: travelcrm/forms/foodcats.py:22
+msgid "Food category with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/hotelcats.py:23
+msgid "Hotel category with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/licences.py:16
+msgid "Invalid dates, please check"
+msgstr ""
+
+#: travelcrm/forms/locations.py:38
+msgid "Location with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/navigations.py:17 travelcrm/forms/structures.py:17
+msgid "Can not be parent of self"
+msgstr ""
+
+#: travelcrm/forms/navigations.py:54 travelcrm/forms/permisions.py:47
+msgid "Can not copy to itself"
+msgstr ""
+
+#: travelcrm/forms/passports.py:17
+msgid "You must set end date for foreign passport"
+msgstr ""
+
+#: travelcrm/forms/permisions.py:16
+msgid "Set structure for scope"
+msgstr ""
+
+#: travelcrm/forms/positions.py:36
+msgid "Position with the same name for structure exists"
+msgstr ""
+
+#: travelcrm/forms/regions.py:28
+msgid "Region already exists"
+msgstr ""
+
+#: travelcrm/forms/resources_types.py:21
+msgid "Resource does not exist"
+msgstr ""
+
+#: travelcrm/forms/resources_types.py:23
+msgid "Resource module does not exist"
+msgstr ""
+
+#: travelcrm/forms/resources_types.py:25
+msgid "Check module name"
+msgstr ""
+
+#: travelcrm/forms/resources_types.py:40
+msgid "Resource Type with the same resource exists"
+msgstr ""
+
+#: travelcrm/forms/resources_types.py:64
+msgid "Resource Type with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/resources_types.py:87
+msgid "Resource Type with the same humanize exists"
+msgstr ""
+
+#: travelcrm/forms/services.py:22
+msgid "Service with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/tasks.py:26
+msgid "Set date and time or leave empty both"
+msgstr ""
+
+#: travelcrm/forms/tours.py:22
+msgid "Adult or Children must be more than 0"
+msgstr ""
+
+#: travelcrm/forms/tours.py:39
+#, python-format
+msgid "Members count must be %s"
+msgstr ""
+
+#: travelcrm/forms/tours.py:52
+msgid "Customer must have contacts, passports and address"
+msgstr ""
+
+#: travelcrm/forms/users.py:23
+msgid "User with the same username exists"
+msgstr ""
+
+#: travelcrm/forms/users.py:40
+msgid "User for this employee already exists"
+msgstr ""
+
+#: travelcrm/forms/users.py:53
+msgid "Password and confirm is not equal"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:42 travelcrm/lib/helpers/fields.py:114
+msgid "no"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:43 travelcrm/lib/helpers/fields.py:115
+msgid "yes"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:177 travelcrm/lib/helpers/fields.py:283
+#: travelcrm/lib/helpers/fields.py:488 travelcrm/lib/helpers/fields.py:596
+#: travelcrm/lib/helpers/fields.py:703 travelcrm/lib/helpers/fields.py:811
+#: travelcrm/lib/helpers/fields.py:919 travelcrm/lib/helpers/fields.py:1027
+#: travelcrm/lib/helpers/fields.py:1135 travelcrm/lib/helpers/fields.py:1243
+#: travelcrm/lib/helpers/fields.py:1351 travelcrm/lib/helpers/fields.py:1459
+#: travelcrm/lib/helpers/fields.py:1567 travelcrm/lib/helpers/fields.py:1675
+#: travelcrm/lib/helpers/fields.py:1783 travelcrm/lib/helpers/fields.py:1891
+#: travelcrm/lib/helpers/fields.py:1998 travelcrm/lib/helpers/fields.py:2136
+msgid "add new"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:191 travelcrm/lib/helpers/fields.py:297
+#: travelcrm/lib/helpers/fields.py:502 travelcrm/lib/helpers/fields.py:610
+#: travelcrm/lib/helpers/fields.py:717 travelcrm/lib/helpers/fields.py:825
+#: travelcrm/lib/helpers/fields.py:933 travelcrm/lib/helpers/fields.py:1041
+#: travelcrm/lib/helpers/fields.py:1149 travelcrm/lib/helpers/fields.py:1257
+#: travelcrm/lib/helpers/fields.py:1365 travelcrm/lib/helpers/fields.py:1473
+#: travelcrm/lib/helpers/fields.py:1581 travelcrm/lib/helpers/fields.py:1689
+#: travelcrm/lib/helpers/fields.py:1797 travelcrm/lib/helpers/fields.py:1905
+#: travelcrm/lib/helpers/fields.py:2012 travelcrm/lib/helpers/fields.py:2150
+msgid "edit selected"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:197 travelcrm/lib/helpers/fields.py:309
+#: travelcrm/lib/helpers/fields.py:616 travelcrm/lib/helpers/fields.py:832
+#: travelcrm/lib/helpers/fields.py:940 travelcrm/lib/helpers/fields.py:1048
+#: travelcrm/lib/helpers/fields.py:1156 travelcrm/lib/helpers/fields.py:1264
+#: travelcrm/lib/helpers/fields.py:1372 travelcrm/lib/helpers/fields.py:1480
+#: travelcrm/lib/helpers/fields.py:1588 travelcrm/lib/helpers/fields.py:1696
+#: travelcrm/lib/helpers/fields.py:1911 travelcrm/lib/helpers/fields.py:2018
+#: travelcrm/lib/helpers/fields.py:2156
+#: travelcrm/templates/accomodations/form.mak:12
+#: travelcrm/templates/accomodations/index.mak:34
+#: travelcrm/templates/advsources/form.mak:12
+#: travelcrm/templates/advsources/index.mak:34
+#: travelcrm/templates/banks/form.mak:15 travelcrm/templates/banks/index.mak:34
+#: travelcrm/templates/bpersons/index.mak:34
+#: travelcrm/templates/common/grid_selectors.mak:53
+#: travelcrm/templates/common/grid_selectors.mak:326
+#: travelcrm/templates/countries/form.mak:21
+#: travelcrm/templates/countries/index.mak:35
+#: travelcrm/templates/foodcats/form.mak:12
+#: travelcrm/templates/foodcats/index.mak:34
+#: travelcrm/templates/hotelcats/form.mak:12
+#: travelcrm/templates/hotelcats/index.mak:34
+#: travelcrm/templates/hotels/form.mak:12
+#: travelcrm/templates/hotels/index.mak:34
+#: travelcrm/templates/locations/form.mak:12
+#: travelcrm/templates/navigations/form.mak:12
+#: travelcrm/templates/navigations/index.mak:31
+#: travelcrm/templates/persons/index.mak:74
+#: travelcrm/templates/positions/form.mak:12
+#: travelcrm/templates/positions/index.mak:32
+#: travelcrm/templates/regions/form.mak:12
+#: travelcrm/templates/resources_types/form.mak:21
+#: travelcrm/templates/resources_types/index.mak:35
+#: travelcrm/templates/roomcats/form.mak:12
+#: travelcrm/templates/roomcats/index.mak:34
+#: travelcrm/templates/services/form.mak:12
+#: travelcrm/templates/services/index.mak:34
+#: travelcrm/templates/structures/form.mak:17
+#: travelcrm/templates/structures/index.mak:26
+#: travelcrm/templates/touroperators/form.mak:17
+#: travelcrm/templates/touroperators/index.mak:33
+msgid "name"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:381
+msgid "all"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:382
+#: travelcrm/templates/appointments/index.mak:37
+#: travelcrm/templates/employees/form.mak:126
+#: travelcrm/templates/permisions/index.mak:34
+#: travelcrm/templates/positions/form.mak:21
+#: travelcrm/templates/positions/index.mak:33
+msgid "structure"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:447
+msgid "female"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:448
+msgid "male"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:460
+#: travelcrm/templates/common/grid_selectors.mak:267
+#: travelcrm/templates/persons/index.mak:19
+msgid "phone"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:461 travelcrm/templates/auth/forgot.mak:15
+#: travelcrm/templates/common/grid_selectors.mak:273
+#: travelcrm/templates/persons/index.mak:25
+msgid "email"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:462
+#: travelcrm/templates/common/grid_selectors.mak:279
+#: travelcrm/templates/persons/index.mak:31
+msgid "skype"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:508
+#: travelcrm/templates/common/grid_selectors.mak:421
+#: travelcrm/templates/licences/form.mak:12
+msgid "licence num"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:724
+#: travelcrm/templates/common/grid_selectors.mak:515
+#: travelcrm/templates/contacts/form.mak:21
+msgid "contact"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:1804
+#: travelcrm/templates/countries/form.mak:12
+#: travelcrm/templates/countries/index.mak:34
+#: travelcrm/templates/currencies/form.mak:12
+#: travelcrm/templates/currencies_rates/index.mak:34
+msgid "iso code"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:2091
+msgid "citizen"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:2092
+msgid "foreign"
+msgstr ""
+
+#: travelcrm/models/resource_type.py:41 travelcrm/models/task.py:62
+msgid "undefined"
+msgstr ""
+
+#: travelcrm/models/resource_type.py:42
+msgid "disabled"
+msgstr ""
+
+#: travelcrm/models/task.py:56
+msgid "minor"
+msgstr ""
+
+#: travelcrm/models/task.py:57
+msgid "normal"
+msgstr ""
+
+#: travelcrm/models/task.py:58
+msgid "major"
+msgstr ""
+
+#: travelcrm/models/task.py:59
+msgid "critical"
+msgstr ""
+
+#: travelcrm/models/task.py:63
+msgid "in work"
+msgstr ""
+
+#: travelcrm/models/task.py:64
+msgid "on hold"
+msgstr ""
+
+#: travelcrm/models/task.py:65
+msgid "requirements"
+msgstr ""
+
+#: travelcrm/models/task.py:66
+msgid "closed"
+msgstr ""
+
+#: travelcrm/resources/__init__.py:90 travelcrm/resources/accomodations.py:30
+#: travelcrm/resources/addresses.py:30 travelcrm/resources/advsources.py:30
+#: travelcrm/resources/appointments.py:30 travelcrm/resources/banks.py:30
+#: travelcrm/resources/banks_details.py:30 travelcrm/resources/bpersons.py:30
+#: travelcrm/resources/contacts.py:30 travelcrm/resources/countries.py:30
+#: travelcrm/resources/currencies.py:29
+#: travelcrm/resources/currencies_rates.py:30
+#: travelcrm/resources/employees.py:30 travelcrm/resources/foodcats.py:30
+#: travelcrm/resources/hotelcats.py:30 travelcrm/resources/hotels.py:30
+#: travelcrm/resources/invoices.py:28 travelcrm/resources/licences.py:29
+#: travelcrm/resources/locations.py:30 travelcrm/resources/navigations.py:30
+#: travelcrm/resources/passports.py:29 travelcrm/resources/permisions.py:30
+#: travelcrm/resources/persons.py:30 travelcrm/resources/positions.py:30
+#: travelcrm/resources/regions.py:29 travelcrm/resources/resources_types.py:29
+#: travelcrm/resources/roomcats.py:30 travelcrm/resources/services.py:28
+#: travelcrm/resources/structures.py:28 travelcrm/resources/tasks.py:30
+#: travelcrm/resources/touroperators.py:30 travelcrm/resources/tours.py:28
+#: travelcrm/resources/users.py:27
+msgid "view"
+msgstr ""
+
+#: travelcrm/resources/accomodations.py:31 travelcrm/resources/addresses.py:31
+#: travelcrm/resources/advsources.py:31 travelcrm/resources/appointments.py:31
+#: travelcrm/resources/banks.py:31 travelcrm/resources/banks_details.py:31
+#: travelcrm/resources/bpersons.py:31 travelcrm/resources/contacts.py:31
+#: travelcrm/resources/countries.py:31 travelcrm/resources/currencies.py:30
+#: travelcrm/resources/currencies_rates.py:31
+#: travelcrm/resources/employees.py:31 travelcrm/resources/foodcats.py:31
+#: travelcrm/resources/hotelcats.py:31 travelcrm/resources/hotels.py:31
+#: travelcrm/resources/licences.py:30 travelcrm/resources/locations.py:31
+#: travelcrm/resources/navigations.py:31 travelcrm/resources/passports.py:30
+#: travelcrm/resources/permisions.py:31 travelcrm/resources/persons.py:31
+#: travelcrm/resources/positions.py:31 travelcrm/resources/regions.py:30
+#: travelcrm/resources/resources_types.py:30 travelcrm/resources/roomcats.py:31
+#: travelcrm/resources/services.py:29 travelcrm/resources/structures.py:29
+#: travelcrm/resources/tasks.py:31 travelcrm/resources/touroperators.py:31
+#: travelcrm/resources/tours.py:29 travelcrm/resources/users.py:28
+msgid "add"
+msgstr ""
+
+#: travelcrm/resources/accomodations.py:32 travelcrm/resources/addresses.py:32
+#: travelcrm/resources/advsources.py:32 travelcrm/resources/appointments.py:32
+#: travelcrm/resources/banks.py:32 travelcrm/resources/banks_details.py:32
+#: travelcrm/resources/bpersons.py:32 travelcrm/resources/contacts.py:32
+#: travelcrm/resources/countries.py:32 travelcrm/resources/currencies.py:31
+#: travelcrm/resources/currencies_rates.py:32
+#: travelcrm/resources/employees.py:32 travelcrm/resources/foodcats.py:32
+#: travelcrm/resources/hotelcats.py:32 travelcrm/resources/hotels.py:32
+#: travelcrm/resources/invoices.py:29 travelcrm/resources/licences.py:31
+#: travelcrm/resources/locations.py:32 travelcrm/resources/navigations.py:32
+#: travelcrm/resources/passports.py:31 travelcrm/resources/permisions.py:32
+#: travelcrm/resources/persons.py:32 travelcrm/resources/positions.py:32
+#: travelcrm/resources/regions.py:31 travelcrm/resources/resources_types.py:31
+#: travelcrm/resources/roomcats.py:32 travelcrm/resources/services.py:30
+#: travelcrm/resources/structures.py:30 travelcrm/resources/tasks.py:32
+#: travelcrm/resources/touroperators.py:32 travelcrm/resources/tours.py:30
+#: travelcrm/resources/users.py:29
+msgid "edit"
+msgstr ""
+
+#: travelcrm/resources/accomodations.py:33 travelcrm/resources/addresses.py:33
+#: travelcrm/resources/advsources.py:33 travelcrm/resources/appointments.py:33
+#: travelcrm/resources/banks.py:33 travelcrm/resources/banks_details.py:33
+#: travelcrm/resources/bpersons.py:33 travelcrm/resources/contacts.py:33
+#: travelcrm/resources/countries.py:33 travelcrm/resources/currencies.py:32
+#: travelcrm/resources/currencies_rates.py:33
+#: travelcrm/resources/employees.py:33 travelcrm/resources/foodcats.py:33
+#: travelcrm/resources/hotelcats.py:33 travelcrm/resources/hotels.py:33
+#: travelcrm/resources/invoices.py:30 travelcrm/resources/licences.py:32
+#: travelcrm/resources/locations.py:33 travelcrm/resources/navigations.py:33
+#: travelcrm/resources/passports.py:32 travelcrm/resources/permisions.py:33
+#: travelcrm/resources/persons.py:33 travelcrm/resources/positions.py:33
+#: travelcrm/resources/regions.py:32 travelcrm/resources/resources_types.py:32
+#: travelcrm/resources/roomcats.py:33 travelcrm/resources/services.py:31
+#: travelcrm/resources/structures.py:31 travelcrm/resources/tasks.py:33
+#: travelcrm/resources/touroperators.py:33 travelcrm/resources/tours.py:31
+#: travelcrm/resources/users.py:30
+msgid "delete"
+msgstr ""
+
+#: travelcrm/resources/tours.py:32
+msgid "invoice"
+msgstr ""
+
+#: travelcrm/resources/tours.py:33
+msgid "contract"
+msgstr ""
+
+#: travelcrm/templates/_layout.mak:5 travelcrm/templates/panels/common.mak:3
+msgid "TravelCRM"
+msgstr ""
+
+#: travelcrm/templates/_layout.mak:53
+msgid "Tasks"
+msgstr ""
+
+#: travelcrm/templates/home.mak:2
+msgid "Home"
+msgstr ""
+
+#: travelcrm/templates/system.mak:53
+msgid "Reload"
+msgstr ""
+
+#: travelcrm/templates/accomodations/delete.mak:2
+#: travelcrm/templates/banks/delete.mak:2
+#: travelcrm/templates/countries/delete.mak:2
+#: travelcrm/templates/currencies_rates/delete.mak:2
+#: travelcrm/templates/foodcats/delete.mak:2
+#: travelcrm/templates/hotelcats/delete.mak:2
+#: travelcrm/templates/hotels/delete.mak:2
+#: travelcrm/templates/services/delete.mak:2
+#: travelcrm/templates/tasks/delete.mak:2
+msgid "Delete Countries"
+msgstr ""
+
+#: travelcrm/templates/accomodations/delete.mak:12
+#: travelcrm/templates/addresses/delete.mak:11
+#: travelcrm/templates/advsources/delete.mak:12
+#: travelcrm/templates/appointments/delete.mak:12
+#: travelcrm/templates/banks/delete.mak:12
+#: travelcrm/templates/banks_details/delete.mak:11
+#: travelcrm/templates/bpersons/delete.mak:12
+#: travelcrm/templates/contacts/delete.mak:11
+#: travelcrm/templates/countries/delete.mak:12
+#: travelcrm/templates/currencies/delete.mak:12
+#: travelcrm/templates/currencies_rates/delete.mak:12
+#: travelcrm/templates/employees/delete.mak:12
+#: travelcrm/templates/foodcats/delete.mak:12
+#: travelcrm/templates/hotelcats/delete.mak:12
+#: travelcrm/templates/hotels/delete.mak:12
+#: travelcrm/templates/licences/delete.mak:11
+#: travelcrm/templates/locations/delete.mak:12
+#: travelcrm/templates/navigations/delete.mak:12
+#: travelcrm/templates/passports/delete.mak:11
+#: travelcrm/templates/permisions/delete.mak:12
+#: travelcrm/templates/persons/delete.mak:12
+#: travelcrm/templates/positions/delete.mak:12
+#: travelcrm/templates/regions/delete.mak:12
+#: travelcrm/templates/resources_types/delete.mak:12
+#: travelcrm/templates/roomcats/delete.mak:12
+#: travelcrm/templates/services/delete.mak:12
+#: travelcrm/templates/structures/delete.mak:12
+#: travelcrm/templates/tasks/delete.mak:12
+#: travelcrm/templates/touroperators/delete.mak:12
+#: travelcrm/templates/tours/delete.mak:12
+#: travelcrm/templates/users/delete.mak:12
+msgid "Do you realy want to delete checked items?"
+msgstr ""
+
+#: travelcrm/templates/accomodations/delete.mak:15
+#: travelcrm/templates/advsources/delete.mak:15
+#: travelcrm/templates/appointments/delete.mak:15
+#: travelcrm/templates/banks/delete.mak:15
+#: travelcrm/templates/bpersons/delete.mak:15
+#: travelcrm/templates/countries/delete.mak:15
+#: travelcrm/templates/currencies/delete.mak:15
+#: travelcrm/templates/currencies_rates/delete.mak:15
+#: travelcrm/templates/employees/delete.mak:15
+#: travelcrm/templates/foodcats/delete.mak:15
+#: travelcrm/templates/hotelcats/delete.mak:15
+#: travelcrm/templates/hotels/delete.mak:15
+#: travelcrm/templates/locations/delete.mak:15
+#: travelcrm/templates/navigations/delete.mak:15
+#: travelcrm/templates/permisions/delete.mak:15
+#: travelcrm/templates/persons/delete.mak:15
+#: travelcrm/templates/positions/delete.mak:15
+#: travelcrm/templates/regions/delete.mak:15
+#: travelcrm/templates/resources_types/delete.mak:15
+#: travelcrm/templates/roomcats/delete.mak:15
+#: travelcrm/templates/structures/delete.mak:15
+#: travelcrm/templates/touroperators/delete.mak:15
+#: travelcrm/templates/tours/delete.mak:15
+#: travelcrm/templates/users/delete.mak:15
+msgid "ATTENTION:"
+msgstr ""
+
+#: travelcrm/templates/accomodations/delete.mak:16
+msgid ""
+"it's highly not recommend to delete accomodations. it may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/accomodations/delete.mak:22
+#: travelcrm/templates/accomodations/index.mak:58
+#: travelcrm/templates/addresses/delete.mak:16
+#: travelcrm/templates/advsources/delete.mak:22
+#: travelcrm/templates/advsources/index.mak:58
+#: travelcrm/templates/appointments/delete.mak:22
+#: travelcrm/templates/appointments/index.mak:61
+#: travelcrm/templates/banks/delete.mak:22
+#: travelcrm/templates/banks/index.mak:58
+#: travelcrm/templates/banks_details/delete.mak:16
+#: travelcrm/templates/bpersons/delete.mak:22
+#: travelcrm/templates/bpersons/index.mak:63
+#: travelcrm/templates/common/grid_selectors.mak:80
+#: travelcrm/templates/common/grid_selectors.mak:222
+#: travelcrm/templates/common/grid_selectors.mak:354
+#: travelcrm/templates/common/grid_selectors.mak:450
+#: travelcrm/templates/common/grid_selectors.mak:542
+#: travelcrm/templates/common/grid_selectors.mak:634
+#: travelcrm/templates/common/grid_selectors.mak:726
+#: travelcrm/templates/common/grid_selectors.mak:841
+#: travelcrm/templates/contacts/delete.mak:16
+#: travelcrm/templates/countries/delete.mak:22
+#: travelcrm/templates/countries/index.mak:59
+#: travelcrm/templates/currencies/delete.mak:22
+#: travelcrm/templates/currencies/index.mak:56
+#: travelcrm/templates/currencies_rates/delete.mak:22
+#: travelcrm/templates/currencies_rates/index.mak:64
+#: travelcrm/templates/employees/delete.mak:22
+#: travelcrm/templates/employees/index.mak:60
+#: travelcrm/templates/foodcats/delete.mak:22
+#: travelcrm/templates/foodcats/index.mak:58
+#: travelcrm/templates/hotelcats/delete.mak:22
+#: travelcrm/templates/hotelcats/index.mak:58
+#: travelcrm/templates/hotels/delete.mak:22
+#: travelcrm/templates/hotels/index.mak:64
+#: travelcrm/templates/licences/delete.mak:16
+#: travelcrm/templates/locations/delete.mak:22
+#: travelcrm/templates/locations/index.mak:63
+#: travelcrm/templates/navigations/delete.mak:22
+#: travelcrm/templates/navigations/index.mak:67
+#: travelcrm/templates/passports/delete.mak:16
+#: travelcrm/templates/permisions/delete.mak:22
+#: travelcrm/templates/persons/delete.mak:22
+#: travelcrm/templates/persons/index.mak:98
+#: travelcrm/templates/positions/delete.mak:22
+#: travelcrm/templates/positions/index.mak:61
+#: travelcrm/templates/regions/delete.mak:22
+#: travelcrm/templates/regions/index.mak:59
+#: travelcrm/templates/resources_types/delete.mak:22
+#: travelcrm/templates/resources_types/index.mak:63
+#: travelcrm/templates/roomcats/delete.mak:22
+#: travelcrm/templates/roomcats/index.mak:58
+#: travelcrm/templates/services/delete.mak:18
+#: travelcrm/templates/services/index.mak:58
+#: travelcrm/templates/structures/delete.mak:22
+#: travelcrm/templates/structures/index.mak:54
+#: travelcrm/templates/tasks/delete.mak:18
+#: travelcrm/templates/tasks/index.mak:119
+#: travelcrm/templates/touroperators/delete.mak:22
+#: travelcrm/templates/touroperators/index.mak:57
+#: travelcrm/templates/tours/delete.mak:22
+#: travelcrm/templates/tours/index.mak:121
+#: travelcrm/templates/users/delete.mak:22
+#: travelcrm/templates/users/index.mak:59
+msgid "Delete"
+msgstr ""
+
+#: travelcrm/templates/accomodations/delete.mak:23
+#: travelcrm/templates/accomodations/form.mak:23
+#: travelcrm/templates/addresses/delete.mak:17
+#: travelcrm/templates/addresses/form.mak:41
+#: travelcrm/templates/advsources/delete.mak:23
+#: travelcrm/templates/advsources/form.mak:23
+#: travelcrm/templates/appointments/delete.mak:23
+#: travelcrm/templates/appointments/form.mak:59
+#: travelcrm/templates/auth/logout.mak:17
+#: travelcrm/templates/banks/delete.mak:23
+#: travelcrm/templates/banks/form.mak:34
+#: travelcrm/templates/banks_details/delete.mak:17
+#: travelcrm/templates/banks_details/form.mak:59
+#: travelcrm/templates/bpersons/delete.mak:23
+#: travelcrm/templates/bpersons/form.mak:61
+#: travelcrm/templates/contacts/delete.mak:17
+#: travelcrm/templates/contacts/form.mak:32
+#: travelcrm/templates/countries/delete.mak:23
+#: travelcrm/templates/countries/form.mak:32
+#: travelcrm/templates/currencies/delete.mak:23
+#: travelcrm/templates/currencies/form.mak:23
+#: travelcrm/templates/currencies_rates/delete.mak:23
+#: travelcrm/templates/currencies_rates/form.mak:41
+#: travelcrm/templates/employees/delete.mak:23
+#: travelcrm/templates/employees/form.mak:138
+#: travelcrm/templates/foodcats/delete.mak:23
+#: travelcrm/templates/foodcats/form.mak:23
+#: travelcrm/templates/hotelcats/delete.mak:23
+#: travelcrm/templates/hotelcats/form.mak:23
+#: travelcrm/templates/hotels/delete.mak:23
+#: travelcrm/templates/hotels/form.mak:41
+#: travelcrm/templates/licences/delete.mak:17
+#: travelcrm/templates/licences/form.mak:41
+#: travelcrm/templates/locations/delete.mak:23
+#: travelcrm/templates/locations/form.mak:32
+#: travelcrm/templates/navigations/copy.mak:23
+#: travelcrm/templates/navigations/delete.mak:23
+#: travelcrm/templates/navigations/form.mak:50
+#: travelcrm/templates/passports/delete.mak:17
+#: travelcrm/templates/passports/form.mak:59
+#: travelcrm/templates/permisions/copy.mak:23
+#: travelcrm/templates/permisions/delete.mak:23
+#: travelcrm/templates/permisions/form.mak:42
+#: travelcrm/templates/persons/delete.mak:23
+#: travelcrm/templates/persons/form.mak:88
+#: travelcrm/templates/positions/delete.mak:23
+#: travelcrm/templates/positions/form.mak:32
+#: travelcrm/templates/regions/delete.mak:23
+#: travelcrm/templates/regions/form.mak:32
+#: travelcrm/templates/resources_types/delete.mak:23
+#: travelcrm/templates/resources_types/form.mak:50
+#: travelcrm/templates/roomcats/delete.mak:23
+#: travelcrm/templates/roomcats/form.mak:23
+#: travelcrm/templates/services/delete.mak:19
+#: travelcrm/templates/services/form.mak:32
+#: travelcrm/templates/structures/delete.mak:23
+#: travelcrm/templates/structures/form.mak:57
+#: travelcrm/templates/tasks/delete.mak:19
+#: travelcrm/templates/tasks/form.mak:79
+#: travelcrm/templates/touroperators/delete.mak:23
+#: travelcrm/templates/touroperators/form.mak:48
+#: travelcrm/templates/tours/delete.mak:23
+#: travelcrm/templates/tours/form.mak:136
+#: travelcrm/templates/tours/form_point.mak:86
+#: travelcrm/templates/users/delete.mak:23
+#: travelcrm/templates/users/form.mak:54
+msgid "Cancel"
+msgstr ""
+
+#: travelcrm/templates/accomodations/form.mak:22
+#: travelcrm/templates/addresses/form.mak:40
+#: travelcrm/templates/advsources/form.mak:22
+#: travelcrm/templates/appointments/form.mak:58
+#: travelcrm/templates/banks/form.mak:33
+#: travelcrm/templates/banks_details/form.mak:58
+#: travelcrm/templates/bpersons/form.mak:60
+#: travelcrm/templates/contacts/form.mak:31
+#: travelcrm/templates/countries/form.mak:31
+#: travelcrm/templates/currencies/form.mak:22
+#: travelcrm/templates/currencies_rates/form.mak:40
+#: travelcrm/templates/employees/form.mak:137
+#: travelcrm/templates/foodcats/form.mak:22
+#: travelcrm/templates/hotelcats/form.mak:22
+#: travelcrm/templates/hotels/form.mak:40
+#: travelcrm/templates/licences/form.mak:40
+#: travelcrm/templates/locations/form.mak:31
+#: travelcrm/templates/navigations/copy.mak:22
+#: travelcrm/templates/navigations/form.mak:49
+#: travelcrm/templates/passports/form.mak:58
+#: travelcrm/templates/permisions/copy.mak:22
+#: travelcrm/templates/permisions/form.mak:41
+#: travelcrm/templates/persons/form.mak:87
+#: travelcrm/templates/positions/form.mak:31
+#: travelcrm/templates/regions/form.mak:31
+#: travelcrm/templates/resources_types/form.mak:49
+#: travelcrm/templates/roomcats/form.mak:22
+#: travelcrm/templates/services/form.mak:31
+#: travelcrm/templates/structures/form.mak:56
+#: travelcrm/templates/tasks/form.mak:78
+#: travelcrm/templates/touroperators/form.mak:47
+#: travelcrm/templates/tours/form.mak:135
+#: travelcrm/templates/tours/form_point.mak:85
+#: travelcrm/templates/users/form.mak:53
+msgid "Save"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:13
+msgid "Accomodations"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:31
+#: travelcrm/templates/accomodations/index.mak:33
+#: travelcrm/templates/advsources/index.mak:31
+#: travelcrm/templates/advsources/index.mak:33
+#: travelcrm/templates/appointments/index.mak:31
+#: travelcrm/templates/appointments/index.mak:33
+#: travelcrm/templates/banks/index.mak:31
+#: travelcrm/templates/banks/index.mak:33
+#: travelcrm/templates/bpersons/index.mak:31
+#: travelcrm/templates/bpersons/index.mak:33
+#: travelcrm/templates/common/grid_selectors.mak:50
+#: travelcrm/templates/common/grid_selectors.mak:52
+#: travelcrm/templates/common/grid_selectors.mak:191
+#: travelcrm/templates/common/grid_selectors.mak:193
+#: travelcrm/templates/common/grid_selectors.mak:323
+#: travelcrm/templates/common/grid_selectors.mak:325
+#: travelcrm/templates/common/grid_selectors.mak:418
+#: travelcrm/templates/common/grid_selectors.mak:420
+#: travelcrm/templates/common/grid_selectors.mak:511
+#: travelcrm/templates/common/grid_selectors.mak:513
+#: travelcrm/templates/common/grid_selectors.mak:602
+#: travelcrm/templates/common/grid_selectors.mak:604
+#: travelcrm/templates/common/grid_selectors.mak:695
+#: travelcrm/templates/common/grid_selectors.mak:697
+#: travelcrm/templates/common/grid_selectors.mak:810
+#: travelcrm/templates/common/grid_selectors.mak:812
+#: travelcrm/templates/countries/index.mak:31
+#: travelcrm/templates/countries/index.mak:33
+#: travelcrm/templates/currencies/index.mak:30
+#: travelcrm/templates/currencies/index.mak:31
+#: travelcrm/templates/currencies_rates/index.mak:31
+#: travelcrm/templates/currencies_rates/index.mak:33
+#: travelcrm/templates/employees/form.mak:123
+#: travelcrm/templates/employees/index.mak:31
+#: travelcrm/templates/employees/index.mak:33
+#: travelcrm/templates/foodcats/index.mak:31
+#: travelcrm/templates/foodcats/index.mak:33
+#: travelcrm/templates/hotelcats/index.mak:31
+#: travelcrm/templates/hotelcats/index.mak:33
+#: travelcrm/templates/hotels/index.mak:31
+#: travelcrm/templates/hotels/index.mak:33
+#: travelcrm/templates/locations/index.mak:31
+#: travelcrm/templates/locations/index.mak:33
+#: travelcrm/templates/navigations/index.mak:27
+#: travelcrm/templates/navigations/index.mak:29
+#: travelcrm/templates/permisions/index.mak:31
+#: travelcrm/templates/persons/index.mak:71
+#: travelcrm/templates/persons/index.mak:73
+#: travelcrm/templates/positions/index.mak:30
+#: travelcrm/templates/positions/index.mak:31
+#: travelcrm/templates/regions/index.mak:31
+#: travelcrm/templates/regions/index.mak:33
+#: travelcrm/templates/resources_types/index.mak:31
+#: travelcrm/templates/resources_types/index.mak:33
+#: travelcrm/templates/roomcats/index.mak:31
+#: travelcrm/templates/roomcats/index.mak:33
+#: travelcrm/templates/services/index.mak:31
+#: travelcrm/templates/services/index.mak:33
+#: travelcrm/templates/structures/index.mak:23
+#: travelcrm/templates/structures/index.mak:25
+#: travelcrm/templates/tasks/index.mak:95
+#: travelcrm/templates/touroperators/index.mak:30
+#: travelcrm/templates/touroperators/index.mak:32
+#: travelcrm/templates/tours/index.mak:85
+#: travelcrm/templates/tours/index.mak:87
+#: travelcrm/templates/users/index.mak:31
+#: travelcrm/templates/users/index.mak:33
+msgid "id"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:35
+#: travelcrm/templates/accomodations/index.mak:68
+#: travelcrm/templates/advsources/index.mak:35
+#: travelcrm/templates/advsources/index.mak:68
+#: travelcrm/templates/appointments/index.mak:38
+#: travelcrm/templates/appointments/index.mak:71
+#: travelcrm/templates/banks/index.mak:35
+#: travelcrm/templates/banks/index.mak:68
+#: travelcrm/templates/bpersons/index.mak:36
+#: travelcrm/templates/bpersons/index.mak:73
+#: travelcrm/templates/common/grid_selectors.mak:424
+#: travelcrm/templates/common/grid_selectors.mak:516
+#: travelcrm/templates/common/grid_selectors.mak:608
+#: travelcrm/templates/common/grid_selectors.mak:700
+#: travelcrm/templates/common/grid_selectors.mak:815
+#: travelcrm/templates/countries/index.mak:36
+#: travelcrm/templates/countries/index.mak:69
+#: travelcrm/templates/currencies/index.mak:33
+#: travelcrm/templates/currencies/index.mak:66
+#: travelcrm/templates/currencies_rates/index.mak:37
+#: travelcrm/templates/currencies_rates/index.mak:82
+#: travelcrm/templates/employees/form.mak:127
+#: travelcrm/templates/employees/index.mak:37
+#: travelcrm/templates/employees/index.mak:70
+#: travelcrm/templates/foodcats/index.mak:35
+#: travelcrm/templates/foodcats/index.mak:68
+#: travelcrm/templates/hotelcats/index.mak:35
+#: travelcrm/templates/hotelcats/index.mak:68
+#: travelcrm/templates/hotels/index.mak:37
+#: travelcrm/templates/hotels/index.mak:74
+#: travelcrm/templates/locations/index.mak:36
+#: travelcrm/templates/locations/index.mak:73
+#: travelcrm/templates/navigations/index.mak:32
+#: travelcrm/templates/persons/index.mak:75
+#: travelcrm/templates/persons/index.mak:108
+#: travelcrm/templates/positions/index.mak:34
+#: travelcrm/templates/positions/index.mak:83
+#: travelcrm/templates/regions/index.mak:36
+#: travelcrm/templates/regions/index.mak:69
+#: travelcrm/templates/resources_types/index.mak:36
+#: travelcrm/templates/resources_types/index.mak:73
+#: travelcrm/templates/roomcats/index.mak:35
+#: travelcrm/templates/roomcats/index.mak:68
+#: travelcrm/templates/services/index.mak:35
+#: travelcrm/templates/services/index.mak:68
+#: travelcrm/templates/structures/index.mak:27
+#: travelcrm/templates/touroperators/index.mak:34
+#: travelcrm/templates/touroperators/index.mak:67
+#: travelcrm/templates/tours/index.mak:94
+#: travelcrm/templates/tours/index.mak:185
+#: travelcrm/templates/users/index.mak:36
+#: travelcrm/templates/users/index.mak:69
+msgid "updated"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:36
+#: travelcrm/templates/accomodations/index.mak:76
+#: travelcrm/templates/advsources/index.mak:36
+#: travelcrm/templates/advsources/index.mak:76
+#: travelcrm/templates/appointments/index.mak:39
+#: travelcrm/templates/appointments/index.mak:79
+#: travelcrm/templates/banks/index.mak:36
+#: travelcrm/templates/banks/index.mak:76
+#: travelcrm/templates/bpersons/index.mak:37
+#: travelcrm/templates/bpersons/index.mak:81
+#: travelcrm/templates/common/grid_selectors.mak:425
+#: travelcrm/templates/common/grid_selectors.mak:517
+#: travelcrm/templates/common/grid_selectors.mak:609
+#: travelcrm/templates/common/grid_selectors.mak:701
+#: travelcrm/templates/common/grid_selectors.mak:816
+#: travelcrm/templates/countries/index.mak:37
+#: travelcrm/templates/countries/index.mak:77
+#: travelcrm/templates/currencies/index.mak:34
+#: travelcrm/templates/currencies/index.mak:74
+#: travelcrm/templates/currencies_rates/index.mak:38
+#: travelcrm/templates/currencies_rates/index.mak:90
+#: travelcrm/templates/employees/form.mak:128
+#: travelcrm/templates/employees/index.mak:38
+#: travelcrm/templates/employees/index.mak:78
+#: travelcrm/templates/foodcats/index.mak:36
+#: travelcrm/templates/foodcats/index.mak:76
+#: travelcrm/templates/hotelcats/index.mak:36
+#: travelcrm/templates/hotelcats/index.mak:76
+#: travelcrm/templates/hotels/index.mak:38
+#: travelcrm/templates/hotels/index.mak:82
+#: travelcrm/templates/locations/index.mak:37
+#: travelcrm/templates/locations/index.mak:81
+#: travelcrm/templates/navigations/index.mak:33
+#: travelcrm/templates/persons/index.mak:76
+#: travelcrm/templates/persons/index.mak:116
+#: travelcrm/templates/positions/index.mak:35
+#: travelcrm/templates/positions/index.mak:91
+#: travelcrm/templates/regions/index.mak:37
+#: travelcrm/templates/regions/index.mak:77
+#: travelcrm/templates/resources_types/index.mak:37
+#: travelcrm/templates/resources_types/index.mak:81
+#: travelcrm/templates/roomcats/index.mak:36
+#: travelcrm/templates/roomcats/index.mak:76
+#: travelcrm/templates/services/index.mak:36
+#: travelcrm/templates/services/index.mak:76
+#: travelcrm/templates/structures/index.mak:28
+#: travelcrm/templates/touroperators/index.mak:35
+#: travelcrm/templates/touroperators/index.mak:75
+#: travelcrm/templates/tours/index.mak:95
+#: travelcrm/templates/tours/index.mak:193
+#: travelcrm/templates/users/index.mak:37
+#: travelcrm/templates/users/index.mak:77
+msgid "modifier"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:45
+#: travelcrm/templates/advsources/index.mak:45
+#: travelcrm/templates/appointments/index.mak:48
+#: travelcrm/templates/banks/index.mak:45
+#: travelcrm/templates/bpersons/index.mak:46
+#: travelcrm/templates/countries/index.mak:46
+#: travelcrm/templates/currencies/index.mak:43
+#: travelcrm/templates/currencies_rates/index.mak:47
+#: travelcrm/templates/employees/index.mak:47
+#: travelcrm/templates/foodcats/index.mak:45
+#: travelcrm/templates/hotelcats/index.mak:45
+#: travelcrm/templates/hotels/index.mak:47
+#: travelcrm/templates/locations/index.mak:46
+#: travelcrm/templates/navigations/index.mak:42
+#: travelcrm/templates/persons/index.mak:85
+#: travelcrm/templates/positions/index.mak:44
+#: travelcrm/templates/regions/index.mak:46
+#: travelcrm/templates/resources_types/index.mak:46
+#: travelcrm/templates/roomcats/index.mak:45
+#: travelcrm/templates/services/index.mak:45
+#: travelcrm/templates/structures/index.mak:37
+#: travelcrm/templates/touroperators/index.mak:44
+#: travelcrm/templates/tours/index.mak:104
+#: travelcrm/templates/users/index.mak:46
+msgid "Add New"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:52
+#: travelcrm/templates/advsources/index.mak:52
+#: travelcrm/templates/appointments/index.mak:55
+#: travelcrm/templates/banks/index.mak:52
+#: travelcrm/templates/bpersons/index.mak:53
+#: travelcrm/templates/common/grid_selectors.mak:78
+#: travelcrm/templates/common/grid_selectors.mak:221
+#: travelcrm/templates/common/grid_selectors.mak:352
+#: travelcrm/templates/common/grid_selectors.mak:449
+#: travelcrm/templates/common/grid_selectors.mak:541
+#: travelcrm/templates/common/grid_selectors.mak:633
+#: travelcrm/templates/common/grid_selectors.mak:725
+#: travelcrm/templates/common/grid_selectors.mak:840
+#: travelcrm/templates/countries/index.mak:53
+#: travelcrm/templates/currencies/index.mak:50
+#: travelcrm/templates/currencies_rates/index.mak:54
+#: travelcrm/templates/employees/index.mak:54
+#: travelcrm/templates/foodcats/index.mak:52
+#: travelcrm/templates/hotelcats/index.mak:52
+#: travelcrm/templates/hotels/index.mak:54
+#: travelcrm/templates/locations/index.mak:53
+#: travelcrm/templates/navigations/index.mak:49
+#: travelcrm/templates/persons/index.mak:92
+#: travelcrm/templates/positions/index.mak:51
+#: travelcrm/templates/regions/index.mak:53
+#: travelcrm/templates/resources_types/index.mak:53
+#: travelcrm/templates/roomcats/index.mak:52
+#: travelcrm/templates/services/index.mak:52
+#: travelcrm/templates/structures/index.mak:44
+#: travelcrm/templates/tasks/index.mak:113
+#: travelcrm/templates/touroperators/index.mak:51
+#: travelcrm/templates/tours/index.mak:111
+#: travelcrm/templates/users/index.mak:53
+msgid "Edit"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:83
+#: travelcrm/templates/advsources/index.mak:83
+#: travelcrm/templates/appointments/index.mak:86
+#: travelcrm/templates/banks/index.mak:83
+#: travelcrm/templates/bpersons/index.mak:88
+#: travelcrm/templates/countries/index.mak:84
+#: travelcrm/templates/currencies/index.mak:81
+#: travelcrm/templates/currencies_rates/index.mak:97
+#: travelcrm/templates/employees/index.mak:85
+#: travelcrm/templates/foodcats/index.mak:83
+#: travelcrm/templates/hotelcats/index.mak:83
+#: travelcrm/templates/hotels/index.mak:89
+#: travelcrm/templates/locations/index.mak:88
+#: travelcrm/templates/persons/index.mak:123
+#: travelcrm/templates/positions/index.mak:98
+#: travelcrm/templates/regions/index.mak:84
+#: travelcrm/templates/resources_types/index.mak:88
+#: travelcrm/templates/roomcats/index.mak:83
+#: travelcrm/templates/services/index.mak:83
+#: travelcrm/templates/touroperators/index.mak:82
+#: travelcrm/templates/tours/index.mak:200
+#: travelcrm/templates/users/index.mak:84
+msgid "Find"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:84
+#: travelcrm/templates/advsources/index.mak:84
+#: travelcrm/templates/appointments/index.mak:87
+#: travelcrm/templates/banks/index.mak:84
+#: travelcrm/templates/bpersons/index.mak:89
+#: travelcrm/templates/countries/index.mak:85
+#: travelcrm/templates/currencies/index.mak:82
+#: travelcrm/templates/currencies_rates/index.mak:98
+#: travelcrm/templates/employees/index.mak:86
+#: travelcrm/templates/foodcats/index.mak:84
+#: travelcrm/templates/hotelcats/index.mak:84
+#: travelcrm/templates/hotels/index.mak:90
+#: travelcrm/templates/locations/index.mak:89
+#: travelcrm/templates/persons/index.mak:124
+#: travelcrm/templates/positions/index.mak:99
+#: travelcrm/templates/regions/index.mak:85
+#: travelcrm/templates/resources_types/index.mak:89
+#: travelcrm/templates/roomcats/index.mak:84
+#: travelcrm/templates/services/index.mak:84
+#: travelcrm/templates/touroperators/index.mak:83
+#: travelcrm/templates/tours/index.mak:201
+#: travelcrm/templates/users/index.mak:85
+msgid "Close"
+msgstr ""
+
+#: travelcrm/templates/accomodations/index.mak:85
+#: travelcrm/templates/advsources/index.mak:85
+#: travelcrm/templates/appointments/index.mak:88
+#: travelcrm/templates/banks/index.mak:85
+#: travelcrm/templates/bpersons/index.mak:90
+#: travelcrm/templates/countries/index.mak:86
+#: travelcrm/templates/currencies/index.mak:83
+#: travelcrm/templates/currencies_rates/index.mak:99
+#: travelcrm/templates/employees/index.mak:87
+#: travelcrm/templates/foodcats/index.mak:85
+#: travelcrm/templates/hotelcats/index.mak:85
+#: travelcrm/templates/hotels/index.mak:91
+#: travelcrm/templates/locations/index.mak:90
+#: travelcrm/templates/persons/index.mak:125
+#: travelcrm/templates/positions/index.mak:100
+#: travelcrm/templates/regions/index.mak:86
+#: travelcrm/templates/resources_types/index.mak:90
+#: travelcrm/templates/roomcats/index.mak:85
+#: travelcrm/templates/services/index.mak:85
+#: travelcrm/templates/touroperators/index.mak:84
+#: travelcrm/templates/tours/index.mak:202
+#: travelcrm/templates/users/index.mak:86
+msgid "Clear"
+msgstr ""
+
+#: travelcrm/templates/addresses/delete.mak:2
+#: travelcrm/templates/contacts/delete.mak:2
+#: travelcrm/templates/licences/delete.mak:2
+#: travelcrm/templates/passports/delete.mak:2
+msgid "Delete Licences"
+msgstr ""
+
+#: travelcrm/templates/addresses/form.mak:12
+#: travelcrm/templates/common/grid_selectors.mak:120
+#: travelcrm/templates/common/grid_selectors.mak:698
+#: travelcrm/templates/hotels/form.mak:30
+#: travelcrm/templates/hotels/index.mak:36
+#: travelcrm/templates/locations/index.mak:34
+#: travelcrm/templates/tours/form_point.mak:12
+msgid "location"
+msgstr ""
+
+#: travelcrm/templates/addresses/form.mak:21
+#: travelcrm/templates/common/grid_selectors.mak:699
+msgid "zip code"
+msgstr ""
+
+#: travelcrm/templates/addresses/form.mak:30
+msgid "address"
+msgstr ""
+
+#: travelcrm/templates/advsources/delete.mak:2
+msgid "Delete Advertising Sources"
+msgstr ""
+
+#: travelcrm/templates/advsources/delete.mak:16
+msgid ""
+"it's highly not recommend to delete advertising sources. it may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/advsources/index.mak:13
+msgid "Advertising Sources"
+msgstr ""
+
+#: travelcrm/templates/appointments/delete.mak:2
+#: travelcrm/templates/bpersons/delete.mak:2
+#: travelcrm/templates/currencies/delete.mak:2
+#: travelcrm/templates/employees/delete.mak:2
+#: travelcrm/templates/persons/delete.mak:2
+#: travelcrm/templates/touroperators/delete.mak:2
+#: travelcrm/templates/tours/delete.mak:2
+#: travelcrm/templates/users/delete.mak:2
+msgid "Delete Employees"
+msgstr ""
+
+#: travelcrm/templates/appointments/delete.mak:16
+msgid ""
+"it's highly not recommend to delete appoitments. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/appointments/form.mak:12
+msgid "appointment date"
+msgstr ""
+
+#: travelcrm/templates/appointments/form.mak:21
+#: travelcrm/templates/appointments/index.mak:34
+#: travelcrm/templates/users/form.mak:13 travelcrm/templates/users/index.mak:34
+msgid "employee"
+msgstr ""
+
+#: travelcrm/templates/appointments/form.mak:30
+#: travelcrm/templates/appointments/index.mak:36
+#: travelcrm/templates/employees/form.mak:125
+msgid "position"
+msgstr ""
+
+#: travelcrm/templates/appointments/form.mak:39
+msgid "salary"
+msgstr ""
+
+#: travelcrm/templates/appointments/form.mak:48
+#: travelcrm/templates/common/grid_selectors.mak:814
+#: travelcrm/templates/currencies_rates/form.mak:12
+msgid "currency"
+msgstr ""
+
+#: travelcrm/templates/appointments/index.mak:13
+msgid "Employees Appointments"
+msgstr ""
+
+#: travelcrm/templates/appointments/index.mak:35
+#: travelcrm/templates/currencies_rates/form.mak:30
+#: travelcrm/templates/currencies_rates/index.mak:36
+#: travelcrm/templates/employees/form.mak:124
+#: travelcrm/templates/tours/index.mak:18
+msgid "date"
+msgstr ""
+
+#: travelcrm/templates/auth/_layout.mak:5
+msgid "TravelCRM - login"
+msgstr ""
+
+#: travelcrm/templates/auth/forgot.mak:2
+msgid "Forgot password"
+msgstr ""
+
+#: travelcrm/templates/auth/forgot.mak:22
+msgid "Back to autorization"
+msgstr ""
+
+#: travelcrm/templates/auth/forgot.mak:26
+msgid "Please, enter your email"
+msgstr ""
+
+#: travelcrm/templates/auth/forgot.mak:29
+msgid "Send"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:2
+msgid "Autorization"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:15 travelcrm/templates/users/form.mak:22
+#: travelcrm/templates/users/index.mak:35
+msgid "username"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:23 travelcrm/templates/users/form.mak:34
+msgid "password"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:30
+msgid "Forgot password?"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:34
+msgid "Please, enter username and password"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:37
+msgid "Login"
+msgstr ""
+
+#: travelcrm/templates/auth/logout.mak:2
+msgid "Logout Confirmation"
+msgstr ""
+
+#: travelcrm/templates/auth/logout.mak:11
+msgid "Do you really want to logout?"
+msgstr ""
+
+#: travelcrm/templates/auth/logout.mak:16
+msgid "Logout"
+msgstr ""
+
+#: travelcrm/templates/banks/delete.mak:16
+#: travelcrm/templates/foodcats/delete.mak:16
+msgid ""
+"it's highly not recommend to delete food categories. it may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/banks/form.mak:12
+#: travelcrm/templates/bpersons/form.mak:12
+#: travelcrm/templates/employees/form.mak:14
+#: travelcrm/templates/persons/form.mak:14
+#: travelcrm/templates/structures/form.mak:14
+#: travelcrm/templates/tasks/form.mak:11
+#: travelcrm/templates/touroperators/form.mak:14
+#: travelcrm/templates/tours/form.mak:13
+msgid "Main"
+msgstr ""
+
+#: travelcrm/templates/banks/form.mak:23
+#: travelcrm/templates/employees/form.mak:100
+#: travelcrm/templates/persons/form.mak:73
+#: travelcrm/templates/structures/form.mak:40
+msgid "Addresses"
+msgstr ""
+
+#: travelcrm/templates/banks/index.mak:13
+msgid "Banks"
+msgstr ""
+
+#: travelcrm/templates/banks_details/delete.mak:2
+msgid "Delete Banks Details"
+msgstr ""
+
+#: travelcrm/templates/banks_details/form.mak:12
+#: travelcrm/templates/common/grid_selectors.mak:813
+msgid "bank"
+msgstr ""
+
+#: travelcrm/templates/banks_details/form.mak:21
+#: travelcrm/templates/tours/form.mak:79
+msgid "price currency"
+msgstr ""
+
+#: travelcrm/templates/banks_details/form.mak:30
+#: travelcrm/templates/common/grid_selectors.mak:766
+msgid "beneficiary"
+msgstr ""
+
+#: travelcrm/templates/banks_details/form.mak:39
+#: travelcrm/templates/common/grid_selectors.mak:770
+msgid "account"
+msgstr ""
+
+#: travelcrm/templates/banks_details/form.mak:48
+#: travelcrm/templates/common/grid_selectors.mak:774
+msgid "swift code"
+msgstr ""
+
+#: travelcrm/templates/bpersons/delete.mak:16
+msgid ""
+"it's highly not recommend to delete business persons. it may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/bpersons/form.mak:15
+#: travelcrm/templates/employees/form.mak:44
+#: travelcrm/templates/employees/index.mak:35
+#: travelcrm/templates/persons/form.mak:17
+msgid "first name"
+msgstr ""
+
+#: travelcrm/templates/bpersons/form.mak:24
+#: travelcrm/templates/employees/form.mak:53
+#: travelcrm/templates/persons/form.mak:26
+msgid "second name"
+msgstr ""
+
+#: travelcrm/templates/bpersons/form.mak:33
+#: travelcrm/templates/employees/form.mak:62
+#: travelcrm/templates/employees/index.mak:34
+#: travelcrm/templates/persons/form.mak:35
+msgid "last name"
+msgstr ""
+
+#: travelcrm/templates/bpersons/form.mak:42
+#: travelcrm/templates/bpersons/index.mak:35
+#: travelcrm/templates/common/grid_selectors.mak:54
+msgid "position name"
+msgstr ""
+
+#: travelcrm/templates/bpersons/form.mak:50
+#: travelcrm/templates/employees/form.mak:88
+#: travelcrm/templates/persons/form.mak:61
+#: travelcrm/templates/structures/form.mak:34
+#: travelcrm/templates/touroperators/form.mak:31
+msgid "Contacts"
+msgstr ""
+
+#: travelcrm/templates/bpersons/index.mak:13
+msgid "Business Persons"
+msgstr ""
+
+#: travelcrm/templates/bpersons/index.mak:57
+#: travelcrm/templates/currencies_rates/index.mak:58
+#: travelcrm/templates/hotels/index.mak:58
+#: travelcrm/templates/locations/index.mak:57
+#: travelcrm/templates/positions/index.mak:55
+#: travelcrm/templates/resources_types/index.mak:57
+#: travelcrm/templates/structures/index.mak:48
+#: travelcrm/templates/tours/index.mak:115
+msgid "Copy"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:72
+#: travelcrm/templates/common/grid_selectors.mak:216
+#: travelcrm/templates/common/grid_selectors.mak:346
+#: travelcrm/templates/common/grid_selectors.mak:444
+#: travelcrm/templates/common/grid_selectors.mak:536
+#: travelcrm/templates/common/grid_selectors.mak:628
+#: travelcrm/templates/common/grid_selectors.mak:720
+#: travelcrm/templates/common/grid_selectors.mak:835
+#: travelcrm/templates/tasks/index.mak:107
+msgid "Add"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:125
+#: travelcrm/templates/common/grid_selectors.mak:195
+#: travelcrm/templates/tours/form_point.mak:21
+#: travelcrm/templates/tours/index.mak:151
+msgid "hotel"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:131
+#: travelcrm/templates/tours/form_point.mak:30
+msgid "accomodation"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:137
+#: travelcrm/templates/tours/form_point.mak:48
+msgid "room category"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:143
+#: travelcrm/templates/tours/form_point.mak:39
+msgid "food category"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:148
+msgid "dates"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:154
+#: travelcrm/templates/passports/form.mak:48
+#: travelcrm/templates/resources_types/form.mak:39
+#: travelcrm/templates/services/form.mak:21
+#: travelcrm/templates/tours/form_point.mak:75
+msgid "description"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:194
+#: travelcrm/templates/passports/form.mak:30
+#: travelcrm/templates/regions/form.mak:21
+#: travelcrm/templates/regions/index.mak:35
+#: travelcrm/templates/tours/index.mak:89
+#: travelcrm/templates/tours/index.mak:163
+msgid "country"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:196
+#: travelcrm/templates/tours/form.mak:90
+#: travelcrm/templates/tours/form_point.mak:57
+#: travelcrm/templates/tours/index.mak:92
+msgid "start"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:197
+#: travelcrm/templates/tours/form.mak:106
+#: travelcrm/templates/tours/form_point.mak:66
+#: travelcrm/templates/tours/index.mak:93
+msgid "end"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:285
+#: travelcrm/templates/persons/index.mak:37
+#: travelcrm/templates/tours/index.mak:45
+msgid "citizen passport"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:291
+#: travelcrm/templates/persons/index.mak:43
+#: travelcrm/templates/tours/index.mak:51
+msgid "foreign passport"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:327
+#: travelcrm/templates/persons/form.mak:53
+msgid "birthday"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:328
+msgid "age"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:422
+#: travelcrm/templates/licences/form.mak:21
+msgid "date from"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:423
+#: travelcrm/templates/licences/form.mak:30
+msgid "date to"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:605
+#: travelcrm/templates/passports/form.mak:21
+msgid "passport num"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:606
+msgid "type"
+msgstr ""
+
+#: travelcrm/templates/common/grid_selectors.mak:607
+#: travelcrm/templates/passports/form.mak:39
+msgid "end date"
+msgstr ""
+
+#: travelcrm/templates/common/search.mak:6
+msgid "search"
+msgstr ""
+
+#: travelcrm/templates/common/search.mak:38
+msgid "advanced search"
+msgstr ""
+
+#: travelcrm/templates/contacts/form.mak:12
+msgid "contact type"
+msgstr ""
+
+#: travelcrm/templates/countries/delete.mak:16
+msgid ""
+"it's highly not recommend to delete countries. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/countries/index.mak:13
+msgid "Countries"
+msgstr ""
+
+#: travelcrm/templates/currencies/delete.mak:16
+msgid ""
+"it's highly not recommend to delete currencies. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/currencies/index.mak:13
+msgid "Currencies"
+msgstr ""
+
+#: travelcrm/templates/currencies/index.mak:32
+msgid "iso_code"
+msgstr ""
+
+#: travelcrm/templates/currencies_rates/delete.mak:16
+msgid ""
+"it's highly not recommend to delete currency rates. it may have "
+"destructive aftermath for billing!"
+msgstr ""
+
+#: travelcrm/templates/currencies_rates/form.mak:21
+#: travelcrm/templates/currencies_rates/index.mak:35
+msgid "rate"
+msgstr ""
+
+#: travelcrm/templates/currencies_rates/index.mak:13
+msgid "Currencies Rates"
+msgstr ""
+
+#: travelcrm/templates/currencies_rates/index.mak:74
+msgid "rate date"
+msgstr ""
+
+#: travelcrm/templates/employees/delete.mak:16
+msgid ""
+"it's highly not recommend to delete employees. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/employees/form.mak:36
+msgid "delete photo"
+msgstr ""
+
+#: travelcrm/templates/employees/form.mak:71
+msgid "tax number"
+msgstr ""
+
+#: travelcrm/templates/employees/form.mak:80
+msgid "dismissal date"
+msgstr ""
+
+#: travelcrm/templates/employees/form.mak:94
+#: travelcrm/templates/persons/form.mak:67
+msgid "Passports"
+msgstr ""
+
+#: travelcrm/templates/employees/form.mak:110
+msgid "Appointments"
+msgstr ""
+
+#: travelcrm/templates/employees/index.mak:13
+msgid "Employees"
+msgstr ""
+
+#: travelcrm/templates/employees/index.mak:36
+msgid "dismissal"
+msgstr ""
+
+#: travelcrm/templates/foodcats/index.mak:13
+msgid "Foods Categories"
+msgstr ""
+
+#: travelcrm/templates/hotelcats/delete.mak:16
+#: travelcrm/templates/hotels/delete.mak:16
+msgid ""
+"it's highly not recommend to delete hotel categories. it may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/hotelcats/index.mak:13
+msgid "Hotels Categories"
+msgstr ""
+
+#: travelcrm/templates/hotels/form.mak:21
+#: travelcrm/templates/hotels/index.mak:35
+msgid "category"
+msgstr ""
+
+#: travelcrm/templates/hotels/index.mak:13
+msgid "Hotels"
+msgstr ""
+
+#: travelcrm/templates/locations/delete.mak:2
+#: travelcrm/templates/regions/delete.mak:2
+msgid "Delete Regions"
+msgstr ""
+
+#: travelcrm/templates/locations/delete.mak:16
+#: travelcrm/templates/regions/delete.mak:16
+msgid ""
+"it's highly not recommend to delete regions. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/locations/form.mak:21
+#: travelcrm/templates/locations/index.mak:35
+#: travelcrm/templates/regions/index.mak:34
+msgid "region"
+msgstr ""
+
+#: travelcrm/templates/locations/index.mak:13
+msgid "Locations"
+msgstr ""
+
+#: travelcrm/templates/navigations/copy.mak:12
+#: travelcrm/templates/permisions/copy.mak:12
+msgid "from position"
+msgstr ""
+
+#: travelcrm/templates/navigations/delete.mak:2
+msgid "Delete Position Navigations"
+msgstr ""
+
+#: travelcrm/templates/navigations/delete.mak:16
+#: travelcrm/templates/permisions/delete.mak:16
+#: travelcrm/templates/positions/delete.mak:16
+#: travelcrm/templates/structures/delete.mak:16
+msgid "all related objects will be delete too!"
+msgstr ""
+
+#: travelcrm/templates/navigations/form.mak:21
+msgid "parent navigation"
+msgstr ""
+
+#: travelcrm/templates/navigations/form.mak:30
+msgid "url"
+msgstr ""
+
+#: travelcrm/templates/navigations/form.mak:39
+msgid "icon css class"
+msgstr ""
+
+#: travelcrm/templates/navigations/index.mak:12
+msgid "Position Navigations"
+msgstr ""
+
+#: travelcrm/templates/navigations/index.mak:53
+#: travelcrm/templates/permisions/index.mak:48
+msgid "Copy From ..."
+msgstr ""
+
+#: travelcrm/templates/navigations/index.mak:57
+msgid "Up"
+msgstr ""
+
+#: travelcrm/templates/navigations/index.mak:61
+msgid "Down"
+msgstr ""
+
+#: travelcrm/templates/panels/common.mak:16
+msgid "logout"
+msgstr ""
+
+#: travelcrm/templates/panels/common.mak:95
+msgid "in"
+msgstr ""
+
+#: travelcrm/templates/passports/form.mak:12
+msgid "passport type"
+msgstr ""
+
+#: travelcrm/templates/permisions/delete.mak:2
+#: travelcrm/templates/positions/delete.mak:2
+msgid "Delete Companies"
+msgstr ""
+
+#: travelcrm/templates/permisions/form.mak:2
+#: travelcrm/templates/permisions/index.mak:44
+msgid "Edit Permissions"
+msgstr ""
+
+#: travelcrm/templates/permisions/form.mak:22
+msgid "scope type"
+msgstr ""
+
+#: travelcrm/templates/permisions/form.mak:31
+msgid "scope structure"
+msgstr ""
+
+#: travelcrm/templates/permisions/index.mak:13
+msgid "Position Permissions"
+msgstr ""
+
+#: travelcrm/templates/permisions/index.mak:32
+msgid "resource type"
+msgstr ""
+
+#: travelcrm/templates/persons/delete.mak:16
+msgid ""
+"it's highly not recommend to delete persons. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/persons/form.mak:44
+msgid "gender"
+msgstr ""
+
+#: travelcrm/templates/persons/form.mak:79
+msgid "Preferences"
+msgstr ""
+
+#: travelcrm/templates/persons/form.mak:81
+msgid "History"
+msgstr ""
+
+#: travelcrm/templates/persons/index.mak:13
+msgid "Persons"
+msgstr ""
+
+#: travelcrm/templates/positions/index.mak:13
+msgid "Company Positions"
+msgstr ""
+
+#: travelcrm/templates/positions/index.mak:69
+msgid "Permissions"
+msgstr ""
+
+#: travelcrm/templates/positions/index.mak:73
+msgid "Menu"
+msgstr ""
+
+#: travelcrm/templates/regions/index.mak:13
+msgid "Regions"
+msgstr ""
+
+#: travelcrm/templates/resources_types/delete.mak:2
+msgid "Delete Resources Types"
+msgstr ""
+
+#: travelcrm/templates/resources_types/delete.mak:16
+msgid ""
+"this operation may cause destructive system changes, use it if you "
+"understand what are you doing!"
+msgstr ""
+
+#: travelcrm/templates/resources_types/form.mak:2
+msgid "Add Company"
+msgstr ""
+
+#: travelcrm/templates/resources_types/form.mak:12
+#: travelcrm/templates/resources_types/index.mak:34
+msgid "humanize"
+msgstr ""
+
+#: travelcrm/templates/resources_types/form.mak:30
+msgid "resource"
+msgstr ""
+
+#: travelcrm/templates/resources_types/index.mak:13
+msgid "Resources Types"
+msgstr ""
+
+#: travelcrm/templates/roomcats/delete.mak:2
+msgid "Delete Rooms Categories"
+msgstr ""
+
+#: travelcrm/templates/roomcats/delete.mak:16
+msgid ""
+"it's highly not recommend to delete rooms categories. it may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/roomcats/index.mak:13
+msgid "Rooms Categories"
+msgstr ""
+
+#: travelcrm/templates/services/index.mak:13
+msgid "Services"
+msgstr ""
+
+#: travelcrm/templates/structures/delete.mak:2
+msgid "Delete Company Structures"
+msgstr ""
+
+#: travelcrm/templates/structures/form.mak:26
+msgid "parent structure"
+msgstr ""
+
+#: travelcrm/templates/structures/form.mak:46
+#: travelcrm/templates/touroperators/form.mak:37
+msgid "Banks Details"
+msgstr ""
+
+#: travelcrm/templates/structures/index.mak:11
+msgid "Company Structures"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:14 travelcrm/templates/tasks/index.mak:97
+msgid "title"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:23 travelcrm/templates/tasks/index.mak:32
+msgid "performer"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:32 travelcrm/templates/tasks/index.mak:44
+msgid "reminder"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:42 travelcrm/templates/tasks/index.mak:38
+msgid "deadline"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:51 travelcrm/templates/tasks/index.mak:53
+msgid "priority"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:60 travelcrm/templates/tasks/index.mak:62
+msgid "status"
+msgstr ""
+
+#: travelcrm/templates/tasks/form.mak:68
+msgid "Description"
+msgstr ""
+
+#: travelcrm/templates/touroperators/delete.mak:16
+msgid ""
+"it's highly not recommend to delete touroperators. It may have "
+"destructive aftermath!"
+msgstr ""
+
+#: travelcrm/templates/touroperators/form.mak:25
+msgid "Licences"
+msgstr ""
+
+#: travelcrm/templates/touroperators/index.mak:13
+msgid "Touroperators"
+msgstr ""
+
+#: travelcrm/templates/tours/delete.mak:16
+msgid ""
+"it's highly not recommend to delete tours. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:16
+msgid "deal date"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:25
+msgid "advertise"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:34 travelcrm/templates/tours/index.mak:88
+msgid "touroperator"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:43 travelcrm/templates/tours/index.mak:22
+msgid "customer"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:52
+msgid "adults"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:61
+msgid "children"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:70 travelcrm/templates/tours/index.mak:91
+msgid "price"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:87
+msgid "Route"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:97
+msgid "start point"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:113
+msgid "end point"
+msgstr ""
+
+#: travelcrm/templates/tours/form.mak:125
+msgid "Members"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:13
+msgid "Tours"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:27
+msgid "customer phone"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:33
+msgid "customer email"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:39
+msgid "customer skype"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:56
+msgid "base price"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:58
+msgid "exchange rate"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:90
+msgid "hotel cat"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:129
+msgid "Invoice"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:135
+msgid "Contract"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:145
+msgid "customer or member"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:157
+msgid "hotel category"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:169
+msgid "price range"
+msgstr ""
+
+#: travelcrm/templates/tours/index.mak:177
+msgid "tour dates"
+msgstr ""
+
+#: travelcrm/templates/users/delete.mak:16
+msgid ""
+"it's highly not recommend to delete users. it may have destructive "
+"aftermath!"
+msgstr ""
+
+#: travelcrm/templates/users/form.mak:30
+msgid "If you do not change password, take this fields empty"
+msgstr ""
+
+#: travelcrm/templates/users/form.mak:43
+msgid "confirm password"
+msgstr ""
+
+#: travelcrm/templates/users/index.mak:14
+msgid "Users"
+msgstr ""
+
+#: travelcrm/views/__init__.py:22 travelcrm/views/__init__.py:35
+msgid "System Info"
+msgstr ""
+
+#: travelcrm/views/__init__.py:23
+msgid "Need to select row"
+msgstr ""
+
+#: travelcrm/views/__init__.py:36
+msgid "Need to check rows"
+msgstr ""
+
+#: travelcrm/views/__init__.py:47
+msgid "Seccurity Info"
+msgstr ""
+
+#: travelcrm/views/__init__.py:48
+msgid "You have no permissions to do this action"
+msgstr ""
+
+#: travelcrm/views/accomodations.py:76 travelcrm/views/foodcats.py:76
+#: travelcrm/views/hotelcats.py:76
+msgid "Add Hotel Category"
+msgstr ""
+
+#: travelcrm/views/accomodations.py:96 travelcrm/views/accomodations.py:130
+#: travelcrm/views/addresses.py:96 travelcrm/views/addresses.py:135
+#: travelcrm/views/advsources.py:97 travelcrm/views/advsources.py:131
+#: travelcrm/views/appointments.py:100 travelcrm/views/appointments.py:141
+#: travelcrm/views/banks.py:108 travelcrm/views/banks.py:154
+#: travelcrm/views/banks_details.py:97 travelcrm/views/banks_details.py:138
+#: travelcrm/views/bpersons.py:113 travelcrm/views/bpersons.py:165
+#: travelcrm/views/contacts.py:95 travelcrm/views/contacts.py:133
+#: travelcrm/views/countries.py:98 travelcrm/views/countries.py:133
+#: travelcrm/views/currencies.py:97 travelcrm/views/currencies.py:131
+#: travelcrm/views/currencies_rates.py:97
+#: travelcrm/views/currencies_rates.py:133 travelcrm/views/employees.py:120
+#: travelcrm/views/employees.py:179 travelcrm/views/foodcats.py:97
+#: travelcrm/views/foodcats.py:131 travelcrm/views/hotelcats.py:97
+#: travelcrm/views/hotelcats.py:131 travelcrm/views/hotels.py:99
+#: travelcrm/views/hotels.py:135 travelcrm/views/licences.py:95
+#: travelcrm/views/licences.py:134 travelcrm/views/locations.py:98
+#: travelcrm/views/locations.py:133 travelcrm/views/navigations.py:109
+#: travelcrm/views/navigations.py:155 travelcrm/views/passports.py:97
+#: travelcrm/views/passports.py:138 travelcrm/views/permisions.py:147
+#: travelcrm/views/persons.py:135 travelcrm/views/persons.py:212
+#: travelcrm/views/positions.py:99 travelcrm/views/positions.py:137
+#: travelcrm/views/regions.py:98 travelcrm/views/regions.py:133
+#: travelcrm/views/resources_types.py:101
+#: travelcrm/views/resources_types.py:141 travelcrm/views/roomcats.py:97
+#: travelcrm/views/roomcats.py:131 travelcrm/views/services.py:98
+#: travelcrm/views/services.py:133 travelcrm/views/structures.py:102
+#: travelcrm/views/structures.py:149 travelcrm/views/tasks.py:115
+#: travelcrm/views/tasks.py:162 travelcrm/views/touroperators.py:109
+#: travelcrm/views/touroperators.py:158 travelcrm/views/tours.py:120
+#: travelcrm/views/tours.py:176 travelcrm/views/tours.py:301
+#: travelcrm/views/tours.py:343 travelcrm/views/users.py:102
+#: travelcrm/views/users.py:139
+msgid "Saved"
+msgstr ""
+
+#: travelcrm/views/accomodations.py:101 travelcrm/views/accomodations.py:135
+#: travelcrm/views/addresses.py:101 travelcrm/views/addresses.py:140
+#: travelcrm/views/advsources.py:102 travelcrm/views/advsources.py:136
+#: travelcrm/views/appointments.py:105 travelcrm/views/appointments.py:146
+#: travelcrm/views/banks.py:113 travelcrm/views/banks.py:159
+#: travelcrm/views/banks_details.py:102 travelcrm/views/banks_details.py:143
+#: travelcrm/views/bpersons.py:118 travelcrm/views/bpersons.py:170
+#: travelcrm/views/contacts.py:100 travelcrm/views/contacts.py:138
+#: travelcrm/views/countries.py:103 travelcrm/views/countries.py:138
+#: travelcrm/views/currencies.py:102 travelcrm/views/currencies.py:136
+#: travelcrm/views/currencies_rates.py:102
+#: travelcrm/views/currencies_rates.py:138 travelcrm/views/employees.py:125
+#: travelcrm/views/employees.py:184 travelcrm/views/foodcats.py:102
+#: travelcrm/views/foodcats.py:136 travelcrm/views/home.py:66
+#: travelcrm/views/hotelcats.py:102 travelcrm/views/hotelcats.py:136
+#: travelcrm/views/hotels.py:104 travelcrm/views/hotels.py:140
+#: travelcrm/views/licences.py:100 travelcrm/views/licences.py:139
+#: travelcrm/views/locations.py:103 travelcrm/views/locations.py:138
+#: travelcrm/views/navigations.py:112 travelcrm/views/navigations.py:158
+#: travelcrm/views/navigations.py:266 travelcrm/views/passports.py:102
+#: travelcrm/views/passports.py:143 travelcrm/views/permisions.py:150
+#: travelcrm/views/permisions.py:204 travelcrm/views/persons.py:140
+#: travelcrm/views/persons.py:217 travelcrm/views/positions.py:104
+#: travelcrm/views/positions.py:142 travelcrm/views/regions.py:103
+#: travelcrm/views/regions.py:138 travelcrm/views/resources_types.py:106
+#: travelcrm/views/resources_types.py:146 travelcrm/views/roomcats.py:102
+#: travelcrm/views/roomcats.py:136 travelcrm/views/services.py:103
+#: travelcrm/views/services.py:138 travelcrm/views/structures.py:105
+#: travelcrm/views/structures.py:152 travelcrm/views/tasks.py:120
+#: travelcrm/views/tasks.py:167 travelcrm/views/touroperators.py:114
+#: travelcrm/views/touroperators.py:163 travelcrm/views/tours.py:125
+#: travelcrm/views/tours.py:181 travelcrm/views/tours.py:306
+#: travelcrm/views/tours.py:346 travelcrm/views/users.py:107
+#: travelcrm/views/users.py:144
+msgid "Please, check errors"
+msgstr ""
+
+#: travelcrm/views/accomodations.py:114 travelcrm/views/foodcats.py:115
+#: travelcrm/views/hotelcats.py:115
+msgid "Edit Hotel Category"
+msgstr ""
+
+#: travelcrm/views/accomodations.py:163 travelcrm/views/addresses.py:192
+#: travelcrm/views/advsources.py:164 travelcrm/views/appointments.py:174
+#: travelcrm/views/banks.py:187 travelcrm/views/banks_details.py:171
+#: travelcrm/views/bpersons.py:222 travelcrm/views/contacts.py:190
+#: travelcrm/views/countries.py:166 travelcrm/views/currencies.py:164
+#: travelcrm/views/currencies_rates.py:190 travelcrm/views/employees.py:212
+#: travelcrm/views/foodcats.py:164 travelcrm/views/hotelcats.py:164
+#: travelcrm/views/hotels.py:192 travelcrm/views/licences.py:191
+#: travelcrm/views/locations.py:190 travelcrm/views/navigations.py:186
+#: travelcrm/views/passports.py:195 travelcrm/views/persons.py:245
+#: travelcrm/views/positions.py:194 travelcrm/views/regions.py:166
+#: travelcrm/views/resources_types.py:198 travelcrm/views/roomcats.py:164
+#: travelcrm/views/services.py:166 travelcrm/views/structures.py:204
+#: travelcrm/views/tasks.py:195 travelcrm/views/touroperators.py:191
+#: travelcrm/views/tours.py:233 travelcrm/views/users.py:172
+msgid "Deleted"
+msgstr ""
+
+#: travelcrm/views/addresses.py:73
+msgid "Add Address"
+msgstr ""
+
+#: travelcrm/views/addresses.py:116
+msgid "Edit Address"
+msgstr ""
+
+#: travelcrm/views/addresses.py:155
+msgid "Copy Address"
+msgstr ""
+
+#: travelcrm/views/advsources.py:76
+msgid "Add Advertising Source"
+msgstr ""
+
+#: travelcrm/views/advsources.py:115
+msgid "Edit Advertising Source"
+msgstr ""
+
+#: travelcrm/views/appointments.py:75
+msgid "Add Employee Appointment"
+msgstr ""
+
+#: travelcrm/views/appointments.py:120
+msgid "Edit Employee Appointment"
+msgstr ""
+
+#: travelcrm/views/banks.py:77
+msgid "Add Bank"
+msgstr ""
+
+#: travelcrm/views/banks.py:126
+msgid "Edit Bank"
+msgstr ""
+
+#: travelcrm/views/banks_details.py:72
+msgid "Add Bank Detail"
+msgstr ""
+
+#: travelcrm/views/banks_details.py:117
+msgid "Edit Bank Detail"
+msgstr ""
+
+#: travelcrm/views/bpersons.py:78
+msgid "Add Business Person"
+msgstr ""
+
+#: travelcrm/views/bpersons.py:133
+msgid "Edit Business Person"
+msgstr ""
+
+#: travelcrm/views/bpersons.py:185
+msgid "Copy Business Person"
+msgstr ""
+
+#: travelcrm/views/contacts.py:72
+msgid "Add Contact"
+msgstr ""
+
+#: travelcrm/views/contacts.py:115
+msgid "Edit Contact"
+msgstr ""
+
+#: travelcrm/views/contacts.py:153
+msgid "Copy Contact"
+msgstr ""
+
+#: travelcrm/views/countries.py:76
+msgid "Add Country"
+msgstr ""
+
+#: travelcrm/views/countries.py:116
+msgid "Edit Country"
+msgstr ""
+
+#: travelcrm/views/currencies.py:76
+msgid "Add Currency"
+msgstr ""
+
+#: travelcrm/views/currencies.py:115
+msgid "Edit Currency"
+msgstr ""
+
+#: travelcrm/views/currencies_rates.py:74
+msgid "Add Currency Rate"
+msgstr ""
+
+#: travelcrm/views/currencies_rates.py:115
+msgid "Edit Currency Rate"
+msgstr ""
+
+#: travelcrm/views/currencies_rates.py:153
+msgid "Copy Rate"
+msgstr ""
+
+#: travelcrm/views/employees.py:79
+msgid "Add Employee"
+msgstr ""
+
+#: travelcrm/views/employees.py:138
+msgid "Edit Employee"
+msgstr ""
+
+#: travelcrm/views/home.py:70
+msgid "Check your email"
+msgstr ""
+
+#: travelcrm/views/home.py:122
+msgid "Success, wait..."
+msgstr ""
+
+#: travelcrm/views/home.py:125
+msgid "Invalid username or password"
+msgstr ""
+
+#: travelcrm/views/hotels.py:76
+msgid "Add Hotel"
+msgstr ""
+
+#: travelcrm/views/hotels.py:117
+msgid "Edit Hotel"
+msgstr ""
+
+#: travelcrm/views/hotels.py:155
+msgid "Copy Hotel"
+msgstr ""
+
+#: travelcrm/views/licences.py:72
+msgid "Add Licence"
+msgstr ""
+
+#: travelcrm/views/licences.py:115
+msgid "Edit Licence"
+msgstr ""
+
+#: travelcrm/views/licences.py:154
+msgid "Copy Licence"
+msgstr ""
+
+#: travelcrm/views/locations.py:76
+msgid "Add Location"
+msgstr ""
+
+#: travelcrm/views/locations.py:116
+msgid "Edit Location"
+msgstr ""
+
+#: travelcrm/views/locations.py:153
+msgid "Copy Location"
+msgstr ""
+
+#: travelcrm/views/navigations.py:82
+msgid "Add Navigation Item"
+msgstr ""
+
+#: travelcrm/views/navigations.py:129
+msgid "Edit Navigation Item"
+msgstr ""
+
+#: travelcrm/views/navigations.py:227
+msgid "Copy Menu From Position"
+msgstr ""
+
+#: travelcrm/views/navigations.py:263 travelcrm/views/permisions.py:201
+msgid "Copied"
+msgstr ""
+
+#: travelcrm/views/passports.py:72
+msgid "Add Passport"
+msgstr ""
+
+#: travelcrm/views/passports.py:117
+msgid "Edit Passport"
+msgstr ""
+
+#: travelcrm/views/passports.py:158
+msgid "Copy Passport"
+msgstr ""
+
+#: travelcrm/views/permisions.py:165
+msgid "Copy Permissions From Position"
+msgstr ""
+
+#: travelcrm/views/persons.py:80
+msgid "Add Person"
+msgstr ""
+
+#: travelcrm/views/persons.py:155
+msgid "Edit Person"
+msgstr ""
+
+#: travelcrm/views/positions.py:77
+msgid "Add Company Position"
+msgstr ""
+
+#: travelcrm/views/positions.py:118
+msgid "Edit Company Position"
+msgstr ""
+
+#: travelcrm/views/positions.py:157
+msgid "Copy Company Position"
+msgstr ""
+
+#: travelcrm/views/regions.py:76
+msgid "Add Region"
+msgstr ""
+
+#: travelcrm/views/regions.py:116
+msgid "Edit Region"
+msgstr ""
+
+#: travelcrm/views/resources_types.py:77
+msgid "Add Resources Type"
+msgstr ""
+
+#: travelcrm/views/resources_types.py:121
+msgid "Edit Resources Type"
+msgstr ""
+
+#: travelcrm/views/resources_types.py:161
+msgid "Copy Resources Type"
+msgstr ""
+
+#: travelcrm/views/roomcats.py:76
+msgid "Add Room Category"
+msgstr ""
+
+#: travelcrm/views/roomcats.py:115
+msgid "Edit Room Category"
+msgstr ""
+
+#: travelcrm/views/services.py:76
+msgid "Add Service"
+msgstr ""
+
+#: travelcrm/views/services.py:116
+msgid "Edit Service"
+msgstr ""
+
+#: travelcrm/views/structures.py:72
+msgid "Add Company Structure"
+msgstr ""
+
+#: travelcrm/views/structures.py:119
+msgid "Edit Company Structure"
+msgstr ""
+
+#: travelcrm/views/structures.py:166
+msgid "Copy Company Structure"
+msgstr ""
+
+#: travelcrm/views/tasks.py:81
+msgid "Add Task"
+msgstr ""
+
+#: travelcrm/views/tasks.py:133
+msgid "Edit Task"
+msgstr ""
+
+#: travelcrm/views/touroperators.py:79
+msgid "Add Touroperator"
+msgstr ""
+
+#: travelcrm/views/touroperators.py:129
+msgid "Edit Touroperator"
+msgstr ""
+
+#: travelcrm/views/tours.py:82
+msgid "Add Tour"
+msgstr ""
+
+#: travelcrm/views/tours.py:140
+msgid "Edit Tour"
+msgstr ""
+
+#: travelcrm/views/tours.py:196
+msgid "Copy Tour"
+msgstr ""
+
+#: travelcrm/views/tours.py:273
+msgid "Add Tour Point"
+msgstr ""
+
+#: travelcrm/views/tours.py:321
+msgid "Edit Tour Point"
+msgstr ""
+
+#: travelcrm/views/users.py:79
+msgid "Add User"
+msgstr ""
+
+#: travelcrm/views/users.py:120
+msgid "Edit User"
+msgstr ""
+
