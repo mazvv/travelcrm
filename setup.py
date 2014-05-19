@@ -58,4 +58,11 @@ setup(
     [console_scripts]
     initialize_travelcrm_db = travelcrm.scripts.initializedb:main
     """,
+    message_extractors = {
+        'travelcrm': [
+            ('**.py', 'python', None),
+            ('templates/**.mak', 'mako', None),
+            ('static/**', 'ignore', None)
+        ]
+    },
 )

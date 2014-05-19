@@ -21,6 +21,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="TravelCRM v0.6.1-dev documentation" href="index.html" />
+    <link rel="next" title="Изменения" href="changes.html" />
     <link rel="prev" title="Документация TravelCRM" href="index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
 <link href="_static/solarized-dark.css" rel="stylesheet">
   </head>
@@ -31,6 +32,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="changes.html" title="Изменения"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Документация TravelCRM"
              accesskey="P">previous</a> |</li>
@@ -48,6 +52,9 @@
 <li><a class="reference internal" href="#virtualenv">Установка virtualenv</a></li>
 <li><a class="reference internal" href="#id3">Создание виртуальной среды</a></li>
 <li><a class="reference internal" href="#travelcrm">Установка TravelCRM в виртуальную среду</a></li>
+<li><a class="reference internal" href="#id5">Восстановление бекапа базы данных</a></li>
+<li><a class="reference internal" href="#id8">Настройка приложения</a></li>
+<li><a class="reference internal" href="#id9">Запуск приложения</a></li>
 </ul>
 </li>
 </ul>
@@ -55,6 +62,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Документация TravelCRM</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="changes.html"
+                        title="next chapter">Изменения</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/install.txt"
@@ -103,30 +113,30 @@ Centos 5, Python 2.6; PostgreSQL 9.1 и PostgreSQL 9.3
 <p>Самым лучшим методом установки TravelCRM является установка в виртуальной
 среде Python, что обеспечивает локальную независимость пакетов Python от
 любых, глобально установленных системных пакетов Python.</p>
-<p>Это может быть сделано с помощью пакета virtualenv .
+<p>Это может быть сделано с помощью пакета <em>virtualenv</em>.
 Использование virtualenv также поможет избежать глобальной установки TravelCRM и
 всех необходимых для его работы пакетов, что исключает риски повреждения системной
 установки Python.</p>
-<p>Чтобы настроить virtualenv в которую будет установлен TravelCRM,
-сначала убедитесь, что установлен пакет setuptools. Самый простой способ - это
-выполнить команду импорта setuptools:</p>
+<p>Чтобы настроить <em>virtualenv</em> в которую будет установлен TravelCRM,
+сначала убедитесь, что установлен пакет <em>setuptools</em>. Самый простой способ - это
+выполнить команду импорта <em>setuptools</em>:</p>
 <div class="highlight-python"><pre>$ python2.7 -c 'import setuptools'</pre>
 </div>
-<p>Если результатом этой комманды будет пустая строка, то setuptools уже установлен,
+<p>Если результатом этой комманды будет пустая строка, то <em>setuptools</em> уже установлен,
 если же будет получен результат вида:</p>
 <div class="highlight-python"><pre>Traceback (most recent call last):
    File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 ImportError: No module named setuptools</pre>
 </div>
-<p>то необходимо установить setuptools вручную</p>
+<p>то необходимо установить <em>setuptools</em> вручную</p>
 </div>
 <div class="section" id="setuptools">
 <h2>Ручная установка setuptools<a class="headerlink" href="#setuptools" title="Permalink to this headline">¶</a></h2>
-<p>Для установки setuptools руками, скачайте ez_setup.py и запустите его, используя
+<p>Для установки <em>setuptools</em> руками, скачайте <a class="reference external" href="http://peak.telecommunity.com/dist/ez_setup.py">ez_setup.py</a> и запустите его, используя
 установленный интерпретатор Python:</p>
 <div class="highlight-python"><pre>$ python ez_setup.py</pre>
 </div>
-<p>Эта комманда выполнит установку setuptools на компьютер в глобальную установку Python.
+<p>Эта комманда выполнит установку <em>setuptools</em> на компьютер в глобальную установку Python.
 Если во время выполнения возникнет ошибка доступа, то используйте комманду:</p>
 <div class="highlight-python"><pre>$ sudo python ez_setup.py</pre>
 </div>
@@ -134,7 +144,7 @@ ImportError: No module named setuptools</pre>
 </div>
 <div class="section" id="virtualenv">
 <h2>Установка virtualenv<a class="headerlink" href="#virtualenv" title="Permalink to this headline">¶</a></h2>
-<p>После установки setuptools, необходимо установить пакет virtualenv. Для этого
+<p>После установки <em>setuptools</em>, необходимо установить пакет virtualenv. Для этого
 достаточно запустить комманду установки:</p>
 <div class="highlight-python"><pre>$ easy_install virtualenv</pre>
 </div>
@@ -148,10 +158,10 @@ ImportError: No module named setuptools</pre>
 <p>После успешной установки virtualenv можно создавать виртуальную среду Python.
 Прежде всего создайте директорию, в которую хотите разместить свою уставку
 TravelCRM:</p>
-<div class="highlight-python"><pre>mkdir ~/Projects/virtenv</pre>
+<div class="highlight-python"><pre>$ mkdir ~/Projects/virtenv</pre>
 </div>
 <p>создаем в этой директории виртуальную установку Python:</p>
-<div class="highlight-python"><pre>virtualenv --no-site-packages ~/Projects/virtenv</pre>
+<div class="highlight-python"><pre>$ virtualenv --no-site-packages ~/Projects/virtenv</pre>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -163,14 +173,68 @@ TravelCRM:</p>
 <h2>Установка TravelCRM в виртуальную среду<a class="headerlink" href="#travelcrm" title="Permalink to this headline">¶</a></h2>
 <p>Прежде всего нужно <a class="reference external" href="https://bitbucket.org/mazvv/travelcrm/downloads">скачать TravelCRM</a>
 и распаковать в директории с вашей виртуальной средой:</p>
-<div class="highlight-python"><pre>cd ~/Projects/virtenv
-wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6-dev.tar.gz
-tar -xzvf travelcrm-0.6-dev.tar.gz``</pre>
+<div class="highlight-python"><pre>$ cd ~/Projects/virtenv
+$ wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6-dev.tar.gz
+$ tar -xzvf travelcrm-0.6-dev.tar.gz``</pre>
 </div>
-<p>Для установки выполните комманду:</p>
-<div class="highlight-python"><pre>./bin/python ./travelcrm-0.6-dev/setup.py develop</pre>
+<p>Не выходя из текущей директории с виртуальной средой, запустите комманду:</p>
+<div class="highlight-python"><pre>$ ./bin/python ./travelcrm-0.6-dev/setup.py develop</pre>
 </div>
 <p>Комманда установки автоматически установит все зависимые пакеты.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Самой распространенной проблемой при установке является уставновка
+пакета psycopg, который необходим для работы с СУБД PostgreSQL.
+Перед его установкой необходимо установить PostgreSQL
+и пакеты postgresql-devel. Автор использует PostgreSQL 9.3,
+также не должно возникнуть никаких поблем со всеми версиями PostgreSQL 9.*</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Восстановление бекапа базы данных<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Если не установлен PostgreSQL
+<a class="reference external" href="http://www.postgresql.org/docs/9.3/static/install-procedure.html">установите</a>
+и <a class="reference external" href="http://www.postgresql.org/docs/9.3/static/creating-cluster.html">настройте его</a>.</p>
+<p>Залогиньтесь как root:</p>
+<div class="highlight-python"><pre>$ su -</pre>
+</div>
+<dl class="docutils">
+<dt>Войдите под пользователем postgres и запустите psql::</dt>
+<dd>$ su postgres
+$ psql</dd>
+<dt>Создайте нового пользователя и базу данных::</dt>
+<dd>postgres=# create user travelcrm with password &#8216;mypassword&#8217; createdb superuser;
+postgres=# create database travelcrm with owner travelcrm;
+postgres=# q;</dd>
+</dl>
+<p>База данных создана, осталось развернуть бекап. Выходим из пользователя
+postgres и root:</p>
+<div class="highlight-python"><pre>$ exit
+$ exit</pre>
+</div>
+<dl class="docutils">
+<dt>Разварачиваем бекап::</dt>
+<dd>$ psql -U travelcrm travelcrm &lt; ./travelcrm-0.6-dev/travelcrm.sql</dd>
+</dl>
+</div>
+<div class="section" id="id8">
+<h2>Настройка приложения<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>Откройте в любом редакторе файл ./travelcrm-0.6-dev/development.ini
+и найдите там строку начинающуюся на <em>sqlalchemy.url</em>
+и установите свои параметры подкючения к базе данных.</p>
+</div>
+<div class="section" id="id9">
+<h2>Запуск приложения<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Для запуска приложения выполните комманду::</dt>
+<dd>$ ./bin/pserve &#8211;reload ./travelcrm-0.6-dev/development.ini</dd>
+<dt>Вы должны увидеть что-то вроде::</dt>
+<dd>Starting server in PID 8150.
+serving on <a class="reference external" href="http://0.0.0.0:6543">http://0.0.0.0:6543</a></dd>
+</dl>
+<p>Это означает, что приложение успешно запущено и слушает порт <em>6543</em></p>
+<p>Откройте веб брайзер и перейдите по адресу <a class="reference external" href="http:://localhost:6543">http:://localhost:6543</a>
+Для входа в систему используйте логин - <strong>admin</strong>, пароль - <strong>adminadmin</strong></p>
 </div>
 </div>
 
@@ -187,6 +251,9 @@ tar -xzvf travelcrm-0.6-dev.tar.gz``</pre>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="changes.html" title="Изменения"
+             >next</a> |</li>
+        <li class="right" >
           <a href="index.html" title="Документация TravelCRM"
              >previous</a> |</li>
         <li><a href="index.html">TravelCRM v0.6.1-dev documentation</a> &raquo;</li> 
@@ -194,7 +261,7 @@ tar -xzvf travelcrm-0.6-dev.tar.gz``</pre>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Vitalii Mazur.
-    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.Theme by <a href="http://github.com/vkvn">vkvn</a>
+    Created using <a href="http://sphinx.pocoo.org/" follow="nofollow">Sphinx</a> 1.0.7.
     </div>
   </body>
 </html>
