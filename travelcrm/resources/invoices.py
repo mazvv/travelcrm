@@ -26,6 +26,7 @@ class Invoices(ResourceTypeBase):
     def allowed_permisions(self):
         return [
             ('view', _(u'view')),
+            ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
         ]

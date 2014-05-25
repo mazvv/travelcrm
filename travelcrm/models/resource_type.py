@@ -3,7 +3,6 @@
 from sqlalchemy import (
     Integer,
     String,
-    Text,
     Column,
     UniqueConstraint,
     ForeignKey,
@@ -13,7 +12,7 @@ from sqlalchemy.orm import (
     relationship,
     backref,
 )
-
+from sqlalchemy.dialects.postgresql import JSON
 from ..models import (
     DBSession,
     Base
@@ -78,9 +77,8 @@ class ResourceType(Base):
     )
     _settings = Column(
         u'settings',
-        Text,
+        JSON,
         primary_key=False,
-        nullable=True
     )
     description = Column(
         String(length=128),

@@ -433,9 +433,6 @@
     % if can_edit:
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container">
-            <%
-                f_id = h.common.gen_id()
-            %>
             <div class="button-group minor-group">
                 <a href="#" class="button _action" 
                     data-options="
@@ -824,9 +821,6 @@
     % if can_edit:
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container">
-            <%
-                f_id = h.common.gen_id()
-            %>
             <div class="button-group minor-group">
                 <a href="#" class="button _action" 
                     data-options="

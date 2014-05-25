@@ -53,3 +53,4 @@ from bank_detail import BankDetail
 from task import Task
 from service import Service
 from currency_rate import CurrencyRate
+from invoice import Invoice

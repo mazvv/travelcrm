@@ -125,7 +125,7 @@
             <div class="button-group">
                 % if _context.has_permision('invoice'):
                 <a href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'invoice')}'">
                     <span class="fa fa-file-o"></span>${_(u'Invoice')}
                 </a>
                 % endif

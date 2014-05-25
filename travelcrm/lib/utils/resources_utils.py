@@ -1,6 +1,12 @@
 # -*coding: utf-8-*-
 import importlib
 
+from zope.interface.verify import (
+    verifyClass,
+    DoesNotImplement
+)
+
+from ...models import DBSession
 from ...models.resource_type import ResourceType
 
 
@@ -56,3 +62,18 @@ def get_resource_type_by_resource_cls(cls):
         cls.__module__,
         cls.__name__
     )
+
+
+def get_resources_types_by_interface(interface):
+    """get all resources types that implements given interface
+    """
+    rts = DBSession.query(ResourceType)
+    res = []
+    for rt in rts:
+        rt_cls = get_resource_class(rt.name)
+        try:
+            verifyClass(interface, rt_cls)
+            res.append(rt)
+        except DoesNotImplement:
+            continue
+    return res

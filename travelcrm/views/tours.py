@@ -4,6 +4,7 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.tour import Tour
@@ -13,6 +14,8 @@ from ..lib.qb.tours import (
     ToursQueryBuilder,
     ToursPointsQueryBuilder,
 )
+from ..resources.invoices import Invoices
+
 from ..lib.utils.common_utils import translate as _
 from ..forms.tours import (
     TourSchema,
@@ -346,3 +349,20 @@ class Tours(object):
                 'error_message': _(u'Please, check errors'),
                 'errors': e.asdict()
             }
+
+    @view_config(
+        name='invoice',
+        context='..resources.tours.Tours',
+        request_method='GET',
+        permission='invoice'
+    )
+    def add_invoice(self):
+        tour = Tour.get(self.request.params.get('id'))
+        if tour:
+            return HTTPFound(
+                self.request.resource_url(
+                    Invoices(self.request),
+                    'add',
+                    query={'resource_id': tour.resource.id}
+                )
+            )

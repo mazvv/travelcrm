@@ -1,6 +1,8 @@
-<%def name="header()">
+<%def name="header(company_name)">
 	<div class="dl30 logo">
-	    ${h.tags.image(request.static_url('travelcrm:static/css/img/logo.png'), _(u'TravelCRM'))} <span class="logo-big">Travel<span class="lipstick">CRM</span></span>
+	    ${h.tags.image(request.static_url('travelcrm:static/css/img/logo.png'), _(u'TravelCRM'))} 
+	    <span class="logo-big">Travel<span class="lipstick">CRM</span></span>
+	    <span class="ml1">${company_name}</span>
 	</div>
     % if hasattr(_context, 'is_logged') and _context.is_logged():
     <div class="dl70">

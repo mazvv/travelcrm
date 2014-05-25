@@ -3,6 +3,7 @@
 from pyramid_layout.panel import panel_config
 
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.common_utils import get_company_name
 from ..lib.bl.employees import get_employee_position, get_employee_structure
 from ..lib.bl.structures import get_structure_name_path
 
@@ -12,7 +13,8 @@ from ..lib.bl.structures import get_structure_name_path
     renderer='travelcrm:templates/panels/common#header.mak'
 )
 def header(context, request):
-    return {}
+    company_name = get_company_name()
+    return {'company_name': company_name}
 
 
 @panel_config(

@@ -16,6 +16,7 @@ encoding//travelcrm/forms/employees.py=utf-8
 encoding//travelcrm/forms/foodcats.py=utf-8
 encoding//travelcrm/forms/hotelcats.py=utf-8
 encoding//travelcrm/forms/hotels.py=utf-8
+encoding//travelcrm/forms/invoices.py=utf-8
 encoding//travelcrm/forms/licences.py=utf-8
 encoding//travelcrm/forms/locations.py=utf-8
 encoding//travelcrm/forms/navigations.py=utf-8

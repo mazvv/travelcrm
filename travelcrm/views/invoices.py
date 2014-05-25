@@ -6,26 +6,30 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.bank_detail import BankDetail
-from ..lib.qb.banks_details import BanksDetailsQueryBuilder
+from ..models.invoice import Invoice
+from ..models.resource import Resource
+from ..lib.qb.invoices import InvoicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.banks_details import BankDetailSchema
+from ..forms.invoices import (
+    InvoiceAddSchema,
+    InvoiceEditSchema
+)
 
 
 log = logging.getLogger(__name__)
 
 
-class BankDetails(object):
+class Invoices(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='GET',
-        renderer='travelcrm:templates/banks_details/index.mak',
+        renderer='travelcrm:templates/invoices/index.mak',
         permission='view'
     )
     def index(self):
@@ -33,23 +37,25 @@ class BankDetails(object):
 
     @view_config(
         name='list',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
-    def _list(self):
-        qb = BanksDetailsQueryBuilder(self.context)
+    def list(self):
+        qb = InvoicesQueryBuilder(self.context)
         qb.search_simple(
-            self.request.params.get('q')
+            self.request.params.get('q'),
+        )
+        qb.advanced_search(
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
         )
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
-        structure_id = self.request.params.get('structure_id')
-        if structure_id:
-            qb.filter_structure_id(structure_id.split(','))
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -65,40 +71,44 @@ class BankDetails(object):
 
     @view_config(
         name='add',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='GET',
-        renderer='travelcrm:templates/banks_details/form.mak',
+        renderer='travelcrm:templates/invoices/form.mak',
         permission='add'
     )
     def add(self):
+        resource_id = self.request.params.get('resource_id')
+        resource = Resource.get(resource_id)
+        structure_id = resource.owner_structure.id
         return {
-            'title': _(u'Add Bank Detail'),
+            'title': _(u'Add Invoice'),
+            'resource_id': resource_id,
+            'structure_id': structure_id
         }
 
     @view_config(
         name='add',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
-        schema = BankDetailSchema().bind(request=self.request)
+        schema = InvoiceAddSchema().bind(request=self.request)
+
         try:
             controls = schema.deserialize(self.request.params)
-            bank_detail = BankDetail(
-                bank_id=controls.get('bank_id'),
-                currency_id=controls.get('currency_id'),
-                beneficiary=controls.get('beneficiary'),
-                account=controls.get('account'),
-                swift_code=controls.get('swift_code'),
+            invoice = Invoice(
+                invoice_resource_id=controls.get('invoice_resource_id'),
+                date=controls.get('date'),
+                bank_detail_id=controls.get('bank_detail_id'),
                 resource=self.context.create_resource()
             )
-            DBSession.add(bank_detail)
+            DBSession.add(invoice)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': bank_detail.id
+                'response': invoice.id
             }
         except colander.Invalid, e:
             return {
@@ -108,38 +118,37 @@ class BankDetails(object):
 
     @view_config(
         name='edit',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='GET',
-        renderer='travelcrm:templates/banks_details/form.mak',
+        renderer='travelcrm:templates/invoices/form.mak',
         permission='edit'
     )
     def edit(self):
-        bank_detail = BankDetail.get(self.request.params.get('id'))
+        invoice = Invoice.get(self.request.params.get('id'))
+        structure_id = invoice.resource.owner_structure.id
         return {
-            'item': bank_detail,
-            'title': _(u'Edit Bank Detail'),
+            'item': invoice,
+            'structure_id': structure_id,
+            'title': _(u'Edit Invoice')
         }
 
     @view_config(
         name='edit',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
-        schema = BankDetailSchema().bind(request=self.request)
-        bank_detail = BankDetail.get(self.request.params.get('id'))
+        schema = InvoiceEditSchema().bind(request=self.request)
+        invoice = Invoice.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            bank_detail.bank_id = controls.get('bank_id')
-            bank_detail.currency_id = controls.get('currency_id')
-            bank_detail.beneficiary = controls.get('beneficiary')
-            bank_detail.account = controls.get('account')
-            bank_detail.swift_code = controls.get('swift_code')
+            invoice.date = controls.get('date')
+            invoice.bank_detail_id = controls.get('bank_detail_id')
             return {
                 'success_message': _(u'Saved'),
-                'response': bank_detail.id
+                'response': invoice.id
             }
         except colander.Invalid, e:
             return {
@@ -149,26 +158,26 @@ class BankDetails(object):
 
     @view_config(
         name='delete',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='GET',
-        renderer='travelcrm:templates/banks_details/delete.mak',
+        renderer='travelcrm:templates/invoices/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'id': self.request.params.get('id')
+            'rid': self.request.params.get('rid')
         }
 
     @view_config(
         name='delete',
-        context='..resources.banks_details.BanksDetails',
+        context='..resources.invoices.Invoices',
         request_method='POST',
         renderer='json',
         permission='delete'
     )
     def _delete(self):
         for id in self.request.params.getall('id'):
-            bank_detail = BankDetail.get(id)
-            if bank_detail:
-                DBSession.delete(bank_detail)
+            invoice = Invoice.get(id)
+            if invoice:
+                DBSession.delete(invoice)
         return {'success_message': _(u'Deleted')}
