@@ -414,7 +414,7 @@ input{
     border: 1px solid #D1D1D1;
     padding: 3px 2px;
     font-size: 100%;
-    font-family: sans-serif;
+    font-family: Arial,Helvetica,sans-serif;
     outline: none;
     margin: 0px;
 }

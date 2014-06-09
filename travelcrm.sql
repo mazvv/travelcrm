@@ -1420,6 +1420,104 @@ ALTER SEQUENCE service_id_seq OWNED BY service.id;
 
 
 --
+-- Name: service_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE service_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    service_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    touroperator_id integer NOT NULL,
+    price numeric(16,2) NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+ALTER TABLE public.service_item OWNER TO mazvv;
+
+--
+-- Name: service_item_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE service_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.service_item_id_seq OWNER TO mazvv;
+
+--
+-- Name: service_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE service_item_id_seq OWNED BY service_item.id;
+
+
+--
+-- Name: service_sale; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE service_sale (
+    id integer NOT NULL,
+    deal_date date NOT NULL,
+    resource_id integer NOT NULL,
+    customer_id integer NOT NULL,
+    advsource_id integer NOT NULL
+);
+
+
+ALTER TABLE public.service_sale OWNER TO mazvv;
+
+--
+-- Name: service_sale_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE service_sale_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.service_sale_id_seq OWNER TO mazvv;
+
+--
+-- Name: service_sale_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE service_sale_id_seq OWNED BY service_sale.id;
+
+
+--
+-- Name: service_sale_invoice; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE service_sale_invoice (
+    service_sale_id integer NOT NULL,
+    invoice_id integer NOT NULL
+);
+
+
+ALTER TABLE public.service_sale_invoice OWNER TO mazvv;
+
+--
+-- Name: service_sale_service_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE service_sale_service_item (
+    service_sale_id integer NOT NULL,
+    service_item_id integer NOT NULL
+);
+
+
+ALTER TABLE public.service_sale_service_item OWNER TO mazvv;
+
+--
 -- Name: structure; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1971,6 +2069,20 @@ ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY service_item ALTER COLUMN id SET DEFAULT nextval('service_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale ALTER COLUMN id SET DEFAULT nextval('service_sale_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_seq'::regclass);
 
 
@@ -2034,21 +2146,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5677, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5685, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1448, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1456, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 107, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 109, true);
 
 
 --
@@ -2175,7 +2287,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-30e7c14e151
+2c4fa46c1704
 \.
 
 
@@ -2644,12 +2756,10 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 15	4	8	Users	/users	\N	2	792
 13	4	10	Employees	/employees	\N	1	790
 41	5	\N	Home	/	fa fa-home	1	1079
-52	4	32	Services	/	\N	3	1369
 8	4	\N	System	/	fa fa-cog	10	778
 23	4	\N	Directories	/	fa fa-book	9	873
 20	4	18	Positions	/positions	\N	2	863
 19	4	18	Structures	/structures	\N	1	838
-54	4	53	Currency Rates	/currencies_rates	\N	12	1395
 35	4	23	Touroperators	/touroperators	\N	11	1002
 14	4	10	Employees Appointments	/appointments	\N	2	791
 30	4	23	Accomodations	/accomodations	\N	10	955
@@ -2668,12 +2778,15 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 47	5	\N	For Test	/	fa fa-credit-card	2	1253
 48	6	\N	Home	/	fa fa-home	1	1079
 49	6	\N	For Test	/	fa fa-credit-card	2	1253
-17	4	53	Currencies	/currencies	\N	5	802
-55	4	53	Accounts Items	/accounts_items	\N	1	1425
-45	4	53	Banks	/banks	\N	3	1212
+17	4	53	Currencies	/currencies	\N	6	802
+45	4	53	Banks	/banks	\N	5	1212
+57	4	53	Accounts	/accounts	\N	1	1436
+54	4	53	Currency Rates	/currencies_rates	\N	7	1395
+56	4	53	Income Payments	incomes	\N	8	1434
+58	4	53	Outgoing Payments	/outgoing	\N	12	1449
 50	4	53	Services	/services	\N	1	1312
-57	4	53	Accounts	/accounts	\N	7	1436
-56	4	53	Income Payments	incomes	\N	6	1434
+55	4	53	Accounts Items	/accounts_items	\N	3	1425
+52	4	32	Services	/services_sales	\N	3	1369
 \.
 
 
@@ -2749,6 +2862,8 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 72	103	4	{view,add,edit,delete}	\N	all
 75	106	4	{view,add,edit,delete}	\N	all
 76	107	4	{view,add,edit,delete}	\N	all
+77	108	4	{view,add,edit,delete}	\N	all
+78	109	4	{view,add,edit,delete,invoice,contract}	\N	all
 \.
 
 
@@ -2842,14 +2957,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 57, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 59, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 76, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 78, true);
 
 
 --
@@ -3324,6 +3439,13 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1442	103	32	f
 1447	106	32	f
 1448	106	32	f
+1449	65	32	f
+1450	12	32	f
+1452	12	32	f
+1453	108	32	f
+1454	108	32	f
+1455	108	32	f
+1456	109	32	f
 \.
 
 
@@ -3968,6 +4090,13 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5671	1442	2	\N	2014-06-07 22:16:04.586659
 5676	1447	2	\N	2014-06-08 21:25:14.638119
 5677	1448	2	\N	2014-06-08 21:25:35.09515
+5678	1449	2	\N	2014-06-09 11:33:52.954559
+5679	1450	2	\N	2014-06-09 15:50:23.760428
+5681	1452	2	\N	2014-06-09 17:20:44.311452
+5682	1453	2	\N	2014-06-09 20:15:57.545778
+5683	1454	2	\N	2014-06-09 20:42:20.973803
+5684	1455	2	\N	2014-06-09 20:42:41.688175
+5685	1456	2	\N	2014-06-09 20:42:48.878295
 \.
 
 
@@ -4012,6 +4141,8 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 92	1221	tours	Tours	Tours	travelcrm.resources.tours	Tour creation and sale it	{"service_id": 5}
 106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	null
 107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and can bind to company structures	null
+109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null
+108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null
 \.
 
 
@@ -4077,6 +4208,57 @@ COPY service (id, resource_id, name, descr, display_text, account_item_id) FROM 
 --
 
 SELECT pg_catalog.setval('service_id_seq', 5, true);
+
+
+--
+-- Data for Name: service_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, price, person_id) FROM stdin;
+1	1453	4	57	57	60.00	21
+2	1454	4	57	5	60.00	20
+3	1455	4	57	5	60.00	21
+\.
+
+
+--
+-- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('service_item_id_seq', 3, true);
+
+
+--
+-- Data for Name: service_sale; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY service_sale (id, deal_date, resource_id, customer_id, advsource_id) FROM stdin;
+1	2014-06-09	1456	20	6
+\.
+
+
+--
+-- Name: service_sale_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('service_sale_id_seq', 1, true);
+
+
+--
+-- Data for Name: service_sale_invoice; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY service_sale_invoice (service_sale_id, invoice_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: service_sale_service_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY service_sale_service_item (service_sale_id, service_item_id) FROM stdin;
+1	3
+\.
 
 
 --
@@ -4619,11 +4801,43 @@ ALTER TABLE ONLY roomcat
 
 
 --
+-- Name: service_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY service_item
+    ADD CONSTRAINT service_item_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: service_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
 ALTER TABLE ONLY service
     ADD CONSTRAINT service_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_sale_invoice_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY service_sale_invoice
+    ADD CONSTRAINT service_sale_invoice_pkey PRIMARY KEY (service_sale_id, invoice_id);
+
+
+--
+-- Name: service_sale_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY service_sale
+    ADD CONSTRAINT service_sale_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_sale_service_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY service_sale_service_item
+    ADD CONSTRAINT service_sale_service_item_pkey PRIMARY KEY (service_sale_id, service_item_id);
 
 
 --
@@ -4979,6 +5193,14 @@ ALTER TABLE ONLY structure_address
 
 
 --
+-- Name: fk_advsource_id_service_sale; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale
+    ADD CONSTRAINT fk_advsource_id_service_sale FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_advsource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5099,6 +5321,14 @@ ALTER TABLE ONLY bank_detail
 
 
 --
+-- Name: fk_currency_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_item
+    ADD CONSTRAINT fk_currency_id_service_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5112,6 +5342,14 @@ ALTER TABLE ONLY tour
 
 ALTER TABLE ONLY currency_rate
     ADD CONSTRAINT fk_currency_id_tour FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_customer_id_service_sale; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale
+    ADD CONSTRAINT fk_customer_id_service_sale FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5208,6 +5446,14 @@ ALTER TABLE ONLY tour_point
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_hotelcat_id_hotel FOREIGN KEY (hotelcat_id) REFERENCES hotelcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_invoice_id_service_sale_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale_invoice
+    ADD CONSTRAINT fk_invoice_id_service_sale_invoice FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5579,6 +5825,22 @@ ALTER TABLE ONLY service
 
 
 --
+-- Name: fk_resource_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_item
+    ADD CONSTRAINT fk_resource_id_service_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_service_sale; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale
+    ADD CONSTRAINT fk_resource_id_service_sale FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5656,6 +5918,38 @@ ALTER TABLE ONLY resource
 
 ALTER TABLE ONLY tour_point
     ADD CONSTRAINT fk_roomcat_id_tour_point FOREIGN KEY (roomcat_id) REFERENCES roomcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_item
+    ADD CONSTRAINT fk_service_id_service_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_item_id_service_sale_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale_service_item
+    ADD CONSTRAINT fk_service_item_id_service_sale_service_item FOREIGN KEY (service_item_id) REFERENCES service_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_sale_id_service_sale_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale_invoice
+    ADD CONSTRAINT fk_service_sale_id_service_sale_invoice FOREIGN KEY (service_sale_id) REFERENCES service_sale(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_sale_id_service_sale_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale_service_item
+    ADD CONSTRAINT fk_service_sale_id_service_sale_service_item FOREIGN KEY (service_sale_id) REFERENCES service_sale(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5744,6 +6038,14 @@ ALTER TABLE ONLY tour_person
 
 ALTER TABLE ONLY tour_point
     ADD CONSTRAINT fk_tour_id_tour_point FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_touroperator_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_item
+    ADD CONSTRAINT fk_touroperator_id_service_item FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

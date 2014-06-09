@@ -58,3 +58,5 @@ from account_item import AccountItem
 from fin_transaction import FinTransaction
 from income import Income
 from account import Account
+from service_item import ServiceItem
+from service_sale import ServiceSale
