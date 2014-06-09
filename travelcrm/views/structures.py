@@ -10,6 +10,7 @@ from ..models.structure import Structure
 from ..models.contact import Contact
 from ..models.address import Address
 from ..models.bank_detail import BankDetail
+from ..models.account import Account
 from ..lib.qb.structures import StructuresQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.structures import StructureSchema
@@ -86,6 +87,7 @@ class Structures(object):
             controls = schema.deserialize(self.request.params.mixed())
             structure = Structure(
                 name=controls.get('name'),
+                invoice_template=controls.get('invoice_template'),
                 parent_id=controls.get('parent_id'),
                 resource=self.context.create_resource()
             )
@@ -98,6 +100,9 @@ class Structures(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 structure.banks_details.append(bank_detail)
+            for id in controls.get('account_id'):
+                account = Account.get(id)
+                structure.accounts.append(account)
             DBSession.add(structure)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
@@ -133,6 +138,7 @@ class Structures(object):
         try:
             controls = schema.deserialize(self.request.params.mixed())
             structure.name = controls.get('name')
+            structure.invoice_template = controls.get('invoice_template')
             structure.parent_id = controls.get('parent_id')
             structure.contacts = []
             structure.addresses = []
@@ -146,6 +152,9 @@ class Structures(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 structure.banks_details.append(bank_detail)
+            for id in controls.get('account_id'):
+                account = Account.get(id)
+                structure.accounts.append(account)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {

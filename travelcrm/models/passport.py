@@ -31,7 +31,6 @@ class Passport(Base):
             name="fk_resource_id_passport",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -42,7 +41,6 @@ class Passport(Base):
             name="fk_country_id_passport",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

@@ -6,19 +6,33 @@ from . import ResourceSchema, Date
 
 
 class InvoiceAddSchema(ResourceSchema):
-    invoice_resource_id = colander.SchemaNode(
+    resource_id = colander.SchemaNode(
         colander.Integer(),
     )
     date = colander.SchemaNode(
         Date(),
     )
-    bank_detail_id = colander.SchemaNode(
+    account_id = colander.SchemaNode(
         colander.Integer()
     )
 
 
 class InvoiceEditSchema(ResourceSchema):
-    invoice_resource_id = colander.SchemaNode(
+    date = colander.SchemaNode(
+        Date(),
+    )
+    account_id = colander.SchemaNode(
+        colander.Integer()
+    )
+
+
+class InvoiceSumSchema(ResourceSchema):
+    resource_id = colander.SchemaNode(
         colander.Integer(),
-        missing=None
+    )
+    date = colander.SchemaNode(
+        Date(),
+    )
+    account_id = colander.SchemaNode(
+        colander.Integer()
     )

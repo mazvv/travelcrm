@@ -21,12 +21,10 @@ class User(Base):
         UniqueConstraint(
             'email',
             name='unique_idx_users_email',
-            use_alter=True,
         ),
         UniqueConstraint(
             'username',
             name='unique_idx_users_username',
-            use_alter=True,
         ),
     )
 
@@ -42,7 +40,6 @@ class User(Base):
             name="fk_resource_id_user",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -53,7 +50,6 @@ class User(Base):
             name="fk_employee_id_user",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

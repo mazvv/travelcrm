@@ -29,7 +29,6 @@ class BankDetail(Base):
             name="fk_resource_id_bank_detail",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -40,7 +39,6 @@ class BankDetail(Base):
             name="fk_currency_id_bank_detail",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -51,7 +49,6 @@ class BankDetail(Base):
             name="fk_bank_id_bank_detail",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

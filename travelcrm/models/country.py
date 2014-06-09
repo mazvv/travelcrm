@@ -21,7 +21,6 @@ class Country(Base):
         UniqueConstraint(
             'iso_code',
             name='unique_idx_country_iso_code',
-            use_alter=True,
         ),
     )
 
@@ -37,7 +36,6 @@ class Country(Base):
             name="fk_resource_id_country",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

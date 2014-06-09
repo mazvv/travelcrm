@@ -16,6 +16,24 @@
                 ${h.common.error_container(name='name')}
             </div>
         </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"account item"), True, "account_item_id")}
+            </div>
+            <div class="ml15">
+                ${h.fields.accounts_items_combobox_field(request, item.account_item_id if item else None)}
+                ${h.common.error_container(name='account_item_id')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"invoice text"), False, "display_text")}
+            </div>
+            <div class="ml15">
+                ${h.tags.text('display_text', item.display_text if item else None, class_="text w20")}
+                ${h.common.error_container(name='display_text')}
+            </div>
+        </div>
         <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"description"), False, "descr")}

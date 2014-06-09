@@ -24,7 +24,6 @@ class Currency(Base):
         UniqueConstraint(
             'iso_code',
             name='unique_idx_currency_iso_code',
-            use_alter=True,
         ),
     )
 
@@ -40,7 +39,6 @@ class Currency(Base):
             name="fk_resource_id_currency",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

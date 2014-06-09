@@ -27,7 +27,6 @@ tour_person = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_tour_id_tour_person',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -39,7 +38,33 @@ tour_person = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_person_id_tour_person',
-            use_alter=True,
+        ),
+        primary_key=True,
+    ),
+)
+
+tour_invoice = Table(
+    'tour_invoice',
+    Base.metadata,
+    Column(
+        'tour_id',
+        Integer,
+        ForeignKey(
+            'tour.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_tour_id_tour_invoice',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'invoice_id',
+        Integer,
+        ForeignKey(
+            'invoice.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_invoice_id_tour_invoice',
         ),
         primary_key=True,
     ),
@@ -65,7 +90,16 @@ class Tour(Base):
             name="fk_resource_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
+        ),
+        nullable=False,
+    )
+    service_id = Column(
+        Integer,
+        ForeignKey(
+            'service.id',
+            name="fk_service_id_tour",
+            ondelete='restrict',
+            onupdate='cascade',
         ),
         nullable=False,
     )
@@ -76,7 +110,6 @@ class Tour(Base):
             name="fk_touroperator_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -87,7 +120,6 @@ class Tour(Base):
             name="fk_customer_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -98,7 +130,6 @@ class Tour(Base):
             name="fk_advsource_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -113,7 +144,6 @@ class Tour(Base):
             name="fk_currency_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -132,7 +162,6 @@ class Tour(Base):
             name="fk_start_location_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -143,7 +172,6 @@ class Tour(Base):
             name="fk_end_location_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -173,6 +201,15 @@ class Tour(Base):
             lazy="dynamic"
         ),
         uselist=True,
+    )
+    service = relationship(
+        'Service',
+        backref=backref(
+            'tours',
+            uselist=True,
+            lazy="dynamic"
+        ),
+        uselist=False,
     )
     touroperator = relationship(
         'Touroperator',
@@ -230,6 +267,15 @@ class Tour(Base):
             lazy="dynamic"
         ),
         uselist=True,
+    )
+    invoice = relationship(
+        'Invoice',
+        secondary=tour_invoice,
+        backref=backref(
+            'tour',
+            uselist=False,
+        ),
+        uselist=False,
     )
 
     @classmethod

@@ -4,7 +4,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Numeric,
     ForeignKey,
     UniqueConstraint,
 )
@@ -22,7 +21,6 @@ class Service(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_service',
-            use_alter=True,
         ),
     )
 
@@ -38,13 +36,25 @@ class Service(Base):
             name="fk_resource_id_service",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
+        ),
+        nullable=False,
+    )
+    account_item_id = Column(
+        Integer,
+        ForeignKey(
+            'account_item.id',
+            name="fk_account_item_id_service",
+            ondelete='restrict',
+            onupdate='cascade',
         ),
         nullable=False,
     )
     name = Column(
         String(length=32),
         nullable=False,
+    )
+    display_text = Column(
+        String(length=256),
     )
     descr = Column(
         String(length=256),
@@ -57,6 +67,15 @@ class Service(Base):
             cascade="all,delete"
         ),
         cascade="all,delete",
+        uselist=False,
+    )
+    account_item = relationship(
+        'AccountItem',
+        backref=backref(
+            'services',
+            uselist=True,
+            lazy='dynamic',
+        ),
         uselist=False,
     )
 

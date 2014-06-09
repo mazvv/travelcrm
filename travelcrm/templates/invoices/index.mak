@@ -35,6 +35,7 @@
             <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
             <th data-options="field:'resource_type',sortable:true,width:150">${_(u"source")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
+            <th data-options="field:'payments',sortable:false,width:100,formatter:function(value, row, index){return payment_indicator(row.payments_percent);}">${_(u"payments, %")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -42,12 +43,6 @@
 
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl45">
-            % if _context.has_permision('add'):
-            <a href="#" class="button primary _action" 
-                data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add')}'">
-                <span class="fa fa-plus"></span>${_(u'Add New')}
-            </a>
-            % endif
             <div class="button-group">
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"

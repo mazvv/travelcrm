@@ -29,7 +29,6 @@ class Hotel(Base):
             name="fk_resource_id_hotel",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -40,7 +39,6 @@ class Hotel(Base):
             name="fk_hotelcat_id_hotel",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -51,7 +49,6 @@ class Hotel(Base):
             name="fk_location_id_hotel",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
     )
     name = Column(

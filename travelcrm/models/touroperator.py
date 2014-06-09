@@ -27,7 +27,6 @@ touroperator_bperson = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_touroperator_id_touroperator_bperson',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -39,7 +38,6 @@ touroperator_bperson = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_bperson_id_touroperator_bperson',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -57,7 +55,6 @@ touroperator_licence = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_touroperator_id_touroperator_licence',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -69,7 +66,6 @@ touroperator_licence = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_licence_id_touroperator_licence',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -87,7 +83,6 @@ touroperator_bank_detail = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_touroperator_id_touroperator_bank_detail',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -99,7 +94,6 @@ touroperator_bank_detail = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_bank_detail_id_touroperator_bank_detail',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -112,7 +106,6 @@ class Touroperator(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_touroperator',
-            use_alter=True,
         ),
     )
 
@@ -128,7 +121,6 @@ class Touroperator(Base):
             name="fk_resource_id_touroperator",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

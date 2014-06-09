@@ -30,7 +30,6 @@ class TourPoint(Base):
             name="fk_tour_id_tour_point",
             ondelete='cascade',
             onupdate='cascade',
-            use_alter=True,
         ),
     )
     location_id = Column(
@@ -40,7 +39,6 @@ class TourPoint(Base):
             name="fk_location_id_tour_point",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -51,7 +49,6 @@ class TourPoint(Base):
             name="fk_hotel_id_tour_point",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
     )
     accomodation_id = Column(
@@ -61,7 +58,6 @@ class TourPoint(Base):
             name="fk_accomodation_id_tour_point",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
     )
     foodcat_id = Column(
@@ -71,7 +67,6 @@ class TourPoint(Base):
             name="fk_foodcat_id_tour_point",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
     )
     roomcat_id = Column(
@@ -81,7 +76,6 @@ class TourPoint(Base):
             name="fk_roomcat_id_tour_point",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
     )
     description = Column(

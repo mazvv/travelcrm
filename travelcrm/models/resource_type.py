@@ -27,12 +27,10 @@ class ResourceType(Base):
             'module',
             'resource_name',
             name='unique_idx_resource_type_module',
-            use_alter=True,
         ),
         UniqueConstraint(
             'name',
             name='unique_idx_resource_type_name',
-            use_alter=True,
         ),
     )
 
@@ -54,7 +52,6 @@ class ResourceType(Base):
             name="fk_resource_id_resource_type",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -75,8 +72,7 @@ class ResourceType(Base):
         String(length=128),
         nullable=False,
     )
-    _settings = Column(
-        u'settings',
+    settings = Column(
         JSON,
         primary_key=False,
     )
@@ -121,14 +117,6 @@ class ResourceType(Base):
         )
 
     @property
-    def settings(self):
-        return str(self._settings)
-
-    @settings.setter
-    def settings(self, settings):
-        self._settings = settings
-
-    @property
     def resource(self):
         return self._resource
 
@@ -147,12 +135,11 @@ class ResourceType(Base):
         return (
             "%s (id=%s, resource_id=%s, context=%s)"
             % (
-               self.__class__.__name__,
-               self.id,
-               self.resource_id,
-               self.resource
+                self.__class__.__name__,
+                self.id,
+                self.resource_id,
+                self.resource
             )
         )
 
-    settings = synonym('settings', descriptor=settings)
     resource = synonym('resource', descriptor=resource)

@@ -21,7 +21,6 @@ class Roomcat(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_roomcat',
-            use_alter=True,
         ),
     )
 
@@ -37,7 +36,6 @@ class Roomcat(Base):
             name="fk_resource_id_roomcat",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

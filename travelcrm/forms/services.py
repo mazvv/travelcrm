@@ -29,6 +29,14 @@ class ServiceSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+    account_item_id = colander.SchemaNode(
+        colander.Integer(),
+    )
+    display_text = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=256),
+        missing=None
+    )
     descr = colander.SchemaNode(
         colander.String(),
         validator=colander.Length(max=256),

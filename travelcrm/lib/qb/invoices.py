@@ -1,27 +1,20 @@
 # -*coding: utf-8-*-
 from collections import Iterable
 
+from sqlalchemy import cast, func, Numeric
+
 from . import ResourcesQueryBuilder
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.invoice import Invoice
-from ...models.bank_detail import BankDetail
-from ...models.bank import Bank
+from ...models.account import Account
 from ...models.currency import Currency
 from ...models.resource_type import ResourceType
+from ...models.income import Income
+from ...models.fin_transaction import FinTransaction
 
-from ...lib.bl.invoices import get_invoices_factories_resources_types
-
-
-def _query_resource_data():
-    factories = get_invoices_factories_resources_types()
-    res = None
-    for i, factory in enumerate(factories):
-        if not i:
-            res = factory.query_list()
-        else:
-            res.union(factory.query_list())
-    return res
+from ...lib.bl.invoices import query_resource_data
+from ...lib.bl.currencies_rates import query_convert_rates
 
 
 class InvoicesQueryBuilder(ResourcesQueryBuilder):
@@ -31,23 +24,50 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         .subquery()
     )
 
-    _subq_resource_data = _query_resource_data().subquery()
+    _subq_resource_data = query_resource_data().subquery()
+    _sum_invoice = cast(
+        func.coalesce(
+            _subq_resource_data.c.sum * (
+                query_convert_rates(
+                    _subq_resource_data.c.currency_id,
+                    Account.currency_id,
+                    Invoice.date
+                )
+                .subquery()
+            ),
+            _subq_resource_data.c.sum
+        ),
+        Numeric(16, 2)
+    )
+    _sum_payments = (
+        DBSession.query(
+            func.sum(FinTransaction.sum).label('sum'), Income.invoice_id
+        )
+        .join(Income, FinTransaction.income)
+        .group_by(Income.invoice_id)
+        .subquery()
+    )
 
     _fields = {
         'id': Invoice.id,
         '_id': Invoice.id,
         'date': Invoice.date,
-        'bank': Bank.name,
+        'account': Account.name,
+        'account_type': Account.account_type,
+        'sum': _sum_invoice.label('sum'),
+        'payments': func.coalesce(_sum_payments.c.sum, 0),
+        'payments_percent': func.round(
+            100 * func.coalesce(_sum_payments.c.sum, 0) / _sum_invoice,
+            2
+        ),
         'resource_type': _subq_resource_type.c.humanize,
         'customer': _subq_resource_data.c.customer,
-        'sum': _subq_resource_data.c.sum,
         'currency': Currency.iso_code,
     }
     _simple_search_fields = [
-        Invoice.date,
-        Bank.name,
+        Account.name,
         _subq_resource_data.c.customer,
-        _subq_resource_type.c.humanize
+        _subq_resource_type.c.humanize,
     ]
 
     def __init__(self, context):
@@ -58,18 +78,22 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(Invoice, Resource.invoice)
-            .join(BankDetail, Invoice.bank_detail)
-            .join(Bank, BankDetail.bank)
-            .join(Currency, BankDetail.currency)
+            .join(Account, Invoice.account)
+            .join(Currency, Account.currency)
+            .join(
+                self._subq_resource_data,
+                self._subq_resource_data.c.invoice_id
+                == Invoice.id
+            )
             .join(
                 self._subq_resource_type,
                 self._subq_resource_type.c.id
-                == Invoice.invoice_resource_id
+                == self._subq_resource_data.c.resource_id
             )
-            .join(
-                self._subq_resource_data,
-                self._subq_resource_data.c.resource_id
-                == Invoice.invoice_resource_id
+            .outerjoin(
+                self._sum_payments,
+                self._sum_payments.c.invoice_id
+                == Invoice.id
             )
         )
 

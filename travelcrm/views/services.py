@@ -89,6 +89,8 @@ class Services(object):
             controls = schema.deserialize(self.request.params)
             service = Service(
                 name=controls.get('name'),
+                account_item_id=controls.get('account_item_id'),
+                display_text=controls.get('display_text'),
                 descr=controls.get('descr'),
                 resource=self.context.create_resource()
             )
@@ -128,6 +130,8 @@ class Services(object):
         try:
             controls = schema.deserialize(self.request.params)
             service.name = controls.get('name')
+            service.account_item_id = controls.get('account_item_id')
+            service.display_text = controls.get('display_text')
             service.descr = controls.get('descr')
             return {
                 'success_message': _(u'Saved'),

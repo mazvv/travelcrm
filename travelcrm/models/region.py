@@ -26,7 +26,6 @@ class Region(Base):
             'name',
             'country_id',
             name='unique_idx_name_country_id_region',
-            use_alter=True,
         ),
     )
 
@@ -42,7 +41,6 @@ class Region(Base):
             name="fk_resource_id_region",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -53,7 +51,6 @@ class Region(Base):
             name='fk_region_country_id',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         ),
         nullable=False,
     )

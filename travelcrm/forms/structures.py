@@ -29,6 +29,10 @@ class StructureSchema(ResourceSchema):
         colander.String(),
         validator=colander.Length(max=128)
     )
+    invoice_template = colander.SchemaNode(
+        colander.String(),
+        missing=None,
+    )
     contact_id = colander.SchemaNode(
         colander.Set(),
         missing=[],
@@ -38,6 +42,10 @@ class StructureSchema(ResourceSchema):
         missing=[],
     )
     bank_detail_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
+    account_id = colander.SchemaNode(
         colander.Set(),
         missing=[],
     )
@@ -66,5 +74,13 @@ class StructureSchema(ResourceSchema):
             val = cstruct['bank_detail_id']
             cstruct['bank_detail_id'] = list()
             cstruct['bank_detail_id'].append(val)
+
+        if (
+            'account_id' in cstruct
+            and not isinstance(cstruct.get('account_id'), list)
+        ):
+            val = cstruct['account_id']
+            cstruct['account_id'] = list()
+            cstruct['account_id'].append(val)
 
         return super(StructureSchema, self).deserialize(cstruct)

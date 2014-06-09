@@ -4,6 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
+    Text,
     Table,
     ForeignKey
     )
@@ -29,7 +30,6 @@ structure_contact = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_structure_id_structure_contact',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -41,7 +41,6 @@ structure_contact = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_contact_id_structure_contact',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -59,7 +58,6 @@ structure_bank_detail = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_structure_id_structure_bank_detail',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -71,7 +69,6 @@ structure_bank_detail = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_bank_detail_id_structure_bank_detail',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -89,7 +86,6 @@ structure_address = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_structure_id_structure_address',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -101,7 +97,34 @@ structure_address = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_address_id_structure_address',
-            use_alter=True,
+        ),
+        primary_key=True,
+    )
+)
+
+
+structure_account = Table(
+    'structure_account',
+    Base.metadata,
+    Column(
+        'structure_id',
+        Integer,
+        ForeignKey(
+            'structure.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_structure_id_structure_account',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'account_id',
+        Integer,
+        ForeignKey(
+            'account.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_account_id_structure_account',
         ),
         primary_key=True,
     )
@@ -123,7 +146,6 @@ class Structure(Base):
             name="fk_resource_id_structure",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -134,14 +156,15 @@ class Structure(Base):
             name='fk_structure_parent_id',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         )
     )
     name = Column(
         String(length=32),
         nullable=False
     )
-
+    invoice_template = Column(
+        Text,
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -184,6 +207,16 @@ class Structure(Base):
     banks_details = relationship(
         'BankDetail',
         secondary=structure_bank_detail,
+        backref=backref(
+            'structure',
+            uselist=False
+        ),
+        uselist=True,
+    )
+
+    accounts = relationship(
+        'Account',
+        secondary=structure_account,
         backref=backref(
             'structure',
             uselist=False

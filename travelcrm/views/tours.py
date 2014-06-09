@@ -17,9 +17,10 @@ from ..lib.qb.tours import (
 from ..resources.invoices import Invoices
 
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..forms.tours import (
     TourSchema,
-    TourPointSchema
+    TourPointSchema,
 )
 
 
@@ -98,6 +99,7 @@ class Tours(object):
             controls = schema.deserialize(self.request.params.mixed())
             tour = Tour(
                 deal_date=controls.get('deal_date'),
+                service_id=controls.get('service_id'),
                 advsource_id=controls.get('advsource_id'),
                 touroperator_id=controls.get('touroperator_id'),
                 customer_id=controls.get('customer_id'),
@@ -157,6 +159,7 @@ class Tours(object):
             controls = schema.deserialize(self.request.params.mixed())
             tour.deal_date = controls.get('deal_date')
             tour.advsource_id = controls.get('advsource_id')
+            tour.service_id = controls.get('service_id')
             tour.touroperator_id = controls.get('touroperator_id')
             tour.customer_id = controls.get('customer_id')
             tour.adults = controls.get('adults')
@@ -356,13 +359,17 @@ class Tours(object):
         request_method='GET',
         permission='invoice'
     )
-    def add_invoice(self):
+    def invoice(self):
         tour = Tour.get(self.request.params.get('id'))
         if tour:
             return HTTPFound(
                 self.request.resource_url(
                     Invoices(self.request),
-                    'add',
-                    query={'resource_id': tour.resource.id}
+                    'add' if not tour.invoice else 'edit',
+                    query=(
+                        {'resource_id': tour.resource.id}
+                        if not tour.invoice
+                        else {'id': tour.invoice.id}
+                    )
                 )
             )

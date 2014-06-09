@@ -4,6 +4,7 @@ from collections import Iterable
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.service import Service
+from ...models.account_item import AccountItem
 
 
 class ServicesQueryBuilder(ResourcesQueryBuilder):
@@ -11,6 +12,7 @@ class ServicesQueryBuilder(ResourcesQueryBuilder):
         'id': Service.id,
         '_id': Service.id,
         'name': Service.name,
+        'account_item': AccountItem.name,
     }
     _simple_search_fields = [
         Service.name
@@ -21,7 +23,11 @@ class ServicesQueryBuilder(ResourcesQueryBuilder):
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
-        self.query = self.query.join(Service, Resource.service)
+        self.query = (
+            self.query
+            .join(Service, Resource.service)
+            .join(AccountItem, Service.account_item)
+        )
         self.query = self.query.add_columns(*fields)
 
     def filter_id(self, id):

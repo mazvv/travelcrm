@@ -382,3 +382,13 @@ function getKeyByValue(obj, value) {
 	}
 	return key;
 }
+
+function payment_indicator(percent){
+	console.log(percent);
+	var text = $('<span>').html(percent + '%');
+	var el = $('<div>').css('width', percent + '%').html('&nbsp;');
+	el = $('<div>').addClass('payment-indicator tc')
+		.css('width', '100%').append(text).append(el);
+	el = $('<div>').append(el);
+	return el.html();
+}

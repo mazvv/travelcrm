@@ -30,7 +30,6 @@ task_resource = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_task_id_task_resource',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -42,7 +41,6 @@ task_resource = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_resource_id_task_resource',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -78,7 +76,6 @@ class Task(Base):
             name="fk_resource_id_task",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -89,7 +86,6 @@ class Task(Base):
             name="fk_employee_id_task",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

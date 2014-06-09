@@ -22,7 +22,6 @@ class Location(Base):
             'name',
             'region_id',
             name='unique_idx_name_region_id_location',
-            use_alter=True,
         ),
     )
 
@@ -38,7 +37,6 @@ class Location(Base):
             name="fk_resource_id_location",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -49,7 +47,6 @@ class Location(Base):
             name='fk_region_id_location',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         ),
         nullable=False,
     )

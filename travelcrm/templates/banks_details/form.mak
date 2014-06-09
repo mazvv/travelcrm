@@ -18,7 +18,7 @@
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"price currency"), True, "currency_id")}
+                ${h.tags.title(_(u"currency"), True, "currency_id")}
             </div>
             <div class="ml15">
                 ${h.fields.currencies_combobox_field(request, item.currency_id if item else None)}

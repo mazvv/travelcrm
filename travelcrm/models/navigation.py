@@ -33,7 +33,6 @@ class Navigation(Base):
             name="fk_resource_id_navigation",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -44,7 +43,6 @@ class Navigation(Base):
             name='fk_navigation_position_id',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         )
     )
     parent_id = Column(
@@ -54,7 +52,6 @@ class Navigation(Base):
             name='fk_parent_id_navigation',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         )
     )
     name = Column(

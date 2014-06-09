@@ -21,7 +21,6 @@ class Accomodation(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_accomodation_name',
-            use_alter=True,
         ),
     )
 
@@ -37,7 +36,6 @@ class Accomodation(Base):
             name="fk_resource_id_accomodation",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

@@ -14,7 +14,7 @@ class IResourceType(Interface):
 class IInvoiceFactory(Interface):
     """ Resource that can be source of Invoice"""
 
-    def invoice_factory():
+    def get_invoice_factory():
         """ Method that returns class instance for invoice interfaces
         This method must be static
         """

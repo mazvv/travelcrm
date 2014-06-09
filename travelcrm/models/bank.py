@@ -27,7 +27,6 @@ bank_address = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_bank_id_bank_address',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -39,7 +38,6 @@ bank_address = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_address_id_bank_address',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -52,7 +50,6 @@ class Bank(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_bank',
-            use_alter=True,
         ),
     )
 
@@ -68,7 +65,6 @@ class Bank(Base):
             name="fk_resource_id_bank",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

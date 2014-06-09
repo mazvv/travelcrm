@@ -36,7 +36,6 @@ class ResourceLog(Base):
             name='fk_resource_id_resource_log',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         ),
         nullable=False
     )
@@ -46,7 +45,6 @@ class ResourceLog(Base):
             name='fk_employee_id_resource_log',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         ),
         nullable=False
     )

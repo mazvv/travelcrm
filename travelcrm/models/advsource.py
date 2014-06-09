@@ -21,7 +21,6 @@ class Advsource(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_advsource',
-            use_alter=True,
         ),
     )
 
@@ -37,7 +36,6 @@ class Advsource(Base):
             name="fk_resource_id_advsource",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

@@ -27,7 +27,6 @@ bperson_contact = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_bperson_id_bperson_contact',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -39,7 +38,6 @@ bperson_contact = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_contact_id_bperson_contact',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -61,7 +59,6 @@ class BPerson(Base):
             name="fk_resource_id_bperson",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

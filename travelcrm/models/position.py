@@ -25,7 +25,6 @@ class Position(Base):
             'name',
             'structure_id',
             name='unique_idx_name_strcuture_id_position',
-            use_alter=True,
         ),
     )
 
@@ -41,7 +40,6 @@ class Position(Base):
             name="fk_resource_id_position",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -52,7 +50,6 @@ class Position(Base):
             name='fk_position_structure_id',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         ),
         nullable=False,
     )

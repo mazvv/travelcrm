@@ -21,7 +21,6 @@ class Foodcat(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_foodcat',
-            use_alter=True,
         ),
     )
 
@@ -37,7 +36,6 @@ class Foodcat(Base):
             name="fk_resource_id_foodcat",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

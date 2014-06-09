@@ -54,3 +54,7 @@ from task import Task
 from service import Service
 from currency_rate import CurrencyRate
 from invoice import Invoice
+from account_item import AccountItem
+from fin_transaction import FinTransaction
+from income import Income
+from account import Account

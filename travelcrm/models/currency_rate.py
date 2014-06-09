@@ -23,7 +23,6 @@ class CurrencyRate(Base):
             'currency_id',
             'date',
             name='unique_idx_currency_rate_currency_id_date',
-            use_alter=True,
         ),
     )
 
@@ -39,7 +38,6 @@ class CurrencyRate(Base):
             name="fk_resource_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -54,7 +52,6 @@ class CurrencyRate(Base):
             name="fk_currency_id_tour",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -79,7 +76,6 @@ class CurrencyRate(Base):
             uselist=True,
             lazy="dynamic"
         ),
-        uselist=False,
     )
 
     @classmethod

@@ -30,7 +30,6 @@ class Contact(Base):
             name="fk_resource_id_contact",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

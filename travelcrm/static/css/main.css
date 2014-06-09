@@ -639,3 +639,26 @@ div.image-thumb{
 	margin-top: 4px;
 	margin-right: 10px;
 }
+
+/** payment indicator **/
+div.payment-indicator{
+	background-color: #ccc;
+	height: 12px;
+	position: relative;
+}
+div.payment-indicator span{
+	position: absolute;
+	display: block;
+	height: 12px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    top: -2px;
+    font-size: 10px;
+    font-weight: 700;
+}
+div.payment-indicator div{
+	background-color: #31c0be;
+	height: 12px;
+}

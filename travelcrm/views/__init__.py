@@ -37,6 +37,19 @@ def system_need_select_rows(context, request):
     }
 
 
+@view_config(
+    name='system_not_configurable',
+    request_method='GET',
+    context='..resources.Root',
+    renderer='travelcrm:templates/system#system_info_dialog.mak'
+)
+def system_need_select_rows(context, request):
+    return {
+        'title': _(u'System Info'),
+        'message': _(u'Selected Resource Type is not configurable')
+    }
+
+
 @forbidden_view_config(
     request_method="GET",
     xhr=True,

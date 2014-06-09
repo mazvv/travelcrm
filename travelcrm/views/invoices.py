@@ -1,21 +1,29 @@
 # -*-coding: utf-8-*-
 
 import logging
+from decimal import Decimal
+
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.invoice import Invoice
 from ..models.resource import Resource
+from ..models.account import Account
 from ..lib.qb.invoices import InvoicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.invoices import (
     InvoiceAddSchema,
-    InvoiceEditSchema
+    InvoiceEditSchema,
+    InvoiceSumSchema,
 )
 
+from ..lib.utils.resources_utils import get_resource_class
+from ..lib.bl.currencies_rates import query_convert_rates
+from ..lib.bl.invoices import query_resource_data
 
 log = logging.getLogger(__name__)
 
@@ -79,6 +87,16 @@ class Invoices(object):
     def add(self):
         resource_id = self.request.params.get('resource_id')
         resource = Resource.get(resource_id)
+        source_cls = get_resource_class(resource.resource_type.name)
+        factory = source_cls.get_invoice_factory()
+        invoice = factory.get_invoice(resource_id)
+        if invoice:
+            return HTTPFound(
+                location=self.request.resource_url(
+                    self.context, 'edit', query={'id': invoice.id}
+                ),
+            )
+
         structure_id = resource.owner_structure.id
         return {
             'title': _(u'Add Invoice'),
@@ -98,13 +116,17 @@ class Invoices(object):
 
         try:
             controls = schema.deserialize(self.request.params)
+            resource_id = controls.get('resource_id')
+            resource = Resource.get(resource_id)
+            source_cls = get_resource_class(resource.resource_type.name)
+            factory = source_cls.get_invoice_factory()
             invoice = Invoice(
-                invoice_resource_id=controls.get('invoice_resource_id'),
                 date=controls.get('date'),
-                bank_detail_id=controls.get('bank_detail_id'),
+                account_id=controls.get('account_id'),
                 resource=self.context.create_resource()
             )
-            DBSession.add(invoice)
+            source = factory.bind_invoice(resource_id, invoice)
+            DBSession.add(source)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
@@ -125,10 +147,16 @@ class Invoices(object):
     )
     def edit(self):
         invoice = Invoice.get(self.request.params.get('id'))
+        bound_resource = (
+            query_resource_data()
+            .filter(Invoice.id == invoice.id)
+            .first()
+        )
         structure_id = invoice.resource.owner_structure.id
         return {
             'item': invoice,
             'structure_id': structure_id,
+            'resource_id': bound_resource.resource_id,
             'title': _(u'Edit Invoice')
         }
 
@@ -145,7 +173,7 @@ class Invoices(object):
         try:
             controls = schema.deserialize(self.request.params)
             invoice.date = controls.get('date')
-            invoice.bank_detail_id = controls.get('bank_detail_id')
+            invoice.account_id = controls.get('account_id')
             return {
                 'success_message': _(u'Saved'),
                 'response': invoice.id
@@ -181,3 +209,38 @@ class Invoices(object):
             if invoice:
                 DBSession.delete(invoice)
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='sum',
+        context='..resources.invoices.Invoices',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def sum(self):
+        schema = InvoiceSumSchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            resource_id = controls.get('resource_id')
+            account_id = controls.get('account_id')
+            date = controls.get('date')
+            resource = Resource.get(resource_id)
+            source_cls = get_resource_class(resource.resource_type.name)
+            factory = source_cls.get_invoice_factory()
+            sum, in_currency_id = factory.get_sum(resource_id)
+            account = Account.get(account_id)
+
+            query_rate_converter = query_convert_rates(
+                in_currency_id, account.currency_id, date
+            )
+            rate = query_rate_converter.scalar() or 1
+            sum = sum * rate
+            return {
+                'sum': str(Decimal(sum).quantize(Decimal('.01'))),
+                'currency': account.currency.iso_code
+            }
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }

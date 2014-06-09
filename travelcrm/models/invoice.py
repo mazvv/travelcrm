@@ -33,29 +33,16 @@ class Invoice(Base):
             name="fk_resource_id_invoice",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
-    bank_detail_id = Column(
+    account_id = Column(
         Integer,
         ForeignKey(
-            'bank_detail.id',
-            name="fk_bank_detail_id_invoice",
+            'account.id',
+            name="fk_account_id_invoice",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
-        ),
-        nullable=False,
-    )
-    invoice_resource_id = Column(
-        Integer,
-        ForeignKey(
-            'resource.id',
-            name="fk_invoice_resource_id_invoice",
-            ondelete='restrict',
-            onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -71,18 +58,8 @@ class Invoice(Base):
         cascade="all,delete",
         uselist=False,
     )
-    invoice_resource = relationship(
-        'Resource',
-        backref=backref(
-            'invoices',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        foreign_keys=[invoice_resource_id],
-        uselist=False,
-    )
-    bank_detail = relationship(
-        'BankDetail',
+    account = relationship(
+        'Account',
         backref=backref(
             'invoices',
             uselist=True,

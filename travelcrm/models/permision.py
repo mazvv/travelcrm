@@ -38,7 +38,6 @@ class Permision(Base):
             name="fk_resource_type_id_permission",
             ondelete='cascade',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -49,7 +48,6 @@ class Permision(Base):
             name="fk_position_id_permision",
             ondelete='cascade',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -66,7 +64,6 @@ class Permision(Base):
             name='fk_permision_structure_id',
             onupdate='cascade',
             ondelete='restrict',
-            use_alter=True,
         )
     )
 

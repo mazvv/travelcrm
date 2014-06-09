@@ -31,7 +31,6 @@ class Appointment(Base):
             name="fk_resource_id_appointment",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -46,7 +45,6 @@ class Appointment(Base):
             name="fk_employee_id_appointment",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -57,7 +55,6 @@ class Appointment(Base):
             name="fk_position_id_appointment",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -72,7 +69,6 @@ class Appointment(Base):
             name="fk_currency_id_appointment",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

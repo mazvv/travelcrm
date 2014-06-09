@@ -21,7 +21,6 @@ class Hotelcat(Base):
         UniqueConstraint(
             'name',
             name='unique_idx_name_hotelcat',
-            use_alter=True,
         ),
     )
 
@@ -37,7 +36,6 @@ class Hotelcat(Base):
             name="fk_resource_id_hotelcat",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

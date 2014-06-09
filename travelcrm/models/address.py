@@ -30,7 +30,6 @@ class Address(Base):
             name="fk_resource_id_address",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )
@@ -41,7 +40,6 @@ class Address(Base):
             name="fk_location_id_address",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

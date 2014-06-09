@@ -29,7 +29,6 @@ person_contact = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_person_id_person_contact',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -41,7 +40,6 @@ person_contact = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_contact_id_person_contact',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -59,7 +57,6 @@ person_passport = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_person_id_person_passport',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -71,7 +68,6 @@ person_passport = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_passport_id_person_passport',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -89,7 +85,6 @@ person_address = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_person_id_person_address',
-            use_alter=True,
         ),
         primary_key=True,
     ),
@@ -101,7 +96,6 @@ person_address = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_address_id_person_address',
-            use_alter=True,
         ),
         primary_key=True,
     )
@@ -123,7 +117,6 @@ class Person(Base):
             name="fk_resource_id_person",
             ondelete='restrict',
             onupdate='cascade',
-            use_alter=True,
         ),
         nullable=False,
     )

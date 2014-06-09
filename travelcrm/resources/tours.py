@@ -32,10 +32,11 @@ class Tours(ResourceTypeBase):
             ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
+            ('settings', _(u'settings')),
             ('invoice', _(u'invoice')),
             ('contract', _(u'contract')),
         ]
 
     @staticmethod
-    def invoice_factory():
+    def get_invoice_factory():
         return TourInvoice
