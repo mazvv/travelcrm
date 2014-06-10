@@ -1,4 +1,4 @@
-Metadata-Version: 1.0
+Metadata-Version: 1.1
 Name: travelcrm
 Version: 0.6.1-dev
 Summary: travelcrm
@@ -18,10 +18,6 @@ Description: Install
         
         
         
-        0.0
-        ---
-        
-        -  Initial version
         
 Keywords: web wsgi bfg pylons pyramid
 Platform: UNKNOWN

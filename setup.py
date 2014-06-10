@@ -13,7 +13,7 @@ requires = [
     'pyramid_mako',
     'pyramid_debugtoolbar',
     'pyramid_tm',
-    'SQLAlchemy',
+    'SQLAlchemy>=0.9.4',
     'transaction',
     'zope.sqlalchemy',
     'waitress',
@@ -58,7 +58,7 @@ setup(
     [console_scripts]
     initialize_travelcrm_db = travelcrm.scripts.initializedb:main
     """,
-    message_extractors = {
+    message_extractors={
         'travelcrm': [
             ('**.py', 'python', None),
             ('templates/**.mak', 'mako', None),

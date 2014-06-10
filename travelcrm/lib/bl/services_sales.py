@@ -1,8 +1,12 @@
 # -*coding: utf-8-*-
 
+from sqlalchemy import func, distinct
+
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.tour import Tour
+from ...models.service_sale import ServiceSale
+from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
 from ...models.fin_transaction import FinTransaction
@@ -12,31 +16,37 @@ class ServiceSaleInvoice(object):
 
     @classmethod
     def bind_invoice(cls, resource_id, invoice):
-        tour = (
-            DBSession.query(Tour)
-            .filter(Tour.resource_id == resource_id)
+        service_sale = (
+            DBSession.query(ServiceSale)
+            .filter(ServiceSale.resource_id == resource_id)
             .first()
         )
-        tour.invoice = invoice
-        return tour
+        service_sale.invoice = invoice
+        return service_saler
 
     @classmethod
     def get_invoice(cls, resource_id):
-        tour = (
-            DBSession.query(Tour)
-            .filter(Tour.resource_id == resource_id)
+        service_sale = (
+            DBSession.query(ServiceSale)
+            .filter(ServiceSale.resource_id == resource_id)
             .first()
         )
-        return tour.invoice
+        return service_sale.invoice
 
     @classmethod
     def get_sum(cls, resource_id):
-        tour = (
-            DBSession.query(Tour)
-            .filter(Tour.resource_id == resource_id)
+        service_sale = (
+            DBSession.query(ServiceSale)
+            .filter(ServiceSale.resource_id == resource_id)
             .first()
         )
-        return tour.price, tour.currency_id
+        currencies = (
+            DBSession(func.count(distinct(ServiceItem.currency_id)))
+            .join(ServiceItem, ServiceSale.services_items)
+            .group_by(ServiceItem.currency_id)
+            .scalar()
+        )
+        return service_sale.price, service_sale.currency_id
 
     @classmethod
     def query_list(cls):

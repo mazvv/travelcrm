@@ -33,3 +33,18 @@ def query_convert_rates(in_attr, out_attr, date_attr):
             subq.c.date <= date_attr
         )
     )
+
+
+def query_convert_rates_to_base(in_attr, date_attr):
+    return (
+        DBSession.query(
+            CurrencyRate.rate,
+            CurrencyRate.date,
+        )
+        .distinct(CurrencyRate.currency_id)
+        .filter(
+            CurrencyRate.currency_id == in_attr,
+            CurrencyRate.date <= date_attr,
+        )
+        .order_by(CurrencyRate.currency_id, desc(CurrencyRate.date))
+    )

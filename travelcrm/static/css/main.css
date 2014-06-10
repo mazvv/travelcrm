@@ -26,8 +26,9 @@ danger - #e87352
 
 /** emastic hacks **/
 .main{
-    width: 115em;
+    width: auto;
     max-width: 115em;
+    min-width: 110em;
 }
 html, body{
 	color: #555;

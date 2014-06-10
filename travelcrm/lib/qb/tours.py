@@ -25,8 +25,8 @@ from ...models.hotelcat import Hotelcat
 from ...models.hotel import Hotel
 from ...models.currency import Currency
 from ...models.person import Person
-from ...models.currency_rate import CurrencyRate
 
+from ...lib.bl.currencies_rates import query_convert_rates_to_base
 from ...lib.bl.persons import query_person_contacts, query_person_passports
 from ...lib.utils.common_utils import get_locale_name, get_base_currency
 
@@ -70,17 +70,7 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
     )
 
     _subq_currencies_rates = (
-        DBSession.query(
-            CurrencyRate.rate,
-            CurrencyRate.date,
-        )
-        .distinct(CurrencyRate.currency_id)
-        .filter(
-            CurrencyRate.currency_id == Tour.currency_id,
-            CurrencyRate.date <= Tour.deal_date,
-        )
-        .join(Currency, CurrencyRate.currency)
-        .order_by(CurrencyRate.currency_id, desc(CurrencyRate.date))
+        query_convert_rates_to_base(Tour.currency_id, Tour.deal_date)
         .subquery()
     )
 
