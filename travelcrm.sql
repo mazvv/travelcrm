@@ -1430,7 +1430,8 @@ CREATE TABLE service_item (
     currency_id integer NOT NULL,
     touroperator_id integer NOT NULL,
     price numeric(16,2) NOT NULL,
-    person_id integer NOT NULL
+    person_id integer NOT NULL,
+    base_price numeric(16,2)
 );
 
 
@@ -1672,7 +1673,8 @@ CREATE TABLE tour (
     start_date date NOT NULL,
     deal_date date NOT NULL,
     advsource_id integer NOT NULL,
-    service_id integer NOT NULL
+    service_id integer NOT NULL,
+    base_price numeric(16,2)
 );
 
 
@@ -1763,6 +1765,18 @@ ALTER TABLE public.tour_point_id_seq OWNER TO mazvv;
 
 ALTER SEQUENCE tour_point_id_seq OWNED BY tour_point.id;
 
+
+--
+-- Name: tour_service_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE tour_service_item (
+    tour_id integer NOT NULL,
+    service_item_id integer NOT NULL
+);
+
+
+ALTER TABLE public.tour_service_item OWNER TO mazvv;
 
 --
 -- Name: touroperator; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -2146,14 +2160,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5685, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5737, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1456, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1509, true);
 
 
 --
@@ -2207,6 +2221,7 @@ SELECT pg_catalog.setval('accomodation_id_seq', 16, true);
 COPY account (id, resource_id, currency_id, account_type, name, display_text, descr) FROM stdin;
 2	1438	56	0	Main Bank Account	some display text	\N
 3	1439	56	1	Main Cash Account	cash payment	\N
+4	1507	54	1	Main Cash EUR Account	Main Cash EUR Account	\N
 \.
 
 
@@ -2214,7 +2229,7 @@ COPY account (id, resource_id, currency_id, account_type, name, display_text, de
 -- Name: account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('account_id_seq', 3, true);
+SELECT pg_catalog.setval('account_id_seq', 4, true);
 
 
 --
@@ -2251,6 +2266,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 20	1407	14	11111	Radujnaya str., 56 a, 153
 21	1414	14	01011	Leskova str., 9
 22	1418	33	12345	Naberegnaya Pobedy, 50
+23	1469	34	09909	Lavrska, str 34
 \.
 
 
@@ -2258,7 +2274,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('address_id_seq', 22, true);
+SELECT pg_catalog.setval('address_id_seq', 23, true);
 
 
 --
@@ -2287,7 +2303,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-2c4fa46c1704
+282012598f63
 \.
 
 
@@ -2402,6 +2418,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 50	+380682345678	phone	1380
 51	+380502232233	phone	1387
 52	+380502354235	phone	1404
+53	+380503435512	phone	1464
 \.
 
 
@@ -2409,7 +2426,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 52, true);
+SELECT pg_catalog.setval('contact_id_seq', 53, true);
 
 
 --
@@ -2466,6 +2483,9 @@ COPY currency_rate (id, resource_id, date, currency_id, rate) FROM stdin;
 6	1401	2014-05-16	54	16.60
 7	1402	2014-05-15	54	16.80
 8	1403	2014-05-15	57	11.80
+9	1504	2014-06-20	54	16.70
+10	1505	2014-06-20	57	12.00
+11	1506	2014-06-20	44	0.37
 \.
 
 
@@ -2473,7 +2493,7 @@ COPY currency_rate (id, resource_id, date, currency_id, rate) FROM stdin;
 -- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('currency_rate_id_seq', 8, true);
+SELECT pg_catalog.setval('currency_rate_id_seq', 11, true);
 
 
 --
@@ -2538,6 +2558,22 @@ COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
 7	1	30000.00	2014-06-08
 8	1	37000.00	2014-06-06
 9	1	39000.00	2014-06-06
+10	1	10.00	2014-06-15
+11	2	334.00	2014-06-18
+12	2	334.00	2014-06-18
+46	2	500.00	2014-06-18
+47	2	1474.00	2014-06-18
+48	2	0.80	2014-06-27
+49	2	2298.00	2014-06-22
+50	1	27702.00	2014-06-22
+53	2	137.60	2014-06-22
+54	1	862.40	2014-06-22
+55	2	0.00	2014-06-22
+56	1	2693.60	2014-06-22
+57	2	137.60	2014-06-22
+58	1	862.40	2014-06-22
+59	2	0.00	2014-06-22
+60	1	2693.60	2014-06-22
 \.
 
 
@@ -2545,7 +2581,7 @@ COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
 -- Name: fin_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('fin_transaction_id_seq', 9, true);
+SELECT pg_catalog.setval('fin_transaction_id_seq', 60, true);
 
 
 --
@@ -2606,6 +2642,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 31	1364	5	The Desert Rose Resort	30
 32	1367	4	Rehana Sharm Resort	31
 33	1386	4	Fantasia	32
+34	1470	5	Villa Augusto	21
 \.
 
 
@@ -2613,7 +2650,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 -- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('hotel_id_seq', 33, true);
+SELECT pg_catalog.setval('hotel_id_seq', 34, true);
 
 
 --
@@ -2646,6 +2683,11 @@ SELECT pg_catalog.setval('hotelcat_id_seq', 8, true);
 COPY income (id, resource_id, invoice_id) FROM stdin;
 5	1447	10
 6	1448	8
+7	1485	10
+19	1499	13
+20	1500	13
+21	1501	13
+23	1509	14
 \.
 
 
@@ -2653,7 +2695,7 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('income_id_seq', 6, true);
+SELECT pg_catalog.setval('income_id_seq', 23, true);
 
 
 --
@@ -2663,6 +2705,12 @@ SELECT pg_catalog.setval('income_id_seq', 6, true);
 COPY income_transactions (income_id, fin_transaction_id) FROM stdin;
 6	7
 5	9
+7	10
+19	46
+20	47
+21	48
+23	59
+23	60
 \.
 
 
@@ -2672,8 +2720,10 @@ COPY income_transactions (income_id, fin_transaction_id) FROM stdin;
 
 COPY invoice (id, date, resource_id, account_id) FROM stdin;
 8	2014-06-05	1440	3
-9	2014-06-07	1441	2
 10	2014-06-06	1442	2
+13	2014-06-16	1487	3
+15	2014-06-16	1503	3
+14	2014-06-22	1502	4
 \.
 
 
@@ -2681,7 +2731,7 @@ COPY invoice (id, date, resource_id, account_id) FROM stdin;
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 10, true);
+SELECT pg_catalog.setval('invoice_id_seq', 15, true);
 
 
 --
@@ -2730,6 +2780,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 31	1366	Nabk Bey	32
 32	1385	Svalyava	33
 33	1417	Dnepropetrovsk	34
+34	1468	Lviv	22
 \.
 
 
@@ -2737,7 +2788,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 -- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('location_id_seq', 33, true);
+SELECT pg_catalog.setval('location_id_seq', 34, true);
 
 
 --
@@ -2748,9 +2799,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 9	4	8	Resource Types	/resources_types	\N	1	779
 18	4	\N	Company	/	fa fa-building-o	7	837
 10	4	\N	HR	/	fa fa-group	6	780
-51	4	32	Invoices	/invoices	\N	2	1368
 26	4	\N	Marketing	/	fa fa-bullhorn	5	900
-38	4	32	Tours	/tours	\N	2	1075
 7	4	\N	Home	/	fa fa-home	1	777
 21	4	\N	Clientage	/	fa fa-briefcase	4	864
 15	4	8	Users	/users	\N	2	792
@@ -2784,9 +2833,11 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 54	4	53	Currency Rates	/currencies_rates	\N	7	1395
 56	4	53	Income Payments	incomes	\N	8	1434
 58	4	53	Outgoing Payments	/outgoing	\N	12	1449
-50	4	53	Services	/services	\N	1	1312
 55	4	53	Accounts Items	/accounts_items	\N	3	1425
-52	4	32	Services	/services_sales	\N	3	1369
+50	4	53	Services List	/services	\N	1	1312
+52	4	32	Services	/services_sales	\N	2	1369
+38	4	32	Tours	/tours	\N	3	1075
+51	4	32	Invoices	/invoices	\N	2	1368
 \.
 
 
@@ -2805,6 +2856,7 @@ COPY passport (id, country_id, passport_type, num, descr, resource_id, end_date)
 9	3	citizen	HK123456	\N	1376	\N
 10	3	citizen	HK12345	\N	1381	\N
 11	3	citizen	PO123456	\N	1406	\N
+12	3	citizen	TY3456	\N	1467	2016-04-10
 \.
 
 
@@ -2812,7 +2864,7 @@ COPY passport (id, country_id, passport_type, num, descr, resource_id, end_date)
 -- Name: passport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('passport_id_seq', 11, true);
+SELECT pg_catalog.setval('passport_id_seq', 12, true);
 
 
 --
@@ -2887,6 +2939,10 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 26	1409	Natalia	Klishunova		1978-08-10	male
 27	1410	Maxim	Klishunov		2005-02-16	male
 28	1411	Ann	Klishunova		2013-02-14	female
+29	1465	Eugen	Velichko		1982-04-07	male
+30	1471	Irina	Avdeeva		1984-11-21	female
+31	1472	Velichko	Alexander		2006-01-11	male
+32	1473	Velichko	Elizabeth		2010-06-15	female
 \.
 
 
@@ -2902,6 +2958,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 23	18
 24	19
 25	20
+29	23
 \.
 
 
@@ -2919,6 +2976,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 22	49
 23	51
 25	52
+29	53
 \.
 
 
@@ -2926,7 +2984,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('person_id_seq', 28, true);
+SELECT pg_catalog.setval('person_id_seq', 32, true);
 
 
 --
@@ -2938,6 +2996,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 20	9
 22	10
 25	11
+29	12
 \.
 
 
@@ -3435,7 +3494,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1438	107	32	f
 1439	107	32	f
 1440	103	32	f
-1441	103	32	f
 1442	103	32	f
 1447	106	32	f
 1448	106	32	f
@@ -3446,6 +3504,44 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1454	108	32	f
 1455	108	32	f
 1456	109	32	f
+1457	108	32	f
+1458	108	32	f
+1459	108	32	f
+1460	108	32	f
+1461	108	32	f
+1462	108	32	f
+1463	108	32	f
+1464	87	32	f
+1465	69	32	f
+1467	89	32	f
+1468	84	32	f
+1469	90	32	f
+1470	83	32	f
+1471	69	32	f
+1472	69	32	f
+1473	69	32	f
+1474	108	32	f
+1475	108	32	f
+1476	108	32	f
+1477	108	32	f
+1478	108	32	f
+1479	108	32	f
+1480	92	32	f
+1481	108	32	f
+1482	108	32	f
+1483	108	32	f
+1485	106	32	f
+1487	103	32	f
+1499	106	32	f
+1500	106	32	f
+1501	106	32	f
+1502	103	32	f
+1503	103	32	f
+1504	104	32	f
+1505	104	32	f
+1506	104	32	f
+1507	107	32	f
+1509	106	32	f
 \.
 
 
@@ -4086,7 +4182,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5667	1438	2	\N	2014-06-07 21:11:01.089928
 5668	1439	2	\N	2014-06-07 21:11:46.797584
 5669	1440	2	\N	2014-06-07 22:15:09.567299
-5670	1441	2	\N	2014-06-07 22:15:51.511779
 5671	1442	2	\N	2014-06-07 22:16:04.586659
 5676	1447	2	\N	2014-06-08 21:25:14.638119
 5677	1448	2	\N	2014-06-08 21:25:35.09515
@@ -4097,6 +4192,44 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5683	1454	2	\N	2014-06-09 20:42:20.973803
 5684	1455	2	\N	2014-06-09 20:42:41.688175
 5685	1456	2	\N	2014-06-09 20:42:48.878295
+5686	1457	2	\N	2014-06-09 22:18:32.577688
+5687	1458	2	\N	2014-06-09 22:18:59.404909
+5688	1459	2	\N	2014-06-09 22:19:29.172655
+5689	1460	2	\N	2014-06-09 22:19:48.16963
+5690	1461	2	\N	2014-06-09 22:20:11.231267
+5691	1462	2	\N	2014-06-13 22:46:08.190119
+5692	1463	2	\N	2014-06-13 22:46:42.967863
+5693	1464	2	\N	2014-06-14 17:55:00.252916
+5694	1465	2	\N	2014-06-14 17:55:08.213215
+5695	1467	2	\N	2014-06-14 17:56:52.935007
+5696	1468	2	\N	2014-06-14 17:58:15.339465
+5697	1469	2	\N	2014-06-14 17:58:37.034547
+5698	1470	2	\N	2014-06-14 18:00:56.71432
+5699	1471	2	\N	2014-06-14 18:02:10.63169
+5700	1472	2	\N	2014-06-14 18:02:54.98084
+5701	1473	2	\N	2014-06-14 18:03:27.411198
+5702	1474	2	\N	2014-06-14 18:04:28.298657
+5703	1475	2	\N	2014-06-14 18:05:22.160315
+5704	1476	2	\N	2014-06-14 18:06:04.93612
+5705	1477	2	\N	2014-06-14 18:06:52.83967
+5706	1478	2	\N	2014-06-14 18:07:42.799714
+5707	1479	2	\N	2014-06-14 18:09:13.451489
+5708	1480	2	\N	2014-06-14 18:09:57.549927
+5709	1481	2	\N	2014-06-14 18:20:00.741016
+5710	1482	2	\N	2014-06-14 18:20:32.755332
+5711	1483	2	\N	2014-06-14 18:21:04.54574
+5713	1485	2	\N	2014-06-15 15:17:28.256792
+5715	1487	2	\N	2014-06-16 14:42:17.062016
+5727	1499	2	\N	2014-06-18 16:58:43.052752
+5728	1500	2	\N	2014-06-18 16:59:05.631362
+5729	1501	2	\N	2014-06-22 12:08:09.44975
+5730	1502	2	\N	2014-06-22 19:40:05.464875
+5731	1503	2	\N	2014-06-22 19:40:20.79663
+5732	1504	2	\N	2014-06-22 19:42:44.939368
+5733	1505	2	\N	2014-06-22 19:43:05.103699
+5734	1506	2	\N	2014-06-22 19:43:23.157992
+5735	1507	2	\N	2014-06-22 19:46:21.388635
+5737	1509	2	\N	2014-06-22 21:15:50.586549
 \.
 
 
@@ -4214,10 +4347,26 @@ SELECT pg_catalog.setval('service_id_seq', 5, true);
 -- Data for Name: service_item; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, price, person_id) FROM stdin;
-1	1453	4	57	57	60.00	21
-2	1454	4	57	5	60.00	20
-3	1455	4	57	5	60.00	21
+COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, price, person_id, base_price) FROM stdin;
+1	1453	4	57	57	60.00	21	\N
+2	1454	4	57	5	60.00	20	\N
+4	1457	3	57	2	20.00	20	\N
+5	1458	3	57	5	20.00	27	\N
+6	1459	4	54	1	60.00	20	\N
+7	1460	1	57	5	100.00	25	\N
+8	1461	3	54	57	67.00	6	\N
+9	1462	4	57	5	60.00	21	726.00
+10	1463	4	57	5	60.00	20	726.00
+3	1455	4	54	1	20.00	21	334.00
+17	1481	1	57	1	54.00	20	653.40
+18	1482	1	57	1	54.00	21	653.40
+19	1483	4	54	1	20.00	20	334.00
+11	1474	3	54	1	10.00	32	167.00
+12	1475	3	54	1	10.00	31	167.00
+13	1476	3	54	1	20.00	29	334.00
+14	1477	3	54	1	20.00	30	334.00
+15	1478	1	57	1	54.00	29	648.00
+16	1479	1	57	1	54.00	30	648.00
 \.
 
 
@@ -4225,7 +4374,7 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 -- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('service_item_id_seq', 3, true);
+SELECT pg_catalog.setval('service_item_id_seq', 19, true);
 
 
 --
@@ -4249,6 +4398,7 @@ SELECT pg_catalog.setval('service_sale_id_seq', 1, true);
 --
 
 COPY service_sale_invoice (service_sale_id, invoice_id) FROM stdin;
+1	13
 \.
 
 
@@ -4258,6 +4408,9 @@ COPY service_sale_invoice (service_sale_id, invoice_id) FROM stdin;
 
 COPY service_sale_service_item (service_sale_id, service_item_id) FROM stdin;
 1	3
+1	19
+1	18
+1	17
 \.
 
 
@@ -4286,6 +4439,7 @@ COPY structure (id, resource_id, parent_id, name, invoice_template) FROM stdin;
 COPY structure_account (structure_id, account_id) FROM stdin;
 32	2
 32	3
+32	4
 \.
 
 
@@ -4355,10 +4509,11 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 -- Data for Name: tour; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id, price, adults, children, customer_id, resource_id, end_date, start_date, deal_date, advsource_id, service_id) FROM stdin;
-12	61	14	14	56	8520.0000	2	2	25	1412	2014-07-25	2014-07-14	2014-07-14	4	5
-10	1	15	15	54	3534.0000	2	0	20	1377	2014-06-07	2014-06-01	2014-05-16	4	5
-9	5	15	15	54	2350.0000	2	1	17	1295	2014-05-09	2014-05-01	2014-04-29	6	5
+COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id, price, adults, children, customer_id, resource_id, end_date, start_date, deal_date, advsource_id, service_id, base_price) FROM stdin;
+12	61	14	14	56	8520.0000	2	2	25	1412	2014-07-25	2014-07-14	2014-07-14	4	5	8520.00
+10	1	15	15	54	3534.0000	2	0	20	1377	2014-06-07	2014-06-01	2014-05-20	4	5	59017.80
+9	5	15	15	54	2350.0000	2	1	17	1295	2014-05-09	2014-05-01	2014-05-17	6	5	39010.00
+13	1	15	15	54	3556.0000	2	2	29	1480	2014-07-20	2014-07-14	2014-06-22	2	5	59385.20
 \.
 
 
@@ -4366,7 +4521,7 @@ COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id,
 -- Name: tour_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_id_seq', 12, true);
+SELECT pg_catalog.setval('tour_id_seq', 13, true);
 
 
 --
@@ -4375,8 +4530,9 @@ SELECT pg_catalog.setval('tour_id_seq', 12, true);
 
 COPY tour_invoice (tour_id, invoice_id) FROM stdin;
 10	8
-12	9
 9	10
+13	14
+12	15
 \.
 
 
@@ -4385,15 +4541,19 @@ COPY tour_invoice (tour_id, invoice_id) FROM stdin;
 --
 
 COPY tour_person (tour_id, person_id) FROM stdin;
-12	26
-12	27
-12	25
 12	28
+12	25
+12	27
+12	26
 10	21
 10	20
+9	18
 9	19
 9	17
-9	18
+13	32
+13	30
+13	29
+13	31
 \.
 
 
@@ -4406,6 +4566,7 @@ COPY tour_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat
 61	27	27	10	11	\N	10	\N	2014-06-07	2014-06-01
 62	32	33	10	11	29	\N	\N	2014-07-18	2014-07-12
 63	32	33	10	10	29	12	\N	2014-07-25	2014-07-14
+64	21	34	\N	\N	\N	13	\N	2014-07-20	2014-07-14
 \.
 
 
@@ -4413,7 +4574,23 @@ COPY tour_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat
 -- Name: tour_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_point_id_seq', 63, true);
+SELECT pg_catalog.setval('tour_point_id_seq', 64, true);
+
+
+--
+-- Data for Name: tour_service_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY tour_service_item (tour_id, service_item_id) FROM stdin;
+10	9
+10	10
+13	11
+13	13
+13	12
+13	15
+13	14
+13	16
+\.
 
 
 --
@@ -4929,6 +5106,14 @@ ALTER TABLE ONLY tour_point
 
 
 --
+-- Name: tour_service_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY tour_service_item
+    ADD CONSTRAINT tour_service_item_pkey PRIMARY KEY (tour_id, service_item_id);
+
+
+--
 -- Name: touroperator_bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -5134,6 +5319,14 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY tour_point
     ADD CONSTRAINT fk_accomodation_id_tour_point FOREIGN KEY (accomodation_id) REFERENCES accomodation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY invoice
+    ADD CONSTRAINT fk_account_id_invoice FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5425,6 +5618,14 @@ ALTER TABLE ONLY tour
 
 
 --
+-- Name: fk_fin_transaction_id_income_transactions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY income_transactions
+    ADD CONSTRAINT fk_fin_transaction_id_income_transactions FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_foodcat_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5446,6 +5647,22 @@ ALTER TABLE ONLY tour_point
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_hotelcat_id_hotel FOREIGN KEY (hotelcat_id) REFERENCES hotelcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_income_id_income_transactions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY income_transactions
+    ADD CONSTRAINT fk_income_id_income_transactions FOREIGN KEY (income_id) REFERENCES income(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY income
+    ADD CONSTRAINT fk_invoice_id_income FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5737,6 +5954,22 @@ ALTER TABLE ONLY hotelcat
 
 
 --
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY income
+    ADD CONSTRAINT fk_resource_id_income FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY invoice
+    ADD CONSTRAINT fk_resource_id_invoice FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5937,6 +6170,14 @@ ALTER TABLE ONLY service_sale_service_item
 
 
 --
+-- Name: fk_service_item_id_tour_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour_service_item
+    ADD CONSTRAINT fk_service_item_id_tour_service_item FOREIGN KEY (service_item_id) REFERENCES service_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_service_sale_id_service_sale_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6038,6 +6279,14 @@ ALTER TABLE ONLY tour_person
 
 ALTER TABLE ONLY tour_point
     ADD CONSTRAINT fk_tour_id_tour_point FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_tour_id_tour_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour_service_item
+    ADD CONSTRAINT fk_tour_id_tour_service_item FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
