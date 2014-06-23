@@ -10,14 +10,15 @@ from ..models import DBSession
 from ..models.tour import Tour
 from ..models.tour_point import TourPoint
 from ..models.person import Person
+from ..models.service_item import ServiceItem
 from ..lib.qb.tours import (
     ToursQueryBuilder,
     ToursPointsQueryBuilder,
 )
 from ..resources.invoices import Invoices
 
+from ..lib.bl.tours import calc_base_price
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..forms.tours import (
     TourSchema,
     TourPointSchema,
@@ -119,6 +120,10 @@ class Tours(object):
             for id in controls.get('person_id'):
                 person = Person.get(id)
                 tour.persons.append(person)
+            for id in controls.get('service_item_id'):
+                service_item = ServiceItem.get(id)
+                tour.services_items.append(service_item)
+            tour = calc_base_price(tour)
             DBSession.add(tour)
             DBSession.flush()
             return {
@@ -172,12 +177,17 @@ class Tours(object):
             tour.end_date = controls.get('end_date')
             tour.points = []
             tour.persons = []
+            tour.services_items = []
             for point in controls.get('tour_point_id', []):
                 point = TourPoint.get(point)
                 tour.points.append(point)
             for id in controls.get('person_id'):
                 person = Person.get(id)
                 tour.persons.append(person)
+            for id in controls.get('service_item_id'):
+                service_item = ServiceItem.get(id)
+                tour.services_items.append(service_item)
+            tour = calc_base_price(tour)
             return {
                 'success_message': _(u'Saved'),
                 'response': tour.id
@@ -221,6 +231,7 @@ class Tours(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Tours'),
             'id': self.request.params.get('id')
         }
 
@@ -232,10 +243,23 @@ class Tours(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            tour = Tour.get(id)
-            if tour:
-                DBSession.delete(tour)
+            item = Tour.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}
 
     @view_config(

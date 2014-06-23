@@ -12,65 +12,58 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off", id=_form_id)}
-        <div class="easyui-tabs h100" data-options="border:false,height:400">
-            <div title="${_(u'Main')}">
-                <script type="text/javascript">
-                    function calc_sum_${_id}(){
-                    	var resource_id = ${resource_id};
-                    	var date = $('#${_form_id} [name=date]').val();
-                    	var account_id = $('#${_form_id} [name=account_id]').val();
-                    	$.ajax({
-                    		url: '${request.resource_url(_context, 'sum')}',
-                    		type: 'post',
-                    		dataType: 'json',
-                    		data: {'resource_id': resource_id, 'date': date, 'account_id': account_id},
-                    		success: function(json){
-                    			if(json.sum) $('#${_form_id} [name=invoice_sum]').val(json.currency + ' ' + json.sum);
-                    		}
-                    	});
-                    }
-                </script>
-		        <div class="form-field">
-		            <div class="dl15">
-		                ${h.tags.title(_(u"invoice date"), True, "date")}
-		            </div>
-		            <div class="ml15">
-		                ${h.fields.date_field(item.date if item else None, 'date', options="onSelect: function(index, data){calc_sum_%s();}" % _id)}
-		                ${h.common.error_container(name='date')}
-		            </div>
-		        </div>
-		        <div class="form-field mb05">
-		            <div class="dl15">
-		                ${h.tags.title(_(u"account"), True, "account_id")}
-		            </div>
-		            <div class="ml15">
-		                ${h.fields.accounts_combobox_field(
-		                    request, item.account_id if item else None, 
-		                    show_toolbar=False, structure_id=structure_id,
-		                    options="onSelect: function(index, data){calc_sum_%s();}" % _id
-		                )}
-		                ${h.common.error_container(name='account_id')}
-		            </div>
-		        </div>
-		        ${infoblock(_(u"Automaticaly calculated"))}
-                <div class="form-field mt05">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"invoice sum"), false, "invoice_sum")}
-                    </div>
-                    <div class="ml15">
-                        ${h.tags.text('invoice_sum', '', class_="text w20", disabled=True)}
-                    </div>
-                </div>
-                % if item:
-                <script type="text/javascript">
-                calc_sum_${_id}();
-                </script>
-                % endif
-	        </div>
-	        <div title="${_(u'Info')}">
-                
-	        </div>
+        <script type="text/javascript">
+            function calc_sum_${_id}(){
+            	var resource_id = ${resource_id};
+            	var date = $('#${_form_id} [name=date]').val();
+            	var account_id = $('#${_form_id} [name=account_id]').val();
+            	$.ajax({
+            		url: '${request.resource_url(_context, 'invoice_sum')}',
+            		type: 'post',
+            		dataType: 'json',
+            		data: {'resource_id': resource_id, 'date': date, 'account_id': account_id},
+            		success: function(json){
+            			if(json.invoice_sum) $('#${_form_id} [name=invoice_sum]').val(json.currency + ' ' + json.invoice_sum);
+            		}
+            	});
+            }
+        </script>
+        <div class="form-field mt05">
+            <div class="dl15">
+                ${h.tags.title(_(u"invoice date"), True, "date")}
+            </div>
+            <div class="ml15">
+                ${h.fields.date_field(item.date if item else None, 'date', options="onSelect: function(index, data){calc_sum_%s();}" % _id)}
+                ${h.common.error_container(name='date')}
+            </div>
         </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"account"), True, "account_id")}
+            </div>
+            <div class="ml15">
+                ${h.fields.accounts_combobox_field(
+                    request, item.account_id if item else None, 
+                    show_toolbar=False, structure_id=structure_id,
+                    options="onSelect: function(index, data){calc_sum_%s();}" % _id
+                )}
+                ${h.common.error_container(name='account_id')}
+            </div>
+        </div>
+        ${infoblock(_(u"Automaticaly calculated"))}
+        <div class="form-field mb05 mt1">
+            <div class="dl15">
+                ${h.tags.title(_(u"invoice sum"), false, "invoice_sum")}
+            </div>
+            <div class="ml15">
+                ${h.tags.text('invoice_sum', '', class_="text w20", disabled=True)}
+            </div>
+        </div>
+        % if item:
+        <script type="text/javascript">
+        calc_sum_${_id}();
+        </script>
+        % endif
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">

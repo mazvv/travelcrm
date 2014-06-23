@@ -195,6 +195,7 @@ class Structures(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Structures'),
             'id': self.request.params.get('id')
         }
 
@@ -206,8 +207,21 @@ class Structures(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            structure = Structure.get(id)
-            if structure:
-                DBSession.delete(structure)
+            item = Structure.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

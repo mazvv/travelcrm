@@ -33,7 +33,7 @@
 			<th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
 			<th data-options="field:'iso_code',sortable:true,width:100">${_(u"iso code")}</th>
 			<th data-options="field:'rate',sortable:true,width:80,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"rate")}</th>
-			<th data-options="field:'date',width:80">${_(u"date")}</th>
+			<th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

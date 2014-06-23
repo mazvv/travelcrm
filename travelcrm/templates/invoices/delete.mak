@@ -1,5 +1,5 @@
 <div class="dl40 easyui-dialog"
-    title="${_(u'Delete Countries')}"
+    title="${title}"
     data-options="
         modal:true,
         resizable:false,
@@ -7,7 +7,7 @@
     ">
     ${h.tags.form(request.resource_url(_context, 'delete'), class_="_ajax", autocomplete="off", hidden_fields=[('id', id) for id in request.params.get('id').split(',')])}
         <div class="p1">
-            <div class="mb1">
+            <div class="tc">
                 <i class="fa fa-info-circle fa-lg"></i> 
                 ${_(u"Do you realy want to delete checked items?")}
             </div>

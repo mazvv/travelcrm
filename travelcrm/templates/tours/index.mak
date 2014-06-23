@@ -85,12 +85,14 @@
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'deal_date',sortable:true,width:80">${_(u"deal date")}</th>
             <th data-options="field:'customer',sortable:true,width:140">${_(u"customer")}</th>
             <th data-options="field:'country',sortable:true,width:100">${_(u"country")}</th>
             <th data-options="field:'hotel_cat',sortable:true,width:60">${_(u"hotel cat")}</th>
-            <th data-options="field:'price',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
+            <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'start_date',sortable:true,width:80">${_(u"start")}</th>
             <th data-options="field:'end_date',sortable:true,width:80">${_(u"end")}</th>
+            <th data-options="field:'invoice_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-text\' title=\'${_(u"invoice already exists")}\'></span>':'';}" align="center"></th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

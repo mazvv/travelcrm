@@ -164,3 +164,9 @@ class ServiceSale(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @property
+    def base_sum(self):
+        return sum(
+            service_item.base_price for service_item in self.services_items
+        )

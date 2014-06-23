@@ -9,6 +9,8 @@ from pyramid.interfaces import ITranslationDirectories
 
 from pyramid.i18n import make_localizer, get_localizer
 
+from sqlalchemy import cast, Numeric
+
 
 def _get_settings_value(name):
     registry = get_current_registry()
@@ -54,3 +56,7 @@ def get_company_name():
 
 def get_base_currency():
     return _get_settings_value('company.base_currency')
+
+
+def money_cast(attr):
+    return cast(attr, Numeric(16, 2))

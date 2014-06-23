@@ -149,6 +149,7 @@ class AccountsItems(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Accounts Items'),
             'rid': self.request.params.get('rid')
         }
 
@@ -160,8 +161,21 @@ class AccountsItems(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            account_item = AccountItem.get(id)
-            if account_item:
-                DBSession.delete(account_item)
+            item = AccountItem.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

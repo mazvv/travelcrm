@@ -1,7 +1,7 @@
 # -*coding: utf-8-*-
 from collections import Iterable
 
-from sqlalchemy import cast, func, Numeric
+from sqlalchemy import func
 
 from . import ResourcesQueryBuilder
 from ...models import DBSession
@@ -15,6 +15,7 @@ from ...models.fin_transaction import FinTransaction
 
 from ...lib.bl.invoices import query_resource_data
 from ...lib.bl.currencies_rates import query_convert_rates
+from ...lib.utils.common_utils import money_cast
 
 
 class InvoicesQueryBuilder(ResourcesQueryBuilder):
@@ -25,19 +26,18 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
     )
 
     _subq_resource_data = query_resource_data().subquery()
-    _sum_invoice = cast(
+    _subq_rate = (
+        query_convert_rates(
+            Account.currency_id,
+            Invoice.date
+        )
+        .as_scalar()
+    )
+    _subq_invoice_sum = money_cast(
         func.coalesce(
-            _subq_resource_data.c.sum * (
-                query_convert_rates(
-                    _subq_resource_data.c.currency_id,
-                    Account.currency_id,
-                    Invoice.date
-                )
-                .subquery()
-            ),
+            _subq_resource_data.c.sum / _subq_rate,
             _subq_resource_data.c.sum
-        ),
-        Numeric(16, 2)
+        )
     )
     _sum_payments = (
         DBSession.query(
@@ -54,10 +54,10 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         'date': Invoice.date,
         'account': Account.name,
         'account_type': Account.account_type,
-        'sum': _sum_invoice.label('sum'),
+        'sum': _subq_invoice_sum.label('sum'),
         'payments': func.coalesce(_sum_payments.c.sum, 0),
         'payments_percent': func.round(
-            100 * func.coalesce(_sum_payments.c.sum, 0) / _sum_invoice,
+            100 * func.coalesce(_sum_payments.c.sum, 0) / _subq_invoice_sum,
             2
         ),
         'resource_type': _subq_resource_type.c.humanize,

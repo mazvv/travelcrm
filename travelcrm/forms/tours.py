@@ -103,6 +103,10 @@ class TourSchema(ResourceSchema):
         colander.Set(),
         validator=person_validator
     )
+    service_item_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[]
+    )
 
     def deserialize(self, cstruct):
         if (
@@ -120,6 +124,14 @@ class TourSchema(ResourceSchema):
             val = cstruct['person_id']
             cstruct['person_id'] = list()
             cstruct['person_id'].append(val)
+
+        if (
+            'service_item_id' in cstruct
+            and not isinstance(cstruct.get('service_item_id'), list)
+        ):
+            val = cstruct['service_item_id']
+            cstruct['service_item_id'] = list()
+            cstruct['service_item_id'].append(val)
 
         return super(TourSchema, self).deserialize(cstruct)
 

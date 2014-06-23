@@ -145,6 +145,7 @@ class Accomodations(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Accomodations'),
             'rid': self.request.params.get('rid')
         }
 
@@ -156,8 +157,21 @@ class Accomodations(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            accomodation = Accomodation.get(id)
-            if accomodation:
-                DBSession.delete(accomodation)
+            item = Accomodation.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

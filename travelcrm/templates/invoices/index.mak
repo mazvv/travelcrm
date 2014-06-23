@@ -44,6 +44,10 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl45">
             <div class="button-group">
+                 <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'info')}'">
+                    <span class="fa fa-lightbulb-o"></span>${_(u'Info')}
+                </a>
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">

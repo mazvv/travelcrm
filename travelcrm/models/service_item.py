@@ -76,6 +76,11 @@ class ServiceItem(Base):
         Numeric(16, 2),
         nullable=False,
     )
+    base_price = Column(
+        Numeric(16, 2),
+        default=0,
+        nullable=False
+    )
     resource = relationship(
         'Resource',
         backref=backref(

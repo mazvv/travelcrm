@@ -146,6 +146,7 @@ class Foodcats(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Food Categories'),
             'rid': self.request.params.get('rid')
         }
 
@@ -157,8 +158,21 @@ class Foodcats(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            foodcat = Foodcat.get(id)
-            if foodcat:
-                DBSession.delete(foodcat)
+            item = Foodcat.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

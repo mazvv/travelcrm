@@ -47,6 +47,10 @@ def query_row_serialize_format(row):
     return res_row
 
 
+def query_serialize(query):
+    return [query_row_serialize_format(row) for row in query]
+
+
 class GeneralQueryBuilder(object):
     __metaclass__ = ABCMeta
 

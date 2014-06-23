@@ -146,6 +146,7 @@ class Advsources(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Advertises Sources'),
             'rid': self.request.params.get('rid')
         }
 
@@ -157,8 +158,21 @@ class Advsources(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            advsource = Advsource.get(id)
-            if advsource:
-                DBSession.delete(advsource)
+            item = Advsource.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

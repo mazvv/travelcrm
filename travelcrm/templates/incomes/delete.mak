@@ -1,5 +1,5 @@
 <div class="dl40 easyui-dialog"
-    title="${_(u'Delete Payments')}"
+    title="${title}"
     data-options="
         modal:true,
         resizable:false,

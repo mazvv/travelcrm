@@ -194,6 +194,7 @@ class Employees(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Employees'),
             'rid': self.request.params.get('rid')
         }
 
@@ -205,8 +206,21 @@ class Employees(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            employee = Employee.get(id)
-            if employee:
-                DBSession.delete(employee)
+            item = Employee.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

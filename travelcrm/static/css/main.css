@@ -27,7 +27,7 @@ danger - #e87352
 /** emastic hacks **/
 .main{
     width: auto;
-    max-width: 115em;
+    max-width: 130em;
     min-width: 110em;
 }
 html, body{
@@ -47,7 +47,6 @@ p{
 }
 #_page_{
 	background-color: #f4f4f4;
-	min-width: 1128px;
 }
 
 #_head_{
@@ -643,7 +642,7 @@ div.image-thumb{
 
 /** payment indicator **/
 div.payment-indicator{
-	background-color: #ccc;
+	background-color: #fafafa;
 	height: 12px;
 	position: relative;
 }
@@ -651,15 +650,15 @@ div.payment-indicator span{
 	position: absolute;
 	display: block;
 	height: 12px;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
-    top: -2px;
-    font-size: 10px;
-    font-weight: 700;
+	left:0;
+	right:0;
+	margin-left:auto;
+	margin-right:auto;
+	top: -2px;
+	font-size: 10px;
+	font-weight: 700;
 }
 div.payment-indicator div{
-	background-color: #31c0be;
+	background-color: #ccc;
 	height: 12px;
 }

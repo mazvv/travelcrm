@@ -1,5 +1,6 @@
 <%namespace file="../common/grid_selectors.mak" import="tour_points_selector"/>
 <%namespace file="../common/grid_selectors.mak" import="persons_selector"/>
+<%namespace file="../common/grid_selectors.mak" import="services_items_selector"/>
 <div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
@@ -9,7 +10,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-        <div class="easyui-tabs h100" data-options="border:false,height:400">
+        <div class="easyui-tabs" data-options="border:false,height:400">
             <div title="${_(u'Main')}">
                 <div class="form-field">
                     <div class="dl15">
@@ -134,6 +135,12 @@
             <div title="${_(u'Members')}">
                 ${persons_selector(
                     values=([person.id for person in item.persons] if item else []),
+                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+                )}
+            </div>
+            <div title="${_(u'Services Items')}">
+                ${services_items_selector(
+                    values=([service_item.id for service_item in item.services_items] if item else []),
                     can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
                 )}
             </div>

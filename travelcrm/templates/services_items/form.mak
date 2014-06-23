@@ -30,7 +30,7 @@
                 ${h.tags.title(_(u"person"), True, "person_id")}
             </div>
             <div class="ml15">
-                ${h.fields.persons_combobox_field(request, item.customer_id if item else None)}
+                ${h.fields.persons_combobox_field(request, item.person_id if item else None)}
                 ${h.common.error_container(name="person_id")}
             </div>
         </div>

@@ -4,12 +4,15 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.service_sale import ServiceSale
 from ..models.service_item import ServiceItem
+from ..resources.invoices import Invoices
 from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 
+from ..lib.bl.services_sales import calc_base_price
 from ..lib.utils.common_utils import translate as _
 from ..forms.services_sales import ServiceSaleSchema
 
@@ -98,6 +101,7 @@ class ServicesSales(object):
             for id in controls.get('service_item_id'):
                 service_item = ServiceItem.get(id)
                 service_sale.services_items.append(service_item)
+            service_sale = calc_base_price(service_sale)
             DBSession.add(service_sale)
             DBSession.flush()
             return {
@@ -143,6 +147,7 @@ class ServicesSales(object):
             for id in controls.get('service_item_id', []):
                 service_item = ServiceItem.get(id)
                 service_sale.services_items.append(service_item)
+            service_sale = calc_base_price(service_sale)
             return {
                 'success_message': _(u'Saved'),
                 'response': service_sale.id
@@ -186,6 +191,7 @@ class ServicesSales(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Services Sales'),
             'id': self.request.params.get('id')
         }
 
@@ -197,8 +203,42 @@ class ServicesSales(object):
         permission='delete'
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            service_sale = ServiceSale.get(id)
-            if service_sale:
-                DBSession.delete(service_sale)
+            item = ServiceSale.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='invoice',
+        context='..resources.services_sales.ServicesSales',
+        request_method='GET',
+        permission='invoice'
+    )
+    def invoice(self):
+        service_sale = ServiceSale.get(self.request.params.get('id'))
+        if service_sale:
+            return HTTPFound(
+                self.request.resource_url(
+                    Invoices(self.request),
+                    'add' if not service_sale.invoice else 'edit',
+                    query=(
+                        {'resource_id': service_sale.resource.id}
+                        if not service_sale.invoice
+                        else {'id': service_sale.invoice.id}
+                    )
+                )
+            )

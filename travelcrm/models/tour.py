@@ -12,7 +12,7 @@ from sqlalchemy.orm import relationship, backref
 
 from ..models import (
     DBSession,
-    Base
+    Base,
 )
 
 
@@ -42,6 +42,34 @@ tour_person = Table(
         primary_key=True,
     ),
 )
+
+tour_service_item = Table(
+    'tour_service_item',
+    Base.metadata,
+    Column(
+        'tour_id',
+        Integer,
+        ForeignKey(
+            'tour.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_tour_id_tour_service_item',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'service_item_id',
+        Integer,
+        ForeignKey(
+            'service_item.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_service_item_id_tour_service_item',
+        ),
+        primary_key=True,
+    ),
+)
+
 
 tour_invoice = Table(
     'tour_invoice',
@@ -146,6 +174,10 @@ class Tour(Base):
             onupdate='cascade',
         ),
         nullable=False,
+    )
+    base_price = Column(
+        Numeric(16, 2),
+        nullable=False
     )
     adults = Column(
         Integer,
@@ -268,6 +300,15 @@ class Tour(Base):
         ),
         uselist=True,
     )
+    services_items = relationship(
+        'ServiceItem',
+        secondary=tour_service_item,
+        backref=backref(
+            'tour',
+            uselist=False,
+        ),
+        uselist=True,
+    )
     invoice = relationship(
         'Invoice',
         secondary=tour_invoice,
@@ -283,3 +324,10 @@ class Tour(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @property
+    def base_sum(self):
+        return sum(
+            [self.base_price, ]
+            + [service_item.base_price for service_item in self.services_items]
+        )

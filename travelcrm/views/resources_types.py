@@ -181,6 +181,7 @@ class ResourcesTypes(object):
     )
     def delete(self):
         return {
+            'title': _(u'Delete Resources Types'),
             'id': self.request.params.get('id')
         }
 
@@ -192,8 +193,21 @@ class ResourcesTypes(object):
         permission="delete"
     )
     def _delete(self):
+        errors = 0
         for id in self.request.params.getall('id'):
-            resources_type = ResourceType.get(id)
-            if resources_type:
-                DBSession.delete(resources_type)
+            item = ResourceType.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}
