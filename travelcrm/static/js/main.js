@@ -334,6 +334,7 @@ function clear_inputs(selector){
 	$(selector).find('.easyui-combobox').combobox('clear');
 	$(selector).find('.easyui-combogrid').combogrid('clear');
 	$(selector).find('.easyui-combotree').combotree('clear');
+	$(selector).find('.easyui-numberbox').numberbox('clear');
 }
 
 function add_datebox_clear_btn(selector){

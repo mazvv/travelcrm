@@ -92,6 +92,7 @@ class BPerson(Base):
             'bperson',
             uselist=False
         ),
+        order_by='Contact.contact_type',
         uselist=True,
     )
 

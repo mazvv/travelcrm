@@ -196,6 +196,19 @@ class BPersons(object):
         return self._add()
 
     @view_config(
+        name='details',
+        context='..resources.bpersons.BPersons',
+        request_method='GET',
+        renderer='travelcrm:templates/bpersons/details.mak',
+        permission='view'
+    )
+    def details(self):
+        bperson = BPerson.get(self.request.params.get('id'))
+        return {
+            'item': bperson,
+        }
+
+    @view_config(
         name='delete',
         context='..resources.bpersons.BPersons',
         request_method='GET',

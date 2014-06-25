@@ -1,4 +1,4 @@
-<%def name="bpersons_selector(name='bperson_id', values=[], can_edit=True)">
+<%def name="bpersons_selector(name='bperson_id', values=[], can_edit=True, style=None)">
     <%
         _func_id = h.common.gen_id()
         _id = h.common.gen_id()
@@ -35,6 +35,21 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/bpersons/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
+            detailFormatter: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
+            },          
             onBeforeLoad: function(param){
                 var id = [0];
                 $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
@@ -756,36 +771,28 @@
         }
     </script>
     % endif
-    <script type="text/javascript">
-        function formatter_${_func_id}(index, row){
-            var html = '<table width="100%" class="grid-details">';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'beneficiary')}</td>'
-                + '<td>' + row.beneficiary + '</td>'
-                + '</tr>';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'account')}</td>'
-                + '<td>' + row.account + '</td>'
-                + '</tr>';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'swift code')}</td>'
-                + '<td>' + row.swift_code + '</td>'
-                + '</tr>';
-            html += '</table>';
-            return html;
-        }
-    </script>
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
             url:'/banks_details/list',border:false,
-            singleSelect:true,
+            singleSelect:true,fit:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/banks_details/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
             detailFormatter: function(index, row){
-                return formatter_${_func_id}(index, row);
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
             },          
             onBeforeLoad: function(param){
                 var response = $(this).data('response');

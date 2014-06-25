@@ -29,3 +29,4 @@ encoding//travelcrm/resources/incomes.py=utf-8
 encoding//travelcrm/resources/services_items.py=utf-8
 encoding//travelcrm/resources/services_sales.py=utf-8
 encoding//travelcrm/resources/tours.py=utf-8
+encoding//travelcrm/views/__init__.py=utf-8

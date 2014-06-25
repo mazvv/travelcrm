@@ -31,9 +31,11 @@
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
-            <th data-options="field:'account_name',sortable:true,width:200">${_(u"account name")}</th>
+            <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
+            <th data-options="field:'account_name',sortable:true,width:150">${_(u"account name")}</th>
+            <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
+            <th data-options="field:'resource_type',sortable:true,width:150">${_(u"source")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
-            <th data-options="field:'account_type',sortable:true,width:100">${_(u"account type")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -67,6 +69,40 @@
                 ${searchbar(_id, _s_id)}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
+                        ${h.tags.title(_(u"invoice"))}
+                    </div>
+                    <div>
+                        ${h.fields.invoices_combobox_field(request, None, 'invoice_id', show_toolbar=False)}
+                    </div>
+		            <div class="mt05">
+		                ${h.tags.title(_(u"account"))}
+		            </div>
+		            <div>
+		                ${h.fields.accounts_combobox_field(request, None, 'account_id', show_toolbar=False, structure_id=None)}
+		            </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"currency"))}
+                    </div>
+                    <div>
+                        ${h.fields.currencies_combobox_field(request, None, 'currency_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"payment date"))}
+                    </div>
+                    <div>
+                        ${h.fields.date_field(None, "payment_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "payment_to")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"sum range"))}
+                    </div>
+                    <div>
+                        ${h.tags.text('sum_from', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        <span class="p1">-</span>
+                        ${h.tags.text('sum_to', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                    </div>
+                    <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>

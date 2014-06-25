@@ -10,7 +10,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-        <div class="easyui-tabs h100" data-options="border:false,height:300">
+        <div class="easyui-tabs" data-options="border:false,height:300">
             <div title="${_(u'Main')}">
 		        <div class="form-field">
 		            <div class="dl15">
@@ -23,22 +23,28 @@
 		        </div>
 		    </div>
 		    <div title="${_(u'Licences')}">
-                ${licences_selector(
-                    values=([licence.id for licence in item.licences] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+ 		        <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${licences_selector(
+	                    values=([licence.id for licence in item.licences] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
 		    </div>
             <div title="${_(u'Contacts')}">
-                ${bpersons_selector(
-                    values=([bperson.id for bperson in item.bpersons] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${bpersons_selector(
+	                    values=([bperson.id for bperson in item.bpersons] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
             </div>
             <div title="${_(u'Banks Details')}">
-                ${banks_details_selector(
-                    values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${banks_details_selector(
+	                    values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')),
+	                )}
+                </div>
             </div>
         </div>
         <div class="form-buttons">

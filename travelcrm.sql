@@ -2160,14 +2160,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5737, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5747, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1509, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1519, true);
 
 
 --
@@ -2342,6 +2342,12 @@ COPY bank_address (bank_id, address_id) FROM stdin;
 
 COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
 5	1420	56	4	LuxTravel, Inc	123456789	123456
+6	1510	54	1	Coral Travel	12345	1234
+7	1511	57	1	Coral LLC	98765	0987
+8	1512	57	1	Coral LLc	0987654	12234
+9	1513	56	5	Coral Travel Ukraine	567990	54343
+10	1514	44	5	Coral LLc	123232321312	`12
+11	1515	54	4	Coral LLC	1223456	55667
 \.
 
 
@@ -2349,7 +2355,7 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 -- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('bank_detail_id_seq', 5, true);
+SELECT pg_catalog.setval('bank_detail_id_seq', 11, true);
 
 
 --
@@ -2374,6 +2380,10 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 --
 
 COPY bperson_contact (bperson_id, contact_id) FROM stdin;
+1	54
+1	55
+1	56
+1	57
 \.
 
 
@@ -2419,6 +2429,10 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 51	+380502232233	phone	1387
 52	+380502354235	phone	1404
 53	+380503435512	phone	1464
+54	+380976543565	phone	1516
+55	+380675643623	phone	1517
+56	ravak_skype	skype	1518
+57	ravak@myemail.com	email	1519
 \.
 
 
@@ -2426,7 +2440,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 53, true);
+SELECT pg_catalog.setval('contact_id_seq', 57, true);
 
 
 --
@@ -3542,6 +3556,16 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1506	104	32	f
 1507	107	32	f
 1509	106	32	f
+1510	101	32	f
+1511	101	32	f
+1512	101	32	f
+1513	101	32	f
+1514	101	32	f
+1515	101	32	f
+1516	87	32	f
+1517	87	32	f
+1518	87	32	f
+1519	87	32	f
 \.
 
 
@@ -4230,6 +4254,16 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5734	1506	2	\N	2014-06-22 19:43:23.157992
 5735	1507	2	\N	2014-06-22 19:46:21.388635
 5737	1509	2	\N	2014-06-22 21:15:50.586549
+5738	1510	2	\N	2014-06-24 20:30:44.36129
+5739	1511	2	\N	2014-06-25 19:21:08.001771
+5740	1512	2	\N	2014-06-25 19:37:43.544622
+5741	1513	2	\N	2014-06-25 19:38:23.293423
+5742	1514	2	\N	2014-06-25 19:38:46.712804
+5743	1515	2	\N	2014-06-25 19:39:14.757449
+5744	1516	2	\N	2014-06-25 20:37:42.602785
+5745	1517	2	\N	2014-06-25 20:54:09.96009
+5746	1518	2	\N	2014-06-25 20:54:50.943042
+5747	1519	2	\N	2014-06-25 20:55:06.988343
 \.
 
 
@@ -4611,6 +4645,11 @@ COPY touroperator (id, resource_id, name) FROM stdin;
 --
 
 COPY touroperator_bank_detail (touroperator_id, bank_detail_id) FROM stdin;
+2	6
+2	11
+2	8
+2	9
+2	10
 \.
 
 
@@ -4619,7 +4658,7 @@ COPY touroperator_bank_detail (touroperator_id, bank_detail_id) FROM stdin;
 --
 
 COPY touroperator_bperson (touroperator_id, bperson_id) FROM stdin;
-5	1
+2	1
 \.
 
 

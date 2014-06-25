@@ -148,6 +148,19 @@ class BankDetails(object):
             }
 
     @view_config(
+        name='details',
+        context='..resources.banks_details.BanksDetails',
+        request_method='GET',
+        renderer='travelcrm:templates/banks_details/details.mak',
+        permission='view'
+    )
+    def details(self):
+        bank_detail = BankDetail.get(self.request.params.get('id'))
+        return {
+            'item': bank_detail,
+        }
+
+    @view_config(
         name='delete',
         context='..resources.banks_details.BanksDetails',
         request_method='GET',

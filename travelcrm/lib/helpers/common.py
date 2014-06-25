@@ -61,3 +61,14 @@ def jsonify(val):
 
 def get_company_name():
     return u_get_company_name()
+
+
+def contact_type_icon(contact_type):
+    assert contact_type in (u'phone', u'email', u'skype'), \
+        u"wrong contact type"
+    if contact_type == u'phone':
+        return HTML.tag('span', class_='fa fa-phone')
+    elif contact_type == u'email':
+        return HTML.tag('span', class_='fa fa-envelope')
+    else:
+        return HTML.tag('span', class_='fa fa-skype')
