@@ -1,6 +1,6 @@
-<%namespace file="../common/grid_selectors.mak" import="tour_points_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="persons_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="services_items_selector"/>
+<%namespace file="../tours/common.mak" import="tour_points_selector"/>
+<%namespace file="../persons/common.mak" import="persons_selector"/>
+<%namespace file="../services_items/common.mak" import="services_items_selector"/>
 <div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
@@ -33,12 +33,12 @@
 			   	<div class="form-field mb05">
 				    <div class="dl15">
 				        ${h.tags.title(_(u"tour service"), True, "service_id")}
-		  	            </div>
-		  	            <div class="ml15">
+	  	            </div>
+	  	            <div class="ml15">
 		  		        ${h.fields.services_combobox_field(request, item.service_id if item else None)}
 		  		        ${h.common.error_container(name='service_id')}
-		  	            </div>
-		  	        </div>
+	  	            </div>
+	  	        </div>
 				<div class="form-field">
 				    <div class="dl15">
 				        ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
@@ -127,22 +127,28 @@
                         ${h.common.error_container(name='end_location_id')}
                     </div>
                 </div>
-                ${tour_points_selector(
-                    values=([point.id for point in item.points] if item else []),
-                    can_edit=(_context.has_permision('edit') if item else _context.has_permision('add')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${tour_points_selector(
+	                    values=([point.id for point in item.points] if item else []),
+	                    can_edit=(_context.has_permision('edit') if item else _context.has_permision('add')) 
+	                )}
+                </div>
 		    </div>
             <div title="${_(u'Members')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
                 ${persons_selector(
                     values=([person.id for person in item.persons] if item else []),
                     can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
                 )}
+                </div>
             </div>
             <div title="${_(u'Services Items')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
                 ${services_items_selector(
                     values=([service_item.id for service_item in item.services_items] if item else []),
                     can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
                 )}
+                </div>
             </div>
         </div>
         <div class="form-buttons">

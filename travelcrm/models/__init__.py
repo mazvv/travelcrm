@@ -60,3 +60,4 @@ from income import Income
 from account import Account
 from service_item import ServiceItem
 from service_sale import ServiceSale
+from commission import Commission

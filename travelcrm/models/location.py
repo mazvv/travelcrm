@@ -80,3 +80,11 @@ class Location(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @property
+    def full_location_name(self):
+        return (
+            self.name + ' - '
+            + self.region.name
+            + ' (' + self.region.country.name + ')'
+        )

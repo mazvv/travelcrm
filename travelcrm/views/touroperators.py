@@ -10,9 +10,11 @@ from ..models.touroperator import Touroperator
 from ..models.licence import Licence
 from ..models.bperson import BPerson
 from ..models.bank_detail import BankDetail
+from ..models.commission import Commission
 from ..lib.qb.touroperators import TouroperatorsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.touroperators import TouroperatorSchema
+from travelcrm.models.tour_point import TourPoint
 
 
 log = logging.getLogger(__name__)
@@ -103,6 +105,9 @@ class Touroperators(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 touroperator.banks_details.append(bank_detail)
+            for id in controls.get('commission_id'):
+                commission = Commission.get(id)
+                touroperator.commissions.append(commission)
             DBSession.add(touroperator)
             DBSession.flush()
             return {
@@ -145,6 +150,7 @@ class Touroperators(object):
             touroperator.licences = []
             touroperator.bpersons = []
             touroperator.banks_details = []
+            touroperator.commissions = []
             for id in controls.get('licence_id'):
                 licence = Licence.get(id)
                 touroperator.licences.append(licence)
@@ -154,6 +160,9 @@ class Touroperators(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 touroperator.banks_details.append(bank_detail)
+            for id in controls.get('commission_id'):
+                commission = Commission.get(id)
+                touroperator.commissions.append(commission)
             return {
                 'success_message': _(u'Saved'),
                 'response': touroperator.id,

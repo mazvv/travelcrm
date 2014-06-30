@@ -148,6 +148,30 @@ class Appointments(object):
             }
 
     @view_config(
+        name='copy',
+        context='..resources.appointments.Appointments',
+        request_method='GET',
+        renderer='travelcrm:templates/appointments/form.mak',
+        permission='add'
+    )
+    def copy(self):
+        resources_type = Appointment.get(self.request.params.get('id'))
+        return {
+            'item': resources_type,
+            'title': _(u"Copy Appointment")
+        }
+
+    @view_config(
+        name='copy',
+        context='..resources.appointments.Appointments',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
         name='delete',
         context='..resources.appointments.Appointments',
         request_method='GET',

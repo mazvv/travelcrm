@@ -1,4 +1,4 @@
-<%namespace file="../common/grid_selectors.mak" import="addresses_selector"/>
+<%namespace file="../addresses/common.mak" import="addresses_selector"/>
 <div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
@@ -21,10 +21,12 @@
 		        </div>
             </div>
             <div title="${_(u'Addresses')}">
-                ${addresses_selector(
-                    values=([address.id for address in item.addresses] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${addresses_selector(
+	                    values=([address.id for address in item.addresses] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
             </div>
         </div>
         <div class="form-buttons">

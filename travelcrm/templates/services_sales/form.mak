@@ -1,4 +1,4 @@
-<%namespace file="../common/grid_selectors.mak" import="services_items_selector"/>
+<%namespace file="../services_items/common.mak" import="services_items_selector"/>
 <div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
@@ -39,10 +39,12 @@
                 </div>
 		    </div>
             <div title="${_(u'Services Items')}">
-                ${services_items_selector(
-                    values=([service_item.id for service_item in item.services_items] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+					${services_items_selector(
+					    values=([service_item.id for service_item in item.services_items] if item else []),
+					    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+					)}
+                </div>
             </div>
         </div>
         <div class="form-buttons">

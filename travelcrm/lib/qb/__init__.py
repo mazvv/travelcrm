@@ -7,8 +7,7 @@ from decimal import Decimal
 from datetime import datetime, date
 from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
-from babel.dates import format_datetime, format_date, parse_date
-from babel.numbers import format_decimal
+from babel.dates import parse_date
 from zope.interface.verify import verifyObject
 
 from ...interfaces import IResourceType
@@ -18,7 +17,9 @@ from ...models.user import User
 from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
-from ..utils.common_utils import get_locale_name, cast_int
+from ..utils.common_utils import (
+    get_locale_name, cast_int, format_date, format_datetime, format_decimal
+)
 from ..utils.security_utils import get_auth_employee
 
 from ..bl.employees import query_employee_scope
@@ -29,21 +30,14 @@ class NotValidContextError(Exception):
 
 
 def query_row_serialize_format(row):
-    locale_name = get_locale_name()
     res_row = dict(zip(row.keys(), row))
     for key, value in res_row.iteritems():
         if isinstance(value, date):
-            res_row[key] = format_date(
-                value, format="short", locale=locale_name
-            )
+            res_row[key] = format_date(value)
         if isinstance(value, datetime):
-            res_row[key] = format_datetime(
-                value, format="short", locale=locale_name
-            )
+            res_row[key] = format_datetime(value)
         if isinstance(value, Decimal):
-            res_row[key] = format_decimal(
-                value, locale=locale_name
-            )
+            res_row[key] = format_decimal(value)
     return res_row
 
 

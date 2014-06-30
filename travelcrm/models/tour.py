@@ -232,7 +232,7 @@ class Tour(Base):
             uselist=True,
             lazy="dynamic"
         ),
-        uselist=True,
+        uselist=False,
     )
     service = relationship(
         'Service',

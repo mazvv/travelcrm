@@ -9,6 +9,7 @@ from ...lib.utils.resources_utils import (
     get_resources_types_by_interface,
     get_resource_class
 )
+
 from ...models import DBSession
 from ...models.invoice import Invoice
 from ...models.resource import Resource

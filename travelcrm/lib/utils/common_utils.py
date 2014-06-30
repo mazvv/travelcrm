@@ -3,6 +3,10 @@
 import random
 from uuid import uuid4
 
+from babel.dates import format_date as fd, format_datetime as fdt
+from babel.dates import parse_date as pd
+from babel.numbers import format_decimal as fdc
+
 from pyramid.threadlocal import get_current_registry
 from pyramid.threadlocal import get_current_request
 from pyramid.interfaces import ITranslationDirectories
@@ -60,3 +64,23 @@ def get_base_currency():
 
 def money_cast(attr):
     return cast(attr, Numeric(16, 2))
+
+
+def format_date(value):
+    return fd(
+        value, format="short", locale=get_locale_name()
+    )
+
+
+def format_datetime(value):
+    return fdt(
+        value, format="short", locale=get_locale_name()
+    )
+
+
+def format_decimal(value):
+    return fdc(value, locale=get_locale_name())
+
+
+def parse_date(value):
+    return pd(value, locale=get_locale_name())

@@ -40,6 +40,10 @@ class TouroperatorSchema(ResourceSchema):
         colander.Set(),
         missing=[],
     )
+    commission_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
 
     def deserialize(self, cstruct):
         if (
@@ -65,5 +69,13 @@ class TouroperatorSchema(ResourceSchema):
             val = cstruct['bank_detail_id']
             cstruct['bank_detail_id'] = list()
             cstruct['bank_detail_id'].append(val)
+
+        if (
+            'commission_id' in cstruct
+            and not isinstance(cstruct.get('commission_id'), list)
+        ):
+            val = cstruct['commission_id']
+            cstruct['commission_id'] = list()
+            cstruct['commission_id'].append(val)
 
         return super(TouroperatorSchema, self).deserialize(cstruct)

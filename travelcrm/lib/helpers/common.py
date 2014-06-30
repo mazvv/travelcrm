@@ -9,7 +9,10 @@ from webhelpers.misc import NotGiven
 
 from ..utils.common_utils import (
     gen_id as u_gen_id,
-    get_company_name as u_get_company_name
+    get_company_name as u_get_company_name,
+    format_date as u_format_date,
+    format_datetime as u_format_datetime,
+    format_decimal as u_format_decimal,
 )
 
 
@@ -72,3 +75,15 @@ def contact_type_icon(contact_type):
         return HTML.tag('span', class_='fa fa-envelope')
     else:
         return HTML.tag('span', class_='fa fa-skype')
+
+
+def format_decimal(value):
+    return u_format_decimal(value)
+
+
+def format_date(value):
+    return u_format_date(value)
+
+
+def format_datetime(value):
+    return u_format_datetime(value)

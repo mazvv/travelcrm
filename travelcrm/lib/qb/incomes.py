@@ -1,7 +1,6 @@
 # -*coding: utf-8-*-
 from collections import Iterable
 
-from babel.dates import parse_date
 from sqlalchemy import func
 
 from . import ResourcesQueryBuilder
@@ -15,7 +14,7 @@ from ...models.currency import Currency
 from ...models.fin_transaction import FinTransaction
 
 from ...lib.bl.invoices import query_resource_data
-from ...lib.utils.common_utils import get_locale_name
+from ...lib.utils.common_utils import parse_date
 
 
 class IncomesQueryBuilder(ResourcesQueryBuilder):
@@ -123,13 +122,9 @@ class IncomesQueryBuilder(ResourcesQueryBuilder):
     def _filter_payment_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                self._sum_subq.c.date >= parse_date(
-                    date_from, locale=get_locale_name()
-                )
+                self._sum_subq.c.date >= parse_date(date_from)
             )
         if date_to:
             self.query = self.query.filter(
-                self._sum_subq.c.date <= parse_date(
-                    date_to, locale=get_locale_name()
-                )
+                self._sum_subq.c.date <= parse_date(date_to)
             )

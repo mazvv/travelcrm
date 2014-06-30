@@ -4,10 +4,12 @@ import logging
 from decimal import Decimal
 
 import colander
+import pdfkit
 from babel.numbers import format_decimal
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+from pyramid.response import Response
 
 from ..models import DBSession
 from ..models.invoice import Invoice
@@ -60,9 +62,7 @@ class Invoices(object):
             self.request.params.get('q'),
         )
         qb.advanced_search(
-            updated_from=self.request.params.get('updated_from'),
-            updated_to=self.request.params.get('updated_to'),
-            modifier_id=self.request.params.get('modifier_id'),
+            **self.request.params.mixed()
         )
         id = self.request.params.get('id')
         if id:
@@ -226,6 +226,20 @@ class Invoices(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='pdf',
+        context='..resources.invoices.Invoices',
+        request_method='GET',
+        permission='view'
+    )
+    def pdf(self):
+        invoice = Invoice.get(self.request.params.get('id'))
+        structure = invoice.resource.owner_structure
+        output = pdfkit.from_string(structure.invoice_template, False)
+        return Response(
+            output, headerlist=[('Content-Type', 'application/pdf')]
+        )
 
     @view_config(
         name='invoice_sum',

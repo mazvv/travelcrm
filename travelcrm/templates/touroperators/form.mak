@@ -1,6 +1,7 @@
-<%namespace file="../common/grid_selectors.mak" import="bpersons_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="licences_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="banks_details_selector"/>
+<%namespace file="../bpersons/common.mak" import="bpersons_selector"/>
+<%namespace file="../licences/common.mak" import="licences_selector"/>
+<%namespace file="../banks_details/common.mak" import="banks_details_selector"/>
+<%namespace file="../commissions/common.mak" import="commissions_selector"/>
 <div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
@@ -44,6 +45,14 @@
 	                    values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
 	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')),
 	                )}
+                </div>
+            </div>
+            <div title="${_(u'Commissions')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${commissions_selector(
+                        values=([commission.id for commission in item.commissions] if item else []),
+                        can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')),
+                    )}
                 </div>
             </div>
         </div>

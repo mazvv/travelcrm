@@ -4,7 +4,6 @@ import logging
 import colander
 
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPFound, HTTPNotFound
 
 from ..models import DBSession
 from ..models.resource_type import ResourceType

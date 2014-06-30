@@ -223,6 +223,19 @@ class Tours(object):
         return self._add()
 
     @view_config(
+        name='details',
+        context='..resources.tours.Tours',
+        request_method='GET',
+        renderer='travelcrm:templates/tours/details.mak',
+        permission='view'
+    )
+    def details(self):
+        tour = Tour.get(self.request.params.get('id'))
+        return {
+            'item': tour,
+        }
+
+    @view_config(
         name='delete',
         context='..resources.tours.Tours',
         request_method='GET',

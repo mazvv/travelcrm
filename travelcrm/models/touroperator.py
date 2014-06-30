@@ -100,6 +100,34 @@ touroperator_bank_detail = Table(
 )
 
 
+touroperator_commission = Table(
+    'touroperator_commission',
+    Base.metadata,
+    Column(
+        'touroperator_id',
+        Integer,
+        ForeignKey(
+            'touroperator.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_touroperator_id_touroperator_commission',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'commission_id',
+        Integer,
+        ForeignKey(
+            'commission.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_commission_id_touroperator_commission',
+        ),
+        primary_key=True,
+    ),
+)
+
+
 class Touroperator(Base):
     __tablename__ = 'touroperator'
     __table_args__ = (
@@ -159,6 +187,15 @@ class Touroperator(Base):
     banks_details = relationship(
         'BankDetail',
         secondary=touroperator_bank_detail,
+        backref=backref(
+            'touroperator',
+            uselist=False,
+        ),
+        uselist=True,
+    )
+    commissions = relationship(
+        'Commission',
+        secondary=touroperator_commission,
         backref=backref(
             'touroperator',
             uselist=False,

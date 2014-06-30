@@ -1,4 +1,4 @@
-<%namespace file="../common/grid_selectors.mak" import="contacts_selector"/>
+<%namespace file="../contacts/common.mak" import="contacts_selector"/>
 <div class="dl55 easyui-dialog"
     title="${title}"
     data-options="
@@ -48,10 +48,12 @@
                 </div>
 		    </div>
 		    <div title="${_(u'Contacts')}">
-                ${contacts_selector(
-                    values=([contact.id for contact in item.contacts] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+		        <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${contacts_selector(
+	                    values=([contact.id for contact in item.contacts] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
 		    </div>
         </div>
         <div class="form-buttons">

@@ -29,7 +29,7 @@ class AccountSchema(ResourceSchema):
     )
     name = colander.SchemaNode(
         colander.String(),
-        validator=colander.Length(max=255)
+        validator=name_validator
     )
     account_type = colander.SchemaNode(
         colander.String(),

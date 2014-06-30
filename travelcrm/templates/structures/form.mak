@@ -1,7 +1,7 @@
-<%namespace file="../common/grid_selectors.mak" import="contacts_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="addresses_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="banks_details_selector"/>
-<%namespace file="../common/grid_selectors.mak" import="accounts_selector"/>
+<%namespace file="../contacts/common.mak" import="contacts_selector"/>
+<%namespace file="../addresses/common.mak" import="addresses_selector"/>
+<%namespace file="../banks_details/common.mak" import="banks_details_selector"/>
+<%namespace file="../accounts/common.mak" import="accounts_selector"/>
 <div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
@@ -33,31 +33,39 @@
 		</div>
             </div>
             <div title="${_(u'Contacts')}">
-                ${contacts_selector(
-                    values=([contact.id for contact in item.contacts] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${contacts_selector(
+	                    values=([contact.id for contact in item.contacts] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
             </div>
             <div title="${_(u'Addresses')}">
-                ${addresses_selector(
-                    values=([address.id for address in item.addresses] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${addresses_selector(
+	                    values=([address.id for address in item.addresses] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
             </div>
             <div title="${_(u'Banks Details')}">
-                ${banks_details_selector(
-                    values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">
+	                ${banks_details_selector(
+	                    values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
             </div>
             <div title="${_(u'Accounts')}">
-                ${accounts_selector(
-                    values=([account.id for account in item.accounts] if item else []),
-                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-                )}
+                <div class="easyui-panel" data-options="fit:true,border:false">            
+	                ${accounts_selector(
+	                    values=([account.id for account in item.accounts] if item else []),
+	                    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
+	                )}
+                </div>
             </div>
             <div title="${_(u'Invoice Template')}">
-                ${h.tags.textarea('invoice_template', item.invoice_template if item else None, style="width: 715px;border:none;height:300px;outline:none;")}
+                ${h.tags.textarea('invoice_template', item.invoice_template if item else None, style="width: 715px;border:none;height:300px;outline:none;", class_="text")}
             </div>
         </div>
         <div class="form-buttons">

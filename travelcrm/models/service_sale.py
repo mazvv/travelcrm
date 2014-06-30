@@ -129,7 +129,7 @@ class ServiceSale(Base):
             uselist=True,
             lazy="dynamic"
         ),
-        uselist=True,
+        uselist=False,
     )
     advsource = relationship(
         'Advsource',

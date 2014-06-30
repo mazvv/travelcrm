@@ -49,9 +49,7 @@ class ServicesSales(object):
             self.request.params.get('q'),
         )
         qb.advanced_search(
-            updated_from=self.request.params.get('updated_from'),
-            updated_to=self.request.params.get('updated_to'),
-            modifier_id=self.request.params.get('modifier_id'),
+            **self.request.params.mixed()
         )
         id = self.request.params.get('id')
         if id:
@@ -193,6 +191,19 @@ class ServicesSales(object):
         return {
             'title': _(u'Delete Services Sales'),
             'id': self.request.params.get('id')
+        }
+
+    @view_config(
+        name='details',
+        context='..resources.services_sales.ServicesSales',
+        request_method='GET',
+        renderer='travelcrm:templates/services_sales/details.mak',
+        permission='view'
+    )
+    def details(self):
+        service_sale = ServiceSale.get(self.request.params.get('id'))
+        return {
+            'item': service_sale,
         }
 
     @view_config(

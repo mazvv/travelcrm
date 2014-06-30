@@ -35,7 +35,8 @@
             <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
             <th data-options="field:'resource_type',sortable:true,width:150">${_(u"source")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
-            <th data-options="field:'payments',sortable:false,width:100,formatter:function(value, row, index){return payment_indicator(row.payments_percent);}">${_(u"payments, %")}</th>
+            <th data-options="field:'payments',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"payments")}</th>
+            <th data-options="field:'payments_percent',sortable:false,width:80,formatter:function(value, row, index){return payment_indicator(row.payments_percent);}">${_(u"payments, %")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -44,16 +45,20 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl45">
             <div class="button-group">
-                 <a href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'info')}'">
-                    <span class="fa fa-lightbulb-o"></span>${_(u'Info')}
-                </a>
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
                 % endif
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'info')}'">
+                    <span class="fa fa-lightbulb-o"></span>${_(u'Info')}
+                </a>
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'blank_open',property:'with_row',url:'${request.resource_url(_context, 'pdf')}'">
+                    <span class="fa fa-print"></span>${_(u'Print')}
+                </a>
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
@@ -67,6 +72,36 @@
                 ${searchbar(_id, _s_id)}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
+                        ${h.tags.title(_(u"currency"))}
+                    </div>
+                    <div>
+                        ${h.fields.currencies_combobox_field(request, None, 'currency_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"sum range"))}
+                    </div>
+                    <div>
+                        ${h.tags.text('sum_from', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        <span class="p1">-</span>
+                        ${h.tags.text('sum_to', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"payment sum range"))}
+                    </div>
+                    <div>
+                        ${h.tags.text('payment_from', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        <span class="p1">-</span>
+                        ${h.tags.text('payment_to', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"invoice_date"))}
+                    </div>
+                    <div>
+                        ${h.fields.date_field(None, "date_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "date_to")}
+                    </div>
+                    <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>

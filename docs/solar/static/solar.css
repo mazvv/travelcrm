@@ -13,12 +13,12 @@ body {
     text-align: center;
     color: #002b36;
     padding: 0;
-    margin: 0px 80px 0px 80px;
-    min-width: 740px;	
+    margin: 0px auto;
+    width: 1140px;
     -moz-box-shadow: 0px 0px 10px #93a1a1;
     -webkit-box-shadow: 0px 0px 10px #93a1a1;
     box-shadow: 0px 0px 10px #93a1a1;
-    background: url("subtle_dots.png") repeat;
+    background: #D9DFE2 url("subtle_dots.png") repeat;
 
 }
 

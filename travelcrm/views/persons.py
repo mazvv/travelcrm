@@ -219,6 +219,19 @@ class Persons(object):
             }
 
     @view_config(
+        name='details',
+        context='..resources.persons.Persons',
+        request_method='GET',
+        renderer='travelcrm:templates/persons/details.mak',
+        permission='view'
+    )
+    def details(self):
+        person = Person.get(self.request.params.get('id'))
+        return {
+            'item': person,
+        }
+
+    @view_config(
         name='delete',
         context='..resources.persons.Persons',
         request_method='GET',

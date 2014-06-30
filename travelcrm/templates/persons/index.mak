@@ -11,43 +11,6 @@
     	iconCls:'fa fa-table'
     "
     title="${_(u'Persons')}">
-    <script type="text/javascript">
-        function formatter_${_id}(index, row){
-            var html = '<table width="100%" class="grid-details">';
-            if(row.phone){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'phone')}</td>'
-                    + '<td>' + row.phone + '</td>'
-                    + '</tr>';
-            }
-            if(row.email){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'email')}</td>'
-                    + '<td>' + row.email + '</td>'
-                    + '</tr>';
-            }
-            if(row.skype){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'skype')}</td>'
-                    + '<td>' + row.skype + '</td>'
-                    + '</tr>';
-            }
-            if(row.citizen_passport){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'citizen passport')}</td>'
-                    + '<td>' + row.citizen_passport + '</td>'
-                    + '</tr>';
-            }
-            if(row.foreign_passport){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'foreign passport')}</td>'
-                    + '<td>' + row.foreign_passport + '</td>'
-                    + '</tr>';
-            }
-            html += '</table>';
-            return html;
-        }
-    </script>
     <table class="easyui-datagrid"
     	id="${_id}"
         data-options="
@@ -57,8 +20,19 @@
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/persons/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
             detailFormatter: function(index, row){
-                return formatter_${_id}(index, row);
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
             },          
             onBeforeLoad: function(param){
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){

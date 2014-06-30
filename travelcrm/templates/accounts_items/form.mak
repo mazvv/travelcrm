@@ -1,4 +1,3 @@
-<%namespace file="../common/grid_selectors.mak" import="addresses_selector"/>
 <div class="dl40 easyui-dialog"
     title="${title}"
     data-options="

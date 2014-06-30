@@ -171,6 +171,9 @@ function action(obj){
 		case('dialog_open'):
 		    dialog_open(options);
 		    break;
+		case('blank_open'):
+		    blank_open(options);
+		    break;
 		case('refresh'):
 		    add_container(options);
 		    refresh_container(null);
@@ -223,6 +226,14 @@ function dialog_open(options){
 	add_container(options);
 	var url = get_action_url(options);
 	_dialog_open(url);
+}
+
+function blank_open(options){
+	var url = get_action_url(options);
+	if(url){
+		var win = window.open(url, '_blank');
+		win.focus();
+	}
 }
 
 function get_action_url(options){

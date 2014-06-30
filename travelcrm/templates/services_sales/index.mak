@@ -11,57 +11,6 @@
     	iconCls:'fa fa-table'
     "
     title="${_(u'Services Sales')}">
-    <script type="text/javascript">
-        function formatter_${_id}(index, row){
-            var html = '<table width="100%" class="grid-details">';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'date')}</td>'
-                + '<td>' + row.deal_date + '</td>'
-                + '</tr>';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'customer')}</td>'
-                + '<td>' + row.customer + '</td>'
-                + '</tr>';
-            if(row.customer_phone){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'customer phone')}</td>'
-                    + '<td>' + row.customer_phone + '</td>'
-                    + '</tr>';
-            }
-            if(row.customer_email){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'customer email')}</td>'
-                    + '<td>' + row.customer_email + '</td>'
-                    + '</tr>';
-            }
-            if(row.customer_skype){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'customer skype')}</td>'
-                    + '<td>' + row.skype + '</td>'
-                    + '</tr>';
-            }
-            if(row.customer_citizen_passport){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'citizen passport')}</td>'
-                    + '<td>' + row.customer_citizen_passport + '</td>'
-                    + '</tr>';
-            }
-            if(row.customer_foreign_passport){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'foreign passport')}</td>'
-                    + '<td>' + row.customer_foreign_passport + '</td>'
-                    + '</tr>';
-            }
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'base price')}</td>'
-                + '<td>' + row.base_price + ' ' + row.base_currency
-                + ' ( ${_(u'exchange rate')}: ' + row.rate + ' ' + row.base_currency 
-                + (row.date?(' ' + row.date):'') + ' )' + '</td>'
-                + '</tr>';
-            html += '</table>';
-            return html;
-        }
-    </script>
     <table class="easyui-datagrid"
     	id="${_id}"
         data-options="
@@ -71,8 +20,19 @@
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/services_sales/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
             detailFormatter: function(index, row){
-                return formatter_${_id}(index, row);
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
             },          
             onBeforeLoad: function(param){
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
@@ -139,28 +99,16 @@
                 ${searchbar(_id, _s_id)}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
-                        ${h.tags.title(_(u"customer or member"))}
+                        ${h.tags.title(_(u"person"))}
                     </div>
                     <div>
                         ${h.fields.persons_combobox_field(request, None, 'person_id', show_toolbar=False)}
                     </div>
 		            <div class="mt05">
-		                ${h.tags.title(_(u"hotel"))}
+		                ${h.tags.title(_(u"service"))}
 		            </div>
 		            <div>
-		                ${h.fields.hotels_combobox_field(request, None, 'hotel_id', show_toolbar=False)}
-		            </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"hotel category"))}
-		            </div>
-		            <div>
-		                ${h.fields.hotelcats_combobox_field(request, None, 'hotelcat_id', show_toolbar=False)}
-		            </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"country"))}
-		            </div>
-		            <div>
-		                ${h.fields.countries_combobox_field(request, None, 'country_id', show_toolbar=False)}
+		                ${h.fields.services_combobox_field(request, None, 'service_id', show_toolbar=False)}
 		            </div>
 		            <div class="mt05">
 		                ${h.tags.title(_(u"price range"))}
@@ -171,12 +119,12 @@
 		                ${h.tags.text('price_to', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
 		            </div>
 		            <div class="mt05">
-		                ${h.tags.title(_(u"tour dates"))}
+		                ${h.tags.title(_(u"sale dates"))}
 		            </div>
 		            <div>
-		                ${h.fields.date_field(None, "tour_from")}
+		                ${h.fields.date_field(None, "sale_from")}
 		                <span class="p1">-</span>
-		                ${h.fields.date_field(None, "tour_to")}
+		                ${h.fields.date_field(None, "sale_to")}
 		            </div>
 		            <div class="mt05">
 		                ${h.tags.title(_(u"updated"))}
