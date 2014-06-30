@@ -672,6 +672,45 @@ ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 
 
 --
+-- Name: commission; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE commission (
+    id integer NOT NULL,
+    date_from date NOT NULL,
+    resource_id integer NOT NULL,
+    service_id integer NOT NULL,
+    percentage numeric(5,2) NOT NULL,
+    price numeric(16,2) NOT NULL,
+    currency_id integer NOT NULL,
+    CONSTRAINT chk_commission_percentage CHECK (((percentage >= (0)::numeric) AND (percentage <= (100)::numeric)))
+);
+
+
+ALTER TABLE public.commission OWNER TO mazvv;
+
+--
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE commission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.commission_id_seq OWNER TO mazvv;
+
+--
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
+
+
+--
 -- Name: position; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1431,7 +1470,7 @@ CREATE TABLE service_item (
     touroperator_id integer NOT NULL,
     price numeric(16,2) NOT NULL,
     person_id integer NOT NULL,
-    base_price numeric(16,2)
+    base_price numeric(16,2) NOT NULL
 );
 
 
@@ -1674,7 +1713,7 @@ CREATE TABLE tour (
     deal_date date NOT NULL,
     advsource_id integer NOT NULL,
     service_id integer NOT NULL,
-    base_price numeric(16,2)
+    base_price numeric(16,2) NOT NULL
 );
 
 
@@ -1816,6 +1855,18 @@ CREATE TABLE touroperator_bperson (
 ALTER TABLE public.touroperator_bperson OWNER TO mazvv;
 
 --
+-- Name: touroperator_commission; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE touroperator_commission (
+    touroperator_id integer NOT NULL,
+    commission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.touroperator_commission OWNER TO mazvv;
+
+--
 -- Name: touroperator_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
 --
 
@@ -1909,6 +1960,13 @@ ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id
 --
 
 ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
 
 
 --
@@ -2160,21 +2218,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5747, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5760, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1519, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1545, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 109, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 110, true);
 
 
 --
@@ -2303,7 +2361,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-282012598f63
+59a442cc5fdc
 \.
 
 
@@ -2314,6 +2372,7 @@ COPY alembic_version (version_num) FROM stdin;
 COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary, date) FROM stdin;
 1	789	54	2	4	1000.00	2014-02-02
 6	892	54	7	5	4500.00	2014-02-22
+8	1542	54	2	4	6500.00	2014-03-01
 \.
 
 
@@ -2395,6 +2454,28 @@ SELECT pg_catalog.setval('bperson_id_seq', 4, true);
 
 
 --
+-- Data for Name: commission; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY commission (id, date_from, resource_id, service_id, percentage, price, currency_id) FROM stdin;
+14	2014-06-28	1535	5	13.20	0.00	56
+15	2014-06-28	1536	5	13.20	0.00	57
+16	2014-06-28	1537	5	13.40	0.00	56
+17	2014-06-28	1538	5	13.40	0.00	56
+18	2014-06-28	1539	4	0.00	10.00	56
+19	2014-06-28	1540	3	0.00	10.00	56
+20	2014-06-28	1541	1	0.00	600.00	56
+\.
+
+
+--
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('commission_id_seq', 20, true);
+
+
+--
 -- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
@@ -2433,6 +2514,9 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 55	+380675643623	phone	1517
 56	ravak_skype	skype	1518
 57	ravak@myemail.com	email	1519
+58	+380681983800	phone	1543
+59	dorianyats	skype	1544
+60	info@travelcrm.org.ua	email	1545
 \.
 
 
@@ -2440,7 +2524,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 57, true);
+SELECT pg_catalog.setval('contact_id_seq', 60, true);
 
 
 --
@@ -2544,6 +2628,9 @@ COPY employee_address (employee_id, address_id) FROM stdin;
 COPY employee_contact (employee_id, contact_id) FROM stdin;
 13	42
 13	41
+2	60
+2	58
+2	59
 \.
 
 
@@ -2560,7 +2647,7 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 -- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('employees_appointments_h_id_seq', 7, true);
+SELECT pg_catalog.setval('employees_appointments_h_id_seq', 8, true);
 
 
 --
@@ -2930,6 +3017,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 76	107	4	{view,add,edit,delete}	\N	all
 77	108	4	{view,add,edit,delete}	\N	all
 78	109	4	{view,add,edit,delete,invoice,contract}	\N	all
+79	110	4	{view,add,edit,delete}	\N	all
 \.
 
 
@@ -3037,7 +3125,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 59, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 78, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 79, true);
 
 
 --
@@ -3566,6 +3654,19 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1517	87	32	f
 1518	87	32	f
 1519	87	32	f
+1520	108	32	f
+1521	12	32	f
+1535	110	32	f
+1536	110	32	f
+1537	110	32	f
+1538	110	32	f
+1539	110	32	f
+1540	110	32	f
+1541	110	32	f
+1542	67	32	f
+1543	87	32	f
+1544	87	32	f
+1545	87	32	f
 \.
 
 
@@ -4264,6 +4365,19 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5745	1517	2	\N	2014-06-25 20:54:09.96009
 5746	1518	2	\N	2014-06-25 20:54:50.943042
 5747	1519	2	\N	2014-06-25 20:55:06.988343
+5748	1520	2	\N	2014-06-26 17:04:36.85438
+5749	1521	2	\N	2014-06-26 21:02:19.488826
+5750	1535	2	\N	2014-06-28 17:17:15.295903
+5751	1536	2	\N	2014-06-28 17:31:39.626186
+5752	1537	2	\N	2014-06-28 20:56:05.816704
+5753	1538	2	\N	2014-06-28 20:57:41.600837
+5754	1539	2	\N	2014-06-28 20:59:59.522314
+5755	1540	2	\N	2014-06-28 21:00:26.365557
+5756	1541	2	\N	2014-06-28 21:00:51.086753
+5757	1542	2	\N	2014-06-28 21:18:20.602573
+5758	1543	2	\N	2014-06-28 21:25:57.336069
+5759	1544	2	\N	2014-06-28 21:26:14.894807
+5760	1545	2	\N	2014-06-28 21:26:35.413657
 \.
 
 
@@ -4310,6 +4424,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and can bind to company structures	null
 109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null
 108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null
+110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null
 \.
 
 
@@ -4382,13 +4497,6 @@ SELECT pg_catalog.setval('service_id_seq', 5, true);
 --
 
 COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, price, person_id, base_price) FROM stdin;
-1	1453	4	57	57	60.00	21	\N
-2	1454	4	57	5	60.00	20	\N
-4	1457	3	57	2	20.00	20	\N
-5	1458	3	57	5	20.00	27	\N
-6	1459	4	54	1	60.00	20	\N
-7	1460	1	57	5	100.00	25	\N
-8	1461	3	54	57	67.00	6	\N
 9	1462	4	57	5	60.00	21	726.00
 10	1463	4	57	5	60.00	20	726.00
 3	1455	4	54	1	20.00	21	334.00
@@ -4401,6 +4509,14 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 14	1477	3	54	1	20.00	30	334.00
 15	1478	1	57	1	54.00	29	648.00
 16	1479	1	57	1	54.00	30	648.00
+20	1520	3	56	57	12.00	30	0.00
+1	1453	4	57	57	60.00	21	0.00
+2	1454	4	57	5	60.00	20	0.00
+4	1457	3	57	2	20.00	20	0.00
+5	1458	3	57	5	20.00	27	0.00
+6	1459	4	54	1	60.00	20	0.00
+7	1460	1	57	5	100.00	25	0.00
+8	1461	3	54	57	67.00	6	0.00
 \.
 
 
@@ -4408,7 +4524,7 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 -- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('service_item_id_seq', 19, true);
+SELECT pg_catalog.setval('service_item_id_seq', 20, true);
 
 
 --
@@ -4514,13 +4630,13 @@ SELECT pg_catalog.setval('structures_id_seq', 12, true);
 
 COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, priority, status) FROM stdin;
 11	1298	2	Task functionality completion	2014-05-17	\N	Complete Tasks Functionality<p></p><ol><li>Make Tasks Comments</li><li>Make Tasks Reminders</li><li>Make Tasks bindings to resources</li><li>Make possibility to create tasks from resources</li><li>Make Tasks filters to find tasks by priority, status, etc.</li><li>Bugfixing with tasks</li><li>Tasks sorting</li></ol><p></p>	2	2
-12	1299	2	Billing Functionality	2014-05-10	\N	Requirements is in progress now	2	3
 13	1300	2	Inline actions in grid rows	2014-05-10	\N	Rework with rows actions in grids. Make actions in grid rows	2	3
 15	1302	2	Translate CRM for RU, UA	2014-05-09	\N	\N	2	1
 16	1303	2	Widgets functionality	2014-05-10	\N	Make widgets functionality for Home or other places	1	3
 17	1305	2	Fulltext search functionality	2014-05-10	\N	Make full text search functionality	2	3
 14	1301	2	Restrictions in foreign keys	2014-05-10	\N	Rework foreign keys in DB, make it restricted to avoid critical aftermath after resources deletion.	3	4
 10	1297	2	Invoices and Contracts	2014-05-10	\N	To provide Billing functionality:<p><ol><li>Add Invoice creattion functionality from sales documents</li><li>Add Contract creation using structures Banks Details</li></ol></p>	2	2
+12	1299	2	Billing Functionality	2014-05-10	\N	Requirements is in progress now	2	4
 \.
 
 
@@ -4663,6 +4779,18 @@ COPY touroperator_bperson (touroperator_id, bperson_id) FROM stdin;
 
 
 --
+-- Data for Name: touroperator_commission; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY touroperator_commission (touroperator_id, commission_id) FROM stdin;
+2	17
+2	20
+2	19
+2	18
+\.
+
+
+--
 -- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
@@ -4774,6 +4902,14 @@ ALTER TABLE ONLY bperson_contact
 
 ALTER TABLE ONLY bperson
     ADD CONSTRAINT bperson_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT commission_pkey PRIMARY KEY (id);
 
 
 --
@@ -5161,6 +5297,14 @@ ALTER TABLE ONLY touroperator_bank_detail
 
 
 --
+-- Name: touroperator_commission_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY touroperator_commission
+    ADD CONSTRAINT touroperator_commission_pkey PRIMARY KEY (touroperator_id, commission_id);
+
+
+--
 -- Name: touroperator_licence_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -5489,6 +5633,14 @@ ALTER TABLE ONLY touroperator_bperson
 
 
 --
+-- Name: fk_commission_id_touroperator_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_commission
+    ADD CONSTRAINT fk_commission_id_touroperator_commission FOREIGN KEY (commission_id) REFERENCES commission(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5550,6 +5702,14 @@ ALTER TABLE ONLY appointment
 
 ALTER TABLE ONLY bank_detail
     ADD CONSTRAINT fk_currency_id_bank_detail FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT fk_currency_id_commission FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5937,6 +6097,14 @@ ALTER TABLE ONLY bperson
 
 
 --
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT fk_resource_id_commission FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6193,6 +6361,14 @@ ALTER TABLE ONLY tour_point
 
 
 --
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT fk_service_id_commission FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_service_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6358,6 +6534,14 @@ ALTER TABLE ONLY touroperator_bank_detail
 
 ALTER TABLE ONLY touroperator_bperson
     ADD CONSTRAINT fk_touroperator_id_touroperator_bperson FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_touroperator_id_touroperator_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_commission
+    ADD CONSTRAINT fk_touroperator_id_touroperator_commission FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
