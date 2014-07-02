@@ -87,7 +87,6 @@ class Structures(object):
             controls = schema.deserialize(self.request.params.mixed())
             structure = Structure(
                 name=controls.get('name'),
-                invoice_template=controls.get('invoice_template'),
                 parent_id=controls.get('parent_id'),
                 resource=self.context.create_resource()
             )
@@ -138,7 +137,6 @@ class Structures(object):
         try:
             controls = schema.deserialize(self.request.params.mixed())
             structure.name = controls.get('name')
-            structure.invoice_template = controls.get('invoice_template')
             structure.parent_id = controls.get('parent_id')
             structure.contacts = []
             structure.addresses = []

@@ -9,6 +9,8 @@ from ...lib.utils.resources_utils import (
     get_resources_types_by_interface,
     get_resource_class
 )
+from ...lib.utils.common_utils import money_cast
+from ...lib.bl.currencies_rates import query_convert_rates
 
 from ...models import DBSession
 from ...models.invoice import Invoice

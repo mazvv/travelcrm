@@ -229,11 +229,10 @@ function dialog_open(options){
 }
 
 function blank_open(options){
+	add_container(options);
 	var url = get_action_url(options);
-	if(url){
-		var win = window.open(url, '_blank');
-		win.focus();
-	}
+	window.open(url , '_tab');
+	delete_container();
 }
 
 function get_action_url(options){

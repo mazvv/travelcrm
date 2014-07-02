@@ -4,7 +4,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Text,
     Table,
     ForeignKey
     )
@@ -161,9 +160,6 @@ class Structure(Base):
     name = Column(
         String(length=32),
         nullable=False
-    )
-    invoice_template = Column(
-        Text,
     )
     resource = relationship(
         'Resource',

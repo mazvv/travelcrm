@@ -8,11 +8,10 @@ from ...models.service_sale import ServiceSale
 from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
-from ...models.fin_transaction import FinTransaction
 from ...models.service import Service
 from ...models.account_item import AccountItem
 
-from ...lib.bl.invoices import query_invoice_payments_accounts_items_grouped
+from ...lib.bl import InvoiceFactory
 from ...lib.bl.currencies_rates import query_convert_rates
 from ...lib.utils.common_utils import money_cast
 
@@ -35,7 +34,7 @@ def calc_base_price(service_sale):
     return service_sale
 
 
-class ServiceSaleInvoice(object):
+class ServiceSaleInvoice(InvoiceFactory):
 
     @classmethod
     def bind_invoice(cls, resource_id, invoice):
@@ -91,37 +90,6 @@ class ServiceSaleInvoice(object):
         return query
 
     @classmethod
-    def make_payment(cls, invoice_id, date, sum):
-        invoice = Invoice.get(invoice_id)
-        currency = invoice.account.currency
-        service_sale = invoice.service_sale
-        transacts = []
-        payments_query = (
-            query_invoice_payments_accounts_items_grouped(invoice.id)
-        )
-        payments = {item.account_item_id: item.sum for item in payments_query}
-        accounts_items_info = cls.accounts_items_info(
-            service_sale.resource_id, currency.id
-        )
-        for account_item in accounts_items_info:
-            account_item_payments = payments.get(account_item.id, 0)
-            debt = account_item.price - account_item_payments
-            if debt <= sum:
-                sum_to_pay = debt
-            else:
-                sum_to_pay = sum
-            transact = FinTransaction(
-                account_item_id=account_item.id,
-                date=date,
-                sum=sum_to_pay
-            )
-            sum -= sum_to_pay
-            transacts.append(transact)
-            if sum <= 0:
-                break
-        return transacts
-
-    @classmethod
     def services_info(cls, resource_id, currency_id=None):
         service_sale = (
             DBSession.query(ServiceSale)
@@ -147,9 +115,10 @@ class ServiceSaleInvoice(object):
                 subq.c.id,
                 subq.c.name,
                 func.count(subq.c.id).label('cnt'),
+                money_cast(subq.c.base_price / rate).label('unit_price'),
                 money_cast(func.sum(subq.c.base_price) / rate).label('price')
             )
-            .group_by(subq.c.id, subq.c.name)
+            .group_by(subq.c.id, subq.c.name, subq.c.base_price)
             .order_by(subq.c.name)
         )
 

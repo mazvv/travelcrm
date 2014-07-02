@@ -10,7 +10,6 @@ from ...models.invoice import Invoice
 from ...models.service_item import ServiceItem
 from ...models.service import Service
 from ...models.account_item import AccountItem
-from ...models.fin_transaction import FinTransaction
 
 from ...lib.bl import InvoiceFactory
 from ...lib.bl.currencies_rates import query_convert_rates
@@ -132,9 +131,10 @@ class TourInvoice(InvoiceFactory):
             DBSession.query(
                 subq.c.name,
                 func.count(subq.c.id).label('cnt'),
+                money_cast(subq.c.base_price / rate).label('unit_price'),
                 money_cast(func.sum(subq.c.base_price) / rate).label('price')
             )
-            .group_by(subq.c.id, subq.c.name)
+            .group_by(subq.c.id, subq.c.name, subq.c.base_price)
             .order_by(subq.c.name)
         )
 

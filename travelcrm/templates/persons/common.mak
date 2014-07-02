@@ -27,43 +27,6 @@
         }
     </script>
     % endif
-    <script type="text/javascript">
-        function formatter_${_func_id}(index, row){
-            var html = '<table width="100%" class="grid-details">';
-            if(row.phone){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'phone')}</td>'
-                    + '<td>' + row.phone + '</td>'
-                    + '</tr>';
-            }
-            if(row.email){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'email')}</td>'
-                    + '<td>' + row.email + '</td>'
-                    + '</tr>';
-            }
-            if(row.skype){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'skype')}</td>'
-                    + '<td>' + row.skype + '</td>'
-                    + '</tr>';
-            }
-            if(row.customer_citizen_passport){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'citizen passport')}</td>'
-                    + '<td>' + row.customer_citizen_passport + '</td>'
-                    + '</tr>';
-            }
-            if(row.customer_foreign_passport){
-                html += '<tr>'
-                    + '<td width="25%" class="b">${_(u'foreign passport')}</td>'
-                    + '<td>' + row.customer_foreign_passport + '</td>'
-                    + '</tr>';
-            }
-            html += '</table>';
-            return html;
-        }
-    </script>
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="

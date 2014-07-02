@@ -64,9 +64,6 @@
 	                )}
                 </div>
             </div>
-            <div title="${_(u'Invoice Template')}">
-                ${h.tags.textarea('invoice_template', item.invoice_template if item else None, style="width: 715px;border:none;height:300px;outline:none;", class_="text")}
-            </div>
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>

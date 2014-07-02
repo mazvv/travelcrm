@@ -1,15 +1,12 @@
 # -*-coding: utf-8-*-
 
 import logging
-from decimal import Decimal
 
 import colander
-import pdfkit
 from babel.numbers import format_decimal
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
-from pyramid.response import Response
 
 from ..models import DBSession
 from ..models.invoice import Invoice
@@ -27,8 +24,11 @@ from ..forms.invoices import (
 
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.common_utils import get_locale_name
-from ..lib.bl.currencies_rates import query_convert_rates
-from ..lib.bl.invoices import query_resource_data, query_invoice_payments
+from ..lib.bl.invoices import (
+    query_resource_data,
+    query_invoice_payments,
+)
+from travelcrm.lib.bl.invoices import get_factory_by_invoice_id
 
 log = logging.getLogger(__name__)
 
@@ -62,7 +62,9 @@ class Invoices(object):
             self.request.params.get('q'),
         )
         qb.advanced_search(
-            **self.request.params.mixed()
+            updated_from=self.request.params.get('updated_from'),
+            updated_to=self.request.params.get('updated_to'),
+            modifier_id=self.request.params.get('modifier_id'),
         )
         id = self.request.params.get('id')
         if id:
@@ -228,18 +230,28 @@ class Invoices(object):
         return {'success_message': _(u'Deleted')}
 
     @view_config(
-        name='pdf',
+        name='print',
         context='..resources.invoices.Invoices',
         request_method='GET',
-        permission='view'
+        renderer='travelcrm:templates/invoices/print.mak',
+        permission='view',
     )
-    def pdf(self):
+    def print_invoice(self):
         invoice = Invoice.get(self.request.params.get('id'))
-        structure = invoice.resource.owner_structure
-        output = pdfkit.from_string(structure.invoice_template, False)
-        return Response(
-            output, headerlist=[('Content-Type', 'application/pdf')]
+        factory = get_factory_by_invoice_id(invoice.id)
+        bound_resource = (
+            query_resource_data()
+            .filter(Invoice.id == invoice.id)
+            .first()
         )
+        payment_query = query_invoice_payments(self.request.params.get('id'))
+        payment_sum = sum(row.sum for row in payment_query)
+        return {
+            'invoice': invoice,
+            'factory': factory,
+            'resource_id': bound_resource.resource_id,
+            'payment_sum': payment_sum,
+        }
 
     @view_config(
         name='invoice_sum',
@@ -258,16 +270,12 @@ class Invoices(object):
             resource = Resource.get(resource_id)
             source_cls = get_resource_class(resource.resource_type.name)
             factory = source_cls.get_invoice_factory()
-            invoice_sum = factory.get_base_sum(resource_id)
             account = Account.get(account_id)
-            query_rate_converter = query_convert_rates(
-                account.currency_id, date
-            )
-            rate = query_rate_converter.scalar() or 1
-            invoice_sum = invoice_sum / rate
             return {
                 'invoice_sum': str(
-                    Decimal(invoice_sum).quantize(Decimal('.01'))
+                    factory.get_sum_by_resource_id(
+                        resource.id, account.currency_id, date
+                    )
                 ),
                 'currency': account.currency.iso_code
             }

@@ -29,10 +29,6 @@ class StructureSchema(ResourceSchema):
         colander.String(),
         validator=colander.Length(max=128)
     )
-    invoice_template = colander.SchemaNode(
-        colander.String(),
-        missing=None,
-    )
     contact_id = colander.SchemaNode(
         colander.Set(),
         missing=[],
