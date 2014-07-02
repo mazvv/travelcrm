@@ -1565,8 +1565,7 @@ CREATE TABLE structure (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     parent_id integer,
-    name character varying(32) NOT NULL,
-    invoice_template text
+    name character varying(32) NOT NULL
 );
 
 
@@ -2218,14 +2217,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5760, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5762, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1545, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1547, true);
 
 
 --
@@ -2361,7 +2360,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-59a442cc5fdc
+3b279a8a50f0
 \.
 
 
@@ -2662,9 +2661,7 @@ COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
 10	1	10.00	2014-06-15
 11	2	334.00	2014-06-18
 12	2	334.00	2014-06-18
-46	2	500.00	2014-06-18
 47	2	1474.00	2014-06-18
-48	2	0.80	2014-06-27
 49	2	2298.00	2014-06-22
 50	1	27702.00	2014-06-22
 53	2	137.60	2014-06-22
@@ -2675,6 +2672,8 @@ COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
 58	1	862.40	2014-06-22
 59	2	0.00	2014-06-22
 60	1	2693.60	2014-06-22
+61	2	500.00	2014-07-01
+62	2	0.80	2014-07-01
 \.
 
 
@@ -2682,7 +2681,7 @@ COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
 -- Name: fin_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('fin_transaction_id_seq', 60, true);
+SELECT pg_catalog.setval('fin_transaction_id_seq', 62, true);
 
 
 --
@@ -2785,10 +2784,10 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 5	1447	10
 6	1448	8
 7	1485	10
-19	1499	13
 20	1500	13
-21	1501	13
 23	1509	14
+24	1546	13
+25	1547	13
 \.
 
 
@@ -2796,7 +2795,7 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('income_id_seq', 23, true);
+SELECT pg_catalog.setval('income_id_seq', 25, true);
 
 
 --
@@ -2807,11 +2806,11 @@ COPY income_transactions (income_id, fin_transaction_id) FROM stdin;
 6	7
 5	9
 7	10
-19	46
 20	47
-21	48
 23	59
 23	60
+24	61
+25	62
 \.
 
 
@@ -3634,9 +3633,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1483	108	32	f
 1485	106	32	f
 1487	103	32	f
-1499	106	32	f
 1500	106	32	f
-1501	106	32	f
 1502	103	32	f
 1503	103	32	f
 1504	104	32	f
@@ -3667,6 +3664,8 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1543	87	32	f
 1544	87	32	f
 1545	87	32	f
+1546	106	32	f
+1547	106	32	f
 \.
 
 
@@ -4345,9 +4344,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5711	1483	2	\N	2014-06-14 18:21:04.54574
 5713	1485	2	\N	2014-06-15 15:17:28.256792
 5715	1487	2	\N	2014-06-16 14:42:17.062016
-5727	1499	2	\N	2014-06-18 16:58:43.052752
 5728	1500	2	\N	2014-06-18 16:59:05.631362
-5729	1501	2	\N	2014-06-22 12:08:09.44975
 5730	1502	2	\N	2014-06-22 19:40:05.464875
 5731	1503	2	\N	2014-06-22 19:40:20.79663
 5732	1504	2	\N	2014-06-22 19:42:44.939368
@@ -4378,6 +4375,8 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5758	1543	2	\N	2014-06-28 21:25:57.336069
 5759	1544	2	\N	2014-06-28 21:26:14.894807
 5760	1545	2	\N	2014-06-28 21:26:35.413657
+5761	1546	2	\N	2014-07-02 23:01:03.321441
+5762	1547	2	\N	2014-07-02 23:03:30.755887
 \.
 
 
@@ -4568,17 +4567,17 @@ COPY service_sale_service_item (service_sale_id, service_item_id) FROM stdin;
 -- Data for Name: structure; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY structure (id, resource_id, parent_id, name, invoice_template) FROM stdin;
-2	858	\N	Kiev Office	\N
-3	859	2	Sales Department	\N
-4	860	32	Marketing Dep.	\N
-1	857	32	Software Dev. Dep.	\N
-5	861	32	CEO	\N
-7	1062	\N	Moscow Office	\N
-8	1250	\N	Odessa Office	\N
-9	1251	8	Sales Department	\N
-11	1277	\N	Lviv Office	\N
-32	725	\N	Head Office	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\r\n<html xmlns="http://www.w3.org/1999/xhtml">\r\n\r\n<head>\r\n\t<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />\r\n\t\r\n\t<title>Editable Invoice</title>\r\n\t<style>\r\n* { margin: 0; padding: 0; }\r\n#page-wrap { width: 800px; margin: 0 auto; }\r\n\r\ntable { border-collapse: collapse; }\r\ntable td, table th { border: 1px solid black; padding: 5px; }\r\n\r\n#header { height: 15px; width: 100%; margin: 20px 0; background: #222; text-align: center; color: white; font: bold 15px Helvetica, Sans-Serif; text-decoration: uppercase; letter-spacing: 20px; padding: 8px 0px; }\r\n\r\n#address { width: 250px; height: 150px; float: left; }\r\n#customer { overflow: hidden; }\r\n\r\n#logo { text-align: right; float: right; position: relative; margin-top: 25px; border: 1px solid #fff; max-width: 540px; max-height: 100px; overflow: hidden; }\r\n#logo:hover, #logo.edit { border: 1px solid #000; margin-top: 0px; max-height: 125px; }\r\n#logoctr { display: none; }\r\n#logo:hover #logoctr, #logo.edit #logoctr { display: block; text-align: right; line-height: 25px; background: #eee; padding: 0 5px; }\r\n#logohelp { text-align: left; display: none; font-style: italic; padding: 10px 5px;}\r\n#logohelp input { margin-bottom: 5px; }\r\n.edit #logohelp { display: block; }\r\n.edit #save-logo, .edit #cancel-logo { display: inline; }\r\n.edit #image, #save-logo, #cancel-logo, .edit #change-logo, .edit #delete-logo { display: none; }\r\n#customer-title { font-size: 20px; font-weight: bold; float: left; }\r\n\r\n#meta { margin-top: 1px; width: 300px; float: right; }\r\n#meta td { text-align: right;  }\r\n#meta td.meta-head { text-align: left; background: #eee; }\r\n#meta td span { width: 100%; height: 20px; text-align: right; }\r\n\r\n#items { clear: both; width: 100%; margin: 30px 0 0 0; border: 1px solid black; }\r\n#items th { background: #eee; }\r\n#items span { width: 80px; height: 50px; }\r\n#items tr.item-row td { border: 0; vertical-align: top; }\r\n#items td.description { width: 300px; }\r\n#items td.item-name { width: 175px; }\r\n#items td.description span, #items td.item-name span { width: 100%; }\r\n#items td.total-line { border-right: 0; text-align: right; }\r\n#items td.total-value { border-left: 0; padding: 10px; }\r\n#items td.total-value span { height: 20px; background: none; }\r\n#items td.balance { background: #eee; }\r\n#items td.blank { border: 0; }\r\n\r\n#terms { text-align: center; margin: 20px 0 0 0; }\r\n#terms h5 { text-transform: uppercase; font: 13px Helvetica, Sans-Serif; letter-spacing: 10px; border-bottom: 1px solid black; padding: 0 0 8px 0; margin: 0 0 8px 0; }\r\n#terms span { width: 100%; text-align: center;}\r\n\r\nspan:hover, span:focus, #items td.total-value span:hover, #items td.total-value span:focus, .delete:hover { background-color:#EEFF88; }\r\n\r\n.delete-wpr { position: relative; }\r\n.delete { display: block; color: #000; text-decoration: none; position: absolute; background: #EEEEEE; font-weight: bold; padding: 0px 3px; border: 1px solid; top: -6px; left: -22px; font-family: Verdana; font-size: 12px; }\r\n\t</style>\t\r\n\r\n</head>\r\n\r\n<body>\r\n\r\n\t<div id="page-wrap">\r\n\r\n\t\t<span id="header">INVOICE</span>\r\n\t\t\r\n\t\t<div id="identity">\r\n\t\t\r\n            <span id="address">Chris Coyier\r\n123 Appleseed Street\r\nAppleville, WI 53719\r\n\r\nPhone: (555) 555-5555</span>\r\n\r\n            <div id="logo">\r\n              My Company Name\r\n            </div>\r\n\t\t\r\n\t\t</div>\r\n\t\t\r\n\t\t<div style="clear:both"></div>\r\n\t\t\r\n\t\t<div id="customer">\r\n\r\n            <span id="customer-title">Widget Corp.\r\nc/o Steve Widget</span>\r\n\r\n            <table id="meta">\r\n                <tr>\r\n                    <td class="meta-head">Invoice #</td>\r\n                    <td><span>000123</span></td>\r\n                </tr>\r\n                <tr>\r\n\r\n                    <td class="meta-head">Date</td>\r\n                    <td><span id="date">December 15, 2009</span></td>\r\n                </tr>\r\n                <tr>\r\n                    <td class="meta-head">Amount Due</td>\r\n                    <td><div class="due">$875.00</div></td>\r\n                </tr>\r\n\r\n            </table>\r\n\t\t\r\n\t\t</div>\r\n\t\t\r\n\t\t<table id="items">\r\n\t\t\r\n\t\t  <tr>\r\n\t\t      <th>Item</th>\r\n\t\t      <th>Description</th>\r\n\t\t      <th>Unit Cost</th>\r\n\t\t      <th>Quantity</th>\r\n\t\t      <th>Price</th>\r\n\t\t  </tr>\r\n\t\t  \r\n\t\t  <tr class="item-row">\r\n\t\t      <td class="item-name"><div class="delete-wpr"><span>Web Updates</span></div></td>\r\n\t\t      <td class="description"><span>Monthly web updates for http://widgetcorp.com (Nov. 1 - Nov. 30, 2009)</span></td>\r\n\t\t      <td><span class="cost">$650.00</span></td>\r\n\t\t      <td><span class="qty">1</span></td>\r\n\t\t      <td><span class="price">$650.00</span></td>\r\n\t\t  </tr>\r\n\t\t  \r\n\t\t  <tr class="item-row">\r\n\t\t      <td class="item-name"><div class="delete-wpr"><span>SSL Renewals</span></div></td>\r\n\r\n\t\t      <td class="description"><span>Yearly renewals of SSL certificates on main domain and several subdomains</span></td>\r\n\t\t      <td><span class="cost">$75.00</span></td>\r\n\t\t      <td><span class="qty">3</span></td>\r\n\t\t      <td><span class="price">$225.00</span></td>\r\n\t\t  </tr>\r\n\t\t  \r\n\t\t  <tr>\r\n\t\t      <td colspan="2" class="blank"> </td>\r\n\t\t      <td colspan="2" class="total-line">Subtotal</td>\r\n\t\t      <td class="total-value"><div id="subtotal">$875.00</div></td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\r\n\t\t      <td colspan="2" class="blank"> </td>\r\n\t\t      <td colspan="2" class="total-line">Total</td>\r\n\t\t      <td class="total-value"><div id="total">$875.00</div></td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t      <td colspan="2" class="blank"> </td>\r\n\t\t      <td colspan="2" class="total-line">Amount Paid</td>\r\n\r\n\t\t      <td class="total-value"><span id="paid">$0.00</span></td>\r\n\t\t  </tr>\r\n\t\t  <tr>\r\n\t\t      <td colspan="2" class="blank"> </td>\r\n\t\t      <td colspan="2" class="total-line balance">Balance Due</td>\r\n\t\t      <td class="total-value balance"><div class="due">$875.00</div></td>\r\n\t\t  </tr>\r\n\t\t\r\n\t\t</table>\r\n\t\t\r\n\t\t<div id="terms">\r\n\t\t  <h5>Terms</h5>\r\n\t\t  <span>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</span>\r\n\t\t</div>\r\n\t\r\n\t</div>\r\n\t\r\n</body>\r\n\r\n</html>
+COPY structure (id, resource_id, parent_id, name) FROM stdin;
+2	858	\N	Kiev Office
+3	859	2	Sales Department
+4	860	32	Marketing Dep.
+1	857	32	Software Dev. Dep.
+5	861	32	CEO
+7	1062	\N	Moscow Office
+8	1250	\N	Odessa Office
+9	1251	8	Sales Department
+11	1277	\N	Lviv Office
+32	725	\N	Head Office
 \.
 
 
