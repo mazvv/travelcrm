@@ -10,6 +10,14 @@
     	iconCls:'fa fa-user'
     ">
     ${h.tags.form(auth_url, class_="_ajax", autocomplete="off")}
+    	% if h.common.is_demo_mode():
+		<div class="form-field tc">
+    	    <span class="b">
+	    		Username: <span class="lipstick">admin</span>, 
+	    		Password: <span class="lipstick">adminadmin</span>
+    	    </span>
+        </div>
+        % endif
         <div class="form-field">
             <div class="dl10">
             	${h.tags.title(_(u"username"), False, "username")}

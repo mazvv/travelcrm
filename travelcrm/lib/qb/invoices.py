@@ -104,10 +104,8 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         if id:
             self.query = self.query.filter(Invoice.id.in_(id))
 
-    def advanced_search(self, updated_from, updated_to, modifier_id, **kwargs):
-        super(InvoicesQueryBuilder, self).advanced_search(
-            updated_from, updated_to, modifier_id
-        )
+    def advanced_search(self, **kwargs):
+        super(InvoicesQueryBuilder, self).advanced_search(**kwargs)
         if 'currency_id' in kwargs:
             self._filter_currency(kwargs.get('currency_id'))
         if 'sum_from' in kwargs or 'sum_to' in kwargs:

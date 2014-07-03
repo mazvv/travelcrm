@@ -32,6 +32,11 @@ def gen_id(prefix='', limit=6):
     return u"%s%s" % (prefix, ''.join(s[:limit]))
 
 
+def is_demo_mode():
+    val = _get_settings_value('company.demo_mode')
+    return val == 'true'
+
+   
 def _get_localizer_for_locale_name(locale_name):
     registry = get_current_registry()
     tdirs = registry.queryUtility(ITranslationDirectories, default=[])

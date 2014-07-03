@@ -148,10 +148,8 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         if id:
             self.query = self.query.filter(Tour.id.in_(id))
 
-    def advanced_search(self, updated_from, updated_to, modifier_id, **kwargs):
-        super(ToursQueryBuilder, self).advanced_search(
-            updated_from, updated_to, modifier_id
-        )
+    def advanced_search(self, **kwargs):
+        super(ToursQueryBuilder, self).advanced_search(**kwargs)
         if 'person_id' in kwargs:
             self._filter_person(kwargs.get('person_id'))
         if 'hotel_id' in kwargs:

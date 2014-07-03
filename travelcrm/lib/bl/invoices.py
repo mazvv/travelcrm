@@ -69,7 +69,7 @@ def query_invoice_payments(invoice_id):
         .join(Account, Invoice.account)
         .join(Currency, Account.currency)
         .filter(Invoice.id == invoice_id)
-        .group_by(Currency.iso_code, FinTransaction.date)
+        .group_by(Income.id, Currency.iso_code, FinTransaction.date)
     )
 
 

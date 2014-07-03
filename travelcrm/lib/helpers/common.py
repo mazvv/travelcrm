@@ -10,6 +10,7 @@ from webhelpers.misc import NotGiven
 from ..utils.common_utils import (
     gen_id as u_gen_id,
     get_company_name as u_get_company_name,
+    is_demo_mode as u_is_demo_mode,
     format_date as u_format_date,
     format_datetime as u_format_datetime,
     format_decimal as u_format_decimal,
@@ -64,6 +65,10 @@ def jsonify(val):
 
 def get_company_name():
     return u_get_company_name()
+
+
+def is_demo_mode():
+    return u_is_demo_mode()
 
 
 def contact_type_icon(contact_type):

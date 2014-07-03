@@ -38,10 +38,8 @@ class CurrenciesRatesQueryBuilder(ResourcesQueryBuilder):
         if id:
             self.query = self.query.filter(CurrencyRate.id.in_(id))
 
-    def advanced_search(self, updated_from, updated_to, modifier_id, **kwargs):
-        super(CurrenciesRatesQueryBuilder, self).advanced_search(
-            updated_from, updated_to, modifier_id
-        )
+    def advanced_search(self, **kwargs):
+        super(CurrenciesRatesQueryBuilder, self).advanced_search(**kwargs)
         if 'rate_from' in kwargs or 'rate_to' in kwargs:
             self._filter_rate_date(
                 kwargs.get('rate_from'), kwargs.get('rate_to')

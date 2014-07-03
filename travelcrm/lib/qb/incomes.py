@@ -82,10 +82,8 @@ class IncomesQueryBuilder(ResourcesQueryBuilder):
         if id:
             self.query = self.query.filter(Income.id.in_(id))
 
-    def advanced_search(self, updated_from, updated_to, modifier_id, **kwargs):
-        super(IncomesQueryBuilder, self).advanced_search(
-            updated_from, updated_to, modifier_id
-        )
+    def advanced_search(self, **kwargs):
+        super(IncomesQueryBuilder, self).advanced_search(**kwargs)
         if 'invoice_id' in kwargs:
             self._filter_invoice(kwargs.get('invoice_id'))
         if 'account_id' in kwargs:

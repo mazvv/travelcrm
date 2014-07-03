@@ -45,9 +45,7 @@ class Advsources(object):
             self.request.params.get('q'),
         )
         qb.advanced_search(
-            updated_from=self.request.params.get('updated_from'),
-            updated_to=self.request.params.get('updated_to'),
-            modifier_id=self.request.params.get('modifier_id'),
+            **self.request.params.mixed()
         )
         id = self.request.params.get('id')
         if id:

@@ -158,9 +158,11 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
         )
         self.query = self.query.order_by(sort_order)
 
-    def advanced_search(self, updated_from, updated_to, modifier_id):
-        self._filter_updated_date(updated_from, updated_to)
-        self._filter_modifier(modifier_id)
+    def advanced_search(self, **kwargs):
+        self._filter_updated_date(
+            kwargs.get('updated_from'), kwargs.get('updated_to')
+        )
+        self._filter_modifier(kwargs.get('modifier_id'))
 
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
