@@ -11,9 +11,15 @@ from pyramid.threadlocal import get_current_registry
 from pyramid.threadlocal import get_current_request
 from pyramid.interfaces import ITranslationDirectories
 
-from pyramid.i18n import make_localizer, get_localizer
+from pyramid.i18n import (
+    make_localizer,
+    get_localizer,
+    TranslationStringFactory
+)
 
 from sqlalchemy import cast, Numeric
+
+tsf = TranslationStringFactory('travelcrm')
 
 
 def _get_settings_value(name):
@@ -36,7 +42,7 @@ def is_demo_mode():
     val = _get_settings_value('company.demo_mode')
     return val == 'true'
 
-   
+
 def _get_localizer_for_locale_name(locale_name):
     registry = get_current_registry()
     tdirs = registry.queryUtility(ITranslationDirectories, default=[])
@@ -49,7 +55,7 @@ def translate(*args, **kwargs):
         localizer = _get_localizer_for_locale_name('en')
     else:
         localizer = get_localizer(request)
-    return localizer.translate(*args, **kwargs)
+    return localizer.translate(tsf(*args, **kwargs))
 
 
 def cast_int(val):

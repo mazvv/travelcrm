@@ -18,7 +18,7 @@ if ($.fn.validatebox){
 	$.fn.validatebox.defaults.rules.email.message = 'Пожалуйста введите корректный e-mail адрес.';
 	$.fn.validatebox.defaults.rules.url.message = 'Пожалуйста введите корректный URL.';
 	$.fn.validatebox.defaults.rules.length.message = 'Пожалуйста введите зачение между {0} и {1}.';
-	$.fn.validatebox.defaults.rules.remote.message = 'Пожалуйста исправте это поле.';
+	$.fn.validatebox.defaults.rules.remote.message = 'Пожалуйста исправьте это поле.';
 }
 if ($.fn.numberbox){
 	$.fn.numberbox.defaults.missingMessage = 'Это поле необходимо.';

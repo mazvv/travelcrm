@@ -13,8 +13,8 @@
     	% if h.common.is_demo_mode():
 		<div class="form-field tc">
     	    <span class="b">
-	    		Username: <span class="lipstick">admin</span>, 
-	    		Password: <span class="lipstick">adminadmin</span>
+	    		${_(u'Username:')} <span class="lipstick">admin</span>, 
+	    		${_(u'Password:')} <span class="lipstick">adminadmin</span>
     	    </span>
         </div>
         % endif

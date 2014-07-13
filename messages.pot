@@ -1,0 +1,1407 @@
+# 
+# SOME DESCRIPTIVE TITLE
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE 1.0\n"
+"POT-Creation-Date: 2014-07-13 13:17+03:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: ./travelcrm/lib/helpers/fields.py:49 ./travelcrm/lib/helpers/fields.py:121
+#, c-format
+msgid "no"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:50 ./travelcrm/lib/helpers/fields.py:122
+#, c-format
+msgid "yes"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:316 ./travelcrm/lib/helpers/fields.py:2281
+#: ./travelcrm/lib/helpers/fields.py:204 ./travelcrm/lib/helpers/fields.py:623
+#: ./travelcrm/lib/helpers/fields.py:839 ./travelcrm/lib/helpers/fields.py:947
+#: ./travelcrm/lib/helpers/fields.py:1055
+#: ./travelcrm/lib/helpers/fields.py:1163
+#: ./travelcrm/lib/helpers/fields.py:1271
+#: ./travelcrm/lib/helpers/fields.py:1379
+#: ./travelcrm/lib/helpers/fields.py:1487
+#: ./travelcrm/lib/helpers/fields.py:1595
+#: ./travelcrm/lib/helpers/fields.py:1703
+#: ./travelcrm/lib/helpers/fields.py:1918
+#: ./travelcrm/lib/helpers/fields.py:2025
+#: ./travelcrm/lib/helpers/fields.py:2163
+#: ./travelcrm/lib/helpers/fields.py:2395
+#: ./travelcrm/lib/helpers/fields.py:2512
+#: ./travelcrm/lib/helpers/fields.py:2630
+#, c-format
+msgid "name"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:388
+#, c-format
+msgid "all"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:389
+#, c-format
+msgid "structure"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:454
+#, c-format
+msgid "female"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:455
+#, c-format
+msgid "male"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:467
+#, c-format
+msgid "phone"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:468
+#, c-format
+msgid "email"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:469
+#, c-format
+msgid "skype"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2098
+#, c-format
+msgid "citizen"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2099
+#, c-format
+msgid "foreign"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2282
+#, c-format
+msgid "beneficiary"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2283
+#, c-format
+msgid "account"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2284
+#, c-format
+msgid "swift"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2737
+#, c-format
+msgid "customer"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2738
+#, c-format
+msgid "sum"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2739
+#, c-format
+msgid "num"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:2740
+#, c-format
+msgid "from date"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:515
+#, c-format
+msgid "licence num"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:731
+#, c-format
+msgid "contact"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:1811
+#, c-format
+msgid "iso code"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:184 ./travelcrm/lib/helpers/fields.py:290
+#: ./travelcrm/lib/helpers/fields.py:495 ./travelcrm/lib/helpers/fields.py:603
+#: ./travelcrm/lib/helpers/fields.py:710 ./travelcrm/lib/helpers/fields.py:818
+#: ./travelcrm/lib/helpers/fields.py:926 ./travelcrm/lib/helpers/fields.py:1034
+#: ./travelcrm/lib/helpers/fields.py:1142
+#: ./travelcrm/lib/helpers/fields.py:1250
+#: ./travelcrm/lib/helpers/fields.py:1358
+#: ./travelcrm/lib/helpers/fields.py:1466
+#: ./travelcrm/lib/helpers/fields.py:1574
+#: ./travelcrm/lib/helpers/fields.py:1682
+#: ./travelcrm/lib/helpers/fields.py:1790
+#: ./travelcrm/lib/helpers/fields.py:1898
+#: ./travelcrm/lib/helpers/fields.py:2005
+#: ./travelcrm/lib/helpers/fields.py:2143
+#: ./travelcrm/lib/helpers/fields.py:2252
+#: ./travelcrm/lib/helpers/fields.py:2375
+#: ./travelcrm/lib/helpers/fields.py:2492
+#: ./travelcrm/lib/helpers/fields.py:2610
+#, c-format
+msgid "add new"
+msgstr ""
+
+#: ./travelcrm/lib/helpers/fields.py:198 ./travelcrm/lib/helpers/fields.py:304
+#: ./travelcrm/lib/helpers/fields.py:509 ./travelcrm/lib/helpers/fields.py:617
+#: ./travelcrm/lib/helpers/fields.py:724 ./travelcrm/lib/helpers/fields.py:832
+#: ./travelcrm/lib/helpers/fields.py:940 ./travelcrm/lib/helpers/fields.py:1048
+#: ./travelcrm/lib/helpers/fields.py:1156
+#: ./travelcrm/lib/helpers/fields.py:1264
+#: ./travelcrm/lib/helpers/fields.py:1372
+#: ./travelcrm/lib/helpers/fields.py:1480
+#: ./travelcrm/lib/helpers/fields.py:1588
+#: ./travelcrm/lib/helpers/fields.py:1696
+#: ./travelcrm/lib/helpers/fields.py:1804
+#: ./travelcrm/lib/helpers/fields.py:1912
+#: ./travelcrm/lib/helpers/fields.py:2019
+#: ./travelcrm/lib/helpers/fields.py:2157
+#: ./travelcrm/lib/helpers/fields.py:2266
+#: ./travelcrm/lib/helpers/fields.py:2389
+#: ./travelcrm/lib/helpers/fields.py:2506
+#: ./travelcrm/lib/helpers/fields.py:2624
+#: ./travelcrm/lib/helpers/fields.py:2722
+#, c-format
+msgid "edit selected"
+msgstr ""
+
+#: ./travelcrm/forms/resources_types.py:40
+#, c-format
+msgid "Resource Type with the same resource exists"
+msgstr ""
+
+#: ./travelcrm/forms/resources_types.py:64
+#, c-format
+msgid "Resource Type with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/resources_types.py:87
+#, c-format
+msgid "Resource Type with the same humanize exists"
+msgstr ""
+
+#: ./travelcrm/forms/resources_types.py:21
+#, c-format
+msgid "Resource does not exist"
+msgstr ""
+
+#: ./travelcrm/forms/resources_types.py:23
+#, c-format
+msgid "Resource module does not exist"
+msgstr ""
+
+#: ./travelcrm/forms/resources_types.py:25
+#, c-format
+msgid "Check module name"
+msgstr ""
+
+#: ./travelcrm/forms/locations.py:38
+#, c-format
+msgid "Location with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/positions.py:36
+#, c-format
+msgid "Position with the same name for structure exists"
+msgstr ""
+
+#: ./travelcrm/forms/accounts.py:21
+#, c-format
+msgid "Account with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/__init__.py:98
+#, c-format
+msgid "Phone is not valid"
+msgstr ""
+
+#: ./travelcrm/forms/__init__.py:89
+#, c-format
+msgid "Phone must be in format +XXXXXXXXXXX and contains country code"
+msgstr ""
+
+#: ./travelcrm/forms/incomes.py:28
+#, c-format
+msgid "Sum must be more then zero"
+msgstr ""
+
+#: ./travelcrm/forms/incomes.py:51
+#, c-format
+msgid "Selected invice is fully payed"
+msgstr ""
+
+#: ./travelcrm/forms/incomes.py:56
+#, c-format
+msgid "Sum must be %s or less"
+msgstr ""
+
+#: ./travelcrm/forms/roomcats.py:22 ./travelcrm/forms/accomodations.py:22
+#: ./travelcrm/forms/touroperators.py:22
+#, c-format
+msgid "Room category with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/passports.py:17
+#, c-format
+msgid "You must set end date for foreign passport"
+msgstr ""
+
+#: ./travelcrm/forms/employees.py:25
+#, c-format
+msgid "Max Image Size for Upload is %s"
+msgstr ""
+
+#: ./travelcrm/forms/employees.py:33
+#, c-format
+msgid "Only images allowed"
+msgstr ""
+
+#: ./travelcrm/forms/structures.py:17 ./travelcrm/forms/navigations.py:17
+#, c-format
+msgid "Can not be parent of self"
+msgstr ""
+
+#: ./travelcrm/forms/services.py:22
+#, c-format
+msgid "Service with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/advsources.py:22
+#, c-format
+msgid "Advertise source with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/tours.py:22
+#, c-format
+msgid "Adult or Children must be more than 0"
+msgstr ""
+
+#: ./travelcrm/forms/tours.py:52
+#, c-format
+msgid "Customer must have contacts, passports and address"
+msgstr ""
+
+#: ./travelcrm/forms/tours.py:39
+#, c-format
+msgid "Members count must be %s"
+msgstr ""
+
+#: ./travelcrm/forms/accounts_items.py:22
+#, c-format
+msgid "Account Item with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/licences.py:16
+#, c-format
+msgid "Invalid dates, please check"
+msgstr ""
+
+#: ./travelcrm/forms/users.py:23
+#, c-format
+msgid "User with the same username exists"
+msgstr ""
+
+#: ./travelcrm/forms/users.py:40
+#, c-format
+msgid "User for this employee already exists"
+msgstr ""
+
+#: ./travelcrm/forms/users.py:53
+#, c-format
+msgid "Password and confirm is not equal"
+msgstr ""
+
+#: ./travelcrm/forms/foodcats.py:22
+#, c-format
+msgid "Food category with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/regions.py:28
+#, c-format
+msgid "Region already exists"
+msgstr ""
+
+#: ./travelcrm/forms/currencies.py:23
+#, c-format
+msgid "Currency with the same iso code exists"
+msgstr ""
+
+#: ./travelcrm/forms/tasks.py:26
+#, c-format
+msgid "Set date and time or leave empty both"
+msgstr ""
+
+#: ./travelcrm/forms/appointments.py:24
+#, c-format
+msgid "Appointment with bigger date already exists"
+msgstr ""
+
+#: ./travelcrm/forms/currencies_rates.py:32
+#, c-format
+msgid "Currency rate for this date exists"
+msgstr ""
+
+#: ./travelcrm/forms/currencies_rates.py:45
+#, c-format
+msgid "This is base currency"
+msgstr ""
+
+#: ./travelcrm/forms/currencies_rates.py:57
+#, c-format
+msgid "Must be more then 0"
+msgstr ""
+
+#: ./travelcrm/forms/countries.py:22
+#, c-format
+msgid "Country with the same iso code exists"
+msgstr ""
+
+#: ./travelcrm/forms/banks.py:22
+#, c-format
+msgid "Bank with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/navigations.py:54 ./travelcrm/forms/permisions.py:47
+#, c-format
+msgid "Can not copy to itself"
+msgstr ""
+
+#: ./travelcrm/forms/hotelcats.py:23
+#, c-format
+msgid "Hotel category with the same name exists"
+msgstr ""
+
+#: ./travelcrm/forms/permisions.py:16
+#, c-format
+msgid "Set structure for scope"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:72
+#, c-format
+msgid "Add Contact"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:115
+#, c-format
+msgid "Edit Contact"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:153
+#, c-format
+msgid "Copy Contact"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:175
+#, c-format
+msgid "Delete Contacts"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:204 ./travelcrm/views/resources_types.py:210
+#: ./travelcrm/views/locations.py:202 ./travelcrm/views/addresses.py:206
+#: ./travelcrm/views/positions.py:206 ./travelcrm/views/accounts.py:188
+#: ./travelcrm/views/incomes.py:191 ./travelcrm/views/roomcats.py:176
+#: ./travelcrm/views/passports.py:209 ./travelcrm/views/banks_details.py:201
+#: ./travelcrm/views/services_items.py:187 ./travelcrm/views/employees.py:224
+#: ./travelcrm/views/services_sales.py:234 ./travelcrm/views/structures.py:225
+#: ./travelcrm/views/services.py:182 ./travelcrm/views/persons.py:269
+#: ./travelcrm/views/advsources.py:176 ./travelcrm/views/bpersons.py:247
+#: ./travelcrm/views/commissions.py:209 ./travelcrm/views/tours.py:276
+#: ./travelcrm/views/hotels.py:204 ./travelcrm/views/accounts_items.py:179
+#: ./travelcrm/views/licences.py:205 ./travelcrm/views/accomodations.py:175
+#: ./travelcrm/views/users.py:184 ./travelcrm/views/foodcats.py:176
+#: ./travelcrm/views/regions.py:178 ./travelcrm/views/currencies.py:176
+#: ./travelcrm/views/tasks.py:207 ./travelcrm/views/appointments.py:210
+#: ./travelcrm/views/currencies_rates.py:204
+#: ./travelcrm/views/touroperators.py:212 ./travelcrm/views/countries.py:178
+#: ./travelcrm/views/invoices.py:228 ./travelcrm/views/banks.py:199
+#: ./travelcrm/views/navigations.py:200 ./travelcrm/views/hotelcats.py:176
+#, c-format
+msgid "Deleted"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:95 ./travelcrm/views/contacts.py:133
+#: ./travelcrm/views/resources_types.py:99
+#: ./travelcrm/views/resources_types.py:139 ./travelcrm/views/locations.py:96
+#: ./travelcrm/views/locations.py:131 ./travelcrm/views/addresses.py:96
+#: ./travelcrm/views/addresses.py:135 ./travelcrm/views/positions.py:97
+#: ./travelcrm/views/positions.py:135 ./travelcrm/views/accounts.py:103
+#: ./travelcrm/views/accounts.py:141 ./travelcrm/views/incomes.py:104
+#: ./travelcrm/views/incomes.py:144 ./travelcrm/views/roomcats.py:95
+#: ./travelcrm/views/roomcats.py:129 ./travelcrm/views/passports.py:97
+#: ./travelcrm/views/passports.py:138 ./travelcrm/views/banks_details.py:100
+#: ./travelcrm/views/banks_details.py:141
+#: ./travelcrm/views/services_items.py:97
+#: ./travelcrm/views/services_items.py:140 ./travelcrm/views/employees.py:118
+#: ./travelcrm/views/employees.py:177 ./travelcrm/views/services_sales.py:106
+#: ./travelcrm/views/services_sales.py:150 ./travelcrm/views/structures.py:106
+#: ./travelcrm/views/structures.py:156 ./travelcrm/views/services.py:98
+#: ./travelcrm/views/services.py:135 ./travelcrm/views/persons.py:133
+#: ./travelcrm/views/persons.py:210 ./travelcrm/views/advsources.py:95
+#: ./travelcrm/views/advsources.py:129 ./travelcrm/views/bpersons.py:111
+#: ./travelcrm/views/bpersons.py:163 ./travelcrm/views/commissions.py:97
+#: ./travelcrm/views/commissions.py:138 ./travelcrm/views/tours.py:130
+#: ./travelcrm/views/tours.py:192 ./travelcrm/views/tours.py:344
+#: ./travelcrm/views/tours.py:386 ./travelcrm/views/hotels.py:97
+#: ./travelcrm/views/hotels.py:133 ./travelcrm/views/accounts_items.py:97
+#: ./travelcrm/views/accounts_items.py:132 ./travelcrm/views/licences.py:95
+#: ./travelcrm/views/licences.py:134 ./travelcrm/views/accomodations.py:94
+#: ./travelcrm/views/accomodations.py:128 ./travelcrm/views/users.py:100
+#: ./travelcrm/views/users.py:137 ./travelcrm/views/foodcats.py:95
+#: ./travelcrm/views/foodcats.py:129 ./travelcrm/views/regions.py:96
+#: ./travelcrm/views/regions.py:131 ./travelcrm/views/currencies.py:95
+#: ./travelcrm/views/currencies.py:129 ./travelcrm/views/tasks.py:113
+#: ./travelcrm/views/tasks.py:160 ./travelcrm/views/appointments.py:98
+#: ./travelcrm/views/appointments.py:139
+#: ./travelcrm/views/currencies_rates.py:97
+#: ./travelcrm/views/currencies_rates.py:133
+#: ./travelcrm/views/touroperators.py:112
+#: ./travelcrm/views/touroperators.py:165 ./travelcrm/views/countries.py:96
+#: ./travelcrm/views/countries.py:131 ./travelcrm/views/invoices.py:135
+#: ./travelcrm/views/invoices.py:181 ./travelcrm/views/banks.py:106
+#: ./travelcrm/views/banks.py:152 ./travelcrm/views/navigations.py:109
+#: ./travelcrm/views/navigations.py:155 ./travelcrm/views/hotelcats.py:95
+#: ./travelcrm/views/hotelcats.py:129 ./travelcrm/views/permisions.py:147
+#, c-format
+msgid "Saved"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:200 ./travelcrm/views/resources_types.py:206
+#: ./travelcrm/views/locations.py:198 ./travelcrm/views/addresses.py:202
+#: ./travelcrm/views/positions.py:202 ./travelcrm/views/accounts.py:184
+#: ./travelcrm/views/incomes.py:187 ./travelcrm/views/roomcats.py:172
+#: ./travelcrm/views/passports.py:205 ./travelcrm/views/banks_details.py:197
+#: ./travelcrm/views/services_items.py:183 ./travelcrm/views/employees.py:220
+#: ./travelcrm/views/services_sales.py:230 ./travelcrm/views/structures.py:221
+#: ./travelcrm/views/services.py:178 ./travelcrm/views/persons.py:265
+#: ./travelcrm/views/advsources.py:172 ./travelcrm/views/bpersons.py:243
+#: ./travelcrm/views/commissions.py:205 ./travelcrm/views/tours.py:272
+#: ./travelcrm/views/hotels.py:200 ./travelcrm/views/accounts_items.py:175
+#: ./travelcrm/views/licences.py:201 ./travelcrm/views/accomodations.py:171
+#: ./travelcrm/views/users.py:180 ./travelcrm/views/foodcats.py:172
+#: ./travelcrm/views/regions.py:174 ./travelcrm/views/currencies.py:172
+#: ./travelcrm/views/tasks.py:203 ./travelcrm/views/appointments.py:206
+#: ./travelcrm/views/currencies_rates.py:200
+#: ./travelcrm/views/touroperators.py:208 ./travelcrm/views/countries.py:174
+#: ./travelcrm/views/invoices.py:224 ./travelcrm/views/banks.py:195
+#: ./travelcrm/views/navigations.py:196 ./travelcrm/views/hotelcats.py:172
+#, c-format
+msgid "Some objects could not be delete"
+msgstr ""
+
+#: ./travelcrm/views/contacts.py:100 ./travelcrm/views/contacts.py:138
+#: ./travelcrm/views/resources_types.py:104
+#: ./travelcrm/views/resources_types.py:144 ./travelcrm/views/locations.py:101
+#: ./travelcrm/views/locations.py:136 ./travelcrm/views/addresses.py:101
+#: ./travelcrm/views/addresses.py:140 ./travelcrm/views/positions.py:102
+#: ./travelcrm/views/positions.py:140 ./travelcrm/views/accounts.py:108
+#: ./travelcrm/views/accounts.py:146 ./travelcrm/views/incomes.py:109
+#: ./travelcrm/views/incomes.py:149 ./travelcrm/views/incomes.py:211
+#: ./travelcrm/views/roomcats.py:100 ./travelcrm/views/roomcats.py:134
+#: ./travelcrm/views/home.py:66 ./travelcrm/views/passports.py:102
+#: ./travelcrm/views/passports.py:143 ./travelcrm/views/banks_details.py:105
+#: ./travelcrm/views/banks_details.py:146
+#: ./travelcrm/views/services_items.py:102
+#: ./travelcrm/views/services_items.py:145 ./travelcrm/views/employees.py:123
+#: ./travelcrm/views/employees.py:182 ./travelcrm/views/services_sales.py:111
+#: ./travelcrm/views/services_sales.py:155 ./travelcrm/views/structures.py:109
+#: ./travelcrm/views/structures.py:159 ./travelcrm/views/services.py:103
+#: ./travelcrm/views/services.py:140 ./travelcrm/views/persons.py:138
+#: ./travelcrm/views/persons.py:215 ./travelcrm/views/advsources.py:100
+#: ./travelcrm/views/advsources.py:134 ./travelcrm/views/bpersons.py:116
+#: ./travelcrm/views/bpersons.py:168 ./travelcrm/views/commissions.py:102
+#: ./travelcrm/views/commissions.py:143 ./travelcrm/views/tours.py:135
+#: ./travelcrm/views/tours.py:197 ./travelcrm/views/tours.py:349
+#: ./travelcrm/views/tours.py:389 ./travelcrm/views/hotels.py:102
+#: ./travelcrm/views/hotels.py:138 ./travelcrm/views/accounts_items.py:102
+#: ./travelcrm/views/accounts_items.py:137 ./travelcrm/views/licences.py:100
+#: ./travelcrm/views/licences.py:139 ./travelcrm/views/accomodations.py:99
+#: ./travelcrm/views/accomodations.py:133 ./travelcrm/views/users.py:105
+#: ./travelcrm/views/users.py:142 ./travelcrm/views/foodcats.py:100
+#: ./travelcrm/views/foodcats.py:134 ./travelcrm/views/regions.py:101
+#: ./travelcrm/views/regions.py:136 ./travelcrm/views/currencies.py:100
+#: ./travelcrm/views/currencies.py:134 ./travelcrm/views/tasks.py:118
+#: ./travelcrm/views/tasks.py:165 ./travelcrm/views/appointments.py:103
+#: ./travelcrm/views/appointments.py:144
+#: ./travelcrm/views/currencies_rates.py:102
+#: ./travelcrm/views/currencies_rates.py:138
+#: ./travelcrm/views/touroperators.py:117
+#: ./travelcrm/views/touroperators.py:170 ./travelcrm/views/countries.py:101
+#: ./travelcrm/views/countries.py:136 ./travelcrm/views/invoices.py:140
+#: ./travelcrm/views/invoices.py:186 ./travelcrm/views/invoices.py:282
+#: ./travelcrm/views/banks.py:111 ./travelcrm/views/banks.py:157
+#: ./travelcrm/views/navigations.py:112 ./travelcrm/views/navigations.py:158
+#: ./travelcrm/views/navigations.py:280 ./travelcrm/views/hotelcats.py:100
+#: ./travelcrm/views/hotelcats.py:134 ./travelcrm/views/permisions.py:150
+#: ./travelcrm/views/permisions.py:204
+#, c-format
+msgid "Please, check errors"
+msgstr ""
+
+#: ./travelcrm/views/resources_types.py:75
+#, c-format
+msgid "Add Resources Type"
+msgstr ""
+
+#: ./travelcrm/views/resources_types.py:119
+#, c-format
+msgid "Edit Resources Type"
+msgstr ""
+
+#: ./travelcrm/views/resources_types.py:159
+#, c-format
+msgid "Copy Resources Type"
+msgstr ""
+
+#: ./travelcrm/views/resources_types.py:181
+#, c-format
+msgid "Delete Resources Types"
+msgstr ""
+
+#: ./travelcrm/views/locations.py:74
+#, c-format
+msgid "Add Location"
+msgstr ""
+
+#: ./travelcrm/views/locations.py:114
+#, c-format
+msgid "Edit Location"
+msgstr ""
+
+#: ./travelcrm/views/locations.py:151
+#, c-format
+msgid "Copy Location"
+msgstr ""
+
+#: ./travelcrm/views/locations.py:173
+#, c-format
+msgid "Delete Locations"
+msgstr ""
+
+#: ./travelcrm/views/addresses.py:73
+#, c-format
+msgid "Add Address"
+msgstr ""
+
+#: ./travelcrm/views/addresses.py:116
+#, c-format
+msgid "Edit Address"
+msgstr ""
+
+#: ./travelcrm/views/addresses.py:155
+#, c-format
+msgid "Copy Address"
+msgstr ""
+
+#: ./travelcrm/views/addresses.py:177
+#, c-format
+msgid "Delete Addresses"
+msgstr ""
+
+#: ./travelcrm/views/positions.py:75
+#, c-format
+msgid "Add Company Position"
+msgstr ""
+
+#: ./travelcrm/views/positions.py:116
+#, c-format
+msgid "Edit Company Position"
+msgstr ""
+
+#: ./travelcrm/views/positions.py:155
+#, c-format
+msgid "Copy Company Position"
+msgstr ""
+
+#: ./travelcrm/views/positions.py:177 ./travelcrm/views/passports.py:180
+#, c-format
+msgid "Delete Passports"
+msgstr ""
+
+#: ./travelcrm/views/accounts.py:78
+#, c-format
+msgid "Add Account"
+msgstr ""
+
+#: ./travelcrm/views/accounts.py:121
+#, c-format
+msgid "Edit Account"
+msgstr ""
+
+#: ./travelcrm/views/accounts.py:159
+#, c-format
+msgid "Delete Accounts"
+msgstr ""
+
+#: ./travelcrm/views/__init__.py:22 ./travelcrm/views/__init__.py:35
+#, c-format
+msgid "System Info"
+msgstr ""
+
+#: ./travelcrm/views/__init__.py:23
+#, c-format
+msgid "Need to select row"
+msgstr ""
+
+#: ./travelcrm/views/__init__.py:36
+#, c-format
+msgid "Need to check rows"
+msgstr ""
+
+#: ./travelcrm/views/__init__.py:47
+#, c-format
+msgid "Seccurity Info"
+msgstr ""
+
+#: ./travelcrm/views/__init__.py:48
+#, c-format
+msgid "You have no permissions to do this action"
+msgstr ""
+
+#: ./travelcrm/views/incomes.py:77
+#, c-format
+msgid "Add Income"
+msgstr ""
+
+#: ./travelcrm/views/incomes.py:122
+#, c-format
+msgid "Edit Income"
+msgstr ""
+
+#: ./travelcrm/views/incomes.py:162
+#, c-format
+msgid "Delete Income Payments"
+msgstr ""
+
+#: ./travelcrm/views/roomcats.py:74
+#, c-format
+msgid "Add Room Category"
+msgstr ""
+
+#: ./travelcrm/views/roomcats.py:113
+#, c-format
+msgid "Edit Room Category"
+msgstr ""
+
+#: ./travelcrm/views/roomcats.py:147
+#, c-format
+msgid "Delete Room Categories"
+msgstr ""
+
+#: ./travelcrm/views/home.py:70
+#, c-format
+msgid "Check your email"
+msgstr ""
+
+#: ./travelcrm/views/home.py:125
+#, c-format
+msgid "Invalid username or password"
+msgstr ""
+
+#: ./travelcrm/views/home.py:122
+#, c-format
+msgid "Success, wait..."
+msgstr ""
+
+#: ./travelcrm/views/passports.py:72
+#, c-format
+msgid "Add Passport"
+msgstr ""
+
+#: ./travelcrm/views/passports.py:117
+#, c-format
+msgid "Edit Passport"
+msgstr ""
+
+#: ./travelcrm/views/passports.py:158
+#, c-format
+msgid "Copy Passport"
+msgstr ""
+
+#: ./travelcrm/views/banks_details.py:75
+#, c-format
+msgid "Add Bank Detail"
+msgstr ""
+
+#: ./travelcrm/views/banks_details.py:120
+#, c-format
+msgid "Edit Bank Detail"
+msgstr ""
+
+#: ./travelcrm/views/banks_details.py:172
+#, c-format
+msgid "Delete Banks Details"
+msgstr ""
+
+#: ./travelcrm/views/services_items.py:72 ./travelcrm/views/services.py:74
+#, c-format
+msgid "Add Service"
+msgstr ""
+
+#: ./travelcrm/views/services_items.py:117 ./travelcrm/views/services.py:116
+#, c-format
+msgid "Edit Service"
+msgstr ""
+
+#: ./travelcrm/views/services_items.py:158
+#, c-format
+msgid "Delete Services Items"
+msgstr ""
+
+#: ./travelcrm/views/employees.py:77
+#, c-format
+msgid "Add Employee"
+msgstr ""
+
+#: ./travelcrm/views/employees.py:136
+#, c-format
+msgid "Edit Employee"
+msgstr ""
+
+#: ./travelcrm/views/employees.py:195
+#, c-format
+msgid "Delete Employees"
+msgstr ""
+
+#: ./travelcrm/views/services_sales.py:79
+#, c-format
+msgid "Add Service Sale"
+msgstr ""
+
+#: ./travelcrm/views/services_sales.py:126
+#, c-format
+msgid "Edit Service Sale"
+msgstr ""
+
+#: ./travelcrm/views/services_sales.py:170
+#, c-format
+msgid "Copy Service Sale"
+msgstr ""
+
+#: ./travelcrm/views/services_sales.py:192
+#, c-format
+msgid "Delete Services Sales"
+msgstr ""
+
+#: ./travelcrm/views/structures.py:73
+#, c-format
+msgid "Add Company Structure"
+msgstr ""
+
+#: ./travelcrm/views/structures.py:123
+#, c-format
+msgid "Edit Company Structure"
+msgstr ""
+
+#: ./travelcrm/views/structures.py:173
+#, c-format
+msgid "Copy Company Structure"
+msgstr ""
+
+#: ./travelcrm/views/structures.py:196
+#, c-format
+msgid "Delete Structures"
+msgstr ""
+
+#: ./travelcrm/views/services.py:153
+#, c-format
+msgid "Delete Services"
+msgstr ""
+
+#: ./travelcrm/views/persons.py:78
+#, c-format
+msgid "Add Person"
+msgstr ""
+
+#: ./travelcrm/views/persons.py:153
+#, c-format
+msgid "Edit Person"
+msgstr ""
+
+#: ./travelcrm/views/advsources.py:74
+#, c-format
+msgid "Add Advertising Source"
+msgstr ""
+
+#: ./travelcrm/views/advsources.py:113
+#, c-format
+msgid "Edit Advertising Source"
+msgstr ""
+
+#: ./travelcrm/views/advsources.py:147
+#, c-format
+msgid "Delete Advertises Sources"
+msgstr ""
+
+#: ./travelcrm/views/bpersons.py:76
+#, c-format
+msgid "Add Business Person"
+msgstr ""
+
+#: ./travelcrm/views/bpersons.py:131
+#, c-format
+msgid "Edit Business Person"
+msgstr ""
+
+#: ./travelcrm/views/bpersons.py:183
+#, c-format
+msgid "Copy Business Person"
+msgstr ""
+
+#: ./travelcrm/views/bpersons.py:218
+#, c-format
+msgid "Delete Business Persons"
+msgstr ""
+
+#: ./travelcrm/views/commissions.py:72
+#, c-format
+msgid "Add Commission"
+msgstr ""
+
+#: ./travelcrm/views/commissions.py:117
+#, c-format
+msgid "Edit Commission"
+msgstr ""
+
+#: ./travelcrm/views/commissions.py:158
+#, c-format
+msgid "Copy Commission"
+msgstr ""
+
+#: ./travelcrm/views/commissions.py:180
+#, c-format
+msgid "Delete Commissions"
+msgstr ""
+
+#: ./travelcrm/views/tours.py:87
+#, c-format
+msgid "Add Tour"
+msgstr ""
+
+#: ./travelcrm/views/tours.py:150
+#, c-format
+msgid "Edit Tour"
+msgstr ""
+
+#: ./travelcrm/views/tours.py:212
+#, c-format
+msgid "Copy Tour"
+msgstr ""
+
+#: ./travelcrm/views/tours.py:247
+#, c-format
+msgid "Delete Tours"
+msgstr ""
+
+#: ./travelcrm/views/tours.py:316
+#, c-format
+msgid "Add Tour Point"
+msgstr ""
+
+#: ./travelcrm/views/tours.py:364
+#, c-format
+msgid "Edit Tour Point"
+msgstr ""
+
+#: ./travelcrm/views/hotels.py:74
+#, c-format
+msgid "Add Hotel"
+msgstr ""
+
+#: ./travelcrm/views/hotels.py:115
+#, c-format
+msgid "Edit Hotel"
+msgstr ""
+
+#: ./travelcrm/views/hotels.py:153
+#, c-format
+msgid "Copy Hotel"
+msgstr ""
+
+#: ./travelcrm/views/hotels.py:175
+#, c-format
+msgid "Delete Hotels"
+msgstr ""
+
+#: ./travelcrm/views/accounts_items.py:75
+#, c-format
+msgid "Add Account Item"
+msgstr ""
+
+#: ./travelcrm/views/accounts_items.py:115
+#, c-format
+msgid "Edit AccountItem"
+msgstr ""
+
+#: ./travelcrm/views/accounts_items.py:150
+#, c-format
+msgid "Delete Accounts Items"
+msgstr ""
+
+#: ./travelcrm/views/licences.py:72
+#, c-format
+msgid "Add Licence"
+msgstr ""
+
+#: ./travelcrm/views/licences.py:115
+#, c-format
+msgid "Edit Licence"
+msgstr ""
+
+#: ./travelcrm/views/licences.py:154
+#, c-format
+msgid "Copy Licence"
+msgstr ""
+
+#: ./travelcrm/views/licences.py:176
+#, c-format
+msgid "Delete Licences"
+msgstr ""
+
+#: ./travelcrm/views/accomodations.py:74 ./travelcrm/views/foodcats.py:74
+#: ./travelcrm/views/hotelcats.py:74
+#, c-format
+msgid "Add Hotel Category"
+msgstr ""
+
+#: ./travelcrm/views/accomodations.py:112 ./travelcrm/views/foodcats.py:113
+#: ./travelcrm/views/hotelcats.py:113
+#, c-format
+msgid "Edit Hotel Category"
+msgstr ""
+
+#: ./travelcrm/views/accomodations.py:146
+#, c-format
+msgid "Delete Accomodations"
+msgstr ""
+
+#: ./travelcrm/views/users.py:77
+#, c-format
+msgid "Add User"
+msgstr ""
+
+#: ./travelcrm/views/users.py:118
+#, c-format
+msgid "Edit User"
+msgstr ""
+
+#: ./travelcrm/views/users.py:155
+#, c-format
+msgid "Delete Users"
+msgstr ""
+
+#: ./travelcrm/views/foodcats.py:147
+#, c-format
+msgid "Delete Food Categories"
+msgstr ""
+
+#: ./travelcrm/views/regions.py:74
+#, c-format
+msgid "Add Region"
+msgstr ""
+
+#: ./travelcrm/views/regions.py:114
+#, c-format
+msgid "Edit Region"
+msgstr ""
+
+#: ./travelcrm/views/regions.py:149
+#, c-format
+msgid "Delete Regions"
+msgstr ""
+
+#: ./travelcrm/views/currencies.py:74
+#, c-format
+msgid "Add Currency"
+msgstr ""
+
+#: ./travelcrm/views/currencies.py:113
+#, c-format
+msgid "Edit Currency"
+msgstr ""
+
+#: ./travelcrm/views/currencies.py:147
+#, c-format
+msgid "Delete Currencies"
+msgstr ""
+
+#: ./travelcrm/views/tasks.py:79
+#, c-format
+msgid "Add Task"
+msgstr ""
+
+#: ./travelcrm/views/tasks.py:131
+#, c-format
+msgid "Edit Task"
+msgstr ""
+
+#: ./travelcrm/views/tasks.py:178
+#, c-format
+msgid "Delete Tasks"
+msgstr ""
+
+#: ./travelcrm/views/appointments.py:73
+#, c-format
+msgid "Add Employee Appointment"
+msgstr ""
+
+#: ./travelcrm/views/appointments.py:118
+#, c-format
+msgid "Edit Employee Appointment"
+msgstr ""
+
+#: ./travelcrm/views/appointments.py:159
+#, c-format
+msgid "Copy Appointment"
+msgstr ""
+
+#: ./travelcrm/views/appointments.py:181
+#, c-format
+msgid "Delete Appointments"
+msgstr ""
+
+#: ./travelcrm/views/currencies_rates.py:74
+#, c-format
+msgid "Add Currency Rate"
+msgstr ""
+
+#: ./travelcrm/views/currencies_rates.py:115
+#, c-format
+msgid "Edit Currency Rate"
+msgstr ""
+
+#: ./travelcrm/views/currencies_rates.py:153
+#, c-format
+msgid "Copy Rate"
+msgstr ""
+
+#: ./travelcrm/views/currencies_rates.py:175
+#, c-format
+msgid "Delete Currencies Rates"
+msgstr ""
+
+#: ./travelcrm/views/touroperators.py:79
+#, c-format
+msgid "Add Touroperator"
+msgstr ""
+
+#: ./travelcrm/views/touroperators.py:132
+#, c-format
+msgid "Edit Touroperator"
+msgstr ""
+
+#: ./travelcrm/views/touroperators.py:183
+#, c-format
+msgid "Delete Touroperators"
+msgstr ""
+
+#: ./travelcrm/views/countries.py:74
+#, c-format
+msgid "Add Country"
+msgstr ""
+
+#: ./travelcrm/views/countries.py:114
+#, c-format
+msgid "Edit Country"
+msgstr ""
+
+#: ./travelcrm/views/countries.py:149
+#, c-format
+msgid "Delete Countries"
+msgstr ""
+
+#: ./travelcrm/views/invoices.py:105
+#, c-format
+msgid "Add Invoice"
+msgstr ""
+
+#: ./travelcrm/views/invoices.py:163
+#, c-format
+msgid "Edit Invoice"
+msgstr ""
+
+#: ./travelcrm/views/invoices.py:199
+#, c-format
+msgid "Delete Invoices"
+msgstr ""
+
+#: ./travelcrm/views/invoices.py:296
+#, c-format
+msgid "Invoice Info"
+msgstr ""
+
+#: ./travelcrm/views/invoices.py:326 ./travelcrm/views/invoices.py:357
+#: ./travelcrm/views/invoices.py:376
+#, c-format
+msgid "total"
+msgstr ""
+
+#: ./travelcrm/views/banks.py:75
+#, c-format
+msgid "Add Bank"
+msgstr ""
+
+#: ./travelcrm/views/banks.py:124
+#, c-format
+msgid "Edit Bank"
+msgstr ""
+
+#: ./travelcrm/views/banks.py:170
+#, c-format
+msgid "Delete Banks"
+msgstr ""
+
+#: ./travelcrm/views/navigations.py:82
+#, c-format
+msgid "Add Navigation Item"
+msgstr ""
+
+#: ./travelcrm/views/navigations.py:129
+#, c-format
+msgid "Edit Navigation Item"
+msgstr ""
+
+#: ./travelcrm/views/navigations.py:171
+#, c-format
+msgid "Delete Navigations"
+msgstr ""
+
+#: ./travelcrm/views/navigations.py:241
+#, c-format
+msgid "Copy Menu From Position"
+msgstr ""
+
+#: ./travelcrm/views/navigations.py:277 ./travelcrm/views/permisions.py:201
+#, c-format
+msgid "Copied"
+msgstr ""
+
+#: ./travelcrm/views/hotelcats.py:147
+#, c-format
+msgid "Delete Hotel Categories"
+msgstr ""
+
+#: ./travelcrm/views/permisions.py:165
+#, c-format
+msgid "Copy Permissions From Position"
+msgstr ""
+
+#: ./travelcrm/resources/contacts.py:30
+#: ./travelcrm/resources/resources_types.py:29
+#: ./travelcrm/resources/locations.py:30 ./travelcrm/resources/addresses.py:30
+#: ./travelcrm/resources/positions.py:30 ./travelcrm/resources/accounts.py:30
+#: ./travelcrm/resources/__init__.py:90 ./travelcrm/resources/incomes.py:29
+#: ./travelcrm/resources/roomcats.py:30 ./travelcrm/resources/passports.py:29
+#: ./travelcrm/resources/banks_details.py:30
+#: ./travelcrm/resources/services_items.py:30
+#: ./travelcrm/resources/employees.py:30
+#: ./travelcrm/resources/services_sales.py:31
+#: ./travelcrm/resources/structures.py:28 ./travelcrm/resources/services.py:28
+#: ./travelcrm/resources/persons.py:30 ./travelcrm/resources/advsources.py:30
+#: ./travelcrm/resources/bpersons.py:30 ./travelcrm/resources/commissions.py:29
+#: ./travelcrm/resources/tours.py:31 ./travelcrm/resources/hotels.py:30
+#: ./travelcrm/resources/accounts_items.py:30
+#: ./travelcrm/resources/licences.py:29
+#: ./travelcrm/resources/accomodations.py:30 ./travelcrm/resources/users.py:27
+#: ./travelcrm/resources/foodcats.py:30 ./travelcrm/resources/regions.py:29
+#: ./travelcrm/resources/currencies.py:29 ./travelcrm/resources/tasks.py:30
+#: ./travelcrm/resources/appointments.py:30
+#: ./travelcrm/resources/currencies_rates.py:30
+#: ./travelcrm/resources/touroperators.py:30
+#: ./travelcrm/resources/countries.py:30 ./travelcrm/resources/invoices.py:28
+#: ./travelcrm/resources/banks.py:30 ./travelcrm/resources/navigations.py:30
+#: ./travelcrm/resources/hotelcats.py:30 ./travelcrm/resources/permisions.py:30
+#, c-format
+msgid "view"
+msgstr ""
+
+#: ./travelcrm/resources/contacts.py:31
+#: ./travelcrm/resources/resources_types.py:30
+#: ./travelcrm/resources/locations.py:31 ./travelcrm/resources/addresses.py:31
+#: ./travelcrm/resources/positions.py:31 ./travelcrm/resources/accounts.py:31
+#: ./travelcrm/resources/incomes.py:30 ./travelcrm/resources/roomcats.py:31
+#: ./travelcrm/resources/passports.py:30
+#: ./travelcrm/resources/banks_details.py:31
+#: ./travelcrm/resources/services_items.py:31
+#: ./travelcrm/resources/employees.py:31
+#: ./travelcrm/resources/services_sales.py:32
+#: ./travelcrm/resources/structures.py:29 ./travelcrm/resources/services.py:29
+#: ./travelcrm/resources/persons.py:31 ./travelcrm/resources/advsources.py:31
+#: ./travelcrm/resources/bpersons.py:31 ./travelcrm/resources/commissions.py:30
+#: ./travelcrm/resources/tours.py:32 ./travelcrm/resources/hotels.py:31
+#: ./travelcrm/resources/accounts_items.py:31
+#: ./travelcrm/resources/licences.py:30
+#: ./travelcrm/resources/accomodations.py:31 ./travelcrm/resources/users.py:28
+#: ./travelcrm/resources/foodcats.py:31 ./travelcrm/resources/regions.py:30
+#: ./travelcrm/resources/currencies.py:30 ./travelcrm/resources/tasks.py:31
+#: ./travelcrm/resources/appointments.py:31
+#: ./travelcrm/resources/currencies_rates.py:31
+#: ./travelcrm/resources/touroperators.py:31
+#: ./travelcrm/resources/countries.py:31 ./travelcrm/resources/invoices.py:29
+#: ./travelcrm/resources/banks.py:31 ./travelcrm/resources/navigations.py:31
+#: ./travelcrm/resources/hotelcats.py:31 ./travelcrm/resources/permisions.py:31
+#, c-format
+msgid "add"
+msgstr ""
+
+#: ./travelcrm/resources/contacts.py:32
+#: ./travelcrm/resources/resources_types.py:31
+#: ./travelcrm/resources/locations.py:32 ./travelcrm/resources/addresses.py:32
+#: ./travelcrm/resources/positions.py:32 ./travelcrm/resources/accounts.py:32
+#: ./travelcrm/resources/incomes.py:31 ./travelcrm/resources/roomcats.py:32
+#: ./travelcrm/resources/passports.py:31
+#: ./travelcrm/resources/banks_details.py:32
+#: ./travelcrm/resources/services_items.py:32
+#: ./travelcrm/resources/employees.py:32
+#: ./travelcrm/resources/services_sales.py:33
+#: ./travelcrm/resources/structures.py:30 ./travelcrm/resources/services.py:30
+#: ./travelcrm/resources/persons.py:32 ./travelcrm/resources/advsources.py:32
+#: ./travelcrm/resources/bpersons.py:32 ./travelcrm/resources/commissions.py:31
+#: ./travelcrm/resources/tours.py:33 ./travelcrm/resources/hotels.py:32
+#: ./travelcrm/resources/accounts_items.py:32
+#: ./travelcrm/resources/licences.py:31
+#: ./travelcrm/resources/accomodations.py:32 ./travelcrm/resources/users.py:29
+#: ./travelcrm/resources/foodcats.py:32 ./travelcrm/resources/regions.py:31
+#: ./travelcrm/resources/currencies.py:31 ./travelcrm/resources/tasks.py:32
+#: ./travelcrm/resources/appointments.py:32
+#: ./travelcrm/resources/currencies_rates.py:32
+#: ./travelcrm/resources/touroperators.py:32
+#: ./travelcrm/resources/countries.py:32 ./travelcrm/resources/invoices.py:30
+#: ./travelcrm/resources/banks.py:32 ./travelcrm/resources/navigations.py:32
+#: ./travelcrm/resources/hotelcats.py:32 ./travelcrm/resources/permisions.py:32
+#, c-format
+msgid "edit"
+msgstr ""
+
+#: ./travelcrm/resources/contacts.py:33
+#: ./travelcrm/resources/resources_types.py:32
+#: ./travelcrm/resources/locations.py:33 ./travelcrm/resources/addresses.py:33
+#: ./travelcrm/resources/positions.py:33 ./travelcrm/resources/accounts.py:33
+#: ./travelcrm/resources/incomes.py:32 ./travelcrm/resources/roomcats.py:33
+#: ./travelcrm/resources/passports.py:32
+#: ./travelcrm/resources/banks_details.py:33
+#: ./travelcrm/resources/services_items.py:33
+#: ./travelcrm/resources/employees.py:33
+#: ./travelcrm/resources/services_sales.py:34
+#: ./travelcrm/resources/structures.py:31 ./travelcrm/resources/services.py:31
+#: ./travelcrm/resources/persons.py:33 ./travelcrm/resources/advsources.py:33
+#: ./travelcrm/resources/bpersons.py:33 ./travelcrm/resources/commissions.py:32
+#: ./travelcrm/resources/tours.py:34 ./travelcrm/resources/hotels.py:33
+#: ./travelcrm/resources/accounts_items.py:33
+#: ./travelcrm/resources/licences.py:32
+#: ./travelcrm/resources/accomodations.py:33 ./travelcrm/resources/users.py:30
+#: ./travelcrm/resources/foodcats.py:33 ./travelcrm/resources/regions.py:32
+#: ./travelcrm/resources/currencies.py:32 ./travelcrm/resources/tasks.py:33
+#: ./travelcrm/resources/appointments.py:33
+#: ./travelcrm/resources/currencies_rates.py:33
+#: ./travelcrm/resources/touroperators.py:33
+#: ./travelcrm/resources/countries.py:33 ./travelcrm/resources/invoices.py:31
+#: ./travelcrm/resources/banks.py:33 ./travelcrm/resources/navigations.py:33
+#: ./travelcrm/resources/hotelcats.py:33 ./travelcrm/resources/permisions.py:33
+#, c-format
+msgid "delete"
+msgstr ""
+
+#: ./travelcrm/resources/services_sales.py:35 ./travelcrm/resources/tours.py:35
+#, c-format
+msgid "settings"
+msgstr ""
+
+#: ./travelcrm/resources/services_sales.py:36 ./travelcrm/resources/tours.py:36
+#, c-format
+msgid "invoice"
+msgstr ""
+
+#: ./travelcrm/resources/services_sales.py:37 ./travelcrm/resources/tours.py:37
+#, c-format
+msgid "contract"
+msgstr ""
+
+#: ./travelcrm/models/resource_type.py:38 ./travelcrm/models/task.py:60
+#, c-format
+msgid "undefined"
+msgstr ""
+
+#: ./travelcrm/models/resource_type.py:39
+#, c-format
+msgid "disabled"
+msgstr ""
+
+#: ./travelcrm/models/account_item.py:30
+#, c-format
+msgid "income"
+msgstr ""
+
+#: ./travelcrm/models/account_item.py:31
+#, c-format
+msgid "expense"
+msgstr ""
+
+#: ./travelcrm/models/account.py:30
+#, c-format
+msgid "bank"
+msgstr ""
+
+#: ./travelcrm/models/account.py:31
+#, c-format
+msgid "cash"
+msgstr ""
+
+#: ./travelcrm/models/task.py:54
+#, c-format
+msgid "minor"
+msgstr ""
+
+#: ./travelcrm/models/task.py:55
+#, c-format
+msgid "normal"
+msgstr ""
+
+#: ./travelcrm/models/task.py:56
+#, c-format
+msgid "major"
+msgstr ""
+
+#: ./travelcrm/models/task.py:57
+#, c-format
+msgid "critical"
+msgstr ""
+
+#: ./travelcrm/models/task.py:61
+#, c-format
+msgid "in work"
+msgstr ""
+
+#: ./travelcrm/models/task.py:62
+#, c-format
+msgid "on hold"
+msgstr ""
+
+#: ./travelcrm/models/task.py:63
+#, c-format
+msgid "requirements"
+msgstr ""
+
+#: ./travelcrm/models/task.py:64
+#, c-format
+msgid "closed"
+msgstr ""

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-07-03 22:19+0300\n"
-"PO-Revision-Date: 2014-07-03 22:22+0300\n"
+"POT-Creation-Date: 2014-07-13 14:43+0300\n"
+"PO-Revision-Date: 2014-07-13 13:47+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: it <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -1367,6 +1367,14 @@ msgstr ""
 
 #: travelcrm/templates/auth/login.mak:2
 msgid "Autorization"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:16
+msgid "Username:"
+msgstr ""
+
+#: travelcrm/templates/auth/login.mak:17
+msgid "Password:"
 msgstr ""
 
 #: travelcrm/templates/auth/login.mak:23 travelcrm/templates/users/form.mak:22

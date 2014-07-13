@@ -1,4 +1,4 @@
-# Russian translations for travelcrm.
+# Ukrainian translations for travelcrm.
 # Copyright (C) 2014 ORGANIZATION
 # This file is distributed under the same license as the travelcrm project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-07-13 14:43+0300\n"
-"PO-Revision-Date: 2014-07-13 13:28+0300\n"
+"PO-Revision-Date: 2014-07-13 13:47+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: ru <LL@li.org>\n"
+"Language-Team: uk <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: travelcrm/forms/__init__.py:98
 msgid "Phone is not valid"
-msgstr "Неверный телефон"
+msgstr ""
 
 #: travelcrm/forms/accomodations.py:22 travelcrm/forms/roomcats.py:22
 #: travelcrm/forms/touroperators.py:22
@@ -276,11 +276,11 @@ msgstr ""
 #: travelcrm/templates/touroperators/form.mak:18
 #: travelcrm/templates/touroperators/index.mak:33
 msgid "name"
-msgstr "название"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:388
 msgid "all"
-msgstr "все"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:389
 #: travelcrm/templates/appointments/index.mak:37
@@ -289,19 +289,19 @@ msgstr "все"
 #: travelcrm/templates/positions/form.mak:21
 #: travelcrm/templates/positions/index.mak:33
 msgid "structure"
-msgstr "структура"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:454
 msgid "female"
-msgstr "женский"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:455
 msgid "male"
-msgstr "мужской"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:467
 msgid "phone"
-msgstr "телефон"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:468 travelcrm/templates/auth/forgot.mak:15
 msgid "email"
@@ -315,13 +315,13 @@ msgstr ""
 #: travelcrm/templates/licences/common.mak:57
 #: travelcrm/templates/licences/form.mak:12
 msgid "licence num"
-msgstr "номер лицензии"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:731
 #: travelcrm/templates/contacts/common.mak:58
 #: travelcrm/templates/contacts/form.mak:21
 msgid "contact"
-msgstr "контакт"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:1811
 #: travelcrm/templates/countries/form.mak:12
@@ -329,23 +329,23 @@ msgstr "контакт"
 #: travelcrm/templates/currencies/form.mak:12
 #: travelcrm/templates/currencies_rates/index.mak:34
 msgid "iso code"
-msgstr "iso код"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2098
 #: travelcrm/templates/persons/details.mak:27
 msgid "citizen"
-msgstr "гражданский"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2099
 #: travelcrm/templates/persons/details.mak:29
 msgid "foreign"
-msgstr "загран"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2282
 #: travelcrm/templates/banks_details/details.mak:3
 #: travelcrm/templates/banks_details/form.mak:30
 msgid "beneficiary"
-msgstr "получатель"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2283
 #: travelcrm/templates/banks_details/details.mak:7
@@ -353,7 +353,7 @@ msgstr "получатель"
 #: travelcrm/templates/incomes/index.mak:78
 #: travelcrm/templates/invoices/form.mak:42
 msgid "account"
-msgstr "счет"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2284
 msgid "swift"
@@ -366,7 +366,7 @@ msgstr ""
 #: travelcrm/templates/services_sales/index.mak:48
 #: travelcrm/templates/tours/form.mak:53 travelcrm/templates/tours/index.mak:49
 msgid "customer"
-msgstr "заказчик"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2738 travelcrm/templates/incomes/form.mak:50
 #: travelcrm/templates/incomes/index.mak:38
@@ -375,7 +375,7 @@ msgstr "заказчик"
 #: travelcrm/templates/invoices/info.mak:34
 #: travelcrm/templates/invoices/info.mak:46
 msgid "sum"
-msgstr "сума"
+msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2739
 msgid "num"
@@ -383,25 +383,25 @@ msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:2740
 msgid "from date"
-msgstr "дата с"
+msgstr ""
 
 #: travelcrm/models/account.py:30
 #: travelcrm/templates/banks_details/common.mak:72
 #: travelcrm/templates/banks_details/form.mak:12
 msgid "bank"
-msgstr "банк"
+msgstr ""
 
 #: travelcrm/models/account.py:31
 msgid "cash"
-msgstr "нал."
+msgstr ""
 
 #: travelcrm/models/account_item.py:30
 msgid "income"
-msgstr "доход"
+msgstr ""
 
 #: travelcrm/models/account_item.py:31
 msgid "expense"
-msgstr "расход"
+msgstr ""
 
 #: travelcrm/models/resource_type.py:38 travelcrm/models/task.py:60
 msgid "undefined"
@@ -465,7 +465,7 @@ msgstr ""
 #: travelcrm/resources/touroperators.py:30 travelcrm/resources/tours.py:31
 #: travelcrm/resources/users.py:27
 msgid "view"
-msgstr "просмотр"
+msgstr ""
 
 #: travelcrm/resources/accomodations.py:31 travelcrm/resources/accounts.py:31
 #: travelcrm/resources/accounts_items.py:31 travelcrm/resources/addresses.py:31
@@ -489,7 +489,7 @@ msgstr "просмотр"
 #: travelcrm/resources/touroperators.py:31 travelcrm/resources/tours.py:32
 #: travelcrm/resources/users.py:28
 msgid "add"
-msgstr "добавление"
+msgstr ""
 
 #: travelcrm/resources/accomodations.py:32 travelcrm/resources/accounts.py:32
 #: travelcrm/resources/accounts_items.py:32 travelcrm/resources/addresses.py:32
@@ -513,7 +513,7 @@ msgstr "добавление"
 #: travelcrm/resources/touroperators.py:32 travelcrm/resources/tours.py:33
 #: travelcrm/resources/users.py:29
 msgid "edit"
-msgstr "изменение"
+msgstr ""
 
 #: travelcrm/resources/accomodations.py:33 travelcrm/resources/accounts.py:33
 #: travelcrm/resources/accounts_items.py:33 travelcrm/resources/addresses.py:33
@@ -537,7 +537,7 @@ msgstr "изменение"
 #: travelcrm/resources/touroperators.py:33 travelcrm/resources/tours.py:34
 #: travelcrm/resources/users.py:30
 msgid "delete"
-msgstr "удаление"
+msgstr ""
 
 #: travelcrm/resources/services_sales.py:35 travelcrm/resources/tours.py:35
 msgid "settings"
@@ -547,11 +547,11 @@ msgstr ""
 #: travelcrm/templates/incomes/form.mak:41
 #: travelcrm/templates/incomes/index.mak:72
 msgid "invoice"
-msgstr "инвойс"
+msgstr ""
 
 #: travelcrm/resources/services_sales.py:37 travelcrm/resources/tours.py:37
 msgid "contract"
-msgstr "договор"
+msgstr ""
 
 #: travelcrm/templates/_layout.mak:5 travelcrm/templates/panels/common.mak:3
 msgid "TravelCRM"
@@ -559,7 +559,7 @@ msgstr ""
 
 #: travelcrm/templates/_layout.mak:53
 msgid "Tasks"
-msgstr "Задачи"
+msgstr ""
 
 #: travelcrm/templates/home.mak:2
 msgid "Home"
@@ -567,7 +567,7 @@ msgstr ""
 
 #: travelcrm/templates/system.mak:53
 msgid "Reload"
-msgstr "Обновить"
+msgstr ""
 
 #: travelcrm/templates/accomodations/delete.mak:12
 #: travelcrm/templates/accounts/delete.mak:12
@@ -608,7 +608,7 @@ msgstr "Обновить"
 #: travelcrm/templates/tours/delete.mak:12
 #: travelcrm/templates/users/delete.mak:12
 msgid "Do you realy want to delete checked items?"
-msgstr "Действительно удалить отмеченные записи?"
+msgstr ""
 
 #: travelcrm/templates/accomodations/delete.mak:18
 #: travelcrm/templates/accomodations/index.mak:58
@@ -690,7 +690,7 @@ msgstr "Действительно удалить отмеченные запи�
 #: travelcrm/templates/users/delete.mak:18
 #: travelcrm/templates/users/index.mak:59
 msgid "Delete"
-msgstr "Удалить"
+msgstr ""
 
 #: travelcrm/templates/accomodations/delete.mak:19
 #: travelcrm/templates/accomodations/form.mak:23
@@ -774,7 +774,7 @@ msgstr "Удалить"
 #: travelcrm/templates/users/delete.mak:19
 #: travelcrm/templates/users/form.mak:54
 msgid "Cancel"
-msgstr "Отмена"
+msgstr ""
 
 #: travelcrm/templates/accomodations/form.mak:22
 #: travelcrm/templates/accounts/form.mak:58
@@ -818,11 +818,11 @@ msgstr "Отмена"
 #: travelcrm/templates/tours/form_point.mak:85
 #: travelcrm/templates/users/form.mak:53
 msgid "Save"
-msgstr "Сохранить"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:13
 msgid "Accomodations"
-msgstr "Назначения"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:31
 #: travelcrm/templates/accomodations/index.mak:33
@@ -975,7 +975,7 @@ msgstr ""
 #: travelcrm/templates/users/index.mak:36
 #: travelcrm/templates/users/index.mak:69
 msgid "updated"
-msgstr "изменено"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:36
 #: travelcrm/templates/accomodations/index.mak:76
@@ -1042,7 +1042,7 @@ msgstr "изменено"
 #: travelcrm/templates/users/index.mak:37
 #: travelcrm/templates/users/index.mak:77
 msgid "modifier"
-msgstr "изменил"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:45
 #: travelcrm/templates/accounts/index.mak:47
@@ -1073,7 +1073,7 @@ msgstr "изменил"
 #: travelcrm/templates/tours/index.mak:66
 #: travelcrm/templates/users/index.mak:46
 msgid "Add New"
-msgstr "Новый"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:52
 #: travelcrm/templates/accounts/common.mak:102
@@ -1117,7 +1117,7 @@ msgstr "Новый"
 #: travelcrm/templates/tours/index.mak:73
 #: travelcrm/templates/users/index.mak:53
 msgid "Edit"
-msgstr "Изменить"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:83
 #: travelcrm/templates/accounts/index.mak:85
@@ -1147,7 +1147,7 @@ msgstr "Изменить"
 #: travelcrm/templates/tours/index.mak:162
 #: travelcrm/templates/users/index.mak:84
 msgid "Find"
-msgstr "Найти"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:84
 #: travelcrm/templates/accounts/index.mak:86
@@ -1177,7 +1177,7 @@ msgstr "Найти"
 #: travelcrm/templates/tours/index.mak:163
 #: travelcrm/templates/users/index.mak:85
 msgid "Close"
-msgstr "Закрыть"
+msgstr ""
 
 #: travelcrm/templates/accomodations/index.mak:85
 #: travelcrm/templates/accounts/index.mak:87
@@ -1207,12 +1207,12 @@ msgstr "Закрыть"
 #: travelcrm/templates/tours/index.mak:164
 #: travelcrm/templates/users/index.mak:86
 msgid "Clear"
-msgstr "Очистить"
+msgstr ""
 
 #: travelcrm/templates/accounts/common.mak:35
 #: travelcrm/templates/accounts/form.mak:39
 msgid "display text"
-msgstr "отображение"
+msgstr ""
 
 #: travelcrm/templates/accounts/common.mak:41
 #: travelcrm/templates/accounts/form.mak:48
@@ -1222,13 +1222,13 @@ msgstr "отображение"
 #: travelcrm/templates/tours/common.mak:67
 #: travelcrm/templates/tours/form_point.mak:75
 msgid "description"
-msgstr "примечание"
+msgstr ""
 
 #: travelcrm/templates/accounts/common.mak:77
 #: travelcrm/templates/accounts/form.mak:21
 #: travelcrm/templates/accounts/index.mak:35
 msgid "account type"
-msgstr "тип счета"
+msgstr ""
 
 #: travelcrm/templates/accounts/common.mak:78
 #: travelcrm/templates/accounts/form.mak:30
@@ -1240,7 +1240,7 @@ msgstr "тип счета"
 #: travelcrm/templates/incomes/index.mak:84
 #: travelcrm/templates/invoices/index.mak:75
 msgid "currency"
-msgstr "валюта"
+msgstr ""
 
 #: travelcrm/templates/accounts/common.mak:96
 #: travelcrm/templates/addresses/common.mak:79
@@ -1255,26 +1255,26 @@ msgstr "валюта"
 #: travelcrm/templates/tasks/index.mak:107
 #: travelcrm/templates/tours/common.mak:129
 msgid "Add"
-msgstr "Новый"
+msgstr ""
 
 #: travelcrm/templates/accounts/index.mak:13
 #: travelcrm/templates/structures/form.mak:59
 msgid "Accounts"
-msgstr "Счета"
+msgstr ""
 
 #: travelcrm/templates/accounts_items/form.mak:21
 msgid "item type"
-msgstr "тип статьи"
+msgstr ""
 
 #: travelcrm/templates/accounts_items/index.mak:13
 #: travelcrm/templates/invoices/info.mak:25
 msgid "Accounts Items"
-msgstr "статьи учета"
+msgstr ""
 
 #: travelcrm/templates/accounts_items/index.mak:35
 #: travelcrm/templates/passports/common.mak:58
 msgid "type"
-msgstr "тип"
+msgstr ""
 
 #: travelcrm/templates/addresses/common.mak:57
 #: travelcrm/templates/addresses/form.mak:12
@@ -1284,44 +1284,44 @@ msgstr "тип"
 #: travelcrm/templates/tours/common.mak:33
 #: travelcrm/templates/tours/form_point.mak:12
 msgid "location"
-msgstr "местоположение"
+msgstr ""
 
 #: travelcrm/templates/addresses/common.mak:58
 #: travelcrm/templates/addresses/form.mak:21
 msgid "zip code"
-msgstr "почтовый индекс"
+msgstr ""
 
 #: travelcrm/templates/addresses/form.mak:30
 msgid "address"
-msgstr "адрес"
+msgstr ""
 
 #: travelcrm/templates/advsources/index.mak:13
 msgid "Advertising Sources"
-msgstr "Источники рекламы"
+msgstr ""
 
 #: travelcrm/templates/appointments/form.mak:12
 msgid "appointment date"
-msgstr "дата назначение"
+msgstr ""
 
 #: travelcrm/templates/appointments/form.mak:21
 #: travelcrm/templates/appointments/index.mak:34
 #: travelcrm/templates/users/form.mak:13 travelcrm/templates/users/index.mak:34
 msgid "employee"
-msgstr "сотрудник"
+msgstr ""
 
 #: travelcrm/templates/appointments/form.mak:30
 #: travelcrm/templates/appointments/index.mak:36
 #: travelcrm/templates/employees/form.mak:131
 msgid "position"
-msgstr "должность"
+msgstr ""
 
 #: travelcrm/templates/appointments/form.mak:39
 msgid "salary"
-msgstr "зарплата"
+msgstr ""
 
 #: travelcrm/templates/appointments/index.mak:13
 msgid "Employees Appointments"
-msgstr "Назначения сотрудников"
+msgstr ""
 
 #: travelcrm/templates/appointments/index.mak:35
 #: travelcrm/templates/currencies_rates/form.mak:30
@@ -1330,7 +1330,7 @@ msgstr "Назначения сотрудников"
 #: travelcrm/templates/incomes/index.mak:34
 #: travelcrm/templates/invoices/index.mak:34
 msgid "date"
-msgstr "дата"
+msgstr ""
 
 #: travelcrm/templates/appointments/index.mak:59
 #: travelcrm/templates/bpersons/index.mak:57
@@ -1344,15 +1344,15 @@ msgstr "дата"
 #: travelcrm/templates/structures/index.mak:48
 #: travelcrm/templates/tours/index.mak:77
 msgid "Copy"
-msgstr "Копия"
+msgstr ""
 
 #: travelcrm/templates/auth/_layout.mak:5
 msgid "TravelCRM - login"
-msgstr "TravelCRM - авторизация"
+msgstr ""
 
 #: travelcrm/templates/auth/forgot.mak:2
 msgid "Forgot password"
-msgstr "Забыли пароль"
+msgstr ""
 
 #: travelcrm/templates/auth/forgot.mak:22
 msgid "Back to autorization"
@@ -1368,52 +1368,48 @@ msgstr ""
 
 #: travelcrm/templates/auth/login.mak:2
 msgid "Autorization"
-msgstr "Авторизация"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:16
-#, fuzzy
-#| msgid "username"
 msgid "Username:"
-msgstr "Логин:"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:17
-#, fuzzy
-#| msgid "password"
 msgid "Password:"
-msgstr "Пароль:"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:23 travelcrm/templates/users/form.mak:22
 #: travelcrm/templates/users/index.mak:35
 msgid "username"
-msgstr "логин"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:31 travelcrm/templates/users/form.mak:34
 msgid "password"
-msgstr "пароль"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:38
 msgid "Forgot password?"
-msgstr "Забыли пароль?"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:42
 msgid "Please, enter username and password"
-msgstr "Пожалуйста, введите логин и пароль"
+msgstr ""
 
 #: travelcrm/templates/auth/login.mak:45
 msgid "Login"
-msgstr "Вход"
+msgstr ""
 
 #: travelcrm/templates/auth/logout.mak:2
 msgid "Logout Confirmation"
-msgstr "Подтвердите выход"
+msgstr ""
 
 #: travelcrm/templates/auth/logout.mak:11
 msgid "Do you really want to logout?"
-msgstr "Действительно хотите выйти?"
+msgstr ""
 
 #: travelcrm/templates/auth/logout.mak:16
 msgid "Logout"
-msgstr "Выход"
+msgstr ""
 
 #: travelcrm/templates/banks/form.mak:12
 #: travelcrm/templates/bpersons/form.mak:12
@@ -1425,49 +1421,49 @@ msgstr "Выход"
 #: travelcrm/templates/touroperators/form.mak:15
 #: travelcrm/templates/tours/form.mak:14
 msgid "Main"
-msgstr "Основные"
+msgstr ""
 
 #: travelcrm/templates/banks/form.mak:23
 #: travelcrm/templates/employees/form.mak:104
 #: travelcrm/templates/persons/form.mak:77
 #: travelcrm/templates/structures/form.mak:43
 msgid "Addresses"
-msgstr "Адреса"
+msgstr ""
 
 #: travelcrm/templates/banks/index.mak:13
 msgid "Banks"
-msgstr "Банки"
+msgstr ""
 
 #: travelcrm/templates/banks_details/details.mak:11
 #: travelcrm/templates/banks_details/form.mak:48
 msgid "swift code"
-msgstr "swift код"
+msgstr ""
 
 #: travelcrm/templates/bpersons/common.mak:69
 #: travelcrm/templates/bpersons/form.mak:42
 #: travelcrm/templates/bpersons/index.mak:35
 msgid "position name"
-msgstr "должность"
+msgstr ""
 
 #: travelcrm/templates/bpersons/form.mak:15
 #: travelcrm/templates/employees/form.mak:44
 #: travelcrm/templates/employees/index.mak:35
 #: travelcrm/templates/persons/form.mak:17
 msgid "first name"
-msgstr "имя"
+msgstr ""
 
 #: travelcrm/templates/bpersons/form.mak:24
 #: travelcrm/templates/employees/form.mak:53
 #: travelcrm/templates/persons/form.mak:26
 msgid "second name"
-msgstr "отчество"
+msgstr ""
 
 #: travelcrm/templates/bpersons/form.mak:33
 #: travelcrm/templates/employees/form.mak:62
 #: travelcrm/templates/employees/index.mak:34
 #: travelcrm/templates/persons/form.mak:35
 msgid "last name"
-msgstr "фамилия"
+msgstr ""
 
 #: travelcrm/templates/bpersons/form.mak:50
 #: travelcrm/templates/employees/form.mak:88
@@ -1475,18 +1471,18 @@ msgstr "фамилия"
 #: travelcrm/templates/structures/form.mak:35
 #: travelcrm/templates/touroperators/form.mak:34
 msgid "Contacts"
-msgstr "Контакты"
+msgstr ""
 
 #: travelcrm/templates/bpersons/index.mak:13
 msgid "Business Persons"
-msgstr "Бизнес контакты"
+msgstr ""
 
 #: travelcrm/templates/commissions/common.mak:57
 #: travelcrm/templates/commissions/form.mak:13
 #: travelcrm/templates/licences/common.mak:58
 #: travelcrm/templates/licences/form.mak:21
 msgid "date from"
-msgstr "дата с"
+msgstr ""
 
 #: travelcrm/templates/commissions/common.mak:58
 #: travelcrm/templates/commissions/form.mak:22
@@ -1494,11 +1490,11 @@ msgstr "дата с"
 #: travelcrm/templates/services_items/common.mak:57
 #: travelcrm/templates/services_sales/index.mak:108
 msgid "service"
-msgstr "услуги"
+msgstr ""
 
 #: travelcrm/templates/commissions/common.mak:59
 msgid "percent"
-msgstr "процент"
+msgstr ""
 
 #: travelcrm/templates/commissions/common.mak:60
 #: travelcrm/templates/commissions/form.mak:41
@@ -1507,21 +1503,21 @@ msgstr "процент"
 #: travelcrm/templates/services_sales/index.mak:49
 #: travelcrm/templates/tours/form.mak:80 travelcrm/templates/tours/index.mak:52
 msgid "price"
-msgstr "цена"
+msgstr ""
 
 #: travelcrm/templates/commissions/form.mak:29
 msgid "Set amount of commission in % and sum. You can use zero."
-msgstr "Установите величину комиссии в % и суму. Можно использовать 0."
+msgstr ""
 
 #: travelcrm/templates/commissions/form.mak:32
 msgid "percentage"
-msgstr "процент"
+msgstr ""
 
 #: travelcrm/templates/commissions/form.mak:50
 #: travelcrm/templates/services_items/form.mak:48
 #: travelcrm/templates/tours/form.mak:89
 msgid "price currency"
-msgstr "валюта"
+msgstr ""
 
 #: travelcrm/templates/common/search.mak:6
 msgid "search"
@@ -1529,249 +1525,249 @@ msgstr ""
 
 #: travelcrm/templates/common/search.mak:38
 msgid "advanced search"
-msgstr "расширенный поиск"
+msgstr ""
 
 #: travelcrm/templates/contacts/form.mak:12
 msgid "contact type"
-msgstr "тип контакта"
+msgstr ""
 
 #: travelcrm/templates/countries/index.mak:13
 msgid "Countries"
-msgstr "Страны"
+msgstr ""
 
 #: travelcrm/templates/currencies/index.mak:13
 msgid "Currencies"
-msgstr "Валюты"
+msgstr ""
 
 #: travelcrm/templates/currencies/index.mak:32
 msgid "iso_code"
-msgstr "iso код"
+msgstr ""
 
 #: travelcrm/templates/currencies_rates/form.mak:21
 #: travelcrm/templates/currencies_rates/index.mak:35
 msgid "rate"
-msgstr "курс"
+msgstr ""
 
 #: travelcrm/templates/currencies_rates/index.mak:13
 msgid "Currencies Rates"
-msgstr "Курсы валют"
+msgstr ""
 
 #: travelcrm/templates/currencies_rates/index.mak:74
 msgid "rate date"
-msgstr "дата курса"
+msgstr ""
 
 #: travelcrm/templates/employees/form.mak:36
 msgid "delete photo"
-msgstr "удалить фото"
+msgstr ""
 
 #: travelcrm/templates/employees/form.mak:71
 msgid "tax number"
-msgstr "ИНН"
+msgstr ""
 
 #: travelcrm/templates/employees/form.mak:80
 msgid "dismissal date"
-msgstr "дата увольнения"
+msgstr ""
 
 #: travelcrm/templates/employees/form.mak:96
 #: travelcrm/templates/persons/form.mak:69
 msgid "Passports"
-msgstr "Паспорта"
+msgstr ""
 
 #: travelcrm/templates/employees/form.mak:116
 msgid "Appointments"
-msgstr "Назначения"
+msgstr ""
 
 #: travelcrm/templates/employees/index.mak:13
 msgid "Employees"
-msgstr "Сотрудники"
+msgstr ""
 
 #: travelcrm/templates/employees/index.mak:36
 msgid "dismissal"
-msgstr "уволен"
+msgstr ""
 
 #: travelcrm/templates/foodcats/index.mak:13
 msgid "Foods Categories"
-msgstr "Категории питания"
+msgstr ""
 
 #: travelcrm/templates/hotelcats/index.mak:13
 msgid "Hotels Categories"
-msgstr "Категории отелей"
+msgstr ""
 
 #: travelcrm/templates/hotels/form.mak:21
 #: travelcrm/templates/hotels/index.mak:35
 msgid "category"
-msgstr "категория"
+msgstr ""
 
 #: travelcrm/templates/hotels/index.mak:13
 msgid "Hotels"
-msgstr "Отели"
+msgstr ""
 
 #: travelcrm/templates/incomes/form.mak:32
 #: travelcrm/templates/incomes/index.mak:90
 #: travelcrm/templates/invoices/info.mak:45
 msgid "payment date"
-msgstr "дата оплаты"
+msgstr ""
 
 #: travelcrm/templates/incomes/form.mak:59
 msgid "sum currency"
-msgstr "валюта оплаты"
+msgstr ""
 
 #: travelcrm/templates/incomes/index.mak:13
 msgid "Income Payments"
-msgstr "Входящие платежи"
+msgstr ""
 
 #: travelcrm/templates/incomes/index.mak:35
 msgid "account name"
-msgstr "счет"
+msgstr ""
 
 #: travelcrm/templates/incomes/index.mak:37
 #: travelcrm/templates/invoices/index.mak:36
 msgid "source"
-msgstr "источник"
+msgstr ""
 
 #: travelcrm/templates/incomes/index.mak:98
 #: travelcrm/templates/invoices/index.mak:81
 msgid "sum range"
-msgstr "диапазон сум"
+msgstr ""
 
 #: travelcrm/templates/invoices/form.mak:33
 msgid "invoice date"
-msgstr "дата инвойса"
+msgstr ""
 
 #: travelcrm/templates/invoices/form.mak:53
 msgid "Automaticaly calculated"
-msgstr "Рассчитано автоматически"
+msgstr ""
 
 #: travelcrm/templates/invoices/form.mak:56
 msgid "invoice sum"
-msgstr "сума инвойса"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:13
 msgid "Invoices"
-msgstr "Инвойсы"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:38
 msgid "payments"
-msgstr "оплачено"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:39
 msgid "payments, %"
-msgstr "оплачено, %"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:56
 msgid "Info"
-msgstr "Инфо"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:60
 msgid "Print"
-msgstr "Печать"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:89
 msgid "payment sum range"
-msgstr "диапазон оплат"
+msgstr ""
 
 #: travelcrm/templates/invoices/index.mak:97
 msgid "invoice_date"
-msgstr "дата инвойса"
+msgstr ""
 
 #: travelcrm/templates/invoices/info.mak:11
 #: travelcrm/templates/services/index.mak:13
 msgid "Services"
-msgstr "Услуги"
+msgstr ""
 
 #: travelcrm/templates/invoices/info.mak:19
 msgid "unit price"
-msgstr "цена за ед."
+msgstr ""
 
 #: travelcrm/templates/invoices/info.mak:20
 #: travelcrm/templates/invoices/info.mak:33
 msgid "qty"
-msgstr "к-во"
+msgstr ""
 
 #: travelcrm/templates/invoices/info.mak:32
 #: travelcrm/templates/services/form.mak:21
 #: travelcrm/templates/services/index.mak:35
 msgid "account item"
-msgstr "статья учета"
+msgstr ""
 
 #: travelcrm/templates/invoices/info.mak:38
 msgid "Payments"
-msgstr "Оплаты"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:7
 #: travelcrm/templates/services_sales/index.mak:86
 #: travelcrm/templates/tours/index.mak:91
 msgid "Invoice"
-msgstr "Инвойс"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:66
 msgid "INVOICE"
-msgstr "СЧЕТ"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:86
 msgid "Invoice #"
-msgstr "СЧЕТ №"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:91
 msgid "Date"
-msgstr "Дата"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:95
 msgid "Amount Due"
-msgstr "Сума к оплате"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:106
 #: travelcrm/templates/tasks/form.mak:68
 msgid "Description"
-msgstr "Описание"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:107
 msgid "Unit Cost"
-msgstr "Цена за ед."
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:108
 msgid "Quantity"
-msgstr "Количество"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:109
 msgid "Price"
-msgstr "Цена"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:128
 msgid "Total"
-msgstr "Всего"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:133
 msgid "Amount Paid"
-msgstr "Оплачено"
+msgstr ""
 
 #: travelcrm/templates/invoices/print.mak:139
 msgid "Balance Due"
-msgstr "Всего к оплате"
+msgstr ""
 
 #: travelcrm/templates/licences/common.mak:59
 #: travelcrm/templates/licences/form.mak:30
 msgid "date to"
-msgstr "дата по"
+msgstr ""
 
 #: travelcrm/templates/locations/form.mak:21
 #: travelcrm/templates/locations/index.mak:35
 #: travelcrm/templates/regions/index.mak:34
 msgid "region"
-msgstr "регион"
+msgstr ""
 
 #: travelcrm/templates/locations/index.mak:13
 msgid "Locations"
-msgstr "Местоположение"
+msgstr ""
 
 #: travelcrm/templates/navigations/copy.mak:12
 #: travelcrm/templates/permisions/copy.mak:12
 msgid "from position"
-msgstr "от должности"
+msgstr ""
 
 #: travelcrm/templates/navigations/form.mak:21
 msgid "parent navigation"
-msgstr "родительское меню"
+msgstr ""
 
 #: travelcrm/templates/navigations/form.mak:30
 msgid "url"
@@ -1783,42 +1779,42 @@ msgstr ""
 
 #: travelcrm/templates/navigations/index.mak:12
 msgid "Position Navigations"
-msgstr "Меню должности"
+msgstr ""
 
 #: travelcrm/templates/navigations/index.mak:53
 #: travelcrm/templates/permisions/index.mak:48
 msgid "Copy From ..."
-msgstr "Копировать от"
+msgstr ""
 
 #: travelcrm/templates/navigations/index.mak:57
 msgid "Up"
-msgstr "Вверх"
+msgstr ""
 
 #: travelcrm/templates/navigations/index.mak:61
 msgid "Down"
-msgstr "Вниз"
+msgstr ""
 
 #: travelcrm/templates/panels/common.mak:18
 msgid "logout"
-msgstr "выход"
+msgstr ""
 
 #: travelcrm/templates/panels/common.mak:97
 msgid "in"
-msgstr "в"
+msgstr ""
 
 #: travelcrm/templates/passports/common.mak:57
 #: travelcrm/templates/passports/form.mak:21
 msgid "passport num"
-msgstr "серия и номер"
+msgstr ""
 
 #: travelcrm/templates/passports/common.mak:59
 #: travelcrm/templates/passports/form.mak:39
 msgid "end date"
-msgstr "дата окончания"
+msgstr ""
 
 #: travelcrm/templates/passports/form.mak:12
 msgid "passport type"
-msgstr "тип паспорта"
+msgstr ""
 
 #: travelcrm/templates/passports/form.mak:30
 #: travelcrm/templates/regions/form.mak:21
@@ -1827,57 +1823,57 @@ msgstr "тип паспорта"
 #: travelcrm/templates/tours/index.mak:50
 #: travelcrm/templates/tours/index.mak:125
 msgid "country"
-msgstr "страна"
+msgstr ""
 
 #: travelcrm/templates/permisions/form.mak:2
 #: travelcrm/templates/permisions/index.mak:44
 msgid "Edit Permissions"
-msgstr "Изменить права доступа"
+msgstr ""
 
 #: travelcrm/templates/permisions/form.mak:22
 msgid "scope type"
-msgstr "область видимости"
+msgstr ""
 
 #: travelcrm/templates/permisions/form.mak:31
 msgid "scope structure"
-msgstr "структура"
+msgstr ""
 
 #: travelcrm/templates/permisions/index.mak:13
 msgid "Position Permissions"
-msgstr "Права доступа для должности"
+msgstr ""
 
 #: travelcrm/templates/permisions/index.mak:32
 msgid "resource type"
-msgstr "тип ресурса"
+msgstr ""
 
 #: travelcrm/templates/persons/common.mak:69
 #: travelcrm/templates/persons/form.mak:53
 msgid "birthday"
-msgstr "дата рождения"
+msgstr ""
 
 #: travelcrm/templates/persons/common.mak:70
 msgid "age"
-msgstr "возраст"
+msgstr ""
 
 #: travelcrm/templates/persons/details.mak:4
 msgid "contacts"
-msgstr "контакты"
+msgstr ""
 
 #: travelcrm/templates/persons/details.mak:21
 msgid "passports"
-msgstr "паспорта"
+msgstr ""
 
 #: travelcrm/templates/persons/details.mak:35
 msgid "expire date"
-msgstr "действителен до"
+msgstr ""
 
 #: travelcrm/templates/persons/form.mak:44
 msgid "gender"
-msgstr "пол"
+msgstr ""
 
 #: travelcrm/templates/persons/form.mak:85
 msgid "Preferences"
-msgstr "Предпочтения"
+msgstr ""
 
 #: travelcrm/templates/persons/index.mak:13
 msgid "Persons"
@@ -1885,19 +1881,19 @@ msgstr ""
 
 #: travelcrm/templates/positions/index.mak:13
 msgid "Company Positions"
-msgstr "Должности компании"
+msgstr ""
 
 #: travelcrm/templates/positions/index.mak:69
 msgid "Permissions"
-msgstr "Права доступа"
+msgstr ""
 
 #: travelcrm/templates/positions/index.mak:73
 msgid "Menu"
-msgstr "Меню"
+msgstr ""
 
 #: travelcrm/templates/regions/index.mak:13
 msgid "Regions"
-msgstr "Регионы"
+msgstr ""
 
 #: travelcrm/templates/resources_types/form.mak:2
 msgid "Add Company"
@@ -1910,70 +1906,70 @@ msgstr ""
 
 #: travelcrm/templates/resources_types/form.mak:30
 msgid "resource"
-msgstr "ресурс"
+msgstr ""
 
 #: travelcrm/templates/resources_types/index.mak:13
 msgid "Resources Types"
-msgstr "Типы ресурсов"
+msgstr ""
 
 #: travelcrm/templates/roomcats/index.mak:13
 msgid "Rooms Categories"
-msgstr "Категории номеров"
+msgstr ""
 
 #: travelcrm/templates/services/form.mak:30
 msgid "invoice text"
-msgstr "текст для инвойса"
+msgstr ""
 
 #: travelcrm/templates/services_items/common.mak:58
 #: travelcrm/templates/services_items/form.mak:30
 #: travelcrm/templates/services_sales/index.mak:102
 msgid "person"
-msgstr "субьект"
+msgstr ""
 
 #: travelcrm/templates/services_items/common.mak:59
 #: travelcrm/templates/services_items/form.mak:21
 #: travelcrm/templates/tours/form.mak:44
 msgid "touroperator"
-msgstr "туроператор"
+msgstr ""
 
 #: travelcrm/templates/services_items/form.mak:12
 #: travelcrm/templates/tours/form.mak:35
 msgid "tour service"
-msgstr "услуга"
+msgstr ""
 
 #: travelcrm/templates/services_sales/details.mak:5
 #: travelcrm/templates/tours/details.mak:6
 msgid "customer contacts"
-msgstr "контакты заказчика"
+msgstr ""
 
 #: travelcrm/templates/services_sales/form.mak:15
 #: travelcrm/templates/tours/form.mak:17 travelcrm/templates/tours/index.mak:48
 msgid "deal date"
-msgstr "дата сделки"
+msgstr ""
 
 #: travelcrm/templates/services_sales/form.mak:24
 #: travelcrm/templates/tours/form.mak:26
 msgid "advertise"
-msgstr "реклама"
+msgstr ""
 
 #: travelcrm/templates/services_sales/form.mak:41
 #: travelcrm/templates/tours/form.mak:145
 msgid "Services Items"
-msgstr "Список услуг"
+msgstr ""
 
 #: travelcrm/templates/services_sales/index.mak:13
 msgid "Services Sales"
-msgstr "Продажа услуг"
+msgstr ""
 
 #: travelcrm/templates/services_sales/index.mak:50
 #: travelcrm/templates/tours/index.mak:55
 msgid "invoice already exists"
-msgstr "инвойс уже создан"
+msgstr ""
 
 #: travelcrm/templates/services_sales/index.mak:92
 #: travelcrm/templates/tours/index.mak:97
 msgid "Contract"
-msgstr "Договор"
+msgstr ""
 
 #: travelcrm/templates/services_sales/index.mak:114
 #: travelcrm/templates/tours/index.mak:131
@@ -1982,20 +1978,20 @@ msgstr ""
 
 #: travelcrm/templates/services_sales/index.mak:122
 msgid "sale dates"
-msgstr "дата продажи"
+msgstr ""
 
 #: travelcrm/templates/structures/form.mak:27
 msgid "parent structure"
-msgstr "родительская структура"
+msgstr ""
 
 #: travelcrm/templates/structures/form.mak:51
 #: travelcrm/templates/touroperators/form.mak:42
 msgid "Banks Details"
-msgstr "Реквизиты банка"
+msgstr ""
 
 #: travelcrm/templates/structures/index.mak:11
 msgid "Company Structures"
-msgstr "Структуры компании"
+msgstr ""
 
 #: travelcrm/templates/tasks/form.mak:14 travelcrm/templates/tasks/index.mak:97
 msgid "title"
@@ -2023,146 +2019,146 @@ msgstr ""
 
 #: travelcrm/templates/touroperators/form.mak:26
 msgid "Licences"
-msgstr "Лицензии"
+msgstr ""
 
 #: travelcrm/templates/touroperators/form.mak:50
 msgid "Commissions"
-msgstr "Комиссии"
+msgstr ""
 
 #: travelcrm/templates/touroperators/index.mak:13
 msgid "Touroperators"
-msgstr "Туроператоры"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:38
 #: travelcrm/templates/tours/common.mak:108
 #: travelcrm/templates/tours/form_point.mak:21
 #: travelcrm/templates/tours/index.mak:113
 msgid "hotel"
-msgstr "отель"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:44
 #: travelcrm/templates/tours/form_point.mak:30
 msgid "accomodation"
-msgstr "размещение"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:50
 #: travelcrm/templates/tours/form_point.mak:48
 msgid "room category"
-msgstr "категория номера"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:56
 #: travelcrm/templates/tours/form_point.mak:39
 msgid "food category"
-msgstr "категория питания"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:61
 msgid "dates"
-msgstr "даты"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:109
 #: travelcrm/templates/tours/form.mak:100
 #: travelcrm/templates/tours/form_point.mak:57
 #: travelcrm/templates/tours/index.mak:53
 msgid "start"
-msgstr "начало"
+msgstr ""
 
 #: travelcrm/templates/tours/common.mak:110
 #: travelcrm/templates/tours/form.mak:116
 #: travelcrm/templates/tours/form_point.mak:66
 #: travelcrm/templates/tours/index.mak:54
 msgid "end"
-msgstr "конец"
+msgstr ""
 
 #: travelcrm/templates/tours/details.mak:24
 msgid "members"
-msgstr "участники"
+msgstr ""
 
 #: travelcrm/templates/tours/details.mak:29
 #: travelcrm/templates/tours/form.mak:62
 msgid "adults"
-msgstr "взрослые"
+msgstr ""
 
 #: travelcrm/templates/tours/details.mak:37
 #: travelcrm/templates/tours/form.mak:71
 msgid "children"
-msgstr "дети"
+msgstr ""
 
 #: travelcrm/templates/tours/details.mak:47
 msgid "route"
-msgstr "маршрут"
+msgstr ""
 
 #: travelcrm/templates/tours/form.mak:97
 msgid "Route"
-msgstr "Маршрут"
+msgstr ""
 
 #: travelcrm/templates/tours/form.mak:107
 msgid "start point"
-msgstr "начальная точка"
+msgstr ""
 
 #: travelcrm/templates/tours/form.mak:123
 msgid "end point"
-msgstr "конечная точка"
+msgstr ""
 
 #: travelcrm/templates/tours/form.mak:137
 msgid "Members"
-msgstr "Участники"
+msgstr ""
 
 #: travelcrm/templates/tours/index.mak:13
 msgid "Tours"
-msgstr "Туры"
+msgstr ""
 
 #: travelcrm/templates/tours/index.mak:51
 msgid "hotel cat"
-msgstr "категория отеля"
+msgstr ""
 
 #: travelcrm/templates/tours/index.mak:107
 msgid "member"
-msgstr "участник"
+msgstr ""
 
 #: travelcrm/templates/tours/index.mak:119
 msgid "hotel category"
-msgstr "категория отеля"
+msgstr ""
 
 #: travelcrm/templates/tours/index.mak:139
 msgid "tour dates"
-msgstr "даты тура"
+msgstr ""
 
 #: travelcrm/templates/users/form.mak:30
 msgid "If you do not change password, take this fields empty"
-msgstr "Если не хотите менять пароль, не заполняйте эти поля"
+msgstr ""
 
 #: travelcrm/templates/users/form.mak:43
 msgid "confirm password"
-msgstr "подтверждение пароля"
+msgstr ""
 
 #: travelcrm/templates/users/index.mak:14
 msgid "Users"
-msgstr "Пользователи"
+msgstr ""
 
 #: travelcrm/views/__init__.py:22 travelcrm/views/__init__.py:35
 msgid "System Info"
-msgstr "Система"
+msgstr ""
 
 #: travelcrm/views/__init__.py:23
 msgid "Need to select row"
-msgstr "Нужно выбрать строку"
+msgstr ""
 
 #: travelcrm/views/__init__.py:36
 msgid "Need to check rows"
-msgstr "Нужно отметить строки"
+msgstr ""
 
 #: travelcrm/views/__init__.py:47
 msgid "Seccurity Info"
-msgstr "Система безобасности"
+msgstr ""
 
 #: travelcrm/views/__init__.py:48
 msgid "You have no permissions to do this action"
-msgstr "Недостаточно прав"
+msgstr ""
 
 #: travelcrm/views/accomodations.py:74 travelcrm/views/foodcats.py:74
 #: travelcrm/views/hotelcats.py:74
 msgid "Add Hotel Category"
-msgstr "Добавить категорию отеля"
+msgstr ""
 
 #: travelcrm/views/accomodations.py:94 travelcrm/views/accomodations.py:128
 #: travelcrm/views/accounts.py:103 travelcrm/views/accounts.py:141
@@ -2204,7 +2200,7 @@ msgstr "Добавить категорию отеля"
 #: travelcrm/views/tours.py:344 travelcrm/views/tours.py:386
 #: travelcrm/views/users.py:100 travelcrm/views/users.py:137
 msgid "Saved"
-msgstr "Сохранено"
+msgstr ""
 
 #: travelcrm/views/accomodations.py:99 travelcrm/views/accomodations.py:133
 #: travelcrm/views/accounts.py:108 travelcrm/views/accounts.py:146
@@ -2249,7 +2245,7 @@ msgstr "Сохранено"
 #: travelcrm/views/tours.py:389 travelcrm/views/users.py:105
 #: travelcrm/views/users.py:142
 msgid "Please, check errors"
-msgstr "Пожалуйста, проверьте ошибки"
+msgstr ""
 
 #: travelcrm/views/accomodations.py:112 travelcrm/views/foodcats.py:113
 #: travelcrm/views/hotelcats.py:113
@@ -2280,7 +2276,7 @@ msgstr ""
 #: travelcrm/views/touroperators.py:208 travelcrm/views/tours.py:272
 #: travelcrm/views/users.py:180
 msgid "Some objects could not be delete"
-msgstr "Некоторые объекты не возможно удалить"
+msgstr ""
 
 #: travelcrm/views/accomodations.py:175 travelcrm/views/accounts.py:188
 #: travelcrm/views/accounts_items.py:179 travelcrm/views/addresses.py:206
@@ -2302,506 +2298,506 @@ msgstr "Некоторые объекты не возможно удалить"
 #: travelcrm/views/touroperators.py:212 travelcrm/views/tours.py:276
 #: travelcrm/views/users.py:184
 msgid "Deleted"
-msgstr "Удалено"
+msgstr ""
 
 #: travelcrm/views/accounts.py:78
 msgid "Add Account"
-msgstr "Новый счет"
+msgstr ""
 
 #: travelcrm/views/accounts.py:121
 msgid "Edit Account"
-msgstr "Изменить счет"
+msgstr ""
 
 #: travelcrm/views/accounts.py:159
 msgid "Delete Accounts"
-msgstr "Удалить счета"
+msgstr ""
 
 #: travelcrm/views/accounts_items.py:75
 msgid "Add Account Item"
-msgstr "Новая статья учета"
+msgstr ""
 
 #: travelcrm/views/accounts_items.py:115
 msgid "Edit AccountItem"
-msgstr "Изменить статью учета"
+msgstr ""
 
 #: travelcrm/views/accounts_items.py:150
 msgid "Delete Accounts Items"
-msgstr "Удалить статьи учета"
+msgstr ""
 
 #: travelcrm/views/addresses.py:73
 msgid "Add Address"
-msgstr "Новый адрес"
+msgstr ""
 
 #: travelcrm/views/addresses.py:116
 msgid "Edit Address"
-msgstr "Изменить адрес"
+msgstr ""
 
 #: travelcrm/views/addresses.py:155
 msgid "Copy Address"
-msgstr "Копировать адрес"
+msgstr ""
 
 #: travelcrm/views/addresses.py:177
 msgid "Delete Addresses"
-msgstr "Удалить адреса"
+msgstr ""
 
 #: travelcrm/views/advsources.py:74
 msgid "Add Advertising Source"
-msgstr "Новый источник рекламы"
+msgstr ""
 
 #: travelcrm/views/advsources.py:113
 msgid "Edit Advertising Source"
-msgstr "Изменить источник рекламы"
+msgstr ""
 
 #: travelcrm/views/advsources.py:147
 msgid "Delete Advertises Sources"
-msgstr "Удалить источники рекламы"
+msgstr ""
 
 #: travelcrm/views/appointments.py:73
 msgid "Add Employee Appointment"
-msgstr "Новое назначение сотрудника"
+msgstr ""
 
 #: travelcrm/views/appointments.py:118
 msgid "Edit Employee Appointment"
-msgstr "Изменить назначание сотрудника"
+msgstr ""
 
 #: travelcrm/views/appointments.py:159
 msgid "Copy Appointment"
-msgstr "Копировать назначение сотрудника"
+msgstr ""
 
 #: travelcrm/views/appointments.py:181
 msgid "Delete Appointments"
-msgstr "Удалить назначения сотрудников"
+msgstr ""
 
 #: travelcrm/views/banks.py:75
 msgid "Add Bank"
-msgstr "Новый банк"
+msgstr ""
 
 #: travelcrm/views/banks.py:124
 msgid "Edit Bank"
-msgstr "Изменить банк"
+msgstr ""
 
 #: travelcrm/views/banks.py:170
 msgid "Delete Banks"
-msgstr "Удалить банки"
+msgstr ""
 
 #: travelcrm/views/banks_details.py:75
 msgid "Add Bank Detail"
-msgstr "Новые реквизиты банка"
+msgstr ""
 
 #: travelcrm/views/banks_details.py:120
 msgid "Edit Bank Detail"
-msgstr "Изменить реквизиты банка"
+msgstr ""
 
 #: travelcrm/views/banks_details.py:172
 msgid "Delete Banks Details"
-msgstr "Удалить реквизиты банка"
+msgstr ""
 
 #: travelcrm/views/bpersons.py:76
 msgid "Add Business Person"
-msgstr "Новый бизнес контакт"
+msgstr ""
 
 #: travelcrm/views/bpersons.py:131
 msgid "Edit Business Person"
-msgstr "Изменить бизнес контакт"
+msgstr ""
 
 #: travelcrm/views/bpersons.py:183
 msgid "Copy Business Person"
-msgstr "Копировать бизнес контакт"
+msgstr ""
 
 #: travelcrm/views/bpersons.py:218
 msgid "Delete Business Persons"
-msgstr "Удалить бизнес контакты"
+msgstr ""
 
 #: travelcrm/views/commissions.py:72
 msgid "Add Commission"
-msgstr "Новая ставка комиссии"
+msgstr ""
 
 #: travelcrm/views/commissions.py:117
 msgid "Edit Commission"
-msgstr "Изменить ставку комиссии"
+msgstr ""
 
 #: travelcrm/views/commissions.py:158
 msgid "Copy Commission"
-msgstr "Копировать ставку комиссии"
+msgstr ""
 
 #: travelcrm/views/commissions.py:180
 msgid "Delete Commissions"
-msgstr "Удалить ставки комиссии"
+msgstr ""
 
 #: travelcrm/views/contacts.py:72
 msgid "Add Contact"
-msgstr "Новый контакт"
+msgstr ""
 
 #: travelcrm/views/contacts.py:115
 msgid "Edit Contact"
-msgstr "Изменить контакт"
+msgstr ""
 
 #: travelcrm/views/contacts.py:153
 msgid "Copy Contact"
-msgstr "Копировать контакт"
+msgstr ""
 
 #: travelcrm/views/contacts.py:175
 msgid "Delete Contacts"
-msgstr "Удалить контакты"
+msgstr ""
 
 #: travelcrm/views/countries.py:74
 msgid "Add Country"
-msgstr "Новая страна"
+msgstr ""
 
 #: travelcrm/views/countries.py:114
 msgid "Edit Country"
-msgstr "Изменить страну"
+msgstr ""
 
 #: travelcrm/views/countries.py:149
 msgid "Delete Countries"
-msgstr "Удалить страны"
+msgstr ""
 
 #: travelcrm/views/currencies.py:74
 msgid "Add Currency"
-msgstr "Новая валюта"
+msgstr ""
 
 #: travelcrm/views/currencies.py:113
 msgid "Edit Currency"
-msgstr "Изменить валюту"
+msgstr ""
 
 #: travelcrm/views/currencies.py:147
 msgid "Delete Currencies"
-msgstr "Удалить валюты"
+msgstr ""
 
 #: travelcrm/views/currencies_rates.py:74
 msgid "Add Currency Rate"
-msgstr "Новый курс валюты"
+msgstr ""
 
 #: travelcrm/views/currencies_rates.py:115
 msgid "Edit Currency Rate"
-msgstr "Изменить курс валюты"
+msgstr ""
 
 #: travelcrm/views/currencies_rates.py:153
 msgid "Copy Rate"
-msgstr "Копировать курс валюты"
+msgstr ""
 
 #: travelcrm/views/currencies_rates.py:175
 msgid "Delete Currencies Rates"
-msgstr "Удалить курсы валют"
+msgstr ""
 
 #: travelcrm/views/employees.py:77
 msgid "Add Employee"
-msgstr "Новый сотрудник"
+msgstr ""
 
 #: travelcrm/views/employees.py:136
 msgid "Edit Employee"
-msgstr "Изменить сотрудника"
+msgstr ""
 
 #: travelcrm/views/employees.py:195
 msgid "Delete Employees"
-msgstr "Удалить сотрудников"
+msgstr ""
 
 #: travelcrm/views/foodcats.py:147
 msgid "Delete Food Categories"
-msgstr "Удалить категории питания"
+msgstr ""
 
 #: travelcrm/views/home.py:70
 msgid "Check your email"
-msgstr "Проверьте ваш email"
+msgstr ""
 
 #: travelcrm/views/home.py:122
 msgid "Success, wait..."
-msgstr "Выполнено, ждите..."
+msgstr ""
 
 #: travelcrm/views/home.py:125
 msgid "Invalid username or password"
-msgstr "Неверный логин или пароль"
+msgstr ""
 
 #: travelcrm/views/hotelcats.py:147
 msgid "Delete Hotel Categories"
-msgstr "Удалить категории отелей"
+msgstr ""
 
 #: travelcrm/views/hotels.py:74
 msgid "Add Hotel"
-msgstr "Новый отель"
+msgstr ""
 
 #: travelcrm/views/hotels.py:115
 msgid "Edit Hotel"
-msgstr "Изменить отель"
+msgstr ""
 
 #: travelcrm/views/hotels.py:153
 msgid "Copy Hotel"
-msgstr "Копировать отель"
+msgstr ""
 
 #: travelcrm/views/hotels.py:175
 msgid "Delete Hotels"
-msgstr "Удалить отели"
+msgstr ""
 
 #: travelcrm/views/incomes.py:77
 msgid "Add Income"
-msgstr "Новый входящий платеж"
+msgstr ""
 
 #: travelcrm/views/incomes.py:122
 msgid "Edit Income"
-msgstr "Изменить входящий платеж"
+msgstr ""
 
 #: travelcrm/views/incomes.py:162
 msgid "Delete Income Payments"
-msgstr "Удалить входящие платежи"
+msgstr ""
 
 #: travelcrm/views/invoices.py:105
 msgid "Add Invoice"
-msgstr "Новый инвойс"
+msgstr ""
 
 #: travelcrm/views/invoices.py:163
 msgid "Edit Invoice"
-msgstr "Изменить инвойс"
+msgstr ""
 
 #: travelcrm/views/invoices.py:199
 msgid "Delete Invoices"
-msgstr "Удалить инвойсы"
+msgstr ""
 
 #: travelcrm/views/invoices.py:296
 msgid "Invoice Info"
-msgstr "Информация по инвойсу"
+msgstr ""
 
 #: travelcrm/views/invoices.py:326 travelcrm/views/invoices.py:357
 #: travelcrm/views/invoices.py:376
 msgid "total"
-msgstr "всего"
+msgstr ""
 
 #: travelcrm/views/licences.py:72
 msgid "Add Licence"
-msgstr "Новая лицензия"
+msgstr ""
 
 #: travelcrm/views/licences.py:115
 msgid "Edit Licence"
-msgstr "Изменить лицензию"
+msgstr ""
 
 #: travelcrm/views/licences.py:154
 msgid "Copy Licence"
-msgstr "Копировать лицензию"
+msgstr ""
 
 #: travelcrm/views/licences.py:176
 msgid "Delete Licences"
-msgstr "Удалить лицензии"
+msgstr ""
 
 #: travelcrm/views/locations.py:74
 msgid "Add Location"
-msgstr "Новое местоположение"
+msgstr ""
 
 #: travelcrm/views/locations.py:114
 msgid "Edit Location"
-msgstr "Изменить местоположение"
+msgstr ""
 
 #: travelcrm/views/locations.py:151
 msgid "Copy Location"
-msgstr "Копировать местоположение"
+msgstr ""
 
 #: travelcrm/views/locations.py:173
 msgid "Delete Locations"
-msgstr "Удалить местоположения"
+msgstr ""
 
 #: travelcrm/views/navigations.py:82
 msgid "Add Navigation Item"
-msgstr "Новый пункт меню"
+msgstr ""
 
 #: travelcrm/views/navigations.py:129
 msgid "Edit Navigation Item"
-msgstr "Изменить пункт меню"
+msgstr ""
 
 #: travelcrm/views/navigations.py:171
 msgid "Delete Navigations"
-msgstr "Удалить пункты меню"
+msgstr ""
 
 #: travelcrm/views/navigations.py:241
 msgid "Copy Menu From Position"
-msgstr "Копировать меню от должности"
+msgstr ""
 
 #: travelcrm/views/navigations.py:277 travelcrm/views/permisions.py:201
 msgid "Copied"
-msgstr "Скопировано"
+msgstr ""
 
 #: travelcrm/views/passports.py:72
 msgid "Add Passport"
-msgstr "Новый паспорт"
+msgstr ""
 
 #: travelcrm/views/passports.py:117
 msgid "Edit Passport"
-msgstr "Изменить паспорт"
+msgstr ""
 
 #: travelcrm/views/passports.py:158
 msgid "Copy Passport"
-msgstr "Копировать паспорт"
+msgstr ""
 
 #: travelcrm/views/passports.py:180 travelcrm/views/positions.py:177
 msgid "Delete Passports"
-msgstr "Удалить паспорта"
+msgstr ""
 
 #: travelcrm/views/permisions.py:165
 msgid "Copy Permissions From Position"
-msgstr "Копировать права от должности"
+msgstr ""
 
 #: travelcrm/views/persons.py:78
 msgid "Add Person"
-msgstr "Новый субьект"
+msgstr ""
 
 #: travelcrm/views/persons.py:153
 msgid "Edit Person"
-msgstr "Изменить субьект"
+msgstr ""
 
 #: travelcrm/views/positions.py:75
 msgid "Add Company Position"
-msgstr "Новая должность"
+msgstr ""
 
 #: travelcrm/views/positions.py:116
 msgid "Edit Company Position"
-msgstr "Изменить должность"
+msgstr ""
 
 #: travelcrm/views/positions.py:155
 msgid "Copy Company Position"
-msgstr "Копировать должность"
+msgstr ""
 
 #: travelcrm/views/regions.py:74
 msgid "Add Region"
-msgstr "Новый регион"
+msgstr ""
 
 #: travelcrm/views/regions.py:114
 msgid "Edit Region"
-msgstr "Изменить регион"
+msgstr ""
 
 #: travelcrm/views/regions.py:149
 msgid "Delete Regions"
-msgstr "Удалить регионы"
+msgstr ""
 
 #: travelcrm/views/resources_types.py:75
 msgid "Add Resources Type"
-msgstr "Новый тип ресурсов"
+msgstr ""
 
 #: travelcrm/views/resources_types.py:119
 msgid "Edit Resources Type"
-msgstr "Изменить тип ресурсов"
+msgstr ""
 
 #: travelcrm/views/resources_types.py:159
 msgid "Copy Resources Type"
-msgstr "Копировать тип ресурсов"
+msgstr ""
 
 #: travelcrm/views/resources_types.py:181
 msgid "Delete Resources Types"
-msgstr "Удалить типы ресурсов"
+msgstr ""
 
 #: travelcrm/views/roomcats.py:74
 msgid "Add Room Category"
-msgstr "Новая категория номера"
+msgstr ""
 
 #: travelcrm/views/roomcats.py:113
 msgid "Edit Room Category"
-msgstr "Изменить категорию номера"
+msgstr ""
 
 #: travelcrm/views/roomcats.py:147
 msgid "Delete Room Categories"
-msgstr "Удалить категории номеров"
+msgstr ""
 
 #: travelcrm/views/services.py:74 travelcrm/views/services_items.py:72
 msgid "Add Service"
-msgstr "Новая услуга"
+msgstr ""
 
 #: travelcrm/views/services.py:116 travelcrm/views/services_items.py:117
 msgid "Edit Service"
-msgstr "Изменить услугу"
+msgstr ""
 
 #: travelcrm/views/services.py:153
 msgid "Delete Services"
-msgstr "Удалить услуги"
+msgstr ""
 
 #: travelcrm/views/services_items.py:158
 msgid "Delete Services Items"
-msgstr "Удалить услуги"
+msgstr ""
 
 #: travelcrm/views/services_sales.py:79
 msgid "Add Service Sale"
-msgstr "Новая продажа услуг"
+msgstr ""
 
 #: travelcrm/views/services_sales.py:126
 msgid "Edit Service Sale"
-msgstr "Изменить продажу услуг"
+msgstr ""
 
 #: travelcrm/views/services_sales.py:170
 msgid "Copy Service Sale"
-msgstr "Копировать продажу услуг"
+msgstr ""
 
 #: travelcrm/views/services_sales.py:192
 msgid "Delete Services Sales"
-msgstr "Удалить продажи услуг"
+msgstr ""
 
 #: travelcrm/views/structures.py:73
 msgid "Add Company Structure"
-msgstr "Новая структура компании"
+msgstr ""
 
 #: travelcrm/views/structures.py:123
 msgid "Edit Company Structure"
-msgstr "Изменить структуру компании"
+msgstr ""
 
 #: travelcrm/views/structures.py:173
 msgid "Copy Company Structure"
-msgstr "Копировать структуру компании"
+msgstr ""
 
 #: travelcrm/views/structures.py:196
 msgid "Delete Structures"
-msgstr "Удалить структуры компании"
+msgstr ""
 
 #: travelcrm/views/tasks.py:79
 msgid "Add Task"
-msgstr "Новая задача"
+msgstr ""
 
 #: travelcrm/views/tasks.py:131
 msgid "Edit Task"
-msgstr "Изменить задачу"
+msgstr ""
 
 #: travelcrm/views/tasks.py:178
 msgid "Delete Tasks"
-msgstr "Удалить задачи"
+msgstr ""
 
 #: travelcrm/views/touroperators.py:79
 msgid "Add Touroperator"
-msgstr "Новый туроператор"
+msgstr ""
 
 #: travelcrm/views/touroperators.py:132
 msgid "Edit Touroperator"
-msgstr "Изменить туроператора"
+msgstr ""
 
 #: travelcrm/views/touroperators.py:183
 msgid "Delete Touroperators"
-msgstr "Удалить туроператоров"
+msgstr ""
 
 #: travelcrm/views/tours.py:87
 msgid "Add Tour"
-msgstr "Новый тур"
+msgstr ""
 
 #: travelcrm/views/tours.py:150
 msgid "Edit Tour"
-msgstr "Изменить тур"
+msgstr ""
 
 #: travelcrm/views/tours.py:212
 msgid "Copy Tour"
-msgstr "Копировать тур"
+msgstr ""
 
 #: travelcrm/views/tours.py:247
 msgid "Delete Tours"
-msgstr "Удалить туры"
+msgstr ""
 
 #: travelcrm/views/tours.py:316
 msgid "Add Tour Point"
-msgstr "Новая точка маршрута"
+msgstr ""
 
 #: travelcrm/views/tours.py:364
 msgid "Edit Tour Point"
-msgstr "Изменить точку маршрута"
+msgstr ""
 
 #: travelcrm/views/users.py:77
 msgid "Add User"
-msgstr "Новый пользователь"
+msgstr ""
 
 #: travelcrm/views/users.py:118
 msgid "Edit User"
-msgstr "Изменить пользователя"
+msgstr ""
 
 #: travelcrm/views/users.py:155
 msgid "Delete Users"
-msgstr "Удалить пользователей"
+msgstr ""
 

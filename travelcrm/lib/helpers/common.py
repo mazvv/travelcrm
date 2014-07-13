@@ -9,6 +9,7 @@ from webhelpers.misc import NotGiven
 
 from ..utils.common_utils import (
     gen_id as u_gen_id,
+    get_locale_name as u_get_locale_name,
     get_company_name as u_get_company_name,
     is_demo_mode as u_is_demo_mode,
     format_date as u_format_date,
@@ -92,3 +93,7 @@ def format_date(value):
 
 def format_datetime(value):
     return u_format_datetime(value)
+
+
+def get_locale_name():
+    return u_get_locale_name()
