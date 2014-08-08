@@ -110,7 +110,7 @@ class Income(Base):
     def sum(self):
         return sum(transaction.sum for transaction in self.transactions)
 
-
     @property
     def date(self):
+        assert self.transactions
         return self.transactions[0].date
