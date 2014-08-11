@@ -39,7 +39,7 @@
                 ${h.tags.title(_(u"price"), True, "price")}
             </div>
             <div class="ml15">
-                ${h.tags.text('price', item.price if item else None, class_="text w20 easyui-numberbox", data_options="min:0,precision:2")}
+                ${h.tags.text('price', item.price if item else None, class_="easyui-textbox w20 easyui-numberbox", data_options="min:0,precision:2")}
                 ${h.common.error_container(name='price')}
             </div>
         </div>

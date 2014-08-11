@@ -98,9 +98,9 @@
                         ${h.tags.title(_(u"sum range"))}
                     </div>
                     <div>
-                        ${h.tags.text('sum_from', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        ${h.tags.text('sum_from', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
                         <span class="p1">-</span>
-                        ${h.tags.text('sum_to', None, class_="text w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        ${h.tags.text('sum_to', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"updated"))}

@@ -15,7 +15,7 @@
 		                ${h.tags.title(_(u"name"), True, "name")}
 		            </div>
 		            <div class="ml15">
-		                ${h.tags.text("name", item.name if item else None, class_="text w20")}
+		                ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
 		                ${h.common.error_container(name='name')}
 		            </div>
 		        </div>

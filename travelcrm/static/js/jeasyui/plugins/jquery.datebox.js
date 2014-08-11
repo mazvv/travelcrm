@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -126,7 +126,7 @@ _1(this);
 };
 $.fn.datebox.methods={options:function(jq){
 var _20=jq.combo("options");
-return $.extend($.data(jq[0],"datebox").options,{originalValue:_20.originalValue,disabled:_20.disabled,readonly:_20.readonly});
+return $.extend($.data(jq[0],"datebox").options,{width:_20.width,height:_20.height,originalValue:_20.originalValue,disabled:_20.disabled,readonly:_20.readonly});
 },calendar:function(jq){
 return $.data(jq[0],"datebox").calendar;
 },setValue:function(jq,_21){
@@ -163,11 +163,17 @@ $(this).closest("div.combo-panel").panel("close");
 var y=_28.getFullYear();
 var m=_28.getMonth()+1;
 var d=_28.getDate();
-return m+"/"+d+"/"+y;
+return (m<10?("0"+m):m)+"/"+(d<10?("0"+d):d)+"/"+y;
 },parser:function(s){
-var t=Date.parse(s);
-if(!isNaN(t)){
-return new Date(t);
+if(!s){
+return new Date();
+}
+var ss=s.split("/");
+var m=parseInt(ss[0],10);
+var d=parseInt(ss[1],10);
+var y=parseInt(ss[2],10);
+if(!isNaN(y)&&!isNaN(m)&&!isNaN(d)){
+return new Date(y,m-1,d);
 }else{
 return new Date();
 }

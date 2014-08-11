@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -9,130 +9,113 @@
  */
 (function($){
 function _1(_2){
-var cp=document.createElement("div");
-while(_2.firstChild){
-cp.appendChild(_2.firstChild);
+var _3=$.data(_2,"dialog").options;
+_3.inited=false;
+$(_2).window($.extend({},_3,{onResize:function(w,h){
+if(_3.inited){
+_a(this);
+_3.onResize.call(this,w,h);
 }
-_2.appendChild(cp);
-var _3=$(cp);
-_3.attr("style",$(_2).attr("style"));
-$(_2).removeAttr("style").css("overflow","hidden");
-_3.panel({border:false,doSize:false,bodyCls:"dialog-content"});
-return _3;
-};
-function _4(_5){
-var _6=$.data(_5,"dialog").options;
-var _7=$.data(_5,"dialog").contentPanel;
-if(_6.toolbar){
-if($.isArray(_6.toolbar)){
-$(_5).find("div.dialog-toolbar").remove();
-var _8=$("<div class=\"dialog-toolbar\"><table cellspacing=\"0\" cellpadding=\"0\"><tr></tr></table></div>").prependTo(_5);
-var tr=_8.find("tr");
-for(var i=0;i<_6.toolbar.length;i++){
-var _9=_6.toolbar[i];
-if(_9=="-"){
+}}));
+var _4=$(_2).window("window");
+if(_3.toolbar){
+if($.isArray(_3.toolbar)){
+$(_2).siblings("div.dialog-toolbar").remove();
+var _5=$("<div class=\"dialog-toolbar\"><table cellspacing=\"0\" cellpadding=\"0\"><tr></tr></table></div>").appendTo(_4);
+var tr=_5.find("tr");
+for(var i=0;i<_3.toolbar.length;i++){
+var _6=_3.toolbar[i];
+if(_6=="-"){
 $("<td><div class=\"dialog-tool-separator\"></div></td>").appendTo(tr);
 }else{
 var td=$("<td></td>").appendTo(tr);
-var _a=$("<a href=\"javascript:void(0)\"></a>").appendTo(td);
-_a[0].onclick=eval(_9.handler||function(){
+var _7=$("<a href=\"javascript:void(0)\"></a>").appendTo(td);
+_7[0].onclick=eval(_6.handler||function(){
 });
-_a.linkbutton($.extend({},_9,{plain:true}));
+_7.linkbutton($.extend({},_6,{plain:true}));
 }
 }
 }else{
-$(_6.toolbar).addClass("dialog-toolbar").prependTo(_5);
-$(_6.toolbar).show();
+$(_3.toolbar).addClass("dialog-toolbar").appendTo(_4);
+$(_3.toolbar).show();
 }
 }else{
-$(_5).find("div.dialog-toolbar").remove();
+$(_2).siblings("div.dialog-toolbar").remove();
 }
-if(_6.buttons){
-if($.isArray(_6.buttons)){
-$(_5).find("div.dialog-button").remove();
-var _b=$("<div class=\"dialog-button\"></div>").appendTo(_5);
-for(var i=0;i<_6.buttons.length;i++){
-var p=_6.buttons[i];
-var _c=$("<a href=\"javascript:void(0)\"></a>").appendTo(_b);
+if(_3.buttons){
+if($.isArray(_3.buttons)){
+$(_2).siblings("div.dialog-button").remove();
+var _8=$("<div class=\"dialog-button\"></div>").appendTo(_4);
+for(var i=0;i<_3.buttons.length;i++){
+var p=_3.buttons[i];
+var _9=$("<a href=\"javascript:void(0)\"></a>").appendTo(_8);
 if(p.handler){
-_c[0].onclick=p.handler;
+_9[0].onclick=p.handler;
 }
-_c.linkbutton(p);
-}
-}else{
-$(_6.buttons).addClass("dialog-button").appendTo(_5);
-$(_6.buttons).show();
+_9.linkbutton(p);
 }
 }else{
-$(_5).find("div.dialog-button").remove();
+$(_3.buttons).addClass("dialog-button").appendTo(_4);
+$(_3.buttons).show();
 }
-var _d=_6.href;
-var _e=_6.content;
-_6.href=null;
-_6.content=null;
-_7.panel({closed:_6.closed,cache:_6.cache,href:_d,content:_e,onLoad:function(){
-if(_6.height=="auto"){
-$(_5).window("resize");
+}else{
+$(_2).siblings("div.dialog-button").remove();
 }
-_6.onLoad.apply(_5,arguments);
-}});
-$(_5).window($.extend({},_6,{onOpen:function(){
-if(_7.panel("options").closed){
-_7.panel("open");
+_3.inited=true;
+_4.show();
+$(_2).window("resize");
+if(_3.closed){
+_4.hide();
 }
-if(_6.onOpen){
-_6.onOpen.call(_5);
-}
-},onResize:function(_f,_10){
-var _11=$(_5);
-_7.panel("panel").show();
-_7.panel("resize",{width:_11.width(),height:(_10=="auto")?"auto":_11.height()-_11.children("div.dialog-toolbar")._outerHeight()-_11.children("div.dialog-button")._outerHeight()});
-if(_6.onResize){
-_6.onResize.call(_5,_f,_10);
-}
-}}));
-_6.href=_d;
-_6.content=_e;
 };
-function _12(_13,_14){
-var _15=$.data(_13,"dialog").contentPanel;
-_15.panel("refresh",_14);
+function _a(_b,_c){
+var t=$(_b);
+var _d=t.dialog("options");
+var _e=_d.noheader;
+var tb=t.siblings(".dialog-toolbar");
+var bb=t.siblings(".dialog-button");
+tb.insertBefore(_b).css({position:"relative",borderTopWidth:(_e?1:0),top:(_e?tb.length:0)});
+bb.insertAfter(_b).css({position:"relative",top:-1});
+if(!isNaN(parseInt(_d.height))){
+t._outerHeight(t._outerHeight()-tb._outerHeight()-bb._outerHeight());
+}
+tb.add(bb)._outerWidth(t._outerWidth());
+var _f=$.data(_b,"window").shadow;
+if(_f){
+var cc=t.panel("panel");
+_f.css({width:cc._outerWidth(),height:cc._outerHeight()});
+}
 };
-$.fn.dialog=function(_16,_17){
-if(typeof _16=="string"){
-var _18=$.fn.dialog.methods[_16];
-if(_18){
-return _18(this,_17);
+$.fn.dialog=function(_10,_11){
+if(typeof _10=="string"){
+var _12=$.fn.dialog.methods[_10];
+if(_12){
+return _12(this,_11);
 }else{
-return this.window(_16,_17);
+return this.window(_10,_11);
 }
 }
-_16=_16||{};
+_10=_10||{};
 return this.each(function(){
-var _19=$.data(this,"dialog");
-if(_19){
-$.extend(_19.options,_16);
+var _13=$.data(this,"dialog");
+if(_13){
+$.extend(_13.options,_10);
 }else{
-$.data(this,"dialog",{options:$.extend({},$.fn.dialog.defaults,$.fn.dialog.parseOptions(this),_16),contentPanel:_1(this)});
+$.data(this,"dialog",{options:$.extend({},$.fn.dialog.defaults,$.fn.dialog.parseOptions(this),_10)});
 }
-_4(this);
+_1(this);
 });
 };
 $.fn.dialog.methods={options:function(jq){
-var _1a=$.data(jq[0],"dialog").options;
-var _1b=jq.panel("options");
-$.extend(_1a,{closed:_1b.closed,collapsed:_1b.collapsed,minimized:_1b.minimized,maximized:_1b.maximized});
-var _1c=$.data(jq[0],"dialog").contentPanel;
-return _1a;
+var _14=$.data(jq[0],"dialog").options;
+var _15=jq.panel("options");
+$.extend(_14,{width:_15.width,height:_15.height,left:_15.left,top:_15.top,closed:_15.closed,collapsed:_15.collapsed,minimized:_15.minimized,maximized:_15.maximized});
+return _14;
 },dialog:function(jq){
 return jq.window("window");
-},refresh:function(jq,_1d){
-return jq.each(function(){
-_12(this,_1d);
-});
 }};
-$.fn.dialog.parseOptions=function(_1e){
-return $.extend({},$.fn.window.parseOptions(_1e),$.parser.parseOptions(_1e,["toolbar","buttons"]));
+$.fn.dialog.parseOptions=function(_16){
+return $.extend({},$.fn.window.parseOptions(_16),$.parser.parseOptions(_16,["toolbar","buttons"]));
 };
 $.fn.dialog.defaults=$.extend({},$.fn.window.defaults,{title:"New Dialog",collapsible:false,minimizable:false,maximizable:false,resizable:false,toolbar:null,buttons:null});
 })(jQuery);

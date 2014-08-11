@@ -13,7 +13,6 @@
   border: 0;
   margin: 0;
   padding: 0 2px;
-  *margin-top: -1px;
   vertical-align: top;
 }
 .searchbox .searchbox-prompt {
@@ -58,6 +57,18 @@
   -webkit-border-radius: 0 0 0 0;
   border-radius: 0 0 0 0;
 }
+.searchbox .m-btn-active {
+  border-width: 0 1px 0 0;
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+.searchbox .textbox-button-right {
+  border-width: 0 0 0 1px;
+}
+.searchbox .textbox-button-left {
+  border-width: 0 1px 0 0;
+}
 .searchbox-button {
   background: url('images/searchbox_button.png') no-repeat center center;
 }
@@ -72,4 +83,8 @@
 .searchbox .l-btn-plain-disabled:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);
+}
+.textbox-invalid {
+  border-color: #ffa8a8;
+  background-color: #fff3f3;
 }

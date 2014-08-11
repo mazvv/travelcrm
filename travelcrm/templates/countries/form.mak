@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"iso code"), True, "iso_code")}
             </div>
             <div class="ml15">
-                ${h.tags.text("iso_code", item.iso_code if item else None, class_="text w20")}
+                ${h.tags.text("iso_code", item.iso_code if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='iso_code')}
             </div>
         </div>
@@ -21,7 +21,7 @@
                 ${h.tags.title(_(u"name"), True, "name")}
             </div>
             <div class="ml15">
-                ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='name')}
             </div>
         </div>

@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -9,7 +9,7 @@
  */
 (function($){
 $.parser={auto:true,onComplete:function(_1){
-},plugins:["draggable","droppable","resizable","pagination","tooltip","linkbutton","menu","menubutton","splitbutton","progressbar","tree","combobox","combotree","combogrid","numberbox","validatebox","searchbox","numberspinner","timespinner","calendar","datebox","datetimebox","slider","layout","panel","datagrid","propertygrid","treegrid","tabs","accordion","window","dialog"],parse:function(_2){
+},plugins:["draggable","droppable","resizable","pagination","tooltip","linkbutton","menu","menubutton","splitbutton","progressbar","tree","textbox","filebox","combo","combobox","combotree","combogrid","numberbox","validatebox","searchbox","spinner","numberspinner","timespinner","datetimespinner","calendar","datebox","datetimebox","slider","layout","panel","datagrid","propertygrid","treegrid","tabs","accordion","window","dialog","form"],parse:function(_2){
 var aa=[];
 for(var i=0;i<$.parser.plugins.length;i++){
 var _3=$.parser.plugins[i];
@@ -38,110 +38,151 @@ $.parser.onComplete.call($.parser,_2);
 }else{
 $.parser.onComplete.call($.parser,_2);
 }
-},parseOptions:function(_6,_7){
-var t=$(_6);
-var _8={};
+},parseValue:function(_6,_7,_8,_9){
+_9=_9||0;
+var v=$.trim(String(_7||""));
+var _a=v.substr(v.length-1,1);
+if(_a=="%"){
+v=parseInt(v.substr(0,v.length-1));
+if(_6.toLowerCase().indexOf("width")>=0){
+v=Math.floor((_8.width()-_9)*v/100);
+}else{
+v=Math.floor((_8.height()-_9)*v/100);
+}
+}else{
+v=parseInt(v)||undefined;
+}
+return v;
+},parseOptions:function(_b,_c){
+var t=$(_b);
+var _d={};
 var s=$.trim(t.attr("data-options"));
 if(s){
 if(s.substring(0,1)!="{"){
 s="{"+s+"}";
 }
-_8=(new Function("return "+s))();
+_d=(new Function("return "+s))();
 }
-if(_7){
-var _9={};
-for(var i=0;i<_7.length;i++){
-var pp=_7[i];
+$.map(["width","height","left","top","minWidth","maxWidth","minHeight","maxHeight"],function(p){
+var pv=$.trim(_b.style[p]||"");
+if(pv){
+if(pv.indexOf("%")==-1){
+pv=parseInt(pv)||undefined;
+}
+_d[p]=pv;
+}
+});
+if(_c){
+var _e={};
+for(var i=0;i<_c.length;i++){
+var pp=_c[i];
 if(typeof pp=="string"){
-if(pp=="width"||pp=="height"||pp=="left"||pp=="top"){
-_9[pp]=parseInt(_6.style[pp])||undefined;
+_e[pp]=t.attr(pp);
 }else{
-_9[pp]=t.attr(pp);
-}
+for(var _f in pp){
+var _10=pp[_f];
+if(_10=="boolean"){
+_e[_f]=t.attr(_f)?(t.attr(_f)=="true"):undefined;
 }else{
-for(var _a in pp){
-var _b=pp[_a];
-if(_b=="boolean"){
-_9[_a]=t.attr(_a)?(t.attr(_a)=="true"):undefined;
-}else{
-if(_b=="number"){
-_9[_a]=t.attr(_a)=="0"?0:parseFloat(t.attr(_a))||undefined;
+if(_10=="number"){
+_e[_f]=t.attr(_f)=="0"?0:parseFloat(t.attr(_f))||undefined;
 }
 }
 }
 }
 }
-$.extend(_8,_9);
+$.extend(_d,_e);
 }
-return _8;
+return _d;
 }};
 $(function(){
 var d=$("<div style=\"position:absolute;top:-1000px;width:100px;height:100px;padding:5px\"></div>").appendTo("body");
-d.width(100);
-$._boxModel=parseInt(d.width())==100;
+$._boxModel=d.outerWidth()!=100;
 d.remove();
 if(!window.easyloader&&$.parser.auto){
 $.parser.parse();
 }
 });
-$.fn._outerWidth=function(_c){
-if(_c==undefined){
+$.fn._outerWidth=function(_11){
+if(_11==undefined){
 if(this[0]==window){
 return this.width()||document.body.clientWidth;
 }
 return this.outerWidth()||0;
 }
-return this.each(function(){
-if($._boxModel){
-$(this).width(_c-($(this).outerWidth()-$(this).width()));
-}else{
-$(this).width(_c);
-}
-});
+return this._size("width",_11);
 };
-$.fn._outerHeight=function(_d){
-if(_d==undefined){
+$.fn._outerHeight=function(_12){
+if(_12==undefined){
 if(this[0]==window){
 return this.height()||document.body.clientHeight;
 }
 return this.outerHeight()||0;
 }
-return this.each(function(){
-if($._boxModel){
-$(this).height(_d-($(this).outerHeight()-$(this).height()));
-}else{
-$(this).height(_d);
-}
-});
+return this._size("height",_12);
 };
-$.fn._scrollLeft=function(_e){
-if(_e==undefined){
+$.fn._scrollLeft=function(_13){
+if(_13==undefined){
 return this.scrollLeft();
 }else{
 return this.each(function(){
-$(this).scrollLeft(_e);
+$(this).scrollLeft(_13);
 });
 }
 };
 $.fn._propAttr=$.fn.prop||$.fn.attr;
-$.fn._fit=function(_f){
-_f=_f==undefined?true:_f;
-var t=this[0];
-var p=(t.tagName=="BODY"?t:this.parent()[0]);
-var _10=p.fcount||0;
-if(_f){
+$.fn._size=function(_14,_15){
+if(typeof _14=="string"){
+if(_14=="clear"){
+return this.each(function(){
+$(this).css({width:"",minWidth:"",maxWidth:"",height:"",minHeight:"",maxHeight:""});
+});
+}else{
+if(_14=="unfit"){
+return this.each(function(){
+_16(this,$(this).parent(),false);
+});
+}else{
+if(_15==undefined){
+return _17(this[0],_14);
+}else{
+return this.each(function(){
+_17(this,_14,_15);
+});
+}
+}
+}
+}else{
+return this.each(function(){
+_15=_15||$(this).parent();
+$.extend(_14,_16(this,_15,_14.fit)||{});
+var r1=_18(this,"width",_15,_14);
+var r2=_18(this,"height",_15,_14);
+if(r1||r2){
+$(this).addClass("easyui-fluid");
+}else{
+$(this).removeClass("easyui-fluid");
+}
+});
+}
+function _16(_19,_1a,fit){
+var t=$(_19)[0];
+var p=_1a[0];
+var _1b=p.fcount||0;
+if(fit){
 if(!t.fitted){
 t.fitted=true;
-p.fcount=_10+1;
+p.fcount=_1b+1;
 $(p).addClass("panel-noscroll");
 if(p.tagName=="BODY"){
 $("html").addClass("panel-fit");
 }
 }
+return {width:($(p).width()||1),height:($(p).height()||1)};
 }else{
 if(t.fitted){
 t.fitted=false;
-p.fcount=_10-1;
+p.fcount=_1b-1;
 if(p.fcount==0){
 $(p).removeClass("panel-noscroll");
 if(p.tagName=="BODY"){
@@ -149,68 +190,124 @@ $("html").removeClass("panel-fit");
 }
 }
 }
+return false;
 }
-return {width:$(p).width(),height:$(p).height()};
+};
+function _18(_1c,_1d,_1e,_1f){
+var t=$(_1c);
+var p=_1d;
+var p1=p.substr(0,1).toUpperCase()+p.substr(1);
+var min=$.parser.parseValue("min"+p1,_1f["min"+p1],_1e);
+var max=$.parser.parseValue("max"+p1,_1f["max"+p1],_1e);
+var val=$.parser.parseValue(p,_1f[p],_1e);
+var _20=(String(_1f[p]||"").indexOf("%")>=0?true:false);
+if(!isNaN(val)){
+var v=Math.min(Math.max(val,min||0),max||99999);
+if(!_20){
+_1f[p]=v;
+}
+t._size("min"+p1,"");
+t._size("max"+p1,"");
+t._size(p,v);
+}else{
+t._size(p,"");
+t._size("min"+p1,min);
+t._size("max"+p1,max);
+}
+return _20||_1f.fit;
+};
+function _17(_21,_22,_23){
+var t=$(_21);
+if(_23==undefined){
+_23=parseInt(_21.style[_22]);
+if(isNaN(_23)){
+return undefined;
+}
+if($._boxModel){
+_23+=_24();
+}
+return _23;
+}else{
+if(_23===""){
+t.css(_22,"");
+}else{
+if($._boxModel){
+_23-=_24();
+if(_23<0){
+_23=0;
+}
+}
+t.css(_22,_23+"px");
+}
+}
+function _24(){
+if(_22.toLowerCase().indexOf("width")>=0){
+return t.outerWidth()-t.width();
+}else{
+return t.outerHeight()-t.height();
+}
+};
+};
 };
 })(jQuery);
 (function($){
-var _11=null;
-var _12=null;
-var _13=false;
-function _14(e){
+var _25=null;
+var _26=null;
+var _27=false;
+function _28(e){
 if(e.touches.length!=1){
 return;
 }
-if(!_13){
-_13=true;
+if(!_27){
+_27=true;
 dblClickTimer=setTimeout(function(){
-_13=false;
+_27=false;
 },500);
 }else{
 clearTimeout(dblClickTimer);
-_13=false;
-_15(e,"dblclick");
+_27=false;
+_29(e,"dblclick");
 }
-_11=setTimeout(function(){
-_15(e,"contextmenu",3);
+_25=setTimeout(function(){
+_29(e,"contextmenu",3);
 },1000);
-_15(e,"mousedown");
+_29(e,"mousedown");
 if($.fn.draggable.isDragging||$.fn.resizable.isResizing){
 e.preventDefault();
 }
 };
-function _16(e){
+function _2a(e){
 if(e.touches.length!=1){
 return;
 }
-if(_11){
-clearTimeout(_11);
+if(_25){
+clearTimeout(_25);
 }
-_15(e,"mousemove");
+_29(e,"mousemove");
 if($.fn.draggable.isDragging||$.fn.resizable.isResizing){
 e.preventDefault();
 }
 };
-function _17(e){
-if(_11){
-clearTimeout(_11);
+function _2b(e){
+if(_25){
+clearTimeout(_25);
 }
-_15(e,"mouseup");
+_29(e,"mouseup");
 if($.fn.draggable.isDragging||$.fn.resizable.isResizing){
 e.preventDefault();
 }
 };
-function _15(e,_18,_19){
-var _1a=new $.Event(_18);
-_1a.pageX=e.changedTouches[0].pageX;
-_1a.pageY=e.changedTouches[0].pageY;
-_1a.which=_19||1;
-$(e.target).trigger(_1a);
+function _29(e,_2c,_2d){
+var _2e=new $.Event(_2c);
+_2e.pageX=e.changedTouches[0].pageX;
+_2e.pageY=e.changedTouches[0].pageY;
+_2e.which=_2d||1;
+$(e.target).trigger(_2e);
 };
 if(document.addEventListener){
-document.addEventListener("touchstart",_14,true);
-document.addEventListener("touchmove",_16,true);
-document.addEventListener("touchend",_17,true);
+document.addEventListener("touchstart",_28,true);
+document.addEventListener("touchmove",_2a,true);
+document.addEventListener("touchend",_2b,true);
 }
 })(jQuery);
 

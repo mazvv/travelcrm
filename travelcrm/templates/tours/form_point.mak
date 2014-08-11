@@ -75,7 +75,7 @@
                 ${h.tags.title(_(u"description"), False, "description")}
             </div>
             <div class="ml15">
-                ${h.tags.textarea('description', item.description if item else None, class_="text w20", rows=5)}
+                ${h.tags.text('description', item.description if item else None, class_="easyui-textbox w20", data_options="multiline:true,height:80")}
                 ${h.common.error_container(name='description')}
             </div>
         </div>

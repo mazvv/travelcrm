@@ -14,7 +14,7 @@
 		                ${h.tags.title(_(u"title"), True, "title")}
 		            </div>
 		            <div class="ml15">
-		                ${h.tags.text("title", item.title if item else None, class_="text w20")}
+		                ${h.tags.text("title", item.title if item else None, class_="easyui-textbox w20")}
 		                ${h.common.error_container(name='title')}
 		            </div>
 		        </div>
@@ -67,7 +67,7 @@
             </div>
             <div title="${_(u'Description')}">
                 ${h.tags.textarea('descr', item.descr if item else None, id="task-rich-text-editor")}
-                <script type="text/javascript">
+                <script type="easyui-textbox/javascript">
                     $('#task-rich-text-editor').jqte({"format":false});
                 </script>               
             </div>

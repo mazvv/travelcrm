@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -18,6 +18,12 @@
 	function init(target){
 		$(target).addClass('progressbar');
 		$(target).html('<div class="progressbar-text"></div><div class="progressbar-value"><div class="progressbar-text"></div></div>');
+		$(target).bind('_resize', function(e,force){
+			if ($(this).hasClass('easyui-fluid') || force){
+				setSize(target);
+			}
+			return false;
+		});
 		return $(target);
 	}
 	
@@ -25,9 +31,9 @@
 		var opts = $.data(target, 'progressbar').options;
 		var bar = $.data(target, 'progressbar').bar;
 		if (width) opts.width = width;
-		bar._outerWidth(opts.width)._outerHeight(opts.height);
+		bar._size(opts);
 		
-		bar.find('div.progressbar-text').width(bar.width());
+		bar.find('div.progressbar-text').css('width', bar.width());
 		bar.find('div.progressbar-text,div.progressbar-value').css({
 			height: bar.height()+'px',
 			lineHeight: bar.height()+'px'

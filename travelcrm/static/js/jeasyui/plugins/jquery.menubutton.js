@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -18,7 +18,7 @@ var _5=_4.find(".l-btn-left");
 $("<span></span>").addClass(_3.cls.arrow).appendTo(_5);
 $("<span></span>").addClass("m-btn-line").appendTo(_5);
 if(_3.menu){
-$(_3.menu).menu();
+$(_3.menu).menu({duration:_3.duration});
 var _6=$(_3.menu).menu("options");
 var _7=_6.onShow;
 var _8=_6.onHide;
@@ -36,36 +36,37 @@ _d.removeClass((_e.plain==true)?_e.cls.btn2:_e.cls.btn1);
 _8.call(this);
 }});
 }
-_f(_2,_3.disabled);
 };
-function _f(_10,_11){
-var _12=$.data(_10,"menubutton").options;
-_12.disabled=_11;
+function _f(_10){
+var _11=$.data(_10,"menubutton").options;
 var btn=$(_10);
-var t=btn.find("."+_12.cls.trigger);
+var t=btn.find("."+_11.cls.trigger);
 if(!t.length){
 t=btn;
 }
 t.unbind(".menubutton");
-if(_11){
-btn.linkbutton("disable");
-}else{
-btn.linkbutton("enable");
-var _13=null;
+var _12=null;
 t.bind("click.menubutton",function(){
+if(!_13()){
 _14(_10);
 return false;
+}
 }).bind("mouseenter.menubutton",function(){
-_13=setTimeout(function(){
+if(!_13()){
+_12=setTimeout(function(){
 _14(_10);
-},_12.duration);
+},_11.duration);
 return false;
+}
 }).bind("mouseleave.menubutton",function(){
-if(_13){
-clearTimeout(_13);
+if(_12){
+clearTimeout(_12);
 }
+$(_11.menu).triggerHandler("mouseleave");
 });
-}
+function _13(){
+return $(_10).linkbutton("options").disabled;
+};
 };
 function _14(_15){
 var _16=$.data(_15,"menubutton").options;
@@ -100,34 +101,24 @@ $.data(this,"menubutton",{options:$.extend({},$.fn.menubutton.defaults,$.fn.menu
 $(this).removeAttr("disabled");
 }
 _1(this);
+_f(this);
 });
 };
 $.fn.menubutton.methods={options:function(jq){
 var _1b=jq.linkbutton("options");
-var _1c=$.data(jq[0],"menubutton").options;
-_1c.toggle=_1b.toggle;
-_1c.selected=_1b.selected;
-return _1c;
-},enable:function(jq){
-return jq.each(function(){
-_f(this,false);
-});
-},disable:function(jq){
-return jq.each(function(){
-_f(this,true);
-});
+return $.extend($.data(jq[0],"menubutton").options,{toggle:_1b.toggle,selected:_1b.selected,disabled:_1b.disabled});
 },destroy:function(jq){
 return jq.each(function(){
-var _1d=$(this).menubutton("options");
-if(_1d.menu){
-$(_1d.menu).menu("destroy");
+var _1c=$(this).menubutton("options");
+if(_1c.menu){
+$(_1c.menu).menu("destroy");
 }
 $(this).remove();
 });
 }};
-$.fn.menubutton.parseOptions=function(_1e){
-var t=$(_1e);
-return $.extend({},$.fn.linkbutton.parseOptions(_1e),$.parser.parseOptions(_1e,["menu",{plain:"boolean",duration:"number"}]));
+$.fn.menubutton.parseOptions=function(_1d){
+var t=$(_1d);
+return $.extend({},$.fn.linkbutton.parseOptions(_1d),$.parser.parseOptions(_1d,["menu",{plain:"boolean",duration:"number"}]));
 };
 $.fn.menubutton.defaults=$.extend({},$.fn.linkbutton.defaults,{plain:true,menu:null,menuAlign:"left",duration:100,cls:{btn1:"m-btn-active",btn2:"m-btn-plain-active",arrow:"m-btn-downarrow",trigger:"m-btn"}});
 })(jQuery);

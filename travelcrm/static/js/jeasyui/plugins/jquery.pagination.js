@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -144,6 +144,10 @@ _18.pageNumber=1;
 if(_18.pageNumber>_19){
 _18.pageNumber=_19;
 }
+if(_18.total==0){
+_18.pageNumber=0;
+_19=0;
+}
 if(bb.num){
 bb.num.val(_18.pageNumber);
 }
@@ -183,10 +187,10 @@ _1c=_1c.replace(/{to}/,Math.min(_18.pageSize*(_18.pageNumber),_18.total));
 _1c=_1c.replace(/{total}/,_18.total);
 $(_15).find("div.pagination-info").html(_1c);
 if(bb.first){
-bb.first.linkbutton({disabled:(_18.pageNumber==1)});
+bb.first.linkbutton({disabled:((!_18.total)||_18.pageNumber==1)});
 }
 if(bb.prev){
-bb.prev.linkbutton({disabled:(_18.pageNumber==1)});
+bb.prev.linkbutton({disabled:((!_18.total)||_18.pageNumber==1)});
 }
 if(bb.next){
 bb.next.linkbutton({disabled:(_18.pageNumber==_19)});

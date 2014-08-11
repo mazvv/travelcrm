@@ -1,7 +1,7 @@
 ${h.tags.Doctype().html5()}
 <html>
     <head>        
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="easyui-textbox/html; charset=utf-8" />
         <title>${_(u"TravelCRM - login")}</title>
         <link rel="icon" type="image/ico" href="${request.static_url('travelcrm:static/css/img/favicon.ico')}"/>
         ${h.tags.stylesheet_link(

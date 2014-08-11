@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -16,31 +16,27 @@
  */
 (function($){
 	
-	function setSize(container){
+	function setSize(container, param){
 		var state = $.data(container, 'accordion');
 		var opts = state.options;
 		var panels = state.panels;
-		
 		var cc = $(container);
-		opts.fit ? $.extend(opts, cc._fit()) : cc._fit(false);
 		
-		if (!isNaN(opts.width)){
-			cc._outerWidth(opts.width);
-		} else {
-			cc.css('width', '');
+		if (param){
+			$.extend(opts, {
+				width: param.width,
+				height: param.height
+			});
 		}
-		
+		cc._size(opts);
 		var headerHeight = 0;
 		var bodyHeight = 'auto';
 		var headers = cc.find('>div.panel>div.accordion-header');
 		if (headers.length){
 			headerHeight = $(headers[0]).css('height', '')._outerHeight();
 		}
-		if (!isNaN(opts.height)){
-			cc._outerHeight(opts.height);
+		if (!isNaN(parseInt(opts.height))){
 			bodyHeight = cc.height() - headerHeight*headers.length;
-		} else {
-			cc.css('height', '');
 		}
 		
 		_resize(true, bodyHeight - _resize(false) + 1);
@@ -56,7 +52,7 @@
 						width: cc.width(),
 						height: (collapsible ? pheight : undefined)
 					});
-					totalHeight += p.panel('panel').outerHeight()-headerHeight;
+					totalHeight += p.panel('panel').outerHeight()-headerHeight*h.length;
 				}
 			}
 			return totalHeight;
@@ -145,8 +141,7 @@
 		});
 		
 		cc.bind('_resize', function(e,force){
-			var opts = $.data(container, 'accordion').options;
-			if (opts.fit == true || force){
+			if ($(this).hasClass('easyui-fluid') || force){
 				setSize(container);
 			}
 			return false;
@@ -320,7 +315,6 @@
 		}
 		
 		options = options || {};
-		
 		return this.each(function(){
 			var state = $.data(this, 'accordion');
 			if (state){
@@ -347,9 +341,9 @@
 		panels: function(jq){
 			return $.data(jq[0], 'accordion').panels;
 		},
-		resize: function(jq){
+		resize: function(jq, param){
 			return jq.each(function(){
-				setSize(this);
+				setSize(this, param);
 			});
 		},
 		getSelections: function(jq){

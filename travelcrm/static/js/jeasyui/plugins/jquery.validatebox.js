@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -22,126 +22,148 @@ $(_4).unbind();
 $(_4).remove();
 };
 function _6(_7){
-var _8=$(_7);
-var _9=$.data(_7,"validatebox");
-_8.unbind(".validatebox");
-if(_9.options.novalidate){
+var _8=$.data(_7,"validatebox").options;
+var _9=$(_7);
+_9.unbind(".validatebox");
+if(_8.novalidate||_9.is(":disabled")){
 return;
 }
-_8.bind("focus.validatebox",function(){
-_9.validating=true;
-_9.value=undefined;
-(function(){
-if(_9.validating){
-if(_9.value!=_8.val()){
-_9.value=_8.val();
-if(_9.timer){
-clearTimeout(_9.timer);
+for(var _a in _8.events){
+$(_7).bind(_a+".validatebox",{target:_7},_8.events[_a]);
 }
-_9.timer=setTimeout(function(){
-$(_7).validatebox("validate");
-},_9.options.delay);
+};
+function _b(e){
+var _c=e.data.target;
+var _d=$.data(_c,"validatebox");
+var _e=$(_c);
+if($(_c).attr("readonly")){
+return;
+}
+_d.validating=true;
+_d.value=undefined;
+(function(){
+if(_d.validating){
+if(_d.value!=_e.val()){
+_d.value=_e.val();
+if(_d.timer){
+clearTimeout(_d.timer);
+}
+_d.timer=setTimeout(function(){
+$(_c).validatebox("validate");
+},_d.options.delay);
 }else{
-_f(_7);
+_f(_c);
 }
 setTimeout(arguments.callee,200);
 }
 })();
-}).bind("blur.validatebox",function(){
-if(_9.timer){
-clearTimeout(_9.timer);
-_9.timer=undefined;
-}
-_9.validating=false;
-_a(_7);
-}).bind("mouseenter.validatebox",function(){
-if(_8.hasClass("validatebox-invalid")){
-_b(_7);
-}
-}).bind("mouseleave.validatebox",function(){
-if(!_9.validating){
-_a(_7);
-}
-});
 };
-function _b(_c){
-var _d=$.data(_c,"validatebox");
-var _e=_d.options;
-$(_c).tooltip($.extend({},_e.tipOptions,{content:_d.message,position:_e.tipPosition,deltaX:_e.deltaX})).tooltip("show");
-_d.tip=true;
+function _10(e){
+var _11=e.data.target;
+var _12=$.data(_11,"validatebox");
+if(_12.timer){
+clearTimeout(_12.timer);
+_12.timer=undefined;
+}
+_12.validating=false;
+_13(_11);
 };
-function _f(_10){
-var _11=$.data(_10,"validatebox");
-if(_11&&_11.tip){
-$(_10).tooltip("reposition");
+function _14(e){
+var _15=e.data.target;
+if($(_15).hasClass("validatebox-invalid")){
+_16(_15);
 }
 };
-function _a(_12){
-var _13=$.data(_12,"validatebox");
-_13.tip=false;
-$(_12).tooltip("hide");
+function _17(e){
+var _18=e.data.target;
+var _19=$.data(_18,"validatebox");
+if(!_19.validating){
+_13(_18);
+}
 };
-function _14(_15){
-var _16=$.data(_15,"validatebox");
-var _17=_16.options;
-var box=$(_15);
-var _18=box.val();
-function _19(msg){
-_16.message=msg;
+function _16(_1a){
+var _1b=$.data(_1a,"validatebox");
+var _1c=_1b.options;
+$(_1a).tooltip($.extend({},_1c.tipOptions,{content:_1b.message,position:_1c.tipPosition,deltaX:_1c.deltaX})).tooltip("show");
+_1b.tip=true;
 };
-function _1a(_1b,_1c){
-var _1d=/([a-zA-Z_]+)(.*)/.exec(_1b);
-var _1e=_17.rules[_1d[1]];
-if(_1e&&_18){
-var _1f=_1c||_17.validParams||eval(_1d[2]);
-if(!_1e["validator"].call(_15,_18,_1f)){
+function _f(_1d){
+var _1e=$.data(_1d,"validatebox");
+if(_1e&&_1e.tip){
+$(_1d).tooltip("reposition");
+}
+};
+function _13(_1f){
+var _20=$.data(_1f,"validatebox");
+_20.tip=false;
+$(_1f).tooltip("hide");
+};
+function _21(_22){
+var _23=$.data(_22,"validatebox");
+var _24=_23.options;
+var box=$(_22);
+_24.onBeforeValidate.call(_22);
+var _25=_26();
+_24.onValidate.call(_22,_25);
+return _25;
+function _27(msg){
+_23.message=msg;
+};
+function _28(_29,_2a){
+var _2b=box.val();
+var _2c=/([a-zA-Z_]+)(.*)/.exec(_29);
+var _2d=_24.rules[_2c[1]];
+if(_2d&&_2b){
+var _2e=_2a||_24.validParams||eval(_2c[2]);
+if(!_2d["validator"].call(_22,_2b,_2e)){
 box.addClass("validatebox-invalid");
-var _20=_1e["message"];
-if(_1f){
-for(var i=0;i<_1f.length;i++){
-_20=_20.replace(new RegExp("\\{"+i+"\\}","g"),_1f[i]);
+var _2f=_2d["message"];
+if(_2e){
+for(var i=0;i<_2e.length;i++){
+_2f=_2f.replace(new RegExp("\\{"+i+"\\}","g"),_2e[i]);
 }
 }
-_19(_17.invalidMessage||_20);
-if(_16.validating){
-_b(_15);
+_27(_24.invalidMessage||_2f);
+if(_23.validating){
+_16(_22);
 }
 return false;
 }
 }
 return true;
 };
+function _26(){
 box.removeClass("validatebox-invalid");
-_a(_15);
-if(_17.novalidate||box.is(":disabled")){
+_13(_22);
+if(_24.novalidate||box.is(":disabled")){
 return true;
 }
-if(_17.required){
-if(_18==""){
+if(_24.required){
+if(box.val()==""){
 box.addClass("validatebox-invalid");
-_19(_17.missingMessage);
-if(_16.validating){
-_b(_15);
+_27(_24.missingMessage);
+if(_23.validating){
+_16(_22);
 }
 return false;
 }
 }
-if(_17.validType){
-if($.isArray(_17.validType)){
-for(var i=0;i<_17.validType.length;i++){
-if(!_1a(_17.validType[i])){
+if(_24.validType){
+if($.isArray(_24.validType)){
+for(var i=0;i<_24.validType.length;i++){
+if(!_28(_24.validType[i])){
 return false;
 }
 }
 }else{
-if(typeof _17.validType=="string"){
-if(!_1a(_17.validType)){
+if(typeof _24.validType=="string"){
+if(!_28(_24.validType)){
 return false;
 }
 }else{
-for(var _21 in _17.validType){
-var _22=_17.validType[_21];
-if(!_1a(_21,_22)){
+for(var _30 in _24.validType){
+var _31=_24.validType[_30];
+if(!_28(_30,_31)){
 return false;
 }
 }
@@ -150,32 +172,34 @@ return false;
 }
 return true;
 };
-function _23(_24,_25){
-var _26=$.data(_24,"validatebox").options;
-if(_25!=undefined){
-_26.novalidate=_25;
-}
-if(_26.novalidate){
-$(_24).removeClass("validatebox-invalid");
-_a(_24);
-}
-_6(_24);
 };
-$.fn.validatebox=function(_27,_28){
-if(typeof _27=="string"){
-return $.fn.validatebox.methods[_27](this,_28);
+function _32(_33,_34){
+var _35=$.data(_33,"validatebox").options;
+if(_34!=undefined){
+_35.novalidate=_34;
 }
-_27=_27||{};
+if(_35.novalidate){
+$(_33).removeClass("validatebox-invalid");
+_13(_33);
+}
+_21(_33);
+_6(_33);
+};
+$.fn.validatebox=function(_36,_37){
+if(typeof _36=="string"){
+return $.fn.validatebox.methods[_36](this,_37);
+}
+_36=_36||{};
 return this.each(function(){
-var _29=$.data(this,"validatebox");
-if(_29){
-$.extend(_29.options,_27);
+var _38=$.data(this,"validatebox");
+if(_38){
+$.extend(_38.options,_36);
 }else{
 _1(this);
-$.data(this,"validatebox",{options:$.extend({},$.fn.validatebox.defaults,$.fn.validatebox.parseOptions(this),_27)});
+$.data(this,"validatebox",{options:$.extend({},$.fn.validatebox.defaults,$.fn.validatebox.parseOptions(this),_36)});
 }
-_23(this);
-_14(this);
+_32(this);
+_21(this);
 });
 };
 $.fn.validatebox.methods={options:function(jq){
@@ -186,39 +210,46 @@ _3(this);
 });
 },validate:function(jq){
 return jq.each(function(){
-_14(this);
+_21(this);
 });
 },isValid:function(jq){
-return _14(jq[0]);
+return _21(jq[0]);
 },enableValidation:function(jq){
 return jq.each(function(){
-_23(this,false);
+_32(this,false);
 });
 },disableValidation:function(jq){
 return jq.each(function(){
-_23(this,true);
+_32(this,true);
 });
 }};
-$.fn.validatebox.parseOptions=function(_2a){
-var t=$(_2a);
-return $.extend({},$.parser.parseOptions(_2a,["validType","missingMessage","invalidMessage","tipPosition",{delay:"number",deltaX:"number"}]),{required:(t.attr("required")?true:undefined),novalidate:(t.attr("novalidate")!=undefined?true:undefined)});
+$.fn.validatebox.parseOptions=function(_39){
+var t=$(_39);
+return $.extend({},$.parser.parseOptions(_39,["validType","missingMessage","invalidMessage","tipPosition",{delay:"number",deltaX:"number"}]),{required:(t.attr("required")?true:undefined),novalidate:(t.attr("novalidate")!=undefined?true:undefined)});
 };
-$.fn.validatebox.defaults={required:false,validType:null,validParams:null,delay:200,missingMessage:"This field is required.",invalidMessage:null,tipPosition:"right",deltaX:0,novalidate:false,tipOptions:{showEvent:"none",hideEvent:"none",showDelay:0,hideDelay:0,zIndex:"",onShow:function(){
+$.fn.validatebox.defaults={required:false,validType:null,validParams:null,delay:200,missingMessage:"This field is required.",invalidMessage:null,tipPosition:"right",deltaX:0,novalidate:false,events:{focus:_b,blur:_10,mouseenter:_14,mouseleave:_17,click:function(e){
+var t=$(e.data.target);
+if(!t.is(":focus")){
+t.trigger("focus");
+}
+}},tipOptions:{showEvent:"none",hideEvent:"none",showDelay:0,hideDelay:0,zIndex:"",onShow:function(){
 $(this).tooltip("tip").css({color:"#000",borderColor:"#CC9933",backgroundColor:"#FFFFCC"});
 },onHide:function(){
 $(this).tooltip("destroy");
-}},rules:{email:{validator:function(_2b){
-return /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i.test(_2b);
-},message:"Please enter a valid email address."},url:{validator:function(_2c){
-return /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(_2c);
-},message:"Please enter a valid URL."},length:{validator:function(_2d,_2e){
-var len=$.trim(_2d).length;
-return len>=_2e[0]&&len<=_2e[1];
-},message:"Please enter a value between {0} and {1}."},remote:{validator:function(_2f,_30){
-var _31={};
-_31[_30[1]]=_2f;
-var _32=$.ajax({url:_30[0],dataType:"json",data:_31,async:false,cache:false,type:"post"}).responseText;
-return _32=="true";
-},message:"Please fix this field."}}};
+}},rules:{email:{validator:function(_3a){
+return /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i.test(_3a);
+},message:"Please enter a valid email address."},url:{validator:function(_3b){
+return /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(_3b);
+},message:"Please enter a valid URL."},length:{validator:function(_3c,_3d){
+var len=$.trim(_3c).length;
+return len>=_3d[0]&&len<=_3d[1];
+},message:"Please enter a value between {0} and {1}."},remote:{validator:function(_3e,_3f){
+var _40={};
+_40[_3f[1]]=_3e;
+var _41=$.ajax({url:_3f[0],dataType:"json",data:_40,async:false,cache:false,type:"post"}).responseText;
+return _41=="true";
+},message:"Please fix this field."}},onBeforeValidate:function(){
+},onValidate:function(_42){
+}};
 })(jQuery);
 

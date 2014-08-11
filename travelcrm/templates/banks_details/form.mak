@@ -30,7 +30,7 @@
                 ${h.tags.title(_(u"beneficiary"), True, "beneficiary")}
             </div>
             <div class="ml15">
-                ${h.tags.text("beneficiary", item.beneficiary if item else None, class_="text w20")}
+                ${h.tags.text("beneficiary", item.beneficiary if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='beneficiary')}
             </div>
         </div>
@@ -39,7 +39,7 @@
                 ${h.tags.title(_(u"account"), True, "account")}
             </div>
             <div class="ml15">
-                ${h.tags.text("account", item.account if item else None, class_="text w20")}
+                ${h.tags.text("account", item.account if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='account')}
             </div>
         </div>
@@ -48,7 +48,7 @@
                 ${h.tags.title(_(u"swift code"), True, "swift_code")}
             </div>
             <div class="ml15">
-                ${h.tags.text("swift_code", item.swift_code if item else None, class_="text w20")}
+                ${h.tags.text("swift_code", item.swift_code if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='swift_code')}
             </div>
         </div>

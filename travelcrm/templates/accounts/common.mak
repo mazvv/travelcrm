@@ -6,7 +6,7 @@
         _tb_id = "tb-%s" % _id
     %>
     % if can_edit:
-    <script type="text/javascript">
+    <script type="easyui-textbox/javascript">
         function add_${_func_id}(input_id){
             var id = $('#' + input_id).combogrid('getValue');
             if(is_int(id)){
@@ -27,7 +27,7 @@
         }
     </script>
     % endif
-    <script type="text/javascript">
+    <script type="easyui-textbox/javascript">
         function formatter_${_func_id}(index, row){
             var html = '<table width="100%" class="grid-details">';
             if(row.display_text){

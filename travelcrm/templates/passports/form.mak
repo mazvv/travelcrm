@@ -21,7 +21,7 @@
                 ${h.tags.title(_(u"passport num"), True, "num")}
             </div>
             <div class="ml15">
-                ${h.tags.text("num", item.num if item else None, class_="text w20")}
+                ${h.tags.text("num", item.num if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='num')}
             </div>
         </div>
@@ -48,7 +48,7 @@
                 ${h.tags.title(_(u"description"), False, "descr")}
             </div>
             <div class="ml15">
-                ${h.tags.textarea('descr', item.descr if item else None, class_="text w20", rows=5)}
+                ${h.tags.text('descr', item.descr if item else None, class_="easyui-textbox w20", data_options="multiline:true,height:80")}
                 ${h.common.error_container(name='descr')}
             </div>
         </div>

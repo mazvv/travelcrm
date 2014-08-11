@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -9,163 +9,66 @@
  */
 (function($){
 function _1(_2){
-var _3=$("<span class=\"spinner\">"+"<span class=\"spinner-arrow\">"+"<span class=\"spinner-arrow-up\"></span>"+"<span class=\"spinner-arrow-down\"></span>"+"</span>"+"</span>").insertAfter(_2);
-$(_2).addClass("spinner-text spinner-f").prependTo(_3);
-return _3;
+var _3=$.data(_2,"spinner");
+var _4=_3.options;
+var _5=$.extend(true,[],_4.icons);
+_5.push({iconCls:"spinner-arrow",handler:function(e){
+_6(e);
+}});
+$(_2).addClass("spinner-f").textbox($.extend({},_4,{icons:_5}));
+var _7=$(_2).textbox("getIcon",_5.length-1);
+_7.append("<a href=\"javascript:void(0)\" class=\"spinner-arrow-up\"></a>");
+_7.append("<a href=\"javascript:void(0)\" class=\"spinner-arrow-down\"></a>");
+$(_2).attr("spinnerName",$(_2).attr("textboxName"));
+_3.spinner=$(_2).next();
+_3.spinner.addClass("spinner");
 };
-function _4(_5,_6){
-var _7=$.data(_5,"spinner").options;
-var _8=$.data(_5,"spinner").spinner;
-if(_6){
-_7.width=_6;
+function _6(e){
+var _8=e.data.target;
+var _9=$(_8).spinner("options");
+var up=$(e.target).closest("a.spinner-arrow-up");
+if(up.length){
+_9.spin.call(_8,false);
+_9.onSpinUp.call(_8);
+$(_8).spinner("validate");
 }
-var _9=$("<div style=\"display:none\"></div>").insertBefore(_8);
-_8.appendTo("body");
-if(isNaN(_7.width)){
-_7.width=$(_5).outerWidth();
-}
-var _a=_8.find(".spinner-arrow");
-_8._outerWidth(_7.width)._outerHeight(_7.height);
-$(_5)._outerWidth(_8.width()-_a.outerWidth());
-$(_5).css({height:_8.height()+"px",lineHeight:_8.height()+"px"});
-_a._outerHeight(_8.height());
-_a.find("span")._outerHeight(_a.height()/2);
-_8.insertAfter(_9);
-_9.remove();
-};
-function _b(_c){
-var _d=$.data(_c,"spinner").options;
-var _e=$.data(_c,"spinner").spinner;
-$(_c).unbind(".spinner");
-_e.find(".spinner-arrow-up,.spinner-arrow-down").unbind(".spinner");
-if(!_d.disabled&&!_d.readonly){
-_e.find(".spinner-arrow-up").bind("mouseenter.spinner",function(){
-$(this).addClass("spinner-arrow-hover");
-}).bind("mouseleave.spinner",function(){
-$(this).removeClass("spinner-arrow-hover");
-}).bind("click.spinner",function(){
-_d.spin.call(_c,false);
-_d.onSpinUp.call(_c);
-$(_c).validatebox("validate");
-});
-_e.find(".spinner-arrow-down").bind("mouseenter.spinner",function(){
-$(this).addClass("spinner-arrow-hover");
-}).bind("mouseleave.spinner",function(){
-$(this).removeClass("spinner-arrow-hover");
-}).bind("click.spinner",function(){
-_d.spin.call(_c,true);
-_d.onSpinDown.call(_c);
-$(_c).validatebox("validate");
-});
-$(_c).bind("change.spinner",function(){
-$(this).spinner("setValue",$(this).val());
-});
+var _a=$(e.target).closest("a.spinner-arrow-down");
+if(_a.length){
+_9.spin.call(_8,true);
+_9.onSpinDown.call(_8);
+$(_8).spinner("validate");
 }
 };
-function _f(_10,_11){
-var _12=$.data(_10,"spinner").options;
-if(_11){
-_12.disabled=true;
-$(_10).attr("disabled",true);
+$.fn.spinner=function(_b,_c){
+if(typeof _b=="string"){
+var _d=$.fn.spinner.methods[_b];
+if(_d){
+return _d(this,_c);
 }else{
-_12.disabled=false;
-$(_10).removeAttr("disabled");
-}
-};
-function _13(_14,_15){
-var _16=$.data(_14,"spinner");
-var _17=_16.options;
-_17.readonly=_15==undefined?true:_15;
-var _18=_17.readonly?true:(!_17.editable);
-$(_14).attr("readonly",_18).css("cursor",_18?"pointer":"");
-};
-$.fn.spinner=function(_19,_1a){
-if(typeof _19=="string"){
-var _1b=$.fn.spinner.methods[_19];
-if(_1b){
-return _1b(this,_1a);
-}else{
-return this.validatebox(_19,_1a);
+return this.textbox(_b,_c);
 }
 }
-_19=_19||{};
+_b=_b||{};
 return this.each(function(){
-var _1c=$.data(this,"spinner");
-if(_1c){
-$.extend(_1c.options,_19);
+var _e=$.data(this,"spinner");
+if(_e){
+$.extend(_e.options,_b);
 }else{
-_1c=$.data(this,"spinner",{options:$.extend({},$.fn.spinner.defaults,$.fn.spinner.parseOptions(this),_19),spinner:_1(this)});
-$(this).removeAttr("disabled");
+_e=$.data(this,"spinner",{options:$.extend({},$.fn.spinner.defaults,$.fn.spinner.parseOptions(this),_b)});
 }
-_1c.options.originalValue=_1c.options.value;
-$(this).val(_1c.options.value);
-_f(this,_1c.options.disabled);
-_13(this,_1c.options.readonly);
-_4(this);
-$(this).validatebox(_1c.options);
-_b(this);
+_1(this);
 });
 };
 $.fn.spinner.methods={options:function(jq){
-var _1d=$.data(jq[0],"spinner").options;
-return $.extend(_1d,{value:jq.val()});
-},destroy:function(jq){
-return jq.each(function(){
-var _1e=$.data(this,"spinner").spinner;
-$(this).validatebox("destroy");
-_1e.remove();
-});
-},resize:function(jq,_1f){
-return jq.each(function(){
-_4(this,_1f);
-});
-},enable:function(jq){
-return jq.each(function(){
-_f(this,false);
-_b(this);
-});
-},disable:function(jq){
-return jq.each(function(){
-_f(this,true);
-_b(this);
-});
-},readonly:function(jq,_20){
-return jq.each(function(){
-_13(this,_20);
-_b(this);
-});
-},getValue:function(jq){
-return jq.val();
-},setValue:function(jq,_21){
-return jq.each(function(){
-var _22=$.data(this,"spinner").options;
-var _23=_22.value;
-_22.value=_21;
-$(this).val(_21);
-if(_23!=_21){
-_22.onChange.call(this,_21,_23);
-}
-});
-},clear:function(jq){
-return jq.each(function(){
-var _24=$.data(this,"spinner").options;
-_24.value="";
-$(this).val("");
-});
-},reset:function(jq){
-return jq.each(function(){
-var _25=$(this).spinner("options");
-$(this).spinner("setValue",_25.originalValue);
-});
+var _f=jq.textbox("options");
+return $.extend($.data(jq[0],"spinner").options,{width:_f.width,value:_f.value,originalValue:_f.originalValue,disabled:_f.disabled,readonly:_f.readonly});
 }};
-$.fn.spinner.parseOptions=function(_26){
-var t=$(_26);
-return $.extend({},$.fn.validatebox.parseOptions(_26),$.parser.parseOptions(_26,["width","height","min","max",{increment:"number",editable:"boolean"}]),{value:(t.val()||undefined),disabled:(t.attr("disabled")?true:undefined),readonly:(t.attr("readonly")?true:undefined)});
+$.fn.spinner.parseOptions=function(_10){
+return $.extend({},$.fn.textbox.parseOptions(_10),$.parser.parseOptions(_10,["min","max",{increment:"number"}]));
 };
-$.fn.spinner.defaults=$.extend({},$.fn.validatebox.defaults,{width:"auto",height:22,deltaX:19,value:"",min:null,max:null,increment:1,editable:true,disabled:false,readonly:false,spin:function(_27){
+$.fn.spinner.defaults=$.extend({},$.fn.textbox.defaults,{min:null,max:null,increment:1,spin:function(_11){
 },onSpinUp:function(){
 },onSpinDown:function(){
-},onChange:function(_28,_29){
 }});
 })(jQuery);
 

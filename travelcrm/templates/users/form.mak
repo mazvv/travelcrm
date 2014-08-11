@@ -22,7 +22,7 @@
                 ${h.tags.title(_(u"username"), False, "username")}
             </div>
             <div class="ml15">
-                ${h.tags.text("username", item.username if item else None, class_="text w20")}
+                ${h.tags.text("username", item.username if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='username')}
             </div>
         </div>
@@ -34,7 +34,7 @@
                 ${h.tags.title(_(u"password"), False if item else True, "password")}
             </div>
             <div class="ml15">
-                ${h.tags.password("password", None, class_="text w20")}
+                ${h.tags.password("password", None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='password')}
             </div>
         </div>
@@ -43,7 +43,7 @@
                 ${h.tags.title(_(u"confirm password"), False if item else True, "password_confirm")}
             </div>
             <div class="ml15">
-                ${h.tags.password("password_confirm", None, class_="text w20")}
+                ${h.tags.password("password_confirm", None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='password_confirm')}
             </div>
         </div>

@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -318,7 +318,7 @@ _2e(this);
 };
 $.fn.combobox.methods={options:function(jq){
 var _4e=jq.combo("options");
-return $.extend($.data(jq[0],"combobox").options,{originalValue:_4e.originalValue,disabled:_4e.disabled,readonly:_4e.readonly});
+return $.extend($.data(jq[0],"combobox").options,{width:_4e.width,height:_4e.height,originalValue:_4e.originalValue,disabled:_4e.disabled,readonly:_4e.readonly});
 },getData:function(jq){
 return $.data(jq[0],"combobox").data;
 },setValues:function(jq,_4f){

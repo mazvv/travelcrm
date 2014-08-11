@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -21,7 +21,7 @@
                 ${h.tags.title(_(u"contact"), True, "contact")}
             </div>
             <div class="ml15">
-                ${h.tags.text("contact", item.contact if item else None, class_="text w20")}
+                ${h.tags.text("contact", item.contact if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='contact')}
             </div>
         </div>

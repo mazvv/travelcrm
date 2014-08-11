@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -12,6 +12,23 @@
  * 
  */
 (function($){
+	function setSize(target, param){
+		var opts = $.data(target, 'linkbutton').options;
+		if (param){
+			$.extend(opts, param);
+		}
+		if (opts.width || opts.height || opts.fit){
+			var spacer = $('<div style="display:none"></div>').insertBefore(target);
+			var btn = $(target);
+			var parent = btn.parent();
+			btn.appendTo('body');
+			btn._size(opts, parent);
+			var left = btn.find('.l-btn-left');
+			left.css('margin-top', parseInt((btn.height()-left.height())/2)+'px');
+			btn.insertAfter(spacer);
+			spacer.remove();
+		}
+	}
 	
 	function createButton(target) {
 		var opts = $.data(target, 'linkbutton').options;
@@ -54,7 +71,7 @@
 				}
 				opts.onClick.call(this);
 			}
-			return false;
+//			return false;
 		});
 //		if (opts.toggle && !opts.disabled){
 //			t.bind('click.linkbutton', function(){
@@ -134,15 +151,27 @@
 					options: $.extend({}, $.fn.linkbutton.defaults, $.fn.linkbutton.parseOptions(this), options)
 				});
 				$(this).removeAttr('disabled');
+				$(this).bind('_resize', function(e, force){
+					if ($(this).hasClass('easyui-fluid') || force){
+						setSize(this);
+					}
+					return false;
+				});
 			}
 			
 			createButton(this);
+			setSize(this);
 		});
 	};
 	
 	$.fn.linkbutton.methods = {
 		options: function(jq){
 			return $.data(jq[0], 'linkbutton').options;
+		},
+		resize: function(jq, param){
+			return jq.each(function(){
+				setSize(this, param);
+			});
 		},
 		enable: function(jq){
 			return jq.each(function(){

@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"name"), True, "name")}
             </div>
             <div class="ml15">
-                ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='name')}
             </div>
         </div>
@@ -30,7 +30,7 @@
                 ${h.tags.title(_(u"invoice text"), False, "display_text")}
             </div>
             <div class="ml15">
-                ${h.tags.text('display_text', item.display_text if item else None, class_="text w20")}
+                ${h.tags.text('display_text', item.display_text if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='display_text')}
             </div>
         </div>
@@ -39,7 +39,7 @@
                 ${h.tags.title(_(u"description"), False, "descr")}
             </div>
             <div class="ml15">
-                ${h.tags.textarea('descr', item.descr if item else None, class_="text w20", rows=5)}
+                ${h.tags.text('descr', item.descr if item else None, class_="easyui-textbox w20", data_options="multiline:true,height:80")}
                 ${h.common.error_container(name='descr')}
             </div>
         </div>

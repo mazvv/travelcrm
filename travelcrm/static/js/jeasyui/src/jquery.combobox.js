@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -392,6 +392,8 @@
 		options: function(jq){
 			var copts = jq.combo('options');
 			return $.extend($.data(jq[0], 'combobox').options, {
+				width: copts.width,
+				height: copts.height,
 				originalValue: copts.originalValue,
 				disabled: copts.disabled,
 				readonly: copts.readonly

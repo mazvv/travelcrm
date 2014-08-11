@@ -11,7 +11,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off", id=_form_id)}
-        <script type="text/javascript">
+        <script type="easyui-textbox/javascript">
             function currency_${_id}(){
                 var invoice_id = $('#${_form_id} [name=invoice_id]').val();
                 $.ajax({
@@ -50,7 +50,7 @@
                 ${h.tags.title(_(u"sum"), True, "sum")}
             </div>
             <div class="ml15">
-                ${h.tags.text('sum', item.sum if item else None, class_="text w20 easyui-numberbox", data_options="min:0,precision:2")}
+                ${h.tags.text('sum', item.sum if item else None, class_="easyui-textbox w20 easyui-numberbox", data_options="min:0,precision:2")}
                 ${h.common.error_container(name='sum')}
             </div>
         </div>
@@ -59,7 +59,7 @@
                 ${h.tags.title(_(u"sum currency"), False, "currency")}
             </div>
             <div class="ml15">
-                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="text w20", disabled=True)}
+                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="easyui-textbox w20", disabled=True)}
             </div>
         </div>
         <div class="form-buttons">

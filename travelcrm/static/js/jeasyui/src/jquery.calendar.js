@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -13,19 +13,20 @@
  */
 (function($){
 	
-	function setSize(target){
+	function setSize(target, param){
 		var opts = $.data(target, 'calendar').options;
 		var t = $(target);
-//		if (opts.fit == true){
-//			var p = t.parent();
-//			opts.width = p.width();
-//			opts.height = p.height();
-//		}
-		opts.fit ? $.extend(opts, t._fit()) : t._fit(false);
-		var header = t.find('.calendar-header');
-		t._outerWidth(opts.width);
-		t._outerHeight(opts.height);
-		t.find('.calendar-body')._outerHeight(t.height() - header._outerHeight());
+		if (param){
+			$.extend(opts, {
+				width: param.width,
+				height: param.height
+			});
+		}
+		t._size(opts, t.parent());
+		t.find('.calendar-body')._outerHeight(t.height() - t.find('.calendar-header')._outerHeight());
+		if (t.find('.calendar-menu').is(':visible')){
+			showSelectMenus(target);
+		}
 	}
 	
 	function init(target){
@@ -81,9 +82,8 @@
 			showYear(target, -1);
 		});
 		
-		$(target).bind('_resize', function(){
-			var opts = $.data(target, 'calendar').options;
-			if (opts.fit == true){
+		$(target).bind('_resize', function(e,force){
+			if ($(this).hasClass('easyui-fluid') || force){
 				setSize(target);
 			}
 			return false;
@@ -395,9 +395,9 @@
 		options: function(jq){
 			return $.data(jq[0], 'calendar').options;
 		},
-		resize: function(jq){
+		resize: function(jq, param){
 			return jq.each(function(){
-				setSize(this);
+				setSize(this, param);
 			});
 		},
 		moveTo: function(jq, date){
@@ -421,7 +421,7 @@
 	$.fn.calendar.parseOptions = function(target){
 		var t = $(target);
 		return $.extend({}, $.parser.parseOptions(target, [
-			'width','height',{firstDay:'number',fit:'boolean',border:'boolean'}
+			{firstDay:'number',fit:'boolean',border:'boolean'}
 		]));
 	};
 	

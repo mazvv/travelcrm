@@ -12,7 +12,7 @@
                  ${h.tags.title(_(u"name"), True, "name")}
             </div>
             <div class="ml15">
-                ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='name')}
             </div>
         </div>
@@ -30,7 +30,7 @@
                  ${h.tags.title(_(u"url"), True, "url")}
             </div>
             <div class="ml15">
-                ${h.tags.text("url", item.url if item else None, class_="text w20")}
+                ${h.tags.text("url", item.url if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='url')}
             </div>
         </div>
@@ -39,7 +39,7 @@
                  ${h.tags.title(_(u"icon css class"), False, "icon_cls")}
             </div>
             <div class="ml15">
-                ${h.tags.text("icon_cls", item.icon_cls if item else None, class_="text w20")}
+                ${h.tags.text("icon_cls", item.icon_cls if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='icon_cls')}
             </div>
         </div>

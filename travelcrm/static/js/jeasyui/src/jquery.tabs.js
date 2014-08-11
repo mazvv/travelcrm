@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -118,16 +118,21 @@
 		}
 	}
 	
-	function setSize(container) {
+	function setSize(container, param) {
 		var state = $.data(container, 'tabs');
 		var opts = state.options;
 		var cc = $(container);
 		
-		opts.fit ? $.extend(opts, cc._fit()) : cc._fit(false);
-		cc.width(opts.width).height(opts.height);
+		if (param){
+			$.extend(opts, {
+				width: param.width,
+				height: param.height
+			});
+		}
+		cc._size(opts);
 		
-		var header = $(container).children('div.tabs-header');
-		var panels = $(container).children('div.tabs-panels');
+		var header = cc.children('div.tabs-header');
+		var panels = cc.children('div.tabs-panels');
 		var wrap = header.find('div.tabs-wrap');
 		var ul = wrap.find('.tabs');
 		
@@ -167,18 +172,8 @@
 			
 			setScrollers(container);
 			
-			var height = opts.height;
-			if (!isNaN(height)) {
-				panels._outerHeight(height - header.outerHeight());
-			} else {
-				panels.height('auto');
-			}
-			var width = opts.width;
-			if (!isNaN(width)){
-				panels._outerWidth(width);
-			} else {
-				panels.width('auto');
-			}
+			panels._size('height', isNaN(opts.height) ? '' : (opts.height-header.outerHeight()));
+			panels._size('width', isNaN(opts.width) ? '' : opts.width);
 		}
 	}
 	
@@ -234,8 +229,7 @@
 				function(){$(this).removeClass('tabs-scroller-over');}
 		);
 		cc.bind('_resize', function(e,force){
-			var opts = $.data(container, 'tabs').options;
-			if (opts.fit == true || force){
+			if ($(this).hasClass('easyui-fluid') || force){
 				setSize(container);
 				setSelectedSize(container);
 			}
@@ -642,10 +636,8 @@
 		options = options || {};
 		return this.each(function(){
 			var state = $.data(this, 'tabs');
-			var opts;
 			if (state) {
-				opts = $.extend(state.options, options);
-				state.options = opts;
+				$.extend(state.options, options);
 			} else {
 				$.data(this, 'tabs', {
 					options: $.extend({},$.fn.tabs.defaults, $.fn.tabs.parseOptions(this), options),
@@ -675,9 +667,9 @@
 		tabs: function(jq){
 			return $.data(jq[0], 'tabs').tabs;
 		},
-		resize: function(jq){
+		resize: function(jq, param){
 			return jq.each(function(){
-				setSize(this);
+				setSize(this, param);
 				setSelectedSize(this);
 			});
 		},
@@ -759,7 +751,7 @@
 	
 	$.fn.tabs.parseOptions = function(target){
 		return $.extend({}, $.parser.parseOptions(target, [
-			'width','height','tools','toolPosition','tabPosition',
+			'tools','toolPosition','tabPosition',
 			{fit:'boolean',border:'boolean',plain:'boolean',headerWidth:'number',tabWidth:'number',tabHeight:'number',selected:'number',showHeader:'boolean'}
 		]));
 	};

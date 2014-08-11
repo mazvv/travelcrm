@@ -62,7 +62,7 @@
                         ${h.tags.title(_(u"adults"), True, "adults")}
                     </div>
                     <div class="ml15">
-                        ${h.tags.text('adults', item.adults if item else 0, class_="text w5 easyui-numberspinner", data_options="min:0,precision:0,editable:false")}
+                        ${h.tags.text('adults', item.adults if item else 0, class_="easyui-textbox w5 easyui-numberspinner", data_options="min:0,precision:0,editable:false")}
                         ${h.common.error_container(name='adults')}
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         ${h.tags.title(_(u"children"), True, "children")}
                     </div>
                     <div class="ml15">
-                        ${h.tags.text('children', item.children if item else 0, class_="text w5 easyui-numberspinner", data_options="min:0,precision:0,editable:false")}
+                        ${h.tags.text('children', item.children if item else 0, class_="easyui-textbox w5 easyui-numberspinner", data_options="min:0,precision:0,editable:false")}
                         ${h.common.error_container(name='children')}
                     </div>
                 </div>
@@ -80,7 +80,7 @@
 		                ${h.tags.title(_(u"price"), True, "price")}
 		            </div>
 		            <div class="ml15">
-		                ${h.tags.text('price', item.price if item else None, class_="text w20 easyui-numberbox", data_options="min:0,precision:2")}
+		                ${h.tags.text('price', item.price if item else None, class_="easyui-textbox w20 easyui-numberbox", data_options="min:0,precision:2")}
 		                ${h.common.error_container(name='price')}
 		            </div>
 		        </div>

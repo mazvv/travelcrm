@@ -15,7 +15,7 @@
             	${h.tags.title(_(u"email"), True, "email")}
             </div>
             <div class="ml10 tr">
-            	${h.tags.text("email", None, class_="text w15")}
+            	${h.tags.text("email", None, class_="easyui-textbox w15")}
             </div>
         </div>
         <div class="form-field">

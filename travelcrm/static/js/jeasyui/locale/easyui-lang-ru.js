@@ -1,7 +1,7 @@
 if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = 'Страница';
 	$.fn.pagination.defaults.afterPageText = 'из {pages}';
-	$.fn.pagination.defaults.displayMsg = '{from} до {to} из {total}';
+	$.fn.pagination.defaults.displayMsg = '{from} - {to} из {total}';
 }
 if ($.fn.datagrid){
 	$.fn.datagrid.defaults.loadMsg = 'Обрабатывается, пожалуйста ждите ...';
@@ -18,7 +18,7 @@ if ($.fn.validatebox){
 	$.fn.validatebox.defaults.rules.email.message = 'Пожалуйста введите корректный e-mail адрес.';
 	$.fn.validatebox.defaults.rules.url.message = 'Пожалуйста введите корректный URL.';
 	$.fn.validatebox.defaults.rules.length.message = 'Пожалуйста введите зачение между {0} и {1}.';
-	$.fn.validatebox.defaults.rules.remote.message = 'Пожалуйста исправьте это поле.';
+	$.fn.validatebox.defaults.rules.remote.message = 'Пожалуйста исправте это поле.';
 }
 if ($.fn.numberbox){
 	$.fn.numberbox.defaults.missingMessage = 'Это поле необходимо.';

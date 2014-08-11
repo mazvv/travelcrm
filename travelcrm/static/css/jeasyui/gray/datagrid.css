@@ -176,11 +176,15 @@
   margin: 0;
   padding: 0;
 }
-.datagrid-body .datagrid-editable .datagrid-editable-input {
+.datagrid-view .datagrid-editable-input {
   margin: 0;
-  padding: 2px;
-  border-width: 1px;
-  border-style: solid;
+  padding: 2px 4px;
+  border: 1px solid #D3D3D3;
+  font-size: 12px;
+  outline-style: none;
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }
 .datagrid-sort-desc .datagrid-sort-icon {
   padding: 0 13px 0 0;
@@ -255,6 +259,9 @@
   background: #0092DC;
   color: #fff;
 }
-.datagrid-body .datagrid-editable .datagrid-editable-input {
-  border-color: #D3D3D3;
+.datagrid-row-editing .textbox,
+.datagrid-row-editing .textbox-text {
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
 }

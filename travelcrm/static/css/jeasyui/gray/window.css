@@ -48,7 +48,6 @@
   filter: alpha(opacity=40);
   opacity: 0.40;
   font-size: 1px;
-  *zoom: 1;
   overflow: hidden;
 }
 .window,

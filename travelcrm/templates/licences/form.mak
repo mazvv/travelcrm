@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"licence num"), True, "licence_num")}
             </div>
             <div class="ml15">
-                ${h.tags.text("licence_num", item.licence_num if item else None, class_="text w20")}
+                ${h.tags.text("licence_num", item.licence_num if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='licence_num')}
             </div>
         </div>

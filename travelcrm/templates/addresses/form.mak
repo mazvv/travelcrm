@@ -21,7 +21,7 @@
                 ${h.tags.title(_(u"zip code"), True, "zip_code")}
             </div>
             <div class="ml15">
-                ${h.tags.text("zip_code", item.zip_code if item else None, class_="text w10")}
+                ${h.tags.text("zip_code", item.zip_code if item else None, class_="easyui-textbox w10")}
                 ${h.common.error_container(name='zip_code')}
             </div>
         </div>
@@ -30,7 +30,7 @@
                 ${h.tags.title(_(u"address"), True, "address")}
             </div>
             <div class="ml15">
-                ${h.tags.textarea('address', item.address if item else None, class_="text w20", rows=5)}
+                ${h.tags.text('address', item.address if item else None, class_="easyui-textbox w20", data_options="multiline:true,height:80")}
                 ${h.common.error_container(name='address')}
             </div>
         </div>

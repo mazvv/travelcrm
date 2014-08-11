@@ -1,6 +1,7 @@
 .l-btn {
   text-decoration: none;
   display: inline-block;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   cursor: pointer;
@@ -11,12 +12,6 @@
 .l-btn-plain {
   border: 0;
   padding: 1px;
-}
-.l-btn-disabled {
-  color: #ccc;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  cursor: default;
 }
 .l-btn-left {
   display: inline-block;
@@ -171,6 +166,8 @@
 }
 .l-btn-disabled,
 .l-btn-disabled:hover {
+  opacity: 0.5;
+  cursor: default;
   background: #fafafa;
   color: #444;
   background: -webkit-linear-gradient(top,#ffffff 0,#eeeeee 100%);
@@ -179,7 +176,10 @@
   background: linear-gradient(to bottom,#ffffff 0,#eeeeee 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eeeeee,GradientType=0);
-  filter: alpha(opacity=50) progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eeeeee,GradientType=0);
+}
+.l-btn-disabled .l-btn-text,
+.l-btn-disabled .l-btn-icon {
+  filter: alpha(opacity=50);
 }
 .l-btn-plain-disabled,
 .l-btn-plain-disabled:hover {

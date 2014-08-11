@@ -1,7 +1,7 @@
 if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = 'Page';
 	$.fn.pagination.defaults.afterPageText = 'of {pages}';
-	$.fn.pagination.defaults.displayMsg = '{from} to {to} of {total}';
+	$.fn.pagination.defaults.displayMsg = '{from} - {to} of {total}';
 }
 if ($.fn.datagrid){
 	$.fn.datagrid.defaults.loadMsg = 'Processing, please wait ...';

@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${title or _(u'Add Company')}"
     data-options="
         modal:true,
@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"humanize"), True, "humanize")}
             </div>
             <div class="ml15">
-                ${h.tags.text("humanize", item.humanize if item else None, class_="text w20")}
+                ${h.tags.text("humanize", item.humanize if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='humanize')}
             </div>
         </div>
@@ -21,7 +21,7 @@
                 ${h.tags.title(_(u"name"), True, "name")}
             </div>
             <div class="ml15">
-                ${h.tags.text("name", item.name if item else None, class_="text w20")}
+                ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='name')}
             </div>
         </div>
@@ -30,7 +30,7 @@
                 ${h.tags.title(_(u"resource"), True, "resource")}
             </div>
             <div class="ml15">
-                ${h.tags.text("resource", item.resource_full if item else None, class_="text w20")}
+                ${h.tags.text("resource", item.resource_full if item else None, class_="easyui-textbox w20")}
                 ${h.common.error_container(name='resource')}
             </div>
         </div>
@@ -39,7 +39,7 @@
                  ${h.tags.title(_(u"description"), False, "description")}
             </div>
             <div class="ml15">
-                ${h.tags.textarea("description", item.description if item else None, class_="text w20", rows=4)}
+                ${h.tags.text("description", item.description if item else None, class_="easyui-textbox w20", data_options="multiline:true,height:80")}
                 ${h.common.error_container(name='description')}
             </div>
         </div>

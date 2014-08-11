@@ -17,7 +17,7 @@
 		                ${h.tags.title(_(u"first name"), True, "first_name")}
 		            </div>
 		            <div class="ml15">
-		                ${h.tags.text("first_name", item.first_name if item else None, class_="text w20")}
+		                ${h.tags.text("first_name", item.first_name if item else None, class_="easyui-textbox w20")}
 		                ${h.common.error_container(name='first_name')}
 		            </div>
 		        </div>
@@ -26,7 +26,7 @@
 		                ${h.tags.title(_(u"second name"), False, "second_name")}
 		            </div>
 		            <div class="ml15">
-		                ${h.tags.text("second_name", item.second_name if item else None, class_="text w20")}
+		                ${h.tags.text("second_name", item.second_name if item else None, class_="easyui-textbox w20")}
 		                ${h.common.error_container(name='second_name')}
 		            </div>
 		        </div>
@@ -35,7 +35,7 @@
 						${h.tags.title(_(u"last name"), False, "last_name")}
 		            </div>
 		            <div class="ml15">
-		                ${h.tags.text("last_name", item.last_name if item else None, class_="text w20")}
+		                ${h.tags.text("last_name", item.last_name if item else None, class_="easyui-textbox w20")}
 		                ${h.common.error_container(name='last_name')}
 		            </div>
 		        </div>

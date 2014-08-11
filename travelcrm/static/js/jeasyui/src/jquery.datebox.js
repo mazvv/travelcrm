@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -173,6 +173,8 @@
 		options: function(jq){
 			var copts = jq.combo('options');
 			return $.extend($.data(jq[0], 'datebox').options, {
+				width: copts.width,
+				height: copts.height,
 				originalValue: copts.originalValue,
 				disabled: copts.disabled,
 				readonly: copts.readonly
@@ -237,12 +239,17 @@
 			var y = date.getFullYear();
 			var m = date.getMonth()+1;
 			var d = date.getDate();
-			return m+'/'+d+'/'+y;
+			return (m<10?('0'+m):m)+'/'+(d<10?('0'+d):d)+'/'+y;
+//			return m+'/'+d+'/'+y;
 		},
 		parser:function(s){
-			var t = Date.parse(s);
-			if (!isNaN(t)){
-				return new Date(t);
+			if (!s) return new Date();
+			var ss = s.split('/');
+			var m = parseInt(ss[0],10);
+			var d = parseInt(ss[1],10);
+			var y = parseInt(ss[2],10);
+			if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+				return new Date(y,m-1,d);
 			} else {
 				return new Date();
 			}

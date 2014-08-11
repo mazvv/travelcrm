@@ -410,30 +410,27 @@ span.error.as-text span{
 input{
 	outline: none;
 }
-.text{
-    border: 1px solid #D1D1D1;
-    padding: 3px 2px;
-    font-size: 100%;
-    font-family: Arial,Helvetica,sans-serif;
-    outline: none;
-    margin: 0px;
+.textbox{
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
 }
-.text.w5{
+.w5{
     width: 5em;
 }
-.text.w10{
+.w10{
     width: 10em;
 }
-.text.w15{
+.w15{
     width: 15em;
 }
-.text.w20{
+.w20{
     width: 20em;
 }
-.text.w25{
+.w25{
     width: 25em;
 }
-.text.w30{
+.w30{
     width: 30em;
 }
 
@@ -495,7 +492,7 @@ input{
 	right: 0px;
 	z-index: 2;
 	background-color: #fff;
-	width: 354px;
+	width: 390px;
 	display: none;
 	padding: 5px 5px 0px 5px;
 }

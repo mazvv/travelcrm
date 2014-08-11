@@ -6,7 +6,7 @@
         _tb_id = "tb-%s" % _id
     %>
     % if can_edit:
-    <script type="text/javascript">
+    <script type="easyui-textbox/javascript">
         function add_${_func_id}(id){
             if(is_int(id)){
                 var input = $('<input type="hidden" name="${name}">').val(id);

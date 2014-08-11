@@ -10,7 +10,7 @@
     	border:false,
     	iconCls:'fa fa-table'
     ">
-    <script type="text/javascript">
+    <script type="easyui-textbox/javascript">
     function _status_${_id}(val){
     	var status = new Object();
     	% for item in status:

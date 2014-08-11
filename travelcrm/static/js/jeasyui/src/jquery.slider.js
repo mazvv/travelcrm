@@ -1,5 +1,5 @@
-﻿/**
- * jQuery EasyUI 1.3.6
+/**
+ * jQuery EasyUI 1.4
  * 
  * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
  *
@@ -33,6 +33,12 @@
 			slider.find('input.slider-value').attr('name', name);
 			t.removeAttr('name').attr('sliderName', name);
 		}
+		slider.bind('_resize', function(e,force){
+			if ($(this).hasClass('easyui-fluid') || force){
+				setSize(target);
+			}
+			return false;
+		});
 		return slider;
 	}
 	
@@ -48,21 +54,14 @@
 			if (param.width) opts.width = param.width;
 			if (param.height) opts.height = param.height;
 		}
+		slider._size(opts);
 		if (opts.mode == 'h'){
 			slider.css('height', '');
 			slider.children('div').css('height', '');
-			if (!isNaN(opts.width)){
-				slider.width(opts.width);
-			}
 		} else {
 			slider.css('width', '');
 			slider.children('div').css('width', '');
-			if (!isNaN(opts.height)){
-				slider.height(opts.height);
-				slider.find('div.slider-rule').height(opts.height);
-				slider.find('div.slider-rulelabel').height(opts.height);
-				slider.find('div.slider-inner')._outerHeight(opts.height);
-			}
+			slider.children('div.slider-rule,div.slider-rulelabel,div.slider-inner')._outerHeight(slider._outerHeight());
 		}
 		initValue(target);
 	}
@@ -157,7 +156,7 @@
 			}
 		});
 		slider.find('div.slider-inner').unbind('.slider').bind('mousedown.slider', function(e){
-			if (state.isDragging){return}
+			if (state.isDragging || opts.disabled){return}
 			var pos = $(this).offset();
 			var value = pos2value(target, (opts.mode=='h'?(e.pageX-pos.left):(e.pageY-pos.top)));
 			adjustValue(value);

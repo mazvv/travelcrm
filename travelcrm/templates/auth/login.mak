@@ -23,7 +23,7 @@
             	${h.tags.title(_(u"username"), False, "username")}
             </div>
             <div class="ml10 tr">
-            	${h.tags.text("username", None, class_="text w15")}
+            	${h.tags.text("username", None, class_="easyui-textbox w15")}
             </div>
         </div>
         <div class="form-field">
@@ -31,7 +31,7 @@
             	${h.tags.title(_(u"password"), False, "password")}
             </div>
             <div class="ml10 tr">
-                ${h.tags.password("password", None, class_="text w15")}
+                ${h.tags.password("password", None, class_="easyui-textbox w15")}
             </div>
         </div>
         <div class="form-field mb05">
