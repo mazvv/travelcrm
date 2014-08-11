@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//docs/source/conf.py=utf-8
 encoding//travelcrm/__init__.py=utf-8
 encoding//travelcrm/forms/accomodations.py=utf-8
 encoding//travelcrm/forms/accounts.py=utf-8
