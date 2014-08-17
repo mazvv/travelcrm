@@ -1082,16 +1082,16 @@ ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: income_transactions; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE income_transactions (
+CREATE TABLE income_transaction (
     income_id integer NOT NULL,
     fin_transaction_id integer NOT NULL
 );
 
 
-ALTER TABLE public.income_transactions OWNER TO mazvv;
+ALTER TABLE public.income_transaction OWNER TO mazvv;
 
 --
 -- Name: invoice; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1216,6 +1216,54 @@ CREATE TABLE navigation (
 
 
 ALTER TABLE public.navigation OWNER TO mazvv;
+
+--
+-- Name: outgoing; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE outgoing (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    account_id integer NOT NULL,
+    account_item_id integer NOT NULL,
+    invoice_id integer
+);
+
+
+ALTER TABLE public.outgoing OWNER TO mazvv;
+
+--
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE outgoing_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.outgoing_id_seq OWNER TO mazvv;
+
+--
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
+
+
+--
+-- Name: outgoing_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE outgoing_transaction (
+    outgoing_id integer NOT NULL,
+    fin_transaction_id integer NOT NULL
+);
+
+
+ALTER TABLE public.outgoing_transaction OWNER TO mazvv;
 
 --
 -- Name: passport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1386,6 +1434,54 @@ ALTER TABLE public.positions_permisions_id_seq OWNER TO mazvv;
 
 ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
+
+--
+-- Name: refund; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE refund (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    account_id integer NOT NULL,
+    account_item_id integer NOT NULL,
+    invoice_id integer NOT NULL
+);
+
+
+ALTER TABLE public.refund OWNER TO mazvv;
+
+--
+-- Name: refund_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE refund_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.refund_id_seq OWNER TO mazvv;
+
+--
+-- Name: refund_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE refund_id_seq OWNED BY refund.id;
+
+
+--
+-- Name: refund_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE refund_transaction (
+    refund_id integer NOT NULL,
+    fin_transaction_id integer NOT NULL
+);
+
+
+ALTER TABLE public.refund_transaction OWNER TO mazvv;
 
 --
 -- Name: roomcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1638,6 +1734,64 @@ ALTER TABLE public.structures_id_seq OWNER TO mazvv;
 --
 
 ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
+
+
+--
+-- Name: supplier; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE supplier (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(64) NOT NULL
+);
+
+
+ALTER TABLE public.supplier OWNER TO mazvv;
+
+--
+-- Name: supplier_bank_detail; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE supplier_bank_detail (
+    supplier_id integer NOT NULL,
+    bank_detail_id integer NOT NULL
+);
+
+
+ALTER TABLE public.supplier_bank_detail OWNER TO mazvv;
+
+--
+-- Name: supplier_bperson; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE supplier_bperson (
+    supplier_id integer NOT NULL,
+    bperson_id integer NOT NULL
+);
+
+
+ALTER TABLE public.supplier_bperson OWNER TO mazvv;
+
+--
+-- Name: supplier_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE supplier_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.supplier_id_seq OWNER TO mazvv;
+
+--
+-- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE supplier_id_seq OWNED BY supplier.id;
 
 
 --
@@ -2070,6 +2224,13 @@ ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navig
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
 
 
@@ -2092,6 +2253,13 @@ ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::reg
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund ALTER COLUMN id SET DEFAULT nextval('refund_id_seq'::regclass);
 
 
 --
@@ -2161,6 +2329,13 @@ ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_se
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('supplier_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
@@ -2217,21 +2392,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5762, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5789, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1547, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1575, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 110, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 113, true);
 
 
 --
@@ -2360,7 +2535,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-3b279a8a50f0
+2f28d3d15605
 \.
 
 
@@ -2406,6 +2581,11 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 9	1513	56	5	Coral Travel Ukraine	567990	54343
 10	1514	44	5	Coral LLc	123232321312	`12
 11	1515	54	4	Coral LLC	1223456	55667
+12	1554	56	5	Intertelecom	12345678	09876
+13	1556	56	5	Intertelecom	12345678	09876
+14	1564	56	4	Lun Real Estate	78900909	12343434
+15	1569	56	5	Lun Real Estate Agency	987456152	671283
+16	1570	56	4	Intertelecom Internet Service Provider	9878723847	84758GH
 \.
 
 
@@ -2413,7 +2593,7 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 -- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('bank_detail_id_seq', 11, true);
+SELECT pg_catalog.setval('bank_detail_id_seq', 16, true);
 
 
 --
@@ -2430,6 +2610,9 @@ SELECT pg_catalog.setval('bank_id_seq', 5, true);
 COPY bperson (id, resource_id, first_name, last_name, second_name, position_name) FROM stdin;
 1	1009	Alexandro	Riak		Sales Manager
 2	1010	Umberto			Accounting
+6	1560	Ivan	Gonchar		Account Manager
+7	1563	Alexander	Tkachuk		manager
+5	1553	Sergey	Vlasov		Main account manager
 \.
 
 
@@ -2442,6 +2625,11 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 1	55
 1	56
 1	57
+5	61
+5	62
+6	63
+7	64
+7	65
 \.
 
 
@@ -2449,7 +2637,7 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 -- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('bperson_id_seq', 4, true);
+SELECT pg_catalog.setval('bperson_id_seq', 7, true);
 
 
 --
@@ -2516,6 +2704,11 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 58	+380681983800	phone	1543
 59	dorianyats	skype	1544
 60	info@travelcrm.org.ua	email	1545
+61	+380681234567	phone	1551
+62	serge_vlasov	skype	1552
+63	i_gonchar@i-tele.com	email	1559
+64	+380953434358	phone	1561
+65	mega_tkach@ukr.net	email	1562
 \.
 
 
@@ -2523,7 +2716,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 60, true);
+SELECT pg_catalog.setval('contact_id_seq', 65, true);
 
 
 --
@@ -2799,10 +2992,10 @@ SELECT pg_catalog.setval('income_id_seq', 25, true);
 
 
 --
--- Data for Name: income_transactions; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: income_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY income_transactions (income_id, fin_transaction_id) FROM stdin;
+COPY income_transaction (income_id, fin_transaction_id) FROM stdin;
 6	7
 5	9
 7	10
@@ -2927,17 +3120,42 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 47	5	\N	For Test	/	fa fa-credit-card	2	1253
 48	6	\N	Home	/	fa fa-home	1	1079
 49	6	\N	For Test	/	fa fa-credit-card	2	1253
-17	4	53	Currencies	/currencies	\N	6	802
-45	4	53	Banks	/banks	\N	5	1212
+45	4	53	Banks	/banks	\N	2	1212
+17	4	53	Currencies	/currencies	\N	3	802
+54	4	53	Currency Rates	/currencies_rates	\N	5	1395
+56	4	53	Income Payments	incomes	\N	6	1434
+38	4	32	Tours	/tours	\N	2	1075
+51	4	32	Invoices	/invoices	\N	3	1368
+61	4	53	Outgoing Payments	/outgoings	\N	9	1571
 57	4	53	Accounts	/accounts	\N	1	1436
-54	4	53	Currency Rates	/currencies_rates	\N	7	1395
-56	4	53	Income Payments	incomes	\N	8	1434
-58	4	53	Outgoing Payments	/outgoing	\N	12	1449
-55	4	53	Accounts Items	/accounts_items	\N	3	1425
+64	4	53	Refunds	/refunds	\N	7	1575
 50	4	53	Services List	/services	\N	1	1312
 52	4	32	Services	/services_sales	\N	2	1369
-38	4	32	Tours	/tours	\N	3	1075
-51	4	32	Invoices	/invoices	\N	2	1368
+60	4	23	Suppliers	/suppliers	\N	11	1550
+55	4	53	Accounts Items	/accounts_items	\N	1	1425
+\.
+
+
+--
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY outgoing (id, resource_id, account_id, account_item_id, invoice_id) FROM stdin;
+\.
+
+
+--
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('outgoing_id_seq', 1, false);
+
+
+--
+-- Data for Name: outgoing_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY outgoing_transaction (outgoing_id, fin_transaction_id) FROM stdin;
 \.
 
 
@@ -3017,6 +3235,9 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 77	108	4	{view,add,edit,delete}	\N	all
 78	109	4	{view,add,edit,delete,invoice,contract}	\N	all
 79	110	4	{view,add,edit,delete}	\N	all
+80	111	4	{view,add,edit,delete}	\N	all
+81	112	4	{view,add,edit,delete}	\N	all
+82	113	4	{view,add,edit,delete}	\N	all
 \.
 
 
@@ -3117,14 +3338,37 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 59, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 64, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 79, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 82, true);
+
+
+--
+-- Data for Name: refund; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY refund (id, resource_id, account_id, account_item_id, invoice_id) FROM stdin;
+\.
+
+
+--
+-- Name: refund_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('refund_id_seq', 1, false);
+
+
+--
+-- Data for Name: refund_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY refund_transaction (refund_id, fin_transaction_id) FROM stdin;
+\.
 
 
 --
@@ -3598,7 +3842,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1442	103	32	f
 1447	106	32	f
 1448	106	32	f
-1449	65	32	f
 1450	12	32	f
 1452	12	32	f
 1453	108	32	f
@@ -3666,6 +3909,27 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1545	87	32	f
 1546	106	32	f
 1547	106	32	f
+1548	12	32	f
+1549	12	32	f
+1550	65	32	f
+1551	87	32	f
+1552	87	32	f
+1553	79	32	f
+1554	101	32	f
+1556	101	32	f
+1559	87	32	f
+1560	79	32	f
+1561	87	32	f
+1562	87	32	f
+1563	79	32	f
+1564	101	32	f
+1567	112	32	f
+1568	112	32	f
+1569	101	32	f
+1570	101	32	f
+1571	65	32	f
+1574	12	32	f
+1575	65	32	f
 \.
 
 
@@ -4309,7 +4573,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5671	1442	2	\N	2014-06-07 22:16:04.586659
 5676	1447	2	\N	2014-06-08 21:25:14.638119
 5677	1448	2	\N	2014-06-08 21:25:35.09515
-5678	1449	2	\N	2014-06-09 11:33:52.954559
 5679	1450	2	\N	2014-06-09 15:50:23.760428
 5681	1452	2	\N	2014-06-09 17:20:44.311452
 5682	1453	2	\N	2014-06-09 20:15:57.545778
@@ -4377,6 +4640,27 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5760	1545	2	\N	2014-06-28 21:26:35.413657
 5761	1546	2	\N	2014-07-02 23:01:03.321441
 5762	1547	2	\N	2014-07-02 23:03:30.755887
+5763	1548	2	\N	2014-07-26 18:07:46.336433
+5764	1549	2	\N	2014-08-16 20:09:11.73959
+5765	1550	2	\N	2014-08-16 20:10:37.840795
+5766	1551	2	\N	2014-08-16 20:23:59.980051
+5767	1552	2	\N	2014-08-16 20:24:12.305446
+5768	1553	2	\N	2014-08-16 20:24:15.930016
+5769	1554	2	\N	2014-08-16 20:25:09.403552
+5771	1556	2	\N	2014-08-16 20:51:19.103778
+5773	1559	2	\N	2014-08-16 21:13:14.302214
+5774	1560	2	\N	2014-08-16 21:13:18.107616
+5775	1561	2	\N	2014-08-16 21:22:35.752473
+5776	1562	2	\N	2014-08-16 21:23:02.397566
+5777	1563	2	\N	2014-08-16 21:23:05.499294
+5778	1564	2	\N	2014-08-16 21:24:08.813965
+5781	1567	2	\N	2014-08-17 11:06:39.681926
+5782	1568	2	\N	2014-08-17 11:06:57.522852
+5783	1569	2	\N	2014-08-17 11:07:53.713228
+5784	1570	2	\N	2014-08-17 11:09:10.292392
+5785	1571	2	\N	2014-08-17 11:33:32.514367
+5788	1574	2	\N	2014-08-17 20:41:08.846318
+5789	1575	2	\N	2014-08-17 20:42:01.113671
 \.
 
 
@@ -4424,6 +4708,9 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null
 108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null
 110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null
+112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null
+111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null
+113	1574	refunds	Refunds	Refunds	travelcrm.resources.refunds	Refunds by invoice	null
 \.
 
 
@@ -4621,6 +4908,44 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 --
 
 SELECT pg_catalog.setval('structures_id_seq', 12, true);
+
+
+--
+-- Data for Name: supplier; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY supplier (id, resource_id, name) FROM stdin;
+5	1567	Intertelecom
+6	1568	Lun Real Estate
+\.
+
+
+--
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
+6	15
+5	16
+\.
+
+
+--
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
+6	7
+5	5
+5	6
+\.
+
+
+--
+-- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('supplier_id_seq', 6, true);
 
 
 --
@@ -5019,7 +5344,7 @@ ALTER TABLE ONLY income
 -- Name: income_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY income_transactions
+ALTER TABLE ONLY income_transaction
     ADD CONSTRAINT income_transactions_pkey PRIMARY KEY (income_id, fin_transaction_id);
 
 
@@ -5053,6 +5378,22 @@ ALTER TABLE ONLY location
 
 ALTER TABLE ONLY navigation
     ADD CONSTRAINT navigation_pk PRIMARY KEY (id);
+
+
+--
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT outgoing_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: outgoing_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY outgoing_transaction
+    ADD CONSTRAINT outgoing_transaction_pkey PRIMARY KEY (outgoing_id, fin_transaction_id);
 
 
 --
@@ -5109,6 +5450,22 @@ ALTER TABLE ONLY person
 
 ALTER TABLE ONLY "position"
     ADD CONSTRAINT position_pk PRIMARY KEY (id);
+
+
+--
+-- Name: refund_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY refund
+    ADD CONSTRAINT refund_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: refund_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY refund_transaction
+    ADD CONSTRAINT refund_transaction_pkey PRIMARY KEY (refund_id, fin_transaction_id);
 
 
 --
@@ -5229,6 +5586,30 @@ ALTER TABLE ONLY structure_contact
 
 ALTER TABLE ONLY structure
     ADD CONSTRAINT structure_pk PRIMARY KEY (id);
+
+
+--
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_bank_detail
+    ADD CONSTRAINT supplier_bank_detail_pkey PRIMARY KEY (supplier_id, bank_detail_id);
+
+
+--
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_bperson
+    ADD CONSTRAINT supplier_bperson_pkey PRIMARY KEY (supplier_id, bperson_id);
+
+
+--
+-- Name: supplier_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier
+    ADD CONSTRAINT supplier_pkey PRIMARY KEY (id);
 
 
 --
@@ -5440,6 +5821,14 @@ ALTER TABLE ONLY "position"
 
 
 --
+-- Name: unique_idx_name_supplier; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier
+    ADD CONSTRAINT unique_idx_name_supplier UNIQUE (name);
+
+
+--
 -- Name: unique_idx_name_touroperator; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -5512,6 +5901,22 @@ ALTER TABLE ONLY invoice
 
 
 --
+-- Name: fk_account_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_account_id_outgoing FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund
+    ADD CONSTRAINT fk_account_id_refund FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_account_id_structure_account; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5525,6 +5930,22 @@ ALTER TABLE ONLY structure_account
 
 ALTER TABLE ONLY fin_transaction
     ADD CONSTRAINT fk_account_item_id_fin_transaction FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_account_item_id_outgoing FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_item_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund
+    ADD CONSTRAINT fk_account_item_id_refund FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5592,6 +6013,14 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY supplier_bank_detail
+    ADD CONSTRAINT fk_bank_detail_id_supplier_bank_detail FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_bank_detail_id_touroperator_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5621,6 +6050,14 @@ ALTER TABLE ONLY bank_detail
 
 ALTER TABLE ONLY bperson_contact
     ADD CONSTRAINT fk_bperson_id_bperson_contact FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY supplier_bperson
+    ADD CONSTRAINT fk_bperson_id_supplier_bperson FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5819,8 +6256,24 @@ ALTER TABLE ONLY tour
 -- Name: fk_fin_transaction_id_income_transactions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY income_transactions
+ALTER TABLE ONLY income_transaction
     ADD CONSTRAINT fk_fin_transaction_id_income_transactions FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_fin_transaction_id_outgoing_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing_transaction
+    ADD CONSTRAINT fk_fin_transaction_id_outgoing_transaction FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_fin_transaction_id_refund_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund_transaction
+    ADD CONSTRAINT fk_fin_transaction_id_refund_transaction FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5851,7 +6304,7 @@ ALTER TABLE ONLY hotel
 -- Name: fk_income_id_income_transactions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY income_transactions
+ALTER TABLE ONLY income_transaction
     ADD CONSTRAINT fk_income_id_income_transactions FOREIGN KEY (income_id) REFERENCES income(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -5861,6 +6314,14 @@ ALTER TABLE ONLY income_transactions
 
 ALTER TABLE ONLY income
     ADD CONSTRAINT fk_invoice_id_income FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_invoice_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund
+    ADD CONSTRAINT fk_invoice_id_refund FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -5917,6 +6378,14 @@ ALTER TABLE ONLY tour_point
 
 ALTER TABLE ONLY navigation
     ADD CONSTRAINT fk_navigation_position_id FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_outgoing_id_outgoing_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing_transaction
+    ADD CONSTRAINT fk_outgoing_id_outgoing_transaction FOREIGN KEY (outgoing_id) REFERENCES outgoing(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6005,6 +6474,14 @@ ALTER TABLE ONLY permision
 
 ALTER TABLE ONLY "position"
     ADD CONSTRAINT fk_position_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_refund_id_refund_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund_transaction
+    ADD CONSTRAINT fk_refund_id_refund_transaction FOREIGN KEY (refund_id) REFERENCES refund(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6200,6 +6677,14 @@ ALTER TABLE ONLY navigation
 
 
 --
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_resource_id_outgoing FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6221,6 +6706,14 @@ ALTER TABLE ONLY person
 
 ALTER TABLE ONLY "position"
     ADD CONSTRAINT fk_resource_id_position FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund
+    ADD CONSTRAINT fk_resource_id_refund FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6285,6 +6778,14 @@ ALTER TABLE ONLY service_sale
 
 ALTER TABLE ONLY structure
     ADD CONSTRAINT fk_resource_id_structure FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_supplier; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY supplier
+    ADD CONSTRAINT fk_resource_id_supplier FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6464,6 +6965,22 @@ ALTER TABLE ONLY structure
 
 
 --
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY supplier_bank_detail
+    ADD CONSTRAINT fk_supplier_id_supplier_bank_detail FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY supplier_bperson
+    ADD CONSTRAINT fk_supplier_id_supplier_bperson FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6501,6 +7018,14 @@ ALTER TABLE ONLY tour_point
 
 ALTER TABLE ONLY tour_service_item
     ADD CONSTRAINT fk_tour_id_tour_service_item FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_touroperator_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_touroperator_id_outgoing FOREIGN KEY (invoice_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
