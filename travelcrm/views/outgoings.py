@@ -6,14 +6,15 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.outgoing import Outgoing
-from ..models.address import Address
+from travelcrm.models.outgoing import Outgoing
 from ..models.invoice import Invoice
 from ..lib.qb.outgoings import OutgoingsQueryBuilder
 from ..lib.bl.invoices import get_factory_by_invoice_id
+from ..lib.bl.employees import get_employee_structure
+from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.outgoings import OutgoingSchema, OutgoingCurrencySchema
+from travelcrm.forms.outgoings import OutgoingSchema, OutgoingCurrencySchema
 
 
 log = logging.getLogger(__name__)
@@ -74,7 +75,12 @@ class Outgoings(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Outgoing')}
+        auth_employee = get_auth_employee(self.request)
+        structure = get_employee_structure(auth_employee)
+        return {
+            'title': _(u'Add Outgoing'),
+            'structure_id': structure.id
+        }
 
     @view_config(
         name='add',

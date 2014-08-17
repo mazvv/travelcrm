@@ -99,6 +99,7 @@ class GeneralQueryBuilder(object):
         assert isinstance(limit, int), type(limit)
         assert isinstance(page, int), type(page)
 
+        page = page or 1
         offset = limit * (page - 1)
         if limit:
             self.query = self.query.limit(limit).offset(offset)

@@ -14,8 +14,8 @@ from ..models import (
 )
 
 
-outgoing_transactions = Table(
-    'outgoing_transactions',
+outgoing_transaction = Table(
+    'outgoing_transaction',
     Base.metadata,
     Column(
         'outgoing_id',
@@ -24,7 +24,7 @@ outgoing_transactions = Table(
             'outgoing.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_outgoing_id_outgoing_transactions',
+            name='fk_outgoing_id_outgoing_transaction',
         ),
         primary_key=True,
     ),
@@ -35,7 +35,7 @@ outgoing_transactions = Table(
             'fin_transaction.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_fin_transaction_id_outgoing_transactions',
+            name='fk_fin_transaction_id_outgoing_transaction',
         ),
         primary_key=True,
     )
@@ -60,6 +60,35 @@ class Outgoing(Base):
         ),
         nullable=False,
     )
+    account_id = Column(
+        Integer,
+        ForeignKey(
+            'account.id',
+            name="fk_account_id_outgoing",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
+    account_item_id = Column(
+        Integer,
+        ForeignKey(
+            'account_item.id',
+            name="fk_account_item_id_outgoing",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
+    invoice_id = Column(
+        Integer,
+        ForeignKey(
+            'invoice.id',
+            name="fk_invoice_id_outgoing",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -70,9 +99,18 @@ class Outgoing(Base):
         cascade="all,delete",
         uselist=False,
     )
+    invoice = relationship(
+        'Invoice',
+        backref=backref(
+            'outgoings',
+            uselist=True,
+            lazy='dynamic',
+        ),
+        uselist=False,
+    )
     transactions = relationship(
         'FinTransaction',
-        secondary=outgoing_transactions,
+        secondary=outgoing_transaction,
         backref=backref(
             'outgoing',
             uselist=False,

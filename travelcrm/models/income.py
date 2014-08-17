@@ -14,8 +14,8 @@ from ..models import (
 )
 
 
-income_transactions = Table(
-    'income_transactions',
+income_transaction = Table(
+    'income_transaction',
     Base.metadata,
     Column(
         'income_id',
@@ -24,7 +24,7 @@ income_transactions = Table(
             'income.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_income_id_income_transactions',
+            name='fk_income_id_income_transaction',
         ),
         primary_key=True,
     ),
@@ -35,7 +35,7 @@ income_transactions = Table(
             'fin_transaction.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_fin_transaction_id_income_transactions',
+            name='fk_fin_transaction_id_income_transaction',
         ),
         primary_key=True,
     )
@@ -91,7 +91,7 @@ class Income(Base):
     )
     transactions = relationship(
         'FinTransaction',
-        secondary=income_transactions,
+        secondary=income_transaction,
         backref=backref(
             'income',
             uselist=False,

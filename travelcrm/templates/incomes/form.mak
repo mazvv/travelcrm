@@ -59,7 +59,7 @@
                 ${h.tags.title(_(u"sum currency"), False, "currency")}
             </div>
             <div class="ml15">
-                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="easyui-textbox w20", disabled=True)}
+                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="easyui-textbox w20", data_options="disabled:true")}
             </div>
         </div>
         <div class="form-buttons">

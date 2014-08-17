@@ -7,7 +7,7 @@ from . import ResourcesQueryBuilder
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.resource_type import ResourceType
-from ...models.income import Income
+from ...models.outgoing import Outgoing
 from ...models.invoice import Invoice
 from ...models.account import Account
 from ...models.currency import Currency
@@ -19,71 +19,34 @@ from ...lib.utils.common_utils import parse_date
 
 class OutgoingsQueryBuilder(ResourcesQueryBuilder):
 
-    _subq_invoice_resource_data = query_resource_data().subquery()
-    _subq_resource_type = (
-        DBSession.query(ResourceType.humanize, Resource.id)
-        .join(Resource, ResourceType.resources)
-        .subquery()
-    )
-    _sum_subq = (
-        DBSession.query(
-            func.sum(FinTransaction.sum).label('sum'),
-            Income.id,
-            FinTransaction.date,
-        )
-        .join(Income, FinTransaction.income)
-        .group_by(Income.id, FinTransaction.date)
-        .subquery()
-    )
-
     _fields = {
-        'id': Income.id,
-        '_id': Income.id,
-        'invoice_id': Income.invoice_id,
-        'date': _sum_subq.c.date,
-        'customer': _subq_invoice_resource_data.c.customer,
-        'resource_type': _subq_resource_type.c.humanize,
-        'currency': Currency.iso_code,
-        'sum': _sum_subq.c.sum,
-        'account_name': Account.name,
-        'account_type': Account.account_type
+        'id': Outgoing.id,
+        '_id': Outgoing.id,
+        'invoice_id': Outgoing.invoice_id,
     }
     _simple_search_fields = [
-        _subq_invoice_resource_data.c.customer,
+
     ]
 
     def __init__(self, context):
-        super(IncomesQueryBuilder, self).__init__(context)
+        super(OutgoingsQueryBuilder, self).__init__(context)
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
         self.query = (
             self.query
-            .join(Income, Resource.income)
-            .join(Invoice, Income.invoice)
-            .join(Account, Invoice.account)
-            .join(Currency, Account.currency)
-            .join(
-                self._subq_invoice_resource_data,
-                self._subq_invoice_resource_data.c.invoice_id
-                == Invoice.id
-            )
-            .join(
-                self._subq_resource_type,
-                self._subq_resource_type.c.id
-                == self._subq_invoice_resource_data.c.resource_id
-            )
-            .join(self._sum_subq, self._sum_subq.c.id == Income.id)
+            .join(Outgoing, Resource.outgoing)
+            .outerjoin(Invoice, Outgoing.invoice)
         )
         self.query = self.query.add_columns(*fields)
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
-            self.query = self.query.filter(Income.id.in_(id))
+            self.query = self.query.filter(Outgoing.id.in_(id))
 
     def advanced_search(self, **kwargs):
-        super(IncomesQueryBuilder, self).advanced_search(**kwargs)
+        super(OutgoingsQueryBuilder, self).advanced_search(**kwargs)
         if 'invoice_id' in kwargs:
             self._filter_invoice(kwargs.get('invoice_id'))
         if 'account_id' in kwargs:

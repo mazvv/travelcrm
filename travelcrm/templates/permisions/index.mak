@@ -52,7 +52,7 @@
         </div>
         <div class="ml25 tr">
             <div class="search">
-                ${searchbar(_id)}
+                ${searchbar(_id, prompt=_(u'Enter resource type name'))}
             </div>
         </div>
     </div>

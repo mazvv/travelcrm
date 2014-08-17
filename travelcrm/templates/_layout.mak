@@ -13,6 +13,7 @@ ${h.tags.Doctype().html5()}
             request.static_url('travelcrm:static/js/jquery-1.10.2.min.js'), 
             request.static_url('travelcrm:static/js/jquery-migrate-1.2.1.min.js'),
             request.static_url('travelcrm:static/js/jeasyui/jquery.easyui.min.js'),
+	    request.static_url('travelcrm:static/js/jeasyui/jquery.easyui.patch.js'),
             request.static_url('travelcrm:static/js/jquery-te-1.4.0.min.js'),
             request.static_url('travelcrm:static/js/jeasyui/locale/easyui-lang-%s.js' % h.common.get_locale_name()),
             request.static_url('travelcrm:static/js/main.js')

@@ -27,8 +27,9 @@ from ..lib.utils.common_utils import get_locale_name
 from ..lib.bl.invoices import (
     query_resource_data,
     query_invoice_payments,
+    query_invoice_payments_transactions
 )
-from travelcrm.lib.bl.invoices import get_factory_by_invoice_id
+from ..lib.bl.invoices import get_factory_by_invoice_id
 
 log = logging.getLogger(__name__)
 
@@ -325,6 +326,7 @@ class Invoices(object):
             'footer': [{
                 'name': _(u'total'),
                 'cnt': total_cnt,
+
                 'price': format_decimal(total_sum, locale=get_locale_name())
             }]
         }
@@ -356,7 +358,7 @@ class Invoices(object):
             'footer': [{
                 'name': _(u'total'),
                 'cnt': total_cnt,
-                'price': format_decimal(total_sum, locale=get_locale_name())
+                'price': format_decimal(total_sum, locale=get_locale_name()),
             }]
         }
 
@@ -369,6 +371,26 @@ class Invoices(object):
     )
     def _payments_info(self):
         query = query_invoice_payments(self.request.params.get('id'))
+        total_sum = sum(row.sum for row in query)
+        return {
+            'rows': query_serialize(query),
+            'footer': [{
+                'date': _(u'total'),
+                'sum': format_decimal(total_sum, locale=get_locale_name())
+            }]
+        }
+
+    @view_config(
+        name='transactions_info',
+        context='..resources.invoices.Invoices',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _transactions_info(self):
+        query = query_invoice_payments_transactions(
+            self.request.params.get('id')
+        )
         total_sum = sum(row.sum for row in query)
         return {
             'rows': query_serialize(query),

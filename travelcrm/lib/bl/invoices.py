@@ -9,8 +9,6 @@ from ...lib.utils.resources_utils import (
     get_resources_types_by_interface,
     get_resource_class
 )
-from ...lib.utils.common_utils import money_cast
-from ...lib.bl.currencies_rates import query_convert_rates
 
 from ...models import DBSession
 from ...models.invoice import Invoice
@@ -19,6 +17,7 @@ from ...models.income import Income
 from ...models.currency import Currency
 from ...models.account import Account
 from ...models.fin_transaction import FinTransaction
+from ...models.account_item import AccountItem
 
 
 def get_invoices_factories_resources_types():
@@ -80,7 +79,26 @@ def query_invoice_payments_accounts_items_grouped(invoice_id):
             FinTransaction.account_item_id
         )
         .join(Income, FinTransaction.income)
-        .join(Invoice, Income.invoice)
-        .filter(Invoice.id == invoice_id)
+        .filter(Income.invoice_id == invoice_id)
         .group_by(FinTransaction.account_item_id)
+    )
+
+
+def query_invoice_payments_transactions(invoice_id):
+    return (
+        DBSession.query(
+            FinTransaction.id,
+            FinTransaction.sum,
+            FinTransaction.account_item_id,
+            FinTransaction.date,
+            AccountItem.name,
+            Currency.iso_code,
+        )
+        .join(Income, FinTransaction.income)
+        .join(AccountItem, FinTransaction.account_item)
+        .join(Invoice, Income.invoice)
+        .join(Account, Invoice.account)
+        .join(Currency, Account.currency)
+        .filter(Invoice.id == invoice_id)
+        .order_by(FinTransaction.date)
     )

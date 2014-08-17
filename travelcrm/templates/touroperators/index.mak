@@ -19,6 +19,21 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/touroperators/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
+            detailFormatter: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
+            },          
             onBeforeLoad: function(param){
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
@@ -61,7 +76,7 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id)}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"updated"))}

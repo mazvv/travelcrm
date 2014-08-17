@@ -353,7 +353,6 @@ form{
 }
 form a{
     text-decoration: none;
-    border-bottom: 1px dashed;
 }
 form a:hover{
     border: none;
@@ -410,7 +409,7 @@ span.error.as-text span{
 input{
 	outline: none;
 }
-.textbox{
+.textbox, .textbox-text{
     -webkit-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
     border-radius: 0px !important;

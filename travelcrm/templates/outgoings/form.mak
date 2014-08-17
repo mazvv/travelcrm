@@ -38,11 +38,24 @@
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"invoice"), True, "invoice_id")}
+                ${h.tags.title(_(u"invoice"), False, "invoice_id")}
             </div>
             <div class="ml15">
                 ${h.fields.invoices_combobox_field(request, item.invoice_id if item else None, options="onSelect: function(){currency_%s();}" % _id)}
                 ${h.common.error_container(name='invoice_id')}
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"payment account"), True, "account_id")}
+            </div>
+            <div class="ml15">
+                ${h.fields.accounts_combobox_field(
+                    request, item.account_id if item else None, 
+                    show_toolbar=False, structure_id=structure_id,
+                    options="onSelect: function(index, data){calc_sum_%s();}" % _id
+                )}
+                ${h.common.error_container(name='account_id')}
             </div>
         </div>
         <div class="form-field">

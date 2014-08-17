@@ -14,7 +14,6 @@ from ..models.commission import Commission
 from ..lib.qb.touroperators import TouroperatorsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.touroperators import TouroperatorSchema
-from travelcrm.models.tour_point import TourPoint
 
 
 log = logging.getLogger(__name__)
@@ -170,6 +169,19 @@ class Touroperators(object):
                 'error_message': _(u'Please, check errors'),
                 'errors': e.asdict()
             }
+
+    @view_config(
+        name='details',
+        context='..resources.touroperators.Touroperators',
+        request_method='GET',
+        renderer='travelcrm:templates/touroperators/details.mak',
+        permission='view'
+    )
+    def details(self):
+        touroperator = Touroperator.get(self.request.params.get('id'))
+        return {
+            'item': touroperator,
+        }
 
     @view_config(
         name='delete',
