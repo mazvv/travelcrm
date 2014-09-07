@@ -27,6 +27,7 @@ from ...models.currency import Currency
 from ...models.person import Person
 from ...models.service_item import ServiceItem
 from ...models.invoice import Invoice
+from ...models.liability import Liability
 
 from ...lib.bl.persons import query_person_contacts, query_person_passports
 from ...lib.utils.common_utils import (
@@ -106,6 +107,7 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         'customer_citizen_passport': _subq_customer_passports.c.citizen,
         'customer_foreign_passport': _subq_customer_passports.c.foreign,
         'invoice_id': Invoice.id,
+        'liability_id': Liability.id,
     }
 
     _simple_search_fields = [
@@ -140,6 +142,7 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
                 self._subq_services.c.id == Tour.id
             )
             .outerjoin(Invoice, Tour.invoice)
+            .outerjoin(Liability, Tour.liability)
         )
         self.query = self.query.add_columns(*fields)
 

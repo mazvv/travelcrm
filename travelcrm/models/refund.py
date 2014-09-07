@@ -60,26 +60,6 @@ class Refund(Base):
         ),
         nullable=False,
     )
-    account_id = Column(
-        Integer,
-        ForeignKey(
-            'account.id',
-            name="fk_account_id_refund",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
-    account_item_id = Column(
-        Integer,
-        ForeignKey(
-            'account_item.id',
-            name="fk_account_item_id_refund",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     invoice_id = Column(
         Integer,
         ForeignKey(
@@ -134,3 +114,8 @@ class Refund(Base):
     def date(self):
         assert self.transactions
         return self.transactions[0].date
+
+    def rollback(self):
+        for transaction in self.transactions:
+            DBSession.delete(transaction)
+        DBSession.flush(self.transactions)

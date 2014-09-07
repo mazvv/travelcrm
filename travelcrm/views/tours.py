@@ -16,12 +16,17 @@ from ..lib.qb.tours import (
     ToursPointsQueryBuilder,
 )
 from ..resources.invoices import Invoices
+from ..resources.liabilities import Liabilities
 
 from ..lib.bl.tours import calc_base_price
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import (
+    get_resource_type_by_resource,
+)
 from ..forms.tours import (
     TourSchema,
     TourPointSchema,
+    SettingsSchema,
 )
 
 
@@ -98,9 +103,10 @@ class Tours(object):
         schema = TourSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params.mixed())
+            settings = self.context.get_settings()
             tour = Tour(
                 deal_date=controls.get('deal_date'),
-                service_id=controls.get('service_id'),
+                service_id=settings.get('service_id'),
                 advsource_id=controls.get('advsource_id'),
                 touroperator_id=controls.get('touroperator_id'),
                 customer_id=controls.get('customer_id'),
@@ -161,10 +167,11 @@ class Tours(object):
         schema = TourSchema().bind(request=self.request)
         tour = Tour.get(self.request.params.get('id'))
         try:
+            settings = self.context.get_settings()
             controls = schema.deserialize(self.request.params.mixed())
             tour.deal_date = controls.get('deal_date')
             tour.advsource_id = controls.get('advsource_id')
-            tour.service_id = controls.get('service_id')
+            tour.service_id = settings.get('service_id'),
             tour.touroperator_id = controls.get('touroperator_id')
             tour.customer_id = controls.get('customer_id')
             tour.adults = controls.get('adults')
@@ -410,3 +417,56 @@ class Tours(object):
                     )
                 )
             )
+
+    @view_config(
+        name='liability',
+        context='..resources.tours.Tours',
+        request_method='GET',
+        permission='liability'
+    )
+    def liabilities(self):
+        tour = Tour.get(self.request.params.get('id'))
+        if tour:
+            return HTTPFound(
+                self.request.resource_url(
+                    Liabilities(self.request),
+                    'add' if not tour.liability else 'edit',
+                    query=(
+                        {'resource_id': tour.resource.id}
+                    )
+                )
+            )
+
+    @view_config(
+        name='settings',
+        context='..resources.tours.Tours',
+        request_method='GET',
+        renderer='travelcrm:templates/tours/settings.mak',
+        permission='settings',
+    )
+    def settings(self):
+        rt = get_resource_type_by_resource(self.context)
+        return {
+            'title': _(u'Settings'),
+            'rt': rt,
+        }
+
+    @view_config(
+        name='settings',
+        context='..resources.tours.Tours',
+        request_method='POST',
+        renderer='json',
+        permission='settings',
+    )
+    def _settings(self):
+        schema = SettingsSchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            rt = get_resource_type_by_resource(self.context)
+            rt.settings = {'service_id': controls.get('service_id')}
+            return {'success_message': _(u'Saved')}
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }

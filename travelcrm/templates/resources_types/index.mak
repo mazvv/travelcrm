@@ -33,6 +33,7 @@
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'humanize',sortable:true,width:200">${_(u"humanize")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
+            <th data-options="field:'customizable',sortable:true,width:26,formatter:function(value, row){if (value) return $('<div>').append($('<span>').addClass('fa fa-cog')).html();}" align="center">${_(u's.')}</th>
             <th data-options="field:'modifydt',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -64,6 +65,12 @@
                 </a>
                 % endif
             </div>
+            % if _context.has_permision('settings'):
+            <a href="#" class="button _action" 
+                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'settings')}'">
+                <span class="fa fa-cog"></span>${_(u'Settings')}
+            </a>
+            % endif
         </div>
         <div class="ml45 tr">
         	<div class="search">

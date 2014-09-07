@@ -43,7 +43,7 @@ def get_resource_class(key):
         resource = getattr(rt_module, rt.resource)
         return resource
     except:
-        raise ResourceClassNotFound()
+        raise ResourceClassNotFound(key)
 
 
 def get_resource_type_by_resource(resource):
@@ -77,3 +77,8 @@ def get_resources_types_by_interface(interface):
         except DoesNotImplement:
             continue
     return res
+
+
+def get_resource_settings(resource):
+    rt = get_resource_type_by_resource(resource)
+    return rt.settings

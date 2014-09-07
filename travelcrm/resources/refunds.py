@@ -4,6 +4,7 @@ from zope.interface import implementer
 
 from ..interfaces import (
     IResourceType,
+    IOutgoingPaymentFactory,
 )
 from ..resources import (
     Root,
@@ -11,10 +12,12 @@ from ..resources import (
 from ..resources import (
     ResourceTypeBase
 )
+from ..lib.bl.refunds import RefundPaymentsFactory
 from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
+@implementer(IOutgoingPaymentFactory)
 class Refunds(ResourceTypeBase):
 
     __name__ = 'refunds'
@@ -30,4 +33,9 @@ class Refunds(ResourceTypeBase):
             ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
+            ('settings', _(u'settings')),
         ]
+
+    @staticmethod
+    def get_outgoing_payment_factory():
+        return RefundPaymentsFactory

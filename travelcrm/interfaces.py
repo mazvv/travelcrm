@@ -18,3 +18,30 @@ class IInvoiceFactory(Interface):
         """ Method that returns class instance for invoice interfaces
         This method must be static
         """
+
+
+class ILiabilityFactory(Interface):
+    """ Resource that can be source of Liabilities"""
+
+    def get_liability_factory():
+        """ Method that returns class instance for invoice interfaces
+        This method must be static
+        """
+
+
+class IIncomePaymentFactory(Interface):
+    """ Resource that can produce Income Transactions """
+
+    def get_income_payment_factory():
+        """ Method that returns class instance for income interfaces
+        This method must be static
+        """
+
+
+class IOutgoingPaymentFactory(Interface):
+    """ Resource that can produce Outgoing Transactions """
+
+    def get_outgoing_payment_factory():
+        """ Method that returns class instance for outgoing interfaces
+        This method must be static
+        """

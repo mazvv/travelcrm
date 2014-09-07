@@ -2,6 +2,7 @@
 
 import random
 from uuid import uuid4
+from decimal import Decimal, ROUND_DOWN
 
 from babel.dates import format_date as fd, format_datetime as fdt
 from babel.dates import parse_date as pd
@@ -73,19 +74,29 @@ def get_base_currency():
     return _get_settings_value('company.base_currency')
 
 
+def get_date_format():
+    return _get_settings_value('date.format')
+
+
+def get_datetime_format():
+    return _get_settings_value('datetime.format')
+
+
 def money_cast(attr):
+    if isinstance(attr, (Decimal, int, float)):
+        return Decimal(attr).quantize('.01', rounding=ROUND_DOWN)
     return cast(attr, Numeric(16, 2))
 
 
 def format_date(value):
     return fd(
-        value, format="short", locale=get_locale_name()
+        value, format=get_date_format(), locale=get_locale_name()
     )
 
 
 def format_datetime(value):
     return fdt(
-        value, format="short", locale=get_locale_name()
+        value, format=get_datetime_format(), locale=get_locale_name()
     )
 
 

@@ -7,14 +7,13 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from travelcrm.models.outgoing import Outgoing
-from ..models.invoice import Invoice
 from ..lib.qb.outgoings import OutgoingsQueryBuilder
 from ..lib.bl.invoices import get_factory_by_invoice_id
 from ..lib.bl.employees import get_employee_structure
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
 
-from travelcrm.forms.outgoings import OutgoingSchema, OutgoingCurrencySchema
+from travelcrm.forms.outgoings import OutgoingSchema
 
 
 log = logging.getLogger(__name__)
@@ -195,25 +194,3 @@ class Outgoings(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
-
-    @view_config(
-        name='currency',
-        context='..resources.outgoings.Outgoings',
-        request_method='POST',
-        renderer='json',
-        permission='add'
-    )
-    def currency(self):
-        schema = OutgoingCurrencySchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            invoice_id = controls.get('invoice_id')
-            invoice = Invoice.get(invoice_id)
-            return {
-                'currency': invoice.account.currency.iso_code
-            }
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }

@@ -62,9 +62,6 @@ class TourSchema(ResourceSchema):
         colander.Integer(),
         validator=customer_validator,
     )
-    service_id = colander.SchemaNode(
-        colander.Integer()
-    )
     advsource_id = colander.SchemaNode(
         colander.Integer(),
     )
@@ -166,4 +163,10 @@ class TourPointSchema(colander.Schema):
         colander.String(),
         validator=colander.Length(max=255),
         missing=None
+    )
+
+
+class SettingsSchema(colander.Schema):
+    service_id = colander.SchemaNode(
+        colander.Integer()
     )

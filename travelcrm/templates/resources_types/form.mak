@@ -34,6 +34,14 @@
                 ${h.common.error_container(name='resource')}
             </div>
         </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"customizable"), False, "customizable")}
+            </div>
+            <div class="ml15">
+                ${h.fields.yes_no_field(item.customizable if item else None, "customizable")}
+            </div>
+        </div>
         <div class="form-field mb05">
             <div class="dl15">
                  ${h.tags.title(_(u"description"), False, "description")}

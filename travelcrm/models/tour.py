@@ -43,6 +43,7 @@ tour_person = Table(
     ),
 )
 
+
 tour_service_item = Table(
     'tour_service_item',
     Base.metadata,
@@ -93,6 +94,34 @@ tour_invoice = Table(
             ondelete='restrict',
             onupdate='cascade',
             name='fk_invoice_id_tour_invoice',
+        ),
+        primary_key=True,
+    ),
+)
+
+
+tour_liability = Table(
+    'tour_liability',
+    Base.metadata,
+    Column(
+        'tour_id',
+        Integer,
+        ForeignKey(
+            'tour.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_tour_id_tour_liability',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'liability_id',
+        Integer,
+        ForeignKey(
+            'liability.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_liability_id_tour_liability',
         ),
         primary_key=True,
     ),
@@ -312,6 +341,16 @@ class Tour(Base):
     invoice = relationship(
         'Invoice',
         secondary=tour_invoice,
+        backref=backref(
+            'tour',
+            uselist=False,
+        ),
+        uselist=False,
+    )
+
+    liability = relationship(
+        'Liability',
+        secondary=tour_liability,
         backref=backref(
             'tour',
             uselist=False,

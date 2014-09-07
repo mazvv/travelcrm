@@ -2,7 +2,7 @@
 
 import colander
 
-from . import ResourceSchema
+from . import ResourceSchema, Date
 from ..lib.utils.common_utils import translate as _
 
 
@@ -16,7 +16,7 @@ def date_validator(node, kw):
                 node,
                 _(u"You must set end date for foreign passport")
             )
-    return colander.All(validator)
+    return validator
 
 
 class PassportSchema(ResourceSchema):
@@ -32,7 +32,7 @@ class PassportSchema(ResourceSchema):
         validator=colander.Length(min=2, max=24)
     )
     end_date = colander.SchemaNode(
-        colander.String(),
+        Date(),
         missing=None,
         validator=date_validator
     )

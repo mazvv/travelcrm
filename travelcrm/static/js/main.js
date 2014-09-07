@@ -126,7 +126,6 @@ function submit(form){
 
 function save_container_response(data){
 	var container = get_container();
-	console.log(container);
 	$(container).data('response', data);
 	return;
 }
@@ -403,3 +402,10 @@ function payment_indicator(percent){
 	el = $('<div>').append(el);
 	return el.html();
 }
+
+$.extend($.fn.textbox.defaults.inputEvents, {
+	keyup: function(e){
+		var t = $(e.data.target);
+		t.textbox('setValue', t.textbox('getText'));
+	}
+});

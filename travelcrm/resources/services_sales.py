@@ -11,7 +11,7 @@ from ..resources import (
 from ..resources import (
     ResourceTypeBase,
 )
-from ..lib.bl.services_sales import ServiceSaleInvoice
+from ..lib.bl.services_sales import ServiceSaleInvoiceFactory
 from ..lib.utils.common_utils import translate as _
 
 
@@ -39,4 +39,4 @@ class ServicesSales(ResourceTypeBase):
 
     @staticmethod
     def get_invoice_factory():
-        return ServiceSaleInvoice
+        return ServiceSaleInvoiceFactory

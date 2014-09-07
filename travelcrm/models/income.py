@@ -114,3 +114,8 @@ class Income(Base):
     def date(self):
         assert self.transactions
         return self.transactions[0].date
+
+    def rollback(self):
+        for transaction in self.transactions:
+            DBSession.delete(transaction)
+        DBSession.flush(self.transactions)

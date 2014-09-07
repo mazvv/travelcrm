@@ -57,3 +57,6 @@ class FinTransaction(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    def __repr__(self):
+        return "%s_%s: %s" % (self.__class__.__name__, self.id, self.sum)

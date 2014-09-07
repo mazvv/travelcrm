@@ -7,13 +7,10 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.income import Income
-from ..models.address import Address
-from ..models.invoice import Invoice
 from ..lib.qb.incomes import IncomesQueryBuilder
-from ..lib.bl.invoices import get_factory_by_invoice_id
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.incomes import IncomeSchema, IncomeCurrencySchema
+from ..forms.incomes import IncomeSchema
 
 
 log = logging.getLogger(__name__)
@@ -92,7 +89,7 @@ class Incomes(object):
                 invoice_id=controls.get('invoice_id'),
                 resource=self.context.create_resource()
             )
-            factory = get_factory_by_invoice_id(controls.get('invoice_id'))
+            factory = self.context.get_income_payment_factory()
             income.transactions = factory.make_payment(
                 controls.get('invoice_id'),
                 controls.get('date'),
@@ -133,8 +130,9 @@ class Incomes(object):
         income = Income.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
+            income.rollback()
             income.invoice_id = controls.get('invoice_id')
-            factory = get_factory_by_invoice_id(controls.get('invoice_id'))
+            factory = self.context.get_income_payment_factory()
             income.transactions = factory.make_payment(
                 controls.get('invoice_id'),
                 controls.get('date'),
@@ -189,25 +187,3 @@ class Incomes(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
-
-    @view_config(
-        name='currency',
-        context='..resources.incomes.Incomes',
-        request_method='POST',
-        renderer='json',
-        permission='add'
-    )
-    def currency(self):
-        schema = IncomeCurrencySchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            invoice_id = controls.get('invoice_id')
-            invoice = Invoice.get(invoice_id)
-            return {
-                'currency': invoice.account.currency.iso_code
-            }
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }

@@ -78,6 +78,11 @@
                     ${_(u"Add")}</a>
                 <a href="#" class="button _action" 
                     data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/services_items/copy',property:'with_row'
+                    ">
+                    ${_(u"Copy")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
                         container:'#${_id}',action:'dialog_open',url:'/services_items/edit',property:'with_row'
                     ">
                     ${_(u"Edit")}</a>

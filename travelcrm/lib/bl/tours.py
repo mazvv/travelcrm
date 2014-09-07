@@ -10,8 +10,12 @@ from ...models.invoice import Invoice
 from ...models.service_item import ServiceItem
 from ...models.service import Service
 from ...models.account_item import AccountItem
+from ...models.currency import Currency
 
-from ...lib.bl import InvoiceFactory
+from ...lib.bl import (
+    InvoiceFactory,
+    LiabilityFactory
+)
 from ...lib.bl.currencies_rates import query_convert_rates
 from ...lib.utils.common_utils import money_cast
 
@@ -41,7 +45,7 @@ def calc_base_price(tour):
     return tour
 
 
-class TourInvoice(InvoiceFactory):
+class TourInvoiceFactory(InvoiceFactory):
 
     @classmethod
     def bind_invoice(cls, resource_id, invoice):
@@ -178,5 +182,82 @@ class TourInvoice(InvoiceFactory):
                 money_cast(func.sum(subq.c.base_price) / rate).label('price')
             )
             .group_by(subq.c.id, subq.c.name)
+            .order_by(subq.c.name)
+        )
+
+
+class TourLiabilityFactory(LiabilityFactory):
+
+    @classmethod
+    def _get_resource(cls, resource_id):
+        return (
+            DBSession.query(Tour)
+            .filter(Tour.resource_id == resource_id)
+            .first()
+        )
+
+    @classmethod
+    def bind_liability(cls, resource_id, liability):
+        tour = cls._get_resource(resource_id)
+        tour.liability = liability
+        return tour
+
+    @classmethod
+    def get_source_date(cls, resource_id):
+        tour = cls._get_resource(resource_id)
+        return tour.deal_date
+
+    @classmethod
+    def get_liability(cls, resource_id):
+        tour = cls._get_resource(resource_id)
+        return tour.liability
+
+    @classmethod
+    def services_info(cls, resource_id):
+        tour = cls._get_resource(resource_id)
+        query = (
+            DBSession.query(
+                Service.id.label('id'),
+                Service.name.label('name'),
+                Tour.price.label('price'),
+                Currency.iso_code.label('currency'),
+                Currency.id.label('currency_id'),
+                Tour.touroperator_id.label('touroperator_id'),
+            )
+            .join(Service, Tour.service)
+            .join(Currency, Tour.currency)
+            .filter(Tour.id == tour.id)
+        )
+        query = query.union_all(
+            DBSession.query(
+                Service.id.label('id'),
+                Service.name.label('name'),
+                ServiceItem.price.label('price'),
+                Currency.iso_code.label('currency'),
+                Currency.id.label('currency_id'),
+                ServiceItem.touroperator_id.label('touroperator_id'),
+            )
+            .join(Tour, ServiceItem.tour)
+            .join(Service, ServiceItem.service)
+            .join(Currency, ServiceItem.currency)
+            .filter(Tour.id == tour.id)
+        )
+        subq = query.subquery()
+        return (
+            DBSession.query(
+                subq.c.id,
+                subq.c.name,
+                func.sum(subq.c.price).label('price'),
+                subq.c.currency,
+                subq.c.currency_id,
+                subq.c.touroperator_id,
+            )
+            .group_by(
+                subq.c.id,
+                subq.c.name,
+                subq.c.currency_id,
+                subq.c.currency,
+                subq.c.touroperator_id
+            )
             .order_by(subq.c.name)
         )

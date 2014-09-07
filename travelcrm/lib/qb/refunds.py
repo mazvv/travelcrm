@@ -19,10 +19,33 @@ from ...lib.utils.common_utils import parse_date
 
 class RefundsQueryBuilder(ResourcesQueryBuilder):
 
+    _subq_resource_data = query_resource_data().subquery()
+    _sum_payments = (
+        DBSession.query(
+            func.sum(FinTransaction.sum).label('sum'),
+            Refund.id,
+            FinTransaction.date,
+        )
+        .join(Refund, FinTransaction.refund)
+        .group_by(Refund.id, FinTransaction.date)
+        .subquery()
+    )
+    _subq_resource_type = (
+        DBSession.query(ResourceType.humanize, Resource.id)
+        .join(Resource, ResourceType.resources)
+        .subquery()
+    )
+
     _fields = {
         'id': Refund.id,
         '_id': Refund.id,
+        'date': _sum_payments.c.date,
         'invoice_id': Refund.invoice_id,
+        'customer': _subq_resource_data.c.customer,
+        'account_name': Account.name,
+        'sum': func.coalesce(_sum_payments.c.sum, 0),
+        'currency': Currency.iso_code,
+        'resource_type': _subq_resource_type.c.humanize,
     }
     _simple_search_fields = [
 
@@ -36,7 +59,24 @@ class RefundsQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(Refund, Resource.refund)
-            .outerjoin(Invoice, Refund.invoice)
+            .join(Invoice, Refund.invoice)
+            .join(Account, Invoice.account)
+            .join(Currency, Account.currency)
+            .join(
+                self._subq_resource_data,
+                self._subq_resource_data.c.invoice_id
+                == Invoice.id
+            )
+            .join(
+                self._subq_resource_type,
+                self._subq_resource_type.c.id
+                == self._subq_resource_data.c.resource_id
+            )
+            .outerjoin(
+                self._sum_payments,
+                self._sum_payments.c.id
+                == Refund.id
+            )
         )
         self.query = self.query.add_columns(*fields)
 

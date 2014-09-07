@@ -7,14 +7,13 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.refund import Refund
-from ..models.invoice import Invoice
 from ..lib.qb.refunds import RefundsQueryBuilder
-from ..lib.bl.invoices import get_factory_by_invoice_id
 from ..lib.bl.employees import get_employee_structure
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import get_resource_type_by_resource
 
-from travelcrm.forms.refunds import RefundSchema, RefundCurrencySchema
+from ..forms.refunds import RefundSchema, SettingsSchema
 
 
 log = logging.getLogger(__name__)
@@ -96,14 +95,14 @@ class Refunds(object):
             controls = schema.deserialize(self.request.params)
             refund = Refund(
                 invoice_id=controls.get('invoice_id'),
-                resource=self.context.create_resource()
+                resource=self.context.create_resource(),
             )
-            factory = get_factory_by_invoice_id(controls.get('invoice_id'))
-            refund.transactions = factory.make_payment(
-                controls.get('invoice_id'),
-                controls.get('date'),
-                controls.get('sum')
-            )
+            factory = self.context.get_outgoing_factory()
+            refund.transactions = [
+                factory.make_payment(
+                    controls.get('date'), controls.get('sum')
+                ),
+            ]
             DBSession.add(refund)
             DBSession.flush()
             return {
@@ -140,12 +139,13 @@ class Refunds(object):
         try:
             controls = schema.deserialize(self.request.params)
             refund.invoice_id = controls.get('invoice_id')
-            factory = get_factory_by_invoice_id(controls.get('invoice_id'))
-            refund.transactions = factory.make_payment(
-                controls.get('invoice_id'),
-                controls.get('date'),
-                controls.get('sum')
-            )
+            refund.rollback()
+            factory = self.context.get_outgoing_factory()
+            refund.transactions = [
+                factory.make_payment(
+                    controls.get('date'), controls.get('sum')
+                ),
+            ]
             return {
                 'success_message': _(u'Saved'),
                 'response': refund.id
@@ -197,21 +197,33 @@ class Refunds(object):
         return {'success_message': _(u'Deleted')}
 
     @view_config(
-        name='currency',
+        name='settings',
+        context='..resources.refunds.Refunds',
+        request_method='GET',
+        renderer='travelcrm:templates/refunds/settings.mak',
+        permission='settings',
+    )
+    def settings(self):
+        rt = get_resource_type_by_resource(self.context)
+        return {
+            'title': _(u'Settings'),
+            'rt': rt,
+        }
+
+    @view_config(
+        name='settings',
         context='..resources.refunds.Refunds',
         request_method='POST',
         renderer='json',
-        permission='add'
+        permission='settings',
     )
-    def currency(self):
-        schema = RefundCurrencySchema().bind(request=self.request)
+    def _settings(self):
+        schema = SettingsSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
-            invoice_id = controls.get('invoice_id')
-            invoice = Invoice.get(invoice_id)
-            return {
-                'currency': invoice.account.currency.iso_code
-            }
+            rt = get_resource_type_by_resource(self.context)
+            rt.settings = {'account_item_id': controls.get('account_item_id')}
+            return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
                 'error_message': _(u'Please, check errors'),

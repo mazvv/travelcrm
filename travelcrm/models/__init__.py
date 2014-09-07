@@ -64,3 +64,5 @@ from commission import Commission
 from supplier import Supplier
 from outgoing import Outgoing
 from refund import Refund
+from liability import Liability
+from liability_item import LiabilityItem

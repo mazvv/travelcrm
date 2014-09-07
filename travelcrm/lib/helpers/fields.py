@@ -40,6 +40,7 @@ from ...models.account import Account
 from ..utils.common_utils import (
     get_locale_name,
     gen_id,
+    get_date_format,
 )
 from ..utils.common_utils import translate as _
 
@@ -400,7 +401,9 @@ def date_field(value, name, options=None):
     if options:
         data_options += ",%s" % options
     if value:
-        value = format_date(value, format="short", locale=get_locale_name())
+        value = format_date(
+            value, format=get_date_format(), locale=get_locale_name()
+        )
     html = tags.text(
         name, value, class_="easyui-datebox text w10",
         id=id, **{'data-options': data_options}
@@ -418,7 +421,7 @@ def time_field(value, name, options=None):
     if options:
         data_options += ",%s" % options
     if value:
-        value = format_date(value, format="short", locale=get_locale_name())
+        value = format_date(value, format=get_date_format(), locale=get_locale_name())
     html = tags.text(
         name, value, class_="easyui-timespinner text w10",
         id=id, **{'data-options': data_options}
@@ -433,7 +436,7 @@ def datetime_field(value, name, options=None):
         data_options += ",%s" % options
     if value:
         value = format_datetime(
-            value, format="short", locale=get_locale_name()
+            value, format=get_date_format(), locale=get_locale_name()
         )
     html = tags.text(
         name, value, class_="easyui-datetimebox text w10",
@@ -2720,6 +2723,20 @@ def invoices_combobox_field(
                 'a', href='#',
                 class_='fa fa-pencil easyui-tooltip _action',
                 title=_(u'edit selected'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/invoices/info',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-info easyui-tooltip _action',
+                title=_(u'info'),
                 **kwargs
             )
         )

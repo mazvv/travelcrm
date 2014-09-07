@@ -3,6 +3,7 @@
 from sqlalchemy import (
     Integer,
     String,
+    Boolean,
     Column,
     UniqueConstraint,
     ForeignKey,
@@ -71,6 +72,9 @@ class ResourceType(Base):
     module = Column(
         String(length=128),
         nullable=False,
+    )
+    customizable = Column(
+        Boolean,
     )
     settings = Column(
         JSON,

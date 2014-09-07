@@ -4,11 +4,13 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.resource_type import ResourceType
 from ..lib.qb.resources_types import ResourcesTypesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import get_resource_class
 
 from ..forms.resources_types import ResourceTypeSchema
 
@@ -90,6 +92,7 @@ class ResourcesTypes(object):
                 humanize=controls.get('humanize'),
                 name=controls.get('name'),
                 resource=controls.get('resource'),
+                customizable=controls.get('customizable'),
                 description=controls.get('description'),
                 resource_obj=self.context.create_resource()
             )
@@ -134,6 +137,7 @@ class ResourcesTypes(object):
             resources_type.humanize = controls.get('humanize')
             resources_type.name = controls.get('name')
             resources_type.resource = controls.get('resource')
+            resources_type.customizable = controls.get('customizable')
             resources_type.description = controls.get('description')
             return {
                 'success_message': _(u'Saved'),
@@ -208,3 +212,24 @@ class ResourcesTypes(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='settings',
+        context='..resources.resources_types.ResourcesTypes',
+        request_method='GET',
+        renderer='travelcrm:templates/resources_types/settings.mak',
+        permission='settings'
+    )
+    def settings(self):
+        id = self.request.params.get('id')
+        rt = ResourceType.get(id)
+        if rt.customizable:
+            rt_ctx = get_resource_class(rt.name)
+            return HTTPFound(
+                location=self.request.resource_url(
+                    rt_ctx(self.request), 'settings'
+                )
+            )
+        return {
+            'title': _(u'Not Allowed')
+        }

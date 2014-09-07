@@ -23,7 +23,7 @@
             		dataType: 'json',
             		data: {'resource_id': resource_id, 'date': date, 'account_id': account_id},
             		success: function(json){
-            			if(json.invoice_sum) $('#${_form_id} [name=invoice_sum]').val(json.currency + ' ' + json.invoice_sum);
+            			if(json.invoice_sum) $('#${_form_id} .invoice_sum').textbox('setValue', json.currency + ' ' + json.invoice_sum);
             		}
             	});
             }
@@ -56,7 +56,7 @@
                 ${h.tags.title(_(u"invoice sum"), false, "invoice_sum")}
             </div>
             <div class="ml15">
-                ${h.tags.text('invoice_sum', '', class_="easyui-textbox w20", disabled=True)}
+                ${h.tags.text('invoice_sum', '', class_="easyui-textbox w20 invoice_sum", disabled=True)}
             </div>
         </div>
         % if item:

@@ -8,6 +8,7 @@ from babel.dates import parse_date
 from . import ResourceSchema, Date
 
 from ..models.invoice import Invoice
+from ..models.income import Income
 from ..lib.bl.invoices import (
     get_factory_by_invoice_id,
     get_bound_resource_by_invoice_id
@@ -29,6 +30,8 @@ def sum_validator(node, kw):
             )
         invoice_id = request.params.get('invoice_id')
         date = request.params.get('date')
+        income_id = request.params.get('id')
+        income = Income.get(income_id)
         invoice = Invoice.get(invoice_id)
         if not date or not invoice:
             return
@@ -42,6 +45,7 @@ def sum_validator(node, kw):
         base_sum = factory.get_base_sum(resource.id)
         payments = query_invoice_payments(invoice.id)
         payed_sum = sum(payment.sum for payment in payments)
+        payed_sum -= (income.sum if income else 0)
         max_sum = (
             Decimal((base_sum - payed_sum) / rate).quantize(Decimal('.01'))
         )
@@ -68,10 +72,4 @@ class IncomeSchema(ResourceSchema):
     sum = colander.SchemaNode(
         colander.Money(),
         validator=sum_validator
-    )
-
-
-class IncomeCurrencySchema(ResourceSchema):
-    invoice_id = colander.SchemaNode(
-        colander.Integer(),
     )

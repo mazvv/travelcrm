@@ -4,6 +4,7 @@ from zope.interface import implementer
 from ..interfaces import (
     IResourceType,
     IInvoiceFactory,
+    ILiabilityFactory,
 )
 from ..resources import (
     Root,
@@ -11,12 +12,16 @@ from ..resources import (
 from ..resources import (
     ResourceTypeBase,
 )
-from ..lib.bl.tours import TourInvoice
+from ..lib.bl.tours import (
+    TourInvoiceFactory,
+    TourLiabilityFactory
+)
 from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
 @implementer(IInvoiceFactory)
+@implementer(ILiabilityFactory)
 class Tours(ResourceTypeBase):
 
     __name__ = 'tours'
@@ -34,9 +39,14 @@ class Tours(ResourceTypeBase):
             ('delete', _(u'delete')),
             ('settings', _(u'settings')),
             ('invoice', _(u'invoice')),
+            ('liability', _(u'liability')),
             ('contract', _(u'contract')),
         ]
 
     @staticmethod
     def get_invoice_factory():
-        return TourInvoice
+        return TourInvoiceFactory
+
+    @staticmethod
+    def get_liability_factory():
+        return TourLiabilityFactory

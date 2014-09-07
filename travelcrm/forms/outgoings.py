@@ -69,9 +69,3 @@ class OutgoingSchema(ResourceSchema):
         colander.Money(),
         validator=sum_validator
     )
-
-
-class OutgoingCurrencySchema(ResourceSchema):
-    invoice_id = colander.SchemaNode(
-        colander.Integer(),
-    )

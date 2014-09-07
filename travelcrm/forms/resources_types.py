@@ -102,6 +102,10 @@ class ResourceTypeSchema(ResourceSchema):
         colander.String(),
         validator=resource_validator
     )
+    customizable = colander.SchemaNode(
+        colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
+        missing=False,
+    )
     description = colander.SchemaNode(
         colander.String(),
         validator=colander.Length(max=128),

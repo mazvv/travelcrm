@@ -147,6 +147,30 @@ class ServiceItems(object):
             }
 
     @view_config(
+        name='copy',
+        context='..resources.services_items.ServicesItems',
+        request_method='GET',
+        renderer='travelcrm:templates/services_items/form.mak',
+        permission='add'
+    )
+    def copy(self):
+        service_item = ServiceItem.get(self.request.params.get('id'))
+        return {
+            'item': service_item,
+            'title': _(u"Copy Service")
+        }
+
+    @view_config(
+        name='copy',
+        context='..resources.services_items.ServicesItems',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
         name='delete',
         context='..resources.services_items.ServicesItems',
         request_method='GET',

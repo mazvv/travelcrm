@@ -269,7 +269,8 @@ CREATE TABLE resource_type (
     resource_name character varying(32) NOT NULL,
     module character varying(128) NOT NULL,
     description character varying(128),
-    settings json
+    settings json,
+    customizable boolean
 );
 
 
@@ -1129,6 +1130,78 @@ ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
+-- Name: liability; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE liability (
+    id integer NOT NULL,
+    date date NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+ALTER TABLE public.liability OWNER TO mazvv;
+
+--
+-- Name: liability_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE liability_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.liability_id_seq OWNER TO mazvv;
+
+--
+-- Name: liability_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE liability_id_seq OWNED BY liability.id;
+
+
+--
+-- Name: liability_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE liability_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    liability_id integer,
+    touroperator_id integer NOT NULL,
+    price numeric(16,2) NOT NULL,
+    currency_id integer NOT NULL,
+    service_id integer NOT NULL
+);
+
+
+ALTER TABLE public.liability_item OWNER TO mazvv;
+
+--
+-- Name: liability_item_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE liability_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.liability_item_id_seq OWNER TO mazvv;
+
+--
+-- Name: liability_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE liability_item_id_seq OWNED BY liability_item.id;
+
+
+--
 -- Name: licence; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1442,8 +1515,6 @@ ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 CREATE TABLE refund (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    account_id integer NOT NULL,
-    account_item_id integer NOT NULL,
     invoice_id integer NOT NULL
 );
 
@@ -1640,6 +1711,18 @@ CREATE TABLE service_sale_invoice (
 
 
 ALTER TABLE public.service_sale_invoice OWNER TO mazvv;
+
+--
+-- Name: service_sale_liability; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE service_sale_liability (
+    service_sale_id integer NOT NULL,
+    liability_id integer NOT NULL
+);
+
+
+ALTER TABLE public.service_sale_liability OWNER TO mazvv;
 
 --
 -- Name: service_sale_service_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1904,6 +1987,18 @@ CREATE TABLE tour_invoice (
 
 
 ALTER TABLE public.tour_invoice OWNER TO mazvv;
+
+--
+-- Name: tour_liability; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE tour_liability (
+    tour_id integer NOT NULL,
+    liability_id integer NOT NULL
+);
+
+
+ALTER TABLE public.tour_liability OWNER TO mazvv;
 
 --
 -- Name: tour_person; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -2203,6 +2298,20 @@ ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY liability ALTER COLUMN id SET DEFAULT nextval('liability_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY liability_item ALTER COLUMN id SET DEFAULT nextval('liability_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY licence ALTER COLUMN id SET DEFAULT nextval('licence_id_seq'::regclass);
 
 
@@ -2385,28 +2494,28 @@ SELECT pg_catalog.setval('_employees_rid_seq', 29, true);
 -- Name: _regions_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_regions_rid_seq', 34, true);
+SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 
 
 --
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 5789, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 5908, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1575, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1701, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 113, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 115, true);
 
 
 --
@@ -2472,6 +2581,8 @@ COPY account_item (id, resource_id, name, item_type) FROM stdin;
 1	1426	Tours Sales	0
 2	1431	Additional Services Sale	0
 3	1432	Rent Payments	1
+4	1608	Refunds	1
+5	1609	Payments To Suppliers	1
 \.
 
 
@@ -2479,7 +2590,7 @@ COPY account_item (id, resource_id, name, item_type) FROM stdin;
 -- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('account_item_id_seq', 3, true);
+SELECT pg_catalog.setval('account_item_id_seq', 5, true);
 
 
 --
@@ -2499,6 +2610,11 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 21	1414	14	01011	Leskova str., 9
 22	1418	33	12345	Naberegnaya Pobedy, 50
 23	1469	34	09909	Lavrska, str 34
+24	1585	14	08967	Solomii Krushelnickoi, 34/3, ap. 45
+25	1614	14	678565	Pobedy, 56/2, ap.67
+26	1623	14	8934	Artema 8d, 47
+27	1644	34	67234	Sichovih Strilciv, 2.
+28	1652	14	54415	Vasilkovskaya 45/56, 19
 \.
 
 
@@ -2506,7 +2622,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('address_id_seq', 23, true);
+SELECT pg_catalog.setval('address_id_seq', 28, true);
 
 
 --
@@ -2535,7 +2651,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-2f28d3d15605
+1cfe6524723e
 \.
 
 
@@ -2613,6 +2729,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 6	1560	Ivan	Gonchar		Account Manager
 7	1563	Alexander	Tkachuk		manager
 5	1553	Sergey	Vlasov		Main account manager
+8	1578	Anna			Manager
 \.
 
 
@@ -2630,6 +2747,7 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 6	63
 7	64
 7	65
+8	66
 \.
 
 
@@ -2637,7 +2755,7 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 -- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('bperson_id_seq', 7, true);
+SELECT pg_catalog.setval('bperson_id_seq', 8, true);
 
 
 --
@@ -2652,6 +2770,7 @@ COPY commission (id, date_from, resource_id, service_id, percentage, price, curr
 18	2014-06-28	1539	4	0.00	10.00	56
 19	2014-06-28	1540	3	0.00	10.00	56
 20	2014-06-28	1541	1	0.00	600.00	56
+21	2014-08-17	1579	5	12.00	0.00	56
 \.
 
 
@@ -2659,7 +2778,7 @@ COPY commission (id, date_from, resource_id, service_id, percentage, price, curr
 -- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('commission_id_seq', 20, true);
+SELECT pg_catalog.setval('commission_id_seq', 21, true);
 
 
 --
@@ -2709,6 +2828,17 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 63	i_gonchar@i-tele.com	email	1559
 64	+380953434358	phone	1561
 65	mega_tkach@ukr.net	email	1562
+66	AnnaNews	skype	1577
+67	+380672568976	phone	1581
+68	+380672346534	phone	1591
+69	+380500567765	phone	1610
+70	artyuh87@gmail.com	email	1611
+71	+380503435436	phone	1620
+72	grach18@ukr.net	email	1621
+73	+380975642876	phone	1624
+74	+380665638900	phone	1640
+75	karpuha1990@ukr.net	email	1641
+76	+380502235686	phone	1650
 \.
 
 
@@ -2716,7 +2846,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 65, true);
+SELECT pg_catalog.setval('contact_id_seq', 76, true);
 
 
 --
@@ -2738,6 +2868,7 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 17	1343	IT	Italy
 11	1100	DE	Germany
 18	1351	GR	Greece
+19	1646	FR	France
 \.
 
 
@@ -2745,7 +2876,7 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 -- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('country_id_seq', 18, true);
+SELECT pg_catalog.setval('country_id_seq', 19, true);
 
 
 --
@@ -2776,6 +2907,7 @@ COPY currency_rate (id, resource_id, date, currency_id, rate) FROM stdin;
 9	1504	2014-06-20	54	16.70
 10	1505	2014-06-20	57	12.00
 11	1506	2014-06-20	44	0.37
+12	1597	2014-08-21	54	18.20
 \.
 
 
@@ -2783,7 +2915,7 @@ COPY currency_rate (id, resource_id, date, currency_id, rate) FROM stdin;
 -- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('currency_rate_id_seq', 11, true);
+SELECT pg_catalog.setval('currency_rate_id_seq', 12, true);
 
 
 --
@@ -2847,22 +2979,16 @@ SELECT pg_catalog.setval('employees_appointments_h_id_seq', 8, true);
 --
 
 COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
-6	1	39000.00	2014-06-06
 7	1	30000.00	2014-06-08
-8	1	37000.00	2014-06-06
 9	1	39000.00	2014-06-06
 10	1	10.00	2014-06-15
-11	2	334.00	2014-06-18
-12	2	334.00	2014-06-18
+98	2	1638.00	2014-08-23
+99	1	64955.80	2014-08-23
+105	4	819.00	2014-08-24
+106	2	960.00	2014-08-25
+107	1	8040.00	2014-08-25
+109	1	10.00	2014-08-31
 47	2	1474.00	2014-06-18
-49	2	2298.00	2014-06-22
-50	1	27702.00	2014-06-22
-53	2	137.60	2014-06-22
-54	1	862.40	2014-06-22
-55	2	0.00	2014-06-22
-56	1	2693.60	2014-06-22
-57	2	137.60	2014-06-22
-58	1	862.40	2014-06-22
 59	2	0.00	2014-06-22
 60	1	2693.60	2014-06-22
 61	2	500.00	2014-07-01
@@ -2874,7 +3000,7 @@ COPY fin_transaction (id, account_item_id, sum, date) FROM stdin;
 -- Name: fin_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('fin_transaction_id_seq', 62, true);
+SELECT pg_catalog.setval('fin_transaction_id_seq', 109, true);
 
 
 --
@@ -2936,6 +3062,8 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 32	1367	4	Rehana Sharm Resort	31
 33	1386	4	Fantasia	32
 34	1470	5	Villa Augusto	21
+35	1590	5	Lindos Blue	36
+36	1649	5	Sezz Saint-Tropez	37
 \.
 
 
@@ -2943,7 +3071,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 -- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('hotel_id_seq', 34, true);
+SELECT pg_catalog.setval('hotel_id_seq', 36, true);
 
 
 --
@@ -2981,6 +3109,9 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 23	1509	14
 24	1546	13
 25	1547	13
+33	1607	16
+34	1639	17
+35	1660	19
 \.
 
 
@@ -2988,7 +3119,7 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('income_id_seq', 25, true);
+SELECT pg_catalog.setval('income_id_seq', 35, true);
 
 
 --
@@ -2996,9 +3127,14 @@ SELECT pg_catalog.setval('income_id_seq', 25, true);
 --
 
 COPY income_transaction (income_id, fin_transaction_id) FROM stdin;
+33	98
+33	99
 6	7
+34	106
 5	9
 7	10
+34	107
+35	109
 20	47
 23	59
 23	60
@@ -3017,6 +3153,9 @@ COPY invoice (id, date, resource_id, account_id) FROM stdin;
 13	2014-06-16	1487	3
 15	2014-06-16	1503	3
 14	2014-06-22	1502	4
+16	2014-08-22	1598	3
+17	2014-08-24	1634	3
+19	2014-08-26	1657	3
 \.
 
 
@@ -3024,7 +3163,42 @@ COPY invoice (id, date, resource_id, account_id) FROM stdin;
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 15, true);
+SELECT pg_catalog.setval('invoice_id_seq', 19, true);
+
+
+--
+-- Data for Name: liability; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY liability (id, date, resource_id) FROM stdin;
+6	2014-09-07	1699
+7	2014-09-07	1701
+\.
+
+
+--
+-- Name: liability_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('liability_id_seq', 7, true);
+
+
+--
+-- Data for Name: liability_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY liability_item (id, resource_id, liability_id, touroperator_id, price, currency_id, service_id) FROM stdin;
+31	1697	6	2	0.00	57	5
+32	1698	6	2	0.00	57	3
+33	1700	7	57	0.00	56	5
+\.
+
+
+--
+-- Name: liability_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('liability_item_id_seq', 33, true);
 
 
 --
@@ -3034,6 +3208,7 @@ SELECT pg_catalog.setval('invoice_id_seq', 15, true);
 COPY licence (id, licence_num, date_from, date_to, resource_id) FROM stdin;
 43	dfgfdgdf	2014-04-22	2014-04-22	1191
 44	TTR-123456	2014-04-15	2014-04-23	1192
+46	TY678234-89	2011-06-10	2017-08-18	1576
 \.
 
 
@@ -3041,7 +3216,7 @@ COPY licence (id, licence_num, date_from, date_to, resource_id) FROM stdin;
 -- Name: licence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('licence_id_seq', 45, true);
+SELECT pg_catalog.setval('licence_id_seq', 46, true);
 
 
 --
@@ -3074,6 +3249,9 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 32	1385	Svalyava	33
 33	1417	Dnepropetrovsk	34
 34	1468	Lviv	22
+35	1588	Diagoras Airport	35
+36	1589	Rhodos	35
+37	1648	Saint-Tropez	36
 \.
 
 
@@ -3081,7 +3259,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 -- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('location_id_seq', 34, true);
+SELECT pg_catalog.setval('location_id_seq', 37, true);
 
 
 --
@@ -3129,6 +3307,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 61	4	53	Outgoing Payments	/outgoings	\N	9	1571
 57	4	53	Accounts	/accounts	\N	1	1436
 64	4	53	Refunds	/refunds	\N	7	1575
+65	4	32	Liabilities	/liabilities	\N	10	1659
 50	4	53	Services List	/services	\N	1	1312
 52	4	32	Services	/services_sales	\N	2	1369
 60	4	23	Suppliers	/suppliers	\N	11	1550
@@ -3175,6 +3354,16 @@ COPY passport (id, country_id, passport_type, num, descr, resource_id, end_date)
 10	3	citizen	HK12345	\N	1381	\N
 11	3	citizen	PO123456	\N	1406	\N
 12	3	citizen	TY3456	\N	1467	2016-04-10
+13	3	citizen	YU78932	Ukrainian citizen passport	1582	\N
+14	3	foreign	RT678123	Foreign Passport	1584	2015-08-21
+15	3	foreign	TY67342	\N	1592	2015-08-28
+16	3	citizen	IO98676	\N	1612	\N
+17	3	foreign	ER781263	\N	1613	\N
+18	3	citizen	НК089564	\N	1622	\N
+19	3	citizen	RE6712346	\N	1625	\N
+20	3	citizen	HJ789665	\N	1642	\N
+21	3	foreign	RT7892634	\N	1643	2017-07-19
+22	3	foreign	RT632453	\N	1651	2019-08-16
 \.
 
 
@@ -3182,7 +3371,7 @@ COPY passport (id, country_id, passport_type, num, descr, resource_id, end_date)
 -- Name: passport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('passport_id_seq', 12, true);
+SELECT pg_catalog.setval('passport_id_seq', 22, true);
 
 
 --
@@ -3227,8 +3416,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 71	102	4	{view,add,edit,delete}	\N	all
 73	104	4	{view,add,edit,delete}	\N	all
 74	105	4	{view,add,edit,delete}	\N	all
-24	12	4	{view,add,edit,delete}	\N	all
-64	92	4	{view,add,edit,delete,settings,invoice,contract}	\N	all
 72	103	4	{view,add,edit,delete}	\N	all
 75	106	4	{view,add,edit,delete}	\N	all
 76	107	4	{view,add,edit,delete}	\N	all
@@ -3237,7 +3424,11 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 79	110	4	{view,add,edit,delete}	\N	all
 80	111	4	{view,add,edit,delete}	\N	all
 81	112	4	{view,add,edit,delete}	\N	all
-82	113	4	{view,add,edit,delete}	\N	all
+24	12	4	{view,add,edit,delete,settings}	\N	all
+82	113	4	{view,add,edit,delete,settings}	\N	all
+83	114	4	{view,add,edit,delete}	\N	all
+64	92	4	{view,add,edit,delete,settings,invoice,liability,contract}	\N	all
+84	115	4	{view,add,edit,delete}	\N	all
 \.
 
 
@@ -3265,6 +3456,16 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 30	1471	Irina	Avdeeva		1984-11-21	female
 31	1472	Velichko	Alexander		2006-01-11	male
 32	1473	Velichko	Elizabeth		2010-06-15	female
+34	1593	Elena	Babich		1991-05-23	female
+33	1586	Roman	Babich		1990-11-14	male
+35	1615	Tat'ana	Artyuh		1987-02-10	female
+36	1616	Nikolay	Artyuh		1986-10-08	male
+37	1619	Andriy	Garkaviy		1984-11-14	male
+38	1626	Elena	Garkava		1986-01-08	male
+39	1627	Petro	Garkaviy		2004-06-08	male
+40	1628	Alena	Garkava		2007-03-29	female
+41	1645	Karpenko	Alexander		1990-06-04	male
+42	1653	Smichko	Olena		1992-07-15	female
 \.
 
 
@@ -3281,6 +3482,11 @@ COPY person_address (person_id, address_id) FROM stdin;
 24	19
 25	20
 29	23
+33	24
+35	25
+37	26
+41	27
+42	28
 \.
 
 
@@ -3299,6 +3505,16 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 23	51
 25	52
 29	53
+33	67
+34	68
+35	69
+35	70
+37	72
+37	71
+38	73
+41	74
+41	75
+42	76
 \.
 
 
@@ -3306,7 +3522,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('person_id_seq', 32, true);
+SELECT pg_catalog.setval('person_id_seq', 42, true);
 
 
 --
@@ -3319,6 +3535,16 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 22	10
 25	11
 29	12
+33	14
+33	13
+34	15
+35	17
+35	16
+37	18
+38	19
+41	20
+41	21
+42	22
 \.
 
 
@@ -3338,21 +3564,22 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 64, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 65, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 82, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 84, true);
 
 
 --
 -- Data for Name: refund; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY refund (id, resource_id, account_id, account_item_id, invoice_id) FROM stdin;
+COPY refund (id, resource_id, invoice_id) FROM stdin;
+3	1638	16
 \.
 
 
@@ -3360,7 +3587,7 @@ COPY refund (id, resource_id, account_id, account_item_id, invoice_id) FROM stdi
 -- Name: refund_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('refund_id_seq', 1, false);
+SELECT pg_catalog.setval('refund_id_seq', 3, true);
 
 
 --
@@ -3368,6 +3595,7 @@ SELECT pg_catalog.setval('refund_id_seq', 1, false);
 --
 
 COPY refund_transaction (refund_id, fin_transaction_id) FROM stdin;
+3	105
 \.
 
 
@@ -3400,6 +3628,8 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 32	1365	4	Sharm el Sheih
 33	1384	3	Zakarpat'e
 34	1416	3	Dnepropetrovsk
+35	1587	18	Rhodos Island
+36	1647	19	Chemiu Due Capon
 \.
 
 
@@ -3930,6 +4160,115 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1571	65	32	f
 1574	12	32	f
 1575	65	32	f
+1576	86	32	f
+1577	87	32	f
+1578	79	32	f
+1579	110	32	f
+1580	78	32	f
+1581	87	32	f
+1582	89	32	f
+1584	89	32	f
+1585	90	32	f
+1586	69	32	f
+1587	39	32	f
+1588	84	32	f
+1589	84	32	f
+1590	83	32	f
+1591	87	32	f
+1592	89	32	f
+1593	69	32	f
+1594	92	32	f
+1595	108	32	f
+1596	108	32	f
+1597	104	32	f
+1598	103	32	f
+1600	108	32	f
+1607	106	32	f
+1608	105	32	f
+1609	105	32	f
+1610	87	32	f
+1611	87	32	f
+1612	89	32	f
+1613	89	32	f
+1614	90	32	f
+1615	69	32	f
+1616	69	32	f
+1617	92	32	f
+1618	108	32	f
+1619	69	32	f
+1620	87	32	f
+1621	87	32	f
+1622	89	32	f
+1623	90	32	f
+1624	87	32	f
+1625	89	32	f
+1626	69	32	f
+1627	69	32	f
+1628	69	32	f
+1629	108	32	f
+1630	92	32	f
+1631	108	32	f
+1632	108	32	f
+1633	108	32	f
+1634	103	32	f
+1638	113	32	f
+1639	106	32	f
+1640	87	32	f
+1641	87	32	f
+1642	89	32	f
+1643	89	32	f
+1644	90	32	f
+1645	69	32	f
+1646	70	32	f
+1647	39	32	f
+1648	84	32	f
+1649	83	32	f
+1650	87	32	f
+1651	89	32	f
+1652	90	32	f
+1653	69	32	f
+1654	108	32	f
+1655	108	32	f
+1656	92	32	f
+1657	103	32	f
+1658	12	32	f
+1659	65	32	f
+1660	106	32	f
+1661	114	32	f
+1662	114	32	f
+1663	114	32	f
+1664	12	32	f
+1667	115	32	f
+1668	115	32	f
+1669	114	32	f
+1670	115	32	f
+1671	115	32	f
+1672	115	32	f
+1673	115	32	f
+1674	115	32	f
+1675	115	32	f
+1676	115	32	f
+1677	115	32	f
+1678	115	32	f
+1679	115	32	f
+1680	115	32	f
+1681	115	32	f
+1682	115	32	f
+1683	115	32	f
+1684	115	32	f
+1685	115	32	f
+1686	115	32	f
+1687	115	32	f
+1688	115	32	f
+1693	115	32	f
+1694	115	32	f
+1695	115	32	f
+1696	115	32	f
+1697	115	32	f
+1698	115	32	f
+1699	114	32	f
+1700	115	32	f
+1701	114	32	f
 \.
 
 
@@ -4661,6 +5000,115 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5785	1571	2	\N	2014-08-17 11:33:32.514367
 5788	1574	2	\N	2014-08-17 20:41:08.846318
 5789	1575	2	\N	2014-08-17 20:42:01.113671
+5790	1576	2	\N	2014-08-22 22:48:58.176695
+5791	1577	2	\N	2014-08-22 22:49:31.584667
+5792	1578	2	\N	2014-08-22 22:49:35.101959
+5793	1579	2	\N	2014-08-22 22:50:20.197271
+5794	1580	2	\N	2014-08-22 22:50:49.188036
+5795	1581	2	\N	2014-08-22 22:51:29.357367
+5796	1582	2	\N	2014-08-22 22:52:03.171722
+5797	1584	2	\N	2014-08-22 22:58:38.326467
+5798	1585	2	\N	2014-08-22 22:59:28.534906
+5799	1586	2	\N	2014-08-22 22:59:41.71816
+5800	1587	2	\N	2014-08-22 23:01:39.676197
+5801	1588	2	\N	2014-08-22 23:02:11.872661
+5802	1589	2	\N	2014-08-22 23:04:10.670971
+5803	1590	2	\N	2014-08-22 23:04:40.181387
+5804	1591	2	\N	2014-08-22 23:05:46.128053
+5805	1592	2	\N	2014-08-22 23:06:07.780481
+5806	1593	2	\N	2014-08-22 23:06:12.342153
+5807	1594	2	\N	2014-08-22 23:07:05.069505
+5808	1595	2	\N	2014-08-22 23:08:18.152328
+5809	1596	2	\N	2014-08-22 23:09:01.174533
+5810	1597	2	\N	2014-08-22 23:14:17.280337
+5811	1598	2	\N	2014-08-22 23:35:58.491964
+5813	1600	2	\N	2014-08-23 11:04:12.184497
+5820	1607	2	\N	2014-08-23 13:37:30.044239
+5821	1608	2	\N	2014-08-23 16:14:22.910225
+5822	1609	2	\N	2014-08-23 16:16:24.823791
+5823	1610	2	\N	2014-08-24 14:10:51.002759
+5824	1611	2	\N	2014-08-24 14:11:19.783792
+5825	1612	2	\N	2014-08-24 14:11:36.729128
+5826	1613	2	\N	2014-08-24 14:11:54.849623
+5827	1614	2	\N	2014-08-24 14:48:54.04485
+5828	1615	2	\N	2014-08-24 14:48:55.715304
+5829	1616	2	\N	2014-08-24 14:49:59.373945
+5830	1617	2	\N	2014-08-24 14:57:40.998747
+5831	1618	2	\N	2014-08-24 14:58:58.327062
+5832	1619	2	\N	2014-08-24 15:01:16.140346
+5833	1620	2	\N	2014-08-24 15:02:15.884894
+5834	1621	2	\N	2014-08-24 15:02:43.162974
+5835	1622	2	\N	2014-08-24 15:03:06.67481
+5836	1623	2	\N	2014-08-24 15:03:53.276198
+5837	1624	2	\N	2014-08-24 15:08:02.737031
+5838	1625	2	\N	2014-08-24 15:08:18.61161
+5839	1626	2	\N	2014-08-24 15:08:29.0077
+5840	1627	2	\N	2014-08-24 15:10:13.736496
+5841	1628	2	\N	2014-08-24 15:10:44.233145
+5842	1629	2	\N	2014-08-24 15:11:29.749793
+5843	1630	2	\N	2014-08-24 15:11:33.251549
+5844	1631	2	\N	2014-08-24 15:16:53.496818
+5845	1632	2	\N	2014-08-24 15:17:15.949468
+5846	1633	2	\N	2014-08-24 15:17:28.997817
+5847	1634	2	\N	2014-08-24 15:21:09.48427
+5851	1638	2	\N	2014-08-24 21:46:39.586432
+5852	1639	2	\N	2014-08-25 15:20:24.884947
+5853	1640	2	\N	2014-08-26 19:55:53.569882
+5854	1641	2	\N	2014-08-26 19:56:28.320221
+5858	1645	2	\N	2014-08-26 20:01:19.187139
+5860	1647	2	\N	2014-08-26 20:04:08.078366
+5862	1649	2	\N	2014-08-26 20:04:48.124422
+5855	1642	2	\N	2014-08-26 19:56:46.695581
+5856	1643	2	\N	2014-08-26 19:57:13.160198
+5857	1644	2	\N	2014-08-26 20:01:16.129984
+5859	1646	2	\N	2014-08-26 20:04:06.105786
+5861	1648	2	\N	2014-08-26 20:04:09.378364
+5863	1650	2	\N	2014-08-26 20:06:13.193356
+5864	1651	2	\N	2014-08-26 20:06:36.249641
+5865	1652	2	\N	2014-08-26 20:07:23.412381
+5866	1653	2	\N	2014-08-26 20:07:31.899383
+5867	1654	2	\N	2014-08-26 20:12:29.150503
+5868	1655	2	\N	2014-08-26 20:12:40.489325
+5869	1656	2	\N	2014-08-26 20:13:02.876592
+5870	1657	2	\N	2014-08-26 20:13:28.887297
+5871	1658	2	\N	2014-08-29 21:48:35.339956
+5872	1659	2	\N	2014-08-29 21:50:49.710689
+5873	1660	2	\N	2014-08-31 16:37:37.888486
+5874	1661	2	\N	2014-08-31 19:36:50.353805
+5875	1662	2	\N	2014-08-31 19:36:50.353805
+5876	1663	2	\N	2014-08-31 19:36:50.353805
+5877	1664	2	\N	2014-09-07 16:57:18.488627
+5878	1667	2	\N	2014-09-07 18:07:30.417383
+5879	1668	2	\N	2014-09-07 18:09:40.311128
+5880	1669	2	\N	2014-09-07 18:41:36.867164
+5881	1670	2	\N	2014-09-07 20:38:27.837429
+5882	1671	2	\N	2014-09-07 20:41:39.751758
+5883	1672	2	\N	2014-09-07 20:41:39.751758
+5884	1673	2	\N	2014-09-07 20:43:53.87844
+5885	1674	2	\N	2014-09-07 20:43:53.87844
+5886	1675	2	\N	2014-09-07 20:49:34.234801
+5887	1676	2	\N	2014-09-07 20:49:34.234801
+5888	1677	2	\N	2014-09-07 20:51:44.493224
+5889	1678	2	\N	2014-09-07 20:51:44.493224
+5890	1679	2	\N	2014-09-07 20:53:23.413949
+5891	1680	2	\N	2014-09-07 20:53:23.413949
+5892	1681	2	\N	2014-09-07 20:53:45.911614
+5893	1682	2	\N	2014-09-07 20:53:45.911614
+5894	1683	2	\N	2014-09-07 20:59:09.005786
+5895	1684	2	\N	2014-09-07 20:59:09.005786
+5896	1685	2	\N	2014-09-07 21:10:00.470344
+5897	1686	2	\N	2014-09-07 21:10:00.470344
+5898	1687	2	\N	2014-09-07 21:11:15.521008
+5899	1688	2	\N	2014-09-07 21:11:15.521008
+5900	1693	2	\N	2014-09-07 21:18:33.334922
+5901	1694	2	\N	2014-09-07 21:18:33.334922
+5902	1695	2	\N	2014-09-07 21:18:58.656028
+5903	1696	2	\N	2014-09-07 21:18:58.656028
+5904	1697	2	\N	2014-09-07 21:20:05.254046
+5905	1698	2	\N	2014-09-07 21:20:05.254046
+5906	1699	2	\N	2014-09-07 21:33:13.823783
+5907	1700	2	\N	2014-09-07 21:37:05.250859
+5908	1701	2	\N	2014-09-07 21:37:10.709511
 \.
 
 
@@ -4668,49 +5116,51 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY resource_type (id, resource_id, name, humanize, resource_name, module, description, settings) FROM stdin;
-2	10	users	Users	Users	travelcrm.resources.users	Users list	\N
-12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	Resources types list	\N
-47	706	employees	Employees	Employees	travelcrm.resources.employees	Employees Container Datagrid	\N
-78	1003	touroperators	Touroperators	Touroperators	travelcrm.resources.touroperators	Touroperators - tours suppliers list	\N
-1	773		Home	Root	travelcrm.resources	Home Page of Travelcrm	\N
-41	283	currencies	Currencies	Currencies	travelcrm.resources.currencies		\N
-55	723	structures	Structures	Structures	travelcrm.resources.structures	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so	\N
-59	764	positions	Positions	Positions	travelcrm.resources.positions	Companies positions is a point of company structure where emplyees can be appointed	\N
-61	769	permisions	Permisions	Permisions	travelcrm.resources.permisions	Permisions list of company structure position. It's list of resources and permisions	\N
-65	775	navigations	Navigations	Navigations	travelcrm.resources.navigations	Navigations list of company structure position.	\N
-67	788	appointments	Appointments	Appointments	travelcrm.resources.appointments	Employees to positions of company appointments	\N
-39	274	regions	Regions	Regions	travelcrm.resources.regions		\N
-70	872	countries	Countries	Countries	travelcrm.resources.countries	Countries directory	\N
-71	901	advsources	Advertise Sources	Advsources	travelcrm.resources.advsources	Types of advertises	\N
-72	908	hotelcats	Hotels Categories	Hotelcats	travelcrm.resources.hotelcats	Hotels categories	\N
-73	909	roomcats	Rooms Categories	Roomcats	travelcrm.resources.roomcats	Categories of the rooms	\N
-74	953	accomodations	Accomodations	Accomodations	travelcrm.resources.accomodations	Accomodations Types list	\N
-75	954	foodcats	Food Categories	Foodcats	travelcrm.resources.foodcats	Food types in hotels	\N
-69	865	persons	Persons	Persons	travelcrm.resources.persons	Persons directory. Person can be client or potential client	\N
-79	1007	bpersons	Business Persons	BPersons	travelcrm.resources.bpersons	Business Persons is not clients it's simple business contacts that can be referenced objects that needs to have contacts	\N
-84	1088	locations	Locations	Locations	travelcrm.resources.locations	Locations list is list of cities, vilages etc. places to use to identify part of region	\N
-83	1081	hotels	Hotels	Hotels	travelcrm.resources.hotels	Hotels directory	\N
-86	1189	licences	Licences	Licences	travelcrm.resources.licences	Licences list for any type of resources as need	\N
-87	1190	contacts	Contacts	Contacts	travelcrm.resources.contacts	Contacts for persons, business persons etc.	\N
-89	1198	passports	Passports	Passports	travelcrm.resources.passports	Clients persons passports lists	\N
-90	1207	addresses	Addresses	Addresses	travelcrm.resources.addresses	Addresses of any type of resources, such as persons, bpersons, hotels etc.	\N
-91	1211	banks	Banks	Banks	travelcrm.resources.banks	Banks list to create bank details and for other reasons	\N
-93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N
-102	1313	services	Services	Services	travelcrm.resources.services	Additional Services that can be provide with tours sales or separate	\N
-101	1268	banks_details	Banks Details	BanksDetails	travelcrm.resources.banks_details	Banks Details that can be attached to any client or business partner to define account	\N
-103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N
-104	1393	currencies_rates	Currency Rates	CurrenciesRates	travelcrm.resources.currencies_rates	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	\N
-105	1424	accounts_items	Account Items	AccountsItems	travelcrm.resources.accounts_items	Finance accounts items	\N
-92	1221	tours	Tours	Tours	travelcrm.resources.tours	Tour creation and sale it	{"service_id": 5}
-106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	null
-107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and can bind to company structures	null
-109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null
-108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null
-110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null
-112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null
-111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null
-113	1574	refunds	Refunds	Refunds	travelcrm.resources.refunds	Refunds by invoice	null
+COPY resource_type (id, resource_id, name, humanize, resource_name, module, description, settings, customizable) FROM stdin;
+2	10	users	Users	Users	travelcrm.resources.users	Users list	\N	\N
+12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	Resources types list	\N	\N
+47	706	employees	Employees	Employees	travelcrm.resources.employees	Employees Container Datagrid	\N	\N
+78	1003	touroperators	Touroperators	Touroperators	travelcrm.resources.touroperators	Touroperators - tours suppliers list	\N	\N
+1	773		Home	Root	travelcrm.resources	Home Page of Travelcrm	\N	\N
+41	283	currencies	Currencies	Currencies	travelcrm.resources.currencies		\N	\N
+55	723	structures	Structures	Structures	travelcrm.resources.structures	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so	\N	\N
+59	764	positions	Positions	Positions	travelcrm.resources.positions	Companies positions is a point of company structure where emplyees can be appointed	\N	\N
+61	769	permisions	Permisions	Permisions	travelcrm.resources.permisions	Permisions list of company structure position. It's list of resources and permisions	\N	\N
+65	775	navigations	Navigations	Navigations	travelcrm.resources.navigations	Navigations list of company structure position.	\N	\N
+67	788	appointments	Appointments	Appointments	travelcrm.resources.appointments	Employees to positions of company appointments	\N	\N
+39	274	regions	Regions	Regions	travelcrm.resources.regions		\N	\N
+70	872	countries	Countries	Countries	travelcrm.resources.countries	Countries directory	\N	\N
+71	901	advsources	Advertise Sources	Advsources	travelcrm.resources.advsources	Types of advertises	\N	\N
+72	908	hotelcats	Hotels Categories	Hotelcats	travelcrm.resources.hotelcats	Hotels categories	\N	\N
+73	909	roomcats	Rooms Categories	Roomcats	travelcrm.resources.roomcats	Categories of the rooms	\N	\N
+74	953	accomodations	Accomodations	Accomodations	travelcrm.resources.accomodations	Accomodations Types list	\N	\N
+75	954	foodcats	Food Categories	Foodcats	travelcrm.resources.foodcats	Food types in hotels	\N	\N
+69	865	persons	Persons	Persons	travelcrm.resources.persons	Persons directory. Person can be client or potential client	\N	\N
+79	1007	bpersons	Business Persons	BPersons	travelcrm.resources.bpersons	Business Persons is not clients it's simple business contacts that can be referenced objects that needs to have contacts	\N	\N
+84	1088	locations	Locations	Locations	travelcrm.resources.locations	Locations list is list of cities, vilages etc. places to use to identify part of region	\N	\N
+83	1081	hotels	Hotels	Hotels	travelcrm.resources.hotels	Hotels directory	\N	\N
+86	1189	licences	Licences	Licences	travelcrm.resources.licences	Licences list for any type of resources as need	\N	\N
+87	1190	contacts	Contacts	Contacts	travelcrm.resources.contacts	Contacts for persons, business persons etc.	\N	\N
+89	1198	passports	Passports	Passports	travelcrm.resources.passports	Clients persons passports lists	\N	\N
+90	1207	addresses	Addresses	Addresses	travelcrm.resources.addresses	Addresses of any type of resources, such as persons, bpersons, hotels etc.	\N	\N
+91	1211	banks	Banks	Banks	travelcrm.resources.banks	Banks list to create bank details and for other reasons	\N	\N
+93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N	\N
+102	1313	services	Services	Services	travelcrm.resources.services	Additional Services that can be provide with tours sales or separate	\N	\N
+101	1268	banks_details	Banks Details	BanksDetails	travelcrm.resources.banks_details	Banks Details that can be attached to any client or business partner to define account	\N	\N
+103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N	\N
+104	1393	currencies_rates	Currency Rates	CurrenciesRates	travelcrm.resources.currencies_rates	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	\N	\N
+105	1424	accounts_items	Account Items	AccountsItems	travelcrm.resources.accounts_items	Finance accounts items	\N	\N
+92	1221	tours	Tours	Tours	travelcrm.resources.tours	Tour creation and sale it	{"service_id": 5}	t
+106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	null	\N
+107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and can bind to company structures	null	\N
+109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null	\N
+108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null	\N
+110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null	\N
+112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	\N
+111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	\N
+113	1574	refunds	Refunds	Refunds	travelcrm.resources.refunds	Refunds by invoice	{"account_item_id": 4}	t
+114	1658	liabilities	Liabilities	Liabilities	travelcrm.resources.liabilities	Liabilities to suppliers	null	f
+115	1664	liabilities_items	Liabilities Items	LiabilitiesItems	travelcrm.resources.liabilities_items	Liabilities Items of liabilities with touroperator and supplier price and currency	null	f
 \.
 
 
@@ -4785,6 +5235,13 @@ SELECT pg_catalog.setval('service_id_seq', 5, true);
 COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, price, person_id, base_price) FROM stdin;
 9	1462	4	57	5	60.00	21	726.00
 10	1463	4	57	5	60.00	20	726.00
+25	1629	3	57	2	5.00	40	60.00
+26	1631	3	57	2	5.00	39	60.00
+27	1632	3	57	2	10.00	38	120.00
+28	1633	3	57	2	10.00	37	120.00
+29	1654	4	54	57	300.00	41	5460.00
+30	1655	4	54	57	300.00	42	5460.00
+24	1618	1	57	1	80.00	35	960.00
 3	1455	4	54	1	20.00	21	334.00
 17	1481	1	57	1	54.00	20	653.40
 18	1482	1	57	1	54.00	21	653.40
@@ -4803,6 +5260,9 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 6	1459	4	54	1	60.00	20	0.00
 7	1460	1	57	5	100.00	25	0.00
 8	1461	3	54	57	67.00	6	0.00
+21	1595	4	54	57	43.00	34	782.60
+22	1596	4	54	62	45.00	33	819.00
+23	1600	4	54	62	45.00	34	819.00
 \.
 
 
@@ -4810,7 +5270,7 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 -- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('service_item_id_seq', 20, true);
+SELECT pg_catalog.setval('service_item_id_seq', 30, true);
 
 
 --
@@ -4835,6 +5295,14 @@ SELECT pg_catalog.setval('service_sale_id_seq', 1, true);
 
 COPY service_sale_invoice (service_sale_id, invoice_id) FROM stdin;
 1	13
+\.
+
+
+--
+-- Data for Name: service_sale_liability; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY service_sale_liability (service_sale_id, liability_id) FROM stdin;
 \.
 
 
@@ -4988,6 +5456,10 @@ COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id,
 10	1	15	15	54	3534.0000	2	0	20	1377	2014-06-07	2014-06-01	2014-05-20	4	5	59017.80
 9	5	15	15	54	2350.0000	2	1	17	1295	2014-05-09	2014-05-01	2014-05-17	6	5	39010.00
 13	1	15	15	54	3556.0000	2	2	29	1480	2014-07-20	2014-07-14	2014-06-22	2	5	59385.20
+14	62	15	15	54	3569.0000	2	0	33	1594	2014-08-31	2014-08-23	2014-08-22	6	5	64955.80
+16	2	15	15	57	2490.0000	2	2	37	1630	2014-09-06	2014-08-31	2014-08-24	4	5	29880.00
+15	2	15	15	57	1475.0000	2	0	35	1617	2014-08-31	2014-08-25	2014-08-24	2	5	17700.00
+17	57	15	15	56	64576.0000	2	0	41	1656	2014-09-05	2014-08-30	2014-08-26	4	5	64576.00
 \.
 
 
@@ -4995,7 +5467,7 @@ COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id,
 -- Name: tour_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_id_seq', 13, true);
+SELECT pg_catalog.setval('tour_id_seq', 17, true);
 
 
 --
@@ -5007,6 +5479,19 @@ COPY tour_invoice (tour_id, invoice_id) FROM stdin;
 9	10
 13	14
 12	15
+14	16
+15	17
+17	19
+\.
+
+
+--
+-- Data for Name: tour_liability; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY tour_liability (tour_id, liability_id) FROM stdin;
+16	6
+17	7
 \.
 
 
@@ -5015,6 +5500,10 @@ COPY tour_invoice (tour_id, invoice_id) FROM stdin;
 --
 
 COPY tour_person (tour_id, person_id) FROM stdin;
+15	35
+15	36
+17	41
+17	42
 12	28
 12	25
 12	27
@@ -5028,6 +5517,12 @@ COPY tour_person (tour_id, person_id) FROM stdin;
 13	30
 13	29
 13	31
+14	34
+14	33
+16	40
+16	37
+16	38
+16	39
 \.
 
 
@@ -5041,6 +5536,11 @@ COPY tour_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat
 62	32	33	10	11	29	\N	\N	2014-07-18	2014-07-12
 63	32	33	10	10	29	12	\N	2014-07-25	2014-07-14
 64	21	34	\N	\N	\N	13	\N	2014-07-20	2014-07-14
+65	36	35	\N	\N	\N	14	\N	2014-08-31	2014-08-25
+66	17	13	\N	\N	\N	15	\N	2014-08-31	2014-08-25
+67	31	32	\N	10	\N	16	\N	2014-09-02	2014-08-31
+68	30	31	\N	15	31	16	\N	2014-09-06	2014-09-02
+69	37	36	\N	\N	\N	17	\N	2014-09-05	2014-08-30
 \.
 
 
@@ -5048,7 +5548,7 @@ COPY tour_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat
 -- Name: tour_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_point_id_seq', 64, true);
+SELECT pg_catalog.setval('tour_point_id_seq', 69, true);
 
 
 --
@@ -5064,6 +5564,12 @@ COPY tour_service_item (tour_id, service_item_id) FROM stdin;
 13	15
 13	14
 13	16
+14	23
+15	24
+16	25
+16	26
+16	27
+16	28
 \.
 
 
@@ -5077,6 +5583,7 @@ COPY touroperator (id, resource_id, name) FROM stdin;
 5	1067	Sail Croatia
 61	1378	EthnoTour
 57	1159	Sun Marino Trvl.
+62	1580	News Travel
 \.
 
 
@@ -5099,6 +5606,7 @@ COPY touroperator_bank_detail (touroperator_id, bank_detail_id) FROM stdin;
 
 COPY touroperator_bperson (touroperator_id, bperson_id) FROM stdin;
 2	1
+62	8
 \.
 
 
@@ -5111,6 +5619,7 @@ COPY touroperator_commission (touroperator_id, commission_id) FROM stdin;
 2	20
 2	19
 2	18
+62	21
 \.
 
 
@@ -5118,7 +5627,7 @@ COPY touroperator_commission (touroperator_id, commission_id) FROM stdin;
 -- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('touroperator_id_seq', 61, true);
+SELECT pg_catalog.setval('touroperator_id_seq', 62, true);
 
 
 --
@@ -5127,6 +5636,7 @@ SELECT pg_catalog.setval('touroperator_id_seq', 61, true);
 
 COPY touroperator_licence (touroperator_id, licence_id) FROM stdin;
 2	44
+62	46
 \.
 
 
@@ -5357,6 +5867,22 @@ ALTER TABLE ONLY invoice
 
 
 --
+-- Name: liability_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY liability_item
+    ADD CONSTRAINT liability_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: liability_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY liability
+    ADD CONSTRAINT liability_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: licence_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -5533,6 +6059,14 @@ ALTER TABLE ONLY service_sale_invoice
 
 
 --
+-- Name: service_sale_liability_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY service_sale_liability
+    ADD CONSTRAINT service_sale_liability_pkey PRIMARY KEY (service_sale_id, liability_id);
+
+
+--
 -- Name: service_sale_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -5634,6 +6168,14 @@ ALTER TABLE ONLY task_resource
 
 ALTER TABLE ONLY tour_invoice
     ADD CONSTRAINT tour_invoice_pkey PRIMARY KEY (tour_id, invoice_id);
+
+
+--
+-- Name: tour_liability_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY tour_liability
+    ADD CONSTRAINT tour_liability_pkey PRIMARY KEY (tour_id, liability_id);
 
 
 --
@@ -5909,14 +6451,6 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund
-    ADD CONSTRAINT fk_account_id_refund FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: fk_account_id_structure_account; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -5938,14 +6472,6 @@ ALTER TABLE ONLY fin_transaction
 
 ALTER TABLE ONLY outgoing
     ADD CONSTRAINT fk_account_item_id_outgoing FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_account_item_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund
-    ADD CONSTRAINT fk_account_item_id_refund FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6149,6 +6675,14 @@ ALTER TABLE ONLY commission
 
 
 --
+-- Name: fk_currency_id_liability_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY liability_item
+    ADD CONSTRAINT fk_currency_id_liability_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_currency_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6338,6 +6872,30 @@ ALTER TABLE ONLY service_sale_invoice
 
 ALTER TABLE ONLY tour_invoice
     ADD CONSTRAINT fk_invoice_id_tour_invoice FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_liability_id_liability_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY liability_item
+    ADD CONSTRAINT fk_liability_id_liability_item FOREIGN KEY (liability_id) REFERENCES liability(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_liability_id_service_sale_liability; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale_liability
+    ADD CONSTRAINT fk_liability_id_service_sale_liability FOREIGN KEY (liability_id) REFERENCES liability(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_liability_id_tour_liability; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour_liability
+    ADD CONSTRAINT fk_liability_id_tour_liability FOREIGN KEY (liability_id) REFERENCES liability(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6653,6 +7211,22 @@ ALTER TABLE ONLY invoice
 
 
 --
+-- Name: fk_resource_id_liability; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY liability
+    ADD CONSTRAINT fk_resource_id_liability FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_liability_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY liability_item
+    ADD CONSTRAINT fk_resource_id_liability_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6901,6 +7475,14 @@ ALTER TABLE ONLY service_sale_invoice
 
 
 --
+-- Name: fk_service_sale_id_service_sale_liability; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_sale_liability
+    ADD CONSTRAINT fk_service_sale_id_service_sale_liability FOREIGN KEY (service_sale_id) REFERENCES service_sale(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_service_sale_id_service_sale_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6997,6 +7579,14 @@ ALTER TABLE ONLY tour_invoice
 
 
 --
+-- Name: fk_tour_id_tour_liability; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY tour_liability
+    ADD CONSTRAINT fk_tour_id_tour_liability FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_tour_id_tour_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7018,6 +7608,14 @@ ALTER TABLE ONLY tour_point
 
 ALTER TABLE ONLY tour_service_item
     ADD CONSTRAINT fk_tour_id_tour_service_item FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_touroperator_id_liability_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY liability_item
+    ADD CONSTRAINT fk_touroperator_id_liability_item FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

@@ -34,7 +34,7 @@ def calc_base_price(service_sale):
     return service_sale
 
 
-class ServiceSaleInvoice(InvoiceFactory):
+class ServiceSaleInvoiceFactory(InvoiceFactory):
 
     @classmethod
     def bind_invoice(cls, resource_id, invoice):

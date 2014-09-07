@@ -12,6 +12,7 @@ class ResourcesTypesQueryBuilder(ResourcesQueryBuilder):
         'name': ResourceType.name,
         'humanize': ResourceType.humanize,
         'module': ResourceType.module,
+        'customizable': ResourceType.customizable,
         'description': ResourceType.description,
     }
     _simple_search_fields = [

@@ -14,6 +14,7 @@ from pyramid.security import (
 
 from ..lib.utils.resources_utils import (
     get_resource_class,
+    get_resource_settings,
     ResourceClassNotFound,
 )
 from ..lib.utils.security_utils import get_auth_employee
@@ -74,6 +75,9 @@ class ResourceTypeBase(SecuredBase):
     @property
     def allowed_scopes(self):
         return True
+
+    def get_settings(self):
+        return get_resource_settings(self)
 
 
 class Root(SecuredBase):

@@ -46,20 +46,22 @@
             % endif
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'deal_date',sortable:true,width:80">${_(u"deal date")}</th>
-            <th data-options="field:'customer',sortable:true,width:140">${_(u"customer")}</th>
+            <th data-options="field:'customer',sortable:true,width:120">${_(u"customer")}</th>
             <th data-options="field:'country',sortable:true,width:100">${_(u"country")}</th>
-            <th data-options="field:'hotel_cat',sortable:true,width:60">${_(u"hotel cat")}</th>
+            <th data-options="field:'hotel_cat',sortable:true,width:40">${_(u"hotel")}</th>
             <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'start_date',sortable:true,width:80">${_(u"start")}</th>
             <th data-options="field:'end_date',sortable:true,width:80">${_(u"end")}</th>
-            <th data-options="field:'invoice_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-text\' title=\'${_(u"invoice already exists")}\'></span>':'';}" align="center"></th>
+            <th data-options="field:'liability_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-flag\' title=\'${_(u"liability already exists")}\'></span>':'';}" align="center">${_(u'L.')}</th>
+            <th data-options="field:'invoice_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-o\' title=\'${_(u"invoice already exists")}\'></span>':'';}" align="center">${_(u'I.')}</th>
+            <th data-options="field:'contract_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-text-o\' title=\'${_(u"contract already exists")}\'></span>':'';}" align="center">${_(u'C.')}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
     </table>
 
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container dl45">
+        <div class="actions button-container dl50">
             % if _context.has_permision('add'):
             <a href="#" class="button primary _action" 
                 data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add')}'">
@@ -85,6 +87,12 @@
                 % endif
             </div>
             <div class="button-group">
+                % if _context.has_permision('liability'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'liability')}'">
+                    <span class="fa fa-flag"></span>${_(u'Liabilities')}
+                </a>
+                % endif
                 % if _context.has_permision('invoice'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'invoice')}'">
@@ -93,13 +101,13 @@
                 % endif
                 % if _context.has_permision('contract'):
                 <a href="#" class="button _action" 
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'contract')}'">
                     <span class="fa fa-file-text-o"></span>${_(u'Contract')}
                 </a>
                 % endif
             </div>
         </div>
-        <div class="ml45 tr">
+        <div class="ml50 tr">
             <div class="search">
                 ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator or person name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
