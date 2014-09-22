@@ -32,6 +32,7 @@ from ...resources.services import Services
 from ...resources.accounts_items import AccountsItems
 from ...resources.accounts import Accounts
 from ...resources.invoices import Invoices
+from ...resources.liabilities import Liabilities
 
 from ...models.task import Task
 from ...models.account_item import AccountItem
@@ -2359,7 +2360,8 @@ def banks_details_combobox_field(
 
 def services_combobox_field(
     request, value=None, name='service_id',
-    id=None, show_toolbar=True, options=None
+    id=None, show_toolbar=True, options=None,
+    explicit_only=True
 ):
     permisions = Services.get_permisions(Services, request)
     obj_id = id or gen_id()
@@ -2426,6 +2428,9 @@ def services_combobox_field(
             else if(id && typeof(param.q) == 'undefined'){
                 param.id = id;
             }
+            if(%(explicit_only)s){
+                param.explicit_only = %(explicit_only)s;
+            }
             if(!param.page){
                 param.page = 1;
                 param.rows = 50;
@@ -2444,6 +2449,7 @@ def services_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
+        'explicit_only': json.dumps(explicit_only),
     })
     if options:
         data_options += """,

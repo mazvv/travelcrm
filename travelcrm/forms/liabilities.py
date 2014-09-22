@@ -6,14 +6,16 @@ from . import ResourceSchema, Date
 
 
 class LiabilitySchema(ResourceSchema):
-    resource_id = colander.SchemaNode(
-        colander.Integer(),
-    )
     date = colander.SchemaNode(
         Date(),
     )
     liability_item_id = colander.SchemaNode(
         colander.Set(),
+    )
+    description = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=255),
+        missing=u''
     )
 
     def deserialize(self, cstruct):
@@ -26,3 +28,9 @@ class LiabilitySchema(ResourceSchema):
             cstruct['liability_item_id'].append(val)
 
         return super(LiabilitySchema, self).deserialize(cstruct)
+
+
+class LiabilityAddSchema(LiabilitySchema):
+    resource_id = colander.SchemaNode(
+        colander.Integer(),
+    )

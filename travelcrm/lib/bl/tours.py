@@ -11,6 +11,8 @@ from ...models.service_item import ServiceItem
 from ...models.service import Service
 from ...models.account_item import AccountItem
 from ...models.currency import Currency
+from ...models.liability import Liability
+from ...models.liability_item import LiabilityItem
 
 from ...lib.bl import (
     InvoiceFactory,
@@ -195,6 +197,52 @@ class TourLiabilityFactory(LiabilityFactory):
             .filter(Tour.resource_id == resource_id)
             .first()
         )
+
+    @classmethod
+    def query_list(cls):
+        subq_services = (
+            DBSession.query(
+                Tour.id,
+                func.sum(ServiceItem.base_price).label('base_price')
+            )
+            .join(Tour, ServiceItem.tour)
+            .group_by(Tour.id)
+            .subquery()
+        )
+        subq_liability = (
+            DBSession.query(
+                Liability.id,
+                money_cast(
+                    func.coalesce(
+                        func.sum(LiabilityItem.base_price), 0
+                    )
+                ).label('base_price')
+            )
+            .join(LiabilityItem, Liability.liabilities_items)
+            .group_by(Liability.id)
+            .subquery()
+        )
+        resource_sum_stmt = money_cast(
+            Tour.base_price + func.coalesce(
+                subq_services.c.base_price, 0
+            )
+        )
+        query = (
+            DBSession.query(
+                Resource.id.label('resource_id'),
+                resource_sum_stmt.label('resource_sum'),
+                (resource_sum_stmt - subq_liability.c.base_price).label(
+                    'profit'
+                ),
+                subq_liability.c.base_price.label('base_price'),
+                Liability.id.label('liability_id'),
+            )
+            .join(Resource, Tour.resource)
+            .join(Liability, Tour.liability)
+            .join(subq_liability, subq_liability.c.id == Liability.id)
+            .outerjoin(subq_services, subq_services.c.id == Tour.id)
+        )
+        return query
 
     @classmethod
     def bind_liability(cls, resource_id, liability):

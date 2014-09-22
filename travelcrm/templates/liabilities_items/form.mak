@@ -10,12 +10,12 @@
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"tour service"), True, "service_id")}
-                </div>
-                <div class="ml15">
-                ${h.fields.services_combobox_field(request, item.service_id if item else None)}
-                ${h.common.error_container(name='service_id')}
-                </div>
             </div>
+            <div class="ml15">
+                ${h.fields.services_combobox_field(request, item.service_id if item else None, explicit_only=False)}
+                ${h.common.error_container(name='service_id')}
+            </div>
+        </div>
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}

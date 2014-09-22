@@ -53,6 +53,10 @@ class Service(Base):
         String(length=32),
         nullable=False,
     )
+    explicit = Column(
+        Integer,
+        default=1,
+    )
     display_text = Column(
         String(length=256),
     )
@@ -88,3 +92,7 @@ class Service(Base):
     @classmethod
     def by_name(cls, name):
         return DBSession.query(cls).filter(cls.name == name).first()
+
+    @classmethod
+    def condition_explicit(cls):
+        return cls.explicit == 1

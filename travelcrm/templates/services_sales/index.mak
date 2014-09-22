@@ -47,6 +47,7 @@
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'customer',sortable:true,width:140">${_(u"customer")}</th>
             <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"price")}</th>
+            <th data-options="field:'liability_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-flag\' title=\'${_(u"liability already exists")}\'></span>':'';}" align="center">${_(u'L.')}</th>
             <th data-options="field:'invoice_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-text\' title=\'${_(u"invoice already exists")}\'></span>':'';}" align="center"></th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
@@ -80,6 +81,12 @@
                 % endif
             </div>
             <div class="button-group">
+                % if _context.has_permision('liability'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'liability')}'">
+                    <span class="fa fa-flag"></span>${_(u'Liabilities')}
+                </a>
+                % endif
                 % if _context.has_permision('invoice'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'invoice')}'">

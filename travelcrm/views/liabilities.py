@@ -3,7 +3,6 @@
 import logging
 
 import colander
-from babel.numbers import format_decimal
 
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
@@ -12,18 +11,18 @@ from ..models import DBSession
 from ..models.liability import Liability
 from ..models.liability_item import LiabilityItem
 from ..models.resource import Resource
-from ..models.account import Account
-from ..lib.qb import query_serialize
 from ..lib.qb.liabilities import LiabilitiesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.liabilities import LiabilitySchema
+from ..forms.liabilities import (
+    LiabilitySchema,
+    LiabilityAddSchema,
+)
 
 from ..lib.utils.resources_utils import get_resource_class
-from ..lib.utils.common_utils import get_locale_name
-from ..lib.bl.liabilities import (
-    query_resource_data,
-)
+from ..lib.bl.currencies_rates import query_convert_rates
+from ..lib.utils.common_utils import money_cast
+from ..lib.bl.liabilities import get_bound_resource_by_liability_id
 
 log = logging.getLogger(__name__)
 
@@ -108,8 +107,7 @@ class Liabilities(object):
         permission='add'
     )
     def _add(self):
-        schema = LiabilitySchema().bind(request=self.request)
-
+        schema = LiabilityAddSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params.mixed())
             resource_id = controls.get('resource_id')
@@ -118,11 +116,17 @@ class Liabilities(object):
             factory = source_cls.get_liability_factory()
             liability = Liability(
                 date=controls.get('date'),
+                descr=controls.get('description'),
                 resource=self.context.create_resource()
             )
             for id in controls.get('liability_item_id'):
                 item = LiabilityItem.get(id)
                 liability.liabilities_items.append(item)
+                base_liability_rate = (
+                    query_convert_rates(item.currency_id, liability.date)
+                    .scalar() or 1
+                )
+                item.base_price = money_cast(item.price * base_liability_rate)
             factory.bind_liability(resource_id, liability)
             return {
                 'success_message': _(u'Saved'),
@@ -143,16 +147,12 @@ class Liabilities(object):
     )
     def edit(self):
         liability = Liability.get(self.request.params.get('id'))
-        bound_resource = (
-            query_resource_data()
-            .filter(Liability.id == liability.id)
-            .first()
+        bound_resource = get_bound_resource_by_liability_id(
+            liability.id
         )
-        structure_id = liability.resource.owner_structure.id
         return {
             'item': liability,
-            'structure_id': structure_id,
-            'resource_id': bound_resource.resource_id,
+            'resource_id': bound_resource.id,
             'title': _(u'Edit Liability')
         }
 
@@ -164,12 +164,21 @@ class Liabilities(object):
         permission='edit'
     )
     def _edit(self):
-        schema = LiabilityEditSchema().bind(request=self.request)
+        schema = LiabilitySchema().bind(request=self.request)
         liability = Liability.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             liability.date = controls.get('date')
-            liability.account_id = controls.get('account_id')
+            liability.descr = controls.get('description')
+            liability.liabilities_items = []
+            for id in controls.get('liability_item_id'):
+                item = LiabilityItem.get(id)
+                base_liability_rate = (
+                    query_convert_rates(item.currency_id, liability.date)
+                    .scalar() or 1
+                )
+                item.base_price = money_cast(item.price * base_liability_rate)
+                liability.liabilities_items.append(item)
             return {
                 'success_message': _(u'Saved'),
                 'response': liability.id
@@ -219,175 +228,3 @@ class Liabilities(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
-
-    @view_config(
-        name='print',
-        context='..resources.liabilities.Liabilities',
-        request_method='GET',
-        renderer='travelcrm:templates/liabilities/print.mak',
-        permission='view',
-    )
-    def print_liability(self):
-        liability = Liability.get(self.request.params.get('id'))
-        factory = get_factory_by_liability_id(liability.id)
-        bound_resource = (
-            query_resource_data()
-            .filter(Liability.id == liability.id)
-            .first()
-        )
-        payment_query = query_liability_payments(self.request.params.get('id'))
-        payment_sum = sum(row.sum for row in payment_query)
-        return {
-            'liability': liability,
-            'factory': factory,
-            'resource_id': bound_resource.resource_id,
-            'payment_sum': payment_sum,
-        }
-
-    @view_config(
-        name='liability_sum',
-        context='..resources.liabilities.Liabilities',
-        request_method='POST',
-        renderer='json',
-        permission='add'
-    )
-    def liability_sum(self):
-        schema = LiabilitySumSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            resource_id = controls.get('resource_id')
-            account_id = controls.get('account_id')
-            date = controls.get('date')
-            resource = Resource.get(resource_id)
-            source_cls = get_resource_class(resource.resource_type.name)
-            factory = source_cls.get_liability_factory()
-            account = Account.get(account_id)
-            return {
-                'liability_sum': str(
-                    factory.get_sum_by_resource_id(
-                        resource.id, account.currency_id, date
-                    )
-                ),
-                'currency': account.currency.iso_code
-            }
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }
-
-    @view_config(
-        name='info',
-        context='..resources.liabilities.Liabilities',
-        request_method='GET',
-        renderer='travelcrm:templates/liabilities/info.mak',
-        permission='view'
-    )
-    def info(self):
-        liability = Liability.get(self.request.params.get('id'))
-        return {
-            'title': _(u'Liability Info'),
-            'currency': liability.account.currency.iso_code,
-            'id': liability.id
-        }
-
-    @view_config(
-        name='services_info',
-        context='..resources.liabilities.Liabilities',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _services_info(self):
-        liability = Liability.get(self.request.params.get('id'))
-        bound_resource = (
-            query_resource_data()
-            .filter(Liability.id == liability.id)
-            .first()
-        )
-        resource = Resource.get(bound_resource.resource_id)
-        source_cls = get_resource_class(resource.resource_type.name)
-        factory = source_cls.get_liability_factory()
-        query = factory.services_info(
-            bound_resource.resource_id, liability.account.currency.id
-        )
-        total_cnt = sum(row.cnt for row in query)
-        total_sum = sum(row.price for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'name': _(u'total'),
-                'cnt': total_cnt,
-
-                'price': format_decimal(total_sum, locale=get_locale_name())
-            }]
-        }
-
-    @view_config(
-        name='accounts_items_info',
-        context='..resources.liabilities.Liabilities',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _accounts_items_info(self):
-        liability = Liability.get(self.request.params.get('id'))
-        bound_resource = (
-            query_resource_data()
-            .filter(Liability.id == liability.id)
-            .first()
-        )
-        resource = Resource.get(bound_resource.resource_id)
-        source_cls = get_resource_class(resource.resource_type.name)
-        factory = source_cls.get_liability_factory()
-        query = factory.accounts_items_info(
-            bound_resource.resource_id, liability.account.currency.id
-        )
-        total_cnt = sum(row.cnt for row in query)
-        total_sum = sum(row.price for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'name': _(u'total'),
-                'cnt': total_cnt,
-                'price': format_decimal(total_sum, locale=get_locale_name()),
-            }]
-        }
-
-    @view_config(
-        name='payments_info',
-        context='..resources.liabilities.Liabilities',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _payments_info(self):
-        query = query_liability_payments(self.request.params.get('id'))
-        total_sum = sum(row.sum for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'date': _(u'total'),
-                'sum': format_decimal(total_sum, locale=get_locale_name())
-            }]
-        }
-
-    @view_config(
-        name='transactions_info',
-        context='..resources.liabilities.Liabilities',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _transactions_info(self):
-        query = query_liability_payments_transactions(
-            self.request.params.get('id')
-        )
-        total_sum = sum(row.sum for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'date': _(u'total'),
-                'sum': format_decimal(total_sum, locale=get_locale_name())
-            }]
-        }

@@ -3,8 +3,8 @@
 from sqlalchemy import (
     Column,
     Integer,
-    Numeric,
     Date,
+    String,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
@@ -27,6 +27,9 @@ class Liability(Base):
         Date,
         nullable=False,
     )
+    descr = Column(
+        String(255),
+    )
     resource_id = Column(
         Integer,
         ForeignKey(
@@ -37,7 +40,6 @@ class Liability(Base):
         ),
         nullable=False,
     )
-
     resource = relationship(
         'Resource',
         backref=backref(

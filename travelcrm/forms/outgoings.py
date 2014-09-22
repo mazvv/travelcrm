@@ -59,13 +59,15 @@ def sum_validator(node, kw):
 
 
 class OutgoingSchema(ResourceSchema):
-    invoice_id = colander.SchemaNode(
-        colander.Integer(),
-    )
     date = colander.SchemaNode(
         Date(),
     )
     sum = colander.SchemaNode(
         colander.Money(),
-        validator=sum_validator
+    )
+    account_id = colander.SchemaNode(
+        colander.Integer(),
+    )
+    touroperator_id = colander.SchemaNode(
+        colander.Integer(),
     )

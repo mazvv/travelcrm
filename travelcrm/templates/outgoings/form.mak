@@ -22,15 +22,11 @@
         </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"invoice"), False, "invoice_id")}
+                ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
             </div>
             <div class="ml15">
-                ${h.fields.invoices_combobox_field(
-                    request, 
-                    item.invoice_id if item else None, 
-                    options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id)
-                )}
-                ${h.common.error_container(name='invoice_id')}
+                ${h.fields.touroperators_combobox_field(request, item.touroperator_id if item else None)}
+                ${h.common.error_container(name='touroperator_id')}
             </div>
         </div>
         <div class="form-field">
@@ -41,7 +37,7 @@
                 ${h.fields.accounts_combobox_field(
                     request, item.account_id if item else None, 
                     show_toolbar=False, structure_id=structure_id,
-                    options="onSelect: function(index, data){calc_sum_%s();}" % _id
+                    options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id
                 )}
                 ${h.common.error_container(name='account_id')}
             </div>
@@ -60,7 +56,7 @@
                 ${h.tags.title(_(u"sum currency"), False, "currency")}
             </div>
             <div class="ml15">
-                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="easyui-textbox w20", disabled=True)}
+                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="easyui-textbox w20 currency", disabled=True)}
             </div>
         </div>
         <div class="form-buttons">

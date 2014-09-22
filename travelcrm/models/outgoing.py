@@ -3,6 +3,7 @@
 from sqlalchemy import (
     Column,
     Integer,
+    Numeric,
     Table,
     ForeignKey,
 )
@@ -70,25 +71,17 @@ class Outgoing(Base):
         ),
         nullable=False,
     )
-    account_item_id = Column(
+    touroperator_id = Column(
         Integer,
         ForeignKey(
-            'account_item.id',
-            name="fk_account_item_id_outgoing",
+            'touroperator.id',
+            name="fk_trouroperator_id_outgoing",
             ondelete='restrict',
             onupdate='cascade',
         ),
         nullable=False,
     )
-    invoice_id = Column(
-        Integer,
-        ForeignKey(
-            'invoice.id',
-            name="fk_invoice_id_outgoing",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-    )
+
     resource = relationship(
         'Resource',
         backref=backref(
@@ -96,27 +89,27 @@ class Outgoing(Base):
             uselist=False,
             cascade="all,delete"
         ),
+        foreign_keys=[resource_id],
         cascade="all,delete",
         uselist=False,
     )
-    invoice = relationship(
-        'Invoice',
+    account = relationship(
+        'Account',
         backref=backref(
             'outgoings',
             uselist=True,
-            lazy='dynamic',
+            lazy="dynamic"
         ),
         uselist=False,
     )
-    transactions = relationship(
-        'FinTransaction',
-        secondary=outgoing_transaction,
+    touroperator = relationship(
+        'Touroperator',
         backref=backref(
-            'outgoing',
-            uselist=False,
+            'outgoings',
+            uselist=True,
+            lazy="dynamic"
         ),
-        cascade="all,delete",
-        uselist=True,
+        uselist=False,
     )
 
     @classmethod
@@ -124,12 +117,3 @@ class Outgoing(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
-
-    @property
-    def sum(self):
-        return sum(transaction.sum for transaction in self.transactions)
-
-    @property
-    def date(self):
-        assert self.transactions
-        return self.transactions[0].date

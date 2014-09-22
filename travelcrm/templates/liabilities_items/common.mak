@@ -16,6 +16,7 @@
         }
         function delete_${_func_id}(grid_id){
             var rows = get_checked($('#' + grid_id));
+            console.log(rows);
             if(rows.length > 0){
                 $.each(rows, function(i, row){
                     $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
@@ -23,6 +24,14 @@
                 $('#' + grid_id).datagrid('reload');
             }
             return false;
+        }
+        function clear_${_func_id}(grid_id){
+            var rows = $('#' + grid_id).datagrid('getRows');
+            if(rows.length > 0){
+                $.each(rows, function(i, row){
+                    $('#${_storage_id} input[name=${name}][value=' + row.id + ']').remove();
+                });
+            }
         }
     </script>
     % endif
@@ -37,8 +46,8 @@
             onBeforeLoad: function(param){
                 var response = $(this).data('response');
                 if(response !== '' && !is_undefined(response)){
+                    clear_${_func_id}('${_id}');
                     $.each(response.split(','), function(i, val){
-                        console.log(val);
 	                    add_${_func_id}(val);
                     });
                     $(this).data('response', '');
@@ -57,7 +66,7 @@
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
-            <th data-options="field:'service',sortable:true,width:100">${_(u"service")}</th>
+            <th data-options="field:'service',sortable:true,width:150">${_(u"service")}</th>
             <th data-options="field:'touroperator',sortable:true,width:100">${_(u"touroperator")}</th>
             <th data-options="field:'price',sortable:true,width:80,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>

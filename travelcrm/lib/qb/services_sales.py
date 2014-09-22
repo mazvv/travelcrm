@@ -12,6 +12,7 @@ from ...models.service_sale import ServiceSale
 from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
+from ...models.liability import Liability
 
 from ...lib.utils.common_utils import get_base_currency, parse_date
 
@@ -36,6 +37,7 @@ class ServicesSalesQueryBuilder(ResourcesQueryBuilder):
         'deal_date': ServiceSale.deal_date,
         'customer': Person.name,
         'base_price': _subq_services_price.c.base_price,
+        'liability_id': Liability.id,
         'invoice_id': Invoice.id,
     }
 
@@ -58,6 +60,7 @@ class ServicesSalesQueryBuilder(ResourcesQueryBuilder):
                 self._subq_services_price.c.id == ServiceSale.id
             )
             .outerjoin(Invoice, ServiceSale.invoice)
+            .outerjoin(Liability, ServiceSale.liability)
         )
         self.query = self.query.add_columns(*fields)
 

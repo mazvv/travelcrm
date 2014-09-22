@@ -433,6 +433,8 @@ class Tours(object):
                     'add' if not tour.liability else 'edit',
                     query=(
                         {'resource_id': tour.resource.id}
+                        if not tour.liability
+                        else {'id': tour.liability.id}
                     )
                 )
             )

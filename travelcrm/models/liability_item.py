@@ -4,7 +4,6 @@ from sqlalchemy import (
     Column,
     Integer,
     Numeric,
-    Date,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
@@ -66,6 +65,10 @@ class LiabilityItem(Base):
     price = Column(
         Numeric(16, 2),
         nullable=False,
+    )
+    base_price = Column(
+        Numeric(16, 2),
+        nullable=True,
     )
     currency_id = Column(
         Integer,

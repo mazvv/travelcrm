@@ -94,14 +94,9 @@ class Outgoings(object):
         try:
             controls = schema.deserialize(self.request.params)
             outgoing = Outgoing(
-                invoice_id=controls.get('invoice_id'),
+                account_id=controls.get('account_id'),
+                touroperator_id=controls.get('touroperator_id'),
                 resource=self.context.create_resource()
-            )
-            factory = get_factory_by_invoice_id(controls.get('invoice_id'))
-            outgoing.transactions = factory.make_payment(
-                controls.get('invoice_id'),
-                controls.get('date'),
-                controls.get('sum')
             )
             DBSession.add(outgoing)
             DBSession.flush()

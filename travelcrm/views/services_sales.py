@@ -9,6 +9,7 @@ from pyramid.httpexceptions import HTTPFound
 from ..models import DBSession
 from ..models.service_sale import ServiceSale
 from ..models.service_item import ServiceItem
+from ..resources.liabilities import Liabilities
 from ..resources.invoices import Invoices
 from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 
@@ -250,6 +251,27 @@ class ServicesSales(object):
                         {'resource_id': service_sale.resource.id}
                         if not service_sale.invoice
                         else {'id': service_sale.invoice.id}
+                    )
+                )
+            )
+
+    @view_config(
+        name='liability',
+        context='..resources.services_sales.ServicesSales',
+        request_method='GET',
+        permission='liability'
+    )
+    def liabilities(self):
+        service_sale = ServiceSale.get(self.request.params.get('id'))
+        if service_sale:
+            return HTTPFound(
+                self.request.resource_url(
+                    Liabilities(self.request),
+                    'add' if not service_sale.liability else 'edit',
+                    query=(
+                        {'resource_id': service_sale.resource.id}
+                        if not service_sale.liability
+                        else {'id': service_sale.liability.id}
                     )
                 )
             )

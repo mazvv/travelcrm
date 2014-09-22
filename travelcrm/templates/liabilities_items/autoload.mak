@@ -6,10 +6,10 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.resource_url(_context, 'autoload'), class_="_ajax", autocomplete="off", hidden_fields=[('resource_id', resource_id)])}
-        <div class="p1">
+        <div class="mt1 mb1">
             <div class="tc">
                 <i class="fa fa-info-circle fa-lg"></i> 
-                ${_(u"Do you realy want to autoload liabilities?")}
+                ${_(u"Do you realy want to autoload liabilities? All existed liability data will be deleted.")}
             </div>
         </div>
         <div class="form-buttons">

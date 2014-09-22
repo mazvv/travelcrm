@@ -33,7 +33,7 @@
             <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
             <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
-            <th data-options="field:'resource_type',sortable:true,width:150">${_(u"source")}</th>
+            <th data-options="field:'resource_type',sortable:true,width:100">${_(u"source")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
             <th data-options="field:'payments',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"payments")}</th>
             <th data-options="field:'payments_percent',sortable:false,width:80,formatter:function(value, row, index){return payment_indicator(row.payments_percent);}">${_(u"payments, %")}</th>

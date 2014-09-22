@@ -9,9 +9,15 @@ from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
 from ...models.service import Service
+from ...models.currency import Currency
 from ...models.account_item import AccountItem
+from ...models.liability import Liability
+from ...models.liability_item import LiabilityItem
 
-from ...lib.bl import InvoiceFactory
+from ...lib.bl import (
+    InvoiceFactory,
+    LiabilityFactory
+)
 from ...lib.bl.currencies_rates import query_convert_rates
 from ...lib.utils.common_utils import money_cast
 
@@ -153,4 +159,97 @@ class ServiceSaleInvoiceFactory(InvoiceFactory):
             )
             .group_by(subq.c.id, subq.c.name)
             .order_by(subq.c.name)
+        )
+
+
+class ServiceSaleLiabilityFactory(LiabilityFactory):
+
+    @classmethod
+    def _get_resource(cls, resource_id):
+        return (
+            DBSession.query(ServiceSale)
+            .filter(ServiceSale.resource_id == resource_id)
+            .first()
+        )
+
+    @classmethod
+    def query_list(cls):
+        subq_services = (
+            DBSession.query(
+                ServiceSale.id,
+                func.sum(ServiceItem.base_price).label('base_price')
+            )
+            .join(ServiceSale, ServiceItem.service_sale)
+            .group_by(ServiceSale.id)
+            .subquery()
+        )
+        subq_liability = (
+            DBSession.query(
+                Liability.id,
+                money_cast(
+                    func.coalesce(
+                        func.sum(LiabilityItem.base_price), 0
+                    )
+                ).label('base_price')
+            )
+            .join(LiabilityItem, Liability.liabilities_items)
+            .group_by(Liability.id)
+            .subquery()
+        )
+        query = (
+            DBSession.query(
+                Resource.id.label('resource_id'),
+                subq_services.c.base_price.label('resource_sum'),
+                (subq_services.c.base_price - subq_liability.c.base_price)
+                .label('profit'),
+                subq_liability.c.base_price.label('base_price'),
+                Liability.id.label('liability_id'),
+            )
+            .join(Resource, ServiceSale.resource)
+            .join(Liability, ServiceSale.liability)
+            .join(subq_liability, subq_liability.c.id == Liability.id)
+            .outerjoin(subq_services, subq_services.c.id == ServiceSale.id)
+        )
+        return query
+
+    @classmethod
+    def bind_liability(cls, resource_id, liability):
+        service_sale = cls._get_resource(resource_id)
+        service_sale.liability = liability
+        return service_sale
+
+    @classmethod
+    def get_source_date(cls, resource_id):
+        service_sale = cls._get_resource(resource_id)
+        return service_sale.deal_date
+
+    @classmethod
+    def get_liability(cls, resource_id):
+        service_sale = cls._get_resource(resource_id)
+        return service_sale.liability
+
+    @classmethod
+    def services_info(cls, resource_id):
+        service_sale = cls._get_resource(resource_id)
+        return (
+            DBSession.query(
+                Service.id.label('id'),
+                Service.name.label('name'),
+                func.sum(ServiceItem.price).label('price'),
+                Currency.iso_code.label('currency'),
+                Currency.id.label('currency_id'),
+                ServiceItem.touroperator_id.label('touroperator_id'),
+            )
+            .join(ServiceSale, ServiceItem.service_sale)
+            .join(Service, ServiceItem.service)
+            .join(Currency, ServiceItem.currency)
+            .filter(ServiceSale.id == service_sale.id)
+            .group_by(
+                Service.id,
+                Service.name,
+                Currency.id,
+                Currency.iso_code,
+                ServiceItem.touroperator_id,
+            )
+            .order_by(Service.name)
         )

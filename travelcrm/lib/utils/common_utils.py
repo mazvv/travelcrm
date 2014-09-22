@@ -84,7 +84,7 @@ def get_datetime_format():
 
 def money_cast(attr):
     if isinstance(attr, (Decimal, int, float)):
-        return Decimal(attr).quantize('.01', rounding=ROUND_DOWN)
+        return Decimal(attr).quantize(Decimal('.01'), rounding=ROUND_DOWN)
     return cast(attr, Numeric(16, 2))
 
 

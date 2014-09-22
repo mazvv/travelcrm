@@ -12,7 +12,11 @@
 		        ${h.tags.title(_(u"tour service"), True, "service_id")}
             </div>
             <div class="ml15">
-  		        ${h.fields.services_combobox_field(request, rt.settings.get("service_id") if rt.settings else None)}
+  		        ${h.fields.services_combobox_field(
+  		            request, 
+  		            rt.settings.get("service_id") if rt.settings else None, 
+  		            explicit_only=False
+  		        )}
   		        ${h.common.error_container(name='service_id')}
             </div>
         </div>

@@ -11,6 +11,7 @@ from ...models.outgoing import Outgoing
 from ...models.invoice import Invoice
 from ...models.account import Account
 from ...models.currency import Currency
+from ...models.touroperator import Touroperator
 from ...models.fin_transaction import FinTransaction
 
 from ...lib.bl.invoices import query_resource_data
@@ -22,7 +23,9 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
     _fields = {
         'id': Outgoing.id,
         '_id': Outgoing.id,
-        'invoice_id': Outgoing.invoice_id,
+        'account_name': Account.name,
+        'currency': Currency.iso_code,
+        'touroperator': Touroperator.name,
     }
     _simple_search_fields = [
 
@@ -36,7 +39,8 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(Outgoing, Resource.outgoing)
-            .outerjoin(Invoice, Outgoing.invoice)
+            .join(Account, Outgoing.account)
+            .join(Touroperator, Outgoing.touroperator)
         )
         self.query = self.query.add_columns(*fields)
 

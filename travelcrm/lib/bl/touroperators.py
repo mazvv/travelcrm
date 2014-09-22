@@ -10,6 +10,7 @@ from ...models.touroperator import Touroperator
 from ...models.commission import Commission
 
 from ..utils.common_utils import money_cast
+from ...lib.bl.currencies_rates import currency_exchange
 
 
 def get_calculation(
@@ -29,7 +30,6 @@ def get_calculation(
             Touroperator.id == touroperator_id,
             Commission.service_id == service_id,
             Commission.date_from <= calc_date,
-            Commission.currency_id == currency_id,
         )
         .order_by(desc(Commission.date_from))
         .first()
@@ -38,8 +38,10 @@ def get_calculation(
         if commission.percentage:
             price = price * (100 - commission.percentage) / 100
         if commission.price:
-            price -= commission.price
-        return money_cast(price)
-
-        return commission.get_calculation(price)
-    return Decimal(0)
+            price -= currency_exchange(
+                commission.price,
+                commission.currency_id,
+                currency_id,
+                calc_date
+            )
+    return money_cast(price)

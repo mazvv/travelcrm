@@ -34,6 +34,14 @@
                 ${h.common.error_container(name='display_text')}
             </div>
         </div>
+        <div class="form-field">
+            <div class="dl15">
+                ${h.tags.title(_(u"explicit"), False, "explicit")}
+            </div>
+            <div class="ml15">
+                ${h.fields.yes_no_field(item.explicit if item else 1, name="explicit")}
+            </div>
+        </div>
         <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"description"), False, "descr")}

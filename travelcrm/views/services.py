@@ -50,6 +50,9 @@ class Services(object):
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
+        explicit_only = self.request.params.get('explicit_only')
+        if explicit_only:
+            qb.filter_explicit_only()
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -89,6 +92,7 @@ class Services(object):
                 name=controls.get('name'),
                 account_item_id=controls.get('account_item_id'),
                 display_text=controls.get('display_text'),
+                explicit=controls.get('explicit'),
                 descr=controls.get('descr'),
                 resource=self.context.create_resource()
             )
@@ -130,6 +134,7 @@ class Services(object):
             service.name = controls.get('name')
             service.account_item_id = controls.get('account_item_id')
             service.display_text = controls.get('display_text')
+            service.explicit = controls.get('explicit')
             service.descr = controls.get('descr')
             return {
                 'success_message': _(u'Saved'),

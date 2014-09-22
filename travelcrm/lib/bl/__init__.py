@@ -64,3 +64,19 @@ class LiabilityFactory(object):
     @classmethod
     def query_list(cls):
         raise NotImplemented()
+
+    @classmethod
+    def bind_liability(cls, resource_id, liability):
+        raise NotImplemented()
+
+    @classmethod
+    def get_source_date(cls, resource_id):
+        raise NotImplemented()
+
+    @classmethod
+    def get_liability(cls, resource_id):
+        raise NotImplemented()
+
+    @classmethod
+    def services_info(cls, resource_id):
+        raise NotImplemented()
