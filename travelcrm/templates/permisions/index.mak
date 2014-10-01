@@ -28,7 +28,7 @@
             }
         " width="100%">
         <thead>
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'rt_humanize',sortable:true,width:150">${_(u"resource type")}</th>
             <th data-options="field:'permisions',width:200">permissions</th>
             <th data-options="field:'structure_path',sortable:true,width:200,formatter:function(value,row,index){return (value)?value.join(' &rarr; '):'';}">${_(u"structure")}</th>

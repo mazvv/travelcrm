@@ -12,7 +12,7 @@ from . import (
 
 from ...models import DBSession
 from ...models.resource import Resource
-from ...models.tour import Tour
+from travelcrm.models.tour import Tour
 from ...models.tour_point import TourPoint
 from ...models.touroperator import Touroperator
 from ...models.location import Location
@@ -27,9 +27,7 @@ from ...models.currency import Currency
 from ...models.person import Person
 from ...models.service_item import ServiceItem
 from ...models.invoice import Invoice
-from ...models.liability import Liability
 
-from ...lib.bl.persons import query_person_contacts, query_person_passports
 from ...lib.utils.common_utils import (
     get_locale_name,
     get_base_currency,
@@ -82,8 +80,6 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         .group_by(Tour.id)
         .subquery()
     )
-    _subq_customer_contacts = query_person_contacts().subquery()
-    _subq_customer_passports = query_person_passports().subquery()
 
     _fields = {
         'id': Tour.id,
@@ -101,13 +97,7 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
         'start_date': cast(Tour.start_date, DATE),
         'end_date': cast(Tour.end_date, DATE),
         'customer': Person.name,
-        'customer_phone': _subq_customer_contacts.c.phone,
-        'customer_skype': _subq_customer_contacts.c.skype,
-        'customer_email': _subq_customer_contacts.c.email,
-        'customer_citizen_passport': _subq_customer_passports.c.citizen,
-        'customer_foreign_passport': _subq_customer_passports.c.foreign,
         'invoice_id': Invoice.id,
-        'liability_id': Liability.id,
     }
 
     _simple_search_fields = [
@@ -130,19 +120,10 @@ class ToursQueryBuilder(ResourcesQueryBuilder):
             .join(self._subq_points, Tour.id == self._subq_points.c.tour_id)
             .join(self._subq_members, Tour.id == self._subq_members.c.tour_id)
             .outerjoin(
-                self._subq_customer_contacts,
-                Tour.customer_id == self._subq_customer_contacts.c.person_id
-            )
-            .outerjoin(
-                self._subq_customer_passports,
-                Tour.customer_id == self._subq_customer_passports.c.person_id
-            )
-            .outerjoin(
                 self._subq_services,
                 self._subq_services.c.id == Tour.id
             )
             .outerjoin(Invoice, Tour.invoice)
-            .outerjoin(Liability, Tour.liability)
         )
         self.query = self.query.add_columns(*fields)
 

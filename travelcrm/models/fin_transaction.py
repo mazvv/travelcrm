@@ -37,6 +37,11 @@ class FinTransaction(Base):
         Numeric(16, 2),
         nullable=False,
     )
+    factor = Column(
+        Integer,
+        default=1,
+        nullable=False,
+    )
     date = Column(
         Date(),
         nullable=False,

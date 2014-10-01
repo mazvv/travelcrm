@@ -9,7 +9,7 @@ from pyramid.httpexceptions import HTTPFound
 from ..models import DBSession
 from ..models.service_sale import ServiceSale
 from ..models.service_item import ServiceItem
-from ..resources.liabilities import Liabilities
+from ..resources.calculations import Calculations
 from ..resources.invoices import Invoices
 from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 

@@ -126,7 +126,7 @@
 			            }
 			        " width="100%">
 			        <thead>
-			            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+			            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
 			            <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
 			            <th data-options="field:'position_name',sortable:true,width:150">${_(u"position")}</th>
 			            <th data-options="field:'structure_path',sortable:true,width:200,formatter:function(value,row,index){return (value)?value.join(' &rarr; '):'';}">${_(u"structure")}</th>

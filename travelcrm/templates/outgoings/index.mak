@@ -30,9 +30,10 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
-            <th data-options="field:'account_name',sortable:true,width:150">${_(u"account name")}</th>
+            <th data-options="field:'account_name',sortable:true,width:150">${_(u"account")}</th>
+            <th data-options="field:'account_item',sortable:true,width:180">${_(u"account item")}</th>
             <th data-options="field:'touroperator',sortable:true,width:150">${_(u"touroperator")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
@@ -65,20 +66,20 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u''))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator name, account name or account item name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
-                    <div>
-                        ${h.tags.title(_(u"invoice"))}
-                    </div>
-                    <div>
-                        ${h.fields.invoices_combobox_field(request, None, 'invoice_id', show_toolbar=False)}
-                    </div>
-		            <div class="mt05">
+		            <div>
 		                ${h.tags.title(_(u"account"))}
 		            </div>
 		            <div>
 		                ${h.fields.accounts_combobox_field(request, None, 'account_id', show_toolbar=False, structure_id=None)}
 		            </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"account item"))}
+                    </div>
+                    <div>
+                        ${h.fields.accounts_items_combobox_field(request, None, 'account_item_id', show_toolbar=False)}
+                    </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"currency"))}
                     </div>

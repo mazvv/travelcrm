@@ -16,7 +16,7 @@ from ..lib.qb.tours import (
     ToursPointsQueryBuilder,
 )
 from ..resources.invoices import Invoices
-from ..resources.liabilities import Liabilities
+from ..resources.calculations import Calculations
 
 from ..lib.bl.tours import calc_base_price
 from ..lib.utils.common_utils import translate as _

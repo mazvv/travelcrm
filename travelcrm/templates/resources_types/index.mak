@@ -30,7 +30,7 @@
         	% if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'humanize',sortable:true,width:200">${_(u"humanize")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
             <th data-options="field:'customizable',sortable:true,width:26,formatter:function(value, row){if (value) return $('<div>').append($('<span>').addClass('fa fa-cog')).html();}" align="center">${_(u's.')}</th>

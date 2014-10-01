@@ -88,7 +88,6 @@ class AccountsItems(object):
             controls = schema.deserialize(self.request.params)
             account_item = AccountItem(
                 name=controls.get('name'),
-                item_type=controls.get('item_type'),
                 resource=self.context.create_resource()
             )
             DBSession.add(account_item)
@@ -127,7 +126,6 @@ class AccountsItems(object):
         try:
             controls = schema.deserialize(self.request.params)
             account_item.name = controls.get('name')
-            account_item.item_type = controls.get('item_type')
             return {
                 'success_message': _(u'Saved'),
                 'response': account_item.id

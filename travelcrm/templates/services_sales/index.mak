@@ -44,7 +44,7 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'customer',sortable:true,width:140">${_(u"customer")}</th>
             <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'liability_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-flag\' title=\'${_(u"liability already exists")}\'></span>':'';}" align="center">${_(u'L.')}</th>

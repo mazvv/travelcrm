@@ -103,7 +103,7 @@
             % if can_edit:
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'country_name',sortable:true,width:150">${_(u"country")}</th>
             <th data-options="field:'full_hotel_name',sortable:true,width:200">${_(u"hotel")}</th>
             <th data-options="field:'point_start_date',sortable:true,width:100">${_(u"start")}</th>

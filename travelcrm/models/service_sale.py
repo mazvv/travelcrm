@@ -70,34 +70,6 @@ service_sale_invoice = Table(
 )
 
 
-service_sale_liability = Table(
-    'service_sale_liability',
-    Base.metadata,
-    Column(
-        'service_sale_id',
-        Integer,
-        ForeignKey(
-            'service_sale.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_service_sale_id_service_sale_liability',
-        ),
-        primary_key=True,
-    ),
-    Column(
-        'liability_id',
-        Integer,
-        ForeignKey(
-            'liability.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_liability_id_service_sale_liability',
-        ),
-        primary_key=True,
-    ),
-)
-
-
 class ServiceSale(Base):
     __tablename__ = 'service_sale'
 
@@ -180,15 +152,6 @@ class ServiceSale(Base):
     invoice = relationship(
         'Invoice',
         secondary=service_sale_invoice,
-        backref=backref(
-            'service_sale',
-            uselist=False,
-        ),
-        uselist=False,
-    )
-    liability = relationship(
-        'Liability',
-        secondary=service_sale_liability,
         backref=backref(
             'service_sale',
             uselist=False,

@@ -10,6 +10,7 @@ from travelcrm.models.outgoing import Outgoing
 from ..lib.qb.outgoings import OutgoingsQueryBuilder
 from ..lib.bl.invoices import get_factory_by_invoice_id
 from ..lib.bl.employees import get_employee_structure
+from ..lib.bl.outgoings import make_payment
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
 
@@ -98,6 +99,11 @@ class Outgoings(object):
                 touroperator_id=controls.get('touroperator_id'),
                 resource=self.context.create_resource()
             )
+            outgoing.transactions = make_payment(
+                controls.get('date'),
+                controls.get('account_item_id'),
+                controls.get('sum'),
+            )
             DBSession.add(outgoing)
             DBSession.flush()
             return {
@@ -119,7 +125,12 @@ class Outgoings(object):
     )
     def edit(self):
         outgoing = Outgoing.get(self.request.params.get('id'))
-        return {'item': outgoing, 'title': _(u'Edit Outgoing')}
+        structure_id = outgoing.resource.owner_structure.id
+        return {
+            'item': outgoing,
+            'structure_id': structure_id,
+            'title': _(u'Edit Outgoing'),
+        }
 
     @view_config(
         name='edit',
@@ -133,12 +144,13 @@ class Outgoings(object):
         outgoing = Outgoing.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
-            outgoing.invoice_id = controls.get('invoice_id')
-            factory = get_factory_by_invoice_id(controls.get('invoice_id'))
-            outgoing.transactions = factory.make_payment(
-                controls.get('invoice_id'),
+            outgoing.rollback()
+            outgoing.account_id = controls.get('account_id'),
+            outgoing.touroperator_id = controls.get('touroperator_id'),
+            outgoing.transactions = make_payment(
                 controls.get('date'),
-                controls.get('sum')
+                controls.get('account_item_id'),
+                controls.get('sum'),
             )
             return {
                 'success_message': _(u'Saved'),

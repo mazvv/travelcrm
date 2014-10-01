@@ -30,10 +30,9 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:250">${_(u"name")}</th>
             <th data-options="field:'account_item',sortable:true,width:250">${_(u"account item")}</th>
-            <th data-options="field:'explicit',sortable:true,width:20,formatter:function(value, row, index){return !value?'<span class=\'fa fa-eye-slash\' title=\'${_(u"not explicit")}\'></span>':'';}" align="center">${_(u"E.")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

@@ -3,7 +3,6 @@
 from sqlalchemy import (
     Column,
     Integer,
-    Numeric,
     Table,
     ForeignKey,
 )
@@ -81,7 +80,6 @@ class Outgoing(Base):
         ),
         nullable=False,
     )
-
     resource = relationship(
         'Resource',
         backref=backref(
@@ -111,9 +109,38 @@ class Outgoing(Base):
         ),
         uselist=False,
     )
+    transactions = relationship(
+        'FinTransaction',
+        secondary=outgoing_transaction,
+        backref=backref(
+            'outgoing',
+            uselist=False,
+        ),
+        cascade="all,delete",
+        uselist=True,
+    )
 
     @classmethod
     def get(cls, id):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @property
+    def sum(self):
+        return sum(transaction.sum for transaction in self.transactions)
+
+    @property
+    def date(self):
+        assert self.transactions
+        return self.transactions[0].date
+
+    def rollback(self):
+        for transaction in self.transactions:
+            DBSession.delete(transaction)
+        DBSession.flush(self.transactions)
+
+    @property
+    def account_item(self):
+        assert self.transactions
+        return self.transactions[0].account_item

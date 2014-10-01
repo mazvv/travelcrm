@@ -11,7 +11,6 @@ class AccountsItemsQueryBuilder(ResourcesQueryBuilder):
         'id': AccountItem.id,
         '_id': AccountItem.id,
         'name': AccountItem.name,
-        'item_type': AccountItem.item_type,
     }
     _simple_search_fields = [
         AccountItem.name

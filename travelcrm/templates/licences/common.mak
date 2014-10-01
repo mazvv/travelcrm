@@ -53,7 +53,7 @@
             % if can_edit:
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'licence_num',sortable:true,width:140">${_(u"licence num")}</th>
             <th data-options="field:'date_from',sortable:true,width:80">${_(u"date from")}</th>
             <th data-options="field:'date_to',sortable:true,width:80">${_(u"date to")}</th>

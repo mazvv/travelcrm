@@ -42,6 +42,18 @@
                 ${h.common.error_container(name='account_id')}
             </div>
         </div>
+        <div class="form-field mb05">
+            <div class="dl15">
+                ${h.tags.title(_(u"account item"), True, "account_item_id")}
+            </div>
+            <div class="ml15">
+                ${h.fields.accounts_items_combobox_field(
+                    request, 
+                    item.account_item.id if item else None, 
+                )}
+                ${h.common.error_container(name='account_item_id')}
+            </div>
+        </div>
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"sum"), True, "sum")}
@@ -56,7 +68,7 @@
                 ${h.tags.title(_(u"sum currency"), False, "currency")}
             </div>
             <div class="ml15">
-                ${h.tags.text('currency', item.invoice.account.currency.iso_code if item else None, class_="easyui-textbox w20 currency", disabled=True)}
+                ${h.tags.text('currency', item.account.currency.iso_code if item else None, class_="easyui-textbox w20 currency", disabled=True)}
             </div>
         </div>
         <div class="form-buttons">

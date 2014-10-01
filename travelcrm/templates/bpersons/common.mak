@@ -64,7 +64,7 @@
             % if can_edit:
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
             <th data-options="field:'position_name',sortable:true,width:200">${_(u"position name")}</th>
         </thead>

@@ -20,15 +20,6 @@ class IInvoiceFactory(Interface):
         """
 
 
-class ILiabilityFactory(Interface):
-    """ Resource that can be source of Liabilities"""
-
-    def get_liability_factory():
-        """ Method that returns class instance for invoice interfaces
-        This method must be static
-        """
-
-
 class IIncomePaymentFactory(Interface):
     """ Resource that can produce Income Transactions """
 

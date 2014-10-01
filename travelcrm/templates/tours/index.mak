@@ -44,7 +44,7 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'deal_date',sortable:true,width:80">${_(u"deal date")}</th>
             <th data-options="field:'customer',sortable:true,width:120">${_(u"customer")}</th>
             <th data-options="field:'country',sortable:true,width:100">${_(u"country")}</th>
@@ -87,10 +87,10 @@
                 % endif
             </div>
             <div class="button-group">
-                % if _context.has_permision('liability'):
+                % if _context.has_permision('calculation'):
                 <a href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'liability')}'">
-                    <span class="fa fa-flag"></span>${_(u'Liabilities')}
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'calculation')}'">
+                    <span class="fa fa-calculator"></span>${_(u'Calculation')}
                 </a>
                 % endif
                 % if _context.has_permision('invoice'):

@@ -1,6 +1,4 @@
 # -*-coding: utf-8 -*-
-
-
 from zope.interface import implementer
 
 from ..interfaces import (
@@ -16,9 +14,9 @@ from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
-class LiabilitiesItems(ResourceTypeBase):
+class Calculations(ResourceTypeBase):
 
-    __name__ = 'liabilities_items'
+    __name__ = 'calculations'
 
     def __init__(self, request):
         self.__parent__ = Root(request)

@@ -13,8 +13,6 @@ from ..models import (
     DBSession,
     Base
 )
-from ..lib import EnumIntType
-from ..lib.utils.common_utils import translate as _
 
 
 class AccountItem(Base):
@@ -25,11 +23,6 @@ class AccountItem(Base):
             name='unique_idx_name_account_item',
         ),
     )
-
-    ITEM_TYPES = [
-        ('income', _(u'income')),
-        ('expense', _(u'expense')),
-    ]
 
     id = Column(
         Integer,
@@ -48,10 +41,6 @@ class AccountItem(Base):
     )
     name = Column(
         String(length=128),
-        nullable=False,
-    )
-    item_type = Column(
-        EnumIntType(ITEM_TYPES),
         nullable=False,
     )
     resource = relationship(

@@ -29,7 +29,3 @@ class AccountItemSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
-    item_type = colander.SchemaNode(
-        colander.String(),
-        validator=colander.OneOf(map(lambda x: x[0], AccountItem.ITEM_TYPES))
-    )

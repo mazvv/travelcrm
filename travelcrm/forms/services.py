@@ -37,10 +37,6 @@ class ServiceSchema(ResourceSchema):
         validator=colander.Length(max=256),
         missing=None
     )
-    explicit = colander.SchemaNode(
-        colander.Integer(),
-        missing=1,
-    )
     descr = colander.SchemaNode(
         colander.String(),
         validator=colander.Length(max=256),

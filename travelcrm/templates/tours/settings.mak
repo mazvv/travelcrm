@@ -15,7 +15,6 @@
   		        ${h.fields.services_combobox_field(
   		            request, 
   		            rt.settings.get("service_id") if rt.settings else None, 
-  		            explicit_only=False
   		        )}
   		        ${h.common.error_container(name='service_id')}
             </div>

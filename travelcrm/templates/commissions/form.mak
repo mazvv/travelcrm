@@ -22,7 +22,7 @@
                 ${h.tags.title(_(u"service"), True, "service_id")}
             </div>
             <div class="ml15">
-                ${h.fields.services_combobox_field(request, item.service_id if item else None, explicit_only=False)}
+                ${h.fields.services_combobox_field(request, item.service_id if item else None)}
                 ${h.common.error_container(name='service_id')}
             </div>
         </div>

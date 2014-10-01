@@ -30,7 +30,7 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'id',sortable:true,width:60">${_(u"id")}</th>
+            <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
             <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
             <th data-options="field:'resource_type',sortable:true,width:100">${_(u"source")}</th>

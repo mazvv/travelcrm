@@ -12,7 +12,6 @@ class ServicesQueryBuilder(ResourcesQueryBuilder):
         'id': Service.id,
         '_id': Service.id,
         'name': Service.name,
-        'explicit': Service.explicit,
         'account_item': AccountItem.name,
     }
     _simple_search_fields = [
@@ -35,6 +34,3 @@ class ServicesQueryBuilder(ResourcesQueryBuilder):
         assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
             self.query = self.query.filter(Service.id.in_(id))
-
-    def filter_explicit_only(self):
-        self.query = self.query.filter(Service.condition_explicit())

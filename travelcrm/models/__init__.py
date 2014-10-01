@@ -46,7 +46,7 @@ from touroperator import Touroperator
 from licence import Licence
 from passport import Passport
 from hotel import Hotel
-from tour import Tour
+from travelcrm.models.tour import Tour
 from tour_point import TourPoint
 from bank import Bank
 from bank_detail import BankDetail
@@ -64,5 +64,3 @@ from commission import Commission
 from supplier import Supplier
 from outgoing import Outgoing
 from refund import Refund
-from liability import Liability
-from liability_item import LiabilityItem

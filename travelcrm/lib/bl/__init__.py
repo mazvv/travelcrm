@@ -56,27 +56,3 @@ class InvoiceFactory(object):
     @classmethod
     def accounts_items_info(cls, resource_id, currency_id=None):
         raise NotImplemented()
-
-
-class LiabilityFactory(object):
-    __metaclass__ = ABCMeta
-
-    @classmethod
-    def query_list(cls):
-        raise NotImplemented()
-
-    @classmethod
-    def bind_liability(cls, resource_id, liability):
-        raise NotImplemented()
-
-    @classmethod
-    def get_source_date(cls, resource_id):
-        raise NotImplemented()
-
-    @classmethod
-    def get_liability(cls, resource_id):
-        raise NotImplemented()
-
-    @classmethod
-    def services_info(cls, resource_id):
-        raise NotImplemented()

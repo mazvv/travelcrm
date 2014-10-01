@@ -16,15 +16,6 @@
                 ${h.common.error_container(name='name')}
             </div>
         </div>
-        <div class="form-field mb05">
-            <div class="dl15">
-                ${h.tags.title(_(u"item type"), True, "item_type")}
-            </div>
-            <div class="ml15">
-                ${h.fields.accounts_items_types_combobox_field(item.item_type if item else None)}
-                ${h.common.error_container(name='item_type')}
-            </div>
-        </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">
