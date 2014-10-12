@@ -1,4 +1,6 @@
 <%namespace file="../services_items/common.mak" import="services_items_selector"/>
+<%namespace file="../notes/common.mak" import="notes_selector"/>
+<%namespace file="../tasks/common.mak" import="tasks_selector"/>
 <div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
@@ -7,7 +9,7 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
         <div class="easyui-tabs h100" data-options="border:false,height:400">
             <div title="${_(u'Main')}">
                 <div class="form-field">
@@ -24,7 +26,10 @@
                         ${h.tags.title(_(u"advertise"), True, "advsource_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.advsources_combobox_field(request, item.advsource_id if item else None)}
+                        ${h.fields.advsources_combobox_field(
+                            request, item.advsource_id if item else None,
+                            show_toolbar=(not readonly if readonly else True)
+                        )}
                         ${h.common.error_container(name='advsource_id')}
                     </div>
                 </div>
@@ -33,17 +38,46 @@
                         ${h.tags.title(_(u"customer"), True, "customer_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.persons_combobox_field(request, item.customer_id if item else None, name="customer_id")}
+                        ${h.fields.persons_combobox_field(
+                            request, item.customer_id if item else None, 
+                            name="customer_id",
+                            show_toolbar=(not readonly if readonly else True)
+                        )}
                         ${h.common.error_container(name="customer_id")}
                     </div>
                 </div>
-		    </div>
+            </div>
             <div title="${_(u'Services Items')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-					${services_items_selector(
-					    values=([service_item.id for service_item in item.services_items] if item else []),
-					    can_edit=(_context.has_permision('add') if item else _context.has_permision('edit')) 
-					)}
+                    ${services_items_selector(
+                        values=([service_item.id for service_item in item.services_items] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
+                </div>
+            </div>
+            <div title="${_(u'Notes')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${notes_selector(
+                        values=([note.id for note in item.resource.notes] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
+                </div>
+            </div>
+            <div title="${_(u'Tasks')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${tasks_selector(
+                        values=([task.id for task in item.resource.tasks] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
                 </div>
             </div>
         </div>

@@ -61,6 +61,21 @@ class Passports(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.passports.Passports',
+        request_method='GET',
+        renderer='travelcrm:templates/passports/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Passport"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.passports.Passports',
         request_method='GET',

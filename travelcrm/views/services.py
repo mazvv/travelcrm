@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.service import Service
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.services import ServicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Services(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.services.Services',
+        request_method='GET',
+        renderer='travelcrm:templates/services/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Service"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.services.Services',
         request_method='GET',
@@ -84,7 +101,7 @@ class Services(object):
         schema = ServiceSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             service = Service(
                 name=controls.get('name'),
                 account_item_id=controls.get('account_item_id'),
@@ -92,6 +109,12 @@ class Services(object):
                 descr=controls.get('descr'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                service.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                service.resource.tasks.append(task)
             DBSession.add(service)
             DBSession.flush()
             return {
@@ -126,11 +149,19 @@ class Services(object):
         schema = ServiceSchema().bind(request=self.request)
         service = Service.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             service.name = controls.get('name')
             service.account_item_id = controls.get('account_item_id')
             service.display_text = controls.get('display_text')
             service.descr = controls.get('descr')
+            service.resource.notes = []
+            service.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                service.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                service.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': service.id

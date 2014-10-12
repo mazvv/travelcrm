@@ -8,6 +8,8 @@ from pyramid.view import view_config
 from ..models import DBSession
 from ..models.bperson import BPerson
 from ..models.contact import Contact
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.bpersons import BPersonsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -65,6 +67,21 @@ class BPersons(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.bpersons.BPersons',
+        request_method='GET',
+        renderer='travelcrm:templates/bpersons/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Business Person"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.bpersons.BPersons',
         request_method='GET',
@@ -87,7 +104,7 @@ class BPersons(object):
         schema = BPersonSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             bperson = BPerson(
                 first_name=controls.get('first_name'),
                 last_name=controls.get('last_name'),
@@ -95,16 +112,15 @@ class BPersons(object):
                 position_name=controls.get('position_name'),
                 resource=self.context.create_resource()
             )
-            if self.request.params.getall('contact_id'):
-                bperson.contacts = (
-                    DBSession.query(Contact)
-                    .filter(
-                        Contact.id.in_(
-                            self.request.params.getall('contact_id')
-                        )
-                    )
-                    .all()
-                )
+            for id in controls.get('contact_id'):
+                contact = Contact.get(id)
+                bperson.contacts.append(contact)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                bperson.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                bperson.resource.tasks.append(task)
             DBSession.add(bperson)
             DBSession.flush()
             return {
@@ -142,23 +158,23 @@ class BPersons(object):
         schema = BPersonSchema().bind(request=self.request)
         bperson = BPerson.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             bperson.first_name = controls.get('first_name')
             bperson.last_name = controls.get('last_name')
             bperson.second_name = controls.get('second_name')
             bperson.position_name = controls.get('position_name')
-            if self.request.params.getall('contact_id'):
-                bperson.contacts = (
-                    DBSession.query(Contact)
-                    .filter(
-                        Contact.id.in_(
-                            self.request.params.getall('contact_id')
-                        )
-                    )
-                    .all()
-                )
-            else:
-                bperson.contacts = []
+            bperson.contacts = []
+            bperson.resource.notes = []
+            bperson.resource.tasks = []
+            for id in controls.get('contact_id'):
+                contact = Contact.get(id)
+                bperson.contacts.append(contact)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                bperson.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                bperson.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': bperson.id

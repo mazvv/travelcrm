@@ -12,7 +12,7 @@
     "
     title="${_(u'Company Positions')}">
     <table class="easyui-datagrid"
-    	id="${_id}"
+        id="${_id}"
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
@@ -45,6 +45,12 @@
             </a>
             % endif
             <div class="button-group">
+                % if _context.has_permision('view'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'view')}'">
+                    <span class="fa fa-circle-o"></span>${_(u'View')}
+                </a>
+                % endif
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">

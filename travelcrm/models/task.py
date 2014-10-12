@@ -126,10 +126,11 @@ class Task(Base):
         'Resource',
         secondary=task_resource,
         backref=backref(
-            'resource_task',
-            uselist=False
+            'tasks',
+            uselist=True,
+            lazy='dynamic',
         ),
-        uselist=True,
+        uselist=False,
     )
     employee = relationship(
         'Employee',

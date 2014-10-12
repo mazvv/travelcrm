@@ -6,13 +6,13 @@
 %>
 <div class="easyui-panel unselectable"
     data-options="
-    	fit:true,
-    	border:false,
-    	iconCls:'fa fa-table'
+        fit:true,
+        border:false,
+        iconCls:'fa fa-table'
     "
     title="${_(u'Services Sales')}">
     <table class="easyui-datagrid"
-    	id="${_id}"
+        id="${_id}"
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
@@ -63,6 +63,12 @@
             </a>
             % endif
             <div class="button-group">
+                % if _context.has_permision('view'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'view')}'">
+                    <span class="fa fa-circle-o"></span>${_(u'View')}
+                </a>
+                % endif
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
@@ -111,42 +117,42 @@
                     <div>
                         ${h.fields.persons_combobox_field(request, None, 'person_id', show_toolbar=False)}
                     </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"service"))}
-		            </div>
-		            <div>
-		                ${h.fields.services_combobox_field(request, None, 'service_id', show_toolbar=False)}
-		            </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"price range"))}
-		            </div>
-		            <div>
-		                ${h.tags.text('price_from', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
-		                <span class="p1">-</span>
-		                ${h.tags.text('price_to', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
-		            </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"sale dates"))}
-		            </div>
-		            <div>
-		                ${h.fields.date_field(None, "sale_from")}
-		                <span class="p1">-</span>
-		                ${h.fields.date_field(None, "sale_to")}
-		            </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"updated"))}
-		            </div>
-		            <div>
-		                ${h.fields.date_field(None, "updated_from")}
-		                <span class="p1">-</span>
-		                ${h.fields.date_field(None, "updated_to")}
-		            </div>
-		            <div class="mt05">
-		                ${h.tags.title(_(u"modifier"))}
-		            </div>
-		            <div>
-		                ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
-		            </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"service"))}
+                    </div>
+                    <div>
+                        ${h.fields.services_combobox_field(request, None, 'service_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"price range"))}
+                    </div>
+                    <div>
+                        ${h.tags.text('price_from', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        <span class="p1">-</span>
+                        ${h.tags.text('price_to', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"sale dates"))}
+                    </div>
+                    <div>
+                        ${h.fields.date_field(None, "sale_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "sale_to")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"updated"))}
+                    </div>
+                    <div>
+                        ${h.fields.date_field(None, "updated_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "updated_to")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"modifier"))}
+                    </div>
+                    <div>
+                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                    </div>
                     <div class="mt1">
                         <div class="button-group minor-group">
                             <a href="#" class="button _advanced_search_submit">${_(u"Find")}</a>

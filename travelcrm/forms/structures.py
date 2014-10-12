@@ -41,10 +41,6 @@ class StructureSchema(ResourceSchema):
         colander.Set(),
         missing=[],
     )
-    account_id = colander.SchemaNode(
-        colander.Set(),
-        missing=[],
-    )
 
     def deserialize(self, cstruct):
         if (
@@ -70,13 +66,5 @@ class StructureSchema(ResourceSchema):
             val = cstruct['bank_detail_id']
             cstruct['bank_detail_id'] = list()
             cstruct['bank_detail_id'].append(val)
-
-        if (
-            'account_id' in cstruct
-            and not isinstance(cstruct.get('account_id'), list)
-        ):
-            val = cstruct['account_id']
-            cstruct['account_id'] = list()
-            cstruct['account_id'].append(val)
 
         return super(StructureSchema, self).deserialize(cstruct)

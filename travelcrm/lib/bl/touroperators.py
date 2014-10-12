@@ -45,3 +45,7 @@ def get_calculation(
                 calc_date
             )
     return money_cast(price)
+
+
+class SubaccountFactory(object):
+    pass

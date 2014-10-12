@@ -34,7 +34,6 @@ from ...resources.accounts import Accounts
 from ...resources.invoices import Invoices
 
 from ...models.task import Task
-from ...models.account_item import AccountItem
 from ...models.account import Account
 
 from ..utils.common_utils import (
@@ -43,16 +42,18 @@ from ..utils.common_utils import (
     get_date_format,
 )
 from ..utils.common_utils import translate as _
+from ..bl.subaccounts import get_subaccounts_types
 
 
-def yes_no_field(value=None, name='yes_no'):
+def yes_no_field(value=None, name='yes_no', **kwargs):
     choices = [
         (0, _(u'no')),
         (1, _(u'yes')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto',editable:false"
+        data_options="panelHeight:'auto',editable:false",
+        **kwargs
     )
 
 
@@ -186,6 +187,20 @@ def employees_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/employees/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -289,6 +304,20 @@ def positions_combogrid_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/positions/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -499,6 +528,20 @@ def licences_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/licences/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -607,6 +650,20 @@ def bpersons_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/bpersons/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -711,6 +768,20 @@ def contacts_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/contacts/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -822,6 +893,20 @@ def hotelcats_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/hotelcats/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -927,6 +1012,20 @@ def countries_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/countries/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -1038,6 +1137,20 @@ def regions_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/regions/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -1143,6 +1256,20 @@ def locations_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/locations/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -1254,6 +1381,20 @@ def touroperators_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/touroperators/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -1359,6 +1500,20 @@ def accomodations_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/accomodations/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -1470,6 +1625,20 @@ def foodcats_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/foodcats/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -1575,6 +1744,20 @@ def roomcats_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/roomcats/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -1686,6 +1869,20 @@ def hotels_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/hotels/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -1791,6 +1988,20 @@ def currencies_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/currencies/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -1902,6 +2113,20 @@ def persons_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/persons/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -2006,6 +2231,20 @@ def advsources_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/advsources/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -2147,6 +2386,20 @@ def banks_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/banks/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -2253,6 +2506,20 @@ def banks_details_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/banks_details/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -2379,6 +2646,20 @@ def services_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/services/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -2487,6 +2768,20 @@ def accounts_items_combobox_field(
                 **kwargs
             )
         )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/accounts_items/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
+                **kwargs
+            )
+        )
     if 'edit' in permisions:
         kwargs = {
             'data-options':
@@ -2585,7 +2880,6 @@ def accounts_types_combobox_field(
 def accounts_combobox_field(
     request, value=None, name='account_id',
     id=None, show_toolbar=True, options=None,
-    structure_id=False
 ):
     permisions = Accounts.get_permisions(Accounts, request)
     obj_id = id or gen_id()
@@ -2602,6 +2896,20 @@ def accounts_combobox_field(
                 'a', href='#',
                 class_='fa fa-plus easyui-tooltip _action',
                 title=_(u'add new'),
+                **kwargs
+            )
+        )
+    if 'view' in permisions:
+        kwargs = {
+            'data-options':
+                "container:'#%s',action:'dialog_open',url:'/accounts/view',"
+                "property:'with_row'" % obj_id
+        }
+        toolbar.append(
+            HTML.tag(
+                'a', href='#',
+                class_='fa fa-circle-o easyui-tooltip _action',
+                title=_(u'view item'),
                 **kwargs
             )
         )
@@ -2644,12 +2952,8 @@ def accounts_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
-                if(%(structure_id)s){
-                    param.structure_id = %(structure_id)s;
-                }
                 param.q = '';
             }
             else if(id && typeof(param.q) == 'undefined'){
@@ -2673,7 +2977,6 @@ def accounts_combobox_field(
         'columns': json.dumps(fields),
         'id': json.dumps(value),
         'obj_id': obj_id,
-        'structure_id': json.dumps(structure_id),
     })
     if options:
         data_options += """,
@@ -2811,4 +3114,23 @@ def invoices_combobox_field(
             data_options=data_options,
         ),
         toolbar if (toolbar and show_toolbar) else ''
+    )
+
+
+def subaccounts_types_combobox_field(
+    value=None, name='subaccount_type', options=None,
+):
+    data_options = "panelHeight:'auto',editable:false"
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    choices = [
+        (rt.name, rt.humanize)
+        for rt in get_subaccounts_types()
+    ]
+    return tags.select(
+        name, value, choices,
+        class_='easyui-combobox text w20',
+        data_options=data_options
     )

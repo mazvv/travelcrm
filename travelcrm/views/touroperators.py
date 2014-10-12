@@ -4,6 +4,7 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.response import Response
 
 from ..models import DBSession
 from ..models.touroperator import Touroperator
@@ -11,8 +12,11 @@ from ..models.licence import Licence
 from ..models.bperson import BPerson
 from ..models.bank_detail import BankDetail
 from ..models.commission import Commission
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.touroperators import TouroperatorsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.helpers.fields import touroperators_combobox_field
 from ..forms.touroperators import TouroperatorSchema
 
 
@@ -67,6 +71,21 @@ class Touroperators(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.touroperators.Touroperators',
+        request_method='GET',
+        renderer='travelcrm:templates/touroperators/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Touroperator"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.touroperators.Touroperators',
         request_method='GET',
@@ -105,6 +124,12 @@ class Touroperators(object):
             for id in controls.get('commission_id'):
                 commission = Commission.get(id)
                 touroperator.commissions.append(commission)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                touroperator.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                touroperator.resource.tasks.append(task)
             DBSession.add(touroperator)
             DBSession.flush()
             return {
@@ -148,6 +173,8 @@ class Touroperators(object):
             touroperator.bpersons = []
             touroperator.banks_details = []
             touroperator.commissions = []
+            touroperator.resource.notes = []
+            touroperator.resource.tasks = []
             for id in controls.get('licence_id'):
                 licence = Licence.get(id)
                 touroperator.licences.append(licence)
@@ -160,6 +187,12 @@ class Touroperators(object):
             for id in controls.get('commission_id'):
                 commission = Commission.get(id)
                 touroperator.commissions.append(commission)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                touroperator.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                touroperator.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': touroperator.id,
@@ -222,3 +255,12 @@ class Touroperators(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='combobox',
+        context='..resources.touroperators.Touroperators',
+        request_method='POST',
+        permission='view'
+    )
+    def _combobox(self):
+        return Response(touroperators_combobox_field(self.request, None))

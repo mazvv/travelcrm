@@ -102,34 +102,6 @@ structure_address = Table(
 )
 
 
-structure_account = Table(
-    'structure_account',
-    Base.metadata,
-    Column(
-        'structure_id',
-        Integer,
-        ForeignKey(
-            'structure.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_structure_id_structure_account',
-        ),
-        primary_key=True,
-    ),
-    Column(
-        'account_id',
-        Integer,
-        ForeignKey(
-            'account.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_account_id_structure_account',
-        ),
-        primary_key=True,
-    )
-)
-
-
 class Structure(Base):
     __tablename__ = 'structure'
 
@@ -203,16 +175,6 @@ class Structure(Base):
     banks_details = relationship(
         'BankDetail',
         secondary=structure_bank_detail,
-        backref=backref(
-            'structure',
-            uselist=False
-        ),
-        uselist=True,
-    )
-
-    accounts = relationship(
-        'Account',
-        secondary=structure_account,
         backref=backref(
             'structure',
             uselist=False

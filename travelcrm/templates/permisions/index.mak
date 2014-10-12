@@ -12,7 +12,7 @@
     "
     title="${_(u'Position Permissions')} | ${position.name}">
     <table class="easyui-datagrid"
-    	id="${_id}"
+        id="${_id}"
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
@@ -38,16 +38,16 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl25">
             <div class="button-group">
-				% if _context.has_permision('edit'):
-				<a href="#" class="button _action"
-				    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit', query=[('position_id', position.id)])}'">
-				    <span class="fa fa-pencil"></span>${_(u'Edit Permissions')}
-				</a>
-				<a href="#" class="button _action"
-				    data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'copy', query=[('position_id', position.id)])}'">
-				    <span class="fa fa-copy"></span>${_(u'Copy From ...')}
-				</a>
-				% endif
+                % if _context.has_permision('edit'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit', query=[('position_id', position.id)])}'">
+                    <span class="fa fa-pencil"></span>${_(u'Edit Permissions')}
+                </a>
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'copy', query=[('position_id', position.id)])}'">
+                    <span class="fa fa-copy"></span>${_(u'Copy From ...')}
+                </a>
+                % endif
             </div>
         </div>
         <div class="ml25 tr">

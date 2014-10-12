@@ -6,9 +6,10 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from travelcrm.models.outgoing import Outgoing
+from ..models.outgoing import Outgoing
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.outgoings import OutgoingsQueryBuilder
-from ..lib.bl.invoices import get_factory_by_invoice_id
 from ..lib.bl.employees import get_employee_structure
 from ..lib.bl.outgoings import make_payment
 from ..lib.utils.security_utils import get_auth_employee
@@ -68,6 +69,21 @@ class Outgoings(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.outgoings.Outgoings',
+        request_method='GET',
+        renderer='travelcrm:templates/outgoings/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Outgoing"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.outgoings.Outgoings',
         request_method='GET',
@@ -93,7 +109,7 @@ class Outgoings(object):
         schema = OutgoingSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             outgoing = Outgoing(
                 account_id=controls.get('account_id'),
                 touroperator_id=controls.get('touroperator_id'),
@@ -104,6 +120,12 @@ class Outgoings(object):
                 controls.get('account_item_id'),
                 controls.get('sum'),
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                outgoing.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                outgoing.resource.tasks.append(task)
             DBSession.add(outgoing)
             DBSession.flush()
             return {
@@ -143,7 +165,7 @@ class Outgoings(object):
         schema = OutgoingSchema().bind(request=self.request)
         outgoing = Outgoing.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             outgoing.rollback()
             outgoing.account_id = controls.get('account_id'),
             outgoing.touroperator_id = controls.get('touroperator_id'),
@@ -152,6 +174,14 @@ class Outgoings(object):
                 controls.get('account_item_id'),
                 controls.get('sum'),
             )
+            outgoing.resource.notes = []
+            outgoing.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                outgoing.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                outgoing.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': outgoing.id

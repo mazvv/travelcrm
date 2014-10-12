@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.income import Income
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.incomes import IncomesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Incomes(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.incomes.Incomes',
+        request_method='GET',
+        renderer='travelcrm:templates/incomes/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Income"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.incomes.Incomes',
         request_method='GET',
@@ -84,7 +101,7 @@ class Incomes(object):
         schema = IncomeSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             income = Income(
                 invoice_id=controls.get('invoice_id'),
                 resource=self.context.create_resource()
@@ -95,6 +112,12 @@ class Incomes(object):
                 controls.get('date'),
                 controls.get('sum')
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                income.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                income.resource.tasks.append(task)
             DBSession.add(income)
             DBSession.flush()
             return {
@@ -129,7 +152,7 @@ class Incomes(object):
         schema = IncomeSchema().bind(request=self.request)
         income = Income.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             income.rollback()
             income.invoice_id = controls.get('invoice_id')
             factory = self.context.get_income_payment_factory()
@@ -138,6 +161,14 @@ class Incomes(object):
                 controls.get('date'),
                 controls.get('sum')
             )
+            income.resource.notes = []
+            income.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                income.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                income.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': income.id

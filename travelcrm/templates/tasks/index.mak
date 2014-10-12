@@ -6,74 +6,12 @@
 %>
 <div class="easyui-panel unselectable"
     data-options="
-    	fit:true,
-    	border:false,
-    	iconCls:'fa fa-table'
+        fit:true,
+        border:false,
+        iconCls:'fa fa-table'
     ">
-    <script type="easyui-textbox/javascript">
-    function _status_${_id}(val){
-    	var status = new Object();
-    	% for item in status:
-    	status['${item[0]}'] = '${item[1]}';
-    	% endfor;
-    	return getKeyByValue(status, val);
-    }
-    function _priority_${_id}(val){
-        var priority = new Object();
-        % for item in priority:
-        priority['${item[0]}'] = '${item[1]}';
-        % endfor;
-        return getKeyByValue(priority, val);
-    }
-    function formatter_${_id}(index, row){
-        var html = '<table width="100%" class="grid-details">';
-        if(row.performer){
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'performer')}</td>'
-                + '<td>' + row.performer + '</td>'
-                + '</tr>';
-        }
-        if(row.deadline){
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'deadline')}</td>'
-                + '<td>' + row.deadline + '</td>'
-                + '</tr>';
-        }
-        if(row.reminder){
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'reminder')}</td>'
-                + '<td>' + row.reminder + '</td>'
-                + '</tr>';
-        }
-        if(row.priority){
-            var span = '<span class="task-priority ' 
-                + _priority_${_id}(row.priority) + '">' 
-                + row.priority + '</span>';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'priority')}</td>'
-                + '<td>' + span + '</td>'
-                + '</tr>';
-        }
-        if(row.status){
-        	var span = '<span class="task-status ' 
-        	    + _status_${_id}(row.status) + '">' 
-        	    + row.status + '</span>';
-            html += '<tr>'
-                + '<td width="25%" class="b">${_(u'status')}</td>'
-                + '<td>' + span + '</td>'
-                + '</tr>';
-        }
-        if(row.descr){
-            html += '<tr>'
-                + '<td colspan="2">' + row.descr + '</td>'
-                + '</tr>';
-        }
-        html += '</table>';
-        return html;
-    }
-    </script>
     <table class="easyui-datagrid"
-    	id="${_id}"
+        id="${_id}"
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
@@ -81,8 +19,19 @@
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/tasks/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
             detailFormatter: function(index, row){
-                return formatter_${_id}(index, row);
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
             },          
             onBeforeLoad: function(param){
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
@@ -101,12 +50,18 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container">
             <div class="button-group minor-group">
-	            % if _context.has_permision('add'):
-	            <a href="#" class="button primary _action" 
-	                data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add')}'">
-	                <span class="fa fa-plus"></span>${_(u'Add')}
-	            </a>
-	            % endif
+                % if _context.has_permision('add'):
+                <a href="#" class="button primary _action" 
+                    data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add')}'">
+                    <span class="fa fa-plus"></span>${_(u'Add')}
+                </a>
+                % endif
+                % if _context.has_permision('view'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'view')}'">
+                    <span class="fa fa-circle-o"></span>${_(u'View')}
+                </a>
+                % endif
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">

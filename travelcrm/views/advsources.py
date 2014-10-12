@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.advsource import Advsource
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.advsources import AdvsourcesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Advsources(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.advsources.Advsources',
+        request_method='GET',
+        renderer='travelcrm:templates/advsources/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Advsource"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.advsources.Advsources',
         request_method='GET',
@@ -84,11 +101,17 @@ class Advsources(object):
         schema = AdvsourceSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             advsource = Advsource(
                 name=controls.get('name'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                advsource.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                advsource.resource.tasks.append(task)
             DBSession.add(advsource)
             DBSession.flush()
             return {
@@ -123,8 +146,16 @@ class Advsources(object):
         schema = AdvsourceSchema().bind(request=self.request)
         advsource = Advsource.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             advsource.name = controls.get('name')
+            advsource.resource.notes = []
+            advsource.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                advsource.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                advsource.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': advsource.id

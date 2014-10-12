@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.foodcat import Foodcat
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.foodcats import FoodcatsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Foodcats(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.foodcats.Foodcats',
+        request_method='GET',
+        renderer='travelcrm:templates/foodcats/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Food Category"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.foodcats.Foodcats',
         request_method='GET',
@@ -84,11 +101,17 @@ class Foodcats(object):
         schema = FoodcatSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             foodcat = Foodcat(
                 name=controls.get('name'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                foodcat.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                foodcat.resource.tasks.append(task)
             DBSession.add(foodcat)
             DBSession.flush()
             return {
@@ -123,8 +146,16 @@ class Foodcats(object):
         schema = FoodcatSchema().bind(request=self.request)
         foodcat = Foodcat.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             foodcat.name = controls.get('name')
+            foodcat.resource.notes = []
+            foodcat.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                foodcat.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                foodcat.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': foodcat.id

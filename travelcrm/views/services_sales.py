@@ -9,7 +9,8 @@ from pyramid.httpexceptions import HTTPFound
 from ..models import DBSession
 from ..models.service_sale import ServiceSale
 from ..models.service_item import ServiceItem
-from ..resources.calculations import Calculations
+from ..models.note import Note
+from ..models.task import Task
 from ..resources.invoices import Invoices
 from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 
@@ -69,6 +70,21 @@ class ServicesSales(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.services_sales.ServicesSales',
+        request_method='GET',
+        renderer='travelcrm:templates/services_sales/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Services Sale"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.services_sales.ServicesSales',
         request_method='GET',
@@ -100,6 +116,12 @@ class ServicesSales(object):
             for id in controls.get('service_item_id'):
                 service_item = ServiceItem.get(id)
                 service_sale.services_items.append(service_item)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                service_sale.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                service_sale.resource.tasks.append(task)
             service_sale = calc_base_price(service_sale)
             DBSession.add(service_sale)
             DBSession.flush()
@@ -143,9 +165,17 @@ class ServicesSales(object):
             service_sale.advsource_id = controls.get('advsource_id')
             service_sale.customer_id = controls.get('customer_id')
             service_sale.services_items = []
+            service_sale.resource.notes = []
+            service_sale.resource.tasks = []
             for id in controls.get('service_item_id', []):
                 service_item = ServiceItem.get(id)
                 service_sale.services_items.append(service_item)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                service_sale.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                service_sale.resource.tasks.append(task)
             service_sale = calc_base_price(service_sale)
             return {
                 'success_message': _(u'Saved'),

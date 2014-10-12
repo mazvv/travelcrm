@@ -64,6 +64,21 @@ class BankDetails(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.banks_details.BanksDetails',
+        request_method='GET',
+        renderer='travelcrm:templates/banks_details/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Bank Detail"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.banks_details.BanksDetails',
         request_method='GET',

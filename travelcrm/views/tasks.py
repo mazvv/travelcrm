@@ -8,8 +8,11 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.task import Task
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.tasks import TasksQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import get_resource_class
 from ..forms.tasks import TaskSchema
 
 
@@ -67,6 +70,21 @@ class Tasks(object):
             'total': qb.get_count(),
             'rows': qb.get_serialized()
         }
+
+    @view_config(
+        name='view',
+        context='..resources.tasks.Tasks',
+        request_method='GET',
+        renderer='travelcrm:templates/tasks/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Task"),
+            'readonly': True,
+        })
+        return result
 
     @view_config(
         name='add',
@@ -165,6 +183,26 @@ class Tasks(object):
                 'error_message': _(u'Please, check errors'),
                 'errors': e.asdict()
             }
+
+    @view_config(
+        name='details',
+        context='..resources.tasks.Tasks',
+        request_method='GET',
+        renderer='travelcrm:templates/tasks/details.mak',
+        permission='view'
+    )
+    def details(self):
+        task = Task.get(self.request.params.get('id'))
+        task_resource = None
+        if task.task_resource:
+            resource_cls = get_resource_class(
+                task.task_resource.resource_type.name
+            )
+            task_resource = resource_cls(self.request)
+        return {
+            'item': task,
+            'task_resource': task_resource,
+        }
 
     @view_config(
         name='delete',

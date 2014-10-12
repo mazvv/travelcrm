@@ -9,7 +9,6 @@ from ..models import DBSession
 from ..models.address import Address
 from ..lib.qb.addresses import AddressesQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import translate as _
 
 from ..forms.addresses import AddressSchema
 
@@ -60,6 +59,21 @@ class Addresses(object):
             'total': qb.get_count(),
             'rows': qb.get_serialized()
         }
+
+    @view_config(
+        name='view',
+        context='..resources.addresses.Addresses',
+        request_method='GET',
+        renderer='travelcrm:templates/addresses/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Address"),
+            'readonly': True,
+        })
+        return result
 
     @view_config(
         name='add',

@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.hotel import Hotel
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.hotels import HotelsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Hotels(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.hotels.Hotels',
+        request_method='GET',
+        renderer='travelcrm:templates/hotels/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Hotel"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.hotels.Hotels',
         request_method='GET',
@@ -84,13 +101,19 @@ class Hotels(object):
         schema = HotelSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             hotel = Hotel(
                 name=controls.get('name'),
                 hotelcat_id=controls.get('hotelcat_id'),
                 location_id=controls.get('location_id'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                hotel.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                hotel.resource.tasks.append(task)
             DBSession.add(hotel)
             DBSession.flush()
             return {
@@ -125,10 +148,18 @@ class Hotels(object):
         schema = HotelSchema().bind(request=self.request)
         hotel = Hotel.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             hotel.name = controls.get('name')
             hotel.hotelcat_id = controls.get('hotelcat_id')
             hotel.location_id = controls.get('location_id')
+            hotel.resource.notes = []
+            hotel.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                hotel.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                hotel.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': hotel.id

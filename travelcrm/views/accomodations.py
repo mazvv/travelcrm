@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.accomodation import Accomodation
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.accomodations import AccomodationsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Accomodations(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.accomodations.Accomodations',
+        request_method='GET',
+        renderer='travelcrm:templates/resources_types/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Accomodation"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.accomodations.Accomodations',
         request_method='GET',
@@ -83,11 +100,17 @@ class Accomodations(object):
     def _add(self):
         schema = AccomodationSchema().bind(request=self.request)
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             accomodation = Accomodation(
                 name=controls.get('name'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                accomodation.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                accomodation.resource.tasks.append(task)
             DBSession.add(accomodation)
             DBSession.flush()
             return {
@@ -122,8 +145,16 @@ class Accomodations(object):
         schema = AccomodationSchema().bind(request=self.request)
         accomodation = Accomodation.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             accomodation.name = controls.get('name')
+            accomodation.resource.notes = []
+            accomodation.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                accomodation.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                accomodation.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': accomodation.id,

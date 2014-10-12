@@ -9,6 +9,8 @@ from ..models import DBSession
 from ..models.supplier import Supplier
 from ..models.bperson import BPerson
 from ..models.bank_detail import BankDetail
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.suppliers import SuppliersQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.suppliers import SupplierSchema
@@ -65,6 +67,21 @@ class Suppliers(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.suppliers.Suppliers',
+        request_method='GET',
+        renderer='travelcrm:templates/suppliers/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Supplier"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.suppliers.Suppliers',
         request_method='GET',
@@ -97,6 +114,12 @@ class Suppliers(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 supplier.banks_details.append(bank_detail)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                supplier.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                supplier.resource.tasks.append(task)
             DBSession.add(supplier)
             DBSession.flush()
             return {
@@ -140,12 +163,20 @@ class Suppliers(object):
             supplier.bpersons = []
             supplier.banks_details = []
             supplier.commissions = []
+            supplier.resource.notes = []
+            supplier.resource.tasks = []
             for id in controls.get('bperson_id'):
                 bperson = BPerson.get(id)
                 supplier.bpersons.append(bperson)
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 supplier.banks_details.append(bank_detail)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                supplier.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                supplier.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': supplier.id,

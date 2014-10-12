@@ -9,19 +9,19 @@
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
         <div class="easyui-tabs" data-options="border:false,height:400">
             <div title="${_(u'Services')}">
-			    <table class="easyui-datagrid"
-			        data-options="
-			            url:'${request.resource_url(_context, 'services_info', query={'id': id})}',border:false,
-			            fit:true,singleSelect:true, rownumbers:true,showFooter:true
-			        " width="100%">
-			        <thead>
-			            <th data-options="field:'name',width:200">${_(u"service")}</th>
+                <table class="easyui-datagrid"
+                    data-options="
+                        url:'${request.resource_url(_context, 'services_info', query={'id': id})}',border:false,
+                        fit:true,singleSelect:true, rownumbers:true,showFooter:true
+                    " width="100%">
+                    <thead>
+                        <th data-options="field:'name',width:200">${_(u"service")}</th>
                         <th data-options="field:'unit_price',width:100,formatter:function(value, row, index){return '${currency} ' + value;}">${_(u"unit price")}</th>
-			            <th data-options="field:'cnt',width:50">${_(u"qty")}</th>
-			            <th data-options="field:'price',width:100,formatter:function(value, row, index){return '${currency} ' + value;}">${_(u"sum")}</th>
-			        </thead>
-			    </table>
-            </div>		       
+                        <th data-options="field:'cnt',width:50">${_(u"qty")}</th>
+                        <th data-options="field:'price',width:100,formatter:function(value, row, index){return '${currency} ' + value;}">${_(u"sum")}</th>
+                    </thead>
+                </table>
+            </div>               
             <div title="${_(u'Accounts Items')}">
                 <table class="easyui-datagrid"
                     data-options="

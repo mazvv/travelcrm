@@ -86,10 +86,12 @@
             },          
             onBeforeLoad: function(param){
                 var response = $(this).data('response');
+                % if can_edit:
                 if(response !== ''){
                     add_${_func_id}(response);
                     $(this).data('response', '');
                 }
+                % endif
                 var id = [0];
                 $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
                     id.push($(el).val());

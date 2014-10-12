@@ -7,7 +7,7 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"date from"), True, "date_from")}
@@ -22,7 +22,10 @@
                 ${h.tags.title(_(u"service"), True, "service_id")}
             </div>
             <div class="ml15">
-                ${h.fields.services_combobox_field(request, item.service_id if item else None)}
+                ${h.fields.services_combobox_field(
+                    request, item.service_id if item else None,
+                    show_toolbar=(not readonly if readonly else True)
+                )}
                 ${h.common.error_container(name='service_id')}
             </div>
         </div>
@@ -50,7 +53,10 @@
                 ${h.tags.title(_(u"price currency"), True, "currency_id")}
             </div>
             <div class="ml15">
-                ${h.fields.currencies_combobox_field(request, item.currency_id if item else None)}
+                ${h.fields.currencies_combobox_field(
+                    request, item.currency_id if item else None,
+                    show_toolbar=(not readonly if readonly else True)
+                )}
                 ${h.common.error_container(name='currency_id')}
             </div>
         </div>

@@ -7,7 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.account_item import AccountItem
-from ..models.address import Address
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.accounts_items import AccountsItemsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -65,6 +66,21 @@ class AccountsItems(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.accounts_items.AccountsItems',
+        request_method='GET',
+        renderer='travelcrm:templates/accounts_items/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Account Item"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.accounts_items.AccountsItems',
         request_method='GET',
@@ -85,11 +101,17 @@ class AccountsItems(object):
         schema = AccountItemSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             account_item = AccountItem(
                 name=controls.get('name'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                account_item.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                account_item.resource.tasks.append(task)
             DBSession.add(account_item)
             DBSession.flush()
             return {
@@ -124,8 +146,16 @@ class AccountsItems(object):
         schema = AccountItemSchema().bind(request=self.request)
         account_item = AccountItem.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             account_item.name = controls.get('name')
+            account_item.resource.notes = []
+            account_item.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                account_item.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                account_item.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': account_item.id

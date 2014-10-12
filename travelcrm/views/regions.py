@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.region import Region
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.regions import RegionsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Regions(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.regions.Regions',
+        request_method='GET',
+        renderer='travelcrm:templates/regions/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Region"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.regions.Regions',
         request_method='GET',
@@ -84,12 +101,18 @@ class Regions(object):
         schema = RegionSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             region = Region(
                 country_id=controls.get('country_id'),
                 name=controls.get('name'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                region.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                region.resource.tasks.append(task)
             DBSession.add(region)
             DBSession.flush()
             return {
@@ -124,9 +147,17 @@ class Regions(object):
         schema = RegionSchema().bind(request=self.request)
         region = Region.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             region.country_id = controls.get('country_id')
             region.name = controls.get('name')
+            region.resource.notes = []
+            region.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                region.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                region.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': region.id

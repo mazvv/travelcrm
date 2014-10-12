@@ -61,6 +61,21 @@ class Licences(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.licences.Licences',
+        request_method='GET',
+        renderer='travelcrm:templates/licences/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Licence"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.licences.Licences',
         request_method='GET',

@@ -19,7 +19,32 @@ from ..lib.utils.common_utils import get_locale_name
 
 
 class ResourceSchema(colander.Schema):
-    pass
+    note_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
+    task_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
+
+    def deserialize(self, cstruct):
+        if (
+            'note_id' in cstruct
+            and not isinstance(cstruct.get('note_id'), list)
+        ):
+            val = cstruct['note_id']
+            cstruct['note_id'] = list()
+            cstruct['note_id'].append(val)
+        if (
+            'task_id' in cstruct
+            and not isinstance(cstruct.get('task_id'), list)
+        ):
+            val = cstruct['task_id']
+            cstruct['task_id'] = list()
+            cstruct['task_id'].append(val)
+
+        return super(ResourceSchema, self).deserialize(cstruct)
 
 
 class Date(ColanderDate):

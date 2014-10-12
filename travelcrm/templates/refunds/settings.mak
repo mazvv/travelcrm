@@ -7,13 +7,13 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-	   	<div class="form-field mb05">
-		    <div class="dl15">
-		        ${h.tags.title(_(u"account item"), True, "account_item_id")}
+           <div class="form-field mb05">
+            <div class="dl15">
+                ${h.tags.title(_(u"account item"), True, "account_item_id")}
             </div>
             <div class="ml15">
-  		        ${h.fields.accounts_items_combobox_field(request, rt.settings.get("account_item_id") if rt.settings else None)}
-  		        ${h.common.error_container(name='account_item_id')}
+                  ${h.fields.accounts_items_combobox_field(request, rt.settings.get("account_item_id") if rt.settings else None)}
+                  ${h.common.error_container(name='account_item_id')}
             </div>
         </div>
         <div class="form-buttons">

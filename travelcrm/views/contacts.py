@@ -61,6 +61,21 @@ class Contacts(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.contacts.Contacts',
+        request_method='GET',
+        renderer='travelcrm:templates/contacts/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Contact"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.contacts.Contacts',
         request_method='GET',

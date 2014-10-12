@@ -7,14 +7,14 @@
                 </td>
             </tr>
         % for contact in item.customer.contacts:
-		    <tr>
-		        <td class="tc" style="width: 25px;">
-		            ${h.common.contact_type_icon(contact.contact_type)}
-		        </td>
-		        <td>
-		            ${contact.contact}
-		        </td>
-		    </tr>
+            <tr>
+                <td class="tc" style="width: 25px;">
+                    ${h.common.contact_type_icon(contact.contact_type)}
+                </td>
+                <td>
+                    ${contact.contact}
+                </td>
+            </tr>
         % endfor
     % endif
 </table>

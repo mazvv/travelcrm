@@ -11,12 +11,13 @@ from ..models.tour import Tour
 from ..models.tour_point import TourPoint
 from ..models.person import Person
 from ..models.service_item import ServiceItem
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.tours import (
     ToursQueryBuilder,
     ToursPointsQueryBuilder,
 )
 from ..resources.invoices import Invoices
-from ..resources.calculations import Calculations
 
 from ..lib.bl.tours import calc_base_price
 from ..lib.utils.common_utils import translate as _
@@ -81,6 +82,21 @@ class Tours(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.tours.Tours',
+        request_method='GET',
+        renderer='travelcrm:templates/tours/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Tour"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.tours.Tours',
         request_method='GET',
@@ -129,6 +145,12 @@ class Tours(object):
             for id in controls.get('service_item_id'):
                 service_item = ServiceItem.get(id)
                 tour.services_items.append(service_item)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                tour.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                tour.resource.tasks.append(task)
             tour = calc_base_price(tour)
             DBSession.add(tour)
             DBSession.flush()
@@ -185,6 +207,8 @@ class Tours(object):
             tour.points = []
             tour.persons = []
             tour.services_items = []
+            tour.resource.notes = []
+            tour.resource.tasks = []
             for point in controls.get('tour_point_id', []):
                 point = TourPoint.get(point)
                 tour.points.append(point)
@@ -194,6 +218,12 @@ class Tours(object):
             for id in controls.get('service_item_id'):
                 service_item = ServiceItem.get(id)
                 tour.services_items.append(service_item)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                tour.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                tour.resource.tasks.append(task)
             tour = calc_base_price(tour)
             return {
                 'success_message': _(u'Saved'),

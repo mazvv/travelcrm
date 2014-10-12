@@ -36,3 +36,12 @@ class IOutgoingPaymentFactory(Interface):
         """ Method that returns class instance for outgoing interfaces
         This method must be static
         """
+
+
+class ISubaccountFactory(Interface):
+    """ Resource that can produce Subaccounts """
+
+    def get_subaccount_factory():
+        """ Method that returns class instance for outgoing interfaces
+        This method must be static
+        """

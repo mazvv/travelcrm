@@ -308,6 +308,7 @@ function get_container_type(container){
 function _dialog_open(url){
 	$('#_dialog_').load(url,
 		function(data){
+			data = disable_inputs(data);
 			$('#_dialog_').html(data);
 			$.parser.parse('#_dialog_');
 		}
@@ -409,3 +410,15 @@ $.extend($.fn.textbox.defaults.inputEvents, {
 		t.textbox('setValue', t.textbox('getText'));
 	}
 });
+
+function disable_inputs(data){
+	var form = $(data).find('form');
+	if(form.hasClass('readonly')){
+		var d = $('<div>').html(data);
+		d.find(":input").attr("disabled", true);
+		d.find("[type=reset]").attr("disabled", false);
+		d.find("[type=submit]").addClass("disable");
+		return d.html();
+	}
+	return data;
+}

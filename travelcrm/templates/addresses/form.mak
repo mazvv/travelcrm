@@ -6,13 +6,16 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"location"), True, "location_id")}
             </div>
             <div class="ml15">
-                ${h.fields.locations_combobox_field(request, item.location_id if item else None)}
+                ${h.fields.locations_combobox_field(
+                    request, item.location_id if item else None,
+                    show_toolbar=(not readonly if readonly else True)
+                )}
                 ${h.common.error_container(name='location_id')}
             </div>
         </div>

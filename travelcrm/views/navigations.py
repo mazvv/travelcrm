@@ -2,18 +2,23 @@
 
 import logging
 import colander
-from sqlalchemy.orm.session import make_transient
 from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.position import Position
 from ..models.navigation import Navigation
-from ..lib.qb.navigations import (
-    NavigationsQueryBuilder,
+from ..models.note import Note
+from ..models.task import Task
+from ..lib.qb.navigations import NavigationsQueryBuilder
+from ..lib.bl.navigations import (
+    get_next_position,
+    copy_from_position,
 )
-from ..lib.bl.navigations import get_next_position
 from ..lib.utils.common_utils import translate as _
-from ..forms.navigations import NavigationSchema, NavigationCopySchema
+from ..forms.navigations import (
+    NavigationSchema,
+    NavigationCopySchema,
+)
 
 
 log = logging.getLogger(__name__)
@@ -67,6 +72,21 @@ class Navigations(object):
         return qb.get_serialized()
 
     @view_config(
+        name='view',
+        context='..resources.navigations.Navigations',
+        request_method='GET',
+        renderer='travelcrm:templates/navigations/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Navigation"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.navigations.Navigations',
         request_method='GET',
@@ -92,7 +112,7 @@ class Navigations(object):
     def _add(self):
         schema = NavigationSchema().bind(request=self.request)
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             navigation = Navigation(
                 name=controls.get('name'),
                 position_id=controls.get('position_id'),
@@ -105,6 +125,12 @@ class Navigations(object):
                 ),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                navigation.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                navigation.resource.tasks.append(task)
             DBSession.add(navigation)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
@@ -144,7 +170,7 @@ class Navigations(object):
             self.request.params.get('id')
         )
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             navigation.name = controls.get('name')
             navigation.position_id = (
                 controls.get('position_id')
@@ -152,6 +178,14 @@ class Navigations(object):
             navigation.url = controls.get('url')
             navigation.icon_cls = controls.get('icon_cls')
             navigation.parent_id = controls.get('parent_id')
+            navigation.resource.notes = []
+            navigation.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                navigation.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                navigation.resource.tasks.append(task)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {
@@ -252,28 +286,10 @@ class Navigations(object):
         schema = NavigationCopySchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params)
-            (
-                DBSession.query(Navigation)
-                .filter(
-                    Navigation.condition_position_id(
-                        controls.get('position_id')
-                    )
-                )
-                .delete()
+            copy_from_position(
+                controls.get('from_position_id'),
+                controls.get('position_id'),
             )
-            navigations_from = (
-                DBSession.query(Navigation)
-                .filter(
-                    Navigation.condition_position_id(
-                        controls.get('from_position_id')
-                    )
-                )
-            )
-            for navigation in navigations_from:
-                make_transient(navigation)
-                navigation.id = None
-                navigation.position_id = controls.get('position_id')
-                DBSession.add(navigation)
             return {'success_message': _(u'Copied')}
         except colander.Invalid, e:
             return {

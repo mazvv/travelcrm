@@ -2,28 +2,28 @@
     <div class="searchbar" style="padding-top: 2px;">
         ${h.tags.text("q", None, class_="easyui-textbox w30 searchbox", onkeyup="onkeyup_%s(event);" % container, data_options="prompt:'%s'" % prompt)}
         <span class="field-actions">
-		    <span class="fa fa-search easyui-tooltip field-action _action" 
-				  title="${_(u'search')}"
-				  data-options="container: '#${container}', action: 'refresh'">
-			</span>
-			% if advanced_id:
+            <span class="fa fa-search easyui-tooltip field-action _action" 
+                  title="${_(u'search')}"
+                  data-options="container: '#${container}', action: 'refresh'">
+            </span>
+            % if advanced_id:
             <script type="easyui-textbox/javascript">
                 function show_advanced_${container}(e){
-                	if($('#${advanced_id}').is(':visible'))
-                		$('#${advanced_id}').css('z-index', 1);
-                	else{
-                		var zindex = get_higher_zindex();
-                	    $('#${advanced_id}').css('z-index', zindex + 1);
+                    if($('#${advanced_id}').is(':visible'))
+                        $('#${advanced_id}').css('z-index', 1);
+                    else{
+                        var zindex = get_higher_zindex();
+                        $('#${advanced_id}').css('z-index', zindex + 1);
                     }
-                	$('#${advanced_id}').toggle();
+                    $('#${advanced_id}').toggle();
                 }
                 $('#${advanced_id} a._advanced_search_submit').on(
-                	'click',
-                	function(event){
-                		event.preventDefault();
-                		$('#${advanced_id}').toggle();
-                		refresh_container('#${container}');                		
-                	}
+                    'click',
+                    function(event){
+                        event.preventDefault();
+                        $('#${advanced_id}').toggle();
+                        refresh_container('#${container}');                        
+                    }
                 );
                 $('#${advanced_id} a._advanced_search_clear').on(
                     'click',
@@ -39,11 +39,11 @@
                   onclick="show_advanced_${container}();">
             </span>
             % endif
-		</span>
-		<script type="easyui-textbox/javascript">
-			function onkeyup_${container}(e){
-			    if(e.keyCode == 13) refresh_container('#${container}');  
-			}
-	    </script>
-	</div>
+        </span>
+        <script type="easyui-textbox/javascript">
+            function onkeyup_${container}(e){
+                if(e.keyCode == 13) refresh_container('#${container}');  
+            }
+        </script>
+    </div>
 </%def>

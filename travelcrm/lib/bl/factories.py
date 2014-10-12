@@ -6,6 +6,7 @@ from ...interfaces import (
     IOutgoingPaymentFactory,
     IIncomePaymentFactory,
     IInvoiceFactory,
+    ISubaccountFactory,
 )
 
 from ...lib.utils.resources_utils import (
@@ -38,4 +39,13 @@ def get_outgoings_factories_resources_types():
         rt_cls = get_resource_class(rt.name)
         assert isfunction(rt_cls.get_outgoing_factory), u"Must be static method"
         factories.append(rt_cls.get_outgoing_factory())
+    return factories
+
+
+def get_subaccounts_factories_resources_types():
+    factories = []
+    for rt in get_resources_types_by_interface(ISubaccountFactory):
+        rt_cls = get_resource_class(rt.name)
+        assert isfunction(rt_cls.get_subaccount_factory), u"Must be static method"
+        factories.append(rt_cls.get_subaccount_factory())
     return factories

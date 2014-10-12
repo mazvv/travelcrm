@@ -1,17 +1,17 @@
 <table width="100%" class="grid-details">
     % if item.contacts:
-	        <tr>
-	            <td colspan="2" class="b">${_(u'contacts')}</td>
-	        </tr>
+            <tr>
+                <td colspan="2" class="b">${_(u'contacts')}</td>
+            </tr>
         % for contact in item.contacts:
-		    <tr>
-		        <td class="tc" style="width: 25px;">
-		            ${h.common.contact_type_icon(contact.contact_type)}
-		        </td>
-		        <td>
-		            ${contact.contact}
-		        </td>
-		    </tr>
+            <tr>
+                <td class="tc" style="width: 25px;">
+                    ${h.common.contact_type_icon(contact.contact_type)}
+                </td>
+                <td>
+                    ${contact.contact}
+                </td>
+            </tr>
         % endfor
     % endif
 </table>

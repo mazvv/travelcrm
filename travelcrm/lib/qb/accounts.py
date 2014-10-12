@@ -5,10 +5,10 @@ from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.account import Account
 from ...models.currency import Currency
-from ...models.structure import Structure
 
 
 class AccountsQueryBuilder(ResourcesQueryBuilder):
+
     _fields = {
         'id': Account.id,
         '_id': Account.id,
@@ -39,9 +39,3 @@ class AccountsQueryBuilder(ResourcesQueryBuilder):
         assert isinstance(id, Iterable), u"Must be iterable object"
         if id:
             self.query = self.query.filter(Account.id.in_(id))
-
-    def filter_structure_id(self, structure_id):
-        assert isinstance(structure_id, Iterable), u"Must be iterable object"
-        if structure_id:
-            self.query = self.query.join(Structure, Account.structure)
-            self.query = self.query.filter(Structure.id.in_(structure_id))

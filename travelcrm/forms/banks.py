@@ -29,3 +29,17 @@ class BankSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+    address_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
+
+    def deserialize(self, cstruct):
+        if (
+            'address_id' in cstruct
+            and not isinstance(cstruct.get('address_id'), list)
+        ):
+            val = cstruct['address_id']
+            cstruct['address_id'] = list()
+            cstruct['address_id'].append(val)
+        return super(BankSchema, self).deserialize(cstruct)

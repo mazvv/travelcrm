@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.refund import Refund
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.refunds import RefundsQueryBuilder
 from ..lib.bl.employees import get_employee_structure
 from ..lib.utils.security_utils import get_auth_employee
@@ -67,6 +69,21 @@ class Refunds(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.refunds.Refunds',
+        request_method='GET',
+        renderer='travelcrm:templates/refunds/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Refund"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.refunds.Refunds',
         request_method='GET',
@@ -92,7 +109,7 @@ class Refunds(object):
         schema = RefundSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             refund = Refund(
                 invoice_id=controls.get('invoice_id'),
                 resource=self.context.create_resource(),
@@ -103,6 +120,12 @@ class Refunds(object):
                     controls.get('date'), controls.get('sum')
                 ),
             ]
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                refund.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                refund.resource.tasks.append(task)
             DBSession.add(refund)
             DBSession.flush()
             return {
@@ -137,7 +160,7 @@ class Refunds(object):
         schema = RefundSchema().bind(request=self.request)
         refund = Refund.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             refund.invoice_id = controls.get('invoice_id')
             refund.rollback()
             factory = self.context.get_outgoing_factory()
@@ -146,6 +169,14 @@ class Refunds(object):
                     controls.get('date'), controls.get('sum')
                 ),
             ]
+            refund.resource.notes = []
+            refund.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                refund.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                refund.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': refund.id

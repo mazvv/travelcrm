@@ -16,6 +16,8 @@ from ..utils.common_utils import (
     format_datetime as u_format_datetime,
     format_decimal as u_format_decimal,
 )
+from ..utils.security_utils import get_auth_employee
+from ..bl.employees import get_employee_structure
 
 
 def reset(name, value=None, id=NotGiven, **attrs):
@@ -97,3 +99,7 @@ def format_datetime(value):
 
 def get_locale_name():
     return u_get_locale_name()
+
+
+def get_current_employee_structure(request):
+    return get_employee_structure(get_auth_employee(request))

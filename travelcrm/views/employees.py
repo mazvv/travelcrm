@@ -10,6 +10,8 @@ from ..models.employee import Employee
 from ..models.contact import Contact
 from ..models.passport import Passport
 from ..models.address import Address
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.employees import EmployeesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -67,6 +69,21 @@ class Employees(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.employees.Employees',
+        request_method='GET',
+        renderer='travelcrm:templates/employees/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Employee"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.employees.Employees',
         request_method='GET',
@@ -111,6 +128,12 @@ class Employees(object):
             for id in controls.get('address_id'):
                 address = Address.get(id)
                 employee.addresses.append(address)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                employee.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                employee.resource.tasks.append(task)
 
             DBSession.add(employee)
             DBSession.flush()
@@ -163,6 +186,8 @@ class Employees(object):
             employee.contacts = []
             employee.passports = []
             employee.addresses = []
+            employee.resource.notes = []
+            employee.resource.tasks = []
             for id in controls.get('contact_id'):
                 contact = Contact.get(id)
                 employee.contacts.append(contact)
@@ -172,6 +197,12 @@ class Employees(object):
             for id in controls.get('address_id'):
                 address = Address.get(id)
                 employee.addresses.append(address)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                employee.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                employee.resource.tasks.append(task)
 
             return {
                 'success_message': _(u'Saved'),

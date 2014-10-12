@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.roomcat import Roomcat
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.roomcats import RoomcatsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -64,6 +66,21 @@ class Roomcats(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.roomcats.Roomcats',
+        request_method='GET',
+        renderer='travelcrm:templates/roomcats/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Room Category"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.roomcats.Roomcats',
         request_method='GET',
@@ -84,11 +101,17 @@ class Roomcats(object):
         schema = RoomcatSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             roomcat = Roomcat(
                 name=controls.get('name'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                roomcat.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                roomcat.resource.tasks.append(task)
             DBSession.add(roomcat)
             DBSession.flush()
             return {
@@ -123,8 +146,16 @@ class Roomcats(object):
         schema = RoomcatSchema().bind(request=self.request)
         roomcat = Roomcat.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             roomcat.name = controls.get('name')
+            roomcat.resource.notes = []
+            roomcat.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                roomcat.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                roomcat.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': roomcat.id

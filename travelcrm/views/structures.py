@@ -10,7 +10,8 @@ from ..models.structure import Structure
 from ..models.contact import Contact
 from ..models.address import Address
 from ..models.bank_detail import BankDetail
-from ..models.account import Account
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.structures import StructuresQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.structures import StructureSchema
@@ -62,6 +63,21 @@ class Structures(object):
         return qb.get_serialized()
 
     @view_config(
+        name='view',
+        context='..resources.structures.Structures',
+        request_method='GET',
+        renderer='travelcrm:templates/structures/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Structure"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.structures.Structures',
         request_method='GET',
@@ -99,9 +115,12 @@ class Structures(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 structure.banks_details.append(bank_detail)
-            for id in controls.get('account_id'):
-                account = Account.get(id)
-                structure.accounts.append(account)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                structure.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                structure.resource.tasks.append(task)
             DBSession.add(structure)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
@@ -141,6 +160,8 @@ class Structures(object):
             structure.contacts = []
             structure.addresses = []
             structure.banks_details = []
+            structure.resource.notes = []
+            structure.resource.tasks = []
             for id in controls.get('contact_id'):
                 contact = Contact.get(id)
                 structure.contacts.append(contact)
@@ -150,9 +171,12 @@ class Structures(object):
             for id in controls.get('bank_detail_id'):
                 bank_detail = BankDetail.get(id)
                 structure.banks_details.append(bank_detail)
-            for id in controls.get('account_id'):
-                account = Account.get(id)
-                structure.accounts.append(account)
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                structure.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                structure.resource.tasks.append(task)
             return {'success_message': _(u'Saved')}
         except colander.Invalid, e:
             return {

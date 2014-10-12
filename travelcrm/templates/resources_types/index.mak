@@ -27,7 +27,7 @@
             }
         " width="100%">
         <thead>
-        	% if _context.has_permision('delete'):
+            % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
@@ -48,6 +48,12 @@
             </a>
             % endif
             <div class="button-group">
+                % if _context.has_permision('view'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'view')}'">
+                    <span class="fa fa-circle-o"></span>${_(u'View')}
+                </a>
+                % endif
                 % if _context.has_permision('edit'):
                 <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
@@ -73,32 +79,32 @@
             % endif
         </div>
         <div class="ml45 tr">
-        	<div class="search">
-	            ${searchbar(_id, _s_id, prompt=_(u'Enter name, humanize or module'))}
-			    <div class="advanced-search tl hidden" id = "${_s_id}">
-			        <div>
-			            ${h.tags.title(_(u"updated"))}
-			        </div>
-			        <div>
-			            ${h.fields.date_field(None, "updated_from")}
-			            <span class="p1">-</span>
-			            ${h.fields.date_field(None, "updated_to")}
-			        </div>
-			        <div class="mt05">
-			            ${h.tags.title(_(u"modifier"))}
-			        </div>
-			        <div>
-			            ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
-			        </div>
-			        <div class="mt1">
-				        <div class="button-group minor-group">
-				            <a href="#" class="button _advanced_search_submit">${_(u"Find")}</a>
-				            <a href="#" class="button" onclick="$(this).closest('.advanced-search').hide();">${_(u"Close")}</a>
-				            <a href="#" class="button danger _advanced_search_clear">${_(u"Clear")}</a>
-				        </div>
-			        </div>
-			    </div>
-		    </div>
+            <div class="search">
+                ${searchbar(_id, _s_id, prompt=_(u'Enter name, humanize or module'))}
+                <div class="advanced-search tl hidden" id = "${_s_id}">
+                    <div>
+                        ${h.tags.title(_(u"updated"))}
+                    </div>
+                    <div>
+                        ${h.fields.date_field(None, "updated_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "updated_to")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"modifier"))}
+                    </div>
+                    <div>
+                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt1">
+                        <div class="button-group minor-group">
+                            <a href="#" class="button _advanced_search_submit">${_(u"Find")}</a>
+                            <a href="#" class="button" onclick="$(this).closest('.advanced-search').hide();">${_(u"Close")}</a>
+                            <a href="#" class="button danger _advanced_search_clear">${_(u"Clear")}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

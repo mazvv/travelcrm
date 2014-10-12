@@ -20,3 +20,18 @@ class BPersonSchema(ResourceSchema):
     position_name = colander.SchemaNode(
         colander.String(),
     )
+    contact_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
+
+    def deserialize(self, cstruct):
+        if (
+            'contact_id' in cstruct
+            and not isinstance(cstruct.get('contact_id'), list)
+        ):
+            val = cstruct['contact_id']
+            cstruct['contact_id'] = list()
+            cstruct['contact_id'].append(val)
+
+        return super(ResourceSchema, self).deserialize(cstruct)

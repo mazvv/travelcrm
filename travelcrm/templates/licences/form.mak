@@ -6,7 +6,7 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"licence num"), True, "licence_num")}

@@ -7,16 +7,16 @@
 
 <div class="easyui-panel unselectable"
     data-options="
-    	fit:true,
-    	border:false,
-    	iconCls:'fa fa-table'
+        fit:true,
+        border:false,
+        iconCls:'fa fa-table'
     "
     title="${_(u'Users')}">
     <table class="easyui-datagrid"
-    	id="${_id}"
+        id="${_id}"
         data-options="
-        	url:'${request.resource_url(_context, 'list')}',border:false,
-        	pagination:true,fit:true,pageSize:50,singleSelect:true,
+            url:'${request.resource_url(_context, 'list')}',border:false,
+            pagination:true,fit:true,pageSize:50,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
@@ -46,20 +46,26 @@
                 <span class="fa fa-plus"></span>${_(u'Add New')}
             </a>
             % endif
-			<div class="button-group">
-				% if _context.has_permision('edit'):
-				<a href="#" class="button _action"
-				    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
-				    <span class="fa fa-pencil"></span>${_(u'Edit')}
-				</a>
-				% endif
+            <div class="button-group">
+                % if _context.has_permision('view'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'view')}'">
+                    <span class="fa fa-circle-o"></span>${_(u'View')}
+                </a>
+                % endif
+                % if _context.has_permision('edit'):
+                <a href="#" class="button _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
+                    <span class="fa fa-pencil"></span>${_(u'Edit')}
+                </a>
+                % endif
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
                     <span class="fa fa-times"></span>${_(u'Delete')}
                 </a>
                 % endif
-	        </div>
+            </div>
         </div>
         <div class="ml45 tr">
             <div class="search">

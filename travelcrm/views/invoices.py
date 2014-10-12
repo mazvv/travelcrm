@@ -12,6 +12,8 @@ from ..models import DBSession
 from ..models.invoice import Invoice
 from ..models.resource import Resource
 from ..models.account import Account
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb import query_serialize
 from ..lib.qb.invoices import InvoicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
@@ -82,6 +84,21 @@ class Invoices(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.invoices.Invoices',
+        request_method='GET',
+        renderer='travelcrm:templates/invoices/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Invoice"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.invoices.Invoices',
         request_method='GET',
@@ -100,12 +117,9 @@ class Invoices(object):
                     self.context, 'edit', query={'id': invoice.id}
                 ),
             )
-
-        structure_id = resource.owner_structure.id
         return {
             'title': _(u'Add Invoice'),
             'resource_id': resource_id,
-            'structure_id': structure_id
         }
 
     @view_config(
@@ -119,7 +133,7 @@ class Invoices(object):
         schema = InvoiceAddSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             resource_id = controls.get('resource_id')
             resource = Resource.get(resource_id)
             source_cls = get_resource_class(resource.resource_type.name)
@@ -129,6 +143,12 @@ class Invoices(object):
                 account_id=controls.get('account_id'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                invoice.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                invoice.resource.tasks.append(task)
             source = factory.bind_invoice(resource_id, invoice)
             DBSession.add(source)
             DBSession.flush()
@@ -156,10 +176,8 @@ class Invoices(object):
             .filter(Invoice.id == invoice.id)
             .first()
         )
-        structure_id = invoice.resource.owner_structure.id
         return {
             'item': invoice,
-            'structure_id': structure_id,
             'resource_id': bound_resource.resource_id,
             'title': _(u'Edit Invoice')
         }
@@ -175,9 +193,17 @@ class Invoices(object):
         schema = InvoiceEditSchema().bind(request=self.request)
         invoice = Invoice.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
+            controls = schema.deserialize(self.request.params.mixed())
             invoice.date = controls.get('date')
             invoice.account_id = controls.get('account_id')
+            invoice.resource.notes = []
+            invoice.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                invoice.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                invoice.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': invoice.id

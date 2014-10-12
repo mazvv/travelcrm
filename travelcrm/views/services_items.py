@@ -61,6 +61,21 @@ class ServiceItems(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.services_items.ServicesItems',
+        request_method='GET',
+        renderer='travelcrm:templates/services_items/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Service Item"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.services_items.ServicesItems',
         request_method='GET',

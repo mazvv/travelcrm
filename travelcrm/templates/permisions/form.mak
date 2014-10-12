@@ -1,4 +1,4 @@
-<div class="dl40 easyui-dialog"
+<div class="dl60 easyui-dialog"
     title="${_(u'Edit Permissions')}"
     data-options="
         modal:true,
@@ -6,7 +6,7 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off", hidden_fields=[('position_id', position.id), ('resource_type_id', resource_type.id)])}
+    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off", hidden_fields=[('position_id', position.id), ('resource_type_id', resource_type.id)])}
         % for permision in allowed_permisions:
         <div class="form-field">
             <div class="dl15">

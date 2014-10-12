@@ -7,6 +7,8 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.appointment import Appointment
+from ..models.note import Note
+from ..models.task import Task
 from ..lib.qb.appointments import AppointmentsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.appointments import AppointmentSchema
@@ -62,6 +64,21 @@ class Appointments(object):
         }
 
     @view_config(
+        name='view',
+        context='..resources.appointments.Appointments',
+        request_method='GET',
+        renderer='travelcrm:templates/appointments/form.mak',
+        permission='view'
+    )
+    def view(self):
+        result = self.edit()
+        result.update({
+            'title': _(u"View Appointment"),
+            'readonly': True,
+        })
+        return result
+
+    @view_config(
         name='add',
         context='..resources.appointments.Appointments',
         request_method='GET',
@@ -92,6 +109,12 @@ class Appointments(object):
                 salary=controls.get('salary'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                appointment.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                appointment.resource.tasks.append(task)
             DBSession.add(appointment)
             DBSession.flush()
             return {
@@ -135,6 +158,14 @@ class Appointments(object):
             appointment.position_id = controls.get('position_id')
             appointment.currency_id = controls.get('currency_id')
             appointment.salary = controls.get('salary')
+            appointment.resource.notes = []
+            appointment.resource.tasks = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                appointment.resource.notes.append(note)
+            for id in controls.get('task_id'):
+                task = Task.get(id)
+                appointment.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
                 'response': appointment.id
