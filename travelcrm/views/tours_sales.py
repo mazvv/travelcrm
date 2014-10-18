@@ -334,6 +334,19 @@ class ToursSales(object):
         }
 
     @view_config(
+        name='point_details',
+        context='..resources.tours_sales.ToursSales',
+        request_method='GET',
+        renderer='travelcrm:templates/tours_sales/point_details.mak',
+        permission='view'
+    )
+    def point_details(self):
+        tour_sale_point = TourSalePoint.get(self.request.params.get('id'))
+        return {
+            'item': tour_sale_point,
+        }
+        
+    @view_config(
         name='add_point',
         context='..resources.tours_sales.ToursSales',
         request_method='GET',

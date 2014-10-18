@@ -1,4 +1,4 @@
-<%namespace file="../tours/common.mak" import="tour_points_selector"/>
+<%namespace file="../tours_sales/common.mak" import="tour_sale_points_selector"/>
 <%namespace file="../persons/common.mak" import="persons_selector"/>
 <%namespace file="../notes/common.mak" import="notes_selector"/>
 <%namespace file="../tasks/common.mak" import="tasks_selector"/>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${tour_points_selector(
+                    ${tour_sale_points_selector(
                         values=([point.id for point in item.points] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 

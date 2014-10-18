@@ -1,4 +1,4 @@
-<%def name="tour_points_selector(name='tour_point_id', values=[], can_edit=True)">
+<%def name="tour_sale_points_selector(name='tour_sale_point_id', values=[], can_edit=True)">
     <%
         _func_id = h.common.gen_id()
         _id = h.common.gen_id()
@@ -75,14 +75,25 @@
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
-            url:'/tours/points',border:false,
+            url:'/tours_sales/points',border:false,
             singleSelect:true,
             rownumbers:true,sortName:'point_start_date',sortOrder:'asc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/tours_sales/point_details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
             detailFormatter: function(index, row){
-                return formatter_${_func_id}(index, row)
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
             },          
             onBeforeLoad: function(param){
                 var response = $(this).data('response');
@@ -126,12 +137,12 @@
             <div class="button-group minor-group">
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/tours/add_point'
+                        container:'#${_id}',action:'dialog_open',url:'/tours_sales/add_point'
                     ">
                     ${_(u"Add")}</a>
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/tours/edit_point',property:'with_row'
+                        container:'#${_id}',action:'dialog_open',url:'/tours_sales/edit_point',property:'with_row'
                     ">
                     ${_(u"Edit")}</a>
                 <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>

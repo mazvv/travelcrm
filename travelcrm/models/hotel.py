@@ -90,3 +90,10 @@ class Hotel(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @property
+    def full_hotel_name(self):
+        return (
+            self.name
+            + ' (' + self.hotelcat.name + ')'
+        )
