@@ -1955,10 +1955,10 @@ CREATE TABLE task_resource (
 ALTER TABLE public.task_resource OWNER TO mazvv;
 
 --
--- Name: tour; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: tour_sale; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE tour (
+CREATE TABLE tour_sale (
     id integer NOT NULL,
     touroperator_id integer NOT NULL,
     start_location_id integer NOT NULL,
@@ -1978,7 +1978,7 @@ CREATE TABLE tour (
 );
 
 
-ALTER TABLE public.tour OWNER TO mazvv;
+ALTER TABLE public.tour_sale OWNER TO mazvv;
 
 --
 -- Name: tour_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -1998,52 +1998,28 @@ ALTER TABLE public.tour_id_seq OWNER TO mazvv;
 -- Name: tour_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE tour_id_seq OWNED BY tour.id;
+ALTER SEQUENCE tour_id_seq OWNED BY tour_sale.id;
 
 
 --
--- Name: tour_invoice; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: tour_sale_point; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE tour_invoice (
-    tour_id integer NOT NULL,
-    invoice_id integer NOT NULL
-);
-
-
-ALTER TABLE public.tour_invoice OWNER TO mazvv;
-
---
--- Name: tour_person; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE tour_person (
-    tour_id integer NOT NULL,
-    person_id integer NOT NULL
-);
-
-
-ALTER TABLE public.tour_person OWNER TO mazvv;
-
---
--- Name: tour_point; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE tour_point (
+CREATE TABLE tour_sale_point (
     id integer NOT NULL,
     location_id integer NOT NULL,
     hotel_id integer,
     accomodation_id integer,
     foodcat_id integer,
     roomcat_id integer,
-    tour_id integer,
+    tour_sale_id integer,
     description character varying(255),
     end_date date NOT NULL,
     start_date date NOT NULL
 );
 
 
-ALTER TABLE public.tour_point OWNER TO mazvv;
+ALTER TABLE public.tour_sale_point OWNER TO mazvv;
 
 --
 -- Name: tour_point_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
@@ -2063,8 +2039,32 @@ ALTER TABLE public.tour_point_id_seq OWNER TO mazvv;
 -- Name: tour_point_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
 --
 
-ALTER SEQUENCE tour_point_id_seq OWNED BY tour_point.id;
+ALTER SEQUENCE tour_point_id_seq OWNED BY tour_sale_point.id;
 
+
+--
+-- Name: tour_sale_invoice; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE tour_sale_invoice (
+    tour_sale_id integer NOT NULL,
+    invoice_id integer NOT NULL
+);
+
+
+ALTER TABLE public.tour_sale_invoice OWNER TO mazvv;
+
+--
+-- Name: tour_sale_person; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE tour_sale_person (
+    tour_sale_id integer NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+ALTER TABLE public.tour_sale_person OWNER TO mazvv;
 
 --
 -- Name: tour_service_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -2472,14 +2472,14 @@ ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq'::regclass);
+ALTER TABLE ONLY tour_sale ALTER COLUMN id SET DEFAULT nextval('tour_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point ALTER COLUMN id SET DEFAULT nextval('tour_point_id_seq'::regclass);
+ALTER TABLE ONLY tour_sale_point ALTER COLUMN id SET DEFAULT nextval('tour_point_id_seq'::regclass);
 
 
 --
@@ -2521,7 +2521,7 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6064, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6066, true);
 
 
 --
@@ -3284,7 +3284,6 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 47	5	\N	For Test	/	fa fa-credit-card	2	1253
 48	6	\N	Home	/	fa fa-home	1	1079
 49	6	\N	For Test	/	fa fa-credit-card	2	1253
-38	4	32	Tours	/tours	\N	2	1075
 51	4	32	Invoices	/invoices	\N	3	1368
 57	4	53	Accounts	/accounts	\N	1	1436
 65	4	32	Liabilities	/liabilities	\N	10	1659
@@ -3300,6 +3299,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 149	4	53	Accounts Postings	/postings	\N	4	1779
 55	4	53	Accounts Items	/accounts_items	\N	3	1425
 150	4	53	Subaccounts	/subaccounts	\N	2	1798
+38	4	32	Tours	/tours_sales	\N	2	1075
 53	4	\N	Finance	/	fa fa-credit-card	9	1394
 18	4	\N	Company	/	fa fa-building-o	8	837
 10	4	\N	HR	/	fa fa-group	7	780
@@ -5256,6 +5256,8 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6062	1838	2	\N	2014-10-12 20:54:50.322646
 6063	861	2	\N	2014-10-12 20:54:52.692696
 6064	861	2	\N	2014-10-12 20:55:02.552131
+6065	1075	2	\N	2014-10-18 11:46:21.55028
+6066	998	2	\N	2014-10-18 11:46:31.67705
 \.
 
 
@@ -5305,10 +5307,10 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	\N
 113	1574	refunds	Refunds	Refunds	travelcrm.resources.refunds	Refunds by invoice	{"account_item_id": 4}	t
 116	1778	postings	Accounts Postings	Postings	travelcrm.resources.postings	Postings beetwen accounts	null	f
-92	1221	tours	Tours Sale	Tours	travelcrm.resources.tours	Tours sales documents	{"service_id": 5}	t
 117	1797	subaccounts	Subaccounts	Subaccounts	travelcrm.resources.subaccounts	Subaccounts are accounts from other objects such as clients, touroperators and so on	null	f
 107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible	null	f
 118	1799	notes	Notes	Notes	travelcrm.resources.notes	Resources Notes	null	f
+92	1221	tours_sales	Tours Sale	ToursSales	travelcrm.resources.tours_sales	Tours sales documents	{"service_id": 5}	t
 \.
 
 
@@ -5595,10 +5597,24 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: tour; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id, price, adults, children, customer_id, resource_id, end_date, start_date, deal_date, advsource_id, service_id, base_price) FROM stdin;
+SELECT pg_catalog.setval('tour_id_seq', 17, true);
+
+
+--
+-- Name: tour_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('tour_point_id_seq', 69, true);
+
+
+--
+-- Data for Name: tour_sale; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY tour_sale (id, touroperator_id, start_location_id, end_location_id, currency_id, price, adults, children, customer_id, resource_id, end_date, start_date, deal_date, advsource_id, service_id, base_price) FROM stdin;
 12	61	14	14	56	8520.0000	2	2	25	1412	2014-07-25	2014-07-14	2014-07-14	4	5	8520.00
 10	1	15	15	54	3534.0000	2	0	20	1377	2014-06-07	2014-06-01	2014-05-20	4	5	59017.80
 9	5	15	15	54	2350.0000	2	1	17	1295	2014-05-09	2014-05-01	2014-05-17	6	5	39010.00
@@ -5611,17 +5627,10 @@ COPY tour (id, touroperator_id, start_location_id, end_location_id, currency_id,
 
 
 --
--- Name: tour_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Data for Name: tour_sale_invoice; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_id_seq', 17, true);
-
-
---
--- Data for Name: tour_invoice; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY tour_invoice (tour_id, invoice_id) FROM stdin;
+COPY tour_sale_invoice (tour_sale_id, invoice_id) FROM stdin;
 10	8
 9	10
 13	14
@@ -5633,10 +5642,10 @@ COPY tour_invoice (tour_id, invoice_id) FROM stdin;
 
 
 --
--- Data for Name: tour_person; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: tour_sale_person; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY tour_person (tour_id, person_id) FROM stdin;
+COPY tour_sale_person (tour_sale_id, person_id) FROM stdin;
 15	35
 15	36
 12	28
@@ -5664,10 +5673,10 @@ COPY tour_person (tour_id, person_id) FROM stdin;
 
 
 --
--- Data for Name: tour_point; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: tour_sale_point; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY tour_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, tour_id, description, end_date, start_date) FROM stdin;
+COPY tour_sale_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, tour_sale_id, description, end_date, start_date) FROM stdin;
 60	16	10	14	10	30	9	All include, Adriatic Sea, excursions and transfer included	2014-05-09	2014-05-01
 61	27	27	10	11	\N	10	\N	2014-06-07	2014-06-01
 62	32	33	10	11	29	\N	\N	2014-07-18	2014-07-12
@@ -5679,13 +5688,6 @@ COPY tour_point (id, location_id, hotel_id, accomodation_id, foodcat_id, roomcat
 68	30	31	\N	15	31	16	\N	2014-09-06	2014-09-02
 69	37	36	\N	\N	\N	17	\N	2014-09-05	2014-08-30
 \.
-
-
---
--- Name: tour_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('tour_point_id_seq', 69, true);
 
 
 --
@@ -6305,23 +6307,23 @@ ALTER TABLE ONLY task_resource
 -- Name: tour_invoice_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY tour_invoice
-    ADD CONSTRAINT tour_invoice_pkey PRIMARY KEY (tour_id, invoice_id);
+ALTER TABLE ONLY tour_sale_invoice
+    ADD CONSTRAINT tour_invoice_pkey PRIMARY KEY (tour_sale_id, invoice_id);
 
 
 --
 -- Name: tour_person_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY tour_person
-    ADD CONSTRAINT tour_person_pkey PRIMARY KEY (tour_id, person_id);
+ALTER TABLE ONLY tour_sale_person
+    ADD CONSTRAINT tour_person_pkey PRIMARY KEY (tour_sale_id, person_id);
 
 
 --
 -- Name: tour_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT tour_pkey PRIMARY KEY (id);
 
 
@@ -6329,7 +6331,7 @@ ALTER TABLE ONLY tour
 -- Name: tour_point_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY tour_point
+ALTER TABLE ONLY tour_sale_point
     ADD CONSTRAINT tour_point_pkey PRIMARY KEY (id);
 
 
@@ -6569,7 +6571,7 @@ ALTER TABLE ONLY "user"
 -- Name: fk_accomodation_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point
+ALTER TABLE ONLY tour_sale_point
     ADD CONSTRAINT fk_accomodation_id_tour_point FOREIGN KEY (accomodation_id) REFERENCES accomodation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -6673,7 +6675,7 @@ ALTER TABLE ONLY service_sale
 -- Name: fk_advsource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_advsource_id_tour FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -6833,7 +6835,7 @@ ALTER TABLE ONLY service_item
 -- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_currency_id_tour FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
@@ -6857,7 +6859,7 @@ ALTER TABLE ONLY service_sale
 -- Name: fk_customer_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_customer_id_tour FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -6921,7 +6923,7 @@ ALTER TABLE ONLY "user"
 -- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_end_location_id_tour FOREIGN KEY (end_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -6953,7 +6955,7 @@ ALTER TABLE ONLY refund_transaction
 -- Name: fk_foodcat_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point
+ALTER TABLE ONLY tour_sale_point
     ADD CONSTRAINT fk_foodcat_id_tour_point FOREIGN KEY (foodcat_id) REFERENCES foodcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -6961,7 +6963,7 @@ ALTER TABLE ONLY tour_point
 -- Name: fk_hotel_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point
+ALTER TABLE ONLY tour_sale_point
     ADD CONSTRAINT fk_hotel_id_tour_point FOREIGN KEY (hotel_id) REFERENCES hotel(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7009,7 +7011,7 @@ ALTER TABLE ONLY service_sale_invoice
 -- Name: fk_invoice_id_tour_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_invoice
+ALTER TABLE ONLY tour_sale_invoice
     ADD CONSTRAINT fk_invoice_id_tour_invoice FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7041,7 +7043,7 @@ ALTER TABLE ONLY hotel
 -- Name: fk_location_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point
+ALTER TABLE ONLY tour_sale_point
     ADD CONSTRAINT fk_location_id_tour_point FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7129,7 +7131,7 @@ ALTER TABLE ONLY person_passport
 -- Name: fk_person_id_tour_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_person
+ALTER TABLE ONLY tour_sale_person
     ADD CONSTRAINT fk_person_id_tour_person FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7521,7 +7523,7 @@ ALTER TABLE ONLY task_resource
 -- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_resource_id_tour FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7569,7 +7571,7 @@ ALTER TABLE ONLY resource
 -- Name: fk_roomcat_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point
+ALTER TABLE ONLY tour_sale_point
     ADD CONSTRAINT fk_roomcat_id_tour_point FOREIGN KEY (roomcat_id) REFERENCES roomcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7625,7 +7627,7 @@ ALTER TABLE ONLY service_sale_service_item
 -- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_start_location_id_tour FOREIGN KEY (start_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -7705,24 +7707,24 @@ ALTER TABLE ONLY task_resource
 -- Name: fk_tour_id_tour_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_invoice
-    ADD CONSTRAINT fk_tour_id_tour_invoice FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY tour_sale_invoice
+    ADD CONSTRAINT fk_tour_id_tour_invoice FOREIGN KEY (tour_sale_id) REFERENCES tour_sale(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
 -- Name: fk_tour_id_tour_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_person
-    ADD CONSTRAINT fk_tour_id_tour_person FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY tour_sale_person
+    ADD CONSTRAINT fk_tour_id_tour_person FOREIGN KEY (tour_sale_id) REFERENCES tour_sale(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
 -- Name: fk_tour_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour_point
-    ADD CONSTRAINT fk_tour_id_tour_point FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY tour_sale_point
+    ADD CONSTRAINT fk_tour_id_tour_point FOREIGN KEY (tour_sale_id) REFERENCES tour_sale(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -7730,7 +7732,7 @@ ALTER TABLE ONLY tour_point
 --
 
 ALTER TABLE ONLY tour_service_item
-    ADD CONSTRAINT fk_tour_id_tour_service_item FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT fk_tour_id_tour_service_item FOREIGN KEY (tour_id) REFERENCES tour_sale(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7745,7 +7747,7 @@ ALTER TABLE ONLY service_item
 -- Name: fk_touroperator_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY tour
+ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_touroperator_id_tour FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
