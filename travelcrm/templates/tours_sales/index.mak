@@ -10,7 +10,7 @@
         border:false,
         iconCls:'fa fa-table'
     "
-    title="${_(u'Tours')}">
+    title="${_(u'Tours Sales')}">
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
@@ -23,7 +23,7 @@
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/tours/details?id=' + row.id, 
+                    '/tours_sales/details?id=' + row.id, 
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);

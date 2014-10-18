@@ -1,6 +1,5 @@
 <%namespace file="../tours/common.mak" import="tour_points_selector"/>
 <%namespace file="../persons/common.mak" import="persons_selector"/>
-<%namespace file="../services_items/common.mak" import="services_items_selector"/>
 <%namespace file="../notes/common.mak" import="notes_selector"/>
 <%namespace file="../tasks/common.mak" import="tasks_selector"/>
 <div class="dl70 easyui-dialog"
@@ -157,17 +156,6 @@
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${persons_selector(
                         values=([person.id for person in item.persons] if item else []),
-                        can_edit=(
-                            not (readonly if readonly else False) and 
-                            (_context.has_permision('add') if item else _context.has_permision('edit'))
-                        ) 
-                    )}
-                </div>
-            </div>
-            <div title="${_(u'Services Items')}">
-                <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${services_items_selector(
-                        values=([service_item.id for service_item in item.services_items] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 
                             (_context.has_permision('add') if item else _context.has_permision('edit'))

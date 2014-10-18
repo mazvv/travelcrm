@@ -54,7 +54,7 @@ def customer_validator(node, kw):
     return validator
 
 
-class TourSchema(ResourceSchema):
+class TourSaleSchema(ResourceSchema):
     deal_date = colander.SchemaNode(
         Date()
     )
@@ -100,10 +100,6 @@ class TourSchema(ResourceSchema):
         colander.Set(),
         validator=person_validator
     )
-    service_item_id = colander.SchemaNode(
-        colander.Set(),
-        missing=[]
-    )
 
     def deserialize(self, cstruct):
         if (
@@ -122,18 +118,10 @@ class TourSchema(ResourceSchema):
             cstruct['person_id'] = list()
             cstruct['person_id'].append(val)
 
-        if (
-            'service_item_id' in cstruct
-            and not isinstance(cstruct.get('service_item_id'), list)
-        ):
-            val = cstruct['service_item_id']
-            cstruct['service_item_id'] = list()
-            cstruct['service_item_id'].append(val)
-
-        return super(TourSchema, self).deserialize(cstruct)
+        return super(TourSaleSchema, self).deserialize(cstruct)
 
 
-class TourPointSchema(colander.Schema):
+class TourSalePointSchema(colander.Schema):
     location_id = colander.SchemaNode(
         colander.Integer(),
     )

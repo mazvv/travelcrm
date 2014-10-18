@@ -15,19 +15,19 @@ from ..models import (
 )
 
 
-class TourPoint(Base):
-    __tablename__ = 'tour_point'
+class TourSalePoint(Base):
+    __tablename__ = 'tour_sale_point'
 
     id = Column(
         Integer,
         autoincrement=True,
         primary_key=True
     )
-    tour_id = Column(
+    tour_sale_id = Column(
         Integer,
         ForeignKey(
-            'tour.id',
-            name="fk_tour_id_tour_point",
+            'tour_sale.id',
+            name="fk_tour_sale_id_tour_sale_point",
             ondelete='cascade',
             onupdate='cascade',
         ),
@@ -36,7 +36,7 @@ class TourPoint(Base):
         Integer,
         ForeignKey(
             'location.id',
-            name="fk_location_id_tour_point",
+            name="fk_location_id_tour_sale_point",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -46,7 +46,7 @@ class TourPoint(Base):
         Integer,
         ForeignKey(
             'hotel.id',
-            name="fk_hotel_id_tour_point",
+            name="fk_hotel_id_tour_sale_point",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -55,7 +55,7 @@ class TourPoint(Base):
         Integer,
         ForeignKey(
             'accomodation.id',
-            name="fk_accomodation_id_tour_point",
+            name="fk_accomodation_id_tour_sale_point",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -64,7 +64,7 @@ class TourPoint(Base):
         Integer,
         ForeignKey(
             'foodcat.id',
-            name="fk_foodcat_id_tour_point",
+            name="fk_foodcat_id_tour_sale_point",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -73,7 +73,7 @@ class TourPoint(Base):
         Integer,
         ForeignKey(
             'roomcat.id',
-            name="fk_roomcat_id_tour_point",
+            name="fk_roomcat_id_tour_sale_point",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -89,20 +89,20 @@ class TourPoint(Base):
         Date,
         nullable=False,
     )
-    tour = relationship(
-        'Tour',
+    tour_sale = relationship(
+        'TourSale',
         backref=backref(
             'points',
             uselist=True,
             lazy="dynamic",
-            order_by='TourPoint.start_date',
+            order_by='TourSalePoint.start_date',
         ),
         uselist=False,
     )
     hotel = relationship(
         'Hotel',
         backref=backref(
-            'tours',
+            'tours_sales_points',
             uselist=True,
             lazy="dynamic"
         ),
@@ -111,7 +111,7 @@ class TourPoint(Base):
     accomodation = relationship(
         'Accomodation',
         backref=backref(
-            'tours',
+            'tours_sales_points',
             uselist=True,
             lazy="dynamic"
         ),
@@ -120,7 +120,7 @@ class TourPoint(Base):
     roomcat = relationship(
         'Roomcat',
         backref=backref(
-            'tours',
+            'tours_sales_points',
             uselist=True,
             lazy="dynamic"
         ),
@@ -129,7 +129,7 @@ class TourPoint(Base):
     foodcat = relationship(
         'Foodcat',
         backref=backref(
-            'tours',
+            'tours_sales_points',
             uselist=True,
             lazy="dynamic"
         ),
@@ -138,7 +138,7 @@ class TourPoint(Base):
     location = relationship(
         'Location',
         backref=backref(
-            'tours',
+            'tours_sales_points',
             uselist=True,
             lazy="dynamic"
         ),

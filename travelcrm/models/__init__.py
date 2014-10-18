@@ -46,8 +46,8 @@ from touroperator import Touroperator
 from licence import Licence
 from passport import Passport
 from hotel import Hotel
-from travelcrm.models.tour import Tour
-from tour_point import TourPoint
+from tour_sale import TourSale
+from tour_sale_point import TourSalePoint
 from bank import Bank
 from bank_detail import BankDetail
 from task import Task

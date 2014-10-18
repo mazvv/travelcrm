@@ -7,26 +7,25 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
-from ..models.tour import Tour
-from ..models.tour_point import TourPoint
+from ..models.tour_sale import TourSale
+from ..models.tour_sale_point import TourSalePoint
 from ..models.person import Person
-from ..models.service_item import ServiceItem
 from ..models.note import Note
 from ..models.task import Task
-from ..lib.qb.tours import (
-    ToursQueryBuilder,
-    ToursPointsQueryBuilder,
+from ..lib.qb.tours_sales import (
+    ToursSalesQueryBuilder,
+    ToursSalesPointsQueryBuilder,
 )
 from ..resources.invoices import Invoices
 
-from ..lib.bl.tours import calc_base_price
+from ..lib.bl.tours_sales import calc_base_price
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import (
     get_resource_type_by_resource,
 )
-from ..forms.tours import (
-    TourSchema,
-    TourPointSchema,
+from ..forms.tours_sales import (
+    TourSaleSchema,
+    TourSalePointSchema,
     SettingsSchema,
 )
 
@@ -34,16 +33,16 @@ from ..forms.tours import (
 log = logging.getLogger(__name__)
 
 
-class Tours(object):
+class ToursSales(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/index.mak',
+        renderer='travelcrm:templates/tours_sales/index.mak',
         permission='view'
     )
     def index(self):
@@ -51,14 +50,14 @@ class Tours(object):
 
     @view_config(
         name='list',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = ToursQueryBuilder(self.context)
+        qb = ToursSalesQueryBuilder(self.context)
         qb.search_simple(
             self.request.params.get('q'),
         )
@@ -83,44 +82,44 @@ class Tours(object):
 
     @view_config(
         name='view',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/form.mak',
+        renderer='travelcrm:templates/tours_sales/form.mak',
         permission='view'
     )
     def view(self):
         result = self.edit()
         result.update({
-            'title': _(u"View Tour"),
+            'title': _(u"View Tour Sale"),
             'readonly': True,
         })
         return result
 
     @view_config(
         name='add',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/form.mak',
+        renderer='travelcrm:templates/tours_sales/form.mak',
         permission='add'
     )
     def add(self):
         return {
-            'title': _(u'Add Tour'),
+            'title': _(u'Add Tour Sale'),
         }
 
     @view_config(
         name='add',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
-        schema = TourSchema().bind(request=self.request)
+        schema = TourSaleSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params.mixed())
             settings = self.context.get_settings()
-            tour = Tour(
+            tour_sale = TourSale(
                 deal_date=controls.get('deal_date'),
                 service_id=settings.get('service_id'),
                 advsource_id=controls.get('advsource_id'),
@@ -137,26 +136,23 @@ class Tours(object):
                 resource=self.context.create_resource()
             )
             for id in controls.get('tour_point_id'):
-                point = TourPoint.get(id)
-                tour.points.append(point)
+                point = TourSalePoint.get(id)
+                tour_sale.points.append(point)
             for id in controls.get('person_id'):
                 person = Person.get(id)
-                tour.persons.append(person)
-            for id in controls.get('service_item_id'):
-                service_item = ServiceItem.get(id)
-                tour.services_items.append(service_item)
+                tour_sale.persons.append(person)
             for id in controls.get('note_id'):
                 note = Note.get(id)
-                tour.resource.notes.append(note)
+                tour_sale.resource.notes.append(note)
             for id in controls.get('task_id'):
                 task = Task.get(id)
-                tour.resource.tasks.append(task)
-            tour = calc_base_price(tour)
-            DBSession.add(tour)
+                tour_sale.resource.tasks.append(task)
+            tour_sale = calc_base_price(tour_sale)
+            DBSession.add(tour_sale)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': tour.id
+                'response': tour_sale.id
             }
         except colander.Invalid, e:
             return {
@@ -166,68 +162,64 @@ class Tours(object):
 
     @view_config(
         name='edit',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/form.mak',
+        renderer='travelcrm:templates/tours_sales/form.mak',
         permission='edit'
     )
     def edit(self):
-        tour = Tour.get(self.request.params.get('id'))
+        tour_sale = TourSale.get(self.request.params.get('id'))
         return {
-            'item': tour,
-            'title': _(u'Edit Tour'),
+            'item': tour_sale,
+            'title': _(u'Edit Tour Sale'),
         }
 
     @view_config(
         name='edit',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
-        schema = TourSchema().bind(request=self.request)
-        tour = Tour.get(self.request.params.get('id'))
+        schema = TourSaleSchema().bind(request=self.request)
+        tour_sale = TourSale.get(self.request.params.get('id'))
         try:
             settings = self.context.get_settings()
             controls = schema.deserialize(self.request.params.mixed())
-            tour.deal_date = controls.get('deal_date')
-            tour.advsource_id = controls.get('advsource_id')
-            tour.service_id = settings.get('service_id'),
-            tour.touroperator_id = controls.get('touroperator_id')
-            tour.customer_id = controls.get('customer_id')
-            tour.adults = controls.get('adults')
-            tour.children = controls.get('children')
-            tour.price = controls.get('price')
-            tour.currency_id = controls.get('currency_id')
-            tour.start_location_id = controls.get('start_location_id')
-            tour.end_location_id = controls.get('end_location_id')
-            tour.start_date = controls.get('start_date')
-            tour.end_date = controls.get('end_date')
-            tour.points = []
-            tour.persons = []
-            tour.services_items = []
-            tour.resource.notes = []
-            tour.resource.tasks = []
+            tour_sale.deal_date = controls.get('deal_date')
+            tour_sale.advsource_id = controls.get('advsource_id')
+            tour_sale.service_id = settings.get('service_id'),
+            tour_sale.touroperator_id = controls.get('touroperator_id')
+            tour_sale.customer_id = controls.get('customer_id')
+            tour_sale.adults = controls.get('adults')
+            tour_sale.children = controls.get('children')
+            tour_sale.price = controls.get('price')
+            tour_sale.currency_id = controls.get('currency_id')
+            tour_sale.start_location_id = controls.get('start_location_id')
+            tour_sale.end_location_id = controls.get('end_location_id')
+            tour_sale.start_date = controls.get('start_date')
+            tour_sale.end_date = controls.get('end_date')
+            tour_sale.points = []
+            tour_sale.persons = []
+            tour_sale.resource.notes = []
+            tour_sale.resource.tasks = []
             for point in controls.get('tour_point_id', []):
-                point = TourPoint.get(point)
-                tour.points.append(point)
+                point = TourSalePoint.get(point)
+                tour_sale.points.append(point)
             for id in controls.get('person_id'):
                 person = Person.get(id)
-                tour.persons.append(person)
-            for id in controls.get('service_item_id'):
-                service_item = ServiceItem.get(id)
-                tour.services_items.append(service_item)
+                tour_sale.persons.append(person)
             for id in controls.get('note_id'):
                 note = Note.get(id)
-                tour.resource.notes.append(note)
+                tour_sale.resource.notes.append(note)
             for id in controls.get('task_id'):
                 task = Task.get(id)
-                tour.resource.tasks.append(task)
-            tour = calc_base_price(tour)
+                tour_sale.resource.tasks.append(task)
+            tour_sale = calc_base_price(tour_sale)
             return {
                 'success_message': _(u'Saved'),
-                'response': tour.id
+                'response': tour_sale.id
             }
         except colander.Invalid, e:
             return {
@@ -237,21 +229,21 @@ class Tours(object):
 
     @view_config(
         name='copy',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/form.mak',
+        renderer='travelcrm:templates/tours_sales/form.mak',
         permission='add'
     )
     def copy(self):
-        tour = Tour.get(self.request.params.get('id'))
+        tour_sale = TourSale.get(self.request.params.get('id'))
         return {
-            'item': tour,
-            'title': _(u"Copy Tour")
+            'item': tour_sale,
+            'title': _(u"Copy Tour Sale")
         }
 
     @view_config(
         name='copy',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='add'
@@ -261,33 +253,33 @@ class Tours(object):
 
     @view_config(
         name='details',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/details.mak',
+        renderer='travelcrm:templates/tours_sales/details.mak',
         permission='view'
     )
     def details(self):
-        tour = Tour.get(self.request.params.get('id'))
+        tour_sale = TourSale.get(self.request.params.get('id'))
         return {
-            'item': tour,
+            'item': tour_sale,
         }
 
     @view_config(
         name='delete',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/delete.mak',
+        renderer='travelcrm:templates/tours_sales/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'title': _(u'Delete Tours'),
+            'title': _(u'Delete Tours Sales'),
             'id': self.request.params.get('id')
         }
 
     @view_config(
         name='delete',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='delete'
@@ -295,7 +287,7 @@ class Tours(object):
     def _delete(self):
         errors = 0
         for id in self.request.params.getall('id'):
-            item = Tour.get(id)
+            item = TourSale.get(id)
             if item:
                 DBSession.begin_nested()
                 try:
@@ -314,14 +306,14 @@ class Tours(object):
 
     @view_config(
         name='points',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def points(self):
-        qb = ToursPointsQueryBuilder()
+        qb = ToursSalesPointsQueryBuilder()
         id = self.request.params.get('id')
         not_bound = self.request.params.get('not_bound')
         if id:
@@ -343,29 +335,29 @@ class Tours(object):
 
     @view_config(
         name='add_point',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/form_point.mak',
+        renderer='travelcrm:templates/tours_sales/form_point.mak',
         permission='add'
     )
     def add_point(self):
         return {
-            'title': _(u'Add Tour Point'),
+            'title': _(u'Add Tour Sale Point'),
         }
 
     @view_config(
         name='add_point',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add_point(self):
-        schema = TourPointSchema().bind(request=self.request)
+        schema = TourSalePointSchema().bind(request=self.request)
 
         try:
             controls = schema.deserialize(self.request.params)
-            point = TourPoint(
+            point = TourSalePoint(
                 location_id=controls.get('location_id'),
                 hotel_id=controls.get('hotel_id'),
                 accomodation_id=controls.get('accomodation_id'),
@@ -389,28 +381,28 @@ class Tours(object):
 
     @view_config(
         name='edit_point',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/form_point.mak',
+        renderer='travelcrm:templates/tours_sales/form_point.mak',
         permission='edit'
     )
     def edit_point(self):
-        point = TourPoint.get(self.request.params.get('id'))
+        point = TourSalePoint.get(self.request.params.get('id'))
         return {
             'item': point,
-            'title': _(u'Edit Tour Point'),
+            'title': _(u'Edit Tour Sale Point'),
         }
 
     @view_config(
         name='edit_point',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit_point(self):
-        schema = TourPointSchema().bind(request=self.request)
-        point = TourPoint.get(self.request.params.get('id'))
+        schema = TourSalePointSchema().bind(request=self.request)
+        point = TourSalePoint.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params)
             point.location_id = controls.get('location_id')
@@ -429,12 +421,12 @@ class Tours(object):
 
     @view_config(
         name='invoice',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
         permission='invoice'
     )
     def invoice(self):
-        tour = Tour.get(self.request.params.get('id'))
+        tour = TourSale.get(self.request.params.get('id'))
         if tour:
             return HTTPFound(
                 self.request.resource_url(
@@ -449,31 +441,10 @@ class Tours(object):
             )
 
     @view_config(
-        name='liability',
-        context='..resources.tours.Tours',
-        request_method='GET',
-        permission='liability'
-    )
-    def liabilities(self):
-        tour = Tour.get(self.request.params.get('id'))
-        if tour:
-            return HTTPFound(
-                self.request.resource_url(
-                    Liabilities(self.request),
-                    'add' if not tour.liability else 'edit',
-                    query=(
-                        {'resource_id': tour.resource.id}
-                        if not tour.liability
-                        else {'id': tour.liability.id}
-                    )
-                )
-            )
-
-    @view_config(
         name='settings',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='GET',
-        renderer='travelcrm:templates/tours/settings.mak',
+        renderer='travelcrm:templates/tours_sales/settings.mak',
         permission='settings',
     )
     def settings(self):
@@ -485,7 +456,7 @@ class Tours(object):
 
     @view_config(
         name='settings',
-        context='..resources.tours.Tours',
+        context='..resources.tours_sales.ToursSales',
         request_method='POST',
         renderer='json',
         permission='settings',

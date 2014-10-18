@@ -11,15 +11,15 @@ from ..resources import (
 from ..resources import (
     ResourceTypeBase,
 )
-from ..lib.bl.tours import TourInvoiceFactory
+from travelcrm.lib.bl.tours_sales import TourSaleInvoiceFactory
 from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
 @implementer(IInvoiceFactory)
-class Tours(ResourceTypeBase):
+class ToursSales(ResourceTypeBase):
 
-    __name__ = 'tours'
+    __name__ = 'tours_sales'
 
     def __init__(self, request):
         self.__parent__ = Root(request)
@@ -40,4 +40,4 @@ class Tours(ResourceTypeBase):
 
     @staticmethod
     def get_invoice_factory():
-        return TourInvoiceFactory
+        return TourSaleInvoiceFactory

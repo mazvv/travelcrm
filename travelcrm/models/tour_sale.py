@@ -16,17 +16,17 @@ from ..models import (
 )
 
 
-tour_person = Table(
-    'tour_person',
+tour_sale_person = Table(
+    'tour_sale_person',
     Base.metadata,
     Column(
-        'tour_id',
+        'tour_sale_id',
         Integer,
         ForeignKey(
-            'tour.id',
+            'tour_sale.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_tour_id_tour_person',
+            name='fk_tour_sale_id_tour_sale_person',
         ),
         primary_key=True,
     ),
@@ -37,52 +37,24 @@ tour_person = Table(
             'person.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_person_id_tour_person',
+            name='fk_person_id_tour_sale_person',
         ),
         primary_key=True,
     ),
 )
 
 
-tour_service_item = Table(
-    'tour_service_item',
+tour_sale_invoice = Table(
+    'tour_sale_invoice',
     Base.metadata,
     Column(
-        'tour_id',
+        'tour_sale_id',
         Integer,
         ForeignKey(
-            'tour.id',
+            'tour_sale.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_tour_id_tour_service_item',
-        ),
-        primary_key=True,
-    ),
-    Column(
-        'service_item_id',
-        Integer,
-        ForeignKey(
-            'service_item.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_service_item_id_tour_service_item',
-        ),
-        primary_key=True,
-    ),
-)
-
-
-tour_invoice = Table(
-    'tour_invoice',
-    Base.metadata,
-    Column(
-        'tour_id',
-        Integer,
-        ForeignKey(
-            'tour.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_tour_id_tour_invoice',
+            name='fk_tour_sale_id_tour_sale_invoice',
         ),
         primary_key=True,
     ),
@@ -93,15 +65,15 @@ tour_invoice = Table(
             'invoice.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_invoice_id_tour_invoice',
+            name='fk_invoice_id_tour_sale_invoice',
         ),
         primary_key=True,
     ),
 )
 
 
-class Tour(Base):
-    __tablename__ = 'tour'
+class TourSale(Base):
+    __tablename__ = 'tour_sale'
 
     id = Column(
         Integer,
@@ -116,7 +88,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_tour",
+            name="fk_resource_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -126,7 +98,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'service.id',
-            name="fk_service_id_tour",
+            name="fk_service_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -136,7 +108,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'touroperator.id',
-            name="fk_touroperator_id_tour",
+            name="fk_touroperator_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -146,7 +118,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'person.id',
-            name="fk_customer_id_tour",
+            name="fk_customer_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -156,7 +128,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'advsource.id',
-            name="fk_advsource_id_tour",
+            name="fk_advsource_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -170,7 +142,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'currency.id',
-            name="fk_currency_id_tour",
+            name="fk_currency_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -192,7 +164,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'location.id',
-            name="fk_start_location_id_tour",
+            name="fk_start_location_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -202,7 +174,7 @@ class Tour(Base):
         Integer,
         ForeignKey(
             'location.id',
-            name="fk_end_location_id_tour",
+            name="fk_end_location_id_tour_sale",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -219,7 +191,7 @@ class Tour(Base):
     resource = relationship(
         'Resource',
         backref=backref(
-            'tour',
+            'tour_sale',
             uselist=False,
             cascade="all,delete"
         ),
@@ -229,7 +201,7 @@ class Tour(Base):
     customer = relationship(
         'Person',
         backref=backref(
-            'customers_tours',
+            'customers_tours_sales',
             uselist=True,
             lazy="dynamic"
         ),
@@ -238,7 +210,7 @@ class Tour(Base):
     service = relationship(
         'Service',
         backref=backref(
-            'tours',
+            'tours_sales',
             uselist=True,
             lazy="dynamic"
         ),
@@ -247,7 +219,7 @@ class Tour(Base):
     touroperator = relationship(
         'Touroperator',
         backref=backref(
-            'tours',
+            'tours_sales',
             uselist=True,
             lazy="dynamic"
         ),
@@ -256,7 +228,7 @@ class Tour(Base):
     currency = relationship(
         'Currency',
         backref=backref(
-            'tours',
+            'tours_sales',
             uselist=True,
             lazy="dynamic"
         ),
@@ -265,7 +237,7 @@ class Tour(Base):
     advsource = relationship(
         'Advsource',
         backref=backref(
-            'tours',
+            'tours_sales',
             uselist=True,
             lazy="dynamic"
         ),
@@ -274,7 +246,7 @@ class Tour(Base):
     start_location = relationship(
         'Location',
         backref=backref(
-            'tours_starts',
+            'tours_sales_starts',
             uselist=True,
             lazy="dynamic"
         ),
@@ -284,7 +256,7 @@ class Tour(Base):
     end_location = relationship(
         'Location',
         backref=backref(
-            'tours_ends',
+            'tours_sales_ends',
             uselist=True,
             lazy="dynamic"
         ),
@@ -293,28 +265,19 @@ class Tour(Base):
     )
     persons = relationship(
         'Person',
-        secondary=tour_person,
+        secondary=tour_sale_person,
         backref=backref(
-            'tours',
+            'tours_sales',
             uselist=True,
             lazy="dynamic"
         ),
         uselist=True,
     )
-    services_items = relationship(
-        'ServiceItem',
-        secondary=tour_service_item,
-        backref=backref(
-            'tour',
-            uselist=False,
-        ),
-        uselist=True,
-    )
     invoice = relationship(
         'Invoice',
-        secondary=tour_invoice,
+        secondary=tour_sale_invoice,
         backref=backref(
-            'tour',
+            'tour_sale',
             uselist=False,
         ),
         uselist=False,
@@ -328,7 +291,4 @@ class Tour(Base):
 
     @property
     def base_sum(self):
-        return sum(
-            [self.base_price, ]
-            + [service_item.base_price for service_item in self.services_items]
-        )
+        return self.base_price
