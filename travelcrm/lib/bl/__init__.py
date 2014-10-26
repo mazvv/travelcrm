@@ -56,3 +56,7 @@ class InvoiceFactory(object):
     @classmethod
     def accounts_items_info(cls, resource_id, currency_id=None):
         raise NotImplemented()
+
+
+class CalculationFactory(object):
+    __metaclass__ = ABCMeta

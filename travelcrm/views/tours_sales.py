@@ -12,13 +12,16 @@ from ..models.tour_sale_point import TourSalePoint
 from ..models.person import Person
 from ..models.note import Note
 from ..models.task import Task
+from ..models.service_item import ServiceItem
 from ..lib.qb.tours_sales import (
     ToursSalesQueryBuilder,
     ToursSalesPointsQueryBuilder,
 )
 from ..resources.invoices import Invoices
+from ..resources.calculations import Calculations
+from ..resources.services_items import ServicesItems
 
-from ..lib.bl.tours_sales import calc_base_price
+from ..lib.bl.currencies_rates import currency_base_exchange
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import (
     get_resource_type_by_resource,
@@ -121,21 +124,30 @@ class ToursSales(object):
             settings = self.context.get_settings()
             tour_sale = TourSale(
                 deal_date=controls.get('deal_date'),
-                service_id=settings.get('service_id'),
-                advsource_id=controls.get('advsource_id'),
-                touroperator_id=controls.get('touroperator_id'),
                 customer_id=controls.get('customer_id'),
+                advsource_id=controls.get('advsource_id'),
                 adults=controls.get('adults'),
                 children=controls.get('children'),
-                price=controls.get('price'),
-                currency_id=controls.get('currency_id'),
                 start_location_id=controls.get('start_location_id'),
                 end_location_id=controls.get('end_location_id'),
                 start_date=controls.get('start_date'),
                 end_date=controls.get('end_date'),
                 resource=self.context.create_resource()
             )
-            for id in controls.get('tour_point_id'):
+            tour_sale.service_item = ServiceItem(
+                service_id=settings.get('service_id'),
+                touroperator_id=controls.get('touroperator_id'),
+                currency_id=controls.get('currency_id'),
+                price=controls.get('price'),
+                person_id=controls.get('customer_id'),
+                base_price=currency_base_exchange(
+                    controls.get('price'),
+                    controls.get('currency_id'),
+                    controls.get('deal_date'),
+                ),
+                resource=ServicesItems(self.request).create_resource()
+            )
+            for id in controls.get('tour_sale_point_id'):
                 point = TourSalePoint.get(id)
                 tour_sale.points.append(point)
             for id in controls.get('person_id'):
@@ -147,7 +159,6 @@ class ToursSales(object):
             for id in controls.get('task_id'):
                 task = Task.get(id)
                 tour_sale.resource.tasks.append(task)
-            tour_sale = calc_base_price(tour_sale)
             DBSession.add(tour_sale)
             DBSession.flush()
             return {
@@ -188,23 +199,36 @@ class ToursSales(object):
             settings = self.context.get_settings()
             controls = schema.deserialize(self.request.params.mixed())
             tour_sale.deal_date = controls.get('deal_date')
-            tour_sale.advsource_id = controls.get('advsource_id')
-            tour_sale.service_id = settings.get('service_id'),
-            tour_sale.touroperator_id = controls.get('touroperator_id')
             tour_sale.customer_id = controls.get('customer_id')
+            tour_sale.advsource_id = controls.get('advsource_id')
             tour_sale.adults = controls.get('adults')
             tour_sale.children = controls.get('children')
-            tour_sale.price = controls.get('price')
-            tour_sale.currency_id = controls.get('currency_id')
             tour_sale.start_location_id = controls.get('start_location_id')
             tour_sale.end_location_id = controls.get('end_location_id')
             tour_sale.start_date = controls.get('start_date')
             tour_sale.end_date = controls.get('end_date')
+            tour_sale.service_item.service_id = settings.get('service_id')
+            tour_sale.service_item.touroperator_id = (
+                controls.get('touroperator_id')
+            )
+            tour_sale.service_item.currency_id = (
+                controls.get('currency_id')
+            )
+            tour_sale.service_item.price = controls.get('price')
+            tour_sale.service_item.person_id = (
+                controls.get('customer_id')
+            )
+            tour_sale.service_item.base_price = currency_base_exchange(
+                controls.get('price'),
+                controls.get('currency_id'),
+                controls.get('deal_date'),
+            )
+
             tour_sale.points = []
             tour_sale.persons = []
             tour_sale.resource.notes = []
             tour_sale.resource.tasks = []
-            for point in controls.get('tour_point_id', []):
+            for point in controls.get('tour_sale_point_id', []):
                 point = TourSalePoint.get(point)
                 tour_sale.points.append(point)
             for id in controls.get('person_id'):
@@ -216,7 +240,6 @@ class ToursSales(object):
             for id in controls.get('task_id'):
                 task = Task.get(id)
                 tour_sale.resource.tasks.append(task)
-            tour_sale = calc_base_price(tour_sale)
             return {
                 'success_message': _(u'Saved'),
                 'response': tour_sale.id
@@ -439,16 +462,35 @@ class ToursSales(object):
         permission='invoice'
     )
     def invoice(self):
-        tour = TourSale.get(self.request.params.get('id'))
-        if tour:
+        tour_sale = TourSale.get(self.request.params.get('id'))
+        if tour_sale:
             return HTTPFound(
                 self.request.resource_url(
                     Invoices(self.request),
-                    'add' if not tour.invoice else 'edit',
+                    'add' if not tour_sale.invoice else 'edit',
                     query=(
-                        {'resource_id': tour.resource.id}
-                        if not tour.invoice
-                        else {'id': tour.invoice.id}
+                        {'resource_id': tour_sale.resource.id}
+                        if not tour_sale.invoice
+                        else {'id': tour_sale.invoice.id}
+                    )
+                )
+            )
+
+    @view_config(
+        name='calculation',
+        context='..resources.tours_sales.ToursSales',
+        request_method='GET',
+        permission='calculation'
+    )
+    def calculation(self):
+        tour_sale = TourSale.get(self.request.params.get('id'))
+        if tour_sale:
+            return HTTPFound(
+                self.request.resource_url(
+                    Calculations(self.request),
+                    'add' if not tour_sale.calculation else 'edit',
+                    query=(
+                        {'resource_id': tour_sale.resource.id}
                     )
                 )
             )

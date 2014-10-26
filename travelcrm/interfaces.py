@@ -45,3 +45,12 @@ class ISubaccountFactory(Interface):
         """ Method that returns class instance for outgoing interfaces
         This method must be static
         """
+
+
+class ICalculationFactory(Interface):
+    """ Resource that can be source of Calculations"""
+
+    def get_calculation_factory():
+        """ Method that returns class instance for calculations interfaces
+        This method must be static
+        """

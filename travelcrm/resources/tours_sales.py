@@ -4,6 +4,7 @@ from zope.interface import implementer
 from ..interfaces import (
     IResourceType,
     IInvoiceFactory,
+    ICalculationFactory,
 )
 from ..resources import (
     Root,
@@ -11,12 +12,16 @@ from ..resources import (
 from ..resources import (
     ResourceTypeBase,
 )
-from travelcrm.lib.bl.tours_sales import TourSaleInvoiceFactory
+from ..lib.bl.tours_sales import (
+    TourSaleInvoiceFactory,
+    TourSaleCalculationFactory,
+)
 from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
 @implementer(IInvoiceFactory)
+@implementer(ICalculationFactory)
 class ToursSales(ResourceTypeBase):
 
     __name__ = 'tours_sales'
@@ -41,3 +46,7 @@ class ToursSales(ResourceTypeBase):
     @staticmethod
     def get_invoice_factory():
         return TourSaleInvoiceFactory
+
+    @staticmethod
+    def get_calculation_factory():
+        return TourSaleCalculationFactory

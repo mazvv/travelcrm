@@ -35,7 +35,7 @@ class ResourceLog(Base):
             'resource.id',
             name='fk_resource_id_resource_log',
             onupdate='cascade',
-            ondelete='restrict',
+            ondelete='cascade',
         ),
         nullable=False
     )

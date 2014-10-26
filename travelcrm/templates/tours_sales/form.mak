@@ -40,7 +40,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.touroperators_combobox_field(
-                            request, item.touroperator_id if item else None,
+                            request, item.service_item.touroperator_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='touroperator_id')}
@@ -52,7 +52,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.persons_combobox_field(
-                            request, item.customer_id if item else None, 
+                            request, item.customer_id if item else None,
                             name="customer_id",
                             show_toolbar=(not readonly if readonly else True)
                         )}
@@ -82,7 +82,11 @@
                         ${h.tags.title(_(u"price"), True, "price")}
                     </div>
                     <div class="ml15">
-                        ${h.tags.text('price', item.price if item else None, class_="easyui-textbox w20 easyui-numberbox", data_options="min:0,precision:2")}
+                        ${h.tags.text('price', 
+			     item.service_item.price if item else None, 
+			     class_="easyui-textbox w20 easyui-numberbox", 
+                             data_options="min:0,precision:2"
+			)}
                         ${h.common.error_container(name='price')}
                     </div>
                 </div>
@@ -92,7 +96,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.currencies_combobox_field(
-                            request, item.currency_id if item else None,
+                            request, item.service_item.currency_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='currency_id')}

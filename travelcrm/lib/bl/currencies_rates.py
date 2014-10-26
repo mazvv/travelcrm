@@ -32,3 +32,9 @@ def currency_exchange(sum, from_currency_id, to_currency_id, date):
     rate_to = query_convert_rates(to_currency_id, date).scalar() or 1
     base_sum = sum * rate_from
     return money_cast(base_sum / rate_to)
+
+
+def currency_base_exchange(sum, currency_id, date):
+    base_rate = query_convert_rates(currency_id, date).scalar() or 1
+    return money_cast(base_rate * sum)
+    

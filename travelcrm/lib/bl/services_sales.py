@@ -17,24 +17,6 @@ from ...lib.bl.currencies_rates import query_convert_rates
 from ...lib.utils.common_utils import money_cast
 
 
-def calc_base_price(service_sale):
-    assert isinstance(service_sale, ServiceSale), \
-        u"Must be ServiceSale instance"
-    for service_item in service_sale.services_items:
-        base_service_rate = (
-            query_convert_rates(
-                service_item.currency_id, service_sale.deal_date
-            )
-            .scalar()
-        )
-        if base_service_rate is None:
-            base_service_rate = 1
-        service_item.base_price = money_cast(
-            base_service_rate * service_item.price
-        )
-    return service_sale
-
-
 class ServiceSaleInvoiceFactory(InvoiceFactory):
 
     @classmethod

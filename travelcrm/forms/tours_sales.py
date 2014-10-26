@@ -93,7 +93,7 @@ class TourSaleSchema(ResourceSchema):
     end_date = colander.SchemaNode(
         Date()
     )
-    tour_point_id = colander.SchemaNode(
+    tour_sale_point_id = colander.SchemaNode(
         colander.Set(),
     )
     person_id = colander.SchemaNode(
@@ -103,12 +103,12 @@ class TourSaleSchema(ResourceSchema):
 
     def deserialize(self, cstruct):
         if (
-            'tour_point_id' in cstruct
-            and not isinstance(cstruct.get('tour_point_id'), list)
+            'tour_sale_point_id' in cstruct
+            and not isinstance(cstruct.get('tour_sale_point_id'), list)
         ):
-            val = cstruct['tour_point_id']
-            cstruct['tour_point_id'] = list()
-            cstruct['tour_point_id'].append(val)
+            val = cstruct['tour_sale_point_id']
+            cstruct['tour_sale_point_id'] = list()
+            cstruct['tour_sale_point_id'].append(val)
 
         if (
             'person_id' in cstruct

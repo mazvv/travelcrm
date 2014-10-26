@@ -77,7 +77,7 @@
     </div>
     % if can_edit:
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container dl40">
+        <div class="actions button-container dl45">
             <div style="display: inline-block;padding-top:2px;">
                 <%
                     f_id = h.common.gen_id()
@@ -96,7 +96,7 @@
                 <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
             </div>
         </div>
-        <div class="ml35 tr" style="padding-top: 5px;">
+        <div class="ml45 tr" style="padding-top: 5px;">
             ${h.common.error_container(name=name)}
         </div>
     </div>

@@ -9,23 +9,14 @@ from ...models.person import Person
 from ...models.invoice import Invoice
 from ...models.service import Service
 from ...models.account_item import AccountItem
+from ...models.service_item import ServiceItem
 
-from ...lib.bl import InvoiceFactory
+from ...lib.bl import (
+    InvoiceFactory,
+    CalculationFactory,
+)
 from ...lib.bl.currencies_rates import query_convert_rates
 from ...lib.utils.common_utils import money_cast
-
-
-def calc_base_price(tour_sale):
-    assert isinstance(tour_sale, TourSale), u"Must be TourSale instance"
-    base_tour_sale_rate = (
-        query_convert_rates(tour_sale.currency_id, tour_sale.deal_date)
-        .scalar()
-    )
-    if base_tour_sale_rate is None:
-        base_tour_sale_rate = 1
-    tour_sale.base_price = money_cast(base_tour_sale_rate * tour_sale.price)
-
-    return tour_sale
 
 
 class TourSaleInvoiceFactory(InvoiceFactory):
@@ -64,10 +55,11 @@ class TourSaleInvoiceFactory(InvoiceFactory):
             DBSession.query(
                 Resource.id.label('resource_id'),
                 Person.name.label('customer'),
-                TourSale.base_price.label('sum'),
+                ServiceItem.base_price.label('sum'),
                 Invoice.id.label('invoice_id'),
             )
             .join(Resource, TourSale.resource)
+            .join(ServiceItem, TourSale.service_item)
             .join(Person, TourSale.customer)
             .join(Invoice, TourSale.invoice)
         )
@@ -87,9 +79,10 @@ class TourSaleInvoiceFactory(InvoiceFactory):
             DBSession.query(
                 Service.id.label('id'),
                 Service.name.label('name'),
-                TourSale.base_price.label('base_price')
+                ServiceItem.base_price.label('base_price')
             )
-            .join(Service, TourSale.service)
+            .join(ServiceItem, TourSale.service_item)
+            .join(Service, ServiceItem.service)
             .filter(TourSale.id == tour_sale.id)
         )
         subq = query.subquery()
@@ -118,9 +111,10 @@ class TourSaleInvoiceFactory(InvoiceFactory):
             DBSession.query(
                 AccountItem.id.label('id'),
                 AccountItem.name.label('name'),
-                TourSale.base_price.label('base_price')
+                ServiceItem.base_price.label('base_price')
             )
-            .join(Service, TourSale.service)
+            .join(ServiceItem, TourSale.service_item)
+            .join(Service, ServiceItem.service)
             .join(AccountItem, Service.account_item)
             .filter(TourSale.id == tour_sale.id)
         )
@@ -135,3 +129,7 @@ class TourSaleInvoiceFactory(InvoiceFactory):
             .group_by(subq.c.id, subq.c.name)
             .order_by(subq.c.name)
         )
+
+
+class TourSaleCalculationFactory(CalculationFactory):
+    pass

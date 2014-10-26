@@ -15,6 +15,32 @@ from ..models import (
     Base,
 )
 
+tour_sale_service_item = Table(
+    'tour_sale_service_item',
+    Base.metadata,
+    Column(
+        'tour_sale_id',
+        Integer,
+        ForeignKey(
+            'tour_sale.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_tour_sale_id_tour_sale_service_item',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'service_item_id',
+        Integer,
+        ForeignKey(
+            'service_item.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_service_item_id_tour_sale_service_item',
+        ),
+        primary_key=True,
+    ),
+)
 
 tour_sale_person = Table(
     'tour_sale_person',
@@ -94,26 +120,6 @@ class TourSale(Base):
         ),
         nullable=False,
     )
-    service_id = Column(
-        Integer,
-        ForeignKey(
-            'service.id',
-            name="fk_service_id_tour_sale",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
-    touroperator_id = Column(
-        Integer,
-        ForeignKey(
-            'touroperator.id',
-            name="fk_touroperator_id_tour_sale",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     customer_id = Column(
         Integer,
         ForeignKey(
@@ -133,24 +139,6 @@ class TourSale(Base):
             onupdate='cascade',
         ),
         nullable=False,
-    )
-    price = Column(
-        Numeric(16, 2),
-        nullable=False
-    )
-    currency_id = Column(
-        Integer,
-        ForeignKey(
-            'currency.id',
-            name="fk_currency_id_tour_sale",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
-    base_price = Column(
-        Numeric(16, 2),
-        nullable=False
     )
     adults = Column(
         Integer,
@@ -207,33 +195,6 @@ class TourSale(Base):
         ),
         uselist=False,
     )
-    service = relationship(
-        'Service',
-        backref=backref(
-            'tours_sales',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        uselist=False,
-    )
-    touroperator = relationship(
-        'Touroperator',
-        backref=backref(
-            'tours_sales',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        uselist=False,
-    )
-    currency = relationship(
-        'Currency',
-        backref=backref(
-            'tours_sales',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        uselist=False,
-    )
     advsource = relationship(
         'Advsource',
         backref=backref(
@@ -261,6 +222,15 @@ class TourSale(Base):
             lazy="dynamic"
         ),
         foreign_keys=[end_location_id],
+        uselist=False,
+    )
+    service_item = relationship(
+        'ServiceItem',
+        secondary=tour_sale_service_item,
+        backref=backref(
+            'tour_sale',
+            uselist=False,
+        ),
         uselist=False,
     )
     persons = relationship(
@@ -291,4 +261,4 @@ class TourSale(Base):
 
     @property
     def base_sum(self):
-        return self.base_price
+        return self.service_item.base_price

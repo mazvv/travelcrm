@@ -14,6 +14,7 @@ from ...models import DBSession
 from ...models.resource import Resource
 from ...models.tour_sale import TourSale
 from ...models.tour_sale_point import TourSalePoint
+from ...models.service_item import ServiceItem
 from ...models.touroperator import Touroperator
 from ...models.location import Location
 from ...models.region import Region
@@ -78,7 +79,7 @@ class ToursSalesQueryBuilder(ResourcesQueryBuilder):
         'touroperator_name': Touroperator.name,
         'hotel_cat': _subq_points.c.hotel_cat,
         'country': _subq_points.c.country,
-        'base_price': TourSale.base_price,
+        'base_price': ServiceItem.base_price,
         'start_date': cast(TourSale.start_date, DATE),
         'end_date': cast(TourSale.end_date, DATE),
         'customer': Person.name,
@@ -99,9 +100,10 @@ class ToursSalesQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(TourSale, Resource.tour_sale)
+            .join(ServiceItem, TourSale.service_item)
             .join(Person, TourSale.customer)
-            .join(Touroperator, TourSale.touroperator)
-            .join(Currency, TourSale.currency)
+            .join(Touroperator, ServiceItem.touroperator)
+            .join(Currency, ServiceItem.currency)
             .join(
                 self._subq_points,
                 TourSale.id == self._subq_points.c.tour_sale_id
@@ -175,9 +177,13 @@ class ToursSalesQueryBuilder(ResourcesQueryBuilder):
 
     def _filter_price(self, price_from, price_to):
         if price_from:
-            self.query = self.query.filter(TourSale.base_price >= price_from)
+            self.query = (
+                self.query.filter(ServiceItem.base_price >= price_from)
+            )
         if price_to:
-            self.query = self.query.filter(TourSale.base_price <= price_to)
+            self.query = (
+                self.query.filter(ServiceItem.base_price <= price_to)
+            )
 
     def _filter_tour_date(self, date_from, date_to):
         if date_from:

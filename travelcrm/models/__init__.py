@@ -67,3 +67,4 @@ from outgoing import Outgoing
 from refund import Refund
 from posting import Posting
 from note import Note
+from calculation import Calculation

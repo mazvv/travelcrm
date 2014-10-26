@@ -14,7 +14,7 @@ from ..models.task import Task
 from ..resources.invoices import Invoices
 from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 
-from ..lib.bl.services_sales import calc_base_price
+from ..lib.bl.currencies_rates import currency_base_exchange
 from ..lib.utils.common_utils import translate as _
 from ..forms.services_sales import ServiceSaleSchema
 
@@ -115,6 +115,11 @@ class ServicesSales(object):
             )
             for id in controls.get('service_item_id'):
                 service_item = ServiceItem.get(id)
+                service_item.base_price = currency_base_exchange(
+                    service_item.price,
+                    service_item.currency_id,
+                    controls.get('deal_date'),
+                )
                 service_sale.services_items.append(service_item)
             for id in controls.get('note_id'):
                 note = Note.get(id)
@@ -122,7 +127,6 @@ class ServicesSales(object):
             for id in controls.get('task_id'):
                 task = Task.get(id)
                 service_sale.resource.tasks.append(task)
-            service_sale = calc_base_price(service_sale)
             DBSession.add(service_sale)
             DBSession.flush()
             return {
@@ -169,6 +173,11 @@ class ServicesSales(object):
             service_sale.resource.tasks = []
             for id in controls.get('service_item_id', []):
                 service_item = ServiceItem.get(id)
+                service_item.base_price = currency_base_exchange(
+                    service_item.price,
+                    service_item.currency_id,
+                    controls.get('deal_date'),
+                )
                 service_sale.services_items.append(service_item)
             for id in controls.get('note_id'):
                 note = Note.get(id)
@@ -176,7 +185,6 @@ class ServicesSales(object):
             for id in controls.get('task_id'):
                 task = Task.get(id)
                 service_sale.resource.tasks.append(task)
-            service_sale = calc_base_price(service_sale)
             return {
                 'success_message': _(u'Saved'),
                 'response': service_sale.id
@@ -281,27 +289,6 @@ class ServicesSales(object):
                         {'resource_id': service_sale.resource.id}
                         if not service_sale.invoice
                         else {'id': service_sale.invoice.id}
-                    )
-                )
-            )
-
-    @view_config(
-        name='liability',
-        context='..resources.services_sales.ServicesSales',
-        request_method='GET',
-        permission='liability'
-    )
-    def liabilities(self):
-        service_sale = ServiceSale.get(self.request.params.get('id'))
-        if service_sale:
-            return HTTPFound(
-                self.request.resource_url(
-                    Liabilities(self.request),
-                    'add' if not service_sale.liability else 'edit',
-                    query=(
-                        {'resource_id': service_sale.resource.id}
-                        if not service_sale.liability
-                        else {'id': service_sale.liability.id}
                     )
                 )
             )
