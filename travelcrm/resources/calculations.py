@@ -28,4 +28,5 @@ class Calculations(ResourceTypeBase):
             ('autoload', _(u'autoload')),
             ('view', _(u'view')),
             ('edit', _(u'edit')),
+            ('delete', _(u'delete')),
         ]

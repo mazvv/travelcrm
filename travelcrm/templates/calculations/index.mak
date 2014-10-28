@@ -75,6 +75,12 @@
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
                 % endif
+                % if _context.has_permision('delete'):
+                <a href="#" class="button danger _action" 
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
+                    <span class="fa fa-times"></span>${_(u'Delete')}
+                </a>
+                % endif
             </div>
         </div>
     </div>
