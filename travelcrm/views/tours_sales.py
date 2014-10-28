@@ -368,7 +368,7 @@ class ToursSales(object):
         return {
             'item': tour_sale_point,
         }
-        
+
     @view_config(
         name='add_point',
         context='..resources.tours_sales.ToursSales',
@@ -488,7 +488,6 @@ class ToursSales(object):
             return HTTPFound(
                 self.request.resource_url(
                     Calculations(self.request),
-                    'add' if not tour_sale.calculation else 'edit',
                     query=(
                         {'resource_id': tour_sale.resource.id}
                     )

@@ -10,6 +10,7 @@ from ...models.invoice import Invoice
 from ...models.service import Service
 from ...models.account_item import AccountItem
 from ...models.service_item import ServiceItem
+from ...models.calculation import Calculation
 
 from ...lib.bl import (
     InvoiceFactory,
@@ -132,4 +133,42 @@ class TourSaleInvoiceFactory(InvoiceFactory):
 
 
 class TourSaleCalculationFactory(CalculationFactory):
-    pass
+
+    @classmethod
+    def get_calculations(cls, resource_id):
+        services_items = cls.get_services_items(resource_id)
+        service_item = services_items[0]
+        if not service_item.calculation:
+            return []
+        return [service_item.calculation, ]
+
+    @classmethod
+    def get_services_items(cls, resource_id):
+        service_item = (
+            DBSession.query(ServiceItem)
+            .join(ServiceItem, TourSale.service_item)
+            .filter(TourSale.resource_id == resource_id)
+            .first()
+        )
+        return [service_item, ]
+
+    @classmethod
+    def get_date(cls, resource_id):
+        tour_sale = (
+            DBSession.query(TourSale)
+            .filter(TourSale.resource_id == resource_id)
+            .first()
+        )
+        return tour_sale.deal_date
+
+    @classmethod
+    def query_list(cls):
+        query = (
+            DBSession.query(
+                Resource.id.label('resource_id'),
+            )
+            .join(Resource, TourSale.resource)
+            .join(ServiceItem, TourSale.service_item)
+            .join(Calculation, ServiceItem.calculation)
+        )
+        return query

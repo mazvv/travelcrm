@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -677,7 +678,7 @@ ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    service_item_id integer NOT NULL,
+    service_item_id integer,
     currency_id integer NOT NULL,
     price numeric(16,2) NOT NULL,
     base_price numeric(16,2) NOT NULL
@@ -2559,14 +2560,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6144, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6150, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1849, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1858, true);
 
 
 --
@@ -2712,7 +2713,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-4efb33045f18
+3bea0dca69a5
 \.
 
 
@@ -2825,6 +2826,12 @@ SELECT pg_catalog.setval('bperson_id_seq', 8, true);
 --
 
 COPY calculation (id, resource_id, service_item_id, currency_id, price, base_price) FROM stdin;
+3	1852	33	56	56826.88	56826.88
+5	1854	36	54	3140.72	57161.10
+6	1855	37	54	3556.00	59385.20
+7	1856	35	57	1277.35	15328.20
+4	1853	\N	57	2150.34	25804.08
+8	1858	34	57	2100.34	25204.08
 \.
 
 
@@ -2832,7 +2839,7 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 1, false);
+SELECT pg_catalog.setval('calculation_id_seq', 8, true);
 
 
 --
@@ -3609,6 +3616,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 127	116	4	{view,add,edit,delete}	\N	all
 128	117	4	{view,add,edit,delete}	\N	all
 129	118	4	{view,add,edit,delete}	\N	all
+130	119	4	{autoload,view,edit}	\N	all
 \.
 
 
@@ -3752,7 +3760,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 150, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 129, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 130, true);
 
 
 --
@@ -4483,6 +4491,12 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1847	108	32	f
 1848	108	32	f
 1849	12	32	f
+1852	119	32	f
+1853	119	32	f
+1854	119	32	f
+1855	119	32	f
+1856	119	32	f
+1858	119	32	f
 \.
 
 
@@ -5395,6 +5409,12 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6142	1659	2	\N	2014-10-25 22:39:28.23436
 6143	1369	2	\N	2014-10-25 22:42:01.657224
 6144	1849	2	\N	2014-10-25 23:00:37.016264
+6145	1852	2	\N	2014-10-28 19:57:41.751563
+6146	1853	2	\N	2014-10-28 20:23:48.907733
+6147	1854	2	\N	2014-10-28 20:24:58.380434
+6148	1855	2	\N	2014-10-28 20:25:08.681569
+6149	1856	2	\N	2014-10-28 20:34:38.55751
+6150	1858	2	\N	2014-10-28 21:58:44.272948
 \.
 
 

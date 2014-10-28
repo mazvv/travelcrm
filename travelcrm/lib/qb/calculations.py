@@ -2,7 +2,7 @@
 
 from collections import Iterable
 
-from sqlalchemy.orm import aliased
+from sqlalchemy import literal
 
 from . import ResourcesQueryBuilder
 
@@ -13,9 +13,7 @@ from ...models.service import Service
 from ...models.currency import Currency
 from ...models.touroperator import Touroperator
 
-
-ServiceItemCurrency = aliased(Currency)
-CalculationCurrency = aliased(Currency)
+from ...lib.utils.common_utils import get_base_currency
 
 
 class CalculationsQueryBuilder(ResourcesQueryBuilder):
@@ -25,16 +23,14 @@ class CalculationsQueryBuilder(ResourcesQueryBuilder):
         '_id': Calculation.id,
         'service': Service.name,
         'touroperator': Touroperator.name,
-        'price': ServiceItem.price,
-        'base_price': ServiceItem.base_price,
-        'currency': ServiceItemCurrency.iso_code,
-        'supplier_price': Calculation.price,
-        'supplier_currency': CalculationCurrency.iso_code,
-        'supplier_base_price': Calculation.base_price,
+        'price': Calculation.price,
+        'currency': Currency.iso_code,
+        'base_price': Calculation.base_price,
     }
 
     def __init__(self, context):
         super(CalculationsQueryBuilder, self).__init__(context)
+        self._fields['base_currency'] = literal(get_base_currency())
         fields = ResourcesQueryBuilder.get_fields_with_labels(
             self.get_fields()
         )
@@ -44,8 +40,7 @@ class CalculationsQueryBuilder(ResourcesQueryBuilder):
             .join(ServiceItem, Calculation.service_item)
             .join(Service, ServiceItem.service)
             .join(Touroperator, ServiceItem.touroperator)
-            .join(ServiceItemCurrency, ServiceItem.currency)
-            .join(CalculationCurrency, Calculation.currency)
+            .join(Currency, Calculation.currency)
         )
         self.query = self.query.add_columns(*fields)
 

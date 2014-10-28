@@ -9,42 +9,6 @@
     ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"service"), True, "service_id")}
-                </div>
-                <div class="ml15">
-                ${h.fields.services_combobox_field(
-                    request, item.service_id if item else None,
-                    show_toolbar=(not readonly if readonly else True)
-                )}
-                ${h.common.error_container(name='service_id')}
-                </div>
-            </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
-            </div>
-            <div class="ml15">
-                ${h.fields.touroperators_combobox_field(
-                    request, item.touroperator_id if item else None,
-                    show_toolbar=(not readonly if readonly else True)
-                )}
-                ${h.common.error_container(name='touroperator_id')}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
-                ${h.tags.title(_(u"person"), True, "person_id")}
-            </div>
-            <div class="ml15">
-                ${h.fields.persons_combobox_field(
-                    request, item.person_id if item else None,
-                    show_toolbar=(not readonly if readonly else True)
-                )}
-                ${h.common.error_container(name="person_id")}
-            </div>
-        </div>
-        <div class="form-field">
-            <div class="dl15">
                 ${h.tags.title(_(u"price"), True, "price")}
             </div>
             <div class="ml15">

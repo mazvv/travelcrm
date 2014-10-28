@@ -25,8 +25,7 @@ class Calculations(ResourceTypeBase):
     @property
     def allowed_permisions(self):
         return [
+            ('autoload', _(u'autoload')),
             ('view', _(u'view')),
-            ('add', _(u'add')),
             ('edit', _(u'edit')),
-            ('delete', _(u'delete')),
         ]

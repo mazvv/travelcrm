@@ -40,7 +40,7 @@ class Calculation(Base):
             ondelete='restrict',
             onupdate='cascade',
         ),
-        nullable=False,
+        nullable=True,
     )
     currency_id = Column(
         Integer,
@@ -56,6 +56,10 @@ class Calculation(Base):
         Numeric(16, 2),
         nullable=False,
     )
+    base_price = Column(
+        Numeric(16, 2),
+        nullable=False,
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -66,18 +70,22 @@ class Calculation(Base):
         cascade="all,delete",
         uselist=False,
     )
+    service_item = relationship(
+        'ServiceItem',
+        backref=backref(
+            'calculation',
+            uselist=False,
+        ),
+        uselist=False,
+    )
     currency = relationship(
         'Currency',
         backref=backref(
-            'calclations',
+            'calculations',
             lazy='dynamic',
             uselist=True,
         ),
         uselist=False,
-    )
-    base_price = Column(
-        Numeric(16, 2),
-        nullable=False,
     )
 
     @classmethod

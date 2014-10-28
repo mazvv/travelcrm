@@ -60,3 +60,19 @@ class InvoiceFactory(object):
 
 class CalculationFactory(object):
     __metaclass__ = ABCMeta
+
+    @classmethod
+    def get_calculations(cls, resource_id):
+        raise NotImplemented()
+
+    @classmethod
+    def get_services_items(cls, resource_id):
+        raise NotImplemented()
+
+    @classmethod
+    def get_date(cls, resource_id):
+        raise NotImplemented()
+
+    @classmethod
+    def query_list(cls):
+        raise NotImplemented()
