@@ -4,6 +4,7 @@ from zope.interface import implementer
 from ..interfaces import (
     IResourceType,
     IInvoiceFactory,
+    ICalculationFactory,
 )
 from ..resources import (
     Root,
@@ -12,11 +13,13 @@ from ..resources import (
     ResourceTypeBase,
 )
 from ..lib.bl.services_sales import ServiceSaleInvoiceFactory
+from ..lib.bl.services_sales import ServiceSaleCalculationFactory
 from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
 @implementer(IInvoiceFactory)
+@implementer(ICalculationFactory)
 class ServicesSales(ResourceTypeBase):
 
     __name__ = 'services_sales'
@@ -41,3 +44,7 @@ class ServicesSales(ResourceTypeBase):
     @staticmethod
     def get_invoice_factory():
         return ServiceSaleInvoiceFactory
+
+    @staticmethod
+    def get_calculation_factory():
+        return ServiceSaleCalculationFactory

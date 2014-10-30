@@ -12,6 +12,7 @@ from ..models.service_item import ServiceItem
 from ..models.note import Note
 from ..models.task import Task
 from ..resources.invoices import Invoices
+from ..resources.calculations import Calculations
 from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 
 from ..lib.bl.currencies_rates import currency_base_exchange
@@ -289,6 +290,24 @@ class ServicesSales(object):
                         {'resource_id': service_sale.resource.id}
                         if not service_sale.invoice
                         else {'id': service_sale.invoice.id}
+                    )
+                )
+            )
+
+    @view_config(
+        name='calculation',
+        context='..resources.services_sales.ServicesSales',
+        request_method='GET',
+        permission='calculation'
+    )
+    def calculation(self):
+        service_sale = ServiceSale.get(self.request.params.get('id'))
+        if service_sale:
+            return HTTPFound(
+                self.request.resource_url(
+                    Calculations(self.request),
+                    query=(
+                        {'resource_id': service_sale.resource.id}
                     )
                 )
             )

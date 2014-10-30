@@ -15,6 +15,7 @@ from ..utils.common_utils import (
     format_date as u_format_date,
     format_datetime as u_format_datetime,
     format_decimal as u_format_decimal,
+    get_base_currency as u_get_base_currency,
 )
 from ..utils.security_utils import get_auth_employee
 from ..bl.employees import get_employee_structure
@@ -103,3 +104,7 @@ def get_locale_name():
 
 def get_current_employee_structure(request):
     return get_employee_structure(get_auth_employee(request))
+
+
+def get_base_currency():
+    return u_get_base_currency()

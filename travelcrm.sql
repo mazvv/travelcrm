@@ -2560,14 +2560,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6150, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6156, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1858, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1864, true);
 
 
 --
@@ -2829,9 +2829,13 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 3	1852	33	56	56826.88	56826.88
 5	1854	36	54	3140.72	57161.10
 6	1855	37	54	3556.00	59385.20
-7	1856	35	57	1277.35	15328.20
 4	1853	\N	57	2150.34	25804.08
-8	1858	34	57	2100.34	25204.08
+9	1859	34	57	2156.34	25876.08
+10	1860	31	57	29.84	358.08
+11	1861	3	54	20.00	334.00
+12	1862	17	57	54.00	653.40
+13	1863	18	57	54.00	653.40
+14	1864	19	54	21.00	350.70
 \.
 
 
@@ -2839,7 +2843,7 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 8, true);
+SELECT pg_catalog.setval('calculation_id_seq', 14, true);
 
 
 --
@@ -3616,7 +3620,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 127	116	4	{view,add,edit,delete}	\N	all
 128	117	4	{view,add,edit,delete}	\N	all
 129	118	4	{view,add,edit,delete}	\N	all
-130	119	4	{autoload,view,edit}	\N	all
+130	119	4	{autoload,view,edit,delete}	\N	all
 \.
 
 
@@ -4495,8 +4499,12 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1853	119	32	f
 1854	119	32	f
 1855	119	32	f
-1856	119	32	f
-1858	119	32	f
+1859	119	32	f
+1860	119	32	f
+1861	119	32	f
+1862	119	32	f
+1863	119	32	f
+1864	119	32	f
 \.
 
 
@@ -5413,8 +5421,12 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6146	1853	2	\N	2014-10-28 20:23:48.907733
 6147	1854	2	\N	2014-10-28 20:24:58.380434
 6148	1855	2	\N	2014-10-28 20:25:08.681569
-6149	1856	2	\N	2014-10-28 20:34:38.55751
-6150	1858	2	\N	2014-10-28 21:58:44.272948
+6151	1859	2	\N	2014-10-29 12:48:22.905378
+6152	1860	2	\N	2014-10-30 22:03:33.988542
+6153	1861	2	\N	2014-10-30 22:04:21.818193
+6154	1862	2	\N	2014-10-30 22:04:21.818193
+6155	1863	2	\N	2014-10-30 22:04:21.818193
+6156	1864	2	\N	2014-10-30 22:04:21.818193
 \.
 
 

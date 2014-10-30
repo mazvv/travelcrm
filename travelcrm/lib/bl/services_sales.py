@@ -9,10 +9,13 @@ from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
 from ...models.service import Service
-from ...models.currency import Currency
 from ...models.account_item import AccountItem
+from ...models.calculation import Calculation
 
-from ...lib.bl import InvoiceFactory
+from ...lib.bl import (
+    InvoiceFactory,
+    CalculationFactory,
+)
 from ...lib.bl.currencies_rates import query_convert_rates
 from ...lib.utils.common_utils import money_cast
 
@@ -137,3 +140,41 @@ class ServiceSaleInvoiceFactory(InvoiceFactory):
             .group_by(subq.c.id, subq.c.name)
             .order_by(subq.c.name)
         )
+
+
+class ServiceSaleCalculationFactory(CalculationFactory):
+
+    @classmethod
+    def get_calculations(cls, resource_id):
+        services_items = cls.get_services_items(resource_id)
+        return [service_item.calculation for service_item in services_items]
+
+    @classmethod
+    def get_services_items(cls, resource_id):
+        return (
+            DBSession.query(ServiceItem)
+            .join(ServiceItem, ServiceSale.services_items)
+            .filter(ServiceSale.resource_id == resource_id)
+            .all()
+        )
+
+    @classmethod
+    def get_date(cls, resource_id):
+        service_sale = (
+            DBSession.query(ServiceSale)
+            .filter(ServiceSale.resource_id == resource_id)
+            .first()
+        )
+        return service_sale.deal_date
+
+    @classmethod
+    def query_list(cls):
+        query = (
+            DBSession.query(
+                Resource.id.label('resource_id'),
+            )
+            .join(Resource, ServiceSale.resource)
+            .join(ServiceItem, ServiceSale.services_items)
+            .join(Calculation, ServiceItem.calculation)
+        )
+        return query

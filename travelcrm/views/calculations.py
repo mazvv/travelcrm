@@ -183,6 +183,19 @@ class Calculations(object):
             }
 
     @view_config(
+        name='details',
+        context='..resources.calculations.Calculations',
+        request_method='GET',
+        renderer='travelcrm:templates/calculations/details.mak',
+        permission='view'
+    )
+    def details(self):
+        calculation = Calculation.get(self.request.params.get('id'))
+        return {
+            'item': calculation,
+        }
+
+    @view_config(
         name='delete',
         context='..resources.calculations.Calculations',
         request_method='GET',
