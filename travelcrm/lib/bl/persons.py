@@ -3,10 +3,12 @@
 from sqlalchemy import func, case
 
 from ...models import DBSession
+from ...models.resource import Resource
 from ...models.person import Person
 from ...models.contact import Contact
 from ...models.passport import Passport
-
+from ...models.subaccount import Subaccount
+from ...lib.bl import SubaccountFactory
 
 def query_person_contacts():
     return (
@@ -56,3 +58,27 @@ def query_person_passports():
         .join(Passport, Person.passports)
         .group_by(Person.id)
     )
+
+
+class PersonSubaccountFactory(SubaccountFactory):
+
+    @classmethod
+    def query_list(cls):
+        query = (
+            DBSession.query(
+                Resource.id.label('resource_id'),
+                Person.name.label('title'),
+                Subaccount.name.label('name'),
+                Subaccount.id.label('subaccount_id'),
+            )
+            .join(Resource, Person.resource)
+            .join(Subaccount, Person.subaccount)
+        )
+        return query
+
+    @classmethod
+    def bind_subaccount(cls, person_id, subaccount):
+        assert isinstance(subaccount, Subaccount)
+        person = Person.get(person_id)
+        person.subaccount = subaccount
+        return person

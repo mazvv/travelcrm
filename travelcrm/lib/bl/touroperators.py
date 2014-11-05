@@ -6,9 +6,12 @@ from decimal import Decimal
 from sqlalchemy import desc
 
 from ...models import DBSession
+from ...models.resource import Resource
 from ...models.touroperator import Touroperator
+from ...models.subaccount import Subaccount
 from ...models.commission import Commission
 
+from ...lib.bl import SubaccountFactory
 from ..utils.common_utils import money_cast
 from ...lib.bl.currencies_rates import currency_exchange
 
@@ -47,5 +50,25 @@ def get_calculation(
     return money_cast(price)
 
 
-class SubaccountFactory(object):
-    pass
+class TouroperatorSubaccountFactory(SubaccountFactory):
+
+    @classmethod
+    def query_list(cls):
+        query = (
+            DBSession.query(
+                Resource.id.label('resource_id'),
+                Touroperator.name.label('title'),
+                Subaccount.name.label('name'),
+                Subaccount.id.label('subaccount_id'),
+            )
+            .join(Resource, Touroperator.resource)
+            .join(Subaccount, Touroperator.subaccount)
+        )
+        return query
+
+    @classmethod
+    def bind_subaccount(cls, touroperator_id, subaccount):
+        assert isinstance(subaccount, Subaccount)
+        touroperator = Touroperator.get(touroperator_id)
+        touroperator.subaccount = subaccount
+        return touroperator

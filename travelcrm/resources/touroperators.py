@@ -14,7 +14,7 @@ from ..resources import (
     ResourceTypeBase,
 )
 from ..lib.utils.common_utils import translate as _
-from ..lib.bl.touroperators import SubaccountFactory
+from ..lib.bl.touroperators import TouroperatorSubaccountFactory
 
 
 @implementer(IResourceType)
@@ -36,6 +36,6 @@ class Touroperators(ResourceTypeBase):
             ('delete', _(u'delete')),
         ]
 
-    @classmethod
-    def get_subaccount_factory(cls):
-        return SubaccountFactory
+    @staticmethod
+    def get_subaccount_factory():
+        return TouroperatorSubaccountFactory

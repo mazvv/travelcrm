@@ -47,7 +47,6 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         .group_by(Income.invoice_id)
         .subquery()
     )
-
     _fields = {
         'id': Invoice.id,
         '_id': Invoice.id,

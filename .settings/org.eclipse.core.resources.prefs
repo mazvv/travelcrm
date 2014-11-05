@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
-encoding//travelcrm/forms/calculations.py=utf-8
-encoding//travelcrm/resources/calculations.py=utf-8
-encoding//travelcrm/resources/services_sales.py=utf-8
+encoding//travelcrm/forms/invoices.py=utf-8
+encoding//travelcrm/forms/subaccounts.py=utf-8
+encoding//travelcrm/resources/employees.py=utf-8
+encoding//travelcrm/resources/persons.py=utf-8
+encoding//travelcrm/resources/suppliers.py=utf-8
+encoding//travelcrm/resources/touroperators.py=utf-8
 encoding//travelcrm/resources/tours_sales.py=utf-8

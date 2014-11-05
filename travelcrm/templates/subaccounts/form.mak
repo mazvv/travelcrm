@@ -26,33 +26,60 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
+                        ${h.tags.title(_(u"account"), True, "account_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.accounts_combobox_field(
+                        	request, item.account_id if item else None,
+                        	show_toolbar=(not readonly if readonly else True)
+                        )}
+                        ${h.common.error_container(name='account_id')}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
                         ${h.tags.title(_(u"subaccount type"), True, "subaccount_type")}
                     </div>
                     <div class="ml15">
                         ${h.fields.subaccounts_types_combobox_field(
-                            item.account_type if item else None, 
+                            resource.resource_type.name if resource else None, 
                             options="""
                                 width:271,
                                 onSelect: function(record){
-                                    $.post("/" + record.value + "/combobox", 
+                                    $.post("/" + record.value + "/combobox",
+                                    	{'name': 'source_id'},
                                         function(data){
                                             $("#%s").html(data);
                                             $.parser.parse("#%s");
                                         }
-                                    )
+                                    );
                                 },
-                            """ % (_combobox_container, _combobox_container)
+                                onLoadSuccess: function(){
+                                	var subaccount_type = $(this).combobox('getValue');
+                                    $.post("/" + subaccount_type + "/combobox",
+                                    	{'name': 'source_id', 'resource_id': %s}, 
+                                        function(data){
+                                            $("#%s").html(data);
+                                            $.parser.parse("#%s");
+                                        }
+                                    );
+                                }                          
+                            """ % (
+                            	_combobox_container, _combobox_container,
+                            	resource.id if resource else 0, 
+                            	_combobox_container, _combobox_container,
+                            )
                         )}
                         ${h.common.error_container(name='subaccount_type')}
                     </div>
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"subaccount object"), True, "subaccount_object")}
+                        ${h.tags.title(_(u"subaccount object"), True, "source_id")}
                     </div>
                     <div class="ml15">
                         <span id="${_combobox_container}"></span>
-                        ${h.common.error_container(name='subaccount object')}
+                        ${h.common.error_container(name='source_id')}
                     </div>
                 </div>
                 <div class="form-field mb05">

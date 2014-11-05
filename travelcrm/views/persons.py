@@ -4,8 +4,10 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.response import Response
 
 from ..models import DBSession
+from ..models.resource import Resource
 from ..models.person import Person
 from ..models.contact import Contact
 from ..models.passport import Passport
@@ -14,6 +16,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.persons import PersonsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.helpers.fields import persons_combobox_field
 
 from ..forms.persons import PersonSchema
 
@@ -254,3 +257,20 @@ class Persons(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='combobox',
+        context='..resources.persons.Persons',
+        request_method='POST',
+        permission='view'
+    )
+    def _combobox(self):
+        value = None
+        resource = Resource.get(self.request.params.get('resource_id'))
+        if resource:
+            value = resource.person.id
+        return Response(
+            persons_combobox_field(
+                self.request, value, name=self.request.params.get('name')
+            )
+        )

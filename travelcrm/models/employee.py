@@ -103,6 +103,34 @@ employee_address = Table(
 )
 
 
+employee_subaccount = Table(
+    'employee_subaccount',
+    Base.metadata,
+    Column(
+        'employee_id',
+        Integer,
+        ForeignKey(
+            'employee.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_employee_id_employee_subaccount',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'subaccount_id',
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_subaccount_id_employee_subaccount',
+        ),
+        primary_key=True,
+    ),
+)
+
+
 class Employee(Base):
     __tablename__ = 'employee'
 
@@ -171,7 +199,6 @@ class Employee(Base):
         cascade="all,delete",
         uselist=True,
     )
-
     addresses = relationship(
         'Address',
         secondary=employee_address,
@@ -181,6 +208,15 @@ class Employee(Base):
         ),
         cascade="all,delete",
         uselist=True,
+    )
+    subaccount = relationship(
+        'Subaccount',
+        secondary=employee_subaccount,
+        backref=backref(
+            'employee',
+            uselist=False,
+        ),
+        uselist=False,
     )
 
     @hybrid_property

@@ -5,6 +5,7 @@ from zope.interface import implementer
 
 from ..interfaces import (
     IResourceType,
+    ISubaccountFactory,
 )
 from ..resources import (
     Root,
@@ -13,9 +14,11 @@ from ..resources import (
     ResourceTypeBase,
 )
 from ..lib.utils.common_utils import translate as _
+from ..lib.bl.employees import EmployeeSubaccountFactory
 
 
 @implementer(IResourceType)
+@implementer(ISubaccountFactory)
 class Employees(ResourceTypeBase):
 
     __name__ = 'employees'
@@ -32,3 +35,7 @@ class Employees(ResourceTypeBase):
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
         ]
+
+    @staticmethod
+    def get_subaccount_factory():
+        return EmployeeSubaccountFactory

@@ -32,8 +32,9 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
-            <th data-options="field:'account',sortable:true,width:200">${_(u"account")}</th>
-            <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
+            <th data-options="field:'title',sortable:true,width:150">${_(u"resource")}</th>
+            <th data-options="field:'resource_type',sortable:true,width:100">${_(u"resource type")}</th>
+            <th data-options="field:'account',sortable:true,width:150">${_(u"account")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

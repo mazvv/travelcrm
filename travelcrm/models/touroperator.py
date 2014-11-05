@@ -128,6 +128,34 @@ touroperator_commission = Table(
 )
 
 
+touroperator_subaccount = Table(
+    'touroperator_subaccount',
+    Base.metadata,
+    Column(
+        'touroperator_id',
+        Integer,
+        ForeignKey(
+            'touroperator.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_touroperator_id_touroperator_subaccount',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'subaccount_id',
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_subaccount_id_touroperator_subaccount',
+        ),
+        primary_key=True,
+    ),
+)
+
+
 class Touroperator(Base):
     __tablename__ = 'touroperator'
     __table_args__ = (
@@ -201,6 +229,15 @@ class Touroperator(Base):
             uselist=False,
         ),
         uselist=True,
+    )
+    subaccount = relationship(
+        'Subaccount',
+        secondary=touroperator_subaccount,
+        backref=backref(
+            'touroperator',
+            uselist=False,
+        ),
+        uselist=False,
     )
 
     @classmethod

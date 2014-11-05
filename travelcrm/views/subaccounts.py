@@ -11,6 +11,11 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.subaccounts import SubaccountsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import get_resource_class
+from ..lib.bl.subaccounts import (
+    get_factory_by_subaccount_id, 
+    get_bound_resource_by_subaccount_id
+)
 
 from ..forms.subaccounts import SubaccountSchema
 
@@ -102,11 +107,16 @@ class Subaccounts(object):
 
         try:
             controls = schema.deserialize(self.request.params.mixed())
+            source_cls = get_resource_class(controls.get('subaccount_type'))
+            factory = source_cls.get_subaccount_factory()
             subaccount = Subaccount(
                 account_id=controls.get('account_id'),
                 name=controls.get('name'),
                 descr=controls.get('descr'),
                 resource=self.context.create_resource()
+            )
+            source = factory.bind_subaccount(
+                controls.get('source_id'), subaccount
             )
             for id in controls.get('note_id'):
                 note = Note.get(id)
@@ -114,7 +124,7 @@ class Subaccounts(object):
             for id in controls.get('task_id'):
                 task = Task.get(id)
                 subaccount.resource.tasks.append(task)
-            DBSession.add(subaccount)
+            DBSession.add(source)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
@@ -135,7 +145,12 @@ class Subaccounts(object):
     )
     def edit(self):
         subaccount = Subaccount.get(self.request.params.get('id'))
-        return {'item': subaccount, 'title': _(u'Edit Subaccount')}
+        resource = get_bound_resource_by_subaccount_id(subaccount.id)
+        return {
+            'item': subaccount,
+            'resource': resource,
+            'title': _(u'Edit Subaccount'),
+        }
 
     @view_config(
         name='edit',
@@ -149,6 +164,7 @@ class Subaccounts(object):
         subaccount = Subaccount.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params.mixed())
+            factory = get_factory_by_subaccount_id(subaccount.id)
             subaccount.account_id = controls.get('account_id')
             subaccount.name = controls.get('name')
             subaccount.descr = controls.get('descr')
@@ -160,6 +176,9 @@ class Subaccounts(object):
             for id in controls.get('task_id'):
                 task = Task.get(id)
                 subaccount.resource.tasks.append(task)
+            factory.bind_subaccount(
+                controls.get('source_id'), subaccount
+            )
             return {
                 'success_message': _(u'Saved'),
                 'response': subaccount.id

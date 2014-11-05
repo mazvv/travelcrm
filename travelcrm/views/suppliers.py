@@ -4,8 +4,10 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.response import Response
 
 from ..models import DBSession
+from ..models.resource import Resource
 from ..models.supplier import Supplier
 from ..models.bperson import BPerson
 from ..models.bank_detail import BankDetail
@@ -13,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.suppliers import SuppliersQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.helpers.fields import suppliers_combobox_field
 from ..forms.suppliers import SupplierSchema
 
 
@@ -239,3 +242,20 @@ class Suppliers(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='combobox',
+        context='..resources.suppliers.Suppliers',
+        request_method='POST',
+        permission='view'
+    )
+    def _combobox(self):
+        value = None
+        resource = Resource.get(self.request.params.get('resource_id'))
+        if resource:
+            value = resource.supplier.id
+        return Response(
+            suppliers_combobox_field(
+                self.request, value, name=self.request.params.get('name')
+            )
+        )

@@ -925,6 +925,18 @@ CREATE TABLE employee_passport (
 ALTER TABLE public.employee_passport OWNER TO mazvv;
 
 --
+-- Name: employee_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE employee_subaccount (
+    employee_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+ALTER TABLE public.employee_subaccount OWNER TO mazvv;
+
+--
 -- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
 --
 
@@ -1478,6 +1490,18 @@ CREATE TABLE person_passport (
 ALTER TABLE public.person_passport OWNER TO mazvv;
 
 --
+-- Name: person_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE person_subaccount (
+    person_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+ALTER TABLE public.person_subaccount OWNER TO mazvv;
+
+--
 -- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
 --
 
@@ -1940,6 +1964,18 @@ ALTER SEQUENCE supplier_id_seq OWNED BY supplier.id;
 
 
 --
+-- Name: suppplier_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE suppplier_subaccount (
+    supplier_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+ALTER TABLE public.suppplier_subaccount OWNER TO mazvv;
+
+--
 -- Name: task; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -2191,6 +2227,18 @@ CREATE TABLE touroperator_licence (
 
 
 ALTER TABLE public.touroperator_licence OWNER TO mazvv;
+
+--
+-- Name: touroperator_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE touroperator_subaccount (
+    touroperator_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+ALTER TABLE public.touroperator_subaccount OWNER TO mazvv;
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
@@ -2560,14 +2608,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6156, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6163, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1864, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1871, true);
 
 
 --
@@ -2713,7 +2761,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-3bea0dca69a5
+4525b9c2d99f
 \.
 
 
@@ -3054,6 +3102,15 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 
 COPY employee_passport (employee_id, passport_id) FROM stdin;
 13	7
+\.
+
+
+--
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
+2	1
 \.
 
 
@@ -3658,6 +3715,7 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 40	1628	Alena	Garkava		2007-03-29	female
 41	1645	Karpenko	Alexander		1990-06-04	male
 42	1653	Smichko	Olena		1992-07-15	female
+43	1869	Alexey	Ivankiv	V.	\N	male
 \.
 
 
@@ -3714,7 +3772,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('person_id_seq', 42, true);
+SELECT pg_catalog.setval('person_id_seq', 43, true);
 
 
 --
@@ -3737,6 +3795,16 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 41	20
 41	21
 42	22
+\.
+
+
+--
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY person_subaccount (person_id, subaccount_id) FROM stdin;
+41	3
+37	4
 \.
 
 
@@ -4505,6 +4573,12 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1862	119	32	f
 1863	119	32	f
 1864	119	32	f
+1865	117	32	f
+1866	117	32	f
+1867	117	32	f
+1868	117	32	f
+1869	69	32	f
+1870	78	32	f
 \.
 
 
@@ -5427,6 +5501,12 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6154	1862	2	\N	2014-10-30 22:04:21.818193
 6155	1863	2	\N	2014-10-30 22:04:21.818193
 6156	1864	2	\N	2014-10-30 22:04:21.818193
+6157	1865	2	\N	2014-11-03 21:33:49.462196
+6158	1866	2	\N	2014-11-03 21:38:54.729983
+6159	1867	2	\N	2014-11-03 21:39:31.824693
+6160	1868	2	\N	2014-11-03 21:40:02.647787
+6161	1869	2	\N	2014-11-05 21:10:08.261088
+6162	1870	2	\N	2014-11-05 21:10:38.427296
 \.
 
 
@@ -5696,6 +5776,10 @@ SELECT pg_catalog.setval('structures_id_seq', 12, true);
 --
 
 COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
+1	1865	4	Vitalii Mazur EUR | cash	\N
+2	1866	2	News Travel | Bank	\N
+3	1867	4	Alexander Karpenko | EUR	\N
+4	1868	3	Garkaviy Andriy | UAH	\N
 \.
 
 
@@ -5703,7 +5787,7 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 1, false);
+SELECT pg_catalog.setval('subaccount_id_seq', 5, true);
 
 
 --
@@ -5742,6 +5826,14 @@ COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
 --
 
 SELECT pg_catalog.setval('supplier_id_seq', 6, true);
+
+
+--
+-- Data for Name: suppplier_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY suppplier_subaccount (supplier_id, subaccount_id) FROM stdin;
+\.
 
 
 --
@@ -5897,6 +5989,7 @@ COPY touroperator (id, resource_id, name) FROM stdin;
 61	1378	EthnoTour
 57	1159	Sun Marino Trvl.
 62	1580	News Travel
+63	1870	Four Winds
 \.
 
 
@@ -5942,7 +6035,7 @@ COPY touroperator_commission (touroperator_id, commission_id) FROM stdin;
 -- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('touroperator_id_seq', 62, true);
+SELECT pg_catalog.setval('touroperator_id_seq', 63, true);
 
 
 --
@@ -5952,6 +6045,15 @@ SELECT pg_catalog.setval('touroperator_id_seq', 62, true);
 COPY touroperator_licence (touroperator_id, licence_id) FROM stdin;
 2	44
 62	46
+\.
+
+
+--
+-- Data for Name: touroperator_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY touroperator_subaccount (touroperator_id, subaccount_id) FROM stdin;
+62	2
 \.
 
 
@@ -6134,6 +6236,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subaccount
+    ADD CONSTRAINT employee_subaccount_pkey PRIMARY KEY (employee_id, subaccount_id);
+
+
+--
 -- Name: fin_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -6291,6 +6401,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY person
     ADD CONSTRAINT person_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY person_subaccount
+    ADD CONSTRAINT person_subaccount_pkey PRIMARY KEY (person_id, subaccount_id);
 
 
 --
@@ -6470,6 +6588,14 @@ ALTER TABLE ONLY supplier
 
 
 --
+-- Name: suppplier_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY suppplier_subaccount
+    ADD CONSTRAINT suppplier_subaccount_pkey PRIMARY KEY (supplier_id, subaccount_id);
+
+
+--
 -- Name: task_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -6555,6 +6681,14 @@ ALTER TABLE ONLY touroperator_licence
 
 ALTER TABLE ONLY touroperator
     ADD CONSTRAINT touroperator_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: touroperator_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY touroperator_subaccount
+    ADD CONSTRAINT touroperator_subaccount_pkey PRIMARY KEY (touroperator_id, subaccount_id);
 
 
 --
@@ -7078,6 +7212,14 @@ ALTER TABLE ONLY employee_passport
 
 
 --
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_subaccount
+    ADD CONSTRAINT fk_employee_id_employee_subaccount FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7307,6 +7449,14 @@ ALTER TABLE ONLY person_contact
 
 ALTER TABLE ONLY person_passport
     ADD CONSTRAINT fk_person_id_person_passport FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_subaccount
+    ADD CONSTRAINT fk_person_id_person_subaccount FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7878,6 +8028,38 @@ ALTER TABLE ONLY subaccount
 
 
 --
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_subaccount
+    ADD CONSTRAINT fk_subaccount_id_employee_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY person_subaccount
+    ADD CONSTRAINT fk_subaccount_id_person_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY suppplier_subaccount
+    ADD CONSTRAINT fk_subaccount_id_supplier_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_touroperator_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_subaccount
+    ADD CONSTRAINT fk_subaccount_id_touroperator_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7891,6 +8073,14 @@ ALTER TABLE ONLY supplier_bank_detail
 
 ALTER TABLE ONLY supplier_bperson
     ADD CONSTRAINT fk_supplier_id_supplier_bperson FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY suppplier_subaccount
+    ADD CONSTRAINT fk_supplier_id_supplier_subaccount FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7971,6 +8161,14 @@ ALTER TABLE ONLY touroperator_commission
 
 ALTER TABLE ONLY touroperator_licence
     ADD CONSTRAINT fk_touroperator_id_touroperator_licence FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_touroperator_id_touroperator_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY touroperator_subaccount
+    ADD CONSTRAINT fk_touroperator_id_touroperator_subaccount FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

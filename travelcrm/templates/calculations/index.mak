@@ -45,7 +45,7 @@
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-            <th data-options="field:'service',sortable:true,width:120">${_(u"service")}</th>
+            <th data-options="field:'service',sortable:true,width:160">${_(u"service")}</th>
             <th data-options="field:'touroperator',sortable:true,width:120">${_(u"touroperator")}</th>
             <th data-options="field:'price',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"base price")}</th>

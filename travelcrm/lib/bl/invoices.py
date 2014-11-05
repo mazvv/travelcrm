@@ -3,6 +3,7 @@
 from sqlalchemy import func
 
 from ...lib.utils.resources_utils import get_resource_class
+from ...lib.utils.sql_utils import build_union_query
 from ...lib.bl.factories import get_invoices_factories_resources_types
 from ...models import DBSession
 from ...models.invoice import Invoice
@@ -16,13 +17,8 @@ from ...models.account_item import AccountItem
 
 def query_resource_data():
     factories = get_invoices_factories_resources_types()
-    res = None
-    for i, factory in enumerate(factories):
-        if not i:
-            res = factory.query_list()
-        else:
-            res = res.union(factory.query_list())
-    return res
+    queries = [factory.query_list() for factory in factories]
+    return build_union_query(queries)
 
 
 def get_bound_resource_by_invoice_id(invoice_id):

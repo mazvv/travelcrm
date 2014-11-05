@@ -76,3 +76,15 @@ class CalculationFactory(object):
     @classmethod
     def query_list(cls):
         raise NotImplemented()
+
+
+class SubaccountFactory(object):
+    __metaclass__ = ABCMeta
+
+    @classmethod
+    def query_list(cls):
+        raise NotImplemented()
+
+    @classmethod
+    def bind_subaccount(cls):
+        raise NotImplemented()

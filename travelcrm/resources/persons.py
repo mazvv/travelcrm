@@ -14,6 +14,7 @@ from ..resources import (
     ResourceTypeBase,
 )
 from ..lib.utils.common_utils import translate as _
+from ..lib.bl.persons import PersonSubaccountFactory
 
 
 @implementer(IResourceType)
@@ -35,6 +36,6 @@ class Persons(ResourceTypeBase):
             ('delete', _(u'delete')),
         ]
 
-    @classmethod
-    def get_subaccount_factory(cls):
-        return None
+    @staticmethod
+    def get_subaccount_factory():
+        return PersonSubaccountFactory

@@ -71,6 +71,34 @@ supplier_bank_detail = Table(
 )
 
 
+supplier_subaccount = Table(
+    'suppplier_subaccount',
+    Base.metadata,
+    Column(
+        'supplier_id',
+        Integer,
+        ForeignKey(
+            'supplier.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_supplier_id_supplier_subaccount',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'subaccount_id',
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_subaccount_id_supplier_subaccount',
+        ),
+        primary_key=True,
+    ),
+)
+
+
 class Supplier(Base):
     __tablename__ = 'supplier'
     __table_args__ = (
@@ -126,6 +154,15 @@ class Supplier(Base):
             uselist=False,
         ),
         uselist=True,
+    )
+    subaccount = relationship(
+        'Subaccount',
+        secondary=supplier_subaccount,
+        backref=backref(
+            'supplier',
+            uselist=False,
+        ),
+        uselist=False,
     )
 
     @classmethod

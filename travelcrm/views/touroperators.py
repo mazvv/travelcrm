@@ -7,6 +7,7 @@ from pyramid.view import view_config
 from pyramid.response import Response
 
 from ..models import DBSession
+from ..models.resource import Resource
 from ..models.touroperator import Touroperator
 from ..models.licence import Licence
 from ..models.bperson import BPerson
@@ -263,4 +264,12 @@ class Touroperators(object):
         permission='view'
     )
     def _combobox(self):
-        return Response(touroperators_combobox_field(self.request, None))
+        value = None
+        resource = Resource.get(self.request.params.get('resource_id'))
+        if resource:
+            value = resource.touroperator.id
+        return Response(
+            touroperators_combobox_field(
+                self.request, value, name=self.request.params.get('name')
+            )
+        )
