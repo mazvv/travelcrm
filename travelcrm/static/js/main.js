@@ -415,10 +415,15 @@ function disable_inputs(data){
 	var form = $(data).find('form');
 	if(form.hasClass('readonly')){
 		var d = $('<div>').html(data);
-		d.find(":input").attr("disabled", true);
-		d.find("[type=reset]").attr("disabled", false);
-		d.find("[type=submit]").addClass("disable");
+                d = disable_obj_inputs(d);
 		return d.html();
 	}
 	return data;
+}
+
+function disable_obj_inputs(obj){
+    obj.find(":input").attr("disabled", true);
+    obj.find("[type=reset]").attr("disabled", false);
+    obj.find("[type=submit]").addClass("disable");
+    return obj;
 }

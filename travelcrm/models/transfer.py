@@ -16,13 +16,15 @@ from ..models import (
 )
 
 
-class Posting(Base):
-    __tablename__ = 'posting'
+class Transfer(Base):
+    __tablename__ = 'transfer'
     __table_args__ = (
         CheckConstraint(
             'not (account_from_id is not null '
-            'and subaccount_from_id is not null)',
-            name='constraint_at_list_single_account_not_null',
+            'and subaccount_from_id is not null) and '
+            'not (account_to_id is not null '
+            'and subaccount_to_id is not null',
+            name='constraint_posting_account_subaccount',
         ),
     )
 
@@ -31,21 +33,20 @@ class Posting(Base):
         autoincrement=True,
         primary_key=True
     )
-    resource_id = Column(
-        Integer,
-        ForeignKey(
-            'resource.id',
-            name="fk_resource_id_posting",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     account_from_id = Column(
         Integer,
         ForeignKey(
             'account.id',
-            name="fk_account_from_id_posting",
+            name="fk_account_from_id_transfer",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
+    subaccount_from_id = Column(
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            name="fk_subaccount_from_id_transfer",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -54,7 +55,16 @@ class Posting(Base):
         Integer,
         ForeignKey(
             'account.id',
-            name="fk_account_to_id_posting",
+            name="fk_account_to_id_transfer",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
+    subaccount_to_id = Column(
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            name="fk_subaccount_to_id_transfer",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -63,7 +73,7 @@ class Posting(Base):
         Integer,
         ForeignKey(
             'account_item.id',
-            name="fk_account_item_id_posting",
+            name="fk_account_item_id_transfer",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -77,40 +87,50 @@ class Posting(Base):
         Date(),
         nullable=False,
     )
-    resource = relationship(
-        'Resource',
-        backref=backref(
-            'posting',
-            uselist=False,
-            cascade="all,delete"
-        ),
-        cascade="all,delete",
-        uselist=False
-    )
     account_from = relationship(
         'Account',
         backref=backref(
-            'postings_from',
+            'transfers_from',
             uselist=True,
             lazy="dynamic"
         ),
         foreign_keys=[account_from_id],
         uselist=False
     )
+    subaccount_from = relationship(
+        'Subaccount',
+        backref=backref(
+            'transfers_from',
+            uselist=True,
+            lazy="dynamic"
+        ),
+        foreign_keys=[subaccount_from_id],
+        uselist=False
+    )
     account_to = relationship(
         'Account',
         backref=backref(
-            'postings_to',
+            'transfers_to',
             uselist=True,
             lazy="dynamic"
         ),
         foreign_keys=[account_to_id],
         uselist=False
     )
+    subaccount_to = relationship(
+        'Subaccount',
+        backref=backref(
+            'transfers_to',
+            uselist=True,
+            lazy="dynamic"
+        ),
+        foreign_keys=[subaccount_to_id],
+        uselist=False
+    )
     account_item = relationship(
         'AccountItem',
         backref=backref(
-            'postings',
+            'transfers',
             uselist=True,
             lazy="dynamic"
         ),

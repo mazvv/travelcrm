@@ -33,5 +33,5 @@ def get_bound_resource_by_subaccount_id(subaccount_id):
 def get_factory_by_subaccount_id(subaccount_id):
     resource = get_bound_resource_by_subaccount_id(subaccount_id)
     source_cls = get_resource_class(resource.resource_type.name)
-    factory = source_cls.get_invoice_factory()
+    factory = source_cls.get_subaccount_factory()
     return factory

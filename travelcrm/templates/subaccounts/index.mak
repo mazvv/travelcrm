@@ -71,9 +71,15 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter currency code or account name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter subaccount name or resource name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
+                        ${h.tags.title(_(u"account"))}
+                    </div>
+                    <div>
+                        ${h.fields.accounts_combobox_field(request, None, 'account_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>

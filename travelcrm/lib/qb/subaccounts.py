@@ -32,6 +32,7 @@ class SubaccountsQueryBuilder(ResourcesQueryBuilder):
    }
     _simple_search_fields = [
         _subq_resource_data.c.name,
+        _subq_resource_data.c.title,
     ]
 
     def __init__(self, context):
@@ -64,9 +65,9 @@ class SubaccountsQueryBuilder(ResourcesQueryBuilder):
 
     def advanced_search(self, **kwargs):
         super(SubaccountsQueryBuilder, self).advanced_search(**kwargs)
-        if 'currency_id' in kwargs:
-            self._filter_currency(kwargs.get('currency_id'))
+        if 'account_id' in kwargs:
+            self._filter_account(kwargs.get('account_id'))
 
-    def _filter_currency(self, currency_id):
-        if currency_id:
-            self.query = self.query.filter(Currency.id == currency_id)
+    def _filter_account(self, account_id):
+        if account_id:
+            self.query = self.query.filter(Account.id == account_id)

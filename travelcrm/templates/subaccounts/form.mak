@@ -57,16 +57,23 @@
                                 onLoadSuccess: function(){
                                 	var subaccount_type = $(this).combobox('getValue');
                                     $.post("/" + subaccount_type + "/combobox",
-                                    	{'name': 'source_id', 'resource_id': %s}, 
+                                    	{'name': 'source_id', 'resource_id': %s},
                                         function(data){
+			                    data = $('<div />').html(data);
+			                    if(%s){
+                                                data.find('.combogrid-toolbar').remove();
+                                                data = disable_obj_inputs(data);
+			                    }
+                                            data = data.html();
                                             $("#%s").html(data);
                                             $.parser.parse("#%s");
                                         }
                                     );
                                 }                          
                             """ % (
-                            	_combobox_container, _combobox_container,
-                            	resource.id if resource else 0, 
+                           	_combobox_container, _combobox_container,
+                            	resource.id if resource else 0,
+			        h.common.jsonify(readonly if readonly else False),
                             	_combobox_container, _combobox_container,
                             )
                         )}

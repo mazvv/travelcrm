@@ -3,7 +3,6 @@
 --
 
 SET statement_timeout = 0;
-SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -2608,14 +2607,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6163, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6166, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1871, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1872, true);
 
 
 --
@@ -3495,6 +3494,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 21	1836	asdfsdfsd	\N
 22	1837	sdfsdfsdf	\N
 23	1838	asdasdaSD	\N
+24	1872	For users	This subaccount is for Person Garkaviy Andrew
 \.
 
 
@@ -3502,7 +3502,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('note_id_seq', 23, true);
+SELECT pg_catalog.setval('note_id_seq', 24, true);
 
 
 --
@@ -3513,6 +3513,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 3	1797
 5	1797
 18	784
+24	1868
 \.
 
 
@@ -4579,6 +4580,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1868	117	32	f
 1869	69	32	f
 1870	78	32	f
+1872	118	32	f
 \.
 
 
@@ -5507,6 +5509,9 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6160	1868	2	\N	2014-11-03 21:40:02.647787
 6161	1869	2	\N	2014-11-05 21:10:08.261088
 6162	1870	2	\N	2014-11-05 21:10:38.427296
+6164	1872	2	\N	2014-11-08 19:05:48.520641
+6165	1868	2	\N	2014-11-08 19:07:32.928999
+6166	1868	2	\N	2014-11-08 19:07:58.653299
 \.
 
 
