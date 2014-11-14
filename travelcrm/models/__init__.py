@@ -55,7 +55,6 @@ from service import Service
 from currency_rate import CurrencyRate
 from invoice import Invoice
 from account_item import AccountItem
-from fin_transaction import FinTransaction
 from income import Income
 from account import Account
 from subaccount import Subaccount
@@ -64,7 +63,7 @@ from service_sale import ServiceSale
 from commission import Commission
 from supplier import Supplier
 from outgoing import Outgoing
-from refund import Refund
 from posting import Posting
 from note import Note
 from calculation import Calculation
+from transfer import Transfer

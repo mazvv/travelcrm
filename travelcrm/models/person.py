@@ -208,14 +208,15 @@ class Person(Base):
         cascade="all,delete",
         uselist=True,
     )
-    subaccount = relationship(
+    subaccounts = relationship(
         'Subaccount',
         secondary=person_subaccount,
         backref=backref(
             'person',
             uselist=False,
         ),
-        uselist=False,
+        cascade="all,delete",
+        uselist=True,
     )
 
     @hybrid_property

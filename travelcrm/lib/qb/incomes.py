@@ -11,7 +11,7 @@ from ...models.income import Income
 from ...models.invoice import Invoice
 from ...models.account import Account
 from ...models.currency import Currency
-from ...models.fin_transaction import FinTransaction
+from ...models.transfer import Transfer
 
 from ...lib.bl.invoices import query_resource_data
 from ...lib.utils.common_utils import parse_date
@@ -27,12 +27,16 @@ class IncomesQueryBuilder(ResourcesQueryBuilder):
     )
     _sum_subq = (
         DBSession.query(
-            func.sum(FinTransaction.sum).label('sum'),
+            func.sum(Transfer.sum).label('sum'),
             Income.id,
-            FinTransaction.date,
+            Transfer.date,
         )
-        .join(Income, FinTransaction.income)
-        .group_by(Income.id, FinTransaction.date)
+        .join(Income, Transfer.income)
+        .filter(
+            Transfer.account_from_id == None,
+            Transfer.subaccount_from_id == None,
+        )
+        .group_by(Income.id, Transfer.date)
         .subquery()
     )
 

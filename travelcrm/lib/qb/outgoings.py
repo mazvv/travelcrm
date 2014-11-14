@@ -1,58 +1,44 @@
 # -*coding: utf-8-*-
 from collections import Iterable
 
-from sqlalchemy import func
-
 from . import ResourcesQueryBuilder
 
 from ...models import DBSession
 from ...models.resource import Resource
+from ...models.resource_type import ResourceType
 from ...models.outgoing import Outgoing
-from ...models.invoice import Invoice
 from ...models.account import Account
 from ...models.account_item import AccountItem
 from ...models.currency import Currency
 from ...models.touroperator import Touroperator
-from ...models.fin_transaction import FinTransaction
+from ...models.transfer import Transfer
 
 from ...lib.utils.common_utils import parse_date
+from ...lib.bl.subaccounts import query_resource_data
 
 
 class OutgoingsQueryBuilder(ResourcesQueryBuilder):
-
-    _sum_subq = (
-        DBSession.query(
-            func.sum(FinTransaction.sum).label('sum'),
-            Outgoing.id,
-            FinTransaction.date,
-            AccountItem.id.label('account_item_id'),
-            AccountItem.name.label('account_item_name'),
-        )
-        .join(Outgoing, FinTransaction.outgoing)
-        .join(AccountItem, FinTransaction.account_item)
-        .group_by(
-            Outgoing.id,
-            FinTransaction.date,
-            AccountItem.name,
-            AccountItem.id,
-        )
+    _subq_subaccount_type = (
+        DBSession.query(ResourceType.humanize, Resource.id)
+        .join(Resource, ResourceType.resources)
         .subquery()
     )
-
+    _subq_subaccount_data = query_resource_data().subquery()
     _fields = {
         'id': Outgoing.id,
         '_id': Outgoing.id,
-        'date': _sum_subq.c.date,
-        'sum': _sum_subq.c.sum,
-        'account_name': Account.name,
-        'account_item': _sum_subq.c.account_item_name,
+        'date': Outgoing.date,
+        'sum': Outgoing.sum,
+        'account': Account.name,
+        'account_item': AccountItem.name,
         'currency': Currency.iso_code,
-        'touroperator': Touroperator.name,
+        'resource': _subq_subaccount_data.c.title,
+        'resource_type': _subq_subaccount_type.c.humanize,
     }
     _simple_search_fields = [
         Account.name,
-        Touroperator.name,
-        _sum_subq.c.account_item_name,
+        _subq_subaccount_data.c.name,
+        _subq_subaccount_data.c.title,
     ]
 
     def __init__(self, context):
@@ -64,9 +50,18 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
             self.query
             .join(Outgoing, Resource.outgoing)
             .join(Account, Outgoing.account)
-            .join(Touroperator, Outgoing.touroperator)
             .join(Currency, Account.currency)
-            .join(self._sum_subq, self._sum_subq.c.id == Outgoing.id)
+            .join(AccountItem, Outgoing.account_item)
+            .join(
+                self._subq_subaccount_data, 
+                Outgoing.subaccount_id 
+                == self._subq_subaccount_data.c.subaccount_id
+            )
+            .join(
+                self._subq_subaccount_type,
+                self._subq_subaccount_type.c.id
+                == self._subq_subaccount_data.c.resource_id
+            )
         )
         self.query = self.query.add_columns(*fields)
 
@@ -81,8 +76,6 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
             self._filter_account(kwargs.get('account_id'))
         if 'account_item_id' in kwargs:
             self._filter_account_item(kwargs.get('account_item_id'))
-        if 'touroperator_id' in kwargs:
-            self._filter_touroperator(kwargs.get('touroperator_id'))
         if 'currency_id' in kwargs:
             self._filter_currency(kwargs.get('currency_id'))
         if 'sum_from' in kwargs or 'sum_to' in kwargs:
@@ -100,10 +93,6 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
                 self._sum_subq.c.account_item_id == account_item_id
             )
 
-    def _filter_touroperator(self, touroperator_id):
-        if touroperator_id:
-            self.query = self.query.filter(Touroperator.id == touroperator_id)
-
     def _filter_account(self, account_id):
         if account_id:
             self.query = self.query.filter(Account.id == account_id)
@@ -114,16 +103,16 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
 
     def _filter_sum(self, sum_from, sum_to):
         if sum_from:
-            self.query = self.query.filter(self._sum_subq.c.sum >= sum_from)
+            self.query = self.query.filter(Outgoing.sum >= sum_from)
         if sum_to:
-            self.query = self.query.filter(self._sum_subq.c.sum <= sum_to)
+            self.query = self.query.filter(Outgoing.sum <= sum_to)
 
     def _filter_payment_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                self._sum_subq.c.date >= parse_date(date_from)
+                Outgoing.date >= parse_date(date_from)
             )
         if date_to:
             self.query = self.query.filter(
-                self._sum_subq.c.date <= parse_date(date_to)
+                Outgoing.date <= parse_date(date_to)
             )

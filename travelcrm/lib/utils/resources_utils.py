@@ -80,5 +80,14 @@ def get_resources_types_by_interface(interface):
 
 
 def get_resource_settings(resource):
+    """get resource settings by resource object
+    """
     rt = get_resource_type_by_resource(resource)
+    return rt.settings
+
+
+def get_resource_settings_by_resource_cls(cls):
+    """get resource settings by resource class
+    """
+    rt = get_resource_type_by_resource_cls(cls)
     return rt.settings

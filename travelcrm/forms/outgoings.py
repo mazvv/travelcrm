@@ -6,7 +6,7 @@ import colander
 
 from . import ResourceSchema, Date
 
-from ..lib.bl.accounts import get_account_balance
+from ..lib.bl.transfers import get_account_balance
 from ..lib.utils.common_utils import parse_date, translate as _
 
 
@@ -46,6 +46,6 @@ class OutgoingSchema(ResourceSchema):
     account_item_id = colander.SchemaNode(
         colander.Integer(),
     )
-    touroperator_id = colander.SchemaNode(
+    subaccount_id = colander.SchemaNode(
         colander.Integer(),
     )

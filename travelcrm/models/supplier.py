@@ -155,14 +155,15 @@ class Supplier(Base):
         ),
         uselist=True,
     )
-    subaccount = relationship(
+    subaccounts = relationship(
         'Subaccount',
         secondary=supplier_subaccount,
         backref=backref(
             'supplier',
             uselist=False,
         ),
-        uselist=False,
+        cascade="all,delete",
+        uselist=True,
     )
 
     @classmethod

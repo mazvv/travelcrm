@@ -15,18 +15,28 @@ class SupplierSubaccountFactory(SubaccountFactory):
         query = (
             DBSession.query(
                 Resource.id.label('resource_id'),
+                Supplier.id.label('id'),
                 Supplier.name.label('title'),
                 Subaccount.name.label('name'),
                 Subaccount.id.label('subaccount_id'),
             )
             .join(Resource, Supplier.resource)
-            .join(Subaccount, Supplier.subaccount)
+            .join(Subaccount, Supplier.subaccounts)
         )
         return query
 
     @classmethod
-    def bind_subaccount(cls, supplier_id, subaccount):
+    def get_source_resource(cls, id):
+        supplier = Supplier.get(id)
+        return supplier.resource
+
+    @classmethod
+    def bind_subaccount(cls, resource_id, subaccount):
         assert isinstance(subaccount, Subaccount)
-        supplier = Supplier.get(supplier_id)
-        supplier.subaccount = subaccount
+        supplier = (
+            DBSession.query(Supplier)
+            .filter(Supplier.resource_id == resource_id)
+            .first()
+        )
+        supplier.subaccounts.append(subaccount)
         return supplier

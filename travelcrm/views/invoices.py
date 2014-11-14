@@ -29,7 +29,8 @@ from ..lib.utils.common_utils import get_locale_name
 from ..lib.bl.invoices import (
     query_resource_data,
     query_invoice_payments,
-    query_invoice_payments_transactions
+    query_invoice_payments_transfers,
+    get_invoice_payments_transfers_balance,
 )
 from ..lib.bl.invoices import get_factory_by_invoice_id
 
@@ -352,7 +353,6 @@ class Invoices(object):
             'footer': [{
                 'name': _(u'total'),
                 'cnt': total_cnt,
-
                 'price': format_decimal(total_sum, locale=get_locale_name())
             }]
         }
@@ -383,6 +383,7 @@ class Invoices(object):
             'rows': query_serialize(query),
             'footer': [{
                 'name': _(u'total'),
+                'unit_price': None,
                 'cnt': total_cnt,
                 'price': format_decimal(total_sum, locale=get_locale_name()),
             }]
@@ -407,21 +408,23 @@ class Invoices(object):
         }
 
     @view_config(
-        name='transactions_info',
+        name='transfers_info',
         context='..resources.invoices.Invoices',
         request_method='POST',
         renderer='json',
         permission='view'
     )
-    def _transactions_info(self):
-        query = query_invoice_payments_transactions(
+    def _transfers_info(self):
+        query = query_invoice_payments_transfers(self.request.params.get('id'))
+        transfers_balance = get_invoice_payments_transfers_balance(
             self.request.params.get('id')
         )
-        total_sum = sum(row.sum for row in query)
         return {
             'rows': query_serialize(query),
             'footer': [{
-                'date': _(u'total'),
-                'sum': format_decimal(total_sum, locale=get_locale_name())
+                'date': _(u'balance'),
+                'sum': format_decimal(
+                    transfers_balance, locale=get_locale_name()
+                )
             }]
         }

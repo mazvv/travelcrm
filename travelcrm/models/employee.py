@@ -209,14 +209,15 @@ class Employee(Base):
         cascade="all,delete",
         uselist=True,
     )
-    subaccount = relationship(
+    subaccounts = relationship(
         'Subaccount',
         secondary=employee_subaccount,
         backref=backref(
             'employee',
             uselist=False,
         ),
-        uselist=False,
+        cascade="all,delete",
+        uselist=True,
     )
 
     @hybrid_property

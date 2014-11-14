@@ -11,7 +11,7 @@ from ...models.account import Account
 from ...models.currency import Currency
 from ...models.resource_type import ResourceType
 from ...models.income import Income
-from ...models.fin_transaction import FinTransaction
+from ...models.transfer import Transfer
 
 from ...lib.bl.invoices import query_resource_data
 from ...lib.bl.currencies_rates import query_convert_rates
@@ -41,9 +41,14 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
     )
     _sum_payments = (
         DBSession.query(
-            func.sum(FinTransaction.sum).label('sum'), Income.invoice_id
+            func.sum(Transfer.sum).label('sum'), 
+            Income.invoice_id
         )
-        .join(Income, FinTransaction.income)
+        .join(Income, Transfer.income)
+        .filter(
+            Transfer.account_from_id == None,
+            Transfer.subaccount_from_id == None,
+        )
         .group_by(Income.invoice_id)
         .subquery()
     )

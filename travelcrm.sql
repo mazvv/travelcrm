@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -957,42 +958,6 @@ ALTER SEQUENCE employees_appointments_h_id_seq OWNED BY appointment.id;
 
 
 --
--- Name: fin_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE fin_transaction (
-    id integer NOT NULL,
-    account_item_id integer NOT NULL,
-    sum numeric(16,2) NOT NULL,
-    date date NOT NULL,
-    factor integer NOT NULL
-);
-
-
-ALTER TABLE public.fin_transaction OWNER TO mazvv;
-
---
--- Name: fin_transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE fin_transaction_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.fin_transaction_id_seq OWNER TO mazvv;
-
---
--- Name: fin_transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE fin_transaction_id_seq OWNED BY fin_transaction.id;
-
-
---
 -- Name: foodcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1131,16 +1096,16 @@ ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: income_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income_transfer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE income_transaction (
+CREATE TABLE income_transfer (
     income_id integer NOT NULL,
-    fin_transaction_id integer NOT NULL
+    transfer_id integer NOT NULL
 );
 
 
-ALTER TABLE public.income_transaction OWNER TO mazvv;
+ALTER TABLE public.income_transfer OWNER TO mazvv;
 
 --
 -- Name: invoice; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1349,16 +1314,16 @@ ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
 
 
 --
--- Name: outgoing_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: outgoing_transfer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE outgoing_transaction (
+CREATE TABLE outgoing_transfer (
     outgoing_id integer NOT NULL,
-    fin_transaction_id integer NOT NULL
+    transfer_id integer NOT NULL
 );
 
 
-ALTER TABLE public.outgoing_transaction OWNER TO mazvv;
+ALTER TABLE public.outgoing_transfer OWNER TO mazvv;
 
 --
 -- Name: passport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1616,16 +1581,16 @@ ALTER SEQUENCE refund_id_seq OWNED BY refund.id;
 
 
 --
--- Name: refund_transaction; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: refund_transfer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-CREATE TABLE refund_transaction (
+CREATE TABLE refund_transfer (
     refund_id integer NOT NULL,
-    fin_transaction_id integer NOT NULL
+    transfer_id integer NOT NULL
 );
 
 
-ALTER TABLE public.refund_transaction OWNER TO mazvv;
+ALTER TABLE public.refund_transfer OWNER TO mazvv;
 
 --
 -- Name: roomcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -2240,6 +2205,46 @@ CREATE TABLE touroperator_subaccount (
 ALTER TABLE public.touroperator_subaccount OWNER TO mazvv;
 
 --
+-- Name: transfer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE transfer (
+    id integer NOT NULL,
+    account_from_id integer,
+    subaccount_from_id integer,
+    account_to_id integer,
+    subaccount_to_id integer,
+    account_item_id integer NOT NULL,
+    sum numeric(16,2) NOT NULL,
+    date date NOT NULL,
+    CONSTRAINT constraint_transfer_account_subaccount CHECK (((NOT ((account_from_id IS NOT NULL) AND (subaccount_from_id IS NOT NULL))) AND (NOT ((account_to_id IS NOT NULL) AND (subaccount_to_id IS NOT NULL)))))
+);
+
+
+ALTER TABLE public.transfer OWNER TO mazvv;
+
+--
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE transfer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.transfer_id_seq OWNER TO mazvv;
+
+--
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE transfer_id_seq OWNED BY transfer.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
@@ -2349,13 +2354,6 @@ ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rat
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('_employees_rid_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY fin_transaction ALTER COLUMN id SET DEFAULT nextval('fin_transaction_id_seq'::regclass);
 
 
 --
@@ -2579,6 +2577,13 @@ ALTER TABLE ONLY touroperator ALTER COLUMN id SET DEFAULT nextval('touroperator_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('_users_rid_seq'::regclass);
 
 
@@ -2607,14 +2612,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6166, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6192, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1872, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1882, true);
 
 
 --
@@ -2691,6 +2696,7 @@ COPY account_item (id, resource_id, name) FROM stdin;
 5	1609	Payments To Suppliers
 6	1769	Payments To Touroperators
 7	1780	Account Initialization
+8	1873	Payment On Invoice
 \.
 
 
@@ -2698,7 +2704,7 @@ COPY account_item (id, resource_id, name) FROM stdin;
 -- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('account_item_id_seq', 7, true);
+SELECT pg_catalog.setval('account_item_id_seq', 8, true);
 
 
 --
@@ -2760,7 +2766,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-4525b9c2d99f
+cac2848ba45
 \.
 
 
@@ -3121,34 +3127,6 @@ SELECT pg_catalog.setval('employees_appointments_h_id_seq', 9, true);
 
 
 --
--- Data for Name: fin_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY fin_transaction (id, account_item_id, sum, date, factor) FROM stdin;
-105	4	819.00	2014-08-24	1
-116	6	2200.00	2014-10-01	-1
-117	6	53456.80	2014-10-02	-1
-118	1	20.00	2014-08-31	1
-119	1	9000.00	2014-08-25	1
-120	1	64955.80	2014-08-23	1
-121	2	0.80	2014-07-01	1
-122	2	500.00	2014-07-01	1
-123	1	2693.60	2014-06-22	1
-124	2	1474.00	2014-06-18	1
-125	1	10.00	2014-06-15	1
-126	1	30000.00	2014-06-08	1
-127	1	39000.00	2014-06-06	1
-\.
-
-
---
--- Name: fin_transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('fin_transaction_id_seq', 127, true);
-
-
---
 -- Data for Name: foodcat; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -3257,6 +3235,9 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 33	1607	16
 34	1639	17
 35	1660	19
+37	1876	21
+40	1880	13
+41	1882	13
 \.
 
 
@@ -3264,24 +3245,20 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('income_id_seq', 35, true);
+SELECT pg_catalog.setval('income_id_seq', 41, true);
 
 
 --
--- Data for Name: income_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: income_transfer; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY income_transaction (income_id, fin_transaction_id) FROM stdin;
-35	118
-34	119
-33	120
-25	121
-24	122
-23	123
-20	124
-7	125
-6	126
-5	127
+COPY income_transfer (income_id, transfer_id) FROM stdin;
+40	28
+40	27
+41	31
+41	32
+37	41
+37	42
 \.
 
 
@@ -3404,7 +3381,6 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 57	4	53	Accounts	/accounts	\N	1	1436
 52	4	32	Services	/services_sales	\N	2	1369
 60	4	23	Suppliers	/suppliers	\N	11	1550
-64	4	53	Refunds	/refunds	\N	11	1575
 61	4	53	Outgoing Payments	/outgoings	\N	10	1571
 56	4	53	Income Payments	incomes	\N	9	1434
 54	4	53	Currency Rates	/currencies_rates	\N	8	1395
@@ -3535,12 +3511,10 @@ SELECT pg_catalog.setval('outgoing_id_seq', 10, true);
 
 
 --
--- Data for Name: outgoing_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: outgoing_transfer; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY outgoing_transaction (outgoing_id, fin_transaction_id) FROM stdin;
-9	116
-10	117
+COPY outgoing_transfer (outgoing_id, transfer_id) FROM stdin;
 \.
 
 
@@ -3623,13 +3597,11 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 73	104	4	{view,add,edit,delete}	\N	all
 74	105	4	{view,add,edit,delete}	\N	all
 72	103	4	{view,add,edit,delete}	\N	all
-75	106	4	{view,add,edit,delete}	\N	all
 76	107	4	{view,add,edit,delete}	\N	all
 77	108	4	{view,add,edit,delete}	\N	all
 79	110	4	{view,add,edit,delete}	\N	all
 80	111	4	{view,add,edit,delete}	\N	all
 81	112	4	{view,add,edit,delete}	\N	all
-82	113	4	{view,add,edit,delete,settings}	\N	all
 78	109	4	{view,add,edit,delete,settings,calculation,invoice,contract}	\N	all
 64	92	4	{view,add,edit,delete,settings,invoice,calculation,contract}	\N	all
 85	65	8	{view,add,edit,delete}	\N	all
@@ -3672,13 +3644,13 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 121	111	8	{view,add,edit,delete}	\N	all
 122	112	8	{view,add,edit,delete}	\N	all
 123	12	8	{view,add,edit,delete,settings}	\N	all
-124	113	8	{view,add,edit,delete,settings}	\N	all
 125	109	8	{view,add,edit,delete,settings,calculation,invoice,contract}	\N	all
 126	92	8	{view,add,edit,delete,settings,invoice,calculation,contract}	\N	all
 127	116	4	{view,add,edit,delete}	\N	all
 128	117	4	{view,add,edit,delete}	\N	all
 129	118	4	{view,add,edit,delete}	\N	all
 130	119	4	{autoload,view,edit,delete}	\N	all
+75	106	4	{view,add,edit,delete,settings}	\N	all
 \.
 
 
@@ -3806,6 +3778,8 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 41	3
 37	4
+40	6
+20	8
 \.
 
 
@@ -3857,7 +3831,6 @@ SELECT pg_catalog.setval('posting_id_seq', 16, true);
 --
 
 COPY refund (id, resource_id, invoice_id) FROM stdin;
-3	1638	16
 \.
 
 
@@ -3869,11 +3842,10 @@ SELECT pg_catalog.setval('refund_id_seq', 3, true);
 
 
 --
--- Data for Name: refund_transaction; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: refund_transfer; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY refund_transaction (refund_id, fin_transaction_id) FROM stdin;
-3	105
+COPY refund_transfer (refund_id, transfer_id) FROM stdin;
 \.
 
 
@@ -4435,7 +4407,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1569	101	32	f
 1570	101	32	f
 1571	65	32	f
-1574	12	32	f
 1575	65	32	f
 1576	86	32	f
 1577	87	32	f
@@ -4488,7 +4459,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1632	108	32	f
 1633	108	32	f
 1634	103	32	f
-1638	113	32	f
 1639	106	32	f
 1640	87	32	f
 1641	87	32	f
@@ -4581,6 +4551,12 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1869	69	32	f
 1870	78	32	f
 1872	118	32	f
+1873	105	32	f
+1875	106	32	f
+1876	106	32	f
+1880	106	32	f
+1881	106	32	f
+1882	106	32	f
 \.
 
 
@@ -5256,7 +5232,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5782	1568	2	\N	2014-08-17 11:06:57.522852
 5783	1569	2	\N	2014-08-17 11:07:53.713228
 5784	1570	2	\N	2014-08-17 11:09:10.292392
-5788	1574	2	\N	2014-08-17 20:41:08.846318
 5790	1576	2	\N	2014-08-22 22:48:58.176695
 5791	1577	2	\N	2014-08-22 22:49:31.584667
 5792	1578	2	\N	2014-08-22 22:49:35.101959
@@ -5308,7 +5283,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5845	1632	2	\N	2014-08-24 15:17:15.949468
 5846	1633	2	\N	2014-08-24 15:17:28.997817
 5847	1634	2	\N	2014-08-24 15:21:09.48427
-5851	1638	2	\N	2014-08-24 21:46:39.586432
 5852	1639	2	\N	2014-08-25 15:20:24.884947
 5853	1640	2	\N	2014-08-26 19:55:53.569882
 5854	1641	2	\N	2014-08-26 19:56:28.320221
@@ -5512,6 +5486,28 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6164	1872	2	\N	2014-11-08 19:05:48.520641
 6165	1868	2	\N	2014-11-08 19:07:32.928999
 6166	1868	2	\N	2014-11-08 19:07:58.653299
+6167	1873	2	\N	2014-11-09 14:14:33.279838
+6168	1433	2	\N	2014-11-09 14:15:02.053975
+6170	1875	2	\N	2014-11-09 20:43:57.157494
+6171	1876	2	\N	2014-11-09 20:50:09.776581
+6172	1876	2	\N	2014-11-09 21:46:07.106741
+6173	1876	2	\N	2014-11-09 21:46:46.766703
+6174	1876	2	\N	2014-11-12 18:42:47.24628
+6175	1876	2	\N	2014-11-12 18:43:00.917409
+6176	1876	2	\N	2014-11-12 18:43:51.052257
+6177	1876	2	\N	2014-11-12 18:49:19.486465
+6178	1876	2	\N	2014-11-12 18:49:50.992411
+6182	1880	2	\N	2014-11-12 18:58:13.464317
+6183	1881	2	\N	2014-11-12 18:58:13.464317
+6184	1876	2	\N	2014-11-12 19:19:20.155903
+6185	1880	2	\N	2014-11-12 19:20:04.488842
+6186	1882	2	\N	2014-11-12 19:21:49.754499
+6187	1882	2	\N	2014-11-12 20:48:55.295948
+6188	1876	2	\N	2014-11-13 18:36:19.360925
+6189	1876	2	\N	2014-11-13 18:36:40.275356
+6190	1876	2	\N	2014-11-13 18:36:53.848561
+6191	1876	2	\N	2014-11-13 18:37:04.828162
+6192	1876	2	\N	2014-11-13 18:44:14.058824
 \.
 
 
@@ -5553,19 +5549,18 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N	\N
 104	1393	currencies_rates	Currency Rates	CurrenciesRates	travelcrm.resources.currencies_rates	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	\N	\N
 105	1424	accounts_items	Account Items	AccountsItems	travelcrm.resources.accounts_items	Finance accounts items	\N	\N
-106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	null	\N
 109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null	\N
 108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null	\N
 110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null	\N
 112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	\N
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	\N
-113	1574	refunds	Refunds	Refunds	travelcrm.resources.refunds	Refunds by invoice	{"account_item_id": 4}	t
 116	1778	postings	Accounts Postings	Postings	travelcrm.resources.postings	Postings beetwen accounts	null	f
 117	1797	subaccounts	Subaccounts	Subaccounts	travelcrm.resources.subaccounts	Subaccounts are accounts from other objects such as clients, touroperators and so on	null	f
 107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible	null	f
 118	1799	notes	Notes	Notes	travelcrm.resources.notes	Resources Notes	null	f
 92	1221	tours_sales	Tours Sale	ToursSales	travelcrm.resources.tours_sales	Tours sales documents	{"service_id": 5}	t
 119	1849	calculations	Caluclations	Calculations	travelcrm.resources.calculations	Calculations of Sale Documents	null	f
+106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	{"account_item_id": 8}	t
 \.
 
 
@@ -5785,6 +5780,8 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 2	1866	2	News Travel | Bank	\N
 3	1867	4	Alexander Karpenko | EUR	\N
 4	1868	3	Garkaviy Andriy | UAH	\N
+6	1875	3	Main Cash Account | rid: 1628	\N
+8	1881	3	Main Cash Account | rid: 1372	\N
 \.
 
 
@@ -5792,7 +5789,7 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 5, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 8, true);
 
 
 --
@@ -6063,6 +6060,27 @@ COPY touroperator_subaccount (touroperator_id, subaccount_id) FROM stdin;
 
 
 --
+-- Data for Name: transfer; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccount_to_id, account_item_id, sum, date) FROM stdin;
+27	\N	\N	\N	8	8	1974.00	2014-11-12
+28	\N	8	3	\N	2	1974.00	2014-11-12
+31	\N	\N	\N	8	8	80.00	2014-11-12
+32	\N	8	3	\N	2	80.00	2014-11-12
+41	\N	\N	\N	6	8	560.00	2014-11-09
+42	\N	6	3	\N	2	540.00	2014-11-09
+\.
+
+
+--
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('transfer_id_seq', 42, true);
+
+
+--
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -6249,14 +6267,6 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fin_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY fin_transaction
-    ADD CONSTRAINT fin_transaction_pkey PRIMARY KEY (id);
-
-
---
 -- Name: foodcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -6289,11 +6299,11 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: income_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income_transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY income_transaction
-    ADD CONSTRAINT income_transactions_pkey PRIMARY KEY (income_id, fin_transaction_id);
+ALTER TABLE ONLY income_transfer
+    ADD CONSTRAINT income_transfer_pkey PRIMARY KEY (income_id, transfer_id);
 
 
 --
@@ -6353,11 +6363,11 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: outgoing_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: outgoing_transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY outgoing_transaction
-    ADD CONSTRAINT outgoing_transaction_pkey PRIMARY KEY (outgoing_id, fin_transaction_id);
+ALTER TABLE ONLY outgoing_transfer
+    ADD CONSTRAINT outgoing_transfer_pkey PRIMARY KEY (outgoing_id, transfer_id);
 
 
 --
@@ -6441,11 +6451,11 @@ ALTER TABLE ONLY refund
 
 
 --
--- Name: refund_transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: refund_transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
-ALTER TABLE ONLY refund_transaction
-    ADD CONSTRAINT refund_transaction_pkey PRIMARY KEY (refund_id, fin_transaction_id);
+ALTER TABLE ONLY refund_transfer
+    ADD CONSTRAINT refund_transfer_pkey PRIMARY KEY (refund_id, transfer_id);
 
 
 --
@@ -6697,6 +6707,14 @@ ALTER TABLE ONLY touroperator_subaccount
 
 
 --
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT transfer_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -6905,6 +6923,14 @@ ALTER TABLE ONLY posting
 
 
 --
+-- Name: fk_account_from_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT fk_account_from_id_transfer FOREIGN KEY (account_from_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6918,14 +6944,6 @@ ALTER TABLE ONLY invoice
 
 ALTER TABLE ONLY outgoing
     ADD CONSTRAINT fk_account_id_outgoing FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_account_item_id_fin_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY fin_transaction
-    ADD CONSTRAINT fk_account_item_id_fin_transaction FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -6945,11 +6963,27 @@ ALTER TABLE ONLY service
 
 
 --
+-- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT fk_account_item_id_transfer FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_account_to_id_posting; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
 ALTER TABLE ONLY posting
     ADD CONSTRAINT fk_account_to_id_posting FOREIGN KEY (account_to_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_to_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT fk_account_to_id_transfer FOREIGN KEY (account_to_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7257,30 +7291,6 @@ ALTER TABLE ONLY tour_sale
 
 
 --
--- Name: fk_fin_transaction_id_income_transactions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY income_transaction
-    ADD CONSTRAINT fk_fin_transaction_id_income_transactions FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_fin_transaction_id_outgoing_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY outgoing_transaction
-    ADD CONSTRAINT fk_fin_transaction_id_outgoing_transaction FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_fin_transaction_id_refund_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund_transaction
-    ADD CONSTRAINT fk_fin_transaction_id_refund_transaction FOREIGN KEY (fin_transaction_id) REFERENCES fin_transaction(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: fk_foodcat_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7305,11 +7315,11 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_income_id_income_transactions; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_income_id_income_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY income_transaction
-    ADD CONSTRAINT fk_income_id_income_transactions FOREIGN KEY (income_id) REFERENCES income(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY income_transfer
+    ADD CONSTRAINT fk_income_id_income_transfer FOREIGN KEY (income_id) REFERENCES income(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7393,11 +7403,11 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_outgoing_id_outgoing_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_outgoing_id_outgoing_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY outgoing_transaction
-    ADD CONSTRAINT fk_outgoing_id_outgoing_transaction FOREIGN KEY (outgoing_id) REFERENCES outgoing(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY outgoing_transfer
+    ADD CONSTRAINT fk_outgoing_id_outgoing_transfer FOREIGN KEY (outgoing_id) REFERENCES outgoing(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7497,11 +7507,11 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_refund_id_refund_transaction; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_refund_id_refund_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
-ALTER TABLE ONLY refund_transaction
-    ADD CONSTRAINT fk_refund_id_refund_transaction FOREIGN KEY (refund_id) REFERENCES refund(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY refund_transfer
+    ADD CONSTRAINT fk_refund_id_refund_transfer FOREIGN KEY (refund_id) REFERENCES refund(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8033,6 +8043,14 @@ ALTER TABLE ONLY subaccount
 
 
 --
+-- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT fk_subaccount_from_id_transfer FOREIGN KEY (subaccount_from_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -8062,6 +8080,14 @@ ALTER TABLE ONLY suppplier_subaccount
 
 ALTER TABLE ONLY touroperator_subaccount
     ADD CONSTRAINT fk_subaccount_id_touroperator_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT fk_subaccount_to_id_transfer FOREIGN KEY (subaccount_to_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8174,6 +8200,30 @@ ALTER TABLE ONLY touroperator_licence
 
 ALTER TABLE ONLY touroperator_subaccount
     ADD CONSTRAINT fk_touroperator_id_touroperator_subaccount FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_transfer_id_income_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY income_transfer
+    ADD CONSTRAINT fk_transfer_id_income_transfer FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_transfer_id_outgoing_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing_transfer
+    ADD CONSTRAINT fk_transfer_id_outgoing_transfer FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_transfer_id_refund_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY refund_transfer
+    ADD CONSTRAINT fk_transfer_id_refund_transfer FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

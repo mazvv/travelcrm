@@ -3,6 +3,8 @@
 from sqlalchemy import (
     Column,
     Integer,
+    Date,
+    Numeric,
     Table,
     ForeignKey,
 )
@@ -14,8 +16,8 @@ from ..models import (
 )
 
 
-outgoing_transaction = Table(
-    'outgoing_transaction',
+outgoing_transfer = Table(
+    'outgoing_transfer',
     Base.metadata,
     Column(
         'outgoing_id',
@@ -24,18 +26,18 @@ outgoing_transaction = Table(
             'outgoing.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_outgoing_id_outgoing_transaction',
+            name='fk_outgoing_id_outgoing_transfer',
         ),
         primary_key=True,
     ),
     Column(
-        'fin_transaction_id',
+        'transfer_id',
         Integer,
         ForeignKey(
-            'fin_transaction.id',
+            'transfer.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_fin_transaction_id_outgoing_transaction',
+            name='fk_transfer_id_outgoing_transfer',
         ),
         primary_key=True,
     )
@@ -49,6 +51,10 @@ class Outgoing(Base):
         Integer,
         autoincrement=True,
         primary_key=True
+    )
+    date = Column(
+        Date,
+        nullable=False,
     )
     resource_id = Column(
         Integer,
@@ -70,14 +76,28 @@ class Outgoing(Base):
         ),
         nullable=False,
     )
-    touroperator_id = Column(
+    account_item_id = Column(
         Integer,
         ForeignKey(
-            'touroperator.id',
-            name="fk_trouroperator_id_outgoing",
+            'account_item.id',
+            name="fk_account_item_id_outgoing",
             ondelete='restrict',
             onupdate='cascade',
         ),
+        nullable=False,
+    )
+    subaccount_id = Column(
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            name="fk_subaccount_id_outgoing",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
+    sum = Column(
+        Numeric(16, 2),
         nullable=False,
     )
     resource = relationship(
@@ -100,8 +120,8 @@ class Outgoing(Base):
         ),
         uselist=False,
     )
-    touroperator = relationship(
-        'Touroperator',
+    account_item = relationship(
+        'AccountItem',
         backref=backref(
             'outgoings',
             uselist=True,
@@ -109,9 +129,18 @@ class Outgoing(Base):
         ),
         uselist=False,
     )
-    transactions = relationship(
-        'FinTransaction',
-        secondary=outgoing_transaction,
+    subacount = relationship(
+        'Subaccount',
+        backref=backref(
+            'outgoings',
+            uselist=True,
+            lazy="dynamic"
+        ),
+        uselist=False,
+    )
+    transfers = relationship(
+        'Transfer',
+        secondary=outgoing_transfer,
         backref=backref(
             'outgoing',
             uselist=False,
@@ -126,21 +155,7 @@ class Outgoing(Base):
             return None
         return DBSession.query(cls).get(id)
 
-    @property
-    def sum(self):
-        return sum(transaction.sum for transaction in self.transactions)
-
-    @property
-    def date(self):
-        assert self.transactions
-        return self.transactions[0].date
-
     def rollback(self):
-        for transaction in self.transactions:
-            DBSession.delete(transaction)
-        DBSession.flush(self.transactions)
-
-    @property
-    def account_item(self):
-        assert self.transactions
-        return self.transactions[0].account_item
+        for transfer in self.transfers:
+            DBSession.delete(transfer)
+        DBSession.flush(self.transfers)

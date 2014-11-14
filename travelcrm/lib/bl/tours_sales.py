@@ -42,6 +42,15 @@ class TourSaleInvoiceFactory(InvoiceFactory):
         return tour_sale.invoice
 
     @classmethod
+    def get_customer_resource(cls, resource_id):
+        tour_sale = (
+            DBSession.query(TourSale)
+            .filter(TourSale.resource_id == resource_id)
+            .first()
+        )
+        return tour_sale.customer.resource
+        
+    @classmethod
     def get_base_sum(cls, resource_id):
         tour_sale = (
             DBSession.query(TourSale)

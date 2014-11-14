@@ -26,14 +26,14 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
+                        ${h.tags.title(_(u"subaccount"), True, "subaccount_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.touroperators_combobox_field(
-                            request, item.touroperator_id if item else None,
+                        ${h.fields.subaccounts_combobox_field(
+                            request, item.subaccount_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
-                        ${h.common.error_container(name='touroperator_id')}
+                        ${h.common.error_container(name='subaccount_id')}
                     </div>
                 </div>
                 <div class="form-field">
@@ -49,7 +49,7 @@
                         ${h.common.error_container(name='account_id')}
                     </div>
                 </div>
-                <div class="form-field mb05">
+                <div class="form-field">
                     <div class="dl15">
                         ${h.tags.title(_(u"account item"), True, "account_item_id")}
                     </div>

@@ -14,8 +14,8 @@ from ..models import (
 )
 
 
-income_transaction = Table(
-    'income_transaction',
+income_transfer = Table(
+    'income_transfer',
     Base.metadata,
     Column(
         'income_id',
@@ -24,18 +24,18 @@ income_transaction = Table(
             'income.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_income_id_income_transaction',
+            name='fk_income_id_income_transfer',
         ),
         primary_key=True,
     ),
     Column(
-        'fin_transaction_id',
+        'transfer_id',
         Integer,
         ForeignKey(
-            'fin_transaction.id',
+            'transfer.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_fin_transaction_id_income_transaction',
+            name='fk_transfer_id_income_transfer',
         ),
         primary_key=True,
     )
@@ -89,9 +89,9 @@ class Income(Base):
         ),
         uselist=False,
     )
-    transactions = relationship(
-        'FinTransaction',
-        secondary=income_transaction,
+    transfers = relationship(
+        'Transfer',
+        secondary=income_transfer,
         backref=backref(
             'income',
             uselist=False,
@@ -108,14 +108,19 @@ class Income(Base):
 
     @property
     def sum(self):
-        return sum(transaction.sum for transaction in self.transactions)
+        return sum(
+            transfer.sum 
+            for transfer in self.transfers 
+            if transfer.account_from_id == None 
+            and transfer.subaccount_from_id == None
+        )
 
     @property
     def date(self):
-        assert self.transactions
-        return self.transactions[0].date
+        assert self.transfers
+        return self.transfers[0].date
 
     def rollback(self):
-        for transaction in self.transactions:
-            DBSession.delete(transaction)
-        DBSession.flush(self.transactions)
+        for transfer in self.transfers:
+            DBSession.delete(transfer)
+        DBSession.flush(self.transfers)

@@ -395,8 +395,8 @@ function getKeyByValue(obj, value) {
 }
 
 function payment_indicator(percent){
-	console.log(percent);
 	var text = $('<span>').html(percent + '%');
+	if(percent > 100) percent = 100;
 	var el = $('<div>').css('width', percent + '%').html('&nbsp;');
 	el = $('<div>').addClass('payment-indicator tc')
 		.css('width', '100%').append(text).append(el);

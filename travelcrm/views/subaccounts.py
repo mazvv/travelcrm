@@ -109,14 +109,18 @@ class Subaccounts(object):
             controls = schema.deserialize(self.request.params.mixed())
             source_cls = get_resource_class(controls.get('subaccount_type'))
             factory = source_cls.get_subaccount_factory()
+            source_resource = factory.get_source_resource(
+                controls.get('source_id')
+            )
             subaccount = Subaccount(
                 account_id=controls.get('account_id'),
                 name=controls.get('name'),
                 descr=controls.get('descr'),
                 resource=self.context.create_resource()
             )
+            
             source = factory.bind_subaccount(
-                controls.get('source_id'), subaccount
+                source_resource.id, subaccount
             )
             for id in controls.get('note_id'):
                 note = Note.get(id)
@@ -165,6 +169,9 @@ class Subaccounts(object):
         try:
             controls = schema.deserialize(self.request.params.mixed())
             factory = get_factory_by_subaccount_id(subaccount.id)
+            source_resource = factory.get_source_resource(
+                controls.get('source_id')
+            )
             subaccount.account_id = controls.get('account_id')
             subaccount.name = controls.get('name')
             subaccount.descr = controls.get('descr')
@@ -177,7 +184,7 @@ class Subaccounts(object):
                 task = Task.get(id)
                 subaccount.resource.tasks.append(task)
             factory.bind_subaccount(
-                controls.get('source_id'), subaccount
+                source_resource.id, subaccount
             )
             return {
                 'success_message': _(u'Saved'),

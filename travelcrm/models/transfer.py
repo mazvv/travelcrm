@@ -23,8 +23,8 @@ class Transfer(Base):
             'not (account_from_id is not null '
             'and subaccount_from_id is not null) and '
             'not (account_to_id is not null '
-            'and subaccount_to_id is not null',
-            name='constraint_posting_account_subaccount',
+            'and subaccount_to_id is not null)',
+            name='constraint_transfer_account_subaccount',
         ),
     )
 

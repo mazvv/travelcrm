@@ -230,14 +230,15 @@ class Touroperator(Base):
         ),
         uselist=True,
     )
-    subaccount = relationship(
+    subaccounts = relationship(
         'Subaccount',
         secondary=touroperator_subaccount,
         backref=backref(
             'touroperator',
             uselist=False,
         ),
-        uselist=False,
+        cascade="all,delete",
+        uselist=True,
     )
 
     @classmethod

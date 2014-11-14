@@ -32,9 +32,9 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
-            <th data-options="field:'account_name',sortable:true,width:150">${_(u"account")}</th>
-            <th data-options="field:'account_item',sortable:true,width:180">${_(u"account item")}</th>
-            <th data-options="field:'touroperator',sortable:true,width:150">${_(u"touroperator")}</th>
+            <th data-options="field:'title',sortable:true,width:150">${_(u"resource")}</th>
+            <th data-options="field:'resource_type',sortable:true,width:100">${_(u"resource type")}</th>
+            <th data-options="field:'account',sortable:true,width:150">${_(u"account")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
@@ -72,7 +72,7 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator name, account name or account item name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter account name, subaccount or resource name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"account"))}

@@ -4,11 +4,7 @@ from decimal import Decimal
 from abc import ABCMeta
 
 from ...models.invoice import Invoice
-from ...models.fin_transaction import FinTransaction
-from ...lib.bl.invoices import (
-    get_bound_resource_by_invoice_id,
-    query_invoice_payments_accounts_items_grouped
-)
+from ...lib.bl.invoices import get_bound_resource_by_invoice_id
 from ...lib.bl.currencies_rates import query_convert_rates
 
 
@@ -21,6 +17,10 @@ class InvoiceFactory(object):
 
     @classmethod
     def get_invoice(cls, resource_id):
+        raise NotImplemented()
+
+    @classmethod
+    def get_customer_resource(cls, resource_id):
         raise NotImplemented()
 
     @classmethod
@@ -86,5 +86,5 @@ class SubaccountFactory(object):
         raise NotImplemented()
 
     @classmethod
-    def bind_subaccount(cls):
+    def bind_subaccount(cls, source_id, subaccount):
         raise NotImplemented()

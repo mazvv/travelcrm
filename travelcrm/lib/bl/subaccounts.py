@@ -2,6 +2,7 @@
 
 from ...interfaces import ISubaccountFactory
 
+from ...models import DBSession
 from ...models.resource import Resource
 from ...models.subaccount import Subaccount
 
@@ -35,3 +36,35 @@ def get_factory_by_subaccount_id(subaccount_id):
     source_cls = get_resource_class(resource.resource_type.name)
     factory = source_cls.get_subaccount_factory()
     return factory
+
+
+def get_subaccount_by_source_id(id, resource_type_id, account_id):
+    subq = query_resource_data().subquery()
+    return (
+        DBSession.query(Subaccount)
+        .select_from(subq)
+        .join(Resource, Resource.id == subq.c.resource_id)
+        .join(Subaccount, Subaccount.id == subq.c.subaccount_id)
+        .filter(
+            subq.c.id == id,
+            Subaccount.account_id == account_id,
+            Resource.resource_type_id == resource_type_id
+        )
+        .first()
+    )
+
+
+def get_subaccount_by_source_resource_id(resource_id, account_id):
+    subq = query_resource_data().subquery()
+    return (
+        DBSession.query(Subaccount)
+        .select_from(subq)
+        .join(Resource, Resource.id == subq.c.resource_id)
+        .join(Subaccount, Subaccount.id == subq.c.subaccount_id)
+        .filter(
+            subq.c.resource_id == resource_id,
+            Subaccount.account_id == account_id,
+        )
+        .first()
+    )
+    

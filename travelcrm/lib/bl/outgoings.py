@@ -3,7 +3,8 @@
 from datetime import datetime, date
 from decimal import Decimal
 
-from ...models.fin_transaction import FinTransaction
+from ...models.transfer import Transfer
+from ...models.outgoing import Outgoing
 
 
 def make_payment(d, account_item_id, sum):
@@ -12,10 +13,9 @@ def make_payment(d, account_item_id, sum):
         u'Datetime or Date instance expected'
     assert isinstance(sum, Decimal), u'Decimal expected'
     return [
-        FinTransaction(
+        Transfer(
             account_item_id=account_item_id,
             date=d,
             sum=sum,
-            factor=-1,
         ),
     ]

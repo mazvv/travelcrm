@@ -21,7 +21,7 @@ class IInvoiceFactory(Interface):
 
 
 class IIncomePaymentFactory(Interface):
-    """ Resource that can produce Income Transactions """
+    """ Resource that can produce Income Transfers """
 
     def get_income_payment_factory():
         """ Method that returns class instance for income interfaces
@@ -30,7 +30,7 @@ class IIncomePaymentFactory(Interface):
 
 
 class IOutgoingPaymentFactory(Interface):
-    """ Resource that can produce Outgoing Transactions """
+    """ Resource that can produce Outgoing Transfers """
 
     def get_outgoing_payment_factory():
         """ Method that returns class instance for outgoing interfaces

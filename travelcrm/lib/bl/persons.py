@@ -10,6 +10,7 @@ from ...models.passport import Passport
 from ...models.subaccount import Subaccount
 from ...lib.bl import SubaccountFactory
 
+
 def query_person_contacts():
     return (
         DBSession.query(
@@ -67,18 +68,28 @@ class PersonSubaccountFactory(SubaccountFactory):
         query = (
             DBSession.query(
                 Resource.id.label('resource_id'),
+                Person.id.label('id'),
                 Person.name.label('title'),
                 Subaccount.name.label('name'),
                 Subaccount.id.label('subaccount_id'),
             )
             .join(Resource, Person.resource)
-            .join(Subaccount, Person.subaccount)
+            .join(Subaccount, Person.subaccounts)
         )
         return query
 
     @classmethod
-    def bind_subaccount(cls, person_id, subaccount):
+    def get_source_resource(cls, id):
+        person = Person.get(id)
+        return person.resource
+
+    @classmethod
+    def bind_subaccount(cls, resource_id, subaccount):
         assert isinstance(subaccount, Subaccount)
-        person = Person.get(person_id)
-        person.subaccount = subaccount
+        person = (
+            DBSession.query(Person)
+            .filter(Person.resource_id == resource_id)
+            .first()
+        )
+        person.subaccounts.append(subaccount)
         return person
