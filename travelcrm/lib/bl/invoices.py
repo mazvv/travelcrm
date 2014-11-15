@@ -92,65 +92,7 @@ def query_invoice_payments_accounts_items_grouped(invoice_id):
     return (
         DBSession.query(
             subq.c.account_item_id,
-            func.sum(subq.c.sum)
+            func.sum(subq.c.sum).label('sum')
         )
         .group_by(subq.c.account_item_id)
-    )
-
-
-def query_invoice_payments_transfers(invoice_id):
-    account_from = aliased(Account)
-    account_to = aliased(Account)
-    subaccount_from = aliased(Subaccount)
-    subaccount_to = aliased(Subaccount)
-    return (
-        DBSession.query(
-            Transfer.id,
-            Transfer.sum,
-            Transfer.date,
-            AccountItem.name.label('account_item'),
-            Currency.iso_code,
-            func.coalesce(
-                account_from.name,
-                subaccount_from.name
-            ).label('from'),
-            func.coalesce(
-                account_to.name,
-                subaccount_to.name
-            ).label('to')
-        )
-        .join(Income, Transfer.income)
-        .join(AccountItem, Transfer.account_item)
-        .join(Invoice, Income.invoice)
-        .join(Account, Invoice.account)
-        .join(Currency, Account.currency)
-        .outerjoin(account_from, Transfer.account_from)
-        .outerjoin(account_to, Transfer.account_to)
-        .outerjoin(subaccount_from, Transfer.subaccount_from)
-        .outerjoin(subaccount_to, Transfer.subaccount_to)
-        .filter(Invoice.id == invoice_id)
-        .order_by(Transfer.date, Transfer.id)
-    )
-
-
-def get_invoice_payments_transfers_balance(invoice_id):
-    invoice = Invoice.get(invoice_id)
-    sum_expr = func.coalesce(func.sum(Transfer.sum), 0)
-    invoice_transfers = (
-        query_invoice_payments_transfers(invoice.id)
-        .with_entities(Transfer.id)
-    )
-    from_transfers_query = (
-        query_account_from_transfers(invoice.account_id)
-        .with_entities(sum_expr)
-        .filter(Transfer.id.in_(invoice_transfers))
-    )
-    to_transfers_query = (
-        query_account_from_transfers(invoice.account_id)
-        .with_entities(sum_expr)
-        .filter(Transfer.id.in_(invoice_transfers))
-    )
-    return money_cast(
-        to_transfers_query.scalar() 
-        - from_transfers_query.scalar()
     )

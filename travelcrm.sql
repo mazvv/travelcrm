@@ -853,6 +853,41 @@ ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
+-- Name: crosspayment; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE crosspayment (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    transfer_id integer NOT NULL,
+    descr character varying(255)
+);
+
+
+ALTER TABLE public.crosspayment OWNER TO mazvv;
+
+--
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE crosspayment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.crosspayment_id_seq OWNER TO mazvv;
+
+--
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
+
+
+--
 -- Name: currency_rate; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1286,7 +1321,10 @@ CREATE TABLE outgoing (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     account_id integer NOT NULL,
-    touroperator_id integer NOT NULL
+    account_item_id integer NOT NULL,
+    date date NOT NULL,
+    subaccount_id integer NOT NULL,
+    sum numeric(16,2) NOT NULL
 );
 
 
@@ -1506,91 +1544,6 @@ ALTER TABLE public.positions_permisions_id_seq OWNER TO mazvv;
 
 ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
-
---
--- Name: posting; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE posting (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    account_from_id integer,
-    account_to_id integer,
-    account_item_id integer NOT NULL,
-    sum numeric(16,2) NOT NULL,
-    date date NOT NULL,
-    CONSTRAINT constraint_at_list_single_account_not_null CHECK (((account_from_id IS NOT NULL) OR (account_to_id IS NOT NULL)))
-);
-
-
-ALTER TABLE public.posting OWNER TO mazvv;
-
---
--- Name: posting_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE posting_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.posting_id_seq OWNER TO mazvv;
-
---
--- Name: posting_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE posting_id_seq OWNED BY posting.id;
-
-
---
--- Name: refund; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE refund (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    invoice_id integer NOT NULL
-);
-
-
-ALTER TABLE public.refund OWNER TO mazvv;
-
---
--- Name: refund_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
---
-
-CREATE SEQUENCE refund_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.refund_id_seq OWNER TO mazvv;
-
---
--- Name: refund_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
---
-
-ALTER SEQUENCE refund_id_seq OWNED BY refund.id;
-
-
---
--- Name: refund_transfer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE refund_transfer (
-    refund_id integer NOT NULL,
-    transfer_id integer NOT NULL
-);
-
-
-ALTER TABLE public.refund_transfer OWNER TO mazvv;
 
 --
 -- Name: roomcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -2339,6 +2292,13 @@ ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('_currencies_rid_seq'::regclass);
 
 
@@ -2452,20 +2412,6 @@ ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::reg
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY posting ALTER COLUMN id SET DEFAULT nextval('posting_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund ALTER COLUMN id SET DEFAULT nextval('refund_id_seq'::regclass);
 
 
 --
@@ -2612,21 +2558,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6192, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6199, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1882, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1887, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 119, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 120, true);
 
 
 --
@@ -2766,7 +2712,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-cac2848ba45
+3a70007cbc68
 \.
 
 
@@ -3023,6 +2969,22 @@ SELECT pg_catalog.setval('country_id_seq', 19, true);
 
 
 --
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY crosspayment (id, resource_id, transfer_id, descr) FROM stdin;
+2	1887	51	Init Main cash balance
+\.
+
+
+--
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('crosspayment_id_seq', 2, true);
+
+
+--
 -- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -3253,12 +3215,12 @@ SELECT pg_catalog.setval('income_id_seq', 41, true);
 --
 
 COPY income_transfer (income_id, transfer_id) FROM stdin;
-40	28
-40	27
 41	31
 41	32
 37	41
 37	42
+40	43
+40	44
 \.
 
 
@@ -3439,6 +3401,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 139	8	147	Services	/services_sales	\N	2	1369
 140	8	112	Suppliers	/suppliers	\N	11	1550
 141	8	142	Accounts Items	/accounts_items	\N	1	1425
+151	4	53	Cross Payments	/crosspayments	\N	11	1885
 \.
 
 
@@ -3497,9 +3460,8 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 -- Data for Name: outgoing; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY outgoing (id, resource_id, account_id, touroperator_id) FROM stdin;
-9	1773	4	62
-10	1774	3	2
+COPY outgoing (id, resource_id, account_id, account_item_id, date, subaccount_id, sum) FROM stdin;
+11	1883	3	4	2014-11-14	8	100.20
 \.
 
 
@@ -3507,7 +3469,7 @@ COPY outgoing (id, resource_id, account_id, touroperator_id) FROM stdin;
 -- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('outgoing_id_seq', 10, true);
+SELECT pg_catalog.setval('outgoing_id_seq', 11, true);
 
 
 --
@@ -3515,6 +3477,9 @@ SELECT pg_catalog.setval('outgoing_id_seq', 10, true);
 --
 
 COPY outgoing_transfer (outgoing_id, transfer_id) FROM stdin;
+11	47
+11	49
+11	48
 \.
 
 
@@ -3646,11 +3611,11 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 123	12	8	{view,add,edit,delete,settings}	\N	all
 125	109	8	{view,add,edit,delete,settings,calculation,invoice,contract}	\N	all
 126	92	8	{view,add,edit,delete,settings,invoice,calculation,contract}	\N	all
-127	116	4	{view,add,edit,delete}	\N	all
 128	117	4	{view,add,edit,delete}	\N	all
 129	118	4	{view,add,edit,delete}	\N	all
 130	119	4	{autoload,view,edit,delete}	\N	all
 75	106	4	{view,add,edit,delete,settings}	\N	all
+131	120	4	{view,add,edit,delete}	\N	all
 \.
 
 
@@ -3800,53 +3765,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 150, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 151, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 130, true);
-
-
---
--- Data for Name: posting; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY posting (id, resource_id, account_from_id, account_to_id, account_item_id, sum, date) FROM stdin;
-16	1796	\N	3	7	282711.00	2014-04-01
-\.
-
-
---
--- Name: posting_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('posting_id_seq', 16, true);
-
-
---
--- Data for Name: refund; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY refund (id, resource_id, invoice_id) FROM stdin;
-\.
-
-
---
--- Name: refund_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
---
-
-SELECT pg_catalog.setval('refund_id_seq', 3, true);
-
-
---
--- Data for Name: refund_transfer; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY refund_transfer (refund_id, transfer_id) FROM stdin;
-\.
+SELECT pg_catalog.setval('positions_permisions_id_seq', 131, true);
 
 
 --
@@ -4495,7 +4421,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1778	12	1	f
 1779	65	32	f
 1780	105	32	f
-1796	116	32	f
 1797	12	32	f
 1798	65	32	f
 1799	12	32	f
@@ -4557,6 +4482,10 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1880	106	32	f
 1881	106	32	f
 1882	106	32	f
+1883	111	32	f
+1884	12	32	f
+1885	65	32	f
+1887	120	32	f
 \.
 
 
@@ -5318,7 +5247,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5978	1778	2	\N	2014-10-04 21:45:17.702702
 5979	1779	2	\N	2014-10-04 22:22:50.715815
 5980	1780	2	\N	2014-10-05 12:49:28.270538
-5981	1796	2	\N	2014-10-05 13:55:57.214599
 5982	1797	2	\N	2014-10-05 21:08:02.025119
 5983	1798	2	\N	2014-10-05 22:07:40.176836
 5984	1799	2	\N	2014-10-09 20:49:57.476724
@@ -5508,6 +5436,12 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6190	1876	2	\N	2014-11-13 18:36:53.848561
 6191	1876	2	\N	2014-11-13 18:37:04.828162
 6192	1876	2	\N	2014-11-13 18:44:14.058824
+6193	1880	2	\N	2014-11-14 13:23:46.652293
+6194	1883	2	\N	2014-11-14 14:39:48.24157
+6195	1883	2	\N	2014-11-14 14:44:29.869357
+6196	1884	2	\N	2014-11-15 12:46:51.68956
+6197	1885	2	\N	2014-11-15 12:55:58.618287
+6199	1887	2	\N	2014-11-15 18:54:51.40188
 \.
 
 
@@ -5554,13 +5488,13 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null	\N
 112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	\N
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	\N
-116	1778	postings	Accounts Postings	Postings	travelcrm.resources.postings	Postings beetwen accounts	null	f
 117	1797	subaccounts	Subaccounts	Subaccounts	travelcrm.resources.subaccounts	Subaccounts are accounts from other objects such as clients, touroperators and so on	null	f
 107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible	null	f
 118	1799	notes	Notes	Notes	travelcrm.resources.notes	Resources Notes	null	f
 92	1221	tours_sales	Tours Sale	ToursSales	travelcrm.resources.tours_sales	Tours sales documents	{"service_id": 5}	t
 119	1849	calculations	Caluclations	Calculations	travelcrm.resources.calculations	Calculations of Sale Documents	null	f
 106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	{"account_item_id": 8}	t
+120	1884	crosspayments	Cross Payments	Crosspayments	travelcrm.resources.crosspayments	Cross payments between accounts and subaccounts. This document is for balance corrections to.	null	f
 \.
 
 
@@ -6064,12 +5998,17 @@ COPY touroperator_subaccount (touroperator_id, subaccount_id) FROM stdin;
 --
 
 COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccount_to_id, account_item_id, sum, date) FROM stdin;
-27	\N	\N	\N	8	8	1974.00	2014-11-12
-28	\N	8	3	\N	2	1974.00	2014-11-12
 31	\N	\N	\N	8	8	80.00	2014-11-12
 32	\N	8	3	\N	2	80.00	2014-11-12
 41	\N	\N	\N	6	8	560.00	2014-11-09
 42	\N	6	3	\N	2	540.00	2014-11-09
+43	\N	\N	\N	8	8	1975.00	2014-11-12
+44	\N	8	3	\N	2	1894.80	2014-11-12
+47	\N	8	\N	\N	4	80.20	2014-11-14
+48	3	\N	\N	8	4	20.00	2014-11-14
+49	\N	8	\N	\N	4	20.00	2014-11-14
+50	\N	\N	3	\N	7	200000.00	2014-06-01
+51	\N	\N	3	\N	7	20000.00	2014-07-01
 \.
 
 
@@ -6077,7 +6016,7 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 42, true);
+SELECT pg_catalog.setval('transfer_id_seq', 51, true);
 
 
 --
@@ -6208,6 +6147,14 @@ ALTER TABLE ONLY contact
 
 ALTER TABLE ONLY country
     ADD CONSTRAINT country_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY crosspayment
+    ADD CONSTRAINT crosspayment_pkey PRIMARY KEY (id);
 
 
 --
@@ -6432,30 +6379,6 @@ ALTER TABLE ONLY person_subaccount
 
 ALTER TABLE ONLY "position"
     ADD CONSTRAINT position_pk PRIMARY KEY (id);
-
-
---
--- Name: posting_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY posting
-    ADD CONSTRAINT posting_pkey PRIMARY KEY (id);
-
-
---
--- Name: refund_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY refund
-    ADD CONSTRAINT refund_pkey PRIMARY KEY (id);
-
-
---
--- Name: refund_transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY refund_transfer
-    ADD CONSTRAINT refund_transfer_pkey PRIMARY KEY (refund_id, transfer_id);
 
 
 --
@@ -6915,14 +6838,6 @@ ALTER TABLE ONLY tour_sale_point
 
 
 --
--- Name: fk_account_from_id_posting; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY posting
-    ADD CONSTRAINT fk_account_from_id_posting FOREIGN KEY (account_from_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: fk_account_from_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6947,14 +6862,6 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_item_id_posting; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY posting
-    ADD CONSTRAINT fk_account_item_id_posting FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: fk_account_item_id_service; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -6968,14 +6875,6 @@ ALTER TABLE ONLY service
 
 ALTER TABLE ONLY transfer
     ADD CONSTRAINT fk_account_item_id_transfer FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_account_to_id_posting; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY posting
-    ADD CONSTRAINT fk_account_to_id_posting FOREIGN KEY (account_to_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7331,14 +7230,6 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_invoice_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund
-    ADD CONSTRAINT fk_invoice_id_refund FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: fk_invoice_id_service_sale_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7507,14 +7398,6 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_refund_id_refund_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund_transfer
-    ADD CONSTRAINT fk_refund_id_refund_transfer FOREIGN KEY (refund_id) REFERENCES refund(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
 -- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7632,6 +7515,14 @@ ALTER TABLE ONLY contact
 
 ALTER TABLE ONLY country
     ADD CONSTRAINT fk_resource_id_country FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY crosspayment
+    ADD CONSTRAINT fk_resource_id_crosspayment FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7760,22 +7651,6 @@ ALTER TABLE ONLY person
 
 ALTER TABLE ONLY "position"
     ADD CONSTRAINT fk_resource_id_position FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_posting; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY posting
-    ADD CONSTRAINT fk_resource_id_posting FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_refund; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund
-    ADD CONSTRAINT fk_resource_id_refund FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8203,6 +8078,14 @@ ALTER TABLE ONLY touroperator_subaccount
 
 
 --
+-- Name: fk_transfer_id_crosspayment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY crosspayment
+    ADD CONSTRAINT fk_transfer_id_crosspayment FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_transfer_id_income_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -8216,14 +8099,6 @@ ALTER TABLE ONLY income_transfer
 
 ALTER TABLE ONLY outgoing_transfer
     ADD CONSTRAINT fk_transfer_id_outgoing_transfer FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_transfer_id_refund_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY refund_transfer
-    ADD CONSTRAINT fk_transfer_id_refund_transfer FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

@@ -120,6 +120,8 @@ class Outgoings(object):
             )
             outgoing.transfers = make_payment(
                 controls.get('date'),
+                controls.get('account_id'),
+                controls.get('subaccount_id'),
                 controls.get('account_item_id'),
                 controls.get('sum'),
             )
@@ -177,6 +179,8 @@ class Outgoings(object):
             outgoing.sum = controls.get('sum')
             outgoing.transfers = make_payment(
                 controls.get('date'),
+                controls.get('account_id'),
+                controls.get('subaccount_id'),
                 controls.get('account_item_id'),
                 controls.get('sum'),
             )

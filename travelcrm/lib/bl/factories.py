@@ -3,8 +3,6 @@
 from inspect import isfunction
 
 from ...interfaces import (
-    IOutgoingPaymentFactory,
-    IIncomePaymentFactory,
     IInvoiceFactory,
     ISubaccountFactory,
     ICalculationFactory,
@@ -22,24 +20,6 @@ def get_invoices_factories_resources_types():
         rt_cls = get_resource_class(rt.name)
         assert isfunction(rt_cls.get_invoice_factory), u"Must be static method"
         factories.append(rt_cls.get_invoice_factory())
-    return factories
-
-
-def get_incomes_factories_resources_types():
-    factories = []
-    for rt in get_resources_types_by_interface(IIncomePaymentFactory):
-        rt_cls = get_resource_class(rt.name)
-        assert isfunction(rt_cls.get_income_factory), u"Must be static method"
-        factories.append(rt_cls.get_income_factory())
-    return factories
-
-
-def get_outgoings_factories_resources_types():
-    factories = []
-    for rt in get_resources_types_by_interface(IOutgoingPaymentFactory):
-        rt_cls = get_resource_class(rt.name)
-        assert isfunction(rt_cls.get_outgoing_factory), u"Must be static method"
-        factories.append(rt_cls.get_outgoing_factory())
     return factories
 
 

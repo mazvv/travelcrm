@@ -112,7 +112,7 @@ class Navigations(object):
     def _add(self):
         schema = NavigationSchema().bind(request=self.request)
         try:
-            controls = schema.deserialize(self.request.params.mixed())
+            controls = schema.deserialize(self.request.params)
             navigation = Navigation(
                 name=controls.get('name'),
                 position_id=controls.get('position_id'),
@@ -170,7 +170,7 @@ class Navigations(object):
             self.request.params.get('id')
         )
         try:
-            controls = schema.deserialize(self.request.params.mixed())
+            controls = schema.deserialize(self.request.params)
             navigation.name = controls.get('name')
             navigation.position_id = (
                 controls.get('position_id')

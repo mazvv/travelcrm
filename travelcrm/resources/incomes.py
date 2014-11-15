@@ -4,7 +4,6 @@ from zope.interface import implementer
 
 from ..interfaces import (
     IResourceType,
-    IIncomePaymentFactory,
 )
 from ..resources import (
     Root,
@@ -12,12 +11,10 @@ from ..resources import (
 from ..resources import (
     ResourceTypeBase
 )
-from ..lib.bl.incomes import IncomePaymentsFactory
 from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
-@implementer(IIncomePaymentFactory)
 class Incomes(ResourceTypeBase):
 
     __name__ = 'incomes'
@@ -35,7 +32,3 @@ class Incomes(ResourceTypeBase):
             ('delete', _(u'delete')),
             ('settings', _(u'settings')),
         ]
-
-    @staticmethod
-    def get_income_payment_factory():
-        return IncomePaymentsFactory

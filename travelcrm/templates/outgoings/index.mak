@@ -32,7 +32,7 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
-            <th data-options="field:'title',sortable:true,width:150">${_(u"resource")}</th>
+            <th data-options="field:'resource',sortable:true,width:150">${_(u"resource")}</th>
             <th data-options="field:'resource_type',sortable:true,width:100">${_(u"resource type")}</th>
             <th data-options="field:'account',sortable:true,width:150">${_(u"account")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>

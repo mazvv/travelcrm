@@ -32,8 +32,8 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
-            <th data-options="field:'account_from',sortable:true,width:150">${_(u"account from")}</th>
-            <th data-options="field:'account_to',sortable:true,width:150">${_(u"account to")}</th>
+            <th data-options="field:'from',sortable:true,width:150">${_(u"from")}</th>
+            <th data-options="field:'to',sortable:true,width:150">${_(u"to")}</th>
             <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
             <th data-options="field:'account_item',sortable:true,width:150">${_(u"account item")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
@@ -72,9 +72,55 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter account item name or account name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter account or subaccount name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
+                        ${h.tags.title(_(u"account from"))}
+                    </div>
+                    <div>
+                        ${h.fields.accounts_combobox_field(request, None, 'account_from_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"subaccount from"))}
+                    </div>
+                    <div>
+                        ${h.fields.subaccounts_combobox_field(request, None, 'subaccount_from_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"account to"))}
+                    </div>
+                    <div>
+                        ${h.fields.accounts_combobox_field(request, None, 'account_to_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"subaccount to"))}
+                    </div>
+                    <div>
+                        ${h.fields.subaccounts_combobox_field(request, None, 'subaccount_to_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"account item"))}
+                    </div>
+                    <div>
+                        ${h.fields.accounts_items_combobox_field(request, None, 'account_item_id', show_toolbar=False)}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"date payment range"))}
+                    </div>
+                    <div>
+                        ${h.fields.date_field(None, "date_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "date_to")}
+                    </div>
+                    <div class="mt05">
+                        ${h.tags.title(_(u"sum range"))}
+                    </div>
+                    <div>
+                        ${h.tags.text('sum_from', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
+                        <span class="p1">-</span>
+                        ${h.tags.text('sum_to', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
+                    </div>
+                    <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>

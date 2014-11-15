@@ -47,21 +47,6 @@
                     </thead>
                 </table>
             </div>             
-            <div title="${_(u'Transfers')}">
-                <table class="easyui-datagrid"
-                    data-options="
-                        url:'${request.resource_url(_context, 'transfers_info', query={'id': id})}',border:false,
-                        fit:true,singleSelect:true, rownumbers:true,showFooter:true
-                    " width="100%">
-                    <thead>
-                        <th data-options="field:'date',width:70">${_(u"date")}</th>
-                        <th data-options="field:'from',width:180">${_(u"from")}</th>
-                        <th data-options="field:'to',width:180">${_(u"to")}</th>
-                        <th data-options="field:'account_item',width:150">${_(u"account item")}</th>
-                        <th data-options="field:'sum',width:80,formatter:function(value, row, index){return '${currency} ' + value;}">${_(u"sum")}</th>
-                    </thead>
-                </table>
-            </div>             
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>

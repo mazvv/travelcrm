@@ -63,7 +63,7 @@ from service_sale import ServiceSale
 from commission import Commission
 from supplier import Supplier
 from outgoing import Outgoing
-from posting import Posting
+from crosspayment import Crosspayment
 from note import Note
 from calculation import Calculation
 from transfer import Transfer

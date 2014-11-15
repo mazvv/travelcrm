@@ -29,8 +29,6 @@ from ..lib.utils.common_utils import get_locale_name
 from ..lib.bl.invoices import (
     query_resource_data,
     query_invoice_payments,
-    query_invoice_payments_transfers,
-    get_invoice_payments_transfers_balance,
 )
 from ..lib.bl.invoices import get_factory_by_invoice_id
 
@@ -404,27 +402,5 @@ class Invoices(object):
             'footer': [{
                 'date': _(u'total'),
                 'sum': format_decimal(total_sum, locale=get_locale_name())
-            }]
-        }
-
-    @view_config(
-        name='transfers_info',
-        context='..resources.invoices.Invoices',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _transfers_info(self):
-        query = query_invoice_payments_transfers(self.request.params.get('id'))
-        transfers_balance = get_invoice_payments_transfers_balance(
-            self.request.params.get('id')
-        )
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'date': _(u'balance'),
-                'sum': format_decimal(
-                    transfers_balance, locale=get_locale_name()
-                )
             }]
         }

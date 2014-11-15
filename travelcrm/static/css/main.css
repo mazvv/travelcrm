@@ -583,6 +583,13 @@ span.field-actions span.field-action:first-child {
 	background: transparent url(./img/adv-search-bg.png) repeat;
 }
 
+/** delimiter-block **/
+.delimiter-block{
+	margin: 5px 0px;
+	background: transparent url(./img/adv-search-bg.png) repeat;
+	height: 5px;
+}
+
 /** labels **/
 .task-status, .task-priority{
 	padding: 1px 2px;

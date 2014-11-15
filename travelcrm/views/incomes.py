@@ -12,6 +12,7 @@ from ..models.task import Task
 from ..lib.qb.incomes import IncomesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_type_by_resource
+from ..lib.bl.incomes import make_payment
 
 from ..forms.incomes import IncomeSchema, SettingsSchema
 
@@ -107,9 +108,7 @@ class Incomes(object):
                 invoice_id=controls.get('invoice_id'),
                 resource=self.context.create_resource()
             )
-            factory = self.context.get_income_payment_factory()
-            
-            income.transfers = factory.make_payment(
+            income.transfers = make_payment(
                 self.context,
                 controls.get('invoice_id'),
                 controls.get('date'),
@@ -158,8 +157,7 @@ class Incomes(object):
             controls = schema.deserialize(self.request.params.mixed())
             income.rollback()
             income.invoice_id = controls.get('invoice_id')
-            factory = self.context.get_income_payment_factory()
-            income.transfers = factory.make_payment(
+            income.transfers = make_payment(
                 self.context,
                 controls.get('invoice_id'),
                 controls.get('date'),

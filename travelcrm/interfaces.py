@@ -20,24 +20,6 @@ class IInvoiceFactory(Interface):
         """
 
 
-class IIncomePaymentFactory(Interface):
-    """ Resource that can produce Income Transfers """
-
-    def get_income_payment_factory():
-        """ Method that returns class instance for income interfaces
-        This method must be static
-        """
-
-
-class IOutgoingPaymentFactory(Interface):
-    """ Resource that can produce Outgoing Transfers """
-
-    def get_outgoing_payment_factory():
-        """ Method that returns class instance for outgoing interfaces
-        This method must be static
-        """
-
-
 class ISubaccountFactory(Interface):
     """ Resource that can produce Subaccounts """
 

@@ -6,6 +6,8 @@ import colander
 
 from . import ResourceSchema, Date
 
+from ..models.account import Account
+from ..models.subaccount import Subaccount
 from ..lib.bl.transfers import get_account_balance
 from ..lib.utils.common_utils import parse_date, translate as _
 
@@ -32,6 +34,23 @@ def sum_validator(node, kw):
     return colander.All(validator,)
 
 
+@colander.deferred
+def account_id_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        subaccount = Subaccount.get(
+            request.params.get('subaccount_id')
+        )
+        account = Account.get(value)
+        if account.currency_id != subaccount.account.currency_id:
+            raise colander.Invalid(
+                node,
+                _(u'Currency of Account and Subaccount must be equal'),
+            )
+    return colander.All(validator,)
+
+    
 class OutgoingSchema(ResourceSchema):
     date = colander.SchemaNode(
         Date(),
@@ -42,6 +61,7 @@ class OutgoingSchema(ResourceSchema):
     )
     account_id = colander.SchemaNode(
         colander.Integer(),
+        validator=account_id_validator,
     )
     account_item_id = colander.SchemaNode(
         colander.Integer(),

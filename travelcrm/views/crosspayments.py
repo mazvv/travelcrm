@@ -6,28 +6,29 @@ import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
-from ..models.posting import Posting
+from ..models.crosspayment import Crosspayment
+from ..models.transfer import Transfer
 from ..models.note import Note
 from ..models.task import Task
-from ..lib.qb.postings import PostingsQueryBuilder
+from ..lib.qb.crosspayments import CrosspaymentsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.postings import PostingSchema
+from ..forms.crosspayments import CrosspaymentSchema
 
 
 log = logging.getLogger(__name__)
 
 
-class Postings(object):
+class Crosspayments(object):
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     @view_config(
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='GET',
-        renderer='travelcrm:templates/postings/index.mak',
+        renderer='travelcrm:templates/crosspayments/index.mak',
         permission='view'
     )
     def index(self):
@@ -35,14 +36,14 @@ class Postings(object):
 
     @view_config(
         name='list',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
     def list(self):
-        qb = PostingsQueryBuilder(self.context)
+        qb = CrosspaymentsQueryBuilder(self.context)
         qb.search_simple(
             self.request.params.get('q'),
         )
@@ -67,59 +68,65 @@ class Postings(object):
 
     @view_config(
         name='view',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='GET',
-        renderer='travelcrm:templates/postings/form.mak',
+        renderer='travelcrm:templates/crosspayments/form.mak',
         permission='view'
     )
     def view(self):
         result = self.edit()
         result.update({
-            'title': _(u"View Posting"),
+            'title': _(u"View Crosspayment"),
             'readonly': True,
         })
         return result
 
     @view_config(
         name='add',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='GET',
-        renderer='travelcrm:templates/postings/form.mak',
+        renderer='travelcrm:templates/crosspayments/form.mak',
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Posting')}
+        return {'title': _(u'Add Crosspayment')}
 
     @view_config(
         name='add',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='POST',
         renderer='json',
         permission='add'
     )
     def _add(self):
-        schema = PostingSchema().bind(request=self.request)
+        schema = CrosspaymentSchema().bind(request=self.request)
         try:
             controls = schema.deserialize(self.request.params.mixed())
-            posting = Posting(
+            crosspayment = Crosspayment(
+                descr=controls.get('descr'),
+                resource=self.context.create_resource()
+            )
+            transfer = Transfer(
                 date=controls.get('date'),
                 account_from_id=controls.get('account_from_id'),
                 account_to_id=controls.get('account_to_id'),
+                subaccount_from_id=controls.get('subaccount_from_id'),
+                subaccount_to_id=controls.get('subaccount_to_id'),
                 account_item_id=controls.get('account_item_id'),
                 sum=controls.get('sum'),
-                resource=self.context.create_resource()
             )
+            crosspayment.transfer = transfer
             for id in controls.get('note_id'):
                 note = Note.get(id)
-                posting.resource.notes.append(note)
+                crosspayment.resource.notes.append(note)
             for id in controls.get('task_id'):
                 task = Task.get(id)
-                posting.resource.tasks.append(task)
-            DBSession.add(posting)
+                crosspayment.resource.tasks.append(task)
+            DBSession.add(crosspayment)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': posting.id
+                'response': crosspayment.id
             }
         except colander.Invalid, e:
             return {
@@ -129,43 +136,48 @@ class Postings(object):
 
     @view_config(
         name='edit',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='GET',
-        renderer='travelcrm:templates/postings/form.mak',
+        renderer='travelcrm:templates/crosspayments/form.mak',
         permission='edit'
     )
     def edit(self):
-        posting = Posting.get(self.request.params.get('id'))
-        return {'item': posting, 'title': _(u'Edit Posting')}
+        crosspayment = Crosspayment.get(self.request.params.get('id'))
+        return {'item': crosspayment, 'title': _(u'Edit Crosspayment')}
 
     @view_config(
         name='edit',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='POST',
         renderer='json',
         permission='edit'
     )
     def _edit(self):
-        schema = PostingSchema().bind(request=self.request)
-        posting = Posting.get(self.request.params.get('id'))
+        schema = CrosspaymentSchema().bind(request=self.request)
+        crosspayment = Crosspayment.get(self.request.params.get('id'))
         try:
             controls = schema.deserialize(self.request.params.mixed())
-            posting.date = controls.get('date')
-            posting.account_from_id = controls.get('account_from_id')
-            posting.account_to_id = controls.get('account_to_id')
-            posting.account_item_id = controls.get('account_item_id')
-            posting.sum = controls.get('sum')
-            posting.resource.notes = []
-            posting.resource.tasks = []
+            crosspayment.descr = controls.get('descr')
+            transfer = crosspayment.transfer
+            transfer.date = controls.get('date')
+            transfer.account_from_id = controls.get('account_from_id')
+            transfer.account_to_id = controls.get('account_to_id')
+            transfer.account_item_id = controls.get('account_item_id')
+            transfer.subaccount_to_id = controls.get('subaccount_to_id')
+            transfer.subaccount_item_id = controls.get('subaccount_item_id')
+            transfer.sum = controls.get('sum')
+            crosspayment.transfer = transfer
+            crosspayment.resource.notes = []
+            crosspayment.resource.tasks = []
             for id in controls.get('note_id'):
                 note = Note.get(id)
-                posting.resource.notes.append(note)
+                crosspayment.resource.notes.append(note)
             for id in controls.get('task_id'):
                 task = Task.get(id)
-                posting.resource.tasks.append(task)
+                crosspayment.resource.tasks.append(task)
             return {
                 'success_message': _(u'Saved'),
-                'response': posting.id
+                'response': crosspayment.id
             }
         except colander.Invalid, e:
             return {
@@ -175,20 +187,20 @@ class Postings(object):
 
     @view_config(
         name='delete',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='GET',
-        renderer='travelcrm:templates/postings/delete.mak',
+        renderer='travelcrm:templates/crosspayments/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'title': _(u'Delete Postings'),
+            'title': _(u'Delete Crosspayments'),
             'rid': self.request.params.get('rid')
         }
 
     @view_config(
         name='delete',
-        context='..resources.postings.Postings',
+        context='..resources.crosspayments.Crosspayments',
         request_method='POST',
         renderer='json',
         permission='delete'
@@ -196,7 +208,7 @@ class Postings(object):
     def _delete(self):
         errors = 0
         for id in self.request.params.getall('id'):
-            item = Posting.get(id)
+            item = Crosspayment.get(id)
             if item:
                 DBSession.begin_nested()
                 try:

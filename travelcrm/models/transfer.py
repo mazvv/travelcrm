@@ -143,5 +143,16 @@ class Transfer(Base):
             return None
         return DBSession.query(cls).get(id)
 
+    @property
+    def currency(self):
+        if self.account_from:
+            return self.account_from.currency
+        if self.account_to:
+            return self.account_to.currency
+        if self.subaccount_from:
+            return self.subaccount_from.account.currency
+        if self.subaccount_to:
+            return self.subaccount_to.account.currency
+        
     def __repr__(self):
         return "%s_%s: %s" % (self.__class__.__name__, self.id, self.sum)

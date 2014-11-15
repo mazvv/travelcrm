@@ -16,9 +16,9 @@ from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
-class Postings(ResourceTypeBase):
+class Crosspayments(ResourceTypeBase):
 
-    __name__ = 'postings'
+    __name__ = 'crosspayments'
 
     def __init__(self, request):
         self.__parent__ = Root(request)
