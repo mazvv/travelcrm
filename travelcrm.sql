@@ -2558,21 +2558,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6199, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6221, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1887, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1903, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 120, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 121, true);
 
 
 --
@@ -2643,6 +2643,7 @@ COPY account_item (id, resource_id, name) FROM stdin;
 6	1769	Payments To Touroperators
 7	1780	Account Initialization
 8	1873	Payment On Invoice
+9	1898	Cashing In
 \.
 
 
@@ -2650,7 +2651,7 @@ COPY account_item (id, resource_id, name) FROM stdin;
 -- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('account_item_id_seq', 8, true);
+SELECT pg_catalog.setval('account_item_id_seq', 9, true);
 
 
 --
@@ -2973,7 +2974,9 @@ SELECT pg_catalog.setval('country_id_seq', 19, true);
 --
 
 COPY crosspayment (id, resource_id, transfer_id, descr) FROM stdin;
-2	1887	51	Init Main cash balance
+6	1893	57	Account init
+8	1900	59	Init Bank Account in UAH
+9	1901	60	Some Cashing in
 \.
 
 
@@ -2981,7 +2984,7 @@ COPY crosspayment (id, resource_id, transfer_id, descr) FROM stdin;
 -- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('crosspayment_id_seq', 2, true);
+SELECT pg_catalog.setval('crosspayment_id_seq', 9, true);
 
 
 --
@@ -3319,8 +3322,6 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 15	4	8	Users	/users	\N	2	792
 13	4	10	Employees	/employees	\N	1	790
 41	5	\N	Home	/	fa fa-home	1	1079
-8	4	\N	System	/	fa fa-cog	10	778
-23	4	\N	Directories	/	fa fa-book	9	873
 20	4	18	Positions	/positions	\N	2	863
 19	4	18	Structures	/structures	\N	1	838
 35	4	23	Touroperators	/touroperators	\N	11	1002
@@ -3353,15 +3354,8 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 55	4	53	Accounts Items	/accounts_items	\N	3	1425
 150	4	53	Subaccounts	/subaccounts	\N	2	1798
 38	4	32	Tours	/tours_sales	\N	2	1075
-53	4	\N	Finance	/	fa fa-credit-card	9	1394
-18	4	\N	Company	/	fa fa-building-o	8	837
-10	4	\N	HR	/	fa fa-group	7	780
-26	4	\N	Marketing	/	fa fa-bullhorn	6	900
 111	8	\N	System	/	fa fa-cog	10	778
-21	4	\N	Clientage	/	fa fa-briefcase	5	864
 112	8	\N	Directories	/	fa fa-book	9	873
-32	4	\N	Sales	/	fa fa-legal	4	998
-107	4	\N	Home	/	fa fa-home	2	1777
 108	8	111	Resource Types	/resources_types	\N	1	779
 109	8	111	Users	/users	\N	2	792
 110	8	144	Employees	/employees	\N	1	790
@@ -3402,6 +3396,17 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 140	8	112	Suppliers	/suppliers	\N	11	1550
 141	8	142	Accounts Items	/accounts_items	\N	1	1425
 151	4	53	Cross Payments	/crosspayments	\N	11	1885
+53	4	\N	Finance	/	fa fa-credit-card	7	1394
+107	4	\N	Home	/	fa fa-home	1	1777
+32	4	\N	Sales	/	fa fa-legal	2	998
+21	4	\N	Clientage	/	fa fa-briefcase	3	864
+26	4	\N	Marketing	/	fa fa-bullhorn	4	900
+10	4	\N	HR	/	fa fa-group	5	780
+18	4	\N	Company	/	fa fa-building-o	6	837
+23	4	\N	Directories	/	fa fa-book	8	873
+152	4	\N	Reports	/	fa fa-pie-chart	9	1895
+8	4	\N	System	/	fa fa-cog	10	778
+153	4	152	Turnovers	/turnovers	\N	1	1896
 \.
 
 
@@ -3462,6 +3467,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 COPY outgoing (id, resource_id, account_id, account_item_id, date, subaccount_id, sum) FROM stdin;
 11	1883	3	4	2014-11-14	8	100.20
+13	1903	3	3	2014-11-18	10	8200.00
 \.
 
 
@@ -3469,7 +3475,7 @@ COPY outgoing (id, resource_id, account_id, account_item_id, date, subaccount_id
 -- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('outgoing_id_seq', 11, true);
+SELECT pg_catalog.setval('outgoing_id_seq', 13, true);
 
 
 --
@@ -3480,6 +3486,8 @@ COPY outgoing_transfer (outgoing_id, transfer_id) FROM stdin;
 11	47
 11	49
 11	48
+13	61
+13	62
 \.
 
 
@@ -3616,6 +3624,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 130	119	4	{autoload,view,edit,delete}	\N	all
 75	106	4	{view,add,edit,delete,settings}	\N	all
 131	120	4	{view,add,edit,delete}	\N	all
+132	121	4	{view}	\N	all
 \.
 
 
@@ -3765,14 +3774,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 151, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 154, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 131, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 132, true);
 
 
 --
@@ -4485,7 +4494,16 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1883	111	32	f
 1884	12	32	f
 1885	65	32	f
-1887	120	32	f
+1888	117	32	f
+1893	120	32	f
+1894	12	32	f
+1895	65	32	f
+1896	65	32	f
+1898	105	32	f
+1900	120	32	f
+1901	120	32	f
+1902	117	32	f
+1903	111	32	f
 \.
 
 
@@ -5441,7 +5459,22 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6195	1883	2	\N	2014-11-14 14:44:29.869357
 6196	1884	2	\N	2014-11-15 12:46:51.68956
 6197	1885	2	\N	2014-11-15 12:55:58.618287
-6199	1887	2	\N	2014-11-15 18:54:51.40188
+6200	1647	2	\N	2014-11-15 19:54:17.589811
+6201	1647	2	\N	2014-11-15 19:57:05.325517
+6202	1587	2	\N	2014-11-15 19:57:11.689531
+6203	1656	2	\N	2014-11-15 19:58:28.321946
+6204	1888	2	\N	2014-11-15 20:54:18.530252
+6209	1893	2	\N	2014-11-15 21:10:00.852505
+6210	1894	2	\N	2014-11-16 11:36:20.360008
+6211	1895	2	\N	2014-11-16 11:38:31.304748
+6212	1896	2	\N	2014-11-16 11:52:22.859107
+6214	1896	2	\N	2014-11-16 17:28:25.282664
+6215	1898	2	\N	2014-11-18 19:36:00.947451
+6217	1900	2	\N	2014-11-18 19:59:41.794255
+6218	1901	2	\N	2014-11-18 20:00:50.313385
+6219	1902	2	\N	2014-11-18 20:05:55.399398
+6220	1903	2	\N	2014-11-18 20:06:23.495804
+6221	1225	2	\N	2014-11-20 20:55:40.655878
 \.
 
 
@@ -5477,7 +5510,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 89	1198	passports	Passports	Passports	travelcrm.resources.passports	Clients persons passports lists	\N	\N
 90	1207	addresses	Addresses	Addresses	travelcrm.resources.addresses	Addresses of any type of resources, such as persons, bpersons, hotels etc.	\N	\N
 91	1211	banks	Banks	Banks	travelcrm.resources.banks	Banks list to create bank details and for other reasons	\N	\N
-93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N	\N
 102	1313	services	Services	Services	travelcrm.resources.services	Additional Services that can be provide with tours sales or separate	\N	\N
 101	1268	banks_details	Banks Details	BanksDetails	travelcrm.resources.banks_details	Banks Details that can be attached to any client or business partner to define account	\N	\N
 103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N	\N
@@ -5495,6 +5527,8 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 119	1849	calculations	Caluclations	Calculations	travelcrm.resources.calculations	Calculations of Sale Documents	null	f
 106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	{"account_item_id": 8}	t
 120	1884	crosspayments	Cross Payments	Crosspayments	travelcrm.resources.crosspayments	Cross payments between accounts and subaccounts. This document is for balance corrections to.	null	f
+121	1894	turnovers	Turnovers	Turnovers	travelcrm.resources.turnovers	Turnovers on Accounts and Subaccounts	null	f
+93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N	t
 \.
 
 
@@ -5716,6 +5750,8 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 4	1868	3	Garkaviy Andriy | UAH	\N
 6	1875	3	Main Cash Account | rid: 1628	\N
 8	1881	3	Main Cash Account | rid: 1372	\N
+9	1888	2	Lun Real Estate | UAH	Month Rate
+10	1902	3	Lun Real Estate | UAH | CASH	Lun on cash account
 \.
 
 
@@ -5723,7 +5759,7 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 8, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 10, true);
 
 
 --
@@ -5769,6 +5805,8 @@ SELECT pg_catalog.setval('supplier_id_seq', 6, true);
 --
 
 COPY suppplier_subaccount (supplier_id, subaccount_id) FROM stdin;
+6	9
+6	10
 \.
 
 
@@ -5867,8 +5905,6 @@ COPY tour_sale_person (tour_sale_id, person_id) FROM stdin;
 9	17
 9	18
 9	19
-17	41
-17	42
 16	40
 16	39
 16	38
@@ -5877,6 +5913,8 @@ COPY tour_sale_person (tour_sale_id, person_id) FROM stdin;
 15	36
 14	34
 14	33
+17	41
+17	42
 \.
 
 
@@ -6007,8 +6045,11 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 47	\N	8	\N	\N	4	80.20	2014-11-14
 48	3	\N	\N	8	4	20.00	2014-11-14
 49	\N	8	\N	\N	4	20.00	2014-11-14
-50	\N	\N	3	\N	7	200000.00	2014-06-01
-51	\N	\N	3	\N	7	20000.00	2014-07-01
+57	\N	\N	3	\N	7	19722.96	2014-07-01
+59	\N	\N	2	\N	7	20000.00	2014-09-01
+60	2	\N	3	\N	9	4500.00	2014-11-18
+61	3	\N	\N	10	3	8200.00	2014-11-18
+62	\N	10	\N	\N	3	8200.00	2014-11-18
 \.
 
 
@@ -6016,7 +6057,7 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 51, true);
+SELECT pg_catalog.setval('transfer_id_seq', 62, true);
 
 
 --
