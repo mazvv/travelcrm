@@ -43,10 +43,10 @@ def account_id_validator(node, kw):
             request.params.get('subaccount_id')
         )
         account = Account.get(value)
-        if account.currency_id != subaccount.account.currency_id:
+        if account.id != subaccount.account.id:
             raise colander.Invalid(
                 node,
-                _(u'Currency of Account and Subaccount must be equal'),
+                _(u'Subaccount is from another Account'),
             )
     return colander.All(validator,)
 

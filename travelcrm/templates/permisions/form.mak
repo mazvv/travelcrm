@@ -1,4 +1,4 @@
-<div class="dl60 easyui-dialog"
+<div class="dl45 easyui-dialog"
     title="${_(u'Edit Permissions')}"
     data-options="
         modal:true,
@@ -22,7 +22,10 @@
                 ${h.tags.title(_(u"scope type"), False, "scope_type")}
             </div>
             <div class="ml15">
-                ${h.fields.permisions_scope_type_field(item.scope_type if item else 'structure', 'scope_type')}
+                ${h.fields.permisions_scope_type_field(
+                	item.scope_type if item else 'structure', 
+                	'scope_type',
+                )}
                 ${h.common.error_container(name='scope_type')}
             </div>
         </div>

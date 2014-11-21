@@ -60,7 +60,9 @@ class Crosspayment(Base):
         backref=backref(
             'crosspayment',
             uselist=False,
+            cascade="all,delete",
         ),
+        cascade="all,delete",
         uselist=False
     )
 

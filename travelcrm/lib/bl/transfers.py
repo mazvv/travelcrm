@@ -153,12 +153,18 @@ def query_transfers():
             Transfer.id,
             Transfer.date,
             Transfer.sum,
+            Transfer.account_from_id,
+            Transfer.subaccount_from_id,
+            Transfer.account_to_id,
+            Transfer.subaccount_to_id,
             Currency.iso_code.label('currency'),
             from_account.name.label('account_from'),
             to_account.name.label('account_to'),
             from_subaccount.name.label('subaccount_from'),
             to_subaccount.name.label('subaccount_to'),
             AccountItem.name.label('account_item'),
+            from_subaccount.account_id.label('subaccount_from_account_id'),
+            to_subaccount.account_id.label('subaccount_to_account_id'),
         )
         .distinct(Transfer.id)
         .join(AccountItem, Transfer.account_item)

@@ -100,6 +100,7 @@ class PositionsPermisions(object):
             'position': position,
             'resource_type': resource_type,
             'allowed_permisions': resource_type_resource.allowed_permisions,
+            'allowed_scopes': resource_type_resource.allowed_scopes,
             'item': permision
         }
 

@@ -8,11 +8,12 @@ from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.task import Task
-from ..models.note import Note
-from ..models.task import Task
 from ..lib.qb.tasks import TasksQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.resources_utils import get_resource_class
+from ..lib.utils.resources_utils import (
+    get_resource_class, 
+    get_resource_type_by_resource,
+)
 from ..forms.tasks import TaskSchema
 
 
@@ -243,3 +244,38 @@ class Tasks(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+
+    @view_config(
+        name='settings',
+        context='..resources.tasks.Tasks',
+        request_method='GET',
+        renderer='travelcrm:templates/tasks/settings.mak',
+        permission='settings',
+    )
+    def settings(self):
+        rt = get_resource_type_by_resource(self.context)
+        return {
+            'title': _(u'Settings'),
+            'rt': rt,
+        }
+
+    @view_config(
+        name='settings',
+        context='..resources.tasks.Tasks',
+        request_method='POST',
+        renderer='json',
+        permission='settings',
+    )
+    def _settings(self):
+        schema = SettingsSchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            rt = get_resource_type_by_resource(self.context)
+            rt.settings = {'service_id': controls.get('service_id')}
+            return {'success_message': _(u'Saved')}
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }

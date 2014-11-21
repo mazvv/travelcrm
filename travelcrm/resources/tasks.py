@@ -31,4 +31,5 @@ class Tasks(ResourceTypeBase):
             ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
+            ('settings', _(u'settings')),
         ]

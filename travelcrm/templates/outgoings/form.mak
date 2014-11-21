@@ -43,7 +43,7 @@
                     <div class="ml15">
                         ${h.fields.accounts_combobox_field(
                             request, item.account_id if item else None, 
-                            show_toolbar=False,
+                            show_toolbar=(not readonly if readonly else True),
                             options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id
                         )}
                         ${h.common.error_container(name='account_id')}

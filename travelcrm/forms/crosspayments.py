@@ -1,5 +1,7 @@
 # -*-coding: utf-8 -*-
 
+from decimal import Decimal
+
 import colander
 
 from . import (
@@ -10,8 +12,9 @@ from . import (
 from ..models.account import Account
 from ..models.subaccount import Subaccount
 
+from ..lib.bl.transfers import get_account_balance
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import cast_int
+from ..lib.utils.common_utils import cast_int, parse_date
 
 
 class AccountFromValidator(object):
@@ -34,6 +37,14 @@ class AccountFromValidator(object):
             raise colander.Invalid(
                 node,
                 _(u'Set only account or subaccount or clear both')
+            )
+        date = parse_date(request.params.get('date'))
+        balance = get_account_balance(value, date_to=date)
+        sum_to_transfer = Decimal(request.params.get('sum'))
+        if sum_to_transfer > balance:
+            raise colander.Invalid(
+                node,
+                _(u'Not enough balance to transfer (%s)' % balance)
             )
         
 
@@ -65,14 +76,13 @@ class AccountToValidator(object):
             
         if account_from_id:
             account = Account.get(account_from_id)
-            currency_from_id = account.currency_id
+            currency_from_id = cast_int(account.currency_id)
         elif subaccount_from_id:
             subaccount = Subaccount.get(subaccount_from_id)
-            currency_from_id = subaccount.account.currency_id
-            
+            currency_from_id = cast_int(subaccount.account.currency_id)
         if (
             currency_from_id and currency_to_id 
-            and currency_from_id == currency_to_id
+            and currency_from_id != currency_to_id
         ):
             raise colander.Invalid(
                 node,
