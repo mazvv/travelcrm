@@ -1,7 +1,6 @@
 # -*coding: utf-8-*-
 from collections import Iterable
 
-from babel.dates import parse_date
 from sqlalchemy import func, cast, DATE, distinct, or_, literal
 from sqlalchemy.dialects.postgresql import Any
 
@@ -31,6 +30,7 @@ from ...models.invoice import Invoice
 from ...lib.utils.common_utils import (
     get_locale_name,
     get_base_currency,
+    parse_date,
 )
 
 
@@ -188,15 +188,11 @@ class ToursSalesQueryBuilder(ResourcesQueryBuilder):
     def _filter_tour_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                TourSale.start_date >= parse_date(
-                    date_from, locale=get_locale_name()
-                )
+                TourSale.start_date >= parse_date(date_from)
             )
         if date_to:
             self.query = self.query.filter(
-                TourSale.end_date <= parse_date(
-                    date_to, locale=get_locale_name()
-                )
+                TourSale.end_date <= parse_date(date_to)
             )
 
 

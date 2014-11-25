@@ -1320,7 +1320,6 @@ ALTER TABLE public.note_resource OWNER TO mazvv;
 CREATE TABLE outgoing (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    account_id integer NOT NULL,
     account_item_id integer NOT NULL,
     date date NOT NULL,
     subaccount_id integer NOT NULL,
@@ -2558,14 +2557,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6221, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6258, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1903, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1918, true);
 
 
 --
@@ -2713,7 +2712,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-3a70007cbc68
+486e28f5f2b8
 \.
 
 
@@ -2836,6 +2835,7 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 12	1862	17	57	54.00	653.40
 13	1863	18	57	54.00	653.40
 14	1864	19	54	21.00	350.70
+16	1918	39	54	3534.00	59017.80
 \.
 
 
@@ -2843,7 +2843,7 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 14, true);
+SELECT pg_catalog.setval('calculation_id_seq', 16, true);
 
 
 --
@@ -2861,6 +2861,7 @@ COPY commission (id, date_from, resource_id, service_id, percentage, price, curr
 21	2014-08-17	1579	5	12.00	0.00	56
 22	2014-08-01	1714	1	0.00	10.00	54
 23	2014-08-01	1721	5	12.00	0.00	57
+24	2014-05-01	1917	5	11.00	0.00	56
 \.
 
 
@@ -2868,7 +2869,7 @@ COPY commission (id, date_from, resource_id, service_id, percentage, price, curr
 -- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('commission_id_seq', 23, true);
+SELECT pg_catalog.setval('commission_id_seq', 24, true);
 
 
 --
@@ -3203,6 +3204,7 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 37	1876	21
 40	1880	13
 41	1882	13
+42	1910	14
 \.
 
 
@@ -3210,7 +3212,7 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('income_id_seq', 41, true);
+SELECT pg_catalog.setval('income_id_seq', 42, true);
 
 
 --
@@ -3224,6 +3226,8 @@ COPY income_transfer (income_id, transfer_id) FROM stdin;
 37	42
 40	43
 40	44
+42	64
+42	63
 \.
 
 
@@ -3324,35 +3328,14 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 41	5	\N	Home	/	fa fa-home	1	1079
 20	4	18	Positions	/positions	\N	2	863
 19	4	18	Structures	/structures	\N	1	838
-35	4	23	Touroperators	/touroperators	\N	11	1002
 14	4	10	Employees Appointments	/appointments	\N	2	791
-30	4	23	Accomodations	/accomodations	\N	10	955
-31	4	23	Food Categories	/foodcats	\N	9	956
-29	4	23	Rooms Categories	/roomcats	\N	7	911
-42	4	23	Hotels	/hotels	\N	6	1080
 27	4	26	Advertising Sources	/advsources	\N	1	902
-28	4	23	Hotels Categories	/hotelcats	\N	5	910
-43	4	23	Locations	/locations	\N	3	1089
-24	4	23	Countries	/countries	\N	4	874
-25	4	23	Regions	/regions	\N	3	879
 22	4	21	Persons	/persons	\N	1	866
-36	4	23	Business Persons	/bpersons	\N	9	1008
 47	5	\N	For Test	/	fa fa-credit-card	2	1253
 48	6	\N	Home	/	fa fa-home	1	1079
 49	6	\N	For Test	/	fa fa-credit-card	2	1253
 51	4	32	Invoices	/invoices	\N	3	1368
-57	4	53	Accounts	/accounts	\N	1	1436
 52	4	32	Services	/services_sales	\N	2	1369
-60	4	23	Suppliers	/suppliers	\N	11	1550
-61	4	53	Outgoing Payments	/outgoings	\N	10	1571
-56	4	53	Income Payments	incomes	\N	9	1434
-54	4	53	Currency Rates	/currencies_rates	\N	8	1395
-17	4	53	Currencies	/currencies	\N	7	802
-45	4	53	Banks	/banks	\N	6	1212
-50	4	53	Services List	/services	\N	5	1312
-149	4	53	Accounts Postings	/postings	\N	4	1779
-55	4	53	Accounts Items	/accounts_items	\N	3	1425
-150	4	53	Subaccounts	/subaccounts	\N	2	1798
 38	4	32	Tours	/tours_sales	\N	2	1075
 111	8	\N	System	/	fa fa-cog	10	778
 112	8	\N	Directories	/	fa fa-book	9	873
@@ -3395,8 +3378,10 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 139	8	147	Services	/services_sales	\N	2	1369
 140	8	112	Suppliers	/suppliers	\N	11	1550
 141	8	142	Accounts Items	/accounts_items	\N	1	1425
-151	4	53	Cross Payments	/crosspayments	\N	11	1885
+151	4	155	Cross Payments	/crosspayments	\N	11	1885
 53	4	\N	Finance	/	fa fa-credit-card	7	1394
+156	4	53	Billing	/	\N	10	1905
+57	4	156	Accounts	/accounts	\N	1	1436
 107	4	\N	Home	/	fa fa-home	1	1777
 32	4	\N	Sales	/	fa fa-legal	2	998
 21	4	\N	Clientage	/	fa fa-briefcase	3	864
@@ -3406,7 +3391,31 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 23	4	\N	Directories	/	fa fa-book	8	873
 152	4	\N	Reports	/	fa fa-pie-chart	9	1895
 8	4	\N	System	/	fa fa-cog	10	778
-153	4	152	Turnovers	/turnovers	\N	1	1896
+155	4	53	Payments	/	\N	12	1904
+56	4	155	Income Payments	incomes	\N	9	1434
+61	4	155	Outgoing Payments	/outgoings	\N	10	1571
+150	4	156	Subaccounts	/subaccounts	\N	2	1798
+55	4	156	Accounts Items	/accounts_items	\N	3	1425
+24	4	158	Countries	/countries	\N	4	874
+157	4	53	Currencies	/	\N	7	1906
+17	4	157	Currencies List	/currencies	\N	7	802
+54	4	157	Currencies Rates	/currencies_rates	\N	8	1395
+45	4	53	Banks	/banks	\N	5	1212
+50	4	53	Services List	/services	\N	6	1312
+25	4	158	Regions	/regions	\N	3	879
+43	4	158	Locations	/locations	\N	3	1089
+31	4	159	Food Categories	/foodcats	\N	9	956
+158	4	23	Geography	/	\N	13	1907
+35	4	23	Touroperators	/touroperators	\N	10	1002
+29	4	159	Rooms Categories	/roomcats	\N	7	911
+30	4	159	Accomodations	/accomodations	\N	10	955
+153	4	160	Turnovers	/turnovers	\N	1	1896
+36	4	23	Business Persons	/bpersons	\N	11	1008
+60	4	23	Suppliers	/suppliers	\N	9	1550
+160	4	152	Billing	/	\N	2	1909
+159	4	23	Hotels	/	\N	12	1908
+28	4	159	Hotels Categories	/hotelcats	\N	6	910
+42	4	159	Hotels List	/hotels	\N	5	1080
 \.
 
 
@@ -3465,9 +3474,11 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 -- Data for Name: outgoing; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY outgoing (id, resource_id, account_id, account_item_id, date, subaccount_id, sum) FROM stdin;
-11	1883	3	4	2014-11-14	8	100.20
-13	1903	3	3	2014-11-18	10	8200.00
+COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum) FROM stdin;
+11	1883	4	2014-11-14	8	100.20
+13	1903	3	2014-11-18	10	8200.00
+14	1912	4	2014-11-23	3	10.00
+16	1915	6	2014-11-23	12	15000.00
 \.
 
 
@@ -3475,7 +3486,7 @@ COPY outgoing (id, resource_id, account_id, account_item_id, date, subaccount_id
 -- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('outgoing_id_seq', 13, true);
+SELECT pg_catalog.setval('outgoing_id_seq', 16, true);
 
 
 --
@@ -3483,11 +3494,10 @@ SELECT pg_catalog.setval('outgoing_id_seq', 13, true);
 --
 
 COPY outgoing_transfer (outgoing_id, transfer_id) FROM stdin;
-11	47
-11	49
-11	48
-13	61
-13	62
+11	68
+14	70
+13	71
+16	73
 \.
 
 
@@ -3754,6 +3764,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 37	4
 40	6
 20	8
+29	11
 \.
 
 
@@ -3774,7 +3785,7 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 154, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 160, true);
 
 
 --
@@ -4428,7 +4439,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1775	59	32	f
 1777	65	32	f
 1778	12	1	f
-1779	65	32	f
 1780	105	32	f
 1797	12	32	f
 1798	65	32	f
@@ -4504,6 +4514,19 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1901	120	32	f
 1902	117	32	f
 1903	111	32	f
+1904	65	32	f
+1905	65	32	f
+1906	65	32	f
+1907	65	32	f
+1908	65	32	f
+1909	65	32	f
+1910	106	32	f
+1911	106	32	f
+1912	111	32	f
+1913	117	32	f
+1915	111	32	f
+1917	110	32	f
+1918	119	32	f
 \.
 
 
@@ -5263,7 +5286,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5975	1775	2	\N	2014-10-03 20:21:54.06353
 5977	1777	2	\N	2014-10-03 20:35:01.628264
 5978	1778	2	\N	2014-10-04 21:45:17.702702
-5979	1779	2	\N	2014-10-04 22:22:50.715815
 5980	1780	2	\N	2014-10-05 12:49:28.270538
 5982	1797	2	\N	2014-10-05 21:08:02.025119
 5983	1798	2	\N	2014-10-05 22:07:40.176836
@@ -5475,6 +5497,42 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6219	1902	2	\N	2014-11-18 20:05:55.399398
 6220	1903	2	\N	2014-11-18 20:06:23.495804
 6221	1225	2	\N	2014-11-20 20:55:40.655878
+6222	1904	2	\N	2014-11-21 20:47:35.513987
+6223	1434	2	\N	2014-11-21 20:48:05.829054
+6224	1571	2	\N	2014-11-21 20:48:27.000088
+6225	1885	2	\N	2014-11-21 20:48:44.475673
+6226	1905	2	\N	2014-11-21 21:17:50.885382
+6227	1436	2	\N	2014-11-21 21:19:06.360097
+6228	1798	2	\N	2014-11-21 21:19:19.899746
+6229	1425	2	\N	2014-11-21 21:19:42.772209
+6230	802	2	\N	2014-11-21 21:20:02.792752
+6231	1906	2	\N	2014-11-21 21:20:18.443474
+6232	802	2	\N	2014-11-21 21:20:33.430037
+6233	1395	2	\N	2014-11-21 21:20:55.244524
+6234	1907	2	\N	2014-11-21 21:25:23.260941
+6235	879	2	\N	2014-11-21 21:26:01.060638
+6236	1089	2	\N	2014-11-21 21:34:19.776611
+6237	874	2	\N	2014-11-21 21:34:45.906696
+6238	1080	2	\N	2014-11-21 21:35:09.652432
+6239	1908	2	\N	2014-11-21 21:35:29.643627
+6240	910	2	\N	2014-11-21 21:36:10.21074
+6241	1080	2	\N	2014-11-21 21:36:26.556412
+6242	911	2	\N	2014-11-21 21:36:37.408083
+6243	956	2	\N	2014-11-21 21:36:56.333028
+6244	955	2	\N	2014-11-21 21:37:09.845857
+6245	1909	2	\N	2014-11-21 21:42:55.617875
+6246	1896	2	\N	2014-11-21 21:43:10.139464
+6247	1910	2	\N	2014-11-22 17:58:53.151533
+6248	1911	2	\N	2014-11-22 17:58:53.151533
+6249	1883	2	\N	2014-11-23 17:32:08.015669
+6250	1883	2	\N	2014-11-23 17:40:29.860378
+6251	1903	2	\N	2014-11-23 17:42:18.707964
+6252	1912	2	\N	2014-11-23 17:49:28.781243
+6253	1903	2	\N	2014-11-23 18:15:04.669498
+6254	1913	2	\N	2014-11-23 18:22:07.34092
+6255	1915	2	\N	2014-11-23 18:25:34.975922
+6257	1917	2	\N	2014-11-23 18:40:26.695236
+6258	1918	2	\N	2014-11-23 18:40:42.249218
 \.
 
 
@@ -5752,6 +5810,8 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 8	1881	3	Main Cash Account | rid: 1372	\N
 9	1888	2	Lun Real Estate | UAH	Month Rate
 10	1902	3	Lun Real Estate | UAH | CASH	Lun on cash account
+11	1911	4	Main Cash EUR Account | rid: 1465	\N
+12	1913	2	Sun Marino Trvl | Cash UAH	Sun Marino Main Bank Subaccount
 \.
 
 
@@ -5759,7 +5819,7 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 10, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 12, true);
 
 
 --
@@ -6028,6 +6088,7 @@ COPY touroperator_licence (touroperator_id, licence_id) FROM stdin;
 
 COPY touroperator_subaccount (touroperator_id, subaccount_id) FROM stdin;
 62	2
+57	12
 \.
 
 
@@ -6042,14 +6103,15 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 42	\N	6	3	\N	2	540.00	2014-11-09
 43	\N	\N	\N	8	8	1975.00	2014-11-12
 44	\N	8	3	\N	2	1894.80	2014-11-12
-47	\N	8	\N	\N	4	80.20	2014-11-14
-48	3	\N	\N	8	4	20.00	2014-11-14
-49	\N	8	\N	\N	4	20.00	2014-11-14
 57	\N	\N	3	\N	7	19722.96	2014-07-01
 59	\N	\N	2	\N	7	20000.00	2014-09-01
 60	2	\N	3	\N	9	4500.00	2014-11-18
-61	3	\N	\N	10	3	8200.00	2014-11-18
-62	\N	10	\N	\N	3	8200.00	2014-11-18
+63	\N	\N	\N	11	8	3000.00	2014-11-22
+64	\N	11	4	\N	1	3000.00	2014-11-22
+68	\N	8	\N	\N	4	100.20	2014-11-14
+70	\N	3	\N	\N	4	10.00	2014-11-23
+71	\N	10	\N	\N	3	8200.00	2014-11-18
+73	\N	12	\N	\N	6	15000.00	2014-11-23
 \.
 
 
@@ -6057,7 +6119,7 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 62, true);
+SELECT pg_catalog.setval('transfer_id_seq', 73, true);
 
 
 --
@@ -6892,14 +6954,6 @@ ALTER TABLE ONLY transfer
 
 ALTER TABLE ONLY invoice
     ADD CONSTRAINT fk_account_id_invoice FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_account_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY outgoing
-    ADD CONSTRAINT fk_account_id_outgoing FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

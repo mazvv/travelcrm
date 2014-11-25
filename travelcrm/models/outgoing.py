@@ -66,16 +66,6 @@ class Outgoing(Base):
         ),
         nullable=False,
     )
-    account_id = Column(
-        Integer,
-        ForeignKey(
-            'account.id',
-            name="fk_account_id_outgoing",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     account_item_id = Column(
         Integer,
         ForeignKey(
@@ -111,15 +101,6 @@ class Outgoing(Base):
         cascade="all,delete",
         uselist=False,
     )
-    account = relationship(
-        'Account',
-        backref=backref(
-            'outgoings',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        uselist=False,
-    )
     account_item = relationship(
         'AccountItem',
         backref=backref(
@@ -129,7 +110,7 @@ class Outgoing(Base):
         ),
         uselist=False,
     )
-    subacount = relationship(
+    subaccount = relationship(
         'Subaccount',
         backref=backref(
             'outgoings',

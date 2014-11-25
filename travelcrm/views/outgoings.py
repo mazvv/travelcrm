@@ -112,7 +112,6 @@ class Outgoings(object):
             controls = schema.deserialize(self.request.params.mixed())
             outgoing = Outgoing(
                 date=controls.get('date'),
-                account_id=controls.get('account_id'),
                 account_item_id=controls.get('account_item_id'),
                 subaccount_id=controls.get('subaccount_id'),
                 sum=controls.get('sum'),
@@ -120,7 +119,6 @@ class Outgoings(object):
             )
             outgoing.transfers = make_payment(
                 controls.get('date'),
-                controls.get('account_id'),
                 controls.get('subaccount_id'),
                 controls.get('account_item_id'),
                 controls.get('sum'),
@@ -173,13 +171,11 @@ class Outgoings(object):
             controls = schema.deserialize(self.request.params.mixed())
             outgoing.rollback()
             outgoing.date = controls.get('date')
-            outgoing.account_id = controls.get('account_id')
             outgoing.account_item_id = controls.get('account_item_id')
             outgoing.subaccount_id = controls.get('subaccount_id')
             outgoing.sum = controls.get('sum')
             outgoing.transfers = make_payment(
                 controls.get('date'),
-                controls.get('account_id'),
                 controls.get('subaccount_id'),
                 controls.get('account_item_id'),
                 controls.get('sum'),

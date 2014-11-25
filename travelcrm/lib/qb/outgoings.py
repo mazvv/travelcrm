@@ -8,10 +8,9 @@ from ...models.resource import Resource
 from ...models.resource_type import ResourceType
 from ...models.outgoing import Outgoing
 from ...models.account import Account
+from ...models.subaccount import Subaccount
 from ...models.account_item import AccountItem
 from ...models.currency import Currency
-from ...models.touroperator import Touroperator
-from ...models.transfer import Transfer
 
 from ...lib.utils.common_utils import parse_date
 from ...lib.bl.subaccounts import query_resource_data
@@ -49,7 +48,8 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(Outgoing, Resource.outgoing)
-            .join(Account, Outgoing.account)
+            .join(Subaccount, Outgoing.subaccount)
+            .join(Account, Subaccount.account)
             .join(Currency, Account.currency)
             .join(AccountItem, Outgoing.account_item)
             .join(

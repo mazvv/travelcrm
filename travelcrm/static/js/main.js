@@ -260,7 +260,21 @@ function get_action_url(options){
 	    	else url = url + '&' + param_name + '=' + params.join();
 		    break;
 	}
+	var params_str = options.params_str?options.params_str:null;
+	if(params_str){
+		if(url.indexOf('?') == -1) url = url + '?' + params_str;
+		else url = url + '&' + params_str;
+	}
 	return url;
+}
+
+function get_params_str(options){
+	params_str = options.params_str?options.params_str:null;
+	if ($.isFunction(params_str)) {
+		params_str = params_str();
+	}
+	console.log(params.str);
+	return params_str;
 }
 
 function get_selected(container){

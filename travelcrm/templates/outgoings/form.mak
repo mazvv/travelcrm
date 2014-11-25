@@ -38,19 +38,6 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"payment account"), True, "account_id")}
-                    </div>
-                    <div class="ml15">
-                        ${h.fields.accounts_combobox_field(
-                            request, item.account_id if item else None, 
-                            show_toolbar=(not readonly if readonly else True),
-                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id
-                        )}
-                        ${h.common.error_container(name='account_id')}
-                    </div>
-                </div>
-                <div class="form-field">
-                    <div class="dl15">
                         ${h.tags.title(_(u"account item"), True, "account_item_id")}
                     </div>
                     <div class="ml15">
@@ -76,7 +63,7 @@
                         ${h.tags.title(_(u"sum currency"), False, "currency")}
                     </div>
                     <div class="ml15">
-                        ${h.tags.text('currency', item.account.currency.iso_code if item else None, class_="easyui-textbox w20 currency", disabled=True)}
+                        ${h.tags.text('currency', item.subaccount.account.currency.iso_code if item else None, class_="easyui-textbox w20 currency", disabled=True)}
                     </div>
                 </div>
             </div>

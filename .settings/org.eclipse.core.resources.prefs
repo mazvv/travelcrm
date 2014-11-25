@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//travelcrm/__init__.py=utf-8
 encoding//travelcrm/forms/crosspayments.py=utf-8
 encoding//travelcrm/forms/incomes.py=utf-8
 encoding//travelcrm/forms/invoices.py=utf-8
@@ -11,8 +12,10 @@ encoding//travelcrm/forms/subaccounts.py=utf-8
 encoding//travelcrm/forms/suppliers.py=utf-8
 encoding//travelcrm/interfaces.py=utf-8
 encoding//travelcrm/models/__init__.py=utf-8
+encoding//travelcrm/resources/accounts.py=utf-8
 encoding//travelcrm/resources/employees.py=utf-8
 encoding//travelcrm/resources/incomes.py=utf-8
+encoding//travelcrm/resources/outgoings.py=utf-8
 encoding//travelcrm/resources/persons.py=utf-8
 encoding//travelcrm/resources/suppliers.py=utf-8
 encoding//travelcrm/resources/tasks.py=utf-8

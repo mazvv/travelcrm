@@ -93,8 +93,6 @@
                     )}
                 </div>
             </div>
-            <div title="${_(u'Preferences')}">
-            </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${notes_selector(

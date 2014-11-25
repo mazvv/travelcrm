@@ -157,6 +157,8 @@ def query_transfers():
             Transfer.subaccount_from_id,
             Transfer.account_to_id,
             Transfer.subaccount_to_id,
+            Transfer.account_item_id,
+            Currency.id.label('currency_id'),
             Currency.iso_code.label('currency'),
             from_account.name.label('account_from'),
             to_account.name.label('account_to'),

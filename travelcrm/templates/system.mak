@@ -9,46 +9,52 @@
 
 
 <%def name="system_navigation(navigation)">
-    <%def name="navigation_item(item, key)">
-        % if navigation.get(item.id) is None:
-            <a href="#" class="${'easyui-linkbutton' if not item.parent_id else 'easyui-menubutton'} _action"
-                id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
-                data-options="plain:true,action:'tab_open',url:'${item.url}',title:'${item.name}'">
-                % if key:
-                    ${item.name}
-                % else:
-                    <span>${item.name}</span>
-                % endif
-            </a>            
-        % else:
-            <a href="#" class="easyui-menubutton _action" 
-                id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
-                data-options="menu:'${'#_navigation_submenu_%d' % item.id}',action:'tab_open',url:'${item.url}',title:'${item.name}'">
-                % if key:
-                    ${item.name}
-                % else:
-                    <span>${item.name}</span>
-                % endif
-            </a>
+    <%def name="navigation_items(key)">
+    	% if navigation.get(key):
+	        % for item in navigation.get(key):
+	        	<div>
+	       		% if navigation.get(item.id):
+	       			<span>
+						<a href="#" class="_action"
+						    iconCls="${item.icon_cls}"
+						    data-options="action:'tab_open',url:'${item.url}',title:'${item.name}'">
+						    ${item.name}
+						</a>
+	       			</span>
+	       			<div>
+	       				${navigation_items(item.id)}
+	       			</div>
+	       		% else:
+					<a href="#" class="_action"
+					    iconCls="${item.icon_cls}"
+					    data-options="action:'tab_open',url:'${item.url}',title:'${item.name}'">
+					    ${item.name}
+					</a>
+	       		% endif
+	       		</div>
+	        % endfor
         % endif
     </%def>
-    <%def name="navigation_items(key)">
-        % for item in navigation[key]:
-            % if key:
-                <div>
-                    ${navigation_item(item, key)}
-                </div>
-            % else:
-                ${navigation_item(item, key)}
-            % endif
-            % if navigation.get(item.id):
-                <div id="${'_navigation_submenu_%d' % item.id}">
-                    ${navigation_items(item.id)}
-                </div>
-            % endif
-        % endfor
-    </%def>
-    ${navigation_items(None)}
+    % for item in navigation.get(None):
+    	% if navigation.get(item.id):
+			<a href="#" class="easyui-menubutton _action"
+			    id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
+			    data-options="menu:'${'#_navigation_submenu_%d' % item.id}',action:'tab_open',url:'${item.url}',title:'${item.name}'">
+			    ${item.name}
+			</a>
+        % else:
+			<a href="#" class="easyui-linkbutton _action"
+	            id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
+	            data-options="plain:true,action:'tab_open',url:'${item.url}',title:'${item.name}'">
+	            ${item.name}
+	        </a>		
+        % endif
+    % endfor
+    % for item in navigation.get(None):
+    	<div id="_navigation_submenu_${item.id}">
+			${navigation_items(item.id)}
+		</div>
+    % endfor
     <a href="#" class="button" style="position: absolute;top:0;right:0;" onclick="$(this).closest('.easyui-panel').panel('refresh');">
         <span class="fa fa-refresh"> ${_(u'Reload')}
     </a>

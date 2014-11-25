@@ -6,7 +6,6 @@ import colander
 
 from . import ResourceSchema, Date
 
-from ..models.account import Account
 from ..models.subaccount import Subaccount
 from ..lib.bl.transfers import get_account_balance
 from ..lib.utils.common_utils import parse_date, translate as _
@@ -22,10 +21,11 @@ def sum_validator(node, kw):
                 node,
                 _(u'Sum must be more then zero'),
             )
-        account_id = int(request.params.get('account_id'))
+        subaccount_id = int(request.params.get('subaccount_id'))
         date = parse_date(request.params.get('date'))
         sum = Decimal(request.params.get('sum'))
-        balance = get_account_balance(account_id, None, date)
+        subaccount = Subaccount.get(subaccount_id)
+        balance = get_account_balance(subaccount.account_id, None, date)
         if balance < sum:
             raise colander.Invalid(
                 node,
@@ -34,23 +34,6 @@ def sum_validator(node, kw):
     return colander.All(validator,)
 
 
-@colander.deferred
-def account_id_validator(node, kw):
-    request = kw.get('request')
-
-    def validator(node, value):
-        subaccount = Subaccount.get(
-            request.params.get('subaccount_id')
-        )
-        account = Account.get(value)
-        if account.id != subaccount.account.id:
-            raise colander.Invalid(
-                node,
-                _(u'Subaccount is from another Account'),
-            )
-    return colander.All(validator,)
-
-    
 class OutgoingSchema(ResourceSchema):
     date = colander.SchemaNode(
         Date(),
@@ -58,10 +41,6 @@ class OutgoingSchema(ResourceSchema):
     sum = colander.SchemaNode(
         colander.Money(),
         validator=sum_validator,
-    )
-    account_id = colander.SchemaNode(
-        colander.Integer(),
-        validator=account_id_validator,
     )
     account_item_id = colander.SchemaNode(
         colander.Integer(),

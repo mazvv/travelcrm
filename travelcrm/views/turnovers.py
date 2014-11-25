@@ -3,8 +3,22 @@
 import logging
 
 from pyramid.view import view_config
+from pyramid.renderers import render
 
-from ..lib.qb.turnovers import TurnoversQueryBuilder
+from ..models.account import Account
+from ..models.subaccount import Subaccount
+
+from ..lib.qb.turnovers import (
+    TurnoversAccountsQueryBuilder,
+    TurnoversSubaccountsQueryBuilder,
+)
+from ..lib.qb.transfers import TransfersQueryBuilder
+from ..lib.bl.transfers import (
+    get_account_balance, 
+    get_subaccount_balance,
+)
+from ..lib.utils.common_utils import translate as _
+from ..lib.utils.common_utils import parse_date, money_cast
 
 
 log = logging.getLogger(__name__)
@@ -34,7 +48,65 @@ class Turnovers(object):
         permission='view'
     )
     def list(self):
-        qb = TurnoversQueryBuilder()
+        export = self.request.params.get('export')
+        report_by = self.request.params.get('report_by')
+        if report_by == 'account':
+            qb = TurnoversAccountsQueryBuilder()
+        else:
+            qb = TurnoversSubaccountsQueryBuilder()
+        qb.search_simple(
+            self.request.params.get('q'),
+        )
+        qb.sort_query(
+            self.request.params.get('sort'),
+            self.request.params.get('order', 'asc')
+        )
+        if export:
+            return {
+                'total': qb.get_count(),
+                'rows': qb.get_serialized()
+            }
+            
+            body = render(
+                'travelcrm:templates/turnovers/export.mak', 
+                {'total': qb.get_count(), 'rows': qb}, 
+                self.request
+            )
+            return {'body': body}
+        qb.page_query(
+            int(self.request.params.get('rows')),
+            int(self.request.params.get('page'))
+        )
+        return {
+            'total': qb.get_count(),
+            'rows': qb.get_serialized()
+        }
+
+    @view_config(
+        name='transfers',
+        context='..resources.turnovers.Turnovers',
+        request_method='GET',
+        renderer='travelcrm:templates/turnovers/transfers.mak',
+        permission='view'
+    )
+    def transfers(self):
+        return {
+            'title': _(u'Transfers'),
+        }
+
+    @view_config(
+        name='transfers',
+        context='..resources.turnovers.Turnovers',
+        xhr='True',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _transfers(self):
+        qb = TransfersQueryBuilder()
+        qb.advanced_search(
+            **self.request.params.mixed()
+        )
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -43,7 +115,51 @@ class Turnovers(object):
             int(self.request.params.get('rows')),
             int(self.request.params.get('page'))
         )
+        date_from = self.request.params.get('date_from')
+        date_to = self.request.params.get('date_to')
+        date_from = parse_date(date_from) if date_from else None
+        date_to = parse_date(date_to) if date_to else None
+        if self.request.params.get('account_id'):
+            account = Account.get(self.request.params.get('account_id'))
+            currency = account.currency.iso_code
+            balance = get_account_balance(
+                account.id, date_from, date_to
+            )
+        elif self.request.params.get('subaccount_id'):
+            subaccount = Subaccount.get(self.request.params.get('subaccount_id'))
+            currency = subaccount.account.currency.iso_code
+            balance = get_subaccount_balance(
+                subaccount.id, date_from, date_to
+            )
         return {
             'total': qb.get_count(),
-            'rows': qb.get_serialized()
+            'rows': qb.get_serialized(),
+            'footer': [{
+                'date': _(u'balance'),
+                'sum': str(money_cast(balance)),
+                'currency': currency,
+            }]
+        }
+
+    @view_config(
+        name='export',
+        context='..resources.turnovers.Turnovers',
+        request_method='GET',
+        renderer='pdf',
+        permission='view'
+    )
+    def export(self):
+        data = self.list()
+        report_by = self.request.params.get('report_by')
+        title_report_by = (
+            _(u'Accounts') if report_by == 'account' else _(u'Subccounts')
+        )
+        data['title'] = _(u'Turnovers by ') + title_report_by
+        body = render(
+            'travelcrm:templates/turnovers/export.mak',
+            data,
+            self.request,
+        )
+        return {
+            'body': body
         }

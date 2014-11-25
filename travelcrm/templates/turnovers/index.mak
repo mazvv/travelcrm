@@ -18,23 +18,9 @@
             pagination:true,fit:true,pageSize:50,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-            selectOnCheck:false,toolbar:'#${_tb_id}',pageNumber:1,
-            view: detailview,
-            onExpandRow: function(index, row){
-                var row_id = 'row-${_id}-' + row.id;
-                $('#' + row_id).load(
-                    '/suppliers/details?id=' + row.id, 
-                    function(){
-                        $('#${_id}').datagrid('fixDetailRowHeight', index);
-                        $('#${_id}').datagrid('fixRowHeight', index);
-                    }
-                );
-            },
-            detailFormatter: function(index, row){
-                var row_id = 'row-${_id}-' + row.id;
-                return '<div id=' + row_id + '></div>';
-            },          
+            selectOnCheck:false,toolbar:'#${_tb_id}',
             onBeforeLoad: function(param){
+                var dg = $(this);
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
                 });
@@ -52,24 +38,55 @@
 
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl45">
+            <script type="text/javascript">
+            	function get_params_${_id}(){
+            		var obj = $('#${_tb_id}');
+            		var params = new Object();
+            		$.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
+                        params[$(el).attr('name')] = $(el).val();
+                    });
+            		var dg_options = $('#${_id}').datagrid('options');
+            		params['sort'] = dg_options.sortName;
+            		params['order'] = dg_options.sortOrder;
+            		return $.param(params, true);
+            	}
+            </script>
+            <div class="button-group">
+	            % if _context.has_permision('view'):
+	            <a href="#" class="button _action" 
+	                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'transfers')}',params_str:get_params_${_id}()">
+	                <span class="fa fa-lightbulb-o"></span>${_(u'Transfers')}
+	            </a>
+	            <a href="#" class="button _action" 
+	                data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export', query={'export': True})}',params_str:get_params_${_id}()">
+	                <span class="fa fa-file-pdf-o"></span>${_(u'Export To PDF')}
+	            </a>
+                % endif
+            </div>
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter supplier name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter name of account or subaccount or account item'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
-                        ${h.tags.title(_(u"updated"))}
+                        ${h.tags.title(_(u"report by"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "updated_from")}
-                        <span class="p1">-</span>
-                        ${h.fields.date_field(None, "updated_to")}
+                        ${h.tags.select(
+                        	'report_by',
+                        	'account',
+                        	[('account', _(u'Account')), ('subaccount', _(u'Subaccount'))],
+                        	class_='easyui-combobox w20',
+                        	data_options="panelHeight:'auto'"
+                        )}
                     </div>
                     <div class="mt05">
-                        ${h.tags.title(_(u"modifier"))}
+                        ${h.tags.title(_(u"dates"))}
                     </div>
                     <div>
-                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                        ${h.fields.date_field(None, "date_from")}
+                        <span class="p1">-</span>
+                        ${h.fields.date_field(None, "date_to")}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">
