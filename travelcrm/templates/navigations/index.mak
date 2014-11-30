@@ -1,5 +1,7 @@
+<%namespace file="../common/context_info.mak" import="context_info"/>
 <%
     _id = h.common.gen_id()
+    _t_id = "t-%s" % _id
     _tb_id = "tb-%s" % _id
 %>
 <div class="dl60 easyui-dialog _container"
@@ -7,9 +9,11 @@
         border:false,
         height:500,
         modal:true,
-        iconCls:'fa fa-table'
+        iconCls:'fa fa-table',
+        tools:'#${_t_id}'
     "
     title="${_(u'Position Navigations')} | ${position.name}">
+    ${context_info(_t_id, request)}
     <table class="easyui-treegrid" 
         id="${_id}"
         data-options="

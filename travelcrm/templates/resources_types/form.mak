@@ -56,7 +56,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.yes_no_field(
-                            item.customizable if item else None, 
+                            int(item.customizable) if item else None, 
                             "customizable"
                         )}
                     </div>

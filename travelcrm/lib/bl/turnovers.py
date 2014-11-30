@@ -5,12 +5,22 @@ from sqlalchemy import func
 from ...models import DBSession
 from ...models.account import Account
 from ...models.subaccount import Subaccount
+from ...models.transfer import Transfer
 
 from ...lib.bl.transfers import query_transfers
 
 
-def query_accounts_turnovers():
-    subq_transfers = query_transfers().subquery()
+def _subq_filter_date(date_from, date_to):
+    query = query_transfers()
+    if date_from:
+        query = query.filter(Transfer.date >= date_from)
+    if date_to:
+        query = query.filter(Transfer.date <= date_to)
+    return query.subquery()
+
+
+def query_accounts_turnovers(date_from=None, date_to=None):
+    subq_transfers = _subq_filter_date(date_from, date_to)
     account_from_expr = func.coalesce(
         subq_transfers.c.account_from_id,
         subq_transfers.c.subaccount_from_account_id,
@@ -55,8 +65,8 @@ def query_accounts_turnovers():
     return query
 
 
-def query_subaccounts_turnovers():
-    subq_transfers = query_transfers().subquery()
+def query_subaccounts_turnovers(date_from=None, date_to=None):
+    subq_transfers = _subq_filter_date(date_from, date_to)
     query_from = (
         DBSession.query(
             func.sum(subq_transfers.c.sum).label('sum'),

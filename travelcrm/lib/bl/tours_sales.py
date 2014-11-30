@@ -175,6 +175,8 @@ class TourSaleCalculationFactory(CalculationFactory):
         query = (
             DBSession.query(
                 Resource.id.label('resource_id'),
+                TourSale.deal_date.label('date'),
+                ServiceItem.id.label('service_item_id'),
             )
             .join(Resource, TourSale.resource)
             .join(ServiceItem, TourSale.service_item)

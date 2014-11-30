@@ -41,6 +41,10 @@ class NavigationSchema(ResourceSchema):
         missing=None,
         validator=colander.Length(max=32)
     )
+    separator_before = colander.SchemaNode(
+        colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
+        missing=False
+    )
 
 
 @colander.deferred

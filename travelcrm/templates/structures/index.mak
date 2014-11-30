@@ -1,14 +1,18 @@
+<%namespace file="../common/context_info.mak" import="context_info"/>
 <%
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
+    _t_id = "t-%s" % _id
 %>
 <div class="easyui-panel unselectable"
     data-options="
         fit:true,
         border:false,
-        iconCls:'fa fa-table'
+        iconCls:'fa fa-table',
+        tools:'#${_t_id}'
     "
     title="${_(u'Company Structures')}">
+    ${context_info(_t_id, request)}
     <table class="easyui-treegrid" 
         id="${_id}"
         data-options="

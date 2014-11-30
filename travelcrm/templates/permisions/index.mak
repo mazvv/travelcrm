@@ -1,16 +1,20 @@
+<%namespace file="../common/context_info.mak" import="context_info"/>
 <%namespace file="../common/search.mak" import="searchbar"/>
 <%
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
+    _t_id = "t-%s" % _id
 %>
 <div class="dl60 easyui-dialog"
     data-options="
         border:false,
         height:400,
         modal:true,
-        iconCls:'fa fa-table'
+        iconCls:'fa fa-table',
+        tools:'#${_t_id}'
     "
     title="${_(u'Position Permissions')} | ${position.name}">
+    ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="

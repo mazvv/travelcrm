@@ -28,7 +28,6 @@ from ...models.person import Person
 from ...models.invoice import Invoice
 
 from ...lib.utils.common_utils import (
-    get_locale_name,
     get_base_currency,
     parse_date,
 )

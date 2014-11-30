@@ -12,6 +12,9 @@
     <%def name="navigation_items(key)">
     	% if navigation.get(key):
 	        % for item in navigation.get(key):
+	        	% if item.separator_before:
+	        		<div class="menu-sep"></div>
+	        	% endif
 	        	<div>
 	       		% if navigation.get(item.id):
 	       			<span>
@@ -58,4 +61,15 @@
     <a href="#" class="button" style="position: absolute;top:0;right:0;" onclick="$(this).closest('.easyui-panel').panel('refresh');">
         <span class="fa fa-refresh"> ${_(u'Reload')}
     </a>
+</%def>
+
+
+<%def name="system_context_info_dialog(title)">
+    <div class="dl40 easyui-dialog" title="${title}"
+        data-options="modal:true,draggable:false,resizable:false,iconCls:'fa fa-info-circle',height:300">
+        <table width="100%" 
+        	class="easyui-propertygrid"
+        	data-options="border:false,scrollbarSize:0,url:'${request.url}',showGroup: true">
+        </table>
+    </div>
 </%def>

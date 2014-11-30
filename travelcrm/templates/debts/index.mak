@@ -13,7 +13,7 @@
         iconCls:'fa fa-pie-chart',
         tools:'#${_t_id}'
     "
-    title="${_(u'Turnovers')}">
+    title="${_(u'Debts to Touroperators')}">
     ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"
@@ -33,9 +33,9 @@
         <thead>
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
-            <th data-options="field:'sum_to',sortable:true,width:100">${_(u"sum to")}</th>
-            <th data-options="field:'sum_from',sortable:true,width:100">${_(u"sum from")}</th>
-			<th data-options="field:'balance',sortable:true,width:100">${_(u"balance")}</th>
+            <th data-options="field:'sum_out',sortable:true,width:100">${_(u"debt sum")}</th>
+            <th data-options="field:'sum_in',sortable:true,width:100">${_(u"payments")}</th>
+            <th data-options="field:'balance',sortable:true,width:100">${_(u"balance")}</th>
             <th data-options="field:'currency',sortable:true,width:80">${_(u"currency")}</th>
         </thead>
     </table>
@@ -55,35 +55,17 @@
             		return $.param(params, true);
             	}
             </script>
-            <div class="button-group">
-	            % if _context.has_permision('view'):
-	            <a href="#" class="button _action" 
-	                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'transfers')}',params_str:get_params_${_id}()">
-	                <span class="fa fa-lightbulb-o"></span>${_(u'Transfers')}
-	            </a>
-	            <a href="#" class="button _action" 
-	                data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export', query={'export': True})}',params_str:get_params_${_id}()">
-	                <span class="fa fa-file-pdf-o"></span>${_(u'Export To PDF')}
-	            </a>
-                % endif
-            </div>
+			% if _context.has_permision('view'):
+			<a href="#" class="button _action" 
+			    data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export', query={'export': True})}',params_str:get_params_${_id}()">
+			    <span class="fa fa-file-pdf-o"></span>${_(u'Export To PDF')}
+			</a>
+			% endif
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter name of account or subaccount or account item'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
-                    <div>
-                        ${h.tags.title(_(u"report by"))}
-                    </div>
-                    <div>
-                        ${h.tags.select(
-                        	'report_by',
-                        	'account',
-                        	[('account', _(u'Account')), ('subaccount', _(u'Subaccount'))],
-                        	class_='easyui-combobox w20',
-                        	data_options="panelHeight:'auto'"
-                        )}
-                    </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"currency"))}
                     </div>

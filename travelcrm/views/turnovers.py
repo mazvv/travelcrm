@@ -8,6 +8,8 @@ from pyramid.renderers import render
 from ..models.account import Account
 from ..models.subaccount import Subaccount
 
+from ..resources.subaccounts import Subaccounts
+from ..resources.accounts import Accounts
 from ..lib.qb.turnovers import (
     TurnoversAccountsQueryBuilder,
     TurnoversSubaccountsQueryBuilder,
@@ -51,11 +53,14 @@ class Turnovers(object):
         export = self.request.params.get('export')
         report_by = self.request.params.get('report_by')
         if report_by == 'account':
-            qb = TurnoversAccountsQueryBuilder()
+            qb = TurnoversAccountsQueryBuilder(Accounts(self.request))
         else:
-            qb = TurnoversSubaccountsQueryBuilder()
+            qb = TurnoversSubaccountsQueryBuilder(Subaccounts(self.request))
         qb.search_simple(
             self.request.params.get('q'),
+        )
+        qb.advanced_search(
+            **self.request.params.mixed()
         )
         qb.sort_query(
             self.request.params.get('sort'),
@@ -66,13 +71,6 @@ class Turnovers(object):
                 'total': qb.get_count(),
                 'rows': qb.get_serialized()
             }
-            
-            body = render(
-                'travelcrm:templates/turnovers/export.mak', 
-                {'total': qb.get_count(), 'rows': qb}, 
-                self.request
-            )
-            return {'body': body}
         qb.page_query(
             int(self.request.params.get('rows')),
             int(self.request.params.get('page'))

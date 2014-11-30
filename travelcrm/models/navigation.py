@@ -2,6 +2,7 @@
 
 from sqlalchemy import (
     Integer,
+    Boolean,
     String,
     Column,
     ForeignKey,
@@ -64,6 +65,10 @@ class Navigation(Base):
     )
     icon_cls = Column(
         String(length=32),
+    )
+    separator_before = Column(
+        Boolean(),
+        default=False,
     )
     sort_order = Column(
         Integer(),

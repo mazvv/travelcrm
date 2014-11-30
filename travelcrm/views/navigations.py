@@ -119,6 +119,7 @@ class Navigations(object):
                 parent_id=controls.get('parent_id'),
                 url=controls.get('url'),
                 icon_cls=controls.get('icon_cls'),
+                separator_before=controls.get('separator_before'),
                 sort_order=get_next_position(
                     controls.get('position_id'),
                     controls.get('parent_id')
@@ -177,6 +178,7 @@ class Navigations(object):
             )
             navigation.url = controls.get('url')
             navigation.icon_cls = controls.get('icon_cls')
+            navigation.separator_before = controls.get('separator_before')
             navigation.parent_id = controls.get('parent_id')
             navigation.resource.notes = []
             navigation.resource.tasks = []

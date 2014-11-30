@@ -1260,7 +1260,8 @@ CREATE TABLE navigation (
     url character varying(128) NOT NULL,
     icon_cls character varying(32),
     sort_order integer NOT NULL,
-    resource_id integer NOT NULL
+    resource_id integer NOT NULL,
+    separator_before boolean
 );
 
 
@@ -2557,21 +2558,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6258, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6268, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1918, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1921, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 121, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 122, true);
 
 
 --
@@ -2712,7 +2713,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-486e28f5f2b8
+27fe728cd7c
 \.
 
 
@@ -3321,101 +3322,103 @@ SELECT pg_catalog.setval('location_id_seq', 37, true);
 -- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id) FROM stdin;
-9	4	8	Resource Types	/resources_types	\N	1	779
-15	4	8	Users	/users	\N	2	792
-13	4	10	Employees	/employees	\N	1	790
-41	5	\N	Home	/	fa fa-home	1	1079
-20	4	18	Positions	/positions	\N	2	863
-19	4	18	Structures	/structures	\N	1	838
-14	4	10	Employees Appointments	/appointments	\N	2	791
-27	4	26	Advertising Sources	/advsources	\N	1	902
-22	4	21	Persons	/persons	\N	1	866
-47	5	\N	For Test	/	fa fa-credit-card	2	1253
-48	6	\N	Home	/	fa fa-home	1	1079
-49	6	\N	For Test	/	fa fa-credit-card	2	1253
-51	4	32	Invoices	/invoices	\N	3	1368
-52	4	32	Services	/services_sales	\N	2	1369
-38	4	32	Tours	/tours_sales	\N	2	1075
-111	8	\N	System	/	fa fa-cog	10	778
-112	8	\N	Directories	/	fa fa-book	9	873
-108	8	111	Resource Types	/resources_types	\N	1	779
-109	8	111	Users	/users	\N	2	792
-110	8	144	Employees	/employees	\N	1	790
-113	8	143	Positions	/positions	\N	2	863
-114	8	143	Structures	/structures	\N	1	838
-115	8	112	Touroperators	/touroperators	\N	11	1002
-116	8	144	Employees Appointments	/appointments	\N	2	791
-117	8	112	Accomodations	/accomodations	\N	10	955
-118	8	112	Food Categories	/foodcats	\N	9	956
-119	8	112	Rooms Categories	/roomcats	\N	7	911
-120	8	112	Hotels	/hotels	\N	6	1080
-121	8	145	Advertising Sources	/advsources	\N	1	902
-122	8	112	Hotels Categories	/hotelcats	\N	5	910
-123	8	112	Locations	/locations	\N	3	1089
-124	8	112	Countries	/countries	\N	4	874
-125	8	112	Regions	/regions	\N	3	879
-126	8	146	Persons	/persons	\N	1	866
-127	8	112	Business Persons	/bpersons	\N	9	1008
-128	8	142	Banks	/banks	\N	2	1212
-129	8	142	Currencies	/currencies	\N	3	802
-142	8	\N	Finance	/	fa fa-credit-card	9	1394
-143	8	\N	Company	/	fa fa-building-o	8	837
-144	8	\N	HR	/	fa fa-group	7	780
-145	8	\N	Marketing	/	fa fa-bullhorn	6	900
-146	8	\N	Clientage	/	fa fa-briefcase	5	864
-147	8	\N	Sales	/	fa fa-legal	4	998
-148	8	\N	Home	/	fa fa-home	2	1777
-130	8	142	Currency Rates	/currencies_rates	\N	5	1395
-131	8	142	Income Payments	incomes	\N	6	1434
-132	8	147	Tours	/tours	\N	2	1075
-133	8	147	Invoices	/invoices	\N	3	1368
-134	8	142	Accounts	/accounts	\N	1	1436
-135	8	147	Liabilities	/liabilities	\N	10	1659
-136	8	142	Outgoing Payments	/outgoings	\N	7	1571
-137	8	142	Refunds	/refunds	\N	9	1575
-138	8	142	Services List	/services	\N	1	1312
-139	8	147	Services	/services_sales	\N	2	1369
-140	8	112	Suppliers	/suppliers	\N	11	1550
-141	8	142	Accounts Items	/accounts_items	\N	1	1425
-151	4	155	Cross Payments	/crosspayments	\N	11	1885
-53	4	\N	Finance	/	fa fa-credit-card	7	1394
-156	4	53	Billing	/	\N	10	1905
-57	4	156	Accounts	/accounts	\N	1	1436
-107	4	\N	Home	/	fa fa-home	1	1777
-32	4	\N	Sales	/	fa fa-legal	2	998
-21	4	\N	Clientage	/	fa fa-briefcase	3	864
-26	4	\N	Marketing	/	fa fa-bullhorn	4	900
-10	4	\N	HR	/	fa fa-group	5	780
-18	4	\N	Company	/	fa fa-building-o	6	837
-23	4	\N	Directories	/	fa fa-book	8	873
-152	4	\N	Reports	/	fa fa-pie-chart	9	1895
-8	4	\N	System	/	fa fa-cog	10	778
-155	4	53	Payments	/	\N	12	1904
-56	4	155	Income Payments	incomes	\N	9	1434
-61	4	155	Outgoing Payments	/outgoings	\N	10	1571
-150	4	156	Subaccounts	/subaccounts	\N	2	1798
-55	4	156	Accounts Items	/accounts_items	\N	3	1425
-24	4	158	Countries	/countries	\N	4	874
-157	4	53	Currencies	/	\N	7	1906
-17	4	157	Currencies List	/currencies	\N	7	802
-54	4	157	Currencies Rates	/currencies_rates	\N	8	1395
-45	4	53	Banks	/banks	\N	5	1212
-50	4	53	Services List	/services	\N	6	1312
-25	4	158	Regions	/regions	\N	3	879
-43	4	158	Locations	/locations	\N	3	1089
-31	4	159	Food Categories	/foodcats	\N	9	956
-158	4	23	Geography	/	\N	13	1907
-35	4	23	Touroperators	/touroperators	\N	10	1002
-29	4	159	Rooms Categories	/roomcats	\N	7	911
-30	4	159	Accomodations	/accomodations	\N	10	955
-153	4	160	Turnovers	/turnovers	\N	1	1896
-36	4	23	Business Persons	/bpersons	\N	11	1008
-60	4	23	Suppliers	/suppliers	\N	9	1550
-160	4	152	Billing	/	\N	2	1909
-159	4	23	Hotels	/	\N	12	1908
-28	4	159	Hotels Categories	/hotelcats	\N	6	910
-42	4	159	Hotels List	/hotels	\N	5	1080
+COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before) FROM stdin;
+162	4	160	Debts	/debts	\N	2	1921	f
+9	4	8	Resource Types	/resources_types	\N	1	779	f
+15	4	8	Users	/users	\N	2	792	f
+13	4	10	Employees	/employees	\N	1	790	f
+41	5	\N	Home	/	fa fa-home	1	1079	f
+20	4	18	Positions	/positions	\N	2	863	f
+19	4	18	Structures	/structures	\N	1	838	f
+14	4	10	Employees Appointments	/appointments	\N	2	791	f
+27	4	26	Advertising Sources	/advsources	\N	1	902	f
+22	4	21	Persons	/persons	\N	1	866	f
+47	5	\N	For Test	/	fa fa-credit-card	2	1253	f
+48	6	\N	Home	/	fa fa-home	1	1079	f
+49	6	\N	For Test	/	fa fa-credit-card	2	1253	f
+111	8	\N	System	/	fa fa-cog	10	778	f
+112	8	\N	Directories	/	fa fa-book	9	873	f
+108	8	111	Resource Types	/resources_types	\N	1	779	f
+109	8	111	Users	/users	\N	2	792	f
+110	8	144	Employees	/employees	\N	1	790	f
+113	8	143	Positions	/positions	\N	2	863	f
+114	8	143	Structures	/structures	\N	1	838	f
+115	8	112	Touroperators	/touroperators	\N	11	1002	f
+116	8	144	Employees Appointments	/appointments	\N	2	791	f
+117	8	112	Accomodations	/accomodations	\N	10	955	f
+118	8	112	Food Categories	/foodcats	\N	9	956	f
+119	8	112	Rooms Categories	/roomcats	\N	7	911	f
+120	8	112	Hotels	/hotels	\N	6	1080	f
+121	8	145	Advertising Sources	/advsources	\N	1	902	f
+122	8	112	Hotels Categories	/hotelcats	\N	5	910	f
+123	8	112	Locations	/locations	\N	3	1089	f
+124	8	112	Countries	/countries	\N	4	874	f
+125	8	112	Regions	/regions	\N	3	879	f
+126	8	146	Persons	/persons	\N	1	866	f
+127	8	112	Business Persons	/bpersons	\N	9	1008	f
+128	8	142	Banks	/banks	\N	2	1212	f
+129	8	142	Currencies	/currencies	\N	3	802	f
+142	8	\N	Finance	/	fa fa-credit-card	9	1394	f
+143	8	\N	Company	/	fa fa-building-o	8	837	f
+144	8	\N	HR	/	fa fa-group	7	780	f
+145	8	\N	Marketing	/	fa fa-bullhorn	6	900	f
+146	8	\N	Clientage	/	fa fa-briefcase	5	864	f
+147	8	\N	Sales	/	fa fa-legal	4	998	f
+148	8	\N	Home	/	fa fa-home	2	1777	f
+130	8	142	Currency Rates	/currencies_rates	\N	5	1395	f
+131	8	142	Income Payments	incomes	\N	6	1434	f
+132	8	147	Tours	/tours	\N	2	1075	f
+133	8	147	Invoices	/invoices	\N	3	1368	f
+134	8	142	Accounts	/accounts	\N	1	1436	f
+135	8	147	Liabilities	/liabilities	\N	10	1659	f
+136	8	142	Outgoing Payments	/outgoings	\N	7	1571	f
+137	8	142	Refunds	/refunds	\N	9	1575	f
+138	8	142	Services List	/services	\N	1	1312	f
+139	8	147	Services	/services_sales	\N	2	1369	f
+140	8	112	Suppliers	/suppliers	\N	11	1550	f
+141	8	142	Accounts Items	/accounts_items	\N	1	1425	f
+151	4	155	Cross Payments	/crosspayments	\N	11	1885	f
+53	4	\N	Finance	/	fa fa-credit-card	7	1394	f
+156	4	53	Billing	/	\N	10	1905	f
+57	4	156	Accounts	/accounts	\N	1	1436	f
+107	4	\N	Home	/	fa fa-home	1	1777	f
+32	4	\N	Sales	/	fa fa-legal	2	998	f
+21	4	\N	Clientage	/	fa fa-briefcase	3	864	f
+26	4	\N	Marketing	/	fa fa-bullhorn	4	900	f
+10	4	\N	HR	/	fa fa-group	5	780	f
+18	4	\N	Company	/	fa fa-building-o	6	837	f
+23	4	\N	Directories	/	fa fa-book	8	873	f
+152	4	\N	Reports	/	fa fa-pie-chart	9	1895	f
+8	4	\N	System	/	fa fa-cog	10	778	f
+161	4	32	Demands	/demands	\N	1	1920	f
+155	4	53	Payments	/	\N	12	1904	f
+56	4	155	Income Payments	incomes	\N	9	1434	f
+61	4	155	Outgoing Payments	/outgoings	\N	10	1571	f
+150	4	156	Subaccounts	/subaccounts	\N	2	1798	f
+55	4	156	Accounts Items	/accounts_items	\N	3	1425	f
+24	4	158	Countries	/countries	\N	4	874	f
+17	4	157	Currencies List	/currencies	\N	7	802	f
+54	4	157	Currencies Rates	/currencies_rates	\N	8	1395	f
+45	4	53	Banks	/banks	\N	5	1212	f
+50	4	53	Services List	/services	\N	6	1312	f
+25	4	158	Regions	/regions	\N	3	879	f
+43	4	158	Locations	/locations	\N	3	1089	f
+31	4	159	Food Categories	/foodcats	\N	9	956	f
+158	4	23	Geography	/	\N	13	1907	f
+35	4	23	Touroperators	/touroperators	\N	10	1002	f
+29	4	159	Rooms Categories	/roomcats	\N	7	911	f
+30	4	159	Accomodations	/accomodations	\N	10	955	f
+153	4	160	Turnovers	/turnovers	\N	1	1896	f
+36	4	23	Business Persons	/bpersons	\N	11	1008	f
+60	4	23	Suppliers	/suppliers	\N	9	1550	f
+51	4	32	Invoices	/invoices	\N	4	1368	f
+160	4	152	Billing	/	\N	2	1909	f
+28	4	159	Hotels Categories	/hotelcats	\N	6	910	f
+42	4	159	Hotels List	/hotels	\N	5	1080	f
+52	4	32	Services	/services_sales	\N	3	1369	f
+38	4	32	Tours	/tours_sales	\N	2	1075	t
+157	4	53	Currencies	/	\N	7	1906	t
+159	4	23	Hotels	/	\N	12	1908	t
 \.
 
 
@@ -3635,6 +3638,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 75	106	4	{view,add,edit,delete,settings}	\N	all
 131	120	4	{view,add,edit,delete}	\N	all
 132	121	4	{view}	\N	all
+133	122	4	{view}	\N	all
 \.
 
 
@@ -3785,14 +3789,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 160, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 162, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 132, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 133, true);
 
 
 --
@@ -4527,6 +4531,9 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1915	111	32	f
 1917	110	32	f
 1918	119	32	f
+1919	12	32	f
+1920	65	32	f
+1921	65	32	f
 \.
 
 
@@ -5533,6 +5540,16 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6255	1915	2	\N	2014-11-23 18:25:34.975922
 6257	1917	2	\N	2014-11-23 18:40:26.695236
 6258	1918	2	\N	2014-11-23 18:40:42.249218
+6259	1919	2	\N	2014-11-27 21:56:12.900683
+6260	1920	2	\N	2014-11-27 22:00:58.914811
+6261	1075	2	\N	2014-11-28 21:47:39.551572
+6262	1075	2	\N	2014-11-28 21:50:21.401582
+6263	1075	2	\N	2014-11-28 21:50:32.965327
+6264	1075	2	\N	2014-11-28 22:01:58.252158
+6265	1906	2	\N	2014-11-28 22:02:27.025943
+6266	1908	2	\N	2014-11-28 22:03:25.613427
+6267	1919	2	\N	2014-11-30 11:21:31.130821
+6268	1921	2	\N	2014-11-30 11:32:16.085887
 \.
 
 
@@ -5541,43 +5558,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, description, settings, customizable) FROM stdin;
-2	10	users	Users	Users	travelcrm.resources.users	Users list	\N	\N
-12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	Resources types list	\N	\N
-47	706	employees	Employees	Employees	travelcrm.resources.employees	Employees Container Datagrid	\N	\N
-78	1003	touroperators	Touroperators	Touroperators	travelcrm.resources.touroperators	Touroperators - tours suppliers list	\N	\N
-1	773		Home	Root	travelcrm.resources	Home Page of Travelcrm	\N	\N
-41	283	currencies	Currencies	Currencies	travelcrm.resources.currencies		\N	\N
-55	723	structures	Structures	Structures	travelcrm.resources.structures	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so	\N	\N
-59	764	positions	Positions	Positions	travelcrm.resources.positions	Companies positions is a point of company structure where emplyees can be appointed	\N	\N
-61	769	permisions	Permisions	Permisions	travelcrm.resources.permisions	Permisions list of company structure position. It's list of resources and permisions	\N	\N
-65	775	navigations	Navigations	Navigations	travelcrm.resources.navigations	Navigations list of company structure position.	\N	\N
-67	788	appointments	Appointments	Appointments	travelcrm.resources.appointments	Employees to positions of company appointments	\N	\N
-39	274	regions	Regions	Regions	travelcrm.resources.regions		\N	\N
-70	872	countries	Countries	Countries	travelcrm.resources.countries	Countries directory	\N	\N
-71	901	advsources	Advertise Sources	Advsources	travelcrm.resources.advsources	Types of advertises	\N	\N
-72	908	hotelcats	Hotels Categories	Hotelcats	travelcrm.resources.hotelcats	Hotels categories	\N	\N
-73	909	roomcats	Rooms Categories	Roomcats	travelcrm.resources.roomcats	Categories of the rooms	\N	\N
-74	953	accomodations	Accomodations	Accomodations	travelcrm.resources.accomodations	Accomodations Types list	\N	\N
-75	954	foodcats	Food Categories	Foodcats	travelcrm.resources.foodcats	Food types in hotels	\N	\N
-69	865	persons	Persons	Persons	travelcrm.resources.persons	Persons directory. Person can be client or potential client	\N	\N
-79	1007	bpersons	Business Persons	BPersons	travelcrm.resources.bpersons	Business Persons is not clients it's simple business contacts that can be referenced objects that needs to have contacts	\N	\N
-84	1088	locations	Locations	Locations	travelcrm.resources.locations	Locations list is list of cities, vilages etc. places to use to identify part of region	\N	\N
-83	1081	hotels	Hotels	Hotels	travelcrm.resources.hotels	Hotels directory	\N	\N
-86	1189	licences	Licences	Licences	travelcrm.resources.licences	Licences list for any type of resources as need	\N	\N
-87	1190	contacts	Contacts	Contacts	travelcrm.resources.contacts	Contacts for persons, business persons etc.	\N	\N
-89	1198	passports	Passports	Passports	travelcrm.resources.passports	Clients persons passports lists	\N	\N
-90	1207	addresses	Addresses	Addresses	travelcrm.resources.addresses	Addresses of any type of resources, such as persons, bpersons, hotels etc.	\N	\N
-91	1211	banks	Banks	Banks	travelcrm.resources.banks	Banks list to create bank details and for other reasons	\N	\N
-102	1313	services	Services	Services	travelcrm.resources.services	Additional Services that can be provide with tours sales or separate	\N	\N
-101	1268	banks_details	Banks Details	BanksDetails	travelcrm.resources.banks_details	Banks Details that can be attached to any client or business partner to define account	\N	\N
-103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N	\N
-104	1393	currencies_rates	Currency Rates	CurrenciesRates	travelcrm.resources.currencies_rates	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	\N	\N
-105	1424	accounts_items	Account Items	AccountsItems	travelcrm.resources.accounts_items	Finance accounts items	\N	\N
-109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null	\N
-108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null	\N
-110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null	\N
-112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	\N
-111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	\N
 117	1797	subaccounts	Subaccounts	Subaccounts	travelcrm.resources.subaccounts	Subaccounts are accounts from other objects such as clients, touroperators and so on	null	f
 107	1435	accounts	Accounts	Accounts	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible	null	f
 118	1799	notes	Notes	Notes	travelcrm.resources.notes	Resources Notes	null	f
@@ -5587,6 +5567,44 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 120	1884	crosspayments	Cross Payments	Crosspayments	travelcrm.resources.crosspayments	Cross payments between accounts and subaccounts. This document is for balance corrections to.	null	f
 121	1894	turnovers	Turnovers	Turnovers	travelcrm.resources.turnovers	Turnovers on Accounts and Subaccounts	null	f
 93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N	t
+2	10	users	Users	Users	travelcrm.resources.users	Users list	\N	f
+12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	Resources types list	\N	f
+47	706	employees	Employees	Employees	travelcrm.resources.employees	Employees Container Datagrid	\N	f
+78	1003	touroperators	Touroperators	Touroperators	travelcrm.resources.touroperators	Touroperators - tours suppliers list	\N	f
+1	773		Home	Root	travelcrm.resources	Home Page of Travelcrm	\N	f
+122	1919	debts	Debts	Debts	travelcrm.resources.debts	Calculations based debts report	null	f
+41	283	currencies	Currencies	Currencies	travelcrm.resources.currencies		\N	f
+55	723	structures	Structures	Structures	travelcrm.resources.structures	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so	\N	f
+59	764	positions	Positions	Positions	travelcrm.resources.positions	Companies positions is a point of company structure where emplyees can be appointed	\N	f
+61	769	permisions	Permisions	Permisions	travelcrm.resources.permisions	Permisions list of company structure position. It's list of resources and permisions	\N	f
+65	775	navigations	Navigations	Navigations	travelcrm.resources.navigations	Navigations list of company structure position.	\N	f
+67	788	appointments	Appointments	Appointments	travelcrm.resources.appointments	Employees to positions of company appointments	\N	f
+39	274	regions	Regions	Regions	travelcrm.resources.regions		\N	f
+70	872	countries	Countries	Countries	travelcrm.resources.countries	Countries directory	\N	f
+71	901	advsources	Advertise Sources	Advsources	travelcrm.resources.advsources	Types of advertises	\N	f
+72	908	hotelcats	Hotels Categories	Hotelcats	travelcrm.resources.hotelcats	Hotels categories	\N	f
+73	909	roomcats	Rooms Categories	Roomcats	travelcrm.resources.roomcats	Categories of the rooms	\N	f
+74	953	accomodations	Accomodations	Accomodations	travelcrm.resources.accomodations	Accomodations Types list	\N	f
+75	954	foodcats	Food Categories	Foodcats	travelcrm.resources.foodcats	Food types in hotels	\N	f
+69	865	persons	Persons	Persons	travelcrm.resources.persons	Persons directory. Person can be client or potential client	\N	f
+79	1007	bpersons	Business Persons	BPersons	travelcrm.resources.bpersons	Business Persons is not clients it's simple business contacts that can be referenced objects that needs to have contacts	\N	f
+84	1088	locations	Locations	Locations	travelcrm.resources.locations	Locations list is list of cities, vilages etc. places to use to identify part of region	\N	f
+83	1081	hotels	Hotels	Hotels	travelcrm.resources.hotels	Hotels directory	\N	f
+86	1189	licences	Licences	Licences	travelcrm.resources.licences	Licences list for any type of resources as need	\N	f
+87	1190	contacts	Contacts	Contacts	travelcrm.resources.contacts	Contacts for persons, business persons etc.	\N	f
+89	1198	passports	Passports	Passports	travelcrm.resources.passports	Clients persons passports lists	\N	f
+90	1207	addresses	Addresses	Addresses	travelcrm.resources.addresses	Addresses of any type of resources, such as persons, bpersons, hotels etc.	\N	f
+91	1211	banks	Banks	Banks	travelcrm.resources.banks	Banks list to create bank details and for other reasons	\N	f
+102	1313	services	Services	Services	travelcrm.resources.services	Additional Services that can be provide with tours sales or separate	\N	f
+101	1268	banks_details	Banks Details	BanksDetails	travelcrm.resources.banks_details	Banks Details that can be attached to any client or business partner to define account	\N	f
+103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N	f
+104	1393	currencies_rates	Currency Rates	CurrenciesRates	travelcrm.resources.currencies_rates	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	\N	f
+105	1424	accounts_items	Account Items	AccountsItems	travelcrm.resources.accounts_items	Finance accounts items	\N	f
+109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null	f
+108	1450	services_items	Service Item	ServicesItems	travelcrm.resources.services_items	Services Items List for include in sales documents such as Tours, Services Sales etc.	null	f
+110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null	f
+112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	f
+111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	f
 \.
 
 

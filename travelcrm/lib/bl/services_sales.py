@@ -181,6 +181,8 @@ class ServiceSaleCalculationFactory(CalculationFactory):
         query = (
             DBSession.query(
                 Resource.id.label('resource_id'),
+                ServiceSale.deal_date.label('date'),
+                ServiceItem.id.label('service_item_id'),
             )
             .join(Resource, ServiceSale.resource)
             .join(ServiceItem, ServiceSale.services_items)

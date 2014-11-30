@@ -7,7 +7,10 @@ from pyramid.view import (
 from pyramid.security import authenticated_userid
 
 from ..models.user import User
-from ..lib.bl.employees import get_employee_position
+from ..models.resource_type import ResourceType
+from ..lib.bl.employees import get_employee_position, get_employee_permisions
+from ..lib.bl.structures import get_structure_name_path 
+from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.common_utils import translate as _
 
 
@@ -68,3 +71,62 @@ def system_navigation(context, request):
         item_children.append(item)
         navigation[item.parent_id] = item_children
     return {'navigation': navigation}
+
+
+@view_config(
+    name='system_context_info',
+    request_method='GET',
+    context='..resources.Root',
+    xhr='True',
+    renderer='travelcrm:templates/system#system_context_info_dialog.mak'
+)
+def system_context_info(context, request):
+    return {
+        'title': _(u'Context Info'),
+    }
+
+
+@view_config(
+    name='system_context_info',
+    request_method='POST',
+    context='..resources.Root',
+    xhr='True',
+    renderer='json'
+)
+def _system_context_info(context, request):
+    user_id = authenticated_userid(request)
+    user = User.get(user_id)
+    employee = user.employee
+    rt = ResourceType.by_name(request.params.get('rt'))
+    rt_cls = get_resource_class(request.params.get('rt'))
+    permisions = get_employee_permisions(employee, rt_cls)
+    common_group_title = _(u'Common')
+    permisions_group_title = _(u'Permissions')
+    rows = []
+    rows.append({
+        'name': _(u'Resource Name'),
+        'value': rt.humanize,
+        'group': common_group_title
+    })    
+    rows.append({
+        'name': _(u'Resource System Name'),
+        'value': rt.name,
+        'group': common_group_title
+    })
+    rows.append({
+        'name': _(u'Rights'),
+        'value': ', '.join(permisions.permisions),
+        'group': permisions_group_title
+    })    
+    rows.append({
+        'name': _(u'Scope'),
+        'value': (
+            '&rarr;'.join(get_structure_name_path(permisions.structure)) 
+            if permisions.structure else _(u'All')
+        ),
+        'group': permisions_group_title
+    })    
+    return {
+        'total': len(rows),
+        'rows': rows,
+    }

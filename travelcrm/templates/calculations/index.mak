@@ -1,6 +1,8 @@
+<%namespace file="../common/context_info.mak" import="context_info"/>
 <%
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
+    _t_id = "t-%s" % _id
     _s_id = "s-%s" % _id    
 %>
 <div class="dl70 easyui-dialog"
@@ -11,8 +13,10 @@
         modal:true,
         draggable:false,
         resizable:false,
-        iconCls:'fa fa-table'
+        iconCls:'fa fa-table',
+        tools:'#${_t_id}'
     ">
+    ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="

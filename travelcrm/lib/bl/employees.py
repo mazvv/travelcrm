@@ -61,6 +61,9 @@ def get_employee_permisions(employee, resource):
 
 
 def query_employee_scope(employee, resource):
+    """get employee scope for resource
+    resource can be instance of context or context class
+    """
     permisions = get_employee_permisions(employee, resource)
     if permisions.scope_type == 'all':
         return DBSession.query(Structure.id)

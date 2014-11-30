@@ -47,6 +47,15 @@
                         ${h.common.error_container(name='icon_cls')}
                     </div>
                 </div>
+                <div class="form-field">
+                    <div class="dl15">
+                         ${h.tags.title(_(u"separator before"), False, "separator_before")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.yes_no_field(int(item.separator_before) if item else None, "separator_before")}
+                        ${h.common.error_container(name='separator_before')}
+                    </div>
+                </div>
             </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
