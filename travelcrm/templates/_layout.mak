@@ -19,11 +19,9 @@ ${h.tags.Doctype().html5()}
         <%block name="js"></%block>
     </head>
     <body id="_page_" class="easyui-layout">
-        <div id="_head_" data-options="region:'north', border:false">
+        <div id="_head_" data-options="region:'north', border:false" class="main">
             <div id="_top_">
-                <div class="main">
-                    ${panel('header_panel')}
-                </div>
+	            ${panel('header_panel')}
             </div>
             <div id="_navigation_">
                 <div class="main">
@@ -38,7 +36,7 @@ ${h.tags.Doctype().html5()}
                 </div>
             </div>
         </div>
-        <div id="_footer_" data-options="region:'south', border:false">
+        <div id="_footer_" data-options="region:'south', border:false" class="main">
             ${panel('footer_panel')}
         </div>
         <div id="_content_" class="main" data-options="region:'center', border:false">
@@ -48,7 +46,7 @@ ${h.tags.Doctype().html5()}
                         border:false, 
                         split:true, 
                 ">
-                    <div id="_tools_" class="easyui-accordion" data-options="fit:true,border:false">
+                    <div id="_tools_" class="easyui-tabs" data-options="fit:true,border:false">
                         <div title="${_(u"Tasks")}" data-options="iconCls:'fa fa-calendar-o',href:'/tasks'">
                         </div>
                     </div>

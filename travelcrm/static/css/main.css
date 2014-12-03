@@ -295,6 +295,26 @@ a:hover.l-btn-plain{
 .accordion .accordion-header-selected{
 	background-color: #ececec;
 }
+.calendar-selected{
+	background-color: #999;
+	border: none;
+}
+.easyui-calendar.tasks .calendar-day{
+	vertical-align: top;
+	text-align: left;
+	font-size: 10px;
+	border: 1px dashed #eee;
+	padding: 0px 2px;
+}
+.easyui-calendar.tasks .calendar-day td{
+	text-align: left;
+}
+.calendar-day, .calendar-menu-month{
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;	
+}
+
 
 /* navigation */
 #_navigation_ .easyui-linkbutton, #_navigation_ .easyui-menubutton{

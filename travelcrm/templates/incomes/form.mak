@@ -33,8 +33,8 @@
                             request, 
                             item.invoice_id if item else None,
                             show_toolbar=(not readonly if readonly else True),
-                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id)
-                        }
+                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id
+                        )}
                         ${h.common.error_container(name='invoice_id')}
                     </div>
                 </div>

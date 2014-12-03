@@ -82,6 +82,10 @@ def get_datetime_format():
     return _get_settings_value('datetime.format')
 
 
+def get_first_day():
+    return _get_settings_value('date.first_day')
+
+
 def money_cast(attr):
     if isinstance(attr, (Decimal, int, float)):
         return Decimal(attr).quantize(Decimal('.01'), rounding=ROUND_DOWN)

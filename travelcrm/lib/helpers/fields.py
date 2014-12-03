@@ -42,6 +42,7 @@ from ..utils.common_utils import (
     get_locale_name,
     gen_id,
     get_date_format,
+    get_first_day,
 )
 from ..utils.common_utils import translate as _
 from ..bl.subaccounts import get_subaccounts_types
@@ -428,7 +429,7 @@ def permisions_scope_type_field(
 
 def date_field(value, name, options=None):
     id = gen_id()
-    data_options = "editable:false"
+    data_options = "editable:false,firstDay:%s" % get_first_day()
     if options:
         data_options += ",%s" % options
     if value:

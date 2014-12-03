@@ -10,6 +10,9 @@
         border:false,
         iconCls:'fa fa-table'
     ">
+    <div>
+    	<div class="easyui-calendar tasks" data-options="border:false,firstDay:${h.common.get_first_day()}" style="width:100%;height:360px;"></div>
+    </div>
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
