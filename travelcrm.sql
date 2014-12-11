@@ -539,6 +539,19 @@ CREATE TABLE appointment (
 ALTER TABLE public.appointment OWNER TO mazvv;
 
 --
+-- Name: apscheduler_jobs; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE apscheduler_jobs (
+    id character varying(191) NOT NULL,
+    next_run_time double precision,
+    job_state bytea NOT NULL
+);
+
+
+ALTER TABLE public.apscheduler_jobs OWNER TO mazvv;
+
+--
 -- Name: bank; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1901,11 +1914,10 @@ CREATE TABLE task (
     resource_id integer NOT NULL,
     employee_id integer NOT NULL,
     title character varying(32) NOT NULL,
-    deadline date NOT NULL,
+    deadline timestamp without time zone NOT NULL,
     reminder timestamp without time zone,
     descr character varying,
-    priority integer NOT NULL,
-    status smallint NOT NULL
+    closed boolean
 );
 
 
@@ -2558,14 +2570,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6268, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6296, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1921, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1935, true);
 
 
 --
@@ -2677,6 +2689,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 27	1644	34	67234	Sichovih Strilciv, 2.
 28	1652	14	54415	Vasilkovskaya 45/56, 19
 29	1807	14	02121	Dekabristov str, filial #239
+30	1926	14	123432	Arsenalna str
 \.
 
 
@@ -2684,7 +2697,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('address_id_seq', 29, true);
+SELECT pg_catalog.setval('address_id_seq', 30, true);
 
 
 --
@@ -2713,7 +2726,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-27fe728cd7c
+458a53485c18
 \.
 
 
@@ -2725,6 +2738,15 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 1	789	54	2	4	1000.00	2014-02-02
 6	892	54	7	5	4500.00	2014-02-22
 8	1542	54	2	4	6500.00	2014-03-01
+\.
+
+
+--
+-- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY apscheduler_jobs (id, next_run_time, job_state) FROM stdin;
+_task_notification-37	1418417160	\\x80027d71012855046172677371024b2585710355086578656375746f727104550764656661756c747105550d6d61785f696e7374616e63657371064b03550466756e637107552c74726176656c63726d2e7363686564756c65722e7461736b733a5f7461736b5f6e6f74696669636174696f6e710855026964710955155f7461736b5f6e6f74696669636174696f6e2d3337710a550d6e6578745f72756e5f74696d65710b636461746574696d650a6461746574696d650a710c550a07de0c0c162e00000000637079747a0a5f700a710d28550b4575726f70652f4b696576710e4d201c4b005503454554710f745271108652711155046e616d65711255125f7461736b5f6e6f74696669636174696f6e711355126d6973666972655f67726163655f74696d6571144b0155077472696767657271156361707363686564756c65722e74726967676572732e646174650a44617465547269676765720a7116298171177d71187d7119550872756e5f64617465711a68117386625508636f616c65736365711b89550776657273696f6e711c4b0155066b7761726773711d7d711e752e
 \.
 
 
@@ -2931,6 +2953,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 74	+380665638900	phone	1640
 75	karpuha1990@ukr.net	email	1641
 76	+380502235686	phone	1650
+77	+380674523123	phone	1927
 \.
 
 
@@ -2938,7 +2961,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 76, true);
+SELECT pg_catalog.setval('contact_id_seq', 77, true);
 
 
 --
@@ -3390,7 +3413,6 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 23	4	\N	Directories	/	fa fa-book	8	873	f
 152	4	\N	Reports	/	fa fa-pie-chart	9	1895	f
 8	4	\N	System	/	fa fa-cog	10	778	f
-161	4	32	Demands	/demands	\N	1	1920	f
 155	4	53	Payments	/	\N	12	1904	f
 56	4	155	Income Payments	incomes	\N	9	1434	f
 61	4	155	Outgoing Payments	/outgoings	\N	10	1571	f
@@ -3416,9 +3438,9 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 28	4	159	Hotels Categories	/hotelcats	\N	6	910	f
 42	4	159	Hotels List	/hotels	\N	5	1080	f
 52	4	32	Services	/services_sales	\N	3	1369	f
-38	4	32	Tours	/tours_sales	\N	2	1075	t
 157	4	53	Currencies	/	\N	7	1906	t
 159	4	23	Hotels	/	\N	12	1908	t
+38	4	32	Tours	/tours_sales	\N	2	1075	f
 \.
 
 
@@ -3451,6 +3473,8 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 22	1837	sdfsdfsdf	\N
 23	1838	asdasdaSD	\N
 24	1872	For users	This subaccount is for Person Garkaviy Andrew
+25	1924	Passport detalized	There is no information about passport
+26	1931	Resource Task	This is for resource only
 \.
 
 
@@ -3458,7 +3482,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('note_id_seq', 24, true);
+SELECT pg_catalog.setval('note_id_seq', 26, true);
 
 
 --
@@ -3470,6 +3494,8 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 5	1797
 18	784
 24	1868
+26	1930
+25	1928
 \.
 
 
@@ -3530,6 +3556,7 @@ COPY passport (id, country_id, passport_type, num, descr, resource_id, end_date)
 20	3	citizen	HJ789665	\N	1642	\N
 21	3	foreign	RT7892634	\N	1643	2017-07-19
 22	3	foreign	RT632453	\N	1651	2019-08-16
+23	3	citizen	RTY	\N	1925	\N
 \.
 
 
@@ -3537,7 +3564,7 @@ COPY passport (id, country_id, passport_type, num, descr, resource_id, end_date)
 -- Name: passport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('passport_id_seq', 22, true);
+SELECT pg_catalog.setval('passport_id_seq', 23, true);
 
 
 --
@@ -3698,6 +3725,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 37	26
 41	27
 42	28
+30	30
 \.
 
 
@@ -3726,6 +3754,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 41	74
 41	75
 42	76
+30	77
 \.
 
 
@@ -3756,6 +3785,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 41	20
 41	21
 42	22
+30	23
 \.
 
 
@@ -3854,7 +3884,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1284	69	32	f
 1287	84	32	f
 1289	84	32	f
-1303	93	32	f
 728	55	32	\N
 784	47	32	\N
 1306	90	32	f
@@ -3946,7 +3975,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 905	71	32	\N
 906	71	32	\N
 907	71	32	\N
-1305	93	32	f
 1308	90	32	f
 1314	102	32	f
 1369	65	32	f
@@ -4191,9 +4219,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1007	12	32	\N
 1008	65	32	\N
 1093	84	32	\N
-1297	93	32	f
-1300	93	32	f
-1302	93	32	f
 1311	41	32	f
 1062	55	32	\N
 1323	83	32	f
@@ -4221,13 +4246,10 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 725	55	32	\N
 726	55	32	\N
 1282	87	32	f
-1298	93	32	f
 1095	70	32	\N
 1009	79	32	\N
 1096	39	32	\N
 1097	84	32	\N
-1299	93	32	f
-1301	93	32	f
 1335	83	32	f
 1079	65	32	\N
 1099	39	32	\N
@@ -4532,8 +4554,21 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1917	110	32	f
 1918	119	32	f
 1919	12	32	f
-1920	65	32	f
 1921	65	32	f
+1922	93	32	f
+1923	93	32	f
+1924	118	32	f
+1925	89	32	f
+1926	90	32	f
+1927	87	32	f
+1928	92	32	f
+1929	108	32	f
+1930	93	32	f
+1931	118	32	f
+1932	93	32	f
+1933	93	32	f
+1934	93	32	f
+1935	93	32	f
 \.
 
 
@@ -5010,9 +5045,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 4790	764	2	\N	2014-01-12 20:33:53.3138
 4909	723	2	\N	2014-02-08 22:28:37.868751
 4940	878	2	\N	2014-02-10 16:40:47.442615
-5528	1297	2	\N	2014-04-29 14:56:57.894099
-5531	1300	2	\N	2014-04-29 15:09:52.91536
-5533	1302	2	\N	2014-04-29 15:20:52.336646
 5610	1379	2	\N	2014-05-17 19:03:38.443538
 5612	1381	2	\N	2014-05-17 19:04:17.238286
 5615	1384	2	\N	2014-05-17 19:07:10.869783
@@ -5026,9 +5058,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5291	1088	2	\N	2014-03-22 18:51:18.985681
 5292	1081	2	\N	2014-03-22 18:51:44.158872
 5458	1225	2	\N	2014-04-13 12:01:26.796233
-5529	1298	2	\N	2014-04-29 15:04:08.798582
-5530	1299	2	\N	2014-04-29 15:07:15.435124
-5532	1301	2	\N	2014-04-29 15:12:08.265284
 5627	1396	2	\N	2014-05-18 11:58:47.293591
 4917	764	2	\N	2014-02-09 00:53:58.264629
 4918	769	2	\N	2014-02-09 00:57:04.796409
@@ -5044,7 +5073,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5294	1090	2	\N	2014-03-22 20:34:50.666418
 5295	1091	2	\N	2014-03-22 20:36:11.95663
 5298	1093	2	\N	2014-03-22 20:40:16.040605
-5534	1303	2	\N	2014-04-29 15:50:56.347101
 5629	1398	2	\N	2014-05-18 12:12:21.975254
 4949	764	2	\N	2014-02-11 19:47:14.055452
 5488	1257	2	\N	2014-04-28 12:34:34.363475
@@ -5061,7 +5089,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 5306	1101	2	\N	2014-03-22 21:00:48.529148
 5307	1102	2	\N	2014-03-22 21:01:34.517288
 5491	1260	2	\N	2014-04-28 12:59:00.104464
-5536	1305	2	\N	2014-04-29 18:26:56.143932
 5631	1400	2	\N	2014-05-18 13:37:21.801854
 5632	1401	2	\N	2014-05-18 13:37:41.402585
 5633	1402	2	\N	2014-05-18 13:44:45.628784
@@ -5541,7 +5568,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6257	1917	2	\N	2014-11-23 18:40:26.695236
 6258	1918	2	\N	2014-11-23 18:40:42.249218
 6259	1919	2	\N	2014-11-27 21:56:12.900683
-6260	1920	2	\N	2014-11-27 22:00:58.914811
 6261	1075	2	\N	2014-11-28 21:47:39.551572
 6262	1075	2	\N	2014-11-28 21:50:21.401582
 6263	1075	2	\N	2014-11-28 21:50:32.965327
@@ -5550,6 +5576,34 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6266	1908	2	\N	2014-11-28 22:03:25.613427
 6267	1919	2	\N	2014-11-30 11:21:31.130821
 6268	1921	2	\N	2014-11-30 11:32:16.085887
+6269	1075	2	\N	2014-11-30 18:21:55.412483
+6270	1368	2	\N	2014-11-30 18:22:02.736241
+6271	1922	2	\N	2014-12-07 14:34:35.538855
+6272	1630	2	\N	2014-12-07 16:56:05.246646
+6273	1923	2	\N	2014-12-07 17:22:48.083707
+6274	1656	2	\N	2014-12-07 20:01:19.362233
+6275	1656	2	\N	2014-12-07 21:16:30.31957
+6276	1924	2	\N	2014-12-07 21:40:24.739542
+6277	1925	2	\N	2014-12-07 21:41:09.94037
+6278	1926	2	\N	2014-12-07 21:41:37.63455
+6279	1471	2	\N	2014-12-07 21:41:39.584636
+6280	1927	2	\N	2014-12-07 21:42:12.893528
+6281	1471	2	\N	2014-12-07 21:42:14.781639
+6282	1928	2	\N	2014-12-07 21:42:16.748923
+6283	1929	2	\N	2014-12-07 21:42:16.748923
+6284	1928	2	\N	2014-12-07 21:42:38.598358
+6285	1930	2	\N	2014-12-08 21:43:55.101305
+6286	1869	2	\N	2014-12-08 21:46:09.685953
+6287	1931	2	\N	2014-12-08 21:52:00.685674
+6288	1930	2	\N	2014-12-08 21:53:17.580512
+6289	1932	2	\N	2014-12-11 22:45:01.994257
+6290	1933	2	\N	2014-12-11 22:46:28.273472
+6291	1934	2	\N	2014-12-11 22:50:30.21811
+6292	1928	2	\N	2014-12-11 22:50:35.79796
+6293	1935	2	\N	2014-12-11 22:53:00.765244
+6294	1928	2	\N	2014-12-11 22:53:03.075924
+6295	1935	2	\N	2014-12-11 22:53:42.569877
+6296	1928	2	\N	2014-12-11 22:53:44.11868
 \.
 
 
@@ -5716,6 +5770,7 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 37	1845	5	54	1	3556.00	29	59385.20
 38	1846	5	56	61	8520.00	25	8520.00
 39	1847	5	54	1	3534.00	20	59017.80
+41	1929	5	56	5	23000.00	30	23000.00
 \.
 
 
@@ -5723,7 +5778,7 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 -- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('service_item_id_seq', 40, true);
+SELECT pg_catalog.setval('service_item_id_seq', 41, true);
 
 
 --
@@ -5892,15 +5947,14 @@ COPY suppplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, priority, status) FROM stdin;
-11	1298	2	Task functionality completion	2014-05-17	\N	Complete Tasks Functionality<p></p><ol><li>Make Tasks Comments</li><li>Make Tasks Reminders</li><li>Make Tasks bindings to resources</li><li>Make possibility to create tasks from resources</li><li>Make Tasks filters to find tasks by priority, status, etc.</li><li>Bugfixing with tasks</li><li>Tasks sorting</li></ol><p></p>	2	2
-13	1300	2	Inline actions in grid rows	2014-05-10	\N	Rework with rows actions in grids. Make actions in grid rows	2	3
-15	1302	2	Translate CRM for RU, UA	2014-05-09	\N	\N	2	1
-16	1303	2	Widgets functionality	2014-05-10	\N	Make widgets functionality for Home or other places	1	3
-17	1305	2	Fulltext search functionality	2014-05-10	\N	Make full text search functionality	2	3
-14	1301	2	Restrictions in foreign keys	2014-05-10	\N	Rework foreign keys in DB, make it restricted to avoid critical aftermath after resources deletion.	3	4
-10	1297	2	Invoices and Contracts	2014-05-10	\N	To provide Billing functionality:<p><ol><li>Add Invoice creattion functionality from sales documents</li><li>Add Contract creation using structures Banks Details</li></ol></p>	2	2
-12	1299	2	Billing Functionality	2014-05-10	\N	Requirements is in progress now	2	4
+COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, closed) FROM stdin;
+34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f
+33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f
+35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f
+36	1932	2	Call and remind about payments	2014-12-11 22:48:00	2014-12-11 22:46:00	\N	f
+37	1933	2	Call and remind about payment	2014-12-13 22:46:00	2014-12-12 22:46:00	\N	f
+38	1934	2	Call and remind about payment	2014-12-12 22:50:00	2014-12-11 22:52:00	Call and remind to pay invoice	f
+39	1935	2	Review Calculation	2014-12-12 22:52:00	2014-12-11 22:55:00	\N	f
 \.
 
 
@@ -5908,7 +5962,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, prior
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 32, true);
+SELECT pg_catalog.setval('task_id_seq', 39, true);
 
 
 --
@@ -5916,6 +5970,9 @@ SELECT pg_catalog.setval('task_id_seq', 32, true);
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
+35	1869
+39	1928
+38	1928
 \.
 
 
@@ -5923,14 +5980,14 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 -- Name: tour_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_id_seq', 17, true);
+SELECT pg_catalog.setval('tour_id_seq', 18, true);
 
 
 --
 -- Name: tour_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('tour_point_id_seq', 69, true);
+SELECT pg_catalog.setval('tour_point_id_seq', 70, true);
 
 
 --
@@ -5938,14 +5995,15 @@ SELECT pg_catalog.setval('tour_point_id_seq', 69, true);
 --
 
 COPY tour_sale (id, start_location_id, end_location_id, adults, children, customer_id, resource_id, end_date, start_date, deal_date, advsource_id) FROM stdin;
-17	15	15	2	0	41	1656	2014-09-05	2014-08-30	2014-08-26	4
-16	15	15	2	2	37	1630	2014-09-06	2014-08-31	2014-08-24	4
 15	15	15	2	0	35	1617	2014-08-31	2014-08-25	2014-08-24	2
 14	15	15	2	0	33	1594	2014-08-31	2014-08-23	2014-08-22	6
 13	15	15	2	2	29	1480	2014-07-20	2014-07-14	2014-06-22	2
 12	14	14	2	2	25	1412	2014-07-25	2014-07-14	2014-07-14	4
 10	15	15	2	0	20	1377	2014-06-07	2014-06-01	2014-05-20	4
 9	15	15	2	1	17	1295	2014-05-09	2014-05-01	2014-05-17	6
+16	15	15	2	2	37	1630	2014-06-09	2014-08-31	2014-08-24	4
+17	15	15	2	0	41	1656	2014-05-09	2014-08-30	2014-08-26	4
+18	33	34	2	0	30	1928	2014-12-13	2014-12-08	2014-07-12	1
 \.
 
 
@@ -5983,16 +6041,18 @@ COPY tour_sale_person (tour_sale_id, person_id) FROM stdin;
 9	17
 9	18
 9	19
-16	40
-16	39
-16	38
-16	37
 15	35
 15	36
 14	34
 14	33
-17	41
+16	40
+16	37
+16	38
+16	39
 17	42
+17	41
+18	41
+18	30
 \.
 
 
@@ -6011,6 +6071,7 @@ COPY tour_sale_point (id, location_id, hotel_id, accomodation_id, foodcat_id, ro
 67	31	32	\N	10	\N	16	\N	2014-09-02	2014-08-31
 68	30	31	\N	15	31	16	\N	2014-09-06	2014-09-02
 69	37	36	\N	\N	\N	17	\N	2014-09-05	2014-08-30
+70	36	\N	\N	\N	\N	18	\N	2014-12-13	2014-07-12
 \.
 
 
@@ -6027,6 +6088,7 @@ COPY tour_sale_service_item (tour_sale_id, service_item_id) FROM stdin;
 12	38
 10	39
 9	40
+18	41
 \.
 
 
@@ -6196,6 +6258,14 @@ ALTER TABLE ONLY advsource
 
 ALTER TABLE ONLY appointment
     ADD CONSTRAINT appointment_header_pk PRIMARY KEY (id);
+
+
+--
+-- Name: apscheduler_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY apscheduler_jobs
+    ADD CONSTRAINT apscheduler_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -6948,6 +7018,13 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY "user"
     ADD CONSTRAINT user_pk PRIMARY KEY (id);
+
+
+--
+-- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (next_run_time);
 
 
 --
