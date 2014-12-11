@@ -42,6 +42,9 @@ from ..utils.common_utils import (
     get_locale_name,
     gen_id,
     get_date_format,
+    get_date_js_format,
+    get_datetime_format,
+    get_datetime_js_format,
     get_first_day,
 )
 from ..utils.common_utils import translate as _
@@ -429,7 +432,14 @@ def permisions_scope_type_field(
 
 def date_field(value, name, options=None):
     id = gen_id()
-    data_options = "editable:false,firstDay:%s" % get_first_day()
+    data_options = """
+        editable:false,
+        firstDay:%s,
+        formatter:function(date){return dt_formatter(date, '%s');},
+        parser:function(s){return dt_parser(s, '%s');}
+        """ % (
+            get_first_day(), get_date_js_format(), get_date_js_format()
+        )
     if options:
         data_options += ",%s" % options
     if value:
@@ -463,12 +473,20 @@ def time_field(value, name, options=None):
 
 def datetime_field(value, name, options=None):
     id = gen_id()
-    data_options = "editable:false,width:150,showSeconds:false"
+    data_options = """
+        editable:false,
+        firstDay:%s,
+        showSeconds:false,
+        formatter:function(date){return dt_formatter(date, '%s');},
+        parser:function(s){return dt_parser(s, '%s');}
+        """ % (
+            get_first_day(), get_datetime_js_format(), get_datetime_js_format()
+        )
     if options:
         data_options += ",%s" % options
     if value:
         value = format_datetime(
-            value, format=get_date_format(), locale=get_locale_name()
+            value, format=get_datetime_format(), locale=get_locale_name()
         )
     html = tags.text(
         name, value, class_="easyui-datetimebox text w10",

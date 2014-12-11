@@ -1,5 +1,6 @@
 # -*-coding: utf-8-*-
 
+from datetime import datetime
 from cgi import FieldStorage
 
 import colander
@@ -12,10 +13,10 @@ from colander import (
 )
 from babel.dates import (
     parse_date,
-    parse_time
+    parse_time,
 )
 
-from ..lib.utils.common_utils import get_locale_name
+from ..lib.utils.common_utils import get_locale_name, parse_datetime
 
 
 class ResourceSchema(colander.Schema):
@@ -71,7 +72,7 @@ class DateTime(ColanderDate):
         if not cstruct:
             return null
         try:
-            result = parse_date(cstruct, locale=get_locale_name())
+            result = parse_datetime(cstruct)
         except:
             raise Invalid(
                 node,

@@ -19,7 +19,7 @@ def name_validator(node, kw):
         ):
             raise colander.Invalid(
                 node,
-                _(u'Room category with the same name exists'),
+                _(u'Touroperator with the same name exists'),
             )
     return colander.All(colander.Length(max=32), validator,)
 
@@ -27,6 +27,7 @@ def name_validator(node, kw):
 class TouroperatorSchema(ResourceSchema):
     name = colander.SchemaNode(
         colander.String(),
+        validator=name_validator
     )
     licence_id = colander.SchemaNode(
         colander.Set(),

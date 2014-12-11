@@ -241,6 +241,7 @@ travelcrm/resources/touroperators.py
 travelcrm/resources/tours_sales.py
 travelcrm/resources/turnovers.py
 travelcrm/resources/users.py
+travelcrm/scheduler/__init__.py
 travelcrm/scripts/__init__.py
 travelcrm/scripts/initializedb.py
 travelcrm/static/css/emastic.css
@@ -391,6 +392,7 @@ travelcrm/static/css/jeasyui/icons/undo.png
 travelcrm/static/js/jquery-1.11.1.min.js
 travelcrm/static/js/jquery-te-1.4.0.min.js
 travelcrm/static/js/main.js
+travelcrm/static/js/moment.js
 travelcrm/static/js/jeasyui/datagrid-bufferview.js
 travelcrm/static/js/jeasyui/datagrid-defaultview.js
 travelcrm/static/js/jeasyui/datagrid-detailview.js
@@ -615,7 +617,6 @@ travelcrm/templates/tasks/delete.mak
 travelcrm/templates/tasks/details.mak
 travelcrm/templates/tasks/form.mak
 travelcrm/templates/tasks/index.mak
-travelcrm/templates/tasks/settings.mak
 travelcrm/templates/touroperators/delete.mak
 travelcrm/templates/touroperators/details.mak
 travelcrm/templates/touroperators/form.mak

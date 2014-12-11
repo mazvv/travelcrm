@@ -1,4 +1,5 @@
-<div class="dl50 easyui-dialog"
+<%namespace file="../notes/common.mak" import="notes_selector"/>
+<div class="dl55 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -23,18 +24,21 @@
                         ${h.tags.title(_(u"performer"), True, "employee_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.employees_combobox_field(request, item.employee_id if item else None, show_toolbar=False)}
+                        ${h.fields.employees_combobox_field(
+                        	request, 
+                        	item.employee_id if item else h.common.get_auth_employee(request).id, 
+                        	show_toolbar=False
+                        )}
                         ${h.common.error_container(name='employee_id')}
                     </div>
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"reminder"), False, "reminder")}
+                        ${h.tags.title(_(u"reminder"), True, "reminder")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.reminder_date if item else None, 'reminder_date')}
-                        ${h.fields.time_field(item.reminder_time if item else None, 'reminder_time')}
-                        ${h.common.error_container(name='reminder_date')}
+                        ${h.fields.datetime_field(item.reminder if item else None, 'reminder')}
+                        ${h.common.error_container(name='reminder')}
                     </div>
                 </div>
                 <div class="form-field">
@@ -42,26 +46,20 @@
                         ${h.tags.title(_(u"deadline"), True, "deadline")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.deadline if item else None, 'deadline')}
+                        ${h.fields.datetime_field(item.deadline if item else None, 'deadline')}
                         ${h.common.error_container(name='deadline')}
                     </div>
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"priority"), True, "priority")}
+                        ${h.tags.title(_(u"closed"), True, "closed")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.tasks_priority_combobox_field(item.priority if item else None)}
-                        ${h.common.error_container(name='priority')}
-                    </div>
-                </div>
-                <div class="form-field">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"status"), True, "status")}
-                    </div>
-                    <div class="ml15">
-                        ${h.fields.tasks_status_combobox_field(item.status if item else None)}
-                        ${h.common.error_container(name='status')}
+                        ${h.fields.yes_no_field(
+                        	int(item.closed) if item else None, 
+                        	'closed'
+                        )}
+                        ${h.common.error_container(name='closed')}
                     </div>
                 </div>
             </div>
@@ -69,7 +67,18 @@
                 ${h.tags.textarea('descr', item.descr if item else None, id="task-rich-text-editor")}
                 <script type="easyui-textbox/javascript">
                     $('#task-rich-text-editor').jqte({"format":false});
-                </script>               
+                </script>
+            </div>
+            <div title="${_(u'Notes')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${notes_selector(
+                        values=([note.id for note in item.resource.notes] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
+                </div>
             </div>
         </div>
         <div class="form-buttons">

@@ -2,18 +2,19 @@
 
 import logging
 import datetime
+import calendar
 
 import colander
 from pyramid.view import view_config
 
 from ..models import DBSession
 from ..models.task import Task
+from ..models.note import Note
 from ..lib.qb.tasks import TasksQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.resources_utils import (
-    get_resource_class, 
-    get_resource_type_by_resource,
-)
+from ..lib.utils.common_utils import cast_int
+from ..lib.utils.resources_utils import get_resource_class
+from ..scheduler.tasks import schedule_task_notification
 from ..forms.tasks import TaskSchema
 
 
@@ -33,12 +34,7 @@ class Tasks(object):
         permission='view'
     )
     def index(self):
-        status = Task.STATUS
-        priority = Task.PRIORITY
-        return {
-            'status': status,
-            'priority': priority
-        }
+        return {}
 
     @view_config(
         name='list',
@@ -59,6 +55,16 @@ class Tasks(object):
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
+        if (
+            self.request.params.get('y')
+            and self.request.params.get('m')
+            and self.request.params.get('d')
+        ):
+            y = cast_int(self.request.params.get('y'))
+            m = cast_int(self.request.params.get('m'))
+            d = cast_int(self.request.params.get('d'))
+            date = datetime.date(y, m, d)
+            qb.filter_date(date)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -108,26 +114,22 @@ class Tasks(object):
         schema = TaskSchema().bind(request=self.request)
 
         try:
-            controls = schema.deserialize(self.request.params)
-            if controls.get('reminder_date'):
-                reminder = datetime.datetime.combine(
-                    controls.get('reminder_date'),
-                    controls.get('reminder_time')
-                )
-            else:
-                reminder = None
+            controls = schema.deserialize(self.request.params.mixed())
             task = Task(
                 employee_id=controls.get('employee_id'),
                 title=controls.get('title'),
                 deadline=controls.get('deadline'),
-                reminder=reminder,
+                reminder=controls.get('reminder'),
                 descr=controls.get('descr'),
-                priority=controls.get('priority'),
-                status=controls.get('status'),
+                closed=controls.get('closed'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                task.resource.notes.append(note)
             DBSession.add(task)
             DBSession.flush()
+            schedule_task_notification(task.id)
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
@@ -160,21 +162,18 @@ class Tasks(object):
         schema = TaskSchema().bind(request=self.request)
         task = Task.get(self.request.params.get('id'))
         try:
-            controls = schema.deserialize(self.request.params)
-            if controls.get('reminder_date'):
-                reminder = datetime.datetime.combine(
-                    controls.get('reminder_date'),
-                    controls.get('reminder_time')
-                )
-            else:
-                reminder = None
+            controls = schema.deserialize(self.request.params.mixed())
             task.employee_id = controls.get('employee_id')
             task.title = controls.get('title')
             task.deadline = controls.get('deadline')
-            task.reminder = reminder
+            task.reminder = controls.get('reminder')
             task.descr = controls.get('descr')
-            task.priority = controls.get('priority')
-            task.status = controls.get('status')
+            task.closed = controls.get('closed')
+            task.resource.notes = []
+            for id in controls.get('note_id'):
+                note = Note.get(id)
+                task.resource.notes.append(note)
+            schedule_task_notification(task.id)
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
@@ -245,37 +244,21 @@ class Tasks(object):
             }
         return {'success_message': _(u'Deleted')}
 
-
     @view_config(
-        name='settings',
+        name='calendar',
         context='..resources.tasks.Tasks',
         request_method='GET',
-        renderer='travelcrm:templates/tasks/settings.mak',
-        permission='settings',
-    )
-    def settings(self):
-        rt = get_resource_type_by_resource(self.context)
-        return {
-            'title': _(u'Settings'),
-            'rt': rt,
-        }
-
-    @view_config(
-        name='settings',
-        context='..resources.tasks.Tasks',
-        request_method='POST',
         renderer='json',
-        permission='settings',
+        permission='view',
     )
-    def _settings(self):
-        schema = SettingsSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            rt = get_resource_type_by_resource(self.context)
-            rt.settings = {'service_id': controls.get('service_id')}
-            return {'success_message': _(u'Saved')}
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }
+    def calendar(self):
+        m = cast_int(self.request.params.get('month'))
+        y = cast_int(self.request.params.get('year'))
+        assert m and y, u'Must be integers'
+        qb = TasksQueryBuilder(self.context)
+        _weekday, days = calendar.monthrange(y, m)
+        start_date = datetime.datetime(year=y, month=m, day=1)
+        end_date = start_date + datetime.timedelta(days=days)
+        qb.calendar_query(start_date, end_date)
+        return qb.get_serialized()
+    

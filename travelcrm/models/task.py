@@ -4,7 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Date,
+    Boolean,
     DateTime,
     Table,
     ForeignKey,
@@ -15,8 +15,6 @@ from ..models import (
     DBSession,
     Base,
 )
-from ..lib import EnumIntType
-from ..lib.utils.common_utils import translate as _
 
 
 task_resource = Table(
@@ -50,20 +48,6 @@ task_resource = Table(
 class Task(Base):
     __tablename__ = 'task'
 
-    PRIORITY = [
-        ('minor', _(u'minor')),
-        ('normal', _(u'normal')),
-        ('major', _(u'major')),
-        ('critical', _(u'critical'))
-    ]
-    STATUS = [
-        ('undefined', _(u'undefined')),
-        ('in_work', _(u'in work')),
-        ('on_hold', _(u'on hold')),
-        ('requirements', _(u'requirements')),
-        ('closed', _(u'closed')),
-    ]
-
     id = Column(
         Integer,
         autoincrement=True,
@@ -94,7 +78,7 @@ class Task(Base):
         nullable=False,
     )
     deadline = Column(
-        Date,
+        DateTime,
         nullable=False,
     )
     reminder = Column(
@@ -103,13 +87,9 @@ class Task(Base):
     descr = Column(
         String,
     )
-    priority = Column(
-        EnumIntType(PRIORITY),
-        nullable=False,
-    )
-    status = Column(
-        EnumIntType(STATUS),
-        nullable=False,
+    closed = Column(
+        Boolean,
+        default=False,
     )
     resource = relationship(
         'Resource',

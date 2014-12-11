@@ -18,7 +18,7 @@ from ..utils.common_utils import (
     get_base_currency as u_get_base_currency,
     get_first_day as u_get_first_day,
 )
-from ..utils.security_utils import get_auth_employee
+from ..utils.security_utils import get_auth_employee as u_get_auth_employee
 from ..bl.employees import get_employee_structure
 
 
@@ -106,8 +106,12 @@ def get_locale_name():
 
 
 def get_current_employee_structure(request):
-    return get_employee_structure(get_auth_employee(request))
+    return get_employee_structure(u_get_auth_employee(request))
 
 
 def get_base_currency():
     return u_get_base_currency()
+
+
+def get_auth_employee(request):
+    return u_get_auth_employee(request)

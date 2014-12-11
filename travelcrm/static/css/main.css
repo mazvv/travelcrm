@@ -303,16 +303,34 @@ a:hover.l-btn-plain{
 	vertical-align: top;
 	text-align: left;
 	font-size: 10px;
-	border: 1px dashed #eee;
-	padding: 0px 2px;
+	border: 1px solid #eee;
+	padding: 0px;
+	border-left: none;
+	border-top: none;
+	height: 50px;
 }
 .easyui-calendar.tasks .calendar-day td{
 	text-align: left;
+}
+.easyui-calendar.tasks .calendar-day .calendar-date{
+	padding: 0px 2px;
 }
 .calendar-day, .calendar-menu-month{
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;	
+}
+.easyui-calendar.tasks .calendar-day .tasks-container{
+	font-size: 14px;
+}
+.easyui-calendar.tasks .calendar-day .tasks-container .task-status{
+	padding: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;	
+}
+.easyui-calendar.tasks .calendar-day .tasks-container .task-status.task-open{
+	color: black;
 }
 
 
@@ -611,33 +629,17 @@ span.field-actions span.field-action:first-child {
 }
 
 /** labels **/
-.task-status, .task-priority{
+.task-status{
 	padding: 1px 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;	
 }
-.task-status.undefined, .task-priority.minor{
-	background-color: #999;
-	color: #fff;
+.task-status.task-open{
+	background-color: #66b5d7;
 }
-.task-status.in_work, .task-priority.major{
-	background-color: #31c0be;
-	color: #fff;
-}
-.task-status.on_hold, .task-priority.normal{
-    background-color: #66b5d7;
-    color: #fff;
-}
-.task-status.requirements{
-	background-color: #eec95a;
-}
-.task-status.closed{
+.task-status.task-closed{
 	background-color: #60cd9b;
-	color: #fff;
-}
-.task-priority.critical{
-	background-color: #e87352;
 	color: #fff;
 }
 

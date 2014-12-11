@@ -32,6 +32,7 @@ requires = [
     'Sphinx>=1.2.2',
     'sphinx-bootstrap-theme>=0.4.0',
     'pdfkit>=0.4.1',
+    'apscheduler>=3.0.1',
 ]
 
 setup(

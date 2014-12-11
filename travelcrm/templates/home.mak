@@ -8,6 +8,7 @@
     Home content
 </div>
 <%block name="js">
+    ${h.tags.javascript_link(request.static_url('travelcrm:static/js/moment.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/datagrid-groupview.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/datagrid-scrollview.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/datagrid-detailview.js'))}

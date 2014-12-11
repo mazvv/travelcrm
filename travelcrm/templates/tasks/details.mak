@@ -11,7 +11,7 @@
     % if item.deadline:
     <tr>
         <td width="25%" class="b">${_(u'deadline')}</td>
-        <td>${h.common.format_date(item.deadline)}</td>
+        <td>${h.common.format_datetime(item.deadline)}</td>
     </tr>
     % endif
     % if item.reminder:
@@ -20,30 +20,14 @@
         <td>${h.common.format_datetime(item.reminder)}</td>
     </tr>
     % endif
-    % if item.priority:
     <tr>
-        <td width="25%" class="b">
-            ${_(u'priority')}
-        </td>
+    	<td width="25%" class="b">${_(u'status')}</td>
         <td>
-            <span class="task-priority ${item.priority}">
-                ${item.priority}
+            <span class="task-status ${'task-closed' if item.closed else 'task-open'}">
+                ${_('closed') if item.closed else _('open')}
             </span>
         </td>
     </tr>
-    % endif
-    % if item.status:
-    <tr>
-        <td width="25%" class="b">
-            ${_(u'status')}
-        </td>
-        <td>
-            <span class="task-status ${item.status}">
-                ${item.status}
-            </span>
-        </td>
-    </tr>
-    % endif
     % if item.descr:
     <tr>
         <td colspan="2">

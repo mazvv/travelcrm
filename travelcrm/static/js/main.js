@@ -441,3 +441,71 @@ function disable_obj_inputs(obj){
     obj.find("[type=submit]").addClass("disable");
     return obj;
 }
+
+
+function dt_formatter(date, format){
+	return moment(date).format(format);
+}
+
+
+function dt_parser(s, format){
+	if(!s) return new Date();
+	var date = moment(s, format);
+	return new Date(date);
+}
+
+
+// Calendar
+function get_calendar_tasks_data(y, m){
+	var url = $('#_calendar').data('url');
+	url += '?' + $.param({'year': y, 'month': m});
+	var tasks_data = null;
+	$.getJSON(url, function(data){populate_calendar_tasks(data);});
+	return tasks_data;
+}
+
+
+function populate_calendar_tasks(tasks_data){
+	$.each(tasks_data, function(key, data){
+		var id = '#tasks-container-' + data['deadline']
+		var container = $(id);
+		if(!is_undefined(container)){
+			var open_title = container.data('open-title');
+			var closed_title = container.data('closed-title');
+			container.html(tasks_container(data, open_title, closed_title));
+			$.parser.parse(id);
+		}
+	});
+}
+
+
+function tasks_container(data, open_title, closed_title){
+	var closed_icon = $('<div/>').addClass('fa fa-dot-circle-o');
+	var open_icon = $('<div/>').addClass('fa fa-clock-o');
+	var closed = $('<div class="dp50 tc task-closed task-status easyui-tooltip"/>')
+		.attr('title', closed_title)
+		.append(closed_icon).append('<div>' + data['closed'] + '</div>');
+	var open = $('<div class="dp50 tc task-open task-status easyui-tooltip"/>')
+		.attr('title', open_title)
+		.append(open_icon).append('<div>' + data['open'] + '</div>');
+	return $('<div class="dp100"/>').append(open).append(closed);
+}
+
+
+function format_tasks_data(date, open_title, closed_title){
+    var d = date.getDate();
+	var ts = moment(date).format('YYYYMMDD');
+    var cell = $('<div/>').addClass('calendar-date').html(d);
+    var tasks_container = $('<div/>').addClass('tasks-container')
+    	.attr('id', 'tasks-container-' + ts)
+    	.attr('data-open-title', open_title)
+    	.attr('data-closed-title', closed_title);
+    return $('<div/>').append(cell).append(tasks_container).html();
+}
+
+
+function repopulate_tasks_calendar(){
+	var y = $('#_calendar').calendar().year;
+	var m = $('#_calendar').calendar().month;
+	if(y && m) get_calendar_tasks_data();
+}

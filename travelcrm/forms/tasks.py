@@ -4,10 +4,9 @@ import colander
 
 from . import (
     ResourceSchema,
-    Date,
-    Time,
+    DateTime
 )
-from ..models.task import Task
+from ..lib.utils.common_utils import parse_datetime
 from ..lib.utils.common_utils import translate as _
 
 
@@ -16,16 +15,13 @@ def reminder_validator(node, kw):
     request = kw.get('request')
 
     def validator(node, value):
-        if (
-            value and not request.params.get('reminder_time')
-            or not value and request.params.get('reminder_time')
-        ):
-
+        deadline = parse_datetime(request.params.get('deadline'))
+        if value and deadline <= value:
             raise colander.Invalid(
                 node,
-                _(u"Set date and time or leave empty both")
+                _(u'Remainder must be earlier than Deadline'),
             )
-    return colander.All(validator,)
+    return colander.All(validator)
 
 
 class TaskSchema(ResourceSchema):
@@ -41,26 +37,17 @@ class TaskSchema(ResourceSchema):
         validator=colander.Length(min=2, max=128)
     )
     deadline = colander.SchemaNode(
-        Date()
+        DateTime()
     )
-    reminder_date = colander.SchemaNode(
-        Date(),
-        missing=None,
+    reminder = colander.SchemaNode(
+        DateTime(),
         validator=reminder_validator
-    )
-    reminder_time = colander.SchemaNode(
-        Time(),
-        missing=None,
     )
     descr = colander.SchemaNode(
         colander.String(),
         missing=None,
     )
-    priority = colander.SchemaNode(
-        colander.String(),
-        validator=colander.OneOf(map(lambda x: x[0], Task.PRIORITY))
-    )
-    status = colander.SchemaNode(
-        colander.String(),
-        validator=colander.OneOf(map(lambda x: x[0], Task.STATUS))
+    closed = colander.SchemaNode(
+        colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
+        default=False,
     )

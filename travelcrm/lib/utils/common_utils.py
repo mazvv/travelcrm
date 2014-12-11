@@ -2,10 +2,11 @@
 
 import random
 from uuid import uuid4
+from datetime import datetime
 from decimal import Decimal, ROUND_DOWN
 
 from babel.dates import format_date as fd, format_datetime as fdt
-from babel.dates import parse_date as pd
+from babel.dates import parse_date as pd, parse_time as pt
 from babel.numbers import format_decimal as fdc
 
 from pyramid.threadlocal import get_current_registry
@@ -86,6 +87,14 @@ def get_first_day():
     return _get_settings_value('date.first_day')
 
 
+def get_date_js_format():
+    return _get_settings_value('date.js_format')
+
+
+def get_datetime_js_format():
+    return _get_settings_value('datetime.js_format')
+
+
 def money_cast(attr):
     if isinstance(attr, (Decimal, int, float)):
         return Decimal(attr).quantize(Decimal('.01'), rounding=ROUND_DOWN)
@@ -110,3 +119,13 @@ def format_decimal(value):
 
 def parse_date(value):
     return pd(value, locale=get_locale_name())
+
+
+def parse_datetime(value):
+    d = pd(value, locale=get_locale_name())
+    #TODO: rework this
+    time_str = value.split(' ')[1]
+    value = time_str.strip()
+    value = "%s:00" % value
+    t = pt(value, locale=get_locale_name())
+    return datetime.combine(d, t)
