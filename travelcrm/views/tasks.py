@@ -55,16 +55,6 @@ class Tasks(object):
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
-        if (
-            self.request.params.get('y')
-            and self.request.params.get('m')
-            and self.request.params.get('d')
-        ):
-            y = cast_int(self.request.params.get('y'))
-            m = cast_int(self.request.params.get('m'))
-            d = cast_int(self.request.params.get('d'))
-            date = datetime.date(y, m, d)
-            qb.filter_date(date)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')

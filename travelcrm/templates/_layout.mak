@@ -46,9 +46,7 @@ ${h.tags.Doctype().html5()}
                         border:false, 
                         split:true, 
                 ">
-                    <div id="_tools_" class="easyui-tabs" data-options="fit:true,border:false">
-                        <div title="${_(u"Tasks")}" data-options="iconCls:'fa fa-calendar-o',href:'/tasks'">
-                        </div>
+                    <div id="_tools_" class="easyui-panel" data-options="fit:true,border:false,href:'/tasks'">
                     </div>
                 </div>
                 <div id="_main_" data-options="region:'center', border:false">

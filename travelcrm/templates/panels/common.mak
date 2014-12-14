@@ -6,8 +6,8 @@
     </div>
     % if hasattr(_context, 'is_logged') and _context.is_logged():
     <div class="dl70">
-        <div class="dl40">&nbsp;</div>
-        <div class="dl30">
+        <div class="dl30">&nbsp;</div>
+        <div class="dl40">
             ${panel('employee_info_panel')}
         </div>
     </div>
@@ -74,7 +74,7 @@
 
 
 <%def name="employee_info()">
-    <div class="employee-info">
+    <div class="employee-info dl30">
         <div class="dl5 tr">
             <%
                photo = employee.photo or 'no-image.png'
@@ -96,6 +96,15 @@
                 <div class="b">${employee.name}</div>
                 <div><span class="b">${position.name}</span> ${_(u'in')} ${h.tags.literal(' &rarr; '.join(structure_path))}</div>
             </div>
+        </div>
+    </div>
+    <div class="dl10">
+        <div class="employee-quick-menu">
+            <a class="fa fa-bell-o quick-menu-item _action easyui-tooltip" 
+                title="${_(u'notifications')}" 
+                data-options="action:'dialog_open',url:'/notifications'">
+                <div class="indicator notifications-counter">${employee.notifications.count()}</div>
+            </a>
         </div>
     </div>
 </%def>

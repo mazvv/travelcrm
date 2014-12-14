@@ -87,6 +87,9 @@ class Task(Base):
     descr = Column(
         String,
     )
+    resource_url = Column(
+        String,
+    )
     closed = Column(
         Boolean,
         default=False,

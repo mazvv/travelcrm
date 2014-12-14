@@ -106,6 +106,8 @@ class Resource(Base):
 
     def logging(self):
         request = threadlocal.get_current_request()
+        if not request:
+            return
         modifier = get_auth_employee(request)
         assert modifier is not None, type(modifier)
         self.resources_logs.append(

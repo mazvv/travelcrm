@@ -4,7 +4,7 @@ from collections import OrderedDict
 from abc import ABCMeta
 from decimal import Decimal
 
-from datetime import datetime, date
+from datetime import datetime, date, time
 from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
 from babel.dates import parse_date
@@ -18,7 +18,8 @@ from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
 from ..utils.common_utils import (
-    get_locale_name, cast_int, format_date, format_datetime, format_decimal
+    get_locale_name, cast_int, format_date, 
+    format_datetime, format_time, format_decimal
 )
 from ..utils.security_utils import get_auth_employee
 
@@ -36,6 +37,8 @@ def query_row_serialize_format(row):
             res_row[key] = format_date(value)
         if isinstance(value, datetime):
             res_row[key] = format_datetime(value)
+        if isinstance(value, time):
+            res_row[key] = format_time(value)
         if isinstance(value, Decimal):
             res_row[key] = format_decimal(value)
     return res_row
@@ -144,7 +147,7 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
             employee = get_auth_employee(context.request)
             query = query_employee_scope(employee, context)
             if query:
-                subq = query_employee_scope(employee, context).subquery()
+                subq = query.subquery()
                 self.query = self.query.join(subq, subq.c.id == aStructure.id)
 
     def get_base_fields(self):

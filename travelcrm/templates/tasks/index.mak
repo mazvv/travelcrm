@@ -15,7 +15,7 @@
                     );
                 },
                 onChange: function(newDate, oldDate){
-                	$('#${_id}').datagrid('load');
+                    $('#${_id}').datagrid('load');
                 },
                 onNavigate: function(year, month){
                     get_calendar_tasks_data(year, month);
@@ -30,7 +30,7 @@
             data-options="
                 url:'${request.resource_url(_context, 'list')}',border:false,
                 pagination:true,fit:true,pageSize:50,singleSelect:true,
-                sortName:'id',sortOrder:'desc',
+                sortName:'time',sortOrder:'asc',
                 pageList:[50,100,500],idField:'_id',checkOnSelect:false,
                 selectOnCheck:false,toolbar:'#${_tb_id}',
                 view: detailview,
@@ -53,18 +53,27 @@
                     param.y = date.getFullYear();
                     param.m = date.getMonth() + 1;
                     param.d = date.getDate();
+                    $.each($('#${_tb_id} .searchbar').find('input'), function(i, el){
+                    if(!is_undefined($(el).attr('name')))
+                        param[$(el).attr('name')] = $(el).val();
+                    });
                 }
             " width="100%">
             <thead>
                 % if _context.has_permision('delete'):
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
                 % endif
-                <th data-options="field:'title',sortable:true,width:350">${_(u"title")}</th>
+                <th data-options="field:'title',sortable:true,width:290">${_(u"title")}</th>
+                <th data-options="field:'time',sortable:true,width:60,formatter: function(value,row,index){
+                    var span = $('<span/>').addClass('fa fa-clock-o mr05');
+                    return $('<div/>').append(span).html() + value;
+                },
+		styler: function(value,row,index){if(row.closed) return 'opacity:0.6;background-color:#eee;';}" class="tc">${_(u'time')}</th>
             </thead>
         </table>
 
         <div class="datagrid-toolbar" id="${_tb_id}">
-            <div class="actions button-container">
+            <div class="actions button-container dl25">
                 <div class="button-group minor-group">
                     % if _context.has_permision('add'):
                     <a href="#" class="button primary _action" 
@@ -90,6 +99,16 @@
                         <span class="fa fa-times"></span>${_(u'Delete')}
                     </a>
                     % endif
+                </div>
+            </div>
+            <div class="ml25 tr">
+                <div class="searchbar" style="margin-top: 2px;">
+                    ${h.tags.select(
+                        'closed', None, 
+                        [('', _(u'--all--')), (1, _(u'closed')), (0, _(u'open'))], 
+                        class_='easyui-combobox w5',
+                        data_options="panelHeight:'auto',editable:false,onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
+                    )}
                 </div>
             </div>
         </div>

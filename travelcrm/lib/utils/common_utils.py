@@ -5,7 +5,9 @@ from uuid import uuid4
 from datetime import datetime
 from decimal import Decimal, ROUND_DOWN
 
-from babel.dates import format_date as fd, format_datetime as fdt
+from babel.dates import (
+    format_date as fd, format_datetime as fdt, format_time as ft
+)
 from babel.dates import parse_date as pd, parse_time as pt
 from babel.numbers import format_decimal as fdc
 
@@ -83,6 +85,10 @@ def get_datetime_format():
     return _get_settings_value('datetime.format')
 
 
+def get_time_format():
+    return _get_settings_value('time.format')
+
+
 def get_first_day():
     return _get_settings_value('date.first_day')
 
@@ -110,6 +116,12 @@ def format_date(value):
 def format_datetime(value):
     return fdt(
         value, format=get_datetime_format(), locale=get_locale_name()
+    )
+
+
+def format_time(value):
+    return ft(
+        value, format=get_time_format(), locale=get_locale_name()
     )
 
 

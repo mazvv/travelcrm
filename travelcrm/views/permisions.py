@@ -95,7 +95,6 @@ class PositionsPermisions(object):
             )
             .first()
         )
-
         return {
             'position': position,
             'resource_type': resource_type,

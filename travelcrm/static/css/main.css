@@ -9,20 +9,6 @@
 @IMPORT url("./font-awesome.min.css");
 @IMPORT url("./jquery-te-1.4.0.css");
 
-/**
-font-color: #555555;
-red: #900;
-background footer: #2b394a;
-page background: #f4f4f4;
-
--- statuses
-default - #999
-primary - #31c0be
-success - #60cd9b
-info - #66b5d7
-warning - #eec95a
-danger - #e87352
-**/
 
 /** emastic hacks **/
 .main{
@@ -77,6 +63,9 @@ p{
 	background-color: #2b394a;
 	color: #fff;
 }
+#_notifications_{
+	height: 300px;
+}
 .logo{
     color: #ffffff !important;
     padding-top: 5px;
@@ -99,9 +88,9 @@ table {
 	margin: 0;
 }
 ._container .unselectable{
-	-webkit-user-select: none;        
-	-moz-user-select: none;
-	-ms-user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .hidden{
@@ -125,6 +114,9 @@ hr.dashed{
 }
 .pt1{
 	padding-top: 1em;
+}
+.pt05{
+	padding-top: 0.5em;
 }
 
 /** margins **/
@@ -241,8 +233,9 @@ a:hover.l-btn-plain{
 	-moz-osx-font-smoothing: grayscale;
 	vertical-align: middle;
 	font-size: 14px;
+	background-color: #f3f3f3;
+	text-align: center;
 }
-
 .tree-file:before{
     content: "\f15b";
 }
@@ -295,9 +288,9 @@ a:hover.l-btn-plain{
 .accordion .accordion-header-selected{
 	background-color: #ececec;
 }
-.calendar-selected{
-	background-color: #999;
-	border: none;
+.easyui-calendar.tasks .calendar-day.calendar-selected{
+	background-color: #555;
+	color: #fff;
 }
 .easyui-calendar.tasks .calendar-day{
 	vertical-align: top;
@@ -308,6 +301,7 @@ a:hover.l-btn-plain{
 	border-left: none;
 	border-top: none;
 	height: 50px;
+	color: #444;
 }
 .easyui-calendar.tasks .calendar-day td{
 	text-align: left;
@@ -332,7 +326,18 @@ a:hover.l-btn-plain{
 .easyui-calendar.tasks .calendar-day .tasks-container .task-status.task-open{
 	color: black;
 }
-
+.datagrid-row-expand, .datagrid-row-collapse{
+	font-family: FontAwesome;
+	background: none;
+	font-size: 14px;
+	color: #444;
+}
+.datagrid-row-expand:before{
+	content: "\f067";
+}
+.datagrid-row-collapse:before{
+	content: "\f068";
+}
 
 /* navigation */
 #_navigation_ .easyui-linkbutton, #_navigation_ .easyui-menubutton{
@@ -412,6 +417,29 @@ form a:hover{
 	background-color: #f3f3f3;
 	line-height: 20px;
 } 
+input[type=checkbox] {
+     position: relative;
+}
+input[type=checkbox]:before {
+    position: absolute;
+    background-color: white;
+    height: 100%;
+	width: 100%;
+    font-family: FontAwesome;
+    display: inline-block;
+    content:"\f096";
+    letter-spacing: 10px;
+    font-size: 18px;
+    vertical-align: middle;
+    text-align: center;
+    color: #444;
+}
+input[type=checkbox]:checked:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content:"\f046";
+    letter-spacing: 5px;
+}
 
 /** required **/
 .required .required-symbol{
@@ -686,4 +714,31 @@ div.payment-indicator span{
 div.payment-indicator div{
 	background-color: #ccc;
 	height: 12px;
+}
+
+/** quick links **/
+.employee-quick-menu{
+    margin-top: 1.4em;
+}
+.quick-menu-item{
+    color: #fff;
+    font-size: 16px;
+    position: relative;
+    z-index: 5;
+}
+.quick-menu-item:hover{
+	text-decoration: none;
+	cursor: pointer;
+}
+.quick-menu-item .indicator{
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    font-size: 60%;
+    background-color: white;
+    color: #555;
+    padding: 1px 2px 0px 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 }

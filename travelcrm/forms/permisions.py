@@ -27,6 +27,7 @@ class PermisionSchema(colander.Schema):
     )
     scope_type = colander.SchemaNode(
         colander.String(),
+        missing='all',
         validator=scope_type_validator
     )
     structure_id = colander.SchemaNode(

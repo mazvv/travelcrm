@@ -418,15 +418,18 @@ def positions_combogrid_field(
 
 
 def permisions_scope_type_field(
-    value='structure', name='scope_type'
+    value='structure', name='scope_type', options=None
 ):
     choices = [
         ("all", _(u'all')),
         ("structure", _(u'structure')),
     ]
+    data_options = "panelHeight:'auto',editable:false"
+    if options:
+        data_options += ',%s' % options
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false"
+        data_options=data_options
     )
 
 

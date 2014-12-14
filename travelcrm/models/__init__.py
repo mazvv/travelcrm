@@ -67,3 +67,4 @@ from crosspayment import Crosspayment
 from note import Note
 from calculation import Calculation
 from transfer import Transfer
+from notification import Notification

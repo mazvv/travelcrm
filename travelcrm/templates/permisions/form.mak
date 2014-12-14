@@ -1,3 +1,4 @@
+<%namespace file="../common/infoblock.mak" import="infoblock"/>
 <div class="dl45 easyui-dialog"
     title="${_(u'Edit Permissions')}"
     data-options="
@@ -17,14 +18,18 @@
             </div>
         </div>
         % endfor
+        % if not allowed_scopes:
+            ${infoblock(_(u'Scopes is not allowed for this Resource Type'))}
+        % endif
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"scope type"), False, "scope_type")}
             </div>
             <div class="ml15">
                 ${h.fields.permisions_scope_type_field(
-                	item.scope_type if item else 'structure', 
+                	item.scope_type if item else 'all', 
                 	'scope_type',
+                	options=('disabled:true' if not allowed_scopes else '')
                 )}
                 ${h.common.error_container(name='scope_type')}
             </div>
@@ -34,7 +39,11 @@
                 ${h.tags.title(_(u"scope structure"), False, "structure_id")}
             </div>
             <div class="ml15">
-                ${h.fields.structures_combotree_field(item.structure_id if item else None, name="structure_id")}
+                ${h.fields.structures_combotree_field(
+                    item.structure_id if item else None, 
+                    name="structure_id", 
+                    options=('disabled:true' if not allowed_scopes else '')
+                )}
                 ${h.common.error_container(name='structure_id')}
             </div>
         </div>

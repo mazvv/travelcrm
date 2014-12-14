@@ -1,11 +1,13 @@
 # -*coding: utf-8-*-
+import datetime
 from collections import Iterable
 
-from sqlalchemy import func, cast, Date, case
+from sqlalchemy import func, cast, Date, Time, case
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.task import Task
+from ...lib.utils.common_utils import cast_int
 
 
 class TasksQueryBuilder(ResourcesQueryBuilder):
@@ -15,6 +17,7 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
         'title': Task.title,
         'reminder': Task.reminder,
         'deadline': Task.deadline,
+        'time': cast(Task.deadline, Time),
         'employee': Task.employee_id,
         'closed': Task.closed,
         'descr': Task.descr
@@ -33,10 +36,6 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
         if id:
             self.query = self.query.filter(Task.id.in_(id))
 
-    def filter_date(self, date):
-        if date:
-            self.query = self.query.filter(cast(Task.deadline, Date) == date)
-
     def calendar_query(self, start_date, end_date=None):
         if start_date:
             self.query = self.query.filter(Task.deadline >= start_date)
@@ -53,3 +52,22 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
             )
             .group_by(cast(Task.deadline, Date))
         )
+
+    def advanced_search(self, **kwargs):
+        super(TasksQueryBuilder, self).advanced_search(**kwargs)
+        if 'y' in kwargs and 'm' in kwargs and 'd' in kwargs:
+            self._filter_date(
+                kwargs.get('y'), kwargs.get('m'), kwargs.get('d')
+            )
+        if 'closed' in kwargs:
+            self._filter_closed(kwargs.get('closed'))
+
+    def _filter_date(self, y, m, d):
+        if y and m and d:
+            date = datetime.date(cast_int(y), cast_int(m), cast_int(d))
+            self.query = self.query.filter(cast(Task.deadline, Date) == date)
+
+    def _filter_closed(self, closed):
+        if closed:
+            closed = bool(cast_int(closed))
+            self.query = self.query.filter(Task.closed == closed)

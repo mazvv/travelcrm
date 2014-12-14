@@ -509,3 +509,22 @@ function repopulate_tasks_calendar(){
 	var m = $('#_calendar').calendar().month;
 	if(y && m) get_calendar_tasks_data();
 }
+
+
+/** notifications **/
+$(document).ready(
+	setInterval(
+		function(){
+			$.getJSON('/notifications/counter', function(data){
+				$('.notifications-counter').html(data.count);
+			});
+		}, 
+		5000
+	)
+);
+
+
+/** home page **/
+$(document).ready(function(){
+	$('#_home_').vectorMap();
+});
