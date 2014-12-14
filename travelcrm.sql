@@ -961,6 +961,18 @@ CREATE TABLE employee_contact (
 ALTER TABLE public.employee_contact OWNER TO mazvv;
 
 --
+-- Name: employee_notification; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE employee_notification (
+    employee_id integer NOT NULL,
+    notification_id integer NOT NULL
+);
+
+
+ALTER TABLE public.employee_notification OWNER TO mazvv;
+
+--
 -- Name: employee_passport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1326,6 +1338,43 @@ CREATE TABLE note_resource (
 
 
 ALTER TABLE public.note_resource OWNER TO mazvv;
+
+--
+-- Name: notification; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE notification (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    title character varying NOT NULL,
+    descr character varying NOT NULL,
+    url character varying,
+    created timestamp without time zone
+);
+
+
+ALTER TABLE public.notification OWNER TO mazvv;
+
+--
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE notification_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.notification_id_seq OWNER TO mazvv;
+
+--
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
+
 
 --
 -- Name: outgoing; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
@@ -1917,7 +1966,8 @@ CREATE TABLE task (
     deadline timestamp without time zone NOT NULL,
     reminder timestamp without time zone,
     descr character varying,
-    closed boolean
+    closed boolean,
+    resource_url character varying
 );
 
 
@@ -2395,6 +2445,13 @@ ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
@@ -2570,21 +2627,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6296, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6328, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1935, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1950, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 122, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 123, true);
 
 
 --
@@ -2726,7 +2783,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-458a53485c18
+339f51c3cba9
 \.
 
 
@@ -2746,7 +2803,6 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 --
 
 COPY apscheduler_jobs (id, next_run_time, job_state) FROM stdin;
-_task_notification-37	1418417160	\\x80027d71012855046172677371024b2585710355086578656375746f727104550764656661756c747105550d6d61785f696e7374616e63657371064b03550466756e637107552c74726176656c63726d2e7363686564756c65722e7461736b733a5f7461736b5f6e6f74696669636174696f6e710855026964710955155f7461736b5f6e6f74696669636174696f6e2d3337710a550d6e6578745f72756e5f74696d65710b636461746574696d650a6461746574696d650a710c550a07de0c0c162e00000000637079747a0a5f700a710d28550b4575726f70652f4b696576710e4d201c4b005503454554710f745271108652711155046e616d65711255125f7461736b5f6e6f74696669636174696f6e711355126d6973666972655f67726163655f74696d6571144b0155077472696767657271156361707363686564756c65722e74726967676572732e646174650a44617465547269676765720a7116298171177d71187d7119550872756e5f64617465711a68117386625508636f616c65736365711b89550776657273696f6e711c4b0155066b7761726773711d7d711e752e
 \.
 
 
@@ -3088,6 +3144,16 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 2	60
 2	58
 2	59
+\.
+
+
+--
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY employee_notification (employee_id, notification_id) FROM stdin;
+2	7
+2	8
 \.
 
 
@@ -3500,6 +3566,27 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 
 --
+-- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
+3	1945	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 19:51:00.013635
+4	1946	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:31:00.012771
+5	1947	A reminder of the task #40	Do not forget about task!	\N	2014-12-14 20:32:00.061386
+6	1948	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:34:00.011181
+7	1949	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:35:00.011903
+8	1950	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:38:00.01699
+\.
+
+
+--
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('notification_id_seq', 8, true);
+
+
+--
 -- Data for Name: outgoing; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -3666,6 +3753,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 131	120	4	{view,add,edit,delete}	\N	all
 132	121	4	{view}	\N	all
 133	122	4	{view}	\N	all
+134	123	4	{view,delete}	\N	all
 \.
 
 
@@ -3826,7 +3914,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 162, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 133, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 134, true);
 
 
 --
@@ -4569,6 +4657,16 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1933	93	32	f
 1934	93	32	f
 1935	93	32	f
+1936	93	32	f
+1939	93	32	f
+1940	93	32	f
+1941	12	32	f
+1945	123	32	f
+1946	123	32	f
+1947	123	32	f
+1948	123	32	f
+1949	123	32	f
+1950	123	32	f
 \.
 
 
@@ -5604,6 +5702,38 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6294	1928	2	\N	2014-12-11 22:53:03.075924
 6295	1935	2	\N	2014-12-11 22:53:42.569877
 6296	1928	2	\N	2014-12-11 22:53:44.11868
+6297	1936	2	\N	2014-12-13 21:35:47.599877
+6298	1939	2	\N	2014-12-13 21:37:02.820409
+6299	1939	2	\N	2014-12-13 21:37:54.352906
+6300	1936	2	\N	2014-12-13 21:55:38.627009
+6301	1933	2	\N	2014-12-13 21:55:57.253566
+6302	1933	2	\N	2014-12-13 21:57:41.570228
+6303	1933	2	\N	2014-12-13 22:01:39.804954
+6304	1936	2	\N	2014-12-13 22:01:54.801501
+6305	1936	2	\N	2014-12-13 22:03:25.347584
+6306	1933	2	\N	2014-12-13 22:03:37.415197
+6307	1939	2	\N	2014-12-13 22:03:52.016284
+6308	1936	2	\N	2014-12-13 22:10:55.202627
+6309	1936	2	\N	2014-12-13 22:11:45.388631
+6310	1936	2	\N	2014-12-14 11:10:18.568487
+6311	1936	2	\N	2014-12-14 11:10:54.616091
+6312	1936	2	\N	2014-12-14 11:12:20.116844
+6313	1933	2	\N	2014-12-14 11:12:44.366886
+6314	1936	2	\N	2014-12-14 11:14:36.987112
+6315	1933	2	\N	2014-12-14 11:14:46.937016
+6316	1940	2	\N	2014-12-14 11:16:18.397912
+6317	1941	2	\N	2014-12-14 17:51:15.587939
+6318	1940	2	\N	2014-12-14 19:37:37.036036
+6319	1936	2	\N	2014-12-14 19:37:54.381361
+6320	1940	2	\N	2014-12-14 19:41:49.794566
+6321	1940	2	\N	2014-12-14 19:44:37.781977
+6322	1940	2	\N	2014-12-14 19:48:08.98232
+6323	1940	2	\N	2014-12-14 19:50:28.583831
+6324	1940	2	\N	2014-12-14 20:30:31.46273
+6325	1936	2	\N	2014-12-14 20:30:45.990313
+6326	1940	2	\N	2014-12-14 20:33:08.50634
+6327	1940	2	\N	2014-12-14 20:34:47.73587
+6328	1940	2	\N	2014-12-14 20:37:41.082704
 \.
 
 
@@ -5659,6 +5789,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 110	1521	commissions	Commissions	Commissions	travelcrm.resources.commissions	Services sales commissions	null	f
 112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	f
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	f
+123	1941	notifications	Notifications	Notifications	travelcrm.resources.notifications	Employee Notifications	null	f
 \.
 
 
@@ -5947,14 +6078,17 @@ COPY suppplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, closed) FROM stdin;
-34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f
-33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f
-35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f
-36	1932	2	Call and remind about payments	2014-12-11 22:48:00	2014-12-11 22:46:00	\N	f
-37	1933	2	Call and remind about payment	2014-12-13 22:46:00	2014-12-12 22:46:00	\N	f
-38	1934	2	Call and remind about payment	2014-12-12 22:50:00	2014-12-11 22:52:00	Call and remind to pay invoice	f
-39	1935	2	Review Calculation	2014-12-12 22:52:00	2014-12-11 22:55:00	\N	f
+COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, closed, resource_url) FROM stdin;
+34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f	\N
+33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f	\N
+35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f	\N
+36	1932	2	Call and remind about payments	2014-12-11 22:48:00	2014-12-11 22:46:00	\N	f	\N
+38	1934	2	Call and remind about payment	2014-12-12 22:50:00	2014-12-11 22:52:00	Call and remind to pay invoice	f	\N
+39	1935	2	Review Calculation	2014-12-12 22:52:00	2014-12-11 22:55:00	\N	f	\N
+41	1939	2	I have the following code	2014-12-13 23:36:00	2014-12-13 22:04:00	\N	t	\N
+37	1933	2	Call and remind about payment	2014-12-14 22:46:00	2014-12-14 11:15:00	\N	f	\N
+40	1936	2	For testing Purpose only	2014-12-14 22:35:00	2014-12-14 20:32:00	\N	f	\N
+42	1940	2	Test notifications	2014-12-14 21:37:00	2014-12-14 20:38:00	\N	f	\N
 \.
 
 
@@ -5962,7 +6096,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 39, true);
+SELECT pg_catalog.setval('task_id_seq', 42, true);
 
 
 --
@@ -6381,6 +6515,14 @@ ALTER TABLE ONLY employee_contact
 
 
 --
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_notification
+    ADD CONSTRAINT employee_notification_pkey PRIMARY KEY (employee_id, notification_id);
+
+
+--
 -- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -6490,6 +6632,14 @@ ALTER TABLE ONLY note
 
 ALTER TABLE ONLY note_resource
     ADD CONSTRAINT note_resource_pkey PRIMARY KEY (note_id, resource_id);
+
+
+--
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY notification
+    ADD CONSTRAINT notification_pkey PRIMARY KEY (id);
 
 
 --
@@ -7212,6 +7362,14 @@ ALTER TABLE ONLY employee_contact
 
 
 --
+-- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_notification
+    ADD CONSTRAINT fk_contact_id_employee_notification FOREIGN KEY (notification_id) REFERENCES notification(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7329,6 +7487,14 @@ ALTER TABLE ONLY employee_address
 
 ALTER TABLE ONLY employee_contact
     ADD CONSTRAINT fk_employee_id_employee_contact FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee_notification
+    ADD CONSTRAINT fk_employee_id_employee_notification FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7809,6 +7975,14 @@ ALTER TABLE ONLY note
 
 ALTER TABLE ONLY note_resource
     ADD CONSTRAINT fk_resource_id_note_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY notification
+    ADD CONSTRAINT fk_resource_id_notification FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
