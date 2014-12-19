@@ -2627,14 +2627,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6328, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6334, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1950, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1952, true);
 
 
 --
@@ -2747,6 +2747,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 28	1652	14	54415	Vasilkovskaya 45/56, 19
 29	1807	14	02121	Dekabristov str, filial #239
 30	1926	14	123432	Arsenalna str
+31	1951	14	02121	Gmiry str
 \.
 
 
@@ -2754,7 +2755,7 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('address_id_seq', 30, true);
+SELECT pg_catalog.setval('address_id_seq', 31, true);
 
 
 --
@@ -3152,8 +3153,6 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 --
 
 COPY employee_notification (employee_id, notification_id) FROM stdin;
-2	7
-2	8
 \.
 
 
@@ -3354,6 +3353,7 @@ COPY licence (id, licence_num, date_from, date_to, resource_id) FROM stdin;
 43	dfgfdgdf	2014-04-22	2014-04-22	1191
 44	TTR-123456	2014-04-15	2014-04-23	1192
 46	TY678234-89	2011-06-10	2017-08-18	1576
+47	LNU7862	2014-12-19	2019-12-31	1952
 \.
 
 
@@ -3361,7 +3361,7 @@ COPY licence (id, licence_num, date_from, date_to, resource_id) FROM stdin;
 -- Name: licence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('licence_id_seq', 46, true);
+SELECT pg_catalog.setval('licence_id_seq', 47, true);
 
 
 --
@@ -4667,6 +4667,8 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1948	123	32	f
 1949	123	32	f
 1950	123	32	f
+1951	90	32	f
+1952	86	32	f
 \.
 
 
@@ -5734,6 +5736,12 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6326	1940	2	\N	2014-12-14 20:33:08.50634
 6327	1940	2	\N	2014-12-14 20:34:47.73587
 6328	1940	2	\N	2014-12-14 20:37:41.082704
+6329	1653	2	\N	2014-12-19 21:31:43.967187
+6330	1653	2	\N	2014-12-19 21:37:31.746728
+6331	1951	2	\N	2014-12-19 21:38:17.300837
+6332	725	2	\N	2014-12-19 21:38:20.726452
+6333	1952	2	\N	2014-12-19 21:42:56.792366
+6334	1870	2	\N	2014-12-19 21:43:03.803839
 \.
 
 
@@ -5975,6 +5983,7 @@ COPY structure (id, resource_id, parent_id, name) FROM stdin;
 --
 
 COPY structure_address (structure_id, address_id) FROM stdin;
+32	31
 \.
 
 
@@ -6293,6 +6302,7 @@ SELECT pg_catalog.setval('touroperator_id_seq', 63, true);
 COPY touroperator_licence (touroperator_id, licence_id) FROM stdin;
 2	44
 62	46
+63	47
 \.
 
 

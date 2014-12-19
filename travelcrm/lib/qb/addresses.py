@@ -1,12 +1,6 @@
 # -*coding: utf-8-*-
 
-from collections import (
-    OrderedDict,
-    Iterable
-)
-
-from sqlalchemy.orm import class_mapper
-from sqlalchemy.orm.properties import RelationshipProperty
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 
@@ -19,7 +13,7 @@ from ...models.location import Location
 
 class AddressesQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = OrderedDict({
+    _fields = {
         'id': Address.id,
         '_id': Address.id,
         'full_location_name': (
@@ -30,7 +24,7 @@ class AddressesQueryBuilder(ResourcesQueryBuilder):
         'country_name': Country.name,
         'zip_code': Address.zip_code,
         'address': Address.address,
-    })
+    }
 
     _simple_search_fields = [
         Location.name,
@@ -53,20 +47,6 @@ class AddressesQueryBuilder(ResourcesQueryBuilder):
             .join(Country, Region.country)
         )
         self.query = self.query.add_columns(*fields)
-
-    def filter_reference(self, ref_name, ref_id):
-        for item in class_mapper(Address).iterate_properties:
-            if isinstance(item, RelationshipProperty) and item.key == ref_name:
-                ref_cls = item.mapper.class_
-                self.query = (
-                    self.query
-                    .join(ref_cls, getattr(Address, ref_name))
-                    .filter(ref_cls.id == ref_id)
-                )
-                return
-        raise ValueError(
-            u"Can't find given ref_name %{ref_name}".format(ref_name)
-        )
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"
