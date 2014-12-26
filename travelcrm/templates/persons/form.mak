@@ -59,6 +59,15 @@
                         ${h.common.error_container(name='birthday')}
                     </div>
                 </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"newsletter subscriber"), False, "subscriber")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.yes_no_field(int(item.subscriber) if item else None, 'subscriber')}
+                        ${h.common.error_container(name='subscriber')}
+                    </div>
+                </div>
             </div>
             <div title="${_(u'Contacts')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">

@@ -11,10 +11,9 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.incomes import IncomesQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..lib.bl.incomes import make_payment
 
-from ..forms.incomes import IncomeSchema, SettingsSchema
+from ..forms.incomes import IncomeSchema
 
 
 log = logging.getLogger(__name__)
@@ -220,37 +219,3 @@ class Incomes(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
-
-    @view_config(
-        name='settings',
-        context='..resources.incomes.Incomes',
-        request_method='GET',
-        renderer='travelcrm:templates/incomes/settings.mak',
-        permission='settings',
-    )
-    def settings(self):
-        rt = get_resource_type_by_resource(self.context)
-        return {
-            'title': _(u'Settings'),
-            'rt': rt,
-        }
-
-    @view_config(
-        name='settings',
-        context='..resources.incomes.Incomes',
-        request_method='POST',
-        renderer='json',
-        permission='settings',
-    )
-    def _settings(self):
-        schema = SettingsSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            rt = get_resource_type_by_resource(self.context)
-            rt.settings = {'account_item_id': controls.get('account_item_id')}
-            return {'success_message': _(u'Saved')}
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }

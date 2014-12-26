@@ -14,7 +14,7 @@ from ..lib.qb.tasks import TasksQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.resources_utils import get_resource_class
-from ..scheduler.tasks import schedule_task_notification
+from ..lib.scheduler.tasks import schedule_task_notification
 from ..forms.tasks import TaskSchema
 
 
@@ -119,7 +119,7 @@ class Tasks(object):
                 task.resource.notes.append(note)
             DBSession.add(task)
             DBSession.flush()
-            schedule_task_notification(task.id)
+            schedule_task_notification(self.request, task.id)
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
@@ -163,7 +163,7 @@ class Tasks(object):
             for id in controls.get('note_id'):
                 note = Note.get(id)
                 task.resource.notes.append(note)
-            schedule_task_notification(task.id)
+            schedule_task_notification(self.request, task.id)
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id

@@ -115,6 +115,7 @@ class Persons(object):
                 second_name=controls.get('second_name'),
                 gender=controls.get('gender'),
                 birthday=controls.get('birthday'),
+                subscriber=controls.get('subscriber'),
                 resource=self.context.create_resource()
             )
             for id in controls.get('contact_id'):
@@ -176,6 +177,7 @@ class Persons(object):
             person.second_name = controls.get('second_name')
             person.gender = controls.get('gender')
             person.birthday = controls.get('birthday')
+            person.subscriber = controls.get('subscriber')
             person.contacts = []
             person.passports = []
             person.addresses = []

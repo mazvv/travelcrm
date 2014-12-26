@@ -23,13 +23,19 @@ from pyramid.i18n import (
 
 from sqlalchemy import cast, Numeric
 
+from ...interfaces import IScheduler
+
 tsf = TranslationStringFactory('travelcrm')
 
 
 def _get_settings_value(name):
-    registry = get_current_registry()
-    settings = registry.settings
+    settings = get_settings()
     return settings.get(name)
+
+
+def get_settings():
+    registry = get_current_registry()
+    return registry.settings
 
 
 def get_locale_name():
@@ -135,9 +141,17 @@ def parse_date(value):
 
 def parse_datetime(value):
     d = pd(value, locale=get_locale_name())
-    #TODO: rework this
+
+    # TODO: rework this
     time_str = value.split(' ')[1]
     value = time_str.strip()
     value = "%s:00" % value
     t = pt(value, locale=get_locale_name())
     return datetime.combine(d, t)
+
+
+def get_scheduler(request):
+    registry = getattr(request, 'registry', None)
+    if registry is None:
+        registry = request
+    return registry.getUtility(IScheduler)

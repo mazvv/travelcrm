@@ -29,6 +29,10 @@ class PersonSchema(ResourceSchema):
         Date(),
         missing=None,
     )
+    subscriber = colander.SchemaNode(
+        colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
+        default=False,
+    )
     contact_id = colander.SchemaNode(
         colander.Set(),
         missing=[],

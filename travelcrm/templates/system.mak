@@ -73,3 +73,12 @@
         </table>
     </div>
 </%def>
+
+
+<%def name="system_portal()">
+    <div id="_portal_" class="easyui-portal" data-options="fit:true,border:false">
+        <div class="dp33"></div>
+        <div class="dp33"></div>
+        <div class="dp33"></div>
+    </div>
+</%def>

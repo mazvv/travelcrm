@@ -24,11 +24,8 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
             Person.birthday != None,
             func.date_part('year', func.age(Person.birthday))
         )]),
-        'skype': _subq_contacts.c.skype,
-        'phone': _subq_contacts.c.phone,
-        'email': _subq_contacts.c.email,
-        'citizen_passport': _subq_passports.c.citizen,
-        'foreign_passport': _subq_passports.c.foreign,
+        'gender': Person.gender,
+        'subscriber': Person.subscriber,
     }
 
     _simple_search_fields = [

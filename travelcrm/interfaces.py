@@ -36,3 +36,8 @@ class ICalculationFactory(Interface):
         """ Method that returns class instance for calculations interfaces
         This method must be static
         """
+
+
+class IScheduler(Interface):
+    """ Application scheduler jobs """
+    pass

@@ -36,6 +36,7 @@ travelcrm/forms/countries.py
 travelcrm/forms/crosspayments.py
 travelcrm/forms/currencies.py
 travelcrm/forms/currencies_rates.py
+travelcrm/forms/emails_campaigns.py
 travelcrm/forms/employees.py
 travelcrm/forms/foodcats.py
 travelcrm/forms/hotelcats.py
@@ -106,6 +107,7 @@ travelcrm/lib/qb/crosspayments.py
 travelcrm/lib/qb/currencies.py
 travelcrm/lib/qb/currencies_rates.py
 travelcrm/lib/qb/debts.py
+travelcrm/lib/qb/emails_campaigns.py
 travelcrm/lib/qb/employees.py
 travelcrm/lib/qb/foodcats.py
 travelcrm/lib/qb/hotelcats.py
@@ -116,6 +118,7 @@ travelcrm/lib/qb/licences.py
 travelcrm/lib/qb/locations.py
 travelcrm/lib/qb/navigations.py
 travelcrm/lib/qb/notes.py
+travelcrm/lib/qb/notifications.py
 travelcrm/lib/qb/outgoings.py
 travelcrm/lib/qb/passports.py
 travelcrm/lib/qb/permisions.py
@@ -160,6 +163,7 @@ travelcrm/models/country.py
 travelcrm/models/crosspayment.py
 travelcrm/models/currency.py
 travelcrm/models/currency_rate.py
+travelcrm/models/email_campaign.py
 travelcrm/models/employee.py
 travelcrm/models/foodcat.py
 travelcrm/models/hotel.py
@@ -170,6 +174,7 @@ travelcrm/models/licence.py
 travelcrm/models/location.py
 travelcrm/models/navigation.py
 travelcrm/models/note.py
+travelcrm/models/notification.py
 travelcrm/models/outgoing.py
 travelcrm/models/passport.py
 travelcrm/models/permision.py
@@ -212,6 +217,7 @@ travelcrm/resources/crosspayments.py
 travelcrm/resources/currencies.py
 travelcrm/resources/currencies_rates.py
 travelcrm/resources/debts.py
+travelcrm/resources/emails_campaigns.py
 travelcrm/resources/employees.py
 travelcrm/resources/foodcats.py
 travelcrm/resources/hotelcats.py
@@ -222,6 +228,7 @@ travelcrm/resources/licences.py
 travelcrm/resources/locations.py
 travelcrm/resources/navigations.py
 travelcrm/resources/notes.py
+travelcrm/resources/notifications.py
 travelcrm/resources/outgoings.py
 travelcrm/resources/passports.py
 travelcrm/resources/permisions.py
@@ -242,6 +249,7 @@ travelcrm/resources/tours_sales.py
 travelcrm/resources/turnovers.py
 travelcrm/resources/users.py
 travelcrm/scheduler/__init__.py
+travelcrm/scheduler/tasks.py
 travelcrm/scripts/__init__.py
 travelcrm/scripts/initializedb.py
 travelcrm/static/css/emastic.css
@@ -403,6 +411,7 @@ travelcrm/static/js/jeasyui/jquery.easyui.min.js
 travelcrm/static/js/jeasyui/jquery.easyui.patch.js
 travelcrm/static/js/jeasyui/jquery.edatagrid.js
 travelcrm/static/js/jeasyui/jquery.min.js
+travelcrm/static/js/jeasyui/jquery.portal.js
 travelcrm/static/js/jeasyui/locale/easyui-lang-en.js
 travelcrm/static/js/jeasyui/locale/easyui-lang-ru.js
 travelcrm/static/js/jeasyui/plugins/jquery.accordion.js
@@ -529,6 +538,9 @@ travelcrm/templates/currencies_rates/form.mak
 travelcrm/templates/currencies_rates/index.mak
 travelcrm/templates/debts/export.mak
 travelcrm/templates/debts/index.mak
+travelcrm/templates/emails_campaigns/delete.mak
+travelcrm/templates/emails_campaigns/form.mak
+travelcrm/templates/emails_campaigns/index.mak
 travelcrm/templates/employees/delete.mak
 travelcrm/templates/employees/form.mak
 travelcrm/templates/employees/index.mak
@@ -563,6 +575,9 @@ travelcrm/templates/notes/common.mak
 travelcrm/templates/notes/delete.mak
 travelcrm/templates/notes/details.mak
 travelcrm/templates/notes/form.mak
+travelcrm/templates/notifications/delete.mak
+travelcrm/templates/notifications/details.mak
+travelcrm/templates/notifications/index.mak
 travelcrm/templates/outgoings/delete.mak
 travelcrm/templates/outgoings/form.mak
 travelcrm/templates/outgoings/index.mak
@@ -655,6 +670,7 @@ travelcrm/views/crosspayments.py
 travelcrm/views/currencies.py
 travelcrm/views/currencies_rates.py
 travelcrm/views/debts.py
+travelcrm/views/emails_campaigns.py
 travelcrm/views/employees.py
 travelcrm/views/foodcats.py
 travelcrm/views/home.py
@@ -666,6 +682,7 @@ travelcrm/views/licences.py
 travelcrm/views/locations.py
 travelcrm/views/navigations.py
 travelcrm/views/notes.py
+travelcrm/views/notifications.py
 travelcrm/views/outgoings.py
 travelcrm/views/passports.py
 travelcrm/views/permisions.py

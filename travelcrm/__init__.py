@@ -7,10 +7,8 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid_beaker import session_factory_from_settings
 
-from .models import (
-    DBSession,
-    Base,
-)
+from .models import Base
+
 
 from .resources import Root
 from .lib.renderers.pdf import PDFRendererFactory
@@ -39,7 +37,6 @@ def main(global_config, **settings):
         authorization_policy=authorization,
         session_factory=session_factory,
     )
-
     config.add_translation_dirs(
         'colander:locale',
         'travelcrm:locale',
@@ -47,6 +44,10 @@ def main(global_config, **settings):
     config.add_subscriber(
         '.subscribers.helpers',
         'pyramid.events.BeforeRender'
+    )
+    config.add_subscriber(
+        '.subscribers.scheduler',
+        'pyramid.events.ApplicationCreated'
     )
 
     config.add_renderer('pdf', PDFRendererFactory)

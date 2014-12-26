@@ -4,9 +4,10 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
+    Text,
+    DateTime,
     ForeignKey,
 )
-from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -15,8 +16,8 @@ from ..models import (
 )
 
 
-class Contact(Base):
-    __tablename__ = 'contact'
+class EmailCampaign(Base):
+    __tablename__ = 'email_campaign'
 
     id = Column(
         Integer,
@@ -27,27 +28,36 @@ class Contact(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_contact",
+            name="fk_resource_id_email_campaign",
             ondelete='restrict',
             onupdate='cascade',
         ),
         nullable=False,
     )
-    contact_type = Column(
-        ENUM(
-            u'phone', u'email', u'skype',
-            name='contact_type_enum', create_type=True,
-        ),
+    name = Column(
+        String(length=32),
         nullable=False,
     )
-    contact = Column(
-        String,
+    subject = Column(
+        String(length=128),
+        nullable=False,
+    )
+    plain_content = Column(
+        Text(),
+        nullable=False,
+    )
+    html_content = Column(
+        Text(),
+        nullable=False,
+    )
+    start_dt = Column(
+        DateTime(),
         nullable=False,
     )
     resource = relationship(
         'Resource',
         backref=backref(
-            'contact',
+            'email_campaign',
             uselist=False,
             cascade="all,delete"
         ),
@@ -60,15 +70,3 @@ class Contact(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
-
-    @classmethod
-    def condition_email(cls):
-        return cls.contact_type == u'email'
-
-    @classmethod
-    def condition_phone(cls):
-        return cls.contact_type == u'phone'
-
-    @classmethod
-    def condition_skype(cls):
-        return cls.contact_type == u'skype'

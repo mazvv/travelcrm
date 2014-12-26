@@ -15,9 +15,3 @@ class IncomeSchema(ResourceSchema):
         colander.Money(),
         validator=colander.Range(min=0)
     )
-
-
-class SettingsSchema(colander.Schema):
-    account_item_id = colander.SchemaNode(
-        colander.Integer()
-    )

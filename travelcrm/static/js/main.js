@@ -206,7 +206,8 @@ function container_picker(options){
 }
 
 function tab_open(options){
-	var url = options.url;
+	var url = options.url.trim();
+	if(!url || url == '/') return;
 	var title = options.title;
 	var main_tabs = $('#_tabs_');
 	if(main_tabs.tabs('exists', title)){
@@ -524,7 +525,7 @@ $(document).ready(
 );
 
 
-/** home page **/
-$(document).ready(function(){
-	$('#_home_').vectorMap();
-});
+/** helpers **/
+function get_icon(cls){
+	return $('<span/>').addClass('fa ' + cls);
+}

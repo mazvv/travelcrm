@@ -16,9 +16,9 @@ from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
-class Tasks(ResourceTypeBase):
+class EmailsCampaigns(ResourceTypeBase):
 
-    __name__ = 'tasks'
+    __name__ = 'emails_campaigns'
 
     def __init__(self, request):
         self.__parent__ = Root(request)
@@ -31,4 +31,5 @@ class Tasks(ResourceTypeBase):
             ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
+            ('settings', _(u'settings')),
         ]

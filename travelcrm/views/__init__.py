@@ -130,3 +130,14 @@ def _system_context_info(context, request):
         'total': len(rows),
         'rows': rows,
     }
+
+
+@view_config(
+    name='system_portal',
+    request_method='GET',
+    context='..resources.Root',
+    xhr='True',
+    renderer='travelcrm:templates/system#system_portal.mak'
+)
+def system_portal(context, request):
+    return {}

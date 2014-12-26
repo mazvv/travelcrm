@@ -68,7 +68,7 @@
                     var span = $('<span/>').addClass('fa fa-clock-o mr05');
                     return $('<div/>').append(span).html() + value;
                 },
-		styler: function(value,row,index){if(row.closed) return 'opacity:0.6;background-color:#eee;';}" class="tc">${_(u'time')}</th>
+		        styler: function(value,row,index){if(row.closed) return 'opacity:0.6;background-color:#eee;';}" class="tc">${_(u'time')}</th>
             </thead>
         </table>
 

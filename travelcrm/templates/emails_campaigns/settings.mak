@@ -9,12 +9,14 @@
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
         <div class="form-field mb05">
             <div class="dl15">
-                ${h.tags.title(_(u"tour service"), True, "service_id")}
+                ${h.tags.title(_(u"timeout"), True, "timeout")}
             </div>
             <div class="ml15">
-                  ${h.fields.services_combobox_field(
-                      request, 
-                      rt.settings.get("service_id") if rt.settings else None, 
+                  ${h.tags.text(
+                      'timeout',
+                      rt.settings.get("timeout") if rt.settings else None,
+                      class_='easyui-numberbox w10',
+                      data_options="suffix:' %s'" % _(u'sec.')
                   )}
                   ${h.common.error_container(name='service_id')}
             </div>

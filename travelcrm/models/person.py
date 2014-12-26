@@ -4,6 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
+    Boolean,
     Date,
     Table,
     ForeignKey,
@@ -168,6 +169,10 @@ class Person(Base):
             create_type=True,
         ),
     )
+    subscriber = Column(
+        Boolean,
+        default=False,
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -228,3 +233,7 @@ class Person(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def condition_subscriber(cls):
+        return cls.subscriber == True
