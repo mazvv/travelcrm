@@ -937,6 +937,44 @@ ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
 
 
 --
+-- Name: email_campaign; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE email_campaign (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    plain_content text NOT NULL,
+    html_content text NOT NULL,
+    start_dt timestamp without time zone NOT NULL,
+    subject character varying(128)
+);
+
+
+ALTER TABLE public.email_campaign OWNER TO mazvv;
+
+--
+-- Name: email_campaign_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE email_campaign_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.email_campaign_id_seq OWNER TO mazvv;
+
+--
+-- Name: email_campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE email_campaign_id_seq OWNED BY email_campaign.id;
+
+
+--
 -- Name: employee_address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -1490,7 +1528,8 @@ CREATE TABLE person (
     last_name character varying(32),
     second_name character varying(32),
     birthday date,
-    gender genders_enum
+    gender genders_enum,
+    subscriber boolean
 );
 
 
@@ -2375,6 +2414,13 @@ ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rat
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY email_campaign ALTER COLUMN id SET DEFAULT nextval('email_campaign_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('_employees_rid_seq'::regclass);
 
 
@@ -2627,21 +2673,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6334, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6410, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1952, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1965, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 123, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 124, true);
 
 
 --
@@ -2784,7 +2830,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-339f51c3cba9
+381e20692d8d
 \.
 
 
@@ -3011,6 +3057,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 75	karpuha1990@ukr.net	email	1641
 76	+380502235686	phone	1650
 77	+380674523123	phone	1927
+78	vitalii.mazur@gmail.com	email	1956
 \.
 
 
@@ -3018,7 +3065,7 @@ COPY contact (id, contact, contact_type, resource_id) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 77, true);
+SELECT pg_catalog.setval('contact_id_seq', 78, true);
 
 
 --
@@ -3109,6 +3156,22 @@ SELECT pg_catalog.setval('currency_rate_id_seq', 12, true);
 
 
 --
+-- Data for Name: email_campaign; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY email_campaign (id, resource_id, name, plain_content, html_content, start_dt, subject) FROM stdin;
+1	1955	Egypt HOT!!!	Hello.<p>Look at this</p>	Hello.<p>Look at this</p>	2014-12-26 22:29:00	Hot New Year in Egypt
+\.
+
+
+--
+-- Name: email_campaign_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('email_campaign_id_seq', 1, true);
+
+
+--
 -- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -3153,6 +3216,10 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 --
 
 COPY employee_notification (employee_id, notification_id) FROM stdin;
+2	9
+2	10
+2	11
+2	12
 \.
 
 
@@ -3413,6 +3480,7 @@ SELECT pg_catalog.setval('location_id_seq', 37, true);
 
 COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before) FROM stdin;
 162	4	160	Debts	/debts	\N	2	1921	f
+163	4	26	Email Campaigns	/emails_campaigns	\N	2	1953	t
 9	4	8	Resource Types	/resources_types	\N	1	779	f
 15	4	8	Users	/users	\N	2	792	f
 13	4	10	Employees	/employees	\N	1	790	f
@@ -3504,7 +3572,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 28	4	159	Hotels Categories	/hotelcats	\N	6	910	f
 42	4	159	Hotels List	/hotels	\N	5	1080	f
 52	4	32	Services	/services_sales	\N	3	1369	f
-157	4	53	Currencies	/	\N	7	1906	t
+157	4	53	Currencies		\N	7	1906	t
 159	4	23	Hotels	/	\N	12	1908	t
 38	4	32	Tours	/tours_sales	\N	2	1075	f
 \.
@@ -3576,6 +3644,10 @@ COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
 6	1948	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:34:00.011181
 7	1949	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:35:00.011903
 8	1950	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:38:00.01699
+9	1959	A reminder of the task #44	Do not forget about task!	\N	2014-12-21 19:21:00.016784
+10	1961	Task: #44	Test new scheduler realization	\N	2014-12-21 19:44:00.016315
+11	1963	Task: Test	Test	\N	2014-12-24 21:33:00.014126
+12	1965	Task: For testing	For testing	\N	2014-12-25 21:06:00.013657
 \.
 
 
@@ -3583,7 +3655,7 @@ COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 8, true);
+SELECT pg_catalog.setval('notification_id_seq', 12, true);
 
 
 --
@@ -3754,6 +3826,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 132	121	4	{view}	\N	all
 133	122	4	{view}	\N	all
 134	123	4	{view,delete}	\N	all
+135	124	4	{view,add,edit,delete,settings}	\N	all
 \.
 
 
@@ -3761,37 +3834,37 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 -- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY person (id, resource_id, first_name, last_name, second_name, birthday, gender) FROM stdin;
-4	870	Greg	Johnson		\N	\N
-5	871	John	Doe		\N	\N
-6	887	Peter	Parker		1976-04-07	\N
-17	1284	Nikolay	Voevoda		1981-07-22	male
-18	1293	Irina	Voevoda		1984-01-18	female
-19	1294	Stas	Voevoda		2007-10-16	male
-20	1372	Oleg	Pogorelov		1970-02-17	male
-21	1375	Elena	Pogorelova	Petrovna	1972-02-19	female
-22	1383	Vitalii	Mazur		1979-07-17	male
-23	1389	Iren	Mazur		1979-09-03	female
-24	1390	Igor	Mazur		2007-07-21	male
-25	1408	Vitalii	Klishunov		1976-04-07	male
-26	1409	Natalia	Klishunova		1978-08-10	male
-27	1410	Maxim	Klishunov		2005-02-16	male
-28	1411	Ann	Klishunova		2013-02-14	female
-29	1465	Eugen	Velichko		1982-04-07	male
-30	1471	Irina	Avdeeva		1984-11-21	female
-31	1472	Velichko	Alexander		2006-01-11	male
-32	1473	Velichko	Elizabeth		2010-06-15	female
-34	1593	Elena	Babich		1991-05-23	female
-33	1586	Roman	Babich		1990-11-14	male
-35	1615	Tat'ana	Artyuh		1987-02-10	female
-36	1616	Nikolay	Artyuh		1986-10-08	male
-37	1619	Andriy	Garkaviy		1984-11-14	male
-38	1626	Elena	Garkava		1986-01-08	male
-39	1627	Petro	Garkaviy		2004-06-08	male
-40	1628	Alena	Garkava		2007-03-29	female
-41	1645	Karpenko	Alexander		1990-06-04	male
-42	1653	Smichko	Olena		1992-07-15	female
-43	1869	Alexey	Ivankiv	V.	\N	male
+COPY person (id, resource_id, first_name, last_name, second_name, birthday, gender, subscriber) FROM stdin;
+4	870	Greg	Johnson		\N	\N	f
+5	871	John	Doe		\N	\N	f
+6	887	Peter	Parker		1976-04-07	\N	f
+17	1284	Nikolay	Voevoda		1981-07-22	male	f
+18	1293	Irina	Voevoda		1984-01-18	female	f
+19	1294	Stas	Voevoda		2007-10-16	male	f
+20	1372	Oleg	Pogorelov		1970-02-17	male	f
+21	1375	Elena	Pogorelova	Petrovna	1972-02-19	female	f
+23	1389	Iren	Mazur		1979-09-03	female	f
+24	1390	Igor	Mazur		2007-07-21	male	f
+25	1408	Vitalii	Klishunov		1976-04-07	male	f
+26	1409	Natalia	Klishunova		1978-08-10	male	f
+27	1410	Maxim	Klishunov		2005-02-16	male	f
+28	1411	Ann	Klishunova		2013-02-14	female	f
+29	1465	Eugen	Velichko		1982-04-07	male	f
+30	1471	Irina	Avdeeva		1984-11-21	female	f
+31	1472	Velichko	Alexander		2006-01-11	male	f
+32	1473	Velichko	Elizabeth		2010-06-15	female	f
+34	1593	Elena	Babich		1991-05-23	female	f
+33	1586	Roman	Babich		1990-11-14	male	f
+36	1616	Nikolay	Artyuh		1986-10-08	male	f
+37	1619	Andriy	Garkaviy		1984-11-14	male	f
+39	1627	Petro	Garkaviy		2004-06-08	male	f
+41	1645	Karpenko	Alexander		1990-06-04	male	f
+42	1653	Smichko	Olena		1992-07-15	female	f
+40	1628	Alena	Garkava		2007-03-29	female	t
+43	1869	Alexey	Ivankiv	V.	\N	male	t
+38	1626	Elena	Garkava		1986-01-08	male	t
+35	1615	Tat'ana	Artyuh		1987-02-10	female	t
+22	1383	Vitalii	Mazur		1979-07-17	male	t
 \.
 
 
@@ -3843,6 +3916,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 41	75
 42	76
 30	77
+22	78
 \.
 
 
@@ -3907,14 +3981,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 162, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 163, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 134, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 135, true);
 
 
 --
@@ -4669,6 +4743,17 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1950	123	32	f
 1951	90	32	f
 1952	86	32	f
+1953	65	32	f
+1954	12	32	f
+1955	124	32	f
+1956	87	32	f
+1958	93	32	f
+1959	123	32	f
+1961	123	32	f
+1962	93	32	f
+1963	123	32	f
+1964	93	32	f
+1965	123	32	f
 \.
 
 
@@ -5742,6 +5827,82 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6332	725	2	\N	2014-12-19 21:38:20.726452
 6333	1952	2	\N	2014-12-19 21:42:56.792366
 6334	1870	2	\N	2014-12-19 21:43:03.803839
+6335	1906	2	\N	2014-12-20 16:10:55.310323
+6336	1953	2	\N	2014-12-20 16:12:04.822804
+6337	1953	2	\N	2014-12-20 16:28:56.986576
+6338	1869	2	\N	2014-12-20 17:01:25.535753
+6339	1869	2	\N	2014-12-20 17:03:12.810766
+6340	1869	2	\N	2014-12-20 17:03:22.550854
+6341	1628	2	\N	2014-12-20 17:05:00.135486
+6342	1869	2	\N	2014-12-20 17:05:08.130568
+6343	1626	2	\N	2014-12-20 17:50:11.179188
+6344	1615	2	\N	2014-12-20 17:50:33.508978
+6345	1954	2	\N	2014-12-20 18:18:17.329483
+6346	1954	2	\N	2014-12-20 18:18:27.668631
+6347	1953	2	\N	2014-12-20 18:19:03.042411
+6348	1955	2	\N	2014-12-20 20:57:13.189777
+6349	1225	2	\N	2014-12-21 12:57:50.837529
+6350	1433	2	\N	2014-12-21 12:57:59.036844
+6351	1954	2	\N	2014-12-21 13:04:30.43023
+6352	1955	2	\N	2014-12-21 14:01:21.220851
+6353	1955	2	\N	2014-12-21 14:02:48.391182
+6354	1955	2	\N	2014-12-21 14:05:59.186502
+6355	1956	2	\N	2014-12-21 14:58:01.627945
+6356	1383	2	\N	2014-12-21 14:58:04.4436
+6357	1383	2	\N	2014-12-21 14:58:18.134114
+6358	1955	2	\N	2014-12-21 14:58:54.05088
+6359	1955	2	\N	2014-12-21 14:59:43.024479
+6360	1955	2	\N	2014-12-21 15:01:24.559119
+6361	1955	2	\N	2014-12-21 15:02:30.825094
+6362	1955	2	\N	2014-12-21 15:03:19.517473
+6363	1955	2	\N	2014-12-21 15:04:26.227416
+6364	1955	2	\N	2014-12-21 15:05:25.219884
+6365	1955	2	\N	2014-12-21 15:08:14.659941
+6366	1955	2	\N	2014-12-21 15:09:18.610638
+6367	1955	2	\N	2014-12-21 15:10:49.564969
+6368	1955	2	\N	2014-12-21 15:18:30.435377
+6369	1955	2	\N	2014-12-21 15:28:30.828306
+6370	1955	2	\N	2014-12-21 15:30:55.116621
+6371	1955	2	\N	2014-12-21 15:33:38.056888
+6372	1955	2	\N	2014-12-21 15:34:45.870649
+6373	1955	2	\N	2014-12-21 15:55:27.822121
+6374	1955	2	\N	2014-12-21 15:56:45.477441
+6375	1955	2	\N	2014-12-21 15:57:54.588037
+6376	1955	2	\N	2014-12-21 15:59:56.190169
+6377	1955	2	\N	2014-12-21 16:10:48.898101
+6378	1955	2	\N	2014-12-21 16:11:31.348869
+6379	1955	2	\N	2014-12-21 16:12:17.283128
+6380	1955	2	\N	2014-12-21 16:12:43.349159
+6381	1955	2	\N	2014-12-21 16:17:53.680374
+6382	1955	2	\N	2014-12-21 16:18:30.615045
+6383	1955	2	\N	2014-12-21 16:24:07.556851
+6384	1955	2	\N	2014-12-21 16:24:36.284901
+6385	1955	2	\N	2014-12-21 16:25:59.736532
+6386	1955	2	\N	2014-12-21 16:26:10.717535
+6387	1958	2	\N	2014-12-21 19:20:00.336409
+6388	1958	2	\N	2014-12-21 19:40:10.412709
+6389	1958	2	\N	2014-12-21 19:43:18.014602
+6390	1955	2	\N	2014-12-21 19:54:47.763979
+6391	1955	2	\N	2014-12-21 19:57:15.899119
+6392	1955	2	\N	2014-12-21 20:01:57.931475
+6393	1962	2	\N	2014-12-24 21:32:53.618984
+6394	1955	2	\N	2014-12-24 21:52:53.75341
+6395	1955	2	\N	2014-12-24 21:54:29.381242
+6396	1955	2	\N	2014-12-24 21:54:40.852567
+6397	1955	2	\N	2014-12-24 21:59:02.013042
+6398	1955	2	\N	2014-12-24 23:47:49.852576
+6399	1955	2	\N	2014-12-24 23:57:47.039863
+6400	1964	2	\N	2014-12-25 21:05:49.345482
+6401	1955	2	\N	2014-12-26 20:17:47.53662
+6402	1955	2	\N	2014-12-26 20:29:33.803173
+6403	1955	2	\N	2014-12-26 20:31:12.755178
+6404	1955	2	\N	2014-12-26 20:32:53.259365
+6405	1955	2	\N	2014-12-26 20:34:24.850656
+6406	1955	2	\N	2014-12-26 20:36:11.286672
+6407	1955	2	\N	2014-12-26 20:37:54.248513
+6408	1955	2	\N	2014-12-26 22:13:17.525737
+6409	1955	2	\N	2014-12-26 22:24:22.10607
+6410	1955	2	\N	2014-12-26 22:28:42.906736
 \.
 
 
@@ -5755,16 +5916,16 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 118	1799	notes	Notes	Notes	travelcrm.resources.notes	Resources Notes	null	f
 92	1221	tours_sales	Tours Sale	ToursSales	travelcrm.resources.tours_sales	Tours sales documents	{"service_id": 5}	t
 119	1849	calculations	Caluclations	Calculations	travelcrm.resources.calculations	Calculations of Sale Documents	null	f
-106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	{"account_item_id": 8}	t
 120	1884	crosspayments	Cross Payments	Crosspayments	travelcrm.resources.crosspayments	Cross payments between accounts and subaccounts. This document is for balance corrections to.	null	f
 121	1894	turnovers	Turnovers	Turnovers	travelcrm.resources.turnovers	Turnovers on Accounts and Subaccounts	null	f
-93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N	t
 2	10	users	Users	Users	travelcrm.resources.users	Users list	\N	f
 12	16	resources_types	Resources Types	ResourcesTypes	travelcrm.resources.resources_types	Resources types list	\N	f
 47	706	employees	Employees	Employees	travelcrm.resources.employees	Employees Container Datagrid	\N	f
 78	1003	touroperators	Touroperators	Touroperators	travelcrm.resources.touroperators	Touroperators - tours suppliers list	\N	f
 1	773		Home	Root	travelcrm.resources	Home Page of Travelcrm	\N	f
 122	1919	debts	Debts	Debts	travelcrm.resources.debts	Calculations based debts report	null	f
+93	1225	tasks	Tasks	Tasks	travelcrm.resources.tasks	Task manager	\N	f
+106	1433	incomes	Incomes	Incomes	travelcrm.resources.incomes	Incomes Payments Document for invoices	{"account_item_id": 8}	f
 41	283	currencies	Currencies	Currencies	travelcrm.resources.currencies		\N	f
 55	723	structures	Structures	Structures	travelcrm.resources.structures	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so	\N	f
 59	764	positions	Positions	Positions	travelcrm.resources.positions	Companies positions is a point of company structure where emplyees can be appointed	\N	f
@@ -5798,6 +5959,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	f
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	f
 123	1941	notifications	Notifications	Notifications	travelcrm.resources.notifications	Employee Notifications	null	f
+124	1954	emails_campaigns	Email Campaigns	EmailsCampaigns	travelcrm.resources.emails_campaigns	Emails Campaigns for subscribers	{"timeout": 12}	t
 \.
 
 
@@ -6088,6 +6250,9 @@ COPY suppplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 --
 
 COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, closed, resource_url) FROM stdin;
+44	1958	2	Test new scheduler realization	2014-12-22 19:18:00	2014-12-21 19:44:00	New scheduler realizations notifications test.	f	\N
+45	1962	2	Test	2014-12-24 23:32:00	2014-12-24 21:33:00	\N	f	\N
+46	1964	2	For testing	2014-12-25 23:05:00	2014-12-25 21:06:00	For testing purpose only	f	\N
 34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f	\N
 33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f	\N
 35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f	\N
@@ -6105,7 +6270,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 42, true);
+SELECT pg_catalog.setval('task_id_seq', 46, true);
 
 
 --
@@ -6113,9 +6278,9 @@ SELECT pg_catalog.setval('task_id_seq', 42, true);
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
-35	1869
 39	1928
 38	1928
+35	1869
 \.
 
 
@@ -6506,6 +6671,14 @@ ALTER TABLE ONLY currency
 
 ALTER TABLE ONLY currency_rate
     ADD CONSTRAINT currency_rate_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: email_campaign_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY email_campaign
+    ADD CONSTRAINT email_campaign_pkey PRIMARY KEY (id);
 
 
 --
@@ -7897,6 +8070,14 @@ ALTER TABLE ONLY crosspayment
 
 ALTER TABLE ONLY currency
     ADD CONSTRAINT fk_resource_id_currency FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_email_campaign; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY email_campaign
+    ADD CONSTRAINT fk_resource_id_email_campaign FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
