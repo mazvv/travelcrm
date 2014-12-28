@@ -1,8 +1,11 @@
 # -*-coding: utf-8 -*-
+
+
 from zope.interface import implementer
 
 from ..interfaces import (
     IResourceType,
+    IPortlet,
 )
 from ..resources import (
     Root,
@@ -14,9 +17,10 @@ from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
-class Invoices(ResourceTypeBase):
+@implementer(IPortlet)
+class UnpaidInvoices(ResourceTypeBase):
 
-    __name__ = 'invoices'
+    __name__ = 'unpaid_invoices'
 
     def __init__(self, request):
         self.__parent__ = Root(request)
@@ -26,8 +30,8 @@ class Invoices(ResourceTypeBase):
     def allowed_permisions(self):
         return [
             ('view', _(u'view')),
-            ('add', _(u'add')),
-            ('edit', _(u'edit')),
-            ('delete', _(u'delete')),
-            ('settings', _(u'settings')),
         ]
+
+    @property
+    def allowed_scopes(self):
+        return False

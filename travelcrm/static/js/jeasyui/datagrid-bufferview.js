@@ -109,7 +109,7 @@ var bufferview = $.extend({}, $.fn.datagrid.defaults.view, {
 		var state = $.data(target, 'datagrid');
 		var opts = state.options;
 		var page = Math.floor(this.renderedCount/opts.pageSize) + 1;
-		
+		console.log(page);
 		if (this.renderedCount >= state.data.total){return;}
 		if (opts.onBeforeFetch.call(target, page) == false){return}
 		

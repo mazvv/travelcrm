@@ -40,4 +40,11 @@ class ICalculationFactory(Interface):
 
 class IScheduler(Interface):
     """ Application scheduler jobs """
+
+    pass
+
+
+class IPortlet(Interface):
+    """ Portlet identificator """
+
     pass

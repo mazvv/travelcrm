@@ -3,6 +3,7 @@
 import logging
 
 import colander
+from datetime import timedelta
 from babel.numbers import format_decimal
 
 from pyramid.view import view_config
@@ -17,14 +18,20 @@ from ..models.task import Task
 from ..lib.qb import query_serialize
 from ..lib.qb.invoices import InvoicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.common_utils import format_date
 
 from ..forms.invoices import (
     InvoiceAddSchema,
     InvoiceEditSchema,
     InvoiceSumSchema,
+    InvoiceActiveUntilSchema,
+    SettingsSchema,
 )
 
-from ..lib.utils.resources_utils import get_resource_class
+from ..lib.utils.resources_utils import (
+    get_resource_class,
+    get_resource_type_by_resource
+)
 from ..lib.utils.common_utils import get_locale_name
 from ..lib.bl.invoices import (
     query_resource_data,
@@ -139,6 +146,7 @@ class Invoices(object):
             factory = source_cls.get_invoice_factory()
             invoice = Invoice(
                 date=controls.get('date'),
+                active_until=controls.get('active_until'),
                 account_id=controls.get('account_id'),
                 resource=self.context.create_resource()
             )
@@ -194,6 +202,7 @@ class Invoices(object):
         try:
             controls = schema.deserialize(self.request.params.mixed())
             invoice.date = controls.get('date')
+            invoice.active_until = controls.get('active_until')
             invoice.account_id = controls.get('account_id')
             invoice.resource.notes = []
             invoice.resource.tasks = []
@@ -282,7 +291,7 @@ class Invoices(object):
         context='..resources.invoices.Invoices',
         request_method='POST',
         renderer='json',
-        permission='add'
+        permission='view'
     )
     def invoice_sum(self):
         schema = InvoiceSumSchema().bind(request=self.request)
@@ -302,6 +311,31 @@ class Invoices(object):
                     )
                 ),
                 'currency': account.currency.iso_code
+            }
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }
+
+    @view_config(
+        name='invoice_active_until',
+        context='..resources.invoices.Invoices',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def invoice_active_until(self):
+        schema = InvoiceActiveUntilSchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            date = controls.get('date')
+            rt = get_resource_type_by_resource(self.context)
+            active_days = rt.settings.get('active_days', 0)
+            return {
+                'active_until': format_date(
+                    date + timedelta(days=active_days)
+                )
             }
         except colander.Invalid, e:
             return {
@@ -404,3 +438,37 @@ class Invoices(object):
                 'sum': format_decimal(total_sum, locale=get_locale_name())
             }]
         }
+
+    @view_config(
+        name='settings',
+        context='..resources.invoices.Invoices',
+        request_method='GET',
+        renderer='travelcrm:templates/invoices/settings.mak',
+        permission='settings',
+    )
+    def settings(self):
+        rt = get_resource_type_by_resource(self.context)
+        return {
+            'title': _(u'Settings'),
+            'rt': rt,
+        }
+
+    @view_config(
+        name='settings',
+        context='..resources.invoices.Invoices',
+        request_method='POST',
+        renderer='json',
+        permission='settings',
+    )
+    def _settings(self):
+        schema = SettingsSchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params)
+            rt = get_resource_type_by_resource(self.context)
+            rt.settings = {'active_days': controls.get('active_days')}
+            return {'success_message': _(u'Saved')}
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }

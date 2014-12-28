@@ -947,7 +947,7 @@ CREATE TABLE email_campaign (
     plain_content text NOT NULL,
     html_content text NOT NULL,
     start_dt timestamp without time zone NOT NULL,
-    subject character varying(128)
+    subject character varying(128) NOT NULL
 );
 
 
@@ -1213,7 +1213,8 @@ CREATE TABLE invoice (
     id integer NOT NULL,
     date date NOT NULL,
     resource_id integer NOT NULL,
-    account_id integer NOT NULL
+    account_id integer NOT NULL,
+    active_until date NOT NULL
 );
 
 
@@ -2673,21 +2674,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6410, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6415, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1965, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1966, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 124, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 125, true);
 
 
 --
@@ -2830,7 +2831,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-381e20692d8d
+217d0442f85d
 \.
 
 
@@ -3391,17 +3392,17 @@ COPY income_transfer (income_id, transfer_id) FROM stdin;
 -- Data for Name: invoice; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY invoice (id, date, resource_id, account_id) FROM stdin;
-8	2014-06-05	1440	3
-10	2014-06-06	1442	2
-13	2014-06-16	1487	3
-15	2014-06-16	1503	3
-14	2014-06-22	1502	4
-16	2014-08-22	1598	3
-17	2014-08-24	1634	3
-19	2014-08-26	1657	3
-20	2014-10-18	1839	3
-21	2014-10-18	1840	3
+COPY invoice (id, date, resource_id, account_id, active_until) FROM stdin;
+8	2014-06-05	1440	3	2014-06-05
+10	2014-06-06	1442	2	2014-06-06
+13	2014-06-16	1487	3	2014-06-16
+15	2014-06-16	1503	3	2014-06-16
+14	2014-06-22	1502	4	2014-06-22
+16	2014-08-22	1598	3	2014-08-22
+17	2014-08-24	1634	3	2014-08-24
+19	2014-08-26	1657	3	2014-08-26
+20	2014-10-18	1839	3	2014-10-18
+21	2014-10-24	1840	3	2014-10-27
 \.
 
 
@@ -3768,7 +3769,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 71	102	4	{view,add,edit,delete}	\N	all
 73	104	4	{view,add,edit,delete}	\N	all
 74	105	4	{view,add,edit,delete}	\N	all
-72	103	4	{view,add,edit,delete}	\N	all
 76	107	4	{view,add,edit,delete}	\N	all
 77	108	4	{view,add,edit,delete}	\N	all
 79	110	4	{view,add,edit,delete}	\N	all
@@ -3827,6 +3827,8 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 133	122	4	{view}	\N	all
 134	123	4	{view,delete}	\N	all
 135	124	4	{view,add,edit,delete,settings}	\N	all
+72	103	4	{view,add,edit,delete,settings}	\N	all
+136	125	4	{view}	\N	all
 \.
 
 
@@ -3988,7 +3990,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 163, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 135, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 136, true);
 
 
 --
@@ -4754,6 +4756,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1963	123	32	f
 1964	93	32	f
 1965	123	32	f
+1966	12	32	f
 \.
 
 
@@ -5903,6 +5906,11 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6408	1955	2	\N	2014-12-26 22:13:17.525737
 6409	1955	2	\N	2014-12-26 22:24:22.10607
 6410	1955	2	\N	2014-12-26 22:28:42.906736
+6411	1317	2	\N	2014-12-27 14:48:10.519499
+6412	1840	2	\N	2014-12-27 16:05:27.016889
+6413	1840	2	\N	2014-12-27 16:32:05.180181
+6414	1840	2	\N	2014-12-27 16:45:52.831401
+6415	1966	2	\N	2014-12-27 19:34:56.371248
 \.
 
 
@@ -5950,7 +5958,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 91	1211	banks	Banks	Banks	travelcrm.resources.banks	Banks list to create bank details and for other reasons	\N	f
 102	1313	services	Services	Services	travelcrm.resources.services	Additional Services that can be provide with tours sales or separate	\N	f
 101	1268	banks_details	Banks Details	BanksDetails	travelcrm.resources.banks_details	Banks Details that can be attached to any client or business partner to define account	\N	f
-103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	\N	f
 104	1393	currencies_rates	Currency Rates	CurrenciesRates	travelcrm.resources.currencies_rates	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	\N	f
 105	1424	accounts_items	Account Items	AccountsItems	travelcrm.resources.accounts_items	Finance accounts items	\N	f
 109	1452	services_sales	Services Sale	ServicesSales	travelcrm.resources.services_sales	Additionals Services sales document. It is Invoicable objects and can generate contracts	null	f
@@ -5960,6 +5967,8 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	f
 123	1941	notifications	Notifications	Notifications	travelcrm.resources.notifications	Employee Notifications	null	f
 124	1954	emails_campaigns	Email Campaigns	EmailsCampaigns	travelcrm.resources.emails_campaigns	Emails Campaigns for subscribers	{"timeout": 12}	t
+103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	{"active_days": 3}	t
+125	1966	unpaid_invoices	Portlet: Unpaid Invoices	UnpaidInvoices	travelcrm.resources.unpaid_invoices	Portlet that shows invoices which has no any pay and active date is over	null	f
 \.
 
 
@@ -7385,6 +7394,14 @@ ALTER TABLE ONLY invoice
 
 
 --
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_account_item_id_outgoing FOREIGN KEY (account_item_id) REFERENCES account_item(id);
+
+
+--
 -- Name: fk_account_item_id_service; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -7902,6 +7919,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY person_subaccount
     ADD CONSTRAINT fk_person_id_person_subaccount FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY service_item
+    ADD CONSTRAINT fk_person_id_service_item FOREIGN KEY (person_id) REFERENCES person(id);
 
 
 --
@@ -8486,6 +8511,14 @@ ALTER TABLE ONLY transfer
 
 ALTER TABLE ONLY employee_subaccount
     ADD CONSTRAINT fk_subaccount_id_employee_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_subaccount_id_outgoing FOREIGN KEY (subaccount_id) REFERENCES subaccount(id);
 
 
 --

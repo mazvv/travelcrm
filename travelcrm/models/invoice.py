@@ -26,6 +26,10 @@ class Invoice(Base):
         Date,
         nullable=False,
     )
+    active_until = Column(
+        Date,
+        nullable=False,
+    )
     resource_id = Column(
         Integer,
         ForeignKey(

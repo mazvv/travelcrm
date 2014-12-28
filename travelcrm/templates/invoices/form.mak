@@ -29,6 +29,19 @@
                     }
                 });
             }
+            function calc_active_until_${_id}(){
+                if($('#${_form_id} [name=active_until]').val()) return;
+                var date = $('#${_form_id} [name=date]').val();
+                $.ajax({
+                    url: '${request.resource_url(_context, 'invoice_active_until')}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {'date': date},
+                    success: function(json){
+                        if(json.active_until) $('#${_form_id} .easyui-datebox:eq(1)').datebox('setValue', json.active_until);
+                    }
+                });
+            }
         </script>
         <div class="easyui-tabs" data-options="border:false,height:400">
             <div title="${_(u'Main')}">
@@ -37,8 +50,22 @@
                         ${h.tags.title(_(u"invoice date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.date if item else None, 'date', options="onSelect: function(index, data){calc_sum_%s();}" % _id)}
+                        ${h.fields.date_field(
+                            item.date if item else None, 'date', 
+                            options="onSelect: function(index, data){calc_sum_%s();calc_active_until_%s();}" % (_id, _id)
+                        )}
                         ${h.common.error_container(name='date')}
+                    </div>
+                </div>
+                <div class="form-field mb05 mt1">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"active until"), True, "active until")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.date_field(
+                            item.active_until if item else None, 'active_until',
+                        )}
+                        ${h.common.error_container(name='active_until')}
                     </div>
                 </div>
                 <div class="form-field">
