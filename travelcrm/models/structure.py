@@ -129,6 +129,16 @@ class Structure(Base):
             ondelete='restrict',
         )
     )
+    company_id = Column(
+        Integer(),
+        ForeignKey(
+            'company.id',
+            name='fk_structure_company_id',
+            onupdate='cascade',
+            ondelete='restrict',
+        ),
+        nullable=False,
+    )
     name = Column(
         String(length=32),
         nullable=False
@@ -153,6 +163,15 @@ class Structure(Base):
         ),
         uselist=True,
         lazy='dynamic',
+    )
+    company = relationship(
+        'Company',
+        backref=backref(
+            'structures',
+            uselist=True,
+            lazy='dynamic'
+        ),
+        uselist=False,
     )
     contacts = relationship(
         'Contact',

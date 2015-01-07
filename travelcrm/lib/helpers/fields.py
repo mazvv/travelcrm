@@ -1,7 +1,7 @@
 # -*coding: utf-8-*-
 
 import json
-
+from pytz import common_timezones
 from babel.dates import (
     format_datetime,
     format_date
@@ -3408,4 +3408,13 @@ def subaccounts_combobox_field(
             data_options=data_options,
         ),
         toolbar if (toolbar and show_toolbar) else ''
+    )
+
+
+def timezones_field(value=None, name='timezone', **kwargs):
+    choices = [tz for tz in common_timezones]
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w20',
+        data_options="panelHeight:'120',editable:false",
+        **kwargs
     )

@@ -12,8 +12,10 @@ from ..models.address import Address
 from ..models.bank_detail import BankDetail
 from ..models.note import Note
 from ..models.task import Task
+from ..lib.bl.employees import get_employee_structure
 from ..lib.qb.structures import StructuresQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 from ..forms.structures import StructureSchema
 
 
@@ -98,12 +100,14 @@ class Structures(object):
     )
     def _add(self):
         schema = StructureSchema().bind(request=self.request)
-
+        employee = get_auth_employee(self.request)
+        employee_structure = get_employee_structure(employee)
         try:
             controls = schema.deserialize(self.request.params.mixed())
             structure = Structure(
                 name=controls.get('name'),
                 parent_id=controls.get('parent_id'),
+                company_id=employee_structure.company_id,
                 resource=self.context.create_resource()
             )
             for id in controls.get('contact_id'):

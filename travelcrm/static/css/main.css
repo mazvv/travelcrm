@@ -107,10 +107,16 @@ hr.dashed{
 	color: #fff;
 	text-decoration: underline;
 }
+a.dashed{
+	border-bottom: 1px dashed #d3d3d3;
+}
 
 /** paddings **/
 .p1 {
     padding: 1em;
+}
+.p05{
+	padding: 0.5em;
 }
 .pt1{
 	padding-top: 1em;
@@ -120,6 +126,9 @@ hr.dashed{
 }
 
 /** margins **/
+.m05{
+	margin: 0.5em;
+}
 .mb1 {
     margin-bottom: 1em;
 }
@@ -131,6 +140,9 @@ hr.dashed{
 }
 .ml1 {
     margin-left: 1em;
+}
+.ml1-5{
+	margin-left: 1.5em;
 }
 .mt05 {
     margin-top: 0.5em;
@@ -419,6 +431,9 @@ form a:hover{
 } 
 input[type=checkbox] {
      position: relative;
+     width: 15px;
+     height: 16px;
+     vertical-align: middle;
 }
 input[type=checkbox]:before {
     position: absolute;
@@ -733,7 +748,7 @@ div.payment-indicator div{
 .quick-menu-item .indicator{
     position: absolute;
     top: -10px;
-    right: -15px;
+    right: -10px;
     font-size: 60%;
     background-color: white;
     color: #555;

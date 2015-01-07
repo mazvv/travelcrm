@@ -15,7 +15,9 @@ from pyramid.view import forbidden_view_config
 from ..resources import Root
 from ..models import User
 from ..lib.utils.common_utils import translate as _
-
+from ..lib.utils.resources_utils import get_resource_class
+from ..lib.utils.resources_utils import get_resources_types_by_interface
+from ..interfaces import IPortlet
 from ..forms.auth import (
     LoginSchema,
     ForgotSchema
@@ -35,7 +37,15 @@ class Home(object):
         permission='view'
     )
     def index(self):
-        return {}
+        portlets = []
+        for portlet in get_resources_types_by_interface(IPortlet):
+            column_index = portlet.settings.get('column_index', 1)
+            rt_cls = get_resource_class(portlet.name)
+            url = self.request.resource_url(rt_cls(self.request))
+            portlets.append({'column_index': column_index, 'url': url})
+        return {
+            'portlets': portlets
+        }
 
     @view_config(
         name='forgot',

@@ -56,6 +56,7 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         'id': Invoice.id,
         '_id': Invoice.id,
         'date': Invoice.date,
+        'active_until': Invoice.active_until,
         'account': Account.name,
         'account_type': Account.account_type,
         'sum': _subq_invoice_sum.label('sum'),

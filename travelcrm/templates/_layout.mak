@@ -5,7 +5,8 @@ ${h.tags.Doctype().html5()}
         <title>${_(u"TravelCRM")}</title>
         <link rel="icon" type="image/ico" href="${request.static_url('travelcrm:static/css/img/favicon.ico')}"/>
         ${h.tags.stylesheet_link(
-            request.static_url('travelcrm:static/css/jeasyui/gray/easyui.css'), 
+            request.static_url('travelcrm:static/css/jeasyui/gray/easyui.css'),
+            request.static_url('travelcrm:static/css/jeasyui/icon.css'),
             request.static_url('travelcrm:static/css/main.css')
         )}
         <%block name="css"></%block>

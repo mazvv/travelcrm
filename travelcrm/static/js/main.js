@@ -218,6 +218,14 @@ function tab_open(options){
 			selected: true,
 			closable: true,
 			href: url,
+			tools:[{
+	            iconCls:'icon-mini-refresh',
+	            handler:function(){
+	            	var li = $(this).closest('li');
+	                var tab = $('#_tabs_').tabs('getTab', $('li').index(li));
+	                tab.panel('refresh');
+	            }
+	        }]			
 		});
 	}
 }

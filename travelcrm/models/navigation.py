@@ -63,6 +63,9 @@ class Navigation(Base):
         String(length=128),
         nullable=False,
     )
+    action = Column(
+        String(length=32),
+    )
     icon_cls = Column(
         String(length=32),
     )

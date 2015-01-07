@@ -20,7 +20,7 @@
 	       			<span>
 						<a href="#" class="_action"
 						    iconCls="${item.icon_cls}"
-						    data-options="action:'tab_open',url:'${item.url}',title:'${item.name}'">
+						    data-options="action:'${item.action or 'tab_open'}',url:'${item.url}',title:'${item.name}'">
 						    ${item.name}
 						</a>
 	       			</span>
@@ -30,7 +30,7 @@
 	       		% else:
 					<a href="#" class="_action"
 					    iconCls="${item.icon_cls}"
-					    data-options="action:'tab_open',url:'${item.url}',title:'${item.name}'">
+					    data-options="action:'${item.action or 'tab_open'}',url:'${item.url}',title:'${item.name}'">
 					    ${item.name}
 					</a>
 	       		% endif
@@ -42,13 +42,13 @@
     	% if navigation.get(item.id):
 			<a href="#" class="easyui-menubutton _action"
 			    id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
-			    data-options="menu:'${'#_navigation_submenu_%d' % item.id}',action:'tab_open',url:'${item.url}',title:'${item.name}'">
+			    data-options="menu:'${'#_navigation_submenu_%d' % item.id}',action:'${item.action or 'tab_open'}',url:'${item.url}',title:'${item.name}'">
 			    ${item.name}
 			</a>
         % else:
 			<a href="#" class="easyui-linkbutton _action"
 	            id="${'_navigation_item_%d' % item.id}" iconCls="${item.icon_cls}"
-	            data-options="plain:true,action:'tab_open',url:'${item.url}',title:'${item.name}'">
+	            data-options="plain:true,action:'${item.action or 'tab_open'}',url:'${item.url}',title:'${item.name}'">
 	            ${item.name}
 	        </a>		
         % endif
@@ -77,8 +77,7 @@
 
 <%def name="system_portal()">
     <div id="_portal_" class="easyui-portal" data-options="fit:true,border:false">
-        <div class="dp33"></div>
-        <div class="dp33"></div>
-        <div class="dp33"></div>
+        <div class="dp60 p05"></div>
+        <div class="dp40 p05"></div>
     </div>
 </%def>

@@ -49,6 +49,15 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
+                         ${h.tags.title(_(u"action"), False, "action")}
+                    </div>
+                    <div class="ml15">
+                        ${h.tags.text("action", item.action if item else 'tab_open', class_="easyui-textbox w20")}
+                        ${h.common.error_container(name='action')}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
                          ${h.tags.title(_(u"separator before"), False, "separator_before")}
                     </div>
                     <div class="ml15">

@@ -118,6 +118,7 @@ class Navigations(object):
                 position_id=controls.get('position_id'),
                 parent_id=controls.get('parent_id'),
                 url=controls.get('url'),
+                action=controls.get('action'),
                 icon_cls=controls.get('icon_cls'),
                 separator_before=controls.get('separator_before'),
                 sort_order=get_next_position(
@@ -177,6 +178,7 @@ class Navigations(object):
                 controls.get('position_id')
             )
             navigation.url = controls.get('url')
+            navigation.action = controls.get('action')
             navigation.icon_cls = controls.get('icon_cls')
             navigation.separator_before = controls.get('separator_before')
             navigation.parent_id = controls.get('parent_id')

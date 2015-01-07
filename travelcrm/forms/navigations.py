@@ -37,6 +37,10 @@ class NavigationSchema(ResourceSchema):
         missing='',
         validator=colander.Length(max=128)
     )
+    action = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=32)
+    )
     icon_cls = colander.SchemaNode(
         colander.String(),
         missing=None,
