@@ -539,19 +539,6 @@ CREATE TABLE appointment (
 ALTER TABLE public.appointment OWNER TO mazvv;
 
 --
--- Name: apscheduler_jobs; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE apscheduler_jobs (
-    id character varying(191) NOT NULL,
-    next_run_time double precision,
-    job_state bytea NOT NULL
-);
-
-
-ALTER TABLE public.apscheduler_jobs OWNER TO mazvv;
-
---
 -- Name: bank; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -793,6 +780,42 @@ ALTER TABLE public.companies_positions_id_seq OWNER TO mazvv;
 --
 
 ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
+
+
+--
+-- Name: company; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE company (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    currency_id integer NOT NULL,
+    settings json
+);
+
+
+ALTER TABLE public.company OWNER TO mazvv;
+
+--
+-- Name: company_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+--
+
+CREATE SEQUENCE company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.company_id_seq OWNER TO mazvv;
+
+--
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+--
+
+ALTER SEQUENCE company_id_seq OWNED BY company.id;
 
 
 --
@@ -1325,7 +1348,8 @@ CREATE TABLE navigation (
     icon_cls character varying(32),
     sort_order integer NOT NULL,
     resource_id integer NOT NULL,
-    separator_before boolean
+    separator_before boolean,
+    action character varying(32)
 );
 
 
@@ -1387,8 +1411,8 @@ CREATE TABLE notification (
     resource_id integer NOT NULL,
     title character varying NOT NULL,
     descr character varying NOT NULL,
-    url character varying,
-    created timestamp without time zone
+    created timestamp without time zone,
+    url character varying
 );
 
 
@@ -1825,7 +1849,8 @@ CREATE TABLE structure (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     parent_id integer,
-    name character varying(32) NOT NULL
+    name character varying(32) NOT NULL,
+    company_id integer NOT NULL
 );
 
 
@@ -2380,6 +2405,13 @@ ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
 --
 
+ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+--
+
 ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
 
 
@@ -2674,21 +2706,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6415, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6435, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1966, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1977, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 125, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 128, true);
 
 
 --
@@ -2831,7 +2863,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-217d0442f85d
+52280a9d76c5
 \.
 
 
@@ -2843,14 +2875,6 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 1	789	54	2	4	1000.00	2014-02-02
 6	892	54	7	5	4500.00	2014-02-22
 8	1542	54	2	4	6500.00	2014-03-01
-\.
-
-
---
--- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY apscheduler_jobs (id, next_run_time, job_state) FROM stdin;
 \.
 
 
@@ -3004,6 +3028,22 @@ SELECT pg_catalog.setval('commission_id_seq', 24, true);
 --
 
 SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
+
+
+--
+-- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY company (id, resource_id, name, currency_id, settings) FROM stdin;
+1	1970	LuxTravel, Inc	56	{"locale": "ru", "timezone": "Europe/Kiev"}
+\.
+
+
+--
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+--
+
+SELECT pg_catalog.setval('company_id_seq', 1, true);
 
 
 --
@@ -3161,7 +3201,7 @@ SELECT pg_catalog.setval('currency_rate_id_seq', 12, true);
 --
 
 COPY email_campaign (id, resource_id, name, plain_content, html_content, start_dt, subject) FROM stdin;
-1	1955	Egypt HOT!!!	Hello.<p>Look at this</p>	Hello.<p>Look at this</p>	2014-12-26 22:29:00	Hot New Year in Egypt
+1	1955	Egypt HOT!!!	Hello.<p>Look at this</p>	      <meta content="text/html; charset=utf-8" http-equiv="Content-Type">    <title>      Boutique    </title><style type="text/css">a:hover { text-decoration: none !important; }.header h1 {color: #ede6cb !important; font: normal 24px Georgia, serif; margin: 0; padding: 0; line-height: 28px;}.header p {color: #645847; font: bold 11px Georgia, serif; margin: 0; padding: 0; line-height: 12px; text-transform: uppercase;}.content h2 {color:#393023 !important; font-weight: bold; margin: 0; padding: 0; line-height: 30px; font-size: 17px;font-family: Helvetica, Arial, sans-serif; }.content p {color:#767676; font-weight: normal; margin: 0; padding: 0; line-height: 20px; font-size: 12px; font-family: Helvetica, Arial, sans-serif;}.content a {color: #0fa2e6; text-decoration: none;}.footer p {font-size: 11px; color:#bfbfbf; margin: 0; padding: 0;font-family: Helvetica, Arial, sans-serif;}.footer a {color: #0fa2e6; text-decoration: none;}</style>      <table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="background: url('images/bg_email.jpg') no-repeat center top; padding: 85px 0 35px">  <tbody><tr>  <td align="center">    <table cellpadding="0" cellspacing="0" border="0" align="center" width="599" style="font-family: Georgia, serif; background: url('images/bg_header.jpg') no-repeat center top" height="142">      <tbody><tr>        <td style="margin: 0; padding: 40px 0 0; background: #c89c22 url('images/bg_header.jpg') no-repeat center top" align="center" valign="top"><h1 style="color: #ede6cb !important; font: normal 24px Georgia, serif; margin: 0; padding: 0; line-height: 28px;">Grandma's Sweets &amp; Cookies</h1>    </td>      </tr>  <tr>        <td style="margin: 0; padding: 25px 0 0;" align="center" valign="top"><p style="color: #645847; font: bold 11px Georgia, serif; margin: 0; padding: 0; line-height: 12px; text-transform: uppercase;">ESTABLISHED 1405</p>        </td>      </tr>  <tr>  <td style="font-size: 1px; height: 15px; line-height: 1px;" height="15">&nbsp;</td>  </tr></tbody></table><!-- header--><table cellpadding="0" cellspacing="0" border="0" align="center" width="599" style="font-family: Georgia, serif;">      <tbody><tr>        <td width="599" valign="top" align="left" bgcolor="#ffffff" style="font-family: Georgia, serif; background: #fff; border-top: 5px solid #e5bd5f"><table cellpadding="0" cellspacing="0" border="0" style="color: #717171; font: normal 11px Georgia, serif; margin: 0; padding: 0;" width="599"><tbody><tr><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td><td style="padding: 15px 0 5px; font-family: Georgia, serif;" valign="top" align="center" width="569"><img src="images/divider_top_full.png" alt="divider"><br></td><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td></tr><tr><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td><td style="padding: 10px 0 0; font-family: Helvetica, Arial, sans-serif;" align="left"><h2 style="color:#393023 !important; font-weight: bold; margin: 0; padding: 0; line-height: 30px; font-size: 17px;font-family: Helvetica, Arial, sans-serif;">Meet Jack — a brown cow.</h2><p style="color:#767676; font-weight: normal; margin: 0; padding: 0; line-height: 20px; font-size: 12px;">Suspendisse potenti--Fusce eu ante in sapien vestibulum sagittis. Cras purus. Nunc rhoncus. <a href="#" style="color: #0fa2e6; text-decoration: none;">Donec imperdiet</a>, nibh sit amet pharetra placerat, tortor purus condimentum lectus.</p></td><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td></tr><tr><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td><td style="padding: 10px 0 0; font-family: Helvetica, Arial, sans-serif;" align="left"><img src="images/img.jpg" alt="Cow" style="border: 5px solid #f7f7f4;"></td></tr><tr><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td><td style="padding: 10px 0 0; font-family: Helvetica, Arial, sans-serif;" align="left"><p style="color:#767676; font-weight: normal; margin: 0; padding: 0; line-height: 20px; font-size: 12px;">Suspendisse potenti--Fusce eu <a href="#" style="color: #0fa2e6; text-decoration: none;">ante in sapien</a> vestibulum sagittis.</p></td></tr><tr><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td><td style="padding: 10px 0 0; font-family: Helvetica, Arial, sans-serif;" align="left"><img src="images/divider_full.png" alt="divider"></td><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td></tr><tr><td width="15" style="font-size: 1px; line-height: 1px; width: 15px;"><img src="images/spacer.gif" alt="space" width="15"></td><td style="padding: 10px 0 55px; font-family: Helvetica, Arial, sans-serif;" align="left"><h2 style="color:#393023 !important; font-weight: bold; margin: 0; padding: 0; line-height: 30px; font-size: 17px;font-family: Helvetica, Arial, sans-serif;">Cookies feels more valuable now than before</h2><p style="color:#767676; font-weight: normal; margin: 0; padding: 0; line-height: 20px; font-size: 12px;">Suspendisse potenti--Fusce eu ante in sapien vestibulum sagittis. Cras purus. Nunc rhoncus. Donec imperdiet, nibh sit amet pharetra placerat, tortor purus condimentum lectus. Says Doctor Lichtenstein in an interview done after last nights press conference in Belgium.<a href="#" style="color: #0fa2e6; text-decoration: none;">Dr. Lichtenstein</a> also states his concerns regarding chocolate now suddenly turning yellow the last couple of years. </p></td></tr>  </tbody></table></td>      </tr> <tr>  <td style="font-size: 1px; height: 10px; line-height: 1px;" height="10"><img src="images/spacer.gif" alt="space" width="15"></td>  </tr></tbody></table><!-- body --><table cellpadding="0" cellspacing="0" border="0" align="center" width="599" style="font-family: Georgia, serif; line-height: 10px;" bgcolor="#464646" class="footer">      <tbody><tr>        <td bgcolor="#464646" align="center" style="padding: 15px 0 10px; font-size: 11px; color:#bfbfbf; margin: 0; line-height: 1.2;font-family: Helvetica, Arial, sans-serif;" valign="top"><p style="font-size: 11px; color:#bfbfbf; margin: 0; padding: 0;font-family: Helvetica, Arial, sans-serif;">You're receiving this newsletter because you bought widgets from us. </p><p style="font-size: 11px; color:#bfbfbf; margin: 0 0 10px 0; padding: 0;font-family: Helvetica, Arial, sans-serif;">Having trouble reading this? <webversion style="color: #0fa2e6; text-decoration: none;">View it in your browser</webversion>. Not interested anymore? <unsubscribe style="color: #0fa2e6; text-decoration: none;">Unsubscribe</unsubscribe> Instantly.</p></td>      </tr>  </tbody></table><!-- footer-->  </td></tr>    </tbody></table>  	2014-12-28 19:18:00	Hot New Year in Egypt
 \.
 
 
@@ -3221,6 +3261,8 @@ COPY employee_notification (employee_id, notification_id) FROM stdin;
 2	10
 2	11
 2	12
+2	13
+2	14
 \.
 
 
@@ -3479,103 +3521,104 @@ SELECT pg_catalog.setval('location_id_seq', 37, true);
 -- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before) FROM stdin;
-162	4	160	Debts	/debts	\N	2	1921	f
-163	4	26	Email Campaigns	/emails_campaigns	\N	2	1953	t
-9	4	8	Resource Types	/resources_types	\N	1	779	f
-15	4	8	Users	/users	\N	2	792	f
-13	4	10	Employees	/employees	\N	1	790	f
-41	5	\N	Home	/	fa fa-home	1	1079	f
-20	4	18	Positions	/positions	\N	2	863	f
-19	4	18	Structures	/structures	\N	1	838	f
-14	4	10	Employees Appointments	/appointments	\N	2	791	f
-27	4	26	Advertising Sources	/advsources	\N	1	902	f
-22	4	21	Persons	/persons	\N	1	866	f
-47	5	\N	For Test	/	fa fa-credit-card	2	1253	f
-48	6	\N	Home	/	fa fa-home	1	1079	f
-49	6	\N	For Test	/	fa fa-credit-card	2	1253	f
-111	8	\N	System	/	fa fa-cog	10	778	f
-112	8	\N	Directories	/	fa fa-book	9	873	f
-108	8	111	Resource Types	/resources_types	\N	1	779	f
-109	8	111	Users	/users	\N	2	792	f
-110	8	144	Employees	/employees	\N	1	790	f
-113	8	143	Positions	/positions	\N	2	863	f
-114	8	143	Structures	/structures	\N	1	838	f
-115	8	112	Touroperators	/touroperators	\N	11	1002	f
-116	8	144	Employees Appointments	/appointments	\N	2	791	f
-117	8	112	Accomodations	/accomodations	\N	10	955	f
-118	8	112	Food Categories	/foodcats	\N	9	956	f
-119	8	112	Rooms Categories	/roomcats	\N	7	911	f
-120	8	112	Hotels	/hotels	\N	6	1080	f
-121	8	145	Advertising Sources	/advsources	\N	1	902	f
-122	8	112	Hotels Categories	/hotelcats	\N	5	910	f
-123	8	112	Locations	/locations	\N	3	1089	f
-124	8	112	Countries	/countries	\N	4	874	f
-125	8	112	Regions	/regions	\N	3	879	f
-126	8	146	Persons	/persons	\N	1	866	f
-127	8	112	Business Persons	/bpersons	\N	9	1008	f
-128	8	142	Banks	/banks	\N	2	1212	f
-129	8	142	Currencies	/currencies	\N	3	802	f
-142	8	\N	Finance	/	fa fa-credit-card	9	1394	f
-143	8	\N	Company	/	fa fa-building-o	8	837	f
-144	8	\N	HR	/	fa fa-group	7	780	f
-145	8	\N	Marketing	/	fa fa-bullhorn	6	900	f
-146	8	\N	Clientage	/	fa fa-briefcase	5	864	f
-147	8	\N	Sales	/	fa fa-legal	4	998	f
-148	8	\N	Home	/	fa fa-home	2	1777	f
-130	8	142	Currency Rates	/currencies_rates	\N	5	1395	f
-131	8	142	Income Payments	incomes	\N	6	1434	f
-132	8	147	Tours	/tours	\N	2	1075	f
-133	8	147	Invoices	/invoices	\N	3	1368	f
-134	8	142	Accounts	/accounts	\N	1	1436	f
-135	8	147	Liabilities	/liabilities	\N	10	1659	f
-136	8	142	Outgoing Payments	/outgoings	\N	7	1571	f
-137	8	142	Refunds	/refunds	\N	9	1575	f
-138	8	142	Services List	/services	\N	1	1312	f
-139	8	147	Services	/services_sales	\N	2	1369	f
-140	8	112	Suppliers	/suppliers	\N	11	1550	f
-141	8	142	Accounts Items	/accounts_items	\N	1	1425	f
-151	4	155	Cross Payments	/crosspayments	\N	11	1885	f
-53	4	\N	Finance	/	fa fa-credit-card	7	1394	f
-156	4	53	Billing	/	\N	10	1905	f
-57	4	156	Accounts	/accounts	\N	1	1436	f
-107	4	\N	Home	/	fa fa-home	1	1777	f
-32	4	\N	Sales	/	fa fa-legal	2	998	f
-21	4	\N	Clientage	/	fa fa-briefcase	3	864	f
-26	4	\N	Marketing	/	fa fa-bullhorn	4	900	f
-10	4	\N	HR	/	fa fa-group	5	780	f
-18	4	\N	Company	/	fa fa-building-o	6	837	f
-23	4	\N	Directories	/	fa fa-book	8	873	f
-152	4	\N	Reports	/	fa fa-pie-chart	9	1895	f
-8	4	\N	System	/	fa fa-cog	10	778	f
-155	4	53	Payments	/	\N	12	1904	f
-56	4	155	Income Payments	incomes	\N	9	1434	f
-61	4	155	Outgoing Payments	/outgoings	\N	10	1571	f
-150	4	156	Subaccounts	/subaccounts	\N	2	1798	f
-55	4	156	Accounts Items	/accounts_items	\N	3	1425	f
-24	4	158	Countries	/countries	\N	4	874	f
-17	4	157	Currencies List	/currencies	\N	7	802	f
-54	4	157	Currencies Rates	/currencies_rates	\N	8	1395	f
-45	4	53	Banks	/banks	\N	5	1212	f
-50	4	53	Services List	/services	\N	6	1312	f
-25	4	158	Regions	/regions	\N	3	879	f
-43	4	158	Locations	/locations	\N	3	1089	f
-31	4	159	Food Categories	/foodcats	\N	9	956	f
-158	4	23	Geography	/	\N	13	1907	f
-35	4	23	Touroperators	/touroperators	\N	10	1002	f
-29	4	159	Rooms Categories	/roomcats	\N	7	911	f
-30	4	159	Accomodations	/accomodations	\N	10	955	f
-153	4	160	Turnovers	/turnovers	\N	1	1896	f
-36	4	23	Business Persons	/bpersons	\N	11	1008	f
-60	4	23	Suppliers	/suppliers	\N	9	1550	f
-51	4	32	Invoices	/invoices	\N	4	1368	f
-160	4	152	Billing	/	\N	2	1909	f
-28	4	159	Hotels Categories	/hotelcats	\N	6	910	f
-42	4	159	Hotels List	/hotels	\N	5	1080	f
-52	4	32	Services	/services_sales	\N	3	1369	f
-157	4	53	Currencies		\N	7	1906	t
-159	4	23	Hotels	/	\N	12	1908	t
-38	4	32	Tours	/tours_sales	\N	2	1075	f
+COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before, action) FROM stdin;
+162	4	160	Debts	/debts	\N	2	1921	f	\N
+163	4	26	Email Campaigns	/emails_campaigns	\N	2	1953	t	\N
+165	4	8	Company Settings	/companies_settings	\N	3	1975	t	dialog_open
+9	4	8	Resource Types	/resources_types	\N	1	779	f	\N
+15	4	8	Users	/users	\N	2	792	f	\N
+13	4	10	Employees	/employees	\N	1	790	f	\N
+41	5	\N	Home	/	fa fa-home	1	1079	f	\N
+20	4	18	Positions	/positions	\N	2	863	f	\N
+19	4	18	Structures	/structures	\N	1	838	f	\N
+14	4	10	Employees Appointments	/appointments	\N	2	791	f	\N
+27	4	26	Advertising Sources	/advsources	\N	1	902	f	\N
+22	4	21	Persons	/persons	\N	1	866	f	\N
+47	5	\N	For Test	/	fa fa-credit-card	2	1253	f	\N
+48	6	\N	Home	/	fa fa-home	1	1079	f	\N
+49	6	\N	For Test	/	fa fa-credit-card	2	1253	f	\N
+111	8	\N	System	/	fa fa-cog	10	778	f	\N
+112	8	\N	Directories	/	fa fa-book	9	873	f	\N
+108	8	111	Resource Types	/resources_types	\N	1	779	f	\N
+109	8	111	Users	/users	\N	2	792	f	\N
+110	8	144	Employees	/employees	\N	1	790	f	\N
+113	8	143	Positions	/positions	\N	2	863	f	\N
+114	8	143	Structures	/structures	\N	1	838	f	\N
+115	8	112	Touroperators	/touroperators	\N	11	1002	f	\N
+116	8	144	Employees Appointments	/appointments	\N	2	791	f	\N
+117	8	112	Accomodations	/accomodations	\N	10	955	f	\N
+118	8	112	Food Categories	/foodcats	\N	9	956	f	\N
+119	8	112	Rooms Categories	/roomcats	\N	7	911	f	\N
+120	8	112	Hotels	/hotels	\N	6	1080	f	\N
+121	8	145	Advertising Sources	/advsources	\N	1	902	f	\N
+122	8	112	Hotels Categories	/hotelcats	\N	5	910	f	\N
+123	8	112	Locations	/locations	\N	3	1089	f	\N
+124	8	112	Countries	/countries	\N	4	874	f	\N
+125	8	112	Regions	/regions	\N	3	879	f	\N
+126	8	146	Persons	/persons	\N	1	866	f	\N
+127	8	112	Business Persons	/bpersons	\N	9	1008	f	\N
+128	8	142	Banks	/banks	\N	2	1212	f	\N
+129	8	142	Currencies	/currencies	\N	3	802	f	\N
+142	8	\N	Finance	/	fa fa-credit-card	9	1394	f	\N
+143	8	\N	Company	/	fa fa-building-o	8	837	f	\N
+144	8	\N	HR	/	fa fa-group	7	780	f	\N
+145	8	\N	Marketing	/	fa fa-bullhorn	6	900	f	\N
+146	8	\N	Clientage	/	fa fa-briefcase	5	864	f	\N
+147	8	\N	Sales	/	fa fa-legal	4	998	f	\N
+148	8	\N	Home	/	fa fa-home	2	1777	f	\N
+130	8	142	Currency Rates	/currencies_rates	\N	5	1395	f	\N
+131	8	142	Income Payments	incomes	\N	6	1434	f	\N
+132	8	147	Tours	/tours	\N	2	1075	f	\N
+133	8	147	Invoices	/invoices	\N	3	1368	f	\N
+134	8	142	Accounts	/accounts	\N	1	1436	f	\N
+135	8	147	Liabilities	/liabilities	\N	10	1659	f	\N
+136	8	142	Outgoing Payments	/outgoings	\N	7	1571	f	\N
+137	8	142	Refunds	/refunds	\N	9	1575	f	\N
+138	8	142	Services List	/services	\N	1	1312	f	\N
+139	8	147	Services	/services_sales	\N	2	1369	f	\N
+140	8	112	Suppliers	/suppliers	\N	11	1550	f	\N
+141	8	142	Accounts Items	/accounts_items	\N	1	1425	f	\N
+151	4	155	Cross Payments	/crosspayments	\N	11	1885	f	\N
+53	4	\N	Finance	/	fa fa-credit-card	7	1394	f	\N
+156	4	53	Billing	/	\N	10	1905	f	\N
+57	4	156	Accounts	/accounts	\N	1	1436	f	\N
+107	4	\N	Home	/	fa fa-home	1	1777	f	\N
+32	4	\N	Sales	/	fa fa-legal	2	998	f	\N
+21	4	\N	Clientage	/	fa fa-briefcase	3	864	f	\N
+26	4	\N	Marketing	/	fa fa-bullhorn	4	900	f	\N
+10	4	\N	HR	/	fa fa-group	5	780	f	\N
+18	4	\N	Company	/	fa fa-building-o	6	837	f	\N
+23	4	\N	Directories	/	fa fa-book	8	873	f	\N
+152	4	\N	Reports	/	fa fa-pie-chart	9	1895	f	\N
+8	4	\N	System	/	fa fa-cog	10	778	f	\N
+155	4	53	Payments	/	\N	12	1904	f	\N
+56	4	155	Income Payments	incomes	\N	9	1434	f	\N
+61	4	155	Outgoing Payments	/outgoings	\N	10	1571	f	\N
+150	4	156	Subaccounts	/subaccounts	\N	2	1798	f	\N
+55	4	156	Accounts Items	/accounts_items	\N	3	1425	f	\N
+24	4	158	Countries	/countries	\N	4	874	f	\N
+17	4	157	Currencies List	/currencies	\N	7	802	f	\N
+54	4	157	Currencies Rates	/currencies_rates	\N	8	1395	f	\N
+45	4	53	Banks	/banks	\N	5	1212	f	\N
+50	4	53	Services List	/services	\N	6	1312	f	\N
+25	4	158	Regions	/regions	\N	3	879	f	\N
+43	4	158	Locations	/locations	\N	3	1089	f	\N
+31	4	159	Food Categories	/foodcats	\N	9	956	f	\N
+158	4	23	Geography	/	\N	13	1907	f	\N
+35	4	23	Touroperators	/touroperators	\N	10	1002	f	\N
+29	4	159	Rooms Categories	/roomcats	\N	7	911	f	\N
+30	4	159	Accomodations	/accomodations	\N	10	955	f	\N
+153	4	160	Turnovers	/turnovers	\N	1	1896	f	\N
+36	4	23	Business Persons	/bpersons	\N	11	1008	f	\N
+60	4	23	Suppliers	/suppliers	\N	9	1550	f	\N
+51	4	32	Invoices	/invoices	\N	4	1368	f	\N
+160	4	152	Billing	/	\N	2	1909	f	\N
+28	4	159	Hotels Categories	/hotelcats	\N	6	910	f	\N
+42	4	159	Hotels List	/hotels	\N	5	1080	f	\N
+52	4	32	Services	/services_sales	\N	3	1369	f	\N
+157	4	53	Currencies		\N	7	1906	t	\N
+159	4	23	Hotels	/	\N	12	1908	t	\N
+38	4	32	Tours	/tours_sales	\N	2	1075	f	\N
 \.
 
 
@@ -3638,17 +3681,19 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
-3	1945	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 19:51:00.013635
-4	1946	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:31:00.012771
-5	1947	A reminder of the task #40	Do not forget about task!	\N	2014-12-14 20:32:00.061386
-6	1948	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:34:00.011181
-7	1949	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:35:00.011903
-8	1950	A reminder of the task #42	Do not forget about task!	\N	2014-12-14 20:38:00.01699
-9	1959	A reminder of the task #44	Do not forget about task!	\N	2014-12-21 19:21:00.016784
-10	1961	Task: #44	Test new scheduler realization	\N	2014-12-21 19:44:00.016315
-11	1963	Task: Test	Test	\N	2014-12-24 21:33:00.014126
-12	1965	Task: For testing	For testing	\N	2014-12-25 21:06:00.013657
+COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
+3	1945	A reminder of the task #42	Do not forget about task!	2014-12-14 19:51:00.013635	\N
+4	1946	A reminder of the task #42	Do not forget about task!	2014-12-14 20:31:00.012771	\N
+5	1947	A reminder of the task #40	Do not forget about task!	2014-12-14 20:32:00.061386	\N
+6	1948	A reminder of the task #42	Do not forget about task!	2014-12-14 20:34:00.011181	\N
+7	1949	A reminder of the task #42	Do not forget about task!	2014-12-14 20:35:00.011903	\N
+8	1950	A reminder of the task #42	Do not forget about task!	2014-12-14 20:38:00.01699	\N
+9	1959	A reminder of the task #44	Do not forget about task!	2014-12-21 19:21:00.016784	\N
+10	1961	Task: #44	Test new scheduler realization	2014-12-21 19:44:00.016315	\N
+11	1963	Task: Test	Test	2014-12-24 21:33:00.014126	\N
+12	1965	Task: For testing	For testing	2014-12-25 21:06:00.013657	\N
+13	1972	Task: Check Payments	Check Payments	2015-01-04 12:46:00.019127	\N
+14	1973	Task: Check Payments	Check Payments	2015-01-04 14:06:00.016859	\N
 \.
 
 
@@ -3656,7 +3701,7 @@ COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 12, true);
+SELECT pg_catalog.setval('notification_id_seq', 14, true);
 
 
 --
@@ -3675,7 +3720,7 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum) FROM 
 -- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('outgoing_id_seq', 16, true);
+SELECT pg_catalog.setval('outgoing_id_seq', 17, true);
 
 
 --
@@ -3828,7 +3873,9 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 134	123	4	{view,delete}	\N	all
 135	124	4	{view,add,edit,delete,settings}	\N	all
 72	103	4	{view,add,edit,delete,settings}	\N	all
-136	125	4	{view}	\N	all
+136	125	4	{view,settings}	\N	all
+137	126	4	{add,edit,view,delete}	\N	all
+139	128	4	{edit,view}	\N	all
 \.
 
 
@@ -3983,14 +4030,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 163, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 165, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 136, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 139, true);
 
 
 --
@@ -4757,6 +4804,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1964	93	32	f
 1965	123	32	f
 1966	12	32	f
+1968	12	32	f
+1970	126	32	f
+1971	93	32	f
+1972	123	32	f
+1973	123	32	f
+1975	65	32	f
+1976	55	32	f
+1977	12	32	f
 \.
 
 
@@ -5911,6 +5966,23 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6413	1840	2	\N	2014-12-27 16:32:05.180181
 6414	1840	2	\N	2014-12-27 16:45:52.831401
 6415	1966	2	\N	2014-12-27 19:34:56.371248
+6416	1955	2	\N	2014-12-28 18:35:17.644826
+6417	1955	2	\N	2014-12-28 19:17:37.697477
+6418	1966	2	\N	2014-12-31 19:10:29.989911
+6420	1968	2	\N	2015-01-03 12:32:10.846571
+6422	1970	2	\N	2015-01-03 12:35:21.670372
+6423	1971	2	\N	2015-01-04 12:45:51.571627
+6424	1840	2	\N	2015-01-04 12:45:53.947837
+6425	1971	2	\N	2015-01-04 12:46:35.715575
+6426	1971	2	\N	2015-01-04 14:05:54.230775
+6428	1975	2	\N	2015-01-04 14:47:53.838979
+6429	1976	2	\N	2015-01-04 15:06:13.604725
+6430	1977	2	\N	2015-01-04 16:44:50.635763
+6431	1975	2	\N	2015-01-04 16:54:32.711408
+6432	1975	2	\N	2015-01-04 17:11:52.039507
+6433	1975	2	\N	2015-01-04 17:31:46.570967
+6434	1975	2	\N	2015-01-07 14:12:48.405815
+6435	1975	2	\N	2015-01-07 14:22:19.046581
 \.
 
 
@@ -5966,9 +6038,11 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 112	1549	suppliers	Suppliers	Suppliers	travelcrm.resources.suppliers	Suppliers for other services except tours services	null	f
 111	1548	outgoings	Outgoings	Outgoings	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	f
 123	1941	notifications	Notifications	Notifications	travelcrm.resources.notifications	Employee Notifications	null	f
+128	1977	companies_settings	Companies Settings	CompaniesSettings	travelcrm.resources.companies_settings	Companies Settings	null	f
 124	1954	emails_campaigns	Email Campaigns	EmailsCampaigns	travelcrm.resources.emails_campaigns	Emails Campaigns for subscribers	{"timeout": 12}	t
 103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	{"active_days": 3}	t
-125	1966	unpaid_invoices	Portlet: Unpaid Invoices	UnpaidInvoices	travelcrm.resources.unpaid_invoices	Portlet that shows invoices which has no any pay and active date is over	null	f
+125	1966	unpaid_invoices	Portlet: Unpaid Invoices	UnpaidInvoices	travelcrm.resources.unpaid_invoices	Portlet that shows invoices which has no any pay and active date is over	{"column_index": 1}	t
+126	1968	companies	Companies	Companies	travelcrm.resources.companies	Multicompanies functionality	null	f
 \.
 
 
@@ -6135,17 +6209,18 @@ COPY service_sale_service_item (service_sale_id, service_item_id) FROM stdin;
 -- Data for Name: structure; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY structure (id, resource_id, parent_id, name) FROM stdin;
-2	858	\N	Kiev Office
-3	859	2	Sales Department
-4	860	32	Marketing Dep.
-1	857	32	Software Dev. Dep.
-5	861	32	CEO
-7	1062	\N	Moscow Office
-8	1250	\N	Odessa Office
-9	1251	8	Sales Department
-11	1277	\N	Lviv Office
-32	725	\N	Head Office
+COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
+2	858	\N	Kiev Office	1
+3	859	2	Sales Department	1
+4	860	32	Marketing Dep.	1
+1	857	32	Software Dev. Dep.	1
+5	861	32	CEO	1
+7	1062	\N	Moscow Office	1
+8	1250	\N	Odessa Office	1
+9	1251	8	Sales Department	1
+11	1277	\N	Lviv Office	1
+32	725	\N	Head Office	1
+13	1976	\N	Dnepropetrovsk Office	1
 \.
 
 
@@ -6178,7 +6253,7 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 -- Name: structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('structures_id_seq', 12, true);
+SELECT pg_catalog.setval('structures_id_seq', 13, true);
 
 
 --
@@ -6262,6 +6337,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 44	1958	2	Test new scheduler realization	2014-12-22 19:18:00	2014-12-21 19:44:00	New scheduler realizations notifications test.	f	\N
 45	1962	2	Test	2014-12-24 23:32:00	2014-12-24 21:33:00	\N	f	\N
 46	1964	2	For testing	2014-12-25 23:05:00	2014-12-25 21:06:00	For testing purpose only	f	\N
+47	1971	2	Check Payments	2015-01-04 15:45:00	2015-01-04 14:06:00	\N	f	\N
 34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f	\N
 33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f	\N
 35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f	\N
@@ -6279,7 +6355,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 46, true);
+SELECT pg_catalog.setval('task_id_seq', 47, true);
 
 
 --
@@ -6290,6 +6366,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 39	1928
 38	1928
 35	1869
+47	1840
 \.
 
 
@@ -6517,7 +6594,7 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 73, true);
+SELECT pg_catalog.setval('transfer_id_seq', 74, true);
 
 
 --
@@ -6579,14 +6656,6 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: apscheduler_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
---
-
-ALTER TABLE ONLY apscheduler_jobs
-    ADD CONSTRAINT apscheduler_jobs_pkey PRIMARY KEY (id);
-
-
---
 -- Name: bank_address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -6640,6 +6709,14 @@ ALTER TABLE ONLY calculation
 
 ALTER TABLE ONLY commission
     ADD CONSTRAINT commission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT company_pkey PRIMARY KEY (id);
 
 
 --
@@ -7235,6 +7312,14 @@ ALTER TABLE ONLY bank
 
 
 --
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT unique_idx_name_company UNIQUE (name);
+
+
+--
 -- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -7360,13 +7445,6 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY "user"
     ADD CONSTRAINT user_pk PRIMARY KEY (id);
-
-
---
--- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (next_run_time);
 
 
 --
@@ -7623,6 +7701,14 @@ ALTER TABLE ONLY bank_detail
 
 ALTER TABLE ONLY commission
     ADD CONSTRAINT fk_currency_id_commission FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT fk_currency_id_company FOREIGN KEY (currency_id) REFERENCES currency(id);
 
 
 --
@@ -8066,6 +8152,14 @@ ALTER TABLE ONLY commission
 
 
 --
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT fk_resource_id_company FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
 --
 
@@ -8447,6 +8541,14 @@ ALTER TABLE ONLY service_sale_service_item
 
 ALTER TABLE ONLY tour_sale
     ADD CONSTRAINT fk_start_location_id_tour FOREIGN KEY (start_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+--
+
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT fk_structure_company_id FOREIGN KEY (company_id) REFERENCES company(id);
 
 
 --
