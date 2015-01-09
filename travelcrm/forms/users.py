@@ -2,8 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
-
+from . import (
+    ResourceSchema,
+    ResourceSearchSchema
+)
 from ..models.user import User
 from ..lib.utils.common_utils import translate as _
 
@@ -80,3 +82,7 @@ class UserEditSchema(UserAddSchema):
         colander.String(),
         missing=None
     )
+
+
+class UserSearchSchema(ResourceSearchSchema):
+    pass

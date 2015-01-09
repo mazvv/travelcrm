@@ -139,3 +139,22 @@ class File(colander.SchemaType):
         if cstruct is None or not isinstance(cstruct, FieldStorage):
             return colander.null
         return cstruct
+
+
+class ResourceSearchSchema(colander.Schema):
+    q = colander.SchemaNode(
+        colander.String(),
+        missing=None
+    )
+    updated_from = colander.SchemaNode(
+        Date(),
+        missing=None
+    )
+    updated_to = colander.SchemaNode(
+        Date(),
+        missing=None
+    )
+    modifier_id = colander.SchemaNode(
+        colander.Int(),
+        missing=None
+    )

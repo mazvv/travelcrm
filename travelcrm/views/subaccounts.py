@@ -16,8 +16,10 @@ from ..lib.bl.subaccounts import (
     get_factory_by_subaccount_id, 
     get_bound_resource_by_subaccount_id
 )
-
-from ..forms.subaccounts import SubaccountSchema
+from ..forms.subaccounts import (
+    SubaccountSchema, 
+    SubaccountSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -47,13 +49,11 @@ class Subaccounts(object):
         permission='view'
     )
     def list(self):
+        schema = SubaccountSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = SubaccountsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

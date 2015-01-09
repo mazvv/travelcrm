@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.bank import Bank
 from ..lib.utils.common_utils import translate as _
 
@@ -43,3 +46,7 @@ class BankSchema(ResourceSchema):
             cstruct['address_id'] = list()
             cstruct['address_id'].append(val)
         return super(BankSchema, self).deserialize(cstruct)
+
+
+class BankSearchSchema(ResourceSearchSchema):
+    pass

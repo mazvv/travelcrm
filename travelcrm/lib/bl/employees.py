@@ -20,6 +20,9 @@ from ...lib.bl import SubaccountFactory
 
 
 def get_employee_position(employee, date=None):
+    """get employee position by date
+    if date is None return current employee position
+    """
     assert isinstance(employee, Employee), type(employee)
     if employee.is_currently_dismissed():
         return None
@@ -37,6 +40,9 @@ def get_employee_position(employee, date=None):
 
 
 def get_employee_structure(employee, date=None):
+    """get employee structure by date
+    if date is None return current employee structure
+    """
     position = get_employee_position(employee, date)
     if position:
         return position.structure

@@ -12,9 +12,7 @@ from ...models.invoice import Invoice
 from ...models.account import Account
 from ...models.currency import Currency
 from ...models.transfer import Transfer
-
 from ...lib.bl.invoices import query_resource_data
-from ...lib.utils.common_utils import parse_date
 
 
 class IncomesQueryBuilder(ResourcesQueryBuilder):
@@ -124,9 +122,9 @@ class IncomesQueryBuilder(ResourcesQueryBuilder):
     def _filter_payment_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                self._sum_subq.c.date >= parse_date(date_from)
+                self._sum_subq.c.date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                self._sum_subq.c.date <= parse_date(date_to)
+                self._sum_subq.c.date <= date_to
             )

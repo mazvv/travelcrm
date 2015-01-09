@@ -8,6 +8,8 @@ from apscheduler.executors.pool import ProcessPoolExecutor
 
 import lib.helpers as h
 from .lib.utils.common_utils import translate as _
+from .lib.bl.employees import get_employee_structure
+from .lib.utils.security_utils import get_auth_employee
 from .interfaces import IScheduler
 
 
@@ -16,6 +18,21 @@ log = logging.getLogger(__name__)
 
 def helpers(event):
     event.update({'h': h, '_': _})
+
+
+def company_settings(event):
+    request = event.request
+    employee = get_auth_employee(request)
+    if not employee:
+        return
+    structure = get_employee_structure(employee)
+    company = structure.company
+    if company:
+        settings = {
+            'company.name': company.name,
+            'company.locale_name': company.settings.get('locale'),
+        }
+        request.registry.settings.update(settings)
 
 
 def scheduler(event):

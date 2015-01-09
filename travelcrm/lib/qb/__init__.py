@@ -170,20 +170,30 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
 
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
-            self.query = self.query.filter(
-                self.__log_subquery.c.modifydt >= parse_date(
-                    updated_from, locale=get_locale_name()
+            if not isinstance(updated_from, date):
+                self.query = self.query.filter(
+                    self.__log_subquery.c.modifydt >= parse_date(
+                        updated_from, locale=get_locale_name()
+                    )
                 )
-            )
+            else:
+                self.query = self.query.filter(
+                    self.__log_subquery.c.modifydt >= updated_from
+                )
         if updated_to:
-            self.query = self.query.filter(
-                self.__log_subquery.c.modifydt <= parse_date(
-                    updated_to, locale=get_locale_name()
+            if not isinstance(updated_from, date):
+                self.query = self.query.filter(
+                    self.__log_subquery.c.modifydt <= parse_date(
+                        updated_to, locale=get_locale_name()
+                    )
                 )
-            )
+            else:
+                self.query = self.query.filter(
+                    self.__log_subquery.c.modifydt <= updated_to
+                )
 
     def _filter_modifier(self, modifier_id):
         if modifier_id:
             self.query = self.query.filter(
-                self.__log_subquery.c.modifier_id == cast_int(modifier_id)
+                self.__log_subquery.c.modifier_id == modifier_id
             )

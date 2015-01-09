@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import (
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.touroperator import Touroperator
 from ..lib.utils.common_utils import translate as _
 
@@ -80,3 +83,7 @@ class TouroperatorSchema(ResourceSchema):
             cstruct['commission_id'].append(val)
 
         return super(TouroperatorSchema, self).deserialize(cstruct)
+
+
+class TouroperatorSearchSchema(ResourceSearchSchema):
+    pass

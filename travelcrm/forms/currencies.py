@@ -2,9 +2,11 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.currency import Currency
-
 from ..lib.utils.common_utils import translate as _
 
 
@@ -30,3 +32,7 @@ class CurrencySchema(ResourceSchema):
         colander.String(),
         validator=iso_code_validator
     )
+
+
+class CurrencySearchSchema(ResourceSearchSchema):
+    pass

@@ -6,12 +6,12 @@ import colander
 
 from . import (
     ResourceSchema,
+    ResourceSearchSchema,
     Date,
 )
 
 from ..models.account import Account
 from ..models.subaccount import Subaccount
-
 from ..lib.bl.transfers import get_account_balance
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.common_utils import cast_int, parse_date
@@ -121,7 +121,7 @@ class CrosspaymentSchema(ResourceSchema):
         missing=None,
         validator=account_to_validator
     )
-    subaccount_from_id = colander.SchemaNode(
+    subaccount_to_id = colander.SchemaNode(
         colander.Integer(),
         missing=None,
     )
@@ -134,4 +134,43 @@ class CrosspaymentSchema(ResourceSchema):
     descr = colander.SchemaNode(
         colander.String(128),
         missing=None,
+    )
+
+
+class CrosspaymentSearchSchema(ResourceSearchSchema):
+    account_from_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    subaccount_from_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    account_to_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    subaccount_to_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    account_item_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    date_from = colander.SchemaNode(
+        Date(),
+        missing=None
+    )
+    date_to = colander.SchemaNode(
+        Date(),
+        missing=None
+    )
+    sum_from = colander.SchemaNode(
+        colander.Decimal(),
+        missing=None
+    )
+    sum_to = colander.SchemaNode(
+        colander.Decimal(),
+        missing=None
     )

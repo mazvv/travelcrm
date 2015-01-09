@@ -11,8 +11,10 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.currencies_rates import CurrenciesRatesQueryBuilder
 from ..lib.utils.common_utils import translate as _
-
-from ..forms.currencies_rates import CurrencyRateSchema
+from ..forms.currencies_rates import (
+    CurrencyRateSchema, 
+    CurrencyRateSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +44,11 @@ class CurrenciesRates(object):
         permission='view'
     )
     def list(self):
+        schema = CurrencyRateSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = CurrenciesRatesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

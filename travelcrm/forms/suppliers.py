@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import (
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.supplier import Supplier
 from ..lib.utils.common_utils import translate as _
 
@@ -56,3 +59,7 @@ class SupplierSchema(ResourceSchema):
             cstruct['bank_detail_id'].append(val)
 
         return super(SupplierSchema, self).deserialize(cstruct)
+
+
+class SupplierSearchSchema(ResourceSearchSchema):
+    pass

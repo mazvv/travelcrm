@@ -13,7 +13,10 @@ from ..models.task import Task
 from ..lib.qb.crosspayments import CrosspaymentsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.crosspayments import CrosspaymentSchema
+from ..forms.crosspayments import (
+    CrosspaymentSchema, 
+    CrosspaymentSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -43,13 +46,11 @@ class Crosspayments(object):
         permission='view'
     )
     def list(self):
+        schema = CrosspaymentSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = CrosspaymentsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

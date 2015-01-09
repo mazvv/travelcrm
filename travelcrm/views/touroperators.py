@@ -18,7 +18,10 @@ from ..models.task import Task
 from ..lib.qb.touroperators import TouroperatorsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.helpers.fields import touroperators_combobox_field
-from ..forms.touroperators import TouroperatorSchema
+from ..forms.touroperators import (
+    TouroperatorSchema, 
+    TouroperatorSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -48,13 +51,11 @@ class Touroperators(object):
         permission='view'
     )
     def list(self):
+        schema = TouroperatorSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = TouroperatorsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

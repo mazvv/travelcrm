@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.roomcat import Roomcat
 from ..lib.utils.common_utils import translate as _
 
@@ -29,3 +32,7 @@ class RoomcatSchema(ResourceSchema):
         colander.String(),
         validator=name_validator
     )
+
+
+class RoomcatSearchSchema(ResourceSearchSchema):
+    pass

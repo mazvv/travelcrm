@@ -38,7 +38,7 @@
                     % if item:
                         ${infoblock(_(u"If you do not change password, take this fields empty"))}
                     % endif
-                    <div class="form-field mt1">
+                    <div class="form-field">
                         <div class="dl15">
                             ${h.tags.title(_(u"password"), False if item else True, "password")}
                         </div>

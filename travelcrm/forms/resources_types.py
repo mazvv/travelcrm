@@ -3,7 +3,7 @@
 import colander
 import importlib
 
-from . import ResourceSchema
+from . import ResourceSchema, ResourceSearchSchema
 from ..models.resource_type import ResourceType
 from ..lib.utils.common_utils import translate as _
 
@@ -111,3 +111,7 @@ class ResourceTypeSchema(ResourceSchema):
         validator=colander.Length(max=128),
         missing=u''
     )
+
+
+class ResourceTypeSearchSchema(ResourceSearchSchema):
+    pass

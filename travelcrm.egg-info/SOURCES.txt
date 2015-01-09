@@ -7,10 +7,10 @@ development.ini
 production.ini
 setup.cfg
 setup.py
+test.ini
 travelcrm/__init__.py
 travelcrm/interfaces.py
 travelcrm/subscribers.py
-travelcrm/tests.py
 travelcrm.egg-info/PKG-INFO
 travelcrm.egg-info/SOURCES.txt
 travelcrm.egg-info/dependency_links.txt
@@ -31,6 +31,7 @@ travelcrm/forms/banks_details.py
 travelcrm/forms/bpersons.py
 travelcrm/forms/calculations.py
 travelcrm/forms/commissions.py
+travelcrm/forms/companies.py
 travelcrm/forms/contacts.py
 travelcrm/forms/countries.py
 travelcrm/forms/crosspayments.py
@@ -64,12 +65,14 @@ travelcrm/forms/suppliers.py
 travelcrm/forms/tasks.py
 travelcrm/forms/touroperators.py
 travelcrm/forms/tours_sales.py
+travelcrm/forms/unpaid_invoices.py
 travelcrm/forms/users.py
 travelcrm/lib/__init__.py
 travelcrm/lib/bl/__init__.py
 travelcrm/lib/bl/calculations.py
 travelcrm/lib/bl/commissions.py
 travelcrm/lib/bl/currencies_rates.py
+travelcrm/lib/bl/emails_campaigns.py
 travelcrm/lib/bl/employees.py
 travelcrm/lib/bl/factories.py
 travelcrm/lib/bl/incomes.py
@@ -85,6 +88,13 @@ travelcrm/lib/bl/touroperators.py
 travelcrm/lib/bl/tours_sales.py
 travelcrm/lib/bl/transfers.py
 travelcrm/lib/bl/turnovers.py
+travelcrm/lib/factories/__init__.py
+travelcrm/lib/factories/employees.py
+travelcrm/lib/factories/persons.py
+travelcrm/lib/factories/services_sales.py
+travelcrm/lib/factories/suppliers.py
+travelcrm/lib/factories/touroperators.py
+travelcrm/lib/factories/tours_sales.py
 travelcrm/lib/helpers/__init__.py
 travelcrm/lib/helpers/common.py
 travelcrm/lib/helpers/fields.py
@@ -101,6 +111,7 @@ travelcrm/lib/qb/banks_details.py
 travelcrm/lib/qb/bpersons.py
 travelcrm/lib/qb/calculations.py
 travelcrm/lib/qb/commissions.py
+travelcrm/lib/qb/companies.py
 travelcrm/lib/qb/contacts.py
 travelcrm/lib/qb/countries.py
 travelcrm/lib/qb/crosspayments.py
@@ -138,9 +149,13 @@ travelcrm/lib/qb/touroperators.py
 travelcrm/lib/qb/tours_sales.py
 travelcrm/lib/qb/transfers.py
 travelcrm/lib/qb/turnovers.py
+travelcrm/lib/qb/unpaid_invoices.py
 travelcrm/lib/qb/users.py
 travelcrm/lib/renderers/__init__.py
 travelcrm/lib/renderers/pdf.py
+travelcrm/lib/scheduler/__init__.py
+travelcrm/lib/scheduler/emails_campaigns.py
+travelcrm/lib/scheduler/tasks.py
 travelcrm/lib/utils/__init__.py
 travelcrm/lib/utils/common_utils.py
 travelcrm/lib/utils/resources_utils.py
@@ -158,6 +173,7 @@ travelcrm/models/bank_detail.py
 travelcrm/models/bperson.py
 travelcrm/models/calculation.py
 travelcrm/models/commission.py
+travelcrm/models/company.py
 travelcrm/models/contact.py
 travelcrm/models/country.py
 travelcrm/models/crosspayment.py
@@ -211,6 +227,8 @@ travelcrm/resources/banks_details.py
 travelcrm/resources/bpersons.py
 travelcrm/resources/calculations.py
 travelcrm/resources/commissions.py
+travelcrm/resources/companies.py
+travelcrm/resources/companies_settings.py
 travelcrm/resources/contacts.py
 travelcrm/resources/countries.py
 travelcrm/resources/crosspayments.py
@@ -247,9 +265,8 @@ travelcrm/resources/tasks.py
 travelcrm/resources/touroperators.py
 travelcrm/resources/tours_sales.py
 travelcrm/resources/turnovers.py
+travelcrm/resources/unpaid_invoices.py
 travelcrm/resources/users.py
-travelcrm/scheduler/__init__.py
-travelcrm/scheduler/tasks.py
 travelcrm/scripts/__init__.py
 travelcrm/scripts/initializedb.py
 travelcrm/static/css/emastic.css
@@ -399,6 +416,7 @@ travelcrm/static/css/jeasyui/icons/tip.png
 travelcrm/static/css/jeasyui/icons/undo.png
 travelcrm/static/js/jquery-1.11.1.min.js
 travelcrm/static/js/jquery-te-1.4.0.min.js
+travelcrm/static/js/jssip-0.5.0.min.js
 travelcrm/static/js/main.js
 travelcrm/static/js/moment.js
 travelcrm/static/js/jeasyui/datagrid-bufferview.js
@@ -521,6 +539,9 @@ travelcrm/templates/commissions/form.mak
 travelcrm/templates/common/context_info.mak
 travelcrm/templates/common/infoblock.mak
 travelcrm/templates/common/search.mak
+travelcrm/templates/companies/delete.mak
+travelcrm/templates/companies/form.mak
+travelcrm/templates/companies/index.mak
 travelcrm/templates/contacts/common.mak
 travelcrm/templates/contacts/delete.mak
 travelcrm/templates/contacts/form.mak
@@ -541,6 +562,7 @@ travelcrm/templates/debts/index.mak
 travelcrm/templates/emails_campaigns/delete.mak
 travelcrm/templates/emails_campaigns/form.mak
 travelcrm/templates/emails_campaigns/index.mak
+travelcrm/templates/emails_campaigns/settings.mak
 travelcrm/templates/employees/delete.mak
 travelcrm/templates/employees/form.mak
 travelcrm/templates/employees/index.mak
@@ -561,6 +583,7 @@ travelcrm/templates/invoices/form.mak
 travelcrm/templates/invoices/index.mak
 travelcrm/templates/invoices/info.mak
 travelcrm/templates/invoices/print.mak
+travelcrm/templates/invoices/settings.mak
 travelcrm/templates/licences/common.mak
 travelcrm/templates/licences/delete.mak
 travelcrm/templates/licences/form.mak
@@ -647,11 +670,13 @@ travelcrm/templates/tours_sales/settings.mak
 travelcrm/templates/turnovers/export.mak
 travelcrm/templates/turnovers/index.mak
 travelcrm/templates/turnovers/transfers.mak
+travelcrm/templates/unpaid_invoices/index.mak
+travelcrm/templates/unpaid_invoices/settings.mak
 travelcrm/templates/users/delete.mak
 travelcrm/templates/users/form.mak
 travelcrm/templates/users/index.mak
 travelcrm/tests/__init__.py
-travelcrm/tests/test_resource_type.py
+travelcrm/tests/test_resources_types.py
 travelcrm/views/__init__.py
 travelcrm/views/accomodations.py
 travelcrm/views/accounts.py
@@ -664,6 +689,8 @@ travelcrm/views/banks_details.py
 travelcrm/views/bpersons.py
 travelcrm/views/calculations.py
 travelcrm/views/commissions.py
+travelcrm/views/companies.py
+travelcrm/views/companies_settings.py
 travelcrm/views/contacts.py
 travelcrm/views/countries.py
 travelcrm/views/crosspayments.py
@@ -701,4 +728,5 @@ travelcrm/views/tasks.py
 travelcrm/views/touroperators.py
 travelcrm/views/tours_sales.py
 travelcrm/views/turnovers.py
+travelcrm/views/unpaid_invoices.py
 travelcrm/views/users.py

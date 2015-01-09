@@ -12,7 +12,10 @@ from ..models.task import Task
 from ..lib.qb.hotels import HotelsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.hotels import HotelSchema
+from ..forms.hotels import (
+    HotelSchema, 
+    HotelSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +45,11 @@ class Hotels(object):
         permission='view'
     )
     def list(self):
+        schema = HotelSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = HotelsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

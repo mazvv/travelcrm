@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 
 
 class BPersonSchema(ResourceSchema):
@@ -35,3 +38,7 @@ class BPersonSchema(ResourceSchema):
             cstruct['contact_id'].append(val)
 
         return super(ResourceSchema, self).deserialize(cstruct)
+
+
+class BPersonSearchSchema(ResourceSearchSchema):
+    pass

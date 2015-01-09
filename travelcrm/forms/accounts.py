@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.account import Account
 
 
@@ -44,3 +47,7 @@ class AccountSchema(ResourceSchema):
         missing=None,
         validator=colander.Length(max=255)
     )
+
+
+class AccountSearchSchema(ResourceSearchSchema):
+    pass

@@ -11,8 +11,10 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.accomodations import AccomodationsQueryBuilder
 from ..lib.utils.common_utils import translate as _
-
-from ..forms.accomodations import AccomodationSchema
+from ..forms.accomodations import (
+    AccomodationSchema, 
+    AccomodationSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +44,11 @@ class Accomodations(object):
         permission='view'
     )
     def list(self):
+        schema = AccomodationSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = AccomodationsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

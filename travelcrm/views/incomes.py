@@ -13,7 +13,10 @@ from ..lib.qb.incomes import IncomesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.bl.incomes import make_payment
 
-from ..forms.incomes import IncomeSchema
+from ..forms.incomes import (
+    IncomeSchema, 
+    IncomeSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -43,13 +46,11 @@ class Incomes(object):
         permission='view'
     )
     def list(self):
+        schema = IncomeSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = IncomesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

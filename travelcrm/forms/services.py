@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.service import Service
 from ..lib.utils.common_utils import translate as _
 
@@ -42,3 +45,7 @@ class ServiceSchema(ResourceSchema):
         validator=colander.Length(max=256),
         missing=None
     )
+
+
+class ServiceSearchSchema(ResourceSearchSchema):
+    pass

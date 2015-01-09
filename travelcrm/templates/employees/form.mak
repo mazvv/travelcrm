@@ -31,11 +31,11 @@
                         </div>
                     </div>
                     <div class="ml15">
-                        ${h.tags.file("photo", None)}
+                    	${h.tags.text('photo', None, class_='easyui-filebox w20', data_options="buttonText: '%s'" % _(u'Choose Image'))}
                         ${h.common.error_container(name='photo')}
                         % if item and item.photo:
                         <div class="mt1">
-                            ${h.tags.checkbox('delete_photo', 1, False, label=_(u"delete photo"), style="vertical-align: middle;")}
+                            ${h.tags.checkbox('delete_photo', 1, False, label=_(u"delete photo"))}
                         </div>
                         % endif
                     </div>

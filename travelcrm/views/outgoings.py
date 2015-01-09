@@ -15,7 +15,10 @@ from ..lib.bl.outgoings import make_payment
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
 
-from travelcrm.forms.outgoings import OutgoingSchema
+from travelcrm.forms.outgoings import (
+    OutgoingSchema, 
+    OutgoingSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -45,13 +48,11 @@ class Outgoings(object):
         permission='view'
     )
     def list(self):
+        schema = OutgoingSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = OutgoingsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

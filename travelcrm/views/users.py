@@ -14,7 +14,8 @@ from ..lib.utils.common_utils import translate as _
 
 from ..forms.users import (
     UserAddSchema,
-    UserEditSchema
+    UserEditSchema,
+    UserSearchSchema
 )
 
 
@@ -30,6 +31,7 @@ class Users(object):
     @view_config(
         context='..resources.users.Users',
         request_method='GET',
+        xhr='True',
         renderer='travelcrm:templates/users/index.mak',
         permission='view'
     )
@@ -45,13 +47,11 @@ class Users(object):
         permission='view'
     )
     def list(self):
+        schema = UserSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = UsersQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
@@ -102,7 +102,6 @@ class Users(object):
     )
     def _add(self):
         schema = UserAddSchema().bind(request=self.request)
-
         try:
             controls = schema.deserialize(self.request.params.mixed())
             user = User(

@@ -2,9 +2,7 @@
 
 import colander
 
-from . import ResourceSchema
-
-
+from . import ResourceSchema, ResourceSearchSchema
 from ..models import DBSession
 from ..models.location import Location
 from ..lib.utils.common_utils import translate as _
@@ -48,3 +46,7 @@ class LocationSchema(ResourceSchema):
         colander.String(),
         validator=name_validator
     )
+
+
+class LocationSearchSchema(ResourceSearchSchema):
+    pass

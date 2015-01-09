@@ -2,7 +2,7 @@
 
 import colander
 
-from . import ResourceSchema
+from . import ResourceSchema, ResourceSearchSchema
 from ..models.account_item import AccountItem
 from ..lib.utils.common_utils import translate as _
 
@@ -29,3 +29,7 @@ class AccountItemSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+
+
+class AccountItemSearchSchema(ResourceSearchSchema):
+    pass

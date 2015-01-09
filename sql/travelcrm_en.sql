@@ -539,6 +539,19 @@ CREATE TABLE appointment (
 ALTER TABLE public.appointment OWNER TO mazvv;
 
 --
+-- Name: apscheduler_jobs; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE apscheduler_jobs (
+    id character varying(191) NOT NULL,
+    next_run_time double precision,
+    job_state bytea NOT NULL
+);
+
+
+ALTER TABLE public.apscheduler_jobs OWNER TO mazvv;
+
+--
 -- Name: bank; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -2031,8 +2044,7 @@ CREATE TABLE task (
     deadline timestamp without time zone NOT NULL,
     reminder timestamp without time zone,
     descr character varying,
-    closed boolean,
-    resource_url character varying
+    closed boolean
 );
 
 
@@ -2706,14 +2718,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6435, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6448, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1977, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1982, true);
 
 
 --
@@ -2727,7 +2739,7 @@ SELECT pg_catalog.setval('_resources_types_rid_seq', 128, true);
 -- Name: _users_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_users_rid_seq', 23, true);
+SELECT pg_catalog.setval('_users_rid_seq', 24, true);
 
 
 --
@@ -2863,7 +2875,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-52280a9d76c5
+5770bb0715f7
 \.
 
 
@@ -2875,6 +2887,14 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 1	789	54	2	4	1000.00	2014-02-02
 6	892	54	7	5	4500.00	2014-02-22
 8	1542	54	2	4	6500.00	2014-03-01
+\.
+
+
+--
+-- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY apscheduler_jobs (id, next_run_time, job_state) FROM stdin;
 \.
 
 
@@ -3035,7 +3055,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings) FROM stdin;
-1	1970	LuxTravel, Inc	56	{"locale": "ru", "timezone": "Europe/Kiev"}
+1	1970	LuxTravel, Inc	56	{"locale": "en", "timezone": "Europe/Kiev"}
 \.
 
 
@@ -3226,8 +3246,8 @@ COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismiss
 15	1046	Viktoriia	Lastovets	\N	\N	2014-04-28	\N
 12	1043	Denis	Yurin	\N	\N	2014-04-01	\N
 14	1045	Dima	Shkreba	\N	\N	2013-04-30	\N
-2	784	Vitalii	Mazur	\N	\N	\N	employee/53945b8e-5eaf-4319-b759-1d2c23d91988.jpg
 7	885	Irina	Mazur	V.	\N	\N	employee/f8ce7007-df56-471c-a330-c43b678ed2ae.jpg
+2	784	John	Doe	\N	\N	\N	employee/e588d949-e13f-43cc-aa0f-115354289850.jpg
 \.
 
 
@@ -3653,6 +3673,8 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 24	1872	For users	This subaccount is for Person Garkaviy Andrew
 25	1924	Passport detalized	There is no information about passport
 26	1931	Resource Task	This is for resource only
+27	1979	Test Note	Description to test note
+28	1981	VIP User	This user is for VIP
 \.
 
 
@@ -3660,7 +3682,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('note_id_seq', 26, true);
+SELECT pg_catalog.setval('note_id_seq', 28, true);
 
 
 --
@@ -3670,10 +3692,12 @@ SELECT pg_catalog.setval('note_id_seq', 26, true);
 COPY note_resource (note_id, resource_id) FROM stdin;
 3	1797
 5	1797
-18	784
 24	1868
 26	1930
 25	1928
+27	1980
+28	3
+18	784
 \.
 
 
@@ -4812,6 +4836,11 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1975	65	32	f
 1976	55	32	f
 1977	12	32	f
+1978	2	32	f
+1979	118	32	f
+1980	93	32	f
+1981	118	32	f
+1982	93	32	f
 \.
 
 
@@ -5983,6 +6012,19 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6433	1975	2	\N	2015-01-04 17:31:46.570967
 6434	1975	2	\N	2015-01-07 14:12:48.405815
 6435	1975	2	\N	2015-01-07 14:22:19.046581
+6436	1978	2	\N	2015-01-07 18:00:22.111119
+6437	1979	2	\N	2015-01-07 18:22:39.961593
+6438	1980	2	\N	2015-01-07 18:22:48.978415
+6439	1981	2	\N	2015-01-07 18:23:19.524712
+6440	3	2	\N	2015-01-07 18:23:30.384627
+6441	1982	2	\N	2015-01-07 18:30:42.662112
+6442	3	2	\N	2015-01-07 18:30:49.411934
+6443	3	2	\N	2015-01-07 18:31:24.902432
+6444	784	2	\N	2015-01-08 13:21:17.321066
+6445	784	2	\N	2015-01-08 13:27:01.529898
+6446	784	2	\N	2015-01-08 14:19:17.153858
+6447	784	2	\N	2015-01-08 14:20:23.527059
+6448	784	2	\N	2015-01-09 10:59:22.101268
 \.
 
 
@@ -6333,21 +6375,23 @@ COPY suppplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, closed, resource_url) FROM stdin;
-44	1958	2	Test new scheduler realization	2014-12-22 19:18:00	2014-12-21 19:44:00	New scheduler realizations notifications test.	f	\N
-45	1962	2	Test	2014-12-24 23:32:00	2014-12-24 21:33:00	\N	f	\N
-46	1964	2	For testing	2014-12-25 23:05:00	2014-12-25 21:06:00	For testing purpose only	f	\N
-47	1971	2	Check Payments	2015-01-04 15:45:00	2015-01-04 14:06:00	\N	f	\N
-34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f	\N
-33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f	\N
-35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f	\N
-36	1932	2	Call and remind about payments	2014-12-11 22:48:00	2014-12-11 22:46:00	\N	f	\N
-38	1934	2	Call and remind about payment	2014-12-12 22:50:00	2014-12-11 22:52:00	Call and remind to pay invoice	f	\N
-39	1935	2	Review Calculation	2014-12-12 22:52:00	2014-12-11 22:55:00	\N	f	\N
-41	1939	2	I have the following code	2014-12-13 23:36:00	2014-12-13 22:04:00	\N	t	\N
-37	1933	2	Call and remind about payment	2014-12-14 22:46:00	2014-12-14 11:15:00	\N	f	\N
-40	1936	2	For testing Purpose only	2014-12-14 22:35:00	2014-12-14 20:32:00	\N	f	\N
-42	1940	2	Test notifications	2014-12-14 21:37:00	2014-12-14 20:38:00	\N	f	\N
+COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, closed) FROM stdin;
+44	1958	2	Test new scheduler realization	2014-12-22 19:18:00	2014-12-21 19:44:00	New scheduler realizations notifications test.	f
+45	1962	2	Test	2014-12-24 23:32:00	2014-12-24 21:33:00	\N	f
+46	1964	2	For testing	2014-12-25 23:05:00	2014-12-25 21:06:00	For testing purpose only	f
+47	1971	2	Check Payments	2015-01-04 15:45:00	2015-01-04 14:06:00	\N	f
+48	1980	2	Check Reminder	2015-01-08 18:21:00	2015-01-07 18:21:00	Description to task	f
+49	1982	2	The second task	2015-01-08 18:30:00	2015-01-07 18:30:00	Second test task	f
+34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f
+33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f
+35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f
+36	1932	2	Call and remind about payments	2014-12-11 22:48:00	2014-12-11 22:46:00	\N	f
+38	1934	2	Call and remind about payment	2014-12-12 22:50:00	2014-12-11 22:52:00	Call and remind to pay invoice	f
+39	1935	2	Review Calculation	2014-12-12 22:52:00	2014-12-11 22:55:00	\N	f
+41	1939	2	I have the following code	2014-12-13 23:36:00	2014-12-13 22:04:00	\N	t
+37	1933	2	Call and remind about payment	2014-12-14 22:46:00	2014-12-14 11:15:00	\N	f
+40	1936	2	For testing Purpose only	2014-12-14 22:35:00	2014-12-14 20:32:00	\N	f
+42	1940	2	Test notifications	2014-12-14 21:37:00	2014-12-14 20:38:00	\N	f
 \.
 
 
@@ -6355,7 +6399,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 47, true);
+SELECT pg_catalog.setval('task_id_seq', 49, true);
 
 
 --
@@ -6367,6 +6411,8 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 38	1928
 35	1869
 47	1840
+48	3
+49	3
 \.
 
 
@@ -6653,6 +6699,14 @@ ALTER TABLE ONLY advsource
 
 ALTER TABLE ONLY appointment
     ADD CONSTRAINT appointment_header_pk PRIMARY KEY (id);
+
+
+--
+-- Name: apscheduler_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY apscheduler_jobs
+    ADD CONSTRAINT apscheduler_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -7445,6 +7499,13 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY "user"
     ADD CONSTRAINT user_pk PRIMARY KEY (id);
+
+
+--
+-- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (next_run_time);
 
 
 --

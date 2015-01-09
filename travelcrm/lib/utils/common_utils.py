@@ -17,13 +17,15 @@ from pyramid.interfaces import ITranslationDirectories
 
 from pyramid.i18n import (
     make_localizer,
-    get_localizer,
     TranslationStringFactory
 )
 
 from sqlalchemy import cast, Numeric
 
 from ...interfaces import IScheduler
+
+
+DEFAULT_LOCALE_NAME = 'en'
 
 tsf = TranslationStringFactory('travelcrm')
 
@@ -39,18 +41,11 @@ def get_settings():
 
 
 def get_locale_name():
-    return _get_settings_value('pyramid.default_locale_name')
-
-
-def gen_id(prefix='', limit=6):
-    s = list(str(int(uuid4())))
-    random.shuffle(s)
-    return u"%s%s" % (prefix, ''.join(s[:limit]))
-
-
-def is_demo_mode():
-    val = _get_settings_value('company.demo_mode')
-    return val == 'true'
+    settings = get_settings()
+    return (
+        settings.get('company.locale_name') 
+        or _get_settings_value('pyramid.default_locale_name')
+    )
 
 
 def _get_localizer_for_locale_name(locale_name):
@@ -62,10 +57,22 @@ def _get_localizer_for_locale_name(locale_name):
 def translate(*args, **kwargs):
     request = get_current_request()
     if request is None:
-        localizer = _get_localizer_for_locale_name('en')
+        localizer = _get_localizer_for_locale_name(DEFAULT_LOCALE_NAME)
     else:
-        localizer = get_localizer(request)
+        locale_name = get_locale_name()
+        localizer = _get_localizer_for_locale_name(locale_name)
     return localizer.translate(tsf(*args, **kwargs))
+
+
+def gen_id(prefix='', limit=6):
+    s = list(str(int(uuid4())))
+    random.shuffle(s)
+    return u"%s%s" % (prefix, ''.join(s[:limit]))
+
+
+def is_demo_mode():
+    val = _get_settings_value('company.demo_mode')
+    return val == 'true'
 
 
 def cast_int(val):

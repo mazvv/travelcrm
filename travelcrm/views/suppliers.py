@@ -16,7 +16,10 @@ from ..models.task import Task
 from ..lib.qb.suppliers import SuppliersQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.helpers.fields import suppliers_combobox_field
-from ..forms.suppliers import SupplierSchema
+from ..forms.suppliers import (
+    SupplierSchema, 
+    SupplierSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -46,13 +49,11 @@ class Suppliers(object):
         permission='view'
     )
     def list(self):
+        schema = SupplierSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = SuppliersQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

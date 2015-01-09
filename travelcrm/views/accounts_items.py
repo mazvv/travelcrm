@@ -11,8 +11,10 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.accounts_items import AccountsItemsQueryBuilder
 from ..lib.utils.common_utils import translate as _
-
-from ..forms.accounts_items import AccountItemSchema
+from ..forms.accounts_items import (
+    AccountItemSchema, 
+    AccountItemSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +44,11 @@ class AccountsItems(object):
         permission='view'
     )
     def list(self):
+        schema = AccountItemSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = AccountsItemsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

@@ -2,7 +2,7 @@
 
 import colander
 
-from . import ResourceSchema
+from . import ResourceSchema, ResourceSearchSchema
 from ..models.country import Country
 from ..lib.utils.common_utils import translate as _
 
@@ -33,3 +33,7 @@ class CountrySchema(ResourceSchema):
         colander.String(),
         validator=colander.Length(min=2, max=32),
     )
+
+
+class CountrySearchSchema(ResourceSearchSchema):
+    pass

@@ -12,7 +12,10 @@ from ..models.task import Task
 from ..lib.qb.regions import RegionsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.regions import RegionSchema
+from ..forms.regions import (
+    RegionSchema, 
+    RegionSearchSchema,
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +45,11 @@ class Regions(object):
         permission='view'
     )
     def list(self):
+        schema = RegionSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = RegionsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

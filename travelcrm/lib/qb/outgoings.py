@@ -11,8 +11,6 @@ from ...models.account import Account
 from ...models.subaccount import Subaccount
 from ...models.account_item import AccountItem
 from ...models.currency import Currency
-
-from ...lib.utils.common_utils import parse_date
 from ...lib.bl.subaccounts import query_resource_data
 
 
@@ -90,7 +88,7 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
     def _filter_account_item(self, account_item_id):
         if account_item_id:
             self.query = self.query.filter(
-                self._sum_subq.c.account_item_id == account_item_id
+                AccountItem.id == account_item_id
             )
 
     def _filter_account(self, account_id):
@@ -110,9 +108,9 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
     def _filter_payment_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                Outgoing.date >= parse_date(date_from)
+                Outgoing.date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                Outgoing.date <= parse_date(date_to)
+                Outgoing.date <= date_to
             )

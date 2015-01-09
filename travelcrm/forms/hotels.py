@@ -2,7 +2,7 @@
 
 import colander
 
-from . import ResourceSchema
+from . import ResourceSchema, ResourceSearchSchema
 
 
 class HotelSchema(ResourceSchema):
@@ -17,3 +17,7 @@ class HotelSchema(ResourceSchema):
         colander.Integer(),
         missing=None
     )
+
+
+class HotelSearchSchema(ResourceSearchSchema):
+    pass

@@ -2,8 +2,7 @@
 
 import colander
 
-from . import ResourceSchema
-
+from . import ResourceSchema, ResourceSearchSchema
 from ..models.hotelcat import Hotelcat
 from ..lib.utils.common_utils import translate as _
 
@@ -30,3 +29,7 @@ class HotelcatSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+
+
+class HotelcatSearchSchema(ResourceSearchSchema):
+    pass

@@ -2,10 +2,13 @@
 
 import colander
 
-from . import ResourceSchema, Date
+from . import (
+    ResourceSchema,
+    ResourceSearchSchema, 
+    Date
+)
 from ..models.currency import Currency
 from ..models.currency_rate import CurrencyRate
-
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.common_utils import get_base_currency
 
@@ -71,4 +74,15 @@ class CurrencyRateSchema(ResourceSchema):
     date = colander.SchemaNode(
         Date(),
         validator=date_validator
+    )
+
+
+class CurrencyRateSearchSchema(ResourceSearchSchema):
+    rate_from = colander.SchemaNode(
+        Date(),
+        missing=None
+    )
+    rate_to = colander.SchemaNode(
+        Date(),
+        missing=None
     )

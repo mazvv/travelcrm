@@ -2,8 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
-
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.subaccount import Subaccount
 from ..lib.bl.subaccounts import (
     get_subaccounts_types, 
@@ -84,4 +86,11 @@ class SubaccountSchema(ResourceSchema):
         colander.String(),
         missing=None,
         validator=colander.Length(max=255)
+    )
+
+
+class SubaccountSearchSchema(ResourceSearchSchema):
+    account_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None
     )

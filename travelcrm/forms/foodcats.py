@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.foodcat import Foodcat
 from ..lib.utils.common_utils import translate as _
 
@@ -29,3 +32,7 @@ class FoodcatSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+
+
+class FoodcatSearchSchema(ResourceSearchSchema):
+    pass

@@ -11,7 +11,6 @@ from ...models.crosspayment import Crosspayment
 from ...models.transfer import Transfer
 
 from ...lib.bl.transfers import query_transfers
-from ...lib.utils.common_utils import parse_date
 
 
 class CrosspaymentsQueryBuilder(ResourcesQueryBuilder):
@@ -119,9 +118,9 @@ class CrosspaymentsQueryBuilder(ResourcesQueryBuilder):
     def _filter_transfer_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                Transfer.date >= parse_date(date_from)
+                Transfer.date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                Transfer.date <= parse_date(date_to)
+                Transfer.date <= date_to
             )

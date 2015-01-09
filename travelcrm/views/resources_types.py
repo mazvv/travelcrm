@@ -14,7 +14,10 @@ from ..lib.qb.resources_types import ResourcesTypesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 
-from ..forms.resources_types import ResourceTypeSchema
+from ..forms.resources_types import (
+    ResourceTypeSchema, 
+    ResourceTypeSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -44,13 +47,11 @@ class ResourcesTypes(object):
         renderer='json'
     )
     def list(self):
+        schema = ResourceTypeSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = ResourcesTypesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

@@ -12,7 +12,10 @@ from ..models.task import Task
 from ..lib.qb.countries import CountriesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.countries import CountrySchema
+from ..forms.countries import (
+    CountrySchema, 
+    CountrySearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +45,11 @@ class Countries(object):
         permission='view'
     )
     def list(self):
+        schema = CountrySearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = CountriesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

@@ -12,7 +12,10 @@ from ..models.task import Task
 from ..lib.qb.services import ServicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.services import ServiceSchema
+from ..forms.services import (
+    ServiceSchema, 
+    ServiceSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +45,11 @@ class Services(object):
         permission='view'
     )
     def list(self):
+        schema = ServiceSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = ServicesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

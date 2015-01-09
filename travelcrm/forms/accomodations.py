@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import(
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models.accomodation import Accomodation
 from ..lib.utils.common_utils import translate as _
 
@@ -29,3 +32,7 @@ class AccomodationSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+
+
+class AccomodationSearchSchema(ResourceSearchSchema):
+    pass
