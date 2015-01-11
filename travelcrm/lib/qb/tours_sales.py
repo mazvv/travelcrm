@@ -27,10 +27,7 @@ from ...models.currency import Currency
 from ...models.person import Person
 from ...models.invoice import Invoice
 
-from ...lib.utils.common_utils import (
-    get_base_currency,
-    parse_date,
-)
+from ...lib.utils.common_utils import get_base_currency
 
 
 class ToursSalesQueryBuilder(ResourcesQueryBuilder):
@@ -187,11 +184,11 @@ class ToursSalesQueryBuilder(ResourcesQueryBuilder):
     def _filter_tour_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                TourSale.start_date >= parse_date(date_from)
+                TourSale.start_date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                TourSale.end_date <= parse_date(date_to)
+                TourSale.end_date <= date_to
             )
 
 

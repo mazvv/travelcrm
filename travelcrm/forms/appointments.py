@@ -4,6 +4,7 @@ import colander
 
 from . import (
     ResourceSchema,
+    ResourceSearchSchema,
     Date
 )
 
@@ -24,3 +25,7 @@ class AppointmentSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
         colander.Integer(),
     )
+
+
+class AppointmentSearchSchema(ResourceSearchSchema):
+    pass

@@ -11,7 +11,10 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.appointments import AppointmentsQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..forms.appointments import AppointmentSchema
+from ..forms.appointments import (
+    AppointmentSchema, 
+    AppointmentSearchSchema
+)
 
 log = logging.getLogger(__name__)
 
@@ -40,13 +43,11 @@ class Appointments(object):
         permission='view'
     )
     def list(self):
+        schema = AppointmentSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = AppointmentsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         qb.filter_employee_id(
             self.request.params.get('employee_id')
         )

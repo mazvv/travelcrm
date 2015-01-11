@@ -5,6 +5,7 @@ import colander
 from . import (
     Date,
     ResourceSchema,
+    ResourceSearchSchema,
 )
 from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
@@ -157,4 +158,39 @@ class TourSalePointSchema(colander.Schema):
 class SettingsSchema(colander.Schema):
     service_id = colander.SchemaNode(
         colander.Integer()
+    )
+
+
+class TourSaleSearchSchema(ResourceSearchSchema):
+    person_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    hotel_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    hotelcat_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    country_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    price_from = colander.SchemaNode(
+        colander.Money(),
+        missing=None,
+    )
+    price_to = colander.SchemaNode(
+        colander.Money(),
+        missing=None,
+    )
+    tour_from = colander.SchemaNode(
+        Date(),
+        missing=None,
+    )
+    tour_to = colander.SchemaNode(
+        Date(),
+        missing=None,
     )

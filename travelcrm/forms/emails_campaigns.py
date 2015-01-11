@@ -2,7 +2,11 @@
 
 import colander
 
-from . import ResourceSchema, DateTime
+from . import (
+    ResourceSchema,
+    ResourceSearchSchema,
+    DateTime
+)
 
 
 class EmailCampaignSchema(ResourceSchema):
@@ -30,3 +34,7 @@ class SettingsSchema(colander.Schema):
         colander.Integer(),
         default=10
     )
+
+
+class EmailCampaignSearchSchema(ResourceSearchSchema):
+    pass

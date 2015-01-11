@@ -15,8 +15,6 @@ from ...models.transfer import Transfer
 
 from ...lib.bl.calculations import query_resource_data
 
-from ...lib.utils.common_utils import parse_date, cast_int
-
 
 class DebtsQueryBuilder(ResourcesQueryBuilder):
     _subq_transfers = (
@@ -105,20 +103,20 @@ class DebtsQueryBuilder(ResourcesQueryBuilder):
         if date_from:
             self.query = self.query.filter(
                 or_(
-                    self._subq_calculations.c.date >= parse_date(date_from),
-                    self._subq_transfers.c.date >= parse_date(date_from),
+                    self._subq_calculations.c.date >= date_from,
+                    self._subq_transfers.c.date >= date_from,
                 )
             )
         if date_to:
             self.query = self.query.filter(
                 or_(
-                    self._subq_calculations.c.date <= parse_date(date_to),
-                    self._subq_transfers.c.date <= parse_date(date_to),
+                    self._subq_calculations.c.date <= date_to,
+                    self._subq_transfers.c.date <= date_to,
                 )
             )
     
     def _filter_currency(self, currency_id):
         if currency_id:
             self.query = self.query.filter(
-                Currency.id == cast_int(currency_id)
+                Currency.id == currency_id
             )

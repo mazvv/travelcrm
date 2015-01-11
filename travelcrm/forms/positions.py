@@ -2,7 +2,10 @@
 
 import colander
 
-from . import ResourceSchema
+from . import (
+    ResourceSchema, 
+    ResourceSearchSchema
+)
 from ..models import DBSession
 from ..models.position import Position
 from ..lib.utils.common_utils import translate as _
@@ -46,3 +49,7 @@ class PositionSchema(ResourceSchema):
         colander.String(),
         validator=name_validator
     )
+
+
+class PositionSearchSchema(ResourceSearchSchema):
+    pass

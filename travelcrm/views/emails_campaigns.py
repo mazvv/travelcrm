@@ -16,6 +16,7 @@ from ..lib.scheduler.emails_campaigns import schedule_email_campaign
 
 from ..forms.emails_campaigns import (
     EmailCampaignSchema,
+    EmailCampaignSearchSchema,
     SettingsSchema
 )
 
@@ -47,13 +48,11 @@ class EmailsCampaigns(object):
         permission='view'
     )
     def list(self):
+        schema = EmailCampaignSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = EmailsCampaignsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

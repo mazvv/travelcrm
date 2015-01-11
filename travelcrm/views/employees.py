@@ -18,7 +18,10 @@ from ..lib.qb.employees import EmployeesQueryBuilder
 from ..lib.helpers.fields import employees_combobox_field
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.employees import EmployeeSchema
+from ..forms.employees import (
+    EmployeeSchema,
+    EmployeeSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -48,13 +51,11 @@ class Employees(object):
         permission='view'
     )
     def list(self):
+        schema = EmployeeSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = EmployeesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

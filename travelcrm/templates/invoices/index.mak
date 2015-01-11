@@ -104,7 +104,7 @@
                         ${h.tags.text('payment_to', None, class_="easyui-textbox w10 easyui-numberbox", data_options="min:0,precision:0")}
                     </div>
                     <div class="mt05">
-                        ${h.tags.title(_(u"invoice_date"))}
+                        ${h.tags.title(_(u"invoice date"))}
                     </div>
                     <div>
                         ${h.fields.date_field(None, "date_from")}

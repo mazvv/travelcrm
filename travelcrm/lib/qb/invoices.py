@@ -15,7 +15,7 @@ from ...models.transfer import Transfer
 
 from ...lib.bl.invoices import query_resource_data
 from ...lib.bl.currencies_rates import query_convert_rates
-from ...lib.utils.common_utils import money_cast, parse_date
+from ...lib.utils.common_utils import money_cast
 
 
 class InvoicesQueryBuilder(ResourcesQueryBuilder):
@@ -153,9 +153,9 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
     def _filter_invoice_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                Invoice.date >= parse_date(date_from)
+                Invoice.date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                Invoice.date <= parse_date(date_to)
+                Invoice.date <= date_to
             )

@@ -17,7 +17,10 @@ from ..lib.qb.services_sales import ServicesSalesQueryBuilder
 
 from ..lib.bl.currencies_rates import currency_base_exchange
 from ..lib.utils.common_utils import translate as _
-from ..forms.services_sales import ServiceSaleSchema
+from ..forms.services_sales import (
+    ServiceSaleSchema, 
+    ServiceSaleSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -47,13 +50,11 @@ class ServicesSales(object):
         permission='view'
     )
     def list(self):
+        schema = ServiceSaleSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = ServicesSalesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

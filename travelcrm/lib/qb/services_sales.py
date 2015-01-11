@@ -13,7 +13,7 @@ from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
 
-from ...lib.utils.common_utils import get_base_currency, parse_date
+from ...lib.utils.common_utils import get_base_currency
 
 
 class ServicesSalesQueryBuilder(ResourcesQueryBuilder):
@@ -106,9 +106,9 @@ class ServicesSalesQueryBuilder(ResourcesQueryBuilder):
     def _filter_sale_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                ServiceSale.deal_date >= parse_date(date_from)
+                ServiceSale.deal_date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                ServiceSale.deal_date <= parse_date(date_to)
+                ServiceSale.deal_date <= date_to
             )

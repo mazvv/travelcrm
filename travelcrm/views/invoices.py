@@ -25,6 +25,7 @@ from ..forms.invoices import (
     InvoiceEditSchema,
     InvoiceSumSchema,
     InvoiceActiveUntilSchema,
+    InvoiceSearchSchema,
     SettingsSchema,
 )
 
@@ -66,13 +67,11 @@ class Invoices(object):
         permission='view'
     )
     def list(self):
+        schema = InvoiceSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = InvoicesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

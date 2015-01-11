@@ -6,6 +6,7 @@ from pyramid.view import view_config
 from pyramid.renderers import render
 
 from ..lib.qb.debts import DebtsQueryBuilder
+from ..forms.debts import DebtSearchSchema
 
 
 log = logging.getLogger(__name__)
@@ -35,14 +36,12 @@ class Debts(object):
         permission='view'
     )
     def list(self):
+        schema = DebtSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         export = self.request.params.get('export')
         qb = DebtsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')

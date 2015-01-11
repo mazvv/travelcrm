@@ -12,7 +12,10 @@ from ..models.task import Task
 from ..lib.qb.positions import PositionsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.positions import PositionSchema
+from ..forms.positions import (
+    PositionSchema,
+    PositionSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -42,13 +45,11 @@ class Positions(object):
         permission='view'
     )
     def list(self):
+        schema = PositionSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = PositionsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

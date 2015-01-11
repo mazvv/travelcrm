@@ -4,6 +4,7 @@ import colander
 
 from . import (
     ResourceSchema,
+    ResourceSearchSchema,
     Date
 )
 
@@ -70,3 +71,7 @@ class PersonSchema(ResourceSchema):
             cstruct['passport_id'].append(val)
 
         return super(PersonSchema, self).deserialize(cstruct)
+
+
+class PersonSearchSchema(ResourceSearchSchema):
+    pass

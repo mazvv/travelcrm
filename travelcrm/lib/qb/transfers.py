@@ -6,7 +6,7 @@ from . import GeneralQueryBuilder
 from ...models import DBSession
 
 from ...lib.bl.transfers import query_transfers
-from ...lib.utils.common_utils import money_cast, parse_date
+from ...lib.utils.common_utils import money_cast
 
 
 class TransfersQueryBuilder(GeneralQueryBuilder):
@@ -69,9 +69,9 @@ class TransfersQueryBuilder(GeneralQueryBuilder):
     def _filter_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                self._subq.c.date >= parse_date(date_from)
+                self._subq.c.date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                self._subq.c.date <= parse_date(date_to)
+                self._subq.c.date <= date_to
             )

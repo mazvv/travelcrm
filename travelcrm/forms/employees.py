@@ -4,6 +4,7 @@ import colander
 from webhelpers.number import format_data_size
 from . import (
     ResourceSchema,
+    ResourceSearchSchema,
     Date,
     File,
 )
@@ -105,3 +106,7 @@ class EmployeeSchema(ResourceSchema):
             cstruct['address_id'].append(val)
 
         return super(EmployeeSchema, self).deserialize(cstruct)
+
+
+class EmployeeSearchSchema(ResourceSearchSchema):
+    pass

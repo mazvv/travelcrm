@@ -20,7 +20,8 @@ from ..lib.bl.transfers import (
     get_subaccount_balance,
 )
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import parse_date, money_cast
+from ..lib.utils.common_utils import money_cast
+from ..forms.turnovers import TurnoverSearchSchema
 
 
 log = logging.getLogger(__name__)
@@ -56,12 +57,10 @@ class Turnovers(object):
             qb = TurnoversAccountsQueryBuilder(Accounts(self.request))
         else:
             qb = TurnoversSubaccountsQueryBuilder(Subaccounts(self.request))
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        schema = TurnoverSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -101,10 +100,10 @@ class Turnovers(object):
         permission='view'
     )
     def _transfers(self):
+        schema = TurnoverSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = TransfersQueryBuilder()
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.advanced_search(**controls)
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -113,21 +112,21 @@ class Turnovers(object):
             int(self.request.params.get('rows')),
             int(self.request.params.get('page'))
         )
-        date_from = self.request.params.get('date_from')
-        date_to = self.request.params.get('date_to')
-        date_from = parse_date(date_from) if date_from else None
-        date_to = parse_date(date_to) if date_to else None
         if self.request.params.get('account_id'):
             account = Account.get(self.request.params.get('account_id'))
             currency = account.currency.iso_code
             balance = get_account_balance(
-                account.id, date_from, date_to
+                account.id, 
+                controls.get('date_from'), 
+                controls.get('date_to')
             )
         elif self.request.params.get('subaccount_id'):
             subaccount = Subaccount.get(self.request.params.get('subaccount_id'))
             currency = subaccount.account.currency.iso_code
             balance = get_subaccount_balance(
-                subaccount.id, date_from, date_to
+                subaccount.id, 
+                controls.get('date_from'), 
+                controls.get('date_to')
             )
         return {
             'total': qb.get_count(),

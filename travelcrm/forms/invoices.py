@@ -2,7 +2,11 @@
 
 import colander
 
-from . import ResourceSchema, Date
+from . import (
+    ResourceSchema,
+    ResourceSearchSchema,
+    Date
+)
 from ..lib.utils.common_utils import parse_date
 from ..lib.utils.common_utils import translate as _
 
@@ -71,4 +75,35 @@ class InvoiceActiveUntilSchema(ResourceSchema):
 class SettingsSchema(colander.Schema):
     active_days = colander.SchemaNode(
         colander.Integer(),
+    )
+
+
+class InvoiceSearchSchema(ResourceSearchSchema):
+    currency_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
+    sum_from = colander.SchemaNode(
+        colander.Money(),
+        missing=None,
+    )
+    sum_to = colander.SchemaNode(
+        colander.Money(),
+        missing=None,
+    )
+    payment_from = colander.SchemaNode(
+        colander.Money(),
+        missing=None,
+    )
+    payment_to = colander.SchemaNode(
+        colander.Money(),
+        missing=None,
+    )
+    date_from = colander.SchemaNode(
+        Date(),
+        missing=None,
+    )
+    date_to = colander.SchemaNode(
+        Date(),
+        missing=None,
     )

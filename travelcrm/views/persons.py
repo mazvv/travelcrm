@@ -18,7 +18,10 @@ from ..lib.qb.persons import PersonsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.helpers.fields import persons_combobox_field
 
-from ..forms.persons import PersonSchema
+from ..forms.persons import (
+    PersonSchema, 
+    PersonSearchSchema
+)
 
 
 log = logging.getLogger(__name__)
@@ -48,13 +51,11 @@ class Persons(object):
         permission='view'
     )
     def list(self):
+        schema = PersonSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = PersonsQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))

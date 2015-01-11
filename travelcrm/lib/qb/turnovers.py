@@ -59,9 +59,7 @@ class TurnoversAccountsQueryBuilder(ResourcesQueryBuilder):
     
     def _filter_currency(self, currency_id):
         if currency_id:
-            self.query = self.query.filter(
-                Currency.id == cast_int(currency_id)
-            )
+            self.query = self.query.filter(Currency.id == currency_id)
 
 
 class TurnoversSubaccountsQueryBuilder(ResourcesQueryBuilder):
@@ -108,6 +106,4 @@ class TurnoversSubaccountsQueryBuilder(ResourcesQueryBuilder):
     
     def _filter_currency(self, currency_id):
         if currency_id:
-            self.query = self.query.filter(
-                Currency.id == cast_int(currency_id)
-            )
+            self.query = self.query.filter(Currency.id == currency_id)

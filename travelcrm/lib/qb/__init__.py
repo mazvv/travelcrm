@@ -7,7 +7,6 @@ from decimal import Decimal
 from datetime import datetime, date, time
 from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
-from babel.dates import parse_date
 from zope.interface.verify import verifyObject
 
 from ...interfaces import IResourceType
@@ -18,7 +17,7 @@ from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
 from ..utils.common_utils import (
-    get_locale_name, cast_int, format_date, 
+    cast_int, format_date, 
     format_datetime, format_time, format_decimal
 )
 from ..utils.security_utils import get_auth_employee
@@ -170,27 +169,13 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
 
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
-            if not isinstance(updated_from, date):
-                self.query = self.query.filter(
-                    self.__log_subquery.c.modifydt >= parse_date(
-                        updated_from, locale=get_locale_name()
-                    )
-                )
-            else:
-                self.query = self.query.filter(
-                    self.__log_subquery.c.modifydt >= updated_from
-                )
+            self.query = self.query.filter(
+                self.__log_subquery.c.modifydt >= updated_from
+            )
         if updated_to:
-            if not isinstance(updated_from, date):
-                self.query = self.query.filter(
-                    self.__log_subquery.c.modifydt <= parse_date(
-                        updated_to, locale=get_locale_name()
-                    )
-                )
-            else:
-                self.query = self.query.filter(
-                    self.__log_subquery.c.modifydt <= updated_to
-                )
+            self.query = self.query.filter(
+                self.__log_subquery.c.modifydt <= updated_to
+            )
 
     def _filter_modifier(self, modifier_id):
         if modifier_id:

@@ -29,6 +29,7 @@ from ..lib.utils.resources_utils import (
 from ..forms.tours_sales import (
     TourSaleSchema,
     TourSalePointSchema,
+    TourSaleSearchSchema,
     SettingsSchema,
 )
 
@@ -60,13 +61,11 @@ class ToursSales(object):
         permission='view'
     )
     def list(self):
+        schema = TourSaleSearchSchema().bind(request=self.request)
+        controls = schema.deserialize(self.request.params.mixed())
         qb = ToursSalesQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
+        qb.search_simple(controls.get('q'))
+        qb.advanced_search(**controls)
         id = self.request.params.get('id')
         if id:
             qb.filter_id(id.split(','))
