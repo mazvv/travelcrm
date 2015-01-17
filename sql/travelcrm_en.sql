@@ -2718,14 +2718,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6448, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6458, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1982, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 1988, true);
 
 
 --
@@ -3007,6 +3007,7 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 13	1863	18	57	54.00	653.40
 14	1864	19	54	21.00	350.70
 16	1918	39	54	3534.00	59017.80
+17	1988	41	56	23000.00	23000.00
 \.
 
 
@@ -3014,7 +3015,7 @@ COPY calculation (id, resource_id, service_item_id, currency_id, price, base_pri
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 16, true);
+SELECT pg_catalog.setval('calculation_id_seq', 17, true);
 
 
 --
@@ -3243,11 +3244,11 @@ COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismiss
 10	1041	Andrey	Shabanov		\N	\N	\N
 11	1042	Dymitrii	Veremeychuk		\N	\N	\N
 13	1044	Alexandra	Koff	\N	\N	\N	\N
-15	1046	Viktoriia	Lastovets	\N	\N	2014-04-28	\N
 12	1043	Denis	Yurin	\N	\N	2014-04-01	\N
 14	1045	Dima	Shkreba	\N	\N	2013-04-30	\N
 7	885	Irina	Mazur	V.	\N	\N	employee/f8ce7007-df56-471c-a330-c43b678ed2ae.jpg
 2	784	John	Doe	\N	\N	\N	employee/e588d949-e13f-43cc-aa0f-115354289850.jpg
+15	1046	Viktoriia	Lastovets	\N	\N	2014-04-29	\N
 \.
 
 
@@ -3283,6 +3284,8 @@ COPY employee_notification (employee_id, notification_id) FROM stdin;
 2	12
 2	13
 2	14
+2	15
+2	16
 \.
 
 
@@ -3465,6 +3468,7 @@ COPY invoice (id, date, resource_id, account_id, active_until) FROM stdin;
 19	2014-08-26	1657	3	2014-08-26
 20	2014-10-18	1839	3	2014-10-18
 21	2014-10-24	1840	3	2014-10-27
+22	2015-01-15	1987	3	2015-01-18
 \.
 
 
@@ -3472,7 +3476,7 @@ COPY invoice (id, date, resource_id, account_id, active_until) FROM stdin;
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 21, true);
+SELECT pg_catalog.setval('invoice_id_seq', 22, true);
 
 
 --
@@ -3718,6 +3722,8 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 12	1965	Task: For testing	For testing	2014-12-25 21:06:00.013657	\N
 13	1972	Task: Check Payments	Check Payments	2015-01-04 12:46:00.019127	\N
 14	1973	Task: Check Payments	Check Payments	2015-01-04 14:06:00.016859	\N
+15	1984	Task: Test	Test	2015-01-13 17:01:00.018967	\N
+16	1986	Task: Test 2	Test 2	2015-01-13 17:04:00.011637	\N
 \.
 
 
@@ -3725,7 +3731,7 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 14, true);
+SELECT pg_catalog.setval('notification_id_seq', 16, true);
 
 
 --
@@ -4841,6 +4847,12 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1980	93	32	f
 1981	118	32	f
 1982	93	32	f
+1983	93	32	f
+1984	123	32	f
+1985	93	32	f
+1986	123	32	f
+1987	103	32	f
+1988	119	32	f
 \.
 
 
@@ -6025,6 +6037,16 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6446	784	2	\N	2015-01-08 14:19:17.153858
 6447	784	2	\N	2015-01-08 14:20:23.527059
 6448	784	2	\N	2015-01-09 10:59:22.101268
+6449	1046	2	\N	2015-01-12 22:16:18.421621
+6450	1046	2	\N	2015-01-12 22:16:29.774766
+6451	1046	2	\N	2015-01-12 22:18:02.620143
+6452	1046	2	\N	2015-01-13 17:00:13.07184
+6453	1983	2	\N	2015-01-13 17:00:57.932019
+6454	1985	2	\N	2015-01-13 17:03:06.725248
+6455	1985	2	\N	2015-01-14 21:32:00.651438
+6456	1046	2	\N	2015-01-14 21:35:47.291833
+6457	1987	2	\N	2015-01-15 20:30:02.464255
+6458	1988	2	\N	2015-01-15 21:27:50.402917
 \.
 
 
@@ -6382,6 +6404,8 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 47	1971	2	Check Payments	2015-01-04 15:45:00	2015-01-04 14:06:00	\N	f
 48	1980	2	Check Reminder	2015-01-08 18:21:00	2015-01-07 18:21:00	Description to task	f
 49	1982	2	The second task	2015-01-08 18:30:00	2015-01-07 18:30:00	Second test task	f
+50	1983	2	Test	2015-01-13 17:06:00	2015-01-13 17:01:00	\N	f
+51	1985	2	Test 2	2015-01-14 17:02:00	2015-01-13 17:04:00	\N	f
 34	1923	2	Test 2	2014-12-16 17:21:00	2014-12-15 17:42:00	\N	f
 33	1922	2	Test	2014-12-07 21:36:00	2014-12-07 20:36:00	For testing purpose	f
 35	1930	2	Check Person Details	2014-12-11 21:43:00	2014-12-10 22:42:00	Check if details is correct	f
@@ -6399,7 +6423,7 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, close
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 49, true);
+SELECT pg_catalog.setval('task_id_seq', 51, true);
 
 
 --
@@ -6460,6 +6484,7 @@ COPY tour_sale_invoice (tour_sale_id, invoice_id) FROM stdin;
 15	17
 17	19
 16	20
+18	22
 \.
 
 
