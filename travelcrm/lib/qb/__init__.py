@@ -51,7 +51,6 @@ class GeneralQueryBuilder(object):
     __metaclass__ = ABCMeta
 
     _fields = {}
-    _searcher = None
     _simple_search_fields = []
     _advanced_search_fields = []
 

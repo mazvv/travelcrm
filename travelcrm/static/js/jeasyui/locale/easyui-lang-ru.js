@@ -1,5 +1,5 @@
 if ($.fn.pagination){
-	$.fn.pagination.defaults.beforePageText = 'Страница';
+	$.fn.pagination.defaults.beforePageText = 'Стр.';
 	$.fn.pagination.defaults.afterPageText = 'из {pages}';
 	$.fn.pagination.defaults.displayMsg = '{from} - {to} из {total}';
 }

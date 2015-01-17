@@ -7,7 +7,7 @@ import colander
 from . import ResourceSchema, Date, ResourceSearchSchema
 from ..models.subaccount import Subaccount
 from ..lib.bl.transfers import get_account_balance
-from ..lib.utils.common_utils import parse_date, translate as _
+from ..lib.utils.common_utils import parse_datetime, translate as _
 
 
 @colander.deferred
@@ -21,7 +21,7 @@ def sum_validator(node, kw):
                 _(u'Sum must be more then zero'),
             )
         subaccount_id = int(request.params.get('subaccount_id'))
-        date = parse_date(request.params.get('date'))
+        date = parse_datetime(request.params.get('date'))
         sum = Decimal(request.params.get('sum'))
         subaccount = Subaccount.get(subaccount_id)
         balance = get_account_balance(subaccount.account_id, None, date)

@@ -17,7 +17,6 @@ from ...lib.bl import (
     CalculationFactory,
 )
 from ...lib.bl.currencies_rates import query_convert_rates
-from ...lib.utils.common_utils import money_cast
 
 
 class ServiceSaleInvoiceFactory(InvoiceFactory):
@@ -110,8 +109,8 @@ class ServiceSaleInvoiceFactory(InvoiceFactory):
                 subq.c.id,
                 subq.c.name,
                 func.count(subq.c.id).label('cnt'),
-                money_cast(subq.c.base_price / rate).label('unit_price'),
-                money_cast(func.sum(subq.c.base_price) / rate).label('price')
+                (subq.c.base_price / rate).label('unit_price'),
+                (func.sum(subq.c.base_price) / rate).label('price')
             )
             .group_by(subq.c.id, subq.c.name, subq.c.base_price)
             .order_by(subq.c.name)
@@ -144,7 +143,7 @@ class ServiceSaleInvoiceFactory(InvoiceFactory):
                 subq.c.id,
                 subq.c.name,
                 func.count(subq.c.id).label('cnt'),
-                money_cast(func.sum(subq.c.base_price) / rate).label('price')
+                (func.sum(subq.c.base_price) / rate).label('price')
             )
             .group_by(subq.c.id, subq.c.name)
             .order_by(subq.c.name)

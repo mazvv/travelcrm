@@ -11,12 +11,11 @@ from colander import (
     null,
     _
 )
-from babel.dates import (
-    parse_date,
-    parse_time,
-)
 
-from ..lib.utils.common_utils import get_locale_name, parse_datetime
+from ..lib.utils.common_utils import (
+    get_locale_name, 
+    parse_datetime
+)
 
 
 class ResourceSchema(colander.Schema):
@@ -54,7 +53,7 @@ class Date(ColanderDate):
         if not cstruct:
             return null
         try:
-            result = parse_date(cstruct, locale=get_locale_name())
+            result = parse_datetime(cstruct)
         except:
             raise Invalid(
                 node,
@@ -73,26 +72,6 @@ class DateTime(ColanderDate):
             return null
         try:
             result = parse_datetime(cstruct)
-        except:
-            raise Invalid(
-                node,
-                _(
-                    self.err_template,
-                    mapping={'val': cstruct}
-                )
-            )
-        return result
-
-
-class Time(ColanderDate):
-
-    def deserialize(self, node, cstruct):
-        if not cstruct:
-            return null
-        try:
-            # Now Babel does not understand time without seconds
-            cstruct = "%s:00" % cstruct
-            result = parse_time(cstruct, locale=get_locale_name())
         except:
             raise Invalid(
                 node,

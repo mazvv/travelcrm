@@ -12,7 +12,6 @@ from ...models.subaccount import Subaccount
 from ...models.commission import Commission
 
 from ...lib.bl import SubaccountFactory
-from ..utils.common_utils import money_cast
 from ...lib.bl.currencies_rates import currency_exchange
 
 
@@ -47,7 +46,7 @@ def get_calculation(
                 currency_id,
                 calc_date
             )
-    return money_cast(price)
+    return price
 
 
 class TouroperatorSubaccountFactory(SubaccountFactory):

@@ -1,11 +1,9 @@
 # -*coding: utf-8-*-
 
 from sqlalchemy import func
-from sqlalchemy.orm import aliased
 
 from ...lib.utils.resources_utils import get_resource_class
 from ...lib.utils.sql_utils import build_union_query
-from ...lib.utils.common_utils import money_cast
 from ...lib.bl.factories import get_invoices_factories_resources_types
 from ...lib.bl.transfers import (
     query_account_from_transfers, 
@@ -17,9 +15,7 @@ from ...models.resource import Resource
 from ...models.income import Income
 from ...models.currency import Currency
 from ...models.account import Account
-from ...models.subaccount import Subaccount
 from ...models.transfer import Transfer
-from ...models.account_item import AccountItem
 
 
 def query_resource_data():

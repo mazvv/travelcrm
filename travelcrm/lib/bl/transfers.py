@@ -10,8 +10,6 @@ from ...models.account import Account
 from ...models.account_item import AccountItem
 from ...models.transfer import Transfer
 
-from ...lib.utils.common_utils import money_cast
-
 
 def _get_balance(
     from_transfers_query, to_transfers_query, date_from, date_to
@@ -30,12 +28,9 @@ def _get_balance(
         to_transfers_query = to_transfers_query.filter(
             Transfer.date <= date_to
         )
-    return money_cast(
-        to_transfers_query.scalar() 
-        - from_transfers_query.scalar()
-    )
-    
-    
+    return to_transfers_query.scalar() - from_transfers_query.scalar()
+
+
 def query_account_to_transfers(account_id):
     assert isinstance(account_id, int)
     return (
@@ -48,7 +43,7 @@ def query_account_to_transfers(account_id):
             )
         )
     )
-    
+
 
 def query_account_from_transfers(account_id):
     assert isinstance(account_id, int)

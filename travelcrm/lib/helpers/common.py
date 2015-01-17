@@ -11,12 +11,10 @@ from ..utils.common_utils import (
     gen_id as u_gen_id,
     get_locale_name as u_get_locale_name,
     get_company_name as u_get_company_name,
-    is_demo_mode as u_is_demo_mode,
     format_date as u_format_date,
     format_datetime as u_format_datetime,
     format_decimal as u_format_decimal,
-    get_base_currency as u_get_base_currency,
-    get_first_day as u_get_first_day,
+    get_base_currency as u_get_base_currency
 )
 from ..utils.security_utils import get_auth_employee as u_get_auth_employee
 from ..bl.employees import get_employee_structure
@@ -72,10 +70,6 @@ def get_company_name():
     return u_get_company_name()
 
 
-def is_demo_mode():
-    return u_is_demo_mode()
-
-
 def contact_type_icon(contact_type):
     assert contact_type in (u'phone', u'email', u'skype'), \
         u"wrong contact type"
@@ -97,9 +91,6 @@ def format_date(value):
 
 def format_datetime(value):
     return u_format_datetime(value)
-
-def get_first_day():
-    return u_get_first_day()
 
 def get_locale_name():
     return u_get_locale_name()

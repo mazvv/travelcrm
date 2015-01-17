@@ -14,7 +14,7 @@ from ..models.account import Account
 from ..models.subaccount import Subaccount
 from ..lib.bl.transfers import get_account_balance
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import cast_int, parse_date
+from ..lib.utils.common_utils import cast_int, parse_datetime
 
 
 class AccountFromValidator(object):
@@ -38,7 +38,7 @@ class AccountFromValidator(object):
                 node,
                 _(u'Set only account or subaccount or clear both')
             )
-        date = parse_date(request.params.get('date'))
+        date = parse_datetime(request.params.get('date'))
         balance = get_account_balance(value, date_to=date)
         sum_to_transfer = Decimal(request.params.get('sum'))
         if sum_to_transfer > balance:

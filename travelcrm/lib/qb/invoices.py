@@ -15,7 +15,6 @@ from ...models.transfer import Transfer
 
 from ...lib.bl.invoices import query_resource_data
 from ...lib.bl.currencies_rates import query_convert_rates
-from ...lib.utils.common_utils import money_cast
 
 
 class InvoicesQueryBuilder(ResourcesQueryBuilder):
@@ -33,11 +32,9 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
         )
         .as_scalar()
     )
-    _subq_invoice_sum = money_cast(
-        func.coalesce(
-            _subq_resource_data.c.sum / _subq_rate,
-            _subq_resource_data.c.sum
-        )
+    _subq_invoice_sum = func.coalesce(
+        _subq_resource_data.c.sum / _subq_rate,
+        _subq_resource_data.c.sum
     )
     _sum_payments = (
         DBSession.query(

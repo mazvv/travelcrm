@@ -2,13 +2,17 @@
 
 import random
 from uuid import uuid4
-from datetime import datetime
-from decimal import Decimal, ROUND_DOWN
+from decimal import Decimal, ROUND_05UP
 
+from dateutil.parser import parse as pdt
 from babel.dates import (
-    format_date as fd, format_datetime as fdt, format_time as ft
+    format_date as fd, 
+    format_datetime as fdt, 
+    format_time as ft,
+    get_date_format as gdf,
+    get_time_format as gtf,
+    get_datetime_format as gdtf
 )
-from babel.dates import parse_date as pd, parse_time as pt
 from babel.numbers import format_decimal as fdc
 
 from pyramid.threadlocal import get_current_registry
@@ -19,8 +23,6 @@ from pyramid.i18n import (
     make_localizer,
     TranslationStringFactory
 )
-
-from sqlalchemy import cast, Numeric
 
 from ...interfaces import IScheduler
 
@@ -70,11 +72,6 @@ def gen_id(prefix='', limit=6):
     return u"%s%s" % (prefix, ''.join(s[:limit]))
 
 
-def is_demo_mode():
-    val = _get_settings_value('company.demo_mode')
-    return val == 'true'
-
-
 def cast_int(val):
     try:
         return int(val)
@@ -83,46 +80,35 @@ def cast_int(val):
 
 
 def get_company_name():
-    return _get_settings_value('company.name')
+    settings = get_settings()
+    return settings.get('company.name', '') 
 
 
 def get_base_currency():
-    return _get_settings_value('company.base_currency')
+    settings = get_settings()
+    return settings.get('company.base_currency') 
 
 
 def get_date_format():
-    return _get_settings_value('date.format')
-
-
-def get_datetime_format():
-    return _get_settings_value('datetime.format')
+    return gdf(format='short', locale=get_locale_name()).pattern
 
 
 def get_time_format():
-    return _get_settings_value('time.format')
+    return gtf(format='short', locale=get_locale_name()).pattern
 
 
-def get_first_day():
-    return _get_settings_value('date.first_day')
+def get_datetime_format():
+    f = gdtf(format='short', locale=get_locale_name())
+    return f.format(get_time_format(), get_date_format())
 
 
-def get_date_js_format():
-    return _get_settings_value('date.js_format')
-
-
-def get_datetime_js_format():
-    return _get_settings_value('datetime.js_format')
-
-
-def money_cast(attr):
-    if isinstance(attr, (Decimal, int, float)):
-        return Decimal(attr).quantize(Decimal('.01'), rounding=ROUND_DOWN)
-    return cast(attr, Numeric(16, 2))
+def parse_datetime(s):
+    return pdt(s)
 
 
 def format_date(value):
     return fd(
-        value, format=get_date_format(), locale=get_locale_name()
+        value, format='short', locale=get_locale_name()
     )
 
 
@@ -139,22 +125,8 @@ def format_time(value):
 
 
 def format_decimal(value):
+    value = Decimal(value).quantize(Decimal('.01'), rounding=ROUND_05UP)
     return fdc(value, locale=get_locale_name())
-
-
-def parse_date(value):
-    return pd(value, locale=get_locale_name())
-
-
-def parse_datetime(value):
-    d = pd(value, locale=get_locale_name())
-
-    # TODO: rework this
-    time_str = value.split(' ')[1]
-    value = time_str.strip()
-    value = "%s:00" % value
-    t = pt(value, locale=get_locale_name())
-    return datetime.combine(d, t)
 
 
 def get_scheduler(request):

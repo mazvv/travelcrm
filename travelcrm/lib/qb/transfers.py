@@ -6,7 +6,6 @@ from . import GeneralQueryBuilder
 from ...models import DBSession
 
 from ...lib.bl.transfers import query_transfers
-from ...lib.utils.common_utils import money_cast
 
 
 class TransfersQueryBuilder(GeneralQueryBuilder):
@@ -27,7 +26,7 @@ class TransfersQueryBuilder(GeneralQueryBuilder):
         ).label('to'),
         'currency': _subq.c.currency,
         'account_item': _subq.c.account_item,
-        'sum': money_cast(_subq.c.sum).label('sum'),
+        'sum': _subq.c.sum.label('sum'),
     }
 
     def __init__(self):

@@ -7,7 +7,7 @@ from . import (
     ResourceSearchSchema,
     Date
 )
-from ..lib.utils.common_utils import parse_date
+from ..lib.utils.common_utils import parse_datetime
 from ..lib.utils.common_utils import translate as _
 
 
@@ -16,7 +16,7 @@ def valid_until_validator(node, kw):
     request = kw.get('request')
 
     def validator(node, value):
-        date = parse_date(request.params.get('date'))
+        date = parse_datetime(request.params.get('date'))
         if date > value:
             raise colander.Invalid(
                 node,

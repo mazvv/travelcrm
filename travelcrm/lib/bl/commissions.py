@@ -9,7 +9,6 @@ from ...models.commission import Commission
 from ...models.touroperator import Touroperator
 
 from ...lib.bl.currencies_rates import currency_exchange
-from ...lib.utils.common_utils import money_cast
 
 
 def get_commission(
@@ -34,7 +33,7 @@ def get_commission(
         .first()
     )
     if not commission:
-        return money_cast(0)
+        return 0
     commission_sum = sum * commission.percentage / 100
     if commission.price:
         commission_sum += currency_exchange(
@@ -43,4 +42,4 @@ def get_commission(
             currency_id,
             commission_date
         )
-    return money_cast(commission_sum)
+    return commission_sum

@@ -2,10 +2,7 @@
 
 import json
 from pytz import common_timezones
-from babel.dates import (
-    format_datetime,
-    format_date
-)
+
 from webhelpers.html import tags
 from webhelpers.html import HTML
 
@@ -39,13 +36,11 @@ from ...models.task import Task
 from ...models.account import Account
 
 from ..utils.common_utils import (
-    get_locale_name,
     gen_id,
     get_date_format,
-    get_date_js_format,
     get_datetime_format,
-    get_datetime_js_format,
-    get_first_day,
+    format_date,
+    format_datetime
 )
 from ..utils.common_utils import translate as _
 from ..bl.subaccounts import get_subaccounts_types
@@ -437,18 +432,16 @@ def date_field(value, name, options=None):
     id = gen_id()
     data_options = """
         editable:false,
-        firstDay:%s,
-        formatter:function(date){return dt_formatter(date, '%s');},
-        parser:function(s){return dt_parser(s, '%s');}
+        formatter:function(date){return dt_formatter(date, %s);},
+        parser:function(s){return dt_parser(s, %s);}
         """ % (
-            get_first_day(), get_date_js_format(), get_date_js_format()
-        )
+       json.dumps(get_date_format()),
+       json.dumps(get_date_format())
+    )
     if options:
         data_options += ",%s" % options
     if value:
-        value = format_date(
-            value, format=get_date_format(), locale=get_locale_name()
-        )
+        value = format_date(value)
     html = tags.text(
         name, value, class_="easyui-datebox text w10",
         id=id, **{'data-options': data_options}
@@ -466,7 +459,7 @@ def time_field(value, name, options=None):
     if options:
         data_options += ",%s" % options
     if value:
-        value = format_date(value, format=get_date_format(), locale=get_locale_name())
+        value = format_date(value)
     html = tags.text(
         name, value, class_="easyui-timespinner text w10",
         id=id, **{'data-options': data_options}
@@ -478,19 +471,17 @@ def datetime_field(value, name, options=None):
     id = gen_id()
     data_options = """
         editable:false,
-        firstDay:%s,
         showSeconds:false,
-        formatter:function(date){return dt_formatter(date, '%s');},
-        parser:function(s){return dt_parser(s, '%s');}
+        formatter:function(date){return dt_formatter(date, %s);},
+        parser:function(s){return dt_parser(s, %s);}
         """ % (
-            get_first_day(), get_datetime_js_format(), get_datetime_js_format()
+            json.dumps(get_datetime_format()),
+            json.dumps(get_datetime_format())
         )
     if options:
         data_options += ",%s" % options
     if value:
-        value = format_datetime(
-            value, format=get_datetime_format(), locale=get_locale_name()
-        )
+        value = format_datetime(value)
     html = tags.text(
         name, value, class_="easyui-datetimebox text w10",
         id=id, **{'data-options': data_options}

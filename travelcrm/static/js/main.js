@@ -453,14 +453,13 @@ function disable_obj_inputs(obj){
 
 
 function dt_formatter(date, format){
-	return moment(date).format(format);
+	return Date.format(date, format);
 }
 
 
 function dt_parser(s, format){
 	if(!s) return new Date();
-	var date = moment(s, format);
-	return new Date(date);
+	return Date.parseFormatted(s, format);
 }
 
 
@@ -503,7 +502,7 @@ function tasks_container(data, open_title, closed_title){
 
 function format_tasks_data(date, open_title, closed_title){
     var d = date.getDate();
-	var ts = moment(date).format('YYYYMMDD');
+    var ts = Date.format(date, 'yyyyMMdd');
     var cell = $('<div/>').addClass('calendar-date').html(d);
     var tasks_container = $('<div/>').addClass('tasks-container')
     	.attr('id', 'tasks-container-' + ts)

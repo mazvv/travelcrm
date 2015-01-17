@@ -30,6 +30,7 @@ def company_settings(event):
     if company:
         settings = {
             'company.name': company.name,
+            'company.base_currency': company.currency.iso_code,
             'company.locale_name': company.settings.get('locale'),
         }
         request.registry.settings.update(settings)

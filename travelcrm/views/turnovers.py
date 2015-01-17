@@ -20,7 +20,7 @@ from ..lib.bl.transfers import (
     get_subaccount_balance,
 )
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import money_cast
+from ..lib.utils.common_utils import format_decimal
 from ..forms.turnovers import TurnoverSearchSchema
 
 
@@ -133,7 +133,7 @@ class Turnovers(object):
             'rows': qb.get_serialized(),
             'footer': [{
                 'date': _(u'balance'),
-                'sum': str(money_cast(balance)),
+                'sum': format_decimal(balance),
                 'currency': currency,
             }]
         }

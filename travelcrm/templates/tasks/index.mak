@@ -8,7 +8,7 @@
         <div class="easyui-calendar tasks" id="_calendar" 
             data-url="${request.resource_url(_context, 'calendar')}"
             data-options="
-                border:false,firstDay:${h.common.get_first_day()},
+                border:false,
                 formatter: function(date){
                     return format_tasks_data(
                         date, '${_(u'open tasks')}', '${_(u'closed tasks')}'
@@ -63,8 +63,8 @@
                 % if _context.has_permision('delete'):
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
                 % endif
-                <th data-options="field:'title',sortable:true,width:290">${_(u"title")}</th>
-                <th data-options="field:'time',sortable:true,width:60,formatter: function(value,row,index){
+                <th data-options="field:'title',sortable:true,width:280">${_(u"title")}</th>
+                <th data-options="field:'time',sortable:true,width:70,formatter: function(value,row,index){
                     var span = $('<span/>').addClass('fa fa-clock-o mr05');
                     return $('<div/>').append(span).html() + value;
                 },
