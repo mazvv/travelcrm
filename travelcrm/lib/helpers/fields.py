@@ -3409,3 +3409,15 @@ def timezones_field(value=None, name='timezone', **kwargs):
         data_options="panelHeight:'120',editable:false",
         **kwargs
     )
+
+
+def locales_field(value=None, name='locale', **kwargs):
+    choices = [
+        (u'en', _(u'en')),
+        (u'ru', _(u'ru')),
+    ]
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w5',
+        data_options="panelHeight:'auto',editable:false",
+        **kwargs
+    )

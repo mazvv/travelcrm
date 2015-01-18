@@ -2718,21 +2718,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6458, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6479, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 1988, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2007, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 128, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 129, true);
 
 
 --
@@ -3427,6 +3427,14 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 40	1880	13
 41	1882	13
 42	1910	14
+43	1990	22
+44	1992	20
+45	1993	22
+46	1994	22
+47	1995	22
+48	1996	19
+49	2001	23
+50	2006	24
 \.
 
 
@@ -3434,7 +3442,7 @@ COPY income (id, resource_id, invoice_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('income_id_seq', 42, true);
+SELECT pg_catalog.setval('income_id_seq', 50, true);
 
 
 --
@@ -3450,6 +3458,22 @@ COPY income_transfer (income_id, transfer_id) FROM stdin;
 40	44
 42	64
 42	63
+44	77
+44	78
+43	79
+43	80
+45	82
+45	81
+46	84
+46	83
+47	85
+47	86
+48	88
+48	87
+49	89
+49	90
+50	91
+50	92
 \.
 
 
@@ -3469,6 +3493,8 @@ COPY invoice (id, date, resource_id, account_id, active_until) FROM stdin;
 20	2014-10-18	1839	3	2014-10-18
 21	2014-10-24	1840	3	2014-10-27
 22	2015-01-15	1987	3	2015-01-18
+24	2015-01-14	2005	3	2015-01-17
+23	2015-01-16	2000	3	2015-01-20
 \.
 
 
@@ -3476,7 +3502,7 @@ COPY invoice (id, date, resource_id, account_id, active_until) FROM stdin;
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 22, true);
+SELECT pg_catalog.setval('invoice_id_seq', 24, true);
 
 
 --
@@ -3906,6 +3932,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 136	125	4	{view,settings}	\N	all
 137	126	4	{add,edit,view,delete}	\N	all
 139	128	4	{edit,view}	\N	all
+140	129	4	{view,settings}	\N	all
 \.
 
 
@@ -4040,6 +4067,10 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 40	6
 20	8
 29	11
+30	13
+41	14
+43	15
+6	16
 \.
 
 
@@ -4067,7 +4098,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 165, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 139, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 140, true);
 
 
 --
@@ -4853,6 +4884,25 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 1986	123	32	f
 1987	103	32	f
 1988	119	32	f
+1989	12	32	f
+1990	106	32	f
+1991	106	32	f
+1992	106	32	f
+1993	106	32	f
+1994	106	32	f
+1995	106	32	f
+1996	106	32	f
+1997	106	32	f
+1998	108	32	f
+1999	109	32	f
+2000	103	32	f
+2001	106	32	f
+2002	106	32	f
+2003	108	32	f
+2004	109	32	f
+2005	103	32	f
+2006	106	32	f
+2007	106	32	f
 \.
 
 
@@ -6047,6 +6097,27 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6456	1046	2	\N	2015-01-14 21:35:47.291833
 6457	1987	2	\N	2015-01-15 20:30:02.464255
 6458	1988	2	\N	2015-01-15 21:27:50.402917
+6459	1989	2	\N	2015-01-17 15:06:55.170629
+6460	1990	2	\N	2015-01-17 19:50:58.298272
+6461	1991	2	\N	2015-01-17 19:50:58.298272
+6462	1992	2	\N	2015-01-17 19:51:20.956564
+6463	1990	2	\N	2015-01-17 21:28:18.900625
+6464	1993	2	\N	2015-01-17 21:28:36.972519
+6465	1994	2	\N	2015-01-17 21:50:01.04394
+6466	1995	2	\N	2015-01-17 21:50:14.61181
+6467	1996	2	\N	2015-01-17 21:54:58.910426
+6468	1997	2	\N	2015-01-17 21:54:58.910426
+6469	1998	2	\N	2015-01-17 21:56:22.636605
+6470	1999	2	\N	2015-01-17 21:56:29.416802
+6471	2000	2	\N	2015-01-17 21:56:46.645017
+6472	2001	2	\N	2015-01-17 21:57:17.28338
+6473	2002	2	\N	2015-01-17 21:57:17.28338
+6474	2003	2	\N	2015-01-17 21:58:51.890926
+6475	2004	2	\N	2015-01-17 21:58:54.962002
+6476	2005	2	\N	2015-01-17 22:00:19.139836
+6477	2006	2	\N	2015-01-17 22:00:39.986496
+6478	2007	2	\N	2015-01-17 22:00:39.986496
+6479	2000	2	\N	2015-01-17 22:01:41.277766
 \.
 
 
@@ -6104,6 +6175,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 123	1941	notifications	Notifications	Notifications	travelcrm.resources.notifications	Employee Notifications	null	f
 128	1977	companies_settings	Companies Settings	CompaniesSettings	travelcrm.resources.companies_settings	Companies Settings	null	f
 124	1954	emails_campaigns	Email Campaigns	EmailsCampaigns	travelcrm.resources.emails_campaigns	Emails Campaigns for subscribers	{"timeout": 12}	t
+129	1989	sales_dynamics	Portlet: Sales Dynamics	SalesDynamics	travelcrm.resources.sales_dynamics	Portlet that shows dynamics of sales in quantity	{"column_index": 0}	t
 103	1317	invoices	Invoices	Invoices	travelcrm.resources.invoices	Invoices list. Invoice can't be created manualy - only using source document such as Tours	{"active_days": 3}	t
 125	1966	unpaid_invoices	Portlet: Unpaid Invoices	UnpaidInvoices	travelcrm.resources.unpaid_invoices	Portlet that shows invoices which has no any pay and active date is over	{"column_index": 1}	t
 126	1968	companies	Companies	Companies	travelcrm.resources.companies	Multicompanies functionality	null	f
@@ -6219,6 +6291,8 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 38	1846	5	56	61	8520.00	25	8520.00
 39	1847	5	54	1	3534.00	20	59017.80
 41	1929	5	56	5	23000.00	30	23000.00
+42	1998	4	56	63	750.00	43	750.00
+43	2003	3	56	61	3450.00	6	3450.00
 \.
 
 
@@ -6226,7 +6300,7 @@ COPY service_item (id, resource_id, service_id, currency_id, touroperator_id, pr
 -- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('service_item_id_seq', 41, true);
+SELECT pg_catalog.setval('service_item_id_seq', 43, true);
 
 
 --
@@ -6236,6 +6310,8 @@ SELECT pg_catalog.setval('service_item_id_seq', 41, true);
 COPY service_sale (id, deal_date, resource_id, customer_id, advsource_id) FROM stdin;
 1	2014-06-09	1456	20	6
 2	2014-09-14	1759	40	5
+3	2015-01-16	1999	43	5
+4	2015-01-14	2004	6	4
 \.
 
 
@@ -6243,7 +6319,7 @@ COPY service_sale (id, deal_date, resource_id, customer_id, advsource_id) FROM s
 -- Name: service_sale_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('service_sale_id_seq', 2, true);
+SELECT pg_catalog.setval('service_sale_id_seq', 4, true);
 
 
 --
@@ -6253,6 +6329,8 @@ SELECT pg_catalog.setval('service_sale_id_seq', 2, true);
 COPY service_sale_invoice (service_sale_id, invoice_id) FROM stdin;
 1	13
 2	21
+3	23
+4	24
 \.
 
 
@@ -6266,6 +6344,8 @@ COPY service_sale_service_item (service_sale_id, service_item_id) FROM stdin;
 1	18
 1	17
 2	31
+3	42
+4	43
 \.
 
 
@@ -6335,6 +6415,10 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 10	1902	3	Lun Real Estate | UAH | CASH	Lun on cash account
 11	1911	4	Main Cash EUR Account | rid: 1465	\N
 12	1913	2	Sun Marino Trvl | Cash UAH	Sun Marino Main Bank Subaccount
+13	1991	3	Main Cash Account | rid: 1471	\N
+14	1997	3	Main Cash Account | rid: 1645	\N
+15	2002	3	Main Cash Account | rid: 1869	\N
+16	2007	3	Main Cash Account | rid: 887	\N
 \.
 
 
@@ -6342,7 +6426,7 @@ COPY subaccount (id, resource_id, account_id, name, descr) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 12, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 16, true);
 
 
 --
@@ -6658,6 +6742,22 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 70	\N	3	\N	\N	4	10.00	2014-11-23
 71	\N	10	\N	\N	3	8200.00	2014-11-18
 73	\N	12	\N	\N	6	15000.00	2014-11-23
+77	\N	\N	\N	4	8	29880.00	2015-01-02
+78	\N	4	3	\N	1	29880.00	2015-01-02
+79	\N	\N	\N	13	8	3000.00	2014-12-18
+80	\N	13	3	\N	1	3000.00	2014-12-18
+81	\N	\N	\N	13	8	6000.00	2015-01-13
+82	\N	13	3	\N	1	6000.00	2015-01-13
+83	\N	\N	\N	13	8	11000.00	2015-01-11
+84	\N	13	3	\N	1	11000.00	2015-01-11
+85	\N	\N	\N	13	8	3000.00	2015-01-15
+86	\N	13	3	\N	1	3000.00	2015-01-15
+87	\N	\N	\N	14	8	64576.00	2015-01-12
+88	\N	14	3	\N	1	64576.00	2015-01-12
+89	\N	\N	\N	15	8	750.00	2015-01-16
+90	\N	15	3	\N	2	750.00	2015-01-16
+91	\N	\N	\N	16	8	3450.00	2015-01-14
+92	\N	16	3	\N	2	3450.00	2015-01-14
 \.
 
 
@@ -6665,7 +6765,7 @@ COPY transfer (id, account_from_id, subaccount_from_id, account_to_id, subaccoun
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 74, true);
+SELECT pg_catalog.setval('transfer_id_seq', 92, true);
 
 
 --

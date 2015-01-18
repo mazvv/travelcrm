@@ -18,9 +18,9 @@ from ..lib.utils.common_utils import translate as _
 
 @implementer(IResourceType)
 @implementer(IPortlet)
-class UnpaidInvoices(ResourceTypeBase):
+class SalesDynamics(ResourceTypeBase):
 
-    __name__ = 'unpaid_invoices'
+    __name__ = 'sales_dynamics'
 
     def __init__(self, request):
         self.__parent__ = Root(request)

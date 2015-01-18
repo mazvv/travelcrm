@@ -1,3 +1,4 @@
+<%namespace file="../common/infoblock.mak" import="infoblock"/>
 <%namespace file="../notes/common.mak" import="notes_selector"/>
 <%namespace file="../tasks/common.mak" import="tasks_selector"/>
 <div class="dl45 easyui-dialog"
@@ -9,6 +10,9 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
+        % if item:
+           ${infoblock(_(u"If you change company settings you need to reload page"))}
+        % endif    
         <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"name"), True, "name")}
@@ -44,7 +48,7 @@
                 ${h.tags.title(_(u"locale"), True, "locale")}
             </div>
             <div class="ml15">
-                ${h.tags.text("locale", item.settings.get('locale') if item else None, class_="easyui-textbox w20")}
+                ${h.fields.locales_field(item.settings.get('locale') if item else None)}
                 ${h.common.error_container(name='locale')}
             </div>
         </div>

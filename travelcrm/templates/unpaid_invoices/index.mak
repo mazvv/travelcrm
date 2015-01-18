@@ -3,7 +3,7 @@
     _id = h.common.gen_id()
     _t_id = "t-%s" % _id
 %>
-<div class="easyui-panel unselectable"
+<div class="easyui-panel"
     data-options="
         height: 300,
         border:true,

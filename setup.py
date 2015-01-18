@@ -34,6 +34,7 @@ requires = [
     'pdfkit>=0.4.1',
     'apscheduler>=3.0.1',
     'dateutils>=0.6.6',
+    'pygal>=1.6.1',
 ]
 
 setup(
@@ -50,7 +51,7 @@ setup(
     author='Vitalii Mazur',
     author_email='vitalii.mazur@gmail.com',
     url='http://www.travelcrm.org.ua',
-    keywords='web wsgi bfg pylons pyramid',
+    keywords='web wsgi bfg pylons pyramid crm',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

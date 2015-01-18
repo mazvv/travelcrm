@@ -49,6 +49,7 @@
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
+            <th data-options="field:'deal_date',sortable:true,width:80">${_(u"deal date")}</th>
             <th data-options="field:'customer',sortable:true,width:140">${_(u"customer")}</th>
             <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'invoice_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-o\' title=\'${_(u"invoice already exists")}\'></span>':'';}" align="center">${_(u'I.')}</th>

@@ -1,5 +1,0 @@
-    [paste.app_factory]
-    main = travelcrm:main
-    [console_scripts]
-    initialize_travelcrm_db = travelcrm.scripts.initializedb:main
-    

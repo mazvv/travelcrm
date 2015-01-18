@@ -16,10 +16,7 @@ from ...models.user import User
 from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
-from ..utils.common_utils import (
-    cast_int, format_date, 
-    format_datetime, format_time, format_decimal
-)
+from ..utils.common_utils import cast_int, serialize
 from ..utils.security_utils import get_auth_employee
 
 from ..bl.employees import query_employee_scope
@@ -32,14 +29,7 @@ class NotValidContextError(Exception):
 def query_row_serialize_format(row):
     res_row = dict(zip(row.keys(), row))
     for key, value in res_row.iteritems():
-        if isinstance(value, date):
-            res_row[key] = format_date(value)
-        if isinstance(value, datetime):
-            res_row[key] = format_datetime(value)
-        if isinstance(value, time):
-            res_row[key] = format_time(value)
-        if isinstance(value, Decimal):
-            res_row[key] = format_decimal(value)
+        res_row[key] = serialize(value)
     return res_row
 
 

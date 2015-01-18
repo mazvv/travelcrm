@@ -2,6 +2,7 @@
 
 import random
 from uuid import uuid4
+from datetime import datetime, date, time
 from decimal import Decimal, ROUND_05UP
 
 from dateutil.parser import parse as pdt
@@ -134,3 +135,15 @@ def get_scheduler(request):
     if registry is None:
         registry = request
     return registry.getUtility(IScheduler)
+
+
+def serialize(value):
+    if isinstance(value, date):
+        return format_date(value)
+    if isinstance(value, datetime):
+        return format_datetime(value)
+    if isinstance(value, time):
+        return format_time(value)
+    if isinstance(value, Decimal):
+        return format_decimal(value)
+    return value

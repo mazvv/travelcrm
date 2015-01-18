@@ -18,3 +18,5 @@ syntax: glob
 .coverage
 .project
 .pydevproject
+.settings
+./travelcrm.egg-info
