@@ -20,3 +20,6 @@ syntax: glob
 .pydevproject
 .settings
 ./travelcrm.egg-info
+./data/sessions
+./data/cache
+./dist

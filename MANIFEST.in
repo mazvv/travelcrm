@@ -1,2 +1,5 @@
-include *.txt *.ini *.cfg *.rst
-recursive-include travelcrm *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml
+include *.txt *.ini *.cfg *.rst *.sh
+recursive-include travelcrm *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml *.pot *.mo *.po *.otf *.eot *.svg *.ttf *.woff
+recursive-include sql *.sql
+graft alembic
+graft data/storage

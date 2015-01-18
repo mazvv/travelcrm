@@ -33,7 +33,7 @@ def main(argv=sys.argv):
     settings = get_appsettings(config_uri, options=options)
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
-    Base.create_all(engine)
+    Base.metadata.create_all(engine)
 
 
 def _execute_dump(locale):
