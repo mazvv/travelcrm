@@ -12,9 +12,9 @@
 
 /** emastic hacks **/
 .main{
-    width: auto;
-    max-width: 130em;
-    min-width: 110em;
+    width: 110em;
+    max-width: 115em;
+    min-width: 115em;
 }
 html, body{
 	color: #555;
@@ -124,6 +124,12 @@ a.dashed{
 .pt05{
 	padding-top: 0.5em;
 }
+.pr02{
+	padding-right: 0.2em;
+}
+.pl02{
+    padding-left: 0.2em;
+}
 
 /** margins **/
 .m05{
@@ -228,9 +234,9 @@ a:hover.l-btn-plain{
 }
 
 .panel-header .panel-title{
-    font-size: 14px;
+    font-size: 12px;
     height: inherit;
-    line-height: inherit;    
+    line-height: inherit;
 }
 
 .tree-file, .tree-folder, .tree-folder-open,
@@ -338,18 +344,6 @@ a:hover.l-btn-plain{
 .easyui-calendar.tasks .calendar-day .tasks-container .task-status.task-open{
 	color: black;
 }
-.datagrid-row-expand, .datagrid-row-collapse{
-	font-family: FontAwesome;
-	background: none;
-	font-size: 14px;
-	color: #444;
-}
-.datagrid-row-expand:before{
-	content: "\f067";
-}
-.datagrid-row-collapse:before{
-	content: "\f068";
-}
 
 /* navigation */
 #_navigation_ .easyui-linkbutton, #_navigation_ .easyui-menubutton{
@@ -429,32 +423,6 @@ form a:hover{
 	background-color: #f3f3f3;
 	line-height: 20px;
 } 
-input[type=checkbox] {
-     position: relative;
-     width: 15px;
-     height: 16px;
-     vertical-align: middle;
-}
-input[type=checkbox]:before {
-    position: absolute;
-    background-color: white;
-    height: 100%;
-	width: 100%;
-    font-family: FontAwesome;
-    display: inline-block;
-    content:"\f096";
-    letter-spacing: 10px;
-    font-size: 18px;
-    vertical-align: middle;
-    text-align: center;
-    color: #444;
-}
-input[type=checkbox]:checked:before {
-    font-family: FontAwesome;
-    display: inline-block;
-    content:"\f046";
-    letter-spacing: 5px;
-}
 
 /** required **/
 .required .required-symbol{
@@ -547,12 +515,6 @@ input{
 .document-rows:after .form-buttons{
 	margin-top: 0em !important;
 }
-
-/** scrollbars **/
-::-webkit-scrollbar {width: 8px;}
-::-webkit-scrollbar-button {width: 8px;height:0px;}
-::-webkit-scrollbar-track {background:#fafafa;border: skinny plain lightgray;box-shadow: 0px 0px 3px #dfdfdf inset;border-radius:0px;}
-::-webkit-scrollbar-thumb {background:#ccc;border: skinny plain gray;border-radius:0px;}
 
 
 /** searchbar **/

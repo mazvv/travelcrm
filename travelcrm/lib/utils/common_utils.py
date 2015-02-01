@@ -138,10 +138,10 @@ def get_scheduler(request):
 
 
 def serialize(value):
-    if isinstance(value, date):
-        return format_date(value)
     if isinstance(value, datetime):
         return format_datetime(value)
+    if isinstance(value, date):
+        return format_date(value)
     if isinstance(value, time):
         return format_time(value)
     if isinstance(value, Decimal):

@@ -455,6 +455,15 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+--
 -- Name: appointment; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1791,7 +1800,7 @@ CREATE TABLE task (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     employee_id integer NOT NULL,
-    title character varying(32) NOT NULL,
+    title character varying(128) NOT NULL,
     deadline timestamp without time zone NOT NULL,
     reminder timestamp without time zone,
     descr character varying,
@@ -2431,14 +2440,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6479, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6524, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2007, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2047, true);
 
 
 --
@@ -2545,13 +2554,14 @@ INSERT INTO address VALUES (28, 1652, 14, '54415', 'Vasilkovskaya 45/56, 19');
 INSERT INTO address VALUES (29, 1807, 14, '02121', 'Dekabristov str, filial #239');
 INSERT INTO address VALUES (30, 1926, 14, '123432', 'Arsenalna str');
 INSERT INTO address VALUES (31, 1951, 14, '02121', 'Gmiry str');
+INSERT INTO address VALUES (32, 2015, 14, '09878', 'Kikvidze 29, 56');
 
 
 --
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('address_id_seq', 31, true);
+SELECT pg_catalog.setval('address_id_seq', 32, true);
 
 
 --
@@ -2574,6 +2584,13 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 
 
 --
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO alembic_version VALUES ('255a4fa72b25');
+
+
+--
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -2586,6 +2603,7 @@ INSERT INTO appointment VALUES (8, 1542, 54, 2, 4, 6500.00, '2014-03-01');
 -- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO apscheduler_jobs VALUES ('_task_notification-53', 1422882540, '\x80027d71012855046172677371024b3585710355086578656375746f727104550764656661756c747105550d6d61785f696e7374616e63657371064b03550466756e637107553074726176656c63726d2e6c69622e7363686564756c65722e7461736b733a5f7461736b5f6e6f74696669636174696f6e710855026964710955155f7461736b5f6e6f74696669636174696f6e2d3533710a550d6e6578745f72756e5f74696d65710b636461746574696d650a6461746574696d650a710c550a07df02020f0900000000637079747a0a5f700a710d28550b4575726f70652f4b696576710e4d201c4b005503454554710f745271108652711155046e616d65711255125f7461736b5f6e6f74696669636174696f6e711355126d6973666972655f67726163655f74696d6571144b0155077472696767657271156361707363686564756c65722e74726967676572732e646174650a44617465547269676765720a7116298171177d71187d7119550872756e5f64617465711a68117386625508636f616c65736365711b89550776657273696f6e711c4b0155066b7761726773711d7d711e752e');
 
 
 --
@@ -2681,19 +2699,24 @@ INSERT INTO calculation VALUES (6, 1855, 37, 54, 3556.00, 59385.20);
 INSERT INTO calculation VALUES (4, 1853, NULL, 57, 2150.34, 25804.08);
 INSERT INTO calculation VALUES (9, 1859, 34, 57, 2156.34, 25876.08);
 INSERT INTO calculation VALUES (10, 1860, 31, 57, 29.84, 358.08);
-INSERT INTO calculation VALUES (11, 1861, 3, 54, 20.00, 334.00);
-INSERT INTO calculation VALUES (12, 1862, 17, 57, 54.00, 653.40);
-INSERT INTO calculation VALUES (13, 1863, 18, 57, 54.00, 653.40);
-INSERT INTO calculation VALUES (14, 1864, 19, 54, 21.00, 350.70);
 INSERT INTO calculation VALUES (16, 1918, 39, 54, 3534.00, 59017.80);
 INSERT INTO calculation VALUES (17, 1988, 41, 56, 23000.00, 23000.00);
+INSERT INTO calculation VALUES (18, 2029, 44, 57, 2017.78, 42171.60);
+INSERT INTO calculation VALUES (19, 2030, 43, 56, 3450.00, 3450.00);
+INSERT INTO calculation VALUES (20, 2031, 42, 56, 750.00, 750.00);
+INSERT INTO calculation VALUES (23, 2038, 45, 56, 1105.00, 1105.00);
+INSERT INTO calculation VALUES (24, 2039, 46, 56, 1105.00, 1105.00);
+INSERT INTO calculation VALUES (29, 2044, 3, 54, 17.00, 283.90);
+INSERT INTO calculation VALUES (30, 2045, 17, 57, 54.00, 653.40);
+INSERT INTO calculation VALUES (31, 2046, 18, 57, 54.00, 653.40);
+INSERT INTO calculation VALUES (32, 2047, 19, 54, 17.00, 283.90);
 
 
 --
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 17, true);
+SELECT pg_catalog.setval('calculation_id_seq', 32, true);
 
 
 --
@@ -2711,13 +2734,15 @@ INSERT INTO commission VALUES (21, '2014-08-17', 1579, 5, 12.00, 0.00, 56);
 INSERT INTO commission VALUES (22, '2014-08-01', 1714, 1, 0.00, 10.00, 54);
 INSERT INTO commission VALUES (23, '2014-08-01', 1721, 5, 12.00, 0.00, 57);
 INSERT INTO commission VALUES (24, '2014-05-01', 1917, 5, 11.00, 0.00, 56);
+INSERT INTO commission VALUES (25, '2014-01-01', 2011, 5, 10.00, 0.00, 56);
+INSERT INTO commission VALUES (26, '2014-01-01', 2032, 4, 15.00, 0.00, 56);
 
 
 --
 -- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('commission_id_seq', 24, true);
+SELECT pg_catalog.setval('commission_id_seq', 26, true);
 
 
 --
@@ -2793,13 +2818,15 @@ INSERT INTO contact VALUES (75, 'karpuha1990@ukr.net', 'email', 1641);
 INSERT INTO contact VALUES (76, '+380502235686', 'phone', 1650);
 INSERT INTO contact VALUES (77, '+380674523123', 'phone', 1927);
 INSERT INTO contact VALUES (78, 'vitalii.mazur@gmail.com', 'email', 1956);
+INSERT INTO contact VALUES (79, '+380923435643', 'phone', 2013);
+INSERT INTO contact VALUES (80, '+380505674534', 'phone', 2018);
 
 
 --
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 78, true);
+SELECT pg_catalog.setval('contact_id_seq', 80, true);
 
 
 --
@@ -2872,13 +2899,15 @@ INSERT INTO currency_rate VALUES (9, 1504, '2014-06-20', 54, 16.70);
 INSERT INTO currency_rate VALUES (10, 1505, '2014-06-20', 57, 12.00);
 INSERT INTO currency_rate VALUES (11, 1506, '2014-06-20', 44, 0.37);
 INSERT INTO currency_rate VALUES (12, 1597, '2014-08-21', 54, 18.20);
+INSERT INTO currency_rate VALUES (13, 2023, '2015-02-01', 54, 22.43);
+INSERT INTO currency_rate VALUES (14, 2024, '2015-02-01', 57, 20.90);
 
 
 --
 -- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('currency_rate_id_seq', 12, true);
+SELECT pg_catalog.setval('currency_rate_id_seq', 14, true);
 
 
 --
@@ -2933,14 +2962,6 @@ INSERT INTO employee_contact VALUES (2, 59);
 -- Data for Name: employee_notification; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO employee_notification VALUES (2, 9);
-INSERT INTO employee_notification VALUES (2, 10);
-INSERT INTO employee_notification VALUES (2, 11);
-INSERT INTO employee_notification VALUES (2, 12);
-INSERT INTO employee_notification VALUES (2, 13);
-INSERT INTO employee_notification VALUES (2, 14);
-INSERT INTO employee_notification VALUES (2, 15);
-INSERT INTO employee_notification VALUES (2, 16);
 
 
 --
@@ -3078,13 +3099,14 @@ INSERT INTO income VALUES (47, 1995, 22);
 INSERT INTO income VALUES (48, 1996, 19);
 INSERT INTO income VALUES (49, 2001, 23);
 INSERT INTO income VALUES (50, 2006, 24);
+INSERT INTO income VALUES (51, 2027, 26);
 
 
 --
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('income_id_seq', 50, true);
+SELECT pg_catalog.setval('income_id_seq', 51, true);
 
 
 --
@@ -3115,6 +3137,8 @@ INSERT INTO income_transfer VALUES (49, 89);
 INSERT INTO income_transfer VALUES (49, 90);
 INSERT INTO income_transfer VALUES (50, 91);
 INSERT INTO income_transfer VALUES (50, 92);
+INSERT INTO income_transfer VALUES (51, 94);
+INSERT INTO income_transfer VALUES (51, 93);
 
 
 --
@@ -3134,13 +3158,14 @@ INSERT INTO invoice VALUES (21, '2014-10-24', 1840, 3, '2014-10-27');
 INSERT INTO invoice VALUES (22, '2015-01-15', 1987, 3, '2015-01-18');
 INSERT INTO invoice VALUES (24, '2015-01-14', 2005, 3, '2015-01-17');
 INSERT INTO invoice VALUES (23, '2015-01-16', 2000, 3, '2015-01-20');
+INSERT INTO invoice VALUES (26, '2015-02-01', 2026, 3, '2015-02-04');
 
 
 --
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 24, true);
+SELECT pg_catalog.setval('invoice_id_seq', 26, true);
 
 
 --
@@ -3336,13 +3361,14 @@ INSERT INTO note VALUES (25, 1924, 'Passport detalized', 'There is no informatio
 INSERT INTO note VALUES (26, 1931, 'Resource Task', 'This is for resource only');
 INSERT INTO note VALUES (27, 1979, 'Test Note', 'Description to test note');
 INSERT INTO note VALUES (28, 1981, 'VIP User', 'This user is for VIP');
+INSERT INTO note VALUES (29, 2012, 'Good Hotel', NULL);
 
 
 --
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 28, true);
+SELECT pg_catalog.setval('note_id_seq', 29, true);
 
 
 --
@@ -3357,6 +3383,7 @@ INSERT INTO note_resource VALUES (25, 1928);
 INSERT INTO note_resource VALUES (27, 1980);
 INSERT INTO note_resource VALUES (28, 3);
 INSERT INTO note_resource VALUES (18, 784);
+INSERT INTO note_resource VALUES (29, 1470);
 
 
 --
@@ -3377,13 +3404,14 @@ INSERT INTO notification VALUES (13, 1972, 'Task: Check Payments', 'Check Paymen
 INSERT INTO notification VALUES (14, 1973, 'Task: Check Payments', 'Check Payments', '2015-01-04 14:06:00.016859', NULL);
 INSERT INTO notification VALUES (15, 1984, 'Task: Test', 'Test', '2015-01-13 17:01:00.018967', NULL);
 INSERT INTO notification VALUES (16, 1986, 'Task: Test 2', 'Test 2', '2015-01-13 17:04:00.011637', NULL);
+INSERT INTO notification VALUES (17, 2010, 'Task: I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 21:45:00.013037', NULL);
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 16, true);
+SELECT pg_catalog.setval('notification_id_seq', 17, true);
 
 
 --
@@ -3439,13 +3467,15 @@ INSERT INTO passport VALUES (20, 3, 'citizen', 'HJ789665', NULL, 1642, NULL);
 INSERT INTO passport VALUES (21, 3, 'foreign', 'RT7892634', NULL, 1643, '2017-07-19');
 INSERT INTO passport VALUES (22, 3, 'foreign', 'RT632453', NULL, 1651, '2019-08-16');
 INSERT INTO passport VALUES (23, 3, 'citizen', 'RTY', NULL, 1925, NULL);
+INSERT INTO passport VALUES (24, 3, 'citizen', 'HH67187', NULL, 2014, NULL);
+INSERT INTO passport VALUES (25, 9, 'foreign', 'TY78534', NULL, 2019, '2018-06-06');
 
 
 --
 -- Name: passport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('passport_id_seq', 23, true);
+SELECT pg_catalog.setval('passport_id_seq', 25, true);
 
 
 --
@@ -3588,6 +3618,8 @@ INSERT INTO person VALUES (43, 1869, 'Alexey', 'Ivankiv', 'V.', NULL, 'male', tr
 INSERT INTO person VALUES (38, 1626, 'Elena', 'Garkava', '', '1986-01-08', 'male', true);
 INSERT INTO person VALUES (35, 1615, 'Tat''ana', 'Artyuh', '', '1987-02-10', 'female', true);
 INSERT INTO person VALUES (22, 1383, 'Vitalii', 'Mazur', '', '1979-07-17', 'male', true);
+INSERT INTO person VALUES (44, 2017, 'Sergey', 'Gavrish', '', '1981-08-05', 'male', true);
+INSERT INTO person VALUES (45, 2020, 'Anna', 'Gavrish', '', '1993-11-17', 'female', true);
 
 
 --
@@ -3608,6 +3640,7 @@ INSERT INTO person_address VALUES (37, 26);
 INSERT INTO person_address VALUES (41, 27);
 INSERT INTO person_address VALUES (42, 28);
 INSERT INTO person_address VALUES (30, 30);
+INSERT INTO person_address VALUES (44, 32);
 
 
 --
@@ -3636,13 +3669,15 @@ INSERT INTO person_contact VALUES (41, 75);
 INSERT INTO person_contact VALUES (42, 76);
 INSERT INTO person_contact VALUES (30, 77);
 INSERT INTO person_contact VALUES (22, 78);
+INSERT INTO person_contact VALUES (44, 79);
+INSERT INTO person_contact VALUES (45, 80);
 
 
 --
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 43, true);
+SELECT pg_catalog.setval('person_id_seq', 45, true);
 
 
 --
@@ -3665,6 +3700,8 @@ INSERT INTO person_passport VALUES (41, 20);
 INSERT INTO person_passport VALUES (41, 21);
 INSERT INTO person_passport VALUES (42, 22);
 INSERT INTO person_passport VALUES (30, 23);
+INSERT INTO person_passport VALUES (44, 24);
+INSERT INTO person_passport VALUES (45, 25);
 
 
 --
@@ -3680,6 +3717,7 @@ INSERT INTO person_subaccount VALUES (30, 13);
 INSERT INTO person_subaccount VALUES (41, 14);
 INSERT INTO person_subaccount VALUES (43, 15);
 INSERT INTO person_subaccount VALUES (6, 16);
+INSERT INTO person_subaccount VALUES (44, 17);
 
 
 --
@@ -4385,10 +4423,6 @@ INSERT INTO resource VALUES (1854, 119, 32, false);
 INSERT INTO resource VALUES (1855, 119, 32, false);
 INSERT INTO resource VALUES (1859, 119, 32, false);
 INSERT INTO resource VALUES (1860, 119, 32, false);
-INSERT INTO resource VALUES (1861, 119, 32, false);
-INSERT INTO resource VALUES (1862, 119, 32, false);
-INSERT INTO resource VALUES (1863, 119, 32, false);
-INSERT INTO resource VALUES (1864, 119, 32, false);
 INSERT INTO resource VALUES (1865, 117, 32, false);
 INSERT INTO resource VALUES (1866, 117, 32, false);
 INSERT INTO resource VALUES (1867, 117, 32, false);
@@ -4506,6 +4540,38 @@ INSERT INTO resource VALUES (2004, 109, 32, false);
 INSERT INTO resource VALUES (2005, 103, 32, false);
 INSERT INTO resource VALUES (2006, 106, 32, false);
 INSERT INTO resource VALUES (2007, 106, 32, false);
+INSERT INTO resource VALUES (2009, 93, 32, false);
+INSERT INTO resource VALUES (2010, 123, 32, false);
+INSERT INTO resource VALUES (2011, 110, 32, false);
+INSERT INTO resource VALUES (2012, 118, 32, false);
+INSERT INTO resource VALUES (2013, 87, 32, false);
+INSERT INTO resource VALUES (2014, 89, 32, false);
+INSERT INTO resource VALUES (2015, 90, 32, false);
+INSERT INTO resource VALUES (2016, 93, 32, false);
+INSERT INTO resource VALUES (2017, 69, 32, false);
+INSERT INTO resource VALUES (2018, 87, 32, false);
+INSERT INTO resource VALUES (2019, 89, 32, false);
+INSERT INTO resource VALUES (2020, 69, 32, false);
+INSERT INTO resource VALUES (2021, 92, 32, false);
+INSERT INTO resource VALUES (2022, 108, 32, false);
+INSERT INTO resource VALUES (2023, 104, 32, false);
+INSERT INTO resource VALUES (2024, 104, 32, false);
+INSERT INTO resource VALUES (2026, 103, 32, false);
+INSERT INTO resource VALUES (2027, 106, 32, false);
+INSERT INTO resource VALUES (2028, 106, 32, false);
+INSERT INTO resource VALUES (2029, 119, 32, false);
+INSERT INTO resource VALUES (2030, 119, 32, false);
+INSERT INTO resource VALUES (2031, 119, 32, false);
+INSERT INTO resource VALUES (2032, 110, 32, false);
+INSERT INTO resource VALUES (2033, 108, 32, false);
+INSERT INTO resource VALUES (2034, 108, 32, false);
+INSERT INTO resource VALUES (2035, 109, 32, false);
+INSERT INTO resource VALUES (2038, 119, 32, false);
+INSERT INTO resource VALUES (2039, 119, 32, false);
+INSERT INTO resource VALUES (2044, 119, 32, false);
+INSERT INTO resource VALUES (2045, 119, 32, false);
+INSERT INTO resource VALUES (2046, 119, 32, false);
+INSERT INTO resource VALUES (2047, 119, 32, false);
 
 
 --
@@ -5410,10 +5476,6 @@ INSERT INTO resource_log VALUES (6147, 1854, 2, NULL, '2014-10-28 20:24:58.38043
 INSERT INTO resource_log VALUES (6148, 1855, 2, NULL, '2014-10-28 20:25:08.681569');
 INSERT INTO resource_log VALUES (6151, 1859, 2, NULL, '2014-10-29 12:48:22.905378');
 INSERT INTO resource_log VALUES (6152, 1860, 2, NULL, '2014-10-30 22:03:33.988542');
-INSERT INTO resource_log VALUES (6153, 1861, 2, NULL, '2014-10-30 22:04:21.818193');
-INSERT INTO resource_log VALUES (6154, 1862, 2, NULL, '2014-10-30 22:04:21.818193');
-INSERT INTO resource_log VALUES (6155, 1863, 2, NULL, '2014-10-30 22:04:21.818193');
-INSERT INTO resource_log VALUES (6156, 1864, 2, NULL, '2014-10-30 22:04:21.818193');
 INSERT INTO resource_log VALUES (6157, 1865, 2, NULL, '2014-11-03 21:33:49.462196');
 INSERT INTO resource_log VALUES (6158, 1866, 2, NULL, '2014-11-03 21:38:54.729983');
 INSERT INTO resource_log VALUES (6159, 1867, 2, NULL, '2014-11-03 21:39:31.824693');
@@ -5719,6 +5781,44 @@ INSERT INTO resource_log VALUES (6476, 2005, 2, NULL, '2015-01-17 22:00:19.13983
 INSERT INTO resource_log VALUES (6477, 2006, 2, NULL, '2015-01-17 22:00:39.986496');
 INSERT INTO resource_log VALUES (6478, 2007, 2, NULL, '2015-01-17 22:00:39.986496');
 INSERT INTO resource_log VALUES (6479, 2000, 2, NULL, '2015-01-17 22:01:41.277766');
+INSERT INTO resource_log VALUES (6480, 2009, 2, NULL, '2015-01-21 21:44:18.418746');
+INSERT INTO resource_log VALUES (6481, 1985, 2, NULL, '2015-02-01 13:03:47.123323');
+INSERT INTO resource_log VALUES (6482, 2009, 2, NULL, '2015-02-01 13:05:09.626214');
+INSERT INTO resource_log VALUES (6483, 2011, 2, NULL, '2015-02-01 13:23:15.549518');
+INSERT INTO resource_log VALUES (6484, 1004, 2, NULL, '2015-02-01 13:23:17.930893');
+INSERT INTO resource_log VALUES (6485, 2012, 2, NULL, '2015-02-01 13:51:03.67962');
+INSERT INTO resource_log VALUES (6486, 1470, 2, NULL, '2015-02-01 13:51:06.125989');
+INSERT INTO resource_log VALUES (6487, 2013, 2, NULL, '2015-02-01 15:08:04.506074');
+INSERT INTO resource_log VALUES (6488, 2014, 2, NULL, '2015-02-01 15:08:25.548868');
+INSERT INTO resource_log VALUES (6489, 2015, 2, NULL, '2015-02-01 15:09:02.223788');
+INSERT INTO resource_log VALUES (6490, 2016, 2, NULL, '2015-02-01 15:09:49.640295');
+INSERT INTO resource_log VALUES (6491, 2017, 2, NULL, '2015-02-01 15:09:55.959842');
+INSERT INTO resource_log VALUES (6492, 2018, 2, NULL, '2015-02-01 15:12:43.612773');
+INSERT INTO resource_log VALUES (6493, 2019, 2, NULL, '2015-02-01 15:13:13.911124');
+INSERT INTO resource_log VALUES (6494, 2020, 2, NULL, '2015-02-01 15:13:27.313034');
+INSERT INTO resource_log VALUES (6495, 2021, 2, NULL, '2015-02-01 15:14:04.244179');
+INSERT INTO resource_log VALUES (6496, 2022, 2, NULL, '2015-02-01 15:14:04.244179');
+INSERT INTO resource_log VALUES (6497, 2023, 2, NULL, '2015-02-01 15:16:10.834689');
+INSERT INTO resource_log VALUES (6498, 2024, 2, NULL, '2015-02-01 15:16:30.308954');
+INSERT INTO resource_log VALUES (6500, 2021, 2, NULL, '2015-02-01 15:26:52.568156');
+INSERT INTO resource_log VALUES (6501, 2026, 2, NULL, '2015-02-01 15:27:12.501194');
+INSERT INTO resource_log VALUES (6502, 2026, 2, NULL, '2015-02-01 15:27:30.084405');
+INSERT INTO resource_log VALUES (6503, 2027, 2, NULL, '2015-02-01 15:27:55.689729');
+INSERT INTO resource_log VALUES (6504, 2028, 2, NULL, '2015-02-01 15:27:55.689729');
+INSERT INTO resource_log VALUES (6505, 2029, 2, NULL, '2015-02-01 19:41:31.921287');
+INSERT INTO resource_log VALUES (6506, 2030, 2, NULL, '2015-02-01 19:49:07.587188');
+INSERT INTO resource_log VALUES (6507, 2031, 2, NULL, '2015-02-01 19:49:18.380376');
+INSERT INTO resource_log VALUES (6508, 2032, 2, NULL, '2015-02-01 19:51:03.621123');
+INSERT INTO resource_log VALUES (6509, 1004, 2, NULL, '2015-02-01 19:51:06.683043');
+INSERT INTO resource_log VALUES (6510, 2033, 2, NULL, '2015-02-01 19:52:42.620583');
+INSERT INTO resource_log VALUES (6511, 2034, 2, NULL, '2015-02-01 19:53:13.308024');
+INSERT INTO resource_log VALUES (6512, 2035, 2, NULL, '2015-02-01 19:53:17.885099');
+INSERT INTO resource_log VALUES (6515, 2038, 2, NULL, '2015-02-01 19:53:59.085718');
+INSERT INTO resource_log VALUES (6516, 2039, 2, NULL, '2015-02-01 19:53:59.085718');
+INSERT INTO resource_log VALUES (6521, 2044, 2, NULL, '2015-02-01 19:54:52.686809');
+INSERT INTO resource_log VALUES (6522, 2045, 2, NULL, '2015-02-01 19:54:52.686809');
+INSERT INTO resource_log VALUES (6523, 2046, 2, NULL, '2015-02-01 19:54:52.686809');
+INSERT INTO resource_log VALUES (6524, 2047, 2, NULL, '2015-02-01 19:54:52.686809');
 
 
 --
@@ -5886,13 +5986,16 @@ INSERT INTO service_item VALUES (39, 1847, 5, 54, 1, 3534.00, 20, 59017.80);
 INSERT INTO service_item VALUES (41, 1929, 5, 56, 5, 23000.00, 30, 23000.00);
 INSERT INTO service_item VALUES (42, 1998, 4, 56, 63, 750.00, 43, 750.00);
 INSERT INTO service_item VALUES (43, 2003, 3, 56, 61, 3450.00, 6, 3450.00);
+INSERT INTO service_item VALUES (44, 2022, 5, 57, 2, 2330.00, 44, 48697.00);
+INSERT INTO service_item VALUES (45, 2033, 4, 56, 1, 1300.00, 45, 1300.00);
+INSERT INTO service_item VALUES (46, 2034, 4, 56, 1, 1300.00, 44, 1300.00);
 
 
 --
 -- Name: service_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('service_item_id_seq', 43, true);
+SELECT pg_catalog.setval('service_item_id_seq', 46, true);
 
 
 --
@@ -5903,13 +6006,14 @@ INSERT INTO service_sale VALUES (1, '2014-06-09', 1456, 20, 6);
 INSERT INTO service_sale VALUES (2, '2014-09-14', 1759, 40, 5);
 INSERT INTO service_sale VALUES (3, '2015-01-16', 1999, 43, 5);
 INSERT INTO service_sale VALUES (4, '2015-01-14', 2004, 6, 4);
+INSERT INTO service_sale VALUES (5, '2015-02-01', 2035, 44, 2);
 
 
 --
 -- Name: service_sale_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('service_sale_id_seq', 4, true);
+SELECT pg_catalog.setval('service_sale_id_seq', 5, true);
 
 
 --
@@ -5933,6 +6037,8 @@ INSERT INTO service_sale_service_item VALUES (1, 17);
 INSERT INTO service_sale_service_item VALUES (2, 31);
 INSERT INTO service_sale_service_item VALUES (3, 42);
 INSERT INTO service_sale_service_item VALUES (4, 43);
+INSERT INTO service_sale_service_item VALUES (5, 45);
+INSERT INTO service_sale_service_item VALUES (5, 46);
 
 
 --
@@ -5996,13 +6102,14 @@ INSERT INTO subaccount VALUES (13, 1991, 3, 'Main Cash Account | rid: 1471', NUL
 INSERT INTO subaccount VALUES (14, 1997, 3, 'Main Cash Account | rid: 1645', NULL);
 INSERT INTO subaccount VALUES (15, 2002, 3, 'Main Cash Account | rid: 1869', NULL);
 INSERT INTO subaccount VALUES (16, 2007, 3, 'Main Cash Account | rid: 887', NULL);
+INSERT INTO subaccount VALUES (17, 2028, 3, 'Main Cash Account | rid: 2017', NULL);
 
 
 --
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 16, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 17, true);
 
 
 --
@@ -6057,6 +6164,8 @@ INSERT INTO task VALUES (48, 1980, 2, 'Check Reminder', '2015-01-08 18:21:00', '
 INSERT INTO task VALUES (49, 1982, 2, 'The second task', '2015-01-08 18:30:00', '2015-01-07 18:30:00', 'Second test task', false);
 INSERT INTO task VALUES (50, 1983, 2, 'Test', '2015-01-13 17:06:00', '2015-01-13 17:01:00', NULL, false);
 INSERT INTO task VALUES (51, 1985, 2, 'Test 2', '2015-01-14 17:02:00', '2015-01-13 17:04:00', NULL, false);
+INSERT INTO task VALUES (52, 2009, 2, 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 22:44:00', '2015-01-21 21:45:00', NULL, true);
+INSERT INTO task VALUES (53, 2016, 2, 'Notify his', '2015-02-02 17:09:00', '2015-02-02 15:09:00', 'Notify about the documents', false);
 INSERT INTO task VALUES (34, 1923, 2, 'Test 2', '2014-12-16 17:21:00', '2014-12-15 17:42:00', NULL, false);
 INSERT INTO task VALUES (33, 1922, 2, 'Test', '2014-12-07 21:36:00', '2014-12-07 20:36:00', 'For testing purpose', false);
 INSERT INTO task VALUES (35, 1930, 2, 'Check Person Details', '2014-12-11 21:43:00', '2014-12-10 22:42:00', 'Check if details is correct', false);
@@ -6073,7 +6182,7 @@ INSERT INTO task VALUES (42, 1940, 2, 'Test notifications', '2014-12-14 21:37:00
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 51, true);
+SELECT pg_catalog.setval('task_id_seq', 53, true);
 
 
 --
@@ -6086,20 +6195,21 @@ INSERT INTO task_resource VALUES (35, 1869);
 INSERT INTO task_resource VALUES (47, 1840);
 INSERT INTO task_resource VALUES (48, 3);
 INSERT INTO task_resource VALUES (49, 3);
+INSERT INTO task_resource VALUES (53, 2017);
 
 
 --
 -- Name: tour_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tour_id_seq', 18, true);
+SELECT pg_catalog.setval('tour_id_seq', 19, true);
 
 
 --
 -- Name: tour_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tour_point_id_seq', 70, true);
+SELECT pg_catalog.setval('tour_point_id_seq', 71, true);
 
 
 --
@@ -6115,6 +6225,7 @@ INSERT INTO tour_sale VALUES (9, 15, 15, 2, 1, 17, 1295, '2014-05-09', '2014-05-
 INSERT INTO tour_sale VALUES (16, 15, 15, 2, 2, 37, 1630, '2014-06-09', '2014-08-31', '2014-08-24', 4);
 INSERT INTO tour_sale VALUES (17, 15, 15, 2, 0, 41, 1656, '2014-05-09', '2014-08-30', '2014-08-26', 4);
 INSERT INTO tour_sale VALUES (18, 33, 34, 2, 0, 30, 1928, '2014-12-13', '2014-12-08', '2014-07-12', 1);
+INSERT INTO tour_sale VALUES (19, 15, 15, 2, 0, 44, 2021, '2015-02-13', '2015-02-06', '2015-02-01', 2);
 
 
 --
@@ -6130,6 +6241,7 @@ INSERT INTO tour_sale_invoice VALUES (15, 17);
 INSERT INTO tour_sale_invoice VALUES (17, 19);
 INSERT INTO tour_sale_invoice VALUES (16, 20);
 INSERT INTO tour_sale_invoice VALUES (18, 22);
+INSERT INTO tour_sale_invoice VALUES (19, 26);
 
 
 --
@@ -6161,6 +6273,8 @@ INSERT INTO tour_sale_person VALUES (17, 42);
 INSERT INTO tour_sale_person VALUES (17, 41);
 INSERT INTO tour_sale_person VALUES (18, 41);
 INSERT INTO tour_sale_person VALUES (18, 30);
+INSERT INTO tour_sale_person VALUES (19, 44);
+INSERT INTO tour_sale_person VALUES (19, 45);
 
 
 --
@@ -6178,6 +6292,7 @@ INSERT INTO tour_sale_point VALUES (67, 31, 32, NULL, 10, NULL, 16, NULL, '2014-
 INSERT INTO tour_sale_point VALUES (68, 30, 31, NULL, 15, 31, 16, NULL, '2014-09-06', '2014-09-02');
 INSERT INTO tour_sale_point VALUES (69, 37, 36, NULL, NULL, NULL, 17, NULL, '2014-09-05', '2014-08-30');
 INSERT INTO tour_sale_point VALUES (70, 36, NULL, NULL, NULL, NULL, 18, NULL, '2014-12-13', '2014-07-12');
+INSERT INTO tour_sale_point VALUES (71, 21, 15, 10, 15, 31, 19, NULL, '2015-02-13', '2015-02-06');
 
 
 --
@@ -6193,6 +6308,7 @@ INSERT INTO tour_sale_service_item VALUES (12, 38);
 INSERT INTO tour_sale_service_item VALUES (10, 39);
 INSERT INTO tour_sale_service_item VALUES (9, 40);
 INSERT INTO tour_sale_service_item VALUES (18, 41);
+INSERT INTO tour_sale_service_item VALUES (19, 44);
 
 
 --
@@ -6238,6 +6354,8 @@ INSERT INTO touroperator_commission VALUES (2, 18);
 INSERT INTO touroperator_commission VALUES (62, 21);
 INSERT INTO touroperator_commission VALUES (1, 22);
 INSERT INTO touroperator_commission VALUES (57, 23);
+INSERT INTO touroperator_commission VALUES (1, 25);
+INSERT INTO touroperator_commission VALUES (1, 26);
 
 
 --
@@ -6299,13 +6417,15 @@ INSERT INTO transfer VALUES (89, NULL, NULL, NULL, 15, 8, 750.00, '2015-01-16');
 INSERT INTO transfer VALUES (90, NULL, 15, 3, NULL, 2, 750.00, '2015-01-16');
 INSERT INTO transfer VALUES (91, NULL, NULL, NULL, 16, 8, 3450.00, '2015-01-14');
 INSERT INTO transfer VALUES (92, NULL, 16, 3, NULL, 2, 3450.00, '2015-01-14');
+INSERT INTO transfer VALUES (93, NULL, NULL, NULL, 17, 8, 48697.00, '2015-02-01');
+INSERT INTO transfer VALUES (94, NULL, 17, 3, NULL, 1, 48697.00, '2015-02-01');
 
 
 --
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 92, true);
+SELECT pg_catalog.setval('transfer_id_seq', 94, true);
 
 
 --

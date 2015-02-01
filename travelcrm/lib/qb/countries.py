@@ -7,24 +7,25 @@ from ...models.country import Country
 
 
 class CountriesQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Country.id,
-        '_id': Country.id,
-        'iso_code': Country.iso_code,
-        'country_name': Country.name
-    }
-    _simple_search_fields = [
-        Country.iso_code,
-        Country.name
-    ]
 
     def __init__(self, context):
         super(CountriesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Country.id,
+            '_id': Country.id,
+            'iso_code': Country.iso_code,
+            'country_name': Country.name
+        }
+        self._simple_search_fields = [
+            Country.iso_code,
+            Country.name
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = self.query.join(Country, Resource.country)
-        self.query = self.query.add_columns(*fields)
+        super(CountriesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

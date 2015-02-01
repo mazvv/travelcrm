@@ -8,23 +8,23 @@ from ...models.touroperator import Touroperator
 
 
 class TouroperatorsQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Touroperator.id,
-        '_id': Touroperator.id,
-        'name': Touroperator.name
-    }
-
-    _simple_search_fields = [
-        Touroperator.name,
-    ]
 
     def __init__(self, context):
         super(TouroperatorsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Touroperator.id,
+            '_id': Touroperator.id,
+            'name': Touroperator.name
+        }
+        self._simple_search_fields = [
+            Touroperator.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = self.query.join(Touroperator, Resource.touroperator)
-        self.query = self.query.add_columns(*fields)
+        super(TouroperatorsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

@@ -12,19 +12,20 @@ from ...models.structure import Structure
 
 
 class StructuresQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Structure.id,
-        '_id': Structure.id,
-        'structure_name': Structure.name,
-        'text': Structure.name,
-        'parent_id': Structure.parent_id.label('parent_id')
-    }
 
     def __init__(self, context):
         super(StructuresQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Structure.id,
+            '_id': Structure.id,
+            'structure_name': Structure.name,
+            'text': Structure.name,
+            'parent_id': Structure.parent_id.label('parent_id')
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         structs_subquery = (
             DBSession.query(
                 Structure.parent_id,
@@ -33,7 +34,6 @@ class StructuresQueryBuilder(ResourcesQueryBuilder):
             .group_by(Structure.parent_id)
             .subquery()
         )
-
         self.query = (
             self.query
             .join(Structure, Resource.structure)
@@ -42,8 +42,8 @@ class StructuresQueryBuilder(ResourcesQueryBuilder):
                 structs_subquery.c.parent_id == Structure.id
             )
         )
-        fields.append(structs_subquery.c.state)
-        self.query = self.query.add_columns(*fields)
+        self.update_fields({'state': structs_subquery.c.state})
+        super(StructuresQueryBuilder, self).build_query()
 
     def filter_parent_id(self, parent_id, with_chain=False):
         if with_chain:

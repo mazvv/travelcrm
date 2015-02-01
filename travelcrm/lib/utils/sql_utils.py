@@ -11,4 +11,4 @@ def build_union_query(queries):
     elif len(queries) == 1:
         return queries[0]
     else:
-        return queries[0].union(*queries[1:]) 
+        return queries[0].union(*queries[1:])

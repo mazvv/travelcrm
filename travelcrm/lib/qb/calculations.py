@@ -18,22 +18,22 @@ from ...lib.utils.common_utils import get_base_currency
 
 class CalculationsQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = {
-        'id': Calculation.id,
-        '_id': Calculation.id,
-        'service': Service.name,
-        'touroperator': Touroperator.name,
-        'price': Calculation.price,
-        'currency': Currency.iso_code,
-        'base_price': Calculation.base_price,
-    }
-
     def __init__(self, context):
         super(CalculationsQueryBuilder, self).__init__(context)
-        self._fields['base_currency'] = literal(get_base_currency())
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Calculation.id,
+            '_id': Calculation.id,
+            'service': Service.name,
+            'touroperator': Touroperator.name,
+            'price': Calculation.price,
+            'currency': Currency.iso_code,
+            'base_price': Calculation.base_price,
+            'base_currency': literal(get_base_currency())
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Calculation, Resource.calculation)
@@ -42,7 +42,7 @@ class CalculationsQueryBuilder(ResourcesQueryBuilder):
             .join(Touroperator, ServiceItem.touroperator)
             .join(Currency, Calculation.currency)
         )
-        self.query = self.query.add_columns(*fields)
+        super(CalculationsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

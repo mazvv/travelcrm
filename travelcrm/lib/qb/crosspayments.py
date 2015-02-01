@@ -14,40 +14,41 @@ from ...lib.bl.transfers import query_transfers
 
 
 class CrosspaymentsQueryBuilder(ResourcesQueryBuilder):
-    _subq = query_transfers().subquery()
-    _fields = {
-        'id': Crosspayment.id,
-        '_id': Crosspayment.id,
-        'date': _subq.c.date,
-        'from': func.coalesce(
-            _subq.c.account_from, _subq.c.subaccount_from
-        ).label('from'),
-        'to': func.coalesce(
-            _subq.c.account_to, _subq.c.subaccount_to
-        ).label('to'),
-        'account_item': _subq.c.account_item,
-        'sum': _subq.c.sum,
-        'currency': _subq.c.currency,
-    }
-    _simple_search_fields = [
-        _subq.c.account_from,
-        _subq.c.account_to,
-        _subq.c.subaccount_from,
-        _subq.c.subaccount_to,
-    ]
 
     def __init__(self, context):
         super(CrosspaymentsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._subq = query_transfers().subquery()
+        self._fields = {
+            'id': Crosspayment.id,
+            '_id': Crosspayment.id,
+            'date': self._subq.c.date,
+            'from': func.coalesce(
+                self._subq.c.account_from, self._subq.c.subaccount_from
+            ).label('from'),
+            'to': func.coalesce(
+                self._subq.c.account_to, self._subq.c.subaccount_to
+            ).label('to'),
+            'account_item': self._subq.c.account_item,
+            'sum': self._subq.c.sum,
+            'currency': self._subq.c.currency,
+        }
+        self._simple_search_fields = [
+            self._subq.c.account_from,
+            self._subq.c.account_to,
+            self._subq.c.subaccount_from,
+            self._subq.c.subaccount_to,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Crosspayment, Resource.crosspayment)
             .join(Transfer, Crosspayment.transfer)
             .join(self._subq, Transfer.id == self._subq.c.id)
         )
-        self.query = self.query.add_columns(*fields)
+        super(CrosspaymentsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

@@ -8,31 +8,31 @@ from ...models.employee import Employee
 
 
 class UsersQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': User.id,
-        '_id': User.id,
-        'employee_name': Employee.name,
-        'username': User.username,
-    }
-
-    _simple_search_fields = [
-        Employee.name,
-        Employee.first_name,
-        Employee.last_name,
-        User.username,
-    ]
 
     def __init__(self, context):
         super(UsersQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': User.id,
+            '_id': User.id,
+            'employee_name': Employee.name,
+            'username': User.username,
+        }
+        self._simple_search_fields = [
+            Employee.name,
+            Employee.first_name,
+            Employee.last_name,
+            User.username,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(User, Resource.user)
             .join(Employee, User.employee)
         )
-        self.query = self.query.add_columns(*fields)
+        super(UsersQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

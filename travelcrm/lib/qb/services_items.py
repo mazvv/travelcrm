@@ -13,21 +13,22 @@ from ...models.person import Person
 
 class ServicesItemsQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = {
-        'id': ServiceItem.id,
-        '_id': ServiceItem.id,
-        'service': Service.name,
-        'touroperator': Touroperator.name,
-        'price': ServiceItem.price,
-        'person': Person.name,
-        'currency': Currency.iso_code,
-    }
 
     def __init__(self, context):
         super(ServicesItemsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': ServiceItem.id,
+            '_id': ServiceItem.id,
+            'service': Service.name,
+            'touroperator': Touroperator.name,
+            'price': ServiceItem.price,
+            'person': Person.name,
+            'currency': Currency.iso_code,
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(ServiceItem, Resource.service_item)
@@ -48,7 +49,7 @@ class ServicesItemsQueryBuilder(ResourcesQueryBuilder):
                 ServiceItem.person
             )
         )
-        self.query = self.query.add_columns(*fields)
+        super(ServicesItemsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

@@ -17,52 +17,58 @@ from ...lib.bl.calculations import query_resource_data
 
 
 class DebtsQueryBuilder(ResourcesQueryBuilder):
-    _subq_transfers = (
-        DBSession.query(
-            Transfer.sum,
-            Transfer.date, 
-            Touroperator.id,
-            Account.currency_id.label('currency_id')
-        )
-        .join(Subaccount, Transfer.subaccount_from)
-        .join(Touroperator, Subaccount.touroperator)
-        .join(Account, Subaccount.account)
-        .subquery()
-    )
-    _subq_resource_data = query_resource_data().subquery()
-    _subq_calculations = (
-        DBSession.query(
-            _subq_resource_data.c.date,
-            Calculation.price.label('sum'),
-            Calculation.currency_id,
-            ServiceItem.touroperator_id,
-        )
-        .join(ServiceItem, Calculation.service_item)
-        .join(
-            _subq_resource_data, 
-            ServiceItem.id == _subq_resource_data.c.service_item_id
-        )
-        .subquery()
-    )
-    _field_sum_in = func.coalesce(func.sum(_subq_transfers.c.sum), 0)
-    _field_sum_out = func.coalesce(func.sum(_subq_calculations.c.sum), 0)
-    _fields = {
-        'id': Touroperator.id,
-        '_id': Touroperator.id,
-        'name': Touroperator.name,
-        'currency': Currency.iso_code,
-        'sum_in': _field_sum_in,
-        'sum_out': _field_sum_out,
-    }
-    _simple_search_fields = [
-        Touroperator.name,
-    ]
 
     def __init__(self, context):
         super(DebtsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_transfers = (
+            DBSession.query(
+                Transfer.sum,
+                Transfer.date, 
+                Touroperator.id,
+                Account.currency_id.label('currency_id')
+            )
+            .join(Subaccount, Transfer.subaccount_from)
+            .join(Touroperator, Subaccount.touroperator)
+            .join(Account, Subaccount.account)
+            .subquery()
         )
+        subq_resource_data = query_resource_data().subquery()
+        self._subq_calculations = (
+            DBSession.query(
+                subq_resource_data.c.date,
+                Calculation.price.label('sum'),
+                Calculation.currency_id,
+                ServiceItem.touroperator_id,
+            )
+            .join(ServiceItem, Calculation.service_item)
+            .join(
+                subq_resource_data, 
+                ServiceItem.id == subq_resource_data.c.service_item_id
+            )
+            .subquery()
+        )
+        self._field_sum_in = func.coalesce(
+            func.sum(self._subq_transfers.c.sum), 0
+        )
+        self._field_sum_out = func.coalesce(
+            func.sum(self._subq_calculations.c.sum), 0
+        )
+        self._fields = {
+            'id': Touroperator.id,
+            '_id': Touroperator.id,
+            'name': Touroperator.name,
+            'currency': Currency.iso_code,
+            'sum_in': self._field_sum_in,
+            'sum_out': self._field_sum_out,
+            'balance': (self._field_sum_out - self._field_sum_in)
+        }
+        self._simple_search_fields = [
+            Touroperator.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Touroperator, Resource.touroperator)
@@ -82,7 +88,7 @@ class DebtsQueryBuilder(ResourcesQueryBuilder):
             )
             .group_by(Touroperator.id, Touroperator.name, Currency.iso_code)
         )
-        self.query = self.query.add_columns(*fields)
+        super(DebtsQueryBuilder, self).build_query()
         self.query = self.query.with_entities(
             Touroperator.id, Touroperator.name, 
             Currency.iso_code.label('currency'),

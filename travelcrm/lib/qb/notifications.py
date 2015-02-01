@@ -9,21 +9,21 @@ from ...models.employee import Employee
 
 class NotificationsQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = {
-        'id': Notification.id,
-        '_id': Notification.id,
-        'title': Notification.title,
-        'descr': Notification.descr,
-        'created': Notification.created,
-    }
-
     def __init__(self, context):
         super(NotificationsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Notification.id,
+            '_id': Notification.id,
+            'title': Notification.title,
+            'descr': Notification.descr,
+            'created': Notification.created,
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = self.query.join(Notification, Resource.notification)
-        self.query = self.query.add_columns(*fields)
+        super(NotificationsQueryBuilder, self).build_query()
 
     def filter_employee(self, employee):
         assert isinstance(employee, Employee), u'Employee expected'

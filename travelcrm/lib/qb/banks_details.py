@@ -1,9 +1,6 @@
 # -*coding: utf-8-*-
 
-from collections import (
-    OrderedDict,
-    Iterable
-)
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 
@@ -16,33 +13,35 @@ from ...models.currency import Currency
 
 class BanksDetailsQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = OrderedDict({
-        'id': BankDetail.id,
-        '_id': BankDetail.id,
-        'bank_name': Bank.name,
-        'currency': Currency.iso_code,
-        'beneficiary': BankDetail.beneficiary,
-        'account': BankDetail.account,
-        'swift_code': BankDetail.swift_code
-    })
-
-    _simple_search_fields = [
-        BankDetail.beneficiary,
-        BankDetail.account,
-        BankDetail.swift_code,
-        Bank.name,
-        Currency.iso_code,
-    ]
-
     def __init__(self, context):
         super(BanksDetailsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._fields = {
+            'id': BankDetail.id,
+            '_id': BankDetail.id,
+            'bank_name': Bank.name,
+            'currency': Currency.iso_code,
+            'beneficiary': BankDetail.beneficiary,
+            'account': BankDetail.account,
+            'swift_code': BankDetail.swift_code
+        }
+        self._simple_search_fields = [
+            BankDetail.beneficiary,
+            BankDetail.account,
+            BankDetail.swift_code,
+            Bank.name,
+            Currency.iso_code,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = (
+            self.query
+            .join(BankDetail, Resource.bank_detail)
+            .join(Bank, BankDetail.bank)
+            .join(Currency, BankDetail.currency)
         )
-        self.query = self.query.join(BankDetail, Resource.bank_detail)
-        self.query = self.query.join(Bank, BankDetail.bank)
-        self.query = self.query.join(Currency, BankDetail.currency)
-        self.query = self.query.add_columns(*fields)
+        super(BanksDetailsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

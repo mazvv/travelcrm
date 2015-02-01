@@ -9,31 +9,32 @@ from ...lib.bl.transfers import query_transfers
 
 
 class TransfersQueryBuilder(GeneralQueryBuilder):
-    _subq  = query_transfers().subquery()
-    _fields = {
-        'id': _subq.c.id,
-        '_id': _subq.c.id,
-        'date': _subq.c.date,
-        'account_from_id': _subq.c.account_from_id,
-        'subaccount_from_id': _subq.c.subaccount_from_id,
-        'account_to_id': _subq.c.account_to_id,
-        'subaccount_to_id': _subq.c.subaccount_to_id,
-        'from': func.coalesce(
-            _subq.c.account_from, _subq.c.subaccount_from, ''
-        ).label('from'),
-        'to': func.coalesce(
-            _subq.c.account_to, _subq.c.subaccount_to, ''
-        ).label('to'),
-        'currency': _subq.c.currency,
-        'account_item': _subq.c.account_item,
-        'sum': _subq.c.sum.label('sum'),
-    }
 
     def __init__(self):
-        fields = GeneralQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
-        self.query = DBSession.query(*fields)
+        self._subq  = query_transfers().subquery()
+        self._fields = {
+            'id': self._subq.c.id,
+            '_id': self._subq.c.id,
+            'date': self._subq.c.date,
+            'account_from_id': self._subq.c.account_from_id,
+            'subaccount_from_id': self._subq.c.subaccount_from_id,
+            'account_to_id': self._subq.c.account_to_id,
+            'subaccount_to_id': self._subq.c.subaccount_to_id,
+            'from': func.coalesce(
+                self._subq.c.account_from, self._subq.c.subaccount_from, ''
+            ).label('from'),
+            'to': func.coalesce(
+                self._subq.c.account_to, self._subq.c.subaccount_to, ''
+            ).label('to'),
+            'currency': self._subq.c.currency,
+            'account_item': self._subq.c.account_item,
+            'sum': self._subq.c.sum.label('sum'),
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.query = DBSession.query(self._subq)
+        super(TransfersQueryBuilder, self).build_query()
 
     def advanced_search(self, **kwargs):
         if 'account_id' in kwargs:

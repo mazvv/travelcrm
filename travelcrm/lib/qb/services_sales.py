@@ -2,6 +2,7 @@
 from collections import Iterable
 
 from sqlalchemy import func, literal
+from sqlalchemy.orm import aliased
 from sqlalchemy.dialects.postgresql import Any
 
 from . import ResourcesQueryBuilder
@@ -12,43 +13,51 @@ from ...models.service_sale import ServiceSale
 from ...models.service_item import ServiceItem
 from ...models.person import Person
 from ...models.invoice import Invoice
+from ...models.calculation import Calculation
 
 from ...lib.utils.common_utils import get_base_currency
 
 
 class ServicesSalesQueryBuilder(ResourcesQueryBuilder):
 
-    _subq_services_price = (
-        DBSession.query(
-            ServiceSale.id,
-            func.sum(ServiceItem.base_price).label('base_price'),
-            func.array_agg(ServiceItem.service_id).label('service_arr'),
-            func.array_agg(ServiceItem.person_id).label('person_arr'),
-        )
-        .join(ServiceItem, ServiceSale.services_items)
-        .group_by(ServiceSale.id)
-        .subquery()
-    )
-
-    _fields = {
-        'id': ServiceSale.id,
-        '_id': ServiceSale.id,
-        'deal_date': ServiceSale.deal_date,
-        'customer': Person.name,
-        'base_price': _subq_services_price.c.base_price,
-        'invoice_id': Invoice.id,
-    }
-
-    _simple_search_fields = [
-        Person.name,
-    ]
-
     def __init__(self, context):
         super(ServicesSalesQueryBuilder, self).__init__(context)
-        self._fields['base_currency'] = literal(get_base_currency())
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_services_price = (
+            DBSession.query(
+                ServiceSale.id,
+                func.sum(ServiceItem.base_price).label('base_price'),
+                func.array_agg(ServiceItem.service_id).label('service_arr'),
+                func.array_agg(ServiceItem.person_id).label('person_arr'),
+            )
+            .join(ServiceItem, ServiceSale.services_items)
+            .group_by(ServiceSale.id)
+            .subquery()
         )
+        _ServiceSale = aliased(ServiceSale)
+        self._subq_calculations = (
+            DBSession.query(Calculation)
+            .join(ServiceItem, Calculation.service_item)
+            .join(_ServiceSale, ServiceItem.service_sale)
+            .filter(_ServiceSale.id == ServiceSale.id)
+            .exists()
+        )
+        self._fields = {
+            'id': ServiceSale.id,
+            '_id': ServiceSale.id,
+            'deal_date': ServiceSale.deal_date,
+            'customer': Person.name,
+            'base_price': self._subq_services_price.c.base_price,
+            'base_currency': literal(get_base_currency()),
+            'invoice_id': Invoice.id,
+            'calculation': self._subq_calculations
+        }
+        self._simple_search_fields = [
+            Person.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(ServiceSale, Resource.service_sale)
@@ -59,7 +68,7 @@ class ServicesSalesQueryBuilder(ResourcesQueryBuilder):
             )
             .outerjoin(Invoice, ServiceSale.invoice)
         )
-        self.query = self.query.add_columns(*fields)
+        super(ServicesSalesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

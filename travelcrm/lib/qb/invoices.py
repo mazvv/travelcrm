@@ -18,65 +18,66 @@ from ...lib.bl.currencies_rates import query_convert_rates
 
 
 class InvoicesQueryBuilder(ResourcesQueryBuilder):
-    _subq_resource_type = (
-        DBSession.query(ResourceType.humanize, Resource.id)
-        .join(Resource, ResourceType.resources)
-        .subquery()
-    )
-
-    _subq_resource_data = query_resource_data().subquery()
-    _subq_rate = (
-        query_convert_rates(
-            Account.currency_id,
-            Invoice.date
-        )
-        .as_scalar()
-    )
-    _subq_invoice_sum = func.coalesce(
-        _subq_resource_data.c.sum / _subq_rate,
-        _subq_resource_data.c.sum
-    )
-    _sum_payments = (
-        DBSession.query(
-            func.sum(Transfer.sum).label('sum'), 
-            Income.invoice_id
-        )
-        .join(Income, Transfer.income)
-        .filter(
-            Transfer.account_from_id == None,
-            Transfer.subaccount_from_id == None,
-        )
-        .group_by(Income.invoice_id)
-        .subquery()
-    )
-    _fields = {
-        'id': Invoice.id,
-        '_id': Invoice.id,
-        'date': Invoice.date,
-        'active_until': Invoice.active_until,
-        'account': Account.name,
-        'account_type': Account.account_type,
-        'sum': _subq_invoice_sum.label('sum'),
-        'payments': func.coalesce(_sum_payments.c.sum, 0),
-        'payments_percent': func.round(
-            100 * func.coalesce(_sum_payments.c.sum, 0) / _subq_invoice_sum,
-            2
-        ),
-        'resource_type': _subq_resource_type.c.humanize,
-        'customer': _subq_resource_data.c.customer,
-        'currency': Currency.iso_code,
-    }
-    _simple_search_fields = [
-        Account.name,
-        _subq_resource_data.c.customer,
-        _subq_resource_type.c.humanize,
-    ]
 
     def __init__(self, context):
         super(InvoicesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_resource_type = (
+            DBSession.query(ResourceType.humanize, Resource.id)
+            .join(Resource, ResourceType.resources)
+            .subquery()
         )
+        self._subq_resource_data = query_resource_data().subquery()
+        subq_rate = (
+            query_convert_rates(
+                Account.currency_id,
+                Invoice.date
+            )
+            .as_scalar()
+        )
+        self._subq_invoice_sum = func.coalesce(
+            self._subq_resource_data.c.sum / subq_rate,
+            self._subq_resource_data.c.sum
+        )
+        self._sum_payments = (
+            DBSession.query(
+                func.sum(Transfer.sum).label('sum'), 
+                Income.invoice_id
+            )
+            .join(Income, Transfer.income)
+            .filter(
+                Transfer.account_from_id == None,
+                Transfer.subaccount_from_id == None,
+            )
+            .group_by(Income.invoice_id)
+            .subquery()
+        )
+        self._fields = {
+            'id': Invoice.id,
+            '_id': Invoice.id,
+            'date': Invoice.date,
+            'active_until': Invoice.active_until,
+            'account': Account.name,
+            'account_type': Account.account_type,
+            'sum': self._subq_invoice_sum.label('sum'),
+            'payments': func.coalesce(self._sum_payments.c.sum, 0),
+            'payments_percent': func.round(
+                100 * func.coalesce(self._sum_payments.c.sum, 0) 
+                / self._subq_invoice_sum,
+                2
+            ),
+            'resource_type': self._subq_resource_type.c.humanize,
+            'customer': self._subq_resource_data.c.customer,
+            'currency': Currency.iso_code,
+        }
+        self._simple_search_fields = [
+            Account.name,
+            self._subq_resource_data.c.customer,
+            self._subq_resource_type.c.humanize,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Invoice, Resource.invoice)
@@ -98,8 +99,7 @@ class InvoicesQueryBuilder(ResourcesQueryBuilder):
                 == Invoice.id
             )
         )
-
-        self.query = self.query.add_columns(*fields)
+        super(InvoicesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

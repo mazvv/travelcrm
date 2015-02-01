@@ -7,44 +7,42 @@ from ...models.resource import Resource
 from ...models.account import Account
 from ...models.subaccount import Subaccount
 from ...models.currency import Currency
-
 from ...lib.bl.turnovers import (
     query_accounts_turnovers,
     query_subaccounts_turnovers,
 )
-from ...lib.utils.common_utils import cast_int
 
 
 class TurnoversAccountsQueryBuilder(ResourcesQueryBuilder):
-    _subq = query_accounts_turnovers().subquery()
-    _fields = {
-        'id': _subq.c.id,
-        '_id': _subq.c.id,
-        'name': Account.name,
-        'currency': Currency.iso_code,
-        'sum_from': func.coalesce(_subq.c.sum_from, 0),
-        'sum_to': func.coalesce(_subq.c.sum_to, 0),
-        'balance': (
-            func.coalesce(_subq.c.sum_to, 0) 
-            - func.coalesce(_subq.c.sum_from, 0)
-        ),
-    }
-    _simple_search_fields = [
-        Account.name,
-    ]
 
     def __init__(self, context):
         super(TurnoversAccountsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._subq = query_accounts_turnovers().subquery()
+        self._fields = {
+            'id': self._subq.c.id,
+            '_id': self._subq.c.id,
+            'name': Account.name,
+            'currency': Currency.iso_code,
+            'sum_from': func.coalesce(self._subq.c.sum_from, 0),
+            'sum_to': func.coalesce(self._subq.c.sum_to, 0),
+            'balance': (
+                func.coalesce(self._subq.c.sum_to, 0) 
+                - func.coalesce(self._subq.c.sum_from, 0)
+            ),
+        }
+        self._simple_search_fields = [
+            Account.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query.join(Account, Resource.account)
             .join(self._subq, Account.id == self._subq.c.id)
             .join(Currency, Account.currency)
         )
-        self.query = self.query.add_columns(*fields)
-        
+        super(TurnoversAccountsQueryBuilder, self).build_query()
 
     def advanced_search(self, **kwargs):
         if 'date_from' in kwargs or 'date_to' in kwargs:
@@ -63,35 +61,36 @@ class TurnoversAccountsQueryBuilder(ResourcesQueryBuilder):
 
 
 class TurnoversSubaccountsQueryBuilder(ResourcesQueryBuilder):
-    _subq = query_subaccounts_turnovers().subquery()
-    _fields = {
-        'id': _subq.c.id,
-        '_id': _subq.c.id,
-        'name': Subaccount.name,
-        'currency': Currency.iso_code,
-        'sum_from': func.coalesce(_subq.c.sum_from, 0),
-        'sum_to': func.coalesce(_subq.c.sum_to, 0),
-        'balance': (
-            func.coalesce(_subq.c.sum_to, 0) 
-            - func.coalesce(_subq.c.sum_from, 0)
-        ),
-    }
-    _simple_search_fields = [
-        Subaccount.name,
-    ]
 
     def __init__(self, context):
         super(TurnoversSubaccountsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._subq = query_subaccounts_turnovers().subquery()
+        self._fields = {
+            'id': self._subq.c.id,
+            '_id': self._subq.c.id,
+            'name': Subaccount.name,
+            'currency': Currency.iso_code,
+            'sum_from': func.coalesce(self._subq.c.sum_from, 0),
+            'sum_to': func.coalesce(self._subq.c.sum_to, 0),
+            'balance': (
+                func.coalesce(self._subq.c.sum_to, 0) 
+                - func.coalesce(self._subq.c.sum_from, 0)
+            ),
+        }
+        self._simple_search_fields = [
+            Subaccount.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query.join(Subaccount, Resource.subaccount)
             .join(self._subq, Subaccount.id == self._subq.c.id)
             .join(Account, Subaccount.account)
             .join(Currency, Account.currency)
         )
-        self.query = self.query.add_columns(*fields)
+        super(TurnoversSubaccountsQueryBuilder, self).build_query()
 
     def advanced_search(self, **kwargs):
         if 'date_from' in kwargs or 'date_to' in kwargs:

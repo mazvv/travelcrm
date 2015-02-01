@@ -7,7 +7,7 @@
         modal:true,
         resizable:false,
         height:400,
-        iconCls:'fa fa-file-pdf-o'
+        iconCls:'fa fa-lightbulb-o'
     ">
 	<table class="easyui-datagrid"
 	    id="${_id}"

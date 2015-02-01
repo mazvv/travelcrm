@@ -20,9 +20,11 @@ ${h.tags.Doctype().html5()}
         <%block name="js"></%block>
     </head>
     <body id="_page_" class="easyui-layout">
-        <div id="_head_" data-options="region:'north', border:false" class="main">
+        <div id="_head_" data-options="region:'north', border:false">
             <div id="_top_">
-	            ${panel('header_panel')}
+                <div class="main">
+                   ${panel('header_panel')}
+                </div>
             </div>
             <div id="_navigation_">
                 <div class="main">
@@ -37,8 +39,10 @@ ${h.tags.Doctype().html5()}
                 </div>
             </div>
         </div>
-        <div id="_footer_" data-options="region:'south', border:false" class="main">
-            ${panel('footer_panel')}
+        <div id="_footer_" data-options="region:'south', border:false">
+            <div class="main">
+                ${panel('footer_panel')}
+            </div>
         </div>
         <div id="_content_" class="main" data-options="region:'center', border:false">
             <div class="easyui-layout" data-options="fit:true">

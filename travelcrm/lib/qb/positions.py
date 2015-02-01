@@ -11,32 +11,33 @@ from ..bl.structures import query_recursive_tree
 
 
 class PositionsQueryBuilder(ResourcesQueryBuilder):
-    _subq_structures_recursive = query_recursive_tree().subquery()
-    _fields = {
-        'id': Position.id,
-        '_id': Position.id,
-        'position_name': Position.name,
-        'structure_id': Position.structure_id,
-        'structure_path': _subq_structures_recursive.c.name_path
-    }
-
-    _simple_search_fields = [
-        Position.name,
-    ]
 
     def __init__(self, context):
         super(PositionsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_structures_recursive = query_recursive_tree().subquery()
+        self._fields = {
+            'id': Position.id,
+            '_id': Position.id,
+            'position_name': Position.name,
+            'structure_id': Position.structure_id,
+            'structure_path': self._subq_structures_recursive.c.name_path
+        }
+        self._simple_search_fields = [
+            Position.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = (
+            self.query
+            .join(Position, Resource.position)
+            .join(
+                self._subq_structures_recursive,
+                self._subq_structures_recursive.c.id == Position.structure_id
+            )
         )
-        self.query = self.query.join(
-            Position, Resource.position
-        )
-        self.query = self.query.join(
-            self._subq_structures_recursive,
-            self._subq_structures_recursive.c.id == Position.structure_id
-        )
-        self.query = self.query.add_columns(*fields)
+        super(PositionsQueryBuilder, self).build_query()
 
     def filter_structure_id(self, structure_id):
         self.query = self.query.filter(

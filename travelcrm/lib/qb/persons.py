@@ -12,38 +12,35 @@ from ...lib.bl.persons import query_person_contacts, query_person_passports
 
 
 class PersonsQueryBuilder(ResourcesQueryBuilder):
-    _subq_contacts = query_person_contacts().subquery()
-    _subq_passports = query_person_passports().subquery()
-
-    _fields = {
-        'id': Person.id,
-        '_id': Person.id,
-        'name': Person.name,
-        'birthday': Person.birthday,
-        'age': case([(
-            Person.birthday != None,
-            func.date_part('year', func.age(Person.birthday))
-        )]),
-        'gender': Person.gender,
-        'subscriber': Person.subscriber,
-    }
-
-    _simple_search_fields = [
-        Person.name,
-        Person.first_name,
-        Person.last_name,
-        _subq_contacts.c.phone,
-        _subq_contacts.c.email,
-        _subq_contacts.c.skype,
-        _subq_passports.c.citizen,
-        _subq_passports.c.foreign,
-    ]
 
     def __init__(self, context):
         super(PersonsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._subq_contacts = query_person_contacts().subquery()
+        self._subq_passports = query_person_passports().subquery()
+        self._fields = {
+            'id': Person.id,
+            '_id': Person.id,
+            'name': Person.name,
+            'age': case([(
+                Person.birthday != None,
+                func.date_part('year', func.age(Person.birthday))
+            )]),
+            'subscriber': Person.subscriber,
+        }
+        self._simple_search_fields = [
+            Person.name,
+            Person.first_name,
+            Person.last_name,
+            self._subq_contacts.c.phone,
+            self._subq_contacts.c.email,
+            self._subq_contacts.c.skype,
+            self._subq_passports.c.citizen,
+            self._subq_passports.c.foreign,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Person, Resource.person)
@@ -56,7 +53,7 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
                 Person.id == self._subq_passports.c.person_id
             )
         )
-        self.query = self.query.add_columns(*fields)
+        super(PersonsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

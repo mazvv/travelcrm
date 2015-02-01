@@ -12,21 +12,22 @@ from ...models.navigation import Navigation
 
 
 class NavigationsQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Navigation.id,
-        '_id': Navigation.id,
-        'name': Navigation.name,
-        'text': Navigation.name,
-        'sort_order': Navigation.sort_order,
-        'icon_cls': Navigation.icon_cls,
-        'parent_id': Navigation.parent_id.label('parent_id')
-    }
 
     def __init__(self, context):
         super(NavigationsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Navigation.id,
+            '_id': Navigation.id,
+            'name': Navigation.name,
+            'text': Navigation.name,
+            'sort_order': Navigation.sort_order,
+            'icon_cls': Navigation.icon_cls,
+            'parent_id': Navigation.parent_id.label('parent_id')
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         navigations_subquery = (
             DBSession.query(
                 Navigation.parent_id,
@@ -35,7 +36,6 @@ class NavigationsQueryBuilder(ResourcesQueryBuilder):
             .group_by(Navigation.parent_id)
             .subquery()
         )
-
         self.query = (
             self.query
             .join(Navigation, Resource.navigation)
@@ -44,8 +44,8 @@ class NavigationsQueryBuilder(ResourcesQueryBuilder):
                 navigations_subquery.c.parent_id == Navigation.id
             )
         )
-        fields.append(navigations_subquery.c.state)
-        self.query = self.query.add_columns(*fields)
+        self.update_fields({'state': navigations_subquery.c.state})
+        super(NavigationsQueryBuilder, self).build_query()
 
     def filter_parent_id(self, parent_id, with_chain=False):
         if with_chain:

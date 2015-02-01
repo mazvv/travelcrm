@@ -11,25 +11,22 @@ from ...lib.utils.common_utils import cast_int
 
 
 class TasksQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Task.id,
-        '_id': Task.id,
-        'title': Task.title,
-        'reminder': Task.reminder,
-        'deadline': Task.deadline,
-        'time': cast(Task.deadline, Time),
-        'employee': Task.employee_id,
-        'closed': Task.closed,
-        'descr': Task.descr
-    }
 
     def __init__(self, context):
         super(TasksQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Task.id,
+            '_id': Task.id,
+            'title': Task.title,
+            'time': cast(Task.deadline, Time),
+            'closed': Task.closed,
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = self.query.join(Task, Resource.task)
-        self.query = self.query.add_columns(*fields)
+        super(TasksQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

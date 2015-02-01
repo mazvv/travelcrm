@@ -57,7 +57,7 @@
             <th data-options="field:'start_date',sortable:true,width:80">${_(u"start")}</th>
             <th data-options="field:'end_date',sortable:true,width:80">${_(u"end")}</th>
             <th data-options="field:'invoice_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-o\' title=\'${_(u"invoice already exists")}\'></span>':'';}" align="center">${_(u'I.')}</th>
-            <th data-options="field:'contract_id',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-file-text-o\' title=\'${_(u"contract already exists")}\'></span>':'';}" align="center">${_(u'C.')}</th>
+            <th data-options="field:'calculation',width:20,formatter:function(value, row, index){return value?'<span class=\'fa fa-calculator\' title=\'${_(u"calculation already exists")}\'></span>':'';}" align="center">${_(u'C.')}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

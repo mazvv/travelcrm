@@ -12,7 +12,7 @@ from ..models.task import Task
 from ..lib.qb.accomodations import AccomodationsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.accomodations import (
-    AccomodationSchema, 
+    AccomodationSchema,
     AccomodationSearchSchema
 )
 

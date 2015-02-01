@@ -5,7 +5,6 @@ from datetime import date
 from sqlalchemy import func
 
 from ...models.invoice import Invoice
-
 from .invoices import InvoicesQueryBuilder
 
 

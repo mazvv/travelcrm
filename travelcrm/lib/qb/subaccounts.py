@@ -15,31 +15,31 @@ from ...lib.bl.subaccounts import query_resource_data
 
 class SubaccountsQueryBuilder(ResourcesQueryBuilder):
 
-    _subq_resource_type = (
-        DBSession.query(ResourceType.humanize, Resource.id)
-        .join(Resource, ResourceType.resources)
-        .subquery()
-    )
-    _subq_resource_data = query_resource_data().subquery()
-    _fields = {
-        'id': Subaccount.id,
-        '_id': Subaccount.id,
-        'account': Account.name,
-        'name': Subaccount.name,
-        'title': _subq_resource_data.c.title,
-        'currency': Currency.iso_code,
-        'resource_type': _subq_resource_type.c.humanize,
-   }
-    _simple_search_fields = [
-        _subq_resource_data.c.name,
-        _subq_resource_data.c.title,
-    ]
-
     def __init__(self, context):
         super(SubaccountsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_resource_type = (
+            DBSession.query(ResourceType.humanize, Resource.id)
+            .join(Resource, ResourceType.resources)
+            .subquery()
         )
+        self._subq_resource_data = query_resource_data().subquery()
+        self._fields = {
+            'id': Subaccount.id,
+            '_id': Subaccount.id,
+            'account': Account.name,
+            'name': Subaccount.name,
+            'title': self._subq_resource_data.c.title,
+            'currency': Currency.iso_code,
+            'resource_type': self._subq_resource_type.c.humanize,
+        }
+        self._simple_search_fields = [
+            self._subq_resource_data.c.name,
+            self._subq_resource_data.c.title,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Subaccount, Resource.subaccount)
@@ -56,7 +56,7 @@ class SubaccountsQueryBuilder(ResourcesQueryBuilder):
                 == self._subq_resource_data.c.resource_id
             )
         )
-        self.query = self.query.add_columns(*fields)
+        super(SubaccountsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

@@ -10,41 +10,40 @@ from ..bl.structures import query_recursive_tree
 
 
 class AppointmentsQueryBuilder(ResourcesQueryBuilder):
-    _subq_structures_recursive = query_recursive_tree().subquery()
-    _fields = {
-        'id': Appointment.id,
-        '_id': Appointment.id,
-        'date': Appointment.date,
-        'employee_name': Employee.name,
-        'position_name': Position.name,
-        'structure_path': _subq_structures_recursive.c.name_path
-    }
-    _simple_search_fields = [
-        Employee.first_name,
-        Employee.last_name,
-        Position.name,
-        _subq_structures_recursive.c.name,
-    ]
 
     def __init__(self, context):
         super(AppointmentsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_structures_recursive = query_recursive_tree().subquery()
+        self._fields = {
+            'id': Appointment.id,
+            '_id': Appointment.id,
+            'date': Appointment.date,
+            'employee_name': Employee.name,
+            'position_name': Position.name,
+            'structure_path': self._subq_structures_recursive.c.name_path
+        }
+        self._simple_search_fields = [
+            Employee.first_name,
+            Employee.last_name,
+            Position.name,
+            self._subq_structures_recursive.c.name,
+        ]
+
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = (
+            self.query
+            .join(Appointment, Resource.appointment)
+            .join(Position, Appointment.position)
+            .join(Employee, Appointment.employee)
+            .join(
+                  self._subq_structures_recursive,
+                  self._subq_structures_recursive.c.id == Position.structure_id
+            )
         )
-        self.query = self.query.join(
-            Appointment, Resource.appointment
-        )
-        self.query = self.query.join(
-            Position, Appointment.position
-        )
-        self.query = self.query.join(
-            Employee, Appointment.employee
-        )
-        self.query = self.query.join(
-            self._subq_structures_recursive,
-            self._subq_structures_recursive.c.id == Position.structure_id
-        )
-        self.query = self.query.add_columns(*fields)
+        super(AppointmentsQueryBuilder, self).build_query()
 
     def filter_structure_id(self, structure_id):
         self.query = self.query.filter(

@@ -77,7 +77,7 @@
 
 <%def name="system_portal()">
     <div id="_portal_" class="easyui-portal" data-options="fit:true,border:false">
-        <div class="dp60 p05"></div>
-        <div class="dp40 p05"></div>
+        <div class="dp50 p05 pr02"></div>
+        <div class="dp50 p05 pl02"></div>
     </div>
 </%def>

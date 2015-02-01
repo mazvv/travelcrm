@@ -12,7 +12,7 @@ from ..models.task import Task
 from ..lib.qb.accounts_items import AccountsItemsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.accounts_items import (
-    AccountItemSchema, 
+    AccountItemSchema,
     AccountItemSearchSchema
 )
 

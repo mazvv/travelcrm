@@ -1,10 +1,5 @@
 # -*-coding: utf-8-*-
 
-from collections import OrderedDict
-from abc import ABCMeta
-from decimal import Decimal
-
-from datetime import datetime, date, time
 from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
 from zope.interface.verify import verifyObject
@@ -12,11 +7,10 @@ from zope.interface.verify import verifyObject
 from ...interfaces import IResourceType
 from ...models import DBSession
 from ...models.resource import Resource
-from ...models.user import User
 from ...models.structure import Structure
 from ...models.resource_log import ResourceLog
 
-from ..utils.common_utils import cast_int, serialize
+from ..utils.common_utils import serialize
 from ..utils.security_utils import get_auth_employee
 
 from ..bl.employees import query_employee_scope
@@ -38,29 +32,33 @@ def query_serialize(query):
 
 
 class GeneralQueryBuilder(object):
-    __metaclass__ = ABCMeta
 
     _fields = {}
     _simple_search_fields = []
     _advanced_search_fields = []
 
-    """ Need to implement self.query
-    """
+    def build_base_query(self):
+        raise NotImplementedError(
+            "Not implemented build base query"
+        )
+
+    def build_query(self):
+        fields = self.get_fields_with_labels()
+        self.query = self.query.with_entities(*fields)
 
     def get_query(self):
         return self.query
 
-    @staticmethod
-    def get_fields_with_labels(fields):
-        assert isinstance(fields, dict), u"fields must be dict"
+    def get_fields_with_labels(self):
+        fields = self.get_fields()
         return [
             field.label(label_name)
             for label_name, field
             in fields.iteritems()
         ]
 
-    @staticmethod
-    def get_sort_order(fields, sort, order):
+    def get_sort_order(self, sort, order):
+        fields = self.get_fields()
         sort = fields.get(sort)
         assert sort is not None, u"Sort can't be None"
         order = asc if order == 'asc' else desc
@@ -79,12 +77,9 @@ class GeneralQueryBuilder(object):
             self.query = self.query.filter(condition)
 
     def sort_query(self, sort, order):
-        all_fields = {}
-        all_fields.update(self.get_fields())
-        sort_order = GeneralQueryBuilder.get_sort_order(
-            all_fields, sort, order
+        self.query = self.query.order_by(
+            self.get_sort_order(sort, order)
         )
-        self.query = self.query.order_by(sort_order)
 
     def page_query(self, limit, page=1):
         assert isinstance(limit, int), type(limit)
@@ -111,44 +106,45 @@ class GeneralQueryBuilder(object):
 
 class ResourcesQueryBuilder(GeneralQueryBuilder):
 
-    __log_subquery = ResourceLog.query_last_max_entries().subquery()
-    __base_fields = OrderedDict({
+    _log_subquery = ResourceLog.query_last_max_entries().subquery()
+    _base_fields = {
         'rid': Resource.id.label('rid'),
-        'modifydt': __log_subquery.c.modifydt.label('modifydt'),
-        'modifier': __log_subquery.c.modifier.label('modifier'),
-    })
+        'modifydt': _log_subquery.c.modifydt.label('modifydt'),
+        'modifier': _log_subquery.c.modifier.label('modifier'),
+    }
 
     def __init__(self, context=None):
         if context and not verifyObject(IResourceType, context):
             raise NotValidContextError()
+        self.context = context
 
+    def build_base_query(self):
         aStructure = aliased(Structure)
         self.query = (
             DBSession.query(*self.get_base_fields().values())
             .join(aStructure, Resource.owner_structure)
             .outerjoin(
-                self.__log_subquery,
-                Resource.id == self.__log_subquery.c.id
+                self._log_subquery,
+                Resource.id == self._log_subquery.c.id
             )
         )
-        if context:
-            employee = get_auth_employee(context.request)
-            query = query_employee_scope(employee, context)
+        if self.context:
+            employee = get_auth_employee(self.context.request)
+            query = query_employee_scope(employee, self.context)
             if query:
                 subq = query.subquery()
                 self.query = self.query.join(subq, subq.c.id == aStructure.id)
 
-    def get_base_fields(self):
-        return self.__base_fields
+    def update_fields(self, fields):
+        self._fields.update(fields)
 
-    def sort_query(self, sort, order):
-        all_fields = {}
-        all_fields.update(self.get_base_fields())
-        all_fields.update(self.get_fields())
-        sort_order = ResourcesQueryBuilder.get_sort_order(
-            all_fields, sort, order
-        )
-        self.query = self.query.order_by(sort_order)
+    def get_base_fields(self):
+        return self._base_fields
+
+    def get_fields(self):
+        fields = super(ResourcesQueryBuilder, self).get_fields()
+        fields.update(self.get_base_fields())
+        return fields
 
     def advanced_search(self, **kwargs):
         self._filter_updated_date(
@@ -159,15 +155,15 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
             self.query = self.query.filter(
-                self.__log_subquery.c.modifydt >= updated_from
+                self._log_subquery.c.modifydt >= updated_from
             )
         if updated_to:
             self.query = self.query.filter(
-                self.__log_subquery.c.modifydt <= updated_to
+                self._log_subquery.c.modifydt <= updated_to
             )
 
     def _filter_modifier(self, modifier_id):
         if modifier_id:
             self.query = self.query.filter(
-                self.__log_subquery.c.modifier_id == modifier_id
+                self._log_subquery.c.modifier_id == modifier_id
             )

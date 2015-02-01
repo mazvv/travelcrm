@@ -8,28 +8,30 @@ from ...models.employee import Employee
 
 
 class EmployeesQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Employee.id,
-        '_id': Employee.id,
-        'first_name': Employee.first_name,
-        'last_name': Employee.last_name,
-        'dismissal_date': Employee.dismissal_date,
-        'name': Employee.name,
-    }
-
-    _simple_search_fields = [
-        Employee.first_name,
-        Employee.last_name,
-        Employee.name,
-    ]
 
     def __init__(self, context):
         super(EmployeesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._fields = {
+            'id': Employee.id,
+            '_id': Employee.id,
+            'first_name': Employee.first_name,
+            'last_name': Employee.last_name,
+            'dismissal_date': Employee.dismissal_date,
+            'name': Employee.name,
+        }
+        self._simple_search_fields = [
+            Employee.first_name,
+            Employee.last_name,
+            Employee.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = self.query.join(
+            Employee, Resource.employee
         )
-        self.query = self.query.join(Employee, Resource.employee)
-        self.query = self.query.add_columns(*fields)
+        super(EmployeesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

@@ -10,8 +10,12 @@ class SalesDynamicsQueryBuilder(InvoicesQueryBuilder):
 
     def __init__(self, context):
         super(SalesDynamicsQueryBuilder, self).__init__(context)
-        base_currency_field = \
+
+    def build_query(self):
+        super(SalesDynamicsQueryBuilder, self).build_query()
+        base_currency_field = (
             func.sum(self._subq_resource_data.c.sum).label('base_sum')
+        )
         self.query = self.query.add_columns(base_currency_field)
         self.query = self.query.with_entities(base_currency_field, Invoice.date)
         self.query = self.query.group_by(Invoice.date)

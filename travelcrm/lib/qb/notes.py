@@ -10,22 +10,19 @@ from ...models.note import Note
 
 class NotesQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = {
-        'id': Note.id,
-        '_id': Note.id,
-        'title': Note.title,
-    }
-
     def __init__(self, context):
         super(NotesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
-        self.query = (
-            self.query
-            .join(Note, Resource.note)
-        )
-        self.query = self.query.add_columns(*fields)
+        self._fields = {
+            'id': Note.id,
+            '_id': Note.id,
+            'title': Note.title,
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = self.query.join(Note, Resource.note)
+        super(NotesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

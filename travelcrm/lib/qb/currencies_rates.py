@@ -11,26 +11,30 @@ from ...lib.utils.common_utils import get_base_currency
 
 
 class CurrenciesRatesQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': CurrencyRate.id,
-        '_id': CurrencyRate.id,
-        'iso_code': Currency.iso_code,
-        'rate': CurrencyRate.rate,
-        'date': CurrencyRate.date,
-    }
-    _simple_search_fields = [
-        Currency.iso_code,
-    ]
 
     def __init__(self, context):
         super(CurrenciesRatesQueryBuilder, self).__init__(context)
-        self._fields['base_currency'] = literal(get_base_currency())
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._fields = {
+            'id': CurrencyRate.id,
+            '_id': CurrencyRate.id,
+            'iso_code': Currency.iso_code,
+            'rate': CurrencyRate.rate,
+            'date': CurrencyRate.date,
+            'base_currency': literal(get_base_currency())
+        }
+        self._simple_search_fields = [
+            Currency.iso_code,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = (
+            self.query
+            .join(CurrencyRate, Resource.currency_rate)
+            .join(Currency, CurrencyRate.currency)
         )
-        self.query = self.query.join(CurrencyRate, Resource.currency_rate)
-        self.query = self.query.join(Currency, CurrencyRate.currency)
-        self.query = self.query.add_columns(*fields)
+        super(CurrenciesRatesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

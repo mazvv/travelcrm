@@ -17,48 +17,47 @@ from ...lib.bl.invoices import query_resource_data
 
 class IncomesQueryBuilder(ResourcesQueryBuilder):
 
-    _subq_invoice_resource_data = query_resource_data().subquery()
-    _subq_resource_type = (
-        DBSession.query(ResourceType.humanize, Resource.id)
-        .join(Resource, ResourceType.resources)
-        .subquery()
-    )
-    _sum_subq = (
-        DBSession.query(
-            func.sum(Transfer.sum).label('sum'),
-            Income.id,
-            Transfer.date,
-        )
-        .join(Income, Transfer.income)
-        .filter(
-            Transfer.account_from_id == None,
-            Transfer.subaccount_from_id == None,
-        )
-        .group_by(Income.id, Transfer.date)
-        .subquery()
-    )
-
-    _fields = {
-        'id': Income.id,
-        '_id': Income.id,
-        'invoice_id': Income.invoice_id,
-        'date': _sum_subq.c.date,
-        'customer': _subq_invoice_resource_data.c.customer,
-        'resource_type': _subq_resource_type.c.humanize,
-        'currency': Currency.iso_code,
-        'sum': _sum_subq.c.sum,
-        'account_name': Account.name,
-        'account_type': Account.account_type
-    }
-    _simple_search_fields = [
-        _subq_invoice_resource_data.c.customer,
-    ]
-
     def __init__(self, context):
         super(IncomesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_invoice_resource_data = query_resource_data().subquery()
+        self._subq_resource_type = (
+            DBSession.query(ResourceType.humanize, Resource.id)
+            .join(Resource, ResourceType.resources)
+            .subquery()
         )
+        self._sum_subq = (
+            DBSession.query(
+                func.sum(Transfer.sum).label('sum'),
+                Income.id,
+                Transfer.date,
+            )
+            .join(Income, Transfer.income)
+            .filter(
+                Transfer.account_from_id == None,
+                Transfer.subaccount_from_id == None,
+            )
+            .group_by(Income.id, Transfer.date)
+            .subquery()
+        )
+        self._fields = {
+            'id': Income.id,
+            '_id': Income.id,
+            'invoice_id': Income.invoice_id,
+            'date': self._sum_subq.c.date,
+            'customer': self._subq_invoice_resource_data.c.customer,
+            'resource_type': self._subq_resource_type.c.humanize,
+            'currency': Currency.iso_code,
+            'sum': self._sum_subq.c.sum,
+            'account_name': Account.name,
+            'account_type': Account.account_type
+        }
+        self._simple_search_fields = [
+            self._subq_invoice_resource_data.c.customer,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Income, Resource.income)
@@ -77,7 +76,7 @@ class IncomesQueryBuilder(ResourcesQueryBuilder):
             )
             .join(self._sum_subq, self._sum_subq.c.id == Income.id)
         )
-        self.query = self.query.add_columns(*fields)
+        super(IncomesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

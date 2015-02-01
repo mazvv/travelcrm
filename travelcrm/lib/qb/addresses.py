@@ -13,32 +13,32 @@ from ...models.location import Location
 
 class AddressesQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = {
-        'id': Address.id,
-        '_id': Address.id,
-        'full_location_name': (
-            Location.name + ' - ' + Region.name + ' (' + Country.name + ')'
-        ),
-        'location_name': Location.name,
-        'region_name': Region.name,
-        'country_name': Country.name,
-        'zip_code': Address.zip_code,
-        'address': Address.address,
-    }
-
-    _simple_search_fields = [
-        Location.name,
-        Region.name,
-        Country.name,
-        Address.zip_code,
-        Address.address
-    ]
 
     def __init__(self, context):
         super(AddressesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Address.id,
+            '_id': Address.id,
+            'full_location_name': (
+                Location.name + ' - ' + Region.name + ' (' + Country.name + ')'
+            ),
+            'location_name': Location.name,
+            'region_name': Region.name,
+            'country_name': Country.name,
+            'zip_code': Address.zip_code,
+            'address': Address.address,
+        }
+        self._simple_search_fields = [
+            Location.name,
+            Region.name,
+            Country.name,
+            Address.zip_code,
+            Address.address
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Address, Resource.address)
@@ -46,7 +46,7 @@ class AddressesQueryBuilder(ResourcesQueryBuilder):
             .join(Region, Location.region)
             .join(Country, Region.country)
         )
-        self.query = self.query.add_columns(*fields)
+        super(AddressesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

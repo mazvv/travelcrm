@@ -8,27 +8,28 @@ from ...models.account_item import AccountItem
 
 
 class ServicesQueryBuilder(ResourcesQueryBuilder):
-    _fields = {
-        'id': Service.id,
-        '_id': Service.id,
-        'name': Service.name,
-        'account_item': AccountItem.name,
-    }
-    _simple_search_fields = [
-        Service.name,
-    ]
 
     def __init__(self, context):
         super(ServicesQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Service.id,
+            '_id': Service.id,
+            'name': Service.name,
+            'account_item': AccountItem.name,
+        }
+        self._simple_search_fields = [
+            Service.name,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Service, Resource.service)
             .join(AccountItem, Service.account_item)
         )
-        self.query = self.query.add_columns(*fields)
+        super(ServicesQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

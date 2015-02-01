@@ -15,34 +15,35 @@ from ...lib.bl.subaccounts import query_resource_data
 
 
 class OutgoingsQueryBuilder(ResourcesQueryBuilder):
-    _subq_subaccount_type = (
-        DBSession.query(ResourceType.humanize, Resource.id)
-        .join(Resource, ResourceType.resources)
-        .subquery()
-    )
-    _subq_subaccount_data = query_resource_data().subquery()
-    _fields = {
-        'id': Outgoing.id,
-        '_id': Outgoing.id,
-        'date': Outgoing.date,
-        'sum': Outgoing.sum,
-        'account': Account.name,
-        'account_item': AccountItem.name,
-        'currency': Currency.iso_code,
-        'resource': _subq_subaccount_data.c.title,
-        'resource_type': _subq_subaccount_type.c.humanize,
-    }
-    _simple_search_fields = [
-        Account.name,
-        _subq_subaccount_data.c.name,
-        _subq_subaccount_data.c.title,
-    ]
 
     def __init__(self, context):
         super(OutgoingsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
+        self._subq_subaccount_type = (
+            DBSession.query(ResourceType.humanize, Resource.id)
+            .join(Resource, ResourceType.resources)
+            .subquery()
         )
+        self._subq_subaccount_data = query_resource_data().subquery()
+        self._fields = {
+            'id': Outgoing.id,
+            '_id': Outgoing.id,
+            'date': Outgoing.date,
+            'sum': Outgoing.sum,
+            'account': Account.name,
+            'account_item': AccountItem.name,
+            'currency': Currency.iso_code,
+            'resource': self._subq_subaccount_data.c.title,
+            'resource_type': self._subq_subaccount_type.c.humanize,
+        }
+        self._simple_search_fields = [
+            Account.name,
+            self._subq_subaccount_data.c.name,
+            self._subq_subaccount_data.c.title,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Outgoing, Resource.outgoing)
@@ -61,7 +62,7 @@ class OutgoingsQueryBuilder(ResourcesQueryBuilder):
                 == self._subq_subaccount_data.c.resource_id
             )
         )
-        self.query = self.query.add_columns(*fields)
+        super(OutgoingsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"

@@ -43,26 +43,28 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl45">
             <script type="text/javascript">
-            	function get_params_${_id}(){
+            	function get_params_${_id}(use_sort_options){
             		var obj = $('#${_tb_id}');
             		var params = new Object();
             		$.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                         params[$(el).attr('name')] = $(el).val();
                     });
-            		var dg_options = $('#${_id}').datagrid('options');
-            		params['sort'] = dg_options.sortName;
-            		params['order'] = dg_options.sortOrder;
+            		if(use_sort_options){
+            			var dg_options = $('#${_id}').datagrid('options');
+            			params['sort'] = dg_options.sortName;
+            			params['order'] = dg_options.sortOrder;
+            		}
             		return $.param(params, true);
             	}
             </script>
             <div class="button-group">
 	            % if _context.has_permision('view'):
 	            <a href="#" class="button _action" 
-	                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'transfers')}',params_str:get_params_${_id}()">
+	                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'transfers')}',params_str:get_params_${_id}(false)">
 	                <span class="fa fa-lightbulb-o"></span>${_(u'Transfers')}
 	            </a>
 	            <a href="#" class="button _action" 
-	                data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export', query={'export': True})}',params_str:get_params_${_id}()">
+	                data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export', query={'export': True})}',params_str:get_params_${_id}(true)">
 	                <span class="fa fa-file-pdf-o"></span>${_(u'Export To PDF')}
 	            </a>
                 % endif

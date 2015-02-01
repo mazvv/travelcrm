@@ -9,31 +9,30 @@ from ...models.currency import Currency
 
 class AccountsQueryBuilder(ResourcesQueryBuilder):
 
-    _fields = {
-        'id': Account.id,
-        '_id': Account.id,
-        'name': Account.name,
-        'account_type': Account.account_type,
-        'display_text': Account.display_text,
-        'descr': Account.descr,
-        'currency': Currency.iso_code,
-    }
-    _simple_search_fields = [
-        Account.name,
-        Currency.iso_code,
-    ]
-
     def __init__(self, context):
         super(AccountsQueryBuilder, self).__init__(context)
-        fields = ResourcesQueryBuilder.get_fields_with_labels(
-            self.get_fields()
-        )
+        self._fields = {
+            'id': Account.id,
+            '_id': Account.id,
+            'name': Account.name,
+            'account_type': Account.account_type,
+            'display_text': Account.display_text,
+            'currency': Currency.iso_code,
+        }
+        self._simple_search_fields = [
+            Account.name,
+            Currency.iso_code,
+        ]
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
         self.query = (
             self.query
             .join(Account, Resource.account)
             .join(Currency, Account.currency)
         )
-        self.query = self.query.add_columns(*fields)
+        super(AccountsQueryBuilder, self).build_query()
 
     def filter_id(self, id):
         assert isinstance(id, Iterable), u"Must be iterable object"
