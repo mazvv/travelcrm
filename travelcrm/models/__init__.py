@@ -70,3 +70,4 @@ from transfer import Transfer
 from notification import Notification
 from email_campaign import EmailCampaign
 from company import Company
+from lead import Lead

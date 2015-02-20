@@ -1130,6 +1130,38 @@ ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
+-- Name: lead; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lead (
+    id integer NOT NULL,
+    lead_date date NOT NULL,
+    resource_id integer NOT NULL,
+    advsource_id integer NOT NULL,
+    customer_id integer NOT NULL
+);
+
+
+--
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE lead_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
+
+
+--
 -- Name: licence; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2230,6 +2262,13 @@ ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY licence ALTER COLUMN id SET DEFAULT nextval('licence_id_seq'::regclass);
 
 
@@ -2440,21 +2479,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6524, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6533, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2047, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2052, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 129, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 130, true);
 
 
 --
@@ -2587,7 +2626,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO alembic_version VALUES ('255a4fa72b25');
+INSERT INTO alembic_version VALUES ('29ebada6b768');
 
 
 --
@@ -2603,7 +2642,6 @@ INSERT INTO appointment VALUES (8, 1542, 54, 2, 4, 6500.00, '2014-03-01');
 -- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO apscheduler_jobs VALUES ('_task_notification-53', 1422882540, '\x80027d71012855046172677371024b3585710355086578656375746f727104550764656661756c747105550d6d61785f696e7374616e63657371064b03550466756e637107553074726176656c63726d2e6c69622e7363686564756c65722e7461736b733a5f7461736b5f6e6f74696669636174696f6e710855026964710955155f7461736b5f6e6f74696669636174696f6e2d3533710a550d6e6578745f72756e5f74696d65710b636461746574696d650a6461746574696d650a710c550a07df02020f0900000000637079747a0a5f700a710d28550b4575726f70652f4b696576710e4d201c4b005503454554710f745271108652711155046e616d65711255125f7461736b5f6e6f74696669636174696f6e711355126d6973666972655f67726163655f74696d6571144b0155077472696767657271156361707363686564756c65722e74726967676572732e646174650a44617465547269676765720a7116298171177d71187d7119550872756e5f64617465711a68117386625508636f616c65736365711b89550776657273696f6e711c4b0155066b7761726773711d7d711e752e');
 
 
 --
@@ -2820,13 +2858,14 @@ INSERT INTO contact VALUES (77, '+380674523123', 'phone', 1927);
 INSERT INTO contact VALUES (78, 'vitalii.mazur@gmail.com', 'email', 1956);
 INSERT INTO contact VALUES (79, '+380923435643', 'phone', 2013);
 INSERT INTO contact VALUES (80, '+380505674534', 'phone', 2018);
+INSERT INTO contact VALUES (81, '+380671238943', 'phone', 2050);
 
 
 --
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 80, true);
+SELECT pg_catalog.setval('contact_id_seq', 81, true);
 
 
 --
@@ -3169,6 +3208,20 @@ SELECT pg_catalog.setval('invoice_id_seq', 26, true);
 
 
 --
+-- Data for Name: lead; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO lead VALUES (1, '2015-02-04', 2052, 5, 46);
+
+
+--
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('lead_id_seq', 1, true);
+
+
+--
 -- Data for Name: licence; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3233,6 +3286,7 @@ SELECT pg_catalog.setval('location_id_seq', 37, true);
 INSERT INTO navigation VALUES (162, 4, 160, 'Debts', '/debts', NULL, 2, 1921, false, NULL);
 INSERT INTO navigation VALUES (163, 4, 26, 'Email Campaigns', '/emails_campaigns', NULL, 2, 1953, true, NULL);
 INSERT INTO navigation VALUES (165, 4, 8, 'Company Settings', '/companies_settings', NULL, 3, 1975, true, 'dialog_open');
+INSERT INTO navigation VALUES (166, 4, 32, 'Leads', '/leads', NULL, 2, 2048, false, 'tab_open');
 INSERT INTO navigation VALUES (9, 4, 8, 'Resource Types', '/resources_types', NULL, 1, 779, false, NULL);
 INSERT INTO navigation VALUES (15, 4, 8, 'Users', '/users', NULL, 2, 792, false, NULL);
 INSERT INTO navigation VALUES (13, 4, 10, 'Employees', '/employees', NULL, 1, 790, false, NULL);
@@ -3323,10 +3377,10 @@ INSERT INTO navigation VALUES (51, 4, 32, 'Invoices', '/invoices', NULL, 4, 1368
 INSERT INTO navigation VALUES (160, 4, 152, 'Billing', '/', NULL, 2, 1909, false, NULL);
 INSERT INTO navigation VALUES (28, 4, 159, 'Hotels Categories', '/hotelcats', NULL, 6, 910, false, NULL);
 INSERT INTO navigation VALUES (42, 4, 159, 'Hotels List', '/hotels', NULL, 5, 1080, false, NULL);
-INSERT INTO navigation VALUES (52, 4, 32, 'Services', '/services_sales', NULL, 3, 1369, false, NULL);
 INSERT INTO navigation VALUES (157, 4, 53, 'Currencies', '', NULL, 7, 1906, true, NULL);
+INSERT INTO navigation VALUES (38, 4, 32, 'Tours', '/tours_sales', NULL, 3, 1075, true, 'tab_open');
 INSERT INTO navigation VALUES (159, 4, 23, 'Hotels', '/', NULL, 12, 1908, true, NULL);
-INSERT INTO navigation VALUES (38, 4, 32, 'Tours', '/tours_sales', NULL, 2, 1075, false, NULL);
+INSERT INTO navigation VALUES (52, 4, 32, 'Services', '/services_sales', NULL, 4, 1369, false, NULL);
 
 
 --
@@ -3582,6 +3636,7 @@ INSERT INTO permision VALUES (136, 125, 4, '{view,settings}', NULL, 'all');
 INSERT INTO permision VALUES (137, 126, 4, '{add,edit,view,delete}', NULL, 'all');
 INSERT INTO permision VALUES (139, 128, 4, '{edit,view}', NULL, 'all');
 INSERT INTO permision VALUES (140, 129, 4, '{view,settings}', NULL, 'all');
+INSERT INTO permision VALUES (141, 130, 4, '{add,view,edit,delete}', NULL, 'all');
 
 
 --
@@ -3620,6 +3675,7 @@ INSERT INTO person VALUES (35, 1615, 'Tat''ana', 'Artyuh', '', '1987-02-10', 'fe
 INSERT INTO person VALUES (22, 1383, 'Vitalii', 'Mazur', '', '1979-07-17', 'male', true);
 INSERT INTO person VALUES (44, 2017, 'Sergey', 'Gavrish', '', '1981-08-05', 'male', true);
 INSERT INTO person VALUES (45, 2020, 'Anna', 'Gavrish', '', '1993-11-17', 'female', true);
+INSERT INTO person VALUES (46, 2051, 'Николай', '', '', NULL, NULL, false);
 
 
 --
@@ -3671,13 +3727,14 @@ INSERT INTO person_contact VALUES (30, 77);
 INSERT INTO person_contact VALUES (22, 78);
 INSERT INTO person_contact VALUES (44, 79);
 INSERT INTO person_contact VALUES (45, 80);
+INSERT INTO person_contact VALUES (46, 81);
 
 
 --
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 45, true);
+SELECT pg_catalog.setval('person_id_seq', 46, true);
 
 
 --
@@ -3735,14 +3792,14 @@ INSERT INTO "position" VALUES (8, 1775, 1, 'Main Developer');
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 165, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 166, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 140, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 141, true);
 
 
 --
@@ -4572,6 +4629,11 @@ INSERT INTO resource VALUES (2044, 119, 32, false);
 INSERT INTO resource VALUES (2045, 119, 32, false);
 INSERT INTO resource VALUES (2046, 119, 32, false);
 INSERT INTO resource VALUES (2047, 119, 32, false);
+INSERT INTO resource VALUES (2048, 65, 32, false);
+INSERT INTO resource VALUES (2049, 12, 32, false);
+INSERT INTO resource VALUES (2050, 87, 32, false);
+INSERT INTO resource VALUES (2051, 69, 32, false);
+INSERT INTO resource VALUES (2052, 130, 32, false);
 
 
 --
@@ -5819,6 +5881,15 @@ INSERT INTO resource_log VALUES (6521, 2044, 2, NULL, '2015-02-01 19:54:52.68680
 INSERT INTO resource_log VALUES (6522, 2045, 2, NULL, '2015-02-01 19:54:52.686809');
 INSERT INTO resource_log VALUES (6523, 2046, 2, NULL, '2015-02-01 19:54:52.686809');
 INSERT INTO resource_log VALUES (6524, 2047, 2, NULL, '2015-02-01 19:54:52.686809');
+INSERT INTO resource_log VALUES (6525, 2048, 2, NULL, '2015-02-03 20:05:38.797054');
+INSERT INTO resource_log VALUES (6526, 2048, 2, NULL, '2015-02-03 20:06:16.781057');
+INSERT INTO resource_log VALUES (6527, 1075, 2, NULL, '2015-02-03 20:06:39.590165');
+INSERT INTO resource_log VALUES (6528, 2049, 2, NULL, '2015-02-03 21:27:11.659126');
+INSERT INTO resource_log VALUES (6529, 2048, 2, NULL, '2015-02-03 21:27:36.200475');
+INSERT INTO resource_log VALUES (6530, 2050, 2, NULL, '2015-02-04 21:04:02.527314');
+INSERT INTO resource_log VALUES (6531, 2051, 2, NULL, '2015-02-04 21:04:04.474427');
+INSERT INTO resource_log VALUES (6532, 2051, 2, NULL, '2015-02-04 21:11:28.094987');
+INSERT INTO resource_log VALUES (6533, 2052, 2, NULL, '2015-02-04 21:11:39.281593');
 
 
 --
@@ -5878,6 +5949,7 @@ INSERT INTO resource_type VALUES (129, 1989, 'sales_dynamics', 'Portlet: Sales D
 INSERT INTO resource_type VALUES (103, 1317, 'invoices', 'Invoices', 'Invoices', 'travelcrm.resources.invoices', 'Invoices list. Invoice can''t be created manualy - only using source document such as Tours', '{"active_days": 3}', true);
 INSERT INTO resource_type VALUES (125, 1966, 'unpaid_invoices', 'Portlet: Unpaid Invoices', 'UnpaidInvoices', 'travelcrm.resources.unpaid_invoices', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true);
 INSERT INTO resource_type VALUES (126, 1968, 'companies', 'Companies', 'Companies', 'travelcrm.resources.companies', 'Multicompanies functionality', 'null', false);
+INSERT INTO resource_type VALUES (130, 2049, 'leads', 'Leads', 'Leads', 'travelcrm.resources.leads', 'Leads that can be converted into contacts', 'null', false);
 
 
 --
@@ -6701,6 +6773,14 @@ ALTER TABLE ONLY invoice
 
 
 --
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT lead_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: licence_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -7380,6 +7460,14 @@ ALTER TABLE ONLY structure_address
 
 
 --
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT fk_advsource_id_lead FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_advsource_id_service_sale; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7577,6 +7665,14 @@ ALTER TABLE ONLY calculation
 
 ALTER TABLE ONLY currency_rate
     ADD CONSTRAINT fk_currency_id_tour FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT fk_customer_id_lead FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8089,6 +8185,14 @@ ALTER TABLE ONLY income
 
 ALTER TABLE ONLY invoice
     ADD CONSTRAINT fk_resource_id_invoice FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT fk_resource_id_lead FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
