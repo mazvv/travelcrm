@@ -1,6 +1,9 @@
 <%def name="searchbar(container, advanced_id=None, prompt=u'')">
+    <%
+        id = 'search' + container
+    %>
     <div class="searchbar" style="padding-top: 2px;">
-        ${h.tags.text("q", None, class_="easyui-textbox w30 searchbox", onkeyup="onkeyup_%s(event);" % container, data_options="prompt:'%s'" % prompt)}
+        ${h.tags.text("q", None, class_="easyui-textbox w30 searchbox", id=id, data_options="prompt:'%s'" % prompt)}
         <span class="field-actions">
             <span class="fa fa-search easyui-tooltip field-action _action" 
                   title="${_(u'search')}"
@@ -41,9 +44,13 @@
             % endif
         </span>
         <script type="easyui-textbox/javascript">
-            function onkeyup_${container}(e){
-                if(e.keyCode == 13) refresh_container('#${container}');  
-            }
+        $('#${id}').textbox({
+            inputEvents:$.extend({},$.fn.textbox.defaults.inputEvents,{
+                keyup:function(e){
+                    if(e.keyCode == 13) refresh_container('#${container}');
+                }
+            })
+        })
         </script>
     </div>
 </%def>

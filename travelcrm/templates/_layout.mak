@@ -49,9 +49,12 @@ ${h.tags.Doctype().html5()}
                 <div id="_tasks_" class="dl35"
                     data-options="region:'east', 
                         border:false, 
-                        split:true, 
-                ">
-                    <div id="_tools_" class="easyui-panel" data-options="fit:true,border:false,href:'/tasks'">
+                        split:true,
+                    ">
+                    <div id="_tools_" 
+                        class="easyui-panel" 
+                        data-options="fit:true,border:false,href:'/tasks'
+                    ">
                     </div>
                 </div>
                 <div id="_main_" data-options="region:'center', border:false">
