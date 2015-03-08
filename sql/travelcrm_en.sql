@@ -242,7 +242,8 @@ CREATE TABLE resource_type (
     module character varying(128) NOT NULL,
     description character varying(128),
     settings json,
-    customizable boolean
+    customizable boolean,
+    status smallint NOT NULL
 );
 
 
@@ -1836,7 +1837,8 @@ CREATE TABLE task (
     deadline timestamp without time zone NOT NULL,
     reminder timestamp without time zone,
     descr character varying,
-    closed boolean
+    closed boolean,
+    status smallint NOT NULL
 );
 
 
@@ -2465,7 +2467,7 @@ SELECT pg_catalog.setval('_currencies_rid_seq', 57, true);
 -- Name: _employees_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_employees_rid_seq', 29, true);
+SELECT pg_catalog.setval('_employees_rid_seq', 30, true);
 
 
 --
@@ -2479,28 +2481,28 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6533, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6590, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2052, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2064, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 130, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 131, true);
 
 
 --
 -- Name: _users_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_users_rid_seq', 24, true);
+SELECT pg_catalog.setval('_users_rid_seq', 25, true);
 
 
 --
@@ -2626,7 +2628,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO alembic_version VALUES ('29ebada6b768');
+INSERT INTO alembic_version VALUES ('42dc01faf677');
 
 
 --
@@ -2978,6 +2980,7 @@ INSERT INTO employee VALUES (14, 1045, 'Dima', 'Shkreba', NULL, NULL, '2013-04-3
 INSERT INTO employee VALUES (7, 885, 'Irina', 'Mazur', 'V.', NULL, NULL, 'employee/f8ce7007-df56-471c-a330-c43b678ed2ae.jpg');
 INSERT INTO employee VALUES (2, 784, 'John', 'Doe', NULL, NULL, NULL, 'employee/e588d949-e13f-43cc-aa0f-115354289850.jpg');
 INSERT INTO employee VALUES (15, 1046, 'Viktoriia', 'Lastovets', NULL, NULL, '2014-04-29', NULL);
+INSERT INTO employee VALUES (30, 2053, 'Igor', 'Mazur', NULL, NULL, NULL, 'employee/5a83ffee-5bd2-4ba8-a82a-cea9a88c4d82.jpg');
 
 
 --
@@ -3001,6 +3004,7 @@ INSERT INTO employee_contact VALUES (2, 59);
 -- Data for Name: employee_notification; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO employee_notification VALUES (2, 18);
 
 
 --
@@ -3285,10 +3289,10 @@ SELECT pg_catalog.setval('location_id_seq', 37, true);
 
 INSERT INTO navigation VALUES (162, 4, 160, 'Debts', '/debts', NULL, 2, 1921, false, NULL);
 INSERT INTO navigation VALUES (163, 4, 26, 'Email Campaigns', '/emails_campaigns', NULL, 2, 1953, true, NULL);
-INSERT INTO navigation VALUES (165, 4, 8, 'Company Settings', '/companies_settings', NULL, 3, 1975, true, 'dialog_open');
 INSERT INTO navigation VALUES (166, 4, 32, 'Leads', '/leads', NULL, 2, 2048, false, 'tab_open');
+INSERT INTO navigation VALUES (165, 4, 8, 'Company Settings', '/companies_settings', NULL, 4, 1975, true, 'dialog_open');
+INSERT INTO navigation VALUES (15, 4, 8, 'Users', '/users', NULL, 3, 792, false, NULL);
 INSERT INTO navigation VALUES (9, 4, 8, 'Resource Types', '/resources_types', NULL, 1, 779, false, NULL);
-INSERT INTO navigation VALUES (15, 4, 8, 'Users', '/users', NULL, 2, 792, false, NULL);
 INSERT INTO navigation VALUES (13, 4, 10, 'Employees', '/employees', NULL, 1, 790, false, NULL);
 INSERT INTO navigation VALUES (41, 5, NULL, 'Home', '/', 'fa fa-home', 1, 1079, false, NULL);
 INSERT INTO navigation VALUES (20, 4, 18, 'Positions', '/positions', NULL, 2, 863, false, NULL);
@@ -3432,12 +3436,12 @@ SELECT pg_catalog.setval('note_id_seq', 29, true);
 INSERT INTO note_resource VALUES (3, 1797);
 INSERT INTO note_resource VALUES (5, 1797);
 INSERT INTO note_resource VALUES (24, 1868);
-INSERT INTO note_resource VALUES (26, 1930);
 INSERT INTO note_resource VALUES (25, 1928);
-INSERT INTO note_resource VALUES (27, 1980);
 INSERT INTO note_resource VALUES (28, 3);
 INSERT INTO note_resource VALUES (18, 784);
 INSERT INTO note_resource VALUES (29, 1470);
+INSERT INTO note_resource VALUES (27, 1980);
+INSERT INTO note_resource VALUES (26, 1930);
 
 
 --
@@ -3459,13 +3463,14 @@ INSERT INTO notification VALUES (14, 1973, 'Task: Check Payments', 'Check Paymen
 INSERT INTO notification VALUES (15, 1984, 'Task: Test', 'Test', '2015-01-13 17:01:00.018967', NULL);
 INSERT INTO notification VALUES (16, 1986, 'Task: Test 2', 'Test 2', '2015-01-13 17:04:00.011637', NULL);
 INSERT INTO notification VALUES (17, 2010, 'Task: I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 21:45:00.013037', NULL);
+INSERT INTO notification VALUES (18, 2064, 'Task: Revert status after testing', 'Revert status after testing', '2015-03-08 18:42:00.01327', NULL);
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 17, true);
+SELECT pg_catalog.setval('notification_id_seq', 18, true);
 
 
 --
@@ -3602,7 +3607,6 @@ INSERT INTO permision VALUES (103, 84, 8, '{view,add,edit,delete}', NULL, 'all')
 INSERT INTO permision VALUES (104, 86, 8, '{view,add,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (105, 87, 8, '{view,add,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (106, 89, 8, '{view,add,edit,delete}', NULL, 'all');
-INSERT INTO permision VALUES (24, 12, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (107, 90, 8, '{view,add,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (108, 91, 8, '{view,add,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (109, 1, 8, '{view}', NULL, 'all');
@@ -3637,6 +3641,7 @@ INSERT INTO permision VALUES (137, 126, 4, '{add,edit,view,delete}', NULL, 'all'
 INSERT INTO permision VALUES (139, 128, 4, '{edit,view}', NULL, 'all');
 INSERT INTO permision VALUES (140, 129, 4, '{view,settings}', NULL, 'all');
 INSERT INTO permision VALUES (141, 130, 4, '{add,view,edit,delete}', NULL, 'all');
+INSERT INTO permision VALUES (24, 12, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 
 
 --
@@ -3675,7 +3680,7 @@ INSERT INTO person VALUES (35, 1615, 'Tat''ana', 'Artyuh', '', '1987-02-10', 'fe
 INSERT INTO person VALUES (22, 1383, 'Vitalii', 'Mazur', '', '1979-07-17', 'male', true);
 INSERT INTO person VALUES (44, 2017, 'Sergey', 'Gavrish', '', '1981-08-05', 'male', true);
 INSERT INTO person VALUES (45, 2020, 'Anna', 'Gavrish', '', '1993-11-17', 'female', true);
-INSERT INTO person VALUES (46, 2051, 'Николай', '', '', NULL, NULL, false);
+INSERT INTO person VALUES (46, 2051, 'Nikolay', '', '', NULL, NULL, false);
 
 
 --
@@ -3792,14 +3797,14 @@ INSERT INTO "position" VALUES (8, 1775, 1, 'Main Developer');
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 166, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 167, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 141, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 142, true);
 
 
 --
@@ -4549,7 +4554,6 @@ INSERT INTO resource VALUES (1951, 90, 32, false);
 INSERT INTO resource VALUES (1952, 86, 32, false);
 INSERT INTO resource VALUES (1953, 65, 32, false);
 INSERT INTO resource VALUES (1954, 12, 32, false);
-INSERT INTO resource VALUES (1955, 124, 32, false);
 INSERT INTO resource VALUES (1956, 87, 32, false);
 INSERT INTO resource VALUES (1958, 93, 32, false);
 INSERT INTO resource VALUES (1959, 123, 32, false);
@@ -4558,6 +4562,7 @@ INSERT INTO resource VALUES (1962, 93, 32, false);
 INSERT INTO resource VALUES (1963, 123, 32, false);
 INSERT INTO resource VALUES (1964, 93, 32, false);
 INSERT INTO resource VALUES (1965, 123, 32, false);
+INSERT INTO resource VALUES (1955, 124, 32, false);
 INSERT INTO resource VALUES (1966, 12, 32, false);
 INSERT INTO resource VALUES (1968, 12, 32, false);
 INSERT INTO resource VALUES (1970, 126, 32, false);
@@ -4634,6 +4639,12 @@ INSERT INTO resource VALUES (2049, 12, 32, false);
 INSERT INTO resource VALUES (2050, 87, 32, false);
 INSERT INTO resource VALUES (2051, 69, 32, false);
 INSERT INTO resource VALUES (2052, 130, 32, false);
+INSERT INTO resource VALUES (2053, 47, 32, false);
+INSERT INTO resource VALUES (2054, 2, 32, false);
+INSERT INTO resource VALUES (2055, 12, 32, false);
+INSERT INTO resource VALUES (2062, 93, 32, false);
+INSERT INTO resource VALUES (2063, 93, 32, false);
+INSERT INTO resource VALUES (2064, 123, 32, false);
 
 
 --
@@ -5890,66 +5901,117 @@ INSERT INTO resource_log VALUES (6530, 2050, 2, NULL, '2015-02-04 21:04:02.52731
 INSERT INTO resource_log VALUES (6531, 2051, 2, NULL, '2015-02-04 21:04:04.474427');
 INSERT INTO resource_log VALUES (6532, 2051, 2, NULL, '2015-02-04 21:11:28.094987');
 INSERT INTO resource_log VALUES (6533, 2052, 2, NULL, '2015-02-04 21:11:39.281593');
+INSERT INTO resource_log VALUES (6534, 2051, 2, NULL, '2015-02-23 21:04:13.639992');
+INSERT INTO resource_log VALUES (6535, 1648, 2, NULL, '2015-02-24 14:58:15.754816');
+INSERT INTO resource_log VALUES (6536, 2053, 2, NULL, '2015-02-24 21:04:03.673911');
+INSERT INTO resource_log VALUES (6537, 2054, 2, NULL, '2015-02-24 21:04:26.838046');
+INSERT INTO resource_log VALUES (6538, 2053, 2, NULL, '2015-02-24 21:06:05.145287');
+INSERT INTO resource_log VALUES (6539, 2054, 2, NULL, '2015-02-24 21:06:08.284296');
+INSERT INTO resource_log VALUES (6540, 2053, 2, NULL, '2015-02-24 21:06:25.905562');
+INSERT INTO resource_log VALUES (6541, 2054, 2, NULL, '2015-02-24 21:06:27.830735');
+INSERT INTO resource_log VALUES (6542, 2055, 2, NULL, '2015-03-03 16:25:23.003263');
+INSERT INTO resource_log VALUES (6549, 1955, 2, NULL, '2015-03-04 21:39:17.186096');
+INSERT INTO resource_log VALUES (6550, 1955, 2, NULL, '2015-03-04 21:39:30.590536');
+INSERT INTO resource_log VALUES (6551, 1955, 2, NULL, '2015-03-05 19:52:38.505441');
+INSERT INTO resource_log VALUES (6552, 1955, 2, NULL, '2015-03-05 19:53:54.442922');
+INSERT INTO resource_log VALUES (6553, 2051, 2, NULL, '2015-03-05 21:22:31.156271');
+INSERT INTO resource_log VALUES (6554, 2052, 2, NULL, '2015-03-05 21:22:34.187754');
+INSERT INTO resource_log VALUES (6555, 2049, 2, NULL, '2015-03-07 13:59:54.391614');
+INSERT INTO resource_log VALUES (6556, 2049, 2, NULL, '2015-03-07 14:00:01.858793');
+INSERT INTO resource_log VALUES (6557, 2049, 2, NULL, '2015-03-07 14:00:08.905813');
+INSERT INTO resource_log VALUES (6558, 2049, 2, NULL, '2015-03-07 17:41:13.176137');
+INSERT INTO resource_log VALUES (6559, 2049, 2, NULL, '2015-03-07 17:41:24.454712');
+INSERT INTO resource_log VALUES (6560, 2016, 2, NULL, '2015-03-07 19:11:45.990005');
+INSERT INTO resource_log VALUES (6561, 1971, 2, NULL, '2015-03-07 20:39:22.05432');
+INSERT INTO resource_log VALUES (6562, 1939, 2, NULL, '2015-03-07 20:41:30.911568');
+INSERT INTO resource_log VALUES (6563, 1964, 2, NULL, '2015-03-07 20:41:40.386597');
+INSERT INTO resource_log VALUES (6564, 1962, 2, NULL, '2015-03-07 20:41:47.24255');
+INSERT INTO resource_log VALUES (6565, 2009, 2, NULL, '2015-03-07 20:41:57.590912');
+INSERT INTO resource_log VALUES (6566, 1958, 2, NULL, '2015-03-07 20:42:08.257141');
+INSERT INTO resource_log VALUES (6567, 2062, 2, NULL, '2015-03-07 20:44:22.388688');
+INSERT INTO resource_log VALUES (6568, 1958, 2, NULL, '2015-03-07 20:44:57.143369');
+INSERT INTO resource_log VALUES (6569, 1922, 2, NULL, '2015-03-07 21:16:33.311167');
+INSERT INTO resource_log VALUES (6570, 1930, 2, NULL, '2015-03-07 21:18:30.204883');
+INSERT INTO resource_log VALUES (6571, 1980, 2, NULL, '2015-03-07 21:18:36.892234');
+INSERT INTO resource_log VALUES (6572, 1930, 2, NULL, '2015-03-07 21:21:01.745845');
+INSERT INTO resource_log VALUES (6573, 1982, 2, NULL, '2015-03-07 21:45:35.899441');
+INSERT INTO resource_log VALUES (6574, 1983, 2, NULL, '2015-03-07 21:45:46.115364');
+INSERT INTO resource_log VALUES (6575, 1985, 2, NULL, '2015-03-07 21:45:53.837217');
+INSERT INTO resource_log VALUES (6576, 2016, 2, NULL, '2015-03-07 21:46:03.965785');
+INSERT INTO resource_log VALUES (6577, 1940, 2, NULL, '2015-03-07 21:46:13.798132');
+INSERT INTO resource_log VALUES (6578, 1932, 2, NULL, '2015-03-07 21:46:22.868946');
+INSERT INTO resource_log VALUES (6579, 1934, 2, NULL, '2015-03-07 21:46:33.42948');
+INSERT INTO resource_log VALUES (6580, 1935, 2, NULL, '2015-03-07 21:46:42.582075');
+INSERT INTO resource_log VALUES (6581, 1936, 2, NULL, '2015-03-07 21:46:53.561952');
+INSERT INTO resource_log VALUES (6582, 1933, 2, NULL, '2015-03-07 21:47:06.74156');
+INSERT INTO resource_log VALUES (6583, 1923, 2, NULL, '2015-03-07 21:47:13.496663');
+INSERT INTO resource_log VALUES (6584, 1922, 2, NULL, '2015-03-08 18:02:14.423833');
+INSERT INTO resource_log VALUES (6585, 1922, 2, NULL, '2015-03-08 18:02:24.288542');
+INSERT INTO resource_log VALUES (6586, 1989, 2, NULL, '2015-03-08 18:07:00.091644');
+INSERT INTO resource_log VALUES (6587, 1922, 2, NULL, '2015-03-08 18:17:03.971743');
+INSERT INTO resource_log VALUES (6588, 1922, 2, NULL, '2015-03-08 18:29:12.5349');
+INSERT INTO resource_log VALUES (6589, 2063, 2, NULL, '2015-03-08 18:41:45.468589');
+INSERT INTO resource_log VALUES (6590, 1989, 2, NULL, '2015-03-08 18:41:51.822924');
 
 
 --
 -- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO resource_type VALUES (117, 1797, 'subaccounts', 'Subaccounts', 'Subaccounts', 'travelcrm.resources.subaccounts', 'Subaccounts are accounts from other objects such as clients, touroperators and so on', 'null', false);
-INSERT INTO resource_type VALUES (107, 1435, 'accounts', 'Accounts', 'Accounts', 'travelcrm.resources.accounts', 'Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible', 'null', false);
-INSERT INTO resource_type VALUES (118, 1799, 'notes', 'Notes', 'Notes', 'travelcrm.resources.notes', 'Resources Notes', 'null', false);
-INSERT INTO resource_type VALUES (92, 1221, 'tours_sales', 'Tours Sale', 'ToursSales', 'travelcrm.resources.tours_sales', 'Tours sales documents', '{"service_id": 5}', true);
-INSERT INTO resource_type VALUES (119, 1849, 'calculations', 'Caluclations', 'Calculations', 'travelcrm.resources.calculations', 'Calculations of Sale Documents', 'null', false);
-INSERT INTO resource_type VALUES (120, 1884, 'crosspayments', 'Cross Payments', 'Crosspayments', 'travelcrm.resources.crosspayments', 'Cross payments between accounts and subaccounts. This document is for balance corrections to.', 'null', false);
-INSERT INTO resource_type VALUES (121, 1894, 'turnovers', 'Turnovers', 'Turnovers', 'travelcrm.resources.turnovers', 'Turnovers on Accounts and Subaccounts', 'null', false);
-INSERT INTO resource_type VALUES (2, 10, 'users', 'Users', 'Users', 'travelcrm.resources.users', 'Users list', NULL, false);
-INSERT INTO resource_type VALUES (12, 16, 'resources_types', 'Resources Types', 'ResourcesTypes', 'travelcrm.resources.resources_types', 'Resources types list', NULL, false);
-INSERT INTO resource_type VALUES (47, 706, 'employees', 'Employees', 'Employees', 'travelcrm.resources.employees', 'Employees Container Datagrid', NULL, false);
-INSERT INTO resource_type VALUES (78, 1003, 'touroperators', 'Touroperators', 'Touroperators', 'travelcrm.resources.touroperators', 'Touroperators - tours suppliers list', NULL, false);
-INSERT INTO resource_type VALUES (1, 773, '', 'Home', 'Root', 'travelcrm.resources', 'Home Page of Travelcrm', NULL, false);
-INSERT INTO resource_type VALUES (122, 1919, 'debts', 'Debts', 'Debts', 'travelcrm.resources.debts', 'Calculations based debts report', 'null', false);
-INSERT INTO resource_type VALUES (93, 1225, 'tasks', 'Tasks', 'Tasks', 'travelcrm.resources.tasks', 'Task manager', NULL, false);
-INSERT INTO resource_type VALUES (106, 1433, 'incomes', 'Incomes', 'Incomes', 'travelcrm.resources.incomes', 'Incomes Payments Document for invoices', '{"account_item_id": 8}', false);
-INSERT INTO resource_type VALUES (41, 283, 'currencies', 'Currencies', 'Currencies', 'travelcrm.resources.currencies', '', NULL, false);
-INSERT INTO resource_type VALUES (55, 723, 'structures', 'Structures', 'Structures', 'travelcrm.resources.structures', 'Companies structures is a tree of company structure. It''s can be offices, filials, departments and so and so', NULL, false);
-INSERT INTO resource_type VALUES (59, 764, 'positions', 'Positions', 'Positions', 'travelcrm.resources.positions', 'Companies positions is a point of company structure where emplyees can be appointed', NULL, false);
-INSERT INTO resource_type VALUES (61, 769, 'permisions', 'Permisions', 'Permisions', 'travelcrm.resources.permisions', 'Permisions list of company structure position. It''s list of resources and permisions', NULL, false);
-INSERT INTO resource_type VALUES (65, 775, 'navigations', 'Navigations', 'Navigations', 'travelcrm.resources.navigations', 'Navigations list of company structure position.', NULL, false);
-INSERT INTO resource_type VALUES (67, 788, 'appointments', 'Appointments', 'Appointments', 'travelcrm.resources.appointments', 'Employees to positions of company appointments', NULL, false);
-INSERT INTO resource_type VALUES (39, 274, 'regions', 'Regions', 'Regions', 'travelcrm.resources.regions', '', NULL, false);
-INSERT INTO resource_type VALUES (70, 872, 'countries', 'Countries', 'Countries', 'travelcrm.resources.countries', 'Countries directory', NULL, false);
-INSERT INTO resource_type VALUES (71, 901, 'advsources', 'Advertise Sources', 'Advsources', 'travelcrm.resources.advsources', 'Types of advertises', NULL, false);
-INSERT INTO resource_type VALUES (72, 908, 'hotelcats', 'Hotels Categories', 'Hotelcats', 'travelcrm.resources.hotelcats', 'Hotels categories', NULL, false);
-INSERT INTO resource_type VALUES (73, 909, 'roomcats', 'Rooms Categories', 'Roomcats', 'travelcrm.resources.roomcats', 'Categories of the rooms', NULL, false);
-INSERT INTO resource_type VALUES (74, 953, 'accomodations', 'Accomodations', 'Accomodations', 'travelcrm.resources.accomodations', 'Accomodations Types list', NULL, false);
-INSERT INTO resource_type VALUES (75, 954, 'foodcats', 'Food Categories', 'Foodcats', 'travelcrm.resources.foodcats', 'Food types in hotels', NULL, false);
-INSERT INTO resource_type VALUES (69, 865, 'persons', 'Persons', 'Persons', 'travelcrm.resources.persons', 'Persons directory. Person can be client or potential client', NULL, false);
-INSERT INTO resource_type VALUES (79, 1007, 'bpersons', 'Business Persons', 'BPersons', 'travelcrm.resources.bpersons', 'Business Persons is not clients it''s simple business contacts that can be referenced objects that needs to have contacts', NULL, false);
-INSERT INTO resource_type VALUES (84, 1088, 'locations', 'Locations', 'Locations', 'travelcrm.resources.locations', 'Locations list is list of cities, vilages etc. places to use to identify part of region', NULL, false);
-INSERT INTO resource_type VALUES (83, 1081, 'hotels', 'Hotels', 'Hotels', 'travelcrm.resources.hotels', 'Hotels directory', NULL, false);
-INSERT INTO resource_type VALUES (86, 1189, 'licences', 'Licences', 'Licences', 'travelcrm.resources.licences', 'Licences list for any type of resources as need', NULL, false);
-INSERT INTO resource_type VALUES (87, 1190, 'contacts', 'Contacts', 'Contacts', 'travelcrm.resources.contacts', 'Contacts for persons, business persons etc.', NULL, false);
-INSERT INTO resource_type VALUES (89, 1198, 'passports', 'Passports', 'Passports', 'travelcrm.resources.passports', 'Clients persons passports lists', NULL, false);
-INSERT INTO resource_type VALUES (90, 1207, 'addresses', 'Addresses', 'Addresses', 'travelcrm.resources.addresses', 'Addresses of any type of resources, such as persons, bpersons, hotels etc.', NULL, false);
-INSERT INTO resource_type VALUES (91, 1211, 'banks', 'Banks', 'Banks', 'travelcrm.resources.banks', 'Banks list to create bank details and for other reasons', NULL, false);
-INSERT INTO resource_type VALUES (102, 1313, 'services', 'Services', 'Services', 'travelcrm.resources.services', 'Additional Services that can be provide with tours sales or separate', NULL, false);
-INSERT INTO resource_type VALUES (101, 1268, 'banks_details', 'Banks Details', 'BanksDetails', 'travelcrm.resources.banks_details', 'Banks Details that can be attached to any client or business partner to define account', NULL, false);
-INSERT INTO resource_type VALUES (104, 1393, 'currencies_rates', 'Currency Rates', 'CurrenciesRates', 'travelcrm.resources.currencies_rates', 'Currencies Rates. Values from this dir used by billing to calc prices in base currency.', NULL, false);
-INSERT INTO resource_type VALUES (105, 1424, 'accounts_items', 'Account Items', 'AccountsItems', 'travelcrm.resources.accounts_items', 'Finance accounts items', NULL, false);
-INSERT INTO resource_type VALUES (109, 1452, 'services_sales', 'Services Sale', 'ServicesSales', 'travelcrm.resources.services_sales', 'Additionals Services sales document. It is Invoicable objects and can generate contracts', 'null', false);
-INSERT INTO resource_type VALUES (108, 1450, 'services_items', 'Service Item', 'ServicesItems', 'travelcrm.resources.services_items', 'Services Items List for include in sales documents such as Tours, Services Sales etc.', 'null', false);
-INSERT INTO resource_type VALUES (110, 1521, 'commissions', 'Commissions', 'Commissions', 'travelcrm.resources.commissions', 'Services sales commissions', 'null', false);
-INSERT INTO resource_type VALUES (112, 1549, 'suppliers', 'Suppliers', 'Suppliers', 'travelcrm.resources.suppliers', 'Suppliers for other services except tours services', 'null', false);
-INSERT INTO resource_type VALUES (111, 1548, 'outgoings', 'Outgoings', 'Outgoings', 'travelcrm.resources.outgoings', 'Outgoings payments for touroperators, suppliers, payback payments and so on', 'null', false);
-INSERT INTO resource_type VALUES (123, 1941, 'notifications', 'Notifications', 'Notifications', 'travelcrm.resources.notifications', 'Employee Notifications', 'null', false);
-INSERT INTO resource_type VALUES (128, 1977, 'companies_settings', 'Companies Settings', 'CompaniesSettings', 'travelcrm.resources.companies_settings', 'Companies Settings', 'null', false);
-INSERT INTO resource_type VALUES (124, 1954, 'emails_campaigns', 'Email Campaigns', 'EmailsCampaigns', 'travelcrm.resources.emails_campaigns', 'Emails Campaigns for subscribers', '{"timeout": 12}', true);
-INSERT INTO resource_type VALUES (129, 1989, 'sales_dynamics', 'Portlet: Sales Dynamics', 'SalesDynamics', 'travelcrm.resources.sales_dynamics', 'Portlet that shows dynamics of sales in quantity', '{"column_index": 0}', true);
-INSERT INTO resource_type VALUES (103, 1317, 'invoices', 'Invoices', 'Invoices', 'travelcrm.resources.invoices', 'Invoices list. Invoice can''t be created manualy - only using source document such as Tours', '{"active_days": 3}', true);
-INSERT INTO resource_type VALUES (125, 1966, 'unpaid_invoices', 'Portlet: Unpaid Invoices', 'UnpaidInvoices', 'travelcrm.resources.unpaid_invoices', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true);
-INSERT INTO resource_type VALUES (126, 1968, 'companies', 'Companies', 'Companies', 'travelcrm.resources.companies', 'Multicompanies functionality', 'null', false);
-INSERT INTO resource_type VALUES (130, 2049, 'leads', 'Leads', 'Leads', 'travelcrm.resources.leads', 'Leads that can be converted into contacts', 'null', false);
+INSERT INTO resource_type VALUES (117, 1797, 'subaccounts', 'Subaccounts', 'Subaccounts', 'travelcrm.resources.subaccounts', 'Subaccounts are accounts from other objects such as clients, touroperators and so on', 'null', false, 0);
+INSERT INTO resource_type VALUES (107, 1435, 'accounts', 'Accounts', 'Accounts', 'travelcrm.resources.accounts', 'Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible', 'null', false, 0);
+INSERT INTO resource_type VALUES (118, 1799, 'notes', 'Notes', 'Notes', 'travelcrm.resources.notes', 'Resources Notes', 'null', false, 0);
+INSERT INTO resource_type VALUES (92, 1221, 'tours_sales', 'Tours Sale', 'ToursSales', 'travelcrm.resources.tours_sales', 'Tours sales documents', '{"service_id": 5}', true, 0);
+INSERT INTO resource_type VALUES (119, 1849, 'calculations', 'Caluclations', 'Calculations', 'travelcrm.resources.calculations', 'Calculations of Sale Documents', 'null', false, 0);
+INSERT INTO resource_type VALUES (120, 1884, 'crosspayments', 'Cross Payments', 'Crosspayments', 'travelcrm.resources.crosspayments', 'Cross payments between accounts and subaccounts. This document is for balance corrections to.', 'null', false, 0);
+INSERT INTO resource_type VALUES (121, 1894, 'turnovers', 'Turnovers', 'Turnovers', 'travelcrm.resources.turnovers', 'Turnovers on Accounts and Subaccounts', 'null', false, 0);
+INSERT INTO resource_type VALUES (2, 10, 'users', 'Users', 'Users', 'travelcrm.resources.users', 'Users list', NULL, false, 0);
+INSERT INTO resource_type VALUES (12, 16, 'resources_types', 'Resources Types', 'ResourcesTypes', 'travelcrm.resources.resources_types', 'Resources types list', NULL, false, 0);
+INSERT INTO resource_type VALUES (47, 706, 'employees', 'Employees', 'Employees', 'travelcrm.resources.employees', 'Employees Container Datagrid', NULL, false, 0);
+INSERT INTO resource_type VALUES (78, 1003, 'touroperators', 'Touroperators', 'Touroperators', 'travelcrm.resources.touroperators', 'Touroperators - tours suppliers list', NULL, false, 0);
+INSERT INTO resource_type VALUES (1, 773, '', 'Home', 'Root', 'travelcrm.resources', 'Home Page of Travelcrm', NULL, false, 0);
+INSERT INTO resource_type VALUES (122, 1919, 'debts', 'Debts', 'Debts', 'travelcrm.resources.debts', 'Calculations based debts report', 'null', false, 0);
+INSERT INTO resource_type VALUES (93, 1225, 'tasks', 'Tasks', 'Tasks', 'travelcrm.resources.tasks', 'Task manager', NULL, false, 0);
+INSERT INTO resource_type VALUES (106, 1433, 'incomes', 'Incomes', 'Incomes', 'travelcrm.resources.incomes', 'Incomes Payments Document for invoices', '{"account_item_id": 8}', false, 0);
+INSERT INTO resource_type VALUES (41, 283, 'currencies', 'Currencies', 'Currencies', 'travelcrm.resources.currencies', '', NULL, false, 0);
+INSERT INTO resource_type VALUES (55, 723, 'structures', 'Structures', 'Structures', 'travelcrm.resources.structures', 'Companies structures is a tree of company structure. It''s can be offices, filials, departments and so and so', NULL, false, 0);
+INSERT INTO resource_type VALUES (59, 764, 'positions', 'Positions', 'Positions', 'travelcrm.resources.positions', 'Companies positions is a point of company structure where emplyees can be appointed', NULL, false, 0);
+INSERT INTO resource_type VALUES (61, 769, 'permisions', 'Permisions', 'Permisions', 'travelcrm.resources.permisions', 'Permisions list of company structure position. It''s list of resources and permisions', NULL, false, 0);
+INSERT INTO resource_type VALUES (65, 775, 'navigations', 'Navigations', 'Navigations', 'travelcrm.resources.navigations', 'Navigations list of company structure position.', NULL, false, 0);
+INSERT INTO resource_type VALUES (67, 788, 'appointments', 'Appointments', 'Appointments', 'travelcrm.resources.appointments', 'Employees to positions of company appointments', NULL, false, 0);
+INSERT INTO resource_type VALUES (39, 274, 'regions', 'Regions', 'Regions', 'travelcrm.resources.regions', '', NULL, false, 0);
+INSERT INTO resource_type VALUES (70, 872, 'countries', 'Countries', 'Countries', 'travelcrm.resources.countries', 'Countries directory', NULL, false, 0);
+INSERT INTO resource_type VALUES (71, 901, 'advsources', 'Advertise Sources', 'Advsources', 'travelcrm.resources.advsources', 'Types of advertises', NULL, false, 0);
+INSERT INTO resource_type VALUES (72, 908, 'hotelcats', 'Hotels Categories', 'Hotelcats', 'travelcrm.resources.hotelcats', 'Hotels categories', NULL, false, 0);
+INSERT INTO resource_type VALUES (73, 909, 'roomcats', 'Rooms Categories', 'Roomcats', 'travelcrm.resources.roomcats', 'Categories of the rooms', NULL, false, 0);
+INSERT INTO resource_type VALUES (74, 953, 'accomodations', 'Accomodations', 'Accomodations', 'travelcrm.resources.accomodations', 'Accomodations Types list', NULL, false, 0);
+INSERT INTO resource_type VALUES (75, 954, 'foodcats', 'Food Categories', 'Foodcats', 'travelcrm.resources.foodcats', 'Food types in hotels', NULL, false, 0);
+INSERT INTO resource_type VALUES (69, 865, 'persons', 'Persons', 'Persons', 'travelcrm.resources.persons', 'Persons directory. Person can be client or potential client', NULL, false, 0);
+INSERT INTO resource_type VALUES (79, 1007, 'bpersons', 'Business Persons', 'BPersons', 'travelcrm.resources.bpersons', 'Business Persons is not clients it''s simple business contacts that can be referenced objects that needs to have contacts', NULL, false, 0);
+INSERT INTO resource_type VALUES (84, 1088, 'locations', 'Locations', 'Locations', 'travelcrm.resources.locations', 'Locations list is list of cities, vilages etc. places to use to identify part of region', NULL, false, 0);
+INSERT INTO resource_type VALUES (83, 1081, 'hotels', 'Hotels', 'Hotels', 'travelcrm.resources.hotels', 'Hotels directory', NULL, false, 0);
+INSERT INTO resource_type VALUES (86, 1189, 'licences', 'Licences', 'Licences', 'travelcrm.resources.licences', 'Licences list for any type of resources as need', NULL, false, 0);
+INSERT INTO resource_type VALUES (87, 1190, 'contacts', 'Contacts', 'Contacts', 'travelcrm.resources.contacts', 'Contacts for persons, business persons etc.', NULL, false, 0);
+INSERT INTO resource_type VALUES (89, 1198, 'passports', 'Passports', 'Passports', 'travelcrm.resources.passports', 'Clients persons passports lists', NULL, false, 0);
+INSERT INTO resource_type VALUES (90, 1207, 'addresses', 'Addresses', 'Addresses', 'travelcrm.resources.addresses', 'Addresses of any type of resources, such as persons, bpersons, hotels etc.', NULL, false, 0);
+INSERT INTO resource_type VALUES (91, 1211, 'banks', 'Banks', 'Banks', 'travelcrm.resources.banks', 'Banks list to create bank details and for other reasons', NULL, false, 0);
+INSERT INTO resource_type VALUES (102, 1313, 'services', 'Services', 'Services', 'travelcrm.resources.services', 'Additional Services that can be provide with tours sales or separate', NULL, false, 0);
+INSERT INTO resource_type VALUES (101, 1268, 'banks_details', 'Banks Details', 'BanksDetails', 'travelcrm.resources.banks_details', 'Banks Details that can be attached to any client or business partner to define account', NULL, false, 0);
+INSERT INTO resource_type VALUES (104, 1393, 'currencies_rates', 'Currency Rates', 'CurrenciesRates', 'travelcrm.resources.currencies_rates', 'Currencies Rates. Values from this dir used by billing to calc prices in base currency.', NULL, false, 0);
+INSERT INTO resource_type VALUES (105, 1424, 'accounts_items', 'Account Items', 'AccountsItems', 'travelcrm.resources.accounts_items', 'Finance accounts items', NULL, false, 0);
+INSERT INTO resource_type VALUES (109, 1452, 'services_sales', 'Services Sale', 'ServicesSales', 'travelcrm.resources.services_sales', 'Additionals Services sales document. It is Invoicable objects and can generate contracts', 'null', false, 0);
+INSERT INTO resource_type VALUES (108, 1450, 'services_items', 'Service Item', 'ServicesItems', 'travelcrm.resources.services_items', 'Services Items List for include in sales documents such as Tours, Services Sales etc.', 'null', false, 0);
+INSERT INTO resource_type VALUES (110, 1521, 'commissions', 'Commissions', 'Commissions', 'travelcrm.resources.commissions', 'Services sales commissions', 'null', false, 0);
+INSERT INTO resource_type VALUES (112, 1549, 'suppliers', 'Suppliers', 'Suppliers', 'travelcrm.resources.suppliers', 'Suppliers for other services except tours services', 'null', false, 0);
+INSERT INTO resource_type VALUES (111, 1548, 'outgoings', 'Outgoings', 'Outgoings', 'travelcrm.resources.outgoings', 'Outgoings payments for touroperators, suppliers, payback payments and so on', 'null', false, 0);
+INSERT INTO resource_type VALUES (123, 1941, 'notifications', 'Notifications', 'Notifications', 'travelcrm.resources.notifications', 'Employee Notifications', 'null', false, 0);
+INSERT INTO resource_type VALUES (128, 1977, 'companies_settings', 'Companies Settings', 'CompaniesSettings', 'travelcrm.resources.companies_settings', 'Companies Settings', 'null', false, 0);
+INSERT INTO resource_type VALUES (124, 1954, 'emails_campaigns', 'Email Campaigns', 'EmailsCampaigns', 'travelcrm.resources.emails_campaigns', 'Emails Campaigns for subscribers', '{"timeout": 12}', true, 0);
+INSERT INTO resource_type VALUES (103, 1317, 'invoices', 'Invoices', 'Invoices', 'travelcrm.resources.invoices', 'Invoices list. Invoice can''t be created manualy - only using source document such as Tours', '{"active_days": 3}', true, 0);
+INSERT INTO resource_type VALUES (125, 1966, 'unpaid_invoices', 'Portlet: Unpaid Invoices', 'UnpaidInvoices', 'travelcrm.resources.unpaid_invoices', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true, 0);
+INSERT INTO resource_type VALUES (126, 1968, 'companies', 'Companies', 'Companies', 'travelcrm.resources.companies', 'Multicompanies functionality', 'null', false, 0);
+INSERT INTO resource_type VALUES (130, 2049, 'leads', 'Leads', 'Leads', 'travelcrm.resources.leads', 'Leads that can be converted into contacts', 'null', false, 0);
+INSERT INTO resource_type VALUES (129, 1989, 'sales_dynamics', 'Portlet: Sales Dynamics', 'SalesDynamics', 'travelcrm.resources.sales_dynamics', 'Portlet that shows dynamics of sales in quantity', '{"column_index": 0}', true, 1);
 
 
 --
@@ -6228,33 +6290,35 @@ INSERT INTO suppplier_subaccount VALUES (6, 10);
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO task VALUES (44, 1958, 2, 'Test new scheduler realization', '2014-12-22 19:18:00', '2014-12-21 19:44:00', 'New scheduler realizations notifications test.', false);
-INSERT INTO task VALUES (45, 1962, 2, 'Test', '2014-12-24 23:32:00', '2014-12-24 21:33:00', NULL, false);
-INSERT INTO task VALUES (46, 1964, 2, 'For testing', '2014-12-25 23:05:00', '2014-12-25 21:06:00', 'For testing purpose only', false);
-INSERT INTO task VALUES (47, 1971, 2, 'Check Payments', '2015-01-04 15:45:00', '2015-01-04 14:06:00', NULL, false);
-INSERT INTO task VALUES (48, 1980, 2, 'Check Reminder', '2015-01-08 18:21:00', '2015-01-07 18:21:00', 'Description to task', false);
-INSERT INTO task VALUES (49, 1982, 2, 'The second task', '2015-01-08 18:30:00', '2015-01-07 18:30:00', 'Second test task', false);
-INSERT INTO task VALUES (50, 1983, 2, 'Test', '2015-01-13 17:06:00', '2015-01-13 17:01:00', NULL, false);
-INSERT INTO task VALUES (51, 1985, 2, 'Test 2', '2015-01-14 17:02:00', '2015-01-13 17:04:00', NULL, false);
-INSERT INTO task VALUES (52, 2009, 2, 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 22:44:00', '2015-01-21 21:45:00', NULL, true);
-INSERT INTO task VALUES (53, 2016, 2, 'Notify his', '2015-02-02 17:09:00', '2015-02-02 15:09:00', 'Notify about the documents', false);
-INSERT INTO task VALUES (34, 1923, 2, 'Test 2', '2014-12-16 17:21:00', '2014-12-15 17:42:00', NULL, false);
-INSERT INTO task VALUES (33, 1922, 2, 'Test', '2014-12-07 21:36:00', '2014-12-07 20:36:00', 'For testing purpose', false);
-INSERT INTO task VALUES (35, 1930, 2, 'Check Person Details', '2014-12-11 21:43:00', '2014-12-10 22:42:00', 'Check if details is correct', false);
-INSERT INTO task VALUES (36, 1932, 2, 'Call and remind about payments', '2014-12-11 22:48:00', '2014-12-11 22:46:00', NULL, false);
-INSERT INTO task VALUES (38, 1934, 2, 'Call and remind about payment', '2014-12-12 22:50:00', '2014-12-11 22:52:00', 'Call and remind to pay invoice', false);
-INSERT INTO task VALUES (39, 1935, 2, 'Review Calculation', '2014-12-12 22:52:00', '2014-12-11 22:55:00', NULL, false);
-INSERT INTO task VALUES (41, 1939, 2, 'I have the following code', '2014-12-13 23:36:00', '2014-12-13 22:04:00', NULL, true);
-INSERT INTO task VALUES (37, 1933, 2, 'Call and remind about payment', '2014-12-14 22:46:00', '2014-12-14 11:15:00', NULL, false);
-INSERT INTO task VALUES (40, 1936, 2, 'For testing Purpose only', '2014-12-14 22:35:00', '2014-12-14 20:32:00', NULL, false);
-INSERT INTO task VALUES (42, 1940, 2, 'Test notifications', '2014-12-14 21:37:00', '2014-12-14 20:38:00', NULL, false);
+INSERT INTO task VALUES (37, 1933, 2, 'Call and remind about payment', '2014-12-14 22:46:00', '2014-12-14 11:15:00', NULL, false, 3);
+INSERT INTO task VALUES (34, 1923, 2, 'Test 2', '2014-12-16 17:21:00', '2014-12-15 17:42:00', NULL, false, 2);
+INSERT INTO task VALUES (38, 1934, 2, 'Call and remind about payment', '2014-12-12 22:50:00', '2014-12-11 22:52:00', 'Call and remind to pay invoice', false, 0);
+INSERT INTO task VALUES (39, 1935, 2, 'Review Calculation', '2014-12-12 22:52:00', '2014-12-11 22:55:00', NULL, false, 0);
+INSERT INTO task VALUES (40, 1936, 2, 'For testing Purpose only', '2014-12-14 22:35:00', '2014-12-14 20:32:00', NULL, false, 0);
+INSERT INTO task VALUES (33, 1922, 30, 'Test', '2014-12-07 21:36:00', '2014-12-07 20:36:00', 'For testing purpose', false, 1);
+INSERT INTO task VALUES (55, 2063, 2, 'Revert status after testing', '2015-03-08 19:41:00', '2015-03-08 18:42:00', 'Set status into active after testing', NULL, 0);
+INSERT INTO task VALUES (47, 1971, 2, 'Check Payments', '2015-01-04 15:45:00', '2015-01-04 14:06:00', NULL, false, 1);
+INSERT INTO task VALUES (41, 1939, 2, 'I have the following code', '2014-12-13 23:36:00', '2014-12-13 22:04:00', NULL, true, 3);
+INSERT INTO task VALUES (46, 1964, 2, 'For testing', '2014-12-25 23:05:00', '2014-12-25 21:06:00', 'For testing purpose only', false, 3);
+INSERT INTO task VALUES (45, 1962, 2, 'Test', '2014-12-24 23:32:00', '2014-12-24 21:33:00', NULL, false, 3);
+INSERT INTO task VALUES (52, 2009, 2, 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 22:44:00', '2015-01-21 21:45:00', NULL, true, 1);
+INSERT INTO task VALUES (54, 2062, 2, 'New JEasyui version migrate', '2015-03-07 21:43:00', '2015-03-07 20:43:00', 'Migrate on new 0.4.2 jeasyui version, check all functionality.', NULL, 2);
+INSERT INTO task VALUES (44, 1958, 2, 'Test new scheduler realization', '2014-12-22 19:18:00', '2014-12-21 19:44:00', 'New scheduler realizations notifications test.', false, 3);
+INSERT INTO task VALUES (48, 1980, 2, 'Check Reminder', '2015-01-08 18:21:00', '2015-01-07 18:21:00', 'Description to task', false, 2);
+INSERT INTO task VALUES (35, 1930, 2, 'Check Person Details', '2014-12-11 21:43:00', '2014-12-10 22:42:00', 'We''ll reuse the Amount type from last week. It''s mostly the same, except we''ll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we''ll use when dealing with SQL expressions.', false, 2);
+INSERT INTO task VALUES (49, 1982, 2, 'The second task', '2015-01-08 18:30:00', '2015-01-07 18:30:00', 'Second test task', false, 1);
+INSERT INTO task VALUES (50, 1983, 2, 'Test', '2015-01-13 17:06:00', '2015-01-13 17:01:00', NULL, false, 1);
+INSERT INTO task VALUES (51, 1985, 2, 'Test 2', '2015-01-14 17:02:00', '2015-01-13 17:04:00', NULL, false, 1);
+INSERT INTO task VALUES (53, 2016, 2, 'Notify his', '2015-02-02 17:09:00', '2015-02-02 15:09:00', 'Notify about the documents', false, 3);
+INSERT INTO task VALUES (42, 1940, 2, 'Test notifications', '2014-12-14 21:37:00', '2014-12-14 20:38:00', NULL, false, 2);
+INSERT INTO task VALUES (36, 1932, 2, 'Call and remind about payments', '2014-12-11 22:48:00', '2014-12-11 22:46:00', NULL, false, 1);
 
 
 --
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 53, true);
+SELECT pg_catalog.setval('task_id_seq', 55, true);
 
 
 --
@@ -6268,6 +6332,7 @@ INSERT INTO task_resource VALUES (47, 1840);
 INSERT INTO task_resource VALUES (48, 3);
 INSERT INTO task_resource VALUES (49, 3);
 INSERT INTO task_resource VALUES (53, 2017);
+INSERT INTO task_resource VALUES (55, 1989);
 
 
 --
@@ -6506,6 +6571,7 @@ SELECT pg_catalog.setval('transfer_id_seq', 94, true);
 
 INSERT INTO "user" VALUES (23, 894, 'maziv', NULL, 'maziv_maziv', 7);
 INSERT INTO "user" VALUES (2, 3, 'admin', 'vitalii.mazur@gmail.com', 'adminadmin', 2);
+INSERT INTO "user" VALUES (25, 2054, 'maz_iv', NULL, 'korn17', 30);
 
 
 --
