@@ -12,14 +12,12 @@
 
 /** emastic hacks **/
 .main{
-    width: 110em;
-    max-width: 115em;
-    min-width: 115em;
+    width: 115em;
 }
 html, body{
 	color: #555;
+	height: 100%;
 }
-
 a{
 	color: #000;
 	outline: none;
@@ -41,7 +39,7 @@ p{
 }
 #_top_{
 	height: 44px;
-	background-color: #2b394a;
+	background-color: #2b394a !important;
 }
 #_navigation_{
     background-color: #eee;
@@ -52,6 +50,9 @@ p{
 	box-shadow: 0px 0px 6px 0px rgba(119, 119, 119, 0.44);
 	-moz-box-shadow: 0px 0px 6px 0px rgba(119, 119, 119, 0.44);
 	-webkit-box-shadow: 0px 0px 6px 0px rgba(119, 119, 119, 0.44);
+	min-height: -moz-calc(100% - 108px); /* Firefox */
+	min-height: -webkit-calc(100% - 108px); /* Chrome, Safari */
+	min-height: calc(100% - 108px); /* IE9+ and future browsers */
 }
 #_main_{
 	background: #e9e9e9;
@@ -124,12 +125,16 @@ a.dashed{
 .pt05{
 	padding-top: 0.5em;
 }
+.pb05{
+	padding-bottom: 0.5em;
+}
 .pr02{
 	padding-right: 0.2em;
 }
 .pl02{
     padding-left: 0.2em;
 }
+
 
 /** margins **/
 .m05{
@@ -634,19 +639,17 @@ span.field-actions span.field-action:first-child {
 }
 
 /** labels **/
-.task-status{
+.status-label{
 	padding: 1px 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;	
-}
-.task-status.task-open{
-	background-color: #66b5d7;
-}
-.task-status.task-closed{
-	background-color: #60cd9b;
 	color: #fff;
 }
+.status-label.active{background-color: #008000;}
+.status-label.disabled{background-color: #800000;}
+.status-label.new{background-color: #808080;}
+.status-label.enquiry{background-color: #800080;}
+.status-label.in_work{background-color: #008080;}
+.status-label.ready{background-color: #008000;}
+
 
 /** images **/
 div.image-thumb{

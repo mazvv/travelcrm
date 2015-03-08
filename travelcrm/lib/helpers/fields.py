@@ -34,6 +34,7 @@ from ...resources.subaccounts import Subaccounts
 
 from ...models.task import Task
 from ...models.account import Account
+from ...models.resource_type import ResourceType
 
 from ..utils.common_utils import (
     gen_id,
@@ -3420,4 +3421,30 @@ def locales_field(value=None, name='locale', **kwargs):
         name, value, choices, class_='easyui-combobox text w5',
         data_options="panelHeight:'auto',editable:false",
         **kwargs
+    )
+
+
+def resources_types_statuses_combobox_field(
+    value=None, name='status'
+):
+    return tags.select(
+        name, value, ResourceType.STATUS, class_='easyui-combobox text w10',
+        data_options="panelHeight:'auto',editable:false,width:126"
+    )
+
+
+def tasks_statuses_combobox_field(
+    value=None, name='status', with_all=False, options=None
+):
+    data_options = "panelHeight:'auto',editable:false"
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    choices = Task.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=data_options
     )

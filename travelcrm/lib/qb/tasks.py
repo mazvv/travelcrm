@@ -1,13 +1,10 @@
 # -*coding: utf-8-*-
-import datetime
-from collections import Iterable
 
-from sqlalchemy import func, cast, Date, Time, case
+from collections import Iterable
 
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.task import Task
-from ...lib.utils.common_utils import cast_int
 
 
 class TasksQueryBuilder(ResourcesQueryBuilder):
@@ -18,8 +15,8 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
             'id': Task.id,
             '_id': Task.id,
             'title': Task.title,
-            'time': cast(Task.deadline, Time),
-            'closed': Task.closed,
+            'deadline': Task.deadline,
+            'status': Task.status,
         }
         self.build_query()
 
@@ -33,38 +30,17 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
         if id:
             self.query = self.query.filter(Task.id.in_(id))
 
-    def calendar_query(self, start_date, end_date=None):
-        if start_date:
-            self.query = self.query.filter(Task.deadline >= start_date)
-        if end_date:
-            self.query = self.query.filter(Task.deadline <= end_date)
-        self.query = (
-            self.query.with_entities(
-                func.sum(case([(Task.closed == True, 1)], else_=0))
-                    .label('closed'),
-                func.sum(case([(Task.closed == False, 1)], else_=0))
-                    .label('open'),
-                func.to_char(cast(Task.deadline, Date), 'YYYYMMDD')
-                    .label('deadline')
-            )
-            .group_by(cast(Task.deadline, Date))
-        )
-
     def advanced_search(self, **kwargs):
         super(TasksQueryBuilder, self).advanced_search(**kwargs)
-        if 'y' in kwargs and 'm' in kwargs and 'd' in kwargs:
-            self._filter_date(
-                kwargs.get('y'), kwargs.get('m'), kwargs.get('d')
-            )
-        if 'closed' in kwargs:
-            self._filter_closed(kwargs.get('closed'))
+        if 'status' in kwargs:
+            self._filter_status(kwargs.get('status'))
+        if 'performer_id' in kwargs:
+            self._filter_performer_id(kwargs.get('performer_id'))
 
-    def _filter_date(self, y, m, d):
-        if y and m and d:
-            date = datetime.date(cast_int(y), cast_int(m), cast_int(d))
-            self.query = self.query.filter(cast(Task.deadline, Date) == date)
+    def _filter_status(self, status):
+        if status:
+            self.query = self.query.filter(Task.status == status)
 
-    def _filter_closed(self, closed):
-        if closed:
-            closed = bool(cast_int(closed))
-            self.query = self.query.filter(Task.closed == closed)
+    def _filter_performer_id(self, performer_id):
+        if performer_id:
+            self.query = self.query.filter(Task.employee_id == performer_id)

@@ -146,4 +146,6 @@ def serialize(value):
         return format_time(value)
     if isinstance(value, Decimal):
         return format_decimal(value)
+    if hasattr(value, 'serialize'):
+        return value.serialize()
     return value

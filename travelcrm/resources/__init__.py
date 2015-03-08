@@ -63,23 +63,6 @@ class SecuredBase(object):
         return authenticated_userid(self.request)
 
 
-class ResourceTypeBase(SecuredBase):
-
-    def create_resource(self):
-        auth_employee = get_auth_employee(self.request)
-        assert auth_employee, "Not auth user can't create resource"
-        owner_structure = get_employee_structure(auth_employee)
-        resource = Resource(self.__class__, owner_structure)
-        return resource
-
-    @property
-    def allowed_scopes(self):
-        return True
-
-    def get_settings(self):
-        return get_resource_settings(self)
-
-
 class Root(SecuredBase):
 
     __name__ = None
@@ -93,3 +76,34 @@ class Root(SecuredBase):
         return [
             ('view', _(u'view')),
         ]
+
+
+class ResourceTypeBase(SecuredBase):
+
+    def __init__(self, request):
+        self.__parent__ = Root(request)
+        self.request = request
+
+    @property
+    def allowed_scopes(self):
+        return True
+
+    @property
+    def allowed_permisions(self):
+        return [
+            ('view', _(u'view')),
+            ('add', _(u'add')),
+            ('edit', _(u'edit')),
+            ('delete', _(u'delete')),
+            ('settings', _(u'settings')),
+        ]
+
+    def create_resource(self):
+        auth_employee = get_auth_employee(self.request)
+        assert auth_employee, "Not auth user can't create resource"
+        owner_structure = get_employee_structure(auth_employee)
+        resource = Resource(self.__class__, owner_structure)
+        return resource
+
+    def get_settings(self):
+        return get_resource_settings(self)

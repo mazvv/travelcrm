@@ -1,5 +1,5 @@
 if ($.fn.pagination){
-	$.fn.pagination.defaults.beforePageText = '';
+	$.fn.pagination.defaults.beforePageText = 'Page';
 	$.fn.pagination.defaults.afterPageText = 'of {pages}';
 	$.fn.pagination.defaults.displayMsg = '{from} - {to} of {total}';
 }

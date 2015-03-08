@@ -61,7 +61,7 @@
                         )}
                     </div>
                 </div>
-                <div class="form-field mb05">
+                <div class="form-field">
                     <div class="dl15">
                          ${h.tags.title(_(u"description"), False, "description")}
                     </div>
@@ -73,6 +73,16 @@
                             data_options="multiline:true,height:80",
                         )}
                         ${h.common.error_container(name='description')}
+                    </div>
+                </div>
+                <div class="form-field mb05">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"status"), True, "status")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.resources_types_statuses_combobox_field(
+                            item.status.key if item else None 
+                        )}
                     </div>
                 </div>
             </div>

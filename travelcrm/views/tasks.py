@@ -1,8 +1,6 @@
 # -*-coding: utf-8-*-
 
 import logging
-import datetime
-import calendar
 
 import colander
 from pyramid.view import view_config
@@ -12,7 +10,6 @@ from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.tasks import TasksQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import cast_int
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.scheduler.tasks import schedule_task_notification
 from ..forms.tasks import TaskSchema
@@ -111,7 +108,7 @@ class Tasks(object):
                 deadline=controls.get('deadline'),
                 reminder=controls.get('reminder'),
                 descr=controls.get('descr'),
-                closed=controls.get('closed'),
+                status=controls.get('status'),
                 resource=self.context.create_resource()
             )
             for id in controls.get('note_id'):
@@ -158,7 +155,7 @@ class Tasks(object):
             task.deadline = controls.get('deadline')
             task.reminder = controls.get('reminder')
             task.descr = controls.get('descr')
-            task.closed = controls.get('closed')
+            task.status = controls.get('status')
             task.resource.notes = []
             for id in controls.get('note_id'):
                 note = Note.get(id)
@@ -233,22 +230,3 @@ class Tasks(object):
                 ),
             }
         return {'success_message': _(u'Deleted')}
-
-    @view_config(
-        name='calendar',
-        context='..resources.tasks.Tasks',
-        request_method='GET',
-        renderer='json',
-        permission='view',
-    )
-    def calendar(self):
-        m = cast_int(self.request.params.get('month'))
-        y = cast_int(self.request.params.get('year'))
-        assert m and y, u'Must be integers'
-        qb = TasksQueryBuilder(self.context)
-        _weekday, days = calendar.monthrange(y, m)
-        start_date = datetime.datetime(year=y, month=m, day=1)
-        end_date = start_date + datetime.timedelta(days=days)
-        qb.calendar_query(start_date, end_date)
-        return qb.get_serialized()
-    

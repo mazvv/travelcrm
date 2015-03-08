@@ -112,6 +112,7 @@ class ResourcesTypes(object):
                 resource=controls.get('resource'),
                 customizable=controls.get('customizable'),
                 description=controls.get('description'),
+                status=controls.get('status'),
                 resource_obj=self.context.create_resource()
             )
             for id in controls.get('note_id'):
@@ -163,6 +164,7 @@ class ResourcesTypes(object):
             resources_type.resource = controls.get('resource')
             resources_type.customizable = controls.get('customizable')
             resources_type.description = controls.get('description')
+            resources_type.status = controls.get('status')
             resources_type.resource_obj.notes = []
             resources_type.resource_obj.tasks = []
             for id in controls.get('note_id'):

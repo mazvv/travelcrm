@@ -8,9 +8,11 @@ from sqlalchemy import (
     Date,
     Table,
     ForeignKey,
+    and_
 )
 from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import relationship, backref
+from sqlalchemy.sql.expression import case
 from sqlalchemy.ext.hybrid import hybrid_property
 
 from ..models import (
@@ -226,7 +228,17 @@ class Person(Base):
 
     @hybrid_property
     def name(self):
-        return self.last_name + " " + self.first_name
+        return " ".join(self.last_name, self.first_name)
+
+    @name.expression
+    def name(cls):
+        return case(
+            [(
+                and_(cls.last_name != None, cls.last_name != ""), 
+                cls.last_name + " " + cls.first_name
+            )],
+            else_=cls.first_name
+        )
 
     @classmethod
     def get(cls, id):

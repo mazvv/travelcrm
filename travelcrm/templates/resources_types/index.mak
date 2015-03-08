@@ -23,8 +23,22 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/resources_types/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
+            detailFormatter: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
+            },          
             onBeforeLoad: function(param){
-                var dg = $(this);
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
                 });
@@ -37,6 +51,7 @@
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'humanize',sortable:true,width:200">${_(u"humanize")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
+            <th data-options="field:'status',sortable:false,width:60,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
             <th data-options="field:'customizable',sortable:true,width:26,formatter:function(value, row){if (value) return $('<div>').append($('<span>').addClass('fa fa-cog')).html();}" align="center">${_(u's.')}</th>
             <th data-options="field:'modifydt',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>

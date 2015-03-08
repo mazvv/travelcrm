@@ -1,12 +1,17 @@
 # coding: utf-8
 
+import re
 import datetime
 
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import (
+    Column,
+    Integer,
+)
 from sqlalchemy.orm import (
     scoped_session,
     sessionmaker,
 )
+from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from zope.sqlalchemy import ZopeTransactionExtension
 
 DBSession = scoped_session(
@@ -16,8 +21,29 @@ DBSession = scoped_session(
     ),
 )
 
+def _to_camelcase(name):
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
-Base = declarative_base()
+
+class _Base(object):
+
+    @declared_attr
+    def __tablename__(cls):
+        return _to_camelcase(cls.__name__)
+
+    id = Column(
+        Integer,
+        autoincrement=True,
+        primary_key=True
+    )
+
+    @classmethod
+    def get(cls, id):
+        return DBSession.query(cls).filter(cls.id == id).first()
+
+
+Base = declarative_base(cls=_Base)
 
 from resource_type import ResourceType
 from resource import Resource

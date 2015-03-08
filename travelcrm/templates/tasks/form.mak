@@ -50,16 +50,14 @@
                         ${h.common.error_container(name='deadline')}
                     </div>
                 </div>
-                <div class="form-field">
+                <div class="form-field mb05">
                     <div class="dl15">
-                        ${h.tags.title(_(u"closed"), True, "closed")}
+                        ${h.tags.title(_(u"status"), True, "status")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.yes_no_field(
-                        	int(item.closed) if item else None, 
-                        	'closed'
+                        ${h.fields.tasks_statuses_combobox_field(
+                            item.status.key if item else None
                         )}
-                        ${h.common.error_container(name='closed')}
                     </div>
                 </div>
             </div>

@@ -47,7 +47,6 @@ class TaskSchema(ResourceSchema):
         colander.String(),
         missing=None,
     )
-    closed = colander.SchemaNode(
-        colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
-        default=False,
+    status = colander.SchemaNode(
+        colander.String(),
     )

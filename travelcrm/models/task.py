@@ -4,7 +4,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Boolean,
     DateTime,
     Table,
     ForeignKey,
@@ -15,6 +14,8 @@ from ..models import (
     DBSession,
     Base,
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 task_resource = Table(
@@ -47,6 +48,13 @@ task_resource = Table(
 
 class Task(Base):
     __tablename__ = 'task'
+
+    STATUS = (
+        ('new', _(u'new')),
+        ('enquiry', _(u'enquiry')),
+        ('in_work', _(u'in work')),
+        ('ready', _(u'ready')),
+    )
 
     id = Column(
         Integer,
@@ -87,9 +95,10 @@ class Task(Base):
     descr = Column(
         String,
     )
-    closed = Column(
-        Boolean,
-        default=False,
+    status = Column(
+        EnumIntType(STATUS),
+        default='new',
+        nullable=True,
     )
     resource = relationship(
         'Resource',

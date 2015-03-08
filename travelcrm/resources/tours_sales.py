@@ -7,12 +7,9 @@ from ..interfaces import (
     ICalculationFactory,
 )
 from ..resources import (
-    Root,
-)
-from ..resources import (
     ResourceTypeBase,
 )
-from ..lib.bl.tours_sales import (
+from ..lib.factories.tours_sales import (
     TourSaleInvoiceFactory,
     TourSaleCalculationFactory,
 )
@@ -26,18 +23,9 @@ class ToursSales(ResourceTypeBase):
 
     __name__ = 'tours_sales'
 
-    def __init__(self, request):
-        self.__parent__ = Root(request)
-        self.request = request
-
     @property
     def allowed_permisions(self):
-        return [
-            ('view', _(u'view')),
-            ('add', _(u'add')),
-            ('edit', _(u'edit')),
-            ('delete', _(u'delete')),
-            ('settings', _(u'settings')),
+        return super(ToursSales, self).allowed_permisions + [
             ('invoice', _(u'invoice')),
             ('calculation', _(u'calculation')),
             ('contract', _(u'contract')),

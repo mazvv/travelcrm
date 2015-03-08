@@ -111,6 +111,9 @@ class ResourceTypeSchema(ResourceSchema):
         validator=colander.Length(max=128),
         missing=u''
     )
+    status = colander.SchemaNode(
+        colander.String(),
+    )
 
 
 class ResourceTypeSearchSchema(ResourceSearchSchema):

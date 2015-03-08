@@ -1,14 +1,9 @@
 # -*-coding: utf-8 -*-
-
-
 from zope.interface import implementer
 
 from ..interfaces import (
     IResourceType,
     IPortlet,
-)
-from ..resources import (
-    Root,
 )
 from ..resources import (
     ResourceTypeBase,
@@ -21,10 +16,6 @@ from ..lib.utils.common_utils import translate as _
 class SalesDynamics(ResourceTypeBase):
 
     __name__ = 'sales_dynamics'
-
-    def __init__(self, request):
-        self.__parent__ = Root(request)
-        self.request = request
 
     @property
     def allowed_permisions(self):

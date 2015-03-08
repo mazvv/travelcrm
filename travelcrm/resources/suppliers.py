@@ -7,13 +7,9 @@ from ..interfaces import (
     ISubaccountFactory,
 )
 from ..resources import (
-    Root,
-)
-from ..resources import (
     ResourceTypeBase
 )
-from ..lib.utils.common_utils import translate as _
-from ..lib.bl.suppliers import SupplierSubaccountFactory
+from ..lib.factories.suppliers import SupplierSubaccountFactory
 
 
 @implementer(IResourceType)
@@ -21,19 +17,6 @@ from ..lib.bl.suppliers import SupplierSubaccountFactory
 class Suppliers(ResourceTypeBase):
 
     __name__ = 'suppliers'
-
-    def __init__(self, request):
-        self.__parent__ = Root(request)
-        self.request = request
-
-    @property
-    def allowed_permisions(self):
-        return [
-            ('view', _(u'view')),
-            ('add', _(u'add')),
-            ('edit', _(u'edit')),
-            ('delete', _(u'delete')),
-        ]
 
     @staticmethod
     def get_subaccount_factory():

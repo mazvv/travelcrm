@@ -19,8 +19,8 @@ ${h.tags.Doctype().html5()}
         )}
         <%block name="js"></%block>
     </head>
-    <body id="_page_" class="easyui-layout">
-        <div id="_head_" data-options="region:'north', border:false">
+    <body id="_page_">
+        <div id="_head_">
             <div id="_top_">
                 <div class="main">
                    ${panel('header_panel')}
@@ -39,31 +39,28 @@ ${h.tags.Doctype().html5()}
                 </div>
             </div>
         </div>
-        <div id="_footer_" data-options="region:'south', border:false">
-            <div class="main">
-                ${panel('footer_panel')}
-            </div>
-        </div>
-        <div id="_content_" class="main" data-options="region:'center', border:false">
-            <div class="easyui-layout" data-options="fit:true">
-                <div id="_tasks_" class="dl35"
-                    data-options="region:'east', 
-                        border:false, 
-                        split:true,
-                    ">
-                    <div id="_tools_" 
-                        class="easyui-panel" 
-                        data-options="fit:true,border:false,href:'/tasks'
-                    ">
+        <div id="_content_" class="main">
+            <div class="easyui-layout" data-options="fit:true,minHeight:650">
+                <div id="_tools_" class="dp30" title="${_(u'Tools panel')}" iconCls="fa fa-plug" data-options="region:'east',border:false,split:true,collapsible:true">
+                    <div class="easyui-tabs" data-options="fit:true,border:false">
+                        <div id="_tasks_" title="${_(u'Tasks')}" data-options="fit:true,border:false,href:'/tasks'">
+                        </div>
+                        <div id="_notes_" title="${_(u'Notes')}" data-options="fit:true,border:false,href:'/notes'">
+                        </div>
                     </div>
                 </div>
-                <div id="_main_" data-options="region:'center', border:false">
+                <div id="_main_" data-options="region:'center',border:false">
                     <div id="_tabs_" class="easyui-tabs" data-options="fit:true,border:false">
                         ${self.body()}
                     </div>
                 </div>
             </div>
             <div id="_dialog_"></div>
+        </div>
+        <div id="_footer_">
+            <div class="main">
+                ${panel('footer_panel')}
+            </div>
         </div>
     </body>
 </html>
