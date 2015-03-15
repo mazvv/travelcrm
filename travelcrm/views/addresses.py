@@ -4,6 +4,7 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.address import Address
@@ -68,6 +69,14 @@ class Addresses(object):
         permission='view'
     )
     def view(self):
+        if self.request.params.get('rid'):
+            resource_id = self.request.params.get('rid')
+            address = Address.by_resource_id(resource_id)
+            return HTTPFound(
+                location=self.request.resource_url(
+                    self.context, 'view', query={'id': address.id}
+                )
+            )
         result = self.edit()
         result.update({
             'title': _(u"View Address"),

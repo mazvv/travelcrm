@@ -16,7 +16,7 @@ class EnumInt(object):
 
     @property
     def key(self):
-        return self._values[self.value][0]
+        return self.value is not None and self._values[self.value][0]
 
     def __eq__(self, other):
         values = map(lambda x: x[0], self._values)

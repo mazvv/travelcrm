@@ -4,12 +4,16 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.company import Company
 from ..lib.qb.companies import CompaniesQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..forms.companies import CompanySchema
+from ..forms.companies import (
+    CompanyAddSchema,
+    CompanySchema,
+)
 
 
 log = logging.getLogger(__name__)
@@ -70,6 +74,14 @@ class Companies(object):
         permission='view'
     )
     def view(self):
+        if self.request.params.get('rid'):
+            resource_id = self.request.params.get('rid')
+            company = Company.by_resource_id(resource_id)
+            return HTTPFound(
+                location=self.request.resource_url(
+                    self.context, 'view', query={'id': company.id}
+                )
+            )
         result = self.edit()
         result.update({
             'title': _(u"View Company"),
@@ -77,47 +89,6 @@ class Companies(object):
         })
         return result
 
-    @view_config(
-        name='add',
-        context='..resources.companies.Companies',
-        request_method='GET',
-        renderer='travelcrm:templates/companies/form.mak',
-        permission='add'
-    )
-    def add(self):
-        return {'title': _(u'Add Company')}
-
-    @view_config(
-        name='add',
-        context='..resources.companies.Companies',
-        request_method='POST',
-        renderer='json',
-        permission='add'
-    )
-    def _add(self):
-        schema = CompanySchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            company = Company(
-                name=controls.get('name'),
-                currency_id=controls.get('currency_id'),
-                settings={
-                    'timezone': controls.get('timezone'),
-                    'locale': controls.get('locale')
-                },
-                resource=self.context.create_resource()
-            )
-            DBSession.add(company)
-            DBSession.flush()
-            return {
-                'success_message': _(u'Saved'),
-                'response': company.id
-            }
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }
 
     @view_config(
         name='edit',

@@ -4,10 +4,12 @@ import logging
 import colander
 
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.note import Note
 from ..lib.qb.notes import NotesQueryBuilder
+from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.notes import NoteSchema
@@ -68,6 +70,14 @@ class Notes(object):
         permission='view'
     )
     def view(self):
+        if self.request.params.get('rid'):
+            resource_id = self.request.params.get('rid')
+            note = Note.by_resource_id(resource_id)
+            return HTTPFound(
+                location=self.request.resource_url(
+                    self.context, 'view', query={'id': note.id}
+                )
+            )
         result = self.edit()
         result.update({
             'title': _(u"View Note"),
@@ -186,8 +196,15 @@ class Notes(object):
     )
     def details(self):
         note = Note.get(self.request.params.get('id'))
+        note_resource = None
+        if note.note_resource:
+            resource_cls = get_resource_class(
+                note.note_resource.resource_type.name
+            )
+            note_resource = resource_cls(self.request)
         return {
             'item': note,
+            'note_resource': note_resource,
         }
 
     @view_config(

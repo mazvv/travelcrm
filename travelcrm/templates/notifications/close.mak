@@ -5,17 +5,17 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.resource_url(_context, 'delete'), class_="_ajax", autocomplete="off", hidden_fields=[('id', id) for id in request.params.get('id').split(',')])}
+    ${h.tags.form(request.resource_url(_context, 'close'), class_="_ajax", autocomplete="off", hidden_fields=[('id', id) for id in request.params.get('id').split(',')])}
         <div class="p1">
             <div class="tc">
                 <i class="fa fa-info-circle fa-lg"></i> 
-                ${_(u"Do you realy want to delete checked items?")}
+                ${_(u"Do you really want to close checked notifications?")}
             </div>
         </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">
-                ${h.tags.submit('delete', _(u"Delete"), class_="button")}
+                ${h.tags.submit('close', _(u"Close"), class_="button")}
                 ${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
             </div>
         </div>

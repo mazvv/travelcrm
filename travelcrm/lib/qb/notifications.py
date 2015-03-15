@@ -3,7 +3,10 @@
 from . import ResourcesQueryBuilder
 
 from ...models.resource import Resource
-from ...models.notification import Notification
+from ...models.notification import (
+    Notification,
+    EmployeeNotification
+)
 from ...models.employee import Employee
 
 
@@ -15,6 +18,7 @@ class NotificationsQueryBuilder(ResourcesQueryBuilder):
             'id': Notification.id,
             '_id': Notification.id,
             'title': Notification.title,
+            'status': EmployeeNotification.status,
             'descr': Notification.descr,
             'created': Notification.created,
         }
@@ -22,8 +26,20 @@ class NotificationsQueryBuilder(ResourcesQueryBuilder):
 
     def build_query(self):
         self.build_base_query()
-        self.query = self.query.join(Notification, Resource.notification)
+        self.query = (
+            self.query
+            .join(Notification, Resource.notification)
+            .join(
+                EmployeeNotification,
+                Notification.id == EmployeeNotification.notification_id
+            )
+        )
         super(NotificationsQueryBuilder, self).build_query()
+
+    def advanced_search(self, **kwargs):
+        super(NotificationsQueryBuilder, self).advanced_search(**kwargs)
+        if 'status' in kwargs:
+            self._filter_status(kwargs.get('status'))
 
     def filter_employee(self, employee):
         assert isinstance(employee, Employee), u'Employee expected'
@@ -32,3 +48,9 @@ class NotificationsQueryBuilder(ResourcesQueryBuilder):
             .join(Employee, Notification.employees)
             .filter(Employee.id == employee.id)
         )
+
+    def _filter_status(self, status):
+        if status:
+            self.query = self.query.filter(
+                EmployeeNotification.status == status
+            )

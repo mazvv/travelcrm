@@ -649,6 +649,7 @@ span.field-actions span.field-action:first-child {
 .status-label.enquiry{background-color: #800080;}
 .status-label.in_work{background-color: #008080;}
 .status-label.ready{background-color: #008000;}
+.status-label.closed{background-color: #008000;}
 
 
 /** images **/

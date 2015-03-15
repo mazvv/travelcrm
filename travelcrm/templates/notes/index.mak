@@ -9,7 +9,7 @@
         data-options="
             url:'${request.resource_url(_context, 'list')}',border:false,
             pagination:true,fit:true,pageSize:50,singleSelect:true,
-            sortName:'id',sortOrder:'desc',
+            sortName:'modifydt',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
@@ -20,6 +20,7 @@
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);
+                        $.parser.parse('#' + row_id);
                     }
                 );
             },
@@ -38,9 +39,8 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'title',sortable:true,width:180">${_(u"title")}</th>
-            <th data-options="field:'status',sortable:false,width:60,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
-            <th data-options="field:'deadline',sortable:true,width:110,styler:function(){return datagrid_resource_cell_styler();}">${_(u'deadline')}</th>
+            <th data-options="field:'title',sortable:true,width:230">${_(u"title")}</th>
+            <th data-options="field:'modifydt',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
         </thead>
     </table>
 

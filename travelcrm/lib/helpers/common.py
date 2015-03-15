@@ -14,7 +14,7 @@ from ..utils.common_utils import (
     format_date as u_format_date,
     format_datetime as u_format_datetime,
     format_decimal as u_format_decimal,
-    get_base_currency as u_get_base_currency
+    get_base_currency as u_get_base_currency,
 )
 from ..utils.security_utils import get_auth_employee as u_get_auth_employee
 from ..bl.employees import get_employee_structure
@@ -71,11 +71,11 @@ def get_company_name():
 
 
 def contact_type_icon(contact_type):
-    assert contact_type in (u'phone', u'email', u'skype'), \
+    assert contact_type.key in (u'phone', u'email', u'skype'), \
         u"wrong contact type"
-    if contact_type == u'phone':
+    if contact_type.key == u'phone':
         return HTML.tag('span', class_='fa fa-phone')
-    elif contact_type == u'email':
+    elif contact_type.key == u'email':
         return HTML.tag('span', class_='fa fa-envelope')
     else:
         return HTML.tag('span', class_='fa fa-skype')

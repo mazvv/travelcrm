@@ -1,6 +1,5 @@
 import os
 import sys
-import transaction
 
 from sqlalchemy import engine_from_config
 
@@ -33,8 +32,5 @@ def main(argv=sys.argv):
     settings = get_appsettings(config_uri, options=options)
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
+    DBSession.execute('set search_path to c_2')
     Base.metadata.create_all(engine)
-
-
-def _execute_dump(locale):
-    pass

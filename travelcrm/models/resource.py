@@ -104,6 +104,18 @@ class Resource(Base):
             return None
         return DBSession.query(cls).get(id)
 
+    @property
+    def creator(self):
+        rl = self.resources_logs.first()
+        if rl:
+            return rl.modifier
+
+    @property
+    def last_modifier(self):
+        rl = self.resources_logs[-1]
+        if rl:
+            return rl.modifier
+
     def logging(self):
         request = threadlocal.get_current_request()
         if not request:

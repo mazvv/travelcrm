@@ -76,6 +76,14 @@ class Address(Base):
         return self.last_name + " " + self.first_name
 
     @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )
+
+    @classmethod
     def get(cls, id):
         if id is None:
             return None

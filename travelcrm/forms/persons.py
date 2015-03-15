@@ -23,7 +23,6 @@ class PersonSchema(ResourceSchema):
     )
     gender = colander.SchemaNode(
         colander.String(),
-        validators=colander.OneOf([u'male', u'female']),
         missing=None,
     )
     birthday = colander.SchemaNode(

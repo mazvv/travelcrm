@@ -17,6 +17,18 @@ ${h.tags.Doctype().html5()}
             request.static_url('travelcrm:static/js/jeasyui/locale/easyui-lang-%s.js' % h.common.get_locale_name()),
             request.static_url('travelcrm:static/js/main.js')
         )}
+        <script type="text/javascript">
+        $(document).ready(
+            setInterval(
+                function(){
+                    $.getJSON('/notifications/counter', function(data){
+                        $('.notifications-counter').html(data.count);
+                    });
+                }, 
+                5000
+            )
+        );
+        </script>
         <%block name="js"></%block>
     </head>
     <body id="_page_">
@@ -46,6 +58,8 @@ ${h.tags.Doctype().html5()}
                         <div id="_tasks_" title="${_(u'Tasks')}" data-options="fit:true,border:false,href:'/tasks'">
                         </div>
                         <div id="_notes_" title="${_(u'Notes')}" data-options="fit:true,border:false,href:'/notes'">
+                        </div>
+                        <div id="_activities_" title="${_(u'Notifications')}" data-options="fit:true,border:false,href:'/notifications'">
                         </div>
                     </div>
                 </div>

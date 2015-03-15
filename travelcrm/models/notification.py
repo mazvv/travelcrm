@@ -11,17 +11,51 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship, backref
 
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
+
 from ..models import (
     DBSession,
     Base
 )
 
 
-employee_notification = Table(
-    'employee_notification',
+notification_resource = Table(
+    'notification_resource',
     Base.metadata,
     Column(
-        'employee_id',
+        'notification_id',
+        Integer,
+        ForeignKey(
+            'notification.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_notification_id_notification_resource',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'resource_id',
+        Integer,
+        ForeignKey(
+            'resource.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_resource_id_notification_resource',
+        ),
+        primary_key=True,
+    )
+)
+
+
+class EmployeeNotification(Base):
+    __tablename__ = 'employee_notification'
+
+    STATUS = (
+        ('new', _(u'new')),
+        ('closed', _(u'closed')),
+    )
+    employee_id = Column(
         Integer,
         ForeignKey(
             'employee.id',
@@ -30,19 +64,25 @@ employee_notification = Table(
             name='fk_employee_id_employee_notification',
         ),
         primary_key=True,
-    ),
-    Column(
-        'notification_id',
+    )
+    notification_id = Column(
         Integer,
         ForeignKey(
             'notification.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_contact_id_employee_notification',
+            name='fk_notification_id_employee_notification',
         ),
         primary_key=True,
     )
-)
+    status = Column(
+        EnumIntType(STATUS),
+        default='new',
+        nullable=False,
+    )
+
+    def close(self):
+        self.status = 'closed'
 
 
 class Notification(Base):
@@ -88,9 +128,19 @@ class Notification(Base):
         cascade="all,delete",
         uselist=False,
     )
+    notification_resource = relationship(
+        'Resource',
+        secondary=notification_resource,
+        backref=backref(
+            'notifications',
+            uselist=True,
+            lazy='dynamic',
+        ),
+        uselist=False,
+    )
     employees = relationship(
         'Employee',
-        secondary=employee_notification,
+        secondary=EmployeeNotification.__table__,
         backref=backref(
             'notifications',
             uselist=True,
@@ -105,3 +155,11 @@ class Notification(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )

@@ -6,10 +6,17 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ProcessPoolExecutor
 
+from pyramid.httpexceptions import HTTPNotFound
+
 import lib.helpers as h
 from .lib.utils.common_utils import translate as _
 from .lib.bl.employees import get_employee_structure
 from .lib.utils.security_utils import get_auth_employee
+from .lib.utils.sql_utils import (
+    get_default_schema,
+    get_schemas,
+    set_search_path
+)
 from .interfaces import IScheduler
 
 
@@ -34,6 +41,18 @@ def company_settings(event):
             'company.locale_name': company.settings.get('locale'),
         }
         request.registry.settings.update(settings)
+
+
+def company_schema(event):
+    request = event.request
+    domain_parts = request.domain.split('.', 1)
+    schema_name = get_default_schema()
+    if len(domain_parts) > 1:
+        schema_name = domain_parts[0]
+        schemas = get_schemas()
+        if schema_name not in schemas:
+            raise HTTPNotFound()
+    set_search_path(schema_name)
 
 
 def scheduler(event):

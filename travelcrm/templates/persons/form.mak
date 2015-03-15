@@ -46,7 +46,7 @@
                         ${h.tags.title(_(u"gender"), False, "gender")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.gender_combobox_field(item.gender if item else None)}
+                        ${h.fields.gender_combobox_field(item.gender.key if item else None)}
                         ${h.common.error_container(name='gender')}
                     </div>
                 </div>

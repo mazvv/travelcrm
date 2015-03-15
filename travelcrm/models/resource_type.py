@@ -23,6 +23,7 @@ from ..lib.utils.common_utils import translate as _
 
 
 class ResourceType(Base):
+    __tablename__ = 'resource_type'
     __table_args__ = (
         UniqueConstraint(
             'module',
@@ -40,6 +41,12 @@ class ResourceType(Base):
         ('disabled', _(u'disabled')),
     )
 
+    id = Column(
+        Integer(),
+        primary_key=True,
+        nullable=False,
+        autoincrement=True
+    )
     resource_id = Column(
         Integer,
         ForeignKey(
@@ -92,6 +99,12 @@ class ResourceType(Base):
         foreign_keys=[resource_id],
         uselist=False
     )
+
+    @classmethod
+    def get(cls, id):
+        if id is None:
+            return None
+        return DBSession.query(cls).get(id)
 
     @classmethod
     def by_resource_id(cls, resource_id):

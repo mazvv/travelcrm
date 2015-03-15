@@ -6,8 +6,10 @@ from pyramid.view import view_config
 
 from ..models.notification import Notification
 from ..lib.qb.notifications import NotificationsQueryBuilder
+from ..lib.bl.notifications import close_notification
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.resources_utils import get_resource_class
 
 
 log = logging.getLogger(__name__)
@@ -40,6 +42,9 @@ class Notifications(object):
     def _list(self):
         qb = NotificationsQueryBuilder(self.context)
         qb.filter_employee(self.employee)
+        qb.advanced_search(
+            **self.request.params.mixed()
+        )
         qb.sort_query(
             self.request.params.get('sort'),
             self.request.params.get('order', 'asc')
@@ -61,8 +66,11 @@ class Notifications(object):
         permission='view'
     )
     def counter(self):
+        qb = NotificationsQueryBuilder(self.context)
+        qb.filter_employee(self.employee)
+        qb.advanced_search(status='new')
         return {
-            'count': self.employee.notifications.count(),
+            'count': qb.query.count(),
         }
 
     @view_config(
@@ -74,32 +82,39 @@ class Notifications(object):
     )
     def details(self):
         notification = Notification.get(self.request.params.get('id'))
+        notification_resource = None
+        if notification.notification_resource:
+            resource_cls = get_resource_class(
+                notification.notification_resource.resource_type.name
+            )
+            notification_resource = resource_cls(self.request)
         return {
             'item': notification,
+            'notification_resource': notification_resource,
         }
 
     @view_config(
-        name='delete',
+        name='close',
         context='..resources.notifications.Notifications',
         request_method='GET',
-        renderer='travelcrm:templates/notifications/delete.mak',
-        permission='delete'
+        renderer='travelcrm:templates/notifications/close.mak',
+        permission='close'
     )
-    def delete(self):
+    def close(self):
         return {
-            'title': _(u'Delete Notifications'),
+            'title': _(u'Close Notification'),
             'id': self.request.params.get('id')
         }
 
     @view_config(
-        name='delete',
+        name='close',
         context='..resources.notifications.Notifications',
         request_method='POST',
         renderer='json',
-        permission='delete'
+        permission='close'
     )
-    def _delete(self):
+    def _close(self):
         for id in self.request.params.getall('id'):
             item = Notification.get(id)
-            item.employees.remove(self.employee)
-        return {'success_message': _(u'Deleted')}
+            close_notification(self.employee, item)
+        return {'success_message': _(u'Closed')}

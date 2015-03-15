@@ -35,6 +35,10 @@ from ...resources.subaccounts import Subaccounts
 from ...models.task import Task
 from ...models.account import Account
 from ...models.resource_type import ResourceType
+from ...models.contact import Contact
+from ...models.person import Person
+from ...models.passport import Passport
+from ...models.notification import EmployeeNotification
 
 from ..utils.common_utils import (
     gen_id,
@@ -366,7 +370,6 @@ def positions_combogrid_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 param.q = '';
@@ -497,11 +500,7 @@ def datetime_field(value, name, options=None):
 def gender_combobox_field(
     value=None, name='gender'
 ):
-    choices = [
-        ('', '--None--'),
-        ('female', _(u'female')),
-        ('male', _(u'male')),
-    ]
+    choices = [('', '--None--'),] + list(Person.GENDER)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options="panelHeight:'auto',editable:false,width:126"
@@ -511,13 +510,9 @@ def gender_combobox_field(
 def contact_type_combobox_field(
     value=None, name='contact_type'
 ):
-    choices = [
-        ('phone', _(u'phone')),
-        ('email', _(u'email')),
-        ('skype', _(u'skype')),
-    ]
     return tags.select(
-        name, value, choices, class_='easyui-combobox text w10',
+        name, value, Contact.CONTACT_TYPE,
+        class_='easyui-combobox text w10',
         data_options="panelHeight:'auto',editable:false"
     )
 
@@ -597,7 +592,6 @@ def licences_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 param.q = '';
@@ -2352,22 +2346,9 @@ def advsources_combobox_field(
 def passport_type_field(
     value=None, name='passport_type'
 ):
-    choices = [
-        ('citizen', _(u'citizen')),
-        ('foreign', _(u'foreign')),
-    ]
     return tags.select(
-        name, value, choices, class_='easyui-combobox text w20',
+        name, value, Passport.PASSPORT_TYPE, class_='easyui-combobox text w20',
         data_options="panelHeight:'auto',editable:false,width:246"
-    )
-
-
-def tasks_priority_combobox_field(
-    value=None, name='priority'
-):
-    return tags.select(
-        name, value, Task.PRIORITY, class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false,width:126"
     )
 
 
@@ -2455,7 +2436,6 @@ def banks_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 param.q = '';
@@ -2589,7 +2569,6 @@ def banks_details_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 if(%(structure_id)s){
@@ -2715,7 +2694,6 @@ def services_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 param.q = '';
@@ -2837,7 +2815,6 @@ def accounts_items_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 param.q = '';
@@ -3086,7 +3063,6 @@ def invoices_combobox_field(
             var this_selector = '#%(obj_id)s';
             var response_id = $(this_selector).data('response');
             var id = %(id)s;
-            console.log(this_selector);
             if(response_id){
                 param.id = response_id;
                 param.q = '';
@@ -3442,6 +3418,23 @@ def tasks_statuses_combobox_field(
             %s
         """ % options
     choices = Task.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=data_options
+    )
+
+
+def notifications_statuses_combobox_field(
+    value=None, name='status', with_all=False, options=None
+):
+    data_options = "panelHeight:'auto',editable:false"
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    choices = EmployeeNotification.STATUS
     if with_all:
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(

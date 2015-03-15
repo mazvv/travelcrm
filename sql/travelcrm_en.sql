@@ -10,6 +10,13 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
+-- Name: c_2; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA c_2;
+
+
+--
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -24,47 +31,6 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 SET search_path = public, pg_catalog;
-
---
--- Name: contact_type_enum; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE contact_type_enum AS ENUM (
-    'phone',
-    'email',
-    'skype'
-);
-
-
---
--- Name: genders_enum; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE genders_enum AS ENUM (
-    'male',
-    'female'
-);
-
-
---
--- Name: passport_type_enum; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE passport_type_enum AS ENUM (
-    'citizen',
-    'foreign'
-);
-
-
---
--- Name: visibility_enum; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE visibility_enum AS ENUM (
-    'all',
-    'own'
-);
-
 
 SET default_tablespace = '';
 
@@ -745,8 +711,8 @@ ALTER SEQUENCE company_id_seq OWNED BY company.id;
 CREATE TABLE contact (
     id integer NOT NULL,
     contact character varying NOT NULL,
-    contact_type contact_type_enum NOT NULL,
-    resource_id integer NOT NULL
+    resource_id integer NOT NULL,
+    contact_type integer NOT NULL
 );
 
 
@@ -923,7 +889,8 @@ CREATE TABLE employee_contact (
 
 CREATE TABLE employee_notification (
     employee_id integer NOT NULL,
-    notification_id integer NOT NULL
+    notification_id integer NOT NULL,
+    status smallint NOT NULL
 );
 
 
@@ -1318,6 +1285,16 @@ ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
+-- Name: notification_resource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notification_resource (
+    notification_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: outgoing; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1367,11 +1344,11 @@ CREATE TABLE outgoing_transfer (
 CREATE TABLE passport (
     id integer NOT NULL,
     country_id integer NOT NULL,
-    passport_type passport_type_enum NOT NULL,
     num character varying(32) NOT NULL,
     descr character varying(255),
     resource_id integer NOT NULL,
-    end_date date
+    end_date date,
+    passport_type integer NOT NULL
 );
 
 
@@ -1419,8 +1396,8 @@ CREATE TABLE person (
     last_name character varying(32),
     second_name character varying(32),
     birthday date,
-    gender genders_enum,
-    subscriber boolean
+    subscriber boolean,
+    gender integer
 );
 
 
@@ -1837,7 +1814,6 @@ CREATE TABLE task (
     deadline timestamp without time zone NOT NULL,
     reminder timestamp without time zone,
     descr character varying,
-    closed boolean,
     status smallint NOT NULL
 );
 
@@ -2481,14 +2457,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6590, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6598, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2064, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2069, true);
 
 
 --
@@ -2628,7 +2604,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO alembic_version VALUES ('42dc01faf677');
+INSERT INTO alembic_version VALUES ('45f5d49f9433');
 
 
 --
@@ -2810,57 +2786,57 @@ SELECT pg_catalog.setval('company_id_seq', 1, true);
 -- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO contact VALUES (27, '+380681983869', 'phone', 1193);
-INSERT INTO contact VALUES (28, 'asdasd@mail.com', 'email', 1194);
-INSERT INTO contact VALUES (29, '+380681983869', 'phone', 1195);
-INSERT INTO contact VALUES (30, '+380681983869', 'phone', 1201);
-INSERT INTO contact VALUES (32, '+380681983869', 'phone', 1204);
-INSERT INTO contact VALUES (35, 'vitalii.mazur@gmail.com', 'email', 1243);
-INSERT INTO contact VALUES (36, '+380681983869', 'phone', 1244);
-INSERT INTO contact VALUES (37, '+380681983869', 'phone', 1257);
-INSERT INTO contact VALUES (38, 'vitalii.mazur@gmail.com', 'email', 1258);
-INSERT INTO contact VALUES (39, '+380681983869', 'phone', 1259);
-INSERT INTO contact VALUES (40, 'vitalii.mazur@gmail.com', 'email', 1260);
-INSERT INTO contact VALUES (41, '+380682523645', 'phone', 1263);
-INSERT INTO contact VALUES (42, 'a.koff@gmail.com', 'email', 1264);
-INSERT INTO contact VALUES (44, '+380675625353', 'phone', 1282);
-INSERT INTO contact VALUES (45, '+380502355565', 'phone', 1285);
-INSERT INTO contact VALUES (46, 'n.voevoda@gmail.com', 'email', 1304);
-INSERT INTO contact VALUES (47, '+380673566789', 'phone', 1371);
-INSERT INTO contact VALUES (48, '+380502314567', 'phone', 1373);
-INSERT INTO contact VALUES (49, 'travelcrm', 'skype', 1379);
-INSERT INTO contact VALUES (50, '+380682345678', 'phone', 1380);
-INSERT INTO contact VALUES (51, '+380502232233', 'phone', 1387);
-INSERT INTO contact VALUES (52, '+380502354235', 'phone', 1404);
-INSERT INTO contact VALUES (53, '+380503435512', 'phone', 1464);
-INSERT INTO contact VALUES (54, '+380976543565', 'phone', 1516);
-INSERT INTO contact VALUES (55, '+380675643623', 'phone', 1517);
-INSERT INTO contact VALUES (56, 'ravak_skype', 'skype', 1518);
-INSERT INTO contact VALUES (57, 'ravak@myemail.com', 'email', 1519);
-INSERT INTO contact VALUES (58, '+380681983800', 'phone', 1543);
-INSERT INTO contact VALUES (59, 'dorianyats', 'skype', 1544);
-INSERT INTO contact VALUES (60, 'info@travelcrm.org.ua', 'email', 1545);
-INSERT INTO contact VALUES (61, '+380681234567', 'phone', 1551);
-INSERT INTO contact VALUES (62, 'serge_vlasov', 'skype', 1552);
-INSERT INTO contact VALUES (63, 'i_gonchar@i-tele.com', 'email', 1559);
-INSERT INTO contact VALUES (64, '+380953434358', 'phone', 1561);
-INSERT INTO contact VALUES (65, 'mega_tkach@ukr.net', 'email', 1562);
-INSERT INTO contact VALUES (66, 'AnnaNews', 'skype', 1577);
-INSERT INTO contact VALUES (67, '+380672568976', 'phone', 1581);
-INSERT INTO contact VALUES (68, '+380672346534', 'phone', 1591);
-INSERT INTO contact VALUES (69, '+380500567765', 'phone', 1610);
-INSERT INTO contact VALUES (70, 'artyuh87@gmail.com', 'email', 1611);
-INSERT INTO contact VALUES (71, '+380503435436', 'phone', 1620);
-INSERT INTO contact VALUES (72, 'grach18@ukr.net', 'email', 1621);
-INSERT INTO contact VALUES (73, '+380975642876', 'phone', 1624);
-INSERT INTO contact VALUES (74, '+380665638900', 'phone', 1640);
-INSERT INTO contact VALUES (75, 'karpuha1990@ukr.net', 'email', 1641);
-INSERT INTO contact VALUES (76, '+380502235686', 'phone', 1650);
-INSERT INTO contact VALUES (77, '+380674523123', 'phone', 1927);
-INSERT INTO contact VALUES (78, 'vitalii.mazur@gmail.com', 'email', 1956);
-INSERT INTO contact VALUES (79, '+380923435643', 'phone', 2013);
-INSERT INTO contact VALUES (80, '+380505674534', 'phone', 2018);
-INSERT INTO contact VALUES (81, '+380671238943', 'phone', 2050);
+INSERT INTO contact VALUES (27, '+380681983869', 1193, 0);
+INSERT INTO contact VALUES (29, '+380681983869', 1195, 0);
+INSERT INTO contact VALUES (30, '+380681983869', 1201, 0);
+INSERT INTO contact VALUES (32, '+380681983869', 1204, 0);
+INSERT INTO contact VALUES (36, '+380681983869', 1244, 0);
+INSERT INTO contact VALUES (37, '+380681983869', 1257, 0);
+INSERT INTO contact VALUES (39, '+380681983869', 1259, 0);
+INSERT INTO contact VALUES (41, '+380682523645', 1263, 0);
+INSERT INTO contact VALUES (44, '+380675625353', 1282, 0);
+INSERT INTO contact VALUES (45, '+380502355565', 1285, 0);
+INSERT INTO contact VALUES (47, '+380673566789', 1371, 0);
+INSERT INTO contact VALUES (48, '+380502314567', 1373, 0);
+INSERT INTO contact VALUES (51, '+380502232233', 1387, 0);
+INSERT INTO contact VALUES (52, '+380502354235', 1404, 0);
+INSERT INTO contact VALUES (53, '+380503435512', 1464, 0);
+INSERT INTO contact VALUES (54, '+380976543565', 1516, 0);
+INSERT INTO contact VALUES (55, '+380675643623', 1517, 0);
+INSERT INTO contact VALUES (58, '+380681983800', 1543, 0);
+INSERT INTO contact VALUES (61, '+380681234567', 1551, 0);
+INSERT INTO contact VALUES (64, '+380953434358', 1561, 0);
+INSERT INTO contact VALUES (67, '+380672568976', 1581, 0);
+INSERT INTO contact VALUES (68, '+380672346534', 1591, 0);
+INSERT INTO contact VALUES (69, '+380500567765', 1610, 0);
+INSERT INTO contact VALUES (71, '+380503435436', 1620, 0);
+INSERT INTO contact VALUES (73, '+380975642876', 1624, 0);
+INSERT INTO contact VALUES (74, '+380665638900', 1640, 0);
+INSERT INTO contact VALUES (76, '+380502235686', 1650, 0);
+INSERT INTO contact VALUES (77, '+380674523123', 1927, 0);
+INSERT INTO contact VALUES (79, '+380923435643', 2013, 0);
+INSERT INTO contact VALUES (80, '+380505674534', 2018, 0);
+INSERT INTO contact VALUES (81, '+380671238943', 2050, 0);
+INSERT INTO contact VALUES (28, 'asdasd@mail.com', 1194, 1);
+INSERT INTO contact VALUES (35, 'vitalii.mazur@gmail.com', 1243, 1);
+INSERT INTO contact VALUES (38, 'vitalii.mazur@gmail.com', 1258, 1);
+INSERT INTO contact VALUES (40, 'vitalii.mazur@gmail.com', 1260, 1);
+INSERT INTO contact VALUES (42, 'a.koff@gmail.com', 1264, 1);
+INSERT INTO contact VALUES (46, 'n.voevoda@gmail.com', 1304, 1);
+INSERT INTO contact VALUES (57, 'ravak@myemail.com', 1519, 1);
+INSERT INTO contact VALUES (60, 'info@travelcrm.org.ua', 1545, 1);
+INSERT INTO contact VALUES (63, 'i_gonchar@i-tele.com', 1559, 1);
+INSERT INTO contact VALUES (65, 'mega_tkach@ukr.net', 1562, 1);
+INSERT INTO contact VALUES (70, 'artyuh87@gmail.com', 1611, 1);
+INSERT INTO contact VALUES (72, 'grach18@ukr.net', 1621, 1);
+INSERT INTO contact VALUES (75, 'karpuha1990@ukr.net', 1641, 1);
+INSERT INTO contact VALUES (78, 'vitalii.mazur@gmail.com', 1956, 1);
+INSERT INTO contact VALUES (49, 'travelcrm', 1379, 2);
+INSERT INTO contact VALUES (56, 'ravak_skype', 1518, 2);
+INSERT INTO contact VALUES (59, 'dorianyats', 1544, 2);
+INSERT INTO contact VALUES (62, 'serge_vlasov', 1552, 2);
+INSERT INTO contact VALUES (66, 'AnnaNews', 1577, 2);
+INSERT INTO contact VALUES (50, '+380682345688', 1380, 0);
 
 
 --
@@ -3004,7 +2980,9 @@ INSERT INTO employee_contact VALUES (2, 59);
 -- Data for Name: employee_notification; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO employee_notification VALUES (2, 18);
+INSERT INTO employee_notification VALUES (2, 18, 1);
+INSERT INTO employee_notification VALUES (2, 20, 1);
+INSERT INTO employee_notification VALUES (2, 19, 1);
 
 
 --
@@ -3396,37 +3374,21 @@ INSERT INTO note VALUES (2, 1801, 'For testing purpose', NULL);
 INSERT INTO note VALUES (3, 1802, 'This resource type is under qustion', '<b>Seems we need new schema for accounting.</b>');
 INSERT INTO note VALUES (4, 1803, 'I had asked questions for expert in accounting', 'Alexander said that the most appopriate schema is to use accounts for each object such as persons, touroperators and so on');
 INSERT INTO note VALUES (5, 1804, 'Need to ask questions to expert', NULL);
-INSERT INTO note VALUES (6, 1808, 'Test note', 'for testing');
-INSERT INTO note VALUES (7, 1813, 'dfsdfsdf', NULL);
-INSERT INTO note VALUES (8, 1814, 'sfdfsdafasdf', NULL);
-INSERT INTO note VALUES (9, 1816, 'asdaDAS', NULL);
-INSERT INTO note VALUES (10, 1818, 'asdasdsadas', NULL);
-INSERT INTO note VALUES (11, 1820, 'SADFASDFASDF', NULL);
-INSERT INTO note VALUES (12, 1823, 'cxvzxcvzxcv', NULL);
-INSERT INTO note VALUES (13, 1825, 'zxvzxcv', NULL);
-INSERT INTO note VALUES (14, 1827, 'cvxzcvxc', NULL);
-INSERT INTO note VALUES (15, 1829, 'xcvzxcvzxcv', NULL);
-INSERT INTO note VALUES (16, 1830, 'dsfsdafasdf', NULL);
-INSERT INTO note VALUES (17, 1831, 'sdafsdafasd f', NULL);
 INSERT INTO note VALUES (18, 1833, 'Main Developer of TravelCRM', 'The main developer of TravelCRM');
-INSERT INTO note VALUES (19, 1834, 'tretwertwer', NULL);
-INSERT INTO note VALUES (20, 1835, 'sdfsdfsdf', NULL);
-INSERT INTO note VALUES (21, 1836, 'asdfsdfsd', NULL);
-INSERT INTO note VALUES (22, 1837, 'sdfsdfsdf', NULL);
-INSERT INTO note VALUES (23, 1838, 'asdasdaSD', NULL);
 INSERT INTO note VALUES (24, 1872, 'For users', 'This subaccount is for Person Garkaviy Andrew');
 INSERT INTO note VALUES (25, 1924, 'Passport detalized', 'There is no information about passport');
 INSERT INTO note VALUES (26, 1931, 'Resource Task', 'This is for resource only');
 INSERT INTO note VALUES (27, 1979, 'Test Note', 'Description to test note');
 INSERT INTO note VALUES (28, 1981, 'VIP User', 'This user is for VIP');
-INSERT INTO note VALUES (29, 2012, 'Good Hotel', NULL);
+INSERT INTO note VALUES (29, 2012, 'Good Hotel', 'Edit description for Hotels note');
+INSERT INTO note VALUES (30, 2065, 'Note without source resource', 'This note was created directly from Tools Panel');
 
 
 --
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 29, true);
+SELECT pg_catalog.setval('note_id_seq', 30, true);
 
 
 --
@@ -3440,8 +3402,8 @@ INSERT INTO note_resource VALUES (25, 1928);
 INSERT INTO note_resource VALUES (28, 3);
 INSERT INTO note_resource VALUES (18, 784);
 INSERT INTO note_resource VALUES (29, 1470);
-INSERT INTO note_resource VALUES (27, 1980);
 INSERT INTO note_resource VALUES (26, 1930);
+INSERT INTO note_resource VALUES (27, 1980);
 
 
 --
@@ -3464,13 +3426,22 @@ INSERT INTO notification VALUES (15, 1984, 'Task: Test', 'Test', '2015-01-13 17:
 INSERT INTO notification VALUES (16, 1986, 'Task: Test 2', 'Test 2', '2015-01-13 17:04:00.011637', NULL);
 INSERT INTO notification VALUES (17, 2010, 'Task: I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 21:45:00.013037', NULL);
 INSERT INTO notification VALUES (18, 2064, 'Task: Revert status after testing', 'Revert status after testing', '2015-03-08 18:42:00.01327', NULL);
+INSERT INTO notification VALUES (19, 2067, 'Task: Notifications testing #2', 'Notifications testing #2', '2015-03-09 17:17:00.020674', NULL);
+INSERT INTO notification VALUES (20, 2069, 'Task: Test Notification resource link', 'Test Notification resource link', '2015-03-09 19:29:00.018282', NULL);
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 18, true);
+SELECT pg_catalog.setval('notification_id_seq', 20, true);
+
+
+--
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO notification_resource VALUES (20, 2068);
 
 
 --
@@ -3504,30 +3475,30 @@ INSERT INTO outgoing_transfer VALUES (16, 73);
 -- Data for Name: passport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO passport VALUES (1, 14, 'foreign', '231654', NULL, 1199, NULL);
-INSERT INTO passport VALUES (2, 14, 'foreign', '132456', NULL, 1200, NULL);
-INSERT INTO passport VALUES (4, 12, 'foreign', '1234564', NULL, 1205, NULL);
-INSERT INTO passport VALUES (5, 14, 'foreign', 'Svxzvxz', 'xzcvxzcv', 1206, NULL);
-INSERT INTO passport VALUES (6, 3, 'citizen', 'НК028057', NULL, 1261, NULL);
-INSERT INTO passport VALUES (7, 3, 'citizen', 'HJ123456', 'new passport', 1265, NULL);
-INSERT INTO passport VALUES (8, 3, 'citizen', 'РМ12345', 'from Kiev region', 1286, NULL);
-INSERT INTO passport VALUES (9, 3, 'citizen', 'HK123456', NULL, 1376, NULL);
-INSERT INTO passport VALUES (10, 3, 'citizen', 'HK12345', NULL, 1381, NULL);
-INSERT INTO passport VALUES (11, 3, 'citizen', 'PO123456', NULL, 1406, NULL);
-INSERT INTO passport VALUES (12, 3, 'citizen', 'TY3456', NULL, 1467, '2016-04-10');
-INSERT INTO passport VALUES (13, 3, 'citizen', 'YU78932', 'Ukrainian citizen passport', 1582, NULL);
-INSERT INTO passport VALUES (14, 3, 'foreign', 'RT678123', 'Foreign Passport', 1584, '2015-08-21');
-INSERT INTO passport VALUES (15, 3, 'foreign', 'TY67342', NULL, 1592, '2015-08-28');
-INSERT INTO passport VALUES (16, 3, 'citizen', 'IO98676', NULL, 1612, NULL);
-INSERT INTO passport VALUES (17, 3, 'foreign', 'ER781263', NULL, 1613, NULL);
-INSERT INTO passport VALUES (18, 3, 'citizen', 'НК089564', NULL, 1622, NULL);
-INSERT INTO passport VALUES (19, 3, 'citizen', 'RE6712346', NULL, 1625, NULL);
-INSERT INTO passport VALUES (20, 3, 'citizen', 'HJ789665', NULL, 1642, NULL);
-INSERT INTO passport VALUES (21, 3, 'foreign', 'RT7892634', NULL, 1643, '2017-07-19');
-INSERT INTO passport VALUES (22, 3, 'foreign', 'RT632453', NULL, 1651, '2019-08-16');
-INSERT INTO passport VALUES (23, 3, 'citizen', 'RTY', NULL, 1925, NULL);
-INSERT INTO passport VALUES (24, 3, 'citizen', 'HH67187', NULL, 2014, NULL);
-INSERT INTO passport VALUES (25, 9, 'foreign', 'TY78534', NULL, 2019, '2018-06-06');
+INSERT INTO passport VALUES (1, 14, '231654', NULL, 1199, NULL, 0);
+INSERT INTO passport VALUES (2, 14, '132456', NULL, 1200, NULL, 0);
+INSERT INTO passport VALUES (4, 12, '1234564', NULL, 1205, NULL, 0);
+INSERT INTO passport VALUES (5, 14, 'Svxzvxz', 'xzcvxzcv', 1206, NULL, 0);
+INSERT INTO passport VALUES (14, 3, 'RT678123', 'Foreign Passport', 1584, '2015-08-21', 0);
+INSERT INTO passport VALUES (15, 3, 'TY67342', NULL, 1592, '2015-08-28', 0);
+INSERT INTO passport VALUES (17, 3, 'ER781263', NULL, 1613, NULL, 0);
+INSERT INTO passport VALUES (21, 3, 'RT7892634', NULL, 1643, '2017-07-19', 0);
+INSERT INTO passport VALUES (22, 3, 'RT632453', NULL, 1651, '2019-08-16', 0);
+INSERT INTO passport VALUES (25, 9, 'TY78534', NULL, 2019, '2018-06-06', 0);
+INSERT INTO passport VALUES (6, 3, 'НК028057', NULL, 1261, NULL, 1);
+INSERT INTO passport VALUES (7, 3, 'HJ123456', 'new passport', 1265, NULL, 1);
+INSERT INTO passport VALUES (8, 3, 'РМ12345', 'from Kiev region', 1286, NULL, 1);
+INSERT INTO passport VALUES (9, 3, 'HK123456', NULL, 1376, NULL, 1);
+INSERT INTO passport VALUES (10, 3, 'HK12345', NULL, 1381, NULL, 1);
+INSERT INTO passport VALUES (11, 3, 'PO123456', NULL, 1406, NULL, 1);
+INSERT INTO passport VALUES (12, 3, 'TY3456', NULL, 1467, '2016-04-10', 1);
+INSERT INTO passport VALUES (13, 3, 'YU78932', 'Ukrainian citizen passport', 1582, NULL, 1);
+INSERT INTO passport VALUES (16, 3, 'IO98676', NULL, 1612, NULL, 1);
+INSERT INTO passport VALUES (18, 3, 'НК089564', NULL, 1622, NULL, 1);
+INSERT INTO passport VALUES (19, 3, 'RE6712346', NULL, 1625, NULL, 1);
+INSERT INTO passport VALUES (20, 3, 'HJ789665', NULL, 1642, NULL, 1);
+INSERT INTO passport VALUES (23, 3, 'RTY', NULL, 1925, NULL, 1);
+INSERT INTO passport VALUES (24, 3, 'HH67187', NULL, 2014, NULL, 1);
 
 
 --
@@ -3633,7 +3604,6 @@ INSERT INTO permision VALUES (75, 106, 4, '{view,add,edit,delete,settings}', NUL
 INSERT INTO permision VALUES (131, 120, 4, '{view,add,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (132, 121, 4, '{view}', NULL, 'all');
 INSERT INTO permision VALUES (133, 122, 4, '{view}', NULL, 'all');
-INSERT INTO permision VALUES (134, 123, 4, '{view,delete}', NULL, 'all');
 INSERT INTO permision VALUES (135, 124, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (72, 103, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (136, 125, 4, '{view,settings}', NULL, 'all');
@@ -3642,45 +3612,46 @@ INSERT INTO permision VALUES (139, 128, 4, '{edit,view}', NULL, 'all');
 INSERT INTO permision VALUES (140, 129, 4, '{view,settings}', NULL, 'all');
 INSERT INTO permision VALUES (141, 130, 4, '{add,view,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (24, 12, 4, '{view,add,edit,delete,settings}', NULL, 'all');
+INSERT INTO permision VALUES (134, 123, 4, '{view,close}', NULL, 'all');
 
 
 --
 -- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO person VALUES (4, 870, 'Greg', 'Johnson', '', NULL, NULL, false);
-INSERT INTO person VALUES (5, 871, 'John', 'Doe', '', NULL, NULL, false);
-INSERT INTO person VALUES (6, 887, 'Peter', 'Parker', '', '1976-04-07', NULL, false);
-INSERT INTO person VALUES (17, 1284, 'Nikolay', 'Voevoda', '', '1981-07-22', 'male', false);
-INSERT INTO person VALUES (18, 1293, 'Irina', 'Voevoda', '', '1984-01-18', 'female', false);
-INSERT INTO person VALUES (19, 1294, 'Stas', 'Voevoda', '', '2007-10-16', 'male', false);
-INSERT INTO person VALUES (20, 1372, 'Oleg', 'Pogorelov', '', '1970-02-17', 'male', false);
-INSERT INTO person VALUES (21, 1375, 'Elena', 'Pogorelova', 'Petrovna', '1972-02-19', 'female', false);
-INSERT INTO person VALUES (23, 1389, 'Iren', 'Mazur', '', '1979-09-03', 'female', false);
-INSERT INTO person VALUES (24, 1390, 'Igor', 'Mazur', '', '2007-07-21', 'male', false);
-INSERT INTO person VALUES (25, 1408, 'Vitalii', 'Klishunov', '', '1976-04-07', 'male', false);
-INSERT INTO person VALUES (26, 1409, 'Natalia', 'Klishunova', '', '1978-08-10', 'male', false);
-INSERT INTO person VALUES (27, 1410, 'Maxim', 'Klishunov', '', '2005-02-16', 'male', false);
-INSERT INTO person VALUES (28, 1411, 'Ann', 'Klishunova', '', '2013-02-14', 'female', false);
-INSERT INTO person VALUES (29, 1465, 'Eugen', 'Velichko', '', '1982-04-07', 'male', false);
-INSERT INTO person VALUES (30, 1471, 'Irina', 'Avdeeva', '', '1984-11-21', 'female', false);
-INSERT INTO person VALUES (31, 1472, 'Velichko', 'Alexander', '', '2006-01-11', 'male', false);
-INSERT INTO person VALUES (32, 1473, 'Velichko', 'Elizabeth', '', '2010-06-15', 'female', false);
-INSERT INTO person VALUES (34, 1593, 'Elena', 'Babich', '', '1991-05-23', 'female', false);
-INSERT INTO person VALUES (33, 1586, 'Roman', 'Babich', '', '1990-11-14', 'male', false);
-INSERT INTO person VALUES (36, 1616, 'Nikolay', 'Artyuh', '', '1986-10-08', 'male', false);
-INSERT INTO person VALUES (37, 1619, 'Andriy', 'Garkaviy', '', '1984-11-14', 'male', false);
-INSERT INTO person VALUES (39, 1627, 'Petro', 'Garkaviy', '', '2004-06-08', 'male', false);
-INSERT INTO person VALUES (41, 1645, 'Karpenko', 'Alexander', '', '1990-06-04', 'male', false);
-INSERT INTO person VALUES (42, 1653, 'Smichko', 'Olena', '', '1992-07-15', 'female', false);
-INSERT INTO person VALUES (40, 1628, 'Alena', 'Garkava', '', '2007-03-29', 'female', true);
-INSERT INTO person VALUES (43, 1869, 'Alexey', 'Ivankiv', 'V.', NULL, 'male', true);
-INSERT INTO person VALUES (38, 1626, 'Elena', 'Garkava', '', '1986-01-08', 'male', true);
-INSERT INTO person VALUES (35, 1615, 'Tat''ana', 'Artyuh', '', '1987-02-10', 'female', true);
-INSERT INTO person VALUES (22, 1383, 'Vitalii', 'Mazur', '', '1979-07-17', 'male', true);
-INSERT INTO person VALUES (44, 2017, 'Sergey', 'Gavrish', '', '1981-08-05', 'male', true);
-INSERT INTO person VALUES (45, 2020, 'Anna', 'Gavrish', '', '1993-11-17', 'female', true);
-INSERT INTO person VALUES (46, 2051, 'Nikolay', '', '', NULL, NULL, false);
+INSERT INTO person VALUES (17, 1284, 'Nikolay', 'Voevoda', '', '1981-07-22', false, 0);
+INSERT INTO person VALUES (19, 1294, 'Stas', 'Voevoda', '', '2007-10-16', false, 0);
+INSERT INTO person VALUES (20, 1372, 'Oleg', 'Pogorelov', '', '1970-02-17', false, 0);
+INSERT INTO person VALUES (24, 1390, 'Igor', 'Mazur', '', '2007-07-21', false, 0);
+INSERT INTO person VALUES (25, 1408, 'Vitalii', 'Klishunov', '', '1976-04-07', false, 0);
+INSERT INTO person VALUES (26, 1409, 'Natalia', 'Klishunova', '', '1978-08-10', false, 0);
+INSERT INTO person VALUES (27, 1410, 'Maxim', 'Klishunov', '', '2005-02-16', false, 0);
+INSERT INTO person VALUES (29, 1465, 'Eugen', 'Velichko', '', '1982-04-07', false, 0);
+INSERT INTO person VALUES (31, 1472, 'Velichko', 'Alexander', '', '2006-01-11', false, 0);
+INSERT INTO person VALUES (33, 1586, 'Roman', 'Babich', '', '1990-11-14', false, 0);
+INSERT INTO person VALUES (36, 1616, 'Nikolay', 'Artyuh', '', '1986-10-08', false, 0);
+INSERT INTO person VALUES (37, 1619, 'Andriy', 'Garkaviy', '', '1984-11-14', false, 0);
+INSERT INTO person VALUES (39, 1627, 'Petro', 'Garkaviy', '', '2004-06-08', false, 0);
+INSERT INTO person VALUES (41, 1645, 'Karpenko', 'Alexander', '', '1990-06-04', false, 0);
+INSERT INTO person VALUES (43, 1869, 'Alexey', 'Ivankiv', 'V.', NULL, true, 0);
+INSERT INTO person VALUES (38, 1626, 'Elena', 'Garkava', '', '1986-01-08', true, 0);
+INSERT INTO person VALUES (22, 1383, 'Vitalii', 'Mazur', '', '1979-07-17', true, 0);
+INSERT INTO person VALUES (44, 2017, 'Sergey', 'Gavrish', '', '1981-08-05', true, 0);
+INSERT INTO person VALUES (18, 1293, 'Irina', 'Voevoda', '', '1984-01-18', false, 1);
+INSERT INTO person VALUES (21, 1375, 'Elena', 'Pogorelova', 'Petrovna', '1972-02-19', false, 1);
+INSERT INTO person VALUES (28, 1411, 'Ann', 'Klishunova', '', '2013-02-14', false, 1);
+INSERT INTO person VALUES (30, 1471, 'Irina', 'Avdeeva', '', '1984-11-21', false, 1);
+INSERT INTO person VALUES (32, 1473, 'Velichko', 'Elizabeth', '', '2010-06-15', false, 1);
+INSERT INTO person VALUES (34, 1593, 'Elena', 'Babich', '', '1991-05-23', false, 1);
+INSERT INTO person VALUES (42, 1653, 'Smichko', 'Olena', '', '1992-07-15', false, 1);
+INSERT INTO person VALUES (40, 1628, 'Alena', 'Garkava', '', '2007-03-29', true, 1);
+INSERT INTO person VALUES (35, 1615, 'Tat''ana', 'Artyuh', '', '1987-02-10', true, 1);
+INSERT INTO person VALUES (45, 2020, 'Anna', 'Gavrish', '', '1993-11-17', true, 1);
+INSERT INTO person VALUES (4, 870, 'Greg', 'Johnson', '', NULL, false, 0);
+INSERT INTO person VALUES (5, 871, 'John', 'Doe', '', NULL, false, 0);
+INSERT INTO person VALUES (6, 887, 'Peter', 'Parker', '', '1976-04-07', false, 0);
+INSERT INTO person VALUES (46, 2051, 'Nikolay', '', '', NULL, false, 0);
+INSERT INTO person VALUES (23, 1389, 'Iren', 'Mazur', '', '1979-09-03', false, 1);
 
 
 --
@@ -4450,24 +4421,7 @@ INSERT INTO resource VALUES (1802, 118, 32, false);
 INSERT INTO resource VALUES (1803, 118, 32, false);
 INSERT INTO resource VALUES (1804, 118, 32, false);
 INSERT INTO resource VALUES (1807, 90, 32, false);
-INSERT INTO resource VALUES (1808, 118, 32, false);
-INSERT INTO resource VALUES (1813, 118, 32, false);
-INSERT INTO resource VALUES (1814, 118, 32, false);
-INSERT INTO resource VALUES (1816, 118, 32, false);
-INSERT INTO resource VALUES (1818, 118, 32, false);
-INSERT INTO resource VALUES (1820, 118, 32, false);
-INSERT INTO resource VALUES (1823, 118, 32, false);
-INSERT INTO resource VALUES (1825, 118, 32, false);
-INSERT INTO resource VALUES (1827, 118, 32, false);
-INSERT INTO resource VALUES (1829, 118, 32, false);
-INSERT INTO resource VALUES (1830, 118, 32, false);
-INSERT INTO resource VALUES (1831, 118, 32, false);
 INSERT INTO resource VALUES (1833, 118, 32, false);
-INSERT INTO resource VALUES (1834, 118, 32, false);
-INSERT INTO resource VALUES (1835, 118, 32, false);
-INSERT INTO resource VALUES (1836, 118, 32, false);
-INSERT INTO resource VALUES (1837, 118, 32, false);
-INSERT INTO resource VALUES (1838, 118, 32, false);
 INSERT INTO resource VALUES (1839, 103, 32, false);
 INSERT INTO resource VALUES (1840, 103, 32, false);
 INSERT INTO resource VALUES (1841, 108, 32, false);
@@ -4645,6 +4599,11 @@ INSERT INTO resource VALUES (2055, 12, 32, false);
 INSERT INTO resource VALUES (2062, 93, 32, false);
 INSERT INTO resource VALUES (2063, 93, 32, false);
 INSERT INTO resource VALUES (2064, 123, 32, false);
+INSERT INTO resource VALUES (2065, 118, 32, false);
+INSERT INTO resource VALUES (2066, 93, 32, false);
+INSERT INTO resource VALUES (2067, 123, 32, false);
+INSERT INTO resource VALUES (2068, 93, 32, false);
+INSERT INTO resource VALUES (2069, 123, 32, false);
 
 
 --
@@ -5408,7 +5367,6 @@ INSERT INTO resource_log VALUES (5991, 1797, 2, NULL, '2014-10-10 21:48:40.22468
 INSERT INTO resource_log VALUES (5994, 1797, 2, NULL, '2014-10-10 22:43:03.886027');
 INSERT INTO resource_log VALUES (5995, 1807, 2, NULL, '2014-10-12 12:18:58.609492');
 INSERT INTO resource_log VALUES (5996, 1419, 2, NULL, '2014-10-12 12:21:41.297126');
-INSERT INTO resource_log VALUES (5997, 1808, 2, NULL, '2014-10-12 14:01:25.243707');
 INSERT INTO resource_log VALUES (5999, 1419, 2, NULL, '2014-10-12 14:03:13.921521');
 INSERT INTO resource_log VALUES (6000, 1419, 2, NULL, '2014-10-12 14:03:56.458732');
 INSERT INTO resource_log VALUES (6002, 1797, 2, NULL, '2014-10-12 14:08:19.225786');
@@ -5416,51 +5374,35 @@ INSERT INTO resource_log VALUES (6003, 1797, 2, NULL, '2014-10-12 14:08:29.32266
 INSERT INTO resource_log VALUES (6005, 1797, 2, NULL, '2014-10-12 14:09:47.667654');
 INSERT INTO resource_log VALUES (6006, 1797, 2, NULL, '2014-10-12 14:10:15.511498');
 INSERT INTO resource_log VALUES (6008, 894, 2, NULL, '2014-10-12 14:15:30.839116');
-INSERT INTO resource_log VALUES (6009, 1813, 2, NULL, '2014-10-12 14:15:48.666773');
 INSERT INTO resource_log VALUES (6010, 894, 2, NULL, '2014-10-12 14:15:50.178579');
 INSERT INTO resource_log VALUES (6011, 894, 2, NULL, '2014-10-12 14:16:00.712168');
-INSERT INTO resource_log VALUES (6012, 1814, 2, NULL, '2014-10-12 14:21:39.857292');
 INSERT INTO resource_log VALUES (6014, 1507, 2, NULL, '2014-10-12 14:21:53.792753');
 INSERT INTO resource_log VALUES (6015, 1507, 2, NULL, '2014-10-12 14:22:06.118134');
 INSERT INTO resource_log VALUES (6016, 1439, 2, NULL, '2014-10-12 14:22:17.008412');
 INSERT INTO resource_log VALUES (6017, 1438, 2, NULL, '2014-10-12 14:22:21.965321');
-INSERT INTO resource_log VALUES (6018, 1816, 2, NULL, '2014-10-12 14:25:07.755915');
 INSERT INTO resource_log VALUES (6020, 1780, 2, NULL, '2014-10-12 14:25:19.014258');
 INSERT INTO resource_log VALUES (6021, 1780, 2, NULL, '2014-10-12 14:25:28.403238');
 INSERT INTO resource_log VALUES (6022, 1780, 2, NULL, '2014-10-12 14:25:37.930302');
-INSERT INTO resource_log VALUES (6023, 1818, 2, NULL, '2014-10-12 14:30:47.572942');
 INSERT INTO resource_log VALUES (6025, 1413, 2, NULL, '2014-10-12 14:31:06.237149');
 INSERT INTO resource_log VALUES (6026, 1413, 2, NULL, '2014-10-12 14:31:16.507549');
-INSERT INTO resource_log VALUES (6027, 1820, 2, NULL, '2014-10-12 14:32:08.189913');
 INSERT INTO resource_log VALUES (6029, 1415, 2, NULL, '2014-10-12 14:34:22.672887');
 INSERT INTO resource_log VALUES (6030, 1415, 2, NULL, '2014-10-12 14:34:32.05391');
-INSERT INTO resource_log VALUES (6032, 1823, 2, NULL, '2014-10-12 14:41:47.550757');
 INSERT INTO resource_log VALUES (6033, 1656, 2, NULL, '2014-10-12 14:41:52.788316');
 INSERT INTO resource_log VALUES (6034, 1656, 2, NULL, '2014-10-12 14:42:08.782779');
 INSERT INTO resource_log VALUES (6036, 1656, 2, NULL, '2014-10-12 14:42:30.203879');
 INSERT INTO resource_log VALUES (6037, 1656, 2, NULL, '2014-10-12 14:42:44.613039');
-INSERT INTO resource_log VALUES (6038, 1825, 2, NULL, '2014-10-12 15:40:22.532108');
 INSERT INTO resource_log VALUES (6040, 1759, 2, NULL, '2014-10-12 15:40:35.199768');
 INSERT INTO resource_log VALUES (6041, 1759, 2, NULL, '2014-10-12 15:41:02.788024');
-INSERT INTO resource_log VALUES (6042, 1827, 2, NULL, '2014-10-12 15:41:56.978292');
 INSERT INTO resource_log VALUES (6043, 1657, 2, NULL, '2014-10-12 15:41:58.778177');
 INSERT INTO resource_log VALUES (6045, 1657, 2, NULL, '2014-10-12 15:42:13.36551');
 INSERT INTO resource_log VALUES (6046, 1657, 2, NULL, '2014-10-12 15:42:24.726059');
-INSERT INTO resource_log VALUES (6047, 1829, 2, NULL, '2014-10-12 15:53:46.704817');
-INSERT INTO resource_log VALUES (6048, 1830, 2, NULL, '2014-10-12 15:54:37.347579');
-INSERT INTO resource_log VALUES (6049, 1831, 2, NULL, '2014-10-12 15:56:47.049952');
 INSERT INTO resource_log VALUES (6050, 1653, 2, NULL, '2014-10-12 16:27:20.425954');
 INSERT INTO resource_log VALUES (6051, 1653, 2, NULL, '2014-10-12 16:27:45.783221');
 INSERT INTO resource_log VALUES (6053, 1283, 2, NULL, '2014-10-12 16:28:08.925372');
 INSERT INTO resource_log VALUES (6054, 1283, 2, NULL, '2014-10-12 16:28:17.376186');
 INSERT INTO resource_log VALUES (6055, 1833, 2, NULL, '2014-10-12 16:29:10.045595');
 INSERT INTO resource_log VALUES (6056, 784, 2, NULL, '2014-10-12 16:29:11.936722');
-INSERT INTO resource_log VALUES (6057, 1834, 2, NULL, '2014-10-12 16:33:14.624844');
-INSERT INTO resource_log VALUES (6058, 1835, 2, NULL, '2014-10-12 16:34:06.787408');
-INSERT INTO resource_log VALUES (6059, 1836, 2, NULL, '2014-10-12 16:34:49.091444');
-INSERT INTO resource_log VALUES (6060, 1837, 2, NULL, '2014-10-12 16:35:17.46038');
 INSERT INTO resource_log VALUES (6061, 1542, 2, NULL, '2014-10-12 17:31:06.178463');
-INSERT INTO resource_log VALUES (6062, 1838, 2, NULL, '2014-10-12 20:54:50.322646');
 INSERT INTO resource_log VALUES (6063, 861, 2, NULL, '2014-10-12 20:54:52.692696');
 INSERT INTO resource_log VALUES (6064, 861, 2, NULL, '2014-10-12 20:55:02.552131');
 INSERT INTO resource_log VALUES (6065, 1075, 2, NULL, '2014-10-18 11:46:21.55028');
@@ -5952,6 +5894,14 @@ INSERT INTO resource_log VALUES (6587, 1922, 2, NULL, '2015-03-08 18:17:03.97174
 INSERT INTO resource_log VALUES (6588, 1922, 2, NULL, '2015-03-08 18:29:12.5349');
 INSERT INTO resource_log VALUES (6589, 2063, 2, NULL, '2015-03-08 18:41:45.468589');
 INSERT INTO resource_log VALUES (6590, 1989, 2, NULL, '2015-03-08 18:41:51.822924');
+INSERT INTO resource_log VALUES (6591, 2021, 2, NULL, '2015-03-09 13:29:58.788901');
+INSERT INTO resource_log VALUES (6592, 2065, 2, NULL, '2015-03-09 14:02:38.899688');
+INSERT INTO resource_log VALUES (6593, 2066, 2, NULL, '2015-03-09 17:16:22.759831');
+INSERT INTO resource_log VALUES (6594, 2068, 2, NULL, '2015-03-09 19:28:40.834898');
+INSERT INTO resource_log VALUES (6595, 1980, 2, NULL, '2015-03-09 19:37:29.594475');
+INSERT INTO resource_log VALUES (6596, 1389, 2, NULL, '2015-03-15 19:00:11.360402');
+INSERT INTO resource_log VALUES (6597, 1389, 2, NULL, '2015-03-15 19:07:00.022851');
+INSERT INTO resource_log VALUES (6598, 1389, 2, NULL, '2015-03-15 19:08:22.540227');
 
 
 --
@@ -6290,35 +6240,37 @@ INSERT INTO suppplier_subaccount VALUES (6, 10);
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO task VALUES (37, 1933, 2, 'Call and remind about payment', '2014-12-14 22:46:00', '2014-12-14 11:15:00', NULL, false, 3);
-INSERT INTO task VALUES (34, 1923, 2, 'Test 2', '2014-12-16 17:21:00', '2014-12-15 17:42:00', NULL, false, 2);
-INSERT INTO task VALUES (38, 1934, 2, 'Call and remind about payment', '2014-12-12 22:50:00', '2014-12-11 22:52:00', 'Call and remind to pay invoice', false, 0);
-INSERT INTO task VALUES (39, 1935, 2, 'Review Calculation', '2014-12-12 22:52:00', '2014-12-11 22:55:00', NULL, false, 0);
-INSERT INTO task VALUES (40, 1936, 2, 'For testing Purpose only', '2014-12-14 22:35:00', '2014-12-14 20:32:00', NULL, false, 0);
-INSERT INTO task VALUES (33, 1922, 30, 'Test', '2014-12-07 21:36:00', '2014-12-07 20:36:00', 'For testing purpose', false, 1);
-INSERT INTO task VALUES (55, 2063, 2, 'Revert status after testing', '2015-03-08 19:41:00', '2015-03-08 18:42:00', 'Set status into active after testing', NULL, 0);
-INSERT INTO task VALUES (47, 1971, 2, 'Check Payments', '2015-01-04 15:45:00', '2015-01-04 14:06:00', NULL, false, 1);
-INSERT INTO task VALUES (41, 1939, 2, 'I have the following code', '2014-12-13 23:36:00', '2014-12-13 22:04:00', NULL, true, 3);
-INSERT INTO task VALUES (46, 1964, 2, 'For testing', '2014-12-25 23:05:00', '2014-12-25 21:06:00', 'For testing purpose only', false, 3);
-INSERT INTO task VALUES (45, 1962, 2, 'Test', '2014-12-24 23:32:00', '2014-12-24 21:33:00', NULL, false, 3);
-INSERT INTO task VALUES (52, 2009, 2, 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 22:44:00', '2015-01-21 21:45:00', NULL, true, 1);
-INSERT INTO task VALUES (54, 2062, 2, 'New JEasyui version migrate', '2015-03-07 21:43:00', '2015-03-07 20:43:00', 'Migrate on new 0.4.2 jeasyui version, check all functionality.', NULL, 2);
-INSERT INTO task VALUES (44, 1958, 2, 'Test new scheduler realization', '2014-12-22 19:18:00', '2014-12-21 19:44:00', 'New scheduler realizations notifications test.', false, 3);
-INSERT INTO task VALUES (48, 1980, 2, 'Check Reminder', '2015-01-08 18:21:00', '2015-01-07 18:21:00', 'Description to task', false, 2);
-INSERT INTO task VALUES (35, 1930, 2, 'Check Person Details', '2014-12-11 21:43:00', '2014-12-10 22:42:00', 'We''ll reuse the Amount type from last week. It''s mostly the same, except we''ll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we''ll use when dealing with SQL expressions.', false, 2);
-INSERT INTO task VALUES (49, 1982, 2, 'The second task', '2015-01-08 18:30:00', '2015-01-07 18:30:00', 'Second test task', false, 1);
-INSERT INTO task VALUES (50, 1983, 2, 'Test', '2015-01-13 17:06:00', '2015-01-13 17:01:00', NULL, false, 1);
-INSERT INTO task VALUES (51, 1985, 2, 'Test 2', '2015-01-14 17:02:00', '2015-01-13 17:04:00', NULL, false, 1);
-INSERT INTO task VALUES (53, 2016, 2, 'Notify his', '2015-02-02 17:09:00', '2015-02-02 15:09:00', 'Notify about the documents', false, 3);
-INSERT INTO task VALUES (42, 1940, 2, 'Test notifications', '2014-12-14 21:37:00', '2014-12-14 20:38:00', NULL, false, 2);
-INSERT INTO task VALUES (36, 1932, 2, 'Call and remind about payments', '2014-12-11 22:48:00', '2014-12-11 22:46:00', NULL, false, 1);
+INSERT INTO task VALUES (37, 1933, 2, 'Call and remind about payment', '2014-12-14 22:46:00', '2014-12-14 11:15:00', NULL, 3);
+INSERT INTO task VALUES (34, 1923, 2, 'Test 2', '2014-12-16 17:21:00', '2014-12-15 17:42:00', NULL, 2);
+INSERT INTO task VALUES (38, 1934, 2, 'Call and remind about payment', '2014-12-12 22:50:00', '2014-12-11 22:52:00', 'Call and remind to pay invoice', 0);
+INSERT INTO task VALUES (39, 1935, 2, 'Review Calculation', '2014-12-12 22:52:00', '2014-12-11 22:55:00', NULL, 0);
+INSERT INTO task VALUES (40, 1936, 2, 'For testing Purpose only', '2014-12-14 22:35:00', '2014-12-14 20:32:00', NULL, 0);
+INSERT INTO task VALUES (33, 1922, 30, 'Test', '2014-12-07 21:36:00', '2014-12-07 20:36:00', 'For testing purpose', 1);
+INSERT INTO task VALUES (55, 2063, 2, 'Revert status after testing', '2015-03-08 19:41:00', '2015-03-08 18:42:00', 'Set status into active after testing', 0);
+INSERT INTO task VALUES (56, 2066, 2, 'Notifications testing #2', '2015-03-11 17:16:00', '2015-03-09 17:17:00', NULL, 0);
+INSERT INTO task VALUES (57, 2068, 2, 'Test Notification resource link', '2015-03-11 19:28:00', '2015-03-09 19:29:00', NULL, 0);
+INSERT INTO task VALUES (48, 1980, 2, 'Check Reminder', '2015-01-08 18:21:00', '2015-01-07 18:21:00', 'Description to task', 3);
+INSERT INTO task VALUES (47, 1971, 2, 'Check Payments', '2015-01-04 15:45:00', '2015-01-04 14:06:00', NULL, 1);
+INSERT INTO task VALUES (41, 1939, 2, 'I have the following code', '2014-12-13 23:36:00', '2014-12-13 22:04:00', NULL, 3);
+INSERT INTO task VALUES (46, 1964, 2, 'For testing', '2014-12-25 23:05:00', '2014-12-25 21:06:00', 'For testing purpose only', 3);
+INSERT INTO task VALUES (45, 1962, 2, 'Test', '2014-12-24 23:32:00', '2014-12-24 21:33:00', NULL, 3);
+INSERT INTO task VALUES (52, 2009, 2, 'I decided to try to follow the postgres approach as directly as possible and came up with the following migration.', '2015-01-21 22:44:00', '2015-01-21 21:45:00', NULL, 1);
+INSERT INTO task VALUES (54, 2062, 2, 'New JEasyui version migrate', '2015-03-07 21:43:00', '2015-03-07 20:43:00', 'Migrate on new 0.4.2 jeasyui version, check all functionality.', 2);
+INSERT INTO task VALUES (44, 1958, 2, 'Test new scheduler realization', '2014-12-22 19:18:00', '2014-12-21 19:44:00', 'New scheduler realizations notifications test.', 3);
+INSERT INTO task VALUES (35, 1930, 2, 'Check Person Details', '2014-12-11 21:43:00', '2014-12-10 22:42:00', 'We''ll reuse the Amount type from last week. It''s mostly the same, except we''ll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we''ll use when dealing with SQL expressions.', 2);
+INSERT INTO task VALUES (49, 1982, 2, 'The second task', '2015-01-08 18:30:00', '2015-01-07 18:30:00', 'Second test task', 1);
+INSERT INTO task VALUES (50, 1983, 2, 'Test', '2015-01-13 17:06:00', '2015-01-13 17:01:00', NULL, 1);
+INSERT INTO task VALUES (51, 1985, 2, 'Test 2', '2015-01-14 17:02:00', '2015-01-13 17:04:00', NULL, 1);
+INSERT INTO task VALUES (53, 2016, 2, 'Notify his', '2015-02-02 17:09:00', '2015-02-02 15:09:00', 'Notify about the documents', 3);
+INSERT INTO task VALUES (42, 1940, 2, 'Test notifications', '2014-12-14 21:37:00', '2014-12-14 20:38:00', NULL, 2);
+INSERT INTO task VALUES (36, 1932, 2, 'Call and remind about payments', '2014-12-11 22:48:00', '2014-12-11 22:46:00', NULL, 1);
 
 
 --
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 55, true);
+SELECT pg_catalog.setval('task_id_seq', 57, true);
 
 
 --
@@ -6892,6 +6844,14 @@ ALTER TABLE ONLY note_resource
 
 ALTER TABLE ONLY notification
     ADD CONSTRAINT notification_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notification_resource
+    ADD CONSTRAINT notification_resource_pkey PRIMARY KEY (notification_id, resource_id);
 
 
 --
@@ -7942,6 +7902,14 @@ ALTER TABLE ONLY note_resource
 
 
 --
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notification_resource
+    ADD CONSTRAINT fk_notification_id_notification_resource FOREIGN KEY (notification_id) REFERENCES notification(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_outgoing_id_outgoing_transfer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8307,6 +8275,14 @@ ALTER TABLE ONLY note_resource
 
 ALTER TABLE ONLY notification
     ADD CONSTRAINT fk_resource_id_notification FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notification_resource
+    ADD CONSTRAINT fk_resource_id_notification_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

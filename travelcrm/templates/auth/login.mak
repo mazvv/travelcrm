@@ -33,6 +33,11 @@
             </div>
         </div>
         <div class="form-field mb05">
+            <span class="mr1">
+                <i class="fa fa-hand-o-right"></i>
+                ${h.tags.link_to(_(u"Create company"), add_url)}
+            </span>
+            <i class="fa fa-unlock-alt"></i>
             ${h.tags.link_to(_(u"Forgot password?"), forgot_url)}
         </div>
         <div class="form-buttons">

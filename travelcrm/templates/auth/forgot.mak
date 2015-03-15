@@ -19,6 +19,7 @@
             </div>
         </div>
         <div class="form-field">
+            <i class="fa fa-long-arrow-left"></i>
             ${h.tags.link_to(_(u"Back to autorization"), auth_url)}
         </div>
         <div class="form-buttons">

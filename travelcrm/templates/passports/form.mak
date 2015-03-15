@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"passport type"), True, "passport type")}
             </div>
             <div class="ml15">
-                ${h.fields.passport_type_field(item.passport_type if item else None)}
+                ${h.fields.passport_type_field(item.passport_type.key if item else None)}
                 ${h.common.error_container(name='passport_type')}
             </div>
         </div>

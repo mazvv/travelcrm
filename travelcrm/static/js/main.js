@@ -222,7 +222,9 @@ function tab_open(options){
 	            iconCls:'icon-mini-refresh',
 	            handler:function(){
 	            	var li = $(this).closest('li');
-	                var tab = $('#_tabs_').tabs('getTab', $('li').index(li));
+	            	var ul = $(this).closest('ul');
+	            	var idx = ul.find('li').index(li);
+	                var tab = $('#_tabs_').tabs('getTab', idx);
 	                tab.panel('refresh');
 	            }
 	        }]			
@@ -462,18 +464,6 @@ function dt_parser(s, format){
 	return Date.parseFormatted(s, format);
 }
 
-
-/** notifications **/
-$(document).ready(
-	setInterval(
-		function(){
-			$.getJSON('/notifications/counter', function(data){
-				$('.notifications-counter').html(data.count);
-			});
-		}, 
-		5000
-	)
-);
 
 /** helpers **/
 function get_icon(cls){

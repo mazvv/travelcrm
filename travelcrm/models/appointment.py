@@ -109,5 +109,13 @@ class Appointment(Base):
         return DBSession.query(cls).get(id)
 
     @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )
+
+    @classmethod
     def condition_employee_id(cls, employee_id):
         return cls.employee_id == employee_id

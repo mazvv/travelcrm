@@ -7,6 +7,7 @@ from ..interfaces import (
 from ..resources import (
     ResourceTypeBase,
 )
+from ..lib.utils.common_utils import translate as _
 
 
 @implementer(IResourceType)
@@ -18,7 +19,7 @@ class Notifications(ResourceTypeBase):
     def allowed_permisions(self):
         return [
             ('view', _(u'view')),
-            ('delete', _(u'delete')),
+            ('close', _(u'close')),
         ]
 
     @property

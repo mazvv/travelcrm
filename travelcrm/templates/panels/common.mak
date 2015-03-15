@@ -58,7 +58,7 @@
         <div class="employee-quick-menu">
             <a class="fa fa-bell-o quick-menu-item _action easyui-tooltip" 
                 title="${_(u'notifications')}" 
-                data-options="action:'dialog_open',url:'/notifications'">
+            >
                 <div class="indicator notifications-counter">${employee.notifications.count()}</div>
             </a>
         </div>

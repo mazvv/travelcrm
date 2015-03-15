@@ -1,6 +1,4 @@
 <%namespace file="../common/infoblock.mak" import="infoblock"/>
-<%namespace file="../notes/common.mak" import="notes_selector"/>
-<%namespace file="../tasks/common.mak" import="tasks_selector"/>
 <div class="dl45 easyui-dialog"
     title="${title}"
     data-options="
@@ -40,7 +38,7 @@
             </div>
             <div class="ml15">
                 ${h.fields.timezones_field(item.settings.get('timezone') if item else None, style="width:271px;")}
-                ${h.common.error_container(name='name')}
+                ${h.common.error_container(name='timezone')}
             </div>
         </div>
         <div class="form-field mb05">

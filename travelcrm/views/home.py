@@ -13,15 +13,17 @@ from pyramid.view import view_config
 from pyramid.view import forbidden_view_config
 
 from ..resources import Root
-from ..models import User
+from ..models.user import User
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.resources_utils import get_resources_types_by_interface
+from ..lib.scheduler.companies import schedule_company_creation
 from ..interfaces import IPortlet
 from ..forms.auth import (
     LoginSchema,
     ForgotSchema
 )
+from ..forms.companies import CompanyAddSchema
 
 
 class Home(object):
@@ -105,9 +107,14 @@ class Home(object):
             Root(self.request),
             'auth'
         )
+        add_url = self.request.resource_url(
+            Root(self.request),
+            'add'
+        )
         return {
             'forgot_url': forgot_url,
-            'auth_url': auth_url
+            'auth_url': auth_url,
+            'add_url': add_url,
         }
 
     @view_config(
@@ -152,3 +159,54 @@ class Home(object):
     def _logout(self):
         redirect_url = self.request.resource_url(Root(self.request))
         return HTTPFound(location=redirect_url, headers=forget(self.request))
+
+
+    @view_config(
+        name='add',
+        context='..resources.Root',
+        request_method='GET',
+        renderer='travelcrm:templates/auth/add.mak',
+    )
+    def add(self):
+        auth_url = self.request.resource_url(
+            Root(self.request),
+            'auth'
+        )
+        return {'auth_url': auth_url}
+
+    @view_config(
+        name='add',
+        context='..resources.Root',
+        request_method='POST',
+        renderer='json',
+    )
+    def _add(self):
+        schema = CompanyAddSchema().bind(request=self.request)
+        try:
+            controls = schema.deserialize(self.request.params.mixed())
+            schedule_company_creation(
+                self.request,
+                controls.get('name'),
+                controls.get('timezone'),
+                controls.get('locale')
+            )
+#             initialize_company_schema()
+#             company = Company(
+#                 name=controls.get('name'),
+#                 currency_id=controls.get('currency_id'),
+#                 settings={
+#                     'timezone': controls.get('timezone'),
+#                     'locale': controls.get('locale')
+#                 },
+#                 resource=self.context.create_resource()
+#             )
+#             DBSession.add(company)
+            return {
+                'success_message': _(u'Saved'),
+#                 'response': company.id
+            }
+        except colander.Invalid, e:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': e.asdict()
+            }

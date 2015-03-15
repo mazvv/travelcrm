@@ -25,7 +25,6 @@ class PassportSchema(ResourceSchema):
     )
     passport_type = colander.SchemaNode(
         colander.String(),
-        validator=colander.OneOf(('citizen', 'foreign'))
     )
     num = colander.SchemaNode(
         colander.String(),

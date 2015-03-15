@@ -24,6 +24,7 @@ def _task_notification(task_id):
             notification = Notification(
                 title=_(u'Task: %s') % task.title,
                 descr=task.title,
+                notification_resource=task.resource,
                 resource=Resource(Notifications, employee_structure)
             )
             task.employee.notifications.append(notification)

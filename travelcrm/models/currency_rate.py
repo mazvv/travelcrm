@@ -85,6 +85,14 @@ class CurrencyRate(Base):
         return DBSession.query(cls).get(id)
 
     @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )
+
+    @classmethod
     def get_by_currency(cls, currency_id, date=None):
         conditions = [cls.currency_id == currency_id]
         if date:

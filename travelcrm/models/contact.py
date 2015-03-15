@@ -6,9 +6,10 @@ from sqlalchemy import (
     String,
     ForeignKey,
 )
-from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import relationship, backref
 
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 from ..models import (
     DBSession,
     Base
@@ -17,6 +18,12 @@ from ..models import (
 
 class Contact(Base):
     __tablename__ = 'contact'
+
+    CONTACT_TYPE = (
+        ('phone', _(u'phone')),
+        ('email', _(u'email')),
+        ('skype', _(u'skype')),
+    )
 
     id = Column(
         Integer,
@@ -34,10 +41,7 @@ class Contact(Base):
         nullable=False,
     )
     contact_type = Column(
-        ENUM(
-            u'phone', u'email', u'skype',
-            name='contact_type_enum', create_type=True,
-        ),
+        EnumIntType(CONTACT_TYPE),
         nullable=False,
     )
     contact = Column(
@@ -60,6 +64,14 @@ class Contact(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )
 
     @classmethod
     def condition_email(cls):

@@ -46,7 +46,7 @@
                 $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
                     id.push($(el).val());
                 });
-                param.id = id.join();                            
+                param.id = id.join();
                 param.rows = 0;
                 param.page = 0;
             }
@@ -57,7 +57,7 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'passport_num',sortable:true,width:200">${_(u"passport num")}</th>
-            <th data-options="field:'passport_type',sortable:true,width:100">${_(u"type")}</th>
+            <th data-options="field:'passport_type',sortable:true,width:80,formatter:function(value, row){return value.title;}">${_(u"type")}</th>
             <th data-options="field:'end_date',width:80">${_(u"end date")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>

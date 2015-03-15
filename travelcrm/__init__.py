@@ -7,7 +7,9 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid_beaker import session_factory_from_settings
 
-from .models import Base
+from .models import (
+    Base, DBSession
+)
 
 
 from .resources import Root
@@ -22,6 +24,7 @@ def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
     engine = engine_from_config(settings, 'sqlalchemy.')
+    DBSession.configure(bind=engine)
     Base.metadata.bind = engine
 
     session_factory = session_factory_from_settings(settings)
@@ -40,6 +43,10 @@ def main(global_config, **settings):
     config.add_translation_dirs(
         'colander:locale',
         'travelcrm:locale',
+    )
+    config.add_subscriber(
+        '.subscribers.company_schema',
+        'pyramid.events.NewRequest'
     )
     config.add_subscriber(
         '.subscribers.company_settings',

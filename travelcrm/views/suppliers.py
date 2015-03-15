@@ -5,6 +5,7 @@ import colander
 
 from pyramid.view import view_config
 from pyramid.response import Response
+from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.resource import Resource
@@ -78,6 +79,14 @@ class Suppliers(object):
         permission='view'
     )
     def view(self):
+        if self.request.params.get('rid'):
+            resource_id = self.request.params.get('rid')
+            supplier = Supplier.by_resource_id(resource_id)
+            return HTTPFound(
+                location=self.request.resource_url(
+                    self.context, 'view', query={'id': supplier.id}
+                )
+            )
         result = self.edit()
         result.update({
             'title': _(u"View Supplier"),

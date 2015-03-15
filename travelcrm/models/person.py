@@ -10,7 +10,6 @@ from sqlalchemy import (
     ForeignKey,
     and_
 )
-from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.sql.expression import case
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -19,6 +18,8 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 person_contact = Table(
@@ -136,6 +137,11 @@ person_subaccount = Table(
 class Person(Base):
     __tablename__ = 'person'
 
+    GENDER = (
+        ('male', _(u'male')),
+        ('female', _(u'female')),
+    )
+
     id = Column(
         Integer,
         autoincrement=True,
@@ -165,11 +171,7 @@ class Person(Base):
         Date,
     )
     gender = Column(
-        ENUM(
-            u'male', u'female',
-            name='genders_enum',
-            create_type=True,
-        ),
+        EnumIntType(GENDER),
     )
     subscriber = Column(
         Boolean,
@@ -245,6 +247,14 @@ class Person(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )
 
     @classmethod
     def condition_subscriber(cls):

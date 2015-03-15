@@ -61,3 +61,11 @@ class Licence(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )

@@ -14,10 +14,17 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 class Passport(Base):
     __tablename__ = 'passport'
+
+    PASSPORT_TYPE = (
+        ('citizen', _(u'citizen')),
+        ('foreign', _(u'foreign')),
+    )
 
     id = Column(
         Integer,
@@ -45,10 +52,7 @@ class Passport(Base):
         nullable=False,
     )
     passport_type = Column(
-        ENUM(
-            u'citizen', u'foreign',
-            name='passport_type_enum', create_type=True,
-        ),
+        EnumIntType(PASSPORT_TYPE),
         nullable=False,
     )
     num = Column(
@@ -87,3 +91,11 @@ class Passport(Base):
         if id is None:
             return None
         return DBSession.query(cls).get(id)
+
+    @classmethod
+    def by_resource_id(cls, resource_id):
+        if resource_id is None:
+            return None
+        return (
+            DBSession.query(cls).filter(cls.resource_id == resource_id).first()
+        )

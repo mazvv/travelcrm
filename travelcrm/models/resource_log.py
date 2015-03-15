@@ -62,6 +62,7 @@ class ResourceLog(Base):
             'resources_logs',
             uselist=True,
             cascade="all,delete",
+            order_by=modifydt,
             lazy='dynamic'
         ),
         cascade="all,delete",

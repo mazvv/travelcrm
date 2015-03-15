@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u"contact type"), True, "contact_type")}
             </div>
             <div class="ml15">
-                ${h.fields.contact_type_combobox_field(item.contact_type if item else None, 'contact_type')}
+                ${h.fields.contact_type_combobox_field(item.contact_type.key if item else None, 'contact_type')}
                 ${h.common.error_container(name='contact_type')}
             </div>
         </div>
