@@ -1,14 +1,23 @@
 <%inherit file="travelcrm:templates/auth/_layout.mak"/>
 <%namespace file="../common/infoblock.mak" import="infoblock"/>
 <div class="dl45 easyui-dialog"
-    title="${_(u'Add company')}"
+    title="${_(u'Create company')}"
     data-options="
         modal:true,
         draggable:false,
         resizable:false,
-        iconCls:'fa fa-pencil-square-o'
+        iconCls:'fa fa-plus'
     ">
     ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+        <div class="form-field mb05">
+            <div class="dl15">
+                ${h.tags.title(_(u"email"), True, "email")}
+            </div>
+            <div class="ml15">
+                ${h.tags.text("email", None, class_="easyui-textbox w20")}
+                ${h.common.error_container(name='email')}
+            </div>
+        </div>
         <div class="form-field mb05">
             <div class="dl15">
                 ${h.tags.title(_(u"name"), True, "name")}

@@ -17,7 +17,8 @@ class LeadsQueryBuilder(ResourcesQueryBuilder):
             '_id': Lead.id,
             'lead_date': Lead.lead_date,
             'customer': Person.name,
-            'advsource': Advsource.name
+            'advsource': Advsource.name,
+            'status': Lead.status,
         }
         self._simple_search_fields = [
             Person.first_name,

@@ -164,6 +164,9 @@ a.dashed{
 .mb05 {
 	margin-bottom: 0.5em;
 }
+.ml05 {
+    margin-left: 0.5em;
+}
 
 /** borders **/
 .top-line{
@@ -645,11 +648,13 @@ span.field-actions span.field-action:first-child {
 }
 .status-label.active{background-color: #008000;}
 .status-label.disabled{background-color: #800000;}
+.status-label.failure{background-color: #800000;}
 .status-label.new{background-color: #808080;}
 .status-label.enquiry{background-color: #800080;}
 .status-label.in_work{background-color: #008080;}
 .status-label.ready{background-color: #008000;}
 .status-label.closed{background-color: #008000;}
+.status-label.success{background-color: #008000;}
 
 
 /** images **/
@@ -722,4 +727,9 @@ div.payment-indicator div{
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+}
+
+/** details **/
+.item-details{
+	margin: 5px 0px;
 }

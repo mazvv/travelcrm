@@ -27,10 +27,11 @@
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/tours_sales/details?id=' + row.id, 
+                    '/leads/details?id=' + row.id, 
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);
+                        $.parser.parse('#' + row_id);
                     }
                 );
             },
@@ -51,7 +52,8 @@
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'lead_date',sortable:true,width:80">${_(u"lead date")}</th>
             <th data-options="field:'customer',sortable:true,width:120">${_(u"customer")}</th>
-            <th data-options="field:'advsource',sortable:true,width:100">${_(u"advertise")}</th>
+            <th data-options="field:'advsource',sortable:true,width:180">${_(u"advertise")}</th>
+            <th data-options="field:'status',sortable:false,width:60,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

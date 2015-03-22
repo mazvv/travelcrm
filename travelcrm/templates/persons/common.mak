@@ -102,3 +102,21 @@
     </div>
     % endif
 </%def>
+
+
+<%def name="person_list_details(person)">
+    <span class="b mr05">${item.customer.name}</span>
+    <%
+        contacts = map(
+            lambda x: (
+                h.common.contact_type_icon(x.contact_type), x.contact
+            ),
+            [contact for contact in item.customer.contacts]
+        )
+    %>
+    % if contacts:
+        % for icon, contact in contacts:
+            ${icon} <span class="mr1">${contact}</span>
+        % endfor
+    % endif
+</%def>

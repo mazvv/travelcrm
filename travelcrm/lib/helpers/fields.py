@@ -39,6 +39,7 @@ from ...models.contact import Contact
 from ...models.person import Person
 from ...models.passport import Passport
 from ...models.notification import EmployeeNotification
+from ...models.lead import Lead
 
 from ..utils.common_utils import (
     gen_id,
@@ -2674,7 +2675,6 @@ def services_combobox_field(
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
     data_options = """
         url: '/services/list',
         fitColumns: true,
@@ -3435,6 +3435,23 @@ def notifications_statuses_combobox_field(
             %s
         """ % options
     choices = EmployeeNotification.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=data_options
+    )
+
+
+def leads_statuses_combobox_field(
+    value=None, name='status', with_all=False, options=None
+):
+    data_options = "panelHeight:'auto',editable:false"
+    if options:
+        data_options += """,
+            %s
+        """ % options
+    choices = Lead.STATUS
     if with_all:
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(

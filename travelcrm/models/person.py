@@ -230,7 +230,7 @@ class Person(Base):
 
     @hybrid_property
     def name(self):
-        return " ".join(self.last_name, self.first_name)
+        return " ".join(filter(None, [self.last_name, self.first_name]))
 
     @name.expression
     def name(cls):

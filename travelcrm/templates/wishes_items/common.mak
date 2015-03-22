@@ -1,4 +1,4 @@
-<%def name="tour_sale_points_selector(name='tour_sale_point_id', values=[], can_edit=True)">
+<%def name="wishes_items_selector(name='wish_item_id', values=[], can_edit=True)">
     <%
         _func_id = h.common.gen_id()
         _id = h.common.gen_id()
@@ -29,16 +29,16 @@
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
-            url:'/tours_sales/points',border:false,
+            url:'/wishes_items/list',border:false,
             singleSelect:true,
-            rownumbers:true,sortName:'point_start_date',sortOrder:'asc',
+            rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
             view: detailview,
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/tours_sales/point_details?id=' + row.id, 
+                    '/wishes_items/details?id=' + row.id, 
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);
@@ -71,38 +71,41 @@
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-            <th data-options="field:'country_name',sortable:true,width:150">${_(u"country")}</th>
-            <th data-options="field:'full_hotel_name',sortable:true,width:200">${_(u"hotel")}</th>
-            <th data-options="field:'point_start_date',sortable:true,width:100">${_(u"start")}</th>
-            <th data-options="field:'point_end_date',sortable:true,width:100">${_(u"end")}</th>
+            <th data-options="field:'service',sortable:true,width:150">${_(u"service")}</th>
+            <th data-options="field:'price_from',sortable:true,width:80,formatter:function(value, row, index){if(value) return row.currency + ' ' + value;}">${_(u"price from")}</th>
+            <th data-options="field:'price_to',sortable:true,width:80,formatter:function(value, row, index){if(value) return row.currency + ' ' + value;}">${_(u"price to")}</th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
     </table>
     <div id="${_storage_id}">
-        % for point in values:
-            ${h.tags.hidden(name, point)}
+        % for id in values:
+            ${h.tags.hidden(name, id)}
         % endfor
     </div>
     % if can_edit:
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container dl45">
-            <%
-                f_id = h.common.gen_id()
-            %>
+        <div class="actions button-container dl20">
             <div class="button-group minor-group">
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/tours_sales/add_point'
+                        container:'#${_id}',action:'dialog_open',url:'/wishes_items/add'
                     ">
                     ${_(u"Add")}</a>
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/tours_sales/edit_point',property:'with_row'
+                        container:'#${_id}',action:'dialog_open',url:'/wishes_items/copy',property:'with_row'
+                    ">
+                    ${_(u"Copy")}</a>
+                <a href="#" class="button _action" 
+                    data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/wishes_items/edit',property:'with_row'
                     ">
                     ${_(u"Edit")}</a>
                 <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
             </div>
         </div>
-        <div class="ml45 tr" style="padding-top:5px;">
+        <div class="ml20 tr" style="padding-top:5px;">
             ${h.common.error_container(name=name)}
         </div>
     </div>

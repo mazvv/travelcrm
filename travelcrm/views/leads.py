@@ -8,6 +8,8 @@ from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.lead import Lead
+from ..models.wish_item import WishItem
+from ..models.offer_item import OfferItem
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.leads import LeadsQueryBuilder
@@ -116,8 +118,15 @@ class Leads(object):
                 lead_date=controls.get('lead_date'),
                 customer_id=controls.get('customer_id'),
                 advsource_id=controls.get('advsource_id'),
+                status=controls.get('status'),
                 resource=self.context.create_resource()
             )
+            for id in controls.get('wish_item_id'):
+                wish_item = WishItem.get(id)
+                lead.wishes_items.append(wish_item)
+            for id in controls.get('offer_item_id'):
+                offer_item = OfferItem.get(id)
+                lead.offers_items.append(offer_item)
             for id in controls.get('note_id'):
                 note = Note.get(id)
                 lead.resource.notes.append(note)
@@ -161,9 +170,18 @@ class Leads(object):
             controls = schema.deserialize(self.request.params.mixed())
             lead.lead_date = controls.get('lead_date')
             lead.customer_id = controls.get('customer_id')
+            lead.status = controls.get('status')
             lead.advsource_id = controls.get('advsource_id')
+            lead.wishes_items = []
+            lead.offers_items = []
             lead.resource.notes = []
             lead.resource.tasks = []
+            for id in controls.get('wish_item_id'):
+                wish_item = WishItem.get(id)
+                lead.wishes_items.append(wish_item)
+            for id in controls.get('offer_item_id'):
+                offer_item = OfferItem.get(id)
+                lead.offers_items.append(offer_item)
             for id in controls.get('note_id'):
                 note = Note.get(id)
                 lead.resource.notes.append(note)
@@ -203,6 +221,19 @@ class Leads(object):
     )
     def _copy(self):
         return self._add()
+
+    @view_config(
+        name='details',
+        context='..resources.leads.Leads',
+        request_method='GET',
+        renderer='travelcrm:templates/leads/details.mak',
+        permission='view'
+    )
+    def details(self):
+        lead = Lead.get(self.request.params.get('id'))
+        return {
+            'item': lead,
+        }
 
     @view_config(
         name='delete',

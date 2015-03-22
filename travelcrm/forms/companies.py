@@ -26,6 +26,10 @@ def name_validator(node, kw):
 
 
 class CompanyAddSchema(ResourceSchema):
+    email = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Email()
+    )
     name = colander.SchemaNode(
         colander.String(),
         validator=name_validator,
@@ -39,6 +43,16 @@ class CompanyAddSchema(ResourceSchema):
 
 
 class CompanySchema(CompanyAddSchema):
+    name = colander.SchemaNode(
+        colander.String(),
+        validator=name_validator,
+    )
+    timezone = colander.SchemaNode(
+        colander.String(),
+    )
+    locale = colander.SchemaNode(
+        colander.String(),
+    )
     currency_id = colander.SchemaNode(
         colander.Integer()
     )

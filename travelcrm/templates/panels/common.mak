@@ -56,10 +56,12 @@
     </div>
     <div class="dl10">
         <div class="employee-quick-menu">
-            <a class="fa fa-bell-o quick-menu-item _action easyui-tooltip" 
+            <a class="fa fa-bell-o quick-menu-item _action easyui-tooltip"
                 title="${_(u'notifications')}" 
             >
-                <div class="indicator notifications-counter">${employee.notifications.count()}</div>
+                <div class="indicator notifications-counter">
+                    ${employee.notifications.count()}
+                </div>
             </a>
         </div>
     </div>

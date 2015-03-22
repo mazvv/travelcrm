@@ -10,13 +10,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: c_2; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA c_2;
-
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -1106,7 +1099,8 @@ CREATE TABLE lead (
     lead_date date NOT NULL,
     resource_id integer NOT NULL,
     advsource_id integer NOT NULL,
-    customer_id integer NOT NULL
+    customer_id integer NOT NULL,
+    status smallint NOT NULL
 );
 
 
@@ -1127,6 +1121,26 @@ CREATE SEQUENCE lead_id_seq
 --
 
 ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
+
+
+--
+-- Name: lead_offer_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lead_offer_item (
+    lead_id integer NOT NULL,
+    offer_item_id integer NOT NULL
+);
+
+
+--
+-- Name: lead_wish_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lead_wish_item (
+    lead_id integer NOT NULL,
+    wish_item_id integer NOT NULL
+);
 
 
 --
@@ -1292,6 +1306,39 @@ CREATE TABLE notification_resource (
     notification_id integer NOT NULL,
     resource_id integer NOT NULL
 );
+
+
+--
+-- Name: offer_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE offer_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    service_id integer NOT NULL,
+    currency_id integer,
+    price numeric(16,2),
+    descr character varying(1024) NOT NULL
+);
+
+
+--
+-- Name: offer_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE offer_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: offer_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE offer_item_id_seq OWNED BY offer_item.id;
 
 
 --
@@ -2069,6 +2116,40 @@ ALTER SEQUENCE transfer_id_seq OWNED BY transfer.id;
 
 
 --
+-- Name: wish_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE wish_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    service_id integer NOT NULL,
+    currency_id integer,
+    price_from numeric(16,2),
+    price_to numeric(16,2),
+    descr character varying(1024) NOT NULL
+);
+
+
+--
+-- Name: wish_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE wish_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: wish_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE wish_item_id_seq OWNED BY wish_item.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2282,6 +2363,13 @@ ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY offer_item ALTER COLUMN id SET DEFAULT nextval('offer_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
@@ -2433,6 +2521,13 @@ ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('_users_rid_seq'::re
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY wish_item ALTER COLUMN id SET DEFAULT nextval('wish_item_id_seq'::regclass);
+
+
+--
 -- Name: _currencies_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -2457,21 +2552,21 @@ SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6598, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6650, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2069, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2095, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 131, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 133, true);
 
 
 --
@@ -2604,7 +2699,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO alembic_version VALUES ('45f5d49f9433');
+INSERT INTO alembic_version VALUES ('50c80c2485d8');
 
 
 --
@@ -2837,13 +2932,15 @@ INSERT INTO contact VALUES (59, 'dorianyats', 1544, 2);
 INSERT INTO contact VALUES (62, 'serge_vlasov', 1552, 2);
 INSERT INTO contact VALUES (66, 'AnnaNews', 1577, 2);
 INSERT INTO contact VALUES (50, '+380682345688', 1380, 0);
+INSERT INTO contact VALUES (82, '+380676775643', 2089, 0);
+INSERT INTO contact VALUES (83, 'nikolay1987@mail.ru', 2095, 1);
 
 
 --
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 81, true);
+SELECT pg_catalog.setval('contact_id_seq', 83, true);
 
 
 --
@@ -2983,6 +3080,7 @@ INSERT INTO employee_contact VALUES (2, 59);
 INSERT INTO employee_notification VALUES (2, 18, 1);
 INSERT INTO employee_notification VALUES (2, 20, 1);
 INSERT INTO employee_notification VALUES (2, 19, 1);
+INSERT INTO employee_notification VALUES (2, 21, 0);
 
 
 --
@@ -3193,14 +3291,33 @@ SELECT pg_catalog.setval('invoice_id_seq', 26, true);
 -- Data for Name: lead; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO lead VALUES (1, '2015-02-04', 2052, 5, 46);
+INSERT INTO lead VALUES (2, '2015-02-04', 2088, 5, 46, 0);
+INSERT INTO lead VALUES (1, '2015-02-04', 2052, 6, 47, 2);
 
 
 --
 -- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_id_seq', 1, true);
+SELECT pg_catalog.setval('lead_id_seq', 2, true);
+
+
+--
+-- Data for Name: lead_offer_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO lead_offer_item VALUES (2, 3);
+INSERT INTO lead_offer_item VALUES (2, 2);
+INSERT INTO lead_offer_item VALUES (1, 5);
+
+
+--
+-- Data for Name: lead_wish_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO lead_wish_item VALUES (2, 5);
+INSERT INTO lead_wish_item VALUES (2, 6);
+INSERT INTO lead_wish_item VALUES (1, 7);
 
 
 --
@@ -3382,13 +3499,15 @@ INSERT INTO note VALUES (27, 1979, 'Test Note', 'Description to test note');
 INSERT INTO note VALUES (28, 1981, 'VIP User', 'This user is for VIP');
 INSERT INTO note VALUES (29, 2012, 'Good Hotel', 'Edit description for Hotels note');
 INSERT INTO note VALUES (30, 2065, 'Note without source resource', 'This note was created directly from Tools Panel');
+INSERT INTO note VALUES (31, 2087, 'Good customer', 'Good customer in any case');
+INSERT INTO note VALUES (32, 2092, 'Failure', 'Customer failure from offers');
 
 
 --
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 30, true);
+SELECT pg_catalog.setval('note_id_seq', 32, true);
 
 
 --
@@ -3404,6 +3523,8 @@ INSERT INTO note_resource VALUES (18, 784);
 INSERT INTO note_resource VALUES (29, 1470);
 INSERT INTO note_resource VALUES (26, 1930);
 INSERT INTO note_resource VALUES (27, 1980);
+INSERT INTO note_resource VALUES (31, 2088);
+INSERT INTO note_resource VALUES (32, 2052);
 
 
 --
@@ -3428,13 +3549,14 @@ INSERT INTO notification VALUES (17, 2010, 'Task: I decided to try to follow the
 INSERT INTO notification VALUES (18, 2064, 'Task: Revert status after testing', 'Revert status after testing', '2015-03-08 18:42:00.01327', NULL);
 INSERT INTO notification VALUES (19, 2067, 'Task: Notifications testing #2', 'Notifications testing #2', '2015-03-09 17:17:00.020674', NULL);
 INSERT INTO notification VALUES (20, 2069, 'Task: Test Notification resource link', 'Test Notification resource link', '2015-03-09 19:29:00.018282', NULL);
+INSERT INTO notification VALUES (21, 2076, 'Task: Call about discounts', 'Call about discounts', '2015-03-21 17:10:00.014771', NULL);
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 20, true);
+SELECT pg_catalog.setval('notification_id_seq', 21, true);
 
 
 --
@@ -3442,6 +3564,25 @@ SELECT pg_catalog.setval('notification_id_seq', 20, true);
 --
 
 INSERT INTO notification_resource VALUES (20, 2068);
+INSERT INTO notification_resource VALUES (21, 2075);
+
+
+--
+-- Data for Name: offer_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO offer_item VALUES (1, 2081, 5, 57, 2010.00, 'Turkey, 4*, Kemer');
+INSERT INTO offer_item VALUES (2, 2085, 5, 57, 2080.00, 'Turkey, 4*');
+INSERT INTO offer_item VALUES (3, 2086, 1, 56, 1600.00, '7 days, Teztour');
+INSERT INTO offer_item VALUES (4, 2093, 5, 54, 4010.00, 'Cuba Varadero, 5*');
+INSERT INTO offer_item VALUES (5, 2094, 5, 57, 3900.00, 'Cuba Varadero, 1st line, Ual');
+
+
+--
+-- Name: offer_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('offer_item_id_seq', 5, true);
 
 
 --
@@ -3613,6 +3754,8 @@ INSERT INTO permision VALUES (140, 129, 4, '{view,settings}', NULL, 'all');
 INSERT INTO permision VALUES (141, 130, 4, '{add,view,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (24, 12, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (134, 123, 4, '{view,close}', NULL, 'all');
+INSERT INTO permision VALUES (143, 132, 4, '{view,add,edit,delete}', NULL, 'all');
+INSERT INTO permision VALUES (144, 133, 4, '{view,add,edit,delete}', NULL, 'all');
 
 
 --
@@ -3652,6 +3795,7 @@ INSERT INTO person VALUES (5, 871, 'John', 'Doe', '', NULL, false, 0);
 INSERT INTO person VALUES (6, 887, 'Peter', 'Parker', '', '1976-04-07', false, 0);
 INSERT INTO person VALUES (46, 2051, 'Nikolay', '', '', NULL, false, 0);
 INSERT INTO person VALUES (23, 1389, 'Iren', 'Mazur', '', '1979-09-03', false, 1);
+INSERT INTO person VALUES (47, 2090, 'Jason', '', 'Lewis', NULL, false, 0);
 
 
 --
@@ -3704,13 +3848,15 @@ INSERT INTO person_contact VALUES (22, 78);
 INSERT INTO person_contact VALUES (44, 79);
 INSERT INTO person_contact VALUES (45, 80);
 INSERT INTO person_contact VALUES (46, 81);
+INSERT INTO person_contact VALUES (47, 82);
+INSERT INTO person_contact VALUES (46, 83);
 
 
 --
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 46, true);
+SELECT pg_catalog.setval('person_id_seq', 47, true);
 
 
 --
@@ -3775,7 +3921,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 167, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 142, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 144, true);
 
 
 --
@@ -4604,6 +4750,31 @@ INSERT INTO resource VALUES (2066, 93, 32, false);
 INSERT INTO resource VALUES (2067, 123, 32, false);
 INSERT INTO resource VALUES (2068, 93, 32, false);
 INSERT INTO resource VALUES (2069, 123, 32, false);
+INSERT INTO resource VALUES (2070, 12, 32, false);
+INSERT INTO resource VALUES (2072, 132, 32, false);
+INSERT INTO resource VALUES (2073, 132, 32, false);
+INSERT INTO resource VALUES (2074, 132, 32, false);
+INSERT INTO resource VALUES (2075, 93, 32, false);
+INSERT INTO resource VALUES (2076, 123, 32, false);
+INSERT INTO resource VALUES (2077, 12, 32, false);
+INSERT INTO resource VALUES (2078, 132, 32, false);
+INSERT INTO resource VALUES (2079, 132, 32, false);
+INSERT INTO resource VALUES (2080, 132, 32, false);
+INSERT INTO resource VALUES (2081, 133, 32, false);
+INSERT INTO resource VALUES (2082, 132, 32, false);
+INSERT INTO resource VALUES (2083, 132, 32, false);
+INSERT INTO resource VALUES (2084, 132, 32, false);
+INSERT INTO resource VALUES (2085, 133, 32, false);
+INSERT INTO resource VALUES (2086, 133, 32, false);
+INSERT INTO resource VALUES (2087, 118, 32, false);
+INSERT INTO resource VALUES (2088, 130, 32, false);
+INSERT INTO resource VALUES (2089, 87, 32, false);
+INSERT INTO resource VALUES (2090, 69, 32, false);
+INSERT INTO resource VALUES (2091, 132, 32, false);
+INSERT INTO resource VALUES (2092, 118, 32, false);
+INSERT INTO resource VALUES (2093, 133, 32, false);
+INSERT INTO resource VALUES (2094, 133, 32, false);
+INSERT INTO resource VALUES (2095, 87, 32, false);
 
 
 --
@@ -5902,12 +6073,65 @@ INSERT INTO resource_log VALUES (6595, 1980, 2, NULL, '2015-03-09 19:37:29.59447
 INSERT INTO resource_log VALUES (6596, 1389, 2, NULL, '2015-03-15 19:00:11.360402');
 INSERT INTO resource_log VALUES (6597, 1389, 2, NULL, '2015-03-15 19:07:00.022851');
 INSERT INTO resource_log VALUES (6598, 1389, 2, NULL, '2015-03-15 19:08:22.540227');
+INSERT INTO resource_log VALUES (6599, 2070, 2, NULL, '2015-03-21 15:11:50.495946');
+INSERT INTO resource_log VALUES (6600, 1989, 2, NULL, '2015-03-21 15:11:59.182752');
+INSERT INTO resource_log VALUES (6601, 2072, 2, NULL, '2015-03-21 16:45:36.665599');
+INSERT INTO resource_log VALUES (6602, 2073, 2, NULL, '2015-03-21 16:48:27.610676');
+INSERT INTO resource_log VALUES (6603, 2052, 2, NULL, '2015-03-21 16:50:40.821135');
+INSERT INTO resource_log VALUES (6604, 2074, 2, NULL, '2015-03-21 16:52:45.363807');
+INSERT INTO resource_log VALUES (6605, 2052, 2, NULL, '2015-03-21 16:52:47.683727');
+INSERT INTO resource_log VALUES (6606, 2075, 2, NULL, '2015-03-21 17:05:47.83578');
+INSERT INTO resource_log VALUES (6607, 2075, 2, NULL, '2015-03-21 17:06:12.331454');
+INSERT INTO resource_log VALUES (6608, 2052, 2, NULL, '2015-03-21 17:06:35.32059');
+INSERT INTO resource_log VALUES (6609, 2070, 2, NULL, '2015-03-21 17:48:31.664941');
+INSERT INTO resource_log VALUES (6610, 2077, 2, NULL, '2015-03-21 17:49:14.645342');
+INSERT INTO resource_log VALUES (6611, 2078, 2, NULL, '2015-03-21 17:54:43.831114');
+INSERT INTO resource_log VALUES (6612, 2079, 2, NULL, '2015-03-21 17:55:33.936569');
+INSERT INTO resource_log VALUES (6613, 2080, 2, NULL, '2015-03-21 17:56:10.086202');
+INSERT INTO resource_log VALUES (6614, 2081, 2, NULL, '2015-03-21 17:58:56.608273');
+INSERT INTO resource_log VALUES (6615, 2082, 2, NULL, '2015-03-21 18:09:53.861989');
+INSERT INTO resource_log VALUES (6616, 2083, 2, NULL, '2015-03-21 18:15:06.078059');
+INSERT INTO resource_log VALUES (6617, 2084, 2, NULL, '2015-03-21 18:15:58.715735');
+INSERT INTO resource_log VALUES (6618, 2052, 2, NULL, '2015-03-21 18:16:06.930298');
+INSERT INTO resource_log VALUES (6619, 2085, 2, NULL, '2015-03-21 18:18:25.006345');
+INSERT INTO resource_log VALUES (6620, 2086, 2, NULL, '2015-03-21 18:19:02.220427');
+INSERT INTO resource_log VALUES (6621, 2052, 2, NULL, '2015-03-21 18:19:16.455929');
+INSERT INTO resource_log VALUES (6622, 2087, 2, NULL, '2015-03-21 18:20:19.713186');
+INSERT INTO resource_log VALUES (6623, 2052, 2, NULL, '2015-03-21 18:20:29.187736');
+INSERT INTO resource_log VALUES (6624, 2052, 2, NULL, '2015-03-21 19:28:39.349206');
+INSERT INTO resource_log VALUES (6625, 2052, 2, NULL, '2015-03-21 19:30:14.844869');
+INSERT INTO resource_log VALUES (6626, 2052, 2, NULL, '2015-03-21 19:33:54.902921');
+INSERT INTO resource_log VALUES (6627, 2052, 2, NULL, '2015-03-21 19:34:11.317898');
+INSERT INTO resource_log VALUES (6628, 2052, 2, NULL, '2015-03-21 19:35:55.581037');
+INSERT INTO resource_log VALUES (6629, 2052, 2, NULL, '2015-03-21 19:36:06.902031');
+INSERT INTO resource_log VALUES (6630, 2052, 2, NULL, '2015-03-21 19:36:15.834648');
+INSERT INTO resource_log VALUES (6631, 2052, 2, NULL, '2015-03-21 19:36:28.227499');
+INSERT INTO resource_log VALUES (6632, 2052, 2, NULL, '2015-03-21 19:36:44.271289');
+INSERT INTO resource_log VALUES (6633, 2088, 2, NULL, '2015-03-21 19:36:44.271289');
+INSERT INTO resource_log VALUES (6634, 2089, 2, NULL, '2015-03-21 19:38:07.835672');
+INSERT INTO resource_log VALUES (6635, 2090, 2, NULL, '2015-03-21 19:38:10.203402');
+INSERT INTO resource_log VALUES (6636, 2091, 2, NULL, '2015-03-21 19:40:16.473806');
+INSERT INTO resource_log VALUES (6637, 2052, 2, NULL, '2015-03-21 19:40:18.868487');
+INSERT INTO resource_log VALUES (6638, 2052, 2, NULL, '2015-03-21 19:41:03.761402');
+INSERT INTO resource_log VALUES (6639, 2052, 2, NULL, '2015-03-21 19:42:48.725752');
+INSERT INTO resource_log VALUES (6640, 2052, 2, NULL, '2015-03-21 19:43:52.346215');
+INSERT INTO resource_log VALUES (6641, 2092, 2, NULL, '2015-03-21 20:11:35.939948');
+INSERT INTO resource_log VALUES (6642, 2052, 2, NULL, '2015-03-21 20:11:42.394011');
+INSERT INTO resource_log VALUES (6643, 2052, 2, NULL, '2015-03-21 20:12:01.524624');
+INSERT INTO resource_log VALUES (6644, 2093, 2, NULL, '2015-03-21 21:12:58.372518');
+INSERT INTO resource_log VALUES (6645, 2094, 2, NULL, '2015-03-21 21:13:53.505088');
+INSERT INTO resource_log VALUES (6646, 2052, 2, NULL, '2015-03-21 21:14:06.180767');
+INSERT INTO resource_log VALUES (6647, 2095, 2, NULL, '2015-03-21 22:03:40.435063');
+INSERT INTO resource_log VALUES (6648, 2051, 2, NULL, '2015-03-21 22:03:42.699321');
+INSERT INTO resource_log VALUES (6649, 2088, 2, NULL, '2015-03-21 22:03:45.19164');
+INSERT INTO resource_log VALUES (6650, 2052, 2, NULL, '2015-03-21 22:12:59.222848');
 
 
 --
 -- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO resource_type VALUES (132, 2070, 'wishes_items', 'Wish Items', 'WishesItems', 'travelcrm.resources.wishes_items', 'Wishes Items is the list of services that customer wish in the lead', 'null', false, 0);
 INSERT INTO resource_type VALUES (117, 1797, 'subaccounts', 'Subaccounts', 'Subaccounts', 'travelcrm.resources.subaccounts', 'Subaccounts are accounts from other objects such as clients, touroperators and so on', 'null', false, 0);
 INSERT INTO resource_type VALUES (107, 1435, 'accounts', 'Accounts', 'Accounts', 'travelcrm.resources.accounts', 'Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible', 'null', false, 0);
 INSERT INTO resource_type VALUES (118, 1799, 'notes', 'Notes', 'Notes', 'travelcrm.resources.notes', 'Resources Notes', 'null', false, 0);
@@ -5923,6 +6147,7 @@ INSERT INTO resource_type VALUES (1, 773, '', 'Home', 'Root', 'travelcrm.resourc
 INSERT INTO resource_type VALUES (122, 1919, 'debts', 'Debts', 'Debts', 'travelcrm.resources.debts', 'Calculations based debts report', 'null', false, 0);
 INSERT INTO resource_type VALUES (93, 1225, 'tasks', 'Tasks', 'Tasks', 'travelcrm.resources.tasks', 'Task manager', NULL, false, 0);
 INSERT INTO resource_type VALUES (106, 1433, 'incomes', 'Incomes', 'Incomes', 'travelcrm.resources.incomes', 'Incomes Payments Document for invoices', '{"account_item_id": 8}', false, 0);
+INSERT INTO resource_type VALUES (133, 2077, 'offers_items', 'Offer Items', 'OffersItems', 'travelcrm.resources.offers_items', 'Offers Items is the list of services that manager offer to the customer', 'null', false, 0);
 INSERT INTO resource_type VALUES (41, 283, 'currencies', 'Currencies', 'Currencies', 'travelcrm.resources.currencies', '', NULL, false, 0);
 INSERT INTO resource_type VALUES (55, 723, 'structures', 'Structures', 'Structures', 'travelcrm.resources.structures', 'Companies structures is a tree of company structure. It''s can be offices, filials, departments and so and so', NULL, false, 0);
 INSERT INTO resource_type VALUES (59, 764, 'positions', 'Positions', 'Positions', 'travelcrm.resources.positions', 'Companies positions is a point of company structure where emplyees can be appointed', NULL, false, 0);
@@ -5961,7 +6186,7 @@ INSERT INTO resource_type VALUES (103, 1317, 'invoices', 'Invoices', 'Invoices',
 INSERT INTO resource_type VALUES (125, 1966, 'unpaid_invoices', 'Portlet: Unpaid Invoices', 'UnpaidInvoices', 'travelcrm.resources.unpaid_invoices', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true, 0);
 INSERT INTO resource_type VALUES (126, 1968, 'companies', 'Companies', 'Companies', 'travelcrm.resources.companies', 'Multicompanies functionality', 'null', false, 0);
 INSERT INTO resource_type VALUES (130, 2049, 'leads', 'Leads', 'Leads', 'travelcrm.resources.leads', 'Leads that can be converted into contacts', 'null', false, 0);
-INSERT INTO resource_type VALUES (129, 1989, 'sales_dynamics', 'Portlet: Sales Dynamics', 'SalesDynamics', 'travelcrm.resources.sales_dynamics', 'Portlet that shows dynamics of sales in quantity', '{"column_index": 0}', true, 1);
+INSERT INTO resource_type VALUES (129, 1989, 'sales_dynamics', 'Portlet: Sales Dynamics', 'SalesDynamics', 'travelcrm.resources.sales_dynamics', 'Portlet that shows dynamics of sales in quantity', '{"column_index": 0}', true, 0);
 
 
 --
@@ -6250,6 +6475,7 @@ INSERT INTO task VALUES (55, 2063, 2, 'Revert status after testing', '2015-03-08
 INSERT INTO task VALUES (56, 2066, 2, 'Notifications testing #2', '2015-03-11 17:16:00', '2015-03-09 17:17:00', NULL, 0);
 INSERT INTO task VALUES (57, 2068, 2, 'Test Notification resource link', '2015-03-11 19:28:00', '2015-03-09 19:29:00', NULL, 0);
 INSERT INTO task VALUES (48, 1980, 2, 'Check Reminder', '2015-01-08 18:21:00', '2015-01-07 18:21:00', 'Description to task', 3);
+INSERT INTO task VALUES (58, 2075, 2, 'Call about discounts', '2015-03-21 17:20:00', '2015-03-21 17:10:00', 'Calls and talk about tour discounts', 0);
 INSERT INTO task VALUES (47, 1971, 2, 'Check Payments', '2015-01-04 15:45:00', '2015-01-04 14:06:00', NULL, 1);
 INSERT INTO task VALUES (41, 1939, 2, 'I have the following code', '2014-12-13 23:36:00', '2014-12-13 22:04:00', NULL, 3);
 INSERT INTO task VALUES (46, 1964, 2, 'For testing', '2014-12-25 23:05:00', '2014-12-25 21:06:00', 'For testing purpose only', 3);
@@ -6270,7 +6496,7 @@ INSERT INTO task VALUES (36, 1932, 2, 'Call and remind about payments', '2014-12
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 57, true);
+SELECT pg_catalog.setval('task_id_seq', 58, true);
 
 
 --
@@ -6285,6 +6511,7 @@ INSERT INTO task_resource VALUES (48, 3);
 INSERT INTO task_resource VALUES (49, 3);
 INSERT INTO task_resource VALUES (53, 2017);
 INSERT INTO task_resource VALUES (55, 1989);
+INSERT INTO task_resource VALUES (58, 2088);
 
 
 --
@@ -6524,6 +6751,26 @@ SELECT pg_catalog.setval('transfer_id_seq', 94, true);
 INSERT INTO "user" VALUES (23, 894, 'maziv', NULL, 'maziv_maziv', 7);
 INSERT INTO "user" VALUES (2, 3, 'admin', 'vitalii.mazur@gmail.com', 'adminadmin', 2);
 INSERT INTO "user" VALUES (25, 2054, 'maz_iv', NULL, 'korn17', 30);
+
+
+--
+-- Data for Name: wish_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO wish_item VALUES (1, 2078, 5, 57, 1600.00, 2000.00, 'Tour for two adult persons and two children, Turkey or Egypt, 7 days, perfect 4* or 5* will be best, UAl');
+INSERT INTO wish_item VALUES (2, 2079, 3, NULL, NULL, NULL, 'Insurance for all members of the tour');
+INSERT INTO wish_item VALUES (3, 2080, 1, NULL, NULL, NULL, 'Foreign Passport very quick for one person');
+INSERT INTO wish_item VALUES (4, 2082, 5, NULL, NULL, NULL, 'dfgsdf gsdfg sdfgd');
+INSERT INTO wish_item VALUES (5, 2083, 5, 57, 1800.00, 2100.00, 'Turkey or Egypt, 2 adults and 2 children, 7 days, 5* or best 4* with Al inclusive');
+INSERT INTO wish_item VALUES (6, 2084, 1, NULL, NULL, NULL, 'Need very quick for one person');
+INSERT INTO wish_item VALUES (7, 2091, 5, 54, NULL, 4000.00, 'Cuba for 1 person, 10 days for 1 person');
+
+
+--
+-- Name: wish_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('wish_item_id_seq', 7, true);
 
 
 --
@@ -6791,11 +7038,27 @@ ALTER TABLE ONLY invoice
 
 
 --
+-- Name: lead_offer_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lead_offer_item
+    ADD CONSTRAINT lead_offer_item_pkey PRIMARY KEY (lead_id, offer_item_id);
+
+
+--
 -- Name: lead_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead
     ADD CONSTRAINT lead_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lead_wish_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lead_wish_item
+    ADD CONSTRAINT lead_wish_item_pkey PRIMARY KEY (lead_id, wish_item_id);
 
 
 --
@@ -6852,6 +7115,14 @@ ALTER TABLE ONLY notification
 
 ALTER TABLE ONLY notification_resource
     ADD CONSTRAINT notification_resource_pkey PRIMARY KEY (notification_id, resource_id);
+
+
+--
+-- Name: offer_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY offer_item
+    ADD CONSTRAINT offer_item_pkey PRIMARY KEY (id);
 
 
 --
@@ -7391,6 +7662,14 @@ ALTER TABLE ONLY "user"
 
 
 --
+-- Name: wish_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY wish_item
+    ADD CONSTRAINT wish_item_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -7670,6 +7949,14 @@ ALTER TABLE ONLY company
 
 
 --
+-- Name: fk_currency_id_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY offer_item
+    ADD CONSTRAINT fk_currency_id_offer_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_currency_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7691,6 +7978,14 @@ ALTER TABLE ONLY calculation
 
 ALTER TABLE ONLY currency_rate
     ADD CONSTRAINT fk_currency_id_tour FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY wish_item
+    ADD CONSTRAINT fk_currency_id_wish_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7854,6 +8149,22 @@ ALTER TABLE ONLY tour_sale_invoice
 
 
 --
+-- Name: fk_lead_id_lead_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer_item
+    ADD CONSTRAINT fk_lead_id_lead_offer_item FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_lead_id_lead_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead_wish_item
+    ADD CONSTRAINT fk_lead_id_lead_wish_item FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_licence_id_touroperator_licence; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7907,6 +8218,14 @@ ALTER TABLE ONLY note_resource
 
 ALTER TABLE ONLY notification_resource
     ADD CONSTRAINT fk_notification_id_notification_resource FOREIGN KEY (notification_id) REFERENCES notification(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_offer_item_id_lead_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer_item
+    ADD CONSTRAINT fk_offer_item_id_lead_offer_item FOREIGN KEY (offer_item_id) REFERENCES offer_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8286,6 +8605,14 @@ ALTER TABLE ONLY notification_resource
 
 
 --
+-- Name: fk_resource_id_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY offer_item
+    ADD CONSTRAINT fk_resource_id_offer_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8446,6 +8773,14 @@ ALTER TABLE ONLY "user"
 
 
 --
+-- Name: fk_resource_id_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY wish_item
+    ADD CONSTRAINT fk_resource_id_wish_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8478,11 +8813,27 @@ ALTER TABLE ONLY commission
 
 
 --
+-- Name: fk_service_id_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY offer_item
+    ADD CONSTRAINT fk_service_id_offer_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_service_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY service_item
     ADD CONSTRAINT fk_service_id_service_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY wish_item
+    ADD CONSTRAINT fk_service_id_wish_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8779,6 +9130,14 @@ ALTER TABLE ONLY income_transfer
 
 ALTER TABLE ONLY outgoing_transfer
     ADD CONSTRAINT fk_transfer_id_outgoing_transfer FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_wish_item_id_lead_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lead_wish_item
+    ADD CONSTRAINT fk_wish_item_id_lead_wish_item FOREIGN KEY (wish_item_id) REFERENCES wish_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

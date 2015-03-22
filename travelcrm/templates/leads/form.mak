@@ -1,3 +1,5 @@
+<%namespace file="../wishes_items/common.mak" import="wishes_items_selector"/>
+<%namespace file="../offers_items/common.mak" import="offers_items_selector"/>
 <%namespace file="../notes/common.mak" import="notes_selector"/>
 <%namespace file="../tasks/common.mak" import="tasks_selector"/>
 <div class="dl70 easyui-dialog"
@@ -44,6 +46,38 @@
                         )}
                         ${h.common.error_container(name="customer_id")}
                     </div>
+                </div>
+                <div class="form-field mb05">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"status"), True, "status")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.leads_statuses_combobox_field(
+                            item.status.key if item else None
+                        )}
+                    </div>
+                </div>
+            </div>
+            <div title="${_(u'Wishes')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${wishes_items_selector(
+                        values=([wish_item.id for wish_item in item.wishes_items] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
+                </div>
+            </div>
+            <div title="${_(u'Offers')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${offers_items_selector(
+                        values=([offer_item.id for offer_item in item.offers_items] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
                 </div>
             </div>
             <div title="${_(u'Notes')}">

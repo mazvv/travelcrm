@@ -70,3 +70,5 @@ from notification import Notification
 from email_campaign import EmailCampaign
 from company import Company
 from lead import Lead
+from wish_item import WishItem
+from offer_item import OfferItem
