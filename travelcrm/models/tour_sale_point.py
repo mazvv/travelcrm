@@ -51,11 +51,11 @@ class TourSalePoint(Base):
             onupdate='cascade',
         ),
     )
-    accomodation_id = Column(
+    accomodation_type_id = Column(
         Integer,
         ForeignKey(
-            'accomodation.id',
-            name="fk_accomodation_id_tour_sale_point",
+            'accomodation_type.id',
+            name="fk_accomodation_type_id_tour_sale_point",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -108,8 +108,8 @@ class TourSalePoint(Base):
         ),
         uselist=False,
     )
-    accomodation = relationship(
-        'Accomodation',
+    accomodation_type = relationship(
+        'AccomodationType',
         backref=backref(
             'tours_sales_points',
             uselist=True,

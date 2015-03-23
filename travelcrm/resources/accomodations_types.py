@@ -10,6 +10,6 @@ from ..resources import (
 
 
 @implementer(IResourceType)
-class Accomodations(ResourceTypeBase):
+class AccomodationsTypes(ResourceTypeBase):
 
-    __name__ = 'accomodations'
+    __name__ = 'accomodations_types'

@@ -6,7 +6,7 @@ from . import(
     ResourceSchema, 
     ResourceSearchSchema
 )
-from ..models.accomodation import Accomodation
+from ..models.accomodation_type import AccomodationType
 from ..lib.utils.common_utils import translate as _
 
 
@@ -15,10 +15,10 @@ def name_validator(node, kw):
     request = kw.get('request')
 
     def validator(node, value):
-        accomodation = Accomodation.by_name(value)
+        accomodation_type = AccomodationType.by_name(value)
         if (
-            accomodation
-            and str(accomodation.id) != request.params.get('id')
+            accomodation_type
+            and str(accomodation_type.id) != request.params.get('id')
         ):
             raise colander.Invalid(
                 node,
@@ -27,12 +27,12 @@ def name_validator(node, kw):
     return colander.All(colander.Length(max=32), validator,)
 
 
-class AccomodationSchema(ResourceSchema):
+class AccomodationTypeSchema(ResourceSchema):
     name = colander.SchemaNode(
         colander.String(),
         validator=name_validator,
     )
 
 
-class AccomodationSearchSchema(ResourceSearchSchema):
+class AccomodationTypeSearchSchema(ResourceSearchSchema):
     pass

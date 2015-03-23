@@ -38,7 +38,7 @@ from location import Location
 from advsource import Advsource
 from hotelcat import Hotelcat
 from roomcat import Roomcat
-from accomodation import Accomodation
+from accomodation_type import AccomodationType
 from foodcat import Foodcat
 from bperson import BPerson
 from touroperator import Touroperator

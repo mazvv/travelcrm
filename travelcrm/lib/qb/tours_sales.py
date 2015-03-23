@@ -18,7 +18,7 @@ from ...models.touroperator import Touroperator
 from ...models.location import Location
 from ...models.region import Region
 from ...models.country import Country
-from ...models.accomodation import Accomodation
+from ...models.accomodation_type import AccomodationType
 from ...models.foodcat import Foodcat
 from ...models.roomcat import Roomcat
 from ...models.hotelcat import Hotelcat
@@ -210,7 +210,7 @@ class ToursSalesPointsQueryBuilder(GeneralQueryBuilder):
             'hotelcat_name': Hotelcat.name,
             'country_name': Country.name,
             'full_hotel_name': Hotel.name + ' (' + Hotelcat.name + ')',
-            'accomodation_name': Accomodation.name,
+            'accomodation_type_name': AccomodationType.name,
             'roomcat_name': Roomcat.name,
             'foodcat_name': Foodcat.name,
             'point_start_date': TourSalePoint.start_date,
@@ -226,7 +226,7 @@ class ToursSalesPointsQueryBuilder(GeneralQueryBuilder):
             .outerjoin(Region, Location.region)
             .outerjoin(Country, Region.country)
             .outerjoin(Hotel, TourSalePoint.hotel)
-            .outerjoin(Accomodation, TourSalePoint.accomodation)
+            .outerjoin(AccomodationType, TourSalePoint.accomodation_type)
             .outerjoin(Foodcat, TourSalePoint.foodcat)
             .outerjoin(Roomcat, TourSalePoint.roomcat)
             .outerjoin(Hotelcat, Hotel.hotelcat)

@@ -16,7 +16,7 @@ from ...resources.countries import Countries
 from ...resources.regions import Regions
 from ...resources.locations import Locations
 from ...resources.touroperators import Touroperators
-from ...resources.accomodations import Accomodations
+from ...resources.accomodations_types import AccomodationsTypes
 from ...resources.roomcats import Roomcats
 from ...resources.foodcats import Foodcats
 from ...resources.hotels import Hotels
@@ -1492,18 +1492,19 @@ def touroperators_combobox_field(
     )
 
 
-def accomodations_combobox_field(
-    request, value=None, name='accomodation_id',
+def accomodations_types_combobox_field(
+    request, value=None, name='accomodation_type_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Accomodations.get_permisions(Accomodations, request)
+    permisions = AccomodationsTypes.get_permisions(AccomodationsTypes, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accomodations/add'"
+                "container:'#%s',action:'dialog_open',"
+                "url:'/accomodations_types/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1517,7 +1518,8 @@ def accomodations_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accomodations/view',"
+                "container:'#%s',action:'dialog_open',"
+                "url:'/accomodations_types/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1531,7 +1533,8 @@ def accomodations_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accomodations/edit',"
+                "container:'#%s',action:'dialog_open',"
+                "url:'/accomodations_types/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1550,7 +1553,7 @@ def accomodations_combobox_field(
     ]]
 
     data_options = """
-        url: '/accomodations/list',
+        url: '/accomodations_types/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
