@@ -1,0 +1,50 @@
+# -*coding: utf-8-*-
+from collections import Iterable
+
+from . import ResourcesQueryBuilder
+
+from ...models.resource import Resource
+from ...models.order_item import OrderItem
+from ...models.service import Service
+from ...models.currency import Currency
+from ...models.touroperator import Touroperator
+
+
+class OrderItemQueryBuilder(ResourcesQueryBuilder):
+
+    def __init__(self, context):
+        super(OrderItemQueryBuilder, self).__init__(context)
+        self._fields = {
+            'id': OrderItem.id,
+            '_id': OrderItem.id,
+            'service': Service.name,
+            'touroperator': Touroperator.name,
+            'price': OrderItem.price,
+            'currency': Currency.iso_code,
+        }
+        self.build_query()
+
+    def build_query(self):
+        self.build_base_query()
+        self.query = (
+            self.query
+            .join(OrderItem, Resource.order_item)
+            .join(
+                Service,
+                OrderItem.service
+            )
+            .join(
+                Touroperator,
+                OrderItem.touroperator
+            )
+            .join(
+                Currency,
+                OrderItem.currency
+            )
+        )
+        super(OrderItemQueryBuilder, self).build_query()
+
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(OrderItem.id.in_(id))

@@ -54,6 +54,10 @@ class Company(Base):
         String(length=32),
         nullable=False,
     )
+    email = Column(
+        String(length=32),
+        nullable=False,
+    )
     settings = Column(
         JSON,
         primary_key=False,

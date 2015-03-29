@@ -55,7 +55,7 @@
                 $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
                     id.push($(el).val());
                 });
-                param.id = id.join();                            
+                param.id = id.join();
                 param.rows = 0;
                 param.page = 0;
             }

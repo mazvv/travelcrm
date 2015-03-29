@@ -34,6 +34,17 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
+                        ${h.tags.title(_(u"resource type"), True, "resource_type_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.services_types_combobox_field(
+                            item.resource_type_id if item else None,
+                        )}
+                        ${h.common.error_container(name='resource_type_id')}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
                         ${h.tags.title(_(u"invoice text"), False, "display_text")}
                     </div>
                     <div class="ml15">

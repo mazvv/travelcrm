@@ -48,3 +48,8 @@ class IPortlet(Interface):
     """ Portlet identificator """
 
     pass
+
+
+class IServiceType(Interface):
+    """ Service """
+    pass

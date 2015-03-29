@@ -55,11 +55,11 @@ ${h.tags.Doctype().html5()}
             <div class="easyui-layout" data-options="fit:true,minHeight:650">
                 <div id="_tools_" class="dp30" title="${_(u'Tools panel')}" iconCls="fa fa-plug" data-options="region:'east',border:false,split:true,collapsible:true">
                     <div class="easyui-tabs" data-options="fit:true,border:false">
-                        <div id="_tasks_" title="${_(u'Tasks')}" data-options="fit:true,border:false,href:'/tasks'">
+                        <div id="_task_" title="${_(u'Tasks')}" data-options="fit:true,border:false,href:'/task'">
                         </div>
-                        <div id="_notes_" title="${_(u'Notes')}" data-options="fit:true,border:false,href:'/notes'">
+                        <div id="_note_" title="${_(u'Notes')}" data-options="fit:true,border:false,href:'/note'">
                         </div>
-                        <div id="_activities_" title="${_(u'Notifications')}" data-options="fit:true,border:false,href:'/notifications'">
+                        <div id="_notification_" title="${_(u'Notifications')}" data-options="fit:true,border:false,href:'/notification'">
                         </div>
                     </div>
                 </div>

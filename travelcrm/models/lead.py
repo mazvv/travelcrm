@@ -17,8 +17,8 @@ from ..lib import EnumIntType
 from ..lib.utils.common_utils import translate as _
 
 
-lead_wish_item = Table(
-    'lead_wish_item',
+lead_wish = Table(
+    'lead_wish',
     Base.metadata,
     Column(
         'lead_id',
@@ -27,26 +27,26 @@ lead_wish_item = Table(
             'lead.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_lead_id_lead_wish_item',
+            name='fk_lead_id_lead_wish',
         ),
         primary_key=True,
     ),
     Column(
-        'wish_item_id',
+        'wish_id',
         Integer,
         ForeignKey(
-            'wish_item.id',
+            'wish.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_wish_item_id_lead_wish_item',
+            name='fk_wish_id_lead_wish',
         ),
         primary_key=True,
     ),
 )
 
 
-lead_offer_item = Table(
-    'lead_offer_item',
+lead_offer = Table(
+    'lead_offer',
     Base.metadata,
     Column(
         'lead_id',
@@ -55,18 +55,18 @@ lead_offer_item = Table(
             'lead.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_lead_id_lead_offer_item',
+            name='fk_lead_id_lead_offer',
         ),
         primary_key=True,
     ),
     Column(
-        'offer_item_id',
+        'offer_id',
         Integer,
         ForeignKey(
-            'offer_item.id',
+            'offer.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_offer_item_id_lead_offer_item',
+            name='fk_offer_item_id_lead_offer',
         ),
         primary_key=True,
     ),
@@ -137,9 +137,9 @@ class Lead(Base):
         cascade="all,delete",
         uselist=False,
     )
-    wishes_items = relationship(
-        'WishItem',
-        secondary=lead_wish_item,
+    wishes = relationship(
+        'Wish',
+        secondary=lead_wish,
         backref=backref(
             'lead',
             uselist=False,
@@ -147,9 +147,9 @@ class Lead(Base):
         uselist=True,
         lazy="dynamic",
     )
-    offers_items = relationship(
-        'OfferItem',
-        secondary=lead_offer_item,
+    offers = relationship(
+        'Offer',
+        secondary=lead_offer,
         backref=backref(
             'lead',
             uselist=False,

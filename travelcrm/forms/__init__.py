@@ -12,6 +12,7 @@ from colander import (
     _
 )
 
+from ..lib.qb import ResourcesQueryBuilder
 from ..lib.utils.common_utils import (
     get_locale_name, 
     parse_datetime
@@ -121,6 +122,10 @@ class File(colander.SchemaType):
 
 
 class ResourceSearchSchema(colander.Schema):
+    id = colander.SchemaNode(
+        colander.String(),
+        missing=None
+    )
     q = colander.SchemaNode(
         colander.String(),
         missing=None
@@ -137,3 +142,70 @@ class ResourceSearchSchema(colander.Schema):
         colander.Int(),
         missing=None
     )
+    sort = colander.SchemaNode(
+        colander.String(),
+    )
+    order = colander.SchemaNode(
+        colander.String(),
+        validator=colander.OneOf(('asc', 'desc')),
+    )
+    rows = colander.SchemaNode(
+        colander.Integer(),
+    )
+    page = colander.SchemaNode(
+        colander.Integer(),
+    )
+
+
+class BaseForm(object):
+    _schema = None
+    _controls = None
+    _errors = None
+
+    def __init__(self, request):
+        assert self._schema, u'Set _schema class attribute'
+        self.request = request
+        self.schema = self._schema().bind(request=self.request)
+
+    def validate(self):
+        try:
+            self._controls = self.schema.deserialize(
+                self.request.params.mixed()
+            )
+            return True
+        except colander.Invalid as e:
+            self._errors = e.asdict()
+            return False
+
+    @property
+    def errors(self):
+        return self._errors
+
+    def submit(self, obj=None):
+        raise NotImplementedError(u'Submit method must be implemented')
+
+
+class BaseSearchForm(BaseForm):
+    _schema = ResourceSearchSchema
+    _qb = None
+
+    def __init__(self, request, context):
+        assert self._qb, u'Set _qb class attribute'
+        self.qb = self._qb(context)
+        super(BaseSearchForm, self).__init__(request)
+
+    def submit(self):
+        self.qb.search_simple(self._controls.get('q'))
+        self.qb.advanced_search(**self._controls)
+        id = self._controls.get('id')
+        if id:
+            self.qb.filter_id(id.split(','))
+        self.qb.sort_query(
+            self._controls.get('sort'),
+            self._controls.get('order', 'asc')
+        )
+        self.qb.page_query(
+            self._controls.get('rows'),
+            self._controls.get('page')
+        )
+        return self.qb

@@ -6,31 +6,32 @@ from pytz import common_timezones
 from webhelpers.html import tags
 from webhelpers.html import HTML
 
-from ...resources.employees import Employees
-from ...resources.positions import Positions
-from ...resources.licences import Licences
-from ...resources.bpersons import BPersons
-from ...resources.contacts import Contacts
-from ...resources.hotelcats import Hotelcats
-from ...resources.countries import Countries
-from ...resources.regions import Regions
-from ...resources.locations import Locations
-from ...resources.touroperators import Touroperators
-from ...resources.accomodations_types import AccomodationsTypes
-from ...resources.roomcats import Roomcats
-from ...resources.foodcats import Foodcats
-from ...resources.hotels import Hotels
-from ...resources.currencies import Currencies
-from ...resources.persons import Persons
-from ...resources.advsources import Advsources
-from ...resources.banks import Banks
-from ...resources.banks_details import BanksDetails
-from ...resources.services import Services
-from ...resources.accounts_items import AccountsItems
-from ...resources.accounts import Accounts
-from ...resources.invoices import Invoices
-from ...resources.suppliers import Suppliers
-from ...resources.subaccounts import Subaccounts
+from ...interfaces import IServiceType
+from ...resources.employee import EmployeeResource
+from ...resources.position import PositionResource
+from ...resources.licence import LicenceResource
+from ...resources.bperson import BPersonResource
+from ...resources.contact import ContactResource
+from ...resources.hotelcat import HotelcatResource
+from ...resources.country import CountryResource
+from ...resources.region import RegionResource
+from ...resources.location import LocationResource
+from ...resources.touroperator import TouroperatorResource
+from ...resources.accomodation_type import AccomodationTypeResource
+from ...resources.roomcat import RoomcatResource
+from ...resources.foodcat import FoodcatResource
+from ...resources.hotel import HotelResource
+from ...resources.currency import CurrencyResource
+from ...resources.person import PersonResource
+from ...resources.advsource import AdvsourceResource
+from ...resources.bank import BankResource
+from ...resources.bank_detail import BankDetailResource
+from ...resources.service import ServiceResource
+from ...resources.account_item import AccountItemResource
+from ...resources.account import AccountResource
+from ...resources.invoice import InvoiceResource
+from ...resources.supplier import SupplierResource
+from ...resources.subaccount import SubaccountResource
 
 from ...models.task import Task
 from ...models.account import Account
@@ -46,9 +47,10 @@ from ..utils.common_utils import (
     get_date_format,
     get_datetime_format,
     format_date,
-    format_datetime
+    format_datetime,
 )
 from ..utils.common_utils import translate as _
+from ..utils.resources_utils import get_resources_types_by_interface
 from ..bl.subaccounts import get_subaccounts_types
 
 
@@ -68,7 +70,7 @@ def structures_combotree_field(
     value=None, name='parent_id', options=None
 ):
     data_options = """
-        url: '/structures/list',
+        url: '/structure/list',
         onBeforeLoad: function(node, param){
             param.sort = 'structure_name';
     """
@@ -107,12 +109,12 @@ def resources_types_combobox_field(
     value=None, name='resource_type_id'
 ):
     data_options = """
-        url: '/resources_types/list',
+        url: '/resource_type/list',
         valueField: 'id',
-        textField: 'rt_humanize',
+        textField: 'humanize',
         editable: false,
         onBeforeLoad: function(param){
-            param.sort = 'rt_humanize';
+            param.sort = 'humanize';
             param.rows = 0;
             param.page = 1;
         },
@@ -120,9 +122,10 @@ def resources_types_combobox_field(
             return data.rows;
         }
     """
-    return tags.text(name, value, class_="easyui-combobox text w20",
-                     data_options=data_options
-                     )
+    return tags.text(
+        name, value, class_="easyui-combobox text w20",
+        data_options=data_options
+    )
 
 
 def permisions_yes_no_field(value=None, permision="view", name='permisions'):
@@ -140,7 +143,7 @@ def navigations_combotree_field(
     position_id, value=None, name='parent_id'
 ):
     data_options = """
-        url: '/navigations/list',
+        url: '/navigation/list',
         onBeforeLoad: function(node, param){
             param.position_id = %s;
             param.sort = 'sort_order';
@@ -167,23 +170,24 @@ def navigations_combotree_field(
             }
         """ % value
 
-    return tags.text(name, value, class_="easyui-combotree text w20",
-                     data_options=data_options
-                     )
+    return tags.text(
+        name, value, class_="easyui-combotree text w20",
+        data_options=data_options
+    )
 
 
 def employees_combobox_field(
     request, value=None, name='employee_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Employees.get_permisions(Employees, request)
+    permisions = EmployeeResource.get_permisions(EmployeeResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/employees/add'"
+                "container:'#%s',action:'dialog_open',url:'/employee/add'"
                 % obj_id
         }
         toolbar.append(
@@ -197,7 +201,7 @@ def employees_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/employees/view',"
+                "container:'#%s',action:'dialog_open',url:'/employee/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -211,7 +215,7 @@ def employees_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/employees/edit',"
+                "container:'#%s',action:'dialog_open',url:'/employee/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -228,7 +232,7 @@ def employees_combobox_field(
     ]]
 
     data_options = """
-        url: '/employees/list',
+        url: '/employee/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -296,14 +300,14 @@ def positions_combogrid_field(
     request, value=None, name='position_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Positions.get_permisions(Positions, request)
+    permisions = PositionResource.get_permisions(PositionResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/positions/add'"
+                "container:'#%s',action:'dialog_open',url:'/position/add'"
                 % obj_id
         }
         toolbar.append(
@@ -317,7 +321,7 @@ def positions_combogrid_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/positions/view',"
+                "container:'#%s',action:'dialog_open',url:'/position/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -331,7 +335,7 @@ def positions_combogrid_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/positions/edit',"
+                "container:'#%s',action:'dialog_open',url:'/position/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -353,7 +357,7 @@ def positions_combogrid_field(
     }]]""" % {'title': _(u'name')}
 
     data_options = """
-        url: '/positions/list',
+        url: '/position/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -522,14 +526,14 @@ def licences_combobox_field(
     request, value=None, name='licence_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Licences.get_permisions(Licences, request)
+    permisions = LicenceResource.get_permisions(LicenceResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/licences/add'"
+                "container:'#%s',action:'dialog_open',url:'/licence/add'"
                 % obj_id
         }
         toolbar.append(
@@ -543,7 +547,7 @@ def licences_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/licences/view',"
+                "container:'#%s',action:'dialog_open',url:'/licence/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -557,7 +561,7 @@ def licences_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/licences/edit',"
+                "container:'#%s',action:'dialog_open',url:'/licence/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -575,7 +579,7 @@ def licences_combobox_field(
     }]]
 
     data_options = """
-        url: '/licences/list',
+        url: '/licence/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -643,14 +647,14 @@ def bpersons_combobox_field(
     request, value=None, name='bperson_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = BPersons.get_permisions(BPersons, request)
+    permisions = BPersonResource.get_permisions(BPersonResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bpersons/add'"
+                "container:'#%s',action:'dialog_open',url:'/bperson/add'"
                 % obj_id
         }
         toolbar.append(
@@ -664,7 +668,7 @@ def bpersons_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bpersons/view',"
+                "container:'#%s',action:'dialog_open',url:'/bperson/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -678,7 +682,7 @@ def bpersons_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bpersons/edit',"
+                "container:'#%s',action:'dialog_open',url:'/bperson/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -696,7 +700,7 @@ def bpersons_combobox_field(
     }]]
 
     data_options = """
-        url: '/bpersons/list',
+        url: '/bperson/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -764,14 +768,14 @@ def contacts_combobox_field(
     request, value=None, name='contact_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Contacts.get_permisions(Contacts, request)
+    permisions = ContactResource.get_permisions(ContactResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/contacts/add'"
+                "container:'#%s',action:'dialog_open',url:'/contact/add'"
                 % obj_id
         }
         toolbar.append(
@@ -785,7 +789,7 @@ def contacts_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/contacts/view',"
+                "container:'#%s',action:'dialog_open',url:'/contact/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -799,7 +803,7 @@ def contacts_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/contacts/edit',"
+                "container:'#%s',action:'dialog_open',url:'/contact/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -818,7 +822,7 @@ def contacts_combobox_field(
     ]]
 
     data_options = """
-        url: '/contacts/list',
+        url: '/contact/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -886,14 +890,14 @@ def hotelcats_combobox_field(
     request, value=None, name='hotelcat_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Hotelcats.get_permisions(Hotelcats, request)
+    permisions = HotelcatResource.get_permisions(HotelcatResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotelcats/add'"
+                "container:'#%s',action:'dialog_open',url:'/hotelcat/add'"
                 % obj_id
         }
         toolbar.append(
@@ -907,7 +911,7 @@ def hotelcats_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotelcats/view',"
+                "container:'#%s',action:'dialog_open',url:'/hotelcat/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -921,7 +925,7 @@ def hotelcats_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotelcats/edit',"
+                "container:'#%s',action:'dialog_open',url:'/hotelcat/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -940,7 +944,7 @@ def hotelcats_combobox_field(
     ]]
 
     data_options = """
-        url: '/hotelcats/list',
+        url: '/hotelcat/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1008,14 +1012,14 @@ def countries_combobox_field(
     request, value=None, name='country_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Countries.get_permisions(Countries, request)
+    permisions = CountryResource.get_permisions(CountryResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/countries/add'"
+                "container:'#%s',action:'dialog_open',url:'/country/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1029,7 +1033,7 @@ def countries_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/countries/view',"
+                "container:'#%s',action:'dialog_open',url:'/country/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1043,7 +1047,7 @@ def countries_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/countries/edit',"
+                "container:'#%s',action:'dialog_open',url:'/country/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1062,7 +1066,7 @@ def countries_combobox_field(
     ]]
 
     data_options = """
-        url: '/countries/list',
+        url: '/country/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1130,14 +1134,14 @@ def regions_combobox_field(
     request, value=None, name='region_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Regions.get_permisions(Regions, request)
+    permisions = RegionResource.get_permisions(RegionResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/regions/add'"
+                "container:'#%s',action:'dialog_open',url:'/region/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1151,7 +1155,7 @@ def regions_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/regions/view',"
+                "container:'#%s',action:'dialog_open',url:'/region/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1165,7 +1169,7 @@ def regions_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/regions/edit',"
+                "container:'#%s',action:'dialog_open',url:'/region/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1184,7 +1188,7 @@ def regions_combobox_field(
     ]]
 
     data_options = """
-        url: '/regions/list',
+        url: '/region/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1252,14 +1256,14 @@ def locations_combobox_field(
     request, value=None, name='location_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Locations.get_permisions(Locations, request)
+    permisions = LocationResource.get_permisions(LocationResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/locations/add'"
+                "container:'#%s',action:'dialog_open',url:'/location/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1273,7 +1277,7 @@ def locations_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/locations/view',"
+                "container:'#%s',action:'dialog_open',url:'/location/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1287,7 +1291,7 @@ def locations_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/locations/edit',"
+                "container:'#%s',action:'dialog_open',url:'/location/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1306,7 +1310,7 @@ def locations_combobox_field(
     ]]
 
     data_options = """
-        url: '/locations/list',
+        url: '/location/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1374,14 +1378,16 @@ def touroperators_combobox_field(
     request, value=None, name='touroperator_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Touroperators.get_permisions(Touroperators, request)
+    permisions = TouroperatorResource.get_permisions(
+        TouroperatorResource, request
+    )
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/touroperators/add'"
+                "container:'#%s',action:'dialog_open',url:'/touroperator/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1395,7 +1401,7 @@ def touroperators_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/touroperators/view',"
+                "container:'#%s',action:'dialog_open',url:'/touroperator/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1409,7 +1415,7 @@ def touroperators_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/touroperators/edit',"
+                "container:'#%s',action:'dialog_open',url:'/touroperator/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1428,7 +1434,7 @@ def touroperators_combobox_field(
     ]]
 
     data_options = """
-        url: '/touroperators/list',
+        url: '/touroperator/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1496,7 +1502,9 @@ def accomodations_types_combobox_field(
     request, value=None, name='accomodation_type_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = AccomodationsTypes.get_permisions(AccomodationsTypes, request)
+    permisions = AccomodationTypeResource.get_permisions(
+        AccomodationTypeResource, request
+    )
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
@@ -1504,7 +1512,7 @@ def accomodations_types_combobox_field(
         kwargs = {
             'data-options':
                 "container:'#%s',action:'dialog_open',"
-                "url:'/accomodations_types/add'"
+                "url:'/accomodation_type/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1519,7 +1527,7 @@ def accomodations_types_combobox_field(
         kwargs = {
             'data-options':
                 "container:'#%s',action:'dialog_open',"
-                "url:'/accomodations_types/view',"
+                "url:'/accomodation_type/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1534,7 +1542,7 @@ def accomodations_types_combobox_field(
         kwargs = {
             'data-options':
                 "container:'#%s',action:'dialog_open',"
-                "url:'/accomodations_types/edit',"
+                "url:'/accomodation_type/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1553,7 +1561,7 @@ def accomodations_types_combobox_field(
     ]]
 
     data_options = """
-        url: '/accomodations_types/list',
+        url: '/accomodation_type/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1621,14 +1629,14 @@ def foodcats_combobox_field(
     request, value=None, name='foodcat_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Foodcats.get_permisions(Foodcats, request)
+    permisions = FoodcatResource.get_permisions(FoodcatResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/foodcats/add'"
+                "container:'#%s',action:'dialog_open',url:'/foodcat/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1642,7 +1650,7 @@ def foodcats_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/foodcats/view',"
+                "container:'#%s',action:'dialog_open',url:'/foodcat/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1656,7 +1664,7 @@ def foodcats_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/foodcats/edit',"
+                "container:'#%s',action:'dialog_open',url:'/foodcat/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1675,7 +1683,7 @@ def foodcats_combobox_field(
     ]]
 
     data_options = """
-        url: '/foodcats/list',
+        url: '/foodcat/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1743,14 +1751,14 @@ def roomcats_combobox_field(
     request, value=None, name='roomcat_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Roomcats.get_permisions(Roomcats, request)
+    permisions = RoomcatResource.get_permisions(RoomcatResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/roomcats/add'"
+                "container:'#%s',action:'dialog_open',url:'/roomcat/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1764,7 +1772,7 @@ def roomcats_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/roomcats/view',"
+                "container:'#%s',action:'dialog_open',url:'/roomcat/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1778,7 +1786,7 @@ def roomcats_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/roomcats/edit',"
+                "container:'#%s',action:'dialog_open',url:'/roomcat/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1797,7 +1805,7 @@ def roomcats_combobox_field(
     ]]
 
     data_options = """
-        url: '/roomcats/list',
+        url: '/roomcat/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1865,14 +1873,14 @@ def hotels_combobox_field(
     request, value=None, name='hotel_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Hotels.get_permisions(Hotels, request)
+    permisions = HotelResource.get_permisions(HotelResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotels/add'"
+                "container:'#%s',action:'dialog_open',url:'/hotel/add'"
                 % obj_id
         }
         toolbar.append(
@@ -1886,7 +1894,7 @@ def hotels_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotels/view',"
+                "container:'#%s',action:'dialog_open',url:'/hotel/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1900,7 +1908,7 @@ def hotels_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotels/edit',"
+                "container:'#%s',action:'dialog_open',url:'/hotel/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -1919,7 +1927,7 @@ def hotels_combobox_field(
     ]]
 
     data_options = """
-        url: '/hotels/list',
+        url: '/hotel/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -1987,14 +1995,14 @@ def currencies_combobox_field(
     request, value=None, name='currency_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Currencies.get_permisions(Currencies, request)
+    permisions = CurrencyResource.get_permisions(CurrencyResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/currencies/add'"
+                "container:'#%s',action:'dialog_open',url:'/currency/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2008,7 +2016,7 @@ def currencies_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/currencies/view',"
+                "container:'#%s',action:'dialog_open',url:'/currency/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2022,7 +2030,7 @@ def currencies_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/currencies/edit',"
+                "container:'#%s',action:'dialog_open',url:'/currency/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2041,7 +2049,7 @@ def currencies_combobox_field(
     ]]
 
     data_options = """
-        url: '/currencies/list',
+        url: '/currency/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2109,14 +2117,14 @@ def persons_combobox_field(
     request, value=None, name='person_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Persons.get_permisions(Persons, request)
+    permisions = PersonResource.get_permisions(PersonResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/persons/add'"
+                "container:'#%s',action:'dialog_open',url:'/person/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2130,7 +2138,7 @@ def persons_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/persons/view',"
+                "container:'#%s',action:'dialog_open',url:'/person/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2144,7 +2152,7 @@ def persons_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/persons/edit',"
+                "container:'#%s',action:'dialog_open',url:'/person/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2162,7 +2170,7 @@ def persons_combobox_field(
     }]]
 
     data_options = """
-        url: '/persons/list',
+        url: '/person/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2230,14 +2238,14 @@ def advsources_combobox_field(
     request, value=None, name='advsource_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Advsources.get_permisions(Advsources, request)
+    permisions = AdvsourceResource.get_permisions(AdvsourceResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/advsources/add'"
+                "container:'#%s',action:'dialog_open',url:'/advsource/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2251,7 +2259,7 @@ def advsources_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/advsources/view',"
+                "container:'#%s',action:'dialog_open',url:'/advsource/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2265,7 +2273,7 @@ def advsources_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/advsources/edit',"
+                "container:'#%s',action:'dialog_open',url:'/advsource/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2283,7 +2291,7 @@ def advsources_combobox_field(
     }]]
 
     data_options = """
-        url: '/advsources/list',
+        url: '/advsource/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2369,14 +2377,14 @@ def banks_combobox_field(
     request, value=None, name='bank_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Banks.get_permisions(Banks, request)
+    permisions = BankResource.get_permisions(BankResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/banks/add'"
+                "container:'#%s',action:'dialog_open',url:'/bank/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2390,7 +2398,7 @@ def banks_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/banks/view',"
+                "container:'#%s',action:'dialog_open',url:'/bank/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2404,7 +2412,7 @@ def banks_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/banks/edit',"
+                "container:'#%s',action:'dialog_open',url:'/bank/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2422,7 +2430,7 @@ def banks_combobox_field(
     }]]
 
     data_options = """
-        url: '/banks/list',
+        url: '/bank/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2491,14 +2499,14 @@ def banks_details_combobox_field(
     id=None, show_toolbar=True,
     structure_id=False, options=None
 ):
-    permisions = BanksDetails.get_permisions(BanksDetails, request)
+    permisions = BankDetailResource.get_permisions(BankDetailResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/banks_details/add'"
+                "container:'#%s',action:'dialog_open',url:'/bank_detail/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2512,7 +2520,7 @@ def banks_details_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/banks_details/view',"
+                "container:'#%s',action:'dialog_open',url:'/bank_detail/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2526,7 +2534,7 @@ def banks_details_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/banks_details/edit',"
+                "container:'#%s',action:'dialog_open',url:'/bank_detail/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2555,7 +2563,7 @@ def banks_details_combobox_field(
     }
 
     data_options = """
-        url: '/banks_details/list',
+        url: '/bank_detail/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2627,14 +2635,14 @@ def services_combobox_field(
     request, value=None, name='service_id',
     id=None, show_toolbar=True, options=None,
 ):
-    permisions = Services.get_permisions(Services, request)
+    permisions = ServiceResource.get_permisions(ServiceResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/services/add'"
+                "container:'#%s',action:'dialog_open',url:'/service/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2648,7 +2656,7 @@ def services_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/services/view',"
+                "container:'#%s',action:'dialog_open',url:'/service/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2662,7 +2670,7 @@ def services_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/services/edit',"
+                "container:'#%s',action:'dialog_open',url:'/service/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2679,7 +2687,7 @@ def services_combobox_field(
         'sortable': True, 'width': 200
     }]]
     data_options = """
-        url: '/services/list',
+        url: '/service/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2747,14 +2755,16 @@ def accounts_items_combobox_field(
     request, value=None, name='account_item_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = AccountsItems.get_permisions(AccountsItems, request)
+    permisions = AccountItemResource.get_permisions(
+        AccountItemResource, request
+    )
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accounts_items/add'"
+                "container:'#%s',action:'dialog_open',url:'/account_item/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2768,7 +2778,7 @@ def accounts_items_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accounts_items/view',"
+                "container:'#%s',action:'dialog_open',url:'/account_item/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2782,7 +2792,7 @@ def accounts_items_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accounts_items/edit',"
+                "container:'#%s',action:'dialog_open',url:'/account_item/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2800,7 +2810,7 @@ def accounts_items_combobox_field(
     }]]
 
     data_options = """
-        url: '/accounts_items/list',
+        url: '/account_item/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2877,14 +2887,14 @@ def accounts_combobox_field(
     request, value=None, name='account_id',
     id=None, show_toolbar=True, options=None,
 ):
-    permisions = Accounts.get_permisions(Accounts, request)
+    permisions = AccountResource.get_permisions(AccountResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accounts/add'"
+                "container:'#%s',action:'dialog_open',url:'/account/add'"
                 % obj_id
         }
         toolbar.append(
@@ -2898,7 +2908,7 @@ def accounts_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accounts/view',"
+                "container:'#%s',action:'dialog_open',url:'/account/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2912,7 +2922,7 @@ def accounts_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/accounts/edit',"
+                "container:'#%s',action:'dialog_open',url:'/account/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -2930,7 +2940,7 @@ def accounts_combobox_field(
     }]]
 
     data_options = """
-        url: '/accounts/list',
+        url: '/account/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -2998,14 +3008,14 @@ def invoices_combobox_field(
     request, value=None, name='invoice_id',
     id=None, show_toolbar=True, options=None
 ):
-    permisions = Invoices.get_permisions(Invoices, request)
+    permisions = InvoiceResource.get_permisions(InvoiceResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/invoices/edit',"
+                "container:'#%s',action:'dialog_open',url:'/invoice/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -3019,7 +3029,7 @@ def invoices_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/invoices/info',"
+                "container:'#%s',action:'dialog_open',url:'/invoice/info',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -3048,7 +3058,7 @@ def invoices_combobox_field(
     }
 
     data_options = """
-        url: '/invoices/list',
+        url: '/invoice/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -3135,14 +3145,14 @@ def suppliers_combobox_field(
     request, value=None, name='supplier_id',
     id=None, show_toolbar=True, options=None,
 ):
-    permisions = Suppliers.get_permisions(Suppliers, request)
+    permisions = SupplierResource.get_permisions(SupplierResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/suppliers/add'"
+                "container:'#%s',action:'dialog_open',url:'/supplier/add'"
                 % obj_id
         }
         toolbar.append(
@@ -3156,7 +3166,7 @@ def suppliers_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/suppliers/view',"
+                "container:'#%s',action:'dialog_open',url:'/supplier/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -3170,7 +3180,7 @@ def suppliers_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/suppliers/edit',"
+                "container:'#%s',action:'dialog_open',url:'/supplier/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -3188,7 +3198,7 @@ def suppliers_combobox_field(
     }]]
 
     data_options = """
-        url: '/suppliers/list',
+        url: '/supplier/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -3256,14 +3266,14 @@ def subaccounts_combobox_field(
     request, value=None, name='subaccount_id',
     id=None, show_toolbar=True, options=None,
 ):
-    permisions = Subaccounts.get_permisions(Subaccounts, request)
+    permisions = SubaccountResource.get_permisions(SubaccountResource, request)
     obj_id = id or gen_id()
     toolbar_id = 'tb-%s' % obj_id
     toolbar = []
     if 'add' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/subaccounts/add'"
+                "container:'#%s',action:'dialog_open',url:'/subaccount/add'"
                 % obj_id
         }
         toolbar.append(
@@ -3277,7 +3287,7 @@ def subaccounts_combobox_field(
     if 'view' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/subaccounts/view',"
+                "container:'#%s',action:'dialog_open',url:'/subaccount/view',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -3291,7 +3301,7 @@ def subaccounts_combobox_field(
     if 'edit' in permisions:
         kwargs = {
             'data-options':
-                "container:'#%s',action:'dialog_open',url:'/subaccounts/edit',"
+                "container:'#%s',action:'dialog_open',url:'/subaccount/edit',"
                 "property:'with_row'" % obj_id
         }
         toolbar.append(
@@ -3318,7 +3328,7 @@ def subaccounts_combobox_field(
     }
 
     data_options = """
-        url: '/subaccounts/list',
+        url: '/subaccount/list',
         fitColumns: true,
         scrollbarSize: 7,
         border: false,
@@ -3459,5 +3469,32 @@ def leads_statuses_combobox_field(
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
+        data_options=data_options
+    )
+
+
+def services_types_combobox_field(
+    value=None, name='resource_type_id'
+):
+    ids = map(
+        lambda x: str(x.id), get_resources_types_by_interface(IServiceType)
+    )
+    data_options = """
+        url: '/resource_type/list',
+        valueField: 'id',
+        textField: 'humanize',
+        editable: false,
+        onBeforeLoad: function(param){
+            param.sort = 'humanize';
+            param.rows = 0;
+            param.page = 1;
+            param.id = %s
+        },
+        loadFilter: function(data){
+            return data.rows;
+        }
+    """ % json.dumps(','.join(ids))
+    return tags.text(
+        name, value, class_="easyui-combobox text w20",
         data_options=data_options
     )

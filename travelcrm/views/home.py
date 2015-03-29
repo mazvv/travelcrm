@@ -23,10 +23,10 @@ from ..forms.auth import (
     LoginSchema,
     ForgotSchema
 )
-from ..forms.companies import CompanyAddSchema
+# from ..forms.company import CompanyAddSchema
 
 
-class Home(object):
+class HomeView(object):
 
     def __init__(self, context, request):
         self.context = context

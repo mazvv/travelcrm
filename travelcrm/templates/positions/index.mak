@@ -75,11 +75,11 @@
             <div class="button-group">
                 % if _context.has_permision('view'):
                 <a href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'permisions')}'">
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'permision')}'">
                     <span class="fa fa-unlock"></span>${_(u'Permissions')}
                 </a>
                 <a href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'navigations')}'">
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'navigation')}'">
                     <span class="fa fa-gear"></span>${_(u'Menu')}
                 </a>
                 % endif

@@ -259,10 +259,10 @@ ALTER SEQUENCE _users_rid_seq OWNED BY "user".id;
 
 
 --
--- Name: accomodation; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: accomodation_type; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE accomodation (
+CREATE TABLE accomodation_type (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL
@@ -285,7 +285,7 @@ CREATE SEQUENCE accomodation_id_seq
 -- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
+ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation_type.id;
 
 
 --
@@ -674,7 +674,8 @@ CREATE TABLE company (
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     currency_id integer NOT NULL,
-    settings json
+    settings json,
+    email character varying(32) NOT NULL
 );
 
 
@@ -1124,22 +1125,22 @@ ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
 
 
 --
--- Name: lead_offer_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: lead_offer; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE lead_offer_item (
+CREATE TABLE lead_offer (
     lead_id integer NOT NULL,
-    offer_item_id integer NOT NULL
+    offer_id integer NOT NULL
 );
 
 
 --
--- Name: lead_wish_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: lead_wish; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE lead_wish_item (
+CREATE TABLE lead_wish (
     lead_id integer NOT NULL,
-    wish_item_id integer NOT NULL
+    wish_id integer NOT NULL
 );
 
 
@@ -1309,10 +1310,10 @@ CREATE TABLE notification_resource (
 
 
 --
--- Name: offer_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: offer; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE offer_item (
+CREATE TABLE offer (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     service_id integer NOT NULL,
@@ -1323,10 +1324,10 @@ CREATE TABLE offer_item (
 
 
 --
--- Name: offer_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: offer_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE offer_item_id_seq
+CREATE SEQUENCE offer_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1335,10 +1336,79 @@ CREATE SEQUENCE offer_item_id_seq
 
 
 --
--- Name: offer_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: offer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE offer_item_id_seq OWNED BY offer_item.id;
+ALTER SEQUENCE offer_id_seq OWNED BY offer.id;
+
+
+--
+-- Name: order; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE "order" (
+    id integer NOT NULL,
+    deal_date date NOT NULL,
+    resource_id integer NOT NULL,
+    customer_id integer NOT NULL,
+    advsource_id integer NOT NULL,
+    invoice_id integer,
+    calculation_id integer
+);
+
+
+--
+-- Name: order_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE order_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE order_id_seq OWNED BY "order".id;
+
+
+--
+-- Name: order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE order_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    order_id integer,
+    service_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    touroperator_id integer NOT NULL,
+    price numeric(16,2) NOT NULL,
+    base_price numeric(16,2) NOT NULL
+);
+
+
+--
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE order_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
 
 
 --
@@ -1488,6 +1558,16 @@ ALTER SEQUENCE person_id_seq OWNED BY person.id;
 
 
 --
+-- Name: person_order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_order_item (
+    order_item_id integer NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+--
 -- Name: person_passport; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1585,7 +1665,8 @@ CREATE TABLE service (
     name character varying(32) NOT NULL,
     descr character varying(256),
     display_text character varying(256),
-    account_item_id integer NOT NULL
+    account_item_id integer NOT NULL,
+    resource_type_id integer NOT NULL
 );
 
 
@@ -1940,7 +2021,7 @@ CREATE TABLE tour_sale_point (
     id integer NOT NULL,
     location_id integer NOT NULL,
     hotel_id integer,
-    accomodation_id integer,
+    accomodation_type_id integer,
     foodcat_id integer,
     roomcat_id integer,
     tour_sale_id integer,
@@ -2116,10 +2197,10 @@ ALTER SEQUENCE transfer_id_seq OWNED BY transfer.id;
 
 
 --
--- Name: wish_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: wish; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE wish_item (
+CREATE TABLE wish (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     service_id integer NOT NULL,
@@ -2131,10 +2212,10 @@ CREATE TABLE wish_item (
 
 
 --
--- Name: wish_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: wish_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE wish_item_id_seq
+CREATE SEQUENCE wish_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2143,17 +2224,17 @@ CREATE SEQUENCE wish_item_id_seq
 
 
 --
--- Name: wish_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: wish_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE wish_item_id_seq OWNED BY wish_item.id;
+ALTER SEQUENCE wish_id_seq OWNED BY wish.id;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
+ALTER TABLE ONLY accomodation_type ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
 
 
 --
@@ -2363,7 +2444,21 @@ ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY offer_item ALTER COLUMN id SET DEFAULT nextval('offer_item_id_seq'::regclass);
+ALTER TABLE ONLY offer ALTER COLUMN id SET DEFAULT nextval('offer_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
 
 
 --
@@ -2524,7 +2619,7 @@ ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('_users_rid_seq'::re
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wish_item ALTER COLUMN id SET DEFAULT nextval('wish_item_id_seq'::regclass);
+ALTER TABLE ONLY wish ALTER COLUMN id SET DEFAULT nextval('wish_id_seq'::regclass);
 
 
 --
@@ -2545,28 +2640,28 @@ SELECT pg_catalog.setval('_employees_rid_seq', 30, true);
 -- Name: _regions_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_regions_rid_seq', 36, true);
+SELECT pg_catalog.setval('_regions_rid_seq', 37, true);
 
 
 --
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6650, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6714, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2095, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2117, true);
 
 
 --
 -- Name: _resources_types_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_types_rid_seq', 133, true);
+SELECT pg_catalog.setval('_resources_types_rid_seq', 137, true);
 
 
 --
@@ -2577,31 +2672,31 @@ SELECT pg_catalog.setval('_users_rid_seq', 25, true);
 
 
 --
--- Data for Name: accomodation; Type: TABLE DATA; Schema: public; Owner: -
---
-
-INSERT INTO accomodation VALUES (1, 957, 'MB');
-INSERT INTO accomodation VALUES (2, 958, 'HV');
-INSERT INTO accomodation VALUES (3, 959, 'BGL');
-INSERT INTO accomodation VALUES (4, 960, 'BG');
-INSERT INTO accomodation VALUES (5, 961, 'Chale');
-INSERT INTO accomodation VALUES (6, 962, 'Cabana');
-INSERT INTO accomodation VALUES (7, 963, 'Cottage');
-INSERT INTO accomodation VALUES (8, 964, 'Executive floor');
-INSERT INTO accomodation VALUES (9, 965, 'SGL');
-INSERT INTO accomodation VALUES (10, 966, 'DBL');
-INSERT INTO accomodation VALUES (11, 967, 'TRPL');
-INSERT INTO accomodation VALUES (12, 968, 'QDPL');
-INSERT INTO accomodation VALUES (13, 969, 'ExB');
-INSERT INTO accomodation VALUES (14, 970, 'Chld');
-INSERT INTO accomodation VALUES (15, 971, 'ВО');
-
-
---
 -- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('accomodation_id_seq', 16, true);
+SELECT pg_catalog.setval('accomodation_id_seq', 17, true);
+
+
+--
+-- Data for Name: accomodation_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO accomodation_type VALUES (1, 957, 'MB');
+INSERT INTO accomodation_type VALUES (2, 958, 'HV');
+INSERT INTO accomodation_type VALUES (3, 959, 'BGL');
+INSERT INTO accomodation_type VALUES (4, 960, 'BG');
+INSERT INTO accomodation_type VALUES (5, 961, 'Chale');
+INSERT INTO accomodation_type VALUES (6, 962, 'Cabana');
+INSERT INTO accomodation_type VALUES (7, 963, 'Cottage');
+INSERT INTO accomodation_type VALUES (8, 964, 'Executive floor');
+INSERT INTO accomodation_type VALUES (9, 965, 'SGL');
+INSERT INTO accomodation_type VALUES (10, 966, 'DBL');
+INSERT INTO accomodation_type VALUES (11, 967, 'TRPL');
+INSERT INTO accomodation_type VALUES (12, 968, 'QDPL');
+INSERT INTO accomodation_type VALUES (13, 969, 'ExB');
+INSERT INTO accomodation_type VALUES (14, 970, 'Chld');
+INSERT INTO accomodation_type VALUES (15, 971, 'ВО');
 
 
 --
@@ -2699,7 +2794,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO alembic_version VALUES ('50c80c2485d8');
+INSERT INTO alembic_version VALUES ('3387aec6d25f');
 
 
 --
@@ -2867,7 +2962,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 -- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO company VALUES (1, 1970, 'LuxTravel, Inc', 56, '{"locale": "en", "timezone": "Europe/Kiev"}');
+INSERT INTO company VALUES (1, 1970, 'LuxTravel, Inc', 56, '{"locale": "en", "timezone": "Europe/Kiev"}', 'lux.travel@gmai.com');
 
 
 --
@@ -2968,7 +3063,7 @@ INSERT INTO country VALUES (19, 1646, 'FR', 'France');
 -- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('country_id_seq', 19, true);
+SELECT pg_catalog.setval('country_id_seq', 20, true);
 
 
 --
@@ -3128,7 +3223,7 @@ INSERT INTO foodcat VALUES (16, 988, 'UAI');
 -- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('foodcat_id_seq', 16, true);
+SELECT pg_catalog.setval('foodcat_id_seq', 17, true);
 
 
 --
@@ -3162,13 +3257,14 @@ INSERT INTO hotel VALUES (33, 1386, 4, 'Fantasia', 32);
 INSERT INTO hotel VALUES (34, 1470, 5, 'Villa Augusto', 21);
 INSERT INTO hotel VALUES (35, 1590, 5, 'Lindos Blue', 36);
 INSERT INTO hotel VALUES (36, 1649, 5, 'Sezz Saint-Tropez', 37);
+INSERT INTO hotel VALUES (38, 2111, 5, 'Spirit of the Knights Boutique', 36);
 
 
 --
 -- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('hotel_id_seq', 36, true);
+SELECT pg_catalog.setval('hotel_id_seq', 38, true);
 
 
 --
@@ -3292,7 +3388,7 @@ SELECT pg_catalog.setval('invoice_id_seq', 26, true);
 --
 
 INSERT INTO lead VALUES (2, '2015-02-04', 2088, 5, 46, 0);
-INSERT INTO lead VALUES (1, '2015-02-04', 2052, 6, 47, 2);
+INSERT INTO lead VALUES (1, '2015-02-04', 2052, 6, 47, 1);
 
 
 --
@@ -3303,21 +3399,15 @@ SELECT pg_catalog.setval('lead_id_seq', 2, true);
 
 
 --
--- Data for Name: lead_offer_item; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO lead_offer_item VALUES (2, 3);
-INSERT INTO lead_offer_item VALUES (2, 2);
-INSERT INTO lead_offer_item VALUES (1, 5);
 
 
 --
--- Data for Name: lead_wish_item; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: lead_wish; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO lead_wish_item VALUES (2, 5);
-INSERT INTO lead_wish_item VALUES (2, 6);
-INSERT INTO lead_wish_item VALUES (1, 7);
 
 
 --
@@ -3375,74 +3465,32 @@ INSERT INTO location VALUES (37, 1648, 'Saint-Tropez', 36);
 -- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('location_id_seq', 37, true);
+SELECT pg_catalog.setval('location_id_seq', 38, true);
 
 
 --
 -- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO navigation VALUES (162, 4, 160, 'Debts', '/debts', NULL, 2, 1921, false, NULL);
-INSERT INTO navigation VALUES (163, 4, 26, 'Email Campaigns', '/emails_campaigns', NULL, 2, 1953, true, NULL);
-INSERT INTO navigation VALUES (166, 4, 32, 'Leads', '/leads', NULL, 2, 2048, false, 'tab_open');
-INSERT INTO navigation VALUES (165, 4, 8, 'Company Settings', '/companies_settings', NULL, 4, 1975, true, 'dialog_open');
-INSERT INTO navigation VALUES (15, 4, 8, 'Users', '/users', NULL, 3, 792, false, NULL);
-INSERT INTO navigation VALUES (9, 4, 8, 'Resource Types', '/resources_types', NULL, 1, 779, false, NULL);
-INSERT INTO navigation VALUES (13, 4, 10, 'Employees', '/employees', NULL, 1, 790, false, NULL);
+INSERT INTO navigation VALUES (168, 4, 32, 'Orders', '/order', NULL, 5, 2101, false, 'tab_open');
+INSERT INTO navigation VALUES (165, 4, 8, 'Company', '/company/edit', NULL, 4, 1975, true, 'dialog_open');
+INSERT INTO navigation VALUES (9, 4, 8, 'Resource Types', '/resource_type', NULL, 1, 779, false, NULL);
+INSERT INTO navigation VALUES (13, 4, 10, 'Employees', '/employee', NULL, 1, 790, false, NULL);
+INSERT INTO navigation VALUES (14, 4, 10, 'Employees Appointments', '/appointment', NULL, 2, 791, false, NULL);
+INSERT INTO navigation VALUES (15, 4, 8, 'Users', '/user', NULL, 3, 792, false, NULL);
+INSERT INTO navigation VALUES (19, 4, 18, 'Structures', '/structure', NULL, 1, 838, false, NULL);
+INSERT INTO navigation VALUES (20, 4, 18, 'Positions', '/position', NULL, 2, 863, false, NULL);
+INSERT INTO navigation VALUES (22, 4, 21, 'Persons', '/person', NULL, 1, 866, false, NULL);
+INSERT INTO navigation VALUES (27, 4, 26, 'Advertising Sources', '/advsource', NULL, 1, 902, false, NULL);
+INSERT INTO navigation VALUES (162, 4, 160, 'Debts', '/debt', NULL, 2, 1921, false, NULL);
+INSERT INTO navigation VALUES (163, 4, 26, 'Email Campaigns', '/email_campaign', NULL, 2, 1953, true, NULL);
+INSERT INTO navigation VALUES (166, 4, 32, 'Leads', '/lead', NULL, 2, 2048, false, 'tab_open');
 INSERT INTO navigation VALUES (41, 5, NULL, 'Home', '/', 'fa fa-home', 1, 1079, false, NULL);
-INSERT INTO navigation VALUES (20, 4, 18, 'Positions', '/positions', NULL, 2, 863, false, NULL);
-INSERT INTO navigation VALUES (19, 4, 18, 'Structures', '/structures', NULL, 1, 838, false, NULL);
-INSERT INTO navigation VALUES (14, 4, 10, 'Employees Appointments', '/appointments', NULL, 2, 791, false, NULL);
-INSERT INTO navigation VALUES (27, 4, 26, 'Advertising Sources', '/advsources', NULL, 1, 902, false, NULL);
-INSERT INTO navigation VALUES (22, 4, 21, 'Persons', '/persons', NULL, 1, 866, false, NULL);
 INSERT INTO navigation VALUES (47, 5, NULL, 'For Test', '/', 'fa fa-credit-card', 2, 1253, false, NULL);
 INSERT INTO navigation VALUES (48, 6, NULL, 'Home', '/', 'fa fa-home', 1, 1079, false, NULL);
 INSERT INTO navigation VALUES (49, 6, NULL, 'For Test', '/', 'fa fa-credit-card', 2, 1253, false, NULL);
-INSERT INTO navigation VALUES (111, 8, NULL, 'System', '/', 'fa fa-cog', 10, 778, false, NULL);
-INSERT INTO navigation VALUES (112, 8, NULL, 'Directories', '/', 'fa fa-book', 9, 873, false, NULL);
-INSERT INTO navigation VALUES (108, 8, 111, 'Resource Types', '/resources_types', NULL, 1, 779, false, NULL);
-INSERT INTO navigation VALUES (109, 8, 111, 'Users', '/users', NULL, 2, 792, false, NULL);
-INSERT INTO navigation VALUES (110, 8, 144, 'Employees', '/employees', NULL, 1, 790, false, NULL);
-INSERT INTO navigation VALUES (113, 8, 143, 'Positions', '/positions', NULL, 2, 863, false, NULL);
-INSERT INTO navigation VALUES (114, 8, 143, 'Structures', '/structures', NULL, 1, 838, false, NULL);
-INSERT INTO navigation VALUES (115, 8, 112, 'Touroperators', '/touroperators', NULL, 11, 1002, false, NULL);
-INSERT INTO navigation VALUES (116, 8, 144, 'Employees Appointments', '/appointments', NULL, 2, 791, false, NULL);
-INSERT INTO navigation VALUES (117, 8, 112, 'Accomodations', '/accomodations', NULL, 10, 955, false, NULL);
-INSERT INTO navigation VALUES (118, 8, 112, 'Food Categories', '/foodcats', NULL, 9, 956, false, NULL);
-INSERT INTO navigation VALUES (119, 8, 112, 'Rooms Categories', '/roomcats', NULL, 7, 911, false, NULL);
-INSERT INTO navigation VALUES (120, 8, 112, 'Hotels', '/hotels', NULL, 6, 1080, false, NULL);
-INSERT INTO navigation VALUES (121, 8, 145, 'Advertising Sources', '/advsources', NULL, 1, 902, false, NULL);
-INSERT INTO navigation VALUES (122, 8, 112, 'Hotels Categories', '/hotelcats', NULL, 5, 910, false, NULL);
-INSERT INTO navigation VALUES (123, 8, 112, 'Locations', '/locations', NULL, 3, 1089, false, NULL);
-INSERT INTO navigation VALUES (124, 8, 112, 'Countries', '/countries', NULL, 4, 874, false, NULL);
-INSERT INTO navigation VALUES (125, 8, 112, 'Regions', '/regions', NULL, 3, 879, false, NULL);
-INSERT INTO navigation VALUES (126, 8, 146, 'Persons', '/persons', NULL, 1, 866, false, NULL);
-INSERT INTO navigation VALUES (127, 8, 112, 'Business Persons', '/bpersons', NULL, 9, 1008, false, NULL);
-INSERT INTO navigation VALUES (128, 8, 142, 'Banks', '/banks', NULL, 2, 1212, false, NULL);
-INSERT INTO navigation VALUES (129, 8, 142, 'Currencies', '/currencies', NULL, 3, 802, false, NULL);
-INSERT INTO navigation VALUES (142, 8, NULL, 'Finance', '/', 'fa fa-credit-card', 9, 1394, false, NULL);
-INSERT INTO navigation VALUES (143, 8, NULL, 'Company', '/', 'fa fa-building-o', 8, 837, false, NULL);
-INSERT INTO navigation VALUES (144, 8, NULL, 'HR', '/', 'fa fa-group', 7, 780, false, NULL);
-INSERT INTO navigation VALUES (145, 8, NULL, 'Marketing', '/', 'fa fa-bullhorn', 6, 900, false, NULL);
-INSERT INTO navigation VALUES (146, 8, NULL, 'Clientage', '/', 'fa fa-briefcase', 5, 864, false, NULL);
-INSERT INTO navigation VALUES (147, 8, NULL, 'Sales', '/', 'fa fa-legal', 4, 998, false, NULL);
-INSERT INTO navigation VALUES (148, 8, NULL, 'Home', '/', 'fa fa-home', 2, 1777, false, NULL);
-INSERT INTO navigation VALUES (130, 8, 142, 'Currency Rates', '/currencies_rates', NULL, 5, 1395, false, NULL);
-INSERT INTO navigation VALUES (131, 8, 142, 'Income Payments', 'incomes', NULL, 6, 1434, false, NULL);
-INSERT INTO navigation VALUES (132, 8, 147, 'Tours', '/tours', NULL, 2, 1075, false, NULL);
-INSERT INTO navigation VALUES (133, 8, 147, 'Invoices', '/invoices', NULL, 3, 1368, false, NULL);
-INSERT INTO navigation VALUES (134, 8, 142, 'Accounts', '/accounts', NULL, 1, 1436, false, NULL);
-INSERT INTO navigation VALUES (135, 8, 147, 'Liabilities', '/liabilities', NULL, 10, 1659, false, NULL);
-INSERT INTO navigation VALUES (136, 8, 142, 'Outgoing Payments', '/outgoings', NULL, 7, 1571, false, NULL);
-INSERT INTO navigation VALUES (137, 8, 142, 'Refunds', '/refunds', NULL, 9, 1575, false, NULL);
-INSERT INTO navigation VALUES (138, 8, 142, 'Services List', '/services', NULL, 1, 1312, false, NULL);
-INSERT INTO navigation VALUES (139, 8, 147, 'Services', '/services_sales', NULL, 2, 1369, false, NULL);
-INSERT INTO navigation VALUES (140, 8, 112, 'Suppliers', '/suppliers', NULL, 11, 1550, false, NULL);
-INSERT INTO navigation VALUES (141, 8, 142, 'Accounts Items', '/accounts_items', NULL, 1, 1425, false, NULL);
-INSERT INTO navigation VALUES (151, 4, 155, 'Cross Payments', '/crosspayments', NULL, 11, 1885, false, NULL);
 INSERT INTO navigation VALUES (53, 4, NULL, 'Finance', '/', 'fa fa-credit-card', 7, 1394, false, NULL);
 INSERT INTO navigation VALUES (156, 4, 53, 'Billing', '/', NULL, 10, 1905, false, NULL);
-INSERT INTO navigation VALUES (57, 4, 156, 'Accounts', '/accounts', NULL, 1, 1436, false, NULL);
 INSERT INTO navigation VALUES (107, 4, NULL, 'Home', '/', 'fa fa-home', 1, 1777, false, NULL);
 INSERT INTO navigation VALUES (32, 4, NULL, 'Sales', '/', 'fa fa-legal', 2, 998, false, NULL);
 INSERT INTO navigation VALUES (21, 4, NULL, 'Clientage', '/', 'fa fa-briefcase', 3, 864, false, NULL);
@@ -3453,33 +3501,35 @@ INSERT INTO navigation VALUES (23, 4, NULL, 'Directories', '/', 'fa fa-book', 8,
 INSERT INTO navigation VALUES (152, 4, NULL, 'Reports', '/', 'fa fa-pie-chart', 9, 1895, false, NULL);
 INSERT INTO navigation VALUES (8, 4, NULL, 'System', '/', 'fa fa-cog', 10, 778, false, NULL);
 INSERT INTO navigation VALUES (155, 4, 53, 'Payments', '/', NULL, 12, 1904, false, NULL);
-INSERT INTO navigation VALUES (56, 4, 155, 'Income Payments', 'incomes', NULL, 9, 1434, false, NULL);
-INSERT INTO navigation VALUES (61, 4, 155, 'Outgoing Payments', '/outgoings', NULL, 10, 1571, false, NULL);
-INSERT INTO navigation VALUES (150, 4, 156, 'Subaccounts', '/subaccounts', NULL, 2, 1798, false, NULL);
-INSERT INTO navigation VALUES (55, 4, 156, 'Accounts Items', '/accounts_items', NULL, 3, 1425, false, NULL);
-INSERT INTO navigation VALUES (24, 4, 158, 'Countries', '/countries', NULL, 4, 874, false, NULL);
-INSERT INTO navigation VALUES (17, 4, 157, 'Currencies List', '/currencies', NULL, 7, 802, false, NULL);
-INSERT INTO navigation VALUES (54, 4, 157, 'Currencies Rates', '/currencies_rates', NULL, 8, 1395, false, NULL);
-INSERT INTO navigation VALUES (45, 4, 53, 'Banks', '/banks', NULL, 5, 1212, false, NULL);
-INSERT INTO navigation VALUES (50, 4, 53, 'Services List', '/services', NULL, 6, 1312, false, NULL);
-INSERT INTO navigation VALUES (25, 4, 158, 'Regions', '/regions', NULL, 3, 879, false, NULL);
-INSERT INTO navigation VALUES (43, 4, 158, 'Locations', '/locations', NULL, 3, 1089, false, NULL);
-INSERT INTO navigation VALUES (31, 4, 159, 'Food Categories', '/foodcats', NULL, 9, 956, false, NULL);
 INSERT INTO navigation VALUES (158, 4, 23, 'Geography', '/', NULL, 13, 1907, false, NULL);
-INSERT INTO navigation VALUES (35, 4, 23, 'Touroperators', '/touroperators', NULL, 10, 1002, false, NULL);
-INSERT INTO navigation VALUES (29, 4, 159, 'Rooms Categories', '/roomcats', NULL, 7, 911, false, NULL);
-INSERT INTO navigation VALUES (30, 4, 159, 'Accomodations', '/accomodations', NULL, 10, 955, false, NULL);
-INSERT INTO navigation VALUES (153, 4, 160, 'Turnovers', '/turnovers', NULL, 1, 1896, false, NULL);
-INSERT INTO navigation VALUES (36, 4, 23, 'Business Persons', '/bpersons', NULL, 11, 1008, false, NULL);
-INSERT INTO navigation VALUES (60, 4, 23, 'Suppliers', '/suppliers', NULL, 9, 1550, false, NULL);
-INSERT INTO navigation VALUES (51, 4, 32, 'Invoices', '/invoices', NULL, 4, 1368, false, NULL);
 INSERT INTO navigation VALUES (160, 4, 152, 'Billing', '/', NULL, 2, 1909, false, NULL);
-INSERT INTO navigation VALUES (28, 4, 159, 'Hotels Categories', '/hotelcats', NULL, 6, 910, false, NULL);
-INSERT INTO navigation VALUES (42, 4, 159, 'Hotels List', '/hotels', NULL, 5, 1080, false, NULL);
 INSERT INTO navigation VALUES (157, 4, 53, 'Currencies', '', NULL, 7, 1906, true, NULL);
-INSERT INTO navigation VALUES (38, 4, 32, 'Tours', '/tours_sales', NULL, 3, 1075, true, 'tab_open');
+INSERT INTO navigation VALUES (43, 4, 158, 'Locations', '/location', NULL, 3, 1089, false, NULL);
 INSERT INTO navigation VALUES (159, 4, 23, 'Hotels', '/', NULL, 12, 1908, true, NULL);
-INSERT INTO navigation VALUES (52, 4, 32, 'Services', '/services_sales', NULL, 4, 1369, false, NULL);
+INSERT INTO navigation VALUES (35, 4, 23, 'Touroperators', '/touroperator', NULL, 10, 1002, false, NULL);
+INSERT INTO navigation VALUES (55, 4, 156, 'Accounts Items', '/account_item', NULL, 3, 1425, false, NULL);
+INSERT INTO navigation VALUES (17, 4, 157, 'Currencies List', '/currency', NULL, 7, 802, false, NULL);
+INSERT INTO navigation VALUES (24, 4, 158, 'Countries', '/country', NULL, 4, 874, false, NULL);
+INSERT INTO navigation VALUES (25, 4, 158, 'Regions', '/region', NULL, 3, 879, false, NULL);
+INSERT INTO navigation VALUES (28, 4, 159, 'Hotels Categories', '/hotelcat', NULL, 6, 910, false, NULL);
+INSERT INTO navigation VALUES (29, 4, 159, 'Rooms Categories', '/roomcat', NULL, 7, 911, false, NULL);
+INSERT INTO navigation VALUES (30, 4, 159, 'Accomodations Types', '/accomodation_type', NULL, 10, 955, false, 'tab_open');
+INSERT INTO navigation VALUES (31, 4, 159, 'Food Categories', '/foodcat', NULL, 9, 956, false, NULL);
+INSERT INTO navigation VALUES (36, 4, 23, 'Business Persons', '/bperson', NULL, 11, 1008, false, NULL);
+INSERT INTO navigation VALUES (38, 4, 32, 'Tours', '/tour_sale', NULL, 3, 1075, true, 'tab_open');
+INSERT INTO navigation VALUES (42, 4, 159, 'Hotels List', '/hotel', NULL, 5, 1080, false, NULL);
+INSERT INTO navigation VALUES (45, 4, 53, 'Banks', '/bank', NULL, 5, 1212, false, NULL);
+INSERT INTO navigation VALUES (50, 4, 53, 'Services List', '/service', NULL, 6, 1312, false, NULL);
+INSERT INTO navigation VALUES (51, 4, 32, 'Invoices', '/invoice', NULL, 4, 1368, false, NULL);
+INSERT INTO navigation VALUES (52, 4, 32, 'Services', '/service_sale', NULL, 4, 1369, false, NULL);
+INSERT INTO navigation VALUES (54, 4, 157, 'Currencies Rates', '/currency_rate', NULL, 8, 1395, false, NULL);
+INSERT INTO navigation VALUES (60, 4, 23, 'Suppliers', '/supplier', NULL, 9, 1550, false, NULL);
+INSERT INTO navigation VALUES (56, 4, 155, 'Income Payments', '/income', NULL, 9, 1434, false, NULL);
+INSERT INTO navigation VALUES (57, 4, 156, 'Accounts', '/account', NULL, 1, 1436, false, NULL);
+INSERT INTO navigation VALUES (61, 4, 155, 'Outgoing Payments', '/outgoing', NULL, 10, 1571, false, NULL);
+INSERT INTO navigation VALUES (151, 4, 155, 'Cross Payments', '/crosspayment', NULL, 11, 1885, false, NULL);
+INSERT INTO navigation VALUES (153, 4, 160, 'Turnovers', '/turnover', NULL, 1, 1896, false, NULL);
+INSERT INTO navigation VALUES (150, 4, 156, 'Subaccounts', '/subaccount', NULL, 2, 1798, false, NULL);
 
 
 --
@@ -3501,13 +3551,16 @@ INSERT INTO note VALUES (29, 2012, 'Good Hotel', 'Edit description for Hotels no
 INSERT INTO note VALUES (30, 2065, 'Note without source resource', 'This note was created directly from Tools Panel');
 INSERT INTO note VALUES (31, 2087, 'Good customer', 'Good customer in any case');
 INSERT INTO note VALUES (32, 2092, 'Failure', 'Customer failure from offers');
+INSERT INTO note VALUES (33, 2096, 'For test purpose only', NULL);
+INSERT INTO note VALUES (34, 2097, 'Failure 2', NULL);
+INSERT INTO note VALUES (35, 2098, 'New property SERVICE_TYPE', 'Add new property for services - SERVICE_TYPE. There is 2 types - common and tour.');
 
 
 --
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 32, true);
+SELECT pg_catalog.setval('note_id_seq', 35, true);
 
 
 --
@@ -3524,7 +3577,10 @@ INSERT INTO note_resource VALUES (29, 1470);
 INSERT INTO note_resource VALUES (26, 1930);
 INSERT INTO note_resource VALUES (27, 1980);
 INSERT INTO note_resource VALUES (31, 2088);
+INSERT INTO note_resource VALUES (33, 970);
 INSERT INTO note_resource VALUES (32, 2052);
+INSERT INTO note_resource VALUES (34, 2052);
+INSERT INTO note_resource VALUES (35, 1413);
 
 
 --
@@ -3568,21 +3624,45 @@ INSERT INTO notification_resource VALUES (21, 2075);
 
 
 --
--- Data for Name: offer_item; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: offer; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO offer_item VALUES (1, 2081, 5, 57, 2010.00, 'Turkey, 4*, Kemer');
-INSERT INTO offer_item VALUES (2, 2085, 5, 57, 2080.00, 'Turkey, 4*');
-INSERT INTO offer_item VALUES (3, 2086, 1, 56, 1600.00, '7 days, Teztour');
-INSERT INTO offer_item VALUES (4, 2093, 5, 54, 4010.00, 'Cuba Varadero, 5*');
-INSERT INTO offer_item VALUES (5, 2094, 5, 57, 3900.00, 'Cuba Varadero, 1st line, Ual');
 
 
 --
--- Name: offer_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: offer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('offer_item_id_seq', 5, true);
+SELECT pg_catalog.setval('offer_id_seq', 1, false);
+
+
+--
+-- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('order_id_seq', 1, false);
+
+
+--
+-- Data for Name: order_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO order_item VALUES (3, 2104, NULL, 5, 56, 62, 454235.00, 0.00);
+INSERT INTO order_item VALUES (4, 2105, NULL, 5, 57, 62, 2134.00, 0.00);
+INSERT INTO order_item VALUES (5, 2106, NULL, 4, 56, 62, 12.00, 0.00);
+
+
+--
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('order_item_id_seq', 5, true);
 
 
 --
@@ -3748,14 +3828,17 @@ INSERT INTO permision VALUES (133, 122, 4, '{view}', NULL, 'all');
 INSERT INTO permision VALUES (135, 124, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (72, 103, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (136, 125, 4, '{view,settings}', NULL, 'all');
-INSERT INTO permision VALUES (137, 126, 4, '{add,edit,view,delete}', NULL, 'all');
-INSERT INTO permision VALUES (139, 128, 4, '{edit,view}', NULL, 'all');
 INSERT INTO permision VALUES (140, 129, 4, '{view,settings}', NULL, 'all');
 INSERT INTO permision VALUES (141, 130, 4, '{add,view,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (24, 12, 4, '{view,add,edit,delete,settings}', NULL, 'all');
 INSERT INTO permision VALUES (134, 123, 4, '{view,close}', NULL, 'all');
 INSERT INTO permision VALUES (143, 132, 4, '{view,add,edit,delete}', NULL, 'all');
 INSERT INTO permision VALUES (144, 133, 4, '{view,add,edit,delete}', NULL, 'all');
+INSERT INTO permision VALUES (145, 134, 4, '{view,add,edit,delete,settings,calculation,invoice,contract}', NULL, 'all');
+INSERT INTO permision VALUES (146, 135, 4, '{view,add,edit,delete,settings}', NULL, 'all');
+INSERT INTO permision VALUES (147, 136, 4, '{view,add,edit,delete,settings}', NULL, 'all');
+INSERT INTO permision VALUES (148, 137, 4, '{view,add,edit,delete,settings}', NULL, 'all');
+INSERT INTO permision VALUES (137, 126, 4, '{view,edit}', NULL, 'all');
 
 
 --
@@ -3860,6 +3943,12 @@ SELECT pg_catalog.setval('person_id_seq', 47, true);
 
 
 --
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
 -- Data for Name: person_passport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3914,14 +4003,14 @@ INSERT INTO "position" VALUES (8, 1775, 1, 'Main Developer');
 -- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_navigations_id_seq', 167, true);
+SELECT pg_catalog.setval('positions_navigations_id_seq', 168, true);
 
 
 --
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 144, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 148, true);
 
 
 --
@@ -4775,6 +4864,20 @@ INSERT INTO resource VALUES (2092, 118, 32, false);
 INSERT INTO resource VALUES (2093, 133, 32, false);
 INSERT INTO resource VALUES (2094, 133, 32, false);
 INSERT INTO resource VALUES (2095, 87, 32, false);
+INSERT INTO resource VALUES (2096, 118, 32, false);
+INSERT INTO resource VALUES (2097, 118, 32, false);
+INSERT INTO resource VALUES (2098, 118, 32, false);
+INSERT INTO resource VALUES (2099, 12, 32, false);
+INSERT INTO resource VALUES (2100, 12, 32, false);
+INSERT INTO resource VALUES (2101, 65, 32, false);
+INSERT INTO resource VALUES (2104, 135, 32, false);
+INSERT INTO resource VALUES (2105, 135, 32, false);
+INSERT INTO resource VALUES (2106, 135, 32, false);
+INSERT INTO resource VALUES (2107, 12, 32, false);
+INSERT INTO resource VALUES (2108, 12, 32, false);
+INSERT INTO resource VALUES (2109, 78, 32, false);
+INSERT INTO resource VALUES (2111, 83, 32, false);
+INSERT INTO resource VALUES (2115, 39, 32, false);
 
 
 --
@@ -6125,68 +6228,129 @@ INSERT INTO resource_log VALUES (6647, 2095, 2, NULL, '2015-03-21 22:03:40.43506
 INSERT INTO resource_log VALUES (6648, 2051, 2, NULL, '2015-03-21 22:03:42.699321');
 INSERT INTO resource_log VALUES (6649, 2088, 2, NULL, '2015-03-21 22:03:45.19164');
 INSERT INTO resource_log VALUES (6650, 2052, 2, NULL, '2015-03-21 22:12:59.222848');
+INSERT INTO resource_log VALUES (6651, 971, 2, NULL, '2015-03-22 16:55:09.922468');
+INSERT INTO resource_log VALUES (6652, 2096, 2, NULL, '2015-03-22 17:22:28.394236');
+INSERT INTO resource_log VALUES (6653, 970, 2, NULL, '2015-03-22 17:22:30.31308');
+INSERT INTO resource_log VALUES (6654, 971, 2, NULL, '2015-03-22 17:32:58.675826');
+INSERT INTO resource_log VALUES (6655, 2097, 2, NULL, '2015-03-22 17:35:36.969555');
+INSERT INTO resource_log VALUES (6656, 2052, 2, NULL, '2015-03-22 17:35:38.710629');
+INSERT INTO resource_log VALUES (6657, 2052, 2, NULL, '2015-03-22 17:35:54.667572');
+INSERT INTO resource_log VALUES (6658, 2052, 2, NULL, '2015-03-22 17:36:02.394493');
+INSERT INTO resource_log VALUES (6659, 1413, 2, NULL, '2015-03-22 21:10:23.96026');
+INSERT INTO resource_log VALUES (6660, 2098, 2, NULL, '2015-03-22 21:12:12.040889');
+INSERT INTO resource_log VALUES (6661, 1413, 2, NULL, '2015-03-22 21:12:14.574907');
+INSERT INTO resource_log VALUES (6662, 953, 2, NULL, '2015-03-23 10:52:07.126828');
+INSERT INTO resource_log VALUES (6663, 955, 2, NULL, '2015-03-23 10:52:46.434534');
+INSERT INTO resource_log VALUES (6664, 955, 2, NULL, '2015-03-23 10:53:07.107505');
+INSERT INTO resource_log VALUES (6665, 971, 2, NULL, '2015-03-23 11:17:09.549645');
+INSERT INTO resource_log VALUES (6666, 971, 2, NULL, '2015-03-23 11:17:14.786132');
+INSERT INTO resource_log VALUES (6667, 971, 2, NULL, '2015-03-23 22:30:47.611278');
+INSERT INTO resource_log VALUES (6668, 2099, 2, NULL, '2015-03-24 19:25:49.743645');
+INSERT INTO resource_log VALUES (6669, 2100, 2, NULL, '2015-03-24 19:26:22.746874');
+INSERT INTO resource_log VALUES (6670, 2101, 2, NULL, '2015-03-24 19:30:50.825716');
+INSERT INTO resource_log VALUES (6671, 1413, 2, NULL, '2015-03-24 21:27:29.027714');
+INSERT INTO resource_log VALUES (6672, 1413, 2, NULL, '2015-03-24 21:27:56.025596');
+INSERT INTO resource_log VALUES (6673, 2104, 2, NULL, '2015-03-25 22:08:36.018637');
+INSERT INTO resource_log VALUES (6674, 2105, 2, NULL, '2015-03-25 22:09:11.121353');
+INSERT INTO resource_log VALUES (6675, 2106, 2, NULL, '2015-03-25 22:10:32.26983');
+INSERT INTO resource_log VALUES (6676, 2107, 2, NULL, '2015-03-27 21:02:27.365736');
+INSERT INTO resource_log VALUES (6677, 1413, 2, NULL, '2015-03-27 22:11:48.664734');
+INSERT INTO resource_log VALUES (6678, 1318, 2, NULL, '2015-03-27 22:11:57.175441');
+INSERT INTO resource_log VALUES (6679, 2108, 2, NULL, '2015-03-27 22:14:09.702895');
+INSERT INTO resource_log VALUES (6680, 1413, 2, NULL, '2015-03-27 22:14:23.177174');
+INSERT INTO resource_log VALUES (6681, 1975, 2, NULL, '2015-03-29 14:54:09.090695');
+INSERT INTO resource_log VALUES (6682, 1975, 2, NULL, '2015-03-29 14:56:05.558074');
+INSERT INTO resource_log VALUES (6683, 2054, 2, NULL, '2015-03-29 18:10:37.298528');
+INSERT INTO resource_log VALUES (6684, 2054, 2, NULL, '2015-03-29 18:10:44.494853');
+INSERT INTO resource_log VALUES (6685, 2054, 2, NULL, '2015-03-29 18:11:59.351954');
+INSERT INTO resource_log VALUES (6686, 894, 2, NULL, '2015-03-29 18:12:33.345883');
+INSERT INTO resource_log VALUES (6687, 2108, 2, NULL, '2015-03-29 18:41:14.962865');
+INSERT INTO resource_log VALUES (6688, 2108, 2, NULL, '2015-03-29 18:41:28.932911');
+INSERT INTO resource_log VALUES (6689, 2108, 2, NULL, '2015-03-29 18:41:35.361837');
+INSERT INTO resource_log VALUES (6690, 1568, 2, NULL, '2015-03-29 18:59:52.709639');
+INSERT INTO resource_log VALUES (6691, 1567, 2, NULL, '2015-03-29 18:59:57.605194');
+INSERT INTO resource_log VALUES (6692, 2109, 2, NULL, '2015-03-29 19:15:59.1205');
+INSERT INTO resource_log VALUES (6693, 1578, 2, NULL, '2015-03-29 19:28:18.094577');
+INSERT INTO resource_log VALUES (6694, 1563, 2, NULL, '2015-03-29 19:28:26.306719');
+INSERT INTO resource_log VALUES (6695, 1560, 2, NULL, '2015-03-29 19:28:31.032916');
+INSERT INTO resource_log VALUES (6696, 1649, 2, NULL, '2015-03-29 20:30:21.118741');
+INSERT INTO resource_log VALUES (6698, 2111, 2, NULL, '2015-03-29 20:32:08.188477');
+INSERT INTO resource_log VALUES (6699, 918, 2, NULL, '2015-03-29 20:45:02.042426');
+INSERT INTO resource_log VALUES (6700, 918, 2, NULL, '2015-03-29 20:45:08.391579');
+INSERT INTO resource_log VALUES (6701, 917, 2, NULL, '2015-03-29 20:45:13.080299');
+INSERT INTO resource_log VALUES (6702, 916, 2, NULL, '2015-03-29 20:45:17.094049');
+INSERT INTO resource_log VALUES (6703, 952, 2, NULL, '2015-03-29 20:51:29.823177');
+INSERT INTO resource_log VALUES (6705, 988, 2, NULL, '2015-03-29 20:57:38.470567');
+INSERT INTO resource_log VALUES (6707, 971, 2, NULL, '2015-03-29 21:04:32.587955');
+INSERT INTO resource_log VALUES (6709, 1647, 2, NULL, '2015-03-29 21:11:13.101083');
+INSERT INTO resource_log VALUES (6710, 2115, 2, NULL, '2015-03-29 21:11:20.771189');
+INSERT INTO resource_log VALUES (6711, 1648, 2, NULL, '2015-03-29 21:19:19.348961');
+INSERT INTO resource_log VALUES (6713, 1646, 2, NULL, '2015-03-29 21:25:36.400114');
 
 
 --
 -- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO resource_type VALUES (132, 2070, 'wishes_items', 'Wish Items', 'WishesItems', 'travelcrm.resources.wishes_items', 'Wishes Items is the list of services that customer wish in the lead', 'null', false, 0);
-INSERT INTO resource_type VALUES (117, 1797, 'subaccounts', 'Subaccounts', 'Subaccounts', 'travelcrm.resources.subaccounts', 'Subaccounts are accounts from other objects such as clients, touroperators and so on', 'null', false, 0);
-INSERT INTO resource_type VALUES (107, 1435, 'accounts', 'Accounts', 'Accounts', 'travelcrm.resources.accounts', 'Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible', 'null', false, 0);
-INSERT INTO resource_type VALUES (118, 1799, 'notes', 'Notes', 'Notes', 'travelcrm.resources.notes', 'Resources Notes', 'null', false, 0);
-INSERT INTO resource_type VALUES (92, 1221, 'tours_sales', 'Tours Sale', 'ToursSales', 'travelcrm.resources.tours_sales', 'Tours sales documents', '{"service_id": 5}', true, 0);
-INSERT INTO resource_type VALUES (119, 1849, 'calculations', 'Caluclations', 'Calculations', 'travelcrm.resources.calculations', 'Calculations of Sale Documents', 'null', false, 0);
-INSERT INTO resource_type VALUES (120, 1884, 'crosspayments', 'Cross Payments', 'Crosspayments', 'travelcrm.resources.crosspayments', 'Cross payments between accounts and subaccounts. This document is for balance corrections to.', 'null', false, 0);
-INSERT INTO resource_type VALUES (121, 1894, 'turnovers', 'Turnovers', 'Turnovers', 'travelcrm.resources.turnovers', 'Turnovers on Accounts and Subaccounts', 'null', false, 0);
-INSERT INTO resource_type VALUES (2, 10, 'users', 'Users', 'Users', 'travelcrm.resources.users', 'Users list', NULL, false, 0);
-INSERT INTO resource_type VALUES (12, 16, 'resources_types', 'Resources Types', 'ResourcesTypes', 'travelcrm.resources.resources_types', 'Resources types list', NULL, false, 0);
-INSERT INTO resource_type VALUES (47, 706, 'employees', 'Employees', 'Employees', 'travelcrm.resources.employees', 'Employees Container Datagrid', NULL, false, 0);
-INSERT INTO resource_type VALUES (78, 1003, 'touroperators', 'Touroperators', 'Touroperators', 'travelcrm.resources.touroperators', 'Touroperators - tours suppliers list', NULL, false, 0);
+INSERT INTO resource_type VALUES (132, 2070, 'wish', 'Wish Items', 'WishResource', 'travelcrm.resources.wish', 'Wishes Items is the list of services that customer wish in the lead', 'null', false, 0);
+INSERT INTO resource_type VALUES (134, 2099, 'order', 'Orders', 'OrderResource', 'travelcrm.resources.order', 'Orders', 'null', false, 0);
+INSERT INTO resource_type VALUES (136, 2107, 'common_service', 'Common Services', 'CommonServiceResource', 'travelcrm.resources.common_service', 'Common Services Interface', 'null', false, 0);
+INSERT INTO resource_type VALUES (2, 10, 'user', 'Users', 'UserResource', 'travelcrm.resources.user', 'Users list', NULL, false, 0);
+INSERT INTO resource_type VALUES (12, 16, 'resource_type', 'Resources Types', 'ResourceTypeResource', 'travelcrm.resources.resource_type', 'Resources types list', NULL, false, 0);
+INSERT INTO resource_type VALUES (47, 706, 'employee', 'Employees', 'EmployeeResource', 'travelcrm.resources.employee', 'Employees Container Datagrid', NULL, false, 0);
+INSERT INTO resource_type VALUES (78, 1003, 'touroperator', 'Touroperators', 'TouroperatorResource', 'travelcrm.resources.touroperator', 'Touroperators - tours suppliers list', NULL, false, 0);
+INSERT INTO resource_type VALUES (92, 1221, 'tour_sale', 'Tours Sale', 'TourSaleResource', 'travelcrm.resources.tour_sale', 'Tours sales documents', '{"service_id": 5}', true, 0);
+INSERT INTO resource_type VALUES (93, 1225, 'task', 'Tasks', 'TaskResource', 'travelcrm.resources.task', 'Task manager', NULL, false, 0);
+INSERT INTO resource_type VALUES (106, 1433, 'income', 'Incomes', 'IncomeResource', 'travelcrm.resources.income', 'Incomes Payments Document for invoices', '{"account_item_id": 8}', false, 0);
+INSERT INTO resource_type VALUES (107, 1435, 'account', 'Accounts', 'AccountResource', 'travelcrm.resources.account', 'Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible', 'null', false, 0);
+INSERT INTO resource_type VALUES (117, 1797, 'subaccount', 'Subaccounts', 'SubaccountResource', 'travelcrm.resources.subaccount', 'Subaccounts are accounts from other objects such as clients, touroperators and so on', 'null', false, 0);
+INSERT INTO resource_type VALUES (118, 1799, 'note', 'Notes', 'NoteResource', 'travelcrm.resources.note', 'Resources Notes', 'null', false, 0);
+INSERT INTO resource_type VALUES (119, 1849, 'calculation', 'Caluclations', 'CalculationResource', 'travelcrm.resources.calculation', 'Calculations of Sale Documents', 'null', false, 0);
+INSERT INTO resource_type VALUES (120, 1884, 'crosspayment', 'Cross Payments', 'CrosspaymentResource', 'travelcrm.resources.crosspayment', 'Cross payments between accounts and subaccounts. This document is for balance corrections to.', 'null', false, 0);
+INSERT INTO resource_type VALUES (121, 1894, 'turnover', 'Turnovers', 'TurnoverResource', 'travelcrm.resources.turnover', 'Turnovers on Accounts and Subaccounts', 'null', false, 0);
+INSERT INTO resource_type VALUES (122, 1919, 'debt', 'Debts', 'DebtResource', 'travelcrm.resources.debt', 'Calculations based debts report', 'null', false, 0);
 INSERT INTO resource_type VALUES (1, 773, '', 'Home', 'Root', 'travelcrm.resources', 'Home Page of Travelcrm', NULL, false, 0);
-INSERT INTO resource_type VALUES (122, 1919, 'debts', 'Debts', 'Debts', 'travelcrm.resources.debts', 'Calculations based debts report', 'null', false, 0);
-INSERT INTO resource_type VALUES (93, 1225, 'tasks', 'Tasks', 'Tasks', 'travelcrm.resources.tasks', 'Task manager', NULL, false, 0);
-INSERT INTO resource_type VALUES (106, 1433, 'incomes', 'Incomes', 'Incomes', 'travelcrm.resources.incomes', 'Incomes Payments Document for invoices', '{"account_item_id": 8}', false, 0);
-INSERT INTO resource_type VALUES (133, 2077, 'offers_items', 'Offer Items', 'OffersItems', 'travelcrm.resources.offers_items', 'Offers Items is the list of services that manager offer to the customer', 'null', false, 0);
-INSERT INTO resource_type VALUES (41, 283, 'currencies', 'Currencies', 'Currencies', 'travelcrm.resources.currencies', '', NULL, false, 0);
-INSERT INTO resource_type VALUES (55, 723, 'structures', 'Structures', 'Structures', 'travelcrm.resources.structures', 'Companies structures is a tree of company structure. It''s can be offices, filials, departments and so and so', NULL, false, 0);
-INSERT INTO resource_type VALUES (59, 764, 'positions', 'Positions', 'Positions', 'travelcrm.resources.positions', 'Companies positions is a point of company structure where emplyees can be appointed', NULL, false, 0);
-INSERT INTO resource_type VALUES (61, 769, 'permisions', 'Permisions', 'Permisions', 'travelcrm.resources.permisions', 'Permisions list of company structure position. It''s list of resources and permisions', NULL, false, 0);
-INSERT INTO resource_type VALUES (65, 775, 'navigations', 'Navigations', 'Navigations', 'travelcrm.resources.navigations', 'Navigations list of company structure position.', NULL, false, 0);
-INSERT INTO resource_type VALUES (67, 788, 'appointments', 'Appointments', 'Appointments', 'travelcrm.resources.appointments', 'Employees to positions of company appointments', NULL, false, 0);
-INSERT INTO resource_type VALUES (39, 274, 'regions', 'Regions', 'Regions', 'travelcrm.resources.regions', '', NULL, false, 0);
-INSERT INTO resource_type VALUES (70, 872, 'countries', 'Countries', 'Countries', 'travelcrm.resources.countries', 'Countries directory', NULL, false, 0);
-INSERT INTO resource_type VALUES (71, 901, 'advsources', 'Advertise Sources', 'Advsources', 'travelcrm.resources.advsources', 'Types of advertises', NULL, false, 0);
-INSERT INTO resource_type VALUES (72, 908, 'hotelcats', 'Hotels Categories', 'Hotelcats', 'travelcrm.resources.hotelcats', 'Hotels categories', NULL, false, 0);
-INSERT INTO resource_type VALUES (73, 909, 'roomcats', 'Rooms Categories', 'Roomcats', 'travelcrm.resources.roomcats', 'Categories of the rooms', NULL, false, 0);
-INSERT INTO resource_type VALUES (74, 953, 'accomodations', 'Accomodations', 'Accomodations', 'travelcrm.resources.accomodations', 'Accomodations Types list', NULL, false, 0);
-INSERT INTO resource_type VALUES (75, 954, 'foodcats', 'Food Categories', 'Foodcats', 'travelcrm.resources.foodcats', 'Food types in hotels', NULL, false, 0);
-INSERT INTO resource_type VALUES (69, 865, 'persons', 'Persons', 'Persons', 'travelcrm.resources.persons', 'Persons directory. Person can be client or potential client', NULL, false, 0);
-INSERT INTO resource_type VALUES (79, 1007, 'bpersons', 'Business Persons', 'BPersons', 'travelcrm.resources.bpersons', 'Business Persons is not clients it''s simple business contacts that can be referenced objects that needs to have contacts', NULL, false, 0);
-INSERT INTO resource_type VALUES (84, 1088, 'locations', 'Locations', 'Locations', 'travelcrm.resources.locations', 'Locations list is list of cities, vilages etc. places to use to identify part of region', NULL, false, 0);
-INSERT INTO resource_type VALUES (83, 1081, 'hotels', 'Hotels', 'Hotels', 'travelcrm.resources.hotels', 'Hotels directory', NULL, false, 0);
-INSERT INTO resource_type VALUES (86, 1189, 'licences', 'Licences', 'Licences', 'travelcrm.resources.licences', 'Licences list for any type of resources as need', NULL, false, 0);
-INSERT INTO resource_type VALUES (87, 1190, 'contacts', 'Contacts', 'Contacts', 'travelcrm.resources.contacts', 'Contacts for persons, business persons etc.', NULL, false, 0);
-INSERT INTO resource_type VALUES (89, 1198, 'passports', 'Passports', 'Passports', 'travelcrm.resources.passports', 'Clients persons passports lists', NULL, false, 0);
-INSERT INTO resource_type VALUES (90, 1207, 'addresses', 'Addresses', 'Addresses', 'travelcrm.resources.addresses', 'Addresses of any type of resources, such as persons, bpersons, hotels etc.', NULL, false, 0);
-INSERT INTO resource_type VALUES (91, 1211, 'banks', 'Banks', 'Banks', 'travelcrm.resources.banks', 'Banks list to create bank details and for other reasons', NULL, false, 0);
-INSERT INTO resource_type VALUES (102, 1313, 'services', 'Services', 'Services', 'travelcrm.resources.services', 'Additional Services that can be provide with tours sales or separate', NULL, false, 0);
-INSERT INTO resource_type VALUES (101, 1268, 'banks_details', 'Banks Details', 'BanksDetails', 'travelcrm.resources.banks_details', 'Banks Details that can be attached to any client or business partner to define account', NULL, false, 0);
-INSERT INTO resource_type VALUES (104, 1393, 'currencies_rates', 'Currency Rates', 'CurrenciesRates', 'travelcrm.resources.currencies_rates', 'Currencies Rates. Values from this dir used by billing to calc prices in base currency.', NULL, false, 0);
-INSERT INTO resource_type VALUES (105, 1424, 'accounts_items', 'Account Items', 'AccountsItems', 'travelcrm.resources.accounts_items', 'Finance accounts items', NULL, false, 0);
-INSERT INTO resource_type VALUES (109, 1452, 'services_sales', 'Services Sale', 'ServicesSales', 'travelcrm.resources.services_sales', 'Additionals Services sales document. It is Invoicable objects and can generate contracts', 'null', false, 0);
-INSERT INTO resource_type VALUES (108, 1450, 'services_items', 'Service Item', 'ServicesItems', 'travelcrm.resources.services_items', 'Services Items List for include in sales documents such as Tours, Services Sales etc.', 'null', false, 0);
-INSERT INTO resource_type VALUES (110, 1521, 'commissions', 'Commissions', 'Commissions', 'travelcrm.resources.commissions', 'Services sales commissions', 'null', false, 0);
-INSERT INTO resource_type VALUES (112, 1549, 'suppliers', 'Suppliers', 'Suppliers', 'travelcrm.resources.suppliers', 'Suppliers for other services except tours services', 'null', false, 0);
-INSERT INTO resource_type VALUES (111, 1548, 'outgoings', 'Outgoings', 'Outgoings', 'travelcrm.resources.outgoings', 'Outgoings payments for touroperators, suppliers, payback payments and so on', 'null', false, 0);
-INSERT INTO resource_type VALUES (123, 1941, 'notifications', 'Notifications', 'Notifications', 'travelcrm.resources.notifications', 'Employee Notifications', 'null', false, 0);
-INSERT INTO resource_type VALUES (128, 1977, 'companies_settings', 'Companies Settings', 'CompaniesSettings', 'travelcrm.resources.companies_settings', 'Companies Settings', 'null', false, 0);
-INSERT INTO resource_type VALUES (124, 1954, 'emails_campaigns', 'Email Campaigns', 'EmailsCampaigns', 'travelcrm.resources.emails_campaigns', 'Emails Campaigns for subscribers', '{"timeout": 12}', true, 0);
-INSERT INTO resource_type VALUES (103, 1317, 'invoices', 'Invoices', 'Invoices', 'travelcrm.resources.invoices', 'Invoices list. Invoice can''t be created manualy - only using source document such as Tours', '{"active_days": 3}', true, 0);
-INSERT INTO resource_type VALUES (125, 1966, 'unpaid_invoices', 'Portlet: Unpaid Invoices', 'UnpaidInvoices', 'travelcrm.resources.unpaid_invoices', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true, 0);
-INSERT INTO resource_type VALUES (126, 1968, 'companies', 'Companies', 'Companies', 'travelcrm.resources.companies', 'Multicompanies functionality', 'null', false, 0);
-INSERT INTO resource_type VALUES (130, 2049, 'leads', 'Leads', 'Leads', 'travelcrm.resources.leads', 'Leads that can be converted into contacts', 'null', false, 0);
-INSERT INTO resource_type VALUES (129, 1989, 'sales_dynamics', 'Portlet: Sales Dynamics', 'SalesDynamics', 'travelcrm.resources.sales_dynamics', 'Portlet that shows dynamics of sales in quantity', '{"column_index": 0}', true, 0);
+INSERT INTO resource_type VALUES (133, 2077, 'offer', 'Offer Items', 'OfferResource', 'travelcrm.resources.offer', 'Offers Items is the list of services that manager offer to the customer', 'null', false, 0);
+INSERT INTO resource_type VALUES (135, 2100, 'order_item', 'Orders Items', 'OrderItemResource', 'travelcrm.resources.order_item', 'Orders Items', 'null', false, 0);
+INSERT INTO resource_type VALUES (137, 2108, 'accomodation_service', 'Accomodations Services', 'AccomodationServiceResource', 'travelcrm.resources.accomodation_service', 'Accomodations Services Interface', 'null', false, 0);
+INSERT INTO resource_type VALUES (41, 283, 'currency', 'Currencies', 'CurrencyResource', 'travelcrm.resources.currency', '', NULL, false, 0);
+INSERT INTO resource_type VALUES (55, 723, 'structure', 'Structures', 'StructureResource', 'travelcrm.resources.structure', 'Companies structures is a tree of company structure. It''s can be offices, filials, departments and so and so', NULL, false, 0);
+INSERT INTO resource_type VALUES (59, 764, 'position', 'Positions', 'PositionResource', 'travelcrm.resources.position', 'Companies positions is a point of company structure where emplyees can be appointed', NULL, false, 0);
+INSERT INTO resource_type VALUES (61, 769, 'permision', 'Permisions', 'PermisionResource', 'travelcrm.resources.permision', 'Permisions list of company structure position. It''s list of resources and permisions', NULL, false, 0);
+INSERT INTO resource_type VALUES (65, 775, 'navigation', 'Navigations', 'NavigationResource', 'travelcrm.resources.navigation', 'Navigations list of company structure position.', NULL, false, 0);
+INSERT INTO resource_type VALUES (67, 788, 'appointment', 'Appointments', 'AppointmentResource', 'travelcrm.resources.appointment', 'Employees to positions of company appointments', NULL, false, 0);
+INSERT INTO resource_type VALUES (126, 1968, 'company', 'Companies', 'CompanyResource', 'travelcrm.resources.company', 'Multicompanies functionality', 'null', false, 0);
+INSERT INTO resource_type VALUES (129, 1989, 'sale_dynamic', 'Portlet: Sales Dynamics', 'SaleDynamicResource', 'travelcrm.resources.sale_dynamic', 'Portlet that shows dynamics of sales in quantity', '{"column_index": 0}', true, 0);
+INSERT INTO resource_type VALUES (130, 2049, 'lead', 'Leads', 'LeadResource', 'travelcrm.resources.lead', 'Leads that can be converted into contacts', 'null', false, 0);
+INSERT INTO resource_type VALUES (72, 908, 'hotelcat', 'Hotels Categories', 'HotelcatResource', 'travelcrm.resources.hotelcat', 'Hotels categories', NULL, false, 0);
+INSERT INTO resource_type VALUES (73, 909, 'roomcat', 'Rooms Categories', 'RoomcatResource', 'travelcrm.resources.roomcat', 'Categories of the rooms', NULL, false, 0);
+INSERT INTO resource_type VALUES (87, 1190, 'contact', 'Contacts', 'ContactResource', 'travelcrm.resources.contact', 'Contacts for persons, business persons etc.', NULL, false, 0);
+INSERT INTO resource_type VALUES (39, 274, 'region', 'Regions', 'RegionResource', 'travelcrm.resources.region', '', NULL, false, 0);
+INSERT INTO resource_type VALUES (69, 865, 'person', 'Persons', 'PersonResource', 'travelcrm.resources.person', 'Persons directory. Person can be client or potential client', NULL, false, 0);
+INSERT INTO resource_type VALUES (70, 872, 'country', 'Countries', 'CountryResource', 'travelcrm.resources.country', 'Countries directory', NULL, false, 0);
+INSERT INTO resource_type VALUES (71, 901, 'advsource', 'Advertise Sources', 'AdvsourceResource', 'travelcrm.resources.advsource', 'Types of advertises', NULL, false, 0);
+INSERT INTO resource_type VALUES (74, 953, 'accomodation_type', 'Accomodations Types', 'AccomodationTypeResource', 'travelcrm.resources.accomodation_type', 'Accomodations Types list', NULL, false, 0);
+INSERT INTO resource_type VALUES (75, 954, 'foodcat', 'Food Categories', 'FoodcatResource', 'travelcrm.resources.foodcat', 'Food types in hotels', NULL, false, 0);
+INSERT INTO resource_type VALUES (79, 1007, 'bperson', 'Business Persons', 'BPersonResource', 'travelcrm.resources.bperson', 'Business Persons is not clients it''s simple business contacts that can be referenced objects that needs to have contacts', NULL, false, 0);
+INSERT INTO resource_type VALUES (83, 1081, 'hotel', 'Hotels', 'HotelResource', 'travelcrm.resources.hotel', 'Hotels directory', NULL, false, 0);
+INSERT INTO resource_type VALUES (84, 1088, 'location', 'Locations', 'LocationResource', 'travelcrm.resources.location', 'Locations list is list of cities, vilages etc. places to use to identify part of region', NULL, false, 0);
+INSERT INTO resource_type VALUES (86, 1189, 'licence', 'Licences', 'LicenceResource', 'travelcrm.resources.licence', 'Licences list for any type of resources as need', NULL, false, 0);
+INSERT INTO resource_type VALUES (89, 1198, 'passport', 'Passports', 'PassportResource', 'travelcrm.resources.passport', 'Clients persons passports lists', NULL, false, 0);
+INSERT INTO resource_type VALUES (90, 1207, 'address', 'Addresses', 'AddressResource', 'travelcrm.resources.address', 'Addresses of any type of resources, such as persons, bpersons, hotels etc.', NULL, false, 0);
+INSERT INTO resource_type VALUES (91, 1211, 'bank', 'Banks', 'BankResource', 'travelcrm.resources.bank', 'Banks list to create bank details and for other reasons', NULL, false, 0);
+INSERT INTO resource_type VALUES (101, 1268, 'bank_detail', 'Banks Details', 'BankDetailResource', 'travelcrm.resources.bank_detail', 'Banks Details that can be attached to any client or business partner to define account', NULL, false, 0);
+INSERT INTO resource_type VALUES (102, 1313, 'service', 'Services', 'ServiceResource', 'travelcrm.resources.service', 'Additional Services that can be provide with tours sales or separate', NULL, false, 0);
+INSERT INTO resource_type VALUES (103, 1317, 'invoice', 'Invoices', 'InvoiceResource', 'travelcrm.resources.invoice', 'Invoices list. Invoice can''t be created manualy - only using source document such as Tours', '{"active_days": 3}', true, 0);
+INSERT INTO resource_type VALUES (104, 1393, 'currency_rate', 'Currency Rates', 'CurrencyRateResource', 'travelcrm.resources.currency_rate', 'Currencies Rates. Values from this dir used by billing to calc prices in base currency.', NULL, false, 0);
+INSERT INTO resource_type VALUES (105, 1424, 'account_item', 'Account Items', 'AccountItemResource', 'travelcrm.resources.account_item', 'Finance accounts items', NULL, false, 0);
+INSERT INTO resource_type VALUES (108, 1450, 'service_item', 'Service Item', 'ServiceItemResource', 'travelcrm.resources.service_item', 'Services Items List for include in sales documents such as Tours, Services Sales etc.', 'null', false, 0);
+INSERT INTO resource_type VALUES (109, 1452, 'service_sale', 'Services Sale', 'ServiceSaleResource', 'travelcrm.resources.service_sale', 'Additionals Services sales document. It is Invoicable objects and can generate contracts', 'null', false, 0);
+INSERT INTO resource_type VALUES (110, 1521, 'commission', 'Commissions', 'CommissionResource', 'travelcrm.resources.commission', 'Services sales commissions', 'null', false, 0);
+INSERT INTO resource_type VALUES (111, 1548, 'outgoing', 'Outgoings', 'OutgoingResource', 'travelcrm.resources.outgoing', 'Outgoings payments for touroperators, suppliers, payback payments and so on', 'null', false, 0);
+INSERT INTO resource_type VALUES (112, 1549, 'supplier', 'Suppliers', 'SupplierResource', 'travelcrm.resources.supplier', 'Suppliers for other services except tours services', 'null', false, 0);
+INSERT INTO resource_type VALUES (123, 1941, 'notification', 'Notifications', 'NotificationResource', 'travelcrm.resources.notification', 'Employee Notifications', 'null', false, 0);
+INSERT INTO resource_type VALUES (124, 1954, 'email_campaign', 'Email Campaigns', 'EmailCampaignResource', 'travelcrm.resources.email_campaign', 'Emails Campaigns for subscribers', '{"timeout": 12}', true, 0);
+INSERT INTO resource_type VALUES (125, 1966, 'unpaid', 'Portlet: Unpaid Invoices', 'UnpaidResource', 'travelcrm.resources.unpaid', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true, 0);
 
 
 --
@@ -6229,17 +6393,17 @@ INSERT INTO roomcat VALUES (33, 952, 'Inside View');
 -- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('roomcat_id_seq', 33, true);
+SELECT pg_catalog.setval('roomcat_id_seq', 34, true);
 
 
 --
 -- Data for Name: service; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO service VALUES (4, 1318, 'A visa', NULL, NULL, 2);
-INSERT INTO service VALUES (3, 1316, 'Travel Insurance', 'Travel Insurance price is custom.', NULL, 2);
-INSERT INTO service VALUES (1, 1314, 'Foreign Passport Service', NULL, NULL, 2);
-INSERT INTO service VALUES (5, 1413, 'Tour', NULL, 'Advance payment for travel services', 1);
+INSERT INTO service VALUES (4, 1318, 'A visa', NULL, NULL, 2, 136);
+INSERT INTO service VALUES (3, 1316, 'Travel Insurance', 'Travel Insurance price is custom.', NULL, 2, 136);
+INSERT INTO service VALUES (1, 1314, 'Foreign Passport Service', NULL, NULL, 2, 136);
+INSERT INTO service VALUES (5, 1413, 'Tour', 'Use this service for tour sales', 'Advance payment for travel services', 1, 137);
 
 
 --
@@ -6638,6 +6802,7 @@ INSERT INTO touroperator VALUES (61, 1378, 'EthnoTour');
 INSERT INTO touroperator VALUES (57, 1159, 'Sun Marino Trvl.');
 INSERT INTO touroperator VALUES (62, 1580, 'News Travel');
 INSERT INTO touroperator VALUES (63, 1870, 'Four Winds');
+INSERT INTO touroperator VALUES (64, 2109, 'Test');
 
 
 --
@@ -6678,7 +6843,7 @@ INSERT INTO touroperator_commission VALUES (1, 26);
 -- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('touroperator_id_seq', 63, true);
+SELECT pg_catalog.setval('touroperator_id_seq', 64, true);
 
 
 --
@@ -6748,36 +6913,29 @@ SELECT pg_catalog.setval('transfer_id_seq', 94, true);
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO "user" VALUES (23, 894, 'maziv', NULL, 'maziv_maziv', 7);
 INSERT INTO "user" VALUES (2, 3, 'admin', 'vitalii.mazur@gmail.com', 'adminadmin', 2);
 INSERT INTO "user" VALUES (25, 2054, 'maz_iv', NULL, 'korn17', 30);
+INSERT INTO "user" VALUES (23, 894, 'maziv', NULL, '111111', 7);
 
 
 --
--- Data for Name: wish_item; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: wish; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO wish_item VALUES (1, 2078, 5, 57, 1600.00, 2000.00, 'Tour for two adult persons and two children, Turkey or Egypt, 7 days, perfect 4* or 5* will be best, UAl');
-INSERT INTO wish_item VALUES (2, 2079, 3, NULL, NULL, NULL, 'Insurance for all members of the tour');
-INSERT INTO wish_item VALUES (3, 2080, 1, NULL, NULL, NULL, 'Foreign Passport very quick for one person');
-INSERT INTO wish_item VALUES (4, 2082, 5, NULL, NULL, NULL, 'dfgsdf gsdfg sdfgd');
-INSERT INTO wish_item VALUES (5, 2083, 5, 57, 1800.00, 2100.00, 'Turkey or Egypt, 2 adults and 2 children, 7 days, 5* or best 4* with Al inclusive');
-INSERT INTO wish_item VALUES (6, 2084, 1, NULL, NULL, NULL, 'Need very quick for one person');
-INSERT INTO wish_item VALUES (7, 2091, 5, 54, NULL, 4000.00, 'Cuba for 1 person, 10 days for 1 person');
 
 
 --
--- Name: wish_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: wish_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('wish_item_id_seq', 7, true);
+SELECT pg_catalog.setval('wish_id_seq', 1, false);
 
 
 --
 -- Name: accomodation_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY accomodation
+ALTER TABLE ONLY accomodation_type
     ADD CONSTRAINT accomodation_pkey PRIMARY KEY (id);
 
 
@@ -7038,11 +7196,11 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: lead_offer_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY lead_offer_item
-    ADD CONSTRAINT lead_offer_item_pkey PRIMARY KEY (lead_id, offer_item_id);
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT lead_offer_pkey PRIMARY KEY (lead_id, offer_id);
 
 
 --
@@ -7054,11 +7212,11 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: lead_wish_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: lead_wish_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY lead_wish_item
-    ADD CONSTRAINT lead_wish_item_pkey PRIMARY KEY (lead_id, wish_item_id);
+ALTER TABLE ONLY lead_wish
+    ADD CONSTRAINT lead_wish_pkey PRIMARY KEY (lead_id, wish_id);
 
 
 --
@@ -7118,11 +7276,27 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: offer_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: offer_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY offer_item
-    ADD CONSTRAINT offer_item_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY offer
+    ADD CONSTRAINT offer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT order_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT order_pkey PRIMARY KEY (id);
 
 
 --
@@ -7171,6 +7345,14 @@ ALTER TABLE ONLY person_address
 
 ALTER TABLE ONLY person_contact
     ADD CONSTRAINT person_contact_pkey PRIMARY KEY (person_id, contact_id);
+
+
+--
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_order_item
+    ADD CONSTRAINT person_order_item_pkey PRIMARY KEY (order_item_id, person_id);
 
 
 --
@@ -7462,11 +7644,11 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_idx_accomodation_type_name; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY accomodation
-    ADD CONSTRAINT unique_idx_accomodation_name UNIQUE (name);
+ALTER TABLE ONLY accomodation_type
+    ADD CONSTRAINT unique_idx_accomodation_type_name UNIQUE (name);
 
 
 --
@@ -7662,11 +7844,11 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: wish_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: wish_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY wish_item
-    ADD CONSTRAINT wish_item_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY wish
+    ADD CONSTRAINT wish_pkey PRIMARY KEY (id);
 
 
 --
@@ -7681,7 +7863,7 @@ CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (
 --
 
 ALTER TABLE ONLY tour_sale_point
-    ADD CONSTRAINT fk_accomodation_id_tour_point FOREIGN KEY (accomodation_id) REFERENCES accomodation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT fk_accomodation_id_tour_point FOREIGN KEY (accomodation_type_id) REFERENCES accomodation_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7773,6 +7955,14 @@ ALTER TABLE ONLY lead
 
 
 --
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_advsource_id_order FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_advsource_id_service_sale; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7850,6 +8040,14 @@ ALTER TABLE ONLY supplier_bperson
 
 ALTER TABLE ONLY touroperator_bperson
     ADD CONSTRAINT fk_bperson_id_touroperator_bperson FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_calculation_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_calculation_id_order FOREIGN KEY (calculation_id) REFERENCES calculation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7949,11 +8147,19 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_currency_id_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_currency_id_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY offer_item
-    ADD CONSTRAINT fk_currency_id_offer_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY offer
+    ADD CONSTRAINT fk_currency_id_offer FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_currency_id_order_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7981,11 +8187,11 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_currency_id_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_currency_id_wish; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wish_item
-    ADD CONSTRAINT fk_currency_id_wish_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY wish
+    ADD CONSTRAINT fk_currency_id_wish FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -7994,6 +8200,14 @@ ALTER TABLE ONLY wish_item
 
 ALTER TABLE ONLY lead
     ADD CONSTRAINT fk_customer_id_lead FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_customer_id_order FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8133,6 +8347,14 @@ ALTER TABLE ONLY income
 
 
 --
+-- Name: fk_invoice_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_invoice_id_order FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_invoice_id_service_sale_invoice; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8149,19 +8371,19 @@ ALTER TABLE ONLY tour_sale_invoice
 
 
 --
--- Name: fk_lead_id_lead_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY lead_offer_item
-    ADD CONSTRAINT fk_lead_id_lead_offer_item FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_lead_id_lead_offer FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
--- Name: fk_lead_id_lead_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_lead_id_lead_wish; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY lead_wish_item
-    ADD CONSTRAINT fk_lead_id_lead_wish_item FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY lead_wish
+    ADD CONSTRAINT fk_lead_id_lead_wish FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8221,11 +8443,27 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_offer_item_id_lead_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_offer_item_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY lead_offer_item
-    ADD CONSTRAINT fk_offer_item_id_lead_offer_item FOREIGN KEY (offer_item_id) REFERENCES offer_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_offer_item_id_lead_offer FOREIGN KEY (offer_id) REFERENCES offer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_order_id_order_item FOREIGN KEY (order_id) REFERENCES "order"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY person_order_item
+    ADD CONSTRAINT fk_order_item_id_person_order_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8282,6 +8520,14 @@ ALTER TABLE ONLY person_address
 
 ALTER TABLE ONLY person_contact
     ADD CONSTRAINT fk_person_id_person_contact FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY person_order_item
+    ADD CONSTRAINT fk_person_id_person_order_item FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8360,7 +8606,7 @@ ALTER TABLE ONLY location
 -- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY accomodation
+ALTER TABLE ONLY accomodation_type
     ADD CONSTRAINT fk_resource_id_accomodation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -8605,11 +8851,27 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_resource_id_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_resource_id_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY offer_item
-    ADD CONSTRAINT fk_resource_id_offer_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY offer
+    ADD CONSTRAINT fk_resource_id_offer FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_resource_id_order FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_resource_id_order_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8773,11 +9035,11 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_resource_id_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_resource_id_wish; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wish_item
-    ADD CONSTRAINT fk_resource_id_wish_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY wish
+    ADD CONSTRAINT fk_resource_id_wish FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8797,6 +9059,14 @@ ALTER TABLE ONLY resource
 
 
 --
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY service
+    ADD CONSTRAINT fk_resource_type_id_service FOREIGN KEY (resource_type_id) REFERENCES resource_type(id);
+
+
+--
 -- Name: fk_roomcat_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8813,11 +9083,19 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_service_id_offer_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_service_id_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY offer_item
-    ADD CONSTRAINT fk_service_id_offer_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY offer
+    ADD CONSTRAINT fk_service_id_offer FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_service_id_order_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -8829,11 +9107,11 @@ ALTER TABLE ONLY service_item
 
 
 --
--- Name: fk_service_id_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_service_id_wish; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY wish_item
-    ADD CONSTRAINT fk_service_id_wish_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY wish
+    ADD CONSTRAINT fk_service_id_wish FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -9061,6 +9339,14 @@ ALTER TABLE ONLY tour_sale_service_item
 
 
 --
+-- Name: fk_touroperator_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_touroperator_id_order_item FOREIGN KEY (touroperator_id) REFERENCES touroperator(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_touroperator_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9133,11 +9419,11 @@ ALTER TABLE ONLY outgoing_transfer
 
 
 --
--- Name: fk_wish_item_id_lead_wish_item; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_wish_id_lead_wish; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY lead_wish_item
-    ADD CONSTRAINT fk_wish_item_id_lead_wish_item FOREIGN KEY (wish_item_id) REFERENCES wish_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY lead_wish
+    ADD CONSTRAINT fk_wish_id_lead_wish FOREIGN KEY (wish_id) REFERENCES wish(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

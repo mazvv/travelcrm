@@ -162,7 +162,10 @@ $(document).on("click", '._action', function(event){
 
 function action(obj){
 	var options = $.parser.parseOptions(obj);
+	do_action(options);
+}
 
+function do_action(options){
 	switch(options.action){
 		case('tab_open'):
 		    tab_open(options);

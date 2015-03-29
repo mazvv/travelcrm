@@ -4,7 +4,7 @@ import unittest
 
 from pyramid import testing
 
-from travelcrm.views.users import Users
+from ..views.user import UserView
 
 
 class TestUsers(unittest.TestCase):
@@ -17,5 +17,5 @@ class TestUsers(unittest.TestCase):
     def test_index(self):
         context = testing.DummyResource()
         request = testing.DummyRequest()
-        users = Users(context, request)
+        users = UserView(context, request)
         self.assertDictEqual({}, users.index())

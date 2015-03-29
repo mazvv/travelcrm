@@ -39,6 +39,16 @@ class Service(Base):
         ),
         nullable=False,
     )
+    resource_type_id = Column(
+        Integer,
+        ForeignKey(
+            'resource_type.id',
+            name="fk_resource_type_id_service",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
     account_item_id = Column(
         Integer,
         ForeignKey(
@@ -61,6 +71,16 @@ class Service(Base):
     )
     resource = relationship(
         'Resource',
+        backref=backref(
+            'service',
+            uselist=False,
+            cascade="all,delete"
+        ),
+        cascade="all,delete",
+        uselist=False,
+    )
+    resource_type = relationship(
+        'ResourceType',
         backref=backref(
             'service',
             uselist=False,
