@@ -4,8 +4,15 @@ import colander
 
 from . import (
     ResourceSchema,
+    ResourceSearchSchema,
+    BaseForm,
+    BaseSearchForm,
     DateTime
 )
+from ..resources.task import TaskResource
+from ..models.task import Task
+from ..models.note import Note
+from ..lib.qb.task import TaskQueryBuilder
 from ..lib.utils.common_utils import parse_datetime
 from ..lib.utils.common_utils import translate as _
 
@@ -24,7 +31,7 @@ def reminder_validator(node, kw):
     return colander.All(validator)
 
 
-class TaskSchema(ResourceSchema):
+class _TaskSchema(ResourceSchema):
     employee_id = colander.SchemaNode(
         colander.Integer(),
     )
@@ -50,3 +57,41 @@ class TaskSchema(ResourceSchema):
     status = colander.SchemaNode(
         colander.String(),
     )
+
+
+class TaskSearchSchema(ResourceSearchSchema):
+    performer_id = colander.SchemaNode(
+        colander.Integer(),
+    )
+    status = colander.SchemaNode(
+        colander.String(),
+        missing=None
+    )
+
+
+class TaskForm(BaseForm):
+    _schema = _TaskSchema
+
+    def submit(self, task=None):
+        context = TaskResource(self.request)
+        if not task:
+            task = Task(
+                resource=context.create_resource()
+            )
+        else:
+            task.resource.notes = []
+        task.employee_id = self._controls.get('employee_id')
+        task.title = self._controls.get('title')
+        task.deadline = self._controls.get('deadline')
+        task.reminder = self._controls.get('reminder')
+        task.descr = self._controls.get('descr')
+        task.status = self._controls.get('status')
+        for id in self._controls.get('note_id'):
+            note = Note.get(id)
+            task.resource.notes.append(note)
+        return task
+
+
+class TaskSearchForm(BaseSearchForm):
+    _schema = TaskSearchSchema
+    _qb = TaskQueryBuilder

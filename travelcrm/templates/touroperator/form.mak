@@ -1,9 +1,9 @@
-<%namespace file="../bpersons/common.mak" import="bpersons_selector"/>
+<%namespace file="../bperson/common.mak" import="bperson_selector"/>
 <%namespace file="../licences/common.mak" import="licences_selector"/>
-<%namespace file="../banks_details/common.mak" import="banks_details_selector"/>
+<%namespace file="../bank_detail/common.mak" import="bank_detail_selector"/>
 <%namespace file="../commissions/common.mak" import="commissions_selector"/>
-<%namespace file="../notes/common.mak" import="notes_selector"/>
-<%namespace file="../tasks/common.mak" import="tasks_selector"/>
+<%namespace file="../note/common.mak" import="note_selector"/>
+<%namespace file="../task/common.mak" import="task_selector"/>
 <div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
@@ -38,7 +38,7 @@
             </div>
             <div title="${_(u'Contacts')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${bpersons_selector(
+                    ${bperson_selector(
                         values=([bperson.id for bperson in item.bpersons] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 
@@ -49,7 +49,7 @@
             </div>
             <div title="${_(u'Banks Details')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${banks_details_selector(
+                    ${bank_detail_selector(
                         values=([bank_detail.id for bank_detail in item.banks_details] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 
@@ -71,7 +71,7 @@
             </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${notes_selector(
+                    ${note_selector(
                         values=([note.id for note in item.resource.notes] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 
@@ -82,7 +82,7 @@
             </div>
             <div title="${_(u'Tasks')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${tasks_selector(
+                    ${task_selector(
                         values=([task.id for task in item.resource.tasks] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 

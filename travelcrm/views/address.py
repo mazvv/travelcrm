@@ -1,17 +1,18 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.address import Address
-from ..lib.qb.address import AddressQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.address import AddressSchema
+from ..forms.address import (
+    AddressForm,
+    AddressSearchForm,
+)
 
 
 log = logging.getLogger(__name__)
@@ -28,7 +29,7 @@ class AddressView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/addresses/index.mak',
+        renderer='travelcrm:templates/address/index.mak',
         permission='view'
     )
     def index(self):
@@ -42,21 +43,9 @@ class AddressView(object):
         permission='view'
     )
     def _list(self):
-        qb = AddressQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = AddressSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -65,7 +54,7 @@ class AddressView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/addresses/form.mak',
+        renderer='travelcrm:templates/address/form.mak',
         permission='view'
     )
     def view(self):
@@ -87,7 +76,7 @@ class AddressView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/addresses/form.mak',
+        renderer='travelcrm:templates/address/form.mak',
         permission='add'
     )
     def add(self):
@@ -102,31 +91,25 @@ class AddressView(object):
         permission='add'
     )
     def _add(self):
-        schema = AddressSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            address = Address(
-                location_id=controls.get('location_id'),
-                zip_code=controls.get('zip_code'),
-                address=controls.get('address'),
-                resource=self.context.create_resource()
-            )
+        form = AddressForm(self.request)
+        if form.validate():
+            address = form.submit()
             DBSession.add(address)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': address.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/addresses/form.mak',
+        renderer='travelcrm:templates/address/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -143,27 +126,24 @@ class AddressView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = AddressSchema().bind(request=self.request)
         address = Address.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params)
-            address.location_id = controls.get('location_id')
-            address.zip_code = controls.get('zip_code')
-            address.address = controls.get('address')
+        form = AddressForm(self.request)
+        if form.validate():
+            form.submit(address)
             return {
                 'success_message': _(u'Saved'),
                 'response': address.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/addresses/form.mak',
+        renderer='travelcrm:templates/address/form.mak',
         permission='add'
     )
     def copy(self):
@@ -185,7 +165,7 @@ class AddressView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/addresses/delete.mak',
+        renderer='travelcrm:templates/address/delete.mak',
         permission='delete'
     )
     def delete(self):

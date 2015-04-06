@@ -14,8 +14,8 @@ from ..lib.qb.advsource import AdvsourceQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.advsource import (
-    AdvsourceSchema, 
-    AdvsourceSearchSchema
+    AdvsourceForm, 
+    AdvsourceSearchForm
 )
 
 
@@ -33,7 +33,7 @@ class AdvsourceView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/advsources/index.mak',
+        renderer='travelcrm:templates/advsource/index.mak',
         permission='view'
     )
     def index(self):
@@ -47,22 +47,9 @@ class AdvsourceView(object):
         permission='view'
     )
     def list(self):
-        schema = AdvsourceSearchSchema().bind(request=self.request)
-        controls = schema.deserialize(self.request.params.mixed())
-        qb = AdvsourceQueryBuilder(self.context)
-        qb.search_simple(controls.get('q'))
-        qb.advanced_search(**controls)
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = AdvsourceSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -71,7 +58,7 @@ class AdvsourceView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/advsources/form.mak',
+        renderer='travelcrm:templates/advsource/form.mak',
         permission='view'
     )
     def view(self):
@@ -93,7 +80,7 @@ class AdvsourceView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/advsources/form.mak',
+        renderer='travelcrm:templates/advsource/form.mak',
         permission='add'
     )
     def add(self):
@@ -106,36 +93,25 @@ class AdvsourceView(object):
         permission='add'
     )
     def _add(self):
-        schema = AdvsourceSchema().bind(request=self.request)
-
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            advsource = Advsource(
-                name=controls.get('name'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                advsource.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                advsource.resource.tasks.append(task)
+        form = AdvsourceForm(self.request)
+        if form.validate():
+            advsource = form.submit()
             DBSession.add(advsource)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': advsource.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/advsources/form.mak',
+        renderer='travelcrm:templates/advsource/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -149,33 +125,24 @@ class AdvsourceView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = AdvsourceSchema().bind(request=self.request)
         advsource = Advsource.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            advsource.name = controls.get('name')
-            advsource.resource.notes = []
-            advsource.resource.tasks = []
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                advsource.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                advsource.resource.tasks.append(task)
+        form = AdvsourceForm(self.request)
+        if form.validate():
+            form.submit(advsource)
             return {
                 'success_message': _(u'Saved'),
                 'response': advsource.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/advsources/delete.mak',
+        renderer='travelcrm:templates/advsource/delete.mak',
         permission='delete'
     )
     def delete(self):

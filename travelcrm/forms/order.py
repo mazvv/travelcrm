@@ -5,11 +5,18 @@ import colander
 from . import (
     Date,
     ResourceSchema,
-    ResourceSearchSchema
+    ResourceSearchSchema,
+    BaseForm,
+    BaseSearchForm,
 )
+from ..resources.order import OrderResource
+from ..models.order import Order
+from ..models.note import Note
+from ..models.task import Task
+from ..lib.qb.order import OrderQueryBuilder
 
 
-class OrderSchema(ResourceSchema):
+class _OrderSchema(ResourceSchema):
     deal_date = colander.SchemaNode(
         Date()
     )
@@ -32,10 +39,10 @@ class OrderSchema(ResourceSchema):
             cstruct['order_item_id'] = list()
             cstruct['order_item_id'].append(val)
 
-        return super(OrderSchema, self).deserialize(cstruct)
+        return super(_OrderSchema, self).deserialize(cstruct)
 
 
-class OrderSearchSchema(ResourceSearchSchema):
+class _OrderSearchSchema(ResourceSearchSchema):
     person_id = colander.SchemaNode(
         colander.Integer(),
         missing=None,
@@ -60,3 +67,32 @@ class OrderSearchSchema(ResourceSearchSchema):
         Date(),
         missing=None,
     )
+
+
+class OrderForm(BaseForm):
+    _schema = _OrderSchema
+
+    def submit(self, order=None):
+        context = OrderResource(self.request)
+        if not order:
+            order = Order(
+                resource=context.create_resource()
+            )
+        else:
+            order.resource.notes = []
+            order.resource.tasks = []
+        order.deal_date = self._controls.get('deal_date'),
+        order.advsource_id = self._controls.get('advsource_id'),
+        order.customer_id = self._controls.get('customer_id'),
+        for id in self._controls.get('note_id'):
+            note = Note.get(id)
+            order.resource.notes.append(note)
+        for id in self._controls.get('task_id'):
+            task = Task.get(id)
+            order.resource.tasks.append(task)
+        return order
+
+
+class OrderSearchForm(BaseSearchForm):
+    _schema = _OrderSearchSchema
+    _qb = OrderQueryBuilder

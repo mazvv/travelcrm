@@ -13,8 +13,8 @@ from ..models.task import Task
 from ..lib.qb.appointment import AppointmentQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from travelcrm.forms.appointment import (
-    AppointmentSchema, 
-    AppointmentSearchSchema
+    AppointmentForm, 
+    AppointmentSearchForm
 )
 
 log = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ class AppointmentView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/appointments/index.mak',
+        renderer='travelcrm:templates/appointment/index.mak',
         permission='view'
     )
     def index(self):
@@ -45,22 +45,9 @@ class AppointmentView(object):
         permission='view'
     )
     def list(self):
-        schema = AppointmentSearchSchema().bind(request=self.request)
-        controls = schema.deserialize(self.request.params.mixed())
-        qb = AppointmentQueryBuilder(self.context)
-        qb.search_simple(controls.get('q'))
-        qb.advanced_search(**controls)
-        qb.filter_employee_id(
-            self.request.params.get('employee_id')
-        )
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = AppointmentSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -69,7 +56,7 @@ class AppointmentView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/appointments/form.mak',
+        renderer='travelcrm:templates/appointment/form.mak',
         permission='view'
     )
     def view(self):
@@ -91,7 +78,7 @@ class AppointmentView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/appointments/form.mak',
+        renderer='travelcrm:templates/appointment/form.mak',
         permission='add'
     )
     def add(self):
@@ -106,39 +93,25 @@ class AppointmentView(object):
         permission='add'
     )
     def _add(self):
-        schema = AppointmentSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            appointment = Appointment(
-                date=controls.get('date'),
-                employee_id=controls.get('employee_id'),
-                position_id=controls.get('position_id'),
-                currency_id=controls.get('currency_id'),
-                salary=controls.get('salary'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                appointment.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                appointment.resource.tasks.append(task)
+        form = AppointmentForm(self.request)
+        if form.validate():
+            appointment = form.submit()
             DBSession.add(appointment)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': appointment.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/appointments/form.mak',
+        renderer='travelcrm:templates/appointment/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -155,37 +128,24 @@ class AppointmentView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = AppointmentSchema().bind(request=self.request)
         appointment = Appointment.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            appointment.date = controls.get('date')
-            appointment.employee_id = controls.get('employee_id')
-            appointment.position_id = controls.get('position_id')
-            appointment.currency_id = controls.get('currency_id')
-            appointment.salary = controls.get('salary')
-            appointment.resource.notes = []
-            appointment.resource.tasks = []
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                appointment.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                appointment.resource.tasks.append(task)
+        form = AppointmentForm(self.request)
+        if form.validate():
+            form.submit(appointment)
             return {
                 'success_message': _(u'Saved'),
                 'response': appointment.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/appointments/form.mak',
+        renderer='travelcrm:templates/appointment/form.mak',
         permission='add'
     )
     def copy(self):
@@ -207,7 +167,7 @@ class AppointmentView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/appointments/delete.mak',
+        renderer='travelcrm:templates/appointment/delete.mak',
         permission='delete'
     )
     def delete(self):

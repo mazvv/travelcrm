@@ -1,4 +1,4 @@
-<%def name="bpersons_selector(name='bperson_id', values=[], can_edit=True, style=None)">
+<%def name="bperson_selector(name='bperson_id', values=[], can_edit=True, style=None)">
     <%
         _func_id = h.common.gen_id()
         _id = h.common.gen_id()
@@ -30,7 +30,7 @@
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
-            url:'/bpersons/list',border:false,
+            url:'/bperson/list',border:false,
             fit:true,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
@@ -39,7 +39,7 @@
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/bpersons/details?id=' + row.id, 
+                    '/bperson/details?id=' + row.id, 
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);
@@ -88,7 +88,7 @@
                 % if 'edit' in h.permisions.get_bpersons_permisions(request):
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/bpersons/edit',property:'with_row'
+                        container:'#${_id}',action:'dialog_open',url:'/bperson/edit',property:'with_row'
                     ">
                     ${_(u"Edit")}</a>
                 % endif

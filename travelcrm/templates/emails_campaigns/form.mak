@@ -1,6 +1,6 @@
-<%namespace file="../addresses/common.mak" import="addresses_selector"/>
-<%namespace file="../notes/common.mak" import="notes_selector"/>
-<%namespace file="../tasks/common.mak" import="tasks_selector"/>
+<%namespace file="../address/common.mak" import="address_selector"/>
+<%namespace file="../note/common.mak" import="note_selector"/>
+<%namespace file="../task/common.mak" import="task_selector"/>
 <div class="dl60 easyui-dialog"
     title="${title}"
     data-options="
@@ -51,7 +51,7 @@
             </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${notes_selector(
+                    ${note_selector(
                         values=([note.id for note in item.resource.notes] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 
@@ -62,7 +62,7 @@
             </div>
             <div title="${_(u'Tasks')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${tasks_selector(
+                    ${task_selector(
                         values=([task.id for task in item.resource.tasks] if item else []),
                         can_edit=(
                             not (readonly if readonly else False) and 

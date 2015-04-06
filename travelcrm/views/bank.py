@@ -1,22 +1,17 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.bank import Bank
-from ..models.address import Address
-from ..models.note import Note
-from ..models.task import Task
-from ..lib.qb.bank import BankQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.bank import (
-    BankSchema, 
-    BankSearchSchema
+    BankForm, 
+    BankSearchForm
 )
 
 
@@ -34,7 +29,7 @@ class BankView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/banks/index.mak',
+        renderer='travelcrm:templates/bank/index.mak',
         permission='view'
     )
     def index(self):
@@ -48,22 +43,9 @@ class BankView(object):
         permission='view'
     )
     def list(self):
-        schema = BankSearchSchema().bind(request=self.request)
-        controls = schema.deserialize(self.request.params.mixed())
-        qb = BankQueryBuilder(self.context)
-        qb.search_simple(controls.get('q'))
-        qb.advanced_search(**controls)
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = BankSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -72,7 +54,7 @@ class BankView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/bank/form.mak',
         permission='view'
     )
     def view(self):
@@ -94,7 +76,7 @@ class BankView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/bank/form.mak',
         permission='add'
     )
     def add(self):
@@ -107,39 +89,25 @@ class BankView(object):
         permission='add'
     )
     def _add(self):
-        schema = BankSchema().bind(request=self.request)
-
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            bank = Bank(
-                name=controls.get('name'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('address_id'):
-                address = Address.get(id)
-                bank.addresses.append(address)
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                bank.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                bank.resource.tasks.append(task)
+        form = BankForm(self.request)
+        if form.validate():
+            bank = form.submit()
             DBSession.add(bank)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': bank.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/banks/form.mak',
+        renderer='travelcrm:templates/bank/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -153,37 +121,24 @@ class BankView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = BankSchema().bind(request=self.request)
         bank = Bank.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            bank.name = controls.get('name')
-            bank.addresses = []
-            bank.resource.notes = []
-            bank.resource.tasks = []
-            for id in controls.get('address_id'):
-                address = Address.get(id)
-                bank.addresses.append(address)
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                bank.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                bank.resource.tasks.append(task)
+        form = BankForm(self.request)
+        if form.validate():
+            form.submit(bank)
             return {
                 'success_message': _(u'Saved'),
                 'response': bank.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/banks/delete.mak',
+        renderer='travelcrm:templates/bank/delete.mak',
         permission='delete'
     )
     def delete(self):

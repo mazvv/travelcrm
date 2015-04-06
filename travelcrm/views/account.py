@@ -1,20 +1,16 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.account import Account
-from ..models.note import Note
-from ..models.task import Task
-from ..lib.qb.account import AccountQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.account import (
-    AccountSchema, 
-    AccountSearchSchema
+    AccountForm, 
+    AccountSearchForm
 )
 
 
@@ -32,7 +28,7 @@ class AccountView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/accounts/index.mak',
+        renderer='travelcrm:templates/account/index.mak',
         permission='view'
     )
     def index(self):
@@ -46,22 +42,9 @@ class AccountView(object):
         permission='view'
     )
     def list(self):
-        schema = AccountSearchSchema().bind(request=self.request)
-        controls = schema.deserialize(self.request.params.mixed())
-        qb = AccountQueryBuilder(self.context)
-        qb.search_simple(controls.get('q'))
-        qb.advanced_search(**controls)
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = AccountSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -70,7 +53,7 @@ class AccountView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/accounts/form.mak',
+        renderer='travelcrm:templates/account/form.mak',
         permission='view'
     )
     def view(self):
@@ -92,7 +75,7 @@ class AccountView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/accounts/form.mak',
+        renderer='travelcrm:templates/account/form.mak',
         permission='add'
     )
     def add(self):
@@ -105,40 +88,25 @@ class AccountView(object):
         permission='add'
     )
     def _add(self):
-        schema = AccountSchema().bind(request=self.request)
-
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            account = Account(
-                name=controls.get('name'),
-                currency_id=controls.get('currency_id'),
-                account_type=controls.get('account_type'),
-                display_text=controls.get('display_text'),
-                descr=controls.get('descr'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                account.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                account.resource.tasks.append(task)
+        form = AccountForm(self.request)
+        if form.validate():
+            account = form.submit()
             DBSession.add(account)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': account.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/accounts/form.mak',
+        renderer='travelcrm:templates/account/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -152,37 +120,24 @@ class AccountView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = AccountSchema().bind(request=self.request)
         account = Account.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            account.name = controls.get('name')
-            account.currency_id = controls.get('currency_id')
-            account.account_type = controls.get('account_type')
-            account.display_text = controls.get('display_text')
-            account.descr = controls.get('descr')
-            account.resource.notes = []
-            account.resource.tasks = []
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                account.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                account.resource.tasks.append(task)
+        form = AccountForm(self.request)
+        if form.validate():
+            form.submit(account)
             return {
                 'success_message': _(u'Saved'),
                 'response': account.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/accounts/delete.mak',
+        renderer='travelcrm:templates/account/delete.mak',
         permission='delete'
     )
     def delete(self):

@@ -11,6 +11,8 @@ from ..lib.utils.common_utils import translate as _
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.resources_utils import get_resource_class
 
+from ..forms.notification import NotificationSearchForm
+
 
 log = logging.getLogger(__name__)
 
@@ -27,7 +29,7 @@ class NotificationView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/notifications/index.mak',
+        renderer='travelcrm:templates/notification/index.mak',
         permission='view'
     )
     def index(self):
@@ -41,19 +43,9 @@ class NotificationView(object):
         permission='view'
     )
     def _list(self):
-        qb = NotificationQueryBuilder(self.context)
-        qb.filter_employee(self.employee)
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = NotificationSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -76,7 +68,7 @@ class NotificationView(object):
     @view_config(
         name='details',
         request_method='GET',
-        renderer='travelcrm:templates/notifications/details.mak',
+        renderer='travelcrm:templates/notification/details.mak',
         permission='view'
     )
     def details(self):
@@ -95,7 +87,7 @@ class NotificationView(object):
     @view_config(
         name='close',
         request_method='GET',
-        renderer='travelcrm:templates/notifications/close.mak',
+        renderer='travelcrm:templates/notification/close.mak',
         permission='close'
     )
     def close(self):

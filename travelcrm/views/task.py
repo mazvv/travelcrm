@@ -2,18 +2,18 @@
 
 import logging
 
-import colander
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.task import Task
-from ..models.note import Note
-from ..lib.qb.task import TaskQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.scheduler.tasks import schedule_task_notification
-from ..forms.task import TaskSchema
+from ..forms.task import (
+    TaskForm, 
+    TaskSearchForm
+)
 
 
 log = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ class TaskView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/tasks/index.mak',
+        renderer='travelcrm:templates/task/index.mak',
         permission='view'
     )
     def index(self):
@@ -44,24 +44,9 @@ class TaskView(object):
         permission='view'
     )
     def list(self):
-        qb = TaskQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q'),
-        )
-        qb.advanced_search(
-            **self.request.params.mixed()
-        )
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = TaskSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -70,7 +55,7 @@ class TaskView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/tasks/form.mak',
+        renderer='travelcrm:templates/task/form.mak',
         permission='view'
     )
     def view(self):
@@ -92,7 +77,7 @@ class TaskView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/tasks/form.mak',
+        renderer='travelcrm:templates/task/form.mak',
         permission='add'
     )
     def add(self):
@@ -105,22 +90,9 @@ class TaskView(object):
         permission='add'
     )
     def _add(self):
-        schema = TaskSchema().bind(request=self.request)
-
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            task = Task(
-                employee_id=controls.get('employee_id'),
-                title=controls.get('title'),
-                deadline=controls.get('deadline'),
-                reminder=controls.get('reminder'),
-                descr=controls.get('descr'),
-                status=controls.get('status'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                task.resource.notes.append(note)
+        form = TaskForm(self.request)
+        if form.validate():
+            task = form.submit()
             DBSession.add(task)
             DBSession.flush()
             schedule_task_notification(self.request, task.id)
@@ -128,16 +100,16 @@ class TaskView(object):
                 'success_message': _(u'Saved'),
                 'response': task.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/tasks/form.mak',
+        renderer='travelcrm:templates/task/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -151,35 +123,25 @@ class TaskView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = TaskSchema().bind(request=self.request)
         task = Task.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            task.employee_id = controls.get('employee_id')
-            task.title = controls.get('title')
-            task.deadline = controls.get('deadline')
-            task.reminder = controls.get('reminder')
-            task.descr = controls.get('descr')
-            task.status = controls.get('status')
-            task.resource.notes = []
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                task.resource.notes.append(note)
+        form = TaskForm(self.request)
+        if form.validate():
+            form.submit(task)
             schedule_task_notification(self.request, task.id)
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='details',
         request_method='GET',
-        renderer='travelcrm:templates/tasks/details.mak',
+        renderer='travelcrm:templates/task/details.mak',
         permission='view'
     )
     def details(self):
@@ -198,7 +160,7 @@ class TaskView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/tasks/delete.mak',
+        renderer='travelcrm:templates/task/delete.mak',
         permission='delete'
     )
     def delete(self):

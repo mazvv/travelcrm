@@ -1,21 +1,18 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
-from ..models import DBSession
 from ..models.order_item import OrderItem
 from ..models.service import Service
-from ..lib.qb.order_item import OrderItemQueryBuilder
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.order_item import (
-    OrderItemSchema,
-    OrderItemServiceSchema,
+    OrderItemForm,
+    OrderItemSearchForm,
 )
 
 
@@ -33,7 +30,7 @@ class OrderItemView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/orders_items/index.mak',
+        renderer='travelcrm:templates/order_item/index.mak',
         permission='view'
     )
     def index(self):
@@ -47,21 +44,9 @@ class OrderItemView(object):
         permission='view'
     )
     def _list(self):
-        qb = OrderItemQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = OrderItemSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -70,7 +55,7 @@ class OrderItemView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/orders_items/form.mak',
+        renderer='travelcrm:templates/order_item/form.mak',
         permission='view'
     )
     def view(self):
@@ -92,7 +77,7 @@ class OrderItemView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/orders_items/form.mak',
+        renderer='travelcrm:templates/order_item/form.mak',
         permission='add'
     )
     def add(self):
@@ -107,7 +92,7 @@ class OrderItemView(object):
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/orders_items/form.mak',
+        renderer='travelcrm:templates/order_item/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -122,7 +107,7 @@ class OrderItemView(object):
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/orders_items/form.mak',
+        renderer='travelcrm:templates/order_item/form.mak',
         permission='add'
     )
     def copy(self):
@@ -135,7 +120,7 @@ class OrderItemView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/orders_items/delete.mak',
+        renderer='travelcrm:templates/order_item/delete.mak',
         permission='delete'
     )
     def delete(self):

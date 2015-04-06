@@ -47,11 +47,11 @@ def company_schema(event):
     request = event.request
     domain_parts = request.domain.split('.', 1)
     schema_name = get_default_schema()
-    if len(domain_parts) > 1:
-        schema_name = domain_parts[0]
-        schemas = get_schemas()
-        if schema_name not in schemas:
-            raise HTTPNotFound()
+#    if len(domain_parts) > 1:
+#        schema_name = domain_parts[0]
+#        schemas = get_schemas()
+#        if schema_name not in schemas:
+#            raise HTTPNotFound()
     set_search_path(schema_name)
 
 

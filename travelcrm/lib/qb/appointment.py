@@ -44,14 +44,3 @@ class AppointmentQueryBuilder(ResourcesQueryBuilder):
             )
         )
         super(AppointmentQueryBuilder, self).build_query()
-
-    def filter_structure_id(self, structure_id):
-        self.query = self.query.filter(
-            Position.condition_structure_id(structure_id)
-        )
-
-    def filter_employee_id(self, employee_id):
-        if employee_id:
-            self.query = self.query.filter(
-                Appointment.condition_employee_id(employee_id)
-            )

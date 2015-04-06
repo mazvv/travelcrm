@@ -4,9 +4,15 @@ import colander
 
 from . import(
     ResourceSchema, 
-    ResourceSearchSchema
+    BaseForm,
+    BaseSearchForm,
 )
+from ..resources.bank import BankResource
 from ..models.bank import Bank
+from ..models.address import Address
+from ..models.note import Note
+from ..models.task import Task
+from ..lib.qb.bank import BankQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
 
@@ -27,7 +33,7 @@ def name_validator(node, kw):
     return colander.All(colander.Length(max=255), validator,)
 
 
-class BankSchema(ResourceSchema):
+class _BankSchema(ResourceSchema):
     name = colander.SchemaNode(
         colander.String(),
         validator=name_validator,
@@ -45,8 +51,34 @@ class BankSchema(ResourceSchema):
             val = cstruct['address_id']
             cstruct['address_id'] = list()
             cstruct['address_id'].append(val)
-        return super(BankSchema, self).deserialize(cstruct)
+        return super(_BankSchema, self).deserialize(cstruct)
 
 
-class BankSearchSchema(ResourceSearchSchema):
-    pass
+class BankForm(BaseForm):
+    _schema = _BankSchema
+
+    def submit(self, bank=None):
+        context = BankResource(self.request)
+        if not bank:
+            bank = Bank(
+                resource=context.create_resource()
+            )
+        else:
+            bank.addresses = []
+            bank.resource.notes = []
+            bank.resource.tasks = []
+        bank.name = self._controls.get('name')
+        for id in self._controls.get('address_id'):
+            address = Address.get(id)
+            bank.addresses.append(address)
+        for id in self._controls.get('note_id'):
+            note = Note.get(id)
+            bank.resource.notes.append(note)
+        for id in self._controls.get('task_id'):
+            task = Task.get(id)
+            bank.resource.tasks.append(task)
+        return bank
+
+
+class BankSearchForm(BaseSearchForm):
+    _qb = BankQueryBuilder

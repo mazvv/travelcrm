@@ -1,18 +1,19 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.note import Note
-from ..lib.qb.note import NoteQueryBuilder
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.note import NoteSchema
+from ..forms.note import (
+    NoteForm,
+    NoteSearchForm,
+)
 
 
 log = logging.getLogger(__name__)
@@ -29,7 +30,7 @@ class NoteView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/notes/index.mak',
+        renderer='travelcrm:templates/note/index.mak',
         permission='view'
     )
     def index(self):
@@ -43,21 +44,9 @@ class NoteView(object):
         permission='view'
     )
     def _list(self):
-        qb = NoteQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = NoteSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -66,7 +55,7 @@ class NoteView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/notes/form.mak',
+        renderer='travelcrm:templates/note/form.mak',
         permission='view'
     )
     def view(self):
@@ -88,7 +77,7 @@ class NoteView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/notes/form.mak',
+        renderer='travelcrm:templates/note/form.mak',
         permission='add'
     )
     def add(self):
@@ -103,30 +92,25 @@ class NoteView(object):
         permission='add'
     )
     def _add(self):
-        schema = NoteSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            note = Note(
-                title=controls.get('title'),
-                descr=controls.get('descr'),
-                resource=self.context.create_resource()
-            )
+        form = NoteForm(self.request)
+        if form.validate():
+            note = form.submit()
             DBSession.add(note)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': note.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/notes/form.mak',
+        renderer='travelcrm:templates/note/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -143,26 +127,24 @@ class NoteView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = NoteSchema().bind(request=self.request)
         note = Note.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params)
-            note.title = controls.get('title')
-            note.descr = controls.get('descr')
+        form = NoteForm(self.request)
+        if form.validate():
+            form.submit(note)
             return {
                 'success_message': _(u'Saved'),
                 'response': note.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/notes/form.mak',
+        renderer='travelcrm:templates/note/form.mak',
         permission='add'
     )
     def copy(self):
@@ -184,7 +166,7 @@ class NoteView(object):
     @view_config(
         name='details',
         request_method='GET',
-        renderer='travelcrm:templates/notes/details.mak',
+        renderer='travelcrm:templates/note/details.mak',
         permission='view'
     )
     def details(self):
@@ -203,7 +185,7 @@ class NoteView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/notes/delete.mak',
+        renderer='travelcrm:templates/note/delete.mak',
         permission='delete'
     )
     def delete(self):

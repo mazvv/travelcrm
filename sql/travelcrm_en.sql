@@ -2647,14 +2647,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 37, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6714, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6726, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2117, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2120, true);
 
 
 --
@@ -2762,13 +2762,14 @@ INSERT INTO address VALUES (29, 1807, 14, '02121', 'Dekabristov str, filial #239
 INSERT INTO address VALUES (30, 1926, 14, '123432', 'Arsenalna str');
 INSERT INTO address VALUES (31, 1951, 14, '02121', 'Gmiry str');
 INSERT INTO address VALUES (32, 2015, 14, '09878', 'Kikvidze 29, 56');
+INSERT INTO address VALUES (33, 2119, 14, '02121', 'Bazhana str.3');
 
 
 --
 -- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('address_id_seq', 32, true);
+SELECT pg_catalog.setval('address_id_seq', 33, true);
 
 
 --
@@ -2826,6 +2827,7 @@ INSERT INTO bank VALUES (5, 1419, 'PrivatBank');
 --
 
 INSERT INTO bank_address VALUES (5, 29);
+INSERT INTO bank_address VALUES (5, 33);
 
 
 --
@@ -2844,20 +2846,21 @@ INSERT INTO bank_detail VALUES (13, 1556, 56, 5, 'Intertelecom', '12345678', '09
 INSERT INTO bank_detail VALUES (14, 1564, 56, 4, 'Lun Real Estate', '78900909', '12343434');
 INSERT INTO bank_detail VALUES (15, 1569, 56, 5, 'Lun Real Estate Agency', '987456152', '671283');
 INSERT INTO bank_detail VALUES (16, 1570, 56, 4, 'Intertelecom Internet Service Provider', '9878723847', '84758GH');
+INSERT INTO bank_detail VALUES (18, 2120, 57, 4, 'sdghsdgh', 'sghsgh', 'dfghdfhgdfh');
 
 
 --
 -- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('bank_detail_id_seq', 16, true);
+SELECT pg_catalog.setval('bank_detail_id_seq', 18, true);
 
 
 --
 -- Name: bank_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('bank_id_seq', 5, true);
+SELECT pg_catalog.setval('bank_id_seq', 6, true);
 
 
 --
@@ -4875,9 +4878,10 @@ INSERT INTO resource VALUES (2105, 135, 32, false);
 INSERT INTO resource VALUES (2106, 135, 32, false);
 INSERT INTO resource VALUES (2107, 12, 32, false);
 INSERT INTO resource VALUES (2108, 12, 32, false);
-INSERT INTO resource VALUES (2109, 78, 32, false);
 INSERT INTO resource VALUES (2111, 83, 32, false);
 INSERT INTO resource VALUES (2115, 39, 32, false);
+INSERT INTO resource VALUES (2119, 90, 32, false);
+INSERT INTO resource VALUES (2120, 101, 32, false);
 
 
 --
@@ -6269,7 +6273,6 @@ INSERT INTO resource_log VALUES (6688, 2108, 2, NULL, '2015-03-29 18:41:28.93291
 INSERT INTO resource_log VALUES (6689, 2108, 2, NULL, '2015-03-29 18:41:35.361837');
 INSERT INTO resource_log VALUES (6690, 1568, 2, NULL, '2015-03-29 18:59:52.709639');
 INSERT INTO resource_log VALUES (6691, 1567, 2, NULL, '2015-03-29 18:59:57.605194');
-INSERT INTO resource_log VALUES (6692, 2109, 2, NULL, '2015-03-29 19:15:59.1205');
 INSERT INTO resource_log VALUES (6693, 1578, 2, NULL, '2015-03-29 19:28:18.094577');
 INSERT INTO resource_log VALUES (6694, 1563, 2, NULL, '2015-03-29 19:28:26.306719');
 INSERT INTO resource_log VALUES (6695, 1560, 2, NULL, '2015-03-29 19:28:31.032916');
@@ -6286,6 +6289,17 @@ INSERT INTO resource_log VALUES (6709, 1647, 2, NULL, '2015-03-29 21:11:13.10108
 INSERT INTO resource_log VALUES (6710, 2115, 2, NULL, '2015-03-29 21:11:20.771189');
 INSERT INTO resource_log VALUES (6711, 1648, 2, NULL, '2015-03-29 21:19:19.348961');
 INSERT INTO resource_log VALUES (6713, 1646, 2, NULL, '2015-03-29 21:25:36.400114');
+INSERT INTO resource_log VALUES (6715, 1419, 2, NULL, '2015-03-31 18:55:34.756779');
+INSERT INTO resource_log VALUES (6716, 1415, 2, NULL, '2015-03-31 18:55:54.50919');
+INSERT INTO resource_log VALUES (6718, 1507, 2, NULL, '2015-03-31 19:11:10.805316');
+INSERT INTO resource_log VALUES (6719, 1507, 2, NULL, '2015-03-31 19:11:17.000092');
+INSERT INTO resource_log VALUES (6720, 1507, 2, NULL, '2015-03-31 19:11:23.716877');
+INSERT INTO resource_log VALUES (6721, 1898, 2, NULL, '2015-03-31 19:19:08.662529');
+INSERT INTO resource_log VALUES (6722, 1898, 2, NULL, '2015-03-31 19:19:13.979595');
+INSERT INTO resource_log VALUES (6723, 1898, 2, NULL, '2015-03-31 19:19:19.541915');
+INSERT INTO resource_log VALUES (6724, 2119, 2, NULL, '2015-03-31 19:31:32.255315');
+INSERT INTO resource_log VALUES (6725, 1419, 2, NULL, '2015-03-31 19:31:35.171043');
+INSERT INTO resource_log VALUES (6726, 2120, 2, NULL, '2015-03-31 21:42:30.209371');
 
 
 --
@@ -6802,7 +6816,6 @@ INSERT INTO touroperator VALUES (61, 1378, 'EthnoTour');
 INSERT INTO touroperator VALUES (57, 1159, 'Sun Marino Trvl.');
 INSERT INTO touroperator VALUES (62, 1580, 'News Travel');
 INSERT INTO touroperator VALUES (63, 1870, 'Four Winds');
-INSERT INTO touroperator VALUES (64, 2109, 'Test');
 
 
 --

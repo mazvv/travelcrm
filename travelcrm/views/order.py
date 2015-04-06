@@ -1,25 +1,19 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.order import Order
-from ..models.order_item import OrderItem
-from ..models.note import Note
-from ..models.task import Task
 from ..resources.invoice import InvoiceResource
 from ..resources.calculation import CalculationResource
-from ..lib.qb.order import OrderQueryBuilder
 
-from ..lib.bl.currencies_rates import currency_base_exchange
 from ..lib.utils.common_utils import translate as _
 from ..forms.order import (
-    OrderSchema, 
-    OrderSearchSchema
+    OrderForm, 
+    OrderSearchForm
 )
 
 
@@ -37,7 +31,7 @@ class OrderView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/orders/index.mak',
+        renderer='travelcrm:templates/order/index.mak',
         permission='view'
     )
     def index(self):
@@ -51,22 +45,9 @@ class OrderView(object):
         permission='view'
     )
     def list(self):
-        schema = OrderSearchSchema().bind(request=self.request)
-        controls = schema.deserialize(self.request.params.mixed())
-        qb = OrderQueryBuilder(self.context)
-        qb.search_simple(controls.get('q'))
-        qb.advanced_search(**controls)
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = OrderSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -75,7 +56,7 @@ class OrderView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/orders/form.mak',
+        renderer='travelcrm:templates/order/form.mak',
         permission='view'
     )
     def view(self):
@@ -97,7 +78,7 @@ class OrderView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/orders/form.mak',
+        renderer='travelcrm:templates/order/form.mak',
         permission='add'
     )
     def add(self):
@@ -112,45 +93,25 @@ class OrderView(object):
         permission='add'
     )
     def _add(self):
-        schema = OrderSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            order = Order(
-                deal_date=controls.get('deal_date'),
-                advsource_id=controls.get('advsource_id'),
-                customer_id=controls.get('customer_id'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('order_item_id'):
-                order_item = OrderItem.get(id)
-                order_item.base_price = currency_base_exchange(
-                    order_item.price,
-                    order_item.currency_id,
-                    controls.get('deal_date'),
-                )
-                order.orders_items.append(order_item)
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                order.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                order.resource.tasks.append(task)
+        form = OrderForm(self.request)
+        if form.validate():
+            order = form.submit()
             DBSession.add(order)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': order.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/orders/form.mak',
+        renderer='travelcrm:templates/order/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -167,44 +128,24 @@ class OrderView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = OrderSchema().bind(request=self.request)
         order = Order.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            order.deal_date = controls.get('deal_date')
-            order.advsource_id = controls.get('advsource_id')
-            order.customer_id = controls.get('customer_id')
-            order.orders_items = []
-            order.resource.notes = []
-            order.resource.tasks = []
-            for id in controls.get('order_item_id', []):
-                order_item = OrderItem.get(id)
-                order_item.base_price = currency_base_exchange(
-                    order_item.price,
-                    order_item.currency_id,
-                    controls.get('deal_date'),
-                )
-                order.orders_items.append(order_item)
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                order.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                order.resource.tasks.append(task)
+        form = OrderForm(self.request)
+        if form.validate():
+            form.submit(order)
             return {
                 'success_message': _(u'Saved'),
                 'response': order.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/orders/form.mak',
+        renderer='travelcrm:templates/order/form.mak',
         permission='add'
     )
     def copy(self):
@@ -226,7 +167,7 @@ class OrderView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/orders/delete.mak',
+        renderer='travelcrm:templates/order/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -238,7 +179,7 @@ class OrderView(object):
     @view_config(
         name='details',
         request_method='GET',
-        renderer='travelcrm:templates/orders/details.mak',
+        renderer='travelcrm:templates/order/details.mak',
         permission='view'
     )
     def details(self):

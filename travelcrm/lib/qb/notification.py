@@ -7,7 +7,6 @@ from ...models.notification import (
     Notification,
     EmployeeNotification
 )
-from ...models.employee import Employee
 
 
 class NotificationQueryBuilder(ResourcesQueryBuilder):
@@ -40,14 +39,14 @@ class NotificationQueryBuilder(ResourcesQueryBuilder):
         super(NotificationQueryBuilder, self).advanced_search(**kwargs)
         if 'status' in kwargs:
             self._filter_status(kwargs.get('status'))
+        if 'employee_id' in kwargs:
+            self._filter_employee_id(kwargs.get('employee_id'))
 
-    def filter_employee(self, employee):
-        assert isinstance(employee, Employee), u'Employee expected'
-        self.query = (
-            self.query
-            .join(Employee, Notification.employees)
-            .filter(Employee.id == employee.id)
-        )
+    def _filter_employee_id(self, employee_id):
+        if employee_id:
+            self.query = self.query.filter(
+                EmployeeNotification.employee_id == employee_id
+            )
 
     def _filter_status(self, status):
         if status:
