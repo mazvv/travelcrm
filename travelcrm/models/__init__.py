@@ -74,3 +74,4 @@ from wish import Wish
 from offer import Offer
 from order import Order
 from order_item import OrderItem
+from general_service import GeneralService

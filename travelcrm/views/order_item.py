@@ -10,10 +10,7 @@ from ..models.service import Service
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.order_item import (
-    OrderItemForm,
-    OrderItemSearchForm,
-)
+from ..forms.order_item import OrderItemSearchForm
 
 
 log = logging.getLogger(__name__)

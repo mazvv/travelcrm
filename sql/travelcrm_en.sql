@@ -439,17 +439,6 @@ CREATE TABLE appointment (
 
 
 --
--- Name: apscheduler_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE apscheduler_jobs (
-    id character varying(191) NOT NULL,
-    next_run_time double precision,
-    job_state bytea NOT NULL
-);
-
-
---
 -- Name: bank; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -955,6 +944,36 @@ CREATE SEQUENCE foodcat_id_seq
 --
 
 ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
+
+
+--
+-- Name: general_service; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE general_service (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    order_item_id integer NOT NULL
+);
+
+
+--
+-- Name: general_service_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE general_service_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: general_service_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE general_service_id_seq OWNED BY general_service.id;
 
 
 --
@@ -2374,6 +2393,13 @@ ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY general_service ALTER COLUMN id SET DEFAULT nextval('general_service_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
 
 
@@ -2647,7 +2673,7 @@ SELECT pg_catalog.setval('_regions_rid_seq', 37, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6726, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6727, true);
 
 
 --
@@ -2795,7 +2821,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 -- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO alembic_version VALUES ('3387aec6d25f');
+INSERT INTO alembic_version VALUES ('53f142d26c34');
 
 
 --
@@ -2805,12 +2831,6 @@ INSERT INTO alembic_version VALUES ('3387aec6d25f');
 INSERT INTO appointment VALUES (1, 789, 54, 2, 4, 1000.00, '2014-02-02');
 INSERT INTO appointment VALUES (6, 892, 54, 7, 5, 4500.00, '2014-02-22');
 INSERT INTO appointment VALUES (8, 1542, 54, 2, 4, 6500.00, '2014-03-01');
-
-
---
--- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: -
---
-
 
 
 --
@@ -3227,6 +3247,19 @@ INSERT INTO foodcat VALUES (16, 988, 'UAI');
 --
 
 SELECT pg_catalog.setval('foodcat_id_seq', 17, true);
+
+
+--
+-- Data for Name: general_service; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
+-- Name: general_service_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('general_service_id_seq', 1, false);
 
 
 --
@@ -6300,6 +6333,7 @@ INSERT INTO resource_log VALUES (6723, 1898, 2, NULL, '2015-03-31 19:19:19.54191
 INSERT INTO resource_log VALUES (6724, 2119, 2, NULL, '2015-03-31 19:31:32.255315');
 INSERT INTO resource_log VALUES (6725, 1419, 2, NULL, '2015-03-31 19:31:35.171043');
 INSERT INTO resource_log VALUES (6726, 2120, 2, NULL, '2015-03-31 21:42:30.209371');
+INSERT INTO resource_log VALUES (6727, 2107, 2, NULL, '2015-04-06 22:18:27.344977');
 
 
 --
@@ -6308,7 +6342,6 @@ INSERT INTO resource_log VALUES (6726, 2120, 2, NULL, '2015-03-31 21:42:30.20937
 
 INSERT INTO resource_type VALUES (132, 2070, 'wish', 'Wish Items', 'WishResource', 'travelcrm.resources.wish', 'Wishes Items is the list of services that customer wish in the lead', 'null', false, 0);
 INSERT INTO resource_type VALUES (134, 2099, 'order', 'Orders', 'OrderResource', 'travelcrm.resources.order', 'Orders', 'null', false, 0);
-INSERT INTO resource_type VALUES (136, 2107, 'common_service', 'Common Services', 'CommonServiceResource', 'travelcrm.resources.common_service', 'Common Services Interface', 'null', false, 0);
 INSERT INTO resource_type VALUES (2, 10, 'user', 'Users', 'UserResource', 'travelcrm.resources.user', 'Users list', NULL, false, 0);
 INSERT INTO resource_type VALUES (12, 16, 'resource_type', 'Resources Types', 'ResourceTypeResource', 'travelcrm.resources.resource_type', 'Resources types list', NULL, false, 0);
 INSERT INTO resource_type VALUES (47, 706, 'employee', 'Employees', 'EmployeeResource', 'travelcrm.resources.employee', 'Employees Container Datagrid', NULL, false, 0);
@@ -6365,6 +6398,7 @@ INSERT INTO resource_type VALUES (112, 1549, 'supplier', 'Suppliers', 'SupplierR
 INSERT INTO resource_type VALUES (123, 1941, 'notification', 'Notifications', 'NotificationResource', 'travelcrm.resources.notification', 'Employee Notifications', 'null', false, 0);
 INSERT INTO resource_type VALUES (124, 1954, 'email_campaign', 'Email Campaigns', 'EmailCampaignResource', 'travelcrm.resources.email_campaign', 'Emails Campaigns for subscribers', '{"timeout": 12}', true, 0);
 INSERT INTO resource_type VALUES (125, 1966, 'unpaid', 'Portlet: Unpaid Invoices', 'UnpaidResource', 'travelcrm.resources.unpaid', 'Portlet that shows invoices which has no any pay and active date is over', '{"column_index": 1}', true, 0);
+INSERT INTO resource_type VALUES (136, 2107, 'general_service', 'General Services', 'GeneralServiceResource', 'travelcrm.resources.general_service', 'Common Services Interface', 'null', false, 0);
 
 
 --
@@ -6993,14 +7027,6 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: apscheduler_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY apscheduler_jobs
-    ADD CONSTRAINT apscheduler_jobs_pkey PRIMARY KEY (id);
-
-
---
 -- Name: bank_address_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -7166,6 +7192,14 @@ ALTER TABLE ONLY employee_subaccount
 
 ALTER TABLE ONLY foodcat
     ADD CONSTRAINT foodcat_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: general_service_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY general_service
+    ADD CONSTRAINT general_service_pkey PRIMARY KEY (id);
 
 
 --
@@ -7865,13 +7899,6 @@ ALTER TABLE ONLY wish
 
 
 --
--- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (next_run_time);
-
-
---
 -- Name: fk_accomodation_id_tour_point; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8472,6 +8499,14 @@ ALTER TABLE ONLY order_item
 
 
 --
+-- Name: fk_order_item_id_general_service; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY general_service
+    ADD CONSTRAINT fk_order_item_id_general_service FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8765,6 +8800,14 @@ ALTER TABLE ONLY employee
 
 ALTER TABLE ONLY foodcat
     ADD CONSTRAINT fk_resource_id_foodcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_general_service; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY general_service
+    ADD CONSTRAINT fk_resource_id_general_service FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

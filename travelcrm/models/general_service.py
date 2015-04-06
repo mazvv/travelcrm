@@ -3,9 +3,7 @@
 from sqlalchemy import (
     Column,
     Integer,
-    String,
     ForeignKey,
-    UniqueConstraint,
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -33,6 +31,16 @@ class GeneralService(Base):
         ),
         nullable=False,
     )
+    order_item_id = Column(
+        Integer,
+        ForeignKey(
+            'order_item.id',
+            name="fk_order_item_id_general_service",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
 
     resource = relationship(
         'Resource',
@@ -42,6 +50,15 @@ class GeneralService(Base):
             cascade="all,delete"
         ),
         cascade="all,delete",
+        uselist=False,
+    )
+    order_item = relationship(
+        'OrderItem',
+        backref=backref(
+            'general_services',
+            uselist=True,
+            lazy='dynamic'
+        ),
         uselist=False,
     )
 
