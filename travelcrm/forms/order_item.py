@@ -13,7 +13,7 @@ from ..models.person import Person
 from ..lib.qb.order_item import OrderItemQueryBuilder
 
 
-class _OrderItemSchema(ResourceSchema):
+class OrderItemSchema(ResourceSchema):
     service_id = colander.SchemaNode(
         colander.Integer(),
     )
@@ -39,11 +39,11 @@ class _OrderItemSchema(ResourceSchema):
             cstruct['person_id'] = list()
             cstruct['person_id'].append(val)
 
-        return super(_OrderItemSchema, self).deserialize(cstruct)
+        return super(OrderItemSchema, self).deserialize(cstruct)
 
 
 class OrderItemForm(BaseForm):
-    _schema = _OrderItemSchema
+    _schema = OrderItemSchema
 
     def submit(self, order_item=None):
         context = OrderItemResource(self.request)
