@@ -19,13 +19,13 @@
         </td>
     </tr>
     % endif
-    % if item.accomodation:
+    % if item.accomodation_type:
     <tr>
         <td class="b" style="width: 140px;">
-            ${_(u'accomodation')}
+            ${_(u'accomodation type')}
         </td>
         <td>
-            ${item.accomodation.name}
+            ${item.accomodation_type.name}
         </td>
     </tr>
     % endif

@@ -27,7 +27,7 @@
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/services_sales/details?id=' + row.id, 
+                    '/service_sale/details?id=' + row.id, 
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);

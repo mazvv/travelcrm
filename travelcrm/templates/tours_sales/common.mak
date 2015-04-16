@@ -29,7 +29,7 @@
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
-            url:'/tours_sales/points',border:false,
+            url:'/tour_sale/points',border:false,
             singleSelect:true,
             rownumbers:true,sortName:'point_start_date',sortOrder:'asc',
             idField:'_id',checkOnSelect:false,
@@ -38,7 +38,7 @@
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/tours_sales/point_details?id=' + row.id, 
+                    '/tour_sale/point_details?id=' + row.id, 
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);

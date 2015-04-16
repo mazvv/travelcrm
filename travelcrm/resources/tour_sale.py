@@ -25,7 +25,7 @@ class TourSaleResource(ResourceTypeBase):
 
     @property
     def allowed_permisions(self):
-        return super(TourSale, self).allowed_permisions + [
+        return super(TourSaleResource, self).allowed_permisions + [
             ('invoice', _(u'invoice')),
             ('calculation', _(u'calculation')),
             ('contract', _(u'contract')),

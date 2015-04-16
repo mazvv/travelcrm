@@ -439,6 +439,17 @@ CREATE TABLE appointment (
 
 
 --
+-- Name: apscheduler_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE apscheduler_jobs (
+    id character varying(191) NOT NULL,
+    next_run_time double precision,
+    job_state bytea NOT NULL
+);
+
+
+--
 -- Name: bank; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2673,14 +2684,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 37, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 6727, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 6729, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2120, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2121, true);
 
 
 --
@@ -2831,6 +2842,12 @@ INSERT INTO alembic_version VALUES ('53f142d26c34');
 INSERT INTO appointment VALUES (1, 789, 54, 2, 4, 1000.00, '2014-02-02');
 INSERT INTO appointment VALUES (6, 892, 54, 7, 5, 4500.00, '2014-02-22');
 INSERT INTO appointment VALUES (8, 1542, 54, 2, 4, 6500.00, '2014-03-01');
+
+
+--
+-- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: -
+--
+
 
 
 --
@@ -3198,7 +3215,7 @@ INSERT INTO employee_contact VALUES (2, 59);
 INSERT INTO employee_notification VALUES (2, 18, 1);
 INSERT INTO employee_notification VALUES (2, 20, 1);
 INSERT INTO employee_notification VALUES (2, 19, 1);
-INSERT INTO employee_notification VALUES (2, 21, 0);
+INSERT INTO employee_notification VALUES (2, 21, 1);
 
 
 --
@@ -3596,7 +3613,7 @@ INSERT INTO note VALUES (35, 2098, 'New property SERVICE_TYPE', 'Add new propert
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 35, true);
+SELECT pg_catalog.setval('note_id_seq', 36, true);
 
 
 --
@@ -6334,6 +6351,7 @@ INSERT INTO resource_log VALUES (6724, 2119, 2, NULL, '2015-03-31 19:31:32.25531
 INSERT INTO resource_log VALUES (6725, 1419, 2, NULL, '2015-03-31 19:31:35.171043');
 INSERT INTO resource_log VALUES (6726, 2120, 2, NULL, '2015-03-31 21:42:30.209371');
 INSERT INTO resource_log VALUES (6727, 2107, 2, NULL, '2015-04-06 22:18:27.344977');
+INSERT INTO resource_log VALUES (6729, 1934, 2, NULL, '2015-04-09 21:33:33.041754');
 
 
 --
@@ -6679,7 +6697,6 @@ INSERT INTO suppplier_subaccount VALUES (6, 10);
 
 INSERT INTO task VALUES (37, 1933, 2, 'Call and remind about payment', '2014-12-14 22:46:00', '2014-12-14 11:15:00', NULL, 3);
 INSERT INTO task VALUES (34, 1923, 2, 'Test 2', '2014-12-16 17:21:00', '2014-12-15 17:42:00', NULL, 2);
-INSERT INTO task VALUES (38, 1934, 2, 'Call and remind about payment', '2014-12-12 22:50:00', '2014-12-11 22:52:00', 'Call and remind to pay invoice', 0);
 INSERT INTO task VALUES (39, 1935, 2, 'Review Calculation', '2014-12-12 22:52:00', '2014-12-11 22:55:00', NULL, 0);
 INSERT INTO task VALUES (40, 1936, 2, 'For testing Purpose only', '2014-12-14 22:35:00', '2014-12-14 20:32:00', NULL, 0);
 INSERT INTO task VALUES (33, 1922, 30, 'Test', '2014-12-07 21:36:00', '2014-12-07 20:36:00', 'For testing purpose', 1);
@@ -6702,6 +6719,7 @@ INSERT INTO task VALUES (51, 1985, 2, 'Test 2', '2015-01-14 17:02:00', '2015-01-
 INSERT INTO task VALUES (53, 2016, 2, 'Notify his', '2015-02-02 17:09:00', '2015-02-02 15:09:00', 'Notify about the documents', 3);
 INSERT INTO task VALUES (42, 1940, 2, 'Test notifications', '2014-12-14 21:37:00', '2014-12-14 20:38:00', NULL, 2);
 INSERT INTO task VALUES (36, 1932, 2, 'Call and remind about payments', '2014-12-11 22:48:00', '2014-12-11 22:46:00', NULL, 1);
+INSERT INTO task VALUES (38, 1934, 2, 'Call and remind about payment', '2014-12-12 22:50:00', '2014-12-11 22:52:00', 'Call and remind to pay invoice', 3);
 
 
 --
@@ -7024,6 +7042,14 @@ ALTER TABLE ONLY advsource
 
 ALTER TABLE ONLY appointment
     ADD CONSTRAINT appointment_header_pk PRIMARY KEY (id);
+
+
+--
+-- Name: apscheduler_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY apscheduler_jobs
+    ADD CONSTRAINT apscheduler_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -7896,6 +7922,13 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY wish
     ADD CONSTRAINT wish_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (next_run_time);
 
 
 --
