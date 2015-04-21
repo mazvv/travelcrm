@@ -3,7 +3,7 @@
 import colander
 
 from . import(
-    ResourceSchema, 
+    ResourceSchema,
     BaseForm,
     BaseSearchForm,
 )

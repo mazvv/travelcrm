@@ -24,7 +24,7 @@
                 ${h.tags.text("username", None, class_="easyui-textbox w15")}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <div class="dl10">
                 ${h.tags.title(_(u"password"), False, "password")}
             </div>
@@ -32,7 +32,7 @@
                 ${h.tags.password("password", None, class_="easyui-textbox w15")}
             </div>
         </div>
-        <div class="form-field mb05">
+        <div class="form-field mb1">
             <span class="mr1">
                 <i class="fa fa-hand-o-right"></i>
                 ${h.tags.link_to(_(u"Create company"), add_url)}

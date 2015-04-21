@@ -5,21 +5,36 @@ from cgi import FieldStorage
 
 import colander
 import phonenumbers
-from colander import (
-    Date as ColanderDate,
-    Invalid,
-    null,
-    _
-)
 
 from ..lib.qb import ResourcesQueryBuilder
 from ..lib.utils.common_utils import (
     get_locale_name, 
     parse_datetime
 )
+from ..lib.utils.common_utils import translate as _
 
 
-class ResourceSchema(colander.Schema):
+@colander.deferred
+def csrf_token_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        if value != request.session.get_csrf_token():
+            raise colander.Invalid(
+                node,
+                _(u'Invalid CSRF token'),
+            )
+    return colander.All(colander.Length(max=255), validator,)
+
+
+class CSRFSchema(colander.Schema):
+    csrf_token = colander.SchemaNode(
+        colander.String(),
+        validator=csrf_token_validator
+    )
+
+    
+class ResourceSchema(CSRFSchema):
     note_id = colander.SchemaNode(
         colander.Set(),
         missing=[],
@@ -48,15 +63,15 @@ class ResourceSchema(colander.Schema):
         return super(ResourceSchema, self).deserialize(cstruct)
 
 
-class Date(ColanderDate):
+class Date(colander.Date):
 
     def deserialize(self, node, cstruct):
         if not cstruct:
-            return null
+            return colander.null
         try:
             result = parse_datetime(cstruct)
         except:
-            raise Invalid(
+            raise colander.Invalid(
                 node,
                 _(
                     self.err_template,
@@ -66,15 +81,15 @@ class Date(ColanderDate):
         return result
 
 
-class DateTime(ColanderDate):
+class DateTime(colander.Date):
 
     def deserialize(self, node, cstruct):
         if not cstruct:
-            return null
+            return colander.null
         try:
             result = parse_datetime(cstruct)
         except:
-            raise Invalid(
+            raise colander.Invalid(
                 node,
                 _(
                     self.err_template,
@@ -90,7 +105,7 @@ class PhoneNumber(object):
         try:
             phone = phonenumbers.parse(value)
         except phonenumbers.NumberParseException:
-            raise Invalid(
+            raise colander.Invalid(
                 node,
                 _(
                     u"Phone must be in format +XXXXXXXXXXX "
@@ -99,7 +114,7 @@ class PhoneNumber(object):
                 )
             )
         if not phonenumbers.is_valid_number(phone):
-            raise Invalid(
+            raise colander.Invalid(
                 node,
                 _(
                     u"Phone is not valid",
