@@ -33,6 +33,22 @@ class CSRFSchema(colander.Schema):
         validator=csrf_token_validator
     )
 
+
+class ItemSchema(CSRFSchema):
+    id = colander.SchemaNode(
+        colander.Set(),
+        missing=[],
+    )
+    
+    def deserialize(self, cstruct):
+        if (
+            'id' in cstruct
+            and not isinstance(cstruct.get('id'), list)
+        ):
+            val = cstruct['id']
+            cstruct['id'] = list()
+            cstruct['id'].append(val)
+
     
 class ResourceSchema(CSRFSchema):
     note_id = colander.SchemaNode(
@@ -61,6 +77,7 @@ class ResourceSchema(CSRFSchema):
             cstruct['task_id'].append(val)
 
         return super(ResourceSchema, self).deserialize(cstruct)
+
 
 
 class Date(colander.Date):
@@ -210,6 +227,7 @@ class BaseSearchForm(BaseForm):
         super(BaseSearchForm, self).__init__(request)
 
     def submit(self):
+        assert self._controls is not None, u'Need to call validate first'
         self.qb.search_simple(self._controls.get('q'))
         self.qb.advanced_search(**self._controls)
         id = self._controls.get('id')

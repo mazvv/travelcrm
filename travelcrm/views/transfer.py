@@ -6,13 +6,12 @@ from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
-from ..models.user import User
+from ..models.transfer import Transfer
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.user import (
-    UserAddForm,
-    UserEditForm,
-    UserSearchForm,
+from ..forms.transfer import (
+    TransferForm, 
+    TransferSearchForm
 )
 
 
@@ -20,9 +19,9 @@ log = logging.getLogger(__name__)
 
 
 @view_defaults(
-    context='..resources.user.UserResource',
+    context='..resources.transfer.TransferResource',
 )
-class UserView(object):
+class TransferView(object):
 
     def __init__(self, context, request):
         self.context = context
@@ -30,8 +29,7 @@ class UserView(object):
 
     @view_config(
         request_method='GET',
-        xhr='True',
-        renderer='travelcrm:templates/user/index.mak',
+        renderer='travelcrm:templates/transfer/index.mak',
         permission='view'
     )
     def index(self):
@@ -45,7 +43,7 @@ class UserView(object):
         permission='view'
     )
     def list(self):
-        form = UserSearchForm(self.request, self.context)
+        form = TransferSearchForm(self.request, self.context)
         form.validate()
         qb = form.submit()
         return {
@@ -56,21 +54,21 @@ class UserView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/user/form.mak',
+        renderer='travelcrm:templates/transfer/form.mak',
         permission='view'
     )
     def view(self):
         if self.request.params.get('rid'):
             resource_id = self.request.params.get('rid')
-            user = User.by_resource_id(resource_id)
+            transfer = Transfer.by_resource_id(resource_id)
             return HTTPFound(
                 location=self.request.resource_url(
-                    self.context, 'view', query={'id': user.id}
+                    self.context, 'view', query={'id': transfer.id}
                 )
             )
         result = self.edit()
         result.update({
-            'title': _(u"View User"),
+            'title': _(u"View Transfer"),
             'readonly': True,
         })
         return result
@@ -78,11 +76,11 @@ class UserView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/user/form.mak',
+        renderer='travelcrm:templates/transfer/form.mak',
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add User')}
+        return {'title': _(u'Add Transfer')}
 
     @view_config(
         name='add',
@@ -91,14 +89,14 @@ class UserView(object):
         permission='add'
     )
     def _add(self):
-        form = UserAddForm(self.request)
+        form = TransferForm(self.request)
         if form.validate():
-            user = form.submit()
-            DBSession.add(user)
+            transfer = form.submit()
+            DBSession.add(transfer)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': user.id
+                'response': transfer.id
             }
         else:
             return {
@@ -109,12 +107,12 @@ class UserView(object):
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/user/form.mak',
+        renderer='travelcrm:templates/transfer/form.mak',
         permission='edit'
     )
     def edit(self):
-        user = User.get(self.request.params.get('id'))
-        return {'item': user, 'title': _(u'Edit User')}
+        transfer = Transfer.get(self.request.params.get('id'))
+        return {'item': transfer, 'title': _(u'Edit Transfer')}
 
     @view_config(
         name='edit',
@@ -123,13 +121,13 @@ class UserView(object):
         permission='edit'
     )
     def _edit(self):
-        user = User.get(self.request.params.get('id'))
-        form = UserEditForm(self.request)
+        transfer = Transfer.get(self.request.params.get('id'))
+        form = TransferForm(self.request)
         if form.validate():
-            form.submit(user)
+            form.submit(transfer)
             return {
                 'success_message': _(u'Saved'),
-                'response': user.id
+                'response': transfer.id
             }
         else:
             return {
@@ -140,13 +138,13 @@ class UserView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/user/delete.mak',
+        renderer='travelcrm:templates/transfer/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'title': _(u'Delete Users'),
-            'id': self.request.params.get('id')
+            'title': _(u'Delete Transfers'),
+            'rid': self.request.params.get('rid')
         }
 
     @view_config(
@@ -156,15 +154,18 @@ class UserView(object):
         permission='delete'
     )
     def _delete(self):
-        errors = False
-        ids = self.request.params.getall('id')
-        if ids:
-            try:
-                DBSession.query(User).filter(User.id.in_(ids)).delete()
-            except:
-                errors=True
-                DBSession.rollback()
-        if errors:
+        errors = 0
+        for id in self.request.params.getall('id'):
+            item = Transfer.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
             return {
                 'error_message': _(
                     u'Some objects could not be delete'

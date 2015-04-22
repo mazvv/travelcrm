@@ -32,11 +32,11 @@ class Crosspayment(Base):
         ),
         nullable=False,
     )
-    transfer_id = Column(
+    cashflow_id = Column(
         Integer,
         ForeignKey(
-            'transfer.id',
-            name="fk_transfer_id_crosspayment",
+            'cashflow.id',
+            name="fk_cashflow_id_crosspayment",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -55,8 +55,8 @@ class Crosspayment(Base):
         cascade="all,delete",
         uselist=False
     )
-    transfer = relationship(
-        'Transfer',
+    cashflow = relationship(
+        'Cashflow',
         backref=backref(
             'crosspayment',
             uselist=False,

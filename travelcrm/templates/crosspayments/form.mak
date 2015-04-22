@@ -13,7 +13,13 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off", id=_form_id)}
+    ${h.tags.form(
+        request.url, 
+        class_="_ajax %s" % ('readonly' if readonly else ''), 
+        autocomplete="off", 
+        id=_form_id,
+        hidden_fields=[('csrf_token', request.session.get_csrf_token())]
+    )}
         <div class="easyui-tabs" data-options="border:false,height:400">
             <div title="${_(u'Main')}">
                 <div class="form-field">
@@ -21,7 +27,7 @@
                         ${h.tags.title(_(u"date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.transfer.date if item else None, 'date')}
+                        ${h.fields.date_field(item.cashflow.date if item else None, 'date')}
                         ${h.common.error_container(name='date')}
                     </div>
                 </div>
@@ -39,7 +45,7 @@
 		                    <div class="ml15">
 		                        ${h.fields.accounts_combobox_field(
 		                            request,
-		                            item.transfer.account_from_id if item else None,
+		                            item.cashflow.account_from_id if item else None,
 		                            name='account_from_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
@@ -54,7 +60,7 @@
 		                    <div class="ml15">
 		                        ${h.fields.subaccounts_combobox_field(
 		                            request,
-		                            item.transfer.subaccount_from_id if item else None,
+		                            item.cashflow.subaccount_from_id if item else None,
 		                            name='subaccount_from_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
@@ -71,7 +77,7 @@
 		                    <div class="ml15">
 		                        ${h.fields.accounts_combobox_field(
 		                            request, 
-		                            item.transfer.account_to_id if item else None,
+		                            item.cashflow.account_to_id if item else None,
 		                            name='account_to_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
@@ -86,7 +92,7 @@
 		                    <div class="ml15">
 		                        ${h.fields.subaccounts_combobox_field(
 		                            request, 
-		                            item.transfer.subaccount_to_id if item else None,
+		                            item.cashflow.subaccount_to_id if item else None,
 		                            name='subaccount_to_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
@@ -104,7 +110,7 @@
                     <div class="ml15">
                         ${h.fields.accounts_items_combobox_field(
                             request,
-                            item.transfer.account_item_id if item else None,
+                            item.cashflow.account_item_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='account_item_id')}
@@ -115,7 +121,7 @@
                         ${h.tags.title(_(u"sum"), True, "sum")}
                     </div>
                     <div class="ml15">
-                        ${h.tags.text('sum', item.transfer.sum if item else None, class_="easyui-textbox w20 easyui-numberbox", data_options="min:0,precision:2")}
+                        ${h.tags.text('sum', item.cashflow.sum if item else None, class_="easyui-textbox w20 easyui-numberbox", data_options="min:0,precision:2")}
                         ${h.common.error_container(name='sum')}
                     </div>
                 </div>
@@ -126,7 +132,7 @@
                     <div class="ml15">
                         ${h.tags.text(
                             'from_currency', 
-                            item.transfer.currency.iso_code if item else None, 
+                            item.cashflow.currency.iso_code if item else None, 
                             class_="easyui-textbox w20 currency", 
                             disabled=True
                         )}

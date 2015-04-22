@@ -115,7 +115,7 @@ class IncomeView(object):
                 invoice_id=controls.get('invoice_id'),
                 resource=self.context.create_resource()
             )
-            income.transfers = make_payment(
+            income.cashflows = make_payment(
                 self.context,
                 controls.get('invoice_id'),
                 controls.get('date'),
@@ -162,7 +162,7 @@ class IncomeView(object):
             controls = schema.deserialize(self.request.params.mixed())
             income.rollback()
             income.invoice_id = controls.get('invoice_id')
-            income.transfers = make_payment(
+            income.cashflows = make_payment(
                 self.context,
                 controls.get('invoice_id'),
                 controls.get('date'),

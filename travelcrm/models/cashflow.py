@@ -16,15 +16,15 @@ from ..models import (
 )
 
 
-class Transfer(Base):
-    __tablename__ = 'transfer'
+class Cashflow(Base):
+    __tablename__ = 'cashflow'
     __table_args__ = (
         CheckConstraint(
             'not (account_from_id is not null '
             'and subaccount_from_id is not null) and '
             'not (account_to_id is not null '
             'and subaccount_to_id is not null)',
-            name='constraint_transfer_account_subaccount',
+            name='constraint_cashflow_account_subaccount',
         ),
     )
 
@@ -37,7 +37,7 @@ class Transfer(Base):
         Integer,
         ForeignKey(
             'account.id',
-            name="fk_account_from_id_transfer",
+            name="fk_account_from_id_cashflow",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -46,7 +46,7 @@ class Transfer(Base):
         Integer,
         ForeignKey(
             'subaccount.id',
-            name="fk_subaccount_from_id_transfer",
+            name="fk_subaccount_from_id_cashflow",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -55,7 +55,7 @@ class Transfer(Base):
         Integer,
         ForeignKey(
             'account.id',
-            name="fk_account_to_id_transfer",
+            name="fk_account_to_id_cashflow",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -64,7 +64,7 @@ class Transfer(Base):
         Integer,
         ForeignKey(
             'subaccount.id',
-            name="fk_subaccount_to_id_transfer",
+            name="fk_subaccount_to_id_cashflow",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -73,7 +73,7 @@ class Transfer(Base):
         Integer,
         ForeignKey(
             'account_item.id',
-            name="fk_account_item_id_transfer",
+            name="fk_account_item_id_cashflow",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -90,7 +90,7 @@ class Transfer(Base):
     account_from = relationship(
         'Account',
         backref=backref(
-            'transfers_from',
+            'cashflows_from',
             uselist=True,
             lazy="dynamic"
         ),
@@ -100,7 +100,7 @@ class Transfer(Base):
     subaccount_from = relationship(
         'Subaccount',
         backref=backref(
-            'transfers_from',
+            'cashflows_from',
             uselist=True,
             lazy="dynamic"
         ),
@@ -110,7 +110,7 @@ class Transfer(Base):
     account_to = relationship(
         'Account',
         backref=backref(
-            'transfers_to',
+            'cashflows_to',
             uselist=True,
             lazy="dynamic"
         ),
@@ -120,7 +120,7 @@ class Transfer(Base):
     subaccount_to = relationship(
         'Subaccount',
         backref=backref(
-            'transfers_to',
+            'cashflows_to',
             uselist=True,
             lazy="dynamic"
         ),
@@ -130,7 +130,7 @@ class Transfer(Base):
     account_item = relationship(
         'AccountItem',
         backref=backref(
-            'transfers',
+            'cashflows',
             uselist=True,
             lazy="dynamic"
         ),

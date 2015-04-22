@@ -14,8 +14,8 @@ from ..models import (
 )
 
 
-income_transfer = Table(
-    'income_transfer',
+income_cashflow = Table(
+    'income_cashflow',
     Base.metadata,
     Column(
         'income_id',
@@ -24,18 +24,18 @@ income_transfer = Table(
             'income.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_income_id_income_transfer',
+            name='fk_income_id_income_cashflow',
         ),
         primary_key=True,
     ),
     Column(
-        'transfer_id',
+        'cashflow_id',
         Integer,
         ForeignKey(
-            'transfer.id',
+            'cashflow.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_transfer_id_income_transfer',
+            name='fk_cashflow_id_income_cashflow',
         ),
         primary_key=True,
     )
@@ -89,9 +89,9 @@ class Income(Base):
         ),
         uselist=False,
     )
-    transfers = relationship(
-        'Transfer',
-        secondary=income_transfer,
+    cashflows = relationship(
+        'Cashflow',
+        secondary=income_cashflow,
         backref=backref(
             'income',
             uselist=False,
@@ -117,18 +117,18 @@ class Income(Base):
     @property
     def sum(self):
         return sum(
-            transfer.sum 
-            for transfer in self.transfers 
-            if transfer.account_from_id == None 
-            and transfer.subaccount_from_id == None
+            cashflow.sum 
+            for cashflow in self.cashflows 
+            if cashflow.account_from_id == None 
+            and cashflow.subaccount_from_id == None
         )
 
     @property
     def date(self):
-        assert self.transfers
-        return self.transfers[0].date
+        assert self.cashflows
+        return self.cashflows[0].date
 
     def rollback(self):
-        for transfer in self.transfers:
-            DBSession.delete(transfer)
-        DBSession.flush(self.transfers)
+        for cashflow in self.cashflows:
+            DBSession.delete(cashflow)
+        DBSession.flush(self.cashflows)

@@ -62,6 +62,7 @@ class _TaskSchema(ResourceSchema):
 class TaskSearchSchema(ResourceSearchSchema):
     performer_id = colander.SchemaNode(
         colander.Integer(),
+        missing=None,
     )
     status = colander.SchemaNode(
         colander.String(),

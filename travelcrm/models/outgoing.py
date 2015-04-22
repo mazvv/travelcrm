@@ -16,8 +16,8 @@ from ..models import (
 )
 
 
-outgoing_transfer = Table(
-    'outgoing_transfer',
+outgoing_cashflow = Table(
+    'outgoing_cashflow',
     Base.metadata,
     Column(
         'outgoing_id',
@@ -26,18 +26,18 @@ outgoing_transfer = Table(
             'outgoing.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_outgoing_id_outgoing_transfer',
+            name='fk_outgoing_id_outgoing_cashflow',
         ),
         primary_key=True,
     ),
     Column(
-        'transfer_id',
+        'cashflow_id',
         Integer,
         ForeignKey(
-            'transfer.id',
+            'cashflow.id',
             ondelete='restrict',
             onupdate='cascade',
-            name='fk_transfer_id_outgoing_transfer',
+            name='fk_cashflow_id_outgoing_cashflow',
         ),
         primary_key=True,
     )
@@ -119,9 +119,9 @@ class Outgoing(Base):
         ),
         uselist=False,
     )
-    transfers = relationship(
-        'Transfer',
-        secondary=outgoing_transfer,
+    cashflows = relationship(
+        'Cashflow',
+        secondary=outgoing_cashflow,
         backref=backref(
             'outgoing',
             uselist=False,
@@ -145,6 +145,6 @@ class Outgoing(Base):
         )
 
     def rollback(self):
-        for transfer in self.transfers:
-            DBSession.delete(transfer)
-        DBSession.flush(self.transfers)
+        for cashflow in self.cashflows:
+            DBSession.delete(cashflow)
+        DBSession.flush(self.cashflows)

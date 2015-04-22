@@ -8,16 +8,16 @@ from . import ResourcesQueryBuilder
 
 from ...models.resource import Resource
 from ...models.crosspayment import Crosspayment
-from ...models.transfer import Transfer
+from ...models.cashflow import Cashflow
 
-from ...lib.bl.transfers import query_transfers
+from ...lib.bl.cashflows import query_cashflows
 
 
 class CrosspaymentQueryBuilder(ResourcesQueryBuilder):
 
     def __init__(self, context):
         super(CrosspaymentQueryBuilder, self).__init__(context)
-        self._subq = query_transfers().subquery()
+        self._subq = query_cashflows().subquery()
         self._fields = {
             'id': Crosspayment.id,
             '_id': Crosspayment.id,
@@ -45,8 +45,8 @@ class CrosspaymentQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(Crosspayment, Resource.crosspayment)
-            .join(Transfer, Crosspayment.transfer)
-            .join(self._subq, Transfer.id == self._subq.c.id)
+            .join(Cashflow, Crosspayment.cashflow)
+            .join(self._subq, Cashflow.id == self._subq.c.id)
         )
         super(CrosspaymentQueryBuilder, self).build_query()
 
@@ -72,56 +72,56 @@ class CrosspaymentQueryBuilder(ResourcesQueryBuilder):
                 kwargs.get('sum_from'), kwargs.get('sum_to')
             )
         if 'date_from' in kwargs or 'date_to' in kwargs:
-            self._filter_transfer_date(
+            self._filter_cashflow_date(
                 kwargs.get('date_from'), kwargs.get('date_to')
             )
 
     def _filter_account_from(self, account_from_id):
         if account_from_id:
             self.query = self.query.filter(
-                Transfer.account_from_id == account_from_id,
+                Cashflow.account_from_id == account_from_id,
             )
 
     def _filter_subaccount_from(self, subaccount_from_id):
         if subaccount_from_id:
             self.query = self.query.filter(
-                Transfer.subaccount_from_id == subaccount_from_id,
+                Cashflow.subaccount_from_id == subaccount_from_id,
             )
 
     def _filter_account_to(self, account_to_id):
         if account_to_id:
             self.query = self.query.filter(
-                Transfer.account_to_id == account_to_id,
+                Cashflow.account_to_id == account_to_id,
             )
 
     def _filter_subaccount_to(self, subaccount_to_id):
         if subaccount_to_id:
             self.query = self.query.filter(
-                Transfer.subaccount_to_id == subaccount_to_id,
+                Cashflow.subaccount_to_id == subaccount_to_id,
             )
 
     def _filter_account_item(self, account_item_id):
         if account_item_id:
             self.query = self.query.filter(
-                Transfer.account_item_id == account_item_id,
+                Cashflow.account_item_id == account_item_id,
             )
 
     def _filter_sum(self, sum_from, sum_to):
         if sum_from:
             self.query = (
-                self.query.filter(Transfer.sum >= sum_from)
+                self.query.filter(Cashflow.sum >= sum_from)
             )
         if sum_to:
             self.query = (
-                self.query.filter(Transfer.sum <= sum_to)
+                self.query.filter(Cashflow.sum <= sum_to)
             )
 
-    def _filter_transfer_date(self, date_from, date_to):
+    def _filter_cashflow_date(self, date_from, date_to):
         if date_from:
             self.query = self.query.filter(
-                Transfer.date >= date_from
+                Cashflow.date >= date_from
             )
         if date_to:
             self.query = self.query.filter(
-                Transfer.date <= date_to
+                Cashflow.date <= date_to
             )

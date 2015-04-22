@@ -8,7 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.crosspayment import Crosspayment
-from ..models.transfer import Transfer
+from ..models.cashflow import Cashflow
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.crosspayment import CrosspaymentQueryBuilder
@@ -114,7 +114,7 @@ class CrosspaymentView(object):
                 descr=controls.get('descr'),
                 resource=self.context.create_resource()
             )
-            transfer = Transfer(
+            cashflow = Cashflow(
                 date=controls.get('date'),
                 account_from_id=controls.get('account_from_id'),
                 account_to_id=controls.get('account_to_id'),
@@ -123,7 +123,7 @@ class CrosspaymentView(object):
                 account_item_id=controls.get('account_item_id'),
                 sum=controls.get('sum'),
             )
-            crosspayment.transfer = transfer
+            crosspayment.cashflow = cashflow
             for id in controls.get('note_id'):
                 note = Note.get(id)
                 crosspayment.resource.notes.append(note)
@@ -164,15 +164,15 @@ class CrosspaymentView(object):
         try:
             controls = schema.deserialize(self.request.params.mixed())
             crosspayment.descr = controls.get('descr')
-            transfer = crosspayment.transfer
-            transfer.date = controls.get('date')
-            transfer.account_from_id = controls.get('account_from_id')
-            transfer.account_to_id = controls.get('account_to_id')
-            transfer.account_item_id = controls.get('account_item_id')
-            transfer.subaccount_to_id = controls.get('subaccount_to_id')
-            transfer.subaccount_item_id = controls.get('subaccount_item_id')
-            transfer.sum = controls.get('sum')
-            crosspayment.transfer = transfer
+            cashflow = crosspayment.cashflow
+            cashflow.date = controls.get('date')
+            cashflow.account_from_id = controls.get('account_from_id')
+            cashflow.account_to_id = controls.get('account_to_id')
+            cashflow.account_item_id = controls.get('account_item_id')
+            cashflow.subaccount_to_id = controls.get('subaccount_to_id')
+            cashflow.subaccount_item_id = controls.get('subaccount_item_id')
+            cashflow.sum = controls.get('sum')
+            crosspayment.cashflow = cashflow
             crosspayment.resource.notes = []
             crosspayment.resource.tasks = []
             for id in controls.get('note_id'):

@@ -1,4 +1,3 @@
-<%namespace file="../address/common.mak" import="address_selector"/>
 <%namespace file="../note/common.mak" import="note_selector"/>
 <%namespace file="../task/common.mak" import="task_selector"/>
 <div class="dl60 easyui-dialog"
@@ -25,17 +24,6 @@
                         ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
                         ${h.common.error_container(name='name')}
                     </div>
-                </div>
-            </div>
-            <div title="${_(u'Addresses')}">
-                <div class="easyui-panel" data-options="fit:true,border:false">
-                    ${address_selector(
-                        values=([address.id for address in item.addresses] if item else []),
-                        can_edit=(
-                            not (readonly if readonly else False) and 
-                            (_context.has_permision('add') if item else _context.has_permision('edit'))
-                        ) 
-                    )}
                 </div>
             </div>
             <div title="${_(u'Notes')}">

@@ -1,14 +1,14 @@
 """alter db
 
-Revision ID: 3cc7cb081f5
-Revises: 3387aec6d25f
-Create Date: 2015-04-06 22:39:27.673083
+Revision ID: 239af7b6893c
+Revises: 5075716173ca
+Create Date: 2015-04-22 15:28:11.882436
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '3cc7cb081f5'
-down_revision = '3387aec6d25f'
+revision = '239af7b6893c'
+down_revision = '5075716173ca'
 
 from alembic import op
 import sqlalchemy as sa

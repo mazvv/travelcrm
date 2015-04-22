@@ -7,11 +7,16 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off")}
+    ${h.tags.form(
+        request.url, 
+        class_="_ajax %s" % ('readonly' if readonly else ''), 
+        autocomplete="off",
+        hidden_fields=[('csrf_token', request.session.get_csrf_token())]
+    )}
         % if item:
            ${infoblock(_(u"If you change company settings you need to reload page"))}
         % endif    
-        <div class="form-field mb05">
+        <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"name"), True, "name")}
             </div>
@@ -20,7 +25,7 @@
                 ${h.common.error_container(name='name')}
             </div>
         </div>
-        <div class="form-field mb05">
+        <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"base currency"), True, "currency_id")}
             </div>
@@ -32,7 +37,7 @@
                 ${h.common.error_container(name='currency_id')}
             </div>
         </div>
-        <div class="form-field mb05">
+        <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"timezone"), True, "timezone")}
             </div>
@@ -41,7 +46,7 @@
                 ${h.common.error_container(name='timezone')}
             </div>
         </div>
-        <div class="form-field mb05">
+        <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"locale"), True, "locale")}
             </div>

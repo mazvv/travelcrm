@@ -101,7 +101,7 @@ class _UserForm(BaseForm):
             user.resource.notes = []
             user.resource.tasks = []
         user.username = self._controls.get('username')
-        user.employee_is = self._controls.get('employee_id')
+        user.employee_id = self._controls.get('employee_id')
         if self._controls.get('password'):
             user.password = self._controls.get('password')
         for id in self._controls.get('note_id'):

@@ -5,13 +5,13 @@ from sqlalchemy import func, or_
 from . import GeneralQueryBuilder
 from ...models import DBSession
 
-from ...lib.bl.transfers import query_transfers
+from ...lib.bl.cashflows import query_cashflows
 
 
-class TransferQueryBuilder(GeneralQueryBuilder):
+class CashflowQueryBuilder(GeneralQueryBuilder):
 
     def __init__(self):
-        self._subq  = query_transfers().subquery()
+        self._subq  = query_cashflows().subquery()
         self._fields = {
             'id': self._subq.c.id,
             '_id': self._subq.c.id,
@@ -34,7 +34,7 @@ class TransferQueryBuilder(GeneralQueryBuilder):
 
     def build_query(self):
         self.query = DBSession.query(self._subq)
-        super(TransferQueryBuilder, self).build_query()
+        super(CashflowQueryBuilder, self).build_query()
 
     def advanced_search(self, **kwargs):
         if 'account_id' in kwargs:

@@ -6,7 +6,7 @@ import colander
 
 from . import ResourceSchema, Date, ResourceSearchSchema
 from ..models.subaccount import Subaccount
-from ..lib.bl.transfers import get_account_balance
+from ..lib.bl.cashflows import get_account_balance
 from ..lib.utils.common_utils import parse_datetime, translate as _
 
 

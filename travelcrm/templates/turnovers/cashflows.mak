@@ -12,7 +12,7 @@
 	<table class="easyui-datagrid"
 	    id="${_id}"
 	    data-options="
-	        url:'${request.resource_url(_context, 'transfers')}',border:false,
+	        url:'${request.resource_url(_context, 'cashflows')}',border:false,
 	        pagination:true,fit:true,pageSize:50,singleSelect:true,
 	        rownumbers:true,sortName:'id',
 	        pageList:[50,100,500],idField:'_id',checkOnSelect:false,

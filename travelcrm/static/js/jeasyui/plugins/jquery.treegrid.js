@@ -934,7 +934,7 @@ _f4.footer=_f3.footer;
 if(_f3.total){
 _f4.total=_f3.total;
 }
-_f3=this.transfer(_f1,_f2,_f3.rows);
+_f3=this.cashflow(_f1,_f2,_f3.rows);
 }else{
 function _f6(_f7,_f8){
 for(var i=0;i<_f7.length;i++){
@@ -991,7 +991,7 @@ _ff(_101);
 }
 }
 };
-},transfer:function(_102,_103,data){
+},cashflow:function(_102,_103,data){
 var opts=$.data(_102,"treegrid").options;
 var rows=[];
 for(var i=0;i<data.length;i++){

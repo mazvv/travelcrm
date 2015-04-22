@@ -7,7 +7,12 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off", hidden_fields=[('position_id', position.id), ('resource_type_id', resource_type.id)])}
+    ${h.tags.form(
+        request.url, 
+        class_="_ajax %s" % ('readonly' if readonly else ''), 
+        autocomplete="off", 
+        hidden_fields=[('position_id', position.id), ('resource_type_id', resource_type.id), ('csrf_token', request.session.get_csrf_token())]
+    )}
         % for permision in allowed_permisions:
         <div class="form-field">
             <div class="dl15">

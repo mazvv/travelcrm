@@ -12,7 +12,7 @@ from . import (
 
 from ..models.account import Account
 from ..models.subaccount import Subaccount
-from ..lib.bl.transfers import get_account_balance
+from ..lib.bl.cashflows import get_account_balance
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.common_utils import cast_int, parse_datetime
 
@@ -40,11 +40,11 @@ class AccountFromValidator(object):
             )
         date = parse_datetime(request.params.get('date'))
         balance = get_account_balance(value, date_to=date)
-        sum_to_transfer = Decimal(request.params.get('sum'))
-        if sum_to_transfer > balance:
+        sum_to_cashflow = Decimal(request.params.get('sum'))
+        if sum_to_cashflow > balance:
             raise colander.Invalid(
                 node,
-                _(u'Not enough balance to transfer (%s)' % balance)
+                _(u'Not enough balance to cashflow (%s)' % balance)
             )
         
 
@@ -86,7 +86,7 @@ class AccountToValidator(object):
         ):
             raise colander.Invalid(
                 node,
-                _(u'Transfer with same currency allowed only'),
+                _(u'Cashflow with same currency allowed only'),
             )
 
 

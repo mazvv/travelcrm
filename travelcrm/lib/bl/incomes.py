@@ -1,7 +1,7 @@
 # -*coding: utf-8-*-
 
 from ...models.invoice import Invoice
-from ...models.transfer import Transfer
+from ...models.cashflow import Cashflow
 from ...models.subaccount import Subaccount
 
 from ...lib.bl.invoices import (
@@ -17,7 +17,7 @@ def make_payment(context, invoice_id, date, sum):
      invoice = Invoice.get(invoice_id)
      currency = invoice.account.currency
      resource = get_bound_resource_by_invoice_id(invoice.id)
-     transfers = []
+     cashflows = []
      payments_query = (
          query_invoice_payments_accounts_items_grouped(invoice.id)
      )
@@ -45,8 +45,8 @@ def make_payment(context, invoice_id, date, sum):
              customer_resource.id, subaccount
          )
      settings = context.get_settings()
-     transfers.append(
-         Transfer(
+     cashflows.append(
+         Cashflow(
              sum=sum,
              date=date,
              subaccount_to=subaccount,
@@ -60,8 +60,8 @@ def make_payment(context, invoice_id, date, sum):
              sum_to_pay = debt
          else:
              sum_to_pay = sum
-         transfers.append(
-             Transfer(
+         cashflows.append(
+             Cashflow(
                  sum=sum_to_pay,
                  date=date,
                  subaccount_from=subaccount,
@@ -72,4 +72,4 @@ def make_payment(context, invoice_id, date, sum):
          sum -= sum_to_pay
          if sum <= 0:
              break
-     return transfers
+     return cashflows

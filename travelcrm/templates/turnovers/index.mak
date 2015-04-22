@@ -60,8 +60,8 @@
             <div class="button-group">
 	            % if _context.has_permision('view'):
 	            <a href="#" class="button _action" 
-	                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'transfers')}',params_str:get_params_${_id}(false)">
-	                <span class="fa fa-lightbulb-o"></span>${_(u'Transfers')}
+	                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'cashflows')}',params_str:get_params_${_id}(false)">
+	                <span class="fa fa-lightbulb-o"></span>${_(u'Cashflows')}
 	            </a>
 	            <a href="#" class="button _action" 
 	                data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export', query={'export': True})}',params_str:get_params_${_id}(true)">

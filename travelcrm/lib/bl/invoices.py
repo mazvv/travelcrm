@@ -5,9 +5,9 @@ from sqlalchemy import func
 from ...lib.utils.resources_utils import get_resource_class
 from ...lib.utils.sql_utils import build_union_query
 from ...lib.bl.factories import get_invoices_factories_resources_types
-from ...lib.bl.transfers import (
-    query_account_from_transfers, 
-    query_account_to_transfers,
+from ...lib.bl.cashflows import (
+    query_account_from_cashflows, 
+    query_account_to_cashflows,
 )
 from ...models import DBSession
 from ...models.invoice import Invoice
@@ -15,7 +15,7 @@ from ...models.resource import Resource
 from ...models.income import Income
 from ...models.currency import Currency
 from ...models.account import Account
-from ...models.transfer import Transfer
+from ...models.cashflow import Cashflow
 
 
 def query_resource_data():
@@ -43,46 +43,46 @@ def get_factory_by_invoice_id(invoice_id):
 def query_invoice_payments(invoice_id):
     return (
         DBSession.query(
-            func.sum(Transfer.sum).label('sum'),
+            func.sum(Cashflow.sum).label('sum'),
             Currency.iso_code,
-            Transfer.date,
+            Cashflow.date,
         )
-        .join(Income, Transfer.income)
+        .join(Income, Cashflow.income)
         .join(Invoice, Income.invoice)
         .join(Account, Invoice.account)
         .join(Currency, Account.currency)
         .filter(
             Invoice.id == invoice_id,
-            Transfer.account_from_id == None,
-            Transfer.subaccount_from_id == None,
-            Transfer.account_to_id == None
+            Cashflow.account_from_id == None,
+            Cashflow.subaccount_from_id == None,
+            Cashflow.account_to_id == None
         )
-        .group_by(Income.id, Currency.iso_code, Transfer.date)
+        .group_by(Income.id, Currency.iso_code, Cashflow.date)
     )
 
 
 def query_invoice_payments_accounts_items_grouped(invoice_id):
     invoice = Invoice.get(invoice_id)
-    from_transfers_query = (
-        query_account_from_transfers(invoice.account_id)
+    from_cashflows_query = (
+        query_account_from_cashflows(invoice.account_id)
         .with_entities(
-            Transfer.account_item_id.label('account_item_id'), 
-            Transfer.sum.label('sum'),
+            Cashflow.account_item_id.label('account_item_id'), 
+            Cashflow.sum.label('sum'),
         )
-        .join(Income, Transfer.income)
+        .join(Income, Cashflow.income)
         .filter(Income.invoice_id == invoice_id)
     )
-    to_transfers_query = (
-        query_account_to_transfers(invoice.account_id)
+    to_cashflows_query = (
+        query_account_to_cashflows(invoice.account_id)
         .with_entities(
-            Transfer.account_item_id.label('account_item_id'), 
-            Transfer.sum.label('sum'),
+            Cashflow.account_item_id.label('account_item_id'), 
+            Cashflow.sum.label('sum'),
         )
-        .join(Income, Transfer.income)
+        .join(Income, Cashflow.income)
         .filter(Income.invoice_id == invoice_id)
     )
     subq = (
-        build_union_query([from_transfers_query, to_transfers_query])
+        build_union_query([from_cashflows_query, to_cashflows_query])
         .subquery()
     )
     return (

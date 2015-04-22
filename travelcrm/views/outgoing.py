@@ -125,7 +125,7 @@ class OutgoingView(object):
                 sum=controls.get('sum'),
                 resource=self.context.create_resource()
             )
-            outgoing.transfers = make_payment(
+            outgoing.cashflows = make_payment(
                 controls.get('date'),
                 controls.get('subaccount_id'),
                 controls.get('account_item_id'),
@@ -180,7 +180,7 @@ class OutgoingView(object):
             outgoing.account_item_id = controls.get('account_item_id')
             outgoing.subaccount_id = controls.get('subaccount_id')
             outgoing.sum = controls.get('sum')
-            outgoing.transfers = make_payment(
+            outgoing.cashflows = make_payment(
                 controls.get('date'),
                 controls.get('subaccount_id'),
                 controls.get('account_item_id'),

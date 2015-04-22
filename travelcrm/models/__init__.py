@@ -65,7 +65,7 @@ from outgoing import Outgoing
 from crosspayment import Crosspayment
 from note import Note
 from calculation import Calculation
-from transfer import Transfer
+from cashflow import Cashflow
 from notification import Notification
 from email_campaign import EmailCampaign
 from company import Company
@@ -75,3 +75,4 @@ from offer import Offer
 from order import Order
 from order_item import OrderItem
 from general_service import GeneralService
+from transfer import Transfer

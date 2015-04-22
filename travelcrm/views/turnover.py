@@ -14,8 +14,8 @@ from ..lib.qb.turnover import (
     TurnoverAccountQueryBuilder,
     TurnoverSubaccountQueryBuilder,
 )
-from ..lib.qb.transfer import TransferQueryBuilder
-from ..lib.bl.transfers import (
+from ..lib.qb.cashflow import CashflowQueryBuilder
+from ..lib.bl.cashflows import (
     get_account_balance, 
     get_subaccount_balance,
 )
@@ -83,27 +83,27 @@ class TurnoverView(object):
         }
 
     @view_config(
-        name='transfers',
+        name='cashflows',
         request_method='GET',
-        renderer='travelcrm:templates/turnovers/transfers.mak',
+        renderer='travelcrm:templates/turnovers/cashflows.mak',
         permission='view'
     )
-    def transfers(self):
+    def cashflows(self):
         return {
-            'title': _(u'Transfers'),
+            'title': _(u'Cashflows'),
         }
 
     @view_config(
-        name='transfers',
+        name='cashflows',
         xhr='True',
         request_method='POST',
         renderer='json',
         permission='view'
     )
-    def _transfers(self):
+    def _cashflows(self):
         schema = TurnoverSearchSchema().bind(request=self.request)
         controls = schema.deserialize(self.request.params.mixed())
-        qb = TransferQueryBuilder()
+        qb = CashflowQueryBuilder()
         qb.advanced_search(**controls)
         qb.sort_query(
             self.request.params.get('sort'),

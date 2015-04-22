@@ -11,7 +11,7 @@ from ...models.calculation import Calculation
 from ...models.service_item import ServiceItem
 from ...models.touroperator import Touroperator
 from ...models.currency import Currency
-from ...models.transfer import Transfer
+from ...models.cashflow import Cashflow
 
 from ...lib.bl.calculations import query_resource_data
 
@@ -20,14 +20,14 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
 
     def __init__(self, context):
         super(DebtQueryBuilder, self).__init__(context)
-        self._subq_transfers = (
+        self._subq_cashflows = (
             DBSession.query(
-                Transfer.sum,
-                Transfer.date, 
+                Cashflow.sum,
+                Cashflow.date, 
                 Touroperator.id,
                 Account.currency_id.label('currency_id')
             )
-            .join(Subaccount, Transfer.subaccount_from)
+            .join(Subaccount, Cashflow.subaccount_from)
             .join(Touroperator, Subaccount.touroperator)
             .join(Account, Subaccount.account)
             .subquery()
@@ -48,7 +48,7 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
             .subquery()
         )
         self._field_sum_in = func.coalesce(
-            func.sum(self._subq_transfers.c.sum), 0
+            func.sum(self._subq_cashflows.c.sum), 0
         )
         self._field_sum_out = func.coalesce(
             func.sum(self._subq_calculations.c.sum), 0
@@ -80,10 +80,10 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
                 Currency, self._subq_calculations.c.currency_id == Currency.id
             )
             .outerjoin(
-                self._subq_transfers, 
+                self._subq_cashflows, 
                 and_(
-                    self._subq_transfers.c.id == Touroperator.id,
-                    self._subq_transfers.c.currency_id == Currency.id
+                    self._subq_cashflows.c.id == Touroperator.id,
+                    self._subq_cashflows.c.currency_id == Currency.id
                 )
             )
             .group_by(Touroperator.id, Touroperator.name, Currency.iso_code)
@@ -110,14 +110,14 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
             self.query = self.query.filter(
                 or_(
                     self._subq_calculations.c.date >= date_from,
-                    self._subq_transfers.c.date >= date_from,
+                    self._subq_cashflows.c.date >= date_from,
                 )
             )
         if date_to:
             self.query = self.query.filter(
                 or_(
                     self._subq_calculations.c.date <= date_to,
-                    self._subq_transfers.c.date <= date_to,
+                    self._subq_cashflows.c.date <= date_to,
                 )
             )
     

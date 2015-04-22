@@ -13,7 +13,13 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax %s" % ('readonly' if readonly else ''), autocomplete="off", id=_form_id)}
+    ${h.tags.form(
+        request.url, 
+        class_="_ajax %s" % ('readonly' if readonly else ''), 
+        autocomplete="off", 
+        id=_form_id,
+        hidden_fields=[('csrf_token', request.session.get_csrf_token())]
+    )}
         <script type="easyui-textbox/javascript">
             function calc_sum_${_id}(){
                 var resource_id = ${resource_id};
