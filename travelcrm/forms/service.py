@@ -37,7 +37,7 @@ class ServiceSchema(ResourceSchema):
     )
     display_text = colander.SchemaNode(
         colander.String(),
-        validator=colander.Length(max=256),
+        validator=colander.Length(max=255),
         missing=None
     )
     resource_type_id = colander.SchemaNode(
@@ -45,7 +45,7 @@ class ServiceSchema(ResourceSchema):
     )
     descr = colander.SchemaNode(
         colander.String(),
-        validator=colander.Length(max=256),
+        validator=colander.Length(max=255),
         missing=None
     )
 

@@ -72,7 +72,7 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter accomodation name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter accomodation type name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"updated"))}

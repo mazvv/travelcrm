@@ -19,6 +19,7 @@ class OrderItemQueryBuilder(ResourcesQueryBuilder):
             '_id': OrderItem.id,
             'service': Service.name,
             'touroperator': Touroperator.name,
+            'status': OrderItem.status,
             'price': OrderItem.price,
             'currency': Currency.iso_code,
         }

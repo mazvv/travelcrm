@@ -3,7 +3,6 @@ from zope.interface import implementer
 
 from ..interfaces import (
     IResourceType,
-    IServiceType,
 )
 from ..resources import (
     ResourceTypeBase,
@@ -11,7 +10,6 @@ from ..resources import (
 
 
 @implementer(IResourceType)
-@implementer(IServiceType)
-class AccomodationServiceResource(ResourceTypeBase):
+class AccomodationResource(ResourceTypeBase):
 
-    __name__ = 'accomodation_service'
+    __name__ = 'accomodation'

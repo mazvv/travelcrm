@@ -4,7 +4,7 @@
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
     _t_id = "t-%s" % _id
-    _s_id = "s-%s" % _id
+    _s_id = "s-%s" % _id    
 %>
 <div class="easyui-panel unselectable"
     data-options="
@@ -13,7 +13,7 @@
         iconCls:'fa fa-table',
         tools:'#${_t_id}'
     "
-    title="${_(u'Accomodations Types')}">
+    title="${_(u'Transport')}">
     ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"
@@ -72,7 +72,7 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter accomodation type name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter transport name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"updated"))}

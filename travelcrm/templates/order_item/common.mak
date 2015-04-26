@@ -24,7 +24,6 @@
             if(is_int(id)){
                 var input = $('<input type="hidden" name="${name}">').val(id);
                 input.appendTo('#${_storage_id}');
-                $('#${_id}').datagrid('reload');
             }
             return false;
         }
@@ -44,10 +43,26 @@
         id="${_id}"
         data-options="
             url:'/order_item/list',border:false,
-            singleSelect:true,
+            fit:true,singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/order_item/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                        $.parser.parse('#' + row_id);
+                    }
+                );
+            },
+            detailFormatter: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
+            },          
             onBeforeLoad: function(param){
                 var response = $(this).data('response');
                 % if can_edit:
@@ -70,9 +85,9 @@
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-            <th data-options="field:'order',sortable:true,width:150">${_(u"order")}</th>
-            <th data-options="field:'person',sortable:true,width:150">${_(u"person")}</th>
+            <th data-options="field:'service',sortable:true,width:150">${_(u"service")}</th>
             <th data-options="field:'touroperator',sortable:true,width:100">${_(u"touroperator")}</th>
+            <th data-options="field:'status',sortable:false,width:100,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>            
             <th data-options="field:'price',sortable:true,width:80,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>

@@ -81,8 +81,8 @@ class ResourceType(Base):
         JSON,
         primary_key=False,
     )
-    description = Column(
-        String(length=128),
+    descr = Column(
+        String(length=255),
     )
     status = Column(
         EnumIntType(STATUS),

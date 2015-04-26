@@ -14,9 +14,9 @@
         autocomplete="off",
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]
     )}
-        <div class="easyui-tabs" data-options="border:false,height:400">
+        <div class="easyui-tabs h100" data-options="border:false,height:300">
             <div title="${_(u'Main')}">
-                <div class="form-field mb05">
+                <div class="form-field">
                     <div class="dl15">
                         ${h.tags.title(_(u"name"), True, "name")}
                     </div>

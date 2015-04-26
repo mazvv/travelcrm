@@ -114,9 +114,9 @@ class _ResourceTypeSchema(ResourceSchema):
         colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
         missing=False,
     )
-    description = colander.SchemaNode(
+    descr = colander.SchemaNode(
         colander.String(),
-        validator=colander.Length(max=128),
+        validator=colander.Length(max=255),
         missing=u''
     )
     status = colander.SchemaNode(
@@ -140,7 +140,7 @@ class ResourceTypeForm(BaseForm):
         resource_type.name = self._controls.get('name')
         resource_type.resource = self._controls.get('resource')
         resource_type.customizable = self._controls.get('customizable')
-        resource_type.description = self._controls.get('description')
+        resource_type.descr = self._controls.get('descr')
         resource_type.status = self._controls.get('status')
         for id in self._controls.get('note_id'):
             note = Note.get(id)

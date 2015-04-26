@@ -132,7 +132,7 @@ class CrosspaymentSchema(ResourceSchema):
         colander.Money(),
     )
     descr = colander.SchemaNode(
-        colander.String(128),
+        colander.String(255),
         missing=None,
     )
 

@@ -20,7 +20,7 @@
         id=_form_id,
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]
     )}
-        <div class="easyui-tabs" data-options="border:false,height:400">
+        <div class="easyui-tabs" data-options="border:false,height:410">
             <div title="${_(u'Main')}">
                 <div class="form-field">
                     <div class="dl15">

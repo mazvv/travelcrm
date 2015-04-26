@@ -38,7 +38,7 @@ from location import Location
 from advsource import Advsource
 from hotelcat import Hotelcat
 from roomcat import Roomcat
-from accomodation_type import AccomodationType
+from accomodation import Accomodation
 from foodcat import Foodcat
 from bperson import BPerson
 from touroperator import Touroperator
@@ -46,7 +46,6 @@ from licence import Licence
 from passport import Passport
 from hotel import Hotel
 from tour_sale import TourSale
-from tour_sale_point import TourSalePoint
 from bank import Bank
 from bank_detail import BankDetail
 from task import Task
@@ -76,3 +75,5 @@ from order import Order
 from order_item import OrderItem
 from general_service import GeneralService
 from transfer import Transfer
+from tour import Tour
+from transport import Transport

@@ -6,11 +6,11 @@ from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
-from ..models.accomodation_type import AccomodationType
+from ..models.accomodation import Accomodation
 from ..lib.utils.common_utils import translate as _
-from ..forms.accomodation_type import (
-    AccomodationTypeForm,
-    AccomodationTypeSearchForm
+from travelcrm.forms.accomodation import (
+    AccomodationForm,
+    AccomodationSearchForm
 )
 
 
@@ -18,9 +18,9 @@ log = logging.getLogger(__name__)
 
 
 @view_defaults(
-    context='..resources.accomodation_type.AccomodationTypeResource',
+    context='..resources.accomodation.AccomodationResource',
 )
-class AccomodationTypeView(object):
+class AccomodationView(object):
 
     def __init__(self, context, request):
         self.context = context
@@ -28,7 +28,7 @@ class AccomodationTypeView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/accomodation_type/index.mak',
+        renderer='travelcrm:templates/accomodation/index.mak',
         permission='view'
     )
     def index(self):
@@ -42,7 +42,7 @@ class AccomodationTypeView(object):
         permission='view'
     )
     def list(self):
-        form = AccomodationTypeSearchForm(self.request, self.context)
+        form = AccomodationSearchForm(self.request, self.context)
         form.validate()
         qb = form.submit()
         return {
@@ -59,10 +59,10 @@ class AccomodationTypeView(object):
     def view(self):
         if self.request.params.get('rid'):
             resource_id = self.request.params.get('rid')
-            accomodation_type = AccomodationType.by_resource_id(resource_id)
+            accomodation = Accomodation.by_resource_id(resource_id)
             return HTTPFound(
                 location=self.request.resource_url(
-                    self.context, 'view', query={'id': accomodation_type.id}
+                    self.context, 'view', query={'id': accomodation.id}
                 )
             )
         result = self.edit()
@@ -75,7 +75,7 @@ class AccomodationTypeView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/accomodation_type/form.mak',
+        renderer='travelcrm:templates/accomodation/form.mak',
         permission='add'
     )
     def add(self):
@@ -88,14 +88,14 @@ class AccomodationTypeView(object):
         permission='add'
     )
     def _add(self):
-        form = AccomodationTypeForm(self.request)
+        form = AccomodationForm(self.request)
         if form.validate():
-            accomodation_type = form.submit()
-            DBSession.add(accomodation_type)
+            accomodation = form.submit()
+            DBSession.add(accomodation)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
-                'response': accomodation_type.id
+                'response': accomodation.id
             }
         else:
             return {
@@ -106,13 +106,13 @@ class AccomodationTypeView(object):
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/accomodation_type/form.mak',
+        renderer='travelcrm:templates/accomodation/form.mak',
         permission='edit'
     )
     def edit(self):
-        accomodation_type = AccomodationType.get(self.request.params.get('id'))
+        accomodation = Accomodation.get(self.request.params.get('id'))
         return {
-            'item': accomodation_type,
+            'item': accomodation,
             'title': _(u'Edit Accomodation Type')
         }
 
@@ -123,13 +123,13 @@ class AccomodationTypeView(object):
         permission='edit'
     )
     def _edit(self):
-        accomodation_type = AccomodationType.get(self.request.params.get('id'))
-        form = AccomodationTypeForm(self.request)
+        accomodation = Accomodation.get(self.request.params.get('id'))
+        form = AccomodationForm(self.request)
         if form.validate():
-            form.submit(accomodation_type)
+            form.submit(accomodation)
             return {
                 'success_message': _(u'Saved'),
-                'response': accomodation_type.id,
+                'response': accomodation.id,
             }
         else:
             return {
@@ -140,12 +140,12 @@ class AccomodationTypeView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/accomodation_type/delete.mak',
+        renderer='travelcrm:templates/accomodation/delete.mak',
         permission='delete'
     )
     def delete(self):
         return {
-            'title': _(u'Delete Accomodation Types'),
+            'title': _(u'Delete Accomodation'),
             'rid': self.request.params.get('rid')
         }
 
@@ -158,7 +158,7 @@ class AccomodationTypeView(object):
     def _delete(self):
         errors = 0
         for id in self.request.params.getall('id'):
-            item = AccomodationType.get(id)
+            item = Accomodation.get(id)
             if item:
                 DBSession.begin_nested()
                 try:

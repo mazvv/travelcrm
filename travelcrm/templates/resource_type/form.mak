@@ -68,16 +68,16 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                         ${h.tags.title(_(u"description"), False, "description")}
+                         ${h.tags.title(_(u"description"), False, "descr")}
                     </div>
                     <div class="ml15">
                         ${h.tags.text(
-                            "description", 
-                            item.description if item else None, 
+                            "descr", 
+                            item.descr if item else None, 
                             class_="easyui-textbox w20", 
                             data_options="multiline:true,height:80",
                         )}
-                        ${h.common.error_container(name='description')}
+                        ${h.common.error_container(name='descr')}
                     </div>
                 </div>
                 <div class="form-field mb05">

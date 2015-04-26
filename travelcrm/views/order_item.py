@@ -97,7 +97,7 @@ class OrderItemView(object):
         rt_cls = get_resource_class(order_item.service.resource_type.name)
         return HTTPFound(
             location=self.request.resource_url(
-                rt_cls(self.request), 'edit'
+                rt_cls(self.request), 'edit', query={'id': order_item.id}
             )
         )
 
@@ -109,10 +109,27 @@ class OrderItemView(object):
     )
     def copy(self):
         order_item = OrderItem.get(self.request.params.get('id'))
-        return {
-            'item': order_item,
-            'title': _(u"Copy Order")
-        }
+        rt_cls = get_resource_class(order_item.service.resource_type.name)
+        return HTTPFound(
+            location=self.request.resource_url(
+                rt_cls(self.request), 'copy', query={'id': order_item.id}
+            )
+        )
+
+    @view_config(
+        name='details',
+        request_method='GET',
+        renderer='travelcrm:templates/order_item/form.mak',
+        permission='view'
+    )
+    def details(self):
+        order_item = OrderItem.get(self.request.params.get('id'))
+        rt_cls = get_resource_class(order_item.service.resource_type.name)
+        return HTTPFound(
+            location=self.request.resource_url(
+                rt_cls(self.request), 'details', query={'id': order_item.id}
+            )
+        )
 
     @view_config(
         name='delete',

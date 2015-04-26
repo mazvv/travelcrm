@@ -72,7 +72,7 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter bank name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter transfer name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"updated"))}

@@ -15,12 +15,12 @@ from ..models import (
 )
 
 
-class AccomodationType(Base):
-    __tablename__ = 'accomodation_type'
+class Transfer(Base):
+    __tablename__ = 'transfer'
     __table_args__ = (
         UniqueConstraint(
             'name',
-            name='unique_idx_accomodation_type_name',
+            name='unique_idx_name_transfer',
         ),
     )
 
@@ -33,21 +33,21 @@ class AccomodationType(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_accomodation_type",
+            name="fk_resource_id_transfer",
             ondelete='restrict',
             onupdate='cascade',
         ),
         nullable=False,
     )
     name = Column(
-        String(length=32),
+        String(length=255),
         nullable=False,
     )
 
     resource = relationship(
         'Resource',
         backref=backref(
-            'accomodation_type',
+            'transfer',
             uselist=False,
             cascade="all,delete"
         ),

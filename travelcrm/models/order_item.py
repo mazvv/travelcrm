@@ -4,15 +4,20 @@ from sqlalchemy import (
     Column,
     Integer,
     Numeric,
+    Date,
+    String,
     Table,
     ForeignKey,
 )
+from sqlalchemy import and_
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 person_order_item = Table(
@@ -45,6 +50,12 @@ person_order_item = Table(
 
 class OrderItem(Base):
     __tablename__ = 'order_item'
+
+    STATUS = (
+        ('awaiting', _(u'awaiting')),
+        ('success', _(u'confirmed')),
+        ('failure', _(u'unconfirmed')),
+    )
 
     id = Column(
         Integer,
@@ -108,6 +119,17 @@ class OrderItem(Base):
         Numeric(16, 2),
         default=0,
         nullable=False
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='awaiting',
+        nullable=False,
+    )
+    status_date = Column(
+        Date,
+    )
+    status_info = Column(
+        String(128),
     )
     resource = relationship(
         'Resource',

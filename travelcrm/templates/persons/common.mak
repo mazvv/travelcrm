@@ -30,7 +30,7 @@
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
-            url:'/persons/list',border:false,
+            url:'/person/list',border:false,
             singleSelect:true,
             rownumbers:true,sortName:'id',sortOrder:'desc',
             idField:'_id',checkOnSelect:false,
@@ -105,13 +105,13 @@
 
 
 <%def name="person_list_details(person)">
-    <span class="b mr05">${item.customer.name}</span>
+    <span class="mr05">${person.name}</span>
     <%
         contacts = map(
             lambda x: (
                 h.common.contact_type_icon(x.contact_type), x.contact
             ),
-            [contact for contact in item.customer.contacts]
+            [contact for contact in person.contacts]
         )
     %>
     % if contacts:

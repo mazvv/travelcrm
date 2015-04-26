@@ -15,12 +15,12 @@ from ..models import (
 )
 
 
-class Service(Base):
-    __tablename__ = 'service'
+class Accomodation(Base):
+    __tablename__ = 'accomodation'
     __table_args__ = (
         UniqueConstraint(
             'name',
-            name='unique_idx_name_service',
+            name='unique_idx_accomodation_name',
         ),
     )
 
@@ -33,27 +33,7 @@ class Service(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_service",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
-    resource_type_id = Column(
-        Integer,
-        ForeignKey(
-            'resource_type.id',
-            name="fk_resource_type_id_service",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
-    account_item_id = Column(
-        Integer,
-        ForeignKey(
-            'account_item.id',
-            name="fk_account_item_id_service",
+            name="fk_resource_id_accomodation",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -63,39 +43,15 @@ class Service(Base):
         String(length=32),
         nullable=False,
     )
-    display_text = Column(
-        String(length=255),
-    )
-    descr = Column(
-        String(length=255),
-    )
+
     resource = relationship(
         'Resource',
         backref=backref(
-            'service',
+            'accomodation',
             uselist=False,
             cascade="all,delete"
         ),
         cascade="all,delete",
-        uselist=False,
-    )
-    resource_type = relationship(
-        'ResourceType',
-        backref=backref(
-            'service',
-            uselist=False,
-            cascade="all,delete"
-        ),
-        cascade="all,delete",
-        uselist=False,
-    )
-    account_item = relationship(
-        'AccountItem',
-        backref=backref(
-            'services',
-            uselist=True,
-            lazy='dynamic',
-        ),
         uselist=False,
     )
 
