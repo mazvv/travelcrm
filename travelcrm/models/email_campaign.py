@@ -51,7 +51,7 @@ class EmailCampaign(Base):
         nullable=False,
     )
     start_dt = Column(
-        DateTime(),
+        DateTime(timezone=True),
         nullable=False,
     )
     resource = relationship(

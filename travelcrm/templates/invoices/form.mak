@@ -57,8 +57,9 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.date_field(
-                            item.date if item else None, 'date', 
-                            options="onSelect: function(index, data){calc_sum_%s();calc_active_until_%s();}" % (_id, _id)
+                            'date',
+                            item.date if item else None, 
+                            date_options="onSelect: function(index, data){calc_sum_%s();calc_active_until_%s();}" % (_id, _id)
                         )}
                         ${h.common.error_container(name='date')}
                     </div>
@@ -69,7 +70,8 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.date_field(
-                            item.active_until if item else None, 'active_until',
+                            'active_until',
+                            item.active_until if item else None,
                         )}
                         ${h.common.error_container(name='active_until')}
                     </div>
@@ -79,10 +81,12 @@
                         ${h.tags.title(_(u"account"), True, "account_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accounts_combobox_field(
-                            request, item.account_id if item else None, 
+                        ${h.fields.accounts_combogrid_field(
+                            request,
+                            'account_id',
+                            item.account_id if item else None, 
                             show_toolbar=False,
-                            options="onSelect: function(index, data){calc_sum_%s();}" % _id,
+                            data_options="onSelect: function(index, data){calc_sum_%s();}" % _id,
                         )}
                         ${h.common.error_container(name='account_id')}
                     </div>

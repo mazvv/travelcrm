@@ -6,27 +6,27 @@ from sqlalchemy import desc
 
 from ...models import DBSession
 from ...models.commission import Commission
-from ...models.touroperator import Touroperator
+from ...models.supplier import Supplier
 
 from ...lib.bl.currencies_rates import currency_exchange
 
 
 def get_commission(
-    sum, touroperator_id, service_id, currency_id, commission_date
+    sum, supplier_id, service_id, currency_id, commission_date
 ):
     """ get commission sum
     """
-    assert isinstance(touroperator_id, int)
+    assert isinstance(supplier_id, int)
     assert isinstance(currency_id, int)
     assert isinstance(service_id, int)
     assert isinstance(commission_date, (datetime, date))
 
     commission = (
         DBSession.query(Commission)
-        .join(Touroperator, Commission.touroperator)
+        .join(Supplier, Commission.supplier)
         .filter(
             Commission.service_id == service_id,
-            Touroperator.id == touroperator_id,
+            Supplier.id == supplier_id,
             Commission.date_from < commission_date,
         )
         .order_by(desc(Commission.date_from))

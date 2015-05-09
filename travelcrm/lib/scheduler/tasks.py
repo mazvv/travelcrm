@@ -3,8 +3,9 @@
 import logging
 import transaction
 
-from ...resources.notification import NotificationResource
+import pytz
 
+from ...resources.notification import NotificationResource
 from ...models.task import Task
 from ...models.resource import Resource
 from ...models.notification import Notification
@@ -37,11 +38,12 @@ def schedule_task_notification(request, task_id):
     id = "%s-%s" % (_task_notification.__name__, task_id)
     task = Task.get(task_id)
     scheduler = get_scheduler(request)
+    run_date = task.reminder_datetime.astimezone(pytz.utc)
     scheduler.add_job(
         _task_notification,
         trigger='date',
         id=id,
         replace_existing=True,
-        run_date=task.reminder,
+        run_date=run_date.replace(tzinfo=None),
         args=[task.id],
     )

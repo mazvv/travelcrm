@@ -17,20 +17,6 @@ from ..lib.utils.common_utils import parse_datetime
 from ..lib.utils.common_utils import translate as _
 
 
-@colander.deferred
-def reminder_validator(node, kw):
-    request = kw.get('request')
-
-    def validator(node, value):
-        deadline = parse_datetime(request.params.get('deadline'))
-        if value and deadline <= value:
-            raise colander.Invalid(
-                node,
-                _(u'Remainder must be earlier than Deadline'),
-            )
-    return colander.All(validator)
-
-
 class _TaskSchema(ResourceSchema):
     employee_id = colander.SchemaNode(
         colander.Integer(),
@@ -47,8 +33,7 @@ class _TaskSchema(ResourceSchema):
         DateTime()
     )
     reminder = colander.SchemaNode(
-        DateTime(),
-        validator=reminder_validator
+        colander.Integer(),
     )
     descr = colander.SchemaNode(
         colander.String(),

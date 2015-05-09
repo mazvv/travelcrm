@@ -30,7 +30,7 @@
                         ${h.tags.title(_(u"structure"), True, "structure_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.structures_combotree_field(item.structure_id if item else None, 'structure_id')}
+                        ${h.fields.structures_combotree_field('structure_id', item.structure_id if item else None)}
                         ${h.common.error_container(name='structure_id')}
                     </div>
                 </div>

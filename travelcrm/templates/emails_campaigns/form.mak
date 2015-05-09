@@ -40,7 +40,7 @@
                         ${h.tags.title(_(u"start at"), True, "start_dt")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.datetime_field(item.start_dt if item else None, 'start_dt')}
+                        ${h.fields.datetime_field('start_dt', item.start_dt if item else None)}
                         ${h.common.error_container(name='start_dt')}
                     </div>
                 </div>

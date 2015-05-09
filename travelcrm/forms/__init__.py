@@ -180,12 +180,15 @@ class ResourceSearchSchema(colander.Schema):
     order = colander.SchemaNode(
         colander.String(),
         validator=colander.OneOf(('asc', 'desc')),
+        missing='asc'
     )
     rows = colander.SchemaNode(
         colander.Integer(),
+        missing=None,
     )
     page = colander.SchemaNode(
         colander.Integer(),
+        missing=None,
     )
 
 
@@ -226,19 +229,29 @@ class BaseSearchForm(BaseForm):
         self.qb = self._qb(context)
         super(BaseSearchForm, self).__init__(request)
 
-    def submit(self):
-        assert self._controls is not None, u'Need to call validate first'
+    def _search(self):
         self.qb.search_simple(self._controls.get('q'))
         self.qb.advanced_search(**self._controls)
         id = self._controls.get('id')
         if id:
             self.qb.filter_id(id.split(','))
+        
+    def _sort(self):
         self.qb.sort_query(
             self._controls.get('sort'),
             self._controls.get('order', 'asc')
         )
-        self.qb.page_query(
-            self._controls.get('rows'),
-            self._controls.get('page')
-        )
+
+    def _page(self):
+        if self._controls.get('rows'):
+            self.qb.page_query(
+                self._controls.get('rows'),
+                self._controls.get('page')
+            )
+
+    def submit(self):
+        assert self._controls is not None, u'Need to call validate first'
+        self._search()
+        self._sort()
+        self._page()
         return self.qb

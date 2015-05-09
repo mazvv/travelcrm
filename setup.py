@@ -66,7 +66,7 @@ setup(
     message_extractors={
         'travelcrm': [
             ('**.py', 'python', None),
-            ('templates/**.mak', 'mako', None),
+            ('templates/**.mako', 'mako', None),
             ('static/**', 'ignore', None)
         ]
     },

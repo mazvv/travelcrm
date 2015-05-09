@@ -17,8 +17,10 @@
                 ${h.tags.title(_(u"location"), True, "location_id")}
             </div>
             <div class="ml15">
-                ${h.fields.locations_combobox_field(
-                    request, item.location_id if item else None,
+                ${h.fields.locations_combogrid_field(
+                    request,
+                    'location_id',
+                    item.location_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name='location_id')}

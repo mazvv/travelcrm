@@ -52,7 +52,7 @@ class ResourceLog(Base):
         String(512),
     )
     modifydt = Column(
-        DateTime(timezone=False),
+        DateTime(timezone=True),
         default=func.now()
     )
 

@@ -5,6 +5,7 @@ from uuid import uuid4
 from datetime import datetime, date, time
 from decimal import Decimal, ROUND_05UP
 
+from pytz import timezone
 from dateutil.parser import parse as pdt
 from babel.dates import (
     format_date as fd, 
@@ -48,6 +49,14 @@ def get_locale_name():
     return (
         settings.get('company.locale_name') 
         or _get_settings_value('pyramid.default_locale_name')
+    )
+
+
+def get_timezone():
+    settings = get_settings()
+    return (
+        settings.get('company.timezone') 
+        or _get_settings_value('pyramid.default_timezone')
     )
 
 
@@ -104,7 +113,7 @@ def get_datetime_format():
 
 
 def parse_datetime(s):
-    return pdt(s)
+    return timezone(get_timezone()).localize(pdt(s))
 
 
 def format_date(value):
@@ -115,7 +124,8 @@ def format_date(value):
 
 def format_datetime(value):
     return fdt(
-        value, format=get_datetime_format(), locale=get_locale_name()
+        value, format=get_datetime_format(), 
+        locale=get_locale_name(), tzinfo=timezone(get_timezone())
     )
 
 

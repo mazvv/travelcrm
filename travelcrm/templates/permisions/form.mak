@@ -19,7 +19,7 @@
                 ${h.tags.title(permision[1], False, "permisions")}
             </div>
             <div class="ml15">
-                ${h.fields.permisions_yes_no_field(permision[0] if item and permision[0] in item.permisions else None, permision=permision[0])}
+                ${h.fields.permisions_yes_no_field('permisions', permision[0] if item and permision[0] in item.permisions else None, permision=permision[0])}
             </div>
         </div>
         % endfor
@@ -32,9 +32,9 @@
             </div>
             <div class="ml15">
                 ${h.fields.permisions_scope_type_field(
-                	item.scope_type if item else 'all', 
-                	'scope_type',
-                	options=('disabled:true' if not allowed_scopes else '')
+                    'scope_type',
+                    item.scope_type if item else 'all', 
+                    data_options=('disabled:true' if not allowed_scopes else '')
                 )}
                 ${h.common.error_container(name='scope_type')}
             </div>
@@ -46,8 +46,8 @@
             <div class="ml15">
                 ${h.fields.structures_combotree_field(
                     item.structure_id if item else None, 
-                    name="structure_id", 
-                    options=('disabled:true' if not allowed_scopes else '')
+                    'structure_id', 
+                    data_options=('disabled:true' if not allowed_scopes else '')
                 )}
                 ${h.common.error_container(name='structure_id')}
             </div>

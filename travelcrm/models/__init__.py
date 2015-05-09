@@ -41,11 +41,10 @@ from roomcat import Roomcat
 from accomodation import Accomodation
 from foodcat import Foodcat
 from bperson import BPerson
-from touroperator import Touroperator
-from licence import Licence
+from supplier import Supplier
+from contract import Contract
 from passport import Passport
 from hotel import Hotel
-from tour_sale import TourSale
 from bank import Bank
 from bank_detail import BankDetail
 from task import Task
@@ -56,10 +55,7 @@ from account_item import AccountItem
 from income import Income
 from account import Account
 from subaccount import Subaccount
-from service_item import ServiceItem
-from service_sale import ServiceSale
 from commission import Commission
-from supplier import Supplier
 from outgoing import Outgoing
 from crosspayment import Crosspayment
 from note import Note
@@ -73,7 +69,6 @@ from wish import Wish
 from offer import Offer
 from order import Order
 from order_item import OrderItem
-from general_service import GeneralService
 from transfer import Transfer
 from tour import Tour
 from transport import Transport

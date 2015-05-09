@@ -39,6 +39,7 @@ def company_settings(event):
             'company.name': company.name,
             'company.base_currency': company.currency.iso_code,
             'company.locale_name': company.settings.get('locale'),
+            'company.timezone': company.settings.get('timezone'),
         }
         request.registry.settings.update(settings)
 
@@ -76,7 +77,7 @@ def scheduler(event):
         jobstores=jobstores,
         executors=executors,
         job_defaults=job_defaults,
-        timezone=timezone(settings['date.timezone'])
+        timezone=timezone('UTC')
     )
     if settings['scheduler.autostart'] == 'true':
         scheduler.start()

@@ -26,7 +26,7 @@
                         ${h.tags.title(_(u"payment date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.date if item else None, 'date')}
+                        ${h.fields.date_field('date', item.date if item else None)}
                         ${h.common.error_container(name='date')}
                     </div>
                 </div>
@@ -35,8 +35,10 @@
                         ${h.tags.title(_(u"subaccount"), True, "subaccount_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.subaccounts_combobox_field(
-                            request, item.subaccount_id if item else None,
+                        ${h.fields.subaccounts_combogrid_field(
+                            request, 
+                            'subaccount_id',
+                            item.subaccount_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='subaccount_id')}
@@ -47,10 +49,9 @@
                         ${h.tags.title(_(u"account item"), True, "account_item_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accounts_items_combobox_field(
-                            request, 
+                        ${h.fields.accounts_items_combotree_field(
+                            'account_item_id',
                             item.account_item.id if item else None,
-                            show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='account_item_id')}
                     </div>

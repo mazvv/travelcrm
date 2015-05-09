@@ -26,7 +26,7 @@
                         ${h.tags.title(_(u"payment date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.date if item else None, 'date')}
+                        ${h.fields.date_field('date', item.date if item else None)}
                         ${h.common.error_container(name='date')}
                     </div>
                 </div>
@@ -35,11 +35,12 @@
                         ${h.tags.title(_(u"invoice"), True, "invoice_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.invoices_combobox_field(
-                            request, 
+                        ${h.fields.invoices_combogrid_field(
+                            request,
+                            'invoice_id',
                             item.invoice_id if item else None,
                             show_toolbar=(not readonly if readonly else True),
-                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id
+                            data_options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id
                         )}
                         ${h.common.error_container(name='invoice_id')}
                     </div>

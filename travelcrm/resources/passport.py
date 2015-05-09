@@ -12,4 +12,4 @@ from ..resources import (
 @implementer(IResourceType)
 class PassportResource(ResourceTypeBase):
 
-    __name__ = 'licence'
+    __name__ = 'contract'

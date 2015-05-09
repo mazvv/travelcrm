@@ -120,7 +120,7 @@ class CalculationView(object):
         for service_item in services_items:
             commission_sum = get_commission(
                 service_item.price,
-                service_item.touroperator_id,
+                service_item.supplier_id,
                 service_item.service_id,
                 service_item.currency_id,
                 calculation_date

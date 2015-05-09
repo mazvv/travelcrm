@@ -3,7 +3,8 @@
 import colander
 
 from . import (
-    ResourceSchema, 
+    ResourceSchema,
+    ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
 )
@@ -32,10 +33,39 @@ def name_validator(node, kw):
     return colander.All(colander.Length(max=255), validator,)
 
 
+@colander.deferred
+def parent_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        if request.params.get('id') and str(value) == request.params.get('id'):
+            raise colander.Invalid(
+                node,
+                _(u'Can not be parent of self'),
+            )
+    return validator
+
+
 class _AccountItemSchema(ResourceSchema):
+    parent_id = colander.SchemaNode(
+        colander.Integer(),
+        validator=parent_validator,
+        missing=None,
+    )
     name = colander.SchemaNode(
         colander.String(),
         validator=name_validator,
+    )
+    type = colander.SchemaNode(
+        colander.String()
+    )
+    status = colander.SchemaNode(
+        colander.String()
+    )
+    descr = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=128),
+        missing=None
     )
 
 
@@ -51,7 +81,11 @@ class AccountItemForm(BaseForm):
         else:
             account_item.resource.notes = []
             account_item.resource.tasks = []
+        account_item.parent_id = self._controls.get('parent_id')
         account_item.name = self._controls.get('name')
+        account_item.type = self._controls.get('type')
+        account_item.status = self._controls.get('status')
+        account_item.descr = self._controls.get('descr')
         for id in self._controls.get('note_id'):
             note = Note.get(id)
             account_item.resource.notes.append(note)
@@ -61,5 +95,21 @@ class AccountItemForm(BaseForm):
         return account_item
 
 
+class _AccountItemSearchSchema(ResourceSearchSchema):
+    with_chain = colander.SchemaNode(
+        colander.String(),
+        missing=None,
+    )
+    
+
 class AccountItemSearchForm(BaseSearchForm):
+    _schema = _AccountItemSearchSchema
     _qb = AccountItemQueryBuilder
+
+    def _search(self):
+        parent_id = self._controls.get('id')
+        self.qb.filter_parent_id(
+            parent_id,
+            with_chain=self._controls.get('with_chain')
+        )
+        

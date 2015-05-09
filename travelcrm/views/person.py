@@ -17,7 +17,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.person import PersonQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.helpers.fields import persons_combobox_field
+from ..lib.helpers.fields import persons_combogrid_field
 
 from ..forms.person import (
     PersonSchema, 
@@ -274,7 +274,7 @@ class PersonView(object):
         if resource:
             value = resource.person.id
         return Response(
-            persons_combobox_field(
+            persons_combogrid_field(
                 self.request, value, name=self.request.params.get('name')
             )
         )

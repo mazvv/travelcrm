@@ -32,11 +32,11 @@ class Calculation(Base):
         ),
         nullable=False,
     )
-    service_item_id = Column(
+    order_item_id = Column(
         Integer,
         ForeignKey(
-            'service_item.id',
-            name="fk_service_item_id_caluclation",
+            'order_item.id',
+            name="fk_order_item_id_caluclation",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -70,8 +70,8 @@ class Calculation(Base):
         cascade="all,delete",
         uselist=False,
     )
-    service_item = relationship(
-        'ServiceItem',
+    order_item = relationship(
+        'OrderItem',
         backref=backref(
             'calculation',
             uselist=False,

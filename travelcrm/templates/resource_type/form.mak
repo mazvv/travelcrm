@@ -61,8 +61,8 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.yes_no_field(
+                            'customizable',
                             int(item.customizable) if item else None, 
-                            "customizable"
                         )}
                     </div>
                 </div>
@@ -86,6 +86,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.resources_types_statuses_combobox_field(
+                            'status',
                             item.status.key if item else None 
                         )}
                     </div>

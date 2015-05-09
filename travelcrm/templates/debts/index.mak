@@ -13,7 +13,7 @@
         iconCls:'fa fa-pie-chart',
         tools:'#${_t_id}'
     "
-    title="${_(u'Debts to Touroperators')}">
+    title="${_(u'Debts to Suppliers')}">
     ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"
@@ -64,21 +64,23 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter supplier name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div class="mt05">
                         ${h.tags.title(_(u"currency"))}
                     </div>
                     <div>
-                        ${h.fields.currencies_combobox_field(request, None, 'currency_id', show_toolbar=False)}
+                        ${h.fields.currencies_combogrid_field(
+                            request, 'currency_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"dates"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "date_from")}
+                        ${h.fields.date_field('date_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "date_to")}
+                        ${h.fields.date_field('date_to')}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">

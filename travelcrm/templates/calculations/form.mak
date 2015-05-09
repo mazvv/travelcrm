@@ -26,8 +26,10 @@
                 ${h.tags.title(_(u"price currency"), True, "currency_id")}
             </div>
             <div class="ml15">
-                ${h.fields.currencies_combobox_field(
-                    request, item.currency_id if item else None,
+                ${h.fields.currencies_combogrid_field(
+                    request,
+                    'currency_id',
+                    item.currency_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name='currency_id')}

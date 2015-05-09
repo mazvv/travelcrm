@@ -111,13 +111,17 @@
                         ${h.tags.title(_(u"person"))}
                     </div>
                     <div>
-                        ${h.fields.persons_combobox_field(request, None, 'person_id', show_toolbar=False)}
+                        ${h.fields.persons_combogrid_field(
+                            request, 'person_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"service"))}
                     </div>
                     <div>
-                        ${h.fields.services_combobox_field(request, None, 'service_id', show_toolbar=False)}
+                        ${h.fields.services_combogrid_field(
+                            request, 'service_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"price range"))}
@@ -131,23 +135,23 @@
                         ${h.tags.title(_(u"sale dates"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "sale_from")}
+                        ${h.fields.date_field('sale_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "sale_to")}
+                        ${h.fields.date_field('sale_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "updated_from")}
+                        ${h.fields.date_field('updated_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "updated_to")}
+                        ${h.fields.date_field('updated_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"modifier"))}
                     </div>
                     <div>
-                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                        ${h.fields.employees_combogrid_field(request, 'modifier_id', show_toolbar=False)}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">

@@ -17,7 +17,6 @@ class CommissionQueryBuilder(ResourcesQueryBuilder):
         self._fields = {
             'id': Commission.id,
             '_id': Commission.id,
-            'date_from': Commission.date_from,
             'service': Service.name,
             'percentage': Commission.percentage,
             'price': Commission.price,

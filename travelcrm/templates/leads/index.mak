@@ -94,31 +94,35 @@
         </div>
         <div class="ml50 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter touroperator or person name'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter supplier or person name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"member"))}
                     </div>
                     <div>
-                        ${h.fields.persons_combobox_field(request, None, 'person_id', show_toolbar=False)}
+                        ${h.fields.persons_combogrid_field(request, 'person_id', show_toolbar=False)}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"hotel"))}
                     </div>
                     <div>
-                        ${h.fields.hotels_combobox_field(request, None, 'hotel_id', show_toolbar=False)}
+                        ${h.fields.hotels_combogrid_field(
+                            request, 
+                            'hotel_id',
+                            show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"hotel category"))}
                     </div>
                     <div>
-                        ${h.fields.hotelcats_combobox_field(request, None, 'hotelcat_id', show_toolbar=False)}
+                        ${h.fields.hotelcats_combogrid_field(request, 'hotelcat_id', show_toolbar=False)}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"country"))}
                     </div>
                     <div>
-                        ${h.fields.countries_combobox_field(request, None, 'country_id', show_toolbar=False)}
+                        ${h.fields.countries_combogrid_field(request, 'country_id', show_toolbar=False)}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"price range"))}
@@ -132,23 +136,23 @@
                         ${h.tags.title(_(u"tour dates"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "tour_from")}
+                        ${h.fields.date_field('tour_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "tour_to")}
+                        ${h.fields.date_field('tour_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "updated_from")}
+                        ${h.fields.date_field('updated_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "updated_to")}
+                        ${h.fields.date_field('updated_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"modifier"))}
                     </div>
                     <div>
-                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                        ${h.fields.employees_combogrid_field(request, 'modifier_id', show_toolbar=False)}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">

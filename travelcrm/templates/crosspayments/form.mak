@@ -27,7 +27,7 @@
                         ${h.tags.title(_(u"date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.cashflow.date if item else None, 'date')}
+                        ${h.fields.date_field('date', item.cashflow.date if item else None)}
                         ${h.common.error_container(name='date')}
                     </div>
                 </div>
@@ -43,10 +43,10 @@
 		                        ${h.tags.title(_(u"account from"), False, "account_from_id")}
 		                    </div>
 		                    <div class="ml15">
-		                        ${h.fields.accounts_combobox_field(
+		                        ${h.fields.accounts_combogrid_field(
 		                            request,
+		                            'account_from_id',
 		                            item.cashflow.account_from_id if item else None,
-		                            name='account_from_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
 		                        )}
@@ -58,10 +58,10 @@
 		                        ${h.tags.title(_(u"subaccount from"), False, "subaccount_from_id")}
 		                    </div>
 		                    <div class="ml15">
-		                        ${h.fields.subaccounts_combobox_field(
+		                        ${h.fields.subaccounts_combogrid_field(
 		                            request,
+		                            'subaccount_from_id',
 		                            item.cashflow.subaccount_from_id if item else None,
-		                            name='subaccount_from_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
 		                        )}
@@ -75,10 +75,10 @@
 		                        ${h.tags.title(_(u"account to"), False, "account_to_id")}
 		                    </div>
 		                    <div class="ml15">
-		                        ${h.fields.accounts_combobox_field(
-		                            request, 
+		                        ${h.fields.accounts_combogrid_field(
+		                            request,
+		                            'account_to_id',
 		                            item.cashflow.account_to_id if item else None,
-		                            name='account_to_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
 		                        )}
@@ -90,10 +90,10 @@
 		                        ${h.tags.title(_(u"subaccount to"), False, "subaccount_to_id")}
 		                    </div>
 		                    <div class="ml15">
-		                        ${h.fields.subaccounts_combobox_field(
-		                            request, 
+		                        ${h.fields.subaccounts_combogrid_field(
+		                            request,
+		                            'subaccount_to_id',
 		                            item.cashflow.subaccount_to_id if item else None,
-		                            name='subaccount_to_id',
 		                            show_toolbar=(not readonly if readonly else True),
 		                            options="onSelect: function(index, data){$('#%s .currency').textbox('setValue', data.currency)}" % _form_id,
 		                        )}
@@ -108,10 +108,9 @@
                         ${h.tags.title(_(u"account item"), True, "account_item_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accounts_items_combobox_field(
-                            request,
+                        ${h.fields.accounts_items_combogrid_field(
+                            'account_item_id',
                             item.cashflow.account_item_id if item else None,
-                            show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='account_item_id')}
                     </div>

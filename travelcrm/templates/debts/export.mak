@@ -1,9 +1,9 @@
 <%inherit file="travelcrm:templates/_report.mak"/>
-<h1>${_(u'Report')}: ${_(u'Debts to Touroperators')}</h1>
+<h1>${_(u'Report')}: ${_(u'Debts to Suppliers')}</h1>
 <table width="100%">
 	<tr>
 		<th width="5%" align="left">#</th>
-		<th width="35%" align="left">${_(u'Touroperator')}</th>
+		<th width="35%" align="left">${_(u'Supplier')}</th>
 		<th width="15%" align="right">${_(u'Debt')}</th>
 		<th width="15%" align="right">${_(u'Outgoing')}</th>
 		<th width="15%" align="right">${_(u'Balance')}</th>

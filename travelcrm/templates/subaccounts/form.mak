@@ -34,9 +34,11 @@
                         ${h.tags.title(_(u"account"), True, "account_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accounts_combobox_field(
-                        	request, item.account_id if item else None,
-                        	show_toolbar=(not readonly if readonly else True)
+                        ${h.fields.accounts_combogrid_field(
+                            request,
+                            'account_id',
+                            item.account_id if item else None,
+                            show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='account_id')}
                     </div>
@@ -47,8 +49,9 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.subaccounts_types_combobox_field(
+                            'subaccount_type',
                             resource.resource_type.name if resource else None, 
-                            options="""
+                            data_options="""
                                 width:271,
                                 onSelect: function(record){
                                     $.post("/" + record.value + "/combobox",
@@ -64,22 +67,22 @@
                                     $.post("/" + subaccount_type + "/combobox",
                                     	{'name': 'source_id', 'resource_id': %s},
                                         function(data){
-			                    data = $('<div />').html(data);
-			                    if(%s){
+                                    data = $('<div />').html(data);
+                                if(%s){
                                                 data.find('.combogrid-toolbar').remove();
                                                 data = disable_obj_inputs(data);
-			                    }
+                                }
                                             data = data.html();
                                             $("#%s").html(data);
                                             $.parser.parse("#%s");
                                         }
                                     );
-                                }                          
+                                }
                             """ % (
-                           	_combobox_container, _combobox_container,
-                            	resource.id if resource else 0,
-			        h.common.jsonify(readonly if readonly else False),
-                            	_combobox_container, _combobox_container,
+                            _combobox_container, _combobox_container,
+                            resource.id if resource else 0,
+                            h.common.jsonify(readonly if readonly else False),
+                                _combobox_container, _combobox_container,
                             )
                         )}
                         ${h.common.error_container(name='subaccount_type')}

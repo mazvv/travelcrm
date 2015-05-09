@@ -22,6 +22,7 @@ class CurrencyRate(Base):
         UniqueConstraint(
             'currency_id',
             'date',
+            'supplier_id',
             name='unique_idx_currency_rate_currency_id_date',
         ),
     )
@@ -35,7 +36,27 @@ class CurrencyRate(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_tour",
+            name="fk_resource_id_currency_rate",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
+    currency_id = Column(
+        Integer,
+        ForeignKey(
+            'currency.id',
+            name="fk_currency_id_currency_rate",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
+    supplier_id = Column(
+        Integer,
+        ForeignKey(
+            'supplier.id',
+            name="fk_supplier_id_currency_rate",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -43,16 +64,6 @@ class CurrencyRate(Base):
     )
     date = Column(
         Date,
-        nullable=False,
-    )
-    currency_id = Column(
-        Integer,
-        ForeignKey(
-            'currency.id',
-            name="fk_currency_id_tour",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
         nullable=False,
     )
     rate = Column(
@@ -68,6 +79,14 @@ class CurrencyRate(Base):
         ),
         cascade="all,delete",
         uselist=False,
+    )
+    supplier = relationship(
+        'Supplier',
+        backref=backref(
+            'currency_rates',
+            uselist=True,
+            lazy="dynamic"
+        ),
     )
     currency = relationship(
         'Currency',
@@ -93,8 +112,11 @@ class CurrencyRate(Base):
         )
 
     @classmethod
-    def get_by_currency(cls, currency_id, date=None):
-        conditions = [cls.currency_id == currency_id]
+    def get_by_currency(cls, currency_id, supplier_id, date=None):
+        conditions = [
+            cls.currency_id == currency_id, 
+            cls.supplier_id == supplier_id
+        ]
         if date:
             conditions.append(cls.date == date)
             return DBSession.query(cls).filter(*conditions).first()

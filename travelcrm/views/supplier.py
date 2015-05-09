@@ -10,7 +10,7 @@ from ..models import DBSession
 from ..models.resource import Resource
 from ..models.supplier import Supplier
 from ..lib.utils.common_utils import translate as _
-from ..lib.helpers.fields import suppliers_combobox_field
+from ..lib.helpers.fields import suppliers_combogrid_field
 from ..forms.supplier import (
     SupplierForm, 
     SupplierSearchForm
@@ -31,7 +31,7 @@ class SupplierView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/suppliers/index.mak',
+        renderer='travelcrm:templates/supplier/index.mak',
         permission='view'
     )
     def index(self):
@@ -56,7 +56,7 @@ class SupplierView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/suppliers/form.mak',
+        renderer='travelcrm:templates/supplier/form.mak',
         permission='view'
     )
     def view(self):
@@ -78,7 +78,7 @@ class SupplierView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/suppliers/form.mak',
+        renderer='travelcrm:templates/supplier/form.mak',
         permission='add'
     )
     def add(self):
@@ -105,13 +105,13 @@ class SupplierView(object):
         else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': form.errors
+                'errors': supplier.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/suppliers/form.mak',
+        renderer='travelcrm:templates/supplier/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -145,7 +145,7 @@ class SupplierView(object):
     @view_config(
         name='details',
         request_method='GET',
-        renderer='travelcrm:templates/suppliers/details.mak',
+        renderer='travelcrm:templates/supplier/details.mak',
         permission='view'
     )
     def details(self):
@@ -157,7 +157,7 @@ class SupplierView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/suppliers/delete.mak',
+        renderer='travelcrm:templates/supplier/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -173,23 +173,21 @@ class SupplierView(object):
         permission='delete'
     )
     def _delete(self):
-        errors = 0
-        for id in self.request.params.getall('id'):
-            item = Supplier.get(id)
-            if item:
-                DBSession.begin_nested()
-                try:
-                    DBSession.delete(item)
-                    DBSession.commit()
-                except:
-                    errors += 1
-                    DBSession.rollback()
-        if errors > 0:
-            return {
-                'error_message': _(
-                    u'Some objects could not be delete'
-                ),
-            }
+        ids = self.request.params.getall('id')
+        if ids:
+            try:
+                (
+                    DBSession.query(Supplier)
+                    .filter(Supplier.id.in_(ids))
+                    .delete()
+                )
+            except:
+                DBSession.rollback()
+                return {
+                    'error_message': _(
+                        u'Some objects could not be delete'
+                    ),
+                }
         return {'success_message': _(u'Deleted')}
 
     @view_config(
@@ -203,7 +201,7 @@ class SupplierView(object):
         if resource:
             value = resource.supplier.id
         return Response(
-            suppliers_combobox_field(
-                self.request, value, name=self.request.params.get('name')
+            suppliers_combogrid_field(
+                self.request, self.request.params.get('name'), value
             )
         )

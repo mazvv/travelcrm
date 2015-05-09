@@ -17,7 +17,7 @@
                 ${h.tags.title(_(u"passport type"), True, "passport type")}
             </div>
             <div class="ml15">
-                ${h.fields.passport_type_field(item.passport_type.key if item else None)}
+                ${h.fields.passport_type_field('passport_type', item.passport_type.key if item else None)}
                 ${h.common.error_container(name='passport_type')}
             </div>
         </div>
@@ -35,8 +35,9 @@
                 ${h.tags.title(_(u"country"), True, "country")}
             </div>
             <div class="ml15">
-                ${h.fields.countries_combobox_field(
-                    request, 
+                ${h.fields.countries_combogrid_field(
+                    request,
+                    'country_id',
                     item.country_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
@@ -48,7 +49,7 @@
                 ${h.tags.title(_(u"end date"), False, "end_date")}
             </div>
             <div class="ml15">
-                ${h.fields.date_field(item.end_date if item else None, "end_date")}
+                ${h.fields.date_field('end_date', item.end_date if item else None)}
                 ${h.common.error_container(name='end_date')}
             </div>
         </div>

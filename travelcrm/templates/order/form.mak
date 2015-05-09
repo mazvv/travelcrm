@@ -22,7 +22,7 @@
                         ${h.tags.title(_(u"deal date"), True, "deal_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.deal_date if item else None, 'deal_date')}
+                        ${h.fields.date_field('deal_date', item.deal_date if item else None)}
                         ${h.common.error_container(name='deal_date')}
                     </div>
                 </div>
@@ -31,8 +31,10 @@
                         ${h.tags.title(_(u"advertise"), True, "advsource_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.advsources_combobox_field(
-                            request, item.advsource_id if item else None,
+                        ${h.fields.advsources_combogrid_field(
+                            request,
+                            'advsource_id',
+                            item.advsource_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='advsource_id')}
@@ -43,9 +45,10 @@
                         ${h.tags.title(_(u"customer"), True, "customer_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.persons_combobox_field(
-                            request, item.customer_id if item else None, 
-                            name="customer_id",
+                        ${h.fields.persons_combogrid_field(
+                            request,
+                            'customer_id',
+                            item.customer_id if item else None, 
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name="customer_id")}

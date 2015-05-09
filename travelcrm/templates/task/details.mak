@@ -15,7 +15,8 @@
     <div class="dp25 b">${_(u'terms')}</div>
     <div class="dp75">
         % if item.reminder:
-            <span class="fa fa-bell-o mr05 easyui-tooltip" title="${_(u'notification time')}"></span>${h.common.format_datetime(item.reminder)}
+            <span class="fa fa-bell-o mr05 easyui-tooltip" title="${_(u'notification time')}"></span>
+            ${h.common.format_datetime(item.reminder_datetime)}
             <span class="fa fa-long-arrow-right"></span>
         % endif
         <span class="fa fa-clock-o mr05 easyui-tooltip" title="${_(u'deadline')}"></span>${h.common.format_datetime(item.deadline)}

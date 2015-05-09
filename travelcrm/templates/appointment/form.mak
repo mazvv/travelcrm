@@ -21,7 +21,7 @@
                         ${h.tags.title(_(u"appointment date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.date if item else None, "date")}
+                        ${h.fields.date_field('date', item.date if item else None)}
                         ${h.common.error_container(name='date')}
                     </div>
                 </div>
@@ -30,8 +30,9 @@
                         ${h.tags.title(_(u"employee"), True, "employee_id")}
                     </div>
                     <div class="ml15">
-                       ${h.fields.employees_combobox_field(
-                           request=request, 
+                       ${h.fields.employees_combogrid_field(
+                           request=request,
+                           'employee_id',
                            value=item.employee_id if item else None,
                            show_toolbar=(not readonly if readonly else True),
                        )}
@@ -44,8 +45,9 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.positions_combogrid_field(
-                            request, 
-                            item.position_id if item else None, name='position_id',
+                            request,
+                            'position_id',
+                            value=item.position_id if item else None, name='position_id',
                             show_toolbar=(not readonly if readonly else True),
                         )}
                         ${h.common.error_container(name='position_id')}
@@ -65,8 +67,10 @@
                         ${h.tags.title(_(u"currency"), True, "currency_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.currencies_combobox_field(
-                            request, item.currency_id if item else None,
+                        ${h.fields.currencies_combogrid_field(
+                            request,
+                            'currency_id',
+                            item.currency_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='currency_id')}

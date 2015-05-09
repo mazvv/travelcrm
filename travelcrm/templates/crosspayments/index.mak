@@ -82,39 +82,49 @@
                         ${h.tags.title(_(u"account from"))}
                     </div>
                     <div>
-                        ${h.fields.accounts_combobox_field(request, None, 'account_from_id', show_toolbar=False)}
+                        ${h.fields.accounts_combogrid_field(
+                            request, 'account_from_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"subaccount from"))}
                     </div>
                     <div>
-                        ${h.fields.subaccounts_combobox_field(request, None, 'subaccount_from_id', show_toolbar=False)}
+                        ${h.fields.subaccounts_combogrid_field(
+                            request, 'subaccount_from_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"account to"))}
                     </div>
                     <div>
-                        ${h.fields.accounts_combobox_field(request, None, 'account_to_id', show_toolbar=False)}
+                        ${h.fields.accounts_combogrid_field(
+                            request, 'account_to_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"subaccount to"))}
                     </div>
                     <div>
-                        ${h.fields.subaccounts_combobox_field(request, None, 'subaccount_to_id', show_toolbar=False)}
+                        ${h.fields.subaccounts_combogrid_field(
+                            request, 'subaccount_to_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"account item"))}
                     </div>
                     <div>
-                        ${h.fields.accounts_items_combobox_field(request, None, 'account_item_id', show_toolbar=False)}
+                        ${h.fields.accounts_items_combotree_field(
+                            'account_item_id'
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"date payment range"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "date_from")}
+                        ${h.fields.date_field('date_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "date_to")}
+                        ${h.fields.date_field('date_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"sum range"))}
@@ -128,15 +138,15 @@
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "updated_from")}
+                        ${h.fields.date_field('updated_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "updated_to")}
+                        ${h.fields.date_field('updated_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"modifier"))}
                     </div>
                     <div>
-                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                        ${h.fields.employees_combogrid_field(request, 'modifier_id', show_toolbar=False)}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">

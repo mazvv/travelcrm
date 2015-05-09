@@ -7,6 +7,7 @@ from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.currency_rate import CurrencyRate
 from ...models.currency import Currency
+from ...models.supplier import Supplier
 from ...lib.utils.common_utils import get_base_currency
 
 
@@ -18,6 +19,7 @@ class CurrencyRateQueryBuilder(ResourcesQueryBuilder):
             'id': CurrencyRate.id,
             '_id': CurrencyRate.id,
             'iso_code': Currency.iso_code,
+            'supplier': Supplier.name,
             'rate': CurrencyRate.rate,
             'date': CurrencyRate.date,
             'base_currency': literal(get_base_currency())
@@ -33,6 +35,7 @@ class CurrencyRateQueryBuilder(ResourcesQueryBuilder):
             self.query
             .join(CurrencyRate, Resource.currency_rate)
             .join(Currency, CurrencyRate.currency)
+            .join(Supplier, CurrencyRate.supplier)
         )
         super(CurrencyRateQueryBuilder, self).build_query()
 
@@ -43,9 +46,29 @@ class CurrencyRateQueryBuilder(ResourcesQueryBuilder):
 
     def advanced_search(self, **kwargs):
         super(CurrencyRateQueryBuilder, self).advanced_search(**kwargs)
+        if 'currency_id' in kwargs:
+            self._filter_currency_id(
+                kwargs.get('currency_id')
+            )
+        if 'supplier_id' in kwargs:
+            self._filter_supplier_id(
+                kwargs.get('supplier_id')
+            )
         if 'rate_from' in kwargs or 'rate_to' in kwargs:
             self._filter_rate_date(
                 kwargs.get('rate_from'), kwargs.get('rate_to')
+            )
+
+    def _filter_currency_id(self, currency_id):
+        if currency_id:
+            self.query = self.query.filter(
+                CurrencyRate.currency_id == currency_id
+            )
+
+    def _filter_supplier_id(self, supplier_id):
+        if supplier_id:
+            self.query = self.query.filter(
+                CurrencyRate.supplier_id == supplier_id
             )
 
     def _filter_rate_date(self, rate_from, rate_to):

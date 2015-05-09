@@ -30,8 +30,10 @@
                         ${h.tags.title(_(u"region"), True, "region_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.regions_combobox_field(
-                            request, item.region_id if item else None,
+                        ${h.fields.regions_combogrid_field(
+                            request,
+                            'region_id',
+                            item.region_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='region_id')}

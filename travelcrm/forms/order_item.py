@@ -21,7 +21,7 @@ class OrderItemSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
         colander.Integer(),
     )
-    touroperator_id = colander.SchemaNode(
+    supplier_id = colander.SchemaNode(
         colander.Integer(),
     )
     price = colander.SchemaNode(
@@ -69,7 +69,7 @@ class OrderItemForm(BaseForm):
 
         order_item.service_id = self._controls.get('service_id')
         order_item.currency_id = self._controls.get('currency_id')
-        order_item.touroperator_id = self._controls.get('touroperator_id')
+        order_item.supplier_id = self._controls.get('supplier_id')
         order_item.price = self._controls.get('price')
         order_item.status = self._controls.get('status')
         order_item.status_date = self._controls.get('status_date')

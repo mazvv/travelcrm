@@ -30,9 +30,9 @@
                         ${h.tags.title(_(u"account item"), True, "account_item_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accounts_items_combobox_field(
-                            request, item.account_item_id if item else None,
-                            show_toolbar=(not readonly if readonly else True)
+                        ${h.fields.accounts_items_combotree_field(
+                            'account_item_id',
+                            item.account_item_id if item else None,
                         )}
                         ${h.common.error_container(name='account_item_id')}
                     </div>
@@ -43,6 +43,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.services_types_combobox_field(
+                            'resource_type_id',
                             item.resource_type_id if item else None,
                         )}
                         ${h.common.error_container(name='resource_type_id')}

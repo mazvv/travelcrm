@@ -29,9 +29,10 @@
                         ${h.tags.title(_(u"performer"), True, "employee_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.employees_combobox_field(
-                        	request, 
-                        	item.employee_id if item else h.common.get_auth_employee(request).id, 
+                        ${h.fields.employees_combogrid_field(
+                        	request,
+                        	'employee_id',
+                        	value=item.employee_id if item else h.common.get_auth_employee(request).id, 
                         	show_toolbar=False
                         )}
                         ${h.common.error_container(name='employee_id')}
@@ -39,20 +40,20 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"reminder"), True, "reminder")}
+                        ${h.tags.title(_(u"deadline"), True, "deadline")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.datetime_field(item.reminder if item else None, 'reminder')}
-                        ${h.common.error_container(name='reminder')}
+                        ${h.fields.datetime_field('deadline', item.deadline if item else None)}
+                        ${h.common.error_container(name='deadline')}
                     </div>
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"deadline"), True, "deadline")}
+                        ${h.tags.title(_(u"reminder, min"), True, "reminder")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.datetime_field(item.deadline if item else None, 'deadline')}
-                        ${h.common.error_container(name='deadline')}
+                        ${h.fields.tasks_reminders_combobox_field('reminder', item.reminder if item else None)}
+                        ${h.common.error_container(name='reminder')}
                     </div>
                 </div>
                 <div class="form-field mb05">
@@ -61,6 +62,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.tasks_statuses_combobox_field(
+                            'status',
                             item.status.key if item else None
                         )}
                     </div>

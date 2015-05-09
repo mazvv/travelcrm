@@ -30,8 +30,10 @@
                         ${h.tags.title(_(u"country"), True, "country_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.countries_combobox_field(
-                            request, item.country_id if item else None,
+                        ${h.fields.countries_combogrid_field(
+                            request,
+                            'country_id',
+                            item.country_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='country_id')}

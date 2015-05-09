@@ -85,7 +85,9 @@
                         ${h.tags.title(_(u"currency"))}
                     </div>
                     <div>
-                        ${h.fields.currencies_combobox_field(request, None, 'currency_id', show_toolbar=False)}
+                        ${h.fields.currencies_combogrid_field(
+                            request, 'currency_id', show_toolbar=False
+                        )}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"sum range"))}
@@ -107,23 +109,23 @@
                         ${h.tags.title(_(u"invoice date"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "date_from")}
+                        ${h.fields.date_field('date_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "date_to")}
+                        ${h.fields.date_field('date_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"updated"))}
                     </div>
                     <div>
-                        ${h.fields.date_field(None, "updated_from")}
+                        ${h.fields.date_field('updated_from')}
                         <span class="p1">-</span>
-                        ${h.fields.date_field(None, "updated_to")}
+                        ${h.fields.date_field('updated_to')}
                     </div>
                     <div class="mt05">
                         ${h.tags.title(_(u"modifier"))}
                     </div>
                     <div>
-                        ${h.fields.employees_combobox_field(request, None, 'modifier_id', show_toolbar=False)}
+                        ${h.fields.employees_combogrid_field(request, 'modifier_id', show_toolbar=False)}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">

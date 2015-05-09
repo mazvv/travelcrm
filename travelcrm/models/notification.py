@@ -115,7 +115,7 @@ class Notification(Base):
         String,
     )
     created = Column(
-        DateTime,
+        DateTime(timezone=True),
         default=func.now(),
     )
     resource = relationship(

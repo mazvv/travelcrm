@@ -7,7 +7,7 @@ from ...models.resource import Resource
 from ...models.order_item import OrderItem
 from ...models.service import Service
 from ...models.currency import Currency
-from ...models.touroperator import Touroperator
+from ...models.supplier import Supplier
 
 
 class OrderItemQueryBuilder(ResourcesQueryBuilder):
@@ -18,7 +18,7 @@ class OrderItemQueryBuilder(ResourcesQueryBuilder):
             'id': OrderItem.id,
             '_id': OrderItem.id,
             'service': Service.name,
-            'touroperator': Touroperator.name,
+            'supplier': Supplier.name,
             'status': OrderItem.status,
             'price': OrderItem.price,
             'currency': Currency.iso_code,
@@ -35,8 +35,8 @@ class OrderItemQueryBuilder(ResourcesQueryBuilder):
                 OrderItem.service
             )
             .join(
-                Touroperator,
-                OrderItem.touroperator
+                Supplier,
+                OrderItem.supplier
             )
             .join(
                 Currency,

@@ -55,7 +55,7 @@
                 $.each($('#${_storage_id} input[name=${name}]'), function(i, el){
                     id.push($(el).val());
                 });
-                param.id = id.join();                            
+                param.id = id.join();
                 param.rows = 0;
                 param.page = 0;
             }
@@ -81,7 +81,7 @@
                 <%
                     f_id = h.common.gen_id()
                 %>
-                ${h.fields.bpersons_combobox_field(request, None, f_id, id=f_id)}
+                ${h.fields.bpersons_combogrid_field(request, f_id, id=f_id)}
             </div>
             <div class="button-group minor-group ml1">
                 <a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>

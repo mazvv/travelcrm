@@ -45,10 +45,7 @@ class AccountItemView(object):
         form = AccountItemSearchForm(self.request, self.context)
         form.validate()
         qb = form.submit()
-        return {
-            'total': qb.get_count(),
-            'rows': qb.get_serialized()
-        }
+        return qb.get_serialized()
 
     @view_config(
         name='view',

@@ -51,7 +51,7 @@
                         ${h.tags.title(_(u"gender"), False, "gender")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.gender_combobox_field(item.gender.key if item else None)}
+                        ${h.fields.gender_combobox_field('gender', item.gender.key if item else None)}
                         ${h.common.error_container(name='gender')}
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         ${h.tags.title(_(u"birthday"), False, "birthday")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.birthday if item else None, 'birthday')}
+                        ${h.fields.date_field('birthday', item.birthday if item else None)}
                         ${h.common.error_container(name='birthday')}
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                         ${h.tags.title(_(u"newsletter subscriber"), False, "subscriber")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.yes_no_field(int(item.subscriber) if item else None, 'subscriber')}
+                        ${h.fields.yes_no_field('subscriber', int(item.subscriber) if item else None)}
                         ${h.common.error_container(name='subscriber')}
                     </div>
                 </div>

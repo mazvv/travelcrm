@@ -1,5 +1,7 @@
 # -*-coding: utf-8-*-
 
+from datetime import timedelta
+
 from sqlalchemy import (
     Column,
     Integer,
@@ -86,11 +88,11 @@ class Task(Base):
         nullable=False,
     )
     deadline = Column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False,
     )
     reminder = Column(
-        DateTime,
+        Integer,
     )
     descr = Column(
         String,
@@ -146,11 +148,6 @@ class Task(Base):
         )
 
     @property
-    def reminder_date(self):
+    def reminder_datetime(self):
         if self.reminder:
-            return self.reminder.date()
-
-    @property
-    def reminder_time(self):
-        if self.reminder:
-            return self.reminder.time()
+            return self.deadline - timedelta(minutes=self.reminder)

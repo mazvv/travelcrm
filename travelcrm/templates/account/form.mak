@@ -30,7 +30,10 @@
                         ${h.tags.title(_(u"account type"), True, "account_type")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accounts_types_combobox_field(item.account_type.key if item else None)}
+                        ${h.fields.accounts_types_combobox_field(
+                            'account_type',
+                            item.account_type.key if item else None
+                        )}
                         ${h.common.error_container(name='account_type')}
                     </div>
                 </div>
@@ -39,8 +42,10 @@
                         ${h.tags.title(_(u"currency"), True, "currency_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.currencies_combobox_field(
-                            request, item.currency_id if item else None,
+                        ${h.fields.currencies_combogrid_field(
+                            request,
+                            'currency_id',
+                            item.currency_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='currency_id')}

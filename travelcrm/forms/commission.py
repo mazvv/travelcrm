@@ -2,13 +2,17 @@
 
 import colander
 
-from . import Date, ResourceSchema
+from . import(
+    ResourceSchema, 
+    BaseForm,
+    BaseSearchForm,
+)
+from ..resources.commission import CommissionResource
+from ..models.commission import Commission
+from ..lib.qb.commission import CommissionQueryBuilder
 
 
-class CommissionSchema(ResourceSchema):
-    date_from = colander.SchemaNode(
-        Date(),
-    )
+class _CommissionSchema(ResourceSchema):
     service_id = colander.SchemaNode(
         colander.Integer()
     )
@@ -22,3 +26,29 @@ class CommissionSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
         colander.Integer(),
     )
+    descr = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=255),
+        missing=u''
+    )
+
+
+class CommissionForm(BaseForm):
+    _schema = _CommissionSchema
+
+    def submit(self, commission=None):
+        context = CommissionResource(self.request)
+        if not commission:
+            commission = Commission(
+                resource=context.create_resource()
+            )
+        commission.service_id = self._controls.get('service_id')
+        commission.percentage = self._controls.get('percentage')
+        commission.price = self._controls.get('price')
+        commission.currency_id = self._controls.get('currency_id')
+        commission.descr = self._controls.get('descr')
+        return commission
+
+
+class CommissionSearchForm(BaseSearchForm):
+    _qb = CommissionQueryBuilder

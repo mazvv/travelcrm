@@ -17,8 +17,10 @@
                 ${h.tags.title(_(u"service"), True, "service_id")}
                 </div>
                 <div class="ml15">
-                ${h.fields.services_combobox_field(
-                    request, item.service_id if item else None,
+                ${h.fields.services_combogrid_field(
+                    request,
+                    'service_id',
+                    item.service_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name='service_id')}
@@ -26,14 +28,16 @@
             </div>
         <div class="form-field">
             <div class="dl15">
-                ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
+                ${h.tags.title(_(u"supplier"), True, "supplier_id")}
             </div>
             <div class="ml15">
-                ${h.fields.touroperators_combobox_field(
-                    request, item.touroperator_id if item else None,
+                ${h.fields.suppliers_combogrid_field(
+                    request,
+                    'supplier_id',
+                    item.supplier_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
-                ${h.common.error_container(name='touroperator_id')}
+                ${h.common.error_container(name='supplier_id')}
             </div>
         </div>
         <div class="form-field">
@@ -41,8 +45,10 @@
                 ${h.tags.title(_(u"person"), True, "person_id")}
             </div>
             <div class="ml15">
-                ${h.fields.persons_combobox_field(
-                    request, item.person_id if item else None,
+                ${h.fields.persons_combogrid_field(
+                    request,
+                    'person_id',
+                    item.person_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name="person_id")}
@@ -62,8 +68,10 @@
                 ${h.tags.title(_(u"price currency"), True, "currency_id")}
             </div>
             <div class="ml15">
-                ${h.fields.currencies_combobox_field(
-                    request, item.currency_id if item else None,
+                ${h.fields.currencies_combogrid_field(
+                    request,
+                    'currency_id',
+                    item.currency_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name='currency_id')}

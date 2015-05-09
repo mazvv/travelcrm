@@ -196,8 +196,8 @@ msgstr ""
 msgid "Remainder must be earlier than Deadline"
 msgstr ""
 
-#: travelcrm/forms/touroperators.py:25
-msgid "Touroperator with the same name exists"
+#: travelcrm/forms/suppliers.py:25
+msgid "Supplier with the same name exists"
 msgstr ""
 
 #: travelcrm/forms/tours_sales.py:23
@@ -386,8 +386,8 @@ msgstr ""
 #: travelcrm/templates/subaccounts/index.mak:38
 #: travelcrm/templates/suppliers/form.mak:18
 #: travelcrm/templates/suppliers/index.mak:52
-#: travelcrm/templates/touroperators/form.mak:20
-#: travelcrm/templates/touroperators/index.mak:52
+#: travelcrm/templates/suppliers/form.mak:20
+#: travelcrm/templates/suppliers/index.mak:52
 #: travelcrm/templates/turnovers/index.mak:35
 msgid "name"
 msgstr "название"
@@ -606,7 +606,7 @@ msgstr ""
 #: travelcrm/resources/subaccounts.py:30
 #: travelcrm/resources/suppliers.py:32
 #: travelcrm/resources/tasks.py:30
-#: travelcrm/resources/touroperators.py:33
+#: travelcrm/resources/suppliers.py:33
 #: travelcrm/resources/tours_sales.py:36
 #: travelcrm/resources/turnovers.py:29
 #: travelcrm/resources/unpaid_invoices.py:32
@@ -656,7 +656,7 @@ msgstr "просмотр"
 #: travelcrm/resources/subaccounts.py:31
 #: travelcrm/resources/suppliers.py:33
 #: travelcrm/resources/tasks.py:31
-#: travelcrm/resources/touroperators.py:34
+#: travelcrm/resources/suppliers.py:34
 #: travelcrm/resources/tours_sales.py:37
 #: travelcrm/resources/users.py:28
 msgid "add"
@@ -706,7 +706,7 @@ msgstr "добавление"
 #: travelcrm/resources/subaccounts.py:32
 #: travelcrm/resources/suppliers.py:34
 #: travelcrm/resources/tasks.py:32
-#: travelcrm/resources/touroperators.py:35
+#: travelcrm/resources/suppliers.py:35
 #: travelcrm/resources/tours_sales.py:38
 #: travelcrm/resources/users.py:29
 msgid "edit"
@@ -756,7 +756,7 @@ msgstr "изменение"
 #: travelcrm/resources/subaccounts.py:33
 #: travelcrm/resources/suppliers.py:35
 #: travelcrm/resources/tasks.py:33
-#: travelcrm/resources/touroperators.py:36
+#: travelcrm/resources/suppliers.py:36
 #: travelcrm/resources/tours_sales.py:39
 #: travelcrm/resources/users.py:30
 msgid "delete"
@@ -856,7 +856,7 @@ msgstr "Обновить"
 #: travelcrm/templates/subaccounts/delete.mak:12
 #: travelcrm/templates/suppliers/delete.mak:12
 #: travelcrm/templates/tasks/delete.mak:12
-#: travelcrm/templates/touroperators/delete.mak:12
+#: travelcrm/templates/suppliers/delete.mak:12
 #: travelcrm/templates/tours_sales/delete.mak:12
 #: travelcrm/templates/users/delete.mak:12
 msgid "Do you realy want to delete checked items?"
@@ -953,8 +953,8 @@ msgstr "Действительно удалить отмеченные запи�
 #: travelcrm/templates/tasks/common.mak:101
 #: travelcrm/templates/tasks/delete.mak:18
 #: travelcrm/templates/tasks/index.mak:99
-#: travelcrm/templates/touroperators/delete.mak:18
-#: travelcrm/templates/touroperators/index.mak:82
+#: travelcrm/templates/suppliers/delete.mak:18
+#: travelcrm/templates/suppliers/index.mak:82
 #: travelcrm/templates/tours_sales/common.mak:102
 #: travelcrm/templates/tours_sales/delete.mak:18
 #: travelcrm/templates/tours_sales/index.mak:94
@@ -1058,8 +1058,8 @@ msgstr "Удалить"
 #: travelcrm/templates/suppliers/form.mak:75
 #: travelcrm/templates/tasks/delete.mak:19
 #: travelcrm/templates/tasks/form.mak:88
-#: travelcrm/templates/touroperators/delete.mak:19
-#: travelcrm/templates/touroperators/form.mak:99
+#: travelcrm/templates/suppliers/delete.mak:19
+#: travelcrm/templates/suppliers/form.mak:99
 #: travelcrm/templates/tours_sales/delete.mak:19
 #: travelcrm/templates/tours_sales/form.mak:197
 #: travelcrm/templates/tours_sales/form_point.mak:86
@@ -1103,7 +1103,7 @@ msgstr "Отмена"
 #: travelcrm/templates/subaccounts/form.mak:17
 #: travelcrm/templates/suppliers/form.mak:15
 #: travelcrm/templates/tasks/form.mak:12
-#: travelcrm/templates/touroperators/form.mak:17
+#: travelcrm/templates/suppliers/form.mak:17
 #: travelcrm/templates/tours_sales/form.mak:15
 #: travelcrm/templates/users/form.mak:14
 msgid "Main"
@@ -1141,7 +1141,7 @@ msgstr "Основные"
 #: travelcrm/templates/subaccounts/form.mak:102
 #: travelcrm/templates/suppliers/form.mak:48
 #: travelcrm/templates/tasks/form.mak:72
-#: travelcrm/templates/touroperators/form.mak:72
+#: travelcrm/templates/suppliers/form.mak:72
 #: travelcrm/templates/tours_sales/form.mak:170
 #: travelcrm/templates/users/form.mak:61
 #, fuzzy
@@ -1179,7 +1179,7 @@ msgstr "Отели"
 #: travelcrm/templates/structures/form.mak:80
 #: travelcrm/templates/subaccounts/form.mak:113
 #: travelcrm/templates/suppliers/form.mak:59
-#: travelcrm/templates/touroperators/form.mak:83
+#: travelcrm/templates/suppliers/form.mak:83
 #: travelcrm/templates/tours_sales/form.mak:181
 #: travelcrm/templates/users/form.mak:72
 msgid "Tasks"
@@ -1233,7 +1233,7 @@ msgstr "Задачи"
 #: travelcrm/templates/subaccounts/form.mak:128
 #: travelcrm/templates/suppliers/form.mak:74
 #: travelcrm/templates/tasks/form.mak:87
-#: travelcrm/templates/touroperators/form.mak:98
+#: travelcrm/templates/suppliers/form.mak:98
 #: travelcrm/templates/tours_sales/form.mak:196
 #: travelcrm/templates/tours_sales/form_point.mak:85
 #: travelcrm/templates/tours_sales/settings.mak:25
@@ -1342,8 +1342,8 @@ msgstr "Назначения"
 #: travelcrm/templates/tasks/common.mak:71
 #: travelcrm/templates/tasks/common.mak:73
 #: travelcrm/templates/tasks/index.mak:64
-#: travelcrm/templates/touroperators/index.mak:49
-#: travelcrm/templates/touroperators/index.mak:51
+#: travelcrm/templates/suppliers/index.mak:49
+#: travelcrm/templates/suppliers/index.mak:51
 #: travelcrm/templates/tours_sales/common.mak:71
 #: travelcrm/templates/tours_sales/common.mak:73
 #: travelcrm/templates/tours_sales/index.mak:49
@@ -1429,8 +1429,8 @@ msgstr ""
 #: travelcrm/templates/suppliers/index.mak:53
 #: travelcrm/templates/suppliers/index.mak:92
 #: travelcrm/templates/tasks/common.mak:75
-#: travelcrm/templates/touroperators/index.mak:53
-#: travelcrm/templates/touroperators/index.mak:92
+#: travelcrm/templates/suppliers/index.mak:53
+#: travelcrm/templates/suppliers/index.mak:92
 #: travelcrm/templates/tours_sales/index.mak:61
 #: travelcrm/templates/tours_sales/index.mak:158
 #: travelcrm/templates/users/index.mak:40
@@ -1511,8 +1511,8 @@ msgstr "изменено"
 #: travelcrm/templates/suppliers/index.mak:54
 #: travelcrm/templates/suppliers/index.mak:100
 #: travelcrm/templates/tasks/common.mak:76
-#: travelcrm/templates/touroperators/index.mak:54
-#: travelcrm/templates/touroperators/index.mak:100
+#: travelcrm/templates/suppliers/index.mak:54
+#: travelcrm/templates/suppliers/index.mak:100
 #: travelcrm/templates/tours_sales/index.mak:62
 #: travelcrm/templates/tours_sales/index.mak:166
 #: travelcrm/templates/users/index.mak:41
@@ -1551,7 +1551,7 @@ msgstr "изменил"
 #: travelcrm/templates/structures/index.mak:41
 #: travelcrm/templates/subaccounts/index.mak:52
 #: travelcrm/templates/suppliers/index.mak:63
-#: travelcrm/templates/touroperators/index.mak:63
+#: travelcrm/templates/suppliers/index.mak:63
 #: travelcrm/templates/tours_sales/index.mak:71
 #: travelcrm/templates/users/index.mak:50
 msgid "Add New"
@@ -1591,7 +1591,7 @@ msgstr "Новый"
 #: travelcrm/templates/subaccounts/index.mak:59
 #: travelcrm/templates/suppliers/index.mak:70
 #: travelcrm/templates/tasks/index.mak:87
-#: travelcrm/templates/touroperators/index.mak:70
+#: travelcrm/templates/suppliers/index.mak:70
 #: travelcrm/templates/tours_sales/index.mak:78
 #: travelcrm/templates/users/index.mak:57
 #, fuzzy
@@ -1644,7 +1644,7 @@ msgstr "просмотр"
 #: travelcrm/templates/suppliers/index.mak:76
 #: travelcrm/templates/tasks/common.mak:100
 #: travelcrm/templates/tasks/index.mak:93
-#: travelcrm/templates/touroperators/index.mak:76
+#: travelcrm/templates/suppliers/index.mak:76
 #: travelcrm/templates/tours_sales/common.mak:101
 #: travelcrm/templates/tours_sales/index.mak:84
 #: travelcrm/templates/users/index.mak:63
@@ -1687,7 +1687,7 @@ msgstr "размещение"
 #: travelcrm/templates/services_sales/index.mak:157
 #: travelcrm/templates/subaccounts/index.mak:102
 #: travelcrm/templates/suppliers/index.mak:107
-#: travelcrm/templates/touroperators/index.mak:107
+#: travelcrm/templates/suppliers/index.mak:107
 #: travelcrm/templates/tours_sales/index.mak:173
 #: travelcrm/templates/turnovers/index.mak:105
 #: travelcrm/templates/users/index.mak:94
@@ -1725,7 +1725,7 @@ msgstr "Найти"
 #: travelcrm/templates/services_sales/index.mak:158
 #: travelcrm/templates/subaccounts/index.mak:103
 #: travelcrm/templates/suppliers/index.mak:108
-#: travelcrm/templates/touroperators/index.mak:108
+#: travelcrm/templates/suppliers/index.mak:108
 #: travelcrm/templates/tours_sales/index.mak:174
 #: travelcrm/templates/turnovers/index.mak:106
 #: travelcrm/templates/users/index.mak:95
@@ -1763,7 +1763,7 @@ msgstr "Закрыть"
 #: travelcrm/templates/services_sales/index.mak:159
 #: travelcrm/templates/subaccounts/index.mak:104
 #: travelcrm/templates/suppliers/index.mak:109
-#: travelcrm/templates/touroperators/index.mak:109
+#: travelcrm/templates/suppliers/index.mak:109
 #: travelcrm/templates/tours_sales/index.mak:175
 #: travelcrm/templates/turnovers/index.mak:107
 #: travelcrm/templates/users/index.mak:96
@@ -2053,7 +2053,7 @@ msgstr "фамилия"
 #: travelcrm/templates/persons/form.mak:72
 #: travelcrm/templates/structures/form.mak:36
 #: travelcrm/templates/suppliers/form.mak:26
-#: travelcrm/templates/touroperators/form.mak:39
+#: travelcrm/templates/suppliers/form.mak:39
 msgid "Contacts"
 msgstr "Контакты"
 
@@ -2085,7 +2085,7 @@ msgstr "услуги"
 #: travelcrm/templates/services_items/common.mak:61
 #: travelcrm/templates/services_items/form.mak:24
 #: travelcrm/templates/tours_sales/form.mak:39
-msgid "touroperator"
+msgid "supplier"
 msgstr "туроператор"
 
 #: travelcrm/templates/calculations/details.mak:20
@@ -2334,12 +2334,12 @@ msgstr ""
 #: travelcrm/templates/debts/export.mak:2
 #: travelcrm/templates/debts/index.mak:16
 #, fuzzy
-msgid "Debts to Touroperators"
+msgid "Debts to Suppliers"
 msgstr "Изменить туроператора"
 
 #: travelcrm/templates/debts/export.mak:6
 #, fuzzy
-msgid "Touroperator"
+msgid "Supplier"
 msgstr "туроператор"
 
 #: travelcrm/templates/debts/export.mak:7
@@ -2387,9 +2387,9 @@ msgid "Export To PDF"
 msgstr ""
 
 #: travelcrm/templates/debts/index.mak:67
-#: travelcrm/templates/touroperators/index.mak:89
+#: travelcrm/templates/suppliers/index.mak:89
 #, fuzzy
-msgid "Enter touroperator name"
+msgid "Enter supplier name"
 msgstr "Удалить туроператоров"
 
 #: travelcrm/templates/debts/index.mak:76
@@ -3019,7 +3019,7 @@ msgstr "родительская структура"
 
 #: travelcrm/templates/structures/form.mak:58
 #: travelcrm/templates/suppliers/form.mak:37
-#: travelcrm/templates/touroperators/form.mak:50
+#: travelcrm/templates/suppliers/form.mak:50
 msgid "Banks Details"
 msgstr "Реквизиты банка"
 
@@ -3047,7 +3047,7 @@ msgid "Enter subaccount name or resource name"
 msgstr ""
 
 #: travelcrm/templates/suppliers/details.mak:13
-#: travelcrm/templates/touroperators/details.mak:13
+#: travelcrm/templates/suppliers/details.mak:13
 #, fuzzy
 msgid "business person"
 msgstr "Бизнес контакты"
@@ -3109,16 +3109,16 @@ msgstr "доход"
 msgid "--all--"
 msgstr "все"
 
-#: travelcrm/templates/touroperators/form.mak:28
+#: travelcrm/templates/suppliers/form.mak:28
 msgid "Licences"
 msgstr "Лицензии"
 
-#: travelcrm/templates/touroperators/form.mak:61
+#: travelcrm/templates/suppliers/form.mak:61
 msgid "Commissions"
 msgstr "Комиссии"
 
-#: travelcrm/templates/touroperators/index.mak:16
-msgid "Touroperators"
+#: travelcrm/templates/suppliers/index.mak:16
+msgid "Suppliers"
 msgstr "Туроператоры"
 
 #: travelcrm/templates/tours_sales/common.mak:75
@@ -3192,7 +3192,7 @@ msgstr "даты тура"
 
 #: travelcrm/templates/tours_sales/index.mak:115
 #, fuzzy
-msgid "Enter touroperator or person name"
+msgid "Enter supplier or person name"
 msgstr "Удалить туроператоров"
 
 #: travelcrm/templates/tours_sales/index.mak:118
@@ -3430,8 +3430,8 @@ msgstr "Добавить категорию отеля"
 #: travelcrm/views/suppliers.py:185
 #: travelcrm/views/tasks.py:124
 #: travelcrm/views/tasks.py:168
-#: travelcrm/views/touroperators.py:138
-#: travelcrm/views/touroperators.py:199
+#: travelcrm/views/suppliers.py:138
+#: travelcrm/views/suppliers.py:199
 #: travelcrm/views/tours_sales.py:164
 #: travelcrm/views/tours_sales.py:243
 #: travelcrm/views/tours_sales.py:408
@@ -3535,8 +3535,8 @@ msgstr "Сохранено"
 #: travelcrm/views/suppliers.py:190
 #: travelcrm/views/tasks.py:129
 #: travelcrm/views/tasks.py:173
-#: travelcrm/views/touroperators.py:143
-#: travelcrm/views/touroperators.py:204
+#: travelcrm/views/suppliers.py:143
+#: travelcrm/views/suppliers.py:204
 #: travelcrm/views/tours_sales.py:169
 #: travelcrm/views/tours_sales.py:248
 #: travelcrm/views/tours_sales.py:413
@@ -3600,7 +3600,7 @@ msgstr ""
 #: travelcrm/views/subaccounts.py:233
 #: travelcrm/views/suppliers.py:241
 #: travelcrm/views/tasks.py:231
-#: travelcrm/views/touroperators.py:255
+#: travelcrm/views/suppliers.py:255
 #: travelcrm/views/tours_sales.py:323
 #: travelcrm/views/users.py:210
 msgid "Some objects could not be delete"
@@ -3649,7 +3649,7 @@ msgstr "Некоторые объекты не возможно удалить"
 #: travelcrm/views/subaccounts.py:237
 #: travelcrm/views/suppliers.py:245
 #: travelcrm/views/tasks.py:235
-#: travelcrm/views/touroperators.py:259
+#: travelcrm/views/suppliers.py:259
 #: travelcrm/views/tours_sales.py:327
 #: travelcrm/views/users.py:214
 msgid "Deleted"
@@ -4453,21 +4453,21 @@ msgstr "Изменить задачу"
 msgid "Delete Tasks"
 msgstr "Удалить задачи"
 
-#: travelcrm/views/touroperators.py:85
+#: travelcrm/views/suppliers.py:85
 #, fuzzy
-msgid "View Touroperator"
+msgid "View Supplier"
 msgstr "туроператор"
 
-#: travelcrm/views/touroperators.py:99
-msgid "Add Touroperator"
+#: travelcrm/views/suppliers.py:99
+msgid "Add Supplier"
 msgstr "Новый туроператор"
 
-#: travelcrm/views/touroperators.py:158
-msgid "Edit Touroperator"
+#: travelcrm/views/suppliers.py:158
+msgid "Edit Supplier"
 msgstr "Изменить туроператора"
 
-#: travelcrm/views/touroperators.py:230
-msgid "Delete Touroperators"
+#: travelcrm/views/suppliers.py:230
+msgid "Delete Suppliers"
 msgstr "Удалить туроператоров"
 
 #: travelcrm/views/tours_sales.py:95

@@ -29,7 +29,7 @@
                         ${h.tags.title(_(u"parent navigation"), False, "parent_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.navigations_combotree_field(position.id, item.parent_id if item else None)}
+                        ${h.fields.navigations_combotree_field('parent_id', position.id, item.parent_id if item else None)}
                         ${h.common.error_container(name='parent_id')}
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                          ${h.tags.title(_(u"separator before"), False, "separator_before")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.yes_no_field(int(item.separator_before) if item else None, "separator_before")}
+                        ${h.fields.yes_no_field('separator_before', int(item.separator_before) if item else None)}
                         ${h.common.error_container(name='separator_before')}
                     </div>
                 </div>

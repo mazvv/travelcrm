@@ -1,5 +1,5 @@
 <%namespace file="../common/infoblock.mak" import="infoblock"/>
-<div class="dl45 easyui-dialog"
+<div class="dl50 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -30,8 +30,10 @@
                 ${h.tags.title(_(u"base currency"), True, "currency_id")}
             </div>
             <div class="ml15">
-                ${h.fields.currencies_combobox_field(
-                    request, item.currency_id if item else None,
+                ${h.fields.currencies_combogrid_field(
+                    request,
+                    'currency_id',
+                    item.currency_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name='currency_id')}
@@ -42,7 +44,7 @@
                 ${h.tags.title(_(u"timezone"), True, "timezone")}
             </div>
             <div class="ml15">
-                ${h.fields.timezones_field(item.settings.get('timezone') if item else None, style="width:271px;")}
+                ${h.fields.timezones_field('timezone', item.settings.get('timezone') if item else None, style="width:271px;")}
                 ${h.common.error_container(name='timezone')}
             </div>
         </div>
@@ -51,7 +53,7 @@
                 ${h.tags.title(_(u"locale"), True, "locale")}
             </div>
             <div class="ml15">
-                ${h.fields.locales_field(item.settings.get('locale') if item else None)}
+                ${h.fields.locales_field('locale', item.settings.get('locale') if item else None)}
                 ${h.common.error_container(name='locale')}
             </div>
         </div>

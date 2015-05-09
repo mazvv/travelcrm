@@ -58,9 +58,10 @@
         <div class="ml20 tr">
             <div class="searchbar" style="margin-top: 2px;">
                 ${h.fields.notifications_statuses_combobox_field(
+                    'status',
                     'new',
                     with_all=True,
-                    options="width:100,onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
+                    data_options="width:100,onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
                 )}
             </div>
         </div>

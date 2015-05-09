@@ -82,7 +82,9 @@
                 <%
                     f_id = h.common.gen_id()
                 %>
-                ${h.fields.services_combobox_field(request, None, f_id, id=f_id)}
+                ${h.fields.services_combogrid_field(
+                    request, f_id, id=f_id
+                )}
             </div>
             <div class="button-group minor-group ml1">
                 <a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>

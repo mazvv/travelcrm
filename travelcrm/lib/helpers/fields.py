@@ -1,23 +1,22 @@
 # -*coding: utf-8-*-
 
 import json
-from pytz import common_timezones
+from collections import namedtuple
 
+from pytz import common_timezones
 from webhelpers.html import tags
 from webhelpers.html import HTML
 
 from ...interfaces import IServiceType
+from ...resources.accomodation import AccomodationResource
 from ...resources.employee import EmployeeResource
 from ...resources.position import PositionResource
-from ...resources.licence import LicenceResource
 from ...resources.bperson import BPersonResource
-from ...resources.contact import ContactResource
 from ...resources.hotelcat import HotelcatResource
 from ...resources.country import CountryResource
 from ...resources.region import RegionResource
 from ...resources.location import LocationResource
-from ...resources.touroperator import TouroperatorResource
-from ...resources.accomodation import AccomodationResource
+from ...resources.supplier import SupplierResource
 from ...resources.roomcat import RoomcatResource
 from ...resources.foodcat import FoodcatResource
 from ...resources.hotel import HotelResource
@@ -25,18 +24,16 @@ from ...resources.currency import CurrencyResource
 from ...resources.person import PersonResource
 from ...resources.advsource import AdvsourceResource
 from ...resources.bank import BankResource
-from ...resources.bank_detail import BankDetailResource
 from ...resources.service import ServiceResource
-from ...resources.account_item import AccountItemResource
 from ...resources.account import AccountResource
 from ...resources.invoice import InvoiceResource
-from ...resources.supplier import SupplierResource
 from ...resources.subaccount import SubaccountResource
 from ...resources.transfer import TransferResource
 from ...resources.transport import TransportResource
 
 from ...models.task import Task
 from ...models.account import Account
+from ...models.account_item import AccountItem
 from ...models.resource_type import ResourceType
 from ...models.contact import Contact
 from ...models.person import Person
@@ -44,6 +41,7 @@ from ...models.passport import Passport
 from ...models.notification import EmployeeNotification
 from ...models.lead import Lead
 from ...models.order_item import OrderItem
+from ...models.supplier import Supplier
 
 from ..utils.common_utils import (
     gen_id,
@@ -57,39 +55,169 @@ from ..utils.resources_utils import get_resources_types_by_interface
 from ..bl.subaccounts import get_subaccounts_types
 
 
-def yes_no_field(value=None, name='yes_no', **kwargs):
-    choices = [
-        (0, _(u'no')),
-        (1, _(u'yes')),
-    ]
-    return tags.select(
-        name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto',editable:false",
-        **kwargs
-    )
+tool = namedtuple('tool', ('name', 'url', 'icon', 'title', 'with_row'))
 
 
-def structures_combotree_field(
-    value=None, name='parent_id', options=None
+class _ComboGridField(object):
+
+    def __init__(
+        self, request, resource, name, value, url, fields, id_field='id',
+        text_field='name', tools=None, id=None, show_toolbar=True, 
+        data_options=None, **kwargs
+    ):
+        self._request = request
+        self._resource = resource
+        self._name = name
+        self._value = value
+        self._url = url
+        self._fields = fields
+        self._id_field = id_field
+        self._text_field = text_field
+        self._id = id or gen_id()
+        self._tools = tools
+        self._show_toolbar = show_toolbar
+        self._data_options = data_options
+        self._html_attrs = kwargs
+
+    def _render_tool(self, tool):
+        tmp = "container:'#%(id)s',action:'dialog_open',url:'%(url)s'"
+        if tool.with_row:
+            tmp += ",property:'with_row'"
+        kwargs = {
+            'data-options': tmp % {'id': self._id, 'url': tool.url}
+        }
+        return HTML.tag(
+            'a', href='#',
+            class_='fa %(icon)s easyui-tooltip _action' % {'icon': tool.icon},
+            title=tool.title,
+            **kwargs
+        )
+
+    def _render_toolbar(self):
+        permisions = self._resource.get_permisions(
+            self._resource, self._request
+        )
+        if not permisions:
+            return
+        toolbar = [
+            self._render_tool(tool) 
+            for tool in self._tools 
+            if tool.name in permisions
+        ]
+        if toolbar:
+            toolbar = HTML.tag(
+                'span', class_='combogrid-toolbar', id=gen_id(),
+                c=HTML(*toolbar)
+            )
+        return toolbar
+
+    def _render_on_before_load(self):
+        return """
+            onBeforeLoad: function(param){
+                var this_selector = '#%(obj_id)s';
+                var response_id = $(this_selector).data('response');
+                var id = %(id)s;
+                if(response_id){
+                    param.id = response_id;
+                    param.q = '';
+                }
+                else if(id && typeof(param.q) == 'undefined'){
+                    param.id = id;
+                }
+                if(!param.page){
+                    param.page = 1;
+                    param.rows = 50;
+                }
+            },
+        """ % {
+            'id': json.dumps(self._value),
+            'obj_id': self._id,
+        }
+
+    def _render_on_load_success(self):
+        return """
+            onLoadSuccess: function(){
+                var this_selector = '#%(obj_id)s';
+                var response_id = $(this_selector).data('response');
+                if(response_id){
+                    $(this_selector).combogrid('clear');
+                    $(this_selector).combogrid('setValue', response_id);
+                    $(this_selector).data('response', '');
+                }
+            },
+        """ % {'obj_id': self._id,}
+
+    def _render_data_options(self):
+        return """
+            url: '%(url)s',
+            fitColumns: true,
+            scrollbarSize: 7,
+            border: false,
+            delay: 500,
+            idField: '%(id_field)s',
+            textField: '%(text_field)s',
+            mode: 'remote',
+            sortName: 'id',
+            sortOrder: 'desc',
+            columns: %(columns)s,
+            pageSize: 50,
+            showHeader: false,
+            view: bufferview,
+            %(on_before_load)s
+            %(on_success_load)s
+        """ % ({
+            'url': self._url,
+            'id_field': self._id_field,
+            'text_field': self._text_field,
+            'columns': (
+                json.dumps(self._fields) 
+                if not isinstance(self._fields, basestring) 
+                else self._fields
+            ),
+            'id': json.dumps(self._value),
+            'obj_id': self._id,
+            'on_before_load': self._render_on_before_load(),
+            'on_success_load': self._render_on_load_success()
+        })
+
+    def __call__(self):
+        if self._show_toolbar:
+            toolbar = self._render_toolbar()
+        else:
+            toolbar = None
+        return HTML(
+           tags.text(
+               self._name, self._value, id=self._id,
+               class_="easyui-combogrid text w20",
+               data_options=self._render_data_options(),
+               **self._html_attrs
+           ),
+           toolbar if toolbar else ''
+        )
+
+
+def _combotree_field(
+    name, value, url, sort, order='asc', data_options=None, **kwargs
 ):
-    data_options = """
-        url: '/structure/list',
+    _data_options = """
+        url: '%(url)s',
         onBeforeLoad: function(node, param){
-            param.sort = 'structure_name';
-    """
+            param.sort = '%(sort)s';
+            param.order = '%(order)s';
+    """ % {'url': url, 'sort': sort, 'order': order}
     if value:
-        data_options += """
+        _data_options += """
             if(!node){
                 param.id = %s;
                 param.with_chain = true;
             }
         """ % value
 
-    data_options += """
+    _data_options += """
         }
     """
     if value:
-        data_options += """,
+        _data_options += """,
             onLoadSuccess: function(node, data){
                 if(!node){
                     var n = $(this).tree('find', %s);
@@ -98,258 +226,39 @@ def structures_combotree_field(
                 }
             }
         """ % value
-    if options:
-        data_options += """,
-            %s
-        """ % options
-
-    return tags.text(name, value, class_="easyui-combotree text w20",
-                     data_options=data_options
-                     )
-
-
-def resources_types_combobox_field(
-    value=None, name='resource_type_id'
-):
-    data_options = """
-        url: '/resource_type/list',
-        valueField: 'id',
-        textField: 'humanize',
-        editable: false,
-        onBeforeLoad: function(param){
-            param.sort = 'humanize';
-            param.rows = 0;
-            param.page = 1;
-        },
-        loadFilter: function(data){
-            return data.rows;
-        }
-    """
-    return tags.text(
-        name, value, class_="easyui-combobox text w20",
-        data_options=data_options
-    )
-
-
-def permisions_yes_no_field(value=None, permision="view", name='permisions'):
-    choices = [
-        ("", _(u'no')),
-        (permision, _(u'yes')),
-    ]
-    return tags.select(
-        name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto',editable:false"
-    )
-
-
-def navigations_combotree_field(
-    position_id, value=None, name='parent_id'
-):
-    data_options = """
-        url: '/navigation/list',
-        onBeforeLoad: function(node, param){
-            param.position_id = %s;
-            param.sort = 'sort_order';
-    """ % position_id
-    if value:
-        data_options += """
-            if(!node){
-                param.id = %s;
-                param.with_chain = true;
-            }
-        """ % value
-
-    data_options += """
-        }
-    """
-    if value:
-        data_options += """,
-            onLoadSuccess: function(node, data){
-                if(!node){
-                    var n = $(this).tree('find', %s);
-                    $(this).tree('expandTo', n.target);
-                    $(this).tree('scrollTo', n.target);
-                }
-            }
-        """ % value
+    if data_options:
+        _data_options += ',%s' % data_options
 
     return tags.text(
         name, value, class_="easyui-combotree text w20",
-        data_options=data_options
+        data_options=_data_options, **kwargs
     )
 
 
-def employees_combobox_field(
-    request, value=None, name='employee_id',
-    id=None, show_toolbar=True, options=None
+def employees_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = EmployeeResource.get_permisions(EmployeeResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/employee/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/employee/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/employee/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'name', 'title': _(u"name"), 'sortable': True, 'width': 200}
     ]]
-
-    data_options = """
-        url: '/employee/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/employee/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/employee/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/employee/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, EmployeeResource, name, value, '/employee/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
 def positions_combogrid_field(
-    request, value=None, name='position_id',
-    id=None, show_toolbar=True, options=None
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = PositionResource.get_permisions(PositionResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/position/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/position/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/position/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = """[[{
         field: 'position_name', title: '%(title)s',
         sortable: true, width: 200,
@@ -358,91 +267,191 @@ def positions_combogrid_field(
             + row.structure_path.join(' &rarr; ');
         }
     }]]""" % {'title': _(u'name')}
+    tools = (
+        tool('add', '/position/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/position/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/position/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, PositionResource, name, value, '/position/list', 
+        fields, 'id', 'position_name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
-    data_options = """
-        url: '/position/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'position_name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
+
+def bpersons_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+    tools = (
+        tool('add', '/bperson/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/bperson/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/bperson/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, BPersonResource, name, value, '/bperson/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def hotelcats_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[
+        {'field': 'name',
+            'title': _(u"name"),
+            'sortable': True, 'width': 200}
+    ]]
+    tools = (
+        tool('add', '/hotelcat/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/hotelcat/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/hotelcat/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, HotelcatResource, name, value, '/hotelcat/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def accomodations_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[
+        {'field': 'name',
+            'title': _(u"name"),
+            'sortable': True, 'width': 200}
+    ]]
+    tools = (
+        tool('add', '/accomodation/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/accomodation/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/accomodation/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, AccomodationResource, name, value, '/accomodation/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def yes_no_field(name, value=None, data_options=None, **kwargs):
+    choices = [
+        (0, _(u'no')),
+        (1, _(u'yes')),
+    ]
+    _data_options = "panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += (',%s' % data_options)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w5',
+        data_options=_data_options, **kwargs
+    )
+
+
+def structures_combotree_field(
+    name, value=None, data_options=None, **kwargs
+):
+    return _combotree_field(
+        name, value, '/structure/list', 'structure_name', 'asc',
+        data_options, **kwargs
+    )
+
+
+def accounts_items_combotree_field(
+    name, value=None, data_options=None, **kwargs
+):
+    return _combotree_field(
+        name, value, '/account_item/list', 'name', 'asc',
+        data_options, **kwargs
+    )
+
+
+def permisions_yes_no_field(
+    name, value, permision, data_options=None, **kwargs
+):
+    choices = [
+        ("", _(u'no')),
+        (permision, _(u'yes')),
+    ]
+    _data_options = "panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ',%s' % data_options
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w5',
+        data_options=_data_options, **kwargs
+    )
+
+
+def navigations_combotree_field(
+    name, position_id, value=None, data_options=None, **kwargs
+):
+    _data_options = """
+        url: '/navigation/list',
+        onBeforeLoad: function(node, param){
+            param.position_id = %s;
+            param.sort = 'sort_order';
+            param.order = 'asc';
+    """ % position_id
+    if value:
+        _data_options += """
+            if(!node){
+                param.id = %s;
+                param.with_chain = true;
             }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
+        """ % value
+
+    _data_options += """
         }
-    """ % ({
-        'columns': fields,
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    """
+    if value:
+        _data_options += """,
+            onLoadSuccess: function(node, data){
+                if(!node){
+                    var n = $(this).tree('find', %s);
+                    $(this).tree('expandTo', n.target);
+                    $(this).tree('scrollTo', n.target);
+                }
+            }
+        """ % value
+    if data_options:
+        _data_options += ',%s' % data_options
+
+    return tags.text(
+        name, value, class_="easyui-combotree text w20",
+        data_options=_data_options, **kwargs
     )
 
 
 def permisions_scope_type_field(
-    value='structure', name='scope_type', options=None
+    name, value, data_options=None, **kwargs
 ):
     choices = [
         ("all", _(u'all')),
         ("structure", _(u'structure')),
     ]
-    data_options = "panelHeight:'auto',editable:false"
-    if options:
-        data_options += ',%s' % options
+    _data_options = "panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ',%s' % data_options
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options=data_options
+        data_options=_data_options, **kwargs
     )
 
 
-def date_field(value, name, options=None):
+def date_field(name, value=None, data_options=None, **kwargs):
     id = gen_id()
-    data_options = """
+    _data_options = """
         editable:false,
         formatter:function(date){return dt_formatter(date, %s);},
         parser:function(s){return dt_parser(s, %s);}
@@ -450,13 +459,13 @@ def date_field(value, name, options=None):
        json.dumps(get_date_format()),
        json.dumps(get_date_format())
     )
-    if options:
-        data_options += ",%s" % options
+    if data_options:
+        _data_options += ",%s" % data_options
     if value:
         value = format_date(value)
     html = tags.text(
         name, value, class_="easyui-datebox text w10",
-        id=id, **{'data-options': data_options}
+        id=id, data_options=_data_options, **kwargs
     )
     return html + HTML.literal("""
         <script type="text/javascript">
@@ -465,23 +474,9 @@ def date_field(value, name, options=None):
     """) % id
 
 
-def time_field(value, name, options=None):
+def datetime_field(name, value=None, data_options=None, **kwargs):
     id = gen_id()
-    data_options = "showSeconds:false,width:60"
-    if options:
-        data_options += ",%s" % options
-    if value:
-        value = format_date(value)
-    html = tags.text(
-        name, value, class_="easyui-timespinner text w10",
-        id=id, **{'data-options': data_options}
-    )
-    return html
-
-
-def datetime_field(value, name, options=None):
-    id = gen_id()
-    data_options = """
+    _data_options = """
         editable:false,
         showSeconds:false,
         formatter:function(date){return dt_formatter(date, %s);},
@@ -490,13 +485,13 @@ def datetime_field(value, name, options=None):
             json.dumps(get_datetime_format()),
             json.dumps(get_datetime_format())
         )
-    if options:
-        data_options += ",%s" % options
+    if data_options:
+        _data_options += ",%s" % data_options
     if value:
         value = format_datetime(value)
     html = tags.text(
         name, value, class_="easyui-datetimebox text w10",
-        id=id, **{'data-options': data_options}
+        id=id, data_options=_data_options, **kwargs
     )
     return html + HTML.literal("""
         <script type="text/javascript">
@@ -505,2545 +500,335 @@ def datetime_field(value, name, options=None):
     """) % id
 
 
-def gender_combobox_field(
-    value=None, name='gender'
-):
+def gender_combobox_field(name, value=None, data_options=None, **kwargs):
     choices = [('', '--None--'),] + list(Person.GENDER)
+    _data_options = "panelHeight:'auto',editable:false,width:126"
+    if data_options:
+        _data_options += ",%s" % data_options
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false,width:126"
+        data_options=_data_options, **kwargs
     )
 
 
-def contact_type_combobox_field(
-    value=None, name='contact_type'
-):
+def contact_type_combobox_field(name, value=None, data_options=None, **kwargs):
+    _data_options = "panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     return tags.select(
         name, value, Contact.CONTACT_TYPE,
         class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false"
+        data_options=_data_options, **kwargs
     )
 
 
-def licences_combobox_field(
-    request, value=None, name='licence_id',
-    id=None, show_toolbar=True, options=None
+def countries_combogrid_field(
+    request, name, value=None, 
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = LicenceResource.get_permisions(LicenceResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/licence/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/licence/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/licence/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[{
-        'field': 'licence_num', 'title': _(u"licence num"),
-        'sortable': True, 'width': 200
-    }]]
-
-    data_options = """
-        url: '/licence/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'licence_num',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
-    )
-
-
-def bpersons_combobox_field(
-    request, value=None, name='bperson_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = BPersonResource.get_permisions(BPersonResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bperson/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bperson/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bperson/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[{
-        'field': 'name', 'title': _(u"name"),
-        'sortable': True, 'width': 200
-    }]]
-
-    data_options = """
-        url: '/bperson/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
-    )
-
-
-def contacts_combobox_field(
-    request, value=None, name='contact_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = ContactResource.get_permisions(ContactResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/contact/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/contact/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/contact/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[
-        {'field': 'contact',
-            'title': _(u"contact"),
-            'sortable': True, 'width': 200}
-    ]]
-
-    data_options = """
-        url: '/contact/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'contact',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
-    )
-
-
-def hotelcats_combobox_field(
-    request, value=None, name='hotelcat_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = HotelcatResource.get_permisions(HotelcatResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotelcat/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotelcat/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotelcat/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[
-        {'field': 'name',
-            'title': _(u"name"),
-            'sortable': True, 'width': 200}
-    ]]
-
-    data_options = """
-        url: '/hotelcat/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
-    )
-
-
-def countries_combobox_field(
-    request, value=None, name='country_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = CountryResource.get_permisions(CountryResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/country/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/country/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/country/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'country_name',
             'title': _(u"name"),
             'sortable': True, 'width': 200}
     ]]
-
-    data_options = """
-        url: '/country/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'country_name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/country/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/country/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/country/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, CountryResource, name, value, '/country/list', 
+        fields, 'id', 'country_name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def regions_combobox_field(
-    request, value=None, name='region_id',
-    id=None, show_toolbar=True, options=None
+def regions_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = RegionResource.get_permisions(RegionResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/region/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/region/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/region/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'full_region_name',
             'title': _(u"name"),
             'sortable': True, 'width': 200},
     ]]
-
-    data_options = """
-        url: '/region/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'full_region_name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/region/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/region/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/region/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, RegionResource, name, value, '/country/list', 
+        fields, 'id', 'full_region_name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def locations_combobox_field(
-    request, value=None, name='location_id',
-    id=None, show_toolbar=True, options=None
+def locations_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = LocationResource.get_permisions(LocationResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/location/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/location/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/location/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'full_location_name',
             'title': _(u"name"),
             'sortable': True, 'width': 100},
     ]]
-
-    data_options = """
-        url: '/location/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'full_location_name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/location/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/location/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/location/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, LocationResource, name, value, '/location/list', 
+        fields, 'id', 'full_location_name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def touroperators_combobox_field(
-    request, value=None, name='touroperator_id',
-    id=None, show_toolbar=True, options=None
+def suppliers_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = TouroperatorResource.get_permisions(
-        TouroperatorResource, request
-    )
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/touroperator/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/touroperator/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/touroperator/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'name',
             'title': _(u"name"),
             'sortable': True, 'width': 200},
     ]]
-
-    data_options = """
-        url: '/touroperator/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/supplier/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/supplier/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/supplier/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, SupplierResource, name, value, '/supplier/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def accomodations_combobox_field(
-    request, value=None, name='accomodation_type_id',
-    id=None, show_toolbar=True, options=None
+def foodcats_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = AccomodationResource.get_permisions(
-        AccomodationResource, request
-    )
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',"
-                "url:'/accomodation_type/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',"
-                "url:'/accomodation_type/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',"
-                "url:'/accomodation_type/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'name',
             'title': _(u"name"),
             'sortable': True, 'width': 200},
     ]]
-
-    data_options = """
-        url: '/accomodation_type/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/foodcat/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/foodcat/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/foodcat/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, FoodcatResource, name, value, '/foodcat/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def foodcats_combobox_field(
-    request, value=None, name='foodcat_id',
-    id=None, show_toolbar=True, options=None
+def roomcats_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = FoodcatResource.get_permisions(FoodcatResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/foodcat/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/foodcat/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/foodcat/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'name',
             'title': _(u"name"),
             'sortable': True, 'width': 200},
     ]]
-
-    data_options = """
-        url: '/foodcat/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/roomcat/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/roomcat/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/roomcat/edit', 'fa-pencil', _(u'edit item'), True)
     )
-
-
-def roomcats_combobox_field(
-    request, value=None, name='roomcat_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = RoomcatResource.get_permisions(RoomcatResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/roomcat/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/roomcat/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/roomcat/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[
-        {'field': 'name',
-            'title': _(u"name"),
-            'sortable': True, 'width': 200},
-    ]]
-
-    data_options = """
-        url: '/roomcat/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    field = _ComboGridField(
+        request, RoomcatResource, name, value, '/roomcat/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
     )
+    return field()
 
 
-def hotels_combobox_field(
-    request, value=None, name='hotel_id',
-    id=None, show_toolbar=True, options=None
+def hotels_combogrid_field(
+    request, name, value=None, 
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = HotelResource.get_permisions(HotelResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotel/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotel/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/hotel/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'full_hotel_name',
             'title': _(u"name"),
             'sortable': True, 'width': 200},
     ]]
-
-    data_options = """
-        url: '/hotel/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'full_hotel_name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/hotel/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/hotel/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/hotel/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, HotelResource, name, value, '/hotel/list', 
+        fields, 'id', 'full_hotel_name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def currencies_combobox_field(
-    request, value=None, name='currency_id',
-    id=None, show_toolbar=True, options=None
+def currencies_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = CurrencyResource.get_permisions(CurrencyResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/currency/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/currency/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/currency/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[
         {'field': 'iso_code',
             'title': _(u"iso code"),
             'sortable': True, 'width': 100},
     ]]
-
-    data_options = """
-        url: '/currency/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'iso_code',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/currency/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/currency/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/currency/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, CurrencyResource, name, value, '/currency/list', 
+        fields, 'id', 'iso_code', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def persons_combobox_field(
-    request, value=None, name='person_id',
-    id=None, show_toolbar=True, options=None
+def persons_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = PersonResource.get_permisions(PersonResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/person/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/person/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/person/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
-    data_options = """
-        url: '/person/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/person/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/person/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/person/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, PersonResource, name, value, '/person/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def advsources_combobox_field(
-    request, value=None, name='advsource_id',
-    id=None, show_toolbar=True, options=None
+def advsources_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = AdvsourceResource.get_permisions(AdvsourceResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/advsource/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/advsource/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/advsource/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
-    data_options = """
-        url: '/advsource/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/advsource/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/advsource/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/advsource/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, AdvsourceResource, name, value, '/advsource/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def passport_type_field(
-    value=None, name='passport_type'
-):
+def passport_type_field(name, value=None, data_options=None, **kwargs):
+    _data_options="panelHeight:'auto',editable:false,width:246"
+    if data_options:
+        _data_options += ",%s" % data_options
     return tags.select(
         name, value, Passport.PASSPORT_TYPE, class_='easyui-combobox text w20',
-        data_options="panelHeight:'auto',editable:false,width:246"
+        data_options=_data_options, **kwargs
     )
 
 
-def tasks_status_combobox_field(
-    value=None, name='status'
+def banks_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    return tags.select(
-        name, value, Task.STATUS, class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false,width:126"
-    )
-
-
-def banks_combobox_field(
-    request, value=None, name='bank_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = BankResource.get_permisions(BankResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bank/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bank/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bank/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
-    data_options = """
-        url: '/bank/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/bank/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/bank/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/bank/edit', 'fa-pencil', _(u'edit item'), True)
     )
-
-
-def banks_details_combobox_field(
-    request, value=None, name='bank_detail_id',
-    id=None, show_toolbar=True,
-    structure_id=False, options=None
-):
-    permisions = BankDetailResource.get_permisions(BankDetailResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bank_detail/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bank_detail/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/bank_detail/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-    fields = """[[{
-        field: 'bank_name', title: '%(title)s',
-        sortable: true, width: 200,
-        formatter: function(value,row,index){
-            return '<span class="b">' + value + ' '
-            + row.currency + '</span><br/>' +
-            '<span>%(beneficiary)s: ' + row.beneficiary
-            + '<br/>%(account)s: ' + row.account
-            + '<br/>%(swift)s: ' + row.swift_code + '</span>';
-        }
-    }]]""" % {
-        'title': _(u'name'),
-        'beneficiary': _(u'beneficiary'),
-        'account': _(u'account'),
-        'swift': _(u'swift'),
-    }
-
-    data_options = """
-        url: '/bank_detail/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'bank_name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                if(%(structure_id)s){
-                    param.structure_id = %(structure_id)s;
-                }
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': fields,
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-        'structure_id': json.dumps(structure_id),
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    field = _ComboGridField(
+        request, BankResource, name, value, '/bank/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
     )
+    return field()
 
 
-def services_combobox_field(
-    request, value=None, name='service_id',
-    id=None, show_toolbar=True, options=None,
+def services_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = ServiceResource.get_permisions(ServiceResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/service/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/service/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/service/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-    data_options = """
-        url: '/service/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/service/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/service/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/service/edit', 'fa-pencil', _(u'edit item'), True)
     )
-
-
-def accounts_items_combobox_field(
-    request, value=None, name='account_item_id',
-    id=None, show_toolbar=True, options=None
-):
-    permisions = AccountItemResource.get_permisions(
-        AccountItemResource, request
+    field = _ComboGridField(
+        request, ServiceResource, name, value, '/service/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
     )
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/account_item/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/account_item/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/account_item/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[{
-        'field': 'name', 'title': _(u"name"),
-        'sortable': True, 'width': 200
-    }]]
-
-    data_options = """
-        url: '/account_item/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
-    )
+    return field()
 
 
 def accounts_types_combobox_field(
-    value=None, name='account_type'
+    name, value=None, data_options=None, **kwargs
 ):
+    _data_options="panelHeight:'auto',editable:false,width:126"
+    if data_options:
+        _data_options += ",%s" % data_options
     return tags.select(
         name, value, Account.ACCOUNTS_TYPES, class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false,width:126"
+        data_options=_data_options, **kwargs
     )
 
 
-def accounts_combobox_field(
-    request, value=None, name='account_id',
-    id=None, show_toolbar=True, options=None,
+def accounts_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = AccountResource.get_permisions(AccountResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/account/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/account/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/account/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
-    data_options = """
-        url: '/account/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/account/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/account/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/account/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, AccountResource, name, value, '/account/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def invoices_combobox_field(
-    request, value=None, name='invoice_id',
-    id=None, show_toolbar=True, options=None
+def invoices_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = InvoiceResource.get_permisions(InvoiceResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/invoice/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/invoice/info',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-info easyui-tooltip _action',
-                title=_(u'info'),
-                **kwargs
-            )
-        )
-
     fields = """[[{
         field: 'customer', title: '%(title)s',
         sortable: true, width: 200,
@@ -3059,80 +844,24 @@ def invoices_combobox_field(
         'id': _(u'num'),
         'from_date': _(u'from date'),
     }
-
-    data_options = """
-        url: '/invoice/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'customer',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': fields,
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('view', '/invoice/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/invoice/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, InvoiceResource, name, value, '/invoice/list', 
+        fields, 'id', 'customer', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
 def subaccounts_types_combobox_field(
-    value=None, name='subaccount_type', options=None,
+    name, value=None, data_options=None, **kwargs
 ):
-    data_options = "panelHeight:'auto',editable:false"
-    if options:
-        data_options += """,
-            %s
-        """ % options
+    _data_options = "panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = [
         (rt.name, rt.humanize)
         for rt in get_subaccounts_types()
@@ -3140,182 +869,14 @@ def subaccounts_types_combobox_field(
     return tags.select(
         name, value, choices,
         class_='easyui-combobox text w20',
-        data_options=data_options
+        data_options=_data_options, **kwargs
     )
 
 
-def suppliers_combobox_field(
-    request, value=None, name='supplier_id',
-    id=None, show_toolbar=True, options=None,
+def subaccounts_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = SupplierResource.get_permisions(SupplierResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/supplier/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/supplier/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/supplier/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
-    fields = [[{
-        'field': 'name', 'title': _(u"name"),
-        'sortable': True, 'width': 200
-    }]]
-
-    data_options = """
-        url: '/supplier/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
-    )
-
-
-def subaccounts_combobox_field(
-    request, value=None, name='subaccount_id',
-    id=None, show_toolbar=True, options=None,
-):
-    permisions = SubaccountResource.get_permisions(SubaccountResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/subaccount/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/subaccount/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/subaccount/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = """[[{
         field: 'title', title: '%(title)s',
         sortable: true, width: 200,
@@ -3329,156 +890,106 @@ def subaccounts_combobox_field(
         'name': _(u'name'),
         'resource_type': _(u'resource'),
     }
-
-    data_options = """
-        url: '/subaccount/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'title',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': fields,
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/subaccount/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/subaccount/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/subaccount/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, SubaccountResource, name, value, '/subaccount/list', 
+        fields, 'id', 'title', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
-def timezones_field(value=None, name='timezone', **kwargs):
+def timezones_field(
+    name, value=None, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'120',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = [tz for tz in common_timezones]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w20',
-        data_options="panelHeight:'120',editable:false",
-        **kwargs
+        data_options=_data_options, **kwargs
     )
 
 
-def locales_field(value=None, name='locale', **kwargs):
+def locales_field(
+    name, value=None, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = [
         (u'en', _(u'en')),
         (u'ru', _(u'ru')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
-        data_options="panelHeight:'auto',editable:false",
-        **kwargs
+        data_options=_data_options, **kwargs
     )
 
 
 def resources_types_statuses_combobox_field(
-    value=None, name='status'
+    name, value=None, data_options=None, **kwargs
 ):
+    _data_options="panelHeight:'auto',editable:false,width:126"
+    if data_options:
+        _data_options += ",%s" % data_options
     return tags.select(
         name, value, ResourceType.STATUS, class_='easyui-combobox text w10',
-        data_options="panelHeight:'auto',editable:false,width:126"
+        data_options=_data_options, **kwargs
     )
 
 
 def tasks_statuses_combobox_field(
-    value=None, name='status', with_all=False, options=None
+    name, value=None, with_all=False, data_options=None, **kwargs
 ):
-    data_options = "panelHeight:'auto',editable:false"
-    if options:
-        data_options += """,
-            %s
-        """ % options
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = Task.STATUS
     if with_all:
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options=data_options
+        data_options=_data_options, **kwargs
     )
 
 
 def notifications_statuses_combobox_field(
-    value=None, name='status', with_all=False, options=None
+    name, value=None, with_all=False, data_options=None, **kwargs
 ):
-    data_options = "panelHeight:'auto',editable:false"
-    if options:
-        data_options += """,
-            %s
-        """ % options
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = EmployeeNotification.STATUS
     if with_all:
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options=data_options
+        data_options=_data_options, **kwargs
     )
 
 
 def leads_statuses_combobox_field(
-    value=None, name='status', with_all=False, options=None
+    name, value=None, with_all=False, data_options=None, **kwargs
 ):
-    data_options = "panelHeight:'auto',editable:false"
-    if options:
-        data_options += """,
-            %s
-        """ % options
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = Lead.STATUS
     if with_all:
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options=data_options
+        data_options=_data_options, **kwargs
     )
 
 
-def services_types_combobox_field(
-    value=None, name='resource_type_id'
-):
+def services_types_combobox_field(name, value=None):
     ids = map(
         lambda x: str(x.id), get_resources_types_by_interface(IServiceType)
     )
@@ -3503,259 +1014,117 @@ def services_types_combobox_field(
     )
 
 
-def transfers_combobox_field(
-    request, value=None, name='transfer_id',
-    id=None, show_toolbar=True, options=None,
+def transfers_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = TransferResource.get_permisions(TransferResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/transfer/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/transfer/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/transfer/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
-
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
-    data_options = """
-        url: '/transfer/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/subaccount/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/subaccount/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/subaccount/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, TransferResource, name, value, '/subaccount/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field
 
 
-def transports_combobox_field(
-    request, value=None, name='transport_id',
-    id=None, show_toolbar=True, options=None,
+def transports_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    permisions = TransportResource.get_permisions(TransportResource, request)
-    obj_id = id or gen_id()
-    toolbar_id = 'tb-%s' % obj_id
-    toolbar = []
-    if 'add' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/transport/add'"
-                % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-plus easyui-tooltip _action',
-                title=_(u'add new'),
-                **kwargs
-            )
-        )
-    if 'view' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/transport/view',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-circle-o easyui-tooltip _action',
-                title=_(u'view item'),
-                **kwargs
-            )
-        )
-    if 'edit' in permisions:
-        kwargs = {
-            'data-options':
-                "container:'#%s',action:'dialog_open',url:'/transport/edit',"
-                "property:'with_row'" % obj_id
-        }
-        toolbar.append(
-            HTML.tag(
-                'a', href='#',
-                class_='fa fa-pencil easyui-tooltip _action',
-                title=_(u'edit selected'),
-                **kwargs
-            )
-        )
     fields = [[{
         'field': 'name', 'title': _(u"name"),
         'sortable': True, 'width': 200
     }]]
-
-    data_options = """
-        url: '/transport/list',
-        fitColumns: true,
-        scrollbarSize: 7,
-        border: false,
-        delay: 500,
-        idField: 'id',
-        textField: 'name',
-        mode: 'remote',
-        sortName: 'id',
-        sortOrder: 'desc',
-        columns: %(columns)s,
-        pageSize: 50,
-        showHeader: false,
-        view: bufferview,
-        onBeforeLoad: function(param){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            var id = %(id)s;
-            if(response_id){
-                param.id = response_id;
-                param.q = '';
-            }
-            else if(id && typeof(param.q) == 'undefined'){
-                param.id = id;
-            }
-            if(!param.page){
-                param.page = 1;
-                param.rows = 50;
-            }
-        },
-        onLoadSuccess: function(){
-            var this_selector = '#%(obj_id)s';
-            var response_id = $(this_selector).data('response');
-            if(response_id){
-                $(this_selector).combogrid('clear');
-                $(this_selector).combogrid('setValue', response_id);
-                $(this_selector).data('response', '');
-            }
-        }
-    """ % ({
-        'columns': json.dumps(fields),
-        'id': json.dumps(value),
-        'obj_id': obj_id,
-    })
-    if options:
-        data_options += """,
-            %s
-        """ % options
-    if toolbar:
-        toolbar = HTML.tag(
-            'span', class_='combogrid-toolbar', id=toolbar_id,
-            c=HTML(*toolbar)
-        )
-    return HTML(
-        tags.text(
-            name, value,
-            id=obj_id,
-            class_="easyui-combogrid text w20",
-            data_options=data_options,
-        ),
-        toolbar if (toolbar and show_toolbar) else ''
+    tools = (
+        tool('add', '/transport/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/transport/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/transport/edit', 'fa-pencil', _(u'edit item'), True)
     )
+    field = _ComboGridField(
+        request, TransportResource, name, value, '/transport/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
 
 
 def orders_items_statuses_combobox_field(
-    value=None, name='status', with_all=False, options=None
+    name, value=None, with_all=False, data_options=None
 ):
-    data_options = "panelHeight:'auto',editable:false"
-    if options:
-        data_options += """,
-            %s
-        """ % options
+    _data_options = "panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
     choices = OrderItem.STATUS
     if with_all:
         choices = [('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
-        data_options=data_options
+        data_options=_data_options
+    )
+
+
+def tasks_reminders_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = [(t, t) for t in range(10, 70, 10)]
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w5',
+        data_options=_data_options, **kwargs
+    )
+
+
+def accounts_items_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = AccountItem.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def accounts_items_types_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = AccountItem.TYPE
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+def suppliers_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = Supplier.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
     )

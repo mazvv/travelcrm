@@ -16,7 +16,7 @@ from ..models.address import Address
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.employee import EmployeeQueryBuilder
-from ..lib.helpers.fields import employees_combobox_field
+from ..lib.helpers.fields import employees_combogrid_field
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.employee import (
@@ -272,7 +272,7 @@ class EmployeeView(object):
         if resource:
             value = resource.employee.id
         return Response(
-            employees_combobox_field(
-                self.request, value, name=self.request.params.get('name')
+            employees_combogrid_field(
+                self.request, self.request.params.get('name'), value
             )
         )

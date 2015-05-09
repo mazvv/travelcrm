@@ -32,7 +32,7 @@
                 ${h.tags.title(_(u"timezone"), True, "timezone")}
             </div>
             <div class="ml15">
-                ${h.fields.timezones_field(None, style="width:271px;")}
+                ${h.fields.timezones_field('timezone', style="width:271px;")}
                 ${h.common.error_container(name='timezone')}
             </div>
         </div>
@@ -41,7 +41,7 @@
                 ${h.tags.title(_(u"locale"), True, "locale")}
             </div>
             <div class="ml15">
-                ${h.fields.locales_field(None)}
+                ${h.fields.locales_field('locale')}
                 ${h.common.error_container(name='locale')}
             </div>
         </div>

@@ -88,7 +88,7 @@
                         ${h.tags.title(_(u"dismissal date"), False, "dismissal_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.dismissal_date if item else None, "dismissal_date")}
+                        ${h.fields.date_field('dismissal_date', item.dismissal_date if item else None)}
                         ${h.common.error_container(name='dismissal_date')}
                     </div>
                 </div>

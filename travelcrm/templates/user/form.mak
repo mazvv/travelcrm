@@ -22,8 +22,9 @@
                         ${h.tags.title(_(u"employee"), True, "employee_id")}
                     </div>
                     <div class="ml15">
-                       ${h.fields.employees_combobox_field(
-                          request=request, 
+                       ${h.fields.employees_combogrid_field(
+                          request=request,
+                          'employee_id',
                           value=item.employee_id if item else None,
                           show_toolbar=(not readonly if readonly else True)
                        )}

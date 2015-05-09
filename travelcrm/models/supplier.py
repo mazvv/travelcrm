@@ -6,7 +6,6 @@ from sqlalchemy import (
     String,
     Table,
     ForeignKey,
-    UniqueConstraint,
 )
 from sqlalchemy.orm import relationship, backref
 
@@ -14,6 +13,8 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 supplier_bperson = Table(
@@ -42,6 +43,35 @@ supplier_bperson = Table(
         primary_key=True,
     )
 )
+
+
+supplier_contract = Table(
+    'supplier_contract',
+    Base.metadata,
+    Column(
+        'supplier_id',
+        Integer,
+        ForeignKey(
+            'supplier.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_supplier_id_supplier_contract',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'contract_id',
+        Integer,
+        ForeignKey(
+            'contract.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_contract_id_supplier_contract',
+        ),
+        primary_key=True,
+    )
+)
+
 
 supplier_bank_detail = Table(
     'supplier_bank_detail',
@@ -72,7 +102,7 @@ supplier_bank_detail = Table(
 
 
 supplier_subaccount = Table(
-    'suppplier_subaccount',
+    'supplier_subaccount',
     Base.metadata,
     Column(
         'supplier_id',
@@ -101,11 +131,11 @@ supplier_subaccount = Table(
 
 class Supplier(Base):
     __tablename__ = 'supplier'
-    __table_args__ = (
-        UniqueConstraint(
-            'name',
-            name='unique_idx_name_supplier',
-        ),
+
+    STATUS = (
+        ('new', _(u'new')),
+        ('trusted', _(u'trusted')),
+        ('untrusted', _(u'untrusted')),
     )
 
     id = Column(
@@ -124,8 +154,16 @@ class Supplier(Base):
         nullable=False,
     )
     name = Column(
-        String(length=64),
+        String(length=32),
         nullable=False,
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='new',
+        nullable=False,
+    )
+    descr = Column(
+        String(255),
     )
     resource = relationship(
         'Resource',
@@ -140,6 +178,15 @@ class Supplier(Base):
     bpersons = relationship(
         'BPerson',
         secondary=supplier_bperson,
+        backref=backref(
+            'supplier',
+            uselist=False,
+        ),
+        uselist=True,
+    )
+    contracts = relationship(
+        'Contract',
+        secondary=supplier_contract,
         backref=backref(
             'supplier',
             uselist=False,

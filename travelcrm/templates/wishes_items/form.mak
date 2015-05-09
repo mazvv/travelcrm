@@ -18,8 +18,10 @@
                     ${h.tags.title(_(u"service"), True, "service_id")}
                 </div>
                 <div class="ml15">
-                ${h.fields.services_combobox_field(
-                    request, item.service_id if item else None,
+                ${h.fields.services_combogrid_field(
+                    request,
+                    'service_id',
+                    item.service_id if item else None,
                     show_toolbar=(not readonly if readonly else True)
                 )}
                 ${h.common.error_container(name='service_id')}
@@ -48,8 +50,10 @@
                     ${h.tags.title(_(u"price currency"), False, "currency_id")}
                 </div>
                 <div class="ml15">
-                    ${h.fields.currencies_combobox_field(
-                        request, item.currency_id if item else None,
+                    ${h.fields.currencies_combogrid_field(
+                        request,
+                        'currency_id',
+                        item.currency_id if item else None,
                         show_toolbar=(not readonly if readonly else True)
                     )}
                     ${h.common.error_container(name='currency_id')}

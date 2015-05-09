@@ -20,14 +20,16 @@
             <div title="${_(u'Main')}">
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"touroperator"), True, "touroperator_id")}
+                        ${h.tags.title(_(u"supplier"), True, "supplier_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.touroperators_combobox_field(
-                            request, item.order_item.touroperator_id if item else None,
+                        ${h.fields.suppliers_combogrid_field(
+                            request,
+                            'supplier_id',
+                            item.order_item.supplier_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
-                        ${h.common.error_container(name='touroperator_id')}
+                        ${h.common.error_container(name='supplier_id')}
                     </div>
                 </div>
                 <div class="form-field">
@@ -66,8 +68,10 @@
                         ${h.tags.title(_(u"price currency"), True, "currency_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.currencies_combobox_field(
-                            request, item.order_item.currency_id if item else None,
+                        ${h.fields.currencies_combogrid_field(
+                            request,
+                            'currency_id',
+                            item.order_item.currency_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='currency_id')}
@@ -89,7 +93,7 @@
                         ${h.tags.title(_(u"start"), True, "start_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.start_date if item else None, 'start_date')}
+                        ${h.fields.date_field('start_date', item.start_date if item else None)}
                         ${h.common.error_container(name='start_date')}
                     </div>
                 </div>
@@ -98,7 +102,7 @@
                         ${h.tags.title(_(u"end"), True, "end_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.end_date if item else None, 'end_date')}
+                        ${h.fields.date_field('end_date', item.end_date if item else None)}
                         ${h.common.error_container(name='end_date')}
                     </div>
                 </div>
@@ -110,10 +114,10 @@
                                 ${h.tags.title(_(u"location"), True, "start_location_id")}
                             </div>
                             <div class="ml15">
-                                ${h.fields.locations_combobox_field(
+                                ${h.fields.locations_combogrid_field(
                                     request, 
-                                    item.start_location_id if item else None, 
                                     'start_location_id',
+                                    item.start_location_id if item else None, 
                                     show_toolbar=(not readonly if readonly else True),
                                 )}
                                 ${h.common.error_container(name='start_location_id')}
@@ -124,10 +128,10 @@
                                 ${h.tags.title(_(u"transport"), True, "start_transport_id")}
                             </div>
                             <div class="ml15">
-                                ${h.fields.transports_combobox_field(
+                                ${h.fields.transports_combogrid_field(
                                     request, 
-                                    item.start_transport_id if item else None, 
                                     'start_transport_id',
+                                    item.start_transport_id if item else None, 
                                     show_toolbar=(not readonly if readonly else True),
                                 )}
                                 ${h.common.error_container(name='start_transport_id')}
@@ -152,10 +156,10 @@
                                 ${h.tags.title(_(u"location"), True, "end_location_id")}
                             </div>
                             <div class="ml15">
-                                ${h.fields.locations_combobox_field(
+                                ${h.fields.locations_combogrid_field(
                                     request, 
-                                    item.end_location_id if item else None, 
                                     'end_location_id',
+                                    item.end_location_id if item else None, 
                                     show_toolbar=(not readonly if readonly else True)
                                 )}
                                 ${h.common.error_container(name='end_location_id')}
@@ -166,10 +170,10 @@
                                 ${h.tags.title(_(u"transport"), True, "end_transport_id")}
                             </div>
                             <div class="ml15">
-                                ${h.fields.transports_combobox_field(
+                                ${h.fields.transports_combogrid_field(
                                     request, 
-                                    item.end_transport_id if item else None, 
                                     'end_transport_id',
+                                    item.end_transport_id if item else None, 
                                     show_toolbar=(not readonly if readonly else True),
                                 )}
                                 ${h.common.error_container(name='end_transport_id')}
@@ -195,7 +199,11 @@
                         ${h.tags.title(_(u"transfer"), False, "transfer_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.transfers_combobox_field(request, item.transfer_id if item else None)}
+                        ${h.fields.transfers_combogrid_field(
+                            request,
+                            'transfer_id',
+                            item.transfer_id if item else None
+                        )}
                         ${h.common.error_container(name='transfer_id')}
                     </div>
                 </div>
@@ -204,7 +212,11 @@
                         ${h.tags.title(_(u"hotel"), True, "hotel_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.hotels_combobox_field(request, item.hotel_id if item else None)}
+                        ${h.fields.hotels_combogrid_field(
+                            request,
+                            'hotel_id',
+                            item.hotel_id if item else None
+                        )}
                         ${h.common.error_container(name='hotel_id')}
                     </div>
                 </div>
@@ -213,7 +225,7 @@
                         ${h.tags.title(_(u"accomodation"), False, "accomodation_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.accomodations_combobox_field(request, item.accomodation_id if item else None)}
+                        ${h.fields.accomodations_combogrid_field(request, 'accomodation_id', value=item.accomodation_id if item else None)}
                         ${h.common.error_container(name='accomodation_id')}
                     </div>
                 </div>
@@ -222,7 +234,11 @@
                         ${h.tags.title(_(u"food category"), False, "foodcat_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.foodcats_combobox_field(request, item.foodcat_id if item else None)}
+                        ${h.fields.foodcats_combogrid_field(
+                            request,
+                            'foodcat_id',
+                            item.foodcat_id if item else None
+                        )}
                         ${h.common.error_container(name='foodcat_id')}
                     </div>
                 </div>
@@ -231,7 +247,11 @@
                         ${h.tags.title(_(u"room category"), False, "roomcat_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.roomcats_combobox_field(request, item.roomcat_id if item else None)}
+                        ${h.fields.roomcats_combogrid_field(
+                            request,
+                            'roomcat_id',
+                            item.roomcat_id if item else None
+                        )}
                         ${h.common.error_container(name='roomcat_id')}
                     </div>
                 </div>
@@ -254,6 +274,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.orders_items_statuses_combobox_field(
+                            'status',
                             item.order_item.status.key if item else None,
                         )}
                         ${h.common.error_container(name='status')}
@@ -264,7 +285,7 @@
                         ${h.tags.title(_(u"status date"), False, "status_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.order_item.status_date if item else None, 'status_date')}
+                        ${h.fields.date_field('status_date', item.order_item.status_date if item else None)}
                         ${h.common.error_container(name='status_date')}
                     </div>
                 </div>

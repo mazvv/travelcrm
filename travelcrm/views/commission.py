@@ -11,7 +11,10 @@ from ..models.commission import Commission
 from ..lib.qb.commission import CommissionQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.commission import CommissionSchema
+from ..forms.commission import (
+    CommissionForm,
+    CommissionSearchForm
+)
 
 
 log = logging.getLogger(__name__)
@@ -28,7 +31,7 @@ class CommissionView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/commissions/index.mak',
+        renderer='travelcrm:templates/commission/index.mak',
         permission='view'
     )
     def index(self):
@@ -42,21 +45,9 @@ class CommissionView(object):
         permission='view'
     )
     def _list(self):
-        qb = CommissionQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = CommissionSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -65,7 +56,7 @@ class CommissionView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/commissions/form.mak',
+        renderer='travelcrm:templates/commission/form.mak',
         permission='view'
     )
     def view(self):
@@ -87,7 +78,7 @@ class CommissionView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/commissions/form.mak',
+        renderer='travelcrm:templates/commission/form.mak',
         permission='add'
     )
     def add(self):
@@ -102,33 +93,25 @@ class CommissionView(object):
         permission='add'
     )
     def _add(self):
-        schema = CommissionSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            commission = Commission(
-                date_from=controls.get('date_from'),
-                service_id=controls.get('service_id'),
-                percentage=controls.get('percentage'),
-                price=controls.get('price'),
-                currency_id=controls.get('currency_id'),
-                resource=self.context.create_resource()
-            )
+        form = CommissionForm(self.request)
+        if form.validate():
+            commission = form.submit()
             DBSession.add(commission)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': commission.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/commissions/form.mak',
+        renderer='travelcrm:templates/commission/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -145,29 +128,24 @@ class CommissionView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = CommissionSchema().bind(request=self.request)
         commission = Commission.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params)
-            commission.date_from = controls.get('date_from')
-            commission.service_id = controls.get('service_id')
-            commission.percentage = controls.get('percentage')
-            commission.price = controls.get('price')
-            commission.currency_id = controls.get('currency_id')
+        form = CommissionForm(self.request)
+        if form.validate():
+            form.submit(commission)
             return {
                 'success_message': _(u'Saved'),
                 'response': commission.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/commissions/form.mak',
+        renderer='travelcrm:templates/commission/form.mak',
         permission='add'
     )
     def copy(self):
@@ -189,7 +167,7 @@ class CommissionView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/commissions/delete.mak',
+        renderer='travelcrm:templates/commission/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -205,21 +183,19 @@ class CommissionView(object):
         permission='delete'
     )
     def _delete(self):
-        errors = 0
-        for id in self.request.params.getall('id'):
-            item = Commission.get(id)
-            if item:
-                DBSession.begin_nested()
-                try:
-                    DBSession.delete(item)
-                    DBSession.commit()
-                except:
-                    errors += 1
-                    DBSession.rollback()
-        if errors > 0:
-            return {
-                'error_message': _(
-                    u'Some objects could not be delete'
-                ),
-            }
+        ids = self.request.params.getall('id')
+        if ids:
+            try:
+                (
+                    DBSession.query(Commission)
+                    .filter(Commission.id.in_(ids))
+                    .delete()
+                )
+            except:
+                DBSession.rollback()
+                return {
+                    'error_message': _(
+                        u'Some objects could not be delete'
+                    ),
+                }
         return {'success_message': _(u'Deleted')}

@@ -7,7 +7,7 @@ from ..interfaces import (
     ISubaccountFactory,
 )
 from ..resources import (
-    ResourceTypeBase
+    ResourceTypeBase,
 )
 from ..lib.factories.suppliers import SupplierSubaccountFactory
 

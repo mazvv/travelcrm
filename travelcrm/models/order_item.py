@@ -101,11 +101,11 @@ class OrderItem(Base):
         ),
         nullable=False,
     )
-    touroperator_id = Column(
+    supplier_id = Column(
         Integer,
         ForeignKey(
-            'touroperator.id',
-            name="fk_touroperator_id_order_item",
+            'supplier.id',
+            name="fk_supplier_id_order_item",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -168,8 +168,8 @@ class OrderItem(Base):
         ),
         uselist=False,
     )
-    touroperator = relationship(
-        'Touroperator',
+    supplier = relationship(
+        'Supplier',
         backref=backref(
             'orders_items',
             lazy='dynamic',

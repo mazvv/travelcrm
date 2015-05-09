@@ -5,6 +5,7 @@ from sqlalchemy import (
     Integer,
     Date,
     Numeric,
+    String,
     ForeignKey,
     CheckConstraint,
 )
@@ -29,10 +30,6 @@ class Commission(Base):
         Integer,
         autoincrement=True,
         primary_key=True
-    )
-    date_from = Column(
-        Date,
-        nullable=False,
     )
     resource_id = Column(
         Integer,
@@ -71,6 +68,9 @@ class Commission(Base):
             onupdate='cascade',
         ),
         nullable=False,
+    )
+    descr = Column(
+        String(255),
     )
     resource = relationship(
         'Resource',

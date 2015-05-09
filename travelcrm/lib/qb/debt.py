@@ -8,8 +8,8 @@ from ...models.resource import Resource
 from ...models.account import Account
 from ...models.subaccount import Subaccount
 from ...models.calculation import Calculation
-from ...models.service_item import ServiceItem
-from ...models.touroperator import Touroperator
+from ...models.order_item import OrderItem
+from ...models.supplier import Supplier
 from ...models.currency import Currency
 from ...models.cashflow import Cashflow
 
@@ -24,11 +24,11 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
             DBSession.query(
                 Cashflow.sum,
                 Cashflow.date, 
-                Touroperator.id,
+                Supplier.id,
                 Account.currency_id.label('currency_id')
             )
             .join(Subaccount, Cashflow.subaccount_from)
-            .join(Touroperator, Subaccount.touroperator)
+            .join(Supplier, Subaccount.supplier)
             .join(Account, Subaccount.account)
             .subquery()
         )
@@ -38,12 +38,12 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
                 subq_resource_data.c.date,
                 Calculation.price.label('sum'),
                 Calculation.currency_id,
-                ServiceItem.touroperator_id,
+                OrderItem.supplier_id,
             )
-            .join(ServiceItem, Calculation.service_item)
+            .join(OrderItem, Calculation.order_item)
             .join(
                 subq_resource_data, 
-                ServiceItem.id == subq_resource_data.c.service_item_id
+                OrderItem.id == subq_resource_data.c.service_item_id
             )
             .subquery()
         )
@@ -54,16 +54,16 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
             func.sum(self._subq_calculations.c.sum), 0
         )
         self._fields = {
-            'id': Touroperator.id,
-            '_id': Touroperator.id,
-            'name': Touroperator.name,
+            'id': Supplier.id,
+            '_id': Supplier.id,
+            'name': Supplier.name,
             'currency': Currency.iso_code,
             'sum_in': self._field_sum_in,
             'sum_out': self._field_sum_out,
             'balance': (self._field_sum_out - self._field_sum_in)
         }
         self._simple_search_fields = [
-            Touroperator.name,
+            Supplier.name,
         ]
         self.build_query()
 
@@ -71,10 +71,10 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
         self.build_base_query()
         self.query = (
             self.query
-            .join(Touroperator, Resource.touroperator)
+            .join(Supplier, Resource.supplier)
             .outerjoin(
                 self._subq_calculations, 
-                self._subq_calculations.c.touroperator_id == Touroperator.id,
+                self._subq_calculations.c.supplier_id == Supplier.id,
             )
             .join(
                 Currency, self._subq_calculations.c.currency_id == Currency.id
@@ -82,15 +82,15 @@ class DebtQueryBuilder(ResourcesQueryBuilder):
             .outerjoin(
                 self._subq_cashflows, 
                 and_(
-                    self._subq_cashflows.c.id == Touroperator.id,
+                    self._subq_cashflows.c.id == Supplier.id,
                     self._subq_cashflows.c.currency_id == Currency.id
                 )
             )
-            .group_by(Touroperator.id, Touroperator.name, Currency.iso_code)
+            .group_by(Supplier.id, Supplier.name, Currency.iso_code)
         )
         super(DebtQueryBuilder, self).build_query()
         self.query = self.query.with_entities(
-            Touroperator.id, Touroperator.name, 
+            Supplier.id, Supplier.name, 
             Currency.iso_code.label('currency'),
             self._field_sum_in.label('sum_in'),
             self._field_sum_out.label('sum_out'),

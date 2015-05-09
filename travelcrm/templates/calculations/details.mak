@@ -9,10 +9,10 @@
     </tr>
     <tr>
         <td class="b" style="width: 140px;" valign="top">
-            ${_(u'touroperator')}
+            ${_(u'supplier')}
         </td>
         <td>
-            ${item.service_item.touroperator.name}
+            ${item.service_item.supplier.name}
         </td>
     </tr>
     <tr>

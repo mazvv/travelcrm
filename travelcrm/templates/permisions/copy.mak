@@ -12,7 +12,7 @@
                 ${h.tags.title(_(u'from position'), True, "from_position_id")}
             </div>
             <div class="ml15">
-                ${h.fields.positions_combogrid_field(request, None, show_toolbar=False, name='from_position_id')}
+                ${h.fields.positions_combogrid_field(request, 'from_position_id', show_toolbar=False)}
                 ${h.common.error_container(name='from_position_id')}
             </div>
         </div>

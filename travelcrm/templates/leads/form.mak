@@ -23,7 +23,7 @@
                         ${h.tags.title(_(u"lead date"), True, "lead_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field(item.lead_date if item else None, 'lead_date')}
+                        ${h.fields.date_field('lead_date', item.lead_date if item else None)}
                         ${h.common.error_container(name='lead_date')}
                     </div>
                 </div>
@@ -32,8 +32,10 @@
                         ${h.tags.title(_(u"advertise"), True, "advsource_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.advsources_combobox_field(
-                            request, item.advsource_id if item else None,
+                        ${h.fields.advsources_combogrid_field(
+                            request,
+                            'advsource_id',
+                            item.advsource_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name='advsource_id')}
@@ -44,9 +46,10 @@
                         ${h.tags.title(_(u"customer"), True, "customer_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.persons_combobox_field(
-                            request, item.customer_id if item else None,
-                            name="customer_id",
+                        ${h.fields.persons_combogrid_field(
+                            request,
+                            'customer_id',
+                            item.customer_id if item else None,
                             show_toolbar=(not readonly if readonly else True)
                         )}
                         ${h.common.error_container(name="customer_id")}
@@ -58,6 +61,7 @@
                     </div>
                     <div class="ml15">
                         ${h.fields.leads_statuses_combobox_field(
+                            'status',
                             item.status.key if item else None
                         )}
                     </div>

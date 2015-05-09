@@ -1,20 +1,16 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.currency_rate import CurrencyRate
-from ..models.note import Note
-from ..models.task import Task
-from ..lib.qb.currency_rate import CurrencyRateQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..forms.currency_rate import (
-    CurrencyRateSchema, 
-    CurrencyRateSearchSchema
+    CurrencyRateForm, 
+    CurrencyRateSearchForm
 )
 
 
@@ -32,7 +28,7 @@ class CurrencyRateView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/currencies_rates/index.mak',
+        renderer='travelcrm:templates/currency_rate/index.mak',
         permission='view'
     )
     def index(self):
@@ -46,22 +42,9 @@ class CurrencyRateView(object):
         permission='view'
     )
     def list(self):
-        schema = CurrencyRateSearchSchema().bind(request=self.request)
-        controls = schema.deserialize(self.request.params.mixed())
-        qb = CurrencyRateQueryBuilder(self.context)
-        qb.search_simple(controls.get('q'))
-        qb.advanced_search(**controls)
-        id = self.request.params.get('id')
-        if id:
-            qb.filter_id(id.split(','))
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = CurrencyRateSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -70,7 +53,7 @@ class CurrencyRateView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/currencies_rates/form.mak',
+        renderer='travelcrm:templates/currency_rate/form.mak',
         permission='view'
     )
     def view(self):
@@ -92,7 +75,7 @@ class CurrencyRateView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/currencies_rates/form.mak',
+        renderer='travelcrm:templates/currency_rate/form.mak',
         permission='add'
     )
     def add(self):
@@ -105,38 +88,25 @@ class CurrencyRateView(object):
         permission='add'
     )
     def _add(self):
-        schema = CurrencyRateSchema().bind(request=self.request)
-
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            currency_rate = CurrencyRate(
-                currency_id=controls.get('currency_id'),
-                rate=controls.get('rate'),
-                date=controls.get('date'),
-                resource=self.context.create_resource()
-            )
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                currency_rate.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                currency_rate.resource.tasks.append(task)
+        form = CurrencyRateForm(self.request)
+        if form.validate():
+            currency_rate = form.submit()
             DBSession.add(currency_rate)
             DBSession.flush()
             return {
                 'success_message': _(u'Saved'),
                 'response': currency_rate.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/currencies_rates/form.mak',
+        renderer='travelcrm:templates/currency_rate/form.mak',
         permission='edit'
     )
     def edit(self):
@@ -150,35 +120,24 @@ class CurrencyRateView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = CurrencyRateSchema().bind(request=self.request)
         currency_rate = CurrencyRate.get(self.request.params.get('id'))
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            currency_rate.currency_id = controls.get('currency_id')
-            currency_rate.rate = controls.get('rate')
-            currency_rate.date = controls.get('date')
-            currency_rate.resource.notes = []
-            currency_rate.resource.tasks = []
-            for id in controls.get('note_id'):
-                note = Note.get(id)
-                currency_rate.resource.notes.append(note)
-            for id in controls.get('task_id'):
-                task = Task.get(id)
-                currency_rate.resource.tasks.append(task)
+        form = CurrencyRateForm(self.request)
+        if form.validate():
+            form.submit(currency_rate)
             return {
                 'success_message': _(u'Saved'),
                 'response': currency_rate.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/currencies_rates/form.mak',
+        renderer='travelcrm:templates/currency_rate/form.mak',
         permission='add'
     )
     def copy(self):
@@ -200,7 +159,7 @@ class CurrencyRateView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/currencies_rates/delete.mak',
+        renderer='travelcrm:templates/currency_rate/delete.mak',
         permission='delete'
     )
     def delete(self):
@@ -216,18 +175,19 @@ class CurrencyRateView(object):
         permission='delete'
     )
     def _delete(self):
-        errors = 0
-        for id in self.request.params.getall('id'):
-            item = CurrencyRate.get(id)
-            if item:
-                DBSession.begin_nested()
-                try:
-                    DBSession.delete(item)
-                    DBSession.commit()
-                except:
-                    errors += 1
-                    DBSession.rollback()
-        if errors > 0:
+        errors = False
+        ids = self.request.params.getall('id')
+        if ids:
+            try:
+                (
+                    DBSession.query(CurrencyRate)
+                    .fiter(CurrencyRate.id.in_(ids))
+                    .delete()
+                )
+            except:
+                errors=True
+                DBSession.rollback()
+        if errors:
             return {
                 'error_message': _(
                     u'Some objects could not be delete'

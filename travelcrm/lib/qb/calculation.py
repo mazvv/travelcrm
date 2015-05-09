@@ -7,11 +7,11 @@ from sqlalchemy import literal
 from . import ResourcesQueryBuilder
 
 from ...models.resource import Resource
-from ...models.service_item import ServiceItem
+from ...models.order_item import OrderItem
 from ...models.calculation import Calculation
 from ...models.service import Service
 from ...models.currency import Currency
-from ...models.touroperator import Touroperator
+from ...models.supplier import Supplier
 
 from ...lib.utils.common_utils import get_base_currency
 
@@ -24,7 +24,7 @@ class CalculationQueryBuilder(ResourcesQueryBuilder):
             'id': Calculation.id,
             '_id': Calculation.id,
             'service': Service.name,
-            'touroperator': Touroperator.name,
+            'supplier': Supplier.name,
             'price': Calculation.price,
             'currency': Currency.iso_code,
             'base_price': Calculation.base_price,
@@ -37,9 +37,9 @@ class CalculationQueryBuilder(ResourcesQueryBuilder):
         self.query = (
             self.query
             .join(Calculation, Resource.calculation)
-            .join(ServiceItem, Calculation.service_item)
-            .join(Service, ServiceItem.service)
-            .join(Touroperator, ServiceItem.touroperator)
+            .join(OrderItem, Calculation.order_item)
+            .join(Service, OrderItem.service)
+            .join(Supplier, OrderItem.supplier)
             .join(Currency, Calculation.currency)
         )
         super(CalculationQueryBuilder, self).build_query()
