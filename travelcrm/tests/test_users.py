@@ -4,7 +4,7 @@ import unittest
 
 from pyramid import testing
 
-from ..views.user import UserView
+from ..views.users import UsersView
 
 
 class TestUsers(unittest.TestCase):
@@ -17,5 +17,5 @@ class TestUsers(unittest.TestCase):
     def test_index(self):
         context = testing.DummyResource()
         request = testing.DummyRequest()
-        users = UserView(context, request)
+        users = UsersView(context, request)
         self.assertDictEqual({}, users.index())

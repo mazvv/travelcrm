@@ -24,6 +24,10 @@ class Contact(Base):
         ('email', _(u'email')),
         ('skype', _(u'skype')),
     )
+    STATUS = (
+        ('active', _(u'active')),
+        ('unactive', _(u'unactive')),
+    )
 
     id = Column(
         Integer,
@@ -47,6 +51,14 @@ class Contact(Base):
     contact = Column(
         String,
         nullable=False,
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='active',
+        nullable=False,
+    )
+    descr = Column(
+        String(255),
     )
     resource = relationship(
         'Resource',
@@ -84,3 +96,10 @@ class Contact(Base):
     @classmethod
     def condition_skype(cls):
         return cls.contact_type == u'skype'
+
+    @classmethod
+    def condition_status_active(cls):
+        return cls.status == u'active'
+
+    def is_status_active(self):
+        return self.status == u'active'

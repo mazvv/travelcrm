@@ -141,3 +141,12 @@ class AccountItem(Base):
         if accounts_items.get(self.id):
             result = []
             return recurse_accumulate(self, result)
+
+    def is_type_any(self):
+        return self.type == 'any'
+
+    def is_type_revenue(self):
+        return self.type == 'revenue'
+
+    def is_type_expenses(self):
+        return self.type == 'expenses'

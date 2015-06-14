@@ -5,7 +5,7 @@ import transaction
 
 import pytz
 
-from ...resources.notification import NotificationResource
+from ...resources.notifications import NotificationsResource
 from ...models.task import Task
 from ...models.resource import Resource
 from ...models.notification import Notification
@@ -26,7 +26,7 @@ def _task_notification(task_id):
                 title=_(u'Task: %s') % task.title,
                 descr=task.title,
                 notification_resource=task.resource,
-                resource=Resource(NotificationResource, employee_structure)
+                resource=Resource(NotificationsResource, employee_structure)
             )
             task.employee.notifications.append(notification)
             log.info(u'Notification for task #%s' % task.id)

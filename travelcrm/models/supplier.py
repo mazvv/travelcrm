@@ -133,9 +133,8 @@ class Supplier(Base):
     __tablename__ = 'supplier'
 
     STATUS = (
-        ('new', _(u'new')),
-        ('trusted', _(u'trusted')),
-        ('untrusted', _(u'untrusted')),
+        ('active', _(u'active')),
+        ('unactive', _(u'unactive')),
     )
 
     id = Column(
@@ -153,13 +152,23 @@ class Supplier(Base):
         ),
         nullable=False,
     )
+    supplier_type_id = Column(
+        Integer,
+        ForeignKey(
+            'supplier_type.id',
+            name="fk_supplier_type_id_supplier",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
     name = Column(
         String(length=32),
         nullable=False,
     )
     status = Column(
         EnumIntType(STATUS),
-        default='new',
+        default='active',
         nullable=False,
     )
     descr = Column(
@@ -173,6 +182,14 @@ class Supplier(Base):
             cascade="all,delete"
         ),
         cascade="all,delete",
+        uselist=False,
+    )
+    supplier_type = relationship(
+        'SupplierType',
+        backref=backref(
+            'suppliers',
+            uselist=True,
+        ),
         uselist=False,
     )
     bpersons = relationship(

@@ -26,10 +26,15 @@ class Account(Base):
         ),
     )
 
-    ACCOUNTS_TYPES = [
+    ACCOUNTS_TYPES = (
         ('bank', _(u'bank')),
         ('cash', _(u'cash'))
-    ]
+    )
+    STATUS = (
+        ('active', _(u'active')),
+        ('disabled', _(u'disabled')),
+    )
+
     id = Column(
         Integer,
         autoincrement=True,
@@ -65,6 +70,11 @@ class Account(Base):
     )
     display_text = Column(
         String(length=255),
+        nullable=False,
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='active',
         nullable=False,
     )
     descr = Column(

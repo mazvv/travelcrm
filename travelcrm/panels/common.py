@@ -10,7 +10,7 @@ from ..lib.bl.structures import get_structure_name_path
 
 @panel_config(
     'header_panel',
-    renderer='travelcrm:templates/panels/common#header.mak'
+    renderer='travelcrm:templates/panels/common#header.mako'
 )
 def header(context, request):
     company_name = get_company_name()
@@ -19,7 +19,7 @@ def header(context, request):
 
 @panel_config(
     'footer_panel',
-    renderer='travelcrm:templates/panels/common#footer.mak'
+    renderer='travelcrm:templates/panels/common#footer.mako'
 )
 def footer(context, request):
     return {}
@@ -27,7 +27,7 @@ def footer(context, request):
 
 @panel_config(
     'employee_info_panel',
-    renderer='travelcrm:templates/panels/common#employee_info.mak'
+    renderer='travelcrm:templates/panels/common#employee_info.mako'
 )
 def employee_info(context, request):
     employee = get_auth_employee(request)

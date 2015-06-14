@@ -480,3 +480,22 @@ function status_formatter(status){
 		return $('<div/>').append(span).html();
 	}
 }
+
+function account_item_type_formatter(item_type){
+	if(item_type){
+		var span = $('<span/>').addClass('fa mr05');
+		var title = $('<span/>').html(item_type.title);
+		switch(item_type.key){
+			case 'revenue':
+				span.addClass('fa-long-arrow-right');
+				break;
+			case 'expenses':
+				span.addClass('fa-long-arrow-left');
+				break;
+			default:
+				span.addClass('fa-arrows-h');
+				break;
+		}
+		return $('<div/>').append(span).append(title).html();
+	}
+}

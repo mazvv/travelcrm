@@ -4,6 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     Date,
+    String,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
@@ -40,6 +41,16 @@ class Invoice(Base):
         ),
         nullable=False,
     )
+    order_id = Column(
+        Integer,
+        ForeignKey(
+            'order.id',
+            name="fk_order_id_invoice",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
     account_id = Column(
         Integer,
         ForeignKey(
@@ -50,7 +61,9 @@ class Invoice(Base):
         ),
         nullable=False,
     )
-
+    descr = Column(
+        String(length=255),
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -60,6 +73,14 @@ class Invoice(Base):
         ),
         foreign_keys=[resource_id],
         cascade="all,delete",
+        uselist=False,
+    )
+    order = relationship(
+        'Order',
+        backref=backref(
+            'invoice',
+            uselist=False,
+        ),
         uselist=False,
     )
     account = relationship(
@@ -85,3 +106,15 @@ class Invoice(Base):
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
+
+    @property
+    def final_price(self):
+        return sum([item.final_price for item in self.invoices_items])
+
+    @property
+    def discount(self):
+        return sum([item.discount for item in self.invoices_items])
+
+    @property
+    def vat(self):
+        return sum([item.vat for item in self.invoices_items])

@@ -6,7 +6,7 @@ import logging
 from pyramid_mailer import mailer_factory_from_settings
 from pyramid_mailer.message import Message
 
-from ...resources.email_campaign import EmailCampaignResource
+from ...resources.emails_campaigns import EmailsCampaignsResource
 from ...models.email_campaign import EmailCampaign
 from ...lib.bl.emails_campaigns import get_all_subscribers
 from ...lib.utils.resources_utils import get_resource_type_by_resource_cls
@@ -31,7 +31,7 @@ def _send(settings, subject, recepient, body, html):
 def schedule_email_campaign(request, email_campaign_id):
     campaign = EmailCampaign.get(email_campaign_id)
     subscribers = get_all_subscribers()
-    rt = get_resource_type_by_resource_cls(EmailCampaignResource)
+    rt = get_resource_type_by_resource_cls(EmailsCampaignsResource)
     start_dt = campaign.start_dt
     scheduler = get_scheduler(request)
 

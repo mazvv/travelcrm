@@ -89,14 +89,20 @@ class ResourceTypeBase(SecuredBase):
         return True
 
     @property
+    def allowed_settings(self):
+        return False
+
+    @property
     def allowed_permisions(self):
-        return [
+        permisions = [
             ('view', _(u'view')),
             ('add', _(u'add')),
             ('edit', _(u'edit')),
             ('delete', _(u'delete')),
-            ('settings', _(u'settings')),
         ]
+        if self.allowed_settings:
+            permisions.append(('settings', _(u'settings')))
+        return permisions
 
     def create_resource(self):
         auth_employee = get_auth_employee(self.request)

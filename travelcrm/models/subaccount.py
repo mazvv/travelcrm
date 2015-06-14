@@ -13,6 +13,8 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 class Subaccount(Base):
@@ -20,8 +22,14 @@ class Subaccount(Base):
     __table_args__ = (
         UniqueConstraint(
             'name',
-            name='unique_idx_name_subaccount',
+            'account_id',
+            name='unique_idx_name_account_id_subaccount',
         ),
+    )
+
+    STATUS = (
+        ('active', _(u'active')),
+        ('unactive', _(u'unactive')),
     )
 
     id = Column(
@@ -46,10 +54,16 @@ class Subaccount(Base):
             name='fk_subaccount_account_id',
             onupdate='cascade',
             ondelete='restrict',
-        )
+        ),
+        nullable=False,
     )
     name = Column(
         String(length=255),
+        nullable=False,
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='active',
         nullable=False,
     )
     descr = Column(

@@ -15,6 +15,7 @@ from ..utils.common_utils import (
     format_datetime as u_format_datetime,
     format_decimal as u_format_decimal,
     get_base_currency as u_get_base_currency,
+    format_currency as u_format_currency,
 )
 from ..utils.security_utils import get_auth_employee as u_get_auth_employee
 from ..bl.employees import get_employee_structure
@@ -85,12 +86,17 @@ def format_decimal(value):
     return u_format_decimal(value)
 
 
+def format_currency(value, currency):
+    return u_format_currency(value, currency)
+
+
 def format_date(value):
     return u_format_date(value)
 
 
 def format_datetime(value):
     return u_format_datetime(value)
+
 
 def get_locale_name():
     return u_get_locale_name()

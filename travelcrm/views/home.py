@@ -35,7 +35,7 @@ class HomeView(object):
     @view_config(
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/home.mak',
+        renderer='travelcrm:templates/home.mako',
         permission='view'
     )
     def index(self):
@@ -53,7 +53,7 @@ class HomeView(object):
         name='forgot',
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth/forgot.mak',
+        renderer='travelcrm:templates/auth/forgot.mako',
     )
     def forgot(self):
         auth_url = self.request.resource_url(
@@ -85,13 +85,13 @@ class HomeView(object):
 
     @forbidden_view_config(
         request_method="GET",
-        renderer="travelcrm:templates/auth/login.mak",
+        renderer="travelcrm:templates/auth/login.mako",
     )
     @view_config(
         name='auth',
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth/login.mak',
+        renderer='travelcrm:templates/auth/login.mako',
     )
     def auth(self):
         if authenticated_userid(self.request):
@@ -146,7 +146,7 @@ class HomeView(object):
         name='logout',
         request_method='GET',
         context='..resources.Root',
-        renderer='travelcrm:templates/auth/logout.mak'
+        renderer='travelcrm:templates/auth/logout.mako'
     )
     def logout(self):
         return {}
@@ -165,7 +165,7 @@ class HomeView(object):
         name='add',
         context='..resources.Root',
         request_method='GET',
-        renderer='travelcrm:templates/auth/add.mak',
+        renderer='travelcrm:templates/auth/add.mako',
     )
     def add(self):
         auth_url = self.request.resource_url(

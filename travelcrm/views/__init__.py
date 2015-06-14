@@ -18,7 +18,7 @@ from ..lib.utils.common_utils import translate as _
     name='system_need_select_row',
     request_method='GET',
     context='..resources.Root',
-    renderer='travelcrm:templates/system#system_info_dialog.mak'
+    renderer='travelcrm:templates/system#system_info_dialog.mako'
 )
 def system_need_select_row(context, request):
     return {
@@ -31,7 +31,7 @@ def system_need_select_row(context, request):
     name='system_need_select_rows',
     request_method='GET',
     context='..resources.Root',
-    renderer='travelcrm:templates/system#system_info_dialog.mak'
+    renderer='travelcrm:templates/system#system_info_dialog.mako'
 )
 def system_need_select_rows(context, request):
     return {
@@ -43,7 +43,7 @@ def system_need_select_rows(context, request):
 @forbidden_view_config(
     request_method="GET",
     xhr=True,
-    renderer="travelcrm:templates/system#system_info_dialog.mak",
+    renderer="travelcrm:templates/system#system_info_dialog.mako",
 )
 def system_resource_forbidden(context, request):
     return {
@@ -56,7 +56,7 @@ def system_resource_forbidden(context, request):
     name='system_navigation',
     request_method='GET',
     context='..resources.Root',
-    renderer='travelcrm:templates/system#system_navigation.mak'
+    renderer='travelcrm:templates/system#system_navigation.mako'
 )
 def system_navigation(context, request):
     user_id = authenticated_userid(request)
@@ -78,7 +78,7 @@ def system_navigation(context, request):
     request_method='GET',
     context='..resources.Root',
     xhr='True',
-    renderer='travelcrm:templates/system#system_context_info_dialog.mak'
+    renderer='travelcrm:templates/system#system_context_info_dialog.mako'
 )
 def system_context_info(context, request):
     return {
@@ -137,7 +137,7 @@ def _system_context_info(context, request):
     request_method='GET',
     context='..resources.Root',
     xhr='True',
-    renderer='travelcrm:templates/system#system_portal.mak'
+    renderer='travelcrm:templates/system#system_portal.mako'
 )
 def system_portal(context, request):
     return {}

@@ -14,6 +14,8 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 contract_commission = Table(
@@ -47,6 +49,11 @@ contract_commission = Table(
 class Contract(Base):
     __tablename__ = 'contract'
 
+    STATUS = (
+        ('active', _(u'active')),
+        ('unactive', _(u'unactive')),
+    )
+
     id = Column(
         Integer,
         autoincrement=True,
@@ -69,6 +76,11 @@ class Contract(Base):
     date = Column(
         Date,
         nullable=False
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='active',
+        nullable=False,
     )
     descr = Column(
         String(255),

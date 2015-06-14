@@ -9,8 +9,8 @@ from sqlalchemy import (
     Table,
     ForeignKey,
 )
-from sqlalchemy import and_
 from sqlalchemy.orm import relationship, backref
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from ..models import (
     DBSession,
@@ -53,8 +53,8 @@ class OrderItem(Base):
 
     STATUS = (
         ('awaiting', _(u'awaiting')),
-        ('success', _(u'confirmed')),
-        ('failure', _(u'unconfirmed')),
+        ('success', _(u'success')),
+        ('failure', _(u'failure')),
     )
 
     id = Column(
@@ -115,7 +115,12 @@ class OrderItem(Base):
         Numeric(16, 2),
         nullable=False,
     )
-    base_price = Column(
+    discount_sum = Column(
+        Numeric(16, 2),
+        default=0,
+        nullable=False
+    )
+    discount_percent = Column(
         Numeric(16, 2),
         default=0,
         nullable=False
@@ -202,3 +207,11 @@ class OrderItem(Base):
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
+
+    @hybrid_property
+    def final_price(self):
+        return self.price - self.discount
+
+    @hybrid_property
+    def discount(self):
+        return self.price * self.discount_percent / 100 + self.discount_sum

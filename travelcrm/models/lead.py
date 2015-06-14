@@ -4,7 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     Date,
-    Table,
+    String,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
@@ -15,62 +15,6 @@ from ..models import (
 )
 from ..lib import EnumIntType
 from ..lib.utils.common_utils import translate as _
-
-
-lead_wish = Table(
-    'lead_wish',
-    Base.metadata,
-    Column(
-        'lead_id',
-        Integer,
-        ForeignKey(
-            'lead.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_lead_id_lead_wish',
-        ),
-        primary_key=True,
-    ),
-    Column(
-        'wish_id',
-        Integer,
-        ForeignKey(
-            'wish.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_wish_id_lead_wish',
-        ),
-        primary_key=True,
-    ),
-)
-
-
-lead_offer = Table(
-    'lead_offer',
-    Base.metadata,
-    Column(
-        'lead_id',
-        Integer,
-        ForeignKey(
-            'lead.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_lead_id_lead_offer',
-        ),
-        primary_key=True,
-    ),
-    Column(
-        'offer_id',
-        Integer,
-        ForeignKey(
-            'offer.id',
-            ondelete='restrict',
-            onupdate='cascade',
-            name='fk_offer_item_id_lead_offer',
-        ),
-        primary_key=True,
-    ),
-)
 
 
 class Lead(Base):
@@ -127,6 +71,9 @@ class Lead(Base):
         default='new',
         nullable=False,
     )
+    descr = Column(
+        String(length=255),
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -136,26 +83,6 @@ class Lead(Base):
         ),
         cascade="all,delete",
         uselist=False,
-    )
-    wishes = relationship(
-        'Wish',
-        secondary=lead_wish,
-        backref=backref(
-            'lead',
-            uselist=False,
-        ),
-        uselist=True,
-        lazy="dynamic",
-    )
-    offers = relationship(
-        'Offer',
-        secondary=lead_offer,
-        backref=backref(
-            'lead',
-            uselist=False,
-        ),
-        uselist=True,
-        lazy="dynamic",
     )
     customer = relationship(
         'Person',

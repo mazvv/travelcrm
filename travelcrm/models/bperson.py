@@ -14,6 +14,8 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 bperson_contact = Table(
@@ -47,6 +49,11 @@ bperson_contact = Table(
 class BPerson(Base):
     __tablename__ = 'bperson'
 
+    STATUS = (
+        ('active', _(u'active')),
+        ('unactive', _(u'unactive')),
+    )
+
     id = Column(
         Integer,
         autoincrement=True,
@@ -74,6 +81,14 @@ class BPerson(Base):
     )
     position_name = Column(
         String(length=64),
+    )
+    status = Column(
+        EnumIntType(STATUS),
+        default='active',
+        nullable=False,
+    )
+    descr = Column(
+        String(255),
     )
     resource = relationship(
         'Resource',
@@ -112,3 +127,9 @@ class BPerson(Base):
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
+
+    def has_active_contacts(self):
+        active_contacts = [
+            contact for contact in self.contacts if contact.is_status_active()
+        ]
+        return len(active_contacts) > 0

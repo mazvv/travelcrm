@@ -49,22 +49,13 @@ class Service(Base):
         ),
         nullable=False,
     )
-    account_item_id = Column(
-        Integer,
-        ForeignKey(
-            'account_item.id',
-            name="fk_account_item_id_service",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     name = Column(
         String(length=32),
         nullable=False,
     )
     display_text = Column(
         String(length=255),
+        nullable=False,
     )
     descr = Column(
         String(length=255),
@@ -87,15 +78,6 @@ class Service(Base):
             cascade="all,delete"
         ),
         cascade="all,delete",
-        uselist=False,
-    )
-    account_item = relationship(
-        'AccountItem',
-        backref=backref(
-            'services',
-            uselist=True,
-            lazy='dynamic',
-        ),
         uselist=False,
     )
 

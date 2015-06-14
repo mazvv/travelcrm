@@ -5,10 +5,7 @@ from sqlalchemy import func
 from ...lib.utils.resources_utils import get_resource_class
 from ...lib.utils.sql_utils import build_union_query
 from ...lib.bl.factories import get_invoices_factories_resources_types
-from ...lib.bl.cashflows import (
-    query_account_from_cashflows, 
-    query_account_to_cashflows,
-)
+from ...lib.utils.common_utils import get_vat as _get_vat
 from ...models import DBSession
 from ...models.invoice import Invoice
 from ...models.resource import Resource
@@ -18,6 +15,13 @@ from ...models.account import Account
 from ...models.cashflow import Cashflow
 
 
+def get_vat(amount):
+    vat = _get_vat()
+    if not vat:
+        return 0
+    return amount * vat / (100 + vat)
+
+    
 def query_resource_data():
     factories = get_invoices_factories_resources_types()
     queries = [factory.query_list() for factory in factories]
@@ -61,34 +65,6 @@ def query_invoice_payments(invoice_id):
     )
 
 
-def query_invoice_payments_accounts_items_grouped(invoice_id):
+def get_invoice_payments_sum(invoice_id):
     invoice = Invoice.get(invoice_id)
-    from_cashflows_query = (
-        query_account_from_cashflows(invoice.account_id)
-        .with_entities(
-            Cashflow.account_item_id.label('account_item_id'), 
-            Cashflow.sum.label('sum'),
-        )
-        .join(Income, Cashflow.income)
-        .filter(Income.invoice_id == invoice_id)
-    )
-    to_cashflows_query = (
-        query_account_to_cashflows(invoice.account_id)
-        .with_entities(
-            Cashflow.account_item_id.label('account_item_id'), 
-            Cashflow.sum.label('sum'),
-        )
-        .join(Income, Cashflow.income)
-        .filter(Income.invoice_id == invoice_id)
-    )
-    subq = (
-        build_union_query([from_cashflows_query, to_cashflows_query])
-        .subquery()
-    )
-    return (
-        DBSession.query(
-            subq.c.account_item_id,
-            func.sum(subq.c.sum).label('sum')
-        )
-        .group_by(subq.c.account_item_id)
-    )
+    return reduce(lambda s, item: s + item.sum, invoice.incomes, 0)

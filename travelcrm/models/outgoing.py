@@ -5,6 +5,7 @@ from sqlalchemy import (
     Integer,
     Date,
     Numeric,
+    String,
     Table,
     ForeignKey,
 )
@@ -90,6 +91,9 @@ class Outgoing(Base):
         Numeric(16, 2),
         nullable=False,
     )
+    descr = Column(
+        String(length=255),
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -145,6 +149,9 @@ class Outgoing(Base):
         )
 
     def rollback(self):
-        for cashflow in self.cashflows:
+        cashflows = list(self.cashflows)
+        self.cashflows = []
+        DBSession.flush()
+        
+        for cashflow in cashflows:
             DBSession.delete(cashflow)
-        DBSession.flush(self.cashflows)

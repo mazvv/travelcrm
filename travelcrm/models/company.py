@@ -4,6 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
+    Table,
     ForeignKey,
     UniqueConstraint,
 )
@@ -13,6 +14,34 @@ from sqlalchemy.dialects.postgresql import JSON
 from ..models import (
     DBSession,
     Base
+)
+
+
+company_subaccount = Table(
+    'company_subaccount',
+    Base.metadata,
+    Column(
+        'company_id',
+        Integer,
+        ForeignKey(
+            'company.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_company_id_company_subaccount',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'subaccount_id',
+        Integer,
+        ForeignKey(
+            'subaccount.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_subaccount_id_company_subaccount',
+        ),
+        primary_key=True,
+    ),
 )
 
 
@@ -82,6 +111,17 @@ class Company(Base):
         ),
         uselist=False,
     )
+    subaccounts = relationship(
+        'Subaccount',
+        secondary=company_subaccount,
+        backref=backref(
+            'company',
+            uselist=False,
+        ),
+        cascade="all,delete",
+        uselist=True,
+    )
+    
 
     @classmethod
     def get(cls, id):

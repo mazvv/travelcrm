@@ -1,37 +1,34 @@
 # -*coding: utf-8-*-
 
-from sqlalchemy import desc, func
+from sqlalchemy import desc
 
 from ...models import DBSession
 from ...models.currency_rate import CurrencyRate
 
 
-def query_convert_rates(in_attr, date_attr):
-    subq = (
+def get_currency_rate(currency_id, supplier_id, date):
+    currency_rate = (
         DBSession.query(CurrencyRate)
-        .order_by(CurrencyRate.currency_id, desc(CurrencyRate.date))
-        .subquery()
-    )
-    query = (
-        DBSession.query(
-            func.coalesce(subq.c.rate, 1).label('rate')
-        )
-        .distinct(subq.c.currency_id)
         .filter(
-            subq.c.currency_id == in_attr,
-            subq.c.date <= date_attr
+            CurrencyRate.currency_id == currency_id,
+            CurrencyRate.supplier_id == supplier_id,
+            CurrencyRate.date <= date
         )
+        .order_by(CurrencyRate.currency_id, desc(CurrencyRate.date))
+        .first()
     )
-    return query
+    return currency_rate.rate if currency_rate else 1
 
 
-def currency_exchange(sum, from_currency_id, to_currency_id, date):
-    rate_from = query_convert_rates(from_currency_id, date).scalar() or 1
-    rate_to = query_convert_rates(to_currency_id, date).scalar() or 1
-    base_sum = sum * rate_from
-    return base_sum / rate_to
+def currency_exchange(
+    amount, from_currency_id, to_currency_id, supplier_id, date
+):
+    rate_from = get_currency_rate(from_currency_id, supplier_id, date)
+    rate_to = get_currency_rate(to_currency_id, supplier_id, date)
+    base_amount = amount * rate_from
+    return base_amount / rate_to
 
 
-def currency_base_exchange(sum, currency_id, date):
-    base_rate = query_convert_rates(currency_id, date).scalar() or 1
-    return base_rate * sum
+def currency_base_exchange(amount, currency_id, supplier_id, date):
+    base_rate = get_currency_rate(currency_id, supplier_id, date)
+    return base_rate * amount

@@ -13,9 +13,12 @@ from babel.dates import (
     format_time as ft,
     get_date_format as gdf,
     get_time_format as gtf,
-    get_datetime_format as gdtf
+    get_datetime_format as gdtf,
 )
-from babel.numbers import format_decimal as fdc
+from babel.numbers import (
+    format_decimal as fdc,
+    format_currency as fc
+)
 
 from pyramid.threadlocal import get_current_registry
 from pyramid.threadlocal import get_current_request
@@ -99,6 +102,11 @@ def get_base_currency():
     return settings.get('company.base_currency') 
 
 
+def get_vat():
+    settings = get_settings()
+    return settings.get('company.vat') 
+
+
 def get_date_format():
     return gdf(format='short', locale=get_locale_name()).pattern
 
@@ -136,7 +144,7 @@ def format_time(value):
 
 
 def format_decimal(value):
-    value = Decimal(value).quantize(Decimal('.01'), rounding=ROUND_05UP)
+    value = Decimal(value).quantize(Decimal('.01'))
     return fdc(value, locale=get_locale_name())
 
 
@@ -159,3 +167,7 @@ def serialize(value):
     if hasattr(value, 'serialize'):
         return value.serialize()
     return value
+
+
+def format_currency(value, currency):
+    return fc(value, currency, locale=get_locale_name())

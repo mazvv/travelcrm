@@ -2,7 +2,10 @@
 
 from sqlalchemy import (
     Column,
+    Date,
+    Numeric,
     Integer,
+    String,
     Table,
     ForeignKey,
 )
@@ -70,6 +73,27 @@ class Income(Base):
         ),
         nullable=False,
     )
+    account_item_id = Column(
+        Integer,
+        ForeignKey(
+            'account_item.id',
+            name="fk_account_item_id_cashflow",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=False,
+    )
+    sum = Column(
+        Numeric(16, 2),
+        nullable=False,
+    )
+    date = Column(
+        Date(),
+        nullable=False,
+    )
+    descr = Column(
+        String(length=255),
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -82,6 +106,15 @@ class Income(Base):
     )
     invoice = relationship(
         'Invoice',
+        backref=backref(
+            'incomes',
+            lazy='dynamic',
+            uselist=True,
+        ),
+        uselist=False,
+    )
+    account_item = relationship(
+        'AccountItem',
         backref=backref(
             'incomes',
             lazy='dynamic',
@@ -114,21 +147,11 @@ class Income(Base):
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
 
-    @property
-    def sum(self):
-        return sum(
-            cashflow.sum 
-            for cashflow in self.cashflows 
-            if cashflow.account_from_id == None 
-            and cashflow.subaccount_from_id == None
-        )
-
-    @property
-    def date(self):
-        assert self.cashflows
-        return self.cashflows[0].date
-
     def rollback(self):
-        for cashflow in self.cashflows:
+        cashflows = list(self.cashflows)
+        self.cashflows = []
+        DBSession.flush()
+
+        for cashflow in cashflows:
             DBSession.delete(cashflow)
-        DBSession.flush(self.cashflows)
+        DBSession.flush()

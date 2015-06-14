@@ -4,6 +4,7 @@ from ...interfaces import ISubaccountFactory
 
 from ...models import DBSession
 from ...models.resource import Resource
+from ...models.account import Account
 from ...models.subaccount import Subaccount
 
 from ...lib.utils.resources_utils import get_resources_types_by_interface
@@ -67,4 +68,18 @@ def get_subaccount_by_source_resource_id(resource_id, account_id):
         )
         .first()
     )
-    
+
+
+def generate_subaccount_name(name, account_id):
+    account = Account.get(account_id)
+    return "%s, %s, %s" % (
+        name, account.currency.iso_code, account.account_type.title
+    )
+
+
+def get_company_subaccount(account_id):
+    account = Account.get(account_id)
+    return get_subaccount_by_source_resource_id(
+        account.resource.owner_structure.company.resource.id,
+        account_id,
+    )

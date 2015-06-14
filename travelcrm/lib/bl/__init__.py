@@ -5,7 +5,6 @@ from abc import ABCMeta
 
 from ...models.invoice import Invoice
 from ...lib.bl.invoices import get_bound_resource_by_invoice_id
-from ...lib.bl.currencies_rates import query_convert_rates
 
 
 class InvoiceFactory(object):

@@ -4,6 +4,7 @@ from sqlalchemy import (
     Column,
     Integer,
     Date,
+    String,
     ForeignKey,
 )
 from sqlalchemy.orm import relationship, backref
@@ -12,10 +13,19 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 class Order(Base):
     __tablename__ = 'order'
+
+    STATUS = (
+        ('new', _(u'new')),
+        ('in_work', _(u'in work')),
+        ('failure', _(u'failure')),
+        ('success', _(u'success')),
+    )
 
     id = Column(
         Integer,
@@ -46,6 +56,15 @@ class Order(Base):
         ),
         nullable=False,
     )
+    lead_id = Column(
+        Integer,
+        ForeignKey(
+            'lead.id',
+            name="fk_lead_id_order",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
     advsource_id = Column(
         Integer,
         ForeignKey(
@@ -56,23 +75,13 @@ class Order(Base):
         ),
         nullable=False,
     )
-    invoice_id = Column(
-        Integer,
-        ForeignKey(
-            'invoice.id',
-            name="fk_invoice_id_order",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
+    status = Column(
+        EnumIntType(STATUS),
+        default='awaiting',
+        nullable=False,
     )
-    calculation_id = Column(
-        Integer,
-        ForeignKey(
-            'calculation.id',
-            name="fk_calculation_id_order",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
+    descr = Column(
+        String(length=255),
     )
     resource = relationship(
         'Resource',
@@ -82,6 +91,14 @@ class Order(Base):
             cascade="all,delete"
         ),
         cascade="all,delete",
+        uselist=False,
+    )
+    lead = relationship(
+        'Lead',
+        backref=backref(
+            'order',
+            uselist=False,
+        ),
         uselist=False,
     )
     customer = relationship(
@@ -102,22 +119,6 @@ class Order(Base):
         ),
         uselist=False,
     )
-    invoice = relationship(
-        'Invoice',
-        backref=backref(
-            'order',
-            uselist=False,
-        ),
-        uselist=False,
-    )
-    calculation = relationship(
-        'Calculation',
-        backref=backref(
-            'order',
-            uselist=False,
-        ),
-        uselist=False,
-    )
 
     @classmethod
     def get(cls, id):
@@ -131,10 +132,4 @@ class Order(Base):
             return None
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
-        )
-
-    @property
-    def base_sum(self):
-        return sum(
-            service_item.base_price for service_item in self.services_items
         )

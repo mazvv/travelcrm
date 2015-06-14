@@ -655,6 +655,7 @@ span.field-actions span.field-action:first-child {
 .status-label.ready{background-color: #008000;}
 .status-label.closed{background-color: #008000;}
 .status-label.success{background-color: #008000;}
+.status-label.unactive{background-color: #800000;}
 .status-label.awaiting{background-color: #808080;}
 
 
@@ -682,7 +683,7 @@ div.image-thumb{
 
 /** payment indicator **/
 div.payment-indicator{
-	background-color: #fafafa;
+	background-color: #eeeeee;
 	height: 12px;
 	position: relative;
 }

@@ -8,28 +8,33 @@ from webhelpers.html import tags
 from webhelpers.html import HTML
 
 from ...interfaces import IServiceType
-from ...resources.accomodation import AccomodationResource
-from ...resources.employee import EmployeeResource
-from ...resources.position import PositionResource
-from ...resources.bperson import BPersonResource
-from ...resources.hotelcat import HotelcatResource
-from ...resources.country import CountryResource
-from ...resources.region import RegionResource
-from ...resources.location import LocationResource
-from ...resources.supplier import SupplierResource
-from ...resources.roomcat import RoomcatResource
-from ...resources.foodcat import FoodcatResource
-from ...resources.hotel import HotelResource
-from ...resources.currency import CurrencyResource
-from ...resources.person import PersonResource
-from ...resources.advsource import AdvsourceResource
-from ...resources.bank import BankResource
-from ...resources.service import ServiceResource
-from ...resources.account import AccountResource
-from ...resources.invoice import InvoiceResource
-from ...resources.subaccount import SubaccountResource
-from ...resources.transfer import TransferResource
-from ...resources.transport import TransportResource
+from ...resources.accomodations import AccomodationsResource
+from ...resources.employees import EmployeesResource
+from ...resources.positions import PositionsResource
+from ...resources.bpersons import BPersonsResource
+from ...resources.hotelcats import HotelcatsResource
+from ...resources.countries import CountriesResource
+from ...resources.regions import RegionsResource
+from ...resources.locations import LocationsResource
+from ...resources.suppliers import SuppliersResource
+from ...resources.roomcats import RoomcatsResource
+from ...resources.foodcats import FoodcatsResource
+from ...resources.hotels import HotelsResource
+from ...resources.currencies import CurrenciesResource
+from ...resources.persons import PersonsResource
+from ...resources.advsources import AdvsourcesResource
+from ...resources.banks import BanksResource
+from ...resources.services import ServicesResource
+from ...resources.accounts import AccountsResource
+from ...resources.invoices import InvoicesResource
+from ...resources.subaccounts import SubaccountsResource
+from ...resources.transfers import TransfersResource
+from ...resources.transports import TransportsResource
+from ...resources.suppliers_types import SuppliersTypesResource
+from ...resources.tickets_classes import TicketsClassesResource
+from ...resources.leads import LeadsResource
+from ...resources.orders import OrdersResource
+from ...resources.companies import CompaniesResource
 
 from ...models.task import Task
 from ...models.account import Account
@@ -42,6 +47,11 @@ from ...models.notification import EmployeeNotification
 from ...models.lead import Lead
 from ...models.order_item import OrderItem
 from ...models.supplier import Supplier
+from ...models.contract import Contract
+from ...models.bperson import BPerson
+from ...models.visa import Visa
+from ...models.lead_offer import LeadOffer
+from ...models.order import Order
 
 from ..utils.common_utils import (
     gen_id,
@@ -148,7 +158,7 @@ class _ComboGridField(object):
         """ % {'obj_id': self._id,}
 
     def _render_data_options(self):
-        return """
+        data_options = """
             url: '%(url)s',
             fitColumns: true,
             scrollbarSize: 7,
@@ -179,6 +189,9 @@ class _ComboGridField(object):
             'on_before_load': self._render_on_before_load(),
             'on_success_load': self._render_on_load_success()
         })
+        if self._data_options:
+            data_options += ('%s' % self._data_options)
+        return data_options
 
     def __call__(self):
         if self._show_toolbar:
@@ -243,12 +256,12 @@ def employees_combogrid_field(
         {'field': 'name', 'title': _(u"name"), 'sortable': True, 'width': 200}
     ]]
     tools = (
-        tool('add', '/employee/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/employee/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/employee/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/employees/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/employees/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/employees/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, EmployeeResource, name, value, '/employee/list', 
+        request, EmployeesResource, name, value, '/employees/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -263,17 +276,17 @@ def positions_combogrid_field(
         field: 'position_name', title: '%(title)s',
         sortable: true, width: 200,
         formatter: function(value,row,index){
-            return '<span class="b">' + value + '</span><br/>'
-            + row.structure_path.join(' &rarr; ');
+            return value + '<br/>'
+            + '<em>' + row.structure_path.join(' &rarr; ') + '</em>';
         }
     }]]""" % {'title': _(u'name')}
     tools = (
-        tool('add', '/position/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/position/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/position/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/positions/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/positions/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/positions/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, PositionResource, name, value, '/position/list', 
+        request, PositionsResource, name, value, '/positions/list', 
         fields, 'id', 'position_name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -289,12 +302,12 @@ def bpersons_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/bperson/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/bperson/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/bperson/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/bpersons/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/bpersons/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/bpersons/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, BPersonResource, name, value, '/bperson/list', 
+        request, BPersonsResource, name, value, '/bpersons/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -311,12 +324,12 @@ def hotelcats_combogrid_field(
             'sortable': True, 'width': 200}
     ]]
     tools = (
-        tool('add', '/hotelcat/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/hotelcat/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/hotelcat/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/hotelcats/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/hotelcats/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/hotelcats/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, HotelcatResource, name, value, '/hotelcat/list', 
+        request, HotelcatsResource, name, value, '/hotelcats/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -333,12 +346,12 @@ def accomodations_combogrid_field(
             'sortable': True, 'width': 200}
     ]]
     tools = (
-        tool('add', '/accomodation/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/accomodation/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/accomodation/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/accomodations/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/accomodations/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/accomodations/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, AccomodationResource, name, value, '/accomodation/list', 
+        request, AccomodationsResource, name, value, '/accomodations/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -363,7 +376,7 @@ def structures_combotree_field(
     name, value=None, data_options=None, **kwargs
 ):
     return _combotree_field(
-        name, value, '/structure/list', 'structure_name', 'asc',
+        name, value, '/structures/list', 'structure_name', 'asc',
         data_options, **kwargs
     )
 
@@ -372,7 +385,7 @@ def accounts_items_combotree_field(
     name, value=None, data_options=None, **kwargs
 ):
     return _combotree_field(
-        name, value, '/account_item/list', 'name', 'asc',
+        name, value, '/accounts_items/list', 'name', 'asc',
         data_options, **kwargs
     )
 
@@ -397,7 +410,7 @@ def navigations_combotree_field(
     name, position_id, value=None, data_options=None, **kwargs
 ):
     _data_options = """
-        url: '/navigation/list',
+        url: '/navigations/list',
         onBeforeLoad: function(node, param){
             param.position_id = %s;
             param.sort = 'sort_order';
@@ -532,12 +545,12 @@ def countries_combogrid_field(
             'sortable': True, 'width': 200}
     ]]
     tools = (
-        tool('add', '/country/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/country/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/country/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/countries/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/countries/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/countries/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, CountryResource, name, value, '/country/list', 
+        request, CountriesResource, name, value, '/countries/list', 
         fields, 'id', 'country_name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -554,12 +567,12 @@ def regions_combogrid_field(
             'sortable': True, 'width': 200},
     ]]
     tools = (
-        tool('add', '/region/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/region/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/region/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/regions/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/regions/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/regions/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, RegionResource, name, value, '/country/list', 
+        request, RegionsResource, name, value, '/regions/list', 
         fields, 'id', 'full_region_name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -576,12 +589,12 @@ def locations_combogrid_field(
             'sortable': True, 'width': 100},
     ]]
     tools = (
-        tool('add', '/location/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/location/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/location/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/locations/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/locations/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/locations/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, LocationResource, name, value, '/location/list', 
+        request, LocationsResource, name, value, '/locations/list', 
         fields, 'id', 'full_location_name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -598,12 +611,12 @@ def suppliers_combogrid_field(
             'sortable': True, 'width': 200},
     ]]
     tools = (
-        tool('add', '/supplier/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/supplier/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/supplier/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/suppliers/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/suppliers/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/suppliers/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, SupplierResource, name, value, '/supplier/list', 
+        request, SuppliersResource, name, value, '/suppliers/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -620,12 +633,12 @@ def foodcats_combogrid_field(
             'sortable': True, 'width': 200},
     ]]
     tools = (
-        tool('add', '/foodcat/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/foodcat/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/foodcat/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/foodcats/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/foodcats/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/foodcats/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, FoodcatResource, name, value, '/foodcat/list', 
+        request, FoodcatsResource, name, value, '/foodcats/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -642,12 +655,12 @@ def roomcats_combogrid_field(
             'sortable': True, 'width': 200},
     ]]
     tools = (
-        tool('add', '/roomcat/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/roomcat/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/roomcat/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/roomcats/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/roomcats/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/roomcats/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, RoomcatResource, name, value, '/roomcat/list', 
+        request, RoomcatsResource, name, value, '/roomcats/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -664,12 +677,12 @@ def hotels_combogrid_field(
             'sortable': True, 'width': 200},
     ]]
     tools = (
-        tool('add', '/hotel/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/hotel/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/hotel/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/hotels/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/hotels/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/hotels/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, HotelResource, name, value, '/hotel/list', 
+        request, HotelsResource, name, value, '/hotels/list', 
         fields, 'id', 'full_hotel_name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -686,12 +699,12 @@ def currencies_combogrid_field(
             'sortable': True, 'width': 100},
     ]]
     tools = (
-        tool('add', '/currency/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/currency/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/currency/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/currencies/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/currencies/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/currencies/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, CurrencyResource, name, value, '/currency/list', 
+        request, CurrenciesResource, name, value, '/currencies/list', 
         fields, 'id', 'iso_code', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -707,12 +720,12 @@ def persons_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/person/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/person/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/person/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/persons/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/persons/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/persons/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, PersonResource, name, value, '/person/list', 
+        request, PersonsResource, name, value, '/persons/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -728,12 +741,12 @@ def advsources_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/advsource/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/advsource/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/advsource/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/advsources/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/advsources/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/advsources/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, AdvsourceResource, name, value, '/advsource/list', 
+        request, AdvsourcesResource, name, value, '/advsources/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -759,12 +772,12 @@ def banks_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/bank/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/bank/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/bank/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/banks/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/banks/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/banks/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, BankResource, name, value, '/bank/list', 
+        request, BanksResource, name, value, '/banks/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -780,12 +793,12 @@ def services_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/service/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/service/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/service/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/services/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/services/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/services/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, ServiceResource, name, value, '/service/list', 
+        request, ServicesResource, name, value, '/services/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -808,17 +821,25 @@ def accounts_combogrid_field(
     request, name, value=None,
     id=None, show_toolbar=True, data_options=None, **kwargs
 ):
-    fields = [[{
-        'field': 'name', 'title': _(u"name"),
-        'sortable': True, 'width': 200
-    }]]
+    fields = """[[{
+        field: 'name', title: '%(title)s',
+        sortable: true, width: 200,
+        formatter: function(value,row,index){
+            return value + '<br/>'
+            + '<div class="dp100"><div class="dp70"><em>' 
+            + row.account_type.title + ' ' + row.currency 
+            + '</em></div><div class="dp30 tr">'
+            + status_formatter(row.status) + '</div></div>';
+        }
+    }]]""" % {'title': _(u'name')}
+
     tools = (
-        tool('add', '/account/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/account/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/account/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/accounts/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/accounts/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/accounts/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, AccountResource, name, value, '/account/list', 
+        request, AccountsResource, name, value, '/accounts/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -834,7 +855,7 @@ def invoices_combogrid_field(
         sortable: true, width: 200,
         formatter: function(value,row,index){
             return '<span class="b">' + value + '</span></br><span>%(sum)s: '
-            + row.currency + ' ' + row.sum + '</span><br/>' +
+            + row.currency + ' ' + row.final_price + '</span><br/>' +
             '<span>%(id)s: ' + row.id +
             ' %(from_date)s: ' + row.date + '</span>';
         }
@@ -845,11 +866,12 @@ def invoices_combogrid_field(
         'from_date': _(u'from date'),
     }
     tools = (
-        tool('view', '/invoice/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/invoice/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/invoices/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/invoices/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/invoices/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, InvoiceResource, name, value, '/invoice/list', 
+        request, InvoicesResource, name, value, '/invoices/list', 
         fields, 'id', 'customer', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -891,12 +913,12 @@ def subaccounts_combogrid_field(
         'resource_type': _(u'resource'),
     }
     tools = (
-        tool('add', '/subaccount/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/subaccount/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/subaccount/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/subaccounts/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/subaccounts/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/subaccounts/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, SubaccountResource, name, value, '/subaccount/list', 
+        request, SubaccountsResource, name, value, '/subaccounts/list', 
         fields, 'id', 'title', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -994,7 +1016,7 @@ def services_types_combobox_field(name, value=None):
         lambda x: str(x.id), get_resources_types_by_interface(IServiceType)
     )
     data_options = """
-        url: '/resource_type/list',
+        url: '/resources_types/list',
         valueField: 'id',
         textField: 'humanize',
         editable: false,
@@ -1023,16 +1045,16 @@ def transfers_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/subaccount/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/subaccount/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/subaccount/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/transfers/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/transfers/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/transfers/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, TransferResource, name, value, '/subaccount/list', 
+        request, TransfersResource, name, value, '/transfers/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
-    return field
+    return field()
 
 
 def transports_combogrid_field(
@@ -1044,12 +1066,34 @@ def transports_combogrid_field(
         'sortable': True, 'width': 200
     }]]
     tools = (
-        tool('add', '/transport/add', 'fa-plus', _(u'add new'), False),
-        tool('view', '/transport/view', 'fa-circle-o', _(u'view item'), True),
-        tool('edit', '/transport/edit', 'fa-pencil', _(u'edit item'), True)
+        tool('add', '/transports/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/transports/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/transports/edit', 'fa-pencil', _(u'edit item'), True)
     )
     field = _ComboGridField(
-        request, TransportResource, name, value, '/transport/list', 
+        request, TransportsResource, name, value, '/transports/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+
+def tickets_classes_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+    tools = (
+        tool('add', '/tickets_classes/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/tickets_classes/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/tickets_classes/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, TicketsClassesResource, name, value, '/tickets_classes/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )
@@ -1128,3 +1172,183 @@ def suppliers_statuses_combobox_field(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
     )
+
+
+def suppliers_types_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+    tools = (
+        tool('add', '/suppliers_types/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/suppliers_types/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/suppliers_types/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, SuppliersTypesResource, name, value, '/suppliers_types/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def contracts_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = Contract.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def bpersons_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = BPerson.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def visas_types_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = Visa.TYPE
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def leads_offers_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = LeadOffer.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def leads_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = """[[{
+        field: 'customer', title: '%(title)s',
+        sortable: true, width: 200,
+        formatter: function(value,row,index){
+            return value + '<br/>'
+            + '<em>id ' + row.id + ' %(from_date)s ' + row.lead_date + '</em>';
+        }
+    }]]""" % {'title': _(u'customer'), 'from_date': _(u'from')}
+
+    tools = (
+        tool('add', '/leads/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/leads/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/leads/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, LeadsResource, name, value, '/leads/list', 
+        fields, 'id', 'customer', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def orders_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = """[[{
+        field: 'customer', title: '%(title)s',
+        sortable: true, width: 200,
+    }]]""" % {'title': _(u'customer')}
+
+    tools = (
+        tool('add', '/orders/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/orders/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/orders/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, OrdersResource, name, value, '/orders/list', 
+        fields, 'id', 'customer', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def accounts_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = Account.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def orders_statuses_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = Order.STATUS
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def companies_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[
+        {'field': 'name',
+            'title': _(u"name"),
+            'sortable': True, 'width': 200},
+    ]]
+    tools = (
+        tool('view', '/companies/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/companies/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, CompaniesResource, name, value, '/companies/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()

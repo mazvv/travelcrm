@@ -20,11 +20,9 @@ class Cashflow(Base):
     __tablename__ = 'cashflow'
     __table_args__ = (
         CheckConstraint(
-            'not (account_from_id is not null '
-            'and subaccount_from_id is not null) and '
-            'not (account_to_id is not null '
-            'and subaccount_to_id is not null)',
-            name='constraint_cashflow_account_subaccount',
+            'subaccount_from_id is not null or '
+            'subaccount_to_id is not null',
+            name='constraint_cashflow_subaccount',
         ),
     )
 
@@ -33,29 +31,11 @@ class Cashflow(Base):
         autoincrement=True,
         primary_key=True
     )
-    account_from_id = Column(
-        Integer,
-        ForeignKey(
-            'account.id',
-            name="fk_account_from_id_cashflow",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-    )
     subaccount_from_id = Column(
         Integer,
         ForeignKey(
             'subaccount.id',
             name="fk_subaccount_from_id_cashflow",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-    )
-    account_to_id = Column(
-        Integer,
-        ForeignKey(
-            'account.id',
-            name="fk_account_to_id_cashflow",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -83,19 +63,13 @@ class Cashflow(Base):
         Numeric(16, 2),
         nullable=False,
     )
+    vat = Column(
+        Numeric(16, 2),
+        nullable=True,
+    )
     date = Column(
         Date(),
         nullable=False,
-    )
-    account_from = relationship(
-        'Account',
-        backref=backref(
-            'cashflows_from',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        foreign_keys=[account_from_id],
-        uselist=False
     )
     subaccount_from = relationship(
         'Subaccount',
@@ -105,16 +79,6 @@ class Cashflow(Base):
             lazy="dynamic"
         ),
         foreign_keys=[subaccount_from_id],
-        uselist=False
-    )
-    account_to = relationship(
-        'Account',
-        backref=backref(
-            'cashflows_to',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        foreign_keys=[account_to_id],
         uselist=False
     )
     subaccount_to = relationship(

@@ -74,9 +74,6 @@ class ResourceType(Base):
         String(length=128),
         nullable=False,
     )
-    customizable = Column(
-        Boolean,
-    )
     settings = Column(
         JSON,
         primary_key=False,

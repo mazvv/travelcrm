@@ -1,6 +1,6 @@
 # -*coding: utf-8-*-
 
-from sqlalchemy import func, or_
+from sqlalchemy import func
 from sqlalchemy.orm import aliased
 
 from ...models import DBSession
@@ -36,12 +36,7 @@ def query_account_to_cashflows(account_id):
     return (
         DBSession.query(Cashflow)
         .outerjoin(Subaccount, Cashflow.subaccount_to)
-        .filter(
-            or_(
-                Cashflow.account_to_id == account_id,
-                Subaccount.account_id == account_id
-            )
-        )
+        .filter(Subaccount.account_id == account_id)
     )
 
 
@@ -50,12 +45,7 @@ def query_account_from_cashflows(account_id):
     return (
         DBSession.query(Cashflow)
         .outerjoin(Subaccount, Cashflow.subaccount_from)
-        .filter(
-            or_(
-                Cashflow.account_from_id == account_id,
-                Subaccount.account_id == account_id
-            )
-        )
+        .filter(Subaccount.account_id == account_id)
     )
 
 
@@ -124,13 +114,9 @@ def query_cashflows():
     to_account = aliased(Account)
     from_subaccount = aliased(Subaccount)
     to_subaccount = aliased(Subaccount)
-    from_subaccount_account = aliased(Account)
-    to_subaccount_account = aliased(Account)
     currency_expr = func.coalesce(
         from_account.currency_id,
         to_account.currency_id,
-        from_subaccount_account.currency_id,
-        to_subaccount_account.currency_id,
     )
  
     return (
@@ -138,9 +124,7 @@ def query_cashflows():
             Cashflow.id,
             Cashflow.date,
             Cashflow.sum,
-            Cashflow.account_from_id,
             Cashflow.subaccount_from_id,
-            Cashflow.account_to_id,
             Cashflow.subaccount_to_id,
             Cashflow.account_item_id,
             Currency.id.label('currency_id'),
@@ -150,22 +134,12 @@ def query_cashflows():
             from_subaccount.name.label('subaccount_from'),
             to_subaccount.name.label('subaccount_to'),
             AccountItem.name.label('account_item'),
-            from_subaccount.account_id.label('subaccount_from_account_id'),
-            to_subaccount.account_id.label('subaccount_to_account_id'),
         )
         .distinct(Cashflow.id)
         .join(AccountItem, Cashflow.account_item)
-        .outerjoin(from_account, Cashflow.account_from)
-        .outerjoin(to_account, Cashflow.account_to)
         .outerjoin(from_subaccount, Cashflow.subaccount_from)
         .outerjoin(to_subaccount, Cashflow.subaccount_to)
-        .outerjoin(
-            from_subaccount_account, 
-            from_subaccount.account_id == from_subaccount_account.id,
-        )
-        .outerjoin(
-            to_subaccount_account, 
-            to_subaccount.account_id == to_subaccount_account.id,
-        )
+        .outerjoin(from_account, from_subaccount.account_id == from_account.id)
+        .outerjoin(to_account, to_subaccount.account_id == to_account.id)
         .join(Currency, Currency.id == currency_expr)
     )
