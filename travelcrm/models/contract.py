@@ -100,7 +100,7 @@ class Contract(Base):
         'Commission',
         secondary=contract_commission,
         backref=backref(
-            'supplier',
+            'contract',
             uselist=False,
         ),
         uselist=True,
@@ -119,3 +119,7 @@ class Contract(Base):
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
+
+    @classmethod
+    def condition_active(cls):
+        return cls.status == 'active'

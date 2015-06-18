@@ -23,7 +23,7 @@
                     </div>
                     <div class="ml15">
                        ${h.fields.employees_combogrid_field(
-                          request=request,
+                          request,
                           'employee_id',
                           value=item.employee_id if item else None,
                           show_toolbar=(not readonly if readonly else True)

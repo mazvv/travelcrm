@@ -1,4 +1,4 @@
-<%namespace file="../contacts/common.mako" import="commission_list_details"/>
+<%namespace file="../commissions/common.mako" import="commission_list_details"/>
 <%namespace file="../common/resource.mako" import="resource_list_details"/>
 <div class="dp100 item-details">
     % if item.descr:

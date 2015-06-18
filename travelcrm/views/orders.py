@@ -249,8 +249,6 @@ class OrdersView(object):
             return HTTPFound(
                 self.request.resource_url(
                     CalculationsResource(self.request),
-                    query=(
-                        {'resource_id': order.resource.id}
-                    )
+                    query={'id': order.id}
                 )
             )

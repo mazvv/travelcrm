@@ -8,18 +8,13 @@ from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
 from ..models.calculation import Calculation
-from ..lib.bl.calculations import (
-    get_resource_calculations,
-    get_resource_services_items,
-    get_calculation_date,
-    get_bound_resource_by_calculation_id,
-)
-from ..lib.bl.currencies_rates import currency_base_exchange
-from ..lib.bl.commissions import get_commission
-from ..lib.qb.calculations import CalculationsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
-from ..forms.calculations import CalculationSchema
+from ..forms.calculations import (
+    CalculationForm,
+    CalculationAutoloadForm,
+    CalculationSearchForm
+)
 
 
 log = logging.getLogger(__name__)
@@ -40,9 +35,9 @@ class CalculationsView(object):
         permission='view'
     )
     def index(self):
-        resource_id = self.request.params.get('resource_id')
+        id = self.request.params.get('id')
         return {
-            'resource_id': resource_id,
+            'id': id,
         }
 
     @view_config(
@@ -53,22 +48,9 @@ class CalculationsView(object):
         permission='view'
     )
     def _list(self):
-        qb = CalculationQueryBuilder(self.context)
-        qb.search_simple(
-            self.request.params.get('q')
-        )
-        resource_id = self.request.params.get('resource_id')
-        calculations = get_resource_calculations(resource_id)
-        ids = [None, ] + [calculation.id for calculation in calculations]
-        qb.filter_id(ids)
-        qb.sort_query(
-            self.request.params.get('sort'),
-            self.request.params.get('order', 'asc')
-        )
-        qb.page_query(
-            int(self.request.params.get('rows')),
-            int(self.request.params.get('page'))
-        )
+        form = CalculationSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
         return {
             'total': qb.get_count(),
             'rows': qb.get_serialized()
@@ -114,30 +96,10 @@ class CalculationsView(object):
         permission='autoload'
     )
     def _autoload(self):
-        resource_id = self.request.params.get('resource_id')
-        services_items = get_resource_services_items(resource_id)
-        calculation_date = get_calculation_date(resource_id)
-        for service_item in services_items:
-            commission_sum = get_commission(
-                service_item.price,
-                service_item.supplier_id,
-                service_item.service_id,
-                service_item.currency_id,
-                calculation_date
-            )
-            price = service_item.price - commission_sum
-            calculation = Calculation(
-                currency_id=service_item.currency_id,
-                price=price,
-                service_item=service_item,
-                base_price=currency_base_exchange(
-                    price,
-                    service_item.currency_id,
-                    calculation_date,
-                ),
-                resource=self.context.create_resource(),
-            )
-            DBSession.add(calculation)
+        form = CalculationAutoloadForm(self.request)
+        if form.validate():
+            calculations = form.submit()
+            DBSession.add_all(calculations)
         DBSession.flush()
         return {
             'success_message': _(u'Saved'),
@@ -163,28 +125,18 @@ class CalculationsView(object):
         permission='edit'
     )
     def _edit(self):
-        schema = CalculationSchema().bind(request=self.request)
-        calculation = Calculation.get(
-            self.request.params.get('id')
-        )
-        try:
-            controls = schema.deserialize(self.request.params)
-            resource = get_bound_resource_by_calculation_id(calculation.id)
-            calculation.price = controls.get('price')
-            calculation.currency_id = controls.get('currency_id')
-            calculation.base_price = currency_base_exchange(
-                calculation.price,
-                calculation.currency_id,
-                get_calculation_date(resource.id),
-            )
+        calculation = Calculation.get(self.request.params.get('id'))
+        form = CalculationForm(self.request)
+        if form.validate():
+            form.submit(calculation)
             return {
                 'success_message': _(u'Saved'),
                 'response': calculation.id
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
 
     @view_config(

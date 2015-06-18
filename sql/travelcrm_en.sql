@@ -649,9 +649,7 @@ ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    currency_id integer NOT NULL,
     price numeric(16,2) NOT NULL,
-    base_price numeric(16,2) NOT NULL,
     order_item_id integer
 );
 
@@ -3093,14 +3091,14 @@ SELECT pg_catalog.setval('_regions_rid_seq', 38, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 7204, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 7214, true);
 
 
 --
 -- Name: _resources_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('_resources_rid_seq', 2467, true);
+SELECT pg_catalog.setval('_resources_rid_seq', 2472, true);
 
 
 --
@@ -3300,7 +3298,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-250bc21d98ef
+4874552ee255
 \.
 
 
@@ -3422,7 +3420,11 @@ SELECT pg_catalog.setval('bperson_id_seq', 8, true);
 -- Data for Name: calculation; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY calculation (id, resource_id, currency_id, price, base_price, order_item_id) FROM stdin;
+COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
+33	2468	300.00	\N
+34	2469	54462.00	\N
+35	2470	300.00	43
+36	2471	54462.75	42
 \.
 
 
@@ -3430,7 +3432,7 @@ COPY calculation (id, resource_id, currency_id, price, base_price, order_item_id
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 32, true);
+SELECT pg_catalog.setval('calculation_id_seq', 36, true);
 
 
 --
@@ -4160,6 +4162,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 36	2132	New note for Lastovec	Test Note for User
 42	2302	Cant call	\N
 43	2370	Very promissed	Very promised client, redy to make business
+44	2472	ookokoik	\N
 \.
 
 
@@ -4167,7 +4170,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('note_id_seq', 43, true);
+SELECT pg_catalog.setval('note_id_seq', 44, true);
 
 
 --
@@ -5773,6 +5776,11 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2465	120	32	f
 2466	117	32	f
 2467	111	32	f
+2468	119	32	f
+2469	119	32	f
+2470	119	32	f
+2471	119	32	f
+2472	118	32	f
 \.
 
 
@@ -7451,6 +7459,16 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7202	2465	2	\N	2015-06-14 18:28:13.295968+03
 7203	2466	2	\N	2015-06-14 18:50:25.96227+03
 7204	2467	2	\N	2015-06-14 18:50:57.662486+03
+7205	2468	2	\N	2015-06-17 21:13:39.6663+03
+7206	2469	2	\N	2015-06-17 21:13:39.6663+03
+7207	2469	2	\N	2015-06-17 21:39:31.5421+03
+7208	2470	2	\N	2015-06-17 21:39:43.056809+03
+7209	2471	2	\N	2015-06-17 21:39:43.056809+03
+7210	2472	2	\N	2015-06-17 22:24:02.164715+03
+7211	2296	2	\N	2015-06-17 22:28:24.889672+03
+7212	2296	2	\N	2015-06-17 22:28:44.137455+03
+7213	2296	2	\N	2015-06-17 22:28:55.531055+03
+7214	2296	2	\N	2015-06-17 22:29:04.688414+03
 \.
 
 
@@ -7505,10 +7523,10 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 134	2099	orders	Orders	OrdersResource	travelcrm.resources.orders	Orders	null	0
 135	2100	orders_items	Orders Items	OrdersItemsResource	travelcrm.resources.orders_items	Orders Items	null	0
 137	2108	tours	Tours	ToursResource	travelcrm.resources.tours	Tour Service	null	0
-146	2296	leads_offers	Leads Offers	LeadsOffersResource	travelcrm.resources.leads_offers	Leads Offers	null	0
 74	953	accomodations	Accomodations	AccomodationsResource	travelcrm.resources.accomodations	Accomodations Types list	\N	0
 110	1521	commissions	Commissions	CommissionsResource	travelcrm.resources.commissions	Services sales commissions	null	0
 111	1548	outgoings	Outgoings	OutgoingsResource	travelcrm.resources.outgoings	Outgoings payments for touroperators, suppliers, payback payments and so on	null	0
+146	2296	leads_offers	Leads Offers	LeadsOffersResource	travelcrm.resources.leads_offers	Leads Offers	null	0
 120	1884	crosspayments	Cross Payments	CrosspaymentsResource	travelcrm.resources.crosspayments	Cross payments between accounts and subaccounts. This document is for balance corrections to.	null	0
 123	1941	notifications	Notifications	NotificationsResource	travelcrm.resources.notifications	Employee Notifications	null	0
 124	1954	emails_campaigns	Email Campaigns	EmailsCampaignsResource	travelcrm.resources.emails_campaigns	Emails Campaigns for subscribers	{"timeout": 12}	0
@@ -9312,14 +9330,6 @@ ALTER TABLE ONLY lead_offer
 
 ALTER TABLE ONLY order_item
     ADD CONSTRAINT fk_currency_id_order_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_currency_id_service_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
---
-
-ALTER TABLE ONLY calculation
-    ADD CONSTRAINT fk_currency_id_service_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

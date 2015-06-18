@@ -41,7 +41,7 @@
                 return '<div id=' + row_id + '></div>';
             },
             onBeforeLoad: function(param){
-                param.resource_id = ${resource_id};
+                param.id = ${id};
             }
         " width="100%">
         <thead>
@@ -49,10 +49,10 @@
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-            <th data-options="field:'service',sortable:true,width:160">${_(u"service")}</th>
-            <th data-options="field:'supplier',sortable:true,width:120">${_(u"supplier")}</th>
-            <th data-options="field:'price',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
-            <th data-options="field:'base_price',sortable:true,width:100,formatter:function(value, row, index){return row.base_currency + ' ' + value;}">${_(u"base price")}</th>
+            <th data-options="field:'service',sortable:true,width:120">${_(u"service")}</th>
+            <th data-options="field:'supplier',sortable:true,width:200">${_(u"supplier")}</th>
+            <th data-options="field:'price',sortable:true,width:80">${_(u"price")}</th>
+            <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -63,7 +63,7 @@
             <div class="button-group minor-group">
                 % if _context.has_permision('autoload'):
                 <a href="#" class="button _action" 
-                    data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'autoload', query={'resource_id': resource_id})}'">
+                    data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'autoload', query={'id': id})}'">
                     <span class="fa fa-plus"></span>${_(u'Autoload')}
                 </a>
                 % endif

@@ -42,21 +42,7 @@ class Calculation(Base):
         ),
         nullable=True,
     )
-    currency_id = Column(
-        Integer,
-        ForeignKey(
-            'currency.id',
-            name="fk_currency_id_service_item",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     price = Column(
-        Numeric(16, 2),
-        nullable=False,
-    )
-    base_price = Column(
         Numeric(16, 2),
         nullable=False,
     )
@@ -75,15 +61,6 @@ class Calculation(Base):
         backref=backref(
             'calculation',
             uselist=False,
-        ),
-        uselist=False,
-    )
-    currency = relationship(
-        'Currency',
-        backref=backref(
-            'calculations',
-            lazy='dynamic',
-            uselist=True,
         ),
         uselist=False,
     )

@@ -5,7 +5,12 @@
         resizable:false,
         iconCls:'fa fa-pencil-square-o'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
+    ${h.tags.form(
+        request.url, 
+        class_="_ajax", 
+        autocomplete="off",
+        hidden_fields=[('csrf_token', request.session.get_csrf_token())]
+    )}
         <div class="p1">
             <div class="tc">
                 <i class="fa fa-info-circle fa-lg"></i> 
@@ -15,7 +20,7 @@
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">
-                ${h.tags.submit('delete', _(u"Autoload"), class_="button")}
+                ${h.tags.submit('save', _(u"Autoload"), class_="button")}
                 ${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
             </div>
         </div>

@@ -1,4 +1,4 @@
-<%namespace file="../contacts/common.mako" import="commission_selector"/>
+<%namespace file="../commissions/common.mako" import="commission_selector"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
 <div class="dl60 easyui-dialog"
