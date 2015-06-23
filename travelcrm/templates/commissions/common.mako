@@ -29,7 +29,7 @@
     <table class="easyui-datagrid"
         id="${_id}"
         data-options="
-            url:'/contacts/list',border:false,
+            url:'/commissions/list',border:false,
             fit:true,singleSelect:true,
             rownumbers:true,sortName:'service',sortOrder:'asc',
             idField:'_id',checkOnSelect:false,
@@ -58,7 +58,8 @@
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'service',sortable:true,width:150">${_(u"service")}</th>
             <th data-options="field:'percentage',sortable:true,width:50">${_(u"percent")}</th>
-            <th data-options="field:'price',sortable:true,width:80,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"price")}</th>
+            <th data-options="field:'price',sortable:true,width:80">${_(u"price")}</th>
+            <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -74,17 +75,17 @@
             <div class="button-group minor-group">
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/contacts/add'
+                        container:'#${_id}',action:'dialog_open',url:'/commissions/add'
                     ">
                     ${_(u"Add")}</a>
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/contacts/copy',property:'with_row'
+                        container:'#${_id}',action:'dialog_open',url:'/commissions/copy',property:'with_row'
                     ">
                     ${_(u"Copy")}</a>
                 <a href="#" class="button _action" 
                     data-options="
-                        container:'#${_id}',action:'dialog_open',url:'/contacts/edit',property:'with_row'
+                        container:'#${_id}',action:'dialog_open',url:'/commissions/edit',property:'with_row'
                     ">
                     ${_(u"Edit")}</a>
                 <a href="#" class="button danger" onclick="delete_${_func_id}('${_id}');">${_(u"Delete")}</a>
@@ -96,8 +97,7 @@
 
 
 <%def name="commission_list_details(commission)">
-    <span>${commission.service.name}</span>
-    <span class="fa fa-long-arrow-right"></span>
+    <span class="mr05">${commission.service.name}</span>
     <%
         data = []
         if commission.percentage:

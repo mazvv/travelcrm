@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"username"), False, "username")}
+                        ${h.tags.title(_(u"username"), True, "username")}
                     </div>
                     <div class="ml15">
                         ${h.tags.text("username", item.username if item else None, class_="easyui-textbox w20")}

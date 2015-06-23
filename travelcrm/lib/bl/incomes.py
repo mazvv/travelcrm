@@ -59,7 +59,7 @@ def make_payment(request, income):
                 date=income.date,
                 subaccount_from=subaccount,
                 subaccount_to=company_subaccount,
-                account_item_id=income.account_item_id,
+#                 account_item_id=income.account_item_id,
             )
         )
     return cashflows

@@ -57,7 +57,6 @@ class Cashflow(Base):
             ondelete='restrict',
             onupdate='cascade',
         ),
-        nullable=False,
     )
     sum = Column(
         Numeric(16, 2),

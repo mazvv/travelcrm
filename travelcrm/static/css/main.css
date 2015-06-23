@@ -167,6 +167,12 @@ a.dashed{
 .ml05 {
     margin-left: 0.5em;
 }
+.mt02{
+    margin-top: 0.2em;
+}
+.mt03{
+    margin-top: 0.3em;
+}
 
 /** borders **/
 .top-line{

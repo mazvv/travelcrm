@@ -34,10 +34,15 @@ class CalculationAutoloadForm(BaseForm):
         order = Order.get(self._controls.get('id'))
         calculations = []
         for order_item in order.orders_items:
+            # make autoload for success items only
+            if not order_item.is_success():
+                continue
             contract = get_contract(
                 order_item.supplier_id,
                 order.deal_date
             )
+            if not contract:
+                continue
             commission = 0
             if contract:
                 _commission = get_commission(

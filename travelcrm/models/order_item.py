@@ -215,3 +215,6 @@ class OrderItem(Base):
     @hybrid_property
     def discount(self):
         return self.price * self.discount_percent / 100 + self.discount_sum
+
+    def is_success(self):
+        return self.status == 'success'

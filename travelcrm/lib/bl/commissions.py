@@ -35,6 +35,7 @@ def get_commission_sum(commission_id, sum, currency_id, date):
             commission.price,
             commission.currency_id,
             currency_id,
+            commission.contract.supplier.id,
             date
         )
     return commission_sum

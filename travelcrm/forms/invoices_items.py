@@ -13,7 +13,6 @@ from ..models.order import Order
 from ..models.account import Account
 from ..lib.qb.invoices_items import InvoicesItemsQueryBuilder
 from ..lib.bl.orders_items import get_price, get_discount
-from ..lib.bl.invoices import get_vat
 
 
 class _InvoiceItemSchema(ResourceSchema):

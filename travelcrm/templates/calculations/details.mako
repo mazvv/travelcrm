@@ -12,7 +12,7 @@
             ${_(u'final price')}
         </div>
         <div class="dp85">
-            ${item.order_item.final_price}
+            ${h.common.format_decimal(item.order_item.final_price)}
         </div>
     </div>
     <div class="dp100">
@@ -20,7 +20,7 @@
             ${_(u'profit')}
         </div>
         <div class="dp85">
-            ${item.order_item.final_price - item.price}
+            ${h.common.format_decimal(item.order_item.final_price - item.price)}
         </div>
     </div>
 </div>

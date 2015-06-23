@@ -22,6 +22,7 @@ class PDFRendererFactory(object):
                 response.accept_ranges = self.accept_ranges
                 response.content_encoding = self.content_encoding
         body = value.get('body')
-        pdf = pdfkit.from_string(body, False)
+        css = value.get('css')
+        pdf = pdfkit.from_string(body, False, css=css)
         response.content_disposition = 'inline; filename="%s"' % ''
         return pdf

@@ -52,6 +52,7 @@ from ...models.bperson import BPerson
 from ...models.visa import Visa
 from ...models.lead_offer import LeadOffer
 from ...models.order import Order
+from ...models.vat import Vat
 
 from ..utils.common_utils import (
     gen_id,
@@ -1352,3 +1353,18 @@ def companies_combogrid_field(
         data_options, **kwargs
     )
     return field()
+
+
+def vats_calc_methods_combobox_field(
+    name, value=None, with_all=False, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = Vat.CALC_METHOD
+    if with_all:
+        choices = [('', _(u'--all--'))] + list(choices)
+    return tags.select(
+        name, value, choices, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )

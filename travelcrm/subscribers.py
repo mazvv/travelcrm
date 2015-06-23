@@ -1,6 +1,5 @@
 # -*-coding: utf-8 -*-
 import logging
-from decimal import Decimal
 from pytz import timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -41,7 +40,6 @@ def company_settings(event):
             'company.base_currency': company.currency.iso_code,
             'company.locale_name': company.settings.get('locale'),
             'company.timezone': company.settings.get('timezone'),
-            'company.vat': Decimal(company.settings.get('vat', 0)),
         }
         request.registry.settings.update(settings)
 

@@ -2,15 +2,21 @@
 
 import colander
 
-from . import ResourceSearchSchema, Date
+from . import (
+    Date,
+    ResourceSearchSchema,
+    BaseSearchForm,
+)
+
+from ..lib.qb.turnovers import TurnoversQueryBuilder
 
 
-class TurnoverSearchSchema(ResourceSearchSchema):
-    report_by = colander.SchemaNode(
-        colander.String(),
-        missing='account',
+class _TurnoverSearchSchema(ResourceSearchSchema):
+    account_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
     )
-    currency_id = colander.SchemaNode(
+    account_item_id = colander.SchemaNode(
         colander.Integer(),
         missing=None,
     )
@@ -22,3 +28,8 @@ class TurnoverSearchSchema(ResourceSearchSchema):
         Date(),
         missing=None,
     )
+
+
+class TurnoverSearchForm(BaseSearchForm):
+    _schema = _TurnoverSearchSchema
+    _qb = TurnoversQueryBuilder

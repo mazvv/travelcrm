@@ -5,7 +5,6 @@ from sqlalchemy import func
 from ...lib.utils.resources_utils import get_resource_class
 from ...lib.utils.sql_utils import build_union_query
 from ...lib.bl.factories import get_invoices_factories_resources_types
-from ...lib.utils.common_utils import get_vat as _get_vat
 from ...models import DBSession
 from ...models.invoice import Invoice
 from ...models.resource import Resource
@@ -15,13 +14,6 @@ from ...models.account import Account
 from ...models.cashflow import Cashflow
 
 
-def get_vat(amount):
-    vat = _get_vat()
-    if not vat:
-        return 0
-    return amount * vat / (100 + vat)
-
-    
 def query_resource_data():
     factories = get_invoices_factories_resources_types()
     queries = [factory.query_list() for factory in factories]

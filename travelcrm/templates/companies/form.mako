@@ -66,19 +66,6 @@
                 ${h.common.error_container(name='email')}
             </div>
         </div>
-        <div class="form-field mb05">
-            <div class="dl15">
-                ${h.tags.title(_(u"vat, %"), True, "vat")}
-            </div>
-            <div class="ml15">
-                ${h.tags.text('vat', 
-                    item.settings.get('vat') if item else None, 
-                    class_="easyui-textbox w20 easyui-numberbox", 
-                    data_options="min:0,precision:2,max:100"
-                )}
-                ${h.common.error_container(name='vat')}
-            </div>
-        </div>
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">

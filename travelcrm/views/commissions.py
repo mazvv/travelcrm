@@ -31,7 +31,7 @@ class CommissionsView(object):
 
     @view_config(
         request_method='GET',
-        renderer='travelcrm:templates/contacts/index.mako',
+        renderer='travelcrm:templates/commissions/index.mako',
         permission='view'
     )
     def index(self):
@@ -56,7 +56,7 @@ class CommissionsView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/contacts/form.mako',
+        renderer='travelcrm:templates/commissions/form.mako',
         permission='view'
     )
     def view(self):
@@ -78,7 +78,7 @@ class CommissionsView(object):
     @view_config(
         name='add',
         request_method='GET',
-        renderer='travelcrm:templates/contacts/form.mako',
+        renderer='travelcrm:templates/commissions/form.mako',
         permission='add'
     )
     def add(self):
@@ -111,7 +111,7 @@ class CommissionsView(object):
     @view_config(
         name='edit',
         request_method='GET',
-        renderer='travelcrm:templates/contacts/form.mako',
+        renderer='travelcrm:templates/commissions/form.mako',
         permission='edit'
     )
     def edit(self):
@@ -145,7 +145,7 @@ class CommissionsView(object):
     @view_config(
         name='copy',
         request_method='GET',
-        renderer='travelcrm:templates/contacts/form.mako',
+        renderer='travelcrm:templates/commissions/form.mako',
         permission='add'
     )
     def copy(self):
@@ -167,7 +167,7 @@ class CommissionsView(object):
     @view_config(
         name='delete',
         request_method='GET',
-        renderer='travelcrm:templates/contacts/delete.mako',
+        renderer='travelcrm:templates/commissions/delete.mako',
         permission='delete'
     )
     def delete(self):
@@ -183,19 +183,21 @@ class CommissionsView(object):
         permission='delete'
     )
     def _delete(self):
-        ids = self.request.params.getall('id')
-        if ids:
-            try:
-                (
-                    DBSession.query(Commission)
-                    .filter(Commission.id.in_(ids))
-                    .delete()
-                )
-            except:
-                DBSession.rollback()
-                return {
-                    'error_message': _(
-                        u'Some objects could not be delete'
-                    ),
-                }
+        errors = 0
+        for id in self.request.params.getall('id'):
+            item = Commission.get(id)
+            if item:
+                DBSession.begin_nested()
+                try:
+                    DBSession.delete(item)
+                    DBSession.commit()
+                except:
+                    errors += 1
+                    DBSession.rollback()
+        if errors > 0:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

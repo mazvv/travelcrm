@@ -18,22 +18,38 @@
             ${_(u'services')}
         </div>
         <div class="dp85">
-	    % for order_item in item.orders_items:
             <div class="dp100">
-                <div class="dp75">
-                    ${order_item.service.name}, ${order_item.supplier.name}
-                    <span class="fa fa-money ml05 mr05"></span>
-                    <em>
-                        ${order_item.currency.iso_code} ${order_item.final_price}
-                    </em>
+                <div class="b dp40">${_(u'service')}</div>
+                <div class="b dp15">${_(u'price')}</div>
+                <div class="b dp15">${_(u'calculation')}</div>
+                <div class="b dp15">${_(u'currency')}</div>
+                <div class="b dp15">${_(u'status')}</div>
+            </div>
+            % for order_item in item.orders_items:
+            <div class="dp100">
+                <div class="dp40">
+                    ${order_item.service.display_text}, ${order_item.supplier.name}
                 </div>
-                <div class="dp25 tr">
+                <div class="dp15">
+                    ${order_item.price}
+                </div>
+                <div class="dp15">
+                    % if order_item.calculation:
+                        ${order_item.calculation.price}
+                    % else:
+                        &nbsp;
+                    % endif
+                </div>
+                <div class="dp15">
+                    ${order_item.currency.iso_code}
+                </div>
+                <div class="dp15">
                     <span class="mr1 status-label ${order_item.status.key}">
                         ${order_item.status.title}
                     </span>
                 </div>
             </div>
-	    % endfor
+            % endfor
         </div>
     </div>
     <div class="dp100">

@@ -102,11 +102,6 @@ def get_base_currency():
     return settings.get('company.base_currency') 
 
 
-def get_vat():
-    settings = get_settings()
-    return settings.get('company.vat') 
-
-
 def get_date_format():
     return gdf(format='short', locale=get_locale_name()).pattern
 

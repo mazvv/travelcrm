@@ -11,7 +11,6 @@ from . import (
 from ..models.company import Company
 from ..resources.companies import CompaniesResource
 from ..lib.qb.companies import CompaniesQueryBuilder
-from ..lib.utils.common_utils import serialize
 
 
 class _CompanySchema(ResourceSchema):
@@ -32,11 +31,6 @@ class _CompanySchema(ResourceSchema):
     currency_id = colander.SchemaNode(
         colander.Integer()
     )
-    vat = colander.SchemaNode(
-        colander.Money(),
-        missing=0,
-        validator=colander.Range(min=0, max=100)
-    )
 
 
 class CompanyForm(BaseForm):
@@ -54,7 +48,6 @@ class CompanyForm(BaseForm):
         company.settings = {
             'timezone': self._controls.get('timezone'),
             'locale': self._controls.get('locale'),
-            'vat': serialize(self._controls.get('vat')),
         }
         return company
 

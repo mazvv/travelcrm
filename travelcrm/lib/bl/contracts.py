@@ -8,7 +8,7 @@ from ...models.supplier import Supplier
 
 
 def get_contract(supplier_id, date=None):
-    """ get contract on date
+    """ get active ontract on date
     """
     assert isinstance(supplier_id, int)
     if not date:
@@ -18,7 +18,8 @@ def get_contract(supplier_id, date=None):
         .join(Supplier, Contract.supplier)
         .filter(
             Contract.condition_active(),
-            Contract.date <= date
+            Contract.date <= date,
+            Supplier.id == supplier_id
         )
         .order_by(Contract.date.desc())
         .first()
