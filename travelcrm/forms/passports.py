@@ -10,6 +10,7 @@ from . import(
 )
 from ..resources.passports import PassportsResource
 from ..models.passport import Passport
+from ..models.upload import Upload
 from ..lib.qb.passports import PassportsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
@@ -48,6 +49,21 @@ class _PassportSchema(ResourceSchema):
         missing=None,
         validator=colander.Length(min=2, max=255)
     )
+    upload_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[]
+    )
+    def deserialize(self, cstruct):
+        if (
+            'upload_id' in cstruct
+            and not isinstance(cstruct.get('upload_id'), list)
+        ):
+            val = cstruct['upload_id']
+            cstruct['upload_id'] = list()
+            cstruct['upload_id'].append(val)
+
+        return super(_PassportSchema, self).deserialize(cstruct)
+
 
 class PassportForm(BaseForm):
     _schema = _PassportSchema
@@ -59,6 +75,7 @@ class PassportForm(BaseForm):
                 resource=context.create_resource()
             )
         else:
+            passport.uploads = []
             passport.resource.notes = []
             passport.resource.tasks = []
         passport.num = self._controls.get('num')
@@ -66,6 +83,9 @@ class PassportForm(BaseForm):
         passport.passport_type = self._controls.get('passport_type')
         passport.end_date = self._controls.get('end_date')
         passport.descr = self._controls.get('descr')
+        for id in self._controls.get('upload_id'):
+            upload = Upload.get(id)
+            passport.uploads.append(upload)
         return passport
 
 

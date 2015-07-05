@@ -90,3 +90,11 @@
     </div>
     % endif
 </%def>
+
+
+<%def name="address_list_details(address)">
+    <%
+        data = [address.zip_code, address.location.full_location_name, address.address]
+    %>
+    ${', '.join(data)}
+</%def>

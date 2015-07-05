@@ -22,7 +22,7 @@ def get_vat(
             Vat.service_id == service_id,
             Vat.date <= calc_date
         )
-        .order_by(Vat.date.desc)
+        .order_by(Vat.date.desc())
         .first()
     )
     return vat

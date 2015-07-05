@@ -499,3 +499,10 @@ function account_item_type_formatter(item_type){
 		return $('<div/>').append(span).append(title).html();
 	}
 }
+
+
+function format_download_link(url){
+	var span = $('<span/>').addClass('fa fa-download');
+	var a = $('<a target="_blank"/>').attr('href', url).append(span);
+	return $('<div/>').append(a).html();
+}

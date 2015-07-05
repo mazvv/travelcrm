@@ -42,6 +42,11 @@ class _PersonSchema(ResourceSchema):
         colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
         default=False,
     )
+    descr = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=255),
+        missing=None
+    )
     contact_id = colander.SchemaNode(
         colander.Set(),
         missing=[],
@@ -102,6 +107,7 @@ class PersonForm(BaseForm):
         person.gender = self._controls.get('gender')
         person.birthday = self._controls.get('birthday')
         person.subscriber = self._controls.get('subscriber')
+        person.descr = self._controls.get('descr')
         for id in self._controls.get('contact_id'):
             contact = Contact.get(id)
             person.contacts.append(contact)

@@ -9,6 +9,7 @@ from . import (
 )
 from ..resources.notes import NotesResource
 from ..models.note import Note
+from ..models.upload import Upload
 from ..lib.qb.notes import NotesQueryBuilder
 
 
@@ -19,8 +20,22 @@ class _NoteSchema(ResourceSchema):
     )
     descr = colander.SchemaNode(
         colander.String(),
-        missing=None,
     )
+    upload_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[]
+    )
+
+    def deserialize(self, cstruct):
+        if (
+            'upload_id' in cstruct
+            and not isinstance(cstruct.get('upload_id'), list)
+        ):
+            val = cstruct['upload_id']
+            cstruct['upload_id'] = list()
+            cstruct['upload_id'].append(val)
+
+        return super(_NoteSchema, self).deserialize(cstruct)
 
 
 class NoteForm(BaseForm):
@@ -32,8 +47,13 @@ class NoteForm(BaseForm):
             note = Note(
                 resource=context.create_resource()
             )
+        else:
+            note.uploads = []
         note.title = self._controls.get('title')
         note.descr = self._controls.get('descr')
+        for id in self._controls.get('upload_id'):
+            upload = Upload.get(id)
+            note.uploads.append(upload)
         return note
 
 

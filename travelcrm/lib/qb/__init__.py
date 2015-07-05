@@ -20,10 +20,13 @@ class NotValidContextError(Exception):
     pass
 
 
-def query_row_serialize_format(row):
+def query_row_serialize_format(row, serializers=None):
     res_row = dict(zip(row.keys(), row))
     for key, value in res_row.iteritems():
-        res_row[key] = serialize(value)
+        if serializers and serializers.get(key):
+            res_row[key] = serializers.get(key)(value, row)
+        else:
+            res_row[key] = serialize(value)
     return res_row
 
 
@@ -36,6 +39,7 @@ class GeneralQueryBuilder(object):
     _fields = {}
     _simple_search_fields = []
     _advanced_search_fields = []
+    _serializers = {}
 
     def build_base_query(self):
         raise NotImplementedError(
@@ -100,7 +104,7 @@ class GeneralQueryBuilder(object):
         query = self.get_query()
         result = []
         for row in query:
-            result.append(query_row_serialize_format(row))
+            result.append(query_row_serialize_format(row, self._serializers))
         return result
 
 

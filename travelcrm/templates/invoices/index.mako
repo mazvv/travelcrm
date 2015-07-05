@@ -85,10 +85,6 @@
                 </a>
                 % endif
                 <a href="#" class="button _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'info')}'">
-                    <span class="fa fa-lightbulb-o"></span>${_(u'Info')}
-                </a>
-                <a href="#" class="button _action"
                     data-options="container:'#${_id}',action:'blank_open',property:'with_row',url:'${request.resource_url(_context, 'print')}'">
                     <span class="fa fa-print"></span>${_(u'Print')}
                 </a>

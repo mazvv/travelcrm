@@ -177,6 +177,9 @@ class Person(Base):
         Boolean,
         default=False,
     )
+    descr = Column(
+        String(length=255),
+    )
     resource = relationship(
         'Resource',
         backref=backref(

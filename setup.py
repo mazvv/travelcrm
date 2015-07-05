@@ -24,7 +24,6 @@ requires = [
     'pyramid_layout',
     'psycopg2',
     'pyramid_beaker',
-    'whoosh>=2.5.7',
     'Babel>=1.3',
     'phonenumbers>=7.0.2',
     'pyramid_storage>=0.0.5',
@@ -34,12 +33,12 @@ requires = [
     'pdfkit>=0.4.1',
     'apscheduler>=3.0.1',
     'dateutils>=0.6.6',
-    'pygal>=1.6.1',
+    'bitmath>=1.0.2-3',
 ]
 
 setup(
     name='travelcrm',
-    version='0.6.2-dev',
+    version='0.6.3-dev',
     description='travelcrm',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[

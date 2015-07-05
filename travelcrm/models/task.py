@@ -48,6 +48,34 @@ task_resource = Table(
 )
 
 
+task_upload = Table(
+    'task_upload',
+    Base.metadata,
+    Column(
+        'task_id',
+        Integer,
+        ForeignKey(
+            'task.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_task_id_task_upload',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'upload_id',
+        Integer,
+        ForeignKey(
+            'upload.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_upload_id_task_upload',
+        ),
+        primary_key=True,
+    )
+)
+
+
 class Task(Base):
     __tablename__ = 'task'
 
@@ -131,6 +159,16 @@ class Task(Base):
             lazy="dynamic"
         ),
         uselist=False
+    )
+    uploads = relationship(
+        'Upload',
+        secondary=task_upload,
+        backref=backref(
+            'task',
+            uselist=False
+        ),
+        cascade="all,delete",
+        uselist=True,
     )
 
     @classmethod

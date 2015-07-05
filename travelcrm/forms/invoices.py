@@ -60,8 +60,8 @@ def order_id_validator(node, kw):
                 node,
                 _(u'Invoice for this order already exists'),
             )
-        for order_item in order.orders_items:
-            if not order_item.calculation:
+        for order_item in invoice.order.orders_items:
+            if not order_item.calculation and order_item.is_success():
                 raise colander.Invalid(
                     node,
                     _(u'Some order items has no calculations'),
@@ -155,6 +155,8 @@ class InvoiceForm(BaseForm):
         account = Account.get(self._controls.get('account_id'))
         items = []
         for order_item in order.orders_items:
+            if not order_item.is_success():
+                continue 
             invoice_item = (
                 DBSession.query(InvoiceItem)
                 .filter(InvoiceItem.order_item_id == order_item.id)
@@ -176,9 +178,10 @@ class InvoiceForm(BaseForm):
             )
             if vat:
                 invoice_item.vat = calc_vat(
+                    vat.id,
                     invoice_item.final_price 
                     if vat.is_full()
-                    else order_item.calculation.price
+                    else invoice_item.final_price - order_item.calculation.price
                 )
             invoice_item.descr = order_item.service.display_text
         return items

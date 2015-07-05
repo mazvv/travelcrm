@@ -54,7 +54,8 @@
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
             <th data-options="field:'account_name',sortable:true,width:150">${_(u"account name")}</th>
             <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
-            <th data-options="field:'sum',sortable:true,width:100,formatter:function(value, row, index){return row.currency + ' ' + value;}">${_(u"sum")}</th>
+            <th data-options="field:'sum',sortable:true,width:100">${_(u"sum")}</th>
+            <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

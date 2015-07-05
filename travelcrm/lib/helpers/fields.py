@@ -1288,8 +1288,15 @@ def orders_combogrid_field(
 ):
     fields = """[[{
         field: 'customer', title: '%(title)s',
+        formatter: function(value,row,index){
+            return value + '<br/>'
+            + '<em>id ' + row.id + ' %(from_date)s ' + row.deal_date + '</em>';
+        },
         sortable: true, width: 200,
-    }]]""" % {'title': _(u'customer')}
+    }]]""" % {
+        'title': _(u'customer'),
+        'from_date': _(u'from')
+    }
 
     tools = (
         tool('add', '/orders/add', 'fa-plus', _(u'add new'), False),

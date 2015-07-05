@@ -31,7 +31,7 @@
                     ${order_item.service.display_text}, ${order_item.supplier.name}
                 </div>
                 <div class="dp15">
-                    ${order_item.price}
+                    ${order_item.final_price}
                 </div>
                 <div class="dp15">
                     % if order_item.calculation:

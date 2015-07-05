@@ -79,3 +79,4 @@ from lead_item import LeadItem
 from lead_offer import LeadOffer
 from invoice_item import InvoiceItem
 from vat import Vat
+from upload import Upload

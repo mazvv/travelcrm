@@ -41,8 +41,6 @@ class CalculationAutoloadForm(BaseForm):
                 order_item.supplier_id,
                 order.deal_date
             )
-            if not contract:
-                continue
             commission = 0
             if contract:
                 _commission = get_commission(

@@ -33,7 +33,7 @@
     <div class="employee-info dl30">
         <div class="dl5 tr">
             <%
-               photo = employee.photo or 'no-image.png'
+               photo = employee.photo and employee.photo.path or 'no-image.png'
             %>
             ${h.tags.image(
                 request.route_url(

@@ -44,7 +44,8 @@ def make_payment(request, income):
             sum=income.sum,
             date=income.date,
             subaccount_to=subaccount,
-            account_item_id=income.account_item_id
+            account_item_id=income.account_item_id,
+            vat=invoice.vat,
         )
     )
     payments_sum = get_invoice_payments_sum(invoice.id)
@@ -55,7 +56,6 @@ def make_payment(request, income):
         cashflows.append(
             Cashflow(
                 sum=min([debt, income.sum]),
-                vat=invoice.vat,
                 date=income.date,
                 subaccount_from=subaccount,
                 subaccount_to=company_subaccount,

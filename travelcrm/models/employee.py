@@ -131,6 +131,34 @@ employee_subaccount = Table(
 )
 
 
+employee_upload = Table(
+    'employee_upload',
+    Base.metadata,
+    Column(
+        'employee_id',
+        Integer,
+        ForeignKey(
+            'employee.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_employee_id_employee_upload',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'upload_id',
+        Integer,
+        ForeignKey(
+            'upload.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_upload_id_employee_upload',
+        ),
+        primary_key=True,
+    )
+)
+
+
 class Employee(Base):
     __tablename__ = 'employee'
 
@@ -149,8 +177,14 @@ class Employee(Base):
         ),
         nullable=False,
     )
-    photo = Column(
-        String,
+    photo_upload_id = Column(
+        Integer,
+        ForeignKey(
+            'upload.id',
+            name="fk_photo_upload_id_employee",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
     )
     first_name = Column(
         String(length=32),
@@ -178,6 +212,21 @@ class Employee(Base):
         ),
         cascade="all,delete",
         uselist=False,
+    )
+    photo = relationship(
+        'Upload',
+        cascade="all,delete",
+        uselist=False,
+    )
+    uploads = relationship(
+        'Upload',
+        secondary=employee_upload,
+        backref=backref(
+            'employee',
+            uselist=False
+        ),
+        cascade="all,delete",
+        uselist=True,
     )
     contacts = relationship(
         'Contact',

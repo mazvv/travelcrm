@@ -43,6 +43,34 @@ note_resource = Table(
 )
 
 
+note_upload = Table(
+    'note_upload',
+    Base.metadata,
+    Column(
+        'note_id',
+        Integer,
+        ForeignKey(
+            'note.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_note_id_note_upload',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'upload_id',
+        Integer,
+        ForeignKey(
+            'upload.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_upload_id_note_upload',
+        ),
+        primary_key=True,
+    )
+)
+
+
 class Note(Base):
     __tablename__ = 'note'
 
@@ -89,6 +117,17 @@ class Note(Base):
         ),
         uselist=False,
     )
+    uploads = relationship(
+        'Upload',
+        secondary=note_upload,
+        backref=backref(
+            'note',
+            uselist=False
+        ),
+        cascade="all,delete",
+        uselist=True,
+    )
+    
 
     @classmethod
     def get(cls, id):

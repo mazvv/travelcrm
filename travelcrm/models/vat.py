@@ -121,7 +121,7 @@ class Vat(Base):
         )
 
     def is_commission(self):
-        return self.status == 'commission'
+        return self.calc_method == 'commission'
 
     def is_full(self):
-        return self.status == 'full'
+        return self.calc_method == 'full'

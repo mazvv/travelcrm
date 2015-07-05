@@ -73,6 +73,20 @@
                         ${h.common.error_container(name='subscriber')}
                     </div>
                 </div>
+                <div class="form-field mb05">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"description"), False, "descr")}
+                    </div>
+                    <div class="ml15">
+                        ${h.tags.text(
+                            'descr', 
+                            item.descr if item else None, 
+                            class_="easyui-textbox w20", 
+                            data_options="multiline:true,height:80"
+                        )}
+                        ${h.common.error_container(name='descr')}
+                    </div>
+                </div>
             </div>
             <div title="${_(u'Contacts')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">

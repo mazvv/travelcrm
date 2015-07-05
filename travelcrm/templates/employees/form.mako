@@ -1,6 +1,7 @@
 <%namespace file="../contacts/common.mako" import="contact_selector"/>
 <%namespace file="../passports/common.mako" import="passports_selector"/>
 <%namespace file="../addresses/common.mako" import="address_selector"/>
+<%namespace file="../uploads/common.mako" import="uploads_selector"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
 <div class="dl70 easyui-dialog"
@@ -28,7 +29,7 @@
                                 request.route_url(
                                     'thumbs', 
                                     size='thumb', 
-                                    path=request.storage.url(item.photo)
+                                    path=request.storage.url(item.photo.path)
                                 ),
                                 item.name,
                                 align='center'
@@ -126,33 +127,17 @@
                     )}
                 </div>
             </div>
-            % if item:
-            <%
-                _id = h.common.gen_id()
-            %>            
-            <div title="${_(u'Appointments')}">
-                <table class="easyui-datagrid"
-                    id="${_id}"
-                    data-options="
-                        url:'appointments/list',border:false,
-                        pagination:true,fit:true,pageSize:50,singleSelect:true,
-                        rownumbers:true,sortName:'date',sortOrder:'desc',
-                        pageList:[50,100,500],idField:'_id',checkOnSelect:false,
-                        onBeforeLoad: function(param){
-                             param.employee_id = ${item.id};
-                        }
-                    " width="100%">
-                    <thead>
-                        <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-                        <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
-                        <th data-options="field:'position_name',sortable:true,width:150">${_(u"position")}</th>
-                        <th data-options="field:'structure_path',sortable:true,width:200,formatter:function(value,row,index){return (value)?value.join(' &rarr; '):'';}">${_(u"structure")}</th>
-                        <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-                        <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
-                    </thead>
-                </table>
-            </div>    
-            % endif        
+            <div title="${_(u'Uploads')}">
+                <div class="easyui-panel" data-options="fit:true,border:false">
+                    ${uploads_selector(
+                        values=([upload.id for upload in item.uploads] if item else []),
+                        can_edit=(
+                            not (readonly if readonly else False) and 
+                            (_context.has_permision('add') if item else _context.has_permision('edit'))
+                        ) 
+                    )}
+                </div>                
+            </div>            
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(

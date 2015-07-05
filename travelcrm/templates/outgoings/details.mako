@@ -1,5 +1,6 @@
 <%namespace file="../common/resource.mako" import="resource_list_details"/>
 <%namespace file="../persons/common.mako" import="person_list_details"/>
+<%namespace file="../cashflows/common.mako" import="cashflow_list_details"/>
 <div class="dp100 item-details">
     % if item.descr:
         <div class="dp100">
@@ -34,13 +35,10 @@
     </div>
     <div class="dp100">
         <div class="dp15 b">
-            ${_(u'outgoing sum')}
+            ${_(u'cashflows')}
         </div>
         <div class="dp85">
-            ${h.common.format_currency(
-                item.sum,
-                item.subaccount.account.currency.iso_code
-            )}
+            ${cashflow_list_details(item.cashflows)}
         </div>
     </div>
     <div class="dp100">

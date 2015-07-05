@@ -3,7 +3,6 @@
 import logging
 
 import colander
-from babel.numbers import format_decimal
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
@@ -11,8 +10,6 @@ from pyramid.httpexceptions import HTTPFound
 from ..models import DBSession
 from ..models.order import Order
 from ..models.invoice import Invoice
-from ..models.resource import Resource
-from ..lib.qb import query_serialize
 from ..lib.utils.common_utils import serialize
 from ..lib.utils.common_utils import translate as _
 
@@ -23,17 +20,7 @@ from ..forms.invoices import (
     InvoiceActiveUntilForm,
     InvoiceSettingsForm,
 )
-
-from ..lib.utils.resources_utils import (
-    get_resource_class,
-    get_resource_type_by_resource
-)
-from ..lib.utils.common_utils import get_locale_name
-from ..lib.bl.invoices import (
-    query_resource_data,
-    query_invoice_payments,
-)
-from ..lib.bl.invoices import get_factory_by_invoice_id
+from ..lib.utils.resources_utils import get_resource_type_by_resource
 
 log = logging.getLogger(__name__)
 
@@ -225,21 +212,8 @@ class InvoicesView(object):
         permission='view',
     )
     def print_invoice(self):
-        invoice = Invoice.get(self.request.params.get('id'))
-        factory = get_factory_by_invoice_id(invoice.id)
-        bound_resource = (
-            query_resource_data()
-            .filter(Invoice.id == invoice.id)
-            .first()
-        )
-        payment_query = query_invoice_payments(self.request.params.get('id'))
-        payment_sum = sum(row.sum for row in payment_query)
-        return {
-            'invoice': invoice,
-            'factory': factory,
-            'resource_id': bound_resource.resource_id,
-            'payment_sum': payment_sum,
-        }
+        #TODO: make it
+        pass
 
     @view_config(
         name='invoice_sum',
@@ -278,98 +252,6 @@ class InvoicesView(object):
                 'error_message': _(u'Please, check errors'),
                 'errors': form.errors
             }
-
-    @view_config(
-        name='info',
-        request_method='GET',
-        renderer='travelcrm:templates/invoices/info.mako',
-        permission='view'
-    )
-    def info(self):
-        invoice = Invoice.get(self.request.params.get('id'))
-        return {
-            'title': _(u'Invoice Info'),
-            'currency': invoice.account.currency.iso_code,
-            'id': invoice.id
-        }
-
-    @view_config(
-        name='services_info',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _services_info(self):
-        invoice = Invoice.get(self.request.params.get('id'))
-        bound_resource = (
-            query_resource_data()
-            .filter(Invoice.id == invoice.id)
-            .first()
-        )
-        resource = Resource.get(bound_resource.resource_id)
-        source_cls = get_resource_class(resource.resource_type.name)
-        factory = source_cls.get_invoice_factory()
-        query = factory.services_info(
-            bound_resource.resource_id, invoice.account.currency.id
-        )
-        total_cnt = sum(row.cnt for row in query)
-        total_sum = sum(row.price for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'name': _(u'total'),
-                'cnt': total_cnt,
-                'price': format_decimal(total_sum, locale=get_locale_name())
-            }]
-        }
-
-    @view_config(
-        name='accounts_items_info',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _accounts_items_info(self):
-        invoice = Invoice.get(self.request.params.get('id'))
-        bound_resource = (
-            query_resource_data()
-            .filter(Invoice.id == invoice.id)
-            .first()
-        )
-        resource = Resource.get(bound_resource.resource_id)
-        source_cls = get_resource_class(resource.resource_type.name)
-        factory = source_cls.get_invoice_factory()
-        query = factory.accounts_items_info(
-            bound_resource.resource_id, invoice.account.currency.id
-        )
-        total_cnt = sum(row.cnt for row in query)
-        total_sum = sum(row.price for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'name': _(u'total'),
-                'unit_price': None,
-                'cnt': total_cnt,
-                'price': format_decimal(total_sum, locale=get_locale_name()),
-            }]
-        }
-
-    @view_config(
-        name='payments_info',
-        request_method='POST',
-        renderer='json',
-        permission='view'
-    )
-    def _payments_info(self):
-        query = query_invoice_payments(self.request.params.get('id'))
-        total_sum = sum(row.sum for row in query)
-        return {
-            'rows': query_serialize(query),
-            'footer': [{
-                'date': _(u'total'),
-                'sum': format_decimal(total_sum, locale=get_locale_name())
-            }]
-        }
 
     @view_config(
         name='settings',

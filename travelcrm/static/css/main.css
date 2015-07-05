@@ -7,7 +7,6 @@
 @IMPORT url("./emastic/plugins/gadgets.css");
 @IMPORT url("./gh-buttons.css");
 @IMPORT url("./font-awesome.min.css");
-@IMPORT url("./jquery-te-1.4.0.css");
 
 
 /** emastic hacks **/
@@ -591,46 +590,6 @@ span.field-actions span.field-action:first-child {
 /** grid **/
 .grid-details, .grid-details tr, .grid-details td{
 	border: none;
-}
-
-
-/** jqte **/
-.jqte *{
-    font-size: 12px;
-}
-.jqte a, .jqte a:hover{
-	text-decoration: none;
-}
-.jqte{
-	margin: 0;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	-o-border-radius: 0px;
-	border-radius: 0px;
-	border: 0px;
-	box-shadow: none;
-}
-.jqte_editor, .jqte_source{
-    padding: 5px;	
-}
-.jqte_focused{
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -o-border-radius: 0px;
-    border-radius: 0px;
-    border: 0px;
-    box-shadow: none;
-}
-.jqte_tool a{
-	border: 1px solid transparent;
-}
-.jqte_editor, .jqte_source{
-    max-height:300px;
-}
-.jqte_source, .jqte_source textarea{
-	padding: 5px;
-	background: transparent;
-	font-size: 12px;
 }
 
 /** info block **/

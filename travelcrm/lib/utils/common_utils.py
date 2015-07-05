@@ -138,8 +138,8 @@ def format_time(value):
     )
 
 
-def format_decimal(value):
-    value = Decimal(value).quantize(Decimal('.01'))
+def format_decimal(value, quantize='.01'):
+    value = Decimal(value).quantize(Decimal(quantize))
     return fdc(value, locale=get_locale_name())
 
 
@@ -166,3 +166,13 @@ def serialize(value):
 
 def format_currency(value, currency):
     return fc(value, currency, locale=get_locale_name())
+
+
+def get_storage_dir():
+    dt = datetime.now(tz=timezone(get_timezone()))
+    return "%d%d%d" % (dt.year, dt.month, dt.day)
+
+
+def get_storage_max_size():
+    settings = get_settings()
+    return settings.get('storage.max_size')

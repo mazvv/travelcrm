@@ -31,6 +31,7 @@
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);
+                        $.parser.parse('#' + row_id);
                     }
                 );
             },

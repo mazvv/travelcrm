@@ -2,7 +2,6 @@
 
 import colander
 from pyramid_storage.extensions import IMAGES
-from webhelpers.number import format_data_size
 
 from . import(
     File,
@@ -12,17 +11,21 @@ from . import(
     BaseSearchForm,
 )
 from ..resources.employees import EmployeesResource
+from ..resources.uploads import UploadsResource
 from ..models.employee import Employee
 from ..models.address import Address
 from ..models.contact import Contact
 from ..models.passport import Passport
 from ..models.note import Note
 from ..models.task import Task
+from ..models.upload import Upload
 from ..lib.qb.employees import EmployeesQueryBuilder
+from ..lib.bl.storages import (
+    is_allowed_file_size,
+    get_file_size
+)
+from ..lib.utils.common_utils import get_storage_dir
 from ..lib.utils.common_utils import translate as _
-
-
-UPLOAD_MAX_SIZE = 102400
 
 
 @colander.deferred
@@ -30,11 +33,10 @@ def photo_validator(node, kw):
     request = kw.get('request')
 
     def validator(node, value):
-        if len(value.file.read()) > UPLOAD_MAX_SIZE:
+        if not is_allowed_file_size(value.file):
             raise colander.Invalid(
                 node,
-                _(u'Max Image Size for Upload is %s')
-                % format_data_size(UPLOAD_MAX_SIZE, 'B', 2),
+                _(u'File is too big')
             )
         try:
             request.storage.file_allowed(value, IMAGES)
@@ -45,7 +47,7 @@ def photo_validator(node, kw):
             )
         value.file.seek(0)
 
-    return validator
+    return colander.All(validator,)
 
 
 class _EmployeeSchema(ResourceSchema):
@@ -89,6 +91,10 @@ class _EmployeeSchema(ResourceSchema):
         colander.Set(),
         missing=[]
     )
+    upload_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[]
+    )
 
     def deserialize(self, cstruct):
         if (
@@ -115,6 +121,14 @@ class _EmployeeSchema(ResourceSchema):
             cstruct['address_id'] = list()
             cstruct['address_id'].append(val)
 
+        if (
+            'upload_id' in cstruct
+            and not isinstance(cstruct.get('upload_id'), list)
+        ):
+            val = cstruct['upload_id']
+            cstruct['upload_id'] = list()
+            cstruct['upload_id'].append(val)
+
         return super(_EmployeeSchema, self).deserialize(cstruct)
 
 
@@ -129,6 +143,9 @@ class EmployeeForm(BaseForm):
             )
         else:
             employee.addresses = []
+            employee.contacts = []
+            employee.passports = []
+            employee.uploads = []
             employee.resource.notes = []
             employee.resource.tasks = []
         employee.first_name = self._controls.get('first_name')
@@ -137,6 +154,22 @@ class EmployeeForm(BaseForm):
         employee.itn = self._controls.get('itn')
         employee.dismissal_date = self._controls.get('dismissal_date')
 
+        if self._controls.get('photo') is not None:
+            upload_context = UploadsResource(context.request)
+            employee.photo = Upload(
+                resource=upload_context.create_resource(),
+                name=self._controls.get('photo').filename,
+                path = self.request.storage.save(
+                    self._controls.get('photo'),
+                    folder=get_storage_dir(),
+                    randomize=True
+                ),
+                size=get_file_size(self._controls.get('photo').file),
+                media_type=self._controls.get('photo').type
+            )
+            
+        if self._controls.get('delete_photo'):
+            employee.photo = None
         for id in self._controls.get('contact_id'):
             contact = Contact.get(id)
             employee.contacts.append(contact)
@@ -146,6 +179,9 @@ class EmployeeForm(BaseForm):
         for id in self._controls.get('address_id'):
             address = Address.get(id)
             employee.addresses.append(address)
+        for id in self._controls.get('upload_id'):
+            upload = Upload.get(id)
+            employee.uploads.append(upload)
         for id in self._controls.get('note_id'):
             note = Note.get(id)
             employee.resource.notes.append(note)

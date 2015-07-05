@@ -10,6 +10,7 @@ from . import (
     DateTime
 )
 from ..resources.tasks import TasksResource
+from ..models.upload import Upload
 from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.tasks import TasksQueryBuilder
@@ -35,11 +36,25 @@ class _TaskSchema(ResourceSchema):
     )
     descr = colander.SchemaNode(
         colander.String(),
-        missing=None,
     )
     status = colander.SchemaNode(
         colander.String(),
     )
+    upload_id = colander.SchemaNode(
+        colander.Set(),
+        missing=[]
+    )
+
+    def deserialize(self, cstruct):
+        if (
+            'upload_id' in cstruct
+            and not isinstance(cstruct.get('upload_id'), list)
+        ):
+            val = cstruct['upload_id']
+            cstruct['upload_id'] = list()
+            cstruct['upload_id'].append(val)
+
+        return super(_TaskSchema, self).deserialize(cstruct)
 
 
 class TaskSearchSchema(ResourceSearchSchema):
@@ -63,6 +78,7 @@ class TaskForm(BaseForm):
                 resource=context.create_resource()
             )
         else:
+            task.uploads = []
             task.resource.notes = []
         task.employee_id = self._controls.get('employee_id')
         task.title = self._controls.get('title')
@@ -70,6 +86,9 @@ class TaskForm(BaseForm):
         task.reminder = self._controls.get('reminder')
         task.descr = self._controls.get('descr')
         task.status = self._controls.get('status')
+        for id in self._controls.get('upload_id'):
+            upload = Upload.get(id)
+            task.uploads.append(upload)
         for id in self._controls.get('note_id'):
             note = Note.get(id)
             task.resource.notes.append(note)
