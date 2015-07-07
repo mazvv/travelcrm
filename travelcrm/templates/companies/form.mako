@@ -16,7 +16,7 @@
         % if item:
            ${infoblock(_(u"If you change company settings you need to reload page"))}
         % endif    
-        <div class="form-field">
+        <div class="form-field mt05">
             <div class="dl15">
                 ${h.tags.title(_(u"name"), True, "name")}
             </div>

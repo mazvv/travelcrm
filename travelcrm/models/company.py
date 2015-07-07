@@ -59,6 +59,8 @@ class Company(Base):
         autoincrement=True,
         primary_key=True
     )
+
+    # can be nullable on creation
     resource_id = Column(
         Integer,
         ForeignKey(
@@ -67,7 +69,6 @@ class Company(Base):
             ondelete='restrict',
             onupdate='cascade',
         ),
-        nullable=False,
     )
     currency_id = Column(
         Integer,
@@ -77,7 +78,6 @@ class Company(Base):
             ondelete='restrict',
             onupdate='cascade',
         ),
-        nullable=False,
     )
     name = Column(
         String(length=32),

@@ -13,17 +13,17 @@ from pyramid.view import view_config
 from pyramid.view import forbidden_view_config
 
 from ..resources import Root
+from ..models import DBSession
 from ..models.user import User
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.resources_utils import get_resources_types_by_interface
-from ..lib.scheduler.companies import schedule_company_creation
 from ..interfaces import IPortlet
 from ..forms.auth import (
     LoginSchema,
     ForgotSchema
 )
-# from ..forms.company import CompanyAddSchema
+from ..forms.companies import CompanyAddForm
 
 
 class HomeView(object):
@@ -181,32 +181,17 @@ class HomeView(object):
         renderer='json',
     )
     def _add(self):
-        schema = CompanyAddSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params.mixed())
-            schedule_company_creation(
-                self.request,
-                controls.get('name'),
-                controls.get('timezone'),
-                controls.get('locale')
-            )
-#             initialize_company_schema()
-#             company = Company(
-#                 name=controls.get('name'),
-#                 currency_id=controls.get('currency_id'),
-#                 settings={
-#                     'timezone': controls.get('timezone'),
-#                     'locale': controls.get('locale')
-#                 },
-#                 resource=self.context.create_resource()
-#             )
-#             DBSession.add(company)
+        form = CompanyAddForm(self.request)
+        if form.validate():
+            form.submit()
             return {
-                'success_message': _(u'Saved'),
-#                 'response': company.id
+                'close': False,
+                'success_message': _(
+                    u'Creation task run soon. Waiting for Email.'
+                ),
             }
-        except colander.Invalid, e:
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }

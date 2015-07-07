@@ -5,11 +5,17 @@
     data-options="
         modal:true,
         draggable:false,
+        closable: false,
         resizable:false,
         iconCls:'fa fa-plus'
     ">
-    ${h.tags.form(request.url, class_="_ajax", autocomplete="off")}
-        <div class="form-field mb05">
+    ${h.tags.form(
+        request.url, 
+        class_="_ajax", 
+        autocomplete="off",
+        hidden_fields=[('csrf_token', request.session.get_csrf_token())]
+    )}
+        <div class="form-field mt05">
             <div class="dl15">
                 ${h.tags.title(_(u"email"), True, "email")}
             </div>
@@ -18,7 +24,7 @@
                 ${h.common.error_container(name='email')}
             </div>
         </div>
-        <div class="form-field mb05">
+        <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"name"), True, "name")}
             </div>
@@ -27,7 +33,7 @@
                 ${h.common.error_container(name='name')}
             </div>
         </div>
-        <div class="form-field mb05">
+        <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"timezone"), True, "timezone")}
             </div>
@@ -45,7 +51,7 @@
                 ${h.common.error_container(name='locale')}
             </div>
         </div>
-        <div class="form-field">
+        <div class="form-field mb05">
             <i class="fa fa-long-arrow-left"></i>
             ${h.tags.link_to(_(u"Back to autorization"), auth_url)}
         </div>

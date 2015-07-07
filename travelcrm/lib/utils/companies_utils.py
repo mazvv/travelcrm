@@ -4,10 +4,8 @@ from sqlalchemy import MetaData
 from sqlalchemy.schema import CreateSchema
 
 from ...models import DBSession, Base
-from ..utils.sql_utils import (
-    get_schemas,
-    set_search_path
-)
+from ..utils.sql_utils import set_search_path
+from ..utils.common_utils import gen_id
 
 
 def create_company_schema(schema_name=None):
@@ -24,5 +22,4 @@ def create_company_schema(schema_name=None):
 
 
 def generate_company_schema():
-    schemas = get_schemas()
-    return "c_%d" % len(schemas)
+    return gen_id('c_')
