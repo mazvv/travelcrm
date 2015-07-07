@@ -25,6 +25,47 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: clone_schema(text, text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION clone_schema(source_schema text, dest_schema text) RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+ 
+DECLARE
+  object text;
+  buffer text;
+  default_ text;
+  column_ text;
+BEGIN
+  EXECUTE 'CREATE SCHEMA ' || dest_schema ;
+ 
+  -- TODO: Find a way to make this sequence's owner is the correct table.
+  FOR object IN
+    SELECT sequence_name::text FROM information_schema.SEQUENCES WHERE sequence_schema = source_schema
+  LOOP
+    EXECUTE 'CREATE SEQUENCE ' || dest_schema || '.' || object;
+  END LOOP;
+ 
+  FOR object IN
+    SELECT TABLE_NAME::text FROM information_schema.TABLES WHERE table_schema = source_schema
+  LOOP
+    buffer := dest_schema || '.' || object;
+    EXECUTE 'CREATE TABLE ' || buffer || ' (LIKE ' || source_schema || '.' || object || ' INCLUDING CONSTRAINTS INCLUDING INDEXES INCLUDING DEFAULTS)';
+ 
+    FOR column_, default_ IN
+      SELECT column_name::text, REPLACE(column_default::text, source_schema, dest_schema) FROM information_schema.COLUMNS WHERE table_schema = dest_schema AND TABLE_NAME = object AND column_default LIKE 'nextval(%' || source_schema || '%::regclass)'
+    LOOP
+      EXECUTE 'ALTER TABLE ' || buffer || ' ALTER COLUMN ' || column_ || ' SET DEFAULT ' || default_;
+    END LOOP;
+  END LOOP;
+ 
+END;
+ 
+$$;
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -419,15 +460,6 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: alembic_version; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE alembic_version (
-    version_num character varying(32) NOT NULL
-);
-
-
---
 -- Name: appointment; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -690,9 +722,9 @@ ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
 CREATE TABLE company (
     id integer NOT NULL,
-    resource_id integer NOT NULL,
+    resource_id integer,
     name character varying(32) NOT NULL,
-    currency_id integer NOT NULL,
+    currency_id integer,
     settings json,
     email character varying(32) NOT NULL
 );
@@ -2901,7 +2933,7 @@ SELECT pg_catalog.setval('_regions_rid_seq', 38, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 7375, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 7376, true);
 
 
 --
@@ -3095,13 +3127,6 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 
 
 --
--- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
---
-
-INSERT INTO alembic_version VALUES ('16da6f2257e8');
-
-
---
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3289,7 +3314,7 @@ INSERT INTO company VALUES (1, 1970, 'LuxTravel, Inc', 56, '{"locale": "en", "ti
 -- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('company_id_seq', 1, true);
+SELECT pg_catalog.setval('company_id_seq', 14, true);
 
 
 --
@@ -7392,6 +7417,7 @@ INSERT INTO resource_log VALUES (7371, 2451, 2, NULL, '2015-07-05 14:39:43.16712
 INSERT INTO resource_log VALUES (7372, 2467, 2, NULL, '2015-07-05 14:49:52.691681+03');
 INSERT INTO resource_log VALUES (7373, 2463, 2, NULL, '2015-07-05 14:50:06.470488+03');
 INSERT INTO resource_log VALUES (7374, 2549, 2, NULL, '2015-07-05 15:34:32.780638+03');
+INSERT INTO resource_log VALUES (7376, 2434, 2, NULL, '2015-07-05 19:13:53.412323+03');
 
 
 --
@@ -7764,10 +7790,10 @@ INSERT INTO task_resource VALUES (70, 2312);
 INSERT INTO task_resource VALUES (68, 2284);
 INSERT INTO task_resource VALUES (71, 2372);
 INSERT INTO task_resource VALUES (72, 2382);
-INSERT INTO task_resource VALUES (73, 2434);
 INSERT INTO task_resource VALUES (74, 2489);
 INSERT INTO task_resource VALUES (76, 2129);
 INSERT INTO task_resource VALUES (77, 2137);
+INSERT INTO task_resource VALUES (73, 2434);
 
 
 --
