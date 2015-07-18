@@ -1,7 +1,6 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
@@ -189,7 +188,7 @@ class NavigationsView(object):
             self.request.params.get('id')
         )
         if navigation:
-            navigation.change_position('up')
+            navigation.change_sort_order('up')
 
     @view_config(
         name='down',
@@ -202,7 +201,7 @@ class NavigationsView(object):
             self.request.params.get('id')
         )
         if navigation:
-            navigation.change_position('down')
+            navigation.change_sort_order('down')
 
     @view_config(
         name='copy',

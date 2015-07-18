@@ -136,7 +136,7 @@ class Navigation(Base):
     def condition_position_id(cls, position_id):
         return cls.position_id == position_id
 
-    def change_position(self, action):
+    def change_sort_order(self, action):
         assert action in ['up', 'down'], u"Action must be 'up' or 'down'"
         query = DBSession.query(Navigation)
         if action == 'up':

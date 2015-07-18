@@ -35,6 +35,7 @@ from ...resources.tickets_classes import TicketsClassesResource
 from ...resources.leads import LeadsResource
 from ...resources.orders import OrdersResource
 from ...resources.companies import CompaniesResource
+from ...resources.persons_categories import PersonsCategoriesResource
 
 from ...models.task import Task
 from ...models.account import Account
@@ -1375,3 +1376,24 @@ def vats_calc_methods_combobox_field(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
     )
+
+
+def persons_categories_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+    tools = (
+        tool('add', '/persons_categories/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/persons_categories/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/persons_categories/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, PersonsCategoriesResource, name, value, '/persons_categories/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()

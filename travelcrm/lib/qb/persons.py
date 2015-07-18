@@ -7,6 +7,7 @@ from . import ResourcesQueryBuilder
 
 from ...models.resource import Resource
 from ...models.person import Person
+from ...models.person_category import PersonCategory
 
 from ...lib.bl.persons import query_person_contacts, query_person_passports
 
@@ -22,11 +23,11 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
             '_id': Person.id,
             'name': Person.name,
             'birthday': Person.birthday,
+            'person_category': PersonCategory.name,
             'age': case([(
                 Person.birthday != None,
                 func.date_part('year', func.age(Person.birthday))
             )]),
-            'subscriber': Person.subscriber,
         }
         self._simple_search_fields = [
             Person.name,
@@ -52,6 +53,9 @@ class PersonsQueryBuilder(ResourcesQueryBuilder):
             .outerjoin(
                 self._subq_passports,
                 Person.id == self._subq_passports.c.person_id
+            )
+            .outerjoin(
+                PersonCategory, Person.person_category
             )
         )
         super(PersonsQueryBuilder, self).build_query()

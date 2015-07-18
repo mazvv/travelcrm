@@ -7,15 +7,27 @@ from ...models import DBSession
 from ...models.navigation import Navigation
 
 
-def get_next_position(position_id, parent_id):
-    navigations_quan = (
-        DBSession.query(func.count(Navigation.id)).filter(
+def update_sort_orders(position_id, parent_id):
+    navigations = (
+        DBSession.query(Navigation).filter(
+            Navigation.condition_parent_id(parent_id),
+            Navigation.condition_position_id(position_id)
+        )
+        .order_by(Navigation.sort_order)
+    )
+    for i, navigation in enumerate(navigations):
+        navigation.sort_order = i + 1
+
+    
+def get_next_sort_order(position_id, parent_id):
+    max_sort_order = (
+        DBSession.query(func.count(Navigation.sort_order)).filter(
             Navigation.condition_parent_id(parent_id),
             Navigation.condition_position_id(position_id)
         )
         .scalar()
     )
-    return navigations_quan + 1
+    return max_sort_order + 1
 
 
 def copy_from_position(source_position_id, target_position_id):

@@ -56,3 +56,4 @@ def query_person_passports():
         .join(Passport, Person.passports)
         .group_by(Person.id)
     )
+    

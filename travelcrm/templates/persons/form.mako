@@ -66,11 +66,16 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"newsletter subscriber"), False, "subscriber")}
+                        ${h.tags.title(_(u"category"), False, "person_category_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.yes_no_field('subscriber', int(item.subscriber) if item else None)}
-                        ${h.common.error_container(name='subscriber')}
+                        ${h.fields.persons_categories_combogrid_field(
+                            request, 
+                            'person_category_id',
+                            item.person_category_id if item else None, 
+                            show_toolbar=(not readonly if readonly else True),
+                        )}
+                        ${h.common.error_container(name='person_category_id')}
                     </div>
                 </div>
                 <div class="form-field mb05">

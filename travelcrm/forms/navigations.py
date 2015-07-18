@@ -14,8 +14,9 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.navigations import NavigationsQueryBuilder
 from ..lib.bl.navigations import (
-    get_next_position,
+    get_next_sort_order,
     copy_from_position,
+    update_sort_orders,
 )
 from ..lib.utils.common_utils import translate as _
 
@@ -88,6 +89,14 @@ class NavigationForm(BaseForm):
             navigation = Navigation(
                 resource=context.create_resource()
             )
+            update_sort_orders(
+                self._controls.get('position_id'),
+                self._controls.get('parent_id')
+            )
+            navigation.sort_order = get_next_sort_order(
+                self._controls.get('position_id'),
+                self._controls.get('parent_id')
+            )
         else:
             navigation.resource.notes = []
             navigation.resource.tasks = []
@@ -98,10 +107,6 @@ class NavigationForm(BaseForm):
         navigation.action = self._controls.get('action')
         navigation.icon_cls = self._controls.get('icon_cls')
         navigation.separator_before = self._controls.get('separator_before')
-        navigation.sort_order = get_next_position(
-            self._controls.get('position_id'),
-            self._controls.get('parent_id')
-        )
         for id in self._controls.get('note_id'):
             note = Note.get(id)
             navigation.resource.notes.append(note)

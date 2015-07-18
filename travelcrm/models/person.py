@@ -157,6 +157,15 @@ class Person(Base):
         ),
         nullable=False,
     )
+    person_category_id = Column(
+        Integer,
+        ForeignKey(
+            'person_category.id',
+            name="fk_person_category_id_person",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
     first_name = Column(
         String(length=32),
         nullable=False,
@@ -173,10 +182,6 @@ class Person(Base):
     gender = Column(
         EnumIntType(GENDER),
     )
-    subscriber = Column(
-        Boolean,
-        default=False,
-    )
     descr = Column(
         String(length=255),
     )
@@ -186,6 +191,15 @@ class Person(Base):
             'person',
             uselist=False,
             cascade="all,delete"
+        ),
+        cascade="all,delete",
+        uselist=False,
+    )
+    person_category = relationship(
+        'PersonCategory',
+        backref=backref(
+            'persons',
+            lazy='dynamic',
         ),
         cascade="all,delete",
         uselist=False,

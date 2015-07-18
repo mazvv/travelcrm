@@ -13,7 +13,7 @@
         iconCls:'fa fa-table',
         tools:'#${_t_id}'
     "
-    title="${_(u'Persons')}">
+    title="${_(u'Transport')}">
     ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"
@@ -23,22 +23,8 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
-            view: detailview,
-            onExpandRow: function(index, row){
-                var row_id = 'row-${_id}-' + row.id;
-                $('#' + row_id).load(
-                    '/persons/details?id=' + row.id, 
-                    function(){
-                        $('#${_id}').datagrid('fixDetailRowHeight', index);
-                        $('#${_id}').datagrid('fixRowHeight', index);
-                    }
-                );
-            },
-            detailFormatter: function(index, row){
-                var row_id = 'row-${_id}-' + row.id;
-                return '<div id=' + row_id + '></div>';
-            },          
             onBeforeLoad: function(param){
+                var dg = $(this);
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
                     param[$(el).attr('name')] = $(el).val();
                 });
@@ -50,9 +36,6 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
-            <th data-options="field:'birthday',sortable:true,width:80">${_(u"birthday")}</th>
-            <th data-options="field:'age',sortable:true,width:60">${_(u"age")}</th>
-            <th data-options="field:'person_category',sortable:true,width:120">${_(u"person category")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>
@@ -89,7 +72,7 @@
         </div>
         <div class="ml45 tr">
             <div class="search">
-                ${searchbar(_id, _s_id, prompt=_(u'Enter person name, contacts or passport num'))}
+                ${searchbar(_id, _s_id, prompt=_(u'Enter person category name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">
                     <div>
                         ${h.tags.title(_(u"updated"))}

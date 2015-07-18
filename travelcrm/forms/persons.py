@@ -4,7 +4,7 @@ import colander
 
 from . import(
     Date,
-    ResourceSchema, 
+    ResourceSchema,
     BaseForm,
     BaseSearchForm,
 )
@@ -19,6 +19,10 @@ from ..lib.qb.persons import PersonsQueryBuilder
 
 
 class _PersonSchema(ResourceSchema):
+    person_category_id = colander.SchemaNode(
+        colander.Integer(),
+        missing=None,
+    )
     first_name = colander.SchemaNode(
         colander.String(),
     )
@@ -37,10 +41,6 @@ class _PersonSchema(ResourceSchema):
     birthday = colander.SchemaNode(
         Date(),
         missing=None,
-    )
-    subscriber = colander.SchemaNode(
-        colander.Boolean(false_choices=("", "0", "false"), true_choices=("1")),
-        default=False,
     )
     descr = colander.SchemaNode(
         colander.String(),
@@ -101,12 +101,12 @@ class PersonForm(BaseForm):
             person.addresses = []
             person.resource.notes = []
             person.resource.tasks = []
+        person.person_category_id = self._controls.get('person_category_id')
         person.first_name = self._controls.get('first_name')
         person.last_name = self._controls.get('last_name')
         person.second_name = self._controls.get('second_name')
         person.gender = self._controls.get('gender')
         person.birthday = self._controls.get('birthday')
-        person.subscriber = self._controls.get('subscriber')
         person.descr = self._controls.get('descr')
         for id in self._controls.get('contact_id'):
             contact = Contact.get(id)

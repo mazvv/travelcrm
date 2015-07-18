@@ -80,3 +80,4 @@ from lead_offer import LeadOffer
 from invoice_item import InvoiceItem
 from vat import Vat
 from upload import Upload
+from person_category import PersonCategory
