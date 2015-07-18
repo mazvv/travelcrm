@@ -176,3 +176,20 @@ def get_storage_dir():
 def get_storage_max_size():
     settings = get_settings()
     return settings.get('storage.max_size')
+
+
+def get_public_domain():
+    settings = get_settings()
+    return settings.get('public_domain')
+
+
+def get_public_subdomain():
+    settings = get_settings()
+    return settings.get('public_subdomain')
+
+    
+def get_multicompanies():
+    settings = get_settings()
+    return int(settings.get('multicompanies'))
+
+    

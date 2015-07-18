@@ -8,28 +8,8 @@ from . import (
     BaseSearchForm,
 )
 
-from ..models.company import Company
-from ..resources.companies import CompaniesResource
 from ..lib.qb.companies import CompaniesQueryBuilder
 from ..lib.scheduler.companies import schedule_company_creation
-from ..lib.utils.common_utils import translate as _
-
-
-@colander.deferred
-def name_validator(node, kw):
-    request = kw.get('request')
-
-    def validator(node, value):
-        company = Company.by_name(value)
-        if (
-            company
-            and str(company.id) != request.params.get('id')
-        ):
-            raise colander.Invalid(
-                node,
-                _(u'Company with the same name exists'),
-            )
-    return colander.All(colander.Length(max=255), validator,)
 
 
 class _CompanyAddSchema(ResourceSchema):
@@ -39,7 +19,6 @@ class _CompanyAddSchema(ResourceSchema):
     )
     name = colander.SchemaNode(
         colander.String(),
-        validator=name_validator
     )
     timezone = colander.SchemaNode(
         colander.String(),

@@ -37,6 +37,7 @@
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'employee_name',sortable:true,width:200">${_(u"employee")}</th>
             <th data-options="field:'username',sortable:true,width:200">${_(u"username")}</th>
+            <th data-options="field:'email',sortable:true,width:200">${_(u"email")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
         </thead>

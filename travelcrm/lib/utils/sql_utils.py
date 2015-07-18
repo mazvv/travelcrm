@@ -31,3 +31,7 @@ def get_default_schema():
 
 def set_search_path(*args):
     DBSession.execute('set search_path to %s' % (', '.join(args)))
+
+
+def get_current_schema():
+    return DBSession.execute('select current_schema()').scalar()

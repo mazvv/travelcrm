@@ -1,8 +1,8 @@
 # -*-coding: utf-8-*-
 
-import colander
 from pyramid.httpexceptions import (
     HTTPFound,
+    HTTPNotFound
 )
 from pyramid.security import (
     remember,
@@ -13,15 +13,15 @@ from pyramid.view import view_config
 from pyramid.view import forbidden_view_config
 
 from ..resources import Root
-from ..models import DBSession
 from ..models.user import User
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.companies_utils import can_create_company
 from ..lib.utils.resources_utils import get_resource_class
 from ..lib.utils.resources_utils import get_resources_types_by_interface
 from ..interfaces import IPortlet
 from ..forms.auth import (
     LoginSchema,
-    ForgotSchema
+    ForgotForm
 )
 from ..forms.companies import CompanyAddForm
 
@@ -56,6 +56,9 @@ class HomeView(object):
         renderer='travelcrm:templates/auth/forgot.mako',
     )
     def forgot(self):
+        if self.request.params.get('success'):
+            self.request.override_renderer = \
+                'travelcrm:templates/auth/forgot_success.mako'
         auth_url = self.request.resource_url(
             Root(self.request),
             'auth'
@@ -69,19 +72,21 @@ class HomeView(object):
         renderer='json',
     )
     def _forgot(self):
-        # TODO: complete this functionality
-        schema = ForgotSchema()
-        try:
-            schema.deserialize(self.request.params)
-        except colander.Invalid, e:
+        form = ForgotForm(self.request)
+        if form.validate():
+            form.submit()
+            return {
+                'close': False,
+                'success_message': _(u'Check your email box.'),
+                'redirect': self.request.resource_url(
+                    self.context, 'forgot', query={'success': 'ok'}
+                )
+            }
+        else:
             return {
                 'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
+                'errors': form.errors
             }
-        return {
-            'success_message': _(u'Check your email'),
-            'close': False
-        }
 
     @forbidden_view_config(
         request_method="GET",
@@ -168,6 +173,11 @@ class HomeView(object):
         renderer='travelcrm:templates/auth/add.mako',
     )
     def add(self):
+        if not can_create_company(self.request):
+            raise HTTPNotFound()
+        if self.request.params.get('success'):
+            self.request.override_renderer = \
+                'travelcrm:templates/auth/add_success.mako'
         auth_url = self.request.resource_url(
             Root(self.request),
             'auth'
@@ -189,6 +199,9 @@ class HomeView(object):
                 'success_message': _(
                     u'Creation task run soon. Waiting for Email.'
                 ),
+                'redirect': self.request.resource_url(
+                    self.context, 'add', query={'success': 'ok'}
+                )
             }
         else:
             return {

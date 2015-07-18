@@ -40,6 +40,15 @@
                         ${h.common.error_container(name='username')}
                     </div>
                 </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"email"), True, "email")}
+                    </div>
+                    <div class="ml15">
+                        ${h.tags.text("email", item.email if item else None, class_="easyui-textbox w20")}
+                        ${h.common.error_container(name='email')}
+                    </div>
+                </div>
                 % if not readonly:
                     % if item:
                         ${infoblock(_(u"If you do not change password, take this fields empty"))}

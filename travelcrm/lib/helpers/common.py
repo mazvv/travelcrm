@@ -16,8 +16,14 @@ from ..utils.common_utils import (
     format_decimal as u_format_decimal,
     get_base_currency as u_get_base_currency,
     format_currency as u_format_currency,
+    get_multicompanies as u_get_multicompanies,
 )
 from ..utils.security_utils import get_auth_employee as u_get_auth_employee
+from ..utils.companies_utils import (
+    get_company_url as u_get_company_url,
+    can_create_company as u_can_create_company,
+    get_public_domain as u_get_public_domain,
+)
 from ..bl.employees import get_employee_structure
 
 
@@ -112,3 +118,19 @@ def get_base_currency():
 
 def get_auth_employee(request):
     return u_get_auth_employee(request)
+
+
+def get_company_url(request, schema_name):
+    return u_get_company_url(request, schema_name)
+
+
+def get_multicompanies():
+    return u_get_multicompanies()
+
+
+def can_create_company(request):
+    return u_can_create_company(request)
+
+
+def is_public_domain(request):
+    return u_get_public_domain() == request.domain

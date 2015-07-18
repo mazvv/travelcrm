@@ -33,6 +33,23 @@ def username_validator(node, kw):
 
 
 @colander.deferred
+def email_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        user = User.by_email(value)
+        if (
+            user
+            and str(user.id) != request.params.get('id')
+        ):
+            raise colander.Invalid(
+                node,
+                _(u'User with the same email exists'),
+            )
+    return colander.All(colander.Email(), validator,)
+
+
+@colander.deferred
 def employee_validator(node, kw):
     request = kw.get('request')
 
@@ -66,6 +83,10 @@ class _UserAddSchema(ResourceSchema):
     username = colander.SchemaNode(
         colander.String(),
         validator=username_validator
+    )
+    email = colander.SchemaNode(
+        colander.String(),
+        validator=email_validator
     )
     password = colander.SchemaNode(
         colander.String(),
@@ -101,6 +122,7 @@ class _UserForm(BaseForm):
             user.resource.notes = []
             user.resource.tasks = []
         user.username = self._controls.get('username')
+        user.email = self._controls.get('email')
         user.employee_id = self._controls.get('employee_id')
         if self._controls.get('password'):
             user.password = self._controls.get('password')

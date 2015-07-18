@@ -15,6 +15,7 @@ class UsersQueryBuilder(ResourcesQueryBuilder):
             'id': User.id,
             '_id': User.id,
             'employee_name': Employee.name,
+            'email': User.email,
             'username': User.username,
         }
         self._simple_search_fields = [
@@ -22,6 +23,7 @@ class UsersQueryBuilder(ResourcesQueryBuilder):
             Employee.first_name,
             Employee.last_name,
             User.username,
+            User.email,
         ]
         self.build_query()
 

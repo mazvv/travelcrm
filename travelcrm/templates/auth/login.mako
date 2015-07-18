@@ -11,10 +11,12 @@
     ">
     ${h.tags.form(auth_url, class_="_ajax", autocomplete="off")}
         <div class="form-field tc">
-            <span class="b">
-                ${_(u'Username:')} <span class="lipstick">admin</span>, 
-                ${_(u'Password:')} <span class="lipstick">adminadmin</span>
-            </span>
+            % if h.common.is_public_domain(request):
+                <span class="b">
+                    ${_(u'Username:')} <span class="lipstick">admin</span>, 
+                    ${_(u'Password:')} <span class="lipstick">adminadmin</span>
+                </span>
+            % endif
         </div>
         <div class="form-field">
             <div class="dl10">
@@ -33,10 +35,12 @@
             </div>
         </div>
         <div class="form-field mb1">
-            <span class="mr1">
-                <i class="fa fa-hand-o-right"></i>
-                ${h.tags.link_to(_(u"Create company"), add_url)}
-            </span>
+            % if h.common.can_create_company(request):
+                <span class="mr1">
+                    <i class="fa fa-hand-o-right"></i>
+                    ${h.tags.link_to(_(u"Create company"), add_url)}
+                </span>
+            % endif
             <i class="fa fa-unlock-alt"></i>
             ${h.tags.link_to(_(u"Forgot password?"), forgot_url)}
         </div>

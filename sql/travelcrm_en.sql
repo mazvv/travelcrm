@@ -25,47 +25,6 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
---
--- Name: clone_schema(text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION clone_schema(source_schema text, dest_schema text) RETURNS void
-    LANGUAGE plpgsql
-    AS $$
- 
-DECLARE
-  object text;
-  buffer text;
-  default_ text;
-  column_ text;
-BEGIN
-  EXECUTE 'CREATE SCHEMA ' || dest_schema ;
- 
-  -- TODO: Find a way to make this sequence's owner is the correct table.
-  FOR object IN
-    SELECT sequence_name::text FROM information_schema.SEQUENCES WHERE sequence_schema = source_schema
-  LOOP
-    EXECUTE 'CREATE SEQUENCE ' || dest_schema || '.' || object;
-  END LOOP;
- 
-  FOR object IN
-    SELECT TABLE_NAME::text FROM information_schema.TABLES WHERE table_schema = source_schema
-  LOOP
-    buffer := dest_schema || '.' || object;
-    EXECUTE 'CREATE TABLE ' || buffer || ' (LIKE ' || source_schema || '.' || object || ' INCLUDING CONSTRAINTS INCLUDING INDEXES INCLUDING DEFAULTS)';
- 
-    FOR column_, default_ IN
-      SELECT column_name::text, REPLACE(column_default::text, source_schema, dest_schema) FROM information_schema.COLUMNS WHERE table_schema = dest_schema AND TABLE_NAME = object AND column_default LIKE 'nextval(%' || source_schema || '%::regclass)'
-    LOOP
-      EXECUTE 'ALTER TABLE ' || buffer || ' ALTER COLUMN ' || column_ || ' SET DEFAULT ' || default_;
-    END LOOP;
-  END LOOP;
- 
-END;
- 
-$$;
-
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -273,7 +232,7 @@ CREATE TABLE "user" (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     username character varying(32) NOT NULL,
-    email character varying(128),
+    email character varying(128) NOT NULL,
     password character varying(128) NOT NULL,
     employee_id integer NOT NULL
 );
@@ -457,6 +416,15 @@ CREATE SEQUENCE advsource_id_seq
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
+
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
 
 
 --
@@ -683,6 +651,18 @@ CREATE SEQUENCE commission_id_seq
 --
 
 ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
+
+
+--
+-- Name: companies_counter; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE companies_counter
+    START WITH 1000
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -2933,7 +2913,7 @@ SELECT pg_catalog.setval('_regions_rid_seq', 38, true);
 -- Name: _resources_logs_rid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('_resources_logs_rid_seq', 7376, true);
+SELECT pg_catalog.setval('_resources_logs_rid_seq', 7381, true);
 
 
 --
@@ -3127,6 +3107,13 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 
 
 --
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO alembic_version VALUES ('50de7a70d39a');
+
+
+--
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -3297,6 +3284,13 @@ SELECT pg_catalog.setval('commission_id_seq', 44, true);
 
 
 --
+-- Name: companies_counter; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('companies_counter', 1040, true);
+
+
+--
 -- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -3307,7 +3301,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 -- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO company VALUES (1, 1970, 'LuxTravel, Inc', 56, '{"locale": "en", "timezone": "Europe/Kiev", "tax": "20"}', 'lux.travel@gmai.com');
+INSERT INTO company VALUES (1, 1970, 'LuxTravel, Inc', 56, '{"locale": "en", "timezone": "Europe/Kiev"}', 'lux.travel@gmai.com');
 
 
 --
@@ -3972,11 +3966,9 @@ SELECT pg_catalog.setval('note_id_seq', 58, true);
 INSERT INTO note_resource VALUES (3, 1797);
 INSERT INTO note_resource VALUES (5, 1797);
 INSERT INTO note_resource VALUES (24, 1868);
-INSERT INTO note_resource VALUES (28, 3);
 INSERT INTO note_resource VALUES (29, 1470);
 INSERT INTO note_resource VALUES (27, 1980);
 INSERT INTO note_resource VALUES (33, 970);
-INSERT INTO note_resource VALUES (36, 2126);
 INSERT INTO note_resource VALUES (42, 2075);
 INSERT INTO note_resource VALUES (31, 2088);
 INSERT INTO note_resource VALUES (32, 2052);
@@ -3985,6 +3977,8 @@ INSERT INTO note_resource VALUES (43, 2372);
 INSERT INTO note_resource VALUES (35, 1413);
 INSERT INTO note_resource VALUES (18, 784);
 INSERT INTO note_resource VALUES (26, 1930);
+INSERT INTO note_resource VALUES (28, 3);
+INSERT INTO note_resource VALUES (36, 2126);
 
 
 --
@@ -7418,6 +7412,11 @@ INSERT INTO resource_log VALUES (7372, 2467, 2, NULL, '2015-07-05 14:49:52.69168
 INSERT INTO resource_log VALUES (7373, 2463, 2, NULL, '2015-07-05 14:50:06.470488+03');
 INSERT INTO resource_log VALUES (7374, 2549, 2, NULL, '2015-07-05 15:34:32.780638+03');
 INSERT INTO resource_log VALUES (7376, 2434, 2, NULL, '2015-07-05 19:13:53.412323+03');
+INSERT INTO resource_log VALUES (7377, 3, 2, NULL, '2015-07-17 19:31:34.831317+03');
+INSERT INTO resource_log VALUES (7378, 894, 2, NULL, '2015-07-17 19:34:30.132569+03');
+INSERT INTO resource_log VALUES (7379, 2054, 2, NULL, '2015-07-17 19:34:44.345599+03');
+INSERT INTO resource_log VALUES (7380, 2126, 2, NULL, '2015-07-17 19:35:00.154065+03');
+INSERT INTO resource_log VALUES (7381, 2484, 2, NULL, '2015-07-17 19:35:15.872953+03');
 
 
 --
@@ -7779,11 +7778,8 @@ SELECT pg_catalog.setval('task_id_seq', 77, true);
 
 INSERT INTO task_resource VALUES (35, 1869);
 INSERT INTO task_resource VALUES (47, 1840);
-INSERT INTO task_resource VALUES (48, 3);
-INSERT INTO task_resource VALUES (49, 3);
 INSERT INTO task_resource VALUES (53, 2017);
 INSERT INTO task_resource VALUES (55, 1989);
-INSERT INTO task_resource VALUES (59, 2126);
 INSERT INTO task_resource VALUES (69, 2088);
 INSERT INTO task_resource VALUES (58, 2088);
 INSERT INTO task_resource VALUES (70, 2312);
@@ -7794,6 +7790,9 @@ INSERT INTO task_resource VALUES (74, 2489);
 INSERT INTO task_resource VALUES (76, 2129);
 INSERT INTO task_resource VALUES (77, 2137);
 INSERT INTO task_resource VALUES (73, 2434);
+INSERT INTO task_resource VALUES (48, 3);
+INSERT INTO task_resource VALUES (49, 3);
+INSERT INTO task_resource VALUES (59, 2126);
 
 
 --
@@ -7974,11 +7973,11 @@ SELECT pg_catalog.setval('upload_id_seq', 16, true);
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO "user" VALUES (2, 3, 'admin', 'vitalii.mazur@gmail.com', 'adminadmin', 2);
-INSERT INTO "user" VALUES (25, 2054, 'maz_iv', NULL, 'korn17', 30);
-INSERT INTO "user" VALUES (23, 894, 'maziv', NULL, '111111', 7);
-INSERT INTO "user" VALUES (31, 2126, 'v.lastovec', NULL, '111111', 15);
-INSERT INTO "user" VALUES (32, 2484, 'alinka', NULL, 'korn1979', 31);
+INSERT INTO "user" VALUES (23, 894, 'maziv', 'maziv@mail.ru', '111111', 7);
+INSERT INTO "user" VALUES (25, 2054, 'maz_iv', 'maz_iv@travelcrm.org.ua', '111111', 30);
+INSERT INTO "user" VALUES (31, 2126, 'v.lastovec', 'lastovec@travelcrm.org.ua', '111111', 15);
+INSERT INTO "user" VALUES (32, 2484, 'alinka', 'kabaeva_alinka@mail.ru', '111111', 31);
+INSERT INTO "user" VALUES (2, 3, 'admin', 'admin@mail.ru', 'adminadmin', 2);
 
 
 --

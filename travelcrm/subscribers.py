@@ -10,8 +10,10 @@ from pyramid.httpexceptions import HTTPNotFound
 
 import lib.helpers as h
 from .lib.utils.common_utils import translate as _
+from .lib.utils.common_utils import get_multicompanies
 from .lib.bl.employees import get_employee_structure
 from .lib.utils.security_utils import get_auth_employee
+from .lib.utils.companies_utils import get_public_domain
 from .lib.utils.sql_utils import (
     get_default_schema,
     get_schemas,
@@ -46,14 +48,22 @@ def company_settings(event):
 
 def company_schema(event):
     request = event.request
-    domain_parts = request.domain.split('.', 1)
     schema_name = get_default_schema()
-    if len(domain_parts) > 1:
-        schema_name = domain_parts[0]
-        schemas = get_schemas()
-        if schema_name not in schemas:
-            raise HTTPNotFound()
-    set_search_path(schema_name)
+
+    if not get_multicompanies() and get_public_domain() != request.domain:
+        raise HTTPNotFound()
+    elif get_public_domain() == request.domain:
+        set_search_path(schema_name)
+        return
+    else:
+        domain_parts = request.domain.split('.', 1)
+        if len(domain_parts) > 1:
+            schema_name = domain_parts[0]
+            schemas = get_schemas()
+            if schema_name in schemas:
+                set_search_path(schema_name)
+                return
+    raise HTTPNotFound()
 
 
 def scheduler(event):

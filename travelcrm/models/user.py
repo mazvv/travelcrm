@@ -59,7 +59,7 @@ class User(Base):
     )
     email = Column(
         String(length=128),
-        nullable=True,
+        nullable=False,
     )
     password = Column(
         String(length=128),

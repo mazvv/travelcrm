@@ -7,16 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-07-05 19:25+0300\n"
-"PO-Revision-Date: 2015-07-05 19:56+0300\n"
+"POT-Creation-Date: 2015-07-09 22:32+0300\n"
+"PO-Revision-Date: 2015-07-09 22:05+0300\n"
 "Last-Translator: Vitalii Mazur <vitalii.mazur@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
-"X-Generator: Poedit 1.5.4\n"
 
 #: travelcrm/forms/__init__.py:25
 msgid "Invalid CSRF token"
@@ -32,15 +31,15 @@ msgstr "Неверный телефон"
 
 #: travelcrm/forms/accomodations.py:30 travelcrm/forms/roomcats.py:30
 msgid "Room category with the same name exists"
-msgstr "Категория номера с таким названием уже существует"
+msgstr "Категория номера с таким названием уже есть"
 
 #: travelcrm/forms/accounts.py:29
 msgid "Account with the same name exists"
-msgstr "Счет с таким названием уже существует"
+msgstr "Счет с таким названием уже есть"
 
 #: travelcrm/forms/accounts_items.py:31
 msgid "Account Item with the same name exists"
-msgstr "Статья учета с таким названием уже существует"
+msgstr "Статья учета с таким названием уже есть"
 
 #: travelcrm/forms/accounts_items.py:44 travelcrm/forms/navigations.py:31
 #: travelcrm/forms/structures.py:32
@@ -49,15 +48,15 @@ msgstr "Не может быть родительским себя самого"
 
 #: travelcrm/forms/advsources.py:30
 msgid "Advertise source with the same name exists"
-msgstr "Источник рекламы с таким названием уже существует"
+msgstr "Источник рекламы с таким названием уже есть"
 
 #: travelcrm/forms/banks.py:31
 msgid "Bank with the same name exists"
-msgstr "Банк с таким названием уже существует"
+msgstr "Банк с таким названием уже есть"
 
 #: travelcrm/forms/countries.py:30
 msgid "Country with the same iso code exists"
-msgstr "Страна с таким кодом уже существует"
+msgstr "Страна с таким кодом уже есть"
 
 #: travelcrm/forms/crosspayments.py:40
 #, python-format
@@ -74,11 +73,11 @@ msgstr "Мультивалютный трансфер не возможен"
 
 #: travelcrm/forms/currencies.py:30
 msgid "Currency with the same iso code exists"
-msgstr "Валюта с таким кодом уже существует"
+msgstr "Валюта с таким кодом уже есть"
 
 #: travelcrm/forms/currencies_rates.py:45
 msgid "Currency rate for this date exists"
-msgstr "Курс валюты для этой даты уже существует"
+msgstr "Курс валюты для этой даты уже есть"
 
 #: travelcrm/forms/currencies_rates.py:58
 msgid "This is base currency"
@@ -98,7 +97,7 @@ msgstr "Допусткаются только изображения"
 
 #: travelcrm/forms/foodcats.py:30
 msgid "Food category with the same name exists"
-msgstr "Категория питания с таким названием уже существует"
+msgstr "Категория питания с таким названием уже есть"
 
 #: travelcrm/forms/hotelcats.py:30 travelcrm/forms/suppliers_types.py:30
 msgid "Hotel category with the same name exists"
@@ -106,13 +105,12 @@ msgstr "Категория отеля с таким названием уже с
 
 #: travelcrm/forms/incomes.py:32 travelcrm/forms/outgoings.py:73
 #, fuzzy
-#| msgid "Enter account item name"
 msgid "Only revenue account item allowed"
 msgstr "счет"
 
 #: travelcrm/forms/incomes.py:46
 msgid "Create company subaccount for account from invoice"
-msgstr ""
+msgstr "Создайте субcчет компании для счета из инвойса"
 
 #: travelcrm/forms/invoices.py:40
 msgid "Active until date must be more than invoice date"
@@ -120,7 +118,6 @@ msgstr "Макс. дата оплаты должна быть больше да�
 
 #: travelcrm/forms/invoices.py:61
 #, fuzzy
-#| msgid "invoice already exists"
 msgid "Invoice for this order already exists"
 msgstr "инвойс уже создан"
 
@@ -159,11 +156,11 @@ msgstr "Укажите структуру для области видимост
 
 #: travelcrm/forms/positions.py:43
 msgid "Position with the same name for structure exists"
-msgstr "Должность с таким названием для этой структуры уже существует"
+msgstr "Должность с таким названием для этой структуры уже есть"
 
 #: travelcrm/forms/regions.py:36
 msgid "Region already exists"
-msgstr "Регион уже существует"
+msgstr "Регион уже есть"
 
 #: travelcrm/forms/resources_types.py:29
 msgid "Resource does not exist"
@@ -179,11 +176,11 @@ msgstr "Проверьте название модуля"
 
 #: travelcrm/forms/resources_types.py:48
 msgid "Resource Type with the same resource exists"
-msgstr "Тип ресурса с таким ресурсом уже существует"
+msgstr "Тип ресурса с таким ресурсом уже есть"
 
 #: travelcrm/forms/resources_types.py:72
 msgid "Resource Type with the same name exists"
-msgstr "Тип русурсов с таким названием уже существует"
+msgstr "Тип русурсов с таким названием уже есть"
 
 #: travelcrm/forms/resources_types.py:95
 msgid "Resource Type with the same humanize exists"
@@ -191,7 +188,7 @@ msgstr ""
 
 #: travelcrm/forms/services.py:30
 msgid "Service with the same name exists"
-msgstr "Сервис с таким названием уже существует"
+msgstr "Сервис с таким названием уже есть"
 
 #: travelcrm/forms/spassports.py:27 travelcrm/forms/tickets.py:27
 #: travelcrm/forms/tours.py:27 travelcrm/forms/visas.py:27
@@ -212,15 +209,13 @@ msgstr "Поставщик с таким названием уже есть"
 
 #: travelcrm/forms/tickets_classes.py:30 travelcrm/forms/transports.py:30
 #, fuzzy
-#| msgid "Bank with the same name exists"
 msgid "Transport with the same name exists"
-msgstr "Банк с таким названием уже существует"
+msgstr "Банк с таким названием уже есть"
 
 #: travelcrm/forms/transfers.py:30
 #, fuzzy
-#| msgid "Bank with the same name exists"
 msgid "Transfer with the same name exists"
-msgstr "Банк с таким названием уже существует"
+msgstr "Банк с таким названием уже есть"
 
 #: travelcrm/forms/uploads.py:37
 msgid "This files types is not allowed"
@@ -263,7 +258,7 @@ msgstr "НДС на эту дату уже есть"
 #: travelcrm/templates/accounts_items/index.mako:32
 #: travelcrm/templates/advsources/form.mako:21
 #: travelcrm/templates/advsources/index.mako:38
-#: travelcrm/templates/auth/add.mako:23 travelcrm/templates/banks/form.mako:22
+#: travelcrm/templates/auth/add.mako:29 travelcrm/templates/banks/form.mako:22
 #: travelcrm/templates/banks/index.mako:38
 #: travelcrm/templates/bpersons/common.mako:70
 #: travelcrm/templates/bpersons/index.mako:52
@@ -362,7 +357,6 @@ msgstr "просмотр"
 #: travelcrm/lib/helpers/fields.py:1275 travelcrm/lib/helpers/fields.py:1304
 #: travelcrm/lib/helpers/fields.py:1355
 #, fuzzy
-#| msgid "view item"
 msgid "edit item"
 msgstr "просмотр"
 
@@ -487,7 +481,6 @@ msgstr "нал."
 #: travelcrm/models/contract.py:53 travelcrm/models/resource_type.py:40
 #: travelcrm/models/subaccount.py:31 travelcrm/models/supplier.py:136
 #, fuzzy
-#| msgid "active days"
 msgid "active"
 msgstr "дата курса"
 
@@ -513,7 +506,6 @@ msgstr "расход"
 #: travelcrm/models/contact.py:29 travelcrm/models/contract.py:54
 #: travelcrm/models/subaccount.py:32 travelcrm/models/supplier.py:137
 #, fuzzy
-#| msgid "active days"
 msgid "unactive"
 msgstr "дата курса"
 
@@ -521,7 +513,7 @@ msgstr "дата курса"
 msgid "phone"
 msgstr "телефон"
 
-#: travelcrm/models/contact.py:24 travelcrm/templates/auth/add.mako:14
+#: travelcrm/models/contact.py:24 travelcrm/templates/auth/add.mako:20
 #: travelcrm/templates/auth/forgot.mako:15
 msgid "email"
 msgstr ""
@@ -548,7 +540,6 @@ msgstr "неудача"
 #: travelcrm/models/lead.py:27 travelcrm/models/lead_offer.py:25
 #: travelcrm/models/order.py:27 travelcrm/models/order_item.py:56
 #, fuzzy
-#| msgid "source"
 msgid "success"
 msgstr "источник"
 
@@ -582,13 +573,11 @@ msgstr "запрос"
 
 #: travelcrm/models/task.py:86
 #, fuzzy
-#| msgid "created"
 msgid "ready"
 msgstr "курс"
 
 #: travelcrm/models/vat.py:25
 #, fuzzy
-#| msgid "Commissions"
 msgid "commission"
 msgstr "Комиссии"
 
@@ -602,7 +591,6 @@ msgstr "единоразовая"
 
 #: travelcrm/models/visa.py:54
 #, fuzzy
-#| msgid "adults"
 msgid "dual"
 msgstr "взрослые"
 
@@ -635,13 +623,11 @@ msgstr "опции"
 
 #: travelcrm/resources/leads.py:21 travelcrm/templates/invoices/form.mako:89
 #, fuzzy
-#| msgid "modifier"
 msgid "order"
 msgstr "изменил"
 
 #: travelcrm/resources/notifications.py:22
 #, fuzzy
-#| msgid "Close"
 msgid "close"
 msgstr "Закрыть"
 
@@ -749,8 +735,7 @@ msgstr "Задачи"
 #: travelcrm/templates/tickets_classes/form.mako:29
 #: travelcrm/templates/transfers/form.mako:29
 #: travelcrm/templates/transports/form.mako:29
-#: travelcrm/templates/users/form.mako:67
-#: travelcrm/templates/vats/form.mako:97
+#: travelcrm/templates/users/form.mako:67 travelcrm/templates/vats/form.mako:97
 #, fuzzy
 msgid "Notes"
 msgstr "Заметки"
@@ -762,7 +747,7 @@ msgstr "Уведомления"
 
 #: travelcrm/templates/_report.mako:9
 msgid "TravelCRM Report"
-msgstr ""
+msgstr "Отчет TravelCRM"
 
 #: travelcrm/templates/home.mako:2
 msgid "Home"
@@ -1101,8 +1086,7 @@ msgstr "Отмена"
 #: travelcrm/templates/tours/form.mako:20
 #: travelcrm/templates/transfers/form.mako:18
 #: travelcrm/templates/transports/form.mako:18
-#: travelcrm/templates/users/form.mako:19
-#: travelcrm/templates/vats/form.mako:18
+#: travelcrm/templates/users/form.mako:19 travelcrm/templates/vats/form.mako:18
 #: travelcrm/templates/visas/form.mako:20
 msgid "Main"
 msgstr "Основные"
@@ -1627,7 +1611,6 @@ msgstr "Правка"
 
 #: travelcrm/templates/accomodations/index.mako:75
 #, fuzzy
-#| msgid "Enter accomodation name"
 msgid "Enter accomodation type name"
 msgstr "размещение"
 
@@ -1784,8 +1767,7 @@ msgstr "отображение"
 #: travelcrm/templates/tickets/form.mako:100
 #: travelcrm/templates/tours/form.mako:100
 #: travelcrm/templates/uploads/form.mako:32
-#: travelcrm/templates/vats/form.mako:84
-#: travelcrm/templates/visas/form.mako:82
+#: travelcrm/templates/vats/form.mako:84 travelcrm/templates/visas/form.mako:82
 msgid "description"
 msgstr "примечание"
 
@@ -1886,7 +1868,6 @@ msgstr "Введите код валюты или название счета"
 
 #: travelcrm/templates/accounts_items/form.mako:30
 #, fuzzy
-#| msgid "account item"
 msgid "parent account item"
 msgstr "статья учета"
 
@@ -1972,8 +1953,7 @@ msgstr "Назначения сотрудников"
 #: travelcrm/templates/outgoings/index.mako:54
 #: travelcrm/templates/tickets/form.mako:142
 #: travelcrm/templates/tickets/form.mako:179
-#: travelcrm/templates/vats/form.mako:21
-#: travelcrm/templates/vats/index.mako:38
+#: travelcrm/templates/vats/form.mako:21 travelcrm/templates/vats/index.mako:38
 msgid "date"
 msgstr "дата"
 
@@ -1999,7 +1979,7 @@ msgstr "Копия"
 
 #: travelcrm/templates/appointments/index.mako:82
 msgid "Enter employee, position or structure name"
-msgstr ""
+msgstr "Введите сотрудника, должность или название структуры"
 
 #: travelcrm/templates/auth/_layout.mako:5
 msgid "TravelCRM - login"
@@ -2007,33 +1987,30 @@ msgstr "TravelCRM - авторизация"
 
 #: travelcrm/templates/auth/add.mako:4 travelcrm/templates/auth/login.mako:38
 #, fuzzy
-#| msgid "Edit Company"
 msgid "Create company"
 msgstr "Изменить входящий платеж"
 
-#: travelcrm/templates/auth/add.mako:32
+#: travelcrm/templates/auth/add.mako:38
 #: travelcrm/templates/companies/form.mako:44
 msgid "timezone"
 msgstr "временная зона"
 
-#: travelcrm/templates/auth/add.mako:41
+#: travelcrm/templates/auth/add.mako:47
 #: travelcrm/templates/companies/form.mako:53
 #, fuzzy
 msgid "locale"
 msgstr "локаль"
 
-#: travelcrm/templates/auth/add.mako:50
-#: travelcrm/templates/auth/forgot.mako:23
+#: travelcrm/templates/auth/add.mako:56 travelcrm/templates/auth/forgot.mako:23
 msgid "Back to autorization"
 msgstr "Назад к авторизации"
 
-#: travelcrm/templates/auth/add.mako:54
+#: travelcrm/templates/auth/add.mako:60
 msgid "Please, feel all fields"
 msgstr "Пожалуйста, заполните все поля"
 
-#: travelcrm/templates/auth/add.mako:57
+#: travelcrm/templates/auth/add.mako:63
 #, fuzzy
-#| msgid "created"
 msgid "Create"
 msgstr "Создать"
 
@@ -2128,8 +2105,7 @@ msgstr "получатель"
 #: travelcrm/templates/subaccounts/details.mako:11
 #: travelcrm/templates/subaccounts/form.mako:34
 #: travelcrm/templates/subaccounts/index.mako:97
-#: travelcrm/templates/vats/form.mako:30
-#: travelcrm/templates/vats/index.mako:39
+#: travelcrm/templates/vats/form.mako:30 travelcrm/templates/vats/index.mako:39
 msgid "account"
 msgstr "счет"
 
@@ -2203,7 +2179,6 @@ msgstr "Автозагрузка"
 #: travelcrm/templates/invoices/details.mako:35
 #: travelcrm/templates/orders_items/common.mako:91
 #, fuzzy
-#| msgid "unit price"
 msgid "final price"
 msgstr "цена за ед."
 
@@ -2255,8 +2230,7 @@ msgstr "Калькуляции"
 #: travelcrm/templates/orders/details.mako:22
 #: travelcrm/templates/orders/index.mako:122
 #: travelcrm/templates/orders_items/common.mako:88
-#: travelcrm/templates/vats/form.mako:44
-#: travelcrm/templates/vats/index.mako:40
+#: travelcrm/templates/vats/form.mako:44 travelcrm/templates/vats/index.mako:40
 msgid "service"
 msgstr "услуги"
 
@@ -2306,19 +2280,15 @@ msgstr "Инфо"
 
 #: travelcrm/templates/common/resource.mako:4
 #, fuzzy
-#| msgid "resource type"
 msgid "resource stats"
 msgstr "тип ресурса"
 
 #: travelcrm/templates/common/resource.mako:7
 #, fuzzy
-#| msgid "Tasks"
 msgid "tasks"
 msgstr "Задачи"
 
 #: travelcrm/templates/common/resource.mako:9
-#, fuzzy
-#| msgid "Notes"
 msgid "notes"
 msgstr ""
 
@@ -2341,7 +2311,6 @@ msgstr "валюта оплаты"
 
 #: travelcrm/templates/companies/form.mako:62
 #, fuzzy
-#| msgid "contact type"
 msgid "contact email"
 msgstr "тип контакта"
 
@@ -2356,7 +2325,6 @@ msgstr "тип контакта"
 
 #: travelcrm/templates/contracts/details.mako:11
 #, fuzzy
-#| msgid "Commissions"
 msgid "commissions"
 msgstr "Комиссии"
 
@@ -2367,7 +2335,6 @@ msgstr "не указано"
 #: travelcrm/templates/contracts/form.mako:31
 #: travelcrm/templates/contracts/index.mako:52
 #, fuzzy
-#| msgid "contract"
 msgid "contract num"
 msgstr "договор"
 
@@ -2377,13 +2344,11 @@ msgstr "Комиссии"
 
 #: travelcrm/templates/contracts/index.mako:16
 #, fuzzy
-#| msgid "contract"
 msgid "Contracts"
 msgstr "договор"
 
 #: travelcrm/templates/contracts/index.mako:92
 #, fuzzy
-#| msgid "customer contacts"
 msgid "Enter contract num"
 msgstr "контакты заказчика"
 
@@ -2398,7 +2363,6 @@ msgstr "Введите название или код"
 #: travelcrm/templates/crosspayments/details.mako:12
 #: travelcrm/templates/outgoings/details.mako:38
 #, fuzzy
-#| msgid "cash"
 msgid "cashflows"
 msgstr "нал."
 
@@ -2432,7 +2396,6 @@ msgstr "статья учета"
 
 #: travelcrm/templates/crosspayments/index.mako:16
 #, fuzzy
-#| msgid "payments"
 msgid "Cross Payments"
 msgstr "оплачено"
 
@@ -2545,7 +2508,6 @@ msgstr "Паспортные данные"
 #: travelcrm/templates/passports/form.mako:69
 #: travelcrm/templates/tasks/form.mako:86
 #, fuzzy
-#| msgid "Reload"
 msgid "Uploads"
 msgstr "Обновить"
 
@@ -2597,7 +2559,6 @@ msgstr "Введите название, категориюб местополо
 
 #: travelcrm/templates/incomes/details.mako:20
 #, fuzzy
-#| msgid "cash"
 msgid "cashflow"
 msgstr "нал."
 
@@ -2627,14 +2588,12 @@ msgstr "контакты заказчика"
 #: travelcrm/templates/leads/details.mako:27
 #: travelcrm/templates/orders/details.mako:18
 #, fuzzy
-#| msgid "service"
 msgid "services"
 msgstr "услуги"
 
 #: travelcrm/templates/invoices/details.mako:33
 #: travelcrm/templates/orders_items/common.mako:92
 #, fuzzy
-#| msgid "Edit Account"
 msgid "discount"
 msgstr "Изменить счет"
 
@@ -2665,7 +2624,6 @@ msgstr "оплачено"
 
 #: travelcrm/templates/invoices/index.mako:58
 #, fuzzy
-#| msgid "Debt"
 msgid "debt"
 msgstr "удаление"
 
@@ -2751,13 +2709,11 @@ msgstr "реклама"
 
 #: travelcrm/templates/leads/details.mako:41
 #, fuzzy
-#| msgid "base price"
 msgid "lead prices"
 msgstr "услуги"
 
 #: travelcrm/templates/leads/details.mako:46
 #, fuzzy
-#| msgid "Unit Cost"
 msgid "not set"
 msgstr "Цена за ед."
 
@@ -2768,7 +2724,6 @@ msgstr "предложения"
 #: travelcrm/templates/leads/form.mako:23
 #: travelcrm/templates/leads/index.mako:53
 #, fuzzy
-#| msgid "end date"
 msgid "lead date"
 msgstr "дата окончания"
 
@@ -2784,19 +2739,16 @@ msgstr "Предложения"
 
 #: travelcrm/templates/leads/index.mako:16
 #, fuzzy
-#| msgid "Clear"
 msgid "Leads"
 msgstr "Очистить"
 
 #: travelcrm/templates/leads/index.mako:97
 #, fuzzy
-#| msgid "modifier"
 msgid "Order"
 msgstr "изменил"
 
 #: travelcrm/templates/leads/index.mako:126
 #, fuzzy
-#| msgid "sale dates"
 msgid "lead dates"
 msgstr "дата продажи"
 
@@ -2808,14 +2760,12 @@ msgstr "диапазон цен"
 #: travelcrm/templates/leads_items/common.mako:77
 #: travelcrm/templates/leads_items/form.mako:33
 #, fuzzy
-#| msgid "price"
 msgid "price from"
 msgstr "цена"
 
 #: travelcrm/templates/leads_items/common.mako:78
 #: travelcrm/templates/leads_items/form.mako:46
 #, fuzzy
-#| msgid "price"
 msgid "price to"
 msgstr "цена"
 
@@ -2888,7 +2838,6 @@ msgstr "название"
 
 #: travelcrm/templates/notes/details.mako:9
 #, fuzzy
-#| msgid "created"
 msgid "creator"
 msgstr "курс"
 
@@ -2896,13 +2845,11 @@ msgstr "курс"
 #: travelcrm/templates/notifications/details.mako:18
 #: travelcrm/templates/tasks/details.mako:30
 #, fuzzy
-#| msgid "resource"
 msgid "show resource"
 msgstr "ресурс"
 
 #: travelcrm/templates/notifications/close.mako:12
 #, fuzzy
-#| msgid "Do you realy want to delete checked items?"
 msgid "Do you really want to close checked notifications?"
 msgstr "Действительно удалить отмеченные записи?"
 
@@ -2917,12 +2864,10 @@ msgid "deal date"
 msgstr "дата сделки"
 
 #: travelcrm/templates/orders/form.mako:33
-#| msgid "Clear"
 msgid "lead"
 msgstr "лид"
 
 #: travelcrm/templates/orders/index.mako:16
-#| msgid "tour dates"
 msgid "Orders"
 msgstr "Заявки"
 
@@ -3041,7 +2986,6 @@ msgid "gender"
 msgstr "пол"
 
 #: travelcrm/templates/persons/details.mako:38
-#| msgid "Addresses"
 msgid "addresses"
 msgstr "адреса"
 
@@ -3071,7 +3015,7 @@ msgstr "Должности компании"
 
 #: travelcrm/templates/positions/index.mako:79 travelcrm/views/__init__.py:104
 msgid "Permissions"
-msgstr "Права доступа"
+msgstr "Доступ"
 
 #: travelcrm/templates/positions/index.mako:83
 msgid "Menu"
@@ -3090,7 +3034,6 @@ msgid "Enter region name or country name"
 msgstr ""
 
 #: travelcrm/templates/resources_types/details.mako:26
-#| msgid "resource type"
 msgid "resources count"
 msgstr "к-во ресурсов"
 
@@ -3113,7 +3056,6 @@ msgid "Enter name, humanize or module"
 msgstr ""
 
 #: travelcrm/templates/resources_types/settings.mako:4
-#| msgid "Enter resource type name"
 msgid "Selected Resource Type have no settings"
 msgstr "Выбранный тип ресурсов не имеет опций"
 
@@ -3131,7 +3073,6 @@ msgstr "Введите название сервиса"
 
 #: travelcrm/templates/spassports/details.mako:6
 #: travelcrm/templates/spassports/form.mako:93
-#| msgid "phone"
 msgid "photo done"
 msgstr "фото сделано"
 
@@ -3147,7 +3088,6 @@ msgstr ""
 
 #: travelcrm/templates/spassports/details.mako:41
 #: travelcrm/templates/spassports/form.mako:120
-#| msgid "passport type"
 msgid "passport receive"
 msgstr "паспорт получен"
 
@@ -3169,12 +3109,10 @@ msgstr ""
 #: travelcrm/templates/tickets/form.mako:91
 #: travelcrm/templates/tours/form.mako:91
 #: travelcrm/templates/visas/form.mako:73
-#| msgid "Edit Account"
 msgid "discount, %"
 msgstr "скидка, %"
 
 #: travelcrm/templates/spassports/form.mako:90
-#| msgid "passport num"
 msgid "Passport Info"
 msgstr "Паспортные данные"
 
@@ -3189,7 +3127,6 @@ msgstr "Участники"
 #: travelcrm/templates/tickets/form.mako:227
 #: travelcrm/templates/tours/form.mako:288
 #: travelcrm/templates/visas/form.mako:147
-#| msgid "Logout Confirmation"
 msgid "Confirmation"
 msgstr "Подтверждение"
 
@@ -3197,7 +3134,6 @@ msgstr "Подтверждение"
 #: travelcrm/templates/tickets/form.mako:242
 #: travelcrm/templates/tours/form.mako:303
 #: travelcrm/templates/visas/form.mako:162
-#| msgid "start at"
 msgid "status date"
 msgstr "дата статуса"
 
@@ -3205,7 +3141,6 @@ msgstr "дата статуса"
 #: travelcrm/templates/tickets/form.mako:251
 #: travelcrm/templates/tours/form.mako:312
 #: travelcrm/templates/visas/form.mako:171
-#| msgid "start point"
 msgid "status info"
 msgstr "доп. инфо"
 
@@ -3241,7 +3176,6 @@ msgstr ""
 #: travelcrm/templates/suppliers/form.mako:32
 #: travelcrm/templates/suppliers/index.mako:54
 #: travelcrm/templates/suppliers/index.mako:95
-#| msgid "supplier price"
 msgid "supplier type"
 msgstr "тип поставщика"
 
@@ -3254,7 +3188,6 @@ msgid "Enter supplier name"
 msgstr "Введите название поставщика"
 
 #: travelcrm/templates/suppliers_types/index.mako:16
-#| msgid "supplier price"
 msgid "Suppliers Types"
 msgstr "Типы поставщиков"
 
@@ -3265,13 +3198,11 @@ msgstr ""
 
 #: travelcrm/templates/tasks/details.mako:15
 #, fuzzy
-#| msgid "dates"
 msgid "terms"
 msgstr "даты"
 
 #: travelcrm/templates/tasks/details.mako:18
 #, fuzzy
-#| msgid "notifications"
 msgid "notification time"
 msgstr "Местоположение"
 
@@ -3290,7 +3221,6 @@ msgstr ""
 #: travelcrm/templates/tours/form.mako:146
 #: travelcrm/templates/tours/form.mako:188
 #, fuzzy
-#| msgid "passports"
 msgid "transport"
 msgstr "паспорта"
 
@@ -3316,13 +3246,11 @@ msgstr "дети"
 
 #: travelcrm/templates/tickets/form.mako:108
 #, fuzzy
-#| msgid "Invoice Info"
 msgid "Ticket Info"
 msgstr "Информация по инвойсу"
 
 #: travelcrm/templates/tickets/form.mako:139
 #, fuzzy
-#| msgid "start point"
 msgid "Start Point"
 msgstr "начальная точка"
 
@@ -3335,7 +3263,6 @@ msgstr ""
 
 #: travelcrm/templates/tickets/form.mako:176
 #, fuzzy
-#| msgid "end point"
 msgid "End Point"
 msgstr "конечная точка"
 
@@ -3346,7 +3273,6 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/index.mako:75
 #: travelcrm/templates/transports/index.mako:75
 #, fuzzy
-#| msgid "Enter source name"
 msgid "Enter transport name"
 msgstr "Удалить типы ресурсов"
 
@@ -3361,7 +3287,6 @@ msgstr "отель"
 
 #: travelcrm/templates/tours/form.mako:108
 #, fuzzy
-#| msgid "info"
 msgid "Tour Info"
 msgstr "Инфо"
 
@@ -3404,13 +3329,11 @@ msgstr ""
 
 #: travelcrm/templates/transfers/index.mako:75
 #, fuzzy
-#| msgid "Enter service name"
 msgid "Enter transfer name"
 msgstr "услуга"
 
 #: travelcrm/templates/transports/index.mako:16
 #, fuzzy
-#| msgid "passports"
 msgid "Transport"
 msgstr "паспорта"
 
@@ -3433,19 +3356,16 @@ msgstr ""
 
 #: travelcrm/templates/turnovers/index.mako:91
 #, fuzzy
-#| msgid "Delete Accounts"
 msgid "Select account"
 msgstr "Удалить счета"
 
 #: travelcrm/templates/uploads/common.mako:60
 #, fuzzy
-#| msgid "scope type"
 msgid "media type"
 msgstr "область видимости"
 
 #: travelcrm/templates/uploads/form.mako:18
 #, fuzzy
-#| msgid "Reload"
 msgid "upload"
 msgstr "Обновить"
 
@@ -3469,13 +3389,11 @@ msgstr "Пользователи"
 msgid "Enter employee name or username"
 msgstr ""
 
-#: travelcrm/templates/vats/form.mako:58
-#: travelcrm/templates/vats/index.mako:41
+#: travelcrm/templates/vats/form.mako:58 travelcrm/templates/vats/index.mako:41
 msgid "vat, %"
 msgstr ""
 
-#: travelcrm/templates/vats/form.mako:72
-#: travelcrm/templates/vats/index.mako:42
+#: travelcrm/templates/vats/form.mako:72 travelcrm/templates/vats/index.mako:42
 msgid "calc method"
 msgstr ""
 
@@ -3485,31 +3403,26 @@ msgstr ""
 
 #: travelcrm/templates/vats/index.mako:79
 #, fuzzy
-#| msgid "Enter service name"
 msgid "Enter service or account name"
 msgstr "услуга"
 
 #: travelcrm/templates/visas/details.mako:14
 #, fuzzy
-#| msgid "person"
 msgid "period"
 msgstr "субьект"
 
 #: travelcrm/templates/visas/form.mako:90
 #, fuzzy
-#| msgid "info"
 msgid "Visa Info"
 msgstr "Инфо"
 
 #: travelcrm/templates/visas/form.mako:119
 #, fuzzy
-#| msgid "date to"
 msgid "date start"
 msgstr "дата по"
 
 #: travelcrm/templates/visas/form.mako:128
 #, fuzzy
-#| msgid "updated"
 msgid "date end"
 msgstr "изменено"
 
@@ -3567,7 +3480,6 @@ msgstr "все"
 
 #: travelcrm/views/accomodations.py:70
 #, fuzzy
-#| msgid "View Accomodation"
 msgid "View Accomodation Type"
 msgstr "размещение"
 
@@ -3597,25 +3509,24 @@ msgstr "Добавить категорию отеля"
 #: travelcrm/views/emails_campaigns.py:101
 #: travelcrm/views/emails_campaigns.py:133 travelcrm/views/employees.py:102
 #: travelcrm/views/employees.py:133 travelcrm/views/foodcats.py:98
-#: travelcrm/views/foodcats.py:129 travelcrm/views/home.py:205
-#: travelcrm/views/hotelcats.py:98 travelcrm/views/hotelcats.py:129
-#: travelcrm/views/hotels.py:98 travelcrm/views/hotels.py:129
-#: travelcrm/views/incomes.py:99 travelcrm/views/incomes.py:130
-#: travelcrm/views/invoices.py:115 travelcrm/views/invoices.py:149
-#: travelcrm/views/invoices.py:279 travelcrm/views/leads.py:100
-#: travelcrm/views/leads.py:131 travelcrm/views/leads_items.py:98
-#: travelcrm/views/leads_items.py:129 travelcrm/views/leads_offers.py:98
-#: travelcrm/views/leads_offers.py:129 travelcrm/views/locations.py:98
-#: travelcrm/views/locations.py:129 travelcrm/views/navigations.py:101
-#: travelcrm/views/navigations.py:136 travelcrm/views/notes.py:101
-#: travelcrm/views/notes.py:135 travelcrm/views/orders.py:105
-#: travelcrm/views/orders.py:139 travelcrm/views/outgoings.py:106
-#: travelcrm/views/outgoings.py:142 travelcrm/views/passports.py:101
-#: travelcrm/views/passports.py:135 travelcrm/views/permisions.py:108
-#: travelcrm/views/persons.py:104 travelcrm/views/persons.py:138
-#: travelcrm/views/positions.py:101 travelcrm/views/positions.py:135
-#: travelcrm/views/regions.py:98 travelcrm/views/regions.py:129
-#: travelcrm/views/resources_types.py:101
+#: travelcrm/views/foodcats.py:129 travelcrm/views/hotelcats.py:98
+#: travelcrm/views/hotelcats.py:129 travelcrm/views/hotels.py:98
+#: travelcrm/views/hotels.py:129 travelcrm/views/incomes.py:99
+#: travelcrm/views/incomes.py:130 travelcrm/views/invoices.py:115
+#: travelcrm/views/invoices.py:149 travelcrm/views/invoices.py:279
+#: travelcrm/views/leads.py:100 travelcrm/views/leads.py:131
+#: travelcrm/views/leads_items.py:98 travelcrm/views/leads_items.py:129
+#: travelcrm/views/leads_offers.py:98 travelcrm/views/leads_offers.py:129
+#: travelcrm/views/locations.py:98 travelcrm/views/locations.py:129
+#: travelcrm/views/navigations.py:101 travelcrm/views/navigations.py:136
+#: travelcrm/views/notes.py:101 travelcrm/views/notes.py:135
+#: travelcrm/views/orders.py:105 travelcrm/views/orders.py:139
+#: travelcrm/views/outgoings.py:106 travelcrm/views/outgoings.py:142
+#: travelcrm/views/passports.py:101 travelcrm/views/passports.py:135
+#: travelcrm/views/permisions.py:108 travelcrm/views/persons.py:104
+#: travelcrm/views/persons.py:138 travelcrm/views/positions.py:101
+#: travelcrm/views/positions.py:135 travelcrm/views/regions.py:98
+#: travelcrm/views/regions.py:129 travelcrm/views/resources_types.py:101
 #: travelcrm/views/resources_types.py:135 travelcrm/views/roomcats.py:98
 #: travelcrm/views/roomcats.py:129 travelcrm/views/services.py:99
 #: travelcrm/views/services.py:130 travelcrm/views/spassports.py:74
@@ -3659,7 +3570,7 @@ msgstr "Сохранено"
 #: travelcrm/views/emails_campaigns.py:138 travelcrm/views/employees.py:107
 #: travelcrm/views/employees.py:138 travelcrm/views/foodcats.py:103
 #: travelcrm/views/foodcats.py:134 travelcrm/views/home.py:78
-#: travelcrm/views/home.py:210 travelcrm/views/hotelcats.py:103
+#: travelcrm/views/home.py:195 travelcrm/views/hotelcats.py:103
 #: travelcrm/views/hotelcats.py:134 travelcrm/views/hotels.py:103
 #: travelcrm/views/hotels.py:134 travelcrm/views/incomes.py:104
 #: travelcrm/views/incomes.py:135 travelcrm/views/invoices.py:120
@@ -3702,13 +3613,11 @@ msgstr "Пожалуйста, проверьте ошибки"
 
 #: travelcrm/views/accomodations.py:116
 #, fuzzy
-#| msgid "Enter accomodation name"
 msgid "Edit Accomodation Type"
 msgstr "размещение"
 
 #: travelcrm/views/accomodations.py:148
 #, fuzzy
-#| msgid "accomodation"
 msgid "Delete Accomodation"
 msgstr "размещение"
 
@@ -3989,31 +3898,26 @@ msgstr "Удалить контакты"
 
 #: travelcrm/views/contracts.py:72
 #, fuzzy
-#| msgid "View Contact"
 msgid "View Contract"
 msgstr "контакт"
 
 #: travelcrm/views/contracts.py:85
 #, fuzzy
-#| msgid "contract"
 msgid "Add Contract"
 msgstr "договор"
 
 #: travelcrm/views/contracts.py:120
 #, fuzzy
-#| msgid "Edit Contact"
 msgid "Edit Contract"
 msgstr "Изменить контакт"
 
 #: travelcrm/views/contracts.py:154
 #, fuzzy
-#| msgid "Copy Contact"
 msgid "Copy Contract"
 msgstr "Копировать контакт"
 
 #: travelcrm/views/contracts.py:186
 #, fuzzy
-#| msgid "Delete Contacts"
 msgid "Delete Contracts"
 msgstr "Удалить контакты"
 
@@ -4048,7 +3952,6 @@ msgstr ""
 
 #: travelcrm/views/crosspayments.py:149
 #, fuzzy
-#| msgid "Delete Crosspayments"
 msgid "Copy Crosspayment"
 msgstr "Удалить входящие платежи"
 
@@ -4154,6 +4057,10 @@ msgstr "Выполнено, ждите..."
 msgid "Invalid username or password"
 msgstr "Неверный логин или пароль"
 
+#: travelcrm/views/home.py:189
+msgid "Creation task run soon. Waiting for Email."
+msgstr ""
+
 #: travelcrm/views/hotelcats.py:71
 #, fuzzy
 msgid "View Hotel Category"
@@ -4199,7 +4106,6 @@ msgstr "Изменить входящий платеж"
 
 #: travelcrm/views/incomes.py:149
 #, fuzzy
-#| msgid "Copy Licence"
 msgid "Copy Income"
 msgstr "Копировать лицензию"
 
@@ -4226,7 +4132,6 @@ msgstr "Удалить инвойсы"
 
 #: travelcrm/views/leads.py:73
 #, fuzzy
-#| msgid "view item"
 msgid "View Lead"
 msgstr "просмотр"
 
@@ -4236,7 +4141,6 @@ msgstr ""
 
 #: travelcrm/views/leads.py:117
 #, fuzzy
-#| msgid "edit"
 msgid "Edit Lead"
 msgstr "изменение"
 
@@ -4246,13 +4150,11 @@ msgstr ""
 
 #: travelcrm/views/leads.py:202
 #, fuzzy
-#| msgid "delete"
 msgid "Delete Leads"
 msgstr "удаление"
 
 #: travelcrm/views/leads_items.py:71
 #, fuzzy
-#| msgid "view item"
 msgid "View Lead Item"
 msgstr "просмотр"
 
@@ -4262,19 +4164,16 @@ msgstr ""
 
 #: travelcrm/views/leads_items.py:115
 #, fuzzy
-#| msgid "view item"
 msgid "Edit Lead Item"
 msgstr "просмотр"
 
 #: travelcrm/views/leads_items.py:148
 #, fuzzy
-#| msgid "Copy Rate"
 msgid "Copy Lead Item"
 msgstr "Копировать курс валюты"
 
 #: travelcrm/views/leads_items.py:180 travelcrm/views/leads_offers.py:180
 #, fuzzy
-#| msgid "Delete Services Items"
 msgid "Delete Leads Items"
 msgstr "Удалить услуги"
 
@@ -4367,25 +4266,21 @@ msgstr "Удалить отели"
 
 #: travelcrm/views/notifications.py:93
 #, fuzzy
-#| msgid "notifications"
 msgid "Close Notification"
 msgstr "Местоположение"
 
 #: travelcrm/views/notifications.py:108
 #, fuzzy
-#| msgid "Close"
 msgid "Closed"
 msgstr "Закрыть"
 
 #: travelcrm/views/orders.py:74
 #, fuzzy
-#| msgid "view item"
 msgid "View Order"
 msgstr "просмотр"
 
 #: travelcrm/views/orders.py:89
 #, fuzzy
-#| msgid "address"
 msgid "Add Order"
 msgstr "адрес"
 
@@ -4403,13 +4298,11 @@ msgstr "Удалить продажи услуг"
 
 #: travelcrm/views/orders_items.py:68
 #, fuzzy
-#| msgid "view item"
 msgid "View Order Item"
 msgstr "просмотр"
 
 #: travelcrm/views/orders_items.py:137
 #, fuzzy
-#| msgid "Delete Services Items"
 msgid "Delete Orders Items"
 msgstr "Удалить услуги"
 
@@ -4429,7 +4322,6 @@ msgstr "Изменить точку маршрута"
 
 #: travelcrm/views/outgoings.py:161
 #, fuzzy
-#| msgid "Outgoing"
 msgid "Copy Outgoing"
 msgstr "Вход"
 
@@ -4512,25 +4404,21 @@ msgstr "Удалить регионы"
 
 #: travelcrm/views/resources_types.py:72
 #, fuzzy
-#| msgid "resource type"
 msgid "View Resource Type"
 msgstr "тип ресурса"
 
 #: travelcrm/views/resources_types.py:85
 #, fuzzy
-#| msgid "resource type"
 msgid "Add Resource Type"
 msgstr "тип ресурса"
 
 #: travelcrm/views/resources_types.py:120
 #, fuzzy
-#| msgid "resource type"
 msgid "Edit Resource Type"
 msgstr "тип ресурса"
 
 #: travelcrm/views/resources_types.py:154
 #, fuzzy
-#| msgid "resource type"
 msgid "Copy Resource Type"
 msgstr "тип ресурса"
 
@@ -4578,19 +4466,16 @@ msgstr "Удалить услуги"
 
 #: travelcrm/views/spassports.py:45
 #, fuzzy
-#| msgid "View Passport"
 msgid "View Passport Sale"
 msgstr "паспорта"
 
 #: travelcrm/views/spassports.py:58
 #, fuzzy
-#| msgid "Add Passport"
 msgid "Add Passport Service"
 msgstr "Новый паспорт"
 
 #: travelcrm/views/spassports.py:93
 #, fuzzy
-#| msgid "Edit Passport"
 msgid "Edit Passport Sale"
 msgstr "Изменить паспорт"
 
@@ -4661,19 +4546,16 @@ msgstr "Удалить пользователей"
 
 #: travelcrm/views/suppliers_types.py:71
 #, fuzzy
-#| msgid "supplier price"
 msgid "View Supplier Type"
 msgstr "цена за ед."
 
 #: travelcrm/views/suppliers_types.py:83
 #, fuzzy
-#| msgid "supplier price"
 msgid "Add Supplier Type"
 msgstr "цена за ед."
 
 #: travelcrm/views/suppliers_types.py:146
 #, fuzzy
-#| msgid "Delete Suppliers"
 msgid "Delete Supplier Types"
 msgstr "Удалить пользователей"
 
@@ -4696,7 +4578,6 @@ msgstr "Удалить задачи"
 
 #: travelcrm/views/tickets.py:47
 #, fuzzy
-#| msgid "View Services Sale"
 msgid "View Ticket Sale"
 msgstr "Продажа услуг"
 
@@ -4706,13 +4587,11 @@ msgstr ""
 
 #: travelcrm/views/tickets.py:95
 #, fuzzy
-#| msgid "Edit Service Sale"
 msgid "Edit Ticket Sale"
 msgstr "Изменить продажу услуг"
 
 #: travelcrm/views/tickets.py:129
 #, fuzzy
-#| msgid "Copy Service"
 msgid "Copy Ticket"
 msgstr "услуга"
 
@@ -4730,7 +4609,6 @@ msgstr ""
 
 #: travelcrm/views/tickets_classes.py:146
 #, fuzzy
-#| msgid "Delete Licences"
 msgid "Delete TicketClasss"
 msgstr "Удалить лицензии"
 
@@ -4740,7 +4618,6 @@ msgstr ""
 
 #: travelcrm/views/tours.py:61
 #, fuzzy
-#| msgid "Add Country"
 msgid "Add Tour"
 msgstr "Новая страна"
 
@@ -4751,55 +4628,46 @@ msgstr "Изменить тур"
 
 #: travelcrm/views/tours.py:130
 #, fuzzy
-#| msgid "Copy Tour Sale"
 msgid "Copy Tour"
 msgstr "Копировать тур"
 
 #: travelcrm/views/transfers.py:71
 #, fuzzy
-#| msgid "view item"
 msgid "View Transfer"
 msgstr "просмотр"
 
 #: travelcrm/views/transfers.py:83
 #, fuzzy
-#| msgid "Add User"
 msgid "Add Transfer"
 msgstr "Новый пользователь"
 
 #: travelcrm/views/transfers.py:115
 #, fuzzy
-#| msgid "Edit User"
 msgid "Edit Transfer"
 msgstr "Изменить пользователя"
 
 #: travelcrm/views/transfers.py:146
 #, fuzzy
-#| msgid "Delete Users"
 msgid "Delete Transfers"
 msgstr "Удалить пользователей"
 
 #: travelcrm/views/transports.py:71
 #, fuzzy
-#| msgid "View Passport"
 msgid "View Transport"
 msgstr "паспорта"
 
 #: travelcrm/views/transports.py:83
 #, fuzzy
-#| msgid "Add Passport"
 msgid "Add Transport"
 msgstr "Новый паспорт"
 
 #: travelcrm/views/transports.py:115
 #, fuzzy
-#| msgid "Edit Passport"
 msgid "Edit Transport"
 msgstr "Изменить паспорт"
 
 #: travelcrm/views/transports.py:146
 #, fuzzy
-#| msgid "Delete Passports"
 msgid "Delete Transports"
 msgstr "Удалить паспорта"
 
@@ -4825,7 +4693,6 @@ msgstr ""
 
 #: travelcrm/views/uploads.py:175
 #, fuzzy
-#| msgid "delete photo"
 msgid "Delete Uploads"
 msgstr "удалить фото"
 
@@ -4848,31 +4715,26 @@ msgstr "Удалить пользователей"
 
 #: travelcrm/views/vats.py:71
 #, fuzzy
-#| msgid "view item"
 msgid "View Vat"
 msgstr "просмотр"
 
 #: travelcrm/views/vats.py:83
 #, fuzzy
-#| msgid "add"
 msgid "Add Vat"
 msgstr "добавление"
 
 #: travelcrm/views/vats.py:115
 #, fuzzy
-#| msgid "edit"
 msgid "Edit Vat"
 msgstr "изменение"
 
 #: travelcrm/views/vats.py:146
 #, fuzzy
-#| msgid "delete"
 msgid "Delete Vats"
 msgstr "удаление"
 
 #: travelcrm/views/visas.py:47
 #, fuzzy
-#| msgid "View Services Sale"
 msgid "View Visa Sale"
 msgstr "Продажа услуг"
 
@@ -4882,7 +4744,6 @@ msgstr ""
 
 #: travelcrm/views/visas.py:95
 #, fuzzy
-#| msgid "Edit Service Sale"
 msgid "Edit Visa Sale"
 msgstr "Изменить продажу услуг"
 
@@ -4890,176 +4751,3 @@ msgstr "Изменить продажу услуг"
 msgid "Copy Visa"
 msgstr ""
 
-#~ msgid "Company with the same name exists"
-#~ msgstr "Компания с таким названием уже существует"
-
-#~ msgid "Set only account or subaccount or clear both"
-#~ msgstr "Укажите аккаунт или субаккаунт или оставьте оба поля пустыми"
-
-#~ msgid "Not enough balance to cashflow (%s)"
-#~ msgstr "Не достаточно средств на балансе для трансфера (%s)"
-
-#~ msgid "licence num"
-#~ msgstr "номер лицензии"
-
-#~ msgid "service name"
-#~ msgstr "услуги"
-
-#~ msgid "date from"
-#~ msgstr "дата с"
-
-#~ msgid "account from"
-#~ msgstr "счет"
-
-#~ msgid "account to"
-#~ msgstr "счет"
-
-#~ msgid "Accounts Postings"
-#~ msgstr "статьи учета"
-
-#~ msgid "Debts to Suppliers"
-#~ msgstr "Изменить туроператора"
-
-#~ msgid "Supplier"
-#~ msgstr "туроператор"
-
-#~ msgid "Balance"
-#~ msgstr "Всего к оплате"
-
-#~ msgid "Currency"
-#~ msgstr "валюта"
-
-#~ msgid "Appointments"
-#~ msgstr "Назначения"
-
-#~ msgid "sum currency"
-#~ msgstr "валюта оплаты"
-
-#~ msgid "Info"
-#~ msgstr "Инфо"
-
-#~ msgid "qty"
-#~ msgstr "к-во"
-
-#~ msgid "Payments"
-#~ msgstr "Оплаты"
-
-#~ msgid "no description"
-#~ msgstr "примечание"
-
-#~ msgid "expire date"
-#~ msgstr "действителен до"
-
-#~ msgid "customizable"
-#~ msgstr "заказчик"
-
-#~ msgid "Sales Dynamics"
-#~ msgstr "дата продажи"
-
-#~ msgid "Services Items"
-#~ msgstr "Список услуг"
-
-#~ msgid "Services Sales"
-#~ msgstr "Продажа услуг"
-
-#~ msgid "calculation already exists"
-#~ msgstr "инвойс уже создан"
-
-#~ msgid "business person"
-#~ msgstr "Бизнес контакты"
-
-#~ msgid "open"
-#~ msgstr "субьект"
-
-#~ msgid "time"
-#~ msgstr "доход"
-
-#~ msgid "Licences"
-#~ msgstr "Лицензии"
-
-#~ msgid "Route"
-#~ msgstr "Маршрут"
-
-#~ msgid "Tours Sales"
-#~ msgstr "даты тура"
-
-#~ msgid "Enter supplier or person name"
-#~ msgstr "Удалить туроператоров"
-
-#~ msgid "member"
-#~ msgstr "участник"
-
-#~ msgid "hotel category"
-#~ msgstr "категория отеля"
-
-#~ msgid "tour service"
-#~ msgstr "услуга"
-
-#~ msgid "Name"
-#~ msgstr "название"
-
-#~ msgid "Income"
-#~ msgstr "доход"
-
-#~ msgid "sum to"
-#~ msgstr "сума"
-
-#~ msgid "Account"
-#~ msgstr "счет"
-
-#~ msgid "Subaccount"
-#~ msgstr "счет"
-
-#~ msgid "Unpaid Invoices"
-#~ msgstr "инвойс"
-
-#~ msgid "Delete Companies"
-#~ msgstr "Удалить страны"
-
-#~ msgid "View Licence"
-#~ msgstr "Изменить лицензию"
-
-#~ msgid "Add Licence"
-#~ msgstr "Новая лицензия"
-
-#~ msgid "Edit Licence"
-#~ msgstr "Изменить лицензию"
-
-#~ msgid "Delete Notifications"
-#~ msgstr "Удалить местоположения"
-
-#~ msgid "View Resources Type"
-#~ msgstr "тип ресурса"
-
-#~ msgid "Add Resources Type"
-#~ msgstr "Новый тип ресурсов"
-
-#~ msgid "Edit Resources Type"
-#~ msgstr "Изменить тип ресурсов"
-
-#~ msgid "Copy Resources Type"
-#~ msgstr "Копировать тип ресурсов"
-
-#~ msgid "amount"
-#~ msgstr "счет"
-
-#~ msgid "View Service Item"
-#~ msgstr "Список услуг"
-
-#~ msgid "Add Service Sale"
-#~ msgstr "Новая продажа услуг"
-
-#~ msgid "Add Tour Sale"
-#~ msgstr "даты тура"
-
-#~ msgid "Delete Tours Sales"
-#~ msgstr "Удалить туры"
-
-#~ msgid "Add Tour Sale Point"
-#~ msgstr "Новая точка маршрута"
-
-#~ msgid "Edit Tour Sale Point"
-#~ msgstr "Изменить точку маршрута"
-
-#~ msgid "Subccounts"
-#~ msgstr "Счета"
