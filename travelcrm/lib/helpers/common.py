@@ -2,6 +2,7 @@
 
 import pkg_resources
 import json
+from datetime import datetime
 
 from webhelpers.html import tags
 from webhelpers.html import HTML
@@ -134,3 +135,7 @@ def can_create_company(request):
 
 def is_public_domain(request):
     return u_get_public_domain() == request.domain
+
+
+def today():
+    return datetime.today().date()

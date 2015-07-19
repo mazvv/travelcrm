@@ -23,7 +23,7 @@
                         ${h.tags.title(_(u"lead date"), True, "lead_date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field('lead_date', item.lead_date if item else None)}
+                        ${h.fields.date_field('lead_date', item.lead_date if item else h.common.today())}
                         ${h.common.error_container(name='lead_date')}
                     </div>
                 </div>

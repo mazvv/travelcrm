@@ -41,7 +41,12 @@ class HomeView(object):
     def index(self):
         portlets = []
         for portlet in get_resources_types_by_interface(IPortlet):
-            column_index = portlet.settings.get('column_index', 1)
+            column_index = (
+                portlet.settings 
+                and portlet.settings.get('column_index', 1)
+            )
+            if column_index is None:
+                continue
             rt_cls = get_resource_class(portlet.name)
             url = self.request.resource_url(rt_cls(self.request))
             portlets.append({'column_index': column_index, 'url': url})
