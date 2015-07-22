@@ -155,6 +155,7 @@ class NavigationCopyForm(BaseForm):
 
     def submit(self):
         copy_from_position(
+            self.request,
             self._controls.get('from_position_id'),
             self._controls.get('position_id'),
         )        

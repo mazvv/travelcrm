@@ -78,6 +78,7 @@ def query_employee_scope(employee, resource):
         children_structures_ids = [
             item.id for item in structure.get_all_descendants()
         ]
+        children_structures_ids.append(permisions.structure_id)
         return (
             DBSession.query(Structure.id)
             .filter(Structure.id.in_(children_structures_ids))

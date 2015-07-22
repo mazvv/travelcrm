@@ -2,9 +2,8 @@
 
 import logging
 
-import colander
-
 from pyramid.view import view_config, view_defaults
+from pyramid.renderers import render
 from pyramid.httpexceptions import HTTPFound
 
 from ..models import DBSession
@@ -208,12 +207,19 @@ class InvoicesView(object):
     @view_config(
         name='print',
         request_method='GET',
-        renderer='travelcrm:templates/invoices/print.mako',
+        renderer='pdf',
         permission='view',
     )
     def print_invoice(self):
-        #TODO: make it
-        pass
+        invoice = Invoice.get(self.request.params.get('id'))
+        body = render(
+            'travelcrm:templates/invoices/print.mako',
+            {'invoice': invoice},
+            self.request,
+        )
+        return {
+            'body': body,
+        }
 
     @view_config(
         name='invoice_sum',

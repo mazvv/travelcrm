@@ -5,9 +5,9 @@ from sqlalchemy import (
     Integer,
     String,
     Date,
+    Table,
     ForeignKey,
 )
-from sqlalchemy.dialects.postgresql import ENUM
 from sqlalchemy.orm import relationship, backref
 
 from ..models import (
@@ -16,6 +16,34 @@ from ..models import (
 )
 from ..lib import EnumIntType
 from ..lib.utils.common_utils import translate as _
+
+
+passport_upload = Table(
+    'passport_upload',
+    Base.metadata,
+    Column(
+        'passport_id',
+        Integer,
+        ForeignKey(
+            'passport.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_passport_id_passport_upload',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'upload_id',
+        Integer,
+        ForeignKey(
+            'upload.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_upload_id_passport_upload',
+        ),
+        primary_key=True,
+    )
+)
 
 
 class Passport(Base):
@@ -84,6 +112,16 @@ class Passport(Base):
             lazy="dynamic"
         ),
         uselist=False
+    )
+    uploads = relationship(
+        'Upload',
+        secondary=passport_upload,
+        backref=backref(
+            'passport',
+            uselist=False
+        ),
+        cascade="all,delete",
+        uselist=True,
     )
 
     @classmethod

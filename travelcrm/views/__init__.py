@@ -4,7 +4,6 @@ from pyramid.view import (
     view_config,
     forbidden_view_config
 )
-from pyramid.security import authenticated_userid
 
 from ..models.user import User
 from ..models.resource_type import ResourceType
@@ -59,7 +58,7 @@ def system_resource_forbidden(context, request):
     renderer='travelcrm:templates/system#system_navigation.mako'
 )
 def system_navigation(context, request):
-    user_id = authenticated_userid(request)
+    user_id = request.authenticated_userid
     user = User.get(user_id)
     employee = user.employee
     employee_position = get_employee_position(employee)
@@ -94,7 +93,7 @@ def system_context_info(context, request):
     renderer='json'
 )
 def _system_context_info(context, request):
-    user_id = authenticated_userid(request)
+    user_id = request.authenticated_userid
     user = User.get(user_id)
     employee = user.employee
     rt = ResourceType.by_name(request.params.get('rt'))

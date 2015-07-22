@@ -14,7 +14,11 @@
             <div class="dl10 status-bar"></div>
             <div class="ml10 tr button-group">
                 ${h.tags.submit('logout', _(u"Logout"), class_="button")}
-                ${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
+                ${h.common.reset(
+                    'cancel', _(u"Cancel"), 
+                    class_="button danger", 
+                    onclick="$(this).closest('.easyui-dialog').dialog('destroy');delete_container();"
+                )}
             </div>
         </div>
     ${h.tags.end_form()}

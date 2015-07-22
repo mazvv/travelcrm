@@ -15,6 +15,7 @@ from travelcrm.models import DBSession, Base
 
 log = logging.getLogger(__name__)
 
+
 def get_settings():
     settings = dict()
     config = configparser.ConfigParser()
@@ -22,3 +23,20 @@ def get_settings():
     for option in config.options('app:main'):
         settings[option] = config.get('app:main', option)
     return settings
+
+
+class BaseTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.settings = get_settings()
+        cls.engine = engine_from_config(cls.settings, prefix='sqlalchemy.')
+        cls.DBSession = sessionmaker()
+
+    def setUp(self):
+        self.config = testing.setUp(settings=self.settings)
+        DBSession.configure(bind=self.engine)
+        Base.metadata.bind = self.engine
+        
+    def tearDown(self):
+        testing.tearDown()

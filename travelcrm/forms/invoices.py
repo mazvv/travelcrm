@@ -21,11 +21,13 @@ from ..models.invoice_item import InvoiceItem
 from ..models.order import Order
 from ..lib.qb.invoices import InvoicesQueryBuilder
 from ..lib.bl.orders import get_order_price
-from ..lib.bl.orders_items import get_discount, get_price
+from ..lib.bl.orders_items import (
+    get_discount, get_price, get_calculation_price
+)
 from ..lib.bl.vats import get_vat, calc_vat
 from ..lib.utils.common_utils import parse_datetime
-from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.resources_utils import get_resource_type_by_resource
 
 
 @colander.deferred
@@ -60,7 +62,8 @@ def order_id_validator(node, kw):
                 node,
                 _(u'Invoice for this order already exists'),
             )
-        for order_item in invoice.order.orders_items:
+        order = Order.get(value)
+        for order_item in order.orders_items:
             if not order_item.calculation and order_item.is_success():
                 raise colander.Invalid(
                     node,
@@ -177,12 +180,14 @@ class InvoiceForm(BaseForm):
                 invoice.account_id, order_item.service_id, invoice.date
             )
             if vat:
-                invoice_item.vat = calc_vat(
-                    vat.id,
-                    invoice_item.final_price 
-                    if vat.is_full()
-                    else invoice_item.final_price - order_item.calculation.price
-                )
+                vatable_price = invoice_item.final_price
+                if not vat.is_full():
+                    vatable_price -= get_calculation_price(
+                        order_item,
+                        self._controls.get('date'),
+                        account.currency_id
+                    )
+                invoice_item.vat = calc_vat(vat.id, vatable_price)
             invoice_item.descr = order_item.service.display_text
         return items
 

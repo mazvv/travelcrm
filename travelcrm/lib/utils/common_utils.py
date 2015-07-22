@@ -3,7 +3,7 @@
 import random
 from uuid import uuid4
 from datetime import datetime, date, time
-from decimal import Decimal, ROUND_05UP
+from decimal import Decimal
 
 from pytz import timezone
 from dateutil.parser import parse as pdt

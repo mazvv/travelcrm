@@ -5,6 +5,7 @@ from sqlalchemy.orm.session import make_transient
 
 from ...models import DBSession
 from ...models.navigation import Navigation
+from ...resources.navigations import NavigationsResource
 
 
 def update_sort_orders(position_id, parent_id):
@@ -30,7 +31,7 @@ def get_next_sort_order(position_id, parent_id):
     return max_sort_order + 1
 
 
-def copy_from_position(source_position_id, target_position_id):
+def copy_from_position(request, source_position_id, target_position_id):
     assert isinstance(source_position_id, int), \
         u"Integer expected"
     assert isinstance(target_position_id, int), \
@@ -67,4 +68,5 @@ def copy_from_position(source_position_id, target_position_id):
     )
     for navigation in target_navigations:
         navigation.parent_id = dict(transform_map).get(navigation.parent_id)
+        navigation.resource = NavigationsResource(request).create_resource()
     return

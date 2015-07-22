@@ -56,7 +56,7 @@ class CalculationAutoloadForm(BaseForm):
                         order.deal_date
                     )
             calculation = Calculation(
-                price=(order_item.final_price - commission),
+                price=(order_item.price - commission),
                 order_item=order_item,
                 resource=context.create_resource()
             )

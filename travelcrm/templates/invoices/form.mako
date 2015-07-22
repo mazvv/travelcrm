@@ -1,4 +1,3 @@
-<%namespace file="../common/infoblock.mako" import="infoblock"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
 <%
@@ -21,25 +20,6 @@
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]
     )}
         <script type="easyui-textbox/javascript">
-            function calc_sum_${_id}(){
-                var order_id = ${item.order_id if item else order_id};
-                var date = $('#${_form_id} [name=date]').val();
-                var account_id = $('#${_form_id} [name=account_id]').val();
-                $.ajax({
-                    url: '${request.resource_url(_context, 'invoice_sum')}',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
-                        'order_id': order_id, 
-                        'date': date, 
-                        'account_id': account_id,
-                        'csrf_token': '${request.session.get_csrf_token()}'
-                    },
-                    success: function(json){
-                        if(json.invoice_sum) $('#${_form_id} .invoice_sum').textbox('setValue', json.invoice_sum);
-                    }
-                });
-            }
             function calc_active_until_${_id}(){
                 if($('#${_form_id} [name=active_until]').val()) return;
                 var date = $('#${_form_id} [name=date]').val();
@@ -67,7 +47,7 @@
                         ${h.fields.date_field(
                             'date',
                             item.date if item else None, 
-                            data_options="onSelect: function(data){calc_sum_%s();calc_active_until_%s();}" % (_id, _id)
+                            data_options="onSelect: function(data){calc_active_until_%s();}" % _id
                         )}
                         ${h.common.error_container(name='date')}
                     </div>
@@ -107,26 +87,11 @@
                             request,
                             'account_id',
                             item.account_id if item else None, 
-                            data_options="onSelect: function(index, data){calc_sum_%s();}" % _id,
                             show_toolbar=(not readonly if readonly else True),
                         )}
                         ${h.common.error_container(name='account_id')}
                     </div>
                 </div>
-                ${infoblock(_(u"Automaticaly calculated"))}
-                <div class="form-field">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"invoice sum"), false, "invoice_sum")}
-                    </div>
-                    <div class="ml15">
-                        ${h.tags.text('invoice_sum', '', class_="easyui-textbox w20 invoice_sum", disabled=True)}
-                    </div>
-                </div>
-                % if item:
-                <script type="easyui-textbox/javascript">
-                    calc_sum_${_id}();
-                </script>
-                % endif
                 <div class="form-field mb05">
                     <div class="dl15">
                         ${h.tags.title(_(u"description"), False, "descr")}

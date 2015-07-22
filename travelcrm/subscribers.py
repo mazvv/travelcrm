@@ -6,9 +6,11 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ProcessPoolExecutor
 
-from pyramid.httpexceptions import HTTPNotFound
+from pyramid.security import forget
+from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 
 import lib.helpers as h
+from .resources import Root
 from .lib.utils.common_utils import translate as _
 from .lib.utils.common_utils import get_multicompanies
 from .lib.bl.employees import get_employee_structure
@@ -35,6 +37,9 @@ def company_settings(event):
     if not employee:
         return
     structure = get_employee_structure(employee)
+    if not structure:
+        redirect_url = request.resource_url(Root(request))
+        raise HTTPFound(location=redirect_url, headers=forget(request))
     company = structure.company
     if company:
         settings = {

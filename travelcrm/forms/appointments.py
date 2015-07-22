@@ -45,7 +45,11 @@ class AppointmentForm(BaseForm):
         else:
             appointment.resource.notes = []
             appointment.resource.tasks = []
-        appointment.name = self._controls.get('name')
+        appointment.date = self._controls.get('date')
+        appointment.employee_id = self._controls.get('employee_id')
+        appointment.position_id = self._controls.get('position_id')
+        appointment.salary = self._controls.get('salary')
+        appointment.currency_id = self._controls.get('currency_id')
         for id in self._controls.get('note_id'):
             note = Note.get(id)
             appointment.resource.notes.append(note)

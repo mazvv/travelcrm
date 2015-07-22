@@ -242,6 +242,7 @@ class Structure(Base):
         if structures.get(self.id):
             result = []
             return recurse_accumulate(self, result)
+        return []
 
     def __repr__(self):
         return u"<Structure id=%d>" % self.id

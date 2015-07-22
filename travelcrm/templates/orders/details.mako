@@ -1,10 +1,19 @@
 <%namespace file="../common/resource.mako" import="resource_list_details"/>
+<%namespace file="../persons/common.mako" import="person_list_details"/>
 <div class="dp100 item-details">
     % if item.descr:
         <div class="dp100">
             ${h.tags.literal(item.descr)}
         </div>
     % endif
+    <div class="dp100">
+        <div class="dp15 b">
+            ${_(u'customer')}
+        </div>
+        <div class="dp85">
+            ${person_list_details(item.customer)}
+        </div>
+    </div>
     <div class="dp100">
         <div class="dp15 b">
             ${_(u'advertise')}
@@ -31,11 +40,11 @@
                     ${order_item.service.display_text}, ${order_item.supplier.name}
                 </div>
                 <div class="dp15">
-                    ${order_item.final_price}
+                    ${h.common.format_decimal(order_item.final_price)}
                 </div>
                 <div class="dp15">
                     % if order_item.calculation:
-                        ${order_item.calculation.price}
+                        ${h.common.format_decimal(order_item.calculation.price)}
                     % else:
                         &nbsp;
                     % endif

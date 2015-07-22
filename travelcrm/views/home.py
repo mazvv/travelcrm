@@ -7,13 +7,13 @@ from pyramid.httpexceptions import (
 from pyramid.security import (
     remember,
     forget,
-    authenticated_userid
 )
 from pyramid.view import view_config
 from pyramid.view import forbidden_view_config
 
 from ..resources import Root
 from ..models.user import User
+from ..lib.bl.employees import get_employee_structure
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.companies_utils import can_create_company
 from ..lib.utils.resources_utils import get_resource_class
@@ -104,7 +104,7 @@ class HomeView(object):
         renderer='travelcrm:templates/auth/login.mako',
     )
     def auth(self):
-        if authenticated_userid(self.request):
+        if self.request.authenticated_userid:
             return HTTPFound(
                 location=self.request.resource_url(self.context)
             )
@@ -142,6 +142,7 @@ class HomeView(object):
         if (user
             and user.validate_password(controls.get('password'))
             and user.employee
+            and get_employee_structure(user.employee)
         ):
             self.request.response.headers = remember(self.request, user.id)
             return {
@@ -179,7 +180,7 @@ class HomeView(object):
     )
     def add(self):
         if not can_create_company(self.request):
-            raise HTTPNotFound()
+            return HTTPNotFound()
         if self.request.params.get('success'):
             self.request.override_renderer = \
                 'travelcrm:templates/auth/add_success.mako'

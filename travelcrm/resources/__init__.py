@@ -8,7 +8,6 @@ from pyramid.security import (
     Authenticated,
     Deny,
     ALL_PERMISSIONS,
-    authenticated_userid,
     has_permission,
 )
 
@@ -60,7 +59,7 @@ class SecuredBase(object):
                 return employee_permisions.permisions
 
     def is_logged(self):
-        return authenticated_userid(self.request)
+        return self.request.authenticated_userid
 
 
 class Root(SecuredBase):

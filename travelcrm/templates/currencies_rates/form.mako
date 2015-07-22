@@ -21,7 +21,7 @@
                         ${h.tags.title(_(u"date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.date_field('date', item.date if item else None)}
+                        ${h.fields.date_field('date', item.date if item else h.common.today())}
                         ${h.common.error_container(name='date')}
                     </div>
                 </div>

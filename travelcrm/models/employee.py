@@ -290,5 +290,5 @@ class Employee(Base):
     def is_currently_dismissed(self):
         return (
             self.dismissal_date != None
-            and self.dismissal_date < datetime.now()
+            and self.dismissal_date < datetime.now().date()
         )
