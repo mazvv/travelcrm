@@ -6,6 +6,7 @@ from sqlalchemy import MetaData, Sequence
 from sqlalchemy.schema import CreateSchema
 
 from ...models import DBSession, Base
+from ...lib import EnumInt
 from ..utils.sql_utils import set_search_path, get_current_schema
 from ..utils.common_utils import (
     get_public_domain as u_get_public_domain, 
@@ -50,6 +51,9 @@ def transfer_data(schema_name):
         set_search_path(schema_name)
         DBSession.execute('alter table "%s" disable trigger all' % table.name)
         for row in rows:
+            row = map(
+                lambda x: ((x.key or None) if isinstance(x, EnumInt) else x), row
+            )
             DBSession.execute(table.insert(row))
     set_search_path(schema_name)
     for table in tables:
