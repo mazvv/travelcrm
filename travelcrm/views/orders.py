@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..resources.invoices import InvoicesResource
 from ..resources.calculations import CalculationsResource
 from ..models import DBSession
@@ -24,11 +25,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.orders.OrdersResource',
 )
-class OrdersView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class OrdersView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -36,7 +33,9 @@ class OrdersView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -71,7 +70,7 @@ class OrdersView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Order"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -86,7 +85,7 @@ class OrdersView(object):
         lead = Lead.get(self.request.params.get('id'))
         return {
             'lead': lead,
-            'title': _(u'Add Order'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -121,7 +120,7 @@ class OrdersView(object):
         sale_service = Order.get(self.request.params.get('id'))
         return {
             'item': sale_service,
-            'title': _(u'Edit Service Sale'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -155,7 +154,7 @@ class OrdersView(object):
         order = Order.get(self.request.params.get('id'))
         return {
             'item': order,
-            'title': _(u"Copy Service Sale")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -175,7 +174,7 @@ class OrdersView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Services Sales'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.currency_rate import CurrencyRate
 from ..lib.utils.common_utils import translate as _
@@ -20,11 +21,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.currencies_rates.CurrenciesRatesResource',
 )
-class CurrenciesRatesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class CurrenciesRatesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -32,7 +29,9 @@ class CurrenciesRatesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -67,7 +66,7 @@ class CurrenciesRatesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Currency Rate"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -79,7 +78,9 @@ class CurrenciesRatesView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Currency Rate')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -111,7 +112,10 @@ class CurrenciesRatesView(object):
     )
     def edit(self):
         currency_rate = CurrencyRate.get(self.request.params.get('id'))
-        return {'item': currency_rate, 'title': _(u'Edit Currency Rate')}
+        return {
+            'item': currency_rate, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -144,7 +148,7 @@ class CurrenciesRatesView(object):
         currency_rate = CurrencyRate.get(self.request.params.get('id'))
         return {
             'item': currency_rate,
-            'title': _(u"Copy Rate")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -164,7 +168,7 @@ class CurrenciesRatesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Currencies Rates'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

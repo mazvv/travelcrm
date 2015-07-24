@@ -6,7 +6,7 @@
     _s_id = "s-%s" % _id    
 %>
 <div class="dl70 easyui-dialog"
-    title="${_(u'Calculations')}"
+    title="${title}"
     data-options="
         border:false,
         height:400,

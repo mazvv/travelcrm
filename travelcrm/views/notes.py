@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.note import Note
 from ..lib.utils.resources_utils import get_resource_class
@@ -22,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.notes.NotesResource',
 )
-class NotesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class NotesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +31,9 @@ class NotesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -69,7 +68,7 @@ class NotesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Note"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -82,7 +81,7 @@ class NotesView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Note'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -117,7 +116,7 @@ class NotesView(object):
         note = Note.get(self.request.params.get('id'))
         return {
             'item': note,
-            'title': _(u'Edit Note'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -151,7 +150,7 @@ class NotesView(object):
         note = Note.get(self.request.params.get('id'))
         return {
             'item': note,
-            'title': _(u"Copy Note")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -190,7 +189,7 @@ class NotesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Notes'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.task import Task
 from ..lib.utils.common_utils import translate as _
@@ -22,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.tasks.TasksResource',
 )
-class TasksView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class TasksView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +31,9 @@ class TasksView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -69,7 +68,7 @@ class TasksView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Task"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -81,7 +80,9 @@ class TasksView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Task')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -114,7 +115,10 @@ class TasksView(object):
     )
     def edit(self):
         task = Task.get(self.request.params.get('id'))
-        return {'item': task, 'title': _(u'Edit Task')}
+        return {
+            'item': task,
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -165,7 +169,7 @@ class TasksView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Tasks'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

@@ -13,7 +13,7 @@
         iconCls:'fa fa-pie-chart',
         tools:'#${_t_id}'
     "
-    title="${_(u'Turnovers')}">
+    title="${title}">
     ${context_info(_t_id, request)}
     <table class="easyui-treegrid" 
         id="${_id}"

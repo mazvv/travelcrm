@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.foodcat import Foodcat
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.foodcats.FoodcatsResource',
 )
-class FoodcatsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class FoodcatsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class FoodcatsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class FoodcatsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Food Category"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class FoodcatsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Hotel Category')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class FoodcatsView(object):
     )
     def edit(self):
         foodcat = Foodcat.get(self.request.params.get('id'))
-        return {'item': foodcat, 'title': _(u'Edit Hotel Category')}
+        return {
+            'item': foodcat, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -143,7 +147,7 @@ class FoodcatsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Food Categories'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

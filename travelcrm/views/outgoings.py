@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.outgoing import Outgoing
 from ..lib.bl.employees import get_employee_structure
@@ -24,11 +24,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.outgoings.OutgoingsResource',
 )
-class OutgoingsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class OutgoingsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -36,7 +32,9 @@ class OutgoingsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -71,7 +69,7 @@ class OutgoingsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Outgoing"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -86,7 +84,7 @@ class OutgoingsView(object):
         auth_employee = get_auth_employee(self.request)
         structure = get_employee_structure(auth_employee)
         return {
-            'title': _(u'Add Outgoing'),
+            'title': self._get_title(_(u'Add')),
             'structure_id': structure.id
         }
 
@@ -124,7 +122,7 @@ class OutgoingsView(object):
         return {
             'item': outgoing,
             'structure_id': structure_id,
-            'title': _(u'Edit Outgoing'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -158,7 +156,7 @@ class OutgoingsView(object):
         outgoing = Outgoing.get(self.request.params.get('id'))
         return {
             'item': outgoing,
-            'title': _(u"Copy Outgoing")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -190,7 +188,7 @@ class OutgoingsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Outgoing Payments'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

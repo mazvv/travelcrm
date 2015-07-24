@@ -15,7 +15,10 @@ from .lib.utils.common_utils import translate as _
 from .lib.utils.common_utils import get_multicompanies
 from .lib.bl.employees import get_employee_structure
 from .lib.utils.security_utils import get_auth_employee
-from .lib.utils.companies_utils import get_public_domain
+from .lib.utils.companies_utils import (
+    get_public_domain, 
+    get_company
+)
 from .lib.utils.sql_utils import (
     get_default_schema,
     get_schemas,
@@ -31,16 +34,7 @@ def helpers(event):
     event.update({'h': h, '_': _})
 
 
-def company_settings(event):
-    request = event.request
-    employee = get_auth_employee(request)
-    if not employee:
-        return
-    structure = get_employee_structure(employee)
-    if not structure:
-        redirect_url = request.resource_url(Root(request))
-        raise HTTPFound(location=redirect_url, headers=forget(request))
-    company = structure.company
+def _company_settings(request, company):
     if company:
         settings = {
             'company.name': company.name,
@@ -49,6 +43,19 @@ def company_settings(event):
             'company.timezone': company.settings.get('timezone'),
         }
         request.registry.settings.update(settings)
+
+    
+def company_settings(event):
+    request = event.request
+    employee = get_auth_employee(request)
+    if not employee:
+        _company_settings(request, get_company())
+        return
+    structure = get_employee_structure(employee)
+    if not structure:
+        redirect_url = request.resource_url(Root(request))
+        raise HTTPFound(location=redirect_url, headers=forget(request))
+    _company_settings(request, structure.company)
 
 
 def company_schema(event):

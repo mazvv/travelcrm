@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.accomodation import Accomodation
 from ..lib.utils.common_utils import translate as _
@@ -20,19 +21,17 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.accomodations.AccomodationsResource',
 )
-class AccomodationsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
+class AccomodationsView(BaseView):
+    
     @view_config(
         request_method='GET',
         renderer='travelcrm:templates/accomodations/index.mako',
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title()
+        }
 
     @view_config(
         name='list',
@@ -53,7 +52,7 @@ class AccomodationsView(object):
     @view_config(
         name='view',
         request_method='GET',
-        renderer='travelcrm:templates/resources_types/form.mako',
+        renderer='travelcrm:templates/accomodations/form.mako',
         permission='view'
     )
     def view(self):
@@ -67,7 +66,7 @@ class AccomodationsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Accomodation Type"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -79,7 +78,9 @@ class AccomodationsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Hotel Category')}
+        return {
+            'title': self._get_title(_(u'Add'))
+        }
 
     @view_config(
         name='add',
@@ -113,7 +114,7 @@ class AccomodationsView(object):
         accomodation = Accomodation.get(self.request.params.get('id'))
         return {
             'item': accomodation,
-            'title': _(u'Edit Accomodation Type')
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -145,7 +146,7 @@ class AccomodationsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Accomodation'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

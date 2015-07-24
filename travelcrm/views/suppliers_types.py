@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.supplier_type import SupplierType
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.suppliers_types.SuppliersTypesResource',
 )
-class SuppliersTypesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class SuppliersTypesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class SuppliersTypesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class SuppliersTypesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Supplier Type"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class SuppliersTypesView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Supplier Type')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class SuppliersTypesView(object):
     )
     def edit(self):
         supplier_type = SupplierType.get(self.request.params.get('id'))
-        return {'item': supplier_type, 'title': _(u'Edit Hotel Category')}
+        return {
+            'item': supplier_type, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -143,7 +147,7 @@ class SuppliersTypesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Supplier Types'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

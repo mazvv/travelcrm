@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.bank import Bank
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.banks.BanksResource',
 )
-class BanksView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class BanksView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class BanksView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class BanksView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Bank"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class BanksView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Bank')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class BanksView(object):
     )
     def edit(self):
         bank = Bank.get(self.request.params.get('id'))
-        return {'item': bank, 'title': _(u'Edit Bank')}
+        return {
+            'item': bank, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -143,7 +147,7 @@ class BanksView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Banks'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

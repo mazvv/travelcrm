@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.location import Location
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.locations.LocationsResource',
 )
-class LocationsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class LocationsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class LocationsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class LocationsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Location"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class LocationsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Location')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class LocationsView(object):
     )
     def edit(self):
         location = Location.get(self.request.params.get('id'))
-        return {'item': location, 'title': _(u'Edit Location')}
+        return {
+            'item': location, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -145,7 +149,7 @@ class LocationsView(object):
         location = Location.get(self.request.params.get('id'))
         return {
             'item': location,
-            'title': _(u"Copy Location")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -165,7 +169,7 @@ class LocationsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Locations'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

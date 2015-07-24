@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.user import User
 from ..lib.utils.common_utils import translate as _
@@ -22,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.users.UsersResource',
 )
-class UsersView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class UsersView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -35,7 +32,9 @@ class UsersView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -70,7 +69,7 @@ class UsersView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View User"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -82,7 +81,9 @@ class UsersView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add User')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -114,7 +115,10 @@ class UsersView(object):
     )
     def edit(self):
         user = User.get(self.request.params.get('id'))
-        return {'item': user, 'title': _(u'Edit User')}
+        return {
+            'item': user, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -145,7 +149,7 @@ class UsersView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Users'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

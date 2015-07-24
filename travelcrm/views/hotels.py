@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.hotel import Hotel
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.hotels.HotelsResource',
 )
-class HotelsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class HotelsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class HotelsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class HotelsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Hotel"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class HotelsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Hotel')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class HotelsView(object):
     )
     def edit(self):
         hotel = Hotel.get(self.request.params.get('id'))
-        return {'item': hotel, 'title': _(u'Edit Hotel')}
+        return {
+            'item': hotel, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -145,7 +149,7 @@ class HotelsView(object):
         hotel = Hotel.get(self.request.params.get('id'))
         return {
             'item': hotel,
-            'title': _(u"Copy Hotel")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -165,7 +169,7 @@ class HotelsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Hotels'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

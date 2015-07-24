@@ -2,9 +2,9 @@
 
 import logging
 
-import colander
 from pyramid.view import view_config, view_defaults
 
+from . import BaseView
 from ..models import DBSession
 from ..models.position import Position
 from ..models.resource_type import ResourceType
@@ -24,11 +24,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.permisions.PermisionsResource',
 )
-class PermisionsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class PermisionsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -37,7 +33,10 @@ class PermisionsView(object):
     )
     def index(self):
         position = Position.get(self.request.params.get('id'))
-        return {'position': position}
+        return {
+            'position': position,
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -122,7 +121,7 @@ class PermisionsView(object):
         position = Position.get(self.request.params.get('position_id'))
         return {
             'position': position,
-            'title': _(u"Copy Permissions From Position")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(

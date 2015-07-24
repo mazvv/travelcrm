@@ -1,12 +1,12 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import FileResponse
 
+from . import BaseView
 from ..models import DBSession
 from ..models.upload import Upload
 from ..lib.utils.common_utils import translate as _
@@ -23,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.uploads.UploadsResource',
 )
-class UploadsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class UploadsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -35,7 +31,9 @@ class UploadsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -70,7 +68,7 @@ class UploadsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Upload"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -83,7 +81,7 @@ class UploadsView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Upload'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -118,7 +116,7 @@ class UploadsView(object):
         upload = Upload.get(self.request.params.get('id'))
         return {
             'item': upload,
-            'title': _(u'Edit Upload'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -152,7 +150,7 @@ class UploadsView(object):
         upload = Upload.get(self.request.params.get('id'))
         return {
             'item': upload,
-            'title': _(u"Copy Upload")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -172,7 +170,7 @@ class UploadsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Uploads'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

@@ -1,14 +1,13 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.commission import Commission
-from ..lib.qb.commissions import CommissionsQueryBuilder
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.commissions import (
@@ -23,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.commissions.CommissionsResource',
 )
-class CommissionsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class CommissionsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -35,7 +30,9 @@ class CommissionsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -70,7 +67,7 @@ class CommissionsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Commission"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -83,7 +80,7 @@ class CommissionsView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Commission'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -118,7 +115,7 @@ class CommissionsView(object):
         commission = Commission.get(self.request.params.get('id'))
         return {
             'item': commission,
-            'title': _(u'Edit Commission'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -152,7 +149,7 @@ class CommissionsView(object):
         commission = Commission.get(self.request.params.get('id'))
         return {
             'item': commission,
-            'title': _(u"Copy Commission")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -172,7 +169,7 @@ class CommissionsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Commissions'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

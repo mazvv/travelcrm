@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.calculation import Calculation
 from ..lib.utils.common_utils import translate as _
@@ -23,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.calculations.CalculationsResource',
 )
-class CalculationsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class CalculationsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -38,6 +34,7 @@ class CalculationsView(object):
         id = self.request.params.get('id')
         return {
             'id': id,
+            'title': self._get_title(),
         }
 
     @view_config(
@@ -73,7 +70,7 @@ class CalculationsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Calculation"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -115,7 +112,7 @@ class CalculationsView(object):
         calculation = Calculation.get(self.request.params.get('id'))
         return {
             'item': calculation,
-            'title': _(u'Edit Calculation'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -159,7 +156,7 @@ class CalculationsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Calculations'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

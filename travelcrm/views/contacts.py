@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.contact import Contact
 from ..lib.utils.common_utils import translate as _
@@ -22,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.contacts.ContactsResource',
 )
-class ContactsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class ContactsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +30,9 @@ class ContactsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -69,7 +67,7 @@ class ContactsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Contact"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -82,7 +80,7 @@ class ContactsView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Contact'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -117,7 +115,7 @@ class ContactsView(object):
         contact = Contact.get(self.request.params.get('id'))
         return {
             'item': contact,
-            'title': _(u'Edit Contact'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -151,7 +149,7 @@ class ContactsView(object):
         contact = Contact.get(self.request.params.get('id'))
         return {
             'item': contact,
-            'title': _(u"Copy Contact")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -171,7 +169,7 @@ class ContactsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Contacts'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

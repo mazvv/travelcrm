@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.transfer import Transfer
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.transfers.TransfersResource',
 )
-class TransfersView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class TransfersView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class TransfersView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class TransfersView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Transfer"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class TransfersView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Transfer')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class TransfersView(object):
     )
     def edit(self):
         transfer = Transfer.get(self.request.params.get('id'))
-        return {'item': transfer, 'title': _(u'Edit Transfer')}
+        return {
+            'item': transfer, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -143,7 +147,7 @@ class TransfersView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Transfers'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

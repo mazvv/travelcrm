@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.renderers import render
 
+from . import BaseView
 from ..lib.utils.common_utils import serialize
 from ..lib.utils.common_utils import translate as _
 from ..forms.turnovers import TurnoverSearchForm
@@ -16,11 +17,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.turnovers.TurnoversResource',
 )
-class TurnoversView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class TurnoversView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -28,7 +25,9 @@ class TurnoversView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',

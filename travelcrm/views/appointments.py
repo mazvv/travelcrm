@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.appointment import Appointment
 from ..lib.utils.common_utils import translate as _
@@ -20,11 +20,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.appointments.AppointmentsResource',
 )
-class AppointmentsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class AppointmentsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -32,7 +28,9 @@ class AppointmentsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -67,7 +65,7 @@ class AppointmentsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Appointment"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +78,7 @@ class AppointmentsView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Employee Appointment'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -115,7 +113,7 @@ class AppointmentsView(object):
         appointment = Appointment.get(self.request.params.get('id'))
         return {
             'item': appointment,
-            'title': _(u'Edit Employee Appointment')
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -149,7 +147,7 @@ class AppointmentsView(object):
         resources_type = Appointment.get(self.request.params.get('id'))
         return {
             'item': resources_type,
-            'title': _(u"Copy Appointment")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -169,7 +167,7 @@ class AppointmentsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Appointments'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

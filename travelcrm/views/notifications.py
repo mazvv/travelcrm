@@ -4,6 +4,7 @@ import logging
 
 from pyramid.view import view_config, view_defaults
 
+from . import BaseView
 from ..models.notification import Notification
 from ..lib.bl.notifications import close_notification
 from ..lib.utils.common_utils import translate as _
@@ -19,11 +20,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.notifications.NotificationsResource',
 )
-class NotificationsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class NotificationsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -31,7 +28,9 @@ class NotificationsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',

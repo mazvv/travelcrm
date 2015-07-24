@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.3-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-07-09 22:32+0300\n"
+"POT-Creation-Date: 2015-07-24 22:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,13 +41,17 @@ msgstr ""
 msgid "Account Item with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/accounts_items.py:44 travelcrm/forms/navigations.py:31
+#: travelcrm/forms/accounts_items.py:44 travelcrm/forms/navigations.py:32
 #: travelcrm/forms/structures.py:32
 msgid "Can not be parent of self"
 msgstr ""
 
 #: travelcrm/forms/advsources.py:30
 msgid "Advertise source with the same name exists"
+msgstr ""
+
+#: travelcrm/forms/auth.py:23
+msgid "Email does not exists"
 msgstr ""
 
 #: travelcrm/forms/banks.py:31
@@ -111,15 +115,15 @@ msgstr ""
 msgid "Create company subaccount for account from invoice"
 msgstr ""
 
-#: travelcrm/forms/invoices.py:40
+#: travelcrm/forms/invoices.py:42
 msgid "Active until date must be more than invoice date"
 msgstr ""
 
-#: travelcrm/forms/invoices.py:61
+#: travelcrm/forms/invoices.py:63
 msgid "Invoice for this order already exists"
 msgstr ""
 
-#: travelcrm/forms/invoices.py:67
+#: travelcrm/forms/invoices.py:70
 msgid "Some order items has no calculations"
 msgstr ""
 
@@ -127,7 +131,7 @@ msgstr ""
 msgid "Location with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/navigations.py:77 travelcrm/forms/permisions.py:109
+#: travelcrm/forms/navigations.py:78 travelcrm/forms/permisions.py:109
 msgid "Can not copy to itself"
 msgstr ""
 
@@ -150,6 +154,10 @@ msgstr ""
 
 #: travelcrm/forms/permisions.py:25
 msgid "Set structure for scope"
+msgstr ""
+
+#: travelcrm/forms/persons_categories.py:30
+msgid "Person Category with the same name exists"
 msgstr ""
 
 #: travelcrm/forms/positions.py:43
@@ -222,10 +230,14 @@ msgid "User with the same username exists"
 msgstr ""
 
 #: travelcrm/forms/users.py:47
+msgid "User with the same email exists"
+msgstr ""
+
+#: travelcrm/forms/users.py:64
 msgid "User for this employee already exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:60
+#: travelcrm/forms/users.py:77
 msgid "Password and confirm is not equal"
 msgstr ""
 
@@ -233,18 +245,19 @@ msgstr ""
 msgid "Vat for this date exists"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:257 travelcrm/lib/helpers/fields.py:283
-#: travelcrm/lib/helpers/fields.py:302 travelcrm/lib/helpers/fields.py:324
-#: travelcrm/lib/helpers/fields.py:346 travelcrm/lib/helpers/fields.py:545
-#: travelcrm/lib/helpers/fields.py:567 travelcrm/lib/helpers/fields.py:589
-#: travelcrm/lib/helpers/fields.py:611 travelcrm/lib/helpers/fields.py:633
-#: travelcrm/lib/helpers/fields.py:655 travelcrm/lib/helpers/fields.py:677
-#: travelcrm/lib/helpers/fields.py:720 travelcrm/lib/helpers/fields.py:741
-#: travelcrm/lib/helpers/fields.py:772 travelcrm/lib/helpers/fields.py:793
-#: travelcrm/lib/helpers/fields.py:835 travelcrm/lib/helpers/fields.py:912
-#: travelcrm/lib/helpers/fields.py:913 travelcrm/lib/helpers/fields.py:1045
-#: travelcrm/lib/helpers/fields.py:1066 travelcrm/lib/helpers/fields.py:1088
-#: travelcrm/lib/helpers/fields.py:1183 travelcrm/lib/helpers/fields.py:1350
+#: travelcrm/lib/helpers/fields.py:258 travelcrm/lib/helpers/fields.py:284
+#: travelcrm/lib/helpers/fields.py:303 travelcrm/lib/helpers/fields.py:325
+#: travelcrm/lib/helpers/fields.py:347 travelcrm/lib/helpers/fields.py:546
+#: travelcrm/lib/helpers/fields.py:568 travelcrm/lib/helpers/fields.py:590
+#: travelcrm/lib/helpers/fields.py:612 travelcrm/lib/helpers/fields.py:634
+#: travelcrm/lib/helpers/fields.py:656 travelcrm/lib/helpers/fields.py:678
+#: travelcrm/lib/helpers/fields.py:721 travelcrm/lib/helpers/fields.py:742
+#: travelcrm/lib/helpers/fields.py:773 travelcrm/lib/helpers/fields.py:794
+#: travelcrm/lib/helpers/fields.py:836 travelcrm/lib/helpers/fields.py:913
+#: travelcrm/lib/helpers/fields.py:914 travelcrm/lib/helpers/fields.py:1046
+#: travelcrm/lib/helpers/fields.py:1067 travelcrm/lib/helpers/fields.py:1089
+#: travelcrm/lib/helpers/fields.py:1184 travelcrm/lib/helpers/fields.py:1351
+#: travelcrm/lib/helpers/fields.py:1386
 #: travelcrm/templates/accomodations/form.mako:21
 #: travelcrm/templates/accomodations/index.mako:38
 #: travelcrm/templates/accounts/common.mako:76
@@ -269,10 +282,12 @@ msgstr ""
 #: travelcrm/templates/hotelcats/index.mako:38
 #: travelcrm/templates/hotels/form.mako:21 travelcrm/templates/hotels/index.mako:38
 #: travelcrm/templates/locations/form.mako:21
-#: travelcrm/templates/navigations/form.mako:20
+#: travelcrm/templates/navigations/form.mako:24
 #: travelcrm/templates/navigations/index.mako:35
 #: travelcrm/templates/persons/common.mako:69
 #: travelcrm/templates/persons/index.mako:52
+#: travelcrm/templates/persons_categories/form.mako:21
+#: travelcrm/templates/persons_categories/index.mako:38
 #: travelcrm/templates/positions/form.mako:21
 #: travelcrm/templates/positions/index.mako:36
 #: travelcrm/templates/regions/form.mako:21
@@ -303,22 +318,6 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:260 travelcrm/lib/helpers/fields.py:285
-#: travelcrm/lib/helpers/fields.py:306 travelcrm/lib/helpers/fields.py:328
-#: travelcrm/lib/helpers/fields.py:350 travelcrm/lib/helpers/fields.py:549
-#: travelcrm/lib/helpers/fields.py:571 travelcrm/lib/helpers/fields.py:593
-#: travelcrm/lib/helpers/fields.py:615 travelcrm/lib/helpers/fields.py:637
-#: travelcrm/lib/helpers/fields.py:659 travelcrm/lib/helpers/fields.py:681
-#: travelcrm/lib/helpers/fields.py:703 travelcrm/lib/helpers/fields.py:724
-#: travelcrm/lib/helpers/fields.py:745 travelcrm/lib/helpers/fields.py:776
-#: travelcrm/lib/helpers/fields.py:797 travelcrm/lib/helpers/fields.py:838
-#: travelcrm/lib/helpers/fields.py:870 travelcrm/lib/helpers/fields.py:917
-#: travelcrm/lib/helpers/fields.py:1049 travelcrm/lib/helpers/fields.py:1070
-#: travelcrm/lib/helpers/fields.py:1092 travelcrm/lib/helpers/fields.py:1187
-#: travelcrm/lib/helpers/fields.py:1273 travelcrm/lib/helpers/fields.py:1302
-msgid "add new"
-msgstr ""
-
 #: travelcrm/lib/helpers/fields.py:261 travelcrm/lib/helpers/fields.py:286
 #: travelcrm/lib/helpers/fields.py:307 travelcrm/lib/helpers/fields.py:329
 #: travelcrm/lib/helpers/fields.py:351 travelcrm/lib/helpers/fields.py:550
@@ -332,8 +331,8 @@ msgstr ""
 #: travelcrm/lib/helpers/fields.py:1050 travelcrm/lib/helpers/fields.py:1071
 #: travelcrm/lib/helpers/fields.py:1093 travelcrm/lib/helpers/fields.py:1188
 #: travelcrm/lib/helpers/fields.py:1274 travelcrm/lib/helpers/fields.py:1303
-#: travelcrm/lib/helpers/fields.py:1354
-msgid "view item"
+#: travelcrm/lib/helpers/fields.py:1390
+msgid "add new"
 msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:262 travelcrm/lib/helpers/fields.py:287
@@ -349,25 +348,42 @@ msgstr ""
 #: travelcrm/lib/helpers/fields.py:1051 travelcrm/lib/helpers/fields.py:1072
 #: travelcrm/lib/helpers/fields.py:1094 travelcrm/lib/helpers/fields.py:1189
 #: travelcrm/lib/helpers/fields.py:1275 travelcrm/lib/helpers/fields.py:1304
-#: travelcrm/lib/helpers/fields.py:1355
-msgid "edit item"
+#: travelcrm/lib/helpers/fields.py:1355 travelcrm/lib/helpers/fields.py:1391
+msgid "view item"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:364 travelcrm/lib/helpers/fields.py:398
-#: travelcrm/templates/resources_types/details.mako:37
-msgid "no"
+#: travelcrm/lib/helpers/fields.py:263 travelcrm/lib/helpers/fields.py:288
+#: travelcrm/lib/helpers/fields.py:309 travelcrm/lib/helpers/fields.py:331
+#: travelcrm/lib/helpers/fields.py:353 travelcrm/lib/helpers/fields.py:552
+#: travelcrm/lib/helpers/fields.py:574 travelcrm/lib/helpers/fields.py:596
+#: travelcrm/lib/helpers/fields.py:618 travelcrm/lib/helpers/fields.py:640
+#: travelcrm/lib/helpers/fields.py:662 travelcrm/lib/helpers/fields.py:684
+#: travelcrm/lib/helpers/fields.py:706 travelcrm/lib/helpers/fields.py:727
+#: travelcrm/lib/helpers/fields.py:748 travelcrm/lib/helpers/fields.py:779
+#: travelcrm/lib/helpers/fields.py:800 travelcrm/lib/helpers/fields.py:841
+#: travelcrm/lib/helpers/fields.py:873 travelcrm/lib/helpers/fields.py:920
+#: travelcrm/lib/helpers/fields.py:1052 travelcrm/lib/helpers/fields.py:1073
+#: travelcrm/lib/helpers/fields.py:1095 travelcrm/lib/helpers/fields.py:1190
+#: travelcrm/lib/helpers/fields.py:1276 travelcrm/lib/helpers/fields.py:1305
+#: travelcrm/lib/helpers/fields.py:1356 travelcrm/lib/helpers/fields.py:1392
+msgid "edit item"
 msgstr ""
 
 #: travelcrm/lib/helpers/fields.py:365 travelcrm/lib/helpers/fields.py:399
 #: travelcrm/templates/resources_types/details.mako:37
+msgid "no"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:366 travelcrm/lib/helpers/fields.py:400
+#: travelcrm/templates/resources_types/details.mako:37
 msgid "yes"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:454
+#: travelcrm/lib/helpers/fields.py:455
 msgid "all"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:455
+#: travelcrm/lib/helpers/fields.py:456
 #: travelcrm/templates/appointments/index.mako:41
 #: travelcrm/templates/permisions/index.mako:38
 #: travelcrm/templates/positions/form.mako:30
@@ -375,24 +391,25 @@ msgstr ""
 msgid "structure"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:699 travelcrm/templates/countries/form.mako:21
+#: travelcrm/lib/helpers/fields.py:700 travelcrm/templates/countries/form.mako:21
 #: travelcrm/templates/countries/index.mako:38
 #: travelcrm/templates/currencies/form.mako:21
 #: travelcrm/templates/currencies_rates/index.mako:39
 msgid "iso code"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:864 travelcrm/lib/helpers/fields.py:1270
-#: travelcrm/lib/helpers/fields.py:1297 travelcrm/templates/incomes/index.mako:56
+#: travelcrm/lib/helpers/fields.py:865 travelcrm/lib/helpers/fields.py:1271
+#: travelcrm/lib/helpers/fields.py:1298 travelcrm/templates/incomes/index.mako:56
 #: travelcrm/templates/invoices/details.mako:11
 #: travelcrm/templates/invoices/index.mako:55
 #: travelcrm/templates/leads/details.mako:11 travelcrm/templates/leads/form.mako:46
-#: travelcrm/templates/leads/index.mako:54 travelcrm/templates/orders/form.mako:61
-#: travelcrm/templates/orders/index.mako:54
+#: travelcrm/templates/leads/index.mako:54
+#: travelcrm/templates/orders/details.mako:11
+#: travelcrm/templates/orders/form.mako:61 travelcrm/templates/orders/index.mako:54
 msgid "customer"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:865 travelcrm/templates/cashflows/common.mako:6
+#: travelcrm/lib/helpers/fields.py:866 travelcrm/templates/cashflows/common.mako:6
 #: travelcrm/templates/crosspayments/form.mako:81
 #: travelcrm/templates/crosspayments/index.mako:56
 #: travelcrm/templates/incomes/form.mako:49
@@ -402,15 +419,15 @@ msgstr ""
 msgid "sum"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:866
+#: travelcrm/lib/helpers/fields.py:867
 msgid "num"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:867
+#: travelcrm/lib/helpers/fields.py:868
 msgid "from date"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:914 travelcrm/templates/notes/details.mako:16
+#: travelcrm/lib/helpers/fields.py:915 travelcrm/templates/notes/details.mako:16
 #: travelcrm/templates/notifications/details.mako:16
 #: travelcrm/templates/outgoings/index.mako:55
 #: travelcrm/templates/resources_types/details.mako:18
@@ -420,34 +437,43 @@ msgstr ""
 msgid "resource"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:949
+#: travelcrm/lib/helpers/fields.py:950
 msgid "en"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:950
+#: travelcrm/lib/helpers/fields.py:951
 msgid "ru"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:978 travelcrm/lib/helpers/fields.py:993
-#: travelcrm/lib/helpers/fields.py:1008 travelcrm/lib/helpers/fields.py:1112
-#: travelcrm/lib/helpers/fields.py:1127 travelcrm/lib/helpers/fields.py:1142
-#: travelcrm/lib/helpers/fields.py:1157 travelcrm/lib/helpers/fields.py:1171
-#: travelcrm/lib/helpers/fields.py:1207 travelcrm/lib/helpers/fields.py:1222
-#: travelcrm/lib/helpers/fields.py:1237 travelcrm/lib/helpers/fields.py:1252
-#: travelcrm/lib/helpers/fields.py:1322 travelcrm/lib/helpers/fields.py:1337
-#: travelcrm/lib/helpers/fields.py:1373
+#: travelcrm/lib/helpers/fields.py:979 travelcrm/lib/helpers/fields.py:994
+#: travelcrm/lib/helpers/fields.py:1009 travelcrm/lib/helpers/fields.py:1113
+#: travelcrm/lib/helpers/fields.py:1128 travelcrm/lib/helpers/fields.py:1143
+#: travelcrm/lib/helpers/fields.py:1158 travelcrm/lib/helpers/fields.py:1172
+#: travelcrm/lib/helpers/fields.py:1208 travelcrm/lib/helpers/fields.py:1223
+#: travelcrm/lib/helpers/fields.py:1238 travelcrm/lib/helpers/fields.py:1253
+#: travelcrm/lib/helpers/fields.py:1323 travelcrm/lib/helpers/fields.py:1338
+#: travelcrm/lib/helpers/fields.py:1374
 msgid "--all--"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:1270 travelcrm/lib/helpers/fields.py:1298
+#: travelcrm/lib/helpers/fields.py:1271 travelcrm/lib/helpers/fields.py:1299
 #: travelcrm/templates/cashflows/common.mako:4
 #: travelcrm/templates/visas/details.mako:18
 msgid "from"
 msgstr ""
 
+#: travelcrm/lib/scheduler/companies.py:46
+msgid "Company created"
+msgstr ""
+
 #: travelcrm/lib/scheduler/tasks.py:26
 #, python-format
 msgid "Task: %s"
+msgstr ""
+
+#: travelcrm/lib/scheduler/users.py:21
+#: travelcrm/templates/users/email_password_recovery.mako:6
+msgid "Password recovery"
 msgstr ""
 
 #: travelcrm/models/account.py:30 travelcrm/templates/banks_details/common.mako:74
@@ -493,7 +519,8 @@ msgid "phone"
 msgstr ""
 
 #: travelcrm/models/contact.py:24 travelcrm/templates/auth/add.mako:20
-#: travelcrm/templates/auth/forgot.mako:15
+#: travelcrm/templates/auth/forgot.mako:15 travelcrm/templates/users/form.mako:45
+#: travelcrm/templates/users/index.mako:40
 msgid "email"
 msgstr ""
 
@@ -529,11 +556,11 @@ msgstr ""
 msgid "closed"
 msgstr ""
 
-#: travelcrm/models/passport.py:25
+#: travelcrm/models/passport.py:53
 msgid "citizen"
 msgstr ""
 
-#: travelcrm/models/passport.py:26
+#: travelcrm/models/passport.py:54
 msgid "foreign"
 msgstr ""
 
@@ -573,30 +600,32 @@ msgstr ""
 msgid "multi"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:77 travelcrm/resources/__init__.py:98
-#: travelcrm/resources/companies.py:24 travelcrm/resources/notifications.py:21
+#: travelcrm/resources/__init__.py:76 travelcrm/resources/__init__.py:97
+#: travelcrm/resources/activities.py:29 travelcrm/resources/companies.py:24
+#: travelcrm/resources/leads_stats.py:29 travelcrm/resources/notifications.py:21
 #: travelcrm/resources/turnovers.py:22
 msgid "view"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:99
+#: travelcrm/resources/__init__.py:98
 msgid "add"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:100 travelcrm/resources/companies.py:25
+#: travelcrm/resources/__init__.py:99 travelcrm/resources/companies.py:25
 msgid "edit"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:101
+#: travelcrm/resources/__init__.py:100
 msgid "delete"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:104
+#: travelcrm/resources/__init__.py:103 travelcrm/resources/activities.py:30
+#: travelcrm/resources/leads_stats.py:30
 #: travelcrm/templates/resources_types/details.mako:34
 msgid "settings"
 msgstr ""
 
-#: travelcrm/resources/leads.py:21 travelcrm/templates/invoices/form.mako:89
+#: travelcrm/resources/leads.py:21 travelcrm/templates/invoices/form.mako:69
 msgid "order"
 msgstr ""
 
@@ -604,7 +633,7 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: travelcrm/resources/orders.py:21 travelcrm/templates/orders/details.mako:24
+#: travelcrm/resources/orders.py:21 travelcrm/templates/orders/details.mako:33
 msgid "calculation"
 msgstr ""
 
@@ -643,13 +672,14 @@ msgstr ""
 #: travelcrm/templates/foodcats/form.mako:40
 #: travelcrm/templates/hotelcats/form.mako:40
 #: travelcrm/templates/hotels/form.mako:68 travelcrm/templates/incomes/form.mako:94
-#: travelcrm/templates/invoices/form.mako:156
+#: travelcrm/templates/invoices/form.mako:121
 #: travelcrm/templates/leads/form.mako:117
 #: travelcrm/templates/locations/form.mako:54
-#: travelcrm/templates/navigations/form.mako:84
+#: travelcrm/templates/navigations/form.mako:88
 #: travelcrm/templates/orders/form.mako:121
 #: travelcrm/templates/outgoings/form.mako:94
-#: travelcrm/templates/persons/form.mako:135
+#: travelcrm/templates/persons/form.mako:140
+#: travelcrm/templates/persons_categories/form.mako:40
 #: travelcrm/templates/positions/form.mako:49
 #: travelcrm/templates/regions/form.mako:54
 #: travelcrm/templates/resources_types/form.mako:95
@@ -662,7 +692,7 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/form.mako:40
 #: travelcrm/templates/transfers/form.mako:40
 #: travelcrm/templates/transports/form.mako:40
-#: travelcrm/templates/users/form.mako:78 travelcrm/templates/vats/form.mako:108
+#: travelcrm/templates/users/form.mako:87 travelcrm/templates/vats/form.mako:108
 msgid "Tasks"
 msgstr ""
 
@@ -683,13 +713,14 @@ msgstr ""
 #: travelcrm/templates/foodcats/form.mako:29
 #: travelcrm/templates/hotelcats/form.mako:29
 #: travelcrm/templates/hotels/form.mako:57 travelcrm/templates/incomes/form.mako:83
-#: travelcrm/templates/invoices/form.mako:145
+#: travelcrm/templates/invoices/form.mako:110
 #: travelcrm/templates/leads/form.mako:106
 #: travelcrm/templates/locations/form.mako:43
-#: travelcrm/templates/navigations/form.mako:73
+#: travelcrm/templates/navigations/form.mako:77
 #: travelcrm/templates/orders/form.mako:110
 #: travelcrm/templates/outgoings/form.mako:83
-#: travelcrm/templates/persons/form.mako:124
+#: travelcrm/templates/persons/form.mako:129
+#: travelcrm/templates/persons_categories/form.mako:29
 #: travelcrm/templates/positions/form.mako:38
 #: travelcrm/templates/regions/form.mako:43
 #: travelcrm/templates/resources_types/form.mako:84
@@ -703,7 +734,7 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/form.mako:29
 #: travelcrm/templates/transfers/form.mako:29
 #: travelcrm/templates/transports/form.mako:29
-#: travelcrm/templates/users/form.mako:67 travelcrm/templates/vats/form.mako:97
+#: travelcrm/templates/users/form.mako:76 travelcrm/templates/vats/form.mako:97
 msgid "Notes"
 msgstr ""
 
@@ -759,6 +790,7 @@ msgstr ""
 #: travelcrm/templates/passports/delete.mako:12
 #: travelcrm/templates/permisions/delete.mako:12
 #: travelcrm/templates/persons/delete.mako:12
+#: travelcrm/templates/persons_categories/delete.mako:12
 #: travelcrm/templates/positions/delete.mako:12
 #: travelcrm/templates/regions/delete.mako:12
 #: travelcrm/templates/resources_types/delete.mako:12
@@ -849,6 +881,8 @@ msgstr ""
 #: travelcrm/templates/persons/common.mako:99
 #: travelcrm/templates/persons/delete.mako:18
 #: travelcrm/templates/persons/index.mako:85
+#: travelcrm/templates/persons_categories/delete.mako:18
+#: travelcrm/templates/persons_categories/index.mako:68
 #: travelcrm/templates/positions/delete.mako:18
 #: travelcrm/templates/positions/index.mako:71
 #: travelcrm/templates/regions/delete.mako:18
@@ -878,8 +912,34 @@ msgstr ""
 #: travelcrm/templates/transports/index.mako:68
 #: travelcrm/templates/uploads/common.mako:88
 #: travelcrm/templates/uploads/delete.mako:18
-#: travelcrm/templates/users/delete.mako:18 travelcrm/templates/users/index.mako:69
+#: travelcrm/templates/users/delete.mako:18 travelcrm/templates/users/index.mako:70
 #: travelcrm/templates/vats/delete.mako:18 travelcrm/templates/vats/index.mako:72
+#: travelcrm/views/accomodations.py:149 travelcrm/views/accounts.py:149
+#: travelcrm/views/accounts_items.py:146 travelcrm/views/addresses.py:172
+#: travelcrm/views/advsources.py:150 travelcrm/views/appointments.py:170
+#: travelcrm/views/banks.py:150 travelcrm/views/banks_details.py:162
+#: travelcrm/views/bpersons.py:183 travelcrm/views/calculations.py:159
+#: travelcrm/views/commissions.py:172 travelcrm/views/contacts.py:172
+#: travelcrm/views/contracts.py:184 travelcrm/views/countries.py:150
+#: travelcrm/views/crosspayments.py:184 travelcrm/views/currencies.py:150
+#: travelcrm/views/currencies_rates.py:171 travelcrm/views/emails_campaigns.py:153
+#: travelcrm/views/employees.py:153 travelcrm/views/foodcats.py:150
+#: travelcrm/views/hotelcats.py:150 travelcrm/views/hotels.py:172
+#: travelcrm/views/incomes.py:185 travelcrm/views/invoices.py:176
+#: travelcrm/views/leads.py:205 travelcrm/views/leads_items.py:184
+#: travelcrm/views/leads_offers.py:184 travelcrm/views/locations.py:172
+#: travelcrm/views/navigations.py:150 travelcrm/views/notes.py:192
+#: travelcrm/views/orders.py:177 travelcrm/views/orders_items.py:136
+#: travelcrm/views/outgoings.py:191 travelcrm/views/passports.py:172
+#: travelcrm/views/persons.py:166 travelcrm/views/persons_categories.py:150
+#: travelcrm/views/positions.py:172 travelcrm/views/regions.py:150
+#: travelcrm/views/resources_types.py:188 travelcrm/views/roomcats.py:150
+#: travelcrm/views/services.py:150 travelcrm/views/structures.py:161
+#: travelcrm/views/subaccounts.py:165 travelcrm/views/suppliers.py:164
+#: travelcrm/views/suppliers_types.py:150 travelcrm/views/tasks.py:172
+#: travelcrm/views/tickets_classes.py:150 travelcrm/views/transfers.py:150
+#: travelcrm/views/transports.py:150 travelcrm/views/uploads.py:173
+#: travelcrm/views/users.py:152 travelcrm/views/vats.py:150
 msgid "Delete"
 msgstr ""
 
@@ -889,13 +949,14 @@ msgstr ""
 #: travelcrm/templates/accounts/form.mako:111
 #: travelcrm/templates/accounts_items/delete.mako:19
 #: travelcrm/templates/accounts_items/form.mako:98
+#: travelcrm/templates/activities/settings.mako:28
 #: travelcrm/templates/addresses/delete.mako:19
 #: travelcrm/templates/addresses/form.mako:51
 #: travelcrm/templates/advsources/delete.mako:19
 #: travelcrm/templates/advsources/form.mako:56
 #: travelcrm/templates/appointments/delete.mako:19
 #: travelcrm/templates/appointments/form.mako:107
-#: travelcrm/templates/auth/logout.mako:17 travelcrm/templates/banks/delete.mako:19
+#: travelcrm/templates/auth/logout.mako:18 travelcrm/templates/banks/delete.mako:19
 #: travelcrm/templates/banks/form.mako:68
 #: travelcrm/templates/banks_details/delete.mako:19
 #: travelcrm/templates/banks_details/form.mako:74
@@ -933,18 +994,19 @@ msgstr ""
 #: travelcrm/templates/incomes/delete.mako:19
 #: travelcrm/templates/incomes/form.mako:110
 #: travelcrm/templates/invoices/delete.mako:19
-#: travelcrm/templates/invoices/form.mako:172
+#: travelcrm/templates/invoices/form.mako:137
 #: travelcrm/templates/invoices/settings.mako:28
 #: travelcrm/templates/leads/delete.mako:19 travelcrm/templates/leads/form.mako:133
 #: travelcrm/templates/leads_items/delete.mako:19
 #: travelcrm/templates/leads_items/form.mako:84
 #: travelcrm/templates/leads_offers/delete.mako:19
 #: travelcrm/templates/leads_offers/form.mako:96
+#: travelcrm/templates/leads_stats/settings.mako:28
 #: travelcrm/templates/locations/delete.mako:19
 #: travelcrm/templates/locations/form.mako:70
-#: travelcrm/templates/navigations/copy.mako:23
+#: travelcrm/templates/navigations/copy.mako:31
 #: travelcrm/templates/navigations/delete.mako:19
-#: travelcrm/templates/navigations/form.mako:100
+#: travelcrm/templates/navigations/form.mako:104
 #: travelcrm/templates/notes/delete.mako:19 travelcrm/templates/notes/form.mako:58
 #: travelcrm/templates/notifications/close.mako:19
 #: travelcrm/templates/orders/delete.mako:19
@@ -954,11 +1016,13 @@ msgstr ""
 #: travelcrm/templates/outgoings/form.mako:110
 #: travelcrm/templates/passports/delete.mako:19
 #: travelcrm/templates/passports/form.mako:85
-#: travelcrm/templates/permisions/copy.mako:23
+#: travelcrm/templates/permisions/copy.mako:31
 #: travelcrm/templates/permisions/delete.mako:19
 #: travelcrm/templates/permisions/form.mako:59
 #: travelcrm/templates/persons/delete.mako:19
-#: travelcrm/templates/persons/form.mako:151
+#: travelcrm/templates/persons/form.mako:156
+#: travelcrm/templates/persons_categories/delete.mako:19
+#: travelcrm/templates/persons_categories/form.mako:56
 #: travelcrm/templates/positions/delete.mako:19
 #: travelcrm/templates/positions/form.mako:65
 #: travelcrm/templates/regions/delete.mako:19
@@ -983,14 +1047,13 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/delete.mako:19
 #: travelcrm/templates/tickets_classes/form.mako:56
 #: travelcrm/templates/tours/form.mako:328
-#: travelcrm/templates/tours/settings.mako:28
 #: travelcrm/templates/transfers/delete.mako:19
 #: travelcrm/templates/transfers/form.mako:56
 #: travelcrm/templates/transports/delete.mako:19
 #: travelcrm/templates/transports/form.mako:56
 #: travelcrm/templates/uploads/delete.mako:19
 #: travelcrm/templates/uploads/form.mako:49
-#: travelcrm/templates/users/delete.mako:19 travelcrm/templates/users/form.mako:94
+#: travelcrm/templates/users/delete.mako:19 travelcrm/templates/users/form.mako:103
 #: travelcrm/templates/vats/delete.mako:19 travelcrm/templates/vats/form.mako:124
 #: travelcrm/templates/visas/form.mako:187
 msgid "Cancel"
@@ -1012,13 +1075,14 @@ msgstr ""
 #: travelcrm/templates/foodcats/form.mako:18
 #: travelcrm/templates/hotelcats/form.mako:18
 #: travelcrm/templates/hotels/form.mako:18 travelcrm/templates/incomes/form.mako:23
-#: travelcrm/templates/invoices/form.mako:61 travelcrm/templates/leads/form.mako:20
+#: travelcrm/templates/invoices/form.mako:41 travelcrm/templates/leads/form.mako:20
 #: travelcrm/templates/locations/form.mako:18
-#: travelcrm/templates/navigations/form.mako:17
+#: travelcrm/templates/navigations/form.mako:21
 #: travelcrm/templates/notes/form.mako:17 travelcrm/templates/orders/form.mako:21
 #: travelcrm/templates/outgoings/form.mako:23
 #: travelcrm/templates/passports/form.mako:17
 #: travelcrm/templates/persons/form.mako:21
+#: travelcrm/templates/persons_categories/form.mako:18
 #: travelcrm/templates/positions/form.mako:18
 #: travelcrm/templates/regions/form.mako:18
 #: travelcrm/templates/resources_types/form.mako:18
@@ -1042,6 +1106,7 @@ msgstr ""
 #: travelcrm/templates/accomodations/form.mako:55
 #: travelcrm/templates/accounts/form.mako:110
 #: travelcrm/templates/accounts_items/form.mako:97
+#: travelcrm/templates/activities/settings.mako:27
 #: travelcrm/templates/addresses/form.mako:50
 #: travelcrm/templates/advsources/form.mako:55
 #: travelcrm/templates/appointments/form.mako:106
@@ -1064,20 +1129,22 @@ msgstr ""
 #: travelcrm/templates/hotelcats/form.mako:55
 #: travelcrm/templates/hotels/form.mako:83
 #: travelcrm/templates/incomes/form.mako:109
-#: travelcrm/templates/invoices/form.mako:171
+#: travelcrm/templates/invoices/form.mako:136
 #: travelcrm/templates/invoices/settings.mako:27
 #: travelcrm/templates/leads/form.mako:132
 #: travelcrm/templates/leads_items/form.mako:83
 #: travelcrm/templates/leads_offers/form.mako:95
+#: travelcrm/templates/leads_stats/settings.mako:27
 #: travelcrm/templates/locations/form.mako:69
-#: travelcrm/templates/navigations/copy.mako:22
-#: travelcrm/templates/navigations/form.mako:99
+#: travelcrm/templates/navigations/copy.mako:30
+#: travelcrm/templates/navigations/form.mako:103
 #: travelcrm/templates/notes/form.mako:57 travelcrm/templates/orders/form.mako:136
 #: travelcrm/templates/outgoings/form.mako:109
 #: travelcrm/templates/passports/form.mako:84
-#: travelcrm/templates/permisions/copy.mako:22
+#: travelcrm/templates/permisions/copy.mako:30
 #: travelcrm/templates/permisions/form.mako:58
-#: travelcrm/templates/persons/form.mako:150
+#: travelcrm/templates/persons/form.mako:155
+#: travelcrm/templates/persons_categories/form.mako:55
 #: travelcrm/templates/positions/form.mako:64
 #: travelcrm/templates/regions/form.mako:69
 #: travelcrm/templates/resources_types/form.mako:110
@@ -1092,16 +1159,11 @@ msgstr ""
 #: travelcrm/templates/tickets/form.mako:266
 #: travelcrm/templates/tickets_classes/form.mako:55
 #: travelcrm/templates/tours/form.mako:327
-#: travelcrm/templates/tours/settings.mako:27
 #: travelcrm/templates/transfers/form.mako:55
 #: travelcrm/templates/transports/form.mako:55
-#: travelcrm/templates/uploads/form.mako:48 travelcrm/templates/users/form.mako:93
+#: travelcrm/templates/uploads/form.mako:48 travelcrm/templates/users/form.mako:102
 #: travelcrm/templates/vats/form.mako:123 travelcrm/templates/visas/form.mako:186
 msgid "Save"
-msgstr ""
-
-#: travelcrm/templates/accomodations/index.mako:16
-msgid "Accomodations"
 msgstr ""
 
 #: travelcrm/templates/accomodations/index.mako:35
@@ -1112,6 +1174,8 @@ msgstr ""
 #: travelcrm/templates/accounts/index.mako:37
 #: travelcrm/templates/accounts_items/index.mako:29
 #: travelcrm/templates/accounts_items/index.mako:31
+#: travelcrm/templates/activities/index.mako:32
+#: travelcrm/templates/activities/index.mako:34
 #: travelcrm/templates/addresses/common.mako:56
 #: travelcrm/templates/addresses/common.mako:58
 #: travelcrm/templates/advsources/index.mako:35
@@ -1180,6 +1244,8 @@ msgstr ""
 #: travelcrm/templates/persons/common.mako:68
 #: travelcrm/templates/persons/index.mako:49
 #: travelcrm/templates/persons/index.mako:51
+#: travelcrm/templates/persons_categories/index.mako:35
+#: travelcrm/templates/persons_categories/index.mako:37
 #: travelcrm/templates/positions/index.mako:34
 #: travelcrm/templates/positions/index.mako:35
 #: travelcrm/templates/regions/index.mako:35
@@ -1222,6 +1288,7 @@ msgstr ""
 #: travelcrm/templates/accounts/index.mako:42
 #: travelcrm/templates/accounts/index.mako:81
 #: travelcrm/templates/accounts_items/index.mako:35
+#: travelcrm/templates/activities/index.mako:36
 #: travelcrm/templates/addresses/common.mako:61
 #: travelcrm/templates/advsources/index.mako:39
 #: travelcrm/templates/advsources/index.mako:78
@@ -1274,6 +1341,8 @@ msgstr ""
 #: travelcrm/templates/passports/common.mako:62
 #: travelcrm/templates/persons/index.mako:56
 #: travelcrm/templates/persons/index.mako:95
+#: travelcrm/templates/persons_categories/index.mako:39
+#: travelcrm/templates/persons_categories/index.mako:78
 #: travelcrm/templates/positions/index.mako:38
 #: travelcrm/templates/positions/index.mako:93
 #: travelcrm/templates/regions/index.mako:40
@@ -1299,7 +1368,7 @@ msgstr ""
 #: travelcrm/templates/transports/index.mako:39
 #: travelcrm/templates/transports/index.mako:78
 #: travelcrm/templates/uploads/common.mako:62
-#: travelcrm/templates/users/index.mako:40 travelcrm/templates/users/index.mako:79
+#: travelcrm/templates/users/index.mako:41 travelcrm/templates/users/index.mako:80
 #: travelcrm/templates/vats/index.mako:43 travelcrm/templates/vats/index.mako:82
 msgid "updated"
 msgstr ""
@@ -1361,6 +1430,8 @@ msgstr ""
 #: travelcrm/templates/passports/common.mako:63
 #: travelcrm/templates/persons/index.mako:57
 #: travelcrm/templates/persons/index.mako:103
+#: travelcrm/templates/persons_categories/index.mako:40
+#: travelcrm/templates/persons_categories/index.mako:86
 #: travelcrm/templates/positions/index.mako:39
 #: travelcrm/templates/positions/index.mako:101
 #: travelcrm/templates/regions/index.mako:41
@@ -1386,7 +1457,7 @@ msgstr ""
 #: travelcrm/templates/transports/index.mako:40
 #: travelcrm/templates/transports/index.mako:86
 #: travelcrm/templates/uploads/common.mako:63
-#: travelcrm/templates/users/index.mako:41 travelcrm/templates/users/index.mako:87
+#: travelcrm/templates/users/index.mako:42 travelcrm/templates/users/index.mako:88
 #: travelcrm/templates/vats/index.mako:44 travelcrm/templates/vats/index.mako:90
 msgid "modifier"
 msgstr ""
@@ -1416,6 +1487,7 @@ msgstr ""
 #: travelcrm/templates/orders/index.mako:67
 #: travelcrm/templates/outgoings/index.mako:70
 #: travelcrm/templates/persons/index.mako:66
+#: travelcrm/templates/persons_categories/index.mako:49
 #: travelcrm/templates/positions/index.mako:48
 #: travelcrm/templates/regions/index.mako:50
 #: travelcrm/templates/resources_types/index.mako:65
@@ -1428,7 +1500,7 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/index.mako:49
 #: travelcrm/templates/transfers/index.mako:49
 #: travelcrm/templates/transports/index.mako:49
-#: travelcrm/templates/users/index.mako:50 travelcrm/templates/vats/index.mako:53
+#: travelcrm/templates/users/index.mako:51 travelcrm/templates/vats/index.mako:53
 msgid "Add New"
 msgstr ""
 
@@ -1458,6 +1530,7 @@ msgstr ""
 #: travelcrm/templates/notes/index.mako:59 travelcrm/templates/orders/index.mako:74
 #: travelcrm/templates/outgoings/index.mako:77
 #: travelcrm/templates/persons/index.mako:73
+#: travelcrm/templates/persons_categories/index.mako:56
 #: travelcrm/templates/positions/index.mako:55
 #: travelcrm/templates/regions/index.mako:57
 #: travelcrm/templates/resources_types/index.mako:72
@@ -1471,7 +1544,36 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/index.mako:56
 #: travelcrm/templates/transfers/index.mako:56
 #: travelcrm/templates/transports/index.mako:56
-#: travelcrm/templates/users/index.mako:57 travelcrm/templates/vats/index.mako:60
+#: travelcrm/templates/users/index.mako:58 travelcrm/templates/vats/index.mako:60
+#: travelcrm/views/accomodations.py:69 travelcrm/views/accounts.py:69
+#: travelcrm/views/accounts_items.py:66 travelcrm/views/addresses.py:70
+#: travelcrm/views/advsources.py:70 travelcrm/views/appointments.py:68
+#: travelcrm/views/banks.py:70 travelcrm/views/banks_details.py:70
+#: travelcrm/views/bpersons.py:69 travelcrm/views/calculations.py:73
+#: travelcrm/views/commissions.py:70 travelcrm/views/companies.py:63
+#: travelcrm/views/contacts.py:70 travelcrm/views/contracts.py:70
+#: travelcrm/views/countries.py:70 travelcrm/views/crosspayments.py:70
+#: travelcrm/views/currencies.py:70 travelcrm/views/currencies_rates.py:69
+#: travelcrm/views/emails_campaigns.py:71 travelcrm/views/employees.py:73
+#: travelcrm/views/foodcats.py:70 travelcrm/views/hotelcats.py:70
+#: travelcrm/views/hotels.py:70 travelcrm/views/incomes.py:70
+#: travelcrm/views/invoices.py:76 travelcrm/views/leads.py:71
+#: travelcrm/views/leads_items.py:70 travelcrm/views/leads_offers.py:70
+#: travelcrm/views/locations.py:70 travelcrm/views/navigations.py:69
+#: travelcrm/views/notes.py:71 travelcrm/views/orders.py:73
+#: travelcrm/views/orders_items.py:67 travelcrm/views/outgoings.py:72
+#: travelcrm/views/passports.py:70 travelcrm/views/persons.py:73
+#: travelcrm/views/persons_categories.py:70 travelcrm/views/positions.py:70
+#: travelcrm/views/regions.py:70 travelcrm/views/resources_types.py:71
+#: travelcrm/views/roomcats.py:70 travelcrm/views/services.py:70
+#: travelcrm/views/spassports.py:42 travelcrm/views/structures.py:66
+#: travelcrm/views/subaccounts.py:70 travelcrm/views/suppliers.py:72
+#: travelcrm/views/suppliers_types.py:70 travelcrm/views/tasks.py:71
+#: travelcrm/views/tickets.py:44 travelcrm/views/tickets_classes.py:70
+#: travelcrm/views/tours.py:45 travelcrm/views/transfers.py:70
+#: travelcrm/views/transports.py:70 travelcrm/views/uploads.py:71
+#: travelcrm/views/users.py:72 travelcrm/views/vats.py:70
+#: travelcrm/views/visas.py:44
 msgid "View"
 msgstr ""
 
@@ -1513,6 +1615,7 @@ msgstr ""
 #: travelcrm/templates/passports/common.mako:87
 #: travelcrm/templates/persons/common.mako:97
 #: travelcrm/templates/persons/index.mako:79
+#: travelcrm/templates/persons_categories/index.mako:62
 #: travelcrm/templates/positions/index.mako:61
 #: travelcrm/templates/regions/index.mako:63
 #: travelcrm/templates/resources_types/index.mako:78
@@ -1529,7 +1632,35 @@ msgstr ""
 #: travelcrm/templates/transfers/index.mako:62
 #: travelcrm/templates/transports/index.mako:62
 #: travelcrm/templates/uploads/common.mako:87
-#: travelcrm/templates/users/index.mako:63 travelcrm/templates/vats/index.mako:66
+#: travelcrm/templates/users/index.mako:64 travelcrm/templates/vats/index.mako:66
+#: travelcrm/views/accomodations.py:117 travelcrm/views/accounts.py:117
+#: travelcrm/views/accounts_items.py:114 travelcrm/views/addresses.py:118
+#: travelcrm/views/advsources.py:118 travelcrm/views/appointments.py:116
+#: travelcrm/views/banks.py:118 travelcrm/views/banks_details.py:118
+#: travelcrm/views/bpersons.py:117 travelcrm/views/calculations.py:115
+#: travelcrm/views/commissions.py:118 travelcrm/views/companies.py:80
+#: travelcrm/views/contacts.py:118 travelcrm/views/contracts.py:118
+#: travelcrm/views/countries.py:118 travelcrm/views/crosspayments.py:118
+#: travelcrm/views/currencies.py:118 travelcrm/views/currencies_rates.py:117
+#: travelcrm/views/emails_campaigns.py:120 travelcrm/views/employees.py:121
+#: travelcrm/views/foodcats.py:118 travelcrm/views/hotelcats.py:118
+#: travelcrm/views/hotels.py:118 travelcrm/views/incomes.py:118
+#: travelcrm/views/invoices.py:132 travelcrm/views/leads.py:119
+#: travelcrm/views/leads_items.py:118 travelcrm/views/leads_offers.py:118
+#: travelcrm/views/locations.py:118 travelcrm/views/navigations.py:119
+#: travelcrm/views/notes.py:119 travelcrm/views/orders.py:123
+#: travelcrm/views/outgoings.py:125 travelcrm/views/passports.py:118
+#: travelcrm/views/persons.py:121 travelcrm/views/persons_categories.py:118
+#: travelcrm/views/positions.py:117 travelcrm/views/regions.py:118
+#: travelcrm/views/resources_types.py:119 travelcrm/views/roomcats.py:118
+#: travelcrm/views/services.py:118 travelcrm/views/spassports.py:90
+#: travelcrm/views/structures.py:109 travelcrm/views/subaccounts.py:120
+#: travelcrm/views/suppliers.py:120 travelcrm/views/suppliers_types.py:118
+#: travelcrm/views/tasks.py:120 travelcrm/views/tickets.py:92
+#: travelcrm/views/tickets_classes.py:118 travelcrm/views/tours.py:93
+#: travelcrm/views/transfers.py:118 travelcrm/views/transports.py:118
+#: travelcrm/views/uploads.py:119 travelcrm/views/users.py:120
+#: travelcrm/views/vats.py:118 travelcrm/views/visas.py:92
 msgid "Edit"
 msgstr ""
 
@@ -1560,6 +1691,7 @@ msgstr ""
 #: travelcrm/templates/orders/index.mako:161
 #: travelcrm/templates/outgoings/index.mako:158
 #: travelcrm/templates/persons/index.mako:110
+#: travelcrm/templates/persons_categories/index.mako:93
 #: travelcrm/templates/positions/index.mako:108
 #: travelcrm/templates/regions/index.mako:94
 #: travelcrm/templates/resources_types/index.mako:119
@@ -1572,7 +1704,7 @@ msgstr ""
 #: travelcrm/templates/transfers/index.mako:93
 #: travelcrm/templates/transports/index.mako:93
 #: travelcrm/templates/turnovers/index.mako:96
-#: travelcrm/templates/users/index.mako:94 travelcrm/templates/vats/index.mako:97
+#: travelcrm/templates/users/index.mako:95 travelcrm/templates/vats/index.mako:97
 msgid "Find"
 msgstr ""
 
@@ -1601,6 +1733,7 @@ msgstr ""
 #: travelcrm/templates/orders/index.mako:162
 #: travelcrm/templates/outgoings/index.mako:159
 #: travelcrm/templates/persons/index.mako:111
+#: travelcrm/templates/persons_categories/index.mako:94
 #: travelcrm/templates/positions/index.mako:109
 #: travelcrm/templates/regions/index.mako:95
 #: travelcrm/templates/resources_types/index.mako:120
@@ -1612,7 +1745,7 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/index.mako:94
 #: travelcrm/templates/transfers/index.mako:94
 #: travelcrm/templates/transports/index.mako:94
-#: travelcrm/templates/users/index.mako:95 travelcrm/templates/vats/index.mako:98
+#: travelcrm/templates/users/index.mako:96 travelcrm/templates/vats/index.mako:98
 msgid "Close"
 msgstr ""
 
@@ -1639,6 +1772,7 @@ msgstr ""
 #: travelcrm/templates/orders/index.mako:163
 #: travelcrm/templates/outgoings/index.mako:160
 #: travelcrm/templates/persons/index.mako:112
+#: travelcrm/templates/persons_categories/index.mako:95
 #: travelcrm/templates/positions/index.mako:110
 #: travelcrm/templates/regions/index.mako:96
 #: travelcrm/templates/resources_types/index.mako:121
@@ -1650,7 +1784,7 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/index.mako:95
 #: travelcrm/templates/transfers/index.mako:95
 #: travelcrm/templates/transports/index.mako:95
-#: travelcrm/templates/users/index.mako:96 travelcrm/templates/vats/index.mako:99
+#: travelcrm/templates/users/index.mako:97 travelcrm/templates/vats/index.mako:99
 msgid "Clear"
 msgstr ""
 
@@ -1668,14 +1802,13 @@ msgstr ""
 #: travelcrm/templates/contracts/form.mako:66
 #: travelcrm/templates/crosspayments/form.mako:90
 #: travelcrm/templates/incomes/form.mako:70
-#: travelcrm/templates/invoices/form.mako:132
-#: travelcrm/templates/leads/form.mako:71
+#: travelcrm/templates/invoices/form.mako:97 travelcrm/templates/leads/form.mako:71
 #: travelcrm/templates/leads_items/form.mako:73
 #: travelcrm/templates/leads_offers/form.mako:85
 #: travelcrm/templates/notes/form.mako:29 travelcrm/templates/orders/form.mako:86
 #: travelcrm/templates/outgoings/form.mako:70
 #: travelcrm/templates/passports/form.mako:61
-#: travelcrm/templates/persons/form.mako:78
+#: travelcrm/templates/persons/form.mako:83
 #: travelcrm/templates/resources_types/form.mako:60
 #: travelcrm/templates/services/form.mako:51
 #: travelcrm/templates/spassports/form.mako:82
@@ -1709,10 +1842,12 @@ msgstr ""
 #: travelcrm/templates/incomes/index.mako:58
 #: travelcrm/templates/invoices/index.mako:59
 #: travelcrm/templates/invoices/index.mako:104
+#: travelcrm/templates/leads/details.mako:34
+#: travelcrm/templates/leads/details.mako:78
 #: travelcrm/templates/leads/index.mako:142
 #: travelcrm/templates/leads_items/common.mako:79
 #: travelcrm/templates/leads_offers/common.mako:79
-#: travelcrm/templates/orders/details.mako:25
+#: travelcrm/templates/orders/details.mako:34
 #: travelcrm/templates/orders_items/common.mako:93
 #: travelcrm/templates/outgoings/index.mako:59
 #: travelcrm/templates/outgoings/index.mako:119
@@ -1733,7 +1868,34 @@ msgstr ""
 #: travelcrm/templates/persons/common.mako:91
 #: travelcrm/templates/services/common.mako:90
 #: travelcrm/templates/tasks/common.mako:97 travelcrm/templates/tasks/index.mako:55
-#: travelcrm/templates/uploads/common.mako:82
+#: travelcrm/templates/uploads/common.mako:82 travelcrm/views/accomodations.py:82
+#: travelcrm/views/accounts.py:82 travelcrm/views/accounts_items.py:79
+#: travelcrm/views/addresses.py:83 travelcrm/views/advsources.py:83
+#: travelcrm/views/appointments.py:81 travelcrm/views/banks.py:83
+#: travelcrm/views/banks_details.py:83 travelcrm/views/bpersons.py:82
+#: travelcrm/views/commissions.py:83 travelcrm/views/contacts.py:83
+#: travelcrm/views/contracts.py:83 travelcrm/views/countries.py:83
+#: travelcrm/views/crosspayments.py:83 travelcrm/views/currencies.py:83
+#: travelcrm/views/currencies_rates.py:82 travelcrm/views/emails_campaigns.py:84
+#: travelcrm/views/employees.py:86 travelcrm/views/foodcats.py:83
+#: travelcrm/views/hotelcats.py:83 travelcrm/views/hotels.py:83
+#: travelcrm/views/incomes.py:83 travelcrm/views/invoices.py:96
+#: travelcrm/views/leads.py:84 travelcrm/views/leads_items.py:83
+#: travelcrm/views/leads_offers.py:83 travelcrm/views/locations.py:83
+#: travelcrm/views/navigations.py:86 travelcrm/views/notes.py:84
+#: travelcrm/views/orders.py:88 travelcrm/views/outgoings.py:87
+#: travelcrm/views/passports.py:83 travelcrm/views/persons.py:86
+#: travelcrm/views/persons_categories.py:83 travelcrm/views/positions.py:83
+#: travelcrm/views/regions.py:83 travelcrm/views/resources_types.py:84
+#: travelcrm/views/roomcats.py:83 travelcrm/views/services.py:83
+#: travelcrm/views/spassports.py:55 travelcrm/views/structures.py:79
+#: travelcrm/views/subaccounts.py:83 travelcrm/views/suppliers.py:85
+#: travelcrm/views/suppliers_types.py:83 travelcrm/views/tasks.py:84
+#: travelcrm/views/tickets.py:57 travelcrm/views/tickets_classes.py:83
+#: travelcrm/views/tours.py:58 travelcrm/views/transfers.py:83
+#: travelcrm/views/transports.py:83 travelcrm/views/uploads.py:84
+#: travelcrm/views/users.py:85 travelcrm/views/vats.py:83
+#: travelcrm/views/visas.py:57
 msgid "Add"
 msgstr ""
 
@@ -1748,12 +1910,12 @@ msgstr ""
 #: travelcrm/templates/contacts/form.mako:35
 #: travelcrm/templates/contracts/form.mako:54
 #: travelcrm/templates/contracts/index.mako:55
-#: travelcrm/templates/leads/form.mako:60 travelcrm/templates/leads/index.mako:56
-#: travelcrm/templates/leads/index.mako:152
+#: travelcrm/templates/leads/details.mako:79 travelcrm/templates/leads/form.mako:60
+#: travelcrm/templates/leads/index.mako:56 travelcrm/templates/leads/index.mako:152
 #: travelcrm/templates/leads_offers/common.mako:80
 #: travelcrm/templates/leads_offers/form.mako:74
 #: travelcrm/templates/notifications/index.mako:44
-#: travelcrm/templates/orders/details.mako:26
+#: travelcrm/templates/orders/details.mako:35
 #: travelcrm/templates/orders/form.mako:75 travelcrm/templates/orders/index.mako:56
 #: travelcrm/templates/orders_items/common.mako:90
 #: travelcrm/templates/resources_types/form.mako:74
@@ -1767,10 +1929,6 @@ msgstr ""
 #: travelcrm/templates/tickets/form.mako:230
 #: travelcrm/templates/tours/form.mako:291 travelcrm/templates/visas/form.mako:150
 msgid "status"
-msgstr ""
-
-#: travelcrm/templates/accounts/index.mako:16
-msgid "Accounts"
 msgstr ""
 
 #: travelcrm/templates/accounts/index.mako:78
@@ -1790,8 +1948,22 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: travelcrm/templates/accounts_items/index.mako:16
-msgid "Accounts Items"
+#: travelcrm/templates/activities/index.mako:16
+msgid "My last activities"
+msgstr ""
+
+#: travelcrm/templates/activities/index.mako:35
+#: travelcrm/templates/outgoings/index.mako:56
+#: travelcrm/templates/permisions/index.mako:36
+#: travelcrm/templates/services/form.mako:30
+#: travelcrm/templates/services/index.mako:39
+#: travelcrm/templates/subaccounts/index.mako:56
+msgid "resource type"
+msgstr ""
+
+#: travelcrm/templates/activities/settings.mako:12
+#: travelcrm/templates/leads_stats/settings.mako:12
+msgid "column index"
 msgstr ""
 
 #: travelcrm/templates/addresses/common.mako:59
@@ -1812,10 +1984,6 @@ msgstr ""
 
 #: travelcrm/templates/addresses/form.mako:40
 msgid "address"
-msgstr ""
-
-#: travelcrm/templates/advsources/index.mako:16
-msgid "Advertising Sources"
 msgstr ""
 
 #: travelcrm/templates/advsources/index.mako:75
@@ -1839,10 +2007,6 @@ msgstr ""
 
 #: travelcrm/templates/appointments/form.mako:58
 msgid "salary"
-msgstr ""
-
-#: travelcrm/templates/appointments/index.mako:16
-msgid "Employees Appointments"
 msgstr ""
 
 #: travelcrm/templates/appointments/index.mako:39
@@ -1878,7 +2042,21 @@ msgstr ""
 #: travelcrm/templates/outgoings/index.mako:87
 #: travelcrm/templates/positions/index.mako:65
 #: travelcrm/templates/resources_types/index.mako:82
-#: travelcrm/templates/structures/index.mako:58
+#: travelcrm/templates/structures/index.mako:58 travelcrm/views/addresses.py:152
+#: travelcrm/views/appointments.py:150 travelcrm/views/bpersons.py:151
+#: travelcrm/views/commissions.py:152 travelcrm/views/contacts.py:152
+#: travelcrm/views/contracts.py:152 travelcrm/views/crosspayments.py:152
+#: travelcrm/views/currencies_rates.py:151 travelcrm/views/hotels.py:152
+#: travelcrm/views/incomes.py:152 travelcrm/views/leads.py:153
+#: travelcrm/views/leads_items.py:152 travelcrm/views/leads_offers.py:152
+#: travelcrm/views/locations.py:152 travelcrm/views/navigations.py:216
+#: travelcrm/views/notes.py:153 travelcrm/views/orders.py:157
+#: travelcrm/views/outgoings.py:159 travelcrm/views/passports.py:152
+#: travelcrm/views/permisions.py:124 travelcrm/views/positions.py:152
+#: travelcrm/views/resources_types.py:153 travelcrm/views/spassports.py:124
+#: travelcrm/views/structures.py:140 travelcrm/views/tickets.py:126
+#: travelcrm/views/tours.py:127 travelcrm/views/uploads.py:153
+#: travelcrm/views/visas.py:126
 msgid "Copy"
 msgstr ""
 
@@ -1890,7 +2068,7 @@ msgstr ""
 msgid "TravelCRM - login"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:4 travelcrm/templates/auth/login.mako:38
+#: travelcrm/templates/auth/add.mako:4 travelcrm/templates/auth/login.mako:41
 msgid "Create company"
 msgstr ""
 
@@ -1902,7 +2080,10 @@ msgstr ""
 msgid "locale"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:56 travelcrm/templates/auth/forgot.mako:23
+#: travelcrm/templates/auth/add.mako:56
+#: travelcrm/templates/auth/add_success.mako:17
+#: travelcrm/templates/auth/forgot.mako:24
+#: travelcrm/templates/auth/forgot_success.mako:17
 msgid "Back to autorization"
 msgstr ""
 
@@ -1914,15 +2095,25 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+#: travelcrm/templates/auth/add_success.mako:3
+#: travelcrm/templates/auth/forgot_success.mako:3
+msgid "Company creation"
+msgstr ""
+
+#: travelcrm/templates/auth/add_success.mako:13
+#: travelcrm/templates/auth/forgot_success.mako:13
+msgid "Creation task run soon. Waiting for Email with registration data"
+msgstr ""
+
 #: travelcrm/templates/auth/forgot.mako:2
 msgid "Forgot password"
 msgstr ""
 
-#: travelcrm/templates/auth/forgot.mako:27
+#: travelcrm/templates/auth/forgot.mako:28
 msgid "Please, enter your email"
 msgstr ""
 
-#: travelcrm/templates/auth/forgot.mako:30
+#: travelcrm/templates/auth/forgot.mako:31
 msgid "Send"
 msgstr ""
 
@@ -1930,32 +2121,32 @@ msgstr ""
 msgid "Autorization"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:15
+#: travelcrm/templates/auth/login.mako:16
 msgid "Username:"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:16
+#: travelcrm/templates/auth/login.mako:17
 msgid "Password:"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:21 travelcrm/templates/users/form.mako:36
+#: travelcrm/templates/auth/login.mako:23 travelcrm/templates/users/form.mako:36
 #: travelcrm/templates/users/index.mako:39
 msgid "username"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:29 travelcrm/templates/users/form.mako:49
+#: travelcrm/templates/auth/login.mako:31 travelcrm/templates/users/form.mako:58
 msgid "password"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:41
+#: travelcrm/templates/auth/login.mako:45
 msgid "Forgot password?"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:45
+#: travelcrm/templates/auth/login.mako:49
 msgid "Please, enter username and password"
 msgstr ""
 
-#: travelcrm/templates/auth/login.mako:48
+#: travelcrm/templates/auth/login.mako:52
 msgid "Login"
 msgstr ""
 
@@ -1973,13 +2164,9 @@ msgstr ""
 
 #: travelcrm/templates/banks/form.mako:30
 #: travelcrm/templates/employees/form.mako:119
-#: travelcrm/templates/persons/form.mako:113
+#: travelcrm/templates/persons/form.mako:118
 #: travelcrm/templates/structures/form.mako:52
 msgid "Addresses"
-msgstr ""
-
-#: travelcrm/templates/banks/index.mako:16
-msgid "Banks"
 msgstr ""
 
 #: travelcrm/templates/banks/index.mako:75
@@ -1995,7 +2182,7 @@ msgstr ""
 #: travelcrm/templates/banks_details/form.mako:54
 #: travelcrm/templates/incomes/index.mako:110
 #: travelcrm/templates/invoices/details.mako:19
-#: travelcrm/templates/invoices/form.mako:103
+#: travelcrm/templates/invoices/form.mako:83
 #: travelcrm/templates/outgoings/index.mako:57
 #: travelcrm/templates/outgoings/index.mako:103
 #: travelcrm/templates/subaccounts/details.mako:11
@@ -2047,14 +2234,10 @@ msgstr ""
 
 #: travelcrm/templates/bpersons/form.mako:83
 #: travelcrm/templates/employees/form.mako:97
-#: travelcrm/templates/persons/form.mako:91
+#: travelcrm/templates/persons/form.mako:96
 #: travelcrm/templates/structures/form.mako:41
 #: travelcrm/templates/suppliers/form.mako:71
 msgid "Contacts"
-msgstr ""
-
-#: travelcrm/templates/bpersons/index.mako:16
-msgid "Business Persons"
 msgstr ""
 
 #: travelcrm/templates/bpersons/index.mako:95
@@ -2086,9 +2269,11 @@ msgstr ""
 #: travelcrm/templates/commissions/form.mako:56
 #: travelcrm/templates/invoices/details.mako:32
 #: travelcrm/templates/invoices/index.mako:56
+#: travelcrm/templates/leads/details.mako:33
+#: travelcrm/templates/leads/details.mako:77
 #: travelcrm/templates/leads_offers/common.mako:78
 #: travelcrm/templates/leads_offers/form.mako:47
-#: travelcrm/templates/orders/details.mako:23
+#: travelcrm/templates/orders/details.mako:32
 #: travelcrm/templates/spassports/form.mako:37
 #: travelcrm/templates/tickets/form.mako:55 travelcrm/templates/tours/form.mako:55
 #: travelcrm/templates/visas/form.mako:37
@@ -2105,20 +2290,18 @@ msgstr ""
 msgid "price currency"
 msgstr ""
 
-#: travelcrm/templates/calculations/index.mako:9
-msgid "Calculations"
-msgstr ""
-
 #: travelcrm/templates/calculations/index.mako:52
 #: travelcrm/templates/commissions/common.mako:59
 #: travelcrm/templates/commissions/form.mako:18
 #: travelcrm/templates/invoices/details.mako:31
+#: travelcrm/templates/leads/details.mako:32
+#: travelcrm/templates/leads/details.mako:75
 #: travelcrm/templates/leads/index.mako:106
 #: travelcrm/templates/leads_items/common.mako:76
 #: travelcrm/templates/leads_items/form.mako:19
 #: travelcrm/templates/leads_offers/common.mako:76
 #: travelcrm/templates/leads_offers/form.mako:19
-#: travelcrm/templates/orders/details.mako:22
+#: travelcrm/templates/orders/details.mako:31
 #: travelcrm/templates/orders/index.mako:122
 #: travelcrm/templates/orders_items/common.mako:88
 #: travelcrm/templates/vats/form.mako:44 travelcrm/templates/vats/index.mako:40
@@ -2132,6 +2315,7 @@ msgstr ""
 #: travelcrm/templates/currencies_rates/form.mako:44
 #: travelcrm/templates/currencies_rates/index.mako:38
 #: travelcrm/templates/currencies_rates/index.mako:91
+#: travelcrm/templates/leads/details.mako:76
 #: travelcrm/templates/leads_offers/common.mako:77
 #: travelcrm/templates/leads_offers/form.mako:33
 #: travelcrm/templates/orders_items/common.mako:89
@@ -2187,6 +2371,58 @@ msgstr ""
 msgid "advanced search"
 msgstr ""
 
+#: travelcrm/templates/companies/email_success.mako:6
+msgid "Company is successfull registered"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:66
+msgid "Congratulations"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:66
+msgid "Your company is created!"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:70
+msgid "Use login"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:70
+msgid "and password"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:70
+msgid "to login"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:73
+msgid "Everything is ready to build your own CRM system."
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:73
+msgid "To get help, please, reffer to "
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:73
+msgid "documentation"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:73
+msgid "or ask your questions on "
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:74
+msgid "our forum"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:78
+msgid "Visit my TravelCRM"
+msgstr ""
+
+#: travelcrm/templates/companies/email_success.mako:82
+msgid "Thanks for choosing TravelCRM."
+msgstr ""
+
 #: travelcrm/templates/companies/form.mako:17
 msgid "If you change company settings you need to reload page"
 msgstr ""
@@ -2225,16 +2461,8 @@ msgstr ""
 msgid "Commissions"
 msgstr ""
 
-#: travelcrm/templates/contracts/index.mako:16
-msgid "Contracts"
-msgstr ""
-
 #: travelcrm/templates/contracts/index.mako:92
 msgid "Enter contract num"
-msgstr ""
-
-#: travelcrm/templates/countries/index.mako:16
-msgid "Countries"
 msgstr ""
 
 #: travelcrm/templates/countries/index.mako:76
@@ -2272,10 +2500,6 @@ msgstr ""
 msgid "account item"
 msgstr ""
 
-#: travelcrm/templates/crosspayments/index.mako:16
-msgid "Cross Payments"
-msgstr ""
-
 #: travelcrm/templates/crosspayments/index.mako:98
 msgid "Enter account or subaccount name"
 msgstr ""
@@ -2291,10 +2515,6 @@ msgstr ""
 msgid "sum range"
 msgstr ""
 
-#: travelcrm/templates/currencies/index.mako:16
-msgid "Currencies"
-msgstr ""
-
 #: travelcrm/templates/currencies/index.mako:36
 msgid "iso_code"
 msgstr ""
@@ -2307,10 +2527,6 @@ msgstr ""
 #: travelcrm/templates/currencies_rates/form.mako:58
 #: travelcrm/templates/currencies_rates/index.mako:40
 msgid "rate"
-msgstr ""
-
-#: travelcrm/templates/currencies_rates/index.mako:16
-msgid "Currencies Rates"
 msgstr ""
 
 #: travelcrm/templates/currencies_rates/index.mako:97
@@ -2332,10 +2548,6 @@ msgstr ""
 
 #: travelcrm/templates/emails_campaigns/form.mako:51
 msgid "Plain text"
-msgstr ""
-
-#: travelcrm/templates/emails_campaigns/index.mako:16
-msgid "Emails Campaigns"
 msgstr ""
 
 #: travelcrm/templates/emails_campaigns/index.mako:40
@@ -2372,7 +2584,7 @@ msgid "dismissal date"
 msgstr ""
 
 #: travelcrm/templates/employees/form.mako:108
-#: travelcrm/templates/persons/form.mako:102
+#: travelcrm/templates/persons/form.mako:107
 msgid "Passports"
 msgstr ""
 
@@ -2383,10 +2595,6 @@ msgstr ""
 msgid "Uploads"
 msgstr ""
 
-#: travelcrm/templates/employees/index.mako:16
-msgid "Employees"
-msgstr ""
-
 #: travelcrm/templates/employees/index.mako:40
 msgid "dismissal"
 msgstr ""
@@ -2395,30 +2603,15 @@ msgstr ""
 msgid "Enter employee name"
 msgstr ""
 
-#: travelcrm/templates/foodcats/index.mako:16
-msgid "Foods Categories"
-msgstr ""
-
 #: travelcrm/templates/foodcats/index.mako:75
+#: travelcrm/templates/hotelcats/index.mako:75
 #: travelcrm/templates/roomcats/index.mako:75
 msgid "Enter category name"
 msgstr ""
 
-#: travelcrm/templates/hotelcats/index.mako:16
-msgid "Hotels Categories"
-msgstr ""
-
-#: travelcrm/templates/hotelcats/index.mako:75
-#: travelcrm/templates/suppliers_types/index.mako:75
-msgid "Enter categor name"
-msgstr ""
-
 #: travelcrm/templates/hotels/form.mako:30 travelcrm/templates/hotels/index.mako:39
+#: travelcrm/templates/persons/form.mako:69
 msgid "category"
-msgstr ""
-
-#: travelcrm/templates/hotels/index.mako:16
-msgid "Hotels"
 msgstr ""
 
 #: travelcrm/templates/hotels/index.mako:81
@@ -2436,10 +2629,6 @@ msgstr ""
 msgid "payment date"
 msgstr ""
 
-#: travelcrm/templates/incomes/index.mako:16
-msgid "Income Payments"
-msgstr ""
-
 #: travelcrm/templates/incomes/index.mako:55
 msgid "account name"
 msgstr ""
@@ -2451,8 +2640,8 @@ msgid "Enter customer name"
 msgstr ""
 
 #: travelcrm/templates/invoices/details.mako:27
-#: travelcrm/templates/leads/details.mako:27
-#: travelcrm/templates/orders/details.mako:18
+#: travelcrm/templates/leads/details.mako:28
+#: travelcrm/templates/orders/details.mako:27
 msgid "services"
 msgstr ""
 
@@ -2461,25 +2650,13 @@ msgstr ""
 msgid "discount"
 msgstr ""
 
-#: travelcrm/templates/invoices/form.mako:64
+#: travelcrm/templates/invoices/form.mako:44
 #: travelcrm/templates/invoices/index.mako:128
 msgid "invoice date"
 msgstr ""
 
-#: travelcrm/templates/invoices/form.mako:77
+#: travelcrm/templates/invoices/form.mako:57
 msgid "active until"
-msgstr ""
-
-#: travelcrm/templates/invoices/form.mako:116
-msgid "Automaticaly calculated"
-msgstr ""
-
-#: travelcrm/templates/invoices/form.mako:119
-msgid "invoice sum"
-msgstr ""
-
-#: travelcrm/templates/invoices/index.mako:16
-msgid "Invoices"
 msgstr ""
 
 #: travelcrm/templates/invoices/index.mako:57
@@ -2506,52 +2683,71 @@ msgstr ""
 msgid "payment sum range"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:7
+#: travelcrm/templates/invoices/print.mako:120
+#: travelcrm/templates/invoices/print1.mako:7
 #: travelcrm/templates/orders/index.mako:104
 msgid "Invoice"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:66
-msgid "INVOICE"
+#: travelcrm/templates/invoices/print.mako:120
+msgid "Created"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:86
-msgid "Invoice #"
+#: travelcrm/templates/invoices/print.mako:121
+msgid "Due"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:91
-msgid "Date"
+#: travelcrm/templates/invoices/print.mako:142
+msgid "Item"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:95
-msgid "Amount Due"
-msgstr ""
-
-#: travelcrm/templates/invoices/print.mako:106
-msgid "Description"
-msgstr ""
-
-#: travelcrm/templates/invoices/print.mako:107
-msgid "Unit Cost"
-msgstr ""
-
-#: travelcrm/templates/invoices/print.mako:108
-msgid "Quantity"
-msgstr ""
-
-#: travelcrm/templates/invoices/print.mako:109
+#: travelcrm/templates/invoices/print.mako:143
+#: travelcrm/templates/invoices/print1.mako:109
 msgid "Price"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:128
+#: travelcrm/templates/invoices/print.mako:154
+msgid "Vat"
+msgstr ""
+
+#: travelcrm/templates/invoices/print.mako:155
+#: travelcrm/templates/invoices/print1.mako:128
 msgid "Total"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:133
+#: travelcrm/templates/invoices/print1.mako:66
+msgid "INVOICE"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:86
+msgid "Invoice #"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:91
+msgid "Date"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:95
+msgid "Amount Due"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:106
+msgid "Description"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:107
+msgid "Unit Cost"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:108
+msgid "Quantity"
+msgstr ""
+
+#: travelcrm/templates/invoices/print1.mako:133
 msgid "Amount Paid"
 msgstr ""
 
-#: travelcrm/templates/invoices/print.mako:139
+#: travelcrm/templates/invoices/print1.mako:139
 msgid "Balance Due"
 msgstr ""
 
@@ -2561,20 +2757,12 @@ msgstr ""
 
 #: travelcrm/templates/leads/details.mako:19 travelcrm/templates/leads/form.mako:32
 #: travelcrm/templates/leads/index.mako:55 travelcrm/templates/leads/index.mako:116
-#: travelcrm/templates/orders/details.mako:10
+#: travelcrm/templates/orders/details.mako:19
 #: travelcrm/templates/orders/form.mako:47 travelcrm/templates/orders/index.mako:55
 msgid "advertise"
 msgstr ""
 
-#: travelcrm/templates/leads/details.mako:41
-msgid "lead prices"
-msgstr ""
-
-#: travelcrm/templates/leads/details.mako:46
-msgid "not set"
-msgstr ""
-
-#: travelcrm/templates/leads/details.mako:58
+#: travelcrm/templates/leads/details.mako:71
 msgid "offers"
 msgstr ""
 
@@ -2583,16 +2771,11 @@ msgid "lead date"
 msgstr ""
 
 #: travelcrm/templates/leads/form.mako:84 travelcrm/templates/orders/form.mako:99
-#: travelcrm/templates/services/index.mako:16
 msgid "Services"
 msgstr ""
 
 #: travelcrm/templates/leads/form.mako:95
 msgid "Offers"
-msgstr ""
-
-#: travelcrm/templates/leads/index.mako:16
-msgid "Leads"
 msgstr ""
 
 #: travelcrm/templates/leads/index.mako:97
@@ -2618,47 +2801,43 @@ msgstr ""
 msgid "price to"
 msgstr ""
 
+#: travelcrm/templates/leads_stats/index.mako:16
+msgid "Leads count dynamics for last week"
+msgstr ""
+
 #: travelcrm/templates/locations/form.mako:30
 #: travelcrm/templates/locations/index.mako:39
 #: travelcrm/templates/regions/index.mako:38
 msgid "region"
 msgstr ""
 
-#: travelcrm/templates/locations/index.mako:16
-msgid "Locations"
-msgstr ""
-
 #: travelcrm/templates/locations/index.mako:80
 msgid "Enter location, region or country name"
 msgstr ""
 
-#: travelcrm/templates/navigations/copy.mako:12
-#: travelcrm/templates/permisions/copy.mako:12
+#: travelcrm/templates/navigations/copy.mako:20
+#: travelcrm/templates/permisions/copy.mako:20
 msgid "from position"
 msgstr ""
 
-#: travelcrm/templates/navigations/form.mako:29
+#: travelcrm/templates/navigations/form.mako:33
 msgid "parent navigation"
 msgstr ""
 
-#: travelcrm/templates/navigations/form.mako:38
+#: travelcrm/templates/navigations/form.mako:42
 msgid "url"
 msgstr ""
 
-#: travelcrm/templates/navigations/form.mako:47
+#: travelcrm/templates/navigations/form.mako:51
 msgid "icon css class"
 msgstr ""
 
-#: travelcrm/templates/navigations/form.mako:56
+#: travelcrm/templates/navigations/form.mako:60
 msgid "action"
 msgstr ""
 
-#: travelcrm/templates/navigations/form.mako:65
+#: travelcrm/templates/navigations/form.mako:69
 msgid "separator before"
-msgstr ""
-
-#: travelcrm/templates/navigations/index.mako:15
-msgid "Position Navigations"
 msgstr ""
 
 #: travelcrm/templates/navigations/index.mako:63
@@ -2709,10 +2888,6 @@ msgstr ""
 msgid "lead"
 msgstr ""
 
-#: travelcrm/templates/orders/index.mako:16
-msgid "Orders"
-msgstr ""
-
 #: travelcrm/templates/orders/index.mako:98
 msgid "Calculation"
 msgstr ""
@@ -2729,18 +2904,6 @@ msgstr ""
 #: travelcrm/templates/outgoings/details.mako:22
 #: travelcrm/templates/outgoings/form.mako:35
 msgid "subaccount"
-msgstr ""
-
-#: travelcrm/templates/outgoings/index.mako:16
-msgid "Outgoing Payments"
-msgstr ""
-
-#: travelcrm/templates/outgoings/index.mako:56
-#: travelcrm/templates/permisions/index.mako:36
-#: travelcrm/templates/services/form.mako:30
-#: travelcrm/templates/services/index.mako:39
-#: travelcrm/templates/subaccounts/index.mako:56
-msgid "resource type"
 msgstr ""
 
 #: travelcrm/templates/outgoings/index.mako:100
@@ -2799,10 +2962,6 @@ msgstr ""
 msgid "scope structure"
 msgstr ""
 
-#: travelcrm/templates/permisions/index.mako:16
-msgid "Position Permissions"
-msgstr ""
-
 #: travelcrm/templates/permisions/index.mako:59
 msgid "Enter resource type name"
 msgstr ""
@@ -2834,27 +2993,19 @@ msgstr ""
 msgid "passports"
 msgstr ""
 
-#: travelcrm/templates/persons/form.mako:69
-msgid "newsletter subscriber"
-msgstr ""
-
-#: travelcrm/templates/persons/index.mako:16
-msgid "Persons"
-msgstr ""
-
 #: travelcrm/templates/persons/index.mako:55
-msgid "S."
+msgid "person category"
 msgstr ""
 
 #: travelcrm/templates/persons/index.mako:92
 msgid "Enter person name, contacts or passport num"
 msgstr ""
 
-#: travelcrm/templates/positions/index.mako:16
-msgid "Company Positions"
+#: travelcrm/templates/persons_categories/index.mako:75
+msgid "Enter person category name"
 msgstr ""
 
-#: travelcrm/templates/positions/index.mako:79 travelcrm/views/__init__.py:104
+#: travelcrm/templates/positions/index.mako:79 travelcrm/views/__init__.py:119
 msgid "Permissions"
 msgstr ""
 
@@ -2864,10 +3015,6 @@ msgstr ""
 
 #: travelcrm/templates/positions/index.mako:90
 msgid "Enter position name"
-msgstr ""
-
-#: travelcrm/templates/regions/index.mako:16
-msgid "Regions"
 msgstr ""
 
 #: travelcrm/templates/regions/index.mako:76
@@ -2883,12 +3030,9 @@ msgstr ""
 msgid "humanize"
 msgstr ""
 
-#: travelcrm/templates/resources_types/index.mako:16
-msgid "Resources Types"
-msgstr ""
-
 #: travelcrm/templates/resources_types/index.mako:95
-#: travelcrm/views/invoices.py:265 travelcrm/views/tours.py:163
+#: travelcrm/views/activities.py:61 travelcrm/views/invoices.py:270
+#: travelcrm/views/leads_stats.py:78 travelcrm/views/tours.py:160
 msgid "Settings"
 msgstr ""
 
@@ -2898,10 +3042,6 @@ msgstr ""
 
 #: travelcrm/templates/resources_types/settings.mako:4
 msgid "Selected Resource Type have no settings"
-msgstr ""
-
-#: travelcrm/templates/roomcats/index.mako:16
-msgid "Rooms Categories"
 msgstr ""
 
 #: travelcrm/templates/services/form.mako:42
@@ -2988,20 +3128,12 @@ msgstr ""
 msgid "Banks Details"
 msgstr ""
 
-#: travelcrm/templates/structures/index.mako:14
-msgid "Company Structures"
-msgstr ""
-
 #: travelcrm/templates/subaccounts/form.mako:48
 msgid "subaccount type"
 msgstr ""
 
 #: travelcrm/templates/subaccounts/form.mako:93
 msgid "subaccount object"
-msgstr ""
-
-#: travelcrm/templates/subaccounts/index.mako:16
-msgid "Subaccounts"
 msgstr ""
 
 #: travelcrm/templates/subaccounts/index.mako:94
@@ -3014,16 +3146,9 @@ msgstr ""
 msgid "supplier type"
 msgstr ""
 
-#: travelcrm/templates/suppliers/index.mako:16
-msgid "Suppliers"
-msgstr ""
-
 #: travelcrm/templates/suppliers/index.mako:92
+#: travelcrm/templates/suppliers_types/index.mako:75
 msgid "Enter supplier name"
-msgstr ""
-
-#: travelcrm/templates/suppliers_types/index.mako:16
-msgid "Suppliers Types"
 msgstr ""
 
 #: travelcrm/templates/tasks/details.mako:9 travelcrm/templates/tasks/form.mako:30
@@ -3089,10 +3214,6 @@ msgstr ""
 msgid "End Point"
 msgstr ""
 
-#: travelcrm/templates/tickets_classes/index.mako:16
-msgid "Tickets Classes"
-msgstr ""
-
 #: travelcrm/templates/tickets_classes/index.mako:75
 #: travelcrm/templates/transports/index.mako:75
 msgid "Enter transport name"
@@ -3139,28 +3260,12 @@ msgstr ""
 msgid "room category"
 msgstr ""
 
-#: travelcrm/templates/tours/settings.mako:12
-msgid "vat method"
-msgstr ""
-
-#: travelcrm/templates/transfers/index.mako:16
-msgid "Transfers"
-msgstr ""
-
 #: travelcrm/templates/transfers/index.mako:75
 msgid "Enter transfer name"
 msgstr ""
 
-#: travelcrm/templates/transports/index.mako:16
-msgid "Transport"
-msgstr ""
-
 #: travelcrm/templates/turnovers/export.mako:2
 msgid "Turnovers Report"
-msgstr ""
-
-#: travelcrm/templates/turnovers/index.mako:16
-msgid "Turnovers"
 msgstr ""
 
 #: travelcrm/templates/turnovers/index.mako:40
@@ -3187,19 +3292,31 @@ msgstr ""
 msgid "Choose File"
 msgstr ""
 
-#: travelcrm/templates/users/form.mako:45
+#: travelcrm/templates/users/email_password_recovery.mako:67
+msgid "Password was recovered successfully."
+msgstr ""
+
+#: travelcrm/templates/users/email_password_recovery.mako:70
+msgid "Username"
+msgstr ""
+
+#: travelcrm/templates/users/email_password_recovery.mako:71
+msgid "Password"
+msgstr ""
+
+#: travelcrm/templates/users/email_password_recovery.mako:75
+msgid "Go to My TravelCRM"
+msgstr ""
+
+#: travelcrm/templates/users/form.mako:54
 msgid "If you do not change password, take this fields empty"
 msgstr ""
 
-#: travelcrm/templates/users/form.mako:58
+#: travelcrm/templates/users/form.mako:67
 msgid "confirm password"
 msgstr ""
 
-#: travelcrm/templates/users/index.mako:17
-msgid "Users"
-msgstr ""
-
-#: travelcrm/templates/users/index.mako:76
+#: travelcrm/templates/users/index.mako:77
 msgid "Enter employee name or username"
 msgstr ""
 
@@ -3209,10 +3326,6 @@ msgstr ""
 
 #: travelcrm/templates/vats/form.mako:72 travelcrm/templates/vats/index.mako:42
 msgid "calc method"
-msgstr ""
-
-#: travelcrm/templates/vats/index.mako:16
-msgid "Vat Settings"
 msgstr ""
 
 #: travelcrm/templates/vats/index.mako:79
@@ -3235,1214 +3348,274 @@ msgstr ""
 msgid "date end"
 msgstr ""
 
-#: travelcrm/views/__init__.py:25 travelcrm/views/__init__.py:38
+#: travelcrm/views/__init__.py:40 travelcrm/views/__init__.py:53
 msgid "System Info"
 msgstr ""
 
-#: travelcrm/views/__init__.py:26
+#: travelcrm/views/__init__.py:41
 msgid "Need to select row"
 msgstr ""
 
-#: travelcrm/views/__init__.py:39
+#: travelcrm/views/__init__.py:54
 msgid "Need to check rows"
 msgstr ""
 
-#: travelcrm/views/__init__.py:50
+#: travelcrm/views/__init__.py:65
 msgid "Seccurity Info"
 msgstr ""
 
-#: travelcrm/views/__init__.py:51
+#: travelcrm/views/__init__.py:66
 msgid "You have no permissions to do this action"
 msgstr ""
 
-#: travelcrm/views/__init__.py:85
+#: travelcrm/views/__init__.py:100
 msgid "Context Info"
 msgstr ""
 
-#: travelcrm/views/__init__.py:103
+#: travelcrm/views/__init__.py:118
 msgid "Common"
 msgstr ""
 
-#: travelcrm/views/__init__.py:107
+#: travelcrm/views/__init__.py:122
 msgid "Resource Name"
 msgstr ""
 
-#: travelcrm/views/__init__.py:112
+#: travelcrm/views/__init__.py:127
 msgid "Resource System Name"
 msgstr ""
 
-#: travelcrm/views/__init__.py:117
+#: travelcrm/views/__init__.py:132
 msgid "Rights"
 msgstr ""
 
-#: travelcrm/views/__init__.py:122
+#: travelcrm/views/__init__.py:137
 msgid "Scope"
 msgstr ""
 
-#: travelcrm/views/__init__.py:125
+#: travelcrm/views/__init__.py:140
 msgid "All"
 msgstr ""
 
-#: travelcrm/views/accomodations.py:70
-msgid "View Accomodation Type"
-msgstr ""
-
-#: travelcrm/views/accomodations.py:82 travelcrm/views/foodcats.py:83
-#: travelcrm/views/hotelcats.py:83
-msgid "Add Hotel Category"
-msgstr ""
-
-#: travelcrm/views/accomodations.py:97 travelcrm/views/accomodations.py:131
-#: travelcrm/views/accounts.py:97 travelcrm/views/accounts.py:128
-#: travelcrm/views/accounts_items.py:94 travelcrm/views/accounts_items.py:125
-#: travelcrm/views/addresses.py:100 travelcrm/views/addresses.py:134
-#: travelcrm/views/advsources.py:99 travelcrm/views/advsources.py:130
-#: travelcrm/views/appointments.py:99 travelcrm/views/appointments.py:133
-#: travelcrm/views/banks.py:98 travelcrm/views/banks.py:129
-#: travelcrm/views/banks_details.py:100 travelcrm/views/banks_details.py:134
-#: travelcrm/views/bpersons.py:99 travelcrm/views/bpersons.py:133
-#: travelcrm/views/calculations.py:105 travelcrm/views/calculations.py:133
-#: travelcrm/views/commissions.py:102 travelcrm/views/commissions.py:136
-#: travelcrm/views/companies.py:97 travelcrm/views/contacts.py:101
-#: travelcrm/views/contacts.py:135 travelcrm/views/contracts.py:101
-#: travelcrm/views/contracts.py:135 travelcrm/views/countries.py:98
-#: travelcrm/views/countries.py:129 travelcrm/views/crosspayments.py:99
-#: travelcrm/views/crosspayments.py:130 travelcrm/views/currencies.py:99
-#: travelcrm/views/currencies.py:130 travelcrm/views/currencies_rates.py:97
-#: travelcrm/views/currencies_rates.py:128 travelcrm/views/emails_campaigns.py:101
-#: travelcrm/views/emails_campaigns.py:133 travelcrm/views/employees.py:102
-#: travelcrm/views/employees.py:133 travelcrm/views/foodcats.py:98
-#: travelcrm/views/foodcats.py:129 travelcrm/views/hotelcats.py:98
-#: travelcrm/views/hotelcats.py:129 travelcrm/views/hotels.py:98
-#: travelcrm/views/hotels.py:129 travelcrm/views/incomes.py:99
-#: travelcrm/views/incomes.py:130 travelcrm/views/invoices.py:115
-#: travelcrm/views/invoices.py:149 travelcrm/views/invoices.py:279
-#: travelcrm/views/leads.py:100 travelcrm/views/leads.py:131
-#: travelcrm/views/leads_items.py:98 travelcrm/views/leads_items.py:129
-#: travelcrm/views/leads_offers.py:98 travelcrm/views/leads_offers.py:129
-#: travelcrm/views/locations.py:98 travelcrm/views/locations.py:129
-#: travelcrm/views/navigations.py:101 travelcrm/views/navigations.py:136
-#: travelcrm/views/notes.py:101 travelcrm/views/notes.py:135
-#: travelcrm/views/orders.py:105 travelcrm/views/orders.py:139
-#: travelcrm/views/outgoings.py:106 travelcrm/views/outgoings.py:142
-#: travelcrm/views/passports.py:101 travelcrm/views/passports.py:135
-#: travelcrm/views/permisions.py:108 travelcrm/views/persons.py:104
-#: travelcrm/views/persons.py:138 travelcrm/views/positions.py:101
-#: travelcrm/views/positions.py:135 travelcrm/views/regions.py:98
-#: travelcrm/views/regions.py:129 travelcrm/views/resources_types.py:101
-#: travelcrm/views/resources_types.py:135 travelcrm/views/roomcats.py:98
-#: travelcrm/views/roomcats.py:129 travelcrm/views/services.py:99
-#: travelcrm/views/services.py:130 travelcrm/views/spassports.py:74
-#: travelcrm/views/spassports.py:108 travelcrm/views/structures.py:95
-#: travelcrm/views/structures.py:126 travelcrm/views/subaccounts.py:99
-#: travelcrm/views/subaccounts.py:135 travelcrm/views/suppliers.py:102
-#: travelcrm/views/suppliers.py:136 travelcrm/views/suppliers_types.py:98
-#: travelcrm/views/suppliers_types.py:129 travelcrm/views/tasks.py:100
-#: travelcrm/views/tasks.py:132 travelcrm/views/tickets.py:76
-#: travelcrm/views/tickets.py:110 travelcrm/views/tickets_classes.py:98
-#: travelcrm/views/tickets_classes.py:129 travelcrm/views/tours.py:77
-#: travelcrm/views/tours.py:111 travelcrm/views/tours.py:179
-#: travelcrm/views/transfers.py:98 travelcrm/views/transfers.py:129
-#: travelcrm/views/transports.py:98 travelcrm/views/transports.py:129
-#: travelcrm/views/uploads.py:102 travelcrm/views/uploads.py:136
-#: travelcrm/views/users.py:100 travelcrm/views/users.py:131
-#: travelcrm/views/vats.py:98 travelcrm/views/vats.py:129
-#: travelcrm/views/visas.py:76 travelcrm/views/visas.py:110
+#: travelcrm/views/accomodations.py:98 travelcrm/views/accomodations.py:132
+#: travelcrm/views/accounts.py:98 travelcrm/views/accounts.py:132
+#: travelcrm/views/accounts_items.py:95 travelcrm/views/accounts_items.py:129
+#: travelcrm/views/activities.py:75 travelcrm/views/addresses.py:99
+#: travelcrm/views/addresses.py:133 travelcrm/views/advsources.py:99
+#: travelcrm/views/advsources.py:133 travelcrm/views/appointments.py:97
+#: travelcrm/views/appointments.py:131 travelcrm/views/banks.py:99
+#: travelcrm/views/banks.py:133 travelcrm/views/banks_details.py:99
+#: travelcrm/views/banks_details.py:133 travelcrm/views/bpersons.py:98
+#: travelcrm/views/bpersons.py:132 travelcrm/views/calculations.py:102
+#: travelcrm/views/calculations.py:130 travelcrm/views/commissions.py:99
+#: travelcrm/views/commissions.py:133 travelcrm/views/companies.py:96
+#: travelcrm/views/contacts.py:99 travelcrm/views/contacts.py:133
+#: travelcrm/views/contracts.py:99 travelcrm/views/contracts.py:133
+#: travelcrm/views/countries.py:99 travelcrm/views/countries.py:133
+#: travelcrm/views/crosspayments.py:99 travelcrm/views/crosspayments.py:133
+#: travelcrm/views/currencies.py:99 travelcrm/views/currencies.py:133
+#: travelcrm/views/currencies_rates.py:98 travelcrm/views/currencies_rates.py:132
+#: travelcrm/views/emails_campaigns.py:101 travelcrm/views/emails_campaigns.py:136
+#: travelcrm/views/employees.py:102 travelcrm/views/employees.py:136
+#: travelcrm/views/foodcats.py:99 travelcrm/views/foodcats.py:133
+#: travelcrm/views/hotelcats.py:99 travelcrm/views/hotelcats.py:133
+#: travelcrm/views/hotels.py:99 travelcrm/views/hotels.py:133
+#: travelcrm/views/incomes.py:99 travelcrm/views/incomes.py:133
+#: travelcrm/views/invoices.py:113 travelcrm/views/invoices.py:147
+#: travelcrm/views/invoices.py:284 travelcrm/views/leads.py:100
+#: travelcrm/views/leads.py:134 travelcrm/views/leads_items.py:99
+#: travelcrm/views/leads_items.py:133 travelcrm/views/leads_offers.py:99
+#: travelcrm/views/leads_offers.py:133 travelcrm/views/leads_stats.py:92
+#: travelcrm/views/locations.py:99 travelcrm/views/locations.py:133
+#: travelcrm/views/navigations.py:100 travelcrm/views/navigations.py:135
+#: travelcrm/views/notes.py:100 travelcrm/views/notes.py:134
+#: travelcrm/views/orders.py:104 travelcrm/views/orders.py:138
+#: travelcrm/views/outgoings.py:104 travelcrm/views/outgoings.py:140
+#: travelcrm/views/passports.py:99 travelcrm/views/passports.py:133
+#: travelcrm/views/permisions.py:107 travelcrm/views/persons.py:102
+#: travelcrm/views/persons.py:136 travelcrm/views/persons_categories.py:99
+#: travelcrm/views/persons_categories.py:133 travelcrm/views/positions.py:99
+#: travelcrm/views/positions.py:133 travelcrm/views/regions.py:99
+#: travelcrm/views/regions.py:133 travelcrm/views/resources_types.py:100
+#: travelcrm/views/resources_types.py:134 travelcrm/views/roomcats.py:99
+#: travelcrm/views/roomcats.py:133 travelcrm/views/services.py:99
+#: travelcrm/views/services.py:133 travelcrm/views/spassports.py:71
+#: travelcrm/views/spassports.py:105 travelcrm/views/structures.py:93
+#: travelcrm/views/structures.py:124 travelcrm/views/subaccounts.py:99
+#: travelcrm/views/subaccounts.py:135 travelcrm/views/suppliers.py:101
+#: travelcrm/views/suppliers.py:135 travelcrm/views/suppliers_types.py:99
+#: travelcrm/views/suppliers_types.py:133 travelcrm/views/tasks.py:101
+#: travelcrm/views/tasks.py:136 travelcrm/views/tickets.py:73
+#: travelcrm/views/tickets.py:107 travelcrm/views/tickets_classes.py:99
+#: travelcrm/views/tickets_classes.py:133 travelcrm/views/tours.py:74
+#: travelcrm/views/tours.py:108 travelcrm/views/tours.py:176
+#: travelcrm/views/transfers.py:99 travelcrm/views/transfers.py:133
+#: travelcrm/views/transports.py:99 travelcrm/views/transports.py:133
+#: travelcrm/views/uploads.py:100 travelcrm/views/uploads.py:134
+#: travelcrm/views/users.py:101 travelcrm/views/users.py:135
+#: travelcrm/views/vats.py:99 travelcrm/views/vats.py:133
+#: travelcrm/views/visas.py:73 travelcrm/views/visas.py:107
 msgid "Saved"
 msgstr ""
 
-#: travelcrm/views/accomodations.py:102 travelcrm/views/accomodations.py:136
-#: travelcrm/views/accounts.py:102 travelcrm/views/accounts.py:133
-#: travelcrm/views/accounts_items.py:99 travelcrm/views/accounts_items.py:130
-#: travelcrm/views/addresses.py:105 travelcrm/views/addresses.py:139
-#: travelcrm/views/advsources.py:104 travelcrm/views/advsources.py:135
-#: travelcrm/views/appointments.py:104 travelcrm/views/appointments.py:138
-#: travelcrm/views/banks.py:103 travelcrm/views/banks.py:134
-#: travelcrm/views/banks_details.py:105 travelcrm/views/banks_details.py:139
-#: travelcrm/views/bpersons.py:104 travelcrm/views/bpersons.py:138
-#: travelcrm/views/calculations.py:138 travelcrm/views/commissions.py:107
-#: travelcrm/views/commissions.py:141 travelcrm/views/companies.py:102
-#: travelcrm/views/contacts.py:106 travelcrm/views/contacts.py:140
-#: travelcrm/views/contracts.py:106 travelcrm/views/contracts.py:140
-#: travelcrm/views/countries.py:103 travelcrm/views/countries.py:134
-#: travelcrm/views/crosspayments.py:104 travelcrm/views/crosspayments.py:135
-#: travelcrm/views/currencies.py:104 travelcrm/views/currencies.py:135
-#: travelcrm/views/currencies_rates.py:102 travelcrm/views/currencies_rates.py:133
-#: travelcrm/views/emails_campaigns.py:106 travelcrm/views/emails_campaigns.py:138
-#: travelcrm/views/employees.py:107 travelcrm/views/employees.py:138
-#: travelcrm/views/foodcats.py:103 travelcrm/views/foodcats.py:134
-#: travelcrm/views/home.py:78 travelcrm/views/home.py:195
-#: travelcrm/views/hotelcats.py:103 travelcrm/views/hotelcats.py:134
-#: travelcrm/views/hotels.py:103 travelcrm/views/hotels.py:134
-#: travelcrm/views/incomes.py:104 travelcrm/views/incomes.py:135
-#: travelcrm/views/invoices.py:120 travelcrm/views/invoices.py:154
-#: travelcrm/views/invoices.py:233 travelcrm/views/invoices.py:252
-#: travelcrm/views/invoices.py:282 travelcrm/views/leads.py:105
-#: travelcrm/views/leads.py:136 travelcrm/views/leads_items.py:103
-#: travelcrm/views/leads_items.py:134 travelcrm/views/leads_offers.py:103
-#: travelcrm/views/leads_offers.py:134 travelcrm/views/locations.py:103
-#: travelcrm/views/locations.py:134 travelcrm/views/navigations.py:104
-#: travelcrm/views/navigations.py:139 travelcrm/views/navigations.py:233
-#: travelcrm/views/notes.py:106 travelcrm/views/notes.py:140
-#: travelcrm/views/orders.py:110 travelcrm/views/orders.py:144
-#: travelcrm/views/outgoings.py:111 travelcrm/views/outgoings.py:147
-#: travelcrm/views/passports.py:106 travelcrm/views/passports.py:140
-#: travelcrm/views/permisions.py:111 travelcrm/views/permisions.py:141
-#: travelcrm/views/persons.py:109 travelcrm/views/persons.py:143
-#: travelcrm/views/positions.py:106 travelcrm/views/positions.py:140
-#: travelcrm/views/regions.py:103 travelcrm/views/regions.py:134
-#: travelcrm/views/resources_types.py:106 travelcrm/views/resources_types.py:140
-#: travelcrm/views/roomcats.py:103 travelcrm/views/roomcats.py:134
-#: travelcrm/views/services.py:104 travelcrm/views/services.py:135
-#: travelcrm/views/spassports.py:79 travelcrm/views/spassports.py:113
-#: travelcrm/views/structures.py:98 travelcrm/views/structures.py:129
-#: travelcrm/views/subaccounts.py:104 travelcrm/views/subaccounts.py:140
-#: travelcrm/views/suppliers.py:107 travelcrm/views/suppliers.py:141
-#: travelcrm/views/suppliers_types.py:103 travelcrm/views/suppliers_types.py:134
-#: travelcrm/views/tasks.py:105 travelcrm/views/tasks.py:137
-#: travelcrm/views/tickets.py:81 travelcrm/views/tickets.py:115
-#: travelcrm/views/tickets_classes.py:103 travelcrm/views/tickets_classes.py:134
-#: travelcrm/views/tours.py:82 travelcrm/views/tours.py:116
-#: travelcrm/views/tours.py:182 travelcrm/views/transfers.py:103
-#: travelcrm/views/transfers.py:134 travelcrm/views/transports.py:103
-#: travelcrm/views/transports.py:134 travelcrm/views/uploads.py:107
-#: travelcrm/views/uploads.py:141 travelcrm/views/users.py:105
-#: travelcrm/views/users.py:136 travelcrm/views/vats.py:103
-#: travelcrm/views/vats.py:134 travelcrm/views/visas.py:81
-#: travelcrm/views/visas.py:115
+#: travelcrm/views/accomodations.py:103 travelcrm/views/accomodations.py:137
+#: travelcrm/views/accounts.py:103 travelcrm/views/accounts.py:137
+#: travelcrm/views/accounts_items.py:100 travelcrm/views/accounts_items.py:134
+#: travelcrm/views/activities.py:78 travelcrm/views/addresses.py:104
+#: travelcrm/views/addresses.py:138 travelcrm/views/advsources.py:104
+#: travelcrm/views/advsources.py:138 travelcrm/views/appointments.py:102
+#: travelcrm/views/appointments.py:136 travelcrm/views/banks.py:104
+#: travelcrm/views/banks.py:138 travelcrm/views/banks_details.py:104
+#: travelcrm/views/banks_details.py:138 travelcrm/views/bpersons.py:103
+#: travelcrm/views/bpersons.py:137 travelcrm/views/calculations.py:135
+#: travelcrm/views/commissions.py:104 travelcrm/views/commissions.py:138
+#: travelcrm/views/companies.py:101 travelcrm/views/contacts.py:104
+#: travelcrm/views/contacts.py:138 travelcrm/views/contracts.py:104
+#: travelcrm/views/contracts.py:138 travelcrm/views/countries.py:104
+#: travelcrm/views/countries.py:138 travelcrm/views/crosspayments.py:104
+#: travelcrm/views/crosspayments.py:138 travelcrm/views/currencies.py:104
+#: travelcrm/views/currencies.py:138 travelcrm/views/currencies_rates.py:103
+#: travelcrm/views/currencies_rates.py:137 travelcrm/views/emails_campaigns.py:106
+#: travelcrm/views/emails_campaigns.py:141 travelcrm/views/employees.py:107
+#: travelcrm/views/employees.py:141 travelcrm/views/foodcats.py:104
+#: travelcrm/views/foodcats.py:138 travelcrm/views/home.py:92
+#: travelcrm/views/home.py:214 travelcrm/views/hotelcats.py:104
+#: travelcrm/views/hotelcats.py:138 travelcrm/views/hotels.py:104
+#: travelcrm/views/hotels.py:138 travelcrm/views/incomes.py:104
+#: travelcrm/views/incomes.py:138 travelcrm/views/invoices.py:118
+#: travelcrm/views/invoices.py:152 travelcrm/views/invoices.py:238
+#: travelcrm/views/invoices.py:257 travelcrm/views/invoices.py:287
+#: travelcrm/views/leads.py:105 travelcrm/views/leads.py:139
+#: travelcrm/views/leads_items.py:104 travelcrm/views/leads_items.py:138
+#: travelcrm/views/leads_offers.py:104 travelcrm/views/leads_offers.py:138
+#: travelcrm/views/leads_stats.py:95 travelcrm/views/locations.py:104
+#: travelcrm/views/locations.py:138 travelcrm/views/navigations.py:103
+#: travelcrm/views/navigations.py:138 travelcrm/views/navigations.py:232
+#: travelcrm/views/notes.py:105 travelcrm/views/notes.py:139
+#: travelcrm/views/orders.py:109 travelcrm/views/orders.py:143
+#: travelcrm/views/outgoings.py:109 travelcrm/views/outgoings.py:145
+#: travelcrm/views/passports.py:104 travelcrm/views/passports.py:138
+#: travelcrm/views/permisions.py:110 travelcrm/views/permisions.py:140
+#: travelcrm/views/persons.py:107 travelcrm/views/persons.py:141
+#: travelcrm/views/persons_categories.py:104
+#: travelcrm/views/persons_categories.py:138 travelcrm/views/positions.py:104
+#: travelcrm/views/positions.py:138 travelcrm/views/regions.py:104
+#: travelcrm/views/regions.py:138 travelcrm/views/resources_types.py:105
+#: travelcrm/views/resources_types.py:139 travelcrm/views/roomcats.py:104
+#: travelcrm/views/roomcats.py:138 travelcrm/views/services.py:104
+#: travelcrm/views/services.py:138 travelcrm/views/spassports.py:76
+#: travelcrm/views/spassports.py:110 travelcrm/views/structures.py:96
+#: travelcrm/views/structures.py:127 travelcrm/views/subaccounts.py:104
+#: travelcrm/views/subaccounts.py:140 travelcrm/views/suppliers.py:106
+#: travelcrm/views/suppliers.py:140 travelcrm/views/suppliers_types.py:104
+#: travelcrm/views/suppliers_types.py:138 travelcrm/views/tasks.py:106
+#: travelcrm/views/tasks.py:141 travelcrm/views/tickets.py:78
+#: travelcrm/views/tickets.py:112 travelcrm/views/tickets_classes.py:104
+#: travelcrm/views/tickets_classes.py:138 travelcrm/views/tours.py:79
+#: travelcrm/views/tours.py:113 travelcrm/views/tours.py:179
+#: travelcrm/views/transfers.py:104 travelcrm/views/transfers.py:138
+#: travelcrm/views/transports.py:104 travelcrm/views/transports.py:138
+#: travelcrm/views/uploads.py:105 travelcrm/views/uploads.py:139
+#: travelcrm/views/users.py:106 travelcrm/views/users.py:140
+#: travelcrm/views/vats.py:104 travelcrm/views/vats.py:138
+#: travelcrm/views/visas.py:78 travelcrm/views/visas.py:112
 msgid "Please, check errors"
 msgstr ""
 
-#: travelcrm/views/accomodations.py:116
-msgid "Edit Accomodation Type"
-msgstr ""
-
-#: travelcrm/views/accomodations.py:148
-msgid "Delete Accomodation"
-msgstr ""
-
-#: travelcrm/views/accomodations.py:172 travelcrm/views/accounts.py:169
-#: travelcrm/views/accounts_items.py:167 travelcrm/views/addresses.py:197
-#: travelcrm/views/advsources.py:171 travelcrm/views/appointments.py:196
-#: travelcrm/views/banks.py:171 travelcrm/views/banks_details.py:187
-#: travelcrm/views/bpersons.py:208 travelcrm/views/calculations.py:186
-#: travelcrm/views/commissions.py:199 travelcrm/views/contacts.py:196
-#: travelcrm/views/contracts.py:208 travelcrm/views/countries.py:170
-#: travelcrm/views/crosspayments.py:205 travelcrm/views/currencies.py:171
-#: travelcrm/views/currencies_rates.py:192 travelcrm/views/emails_campaigns.py:174
-#: travelcrm/views/employees.py:174 travelcrm/views/foodcats.py:170
-#: travelcrm/views/hotelcats.py:170 travelcrm/views/hotels.py:192
-#: travelcrm/views/incomes.py:206 travelcrm/views/invoices.py:202
-#: travelcrm/views/leads.py:227 travelcrm/views/leads_items.py:204
-#: travelcrm/views/leads_offers.py:204 travelcrm/views/locations.py:192
-#: travelcrm/views/navigations.py:175 travelcrm/views/notes.py:217
-#: travelcrm/views/orders.py:215 travelcrm/views/outgoings.py:217
-#: travelcrm/views/passports.py:198 travelcrm/views/persons.py:190
-#: travelcrm/views/positions.py:198 travelcrm/views/regions.py:170
-#: travelcrm/views/resources_types.py:213 travelcrm/views/roomcats.py:171
-#: travelcrm/views/services.py:172 travelcrm/views/structures.py:188
-#: travelcrm/views/subaccounts.py:189 travelcrm/views/suppliers.py:187
-#: travelcrm/views/suppliers_types.py:168 travelcrm/views/tasks.py:192
-#: travelcrm/views/tickets_classes.py:171 travelcrm/views/transfers.py:170
-#: travelcrm/views/transports.py:171 travelcrm/views/uploads.py:197
-#: travelcrm/views/users.py:169 travelcrm/views/vats.py:171
+#: travelcrm/views/accomodations.py:173 travelcrm/views/accounts.py:173
+#: travelcrm/views/accounts_items.py:171 travelcrm/views/addresses.py:196
+#: travelcrm/views/advsources.py:174 travelcrm/views/appointments.py:194
+#: travelcrm/views/banks.py:175 travelcrm/views/banks_details.py:186
+#: travelcrm/views/bpersons.py:207 travelcrm/views/calculations.py:183
+#: travelcrm/views/commissions.py:196 travelcrm/views/contacts.py:194
+#: travelcrm/views/contracts.py:206 travelcrm/views/countries.py:174
+#: travelcrm/views/crosspayments.py:208 travelcrm/views/currencies.py:174
+#: travelcrm/views/currencies_rates.py:196 travelcrm/views/emails_campaigns.py:177
+#: travelcrm/views/employees.py:177 travelcrm/views/foodcats.py:174
+#: travelcrm/views/hotelcats.py:174 travelcrm/views/hotels.py:196
+#: travelcrm/views/incomes.py:209 travelcrm/views/invoices.py:200
+#: travelcrm/views/leads.py:230 travelcrm/views/leads_items.py:208
+#: travelcrm/views/leads_offers.py:208 travelcrm/views/locations.py:196
+#: travelcrm/views/navigations.py:174 travelcrm/views/notes.py:216
+#: travelcrm/views/orders.py:214 travelcrm/views/outgoings.py:215
+#: travelcrm/views/passports.py:196 travelcrm/views/persons.py:189
+#: travelcrm/views/persons_categories.py:175 travelcrm/views/positions.py:196
+#: travelcrm/views/regions.py:174 travelcrm/views/resources_types.py:212
+#: travelcrm/views/roomcats.py:175 travelcrm/views/services.py:175
+#: travelcrm/views/structures.py:186 travelcrm/views/subaccounts.py:189
+#: travelcrm/views/suppliers.py:186 travelcrm/views/suppliers_types.py:172
+#: travelcrm/views/tasks.py:196 travelcrm/views/tickets_classes.py:175
+#: travelcrm/views/transfers.py:174 travelcrm/views/transports.py:175
+#: travelcrm/views/uploads.py:195 travelcrm/views/users.py:173
+#: travelcrm/views/vats.py:175
 msgid "Some objects could not be delete"
 msgstr ""
 
-#: travelcrm/views/accomodations.py:176 travelcrm/views/accounts.py:173
-#: travelcrm/views/accounts_items.py:171 travelcrm/views/addresses.py:201
-#: travelcrm/views/advsources.py:175 travelcrm/views/appointments.py:200
-#: travelcrm/views/banks.py:175 travelcrm/views/banks_details.py:191
-#: travelcrm/views/bpersons.py:212 travelcrm/views/calculations.py:190
-#: travelcrm/views/commissions.py:203 travelcrm/views/contacts.py:200
-#: travelcrm/views/contracts.py:212 travelcrm/views/countries.py:174
-#: travelcrm/views/crosspayments.py:209 travelcrm/views/currencies.py:175
-#: travelcrm/views/currencies_rates.py:196 travelcrm/views/emails_campaigns.py:178
-#: travelcrm/views/employees.py:178 travelcrm/views/foodcats.py:174
-#: travelcrm/views/hotelcats.py:174 travelcrm/views/hotels.py:196
-#: travelcrm/views/incomes.py:210 travelcrm/views/invoices.py:206
-#: travelcrm/views/leads.py:231 travelcrm/views/leads_items.py:208
-#: travelcrm/views/leads_offers.py:208 travelcrm/views/locations.py:196
-#: travelcrm/views/navigations.py:179 travelcrm/views/notes.py:221
-#: travelcrm/views/orders.py:219 travelcrm/views/outgoings.py:221
-#: travelcrm/views/passports.py:202 travelcrm/views/persons.py:194
-#: travelcrm/views/positions.py:202 travelcrm/views/regions.py:174
-#: travelcrm/views/resources_types.py:217 travelcrm/views/roomcats.py:175
-#: travelcrm/views/services.py:176 travelcrm/views/structures.py:192
-#: travelcrm/views/subaccounts.py:193 travelcrm/views/suppliers.py:191
-#: travelcrm/views/suppliers_types.py:172 travelcrm/views/tasks.py:196
-#: travelcrm/views/tickets_classes.py:175 travelcrm/views/transfers.py:174
-#: travelcrm/views/transports.py:175 travelcrm/views/uploads.py:201
-#: travelcrm/views/users.py:173 travelcrm/views/vats.py:175
+#: travelcrm/views/accomodations.py:177 travelcrm/views/accounts.py:177
+#: travelcrm/views/accounts_items.py:175 travelcrm/views/addresses.py:200
+#: travelcrm/views/advsources.py:178 travelcrm/views/appointments.py:198
+#: travelcrm/views/banks.py:179 travelcrm/views/banks_details.py:190
+#: travelcrm/views/bpersons.py:211 travelcrm/views/calculations.py:187
+#: travelcrm/views/commissions.py:200 travelcrm/views/contacts.py:198
+#: travelcrm/views/contracts.py:210 travelcrm/views/countries.py:178
+#: travelcrm/views/crosspayments.py:212 travelcrm/views/currencies.py:178
+#: travelcrm/views/currencies_rates.py:200 travelcrm/views/emails_campaigns.py:181
+#: travelcrm/views/employees.py:181 travelcrm/views/foodcats.py:178
+#: travelcrm/views/hotelcats.py:178 travelcrm/views/hotels.py:200
+#: travelcrm/views/incomes.py:213 travelcrm/views/invoices.py:204
+#: travelcrm/views/leads.py:234 travelcrm/views/leads_items.py:212
+#: travelcrm/views/leads_offers.py:212 travelcrm/views/locations.py:200
+#: travelcrm/views/navigations.py:178 travelcrm/views/notes.py:220
+#: travelcrm/views/orders.py:218 travelcrm/views/outgoings.py:219
+#: travelcrm/views/passports.py:200 travelcrm/views/persons.py:193
+#: travelcrm/views/persons_categories.py:179 travelcrm/views/positions.py:200
+#: travelcrm/views/regions.py:178 travelcrm/views/resources_types.py:216
+#: travelcrm/views/roomcats.py:179 travelcrm/views/services.py:179
+#: travelcrm/views/structures.py:190 travelcrm/views/subaccounts.py:193
+#: travelcrm/views/suppliers.py:190 travelcrm/views/suppliers_types.py:176
+#: travelcrm/views/tasks.py:200 travelcrm/views/tickets_classes.py:179
+#: travelcrm/views/transfers.py:178 travelcrm/views/transports.py:179
+#: travelcrm/views/uploads.py:199 travelcrm/views/users.py:177
+#: travelcrm/views/vats.py:179
 msgid "Deleted"
 msgstr ""
 
-#: travelcrm/views/accounts.py:70
-msgid "View Account"
-msgstr ""
-
-#: travelcrm/views/accounts.py:82
-msgid "Add Account"
-msgstr ""
-
-#: travelcrm/views/accounts.py:114
-msgid "Edit Account"
-msgstr ""
-
-#: travelcrm/views/accounts.py:145
-msgid "Delete Accounts"
-msgstr ""
-
-#: travelcrm/views/accounts_items.py:67
-msgid "View Account Item"
-msgstr ""
-
-#: travelcrm/views/accounts_items.py:79
-msgid "Add Account Item"
-msgstr ""
-
-#: travelcrm/views/accounts_items.py:111
-msgid "Edit AccountItem"
-msgstr ""
-
-#: travelcrm/views/accounts_items.py:142
-msgid "Delete Accounts Items"
-msgstr ""
-
-#: travelcrm/views/addresses.py:71
-msgid "View Address"
-msgstr ""
-
-#: travelcrm/views/addresses.py:84
-msgid "Add Address"
-msgstr ""
-
-#: travelcrm/views/addresses.py:119
-msgid "Edit Address"
-msgstr ""
-
-#: travelcrm/views/addresses.py:153
-msgid "Copy Address"
-msgstr ""
-
-#: travelcrm/views/addresses.py:173
-msgid "Delete Addresses"
-msgstr ""
-
-#: travelcrm/views/advsources.py:72
-msgid "View Advsource"
-msgstr ""
-
-#: travelcrm/views/advsources.py:84
-msgid "Add Advertising Source"
-msgstr ""
-
-#: travelcrm/views/advsources.py:116
-msgid "Edit Advertising Source"
-msgstr ""
-
-#: travelcrm/views/advsources.py:147
-msgid "Delete Advertises Sources"
-msgstr ""
-
-#: travelcrm/views/appointments.py:70
-msgid "View Appointment"
-msgstr ""
-
-#: travelcrm/views/appointments.py:83
-msgid "Add Employee Appointment"
-msgstr ""
-
-#: travelcrm/views/appointments.py:118
-msgid "Edit Employee Appointment"
-msgstr ""
-
-#: travelcrm/views/appointments.py:152
-msgid "Copy Appointment"
-msgstr ""
-
-#: travelcrm/views/appointments.py:172
-msgid "Delete Appointments"
-msgstr ""
-
-#: travelcrm/views/banks.py:71
-msgid "View Bank"
-msgstr ""
-
-#: travelcrm/views/banks.py:83
-msgid "Add Bank"
-msgstr ""
-
-#: travelcrm/views/banks.py:115
-msgid "Edit Bank"
-msgstr ""
-
-#: travelcrm/views/banks.py:146
-msgid "Delete Banks"
-msgstr ""
-
-#: travelcrm/views/banks_details.py:71
-msgid "View Bank Detail"
-msgstr ""
-
-#: travelcrm/views/banks_details.py:84
-msgid "Add Bank Detail"
-msgstr ""
-
-#: travelcrm/views/banks_details.py:119
-msgid "Edit Bank Detail"
-msgstr ""
-
-#: travelcrm/views/banks_details.py:163
-msgid "Delete Banks Details"
-msgstr ""
-
-#: travelcrm/views/bpersons.py:70
-msgid "View Business Person"
-msgstr ""
-
-#: travelcrm/views/bpersons.py:83
-msgid "Add Business Person"
-msgstr ""
-
-#: travelcrm/views/bpersons.py:118
-msgid "Edit Business Person"
-msgstr ""
-
-#: travelcrm/views/bpersons.py:152
-msgid "Copy Business Person"
-msgstr ""
-
-#: travelcrm/views/bpersons.py:184
-msgid "Delete Business Persons"
-msgstr ""
-
-#: travelcrm/views/calculations.py:76
-msgid "View Calculation"
-msgstr ""
-
-#: travelcrm/views/calculations.py:89
+#: travelcrm/views/calculations.py:86
 msgid "Calculation Autoload"
 msgstr ""
 
-#: travelcrm/views/calculations.py:118
-msgid "Edit Calculation"
+#: travelcrm/views/home.py:85
+msgid "Check your email box."
 msgstr ""
 
-#: travelcrm/views/calculations.py:162
-msgid "Delete Calculations"
-msgstr ""
-
-#: travelcrm/views/commissions.py:73
-msgid "View Commission"
-msgstr ""
-
-#: travelcrm/views/commissions.py:86
-msgid "Add Commission"
-msgstr ""
-
-#: travelcrm/views/commissions.py:121
-msgid "Edit Commission"
-msgstr ""
-
-#: travelcrm/views/commissions.py:155
-msgid "Copy Commission"
-msgstr ""
-
-#: travelcrm/views/commissions.py:175
-msgid "Delete Commissions"
-msgstr ""
-
-#: travelcrm/views/companies.py:67
-msgid "View Company"
-msgstr ""
-
-#: travelcrm/views/companies.py:82
-msgid "Edit Company"
-msgstr ""
-
-#: travelcrm/views/contacts.py:72
-msgid "View Contact"
-msgstr ""
-
-#: travelcrm/views/contacts.py:85
-msgid "Add Contact"
-msgstr ""
-
-#: travelcrm/views/contacts.py:120
-msgid "Edit Contact"
-msgstr ""
-
-#: travelcrm/views/contacts.py:154
-msgid "Copy Contact"
-msgstr ""
-
-#: travelcrm/views/contacts.py:174
-msgid "Delete Contacts"
-msgstr ""
-
-#: travelcrm/views/contracts.py:72
-msgid "View Contract"
-msgstr ""
-
-#: travelcrm/views/contracts.py:85
-msgid "Add Contract"
-msgstr ""
-
-#: travelcrm/views/contracts.py:120
-msgid "Edit Contract"
-msgstr ""
-
-#: travelcrm/views/contracts.py:154
-msgid "Copy Contract"
-msgstr ""
-
-#: travelcrm/views/contracts.py:186
-msgid "Delete Contracts"
-msgstr ""
-
-#: travelcrm/views/countries.py:71
-msgid "View Country"
-msgstr ""
-
-#: travelcrm/views/countries.py:83
-msgid "Add Country"
-msgstr ""
-
-#: travelcrm/views/countries.py:115
-msgid "Edit Country"
-msgstr ""
-
-#: travelcrm/views/countries.py:146
-msgid "Delete Countries"
-msgstr ""
-
-#: travelcrm/views/crosspayments.py:72
-msgid "View Crosspayment"
-msgstr ""
-
-#: travelcrm/views/crosspayments.py:84
-msgid "Add Crosspayment"
-msgstr ""
-
-#: travelcrm/views/crosspayments.py:116
-msgid "Edit Crosspayment"
-msgstr ""
-
-#: travelcrm/views/crosspayments.py:149
-msgid "Copy Crosspayment"
-msgstr ""
-
-#: travelcrm/views/crosspayments.py:181
-msgid "Delete Crosspayments"
-msgstr ""
-
-#: travelcrm/views/currencies.py:72
-msgid "View Currency"
-msgstr ""
-
-#: travelcrm/views/currencies.py:84
-msgid "Add Currency"
-msgstr ""
-
-#: travelcrm/views/currencies.py:116
-msgid "Edit Currency"
-msgstr ""
-
-#: travelcrm/views/currencies.py:147
-msgid "Delete Currencies"
-msgstr ""
-
-#: travelcrm/views/currencies_rates.py:70
-msgid "View Currency Rate"
-msgstr ""
-
-#: travelcrm/views/currencies_rates.py:82
-msgid "Add Currency Rate"
-msgstr ""
-
-#: travelcrm/views/currencies_rates.py:114
-msgid "Edit Currency Rate"
-msgstr ""
-
-#: travelcrm/views/currencies_rates.py:147
-msgid "Copy Rate"
-msgstr ""
-
-#: travelcrm/views/currencies_rates.py:167
-msgid "Delete Currencies Rates"
-msgstr ""
-
-#: travelcrm/views/emails_campaigns.py:73
-msgid "View Email Campaign"
-msgstr ""
-
-#: travelcrm/views/emails_campaigns.py:85
-msgid "Add Email Campaign"
-msgstr ""
-
-#: travelcrm/views/emails_campaigns.py:118
-msgid "Edit EmailCampaign"
-msgstr ""
-
-#: travelcrm/views/emails_campaigns.py:150
-msgid "Delete EmailCampaigns"
-msgstr ""
-
-#: travelcrm/views/employees.py:75
-msgid "View Employee"
-msgstr ""
-
-#: travelcrm/views/employees.py:87
-msgid "Add Employee"
-msgstr ""
-
-#: travelcrm/views/employees.py:119
-msgid "Edit Employee"
-msgstr ""
-
-#: travelcrm/views/employees.py:150
-msgid "Delete Employees"
-msgstr ""
-
-#: travelcrm/views/foodcats.py:71
-msgid "View Food Category"
-msgstr ""
-
-#: travelcrm/views/foodcats.py:115 travelcrm/views/hotelcats.py:115
-#: travelcrm/views/suppliers_types.py:115
-msgid "Edit Hotel Category"
-msgstr ""
-
-#: travelcrm/views/foodcats.py:146
-msgid "Delete Food Categories"
-msgstr ""
-
-#: travelcrm/views/home.py:82
-msgid "Check your email"
-msgstr ""
-
-#: travelcrm/views/home.py:139
+#: travelcrm/views/home.py:150
 msgid "Success, wait..."
 msgstr ""
 
-#: travelcrm/views/home.py:142
+#: travelcrm/views/home.py:153
 msgid "Invalid username or password"
 msgstr ""
 
-#: travelcrm/views/home.py:189
+#: travelcrm/views/home.py:205
 msgid "Creation task run soon. Waiting for Email."
 msgstr ""
 
-#: travelcrm/views/hotelcats.py:71
-msgid "View Hotel Category"
-msgstr ""
-
-#: travelcrm/views/hotelcats.py:146
-msgid "Delete Hotel Categories"
-msgstr ""
-
-#: travelcrm/views/hotels.py:71
-msgid "View Hotel"
-msgstr ""
-
-#: travelcrm/views/hotels.py:83
-msgid "Add Hotel"
-msgstr ""
-
-#: travelcrm/views/hotels.py:115
-msgid "Edit Hotel"
-msgstr ""
-
-#: travelcrm/views/hotels.py:148
-msgid "Copy Hotel"
-msgstr ""
-
-#: travelcrm/views/hotels.py:168
-msgid "Delete Hotels"
-msgstr ""
-
-#: travelcrm/views/incomes.py:72
-msgid "View Income"
-msgstr ""
-
-#: travelcrm/views/incomes.py:84
-msgid "Add Income"
-msgstr ""
-
-#: travelcrm/views/incomes.py:116
-msgid "Edit Income"
-msgstr ""
-
-#: travelcrm/views/incomes.py:149
-msgid "Copy Income"
-msgstr ""
-
-#: travelcrm/views/incomes.py:182
-msgid "Delete Income Payments"
-msgstr ""
-
-#: travelcrm/views/invoices.py:78
-msgid "View Invoice"
-msgstr ""
-
-#: travelcrm/views/invoices.py:98
-msgid "Add Invoice"
-msgstr ""
-
-#: travelcrm/views/invoices.py:134
-msgid "Edit Invoice"
-msgstr ""
-
-#: travelcrm/views/invoices.py:178
-msgid "Delete Invoices"
-msgstr ""
-
-#: travelcrm/views/leads.py:73
-msgid "View Lead"
-msgstr ""
-
-#: travelcrm/views/leads.py:85
-msgid "Add Lead"
-msgstr ""
-
-#: travelcrm/views/leads.py:117
-msgid "Edit Lead"
-msgstr ""
-
-#: travelcrm/views/leads.py:150
-msgid "Copy Lead"
-msgstr ""
-
-#: travelcrm/views/leads.py:202
-msgid "Delete Leads"
-msgstr ""
-
-#: travelcrm/views/leads_items.py:71
-msgid "View Lead Item"
-msgstr ""
-
-#: travelcrm/views/leads_items.py:83
-msgid "Add Lead Item"
-msgstr ""
-
-#: travelcrm/views/leads_items.py:115
-msgid "Edit Lead Item"
-msgstr ""
-
-#: travelcrm/views/leads_items.py:148
-msgid "Copy Lead Item"
-msgstr ""
-
-#: travelcrm/views/leads_items.py:180 travelcrm/views/leads_offers.py:180
-msgid "Delete Leads Items"
-msgstr ""
-
-#: travelcrm/views/leads_offers.py:71
-msgid "View Lead Offer"
-msgstr ""
-
-#: travelcrm/views/leads_offers.py:83
-msgid "Add Lead Offer"
-msgstr ""
-
-#: travelcrm/views/leads_offers.py:115
-msgid "Edit Lead Offer"
-msgstr ""
-
-#: travelcrm/views/leads_offers.py:148
-msgid "Copy Lead Offer"
-msgstr ""
-
-#: travelcrm/views/locations.py:71
-msgid "View Location"
-msgstr ""
-
-#: travelcrm/views/locations.py:83
-msgid "Add Location"
-msgstr ""
-
-#: travelcrm/views/locations.py:115
-msgid "Edit Location"
-msgstr ""
-
-#: travelcrm/views/locations.py:148
-msgid "Copy Location"
-msgstr ""
-
-#: travelcrm/views/locations.py:168
-msgid "Delete Locations"
-msgstr ""
-
-#: travelcrm/views/navigations.py:70
-msgid "View Navigation"
-msgstr ""
-
-#: travelcrm/views/navigations.py:87
-msgid "Add Navigation Item"
-msgstr ""
-
-#: travelcrm/views/navigations.py:120
-msgid "Edit Navigation Item"
-msgstr ""
-
-#: travelcrm/views/navigations.py:151
-msgid "Delete Navigations"
-msgstr ""
-
-#: travelcrm/views/navigations.py:217
-msgid "Copy Menu From Position"
-msgstr ""
-
-#: travelcrm/views/navigations.py:230 travelcrm/views/permisions.py:138
+#: travelcrm/views/navigations.py:229 travelcrm/views/permisions.py:137
 msgid "Copied"
 msgstr ""
 
-#: travelcrm/views/notes.py:72
-msgid "View Note"
-msgstr ""
-
-#: travelcrm/views/notes.py:85
-msgid "Add Note"
-msgstr ""
-
-#: travelcrm/views/notes.py:120
-msgid "Edit Note"
-msgstr ""
-
-#: travelcrm/views/notes.py:154
-msgid "Copy Note"
-msgstr ""
-
-#: travelcrm/views/notes.py:193
-msgid "Delete Notes"
-msgstr ""
-
-#: travelcrm/views/notifications.py:93
+#: travelcrm/views/notifications.py:92
 msgid "Close Notification"
 msgstr ""
 
-#: travelcrm/views/notifications.py:108
+#: travelcrm/views/notifications.py:107
 msgid "Closed"
 msgstr ""
 
-#: travelcrm/views/orders.py:74
-msgid "View Order"
-msgstr ""
-
-#: travelcrm/views/orders.py:89
-msgid "Add Order"
-msgstr ""
-
-#: travelcrm/views/orders.py:124
-msgid "Edit Service Sale"
-msgstr ""
-
-#: travelcrm/views/orders.py:158
-msgid "Copy Service Sale"
-msgstr ""
-
-#: travelcrm/views/orders.py:178
-msgid "Delete Services Sales"
-msgstr ""
-
-#: travelcrm/views/orders_items.py:68
-msgid "View Order Item"
-msgstr ""
-
-#: travelcrm/views/orders_items.py:137
-msgid "Delete Orders Items"
-msgstr ""
-
-#: travelcrm/views/outgoings.py:74
-msgid "View Outgoing"
-msgstr ""
-
-#: travelcrm/views/outgoings.py:89
-msgid "Add Outgoing"
-msgstr ""
-
-#: travelcrm/views/outgoings.py:127
-msgid "Edit Outgoing"
-msgstr ""
-
-#: travelcrm/views/outgoings.py:161
-msgid "Copy Outgoing"
-msgstr ""
-
-#: travelcrm/views/outgoings.py:193
-msgid "Delete Outgoing Payments"
-msgstr ""
-
-#: travelcrm/views/passports.py:72
-msgid "View Passport"
-msgstr ""
-
-#: travelcrm/views/passports.py:85
-msgid "Add Passport"
-msgstr ""
-
-#: travelcrm/views/passports.py:120
-msgid "Edit Passport"
-msgstr ""
-
-#: travelcrm/views/passports.py:154
-msgid "Copy Passport"
-msgstr ""
-
-#: travelcrm/views/passports.py:174 travelcrm/views/positions.py:174
-msgid "Delete Passports"
-msgstr ""
-
-#: travelcrm/views/permisions.py:125
-msgid "Copy Permissions From Position"
-msgstr ""
-
-#: travelcrm/views/persons.py:75
-msgid "View Person"
-msgstr ""
-
-#: travelcrm/views/persons.py:88
-msgid "Add Person"
-msgstr ""
-
-#: travelcrm/views/persons.py:123
-msgid "Edit Person"
-msgstr ""
-
-#: travelcrm/views/positions.py:72
-msgid "View Position"
-msgstr ""
-
-#: travelcrm/views/positions.py:85
-msgid "Add Company Position"
-msgstr ""
-
-#: travelcrm/views/positions.py:119
-msgid "Edit Company Position"
-msgstr ""
-
-#: travelcrm/views/positions.py:154
-msgid "Copy Company Position"
-msgstr ""
-
-#: travelcrm/views/regions.py:71
-msgid "View Region"
-msgstr ""
-
-#: travelcrm/views/regions.py:83
-msgid "Add Region"
-msgstr ""
-
-#: travelcrm/views/regions.py:115
-msgid "Edit Region"
-msgstr ""
-
-#: travelcrm/views/regions.py:146
-msgid "Delete Regions"
-msgstr ""
-
-#: travelcrm/views/resources_types.py:72
-msgid "View Resource Type"
-msgstr ""
-
-#: travelcrm/views/resources_types.py:85
-msgid "Add Resource Type"
-msgstr ""
-
-#: travelcrm/views/resources_types.py:120
-msgid "Edit Resource Type"
-msgstr ""
-
-#: travelcrm/views/resources_types.py:154
-msgid "Copy Resource Type"
-msgstr ""
-
-#: travelcrm/views/resources_types.py:189
-msgid "Delete Resources Types"
-msgstr ""
-
-#: travelcrm/views/resources_types.py:235
+#: travelcrm/views/resources_types.py:234
 msgid "Not Allowed"
 msgstr ""
 
-#: travelcrm/views/roomcats.py:71
-msgid "View Room Category"
-msgstr ""
-
-#: travelcrm/views/roomcats.py:83
-msgid "Add Room Category"
-msgstr ""
-
-#: travelcrm/views/roomcats.py:115
-msgid "Edit Room Category"
-msgstr ""
-
-#: travelcrm/views/roomcats.py:146
-msgid "Delete Room Categories"
-msgstr ""
-
-#: travelcrm/views/services.py:72
-msgid "View Service"
-msgstr ""
-
-#: travelcrm/views/services.py:84
-msgid "Add Service"
-msgstr ""
-
-#: travelcrm/views/services.py:116
-msgid "Edit Service"
-msgstr ""
-
-#: travelcrm/views/services.py:147
-msgid "Delete Services"
-msgstr ""
-
-#: travelcrm/views/spassports.py:45
-msgid "View Passport Sale"
-msgstr ""
-
-#: travelcrm/views/spassports.py:58
-msgid "Add Passport Service"
-msgstr ""
-
-#: travelcrm/views/spassports.py:93
-msgid "Edit Passport Sale"
-msgstr ""
-
-#: travelcrm/views/spassports.py:127
-msgid "Copy Service"
-msgstr ""
-
-#: travelcrm/views/structures.py:68
-msgid "View Structure"
-msgstr ""
-
-#: travelcrm/views/structures.py:81
-msgid "Add Company Structure"
-msgstr ""
-
-#: travelcrm/views/structures.py:111
-msgid "Edit Company Structure"
-msgstr ""
-
-#: travelcrm/views/structures.py:142
-msgid "Copy Company Structure"
-msgstr ""
-
-#: travelcrm/views/structures.py:163
-msgid "Delete Structures"
-msgstr ""
-
-#: travelcrm/views/subaccounts.py:72
-msgid "View Subaccount"
-msgstr ""
-
-#: travelcrm/views/subaccounts.py:84
-msgid "Add Subaccount"
-msgstr ""
-
-#: travelcrm/views/subaccounts.py:120
-msgid "Edit Subaccount"
-msgstr ""
-
-#: travelcrm/views/subaccounts.py:165
-msgid "Delete Subaccounts"
-msgstr ""
-
-#: travelcrm/views/suppliers.py:73
-msgid "View Supplier"
-msgstr ""
-
-#: travelcrm/views/suppliers.py:86
-msgid "Add Supplier"
-msgstr ""
-
-#: travelcrm/views/suppliers.py:121
-msgid "Edit Supplier"
-msgstr ""
-
-#: travelcrm/views/suppliers.py:165
-msgid "Delete Suppliers"
-msgstr ""
-
-#: travelcrm/views/suppliers_types.py:71
-msgid "View Supplier Type"
-msgstr ""
-
-#: travelcrm/views/suppliers_types.py:83
-msgid "Add Supplier Type"
-msgstr ""
-
-#: travelcrm/views/suppliers_types.py:146
-msgid "Delete Supplier Types"
-msgstr ""
-
-#: travelcrm/views/tasks.py:72
-msgid "View Task"
-msgstr ""
-
-#: travelcrm/views/tasks.py:84
-msgid "Add Task"
-msgstr ""
-
-#: travelcrm/views/tasks.py:117
-msgid "Edit Task"
-msgstr ""
-
-#: travelcrm/views/tasks.py:168
-msgid "Delete Tasks"
-msgstr ""
-
-#: travelcrm/views/tickets.py:47
-msgid "View Ticket Sale"
-msgstr ""
-
-#: travelcrm/views/tickets.py:60
-msgid "Add Ticket"
-msgstr ""
-
-#: travelcrm/views/tickets.py:95
-msgid "Edit Ticket Sale"
-msgstr ""
-
-#: travelcrm/views/tickets.py:129
-msgid "Copy Ticket"
-msgstr ""
-
-#: travelcrm/views/tickets_classes.py:71
-msgid "View TicketClass"
-msgstr ""
-
-#: travelcrm/views/tickets_classes.py:83
-msgid "Add TicketClass"
-msgstr ""
-
-#: travelcrm/views/tickets_classes.py:115
-msgid "Edit TicketClass"
-msgstr ""
-
-#: travelcrm/views/tickets_classes.py:146
-msgid "Delete TicketClasss"
-msgstr ""
-
-#: travelcrm/views/tours.py:48
-msgid "View Tour Sale"
-msgstr ""
-
-#: travelcrm/views/tours.py:61
-msgid "Add Tour"
-msgstr ""
-
-#: travelcrm/views/tours.py:96
-msgid "Edit Tour Sale"
-msgstr ""
-
-#: travelcrm/views/tours.py:130
-msgid "Copy Tour"
-msgstr ""
-
-#: travelcrm/views/transfers.py:71
-msgid "View Transfer"
-msgstr ""
-
-#: travelcrm/views/transfers.py:83
-msgid "Add Transfer"
-msgstr ""
-
-#: travelcrm/views/transfers.py:115
-msgid "Edit Transfer"
-msgstr ""
-
-#: travelcrm/views/transfers.py:146
-msgid "Delete Transfers"
-msgstr ""
-
-#: travelcrm/views/transports.py:71
-msgid "View Transport"
-msgstr ""
-
-#: travelcrm/views/transports.py:83
-msgid "Add Transport"
-msgstr ""
-
-#: travelcrm/views/transports.py:115
-msgid "Edit Transport"
-msgstr ""
-
-#: travelcrm/views/transports.py:146
-msgid "Delete Transports"
-msgstr ""
-
-#: travelcrm/views/turnovers.py:55
+#: travelcrm/views/turnovers.py:54
 msgid "total"
-msgstr ""
-
-#: travelcrm/views/uploads.py:73
-msgid "View Upload"
-msgstr ""
-
-#: travelcrm/views/uploads.py:86
-msgid "Add Upload"
-msgstr ""
-
-#: travelcrm/views/uploads.py:121
-msgid "Edit Upload"
-msgstr ""
-
-#: travelcrm/views/uploads.py:155
-msgid "Copy Upload"
-msgstr ""
-
-#: travelcrm/views/uploads.py:175
-msgid "Delete Uploads"
-msgstr ""
-
-#: travelcrm/views/users.py:73
-msgid "View User"
-msgstr ""
-
-#: travelcrm/views/users.py:85
-msgid "Add User"
-msgstr ""
-
-#: travelcrm/views/users.py:117
-msgid "Edit User"
-msgstr ""
-
-#: travelcrm/views/users.py:148
-msgid "Delete Users"
-msgstr ""
-
-#: travelcrm/views/vats.py:71
-msgid "View Vat"
-msgstr ""
-
-#: travelcrm/views/vats.py:83
-msgid "Add Vat"
-msgstr ""
-
-#: travelcrm/views/vats.py:115
-msgid "Edit Vat"
-msgstr ""
-
-#: travelcrm/views/vats.py:146
-msgid "Delete Vats"
-msgstr ""
-
-#: travelcrm/views/visas.py:47
-msgid "View Visa Sale"
-msgstr ""
-
-#: travelcrm/views/visas.py:60
-msgid "Add Visa"
-msgstr ""
-
-#: travelcrm/views/visas.py:95
-msgid "Edit Visa Sale"
-msgstr ""
-
-#: travelcrm/views/visas.py:129
-msgid "Copy Visa"
 msgstr ""
 

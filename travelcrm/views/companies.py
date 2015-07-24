@@ -1,12 +1,12 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models.company import Company
 from ..models.resource import Resource
 from ..lib.utils.security_utils import get_auth_employee
@@ -25,11 +25,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.companies.CompaniesResource',
 )
-class CompaniesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class CompaniesView(BaseView):
 
     @view_config(
         name='list',
@@ -64,7 +60,7 @@ class CompaniesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Company"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -79,7 +75,10 @@ class CompaniesView(object):
     def edit(self):
         employee = get_auth_employee(self.request)
         structure = get_employee_structure(employee)
-        return {'item': structure.company, 'title': _(u'Edit Company')}
+        return {
+            'item': structure.company, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',

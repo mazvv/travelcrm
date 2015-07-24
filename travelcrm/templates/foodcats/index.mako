@@ -13,7 +13,7 @@
         iconCls:'fa fa-table',
         tools:'#${_t_id}'
     "
-    title="${_(u'Foods Categories')}">
+    title="${title}">
     ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"

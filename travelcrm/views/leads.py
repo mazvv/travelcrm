@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..resources.orders import OrdersResource
 from ..models import DBSession
 from ..models.lead import Lead
@@ -23,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.leads.LeadsResource',
 )
-class LeadsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class LeadsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -35,7 +31,9 @@ class LeadsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -70,7 +68,7 @@ class LeadsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Lead"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -82,7 +80,9 @@ class LeadsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Lead')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -114,7 +114,10 @@ class LeadsView(object):
     )
     def edit(self):
         lead = Lead.get(self.request.params.get('id'))
-        return {'item': lead, 'title': _(u'Edit Lead')}
+        return {
+            'item': lead, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -147,7 +150,7 @@ class LeadsView(object):
         lead = Lead.get(self.request.params.get('id'))
         return {
             'item': lead,
-            'title': _(u"Copy Lead")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -199,7 +202,7 @@ class LeadsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Leads'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

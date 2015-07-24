@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.subaccount import Subaccount
 from ..lib.utils.common_utils import translate as _
@@ -22,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.subaccounts.SubaccountsResource',
 )
-class SubaccountsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class SubaccountsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +30,9 @@ class SubaccountsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -69,7 +67,7 @@ class SubaccountsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Subaccount"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -81,7 +79,9 @@ class SubaccountsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Subaccount')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -117,7 +117,7 @@ class SubaccountsView(object):
         return {
             'item': subaccount,
             'resource': resource,
-            'title': _(u'Edit Subaccount'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -162,7 +162,7 @@ class SubaccountsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Subaccounts'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

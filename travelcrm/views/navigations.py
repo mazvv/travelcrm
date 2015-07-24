@@ -4,6 +4,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.position import Position
 from ..models.navigation import Navigation
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.navigations.NavigationsResource',
 )
-class NavigationsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class NavigationsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +31,10 @@ class NavigationsView(object):
     )
     def index(self):
         position = Position.get(self.request.params.get('id'))
-        return {'position': position}
+        return {
+            'position': position,
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -66,7 +66,7 @@ class NavigationsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Navigation"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -83,7 +83,7 @@ class NavigationsView(object):
         )
         return {
             'position': position,
-            'title': _(u"Add Navigation Item")
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -116,7 +116,7 @@ class NavigationsView(object):
         )
         position = navigation.position
         return {
-            'title': _(u"Edit Navigation Item"),
+            'title': self._get_title(_(u'Edit')),
             'position': position,
             'item': navigation
         }
@@ -147,7 +147,7 @@ class NavigationsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Navigations'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 
@@ -213,7 +213,7 @@ class NavigationsView(object):
         position = Position.get(self.request.params.get('position_id'))
         return {
             'position': position,
-            'title': _(u"Copy Menu From Position")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(

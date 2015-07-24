@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.visa import Visa
 from ..models.order_item import OrderItem
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.visas.VisasResource',
 )
-class VisasView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class VisasView(BaseView):
 
     @view_config(
         name='view',
@@ -44,7 +41,7 @@ class VisasView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Visa Sale"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -57,7 +54,7 @@ class VisasView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Visa'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -92,7 +89,7 @@ class VisasView(object):
         order_item = OrderItem.get(self.request.params.get('id'))
         return {
             'item': order_item.visa,
-            'title': _(u'Edit Visa Sale'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -126,7 +123,7 @@ class VisasView(object):
         order_item = OrderItem.get(self.request.params.get('id'))
         return {
             'item': order_item.visa,
-            'title': _(u"Copy Visa")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(

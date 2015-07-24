@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.structure import Structure
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +21,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.structures.StructuresResource',
 )
-class StructuresView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class StructuresView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +29,9 @@ class StructuresView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -65,7 +63,7 @@ class StructuresView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Structure"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -78,7 +76,7 @@ class StructuresView(object):
     )
     def add(self):
         return {
-            'title': _(u"Add Company Structure")
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -108,7 +106,7 @@ class StructuresView(object):
     def edit(self):
         structure = Structure.get(self.request.params.get('id'))
         return {
-            'title': _(u"Edit Company Structure"),
+            'title': self._get_title(_(u'Edit')),
             'item': structure,
         }
 
@@ -139,7 +137,7 @@ class StructuresView(object):
     def copy(self):
         structure = Structure.get(self.request.params.get('id'))
         return {
-            'title': _(u"Copy Company Structure"),
+            'title': self._get_title(_(u'Copy')),
             'item': structure,
         }
 
@@ -160,7 +158,7 @@ class StructuresView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Structures'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

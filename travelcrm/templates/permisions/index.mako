@@ -13,7 +13,7 @@
         iconCls:'fa fa-table',
         tools:'#${_t_id}'
     "
-    title="${_(u'Position Permissions')} | ${position.name}">
+    title="${title} | ${position.name}">
     ${context_info(_t_id, request)}
     <table class="easyui-datagrid"
         id="${_id}"

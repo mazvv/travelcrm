@@ -6,6 +6,7 @@ from sqlalchemy import MetaData, Sequence
 from sqlalchemy.schema import CreateSchema
 
 from ...models import DBSession, Base
+from ...models.company import Company
 from ...lib import EnumInt
 from ..utils.sql_utils import set_search_path, get_current_schema
 from ..utils.common_utils import (
@@ -80,3 +81,7 @@ def get_company_url(request, schema_name=None):
 
 def can_create_company(request):
     return get_multicompanies() and get_public_domain() == request.domain
+
+
+def get_company():
+    return DBSession.query(Company).first()

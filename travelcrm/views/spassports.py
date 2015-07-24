@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.spassport import Spassport
 from ..models.order_item import OrderItem
@@ -19,11 +20,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.spassports.SpassportsResource',
 )
-class SpassportsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class SpassportsView(BaseView):
 
     @view_config(
         name='view',
@@ -42,7 +39,7 @@ class SpassportsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Passport Sale"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -55,7 +52,7 @@ class SpassportsView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Passport Service'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -90,7 +87,7 @@ class SpassportsView(object):
         order_item = OrderItem.get(self.request.params.get('id'))
         return {
             'item': order_item.spassport,
-            'title': _(u'Edit Passport Sale'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -124,7 +121,7 @@ class SpassportsView(object):
         order_item = OrderItem.get(self.request.params.get('id'))
         return {
             'item': order_item.spassport,
-            'title': _(u"Copy Service")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(

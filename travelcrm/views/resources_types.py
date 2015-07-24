@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.resource_type import ResourceType
 from ..lib.utils.common_utils import translate as _
@@ -22,11 +23,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.resources_types.ResourcesTypesResource',
 )
-class ResourcesTypesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class ResourcesTypesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +31,9 @@ class ResourcesTypesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -69,7 +68,7 @@ class ResourcesTypesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Resource Type"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -82,7 +81,7 @@ class ResourcesTypesView(object):
     )
     def add(self):
         return {
-            'title': _(u"Add Resource Type")
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -117,7 +116,7 @@ class ResourcesTypesView(object):
         resources_type = ResourceType.get(self.request.params.get('id'))
         return {
             'item': resources_type,
-            'title': _(u"Edit Resource Type")
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -151,7 +150,7 @@ class ResourcesTypesView(object):
         resources_type = ResourceType.get(self.request.params.get('id'))
         return {
             'item': resources_type,
-            'title': _(u"Copy Resource Type")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -186,7 +185,7 @@ class ResourcesTypesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Resources Types'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

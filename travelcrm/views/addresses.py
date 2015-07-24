@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.address import Address
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.addresses.AddressesResource',
 )
-class AddressesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class AddressesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class AddressesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class AddressesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Address"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -81,7 +80,7 @@ class AddressesView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Address'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -116,7 +115,7 @@ class AddressesView(object):
         address = Address.get(self.request.params.get('id'))
         return {
             'item': address,
-            'title': _(u'Edit Address'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -150,7 +149,7 @@ class AddressesView(object):
         address = Address.get(self.request.params.get('id'))
         return {
             'item': address,
-            'title': _(u"Copy Address")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -170,7 +169,7 @@ class AddressesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Addresses'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

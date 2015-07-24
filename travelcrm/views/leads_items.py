@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.lead_item import LeadItem
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.leads_items.LeadsItemsResource',
 )
-class LeadsItemsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class LeadsItemsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class LeadsItemsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class LeadsItemsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Lead Item"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class LeadsItemsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Lead Item')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class LeadsItemsView(object):
     )
     def edit(self):
         lead_item = LeadItem.get(self.request.params.get('id'))
-        return {'item': lead_item, 'title': _(u'Edit Lead Item')}
+        return {
+            'item': lead_item, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -145,7 +149,7 @@ class LeadsItemsView(object):
         lead_item = LeadItem.get(self.request.params.get('id'))
         return {
             'item': lead_item,
-            'title': _(u"Copy Lead Item")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -177,7 +181,7 @@ class LeadsItemsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Leads Items'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

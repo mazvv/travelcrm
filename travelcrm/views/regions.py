@@ -5,6 +5,7 @@ import logging
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.region import Region
 from ..lib.utils.common_utils import translate as _
@@ -21,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.regions.RegionsResource',
 )
-class RegionsView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class RegionsView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -33,7 +30,9 @@ class RegionsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -68,7 +67,7 @@ class RegionsView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Region"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -80,7 +79,9 @@ class RegionsView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Region')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -112,7 +113,10 @@ class RegionsView(object):
     )
     def edit(self):
         region = Region.get(self.request.params.get('id'))
-        return {'item': region, 'title': _(u'Edit Region')}
+        return {
+            'item': region, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -143,7 +147,7 @@ class RegionsView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Regions'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

@@ -1,12 +1,12 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 
+from . import BaseView
 from ..models import DBSession
 from ..models.resource import Resource
 from ..models.employee import Employee
@@ -25,11 +25,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.employees.EmployeesResource',
 )
-class EmployeesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class EmployeesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -37,7 +33,9 @@ class EmployeesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -72,7 +70,7 @@ class EmployeesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Employee"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -84,7 +82,9 @@ class EmployeesView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Employee')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -116,7 +116,10 @@ class EmployeesView(object):
     )
     def edit(self):
         employee = Employee.get(self.request.params.get('id'))
-        return {'item': employee, 'title': _(u'Edit Employee')}
+        return {
+            'item': employee, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -147,7 +150,7 @@ class EmployeesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Employees'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

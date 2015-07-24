@@ -6,6 +6,7 @@ from pyramid.view import view_config, view_defaults
 from pyramid.response import Response
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.resource import Resource
 from ..models.supplier import Supplier
@@ -23,11 +24,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.suppliers.SuppliersResource',
 )
-class SuppliersView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class SuppliersView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -35,7 +32,9 @@ class SuppliersView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -70,7 +69,7 @@ class SuppliersView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Supplier"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -83,7 +82,7 @@ class SuppliersView(object):
     )
     def add(self):
         return {
-            'title': _(u'Add Supplier'),
+            'title': self._get_title(_(u'Add')),
         }
 
     @view_config(
@@ -118,7 +117,7 @@ class SuppliersView(object):
         supplier = Supplier.get(self.request.params.get('id'))
         return {
             'item': supplier,
-            'title': _(u'Edit Supplier'),
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -162,7 +161,7 @@ class SuppliersView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Suppliers'),
+            'title': self._get_title(_(u'Delete')),
             'id': self.request.params.get('id')
         }
 

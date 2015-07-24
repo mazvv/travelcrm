@@ -3,6 +3,7 @@
 import logging
 from pyramid.view import view_config, view_defaults
 
+from . import BaseView
 from ..resources.leads import LeadsResource
 from ..forms.activities import (
     ActivitiesSearchForm,
@@ -19,11 +20,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.activities.ActivitiesResource',
 )
-class ActivitiesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class ActivitiesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -61,7 +58,7 @@ class ActivitiesView(object):
     def settings(self):
         rt = get_resource_type_by_resource(self.context)
         return {
-            'title': _(u'Settings'),
+            'title': self._get_title(_(u'Settings')),
             'rt': rt,
         }
 

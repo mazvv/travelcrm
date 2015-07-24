@@ -9,8 +9,24 @@ from ..models.user import User
 from ..models.resource_type import ResourceType
 from ..lib.bl.employees import get_employee_position, get_employee_permisions
 from ..lib.bl.structures import get_structure_name_path 
-from ..lib.utils.resources_utils import get_resource_class
+from ..lib.utils.resources_utils import (
+    get_resource_class, 
+    get_resource_type_by_resource
+)
 from ..lib.utils.common_utils import translate as _
+
+
+class BaseView(object):
+    
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def _get_title(self, action_name=None):
+        rt = get_resource_type_by_resource(self.context)
+        if action_name is None:
+            return rt.humanize
+        return action_name + ': ' + rt.humanize 
 
 
 @view_config(

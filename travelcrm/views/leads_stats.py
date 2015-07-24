@@ -9,6 +9,7 @@ from ..forms.leads_stats import (
     LeadsStatsSearchForm,
     LeadsStatsSettingsForm
 )
+from . import BaseView
 from ..lib.bl.charts import get_settings
 from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..lib.utils.common_utils import serialize
@@ -21,7 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.leads_stats.LeadsStatsResource',
 )
-class LeadsStatsView(object):
+class LeadsStatsView(BaseView):
 
     def __init__(self, context, request):
         self.context = context
@@ -33,7 +34,9 @@ class LeadsStatsView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -72,7 +75,7 @@ class LeadsStatsView(object):
     def settings(self):
         rt = get_resource_type_by_resource(self.context)
         return {
-            'title': _(u'Settings'),
+            'title': self._get_title(_(u'Settings')),
             'rt': rt,
         }
 

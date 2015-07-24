@@ -6,6 +6,7 @@ from pyramid.view import view_config, view_defaults
 from pyramid.renderers import render
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.order import Order
 from ..models.invoice import Invoice
@@ -27,11 +28,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.invoices.InvoicesResource',
 )
-class InvoicesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class InvoicesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -39,7 +36,9 @@ class InvoicesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -74,7 +73,7 @@ class InvoicesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Invoice"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -94,7 +93,7 @@ class InvoicesView(object):
                 ),
             )
         return {
-            'title': _(u'Add Invoice'),
+            'title': self._get_title(_(u'Add')),
             'order_id': order.id if order else None,
         }
 
@@ -130,7 +129,7 @@ class InvoicesView(object):
         invoice = Invoice.get(self.request.params.get('id'))
         return {
             'item': invoice,
-            'title': _(u'Edit Invoice')
+            'title': self._get_title(_(u'Edit')),
         }
 
     @view_config(
@@ -174,7 +173,7 @@ class InvoicesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Invoices'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 
@@ -268,7 +267,7 @@ class InvoicesView(object):
     def settings(self):
         rt = get_resource_type_by_resource(self.context)
         return {
-            'title': _(u'Settings'),
+            'title': self._get_title(_(u'Settings')),
             'rt': rt,
         }
 

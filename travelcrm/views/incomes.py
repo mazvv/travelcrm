@@ -1,11 +1,11 @@
 # -*-coding: utf-8-*-
 
 import logging
-import colander
 
 from pyramid.view import view_config, view_defaults
 from pyramid.httpexceptions import HTTPFound
 
+from . import BaseView
 from ..models import DBSession
 from ..models.income import Income
 from ..lib.utils.common_utils import translate as _
@@ -22,11 +22,7 @@ log = logging.getLogger(__name__)
 @view_defaults(
     context='..resources.incomes.IncomesResource',
 )
-class IncomesView(object):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+class IncomesView(BaseView):
 
     @view_config(
         request_method='GET',
@@ -34,7 +30,9 @@ class IncomesView(object):
         permission='view'
     )
     def index(self):
-        return {}
+        return {
+            'title': self._get_title(),
+        }
 
     @view_config(
         name='list',
@@ -69,7 +67,7 @@ class IncomesView(object):
             )
         result = self.edit()
         result.update({
-            'title': _(u"View Income"),
+            'title': self._get_title(_(u'View')),
             'readonly': True,
         })
         return result
@@ -81,7 +79,9 @@ class IncomesView(object):
         permission='add'
     )
     def add(self):
-        return {'title': _(u'Add Income')}
+        return {
+            'title': self._get_title(_(u'Add')),
+        }
 
     @view_config(
         name='add',
@@ -113,7 +113,10 @@ class IncomesView(object):
     )
     def edit(self):
         income = Income.get(self.request.params.get('id'))
-        return {'item': income, 'title': _(u'Edit Income')}
+        return {
+            'item': income, 
+            'title': self._get_title(_(u'Edit')),
+        }
 
     @view_config(
         name='edit',
@@ -146,7 +149,7 @@ class IncomesView(object):
         income = Income.get(self.request.params.get('id'))
         return {
             'item': income,
-            'title': _(u"Copy Income")
+            'title': self._get_title(_(u'Copy')),
         }
 
     @view_config(
@@ -179,7 +182,7 @@ class IncomesView(object):
     )
     def delete(self):
         return {
-            'title': _(u'Delete Income Payments'),
+            'title': self._get_title(_(u'Delete')),
             'rid': self.request.params.get('rid')
         }
 

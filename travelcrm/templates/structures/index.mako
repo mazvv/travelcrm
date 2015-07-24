@@ -11,7 +11,7 @@
         iconCls:'fa fa-table',
         tools:'#${_t_id}'
     "
-    title="${_(u'Company Structures')}">
+    title="${title}">
     ${context_info(_t_id, request)}
     <table class="easyui-treegrid" 
         id="${_id}"
