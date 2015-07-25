@@ -1,4 +1,5 @@
 import os
+import sys
 from subprocess import check_output
 
 from setuptools import setup, find_packages
@@ -10,13 +11,15 @@ with open(os.path.join(here, 'README.txt')) as f:
     README = f.read()
 with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
-with open(os.path.join(here, 'VERSION.txt'), 'w') as f:
-    build = (
-        check_output([
-            "hg", "log", "-r", ".", "--template", "{branch} b.{node|short}"
-        ])
-    )
-    f.write(build)
+
+if 'sdist' in sys.argv or 'bdist' in sys.argv:
+    with open(os.path.join(here, 'VERSION.txt'), 'w') as f:
+        build = (
+            check_output([
+                "hg", "log", "-r", ".", "--template", "{branch} b.{node|short}"
+            ])
+        )
+        f.write(build)
 
 
 requires = [
@@ -43,7 +46,6 @@ requires = [
     'sphinx-bootstrap-theme>=0.4.0',
     'pdfkit>=0.4.1',
     'apscheduler>=3.0.1',
-    'dateutils>=0.6.6',
     'bitmath>=1.0.2-3',
 ]
 
