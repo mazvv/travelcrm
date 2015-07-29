@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Изменения &mdash; TravelCRM 0.6.1-dev documentation</title>
+    <title>Изменения &mdash; TravelCRM 0.6.3-dev documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.1-dev',
+        VERSION:     '0.6.3-dev',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -28,7 +28,8 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="TravelCRM 0.6.1-dev documentation" href="index.html" />
+    <link rel="top" title="TravelCRM 0.6.3-dev documentation" href="index.html" />
+    <link rel="next" title="Известные проблемы" href="bugs.html" />
     <link rel="prev" title="Установка" href="install.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -49,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           TravelCRM</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.6.1-dev</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.3-dev</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -68,6 +69,7 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Установка</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Изменения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">Известные проблемы</a></li>
 </ul>
 </ul>
 </li>
@@ -82,7 +84,9 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Изменения</a><ul>
-<li><a class="reference internal" href="#dev">0.6.1-dev</a></li>
+<li><a class="reference internal" href="#dev">0.6.3-dev</a></li>
+<li><a class="reference internal" href="#id2">0.6.2-dev</a></li>
+<li><a class="reference internal" href="#id3">0.6.1-dev</a></li>
 </ul>
 </li>
 </ul>
@@ -95,6 +99,10 @@
                 
   <li>
     <a href="install.html" title="Previous Chapter: Установка"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Установка</span>
+    </a>
+  </li>
+  <li>
+    <a href="bugs.html" title="Next Chapter: Известные проблемы"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Известные пробле... &raquo;</span>
     </a>
   </li>
               
@@ -131,7 +139,77 @@
   <div class="section" id="id1">
 <h1>Изменения<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="dev">
-<h2>0.6.1-dev<a class="headerlink" href="#dev" title="Permalink to this headline">¶</a></h2>
+<h2>0.6.3-dev<a class="headerlink" href="#dev" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>обновлен jeasyui до версии 1.4.3</li>
+<li>введен единый документ продажи услуг</li>
+<li>возможность продажи билетов, виз и услуг по оформлению загранпаспортов</li>
+<li>теперь инвойс привязывается к единому документу продаж</li>
+<li>форматы типов date и datetime зависят от настроек локали компании</li>
+<li>удалены ненужные default_locale и default_timezone из конфига</li>
+<li>добавлены настройки компании</li>
+<li>изменена логика параметров ресурсов</li>
+<li>формат decimal теперь зависит от локали компании</li>
+<li>теперь можно регистрировать множество компаний,
+которым отводится свой субдомен</li>
+<li>добавлены загрузки документов</li>
+<li>исправлен баг с копированием меню с должностей</li>
+<li>изменена логика билинга</li>
+<li>переделан документ входящих платежей</li>
+<li>добавлен документ исходящих платежей</li>
+<li>добавлен документ кросс платежей</li>
+<li>теперь в одном документе продаж можно пордавать сразу несколько сервисов</li>
+<li>добавлены настройки НДС</li>
+<li>добавлены статусы для многих типов ресурсов</li>
+<li>исправлен функционал восстановления пароля</li>
+<li>добавлен виджет лидоа за неделю</li>
+<li>добавлен виджет топ 10 последних действий</li>
+<li>добавлен отчет по ДДС</li>
+<li>план статей учета теперь в виде дерева</li>
+<li>добавлены лиды</li>
+<li>fontawesome v. 4.3.0</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>0.6.2-dev<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>обновлен jeasyui до версии 1.4.1</li>
+<li>исправлен баг с датой для заграничного паспорта</li>
+<li>добавлена вкладка с данными о транзакциях в окне информации об инвойсе</li>
+<li>форматы типов date и datetime теперь можно менять в ini файле</li>
+<li>исправлен баг редактирования суммы оплаты входящих платежей</li>
+<li>добавлена кнопка info для поля выбора инвойса</li>
+<li>добавлены настройки для типов ресурсов</li>
+<li>удалено поле &#8220;сервис&#8221; из документа продажи туров, теперь сервис нужно
+указывать в настройках документов продаж</li>
+<li>добавлена возможность копирования в списке дополнительных сервисов
+документов продаж</li>
+<li>обновлен fontawesome до v. 4.2.0</li>
+<li>исправлен баг с копированием меню с должностей</li>
+<li>добавлен функционал заметок к ресурсам в отдельной вкладке</li>
+<li>добавлен функционал задач к ресурсам в отдельной вкладке</li>
+<li>добавлен режим просмотра ресурсов</li>
+<li>изменена логика билинга</li>
+<li>переделан документ входящих платежей</li>
+<li>добавлен документ исходящих платежей</li>
+<li>добавлен документ кросс платежей</li>
+<li>удалена вкладка сервисы из документа продажи туров, теперь этот документ
+может продавать только туры, дополнительные сервисы продаются через документ
+продажи прочих сервисов.</li>
+<li>добавлены калькуляции для документов продаж</li>
+<li>исправлен баг с главным меню - рендеринг древовидного меню</li>
+<li>добавлен разделитель в настройки меню</li>
+<li>добавлена иконка для получения информации о текущем контексте и
+уровнях доступа</li>
+<li>добавлен отчет по оборотам в разрезе аккаунтов и субаккаунтов с выгрузкой в
+PDF</li>
+<li>добавлен отчет по задолженности перед туроператорами</li>
+<li>переписан таск менеджер</li>
+<li>добавлен планировщик задач в фоновом режиме - APScheduler</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>0.6.1-dev<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>добавлены курсы валют</li>
 <li>исправлен баг в контактах клиентов</li>
@@ -152,7 +230,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2014, Vitalii Mazur.<br/>
+        &copy; Copyright 2015, Vitalii Mazur.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
     </p>
   </div>

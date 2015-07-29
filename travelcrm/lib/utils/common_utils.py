@@ -49,18 +49,12 @@ def get_settings():
 
 def get_locale_name():
     settings = get_settings()
-    return (
-        settings.get('company.locale_name') 
-        or _get_settings_value('pyramid.default_locale_name')
-    )
+    return settings.get('company.locale_name') 
 
 
 def get_timezone():
     settings = get_settings()
-    return (
-        settings.get('company.timezone') 
-        or _get_settings_value('pyramid.default_timezone')
-    )
+    return settings.get('company.timezone') 
 
 
 def _get_localizer_for_locale_name(locale_name):

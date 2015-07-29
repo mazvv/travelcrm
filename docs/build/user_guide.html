@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Search &mdash; TravelCRM 0.6.3-dev documentation</title>
+    <title>Руководство пользователя &mdash; TravelCRM 0.6.3-dev documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,23 +24,17 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="TravelCRM 0.6.3-dev documentation" href="index.html" />
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-  
+    <link rel="next" title="Изменения" href="changes.html" />
+    <link rel="prev" title="Установка" href="install.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-
 
   </head>
   <body>
@@ -72,9 +66,11 @@
      href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul>
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Установка</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Руководство пользователя</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changes.html">Изменения</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bugs.html">Известные проблемы</a></li>
 </ul>
 </ul>
 </li>
@@ -87,24 +83,49 @@
      href="#">Page <b class="caret"></b></a>
   <ul class="dropdown-menu localtoc"
       role="menu"
-      aria-labelledby="dLabelLocalToc"></ul>
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Руководство пользователя</a><ul>
+<li><a class="reference internal" href="#ini">Настройка .ini</a></li>
+</ul>
+</li>
+</ul>
+</ul>
 </li>
               
             
             
               
                 
+  <li>
+    <a href="install.html" title="Previous Chapter: Установка"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Установка</span>
+    </a>
+  </li>
+  <li>
+    <a href="changes.html" title="Next Chapter: Изменения"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Изменения &raquo;</span>
+    </a>
+  </li>
               
             
             
             
             
-              <li class="hidden-sm"></li>
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/user_guide.txt"
+     rel="nofollow">Source</a>
+</div></li>
             
           </ul>
 
           
             
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
           
         </div>
     </div>
@@ -114,35 +135,22 @@
   <div class="row">
     <div class="col-md-12">
       
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
+  <div class="section" id="id1">
+<h1>Руководство пользователя<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ini">
+<h2>Настройка .ini<a class="headerlink" href="#ini" title="Permalink to this headline">¶</a></h2>
+<p>Для успешной установки TravelCRM необходимо установить Python версии 2.7.
+Подробнее об установке Python на свой компьютер можно ознакомиться в
+<a class="reference external" href="https://docs.python.org/2/using/index.html">официальной документации Python</a>.</p>
+<p>PostgreSQL 9.*, для более ранних версий не тестировалось.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Автор тестировал TravelCRM на Linux Fedora Core, Python 2.7 и
+Centos 5, Python 2.6; PostgreSQL 9.4</p>
+</div>
+</div>
+</div>
 
-  
-  <form class="form-inline" action="" method="get">
-    <div class="form-group">
-      <input type="text" class="form-control" name="q" value="" />
-    </div>
-    <input type="submit" class="btn btn-default" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>  
-  
-  
-  
-  <div id="search-results">
-  
-  </div>
 
     </div>
       

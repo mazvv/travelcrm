@@ -5,7 +5,7 @@
         minimizable:false,
         maximizable:false,
         collapsible:false,
-        draggable:true,
+        draggable:false,
         resizable:false,
         iconCls:'fa fa-user'
     ">

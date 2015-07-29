@@ -17,19 +17,23 @@ ${h.tags.Doctype().html5()}
         )}
         <%block name="js"></%block>
     </head>
-    <body id="_page_" class="easyui-layout">
-        <div id="_head_" data-options="region:'north', border:false">
-            <div id="_top_">
-                <div class="main">
-                    ${panel('header_panel')}
-                </div>
+
+    <body id="_page_">
+        <div id="_top_">
+            <div class="main">
+               ${panel('header_panel')}
             </div>
         </div>
-        <div id="_footer_" data-options="region:'south', border:false">
-            ${panel('footer_panel')}
+        <div id="_auth_" class="main">
+            <div class="easyui-panel" data-options="fit:true">
+                ${self.body()}
+            </div>
         </div>
-        <div id="_main_" data-options="region:'center', border:false">
-            ${self.body()}
+        <div id="_footer_">
+            <div class="main">
+                ${panel('footer_panel')}
+            </div>
         </div>
     </body>
+
 </html>
