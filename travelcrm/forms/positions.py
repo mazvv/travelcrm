@@ -8,6 +8,7 @@ from . import(
     BaseSearchForm,
 )
 from ..resources.positions import PositionsResource
+from ..models import DBSession
 from ..models.position import Position
 from ..models.note import Note
 from ..models.task import Task
