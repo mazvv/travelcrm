@@ -3260,6 +3260,19 @@ CREATE TABLE appointment (
 ALTER TABLE public.appointment OWNER TO mazvv;
 
 --
+-- Name: apscheduler_jobs; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE TABLE apscheduler_jobs (
+    id character varying(191) NOT NULL,
+    next_run_time double precision,
+    job_state bytea NOT NULL
+);
+
+
+ALTER TABLE public.apscheduler_jobs OWNER TO mazvv;
+
+--
 -- Name: bank; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -12640,6 +12653,14 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 
 
 --
+-- Data for Name: apscheduler_jobs; Type: TABLE DATA; Schema: public; Owner: mazvv
+--
+
+COPY apscheduler_jobs (id, next_run_time, job_state) FROM stdin;
+\.
+
+
+--
 -- Data for Name: bank; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -12864,7 +12885,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	LuxTravel, Inc	56	{"locale": "ru", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
+1	1970	LuxTravel, Inc	56	{"locale": "en", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
 \.
 
 
@@ -19385,6 +19406,14 @@ ALTER TABLE ONLY appointment
 
 
 --
+-- Name: apscheduler_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+ALTER TABLE ONLY apscheduler_jobs
+    ADD CONSTRAINT apscheduler_jobs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: bank_address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -20334,6 +20363,13 @@ ALTER TABLE ONLY visa_order_item
 
 ALTER TABLE ONLY visa
     ADD CONSTRAINT visa_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ix_apscheduler_jobs_next_run_time; Type: INDEX; Schema: public; Owner: mazvv; Tablespace: 
+--
+
+CREATE INDEX ix_apscheduler_jobs_next_run_time ON apscheduler_jobs USING btree (next_run_time);
 
 
 SET search_path = company, pg_catalog;
