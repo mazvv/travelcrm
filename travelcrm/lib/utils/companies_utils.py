@@ -20,6 +20,11 @@ log = logging.getLogger(__name__)
 
 SOURCE_SCHEMA = 'public'
 SEQUENCE_NAME = 'companies_counter'
+TABLES = (
+    'appointment', 'company', 'country', 'currency', 'employee', 
+    'navigation', 'permision', 'resource', 'resource_log',
+    'resource_type', 'service', 'structure', 'user'
+)
 
 
 def create_company_schema(schema_name=None):
@@ -51,6 +56,8 @@ def transfer_data(schema_name):
         rows = DBSession.query(table).all()
         set_search_path(schema_name)
         DBSession.execute('alter table "%s" disable trigger all' % table.name)
+        if table.name not in TABLES:
+            continue
         for row in rows:
             row = map(
                 lambda x: ((x.key or None) if isinstance(x, EnumInt) else x), row
