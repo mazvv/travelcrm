@@ -17,20 +17,23 @@ ${h.tags.Doctype().html5()}
             request.static_url('travelcrm:static/js/main.js')
         )}
         <script type="text/javascript">
-        $(document).ready(
-            setInterval(
-                function(){
-                    $.getJSON(
-                    	'/notifications/counter', 
-                    	{'employee_id': ${h.common.get_auth_employee(request).id}, 'status': 'new', 'sort': 'id'},
-                        function(data){
-                            $('.notifications-counter').html(data.count);
-                        }
-                    );
-                }, 
-                5000
-            )
-        );
+        $(document).ready(function(){
+            var socket = io.connect("/notifications/counter");
+        })
+        //$(document).ready(
+        //    setInterval(
+        //        function(){
+        //            $.getJSON(
+        //            	'/notifications/counter', 
+        //            	{'employee_id': ${h.common.get_auth_employee(request).id}, 'status': 'new', 'sort': 'id'},
+        //                function(data){
+        //                    $('.notifications-counter').html(data.count);
+        //                }
+        //            );
+        //        }, 
+        //        5000
+        //    )
+        //);
         </script>
         <%block name="js"></%block>
     </head>

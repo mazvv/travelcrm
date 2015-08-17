@@ -38,4 +38,5 @@
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/datagrid-bufferview.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/jquery.portal.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/Chart.js'))}
+    ${h.tags.javascript_link(request.static_url('travelcrm:static/js/socket.io.js'))}
 </%block>
