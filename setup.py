@@ -23,6 +23,7 @@ if 'sdist' in sys.argv or 'bdist' in sys.argv:
 
 
 requires = [
+    'setuptools>=17.1',
     'pyramid',
     'pyramid_mako',
     'pyramid_debugtoolbar',
@@ -47,6 +48,8 @@ requires = [
     'pdfkit>=0.4.1',
     'apscheduler>=3.0.1',
     'bitmath>=1.0.2-3',
+    'gunicorn>=19.3.0',
+    'Mock>=1.3.0',
 ]
 
 setup(
