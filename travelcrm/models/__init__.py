@@ -62,7 +62,6 @@ from note import Note
 from calculation import Calculation
 from cashflow import Cashflow
 from notification import Notification
-from email_campaign import EmailCampaign
 from company import Company
 from lead import Lead
 from order import Order
@@ -81,3 +80,4 @@ from invoice_item import InvoiceItem
 from vat import Vat
 from upload import Upload
 from person_category import PersonCategory
+from campaign import Campaign

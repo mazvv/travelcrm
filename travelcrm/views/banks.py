@@ -162,11 +162,11 @@ class BanksView(BaseView):
         ids = self.request.params.getall('id')
         if ids:
             try:
-                (
-                    DBSession.query(Bank)
-                    .filter(Bank.id.in_(ids))
-                    .delete()
+                items = DBSession.query(Bank).filter(
+                    Bank.id.in_(ids)
                 )
+                for item in items:
+                    DBSession.delete(item)
             except:
                 errors=True
                 DBSession.rollback()

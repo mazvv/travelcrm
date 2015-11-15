@@ -158,19 +158,22 @@ class SuppliersTypesView(BaseView):
         permission='delete'
     )
     def _delete(self):
+        errors = False
         ids = self.request.params.getall('id')
         if ids:
             try:
-                (
-                    DBSession.query(SupplierType)
-                    .filter(SupplierType.id.in_(ids))
-                    .delete()
+                items = DBSession.query(SupplierType).filter(
+                    SupplierType.id.in_(ids)
                 )
+                for item in items:
+                    DBSession.delete(item)
             except:
+                errors=True
                 DBSession.rollback()
-                return {
-                    'error_message': _(
-                        u'Some objects could not be delete'
-                    ),
-                }
+        if errors:
+            return {
+                'error_message': _(
+                    u'Some objects could not be delete'
+                ),
+            }
         return {'success_message': _(u'Deleted')}

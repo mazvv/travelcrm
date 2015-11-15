@@ -157,18 +157,21 @@ class AccountsView(BaseView):
         permission='delete'
     )
     def _delete(self):
-        errors = 0
-        for id in self.request.params.getall('id'):
-            item = Account.get(id)
-            if item:
-                DBSession.begin_nested()
+        errors = False
+        ids = self.request.params.getall('id')
+        if ids:
+            items = DBSession.query(Account).filter(
+                Account.id.in_(ids)
+            )
+            for item in items:
                 try:
+                    DBSession.begin_nested()
                     DBSession.delete(item)
-                    DBSession.commit()
-                except:
-                    errors += 1
+                    DBSession.flush()
+                except Exception as e:
+                    errors=True
                     DBSession.rollback()
-        if errors > 0:
+        if errors:
             return {
                 'error_message': _(
                     u'Some objects could not be delete'

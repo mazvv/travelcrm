@@ -162,11 +162,11 @@ class TransportsView(BaseView):
         ids = self.request.params.getall('id')
         if ids:
             try:
-                (
-                    DBSession.query(Transport)
-                    .filter(Transport.id.in_(ids))
-                    .delete()
+                items = DBSession.query(Transport).filter(
+                    Transport.id.in_(ids)
                 )
+                for item in items:
+                    DBSession.delete(item)
             except:
                 errors=True
                 DBSession.rollback()

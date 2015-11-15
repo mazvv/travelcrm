@@ -374,6 +374,16 @@ def yes_no_field(name, value=None, data_options=None, **kwargs):
     )
 
 
+def switch_field(name, value=None, data_options=None, **kwargs):
+    _data_options = ""
+    if data_options:
+        _data_options += ('%s' % data_options)
+    return tags.checkbox(
+        name, True, bool(value), class_='easyui-switchbutton',
+        data_options=_data_options, **kwargs
+    )
+
+
 def structures_combotree_field(
     name, value=None, data_options=None, **kwargs
 ):

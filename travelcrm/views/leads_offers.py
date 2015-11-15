@@ -192,18 +192,19 @@ class LeadsOffersView(BaseView):
         permission='delete'
     )
     def _delete(self):
-        errors = 0
-        for id in self.request.params.getall('id'):
-            item = LeadOffer.get(id)
-            if item:
-                DBSession.begin_nested()
-                try:
+        errors = False
+        ids = self.request.params.getall('id')
+        if ids:
+            try:
+                items = DBSession.query(LeadOffer).filter(
+                    LeadOffer.id.in_(ids)
+                )
+                for item in items:
                     DBSession.delete(item)
-                    DBSession.commit()
-                except:
-                    errors += 1
-                    DBSession.rollback()
-        if errors > 0:
+            except:
+                errors=True
+                DBSession.rollback()
+        if errors:
             return {
                 'error_message': _(
                     u'Some objects could not be delete'

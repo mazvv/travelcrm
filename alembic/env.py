@@ -1,4 +1,7 @@
 from __future__ import with_statement
+
+import re
+
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
@@ -22,6 +25,7 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
@@ -55,13 +59,24 @@ def run_migrations_online():
 
     connection = engine.connect()
     context.configure(
-                connection=connection,
-                target_metadata=target_metadata
-                )
+        connection=connection,
+        target_metadata=target_metadata,
+    )
 
     try:
-        with context.begin_transaction():
-            context.run_migrations()
+        schemas = [
+            row[0] for row in connection.execute(
+                'select schema_name from information_schema.schemata'
+            )
+            if row[0] in ['public', 'company'] or re.match('r^(c\d+)', row[0])
+        ]
+
+        for schema in schemas:
+            connection.execute(
+                'set search_path to "{}"'.format(schema)
+            )
+            with context.begin_transaction():
+                context.run_migrations()
     finally:
         connection.close()
 
@@ -69,4 +84,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-

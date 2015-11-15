@@ -29,7 +29,7 @@ class InvoiceItem(Base):
         ForeignKey(
             'invoice.id',
             name="fk_invoice_id_invoice_item",
-            ondelete='restrict',
+            ondelete='cascade',
             onupdate='cascade',
         ),
         nullable=False,
@@ -75,6 +75,7 @@ class InvoiceItem(Base):
             'invoices_items',
             lazy='dynamic',
             uselist=True,
+            cascade='all, delete-orphan'
         ),
         uselist=False,
     )

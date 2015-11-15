@@ -138,7 +138,6 @@ class HomeView(object):
 
         controls = schema.deserialize(self.request.params)
         user = User.by_username(controls.get('username'))
-
         if (user
             and user.validate_password(controls.get('password'))
             and user.employee

@@ -1,7 +1,6 @@
-<%namespace file="../addresses/common.mako" import="address_selector"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
-<div class="dl60 easyui-dialog"
+<div class="dl70 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
@@ -46,13 +45,18 @@
                 </div>
             </div>
             <div title="${_(u'HTML content')}">
-                ${h.tags.textarea('html_content', item.html_content if item else None, class_="rich-text-editor")}
+                ${h.tags.textarea(
+                    'html_content', 
+                    item.html_content if item else None,
+                    class_="rich-text-editor"
+                )}
             </div>
             <div title="${_(u'Plain text')}">
-                ${h.tags.textarea('plain_content', item.plain_content if item else None, class_="rich-text-editor")}
-                <script type="easyui-textbox/javascript">
-                    $('.rich-text-editor').jqte({"format":false});
-                </script>
+                ${h.tags.textarea(
+                    'plain_content',
+                    item.plain_content if item else None,
+                    class_="rich-text-editor"
+                )}
             </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">

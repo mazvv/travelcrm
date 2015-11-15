@@ -45,19 +45,19 @@ def main(global_config, **settings):
         'travelcrm:locale',
     )
     config.add_subscriber(
-        '.subscribers.company_schema',
+        '.lib.subscribers.company_schema',
         'pyramid.events.NewRequest'
     )
     config.add_subscriber(
-        '.subscribers.company_settings',
+        '.lib.subscribers.company_settings',
         'pyramid.events.NewRequest'
     )
     config.add_subscriber(
-        '.subscribers.helpers',
+        '.lib.subscribers.helpers',
         'pyramid.events.BeforeRender'
     )
     config.add_subscriber(
-        '.subscribers.scheduler',
+        '.lib.subscribers.scheduler',
         'pyramid.events.ApplicationCreated'
     )
 

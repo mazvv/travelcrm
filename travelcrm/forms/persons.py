@@ -42,6 +42,14 @@ class _PersonSchema(ResourceSchema):
         Date(),
         missing=None,
     )
+    email_subscription = colander.SchemaNode(
+        colander.Boolean(),
+        missing=False,
+    )
+    sms_subscription = colander.SchemaNode(
+        colander.Boolean(),
+        missing=False,
+    )
     descr = colander.SchemaNode(
         colander.String(),
         validator=colander.Length(max=255),
@@ -106,6 +114,8 @@ class PersonForm(BaseForm):
         person.last_name = self._controls.get('last_name')
         person.second_name = self._controls.get('second_name')
         person.gender = self._controls.get('gender')
+        person.email_subscription = self._controls.get('email_subscription')
+        person.sms_subscription = self._controls.get('sms_subscription')
         person.birthday = self._controls.get('birthday')
         person.descr = self._controls.get('descr')
         for id in self._controls.get('contact_id'):

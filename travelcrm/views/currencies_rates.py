@@ -183,11 +183,11 @@ class CurrenciesRatesView(BaseView):
         ids = self.request.params.getall('id')
         if ids:
             try:
-                (
-                    DBSession.query(CurrencyRate)
-                    .fiter(CurrencyRate.id.in_(ids))
-                    .delete()
+                items = DBSession.query(CurrencyRate).filter(
+                    CurrencyRate.id.in_(ids)
                 )
+                for item in items:
+                    DBSession.delete(item)
             except:
                 errors=True
                 DBSession.rollback()

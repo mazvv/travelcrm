@@ -47,7 +47,7 @@ class BankDetail(Base):
         ForeignKey(
             'bank.id',
             name="fk_bank_id_bank_detail",
-            ondelete='restrict',
+            ondelete='cascade',
             onupdate='cascade',
         ),
         nullable=False,
@@ -88,7 +88,8 @@ class BankDetail(Base):
         backref=backref(
             'banks_details',
             uselist=True,
-            lazy="dynamic"
+            lazy="dynamic",
+            cascade='all, delete-orphan'
         ),
         uselist=False,
     )

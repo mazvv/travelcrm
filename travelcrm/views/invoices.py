@@ -184,18 +184,19 @@ class InvoicesView(BaseView):
         permission='delete'
     )
     def _delete(self):
-        errors = 0
-        for id in self.request.params.getall('id'):
-            item = Invoice.get(id)
-            if item:
-                DBSession.begin_nested()
+        errors = False
+        ids = self.request.params.getall('id')
+        if ids:
+            items = DBSession.query(Invoice).filter(
+                Invoice.id.in_(ids)
+            )
+            for item in items:
                 try:
                     DBSession.delete(item)
-                    DBSession.commit()
                 except:
-                    errors += 1
+                    errors=True
                     DBSession.rollback()
-        if errors > 0:
+        if errors:
             return {
                 'error_message': _(
                     u'Some objects could not be delete'

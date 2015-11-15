@@ -145,6 +145,9 @@ class ResourceType(Base):
     def resource_full(self):
         return "%s.%s" % (self.module, self.resource)
 
+    def is_active(self):
+        return self.status == 'active'
+
     def __repr__(self):
         return (
             "%s (id=%s, resource_id=%s, context=%s)"

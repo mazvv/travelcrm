@@ -15,6 +15,11 @@ from ..forms.users import (
     UserEditForm,
     UserSearchForm,
 )
+from ..lib.events.users import (
+    UserCreated,
+    UserEdited,
+    UserDeleted
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,10 @@ class UsersView(BaseView):
             user = form.submit()
             DBSession.add(user)
             DBSession.flush()
+
+            event = UserCreated(self.request, user)
+            self.request.registry.notify(event)
+
             return {
                 'success_message': _(u'Saved'),
                 'response': user.id
@@ -131,6 +140,10 @@ class UsersView(BaseView):
         form = UserEditForm(self.request)
         if form.validate():
             form.submit(user)
+
+            event = UserEdited(self.request, user)
+            self.request.registry.notify(event)
+
             return {
                 'success_message': _(u'Saved'),
                 'response': user.id
@@ -164,7 +177,11 @@ class UsersView(BaseView):
         ids = self.request.params.getall('id')
         if ids:
             try:
-                DBSession.query(User).filter(User.id.in_(ids)).delete()
+                items = DBSession.query(User).filter(User.id.in_(ids))
+                for item in items:
+                    DBSession.delete(item)
+                    event = UserDeleted(self.request, item)
+                    self.request.registry.notify(event)
             except:
                 errors=True
                 DBSession.rollback()

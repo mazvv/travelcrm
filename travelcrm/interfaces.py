@@ -20,12 +20,6 @@ class ISubaccountFactory(Interface):
         """
 
 
-class IScheduler(Interface):
-    """ Application scheduler jobs """
-
-    pass
-
-
 class IPortlet(Interface):
     """ Portlet identificator """
 

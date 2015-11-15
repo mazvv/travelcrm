@@ -13,7 +13,8 @@ from pyramid.renderers import render
 
 from ...models import DBSession
 from ...models.company import Company
-from ...lib.utils.common_utils import get_scheduler, gen_id
+from ...lib.scheduler import scheduler
+from ...lib.utils.common_utils import gen_id
 from ...lib.utils.companies_utils import (
     create_company_schema, generate_company_schema
 )
@@ -58,15 +59,12 @@ def _notification_callback(
         html=html
     )
     mailer.send_immediately(message)
-    
-    scheduler = get_scheduler(request)
     scheduler.remove_listener(_notification_callback)
     
 
 def schedule_company_creation(request, company_name, email, timezone, locale):
     """create new company schema
     """
-    scheduler = get_scheduler(request)
     job_id = gen_id(limit=12)
     schema_name = generate_company_schema()
     scheduler.add_job(

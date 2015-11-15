@@ -72,6 +72,25 @@
     </div>
     % endif
     <div class="dp100">
+        <div class="dp15 b">
+            ${_(u'subscriptions')}
+        </div>
+        <div class="dp85">
+            <div class="dp100">
+                <div class="dp30">${_(u'email subscription')}</div>
+                <div class="dp70">
+                    <span class="fa fa-toggle-${'on' if item.email_subscription else 'off'}"></span>
+                </div>
+            </div>
+            <div class="dp100">
+                <div class="dp30">${_(u'sms subscription')}</div>
+                <div class="dp70">
+                    <span class="fa fa-toggle-${'on' if item.sms_subscription else 'off'}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dp100">
         ${resource_list_details(item.resource)}
     </div>
 </div>

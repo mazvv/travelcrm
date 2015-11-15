@@ -1,30 +1,24 @@
-# -*-coding: utf-8 -*-
 import logging
-from pytz import timezone
-
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
-from apscheduler.executors.pool import ProcessPoolExecutor
 
 from pyramid.security import forget
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 
-import lib.helpers as h
-from .resources import Root
-from .lib.utils.common_utils import translate as _
-from .lib.utils.common_utils import get_multicompanies
-from .lib.bl.employees import get_employee_structure
-from .lib.utils.security_utils import get_auth_employee
-from .lib.utils.companies_utils import (
+from ...lib import helpers as h
+from ...resources import Root
+from ..utils.common_utils import translate as _
+from ..utils.common_utils import get_multicompanies
+from ..bl.employees import get_employee_structure
+from ..scheduler import start_scheduler  
+from ..utils.security_utils import get_auth_employee
+from ..utils.companies_utils import (
     get_public_domain, 
     get_company
 )
-from .lib.utils.sql_utils import (
+from ..utils.sql_utils import (
     get_default_schema,
     get_schemas,
     set_search_path
 )
-from .interfaces import IScheduler
 
 
 log = logging.getLogger(__name__)
@@ -79,28 +73,5 @@ def company_schema(event):
 
 
 def scheduler(event):
-    scheduler = BackgroundScheduler()
     settings = event.app.registry.settings
-    jobstores = {'default': SQLAlchemyJobStore(url=settings['scheduler.url'])}
-    executors = {
-        'default': {
-            'type': settings['scheduler.executors.type'],
-            'max_workers': settings['scheduler.executors.max_workers']
-        },
-        'processpool': ProcessPoolExecutor(
-            max_workers=settings['scheduler.executors.processpool.max_workers']
-        )
-    }
-    job_defaults = {
-        'coalesce': False,
-        'max_instances': settings['scheduler.job_defaults.max_instances']
-    }
-    scheduler.configure(
-        jobstores=jobstores,
-        executors=executors,
-        job_defaults=job_defaults,
-        timezone=timezone('UTC')
-    )
-    if settings['scheduler.autostart'] == 'true':
-        scheduler.start()
-    event.app.registry.registerUtility(scheduler, IScheduler)
+    start_scheduler(settings)

@@ -29,8 +29,6 @@ from pyramid.i18n import (
     TranslationStringFactory
 )
 
-from ...interfaces import IScheduler
-
 
 DEFAULT_LOCALE_NAME = 'en'
 
@@ -135,13 +133,6 @@ def format_time(value):
 def format_decimal(value, quantize='.01'):
     value = Decimal(value).quantize(Decimal(quantize))
     return fdc(value, locale=get_locale_name())
-
-
-def get_scheduler(request):
-    registry = getattr(request, 'registry', None)
-    if registry is None:
-        registry = request
-    return registry.getUtility(IScheduler)
 
 
 def serialize(value):

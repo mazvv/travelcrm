@@ -126,6 +126,32 @@
                     )}
                 </div>
             </div>
+            <div title="${_(u'Subscriptions')}">
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"email subscription"), False, "email_subscription")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.switch_field(
+                            'email_subscription',
+                            item.email_subscription if item else None, 
+                        )}
+                        ${h.common.error_container(name='email_subscription')}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"sms subscription"), False, "sms_subscription")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.switch_field(
+                            'sms_subscription',
+                            item.sms_subscription if item else None, 
+                        )}
+                        ${h.common.error_container(name='sms_subscription')}
+                    </div>
+                </div>
+            </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(

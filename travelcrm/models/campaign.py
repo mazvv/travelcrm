@@ -16,8 +16,8 @@ from ..models import (
 )
 
 
-class EmailCampaign(Base):
-    __tablename__ = 'email_campaign'
+class Campaign(Base):
+    __tablename__ = 'campaign'
 
     id = Column(
         Integer,
@@ -28,7 +28,7 @@ class EmailCampaign(Base):
         Integer,
         ForeignKey(
             'resource.id',
-            name="fk_resource_id_email_campaign",
+            name="fk_resource_id_campaign",
             ondelete='restrict',
             onupdate='cascade',
         ),
@@ -44,11 +44,9 @@ class EmailCampaign(Base):
     )
     plain_content = Column(
         Text(),
-        nullable=False,
     )
     html_content = Column(
         Text(),
-        nullable=False,
     )
     start_dt = Column(
         DateTime(timezone=True),
@@ -57,7 +55,7 @@ class EmailCampaign(Base):
     resource = relationship(
         'Resource',
         backref=backref(
-            'email_campaign',
+            'campaign',
             uselist=False,
             cascade="all,delete"
         ),

@@ -200,15 +200,16 @@ class OrdersView(BaseView):
         errors = False
         ids = self.request.params.getall('id')
         if ids:
-            try:
-                (
-                    DBSession.query(Order)
-                    .filter(Order.id.in_(ids))
-                    .delete()
-                )
-            except:
-                errors=True
-                DBSession.rollback()
+            items = DBSession.query(Order).filter(
+                Order.id.in_(ids)
+            )
+            for item in items:
+                try:
+                    DBSession.delete(item)
+                    DBSession.flush()
+                except:
+                    errors=True
+                    DBSession.rollback()
         if errors:
             return {
                 'error_message': _(

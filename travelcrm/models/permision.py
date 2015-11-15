@@ -72,7 +72,8 @@ class Permision(Base):
         backref=backref(
             'permisions',
             uselist=True,
-            lazy='dynamic'
+            lazy='dynamic',
+            cascade='all, delete-orphan'
         ),
         uselist=False
     )

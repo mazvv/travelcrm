@@ -9,7 +9,8 @@ from pyramid_mailer.message import Message
 from pyramid.renderers import render
 
 from ...models.user import User
-from ...lib.utils.common_utils import get_scheduler, gen_id
+from ...lib.scheduler import scheduler
+from ...lib.utils.common_utils import gen_id
 from ...lib.utils.common_utils import translate as _
 from ...lib.utils.companies_utils import get_company_url
 
@@ -17,9 +18,7 @@ from ...lib.utils.companies_utils import get_company_url
 log = logging.getLogger(__name__)
 
 
-def _user_notification(email, html, mailer_settings):
-    subject = _(u'Password recovery')
-
+def _user_notification(email, subject, html, mailer_settings):
     mailer = mailer_factory_from_settings(mailer_settings)
     message = Message(
         subject=subject,
@@ -30,11 +29,11 @@ def _user_notification(email, html, mailer_settings):
     mailer.send_immediately(message)
     
 
-def _render_mail(request, user):
+def _render_mail(request, user, tmpl):
     user.password = gen_id()
     
     return render(
-        'travelcrm:templates/users/email_password_recovery.mako',
+        'travelcrm:templates/users/%s' % tmpl,
         {
             'user': user, 
             'company_url': get_company_url(request)
@@ -46,7 +45,6 @@ def _render_mail(request, user):
 def schedule_user_password_recovery(request, user_id):
     """user's password recovery 
     """
-    scheduler = get_scheduler(request)
     job_id = gen_id(limit=12)
 
     user = User.get(user_id)
@@ -56,6 +54,29 @@ def schedule_user_password_recovery(request, user_id):
         id=job_id,
         run_date=datetime.now(pytz.utc),
         args=[
-            user.email, _render_mail(request, user), request.registry.settings
+            user.email, 
+            _(u'Password recovery'),
+            _render_mail(request, user, 'email_password_recovery.mako'),
+            request.registry.settings
+        ],
+    )
+
+
+def schedule_user_created(request, user_id):
+    """new user created 
+    """
+    job_id = gen_id(limit=12)
+
+    user = User.get(user_id)
+    scheduler.add_job(
+        _user_notification,
+        trigger='date',
+        id=job_id,
+        run_date=datetime.now(pytz.utc),
+        args=[
+            user.email,
+            _(u'New User created'),
+            _render_mail(request, user, 'email_user_created.mako'),
+            request.registry.settings
         ],
     )

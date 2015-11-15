@@ -53,6 +53,10 @@ def get_employee_permisions(employee, resource):
         rt = get_resource_type_by_resource_cls(resource)
     else:
         rt = get_resource_type_by_resource(resource)
+
+    if not rt.is_active():
+        return
+
     employee_position = get_employee_position(employee)
     permisions = (
         employee_position.permisions.filter(

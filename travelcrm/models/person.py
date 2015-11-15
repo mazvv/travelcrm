@@ -182,6 +182,14 @@ class Person(Base):
     gender = Column(
         EnumIntType(GENDER),
     )
+    email_subscription = Column(
+        Boolean,
+        default=False,
+    )
+    sms_subscription = Column(
+        Boolean,
+        default=False,
+    )
     descr = Column(
         String(length=255),
     )
@@ -274,5 +282,9 @@ class Person(Base):
         )
 
     @classmethod
-    def condition_subscriber(cls):
-        return cls.subscriber == True
+    def condition_email_subscribtion(cls):
+        return cls.email_subscription == True
+
+    @classmethod
+    def condition_sms_subscribtion(cls):
+        return cls.sms_subscription == True

@@ -10,6 +10,10 @@ from ..resources import (
 
 
 @implementer(IResourceType)
-class EmailsCampaignsResource(ResourceTypeBase):
+class CampaignsResource(ResourceTypeBase):
 
-    __name__ = 'emails_campaigns'
+    __name__ = 'campaigns'
+
+    @property
+    def allowed_settings(self):
+        return True

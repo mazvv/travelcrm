@@ -173,11 +173,11 @@ class StructuresView(BaseView):
         ids = self.request.params.getall('id')
         if ids:
             try:
-                (
-                    DBSession.query(Structure)
-                    .filter(Structure.id.in_(ids))
-                    .delete()
+                items = DBSession.query(Structure).filter(
+                    Structure.id.in_(ids)
                 )
+                for item in items:
+                    DBSession.delete(item)
             except:
                 errors=True
                 DBSession.rollback()

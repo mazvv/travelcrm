@@ -8,7 +8,11 @@ from sqlalchemy.schema import CreateSchema
 from ...models import DBSession, Base
 from ...models.company import Company
 from ...lib import EnumInt
-from ..utils.sql_utils import set_search_path, get_current_schema
+from ..utils.sql_utils import (
+    set_search_path,
+    get_current_schema,
+    get_all_schema_sequences
+)
 from ..utils.common_utils import (
     get_public_domain as u_get_public_domain, 
     get_public_subdomain,
@@ -18,11 +22,11 @@ from ..utils.common_utils import (
 
 log = logging.getLogger(__name__)
 
-SOURCE_SCHEMA = 'public'
+SOURCE_SCHEMA = 'company'
 SEQUENCE_NAME = 'companies_counter'
 TABLES = (
     'appointment', 'company', 'country', 'currency', 'employee', 
-    'navigation', 'permision', 'resource', 'resource_log',
+    'navigation', 'permision', 'resource', 'resource_log', 'position',
     'resource_type', 'service', 'structure', 'user'
 )
 
@@ -51,6 +55,7 @@ def generate_company_schema():
 def transfer_data(schema_name):
     set_search_path(SOURCE_SCHEMA)
     tables = Base.metadata.sorted_tables
+
     for table in tables:
         set_search_path(SOURCE_SCHEMA)
         rows = DBSession.query(table).all()
@@ -63,8 +68,18 @@ def transfer_data(schema_name):
                 lambda x: ((x.key or None) if isinstance(x, EnumInt) else x), row
             )
             DBSession.execute(table.insert(row))
+            
     set_search_path(schema_name)
+    sequences = get_all_schema_sequences(schema_name)
     for table in tables:
+        if '%s_id_seq' % table.name in sequences:
+            max_id = DBSession.execute(
+                'select max(id) from "%s"' % table.name
+            ).first()
+            DBSession.execute(
+                "select setval('%s_id_seq', %s)"
+                % (table.name, max_id[0] or 1)
+            )
         DBSession.execute('alter table "%s" enable trigger all' % table.name)
 
 
