@@ -57,22 +57,39 @@ class _CampaignSchema(ResourceSchema):
 
 
 class _SettingsSchema(colander.Schema):
-    host = colander.SchemaNode(
+    host_smtp = colander.SchemaNode(
         colander.String(),
     )
-    port = colander.SchemaNode(
+    port_smtp = colander.SchemaNode(
         colander.String(),
     )
-    username = colander.SchemaNode(
+    username_smtp = colander.SchemaNode(
         colander.String(),
     )
-    password = colander.SchemaNode(
+    password_smtp = colander.SchemaNode(
         colander.String(),
     )
-    default_sender = colander.SchemaNode(
+    default_sender_smtp = colander.SchemaNode(
         colander.String(),
         validators=colander.All(colander.Email())
     )
+    host_smpp = colander.SchemaNode(
+        colander.String(),
+    )
+    port_smpp = colander.SchemaNode(
+        colander.String(),
+    )
+    username_smpp = colander.SchemaNode(
+        colander.String(),
+    )
+    password_smpp = colander.SchemaNode(
+        colander.String(),
+    )
+    system_type_smpp = colander.SchemaNode(
+        colander.String(),
+        validators=colander.All(colander.Email())
+    )
+
 
 
 class CampaignForm(BaseForm):
@@ -112,9 +129,14 @@ class CampaignsSettingsForm(BaseForm):
         context = CampaignsResource(self.request)
         rt = get_resource_type_by_resource(context)
         rt.settings = {
-            'host': self._controls.get('host'),
-            'port': self._controls.get('port'),
-            'username': self._controls.get('username'),
-            'password': self._controls.get('password'),
-            'default_sender': self._controls.get('default_sender'),
+            'host_smtp': self._controls.get('host_smtp'),
+            'port_smtp': self._controls.get('port_smtp'),
+            'username_smtp': self._controls.get('username_smtp'),
+            'password_smtp': self._controls.get('password_smtp'),
+            'default_sender_smtp': self._controls.get('default_sender_smtp'),
+            'host_smpp': self._controls.get('host_smpp'),
+            'port_smpp': self._controls.get('port_smpp'),
+            'username_smpp': self._controls.get('username_smpp'),
+            'password_smpp': self._controls.get('password_smpp'),
+            'system_type_smpp': self._controls.get('system_type_smpp'),
         }

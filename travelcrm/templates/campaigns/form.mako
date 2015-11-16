@@ -48,15 +48,25 @@
                 ${h.tags.textarea(
                     'html_content', 
                     item.html_content if item else None,
-                    class_="rich-text-editor"
+                    class_="rich-text-editor",
+                    cols=103,
+                    rows=18,
                 )}
+                <script>
+                    $('textarea[name=html_content]').ace({lang: 'html'});
+                </script>
             </div>
             <div title="${_(u'Plain text')}">
                 ${h.tags.textarea(
                     'plain_content',
                     item.plain_content if item else None,
-                    class_="rich-text-editor"
+                    class_="rich-text-editor",
+                    cols=103,
+                    rows=18,
                 )}
+                <script>
+                    $('textarea[name=plain_content]').ace({lang: 'html'});
+                </script>
             </div>
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">

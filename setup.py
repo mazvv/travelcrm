@@ -48,7 +48,7 @@ requires = [
     'pdfkit>=0.4.1',
     'apscheduler>=3.0.1',
     'bitmath>=1.0.2-3',
-    'gunicorn>=19.3.0',
+    'smpplib>=0.1',
     'Mock>=1.3.0',
 ]
 

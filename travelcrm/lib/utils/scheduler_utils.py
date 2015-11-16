@@ -41,7 +41,7 @@ def bucket(limit):
                 _wrapper(*args, **kwargs)
             except RuntimeError:
                 log.info(_(u'Generator exhausted'))
-                pass
+                delattr(func, '_offset')
             gen.close()
         return _wrapper
     return wrapper
