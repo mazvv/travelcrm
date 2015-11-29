@@ -229,17 +229,6 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: alembic_version; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE alembic_version (
-    version_num character varying(32) NOT NULL
-);
-
-
-ALTER TABLE company.alembic_version OWNER TO mazvv;
-
---
 -- Name: appointment; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
 --
 
@@ -437,7 +426,8 @@ CREATE TABLE campaign (
     subject character varying(128) NOT NULL,
     plain_content text,
     html_content text,
-    start_dt timestamp with time zone NOT NULL
+    start_dt timestamp with time zone NOT NULL,
+    status smallint NOT NULL
 );
 
 
@@ -3045,17 +3035,6 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: alembic_version; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
---
-
-CREATE TABLE alembic_version (
-    version_num character varying(32) NOT NULL
-);
-
-
-ALTER TABLE public.alembic_version OWNER TO mazvv;
-
---
 -- Name: appointment; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
 --
 
@@ -3253,7 +3232,8 @@ CREATE TABLE campaign (
     subject character varying(128) NOT NULL,
     plain_content text,
     html_content text,
-    start_dt timestamp with time zone NOT NULL
+    start_dt timestamp with time zone NOT NULL,
+    status smallint NOT NULL
 );
 
 
@@ -6045,7 +6025,8 @@ CREATE TABLE campaign (
     subject character varying(128) NOT NULL,
     plain_content text,
     html_content text,
-    start_dt timestamp with time zone NOT NULL
+    start_dt timestamp with time zone NOT NULL,
+    status smallint NOT NULL
 );
 
 
@@ -9815,15 +9796,6 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
--- Data for Name: alembic_version; Type: TABLE DATA; Schema: company; Owner: mazvv
---
-
-COPY alembic_version (version_num) FROM stdin;
-478e038fdb69
-\.
-
-
---
 -- Data for Name: appointment; Type: TABLE DATA; Schema: company; Owner: mazvv
 --
 
@@ -9912,7 +9884,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: company; Owner: mazvv
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt) FROM stdin;
+COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
 \.
 
 
@@ -10586,6 +10558,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 163	151	4	{view,add,edit,delete}	\N	all
 164	152	4	{view,settings}	\N	all
 165	153	4	{view,settings}	\N	all
+295	157	4	{send,settings}	\N	all
 \.
 
 
@@ -10679,7 +10652,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 236, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 294, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 296, true);
 
 
 --
@@ -11671,6 +11644,8 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2785	47	1	f
 2786	2	1	f
 2787	2	1	f
+2789	12	1	f
+2790	12	1	f
 \.
 
 
@@ -11678,7 +11653,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2788, true);
+SELECT pg_catalog.setval('resource_id_seq', 2790, true);
 
 
 --
@@ -11765,6 +11740,8 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7748	878	2	\N	2015-10-25 21:20:36.956871+02
 7749	2788	2	\N	2015-11-15 11:41:32.753196+02
 7750	2741	2	\N	2015-11-15 11:42:42.182101+02
+7751	2789	2	\N	2015-11-22 20:53:32.477901+02
+7752	2790	2	\N	2015-11-22 22:04:31.745001+02
 \.
 
 
@@ -11772,7 +11749,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7750, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7752, true);
 
 
 --
@@ -11843,6 +11820,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 143	2268	visas	Visas	VisasResource	travelcrm.resources.visas	Visa is a service for sale visas	null	0
 144	2276	spassports	Passports Services	SpassportsResource	travelcrm.resources.spassports	Service formulation of foreign passports	null	0
 156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	Marketings campaigns	{"username": "--", "host": "--", "password": "--", "port": "2525", "default_sender": "--"}	0
+157	2789	turbosms	Turbosms	TurbosmsResource	travelcrm_turbosms.resources.turbosms	SMS getway with TorboSMS	null	0
 \.
 
 
@@ -11850,7 +11828,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 -- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_type_id_seq', 156, true);
+SELECT pg_catalog.setval('resource_type_id_seq', 158, true);
 
 
 --
@@ -12424,15 +12402,6 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 
 
 --
--- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: mazvv
---
-
-COPY alembic_version (version_num) FROM stdin;
-478e038fdb69
-\.
-
-
---
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
@@ -12605,7 +12574,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 85, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: public; Owner: mazvv
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt) FROM stdin;
+COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
 \.
 
 
@@ -12669,7 +12638,7 @@ SELECT pg_catalog.setval('commission_id_seq', 48, true);
 -- Name: companies_counter; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('companies_counter', 1074, true);
+SELECT pg_catalog.setval('companies_counter', 1076, true);
 
 
 --
@@ -12778,6 +12747,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 95	valik_gopko	2659	2		0
 96	+380673508989	2666	0		0
 97	+380504538765	2676	0		0
+98	+380681983869	2814	0		0
 \.
 
 
@@ -12785,7 +12755,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 97, true);
+SELECT pg_catalog.setval('contact_id_seq', 98, true);
 
 
 --
@@ -12987,10 +12957,12 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 2	22	1
 2	23	1
 2	24	1
-2	26	0
-2	27	0
 2	25	1
 7	34	0
+2	26	1
+2	27	1
+2	35	0
+2	36	0
 \.
 
 
@@ -13549,6 +13521,8 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 32	2782	Your User profile was changed		2015-10-24 15:06:44.559696+03	\N
 33	2783	Your User profile was changed		2015-10-24 15:13:07.98256+03	\N
 34	2784	Your User profile was changed		2015-10-24 15:16:03.818888+03	\N
+35	2817	Test for notifications 2	Test for notifications 2	2015-11-29 18:06:00.016338+02	\N
+36	2819	Check for notofications	Check for notofications	2015-11-29 19:07:00.054887+02	\N
 \.
 
 
@@ -13556,7 +13530,7 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 34, true);
+SELECT pg_catalog.setval('notification_id_seq', 36, true);
 
 
 --
@@ -13577,6 +13551,8 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 31	894
 32	894
 34	894
+35	2816
+36	2818
 \.
 
 
@@ -13892,6 +13868,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 245	47	6	{view}	\N	all
 235	69	6	{view,add,edit,delete}	\N	all
 294	156	4	{view,add,edit,delete,settings}	\N	all
+295	157	4	{send,settings}	\N	all
 \.
 
 
@@ -13954,8 +13931,8 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 68	2679	Yuriy	Fedirko		2012-04-05	0	\N	\N	t	\N
 67	2678	Anna	Fedirko		\N	1	\N	\N	t	\N
 56	2563	Alex	Saveliev		\N	0	\N	3	t	\N
-69	2739	Vitalii			\N	\N	\N	\N	t	t
 63	2593	Maria	Fed'ko		1993-05-19	1	\N	3	t	f
+69	2739	Vitalii			\N	\N	\N	\N	t	t
 \.
 
 
@@ -14177,7 +14154,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 236, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 294, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 296, true);
 
 
 --
@@ -15471,6 +15448,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2786	2	32	f
 2787	2	32	f
 2788	12	32	f
+2812	12	32	f
+2813	12	32	f
+2814	87	32	f
+2815	93	32	f
+2816	93	32	f
+2817	123	32	f
+2818	93	32	f
+2819	123	32	f
 \.
 
 
@@ -15478,7 +15463,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2811, true);
+SELECT pg_catalog.setval('resource_id_seq', 2819, true);
 
 
 --
@@ -17475,6 +17460,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7677	2593	2	\N	2015-10-31 10:32:28.375294+02
 7678	2788	2	\N	2015-10-31 11:46:02.329007+02
 7679	2741	2	\N	2015-10-31 11:48:54.106885+02
+7697	2812	2	\N	2015-11-22 20:39:40.441717+02
+7698	2813	2	\N	2015-11-22 21:52:45.311354+02
+7699	2814	2	\N	2015-11-22 21:57:07.211721+02
+7700	2739	2	\N	2015-11-22 21:57:09.506917+02
+7701	2739	2	\N	2015-11-22 22:03:49.302367+02
+7702	2815	2	\N	2015-11-29 18:03:23.32558+02
+7703	2816	2	\N	2015-11-29 18:05:24.319676+02
+7704	2818	2	\N	2015-11-29 19:06:37.534692+02
 \.
 
 
@@ -17482,7 +17475,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7696, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7704, true);
 
 
 --
@@ -17553,6 +17546,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 143	2268	visas	Visas	VisasResource	travelcrm.resources.visas	Visa is a service for sale visas	null	0
 144	2276	spassports	Passports Services	SpassportsResource	travelcrm.resources.spassports	Service formulation of foreign passports	null	0
 156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	Marketings campaigns	{"host_smpp": "94.249.146.183", "system_type_smpp": "transceiver", "password_smpp": "korn17", "port_smtp": "2525", "username_smtp": "mazvv@mail.ru", "password_smtp": "GmA67mpqqYjKQ", "port_smpp": "29900", "username_smpp": "mazvv", "host_smtp": "smtp-pulse.com", "default_sender_smtp": "mazvv@mail.ru"}	0
+157	2812	turbosms	Turbosms	TurbosmsResource	travelcrm_turbosms.resources.turbosms	SMS getway with TorboSMS	{"username": "---", "password": "---", "default_sender": "TravelCRM"}	0
 \.
 
 
@@ -17560,7 +17554,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 -- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_type_id_seq', 156, true);
+SELECT pg_catalog.setval('resource_type_id_seq', 158, true);
 
 
 --
@@ -17874,6 +17868,9 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 36	1932	2	Call and remind about payments	2014-12-11 22:48:00+02	Bla-Bla	3	10
 79	2671	2	Call to customer!	2015-07-22 12:05:00+03	call to customer and ask for offer	0	10
 80	2730	2	Check invoice	2015-07-22 15:30:00+03	Check invoice sum and call about currencies rates	0	10
+81	2815	2	Test for notifications	2015-11-29 18:04:00+02	For test purposes only	0	10
+82	2816	2	Test for notifications 2	2015-11-29 18:16:00+02	For test purpose only	0	10
+83	2818	2	Check for notofications	2015-11-29 19:17:00+02	Test this one	0	10
 \.
 
 
@@ -17881,7 +17878,7 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('task_id_seq', 80, true);
+SELECT pg_catalog.setval('task_id_seq', 83, true);
 
 
 --
@@ -18352,7 +18349,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: test; Owner: mazvv
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt) FROM stdin;
+COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
 \.
 
 
@@ -18360,7 +18357,7 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 -- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('campaign_id_seq', 20, true);
+SELECT pg_catalog.setval('campaign_id_seq', 1, true);
 
 
 --
@@ -18398,7 +18395,7 @@ SELECT pg_catalog.setval('commission_id_seq', 1, true);
 --
 
 COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
-1	1970	56	TravelCRM Test	vitalii.mazur@gmail.com	{"locale": "en", "timezone": "Europe/Kiev"}
+1	1970	56	Vitalii	vitalii.mazur@gmail.com	{"locale": "ru", "timezone": "Africa/Abidjan"}
 \.
 
 
@@ -18422,7 +18419,6 @@ COPY company_subaccount (company_id, subaccount_id) FROM stdin;
 --
 
 COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
-2	2789	1	iren.mazur@gmail.com	0	
 \.
 
 
@@ -18430,7 +18426,7 @@ COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 2, true);
+SELECT pg_catalog.setval('contact_id_seq', 1, true);
 
 
 --
@@ -19020,6 +19016,7 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 163	151	4	{view,add,edit,delete}	all	\N
 164	152	4	{view,settings}	all	\N
 165	153	4	{view,settings}	all	\N
+295	157	4	{send,settings}	all	\N
 \.
 
 
@@ -19027,7 +19024,7 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 -- Name: permision_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('permision_id_seq', 294, true);
+SELECT pg_catalog.setval('permision_id_seq', 295, true);
 
 
 --
@@ -19035,7 +19032,6 @@ SELECT pg_catalog.setval('permision_id_seq', 294, true);
 --
 
 COPY person (id, resource_id, person_category_id, first_name, last_name, second_name, birthday, gender, email_subscription, sms_subscription, descr) FROM stdin;
-2	2790	\N	Mazvv			\N	\N	t	f	\N
 \.
 
 
@@ -19067,7 +19063,6 @@ SELECT pg_catalog.setval('person_category_id_seq', 1, true);
 --
 
 COPY person_contact (person_id, contact_id) FROM stdin;
-2	2
 \.
 
 
@@ -19075,7 +19070,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('person_id_seq', 2, true);
+SELECT pg_catalog.setval('person_id_seq', 1, true);
 
 
 --
@@ -20107,8 +20102,8 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2785	47	1	f
 2786	2	1	f
 2787	2	1	f
-2789	87	1	f
-2790	69	1	f
+2789	12	1	f
+2790	12	1	f
 \.
 
 
@@ -20116,7 +20111,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2809, true);
+SELECT pg_catalog.setval('resource_id_seq', 2790, true);
 
 
 --
@@ -20203,9 +20198,8 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7748	878	2	\N	2015-10-25 21:20:36.956871+02
 7749	2788	2	\N	2015-11-15 11:41:32.753196+02
 7750	2741	2	\N	2015-11-15 11:42:42.182101+02
-7751	2789	2	\N	2015-11-15 14:43:04.130721+02
-7752	2790	2	\N	2015-11-15 14:43:10.452148+02
-7763	2790	2	\N	2015-11-15 16:31:36.865091+02
+7751	2789	2	\N	2015-11-22 20:53:32.477901+02
+7752	2790	2	\N	2015-11-22 22:04:31.745001+02
 \.
 
 
@@ -20213,7 +20207,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7773, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7752, true);
 
 
 --
@@ -20283,7 +20277,8 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 142	2244	tickets	Tickets	TicketsResource	travelcrm.resources.tickets	null	Ticket is a service for sale tickets of any type	0
 143	2268	visas	Visas	VisasResource	travelcrm.resources.visas	null	Visa is a service for sale visas	0
 144	2276	spassports	Passports Services	SpassportsResource	travelcrm.resources.spassports	null	Service formulation of foreign passports	0
-156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	{"username": "mazvv@mail.ru", "host": "smtp-pulse.com", "password": "GmA67mpqqYjKQ", "port": "2525", "default_sender": "mazvv@mail.ru"}	Marketings campaigns	0
+156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	{"username": "--", "host": "--", "password": "--", "port": "2525", "default_sender": "--"}	Marketings campaigns	0
+157	2789	turbosms	Turbosms	TurbosmsResource	travelcrm_turbosms.resources.turbosms	null	SMS getway with TorboSMS	0
 \.
 
 
@@ -20291,7 +20286,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 -- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
 --
 
-SELECT pg_catalog.setval('resource_type_id_seq', 156, true);
+SELECT pg_catalog.setval('resource_type_id_seq', 157, true);
 
 
 --
@@ -27768,6 +27763,14 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+--
+
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT fk_photo_upload_id_employee FOREIGN KEY (photo_upload_id) REFERENCES upload(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
 --
 
@@ -27915,7 +27918,7 @@ ALTER TABLE ONLY company
 -- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
 --
 
-ALTER TABLE ONLY contact
+ALTER TABLE ONLY upload
     ADD CONSTRAINT fk_resource_id_contact FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
@@ -27923,7 +27926,7 @@ ALTER TABLE ONLY contact
 -- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
 --
 
-ALTER TABLE ONLY upload
+ALTER TABLE ONLY contact
     ADD CONSTRAINT fk_resource_id_contact FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
