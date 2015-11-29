@@ -54,38 +54,25 @@ class _CampaignSchema(ResourceSchema):
         DateTime(),
         validators=start_dt_validator
     )
+    status = colander.SchemaNode(
+        colander.String(),
+    )
 
 
 class _SettingsSchema(colander.Schema):
-    host_smtp = colander.SchemaNode(
+    host = colander.SchemaNode(
         colander.String(),
     )
-    port_smtp = colander.SchemaNode(
+    port = colander.SchemaNode(
         colander.String(),
     )
-    username_smtp = colander.SchemaNode(
+    username = colander.SchemaNode(
         colander.String(),
     )
-    password_smtp = colander.SchemaNode(
+    password = colander.SchemaNode(
         colander.String(),
     )
-    default_sender_smtp = colander.SchemaNode(
-        colander.String(),
-        validators=colander.All(colander.Email())
-    )
-    host_smpp = colander.SchemaNode(
-        colander.String(),
-    )
-    port_smpp = colander.SchemaNode(
-        colander.String(),
-    )
-    username_smpp = colander.SchemaNode(
-        colander.String(),
-    )
-    password_smpp = colander.SchemaNode(
-        colander.String(),
-    )
-    system_type_smpp = colander.SchemaNode(
+    default_sender = colander.SchemaNode(
         colander.String(),
         validators=colander.All(colander.Email())
     )
@@ -95,27 +82,28 @@ class _SettingsSchema(colander.Schema):
 class CampaignForm(BaseForm):
     _schema = _CampaignSchema
 
-    def submit(self, email_campaign=None):
+    def submit(self, campaign=None):
         context = CampaignsResource(self.request)
-        if not email_campaign:
-            email_campaign = Campaign(
+        if not campaign:
+            campaign = Campaign(
                 resource=context.create_resource()
             )
         else:
-            email_campaign.resource.notes = []
-            email_campaign.resource.tasks = []
-        email_campaign.name = self._controls.get('name')
-        email_campaign.subject = self._controls.get('subject')
-        email_campaign.plain_content = self._controls.get('plain_content')
-        email_campaign.html_content = self._controls.get('html_content')
-        email_campaign.start_dt = self._controls.get('start_dt')
+            campaign.resource.notes = []
+            campaign.resource.tasks = []
+        campaign.name = self._controls.get('name')
+        campaign.subject = self._controls.get('subject')
+        campaign.plain_content = self._controls.get('plain_content')
+        campaign.html_content = self._controls.get('html_content')
+        campaign.start_dt = self._controls.get('start_dt')
+        campaign.status = self._controls.get('status')
         for id in self._controls.get('note_id'):
             note = Note.get(id)
-            email_campaign.resource.notes.append(note)
+            campaign.resource.notes.append(note)
         for id in self._controls.get('task_id'):
             task = Task.get(id)
-            email_campaign.resource.tasks.append(task)
-        return email_campaign
+            campaign.resource.tasks.append(task)
+        return campaign
 
 
 class CampaignSearchForm(BaseSearchForm):
@@ -129,14 +117,9 @@ class CampaignsSettingsForm(BaseForm):
         context = CampaignsResource(self.request)
         rt = get_resource_type_by_resource(context)
         rt.settings = {
-            'host_smtp': self._controls.get('host_smtp'),
-            'port_smtp': self._controls.get('port_smtp'),
-            'username_smtp': self._controls.get('username_smtp'),
-            'password_smtp': self._controls.get('password_smtp'),
-            'default_sender_smtp': self._controls.get('default_sender_smtp'),
-            'host_smpp': self._controls.get('host_smpp'),
-            'port_smpp': self._controls.get('port_smpp'),
-            'username_smpp': self._controls.get('username_smpp'),
-            'password_smpp': self._controls.get('password_smpp'),
-            'system_type_smpp': self._controls.get('system_type_smpp'),
+            'host': self._controls.get('host'),
+            'port': self._controls.get('port'),
+            'username': self._controls.get('username'),
+            'password': self._controls.get('password'),
+            'default_sender': self._controls.get('default_sender'),
         }

@@ -20,7 +20,6 @@ def get_schema_from_job_id(job_id):
     return job_id.split('_')[0]
     
 
-
 def bucket(limit):
     def wrapper(func):
         def _wrapper(*args, **kwargs):

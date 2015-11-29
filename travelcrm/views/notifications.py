@@ -51,7 +51,7 @@ class NotificationsView(BaseView):
     @view_config(
         name='counter',
         request_method='GET',
-        renderer='json',
+        renderer='sse',
         permission='view'
     )
     def counter(self):
@@ -61,6 +61,7 @@ class NotificationsView(BaseView):
         return {
             'count': qb.query.count(),
         }
+
 
     @view_config(
         name='details',

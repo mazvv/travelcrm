@@ -32,6 +32,7 @@ def _send_message(campaign_id, contacts):
             html=campaign.html_content
         )
         mailer.send_immediately(message)
+    campaign.set_status_ready()
 
 
 @bucket(BUCKET_SIZE)

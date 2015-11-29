@@ -54,6 +54,7 @@ from ...models.visa import Visa
 from ...models.lead_offer import LeadOffer
 from ...models.order import Order
 from ...models.vat import Vat
+from ...models.campaign import Campaign
 
 from ..utils.common_utils import (
     gen_id,
@@ -1407,3 +1408,15 @@ def persons_categories_combogrid_field(
         data_options, **kwargs
     )
     return field()
+
+
+def campaigns_statuses_combobox_field(
+    name, value=None, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false,width:126"
+    if data_options:
+        _data_options += ",%s" % data_options
+    return tags.select(
+        name, value, Campaign.STATUS, class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )

@@ -43,6 +43,18 @@
                         ${h.common.error_container(name='start_dt')}
                     </div>
                 </div>
+                <div class="form-field mb05">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"status"), True, "status")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.campaigns_statuses_combobox_field(
+                            'status',
+                            item.status.key if item else None,
+                            data_options='readonly:true'
+                        )}
+                    </div>
+                </div>
             </div>
             <div title="${_(u'HTML content')}">
                 ${h.tags.textarea(

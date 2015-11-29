@@ -16,11 +16,6 @@ ${h.tags.Doctype().html5()}
             request.static_url('travelcrm:static/js/jeasyui/locale/easyui-lang-%s.js' % h.common.get_locale_name()),
             request.static_url('travelcrm:static/js/main.js')
         )}
-        <script type="text/javascript">
-        $(document).ready(function(){
-            var socket = io.connect("/notifications/counter");
-        })
-        </script>
         <%block name="js"></%block>
     </head>
     <body id="_page_">

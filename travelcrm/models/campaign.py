@@ -14,10 +14,17 @@ from ..models import (
     DBSession,
     Base
 )
+from ..lib import EnumIntType
+from ..lib.utils.common_utils import translate as _
 
 
 class Campaign(Base):
     __tablename__ = 'campaign'
+
+    STATUS = (
+        ('awaiting', _(u'awaiting')),
+        ('ready', _(u'ready')),
+    )
 
     id = Column(
         Integer,
@@ -52,6 +59,10 @@ class Campaign(Base):
         DateTime(timezone=True),
         nullable=False,
     )
+    status = Column(
+        EnumIntType(STATUS),
+        nullable=False,
+    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -76,3 +87,6 @@ class Campaign(Base):
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
+
+    def set_status_ready(self):
+        self.status = 'ready'

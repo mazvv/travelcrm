@@ -15,6 +15,11 @@ from ..forms.leads import (
     LeadForm, 
     LeadSearchForm
 )
+from ..lib.events.leads import (
+    LeadCreated,
+    LeadEdited,
+    LeadDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class LeadsView(BaseView):
             lead = form.submit()
             DBSession.add(lead)
             DBSession.flush()
+            event = LeadCreated(self.request, lead)
+            self.request.registry.notify(event)
             return {
                 'success_message': _(u'Saved'),
                 'response': lead.id
@@ -130,6 +137,8 @@ class LeadsView(BaseView):
         form = LeadForm(self.request)
         if form.validate():
             form.submit(lead)
+            event = LeadEdited(self.request, lead)
+            self.request.registry.notify(event)
             return {
                 'success_message': _(u'Saved'),
                 'response': lead.id
@@ -220,6 +229,8 @@ class LeadsView(BaseView):
                 items = DBSession.query(Lead).filter(Lead.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
+                    event = LeadDeleted(self.request, item)
+                    self.request.registry.notify(event)
             except:
                 errors=True
                 DBSession.rollback()

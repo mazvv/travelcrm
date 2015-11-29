@@ -16,6 +16,7 @@ class CampaignsQueryBuilder(ResourcesQueryBuilder):
             'name': Campaign.name,
             'subject': Campaign.subject,
             'start_dt': Campaign.start_dt,
+            'status': Campaign.status,
         }
         self._simple_search_fields = [
             Campaign.name,

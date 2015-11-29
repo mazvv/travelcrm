@@ -10,10 +10,14 @@ from ..models import DBSession
 from ..models.task import Task
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
-from ..lib.scheduler.tasks import schedule_task_notification
 from ..forms.tasks import (
     TaskForm, 
     TaskSearchForm
+)
+from ..lib.events.tasks import (
+    TaskCreated,
+    TaskEdited,
+    TaskDeleted
 )
 
 
@@ -96,7 +100,10 @@ class TasksView(BaseView):
             task = form.submit()
             DBSession.add(task)
             DBSession.flush()
-            schedule_task_notification(self.request, task.id)
+
+            event = TaskCreated(self.request, task)
+            self.request.registry.notify(event)
+
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
@@ -131,7 +138,8 @@ class TasksView(BaseView):
         form = TaskForm(self.request)
         if form.validate():
             form.submit(task)
-            schedule_task_notification(self.request, task.id)
+            event = TaskEdited(self.request, task)
+            self.request.registry.notify(event)
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
@@ -184,11 +192,11 @@ class TasksView(BaseView):
         ids = self.request.params.getall('id')
         if ids:
             try:
-                items = DBSession.query(Task).filter(
-                    Task.id.in_(ids)
-                )
+                items = DBSession.query(Task).filter(Task.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
+                    event = TaskDeleted(self.request, item)
+                    self.request.registry.notify(event)
             except:
                 errors=True
                 DBSession.rollback()

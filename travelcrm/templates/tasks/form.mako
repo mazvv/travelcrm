@@ -1,6 +1,6 @@
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../uploads/common.mako" import="uploads_selector"/>
-<div class="dl50 easyui-dialog"
+<div class="dl55 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,

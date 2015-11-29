@@ -38,9 +38,15 @@
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/datagrid-bufferview.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jeasyui/jquery.portal.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/Chart.js'))}
-    ${h.tags.javascript_link(request.static_url('travelcrm:static/js/socket.io.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/ace/ace.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/ace/mode-html.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/ace/theme-chrome.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jquery-ace.min.js'))}
+    <script type="text/javascript">
+        var eventSource = new EventSource("/notifications/counter?sort=id&employee_id=${h.common.get_auth_employee(request).id}");
+        eventSource.onmessage = function(e) {
+        	var data = $.parseJSON(e.data);
+        	$('.indicator.notifications-counter').html(data.count);
+        }
+    </script>
 </%block>
