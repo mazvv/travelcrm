@@ -50,11 +50,12 @@ requires = [
     'bitmath>=1.0.2-3',
     'smpplib>=0.1',
     'Mock>=1.3.0',
+    'python_dateutil>=2.4.0',
 ]
 
 setup(
     name='travelcrm',
-    version='0.6.3-dev',
+    version='0.6.4-dev',
     description='travelcrm',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -66,7 +67,7 @@ setup(
     author='Vitalii Mazur',
     author_email='vitalii.mazur@gmail.com',
     url='http://www.travelcrm.org.ua',
-    keywords='web wsgi bfg pylons pyramid crm',
+    keywords='web wsgi bfg pylons pyramid travel crms',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

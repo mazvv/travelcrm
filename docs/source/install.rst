@@ -81,13 +81,13 @@ PostgreSQL 9.*, для более ранних версий не тестиро�
 и распаковать в директорию с виртуальным окружением::
 
    $ cd ~/Projects/virtenv
-   $ wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6.3-dev.tar.gz
-   $ tar -xzvf travelcrm-0.6.3-dev.tar.gz
-   $ cd ./travelcrm-0.6.3-dev
+   $ wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6.4.dev0.tar.gz
+   $ tar -xzvf travelcrm-0.6.4.dev0.tar.gz
+   $ cd ./travelcrm-0.6.4.dev0
 
 Запустите установку TravelCRM::
 
-   $ ./bin/python ./travelcrm-0.6.3-dev/setup.py develop
+   $ ../bin/python ./setup.py develop
 
 Комманда установки автоматически установит все зависимые пакеты.
 
@@ -128,12 +128,12 @@ postgres и root::
 
 Разварачиваем бекап::
 
-   $ psql -U travelcrm travelcrm < ./travelcrm-0.6.3-dev/travelcrm_en.sql
+   $ psql -U travelcrm travelcrm < ./travelcrm-0.6.4.dev0/travelcrm_en.sql
 
 
 Настройка приложения
 ####################
-Откройте в любом редакторе файл ./travelcrm-0.6.3-dev/development.ini 
+Откройте в любом редакторе файл ./travelcrm-0.6.4.dev0/development.ini 
 и найдите там строку начинающуюся на *sqlalchemy.url* 
 и установите свои параметры подкючения к базе данных.
 
@@ -142,7 +142,8 @@ postgres и root::
 #################
 Для запуска приложения выполните комманду::
 
-   $ ./bin/pserve --reload ./travelcrm-0.6.3-dev/development.ini
+   $ cd ~/Projects/virtenv
+   $ ./bin/pserve --reload ./travelcrm-0.6.4.dev0/development.ini
    
 Вы должны увидеть что-то вроде::
 
