@@ -128,7 +128,7 @@ postgres и root::
 
 Разварачиваем бекап::
 
-   $ psql -U travelcrm travelcrm < ./travelcrm-0.6.4.dev0/travelcrm_en.sql
+   $ psql -U travelcrm travelcrm < ./travelcrm-0.6.4.dev0/sql/travelcrm_en.sql
 
 
 Настройка приложения

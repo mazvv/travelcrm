@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-11-29 19:43+0200\n"
+"POT-Creation-Date: 2015-12-19 22:01+0200\n"
 "PO-Revision-Date: 2015-07-24 22:55+0300\n"
 "Last-Translator: Vitalii Mazur <vitalii.mazur@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -468,7 +468,7 @@ msgstr "ru"
 #: travelcrm/lib/helpers/fields.py:1334 travelcrm/lib/helpers/fields.py:1349
 #: travelcrm/lib/helpers/fields.py:1385
 msgid "--all--"
-msgstr "все"
+msgstr "--все--"
 
 #: travelcrm/lib/helpers/fields.py:1282 travelcrm/lib/helpers/fields.py:1310
 #: travelcrm/templates/cashflows/common.mako:4
@@ -2526,7 +2526,7 @@ msgstr "инфо"
 
 #: travelcrm/templates/common/resource.mako:4
 msgid "resource stats"
-msgstr "статистика ресурса"
+msgstr "статистика"
 
 #: travelcrm/templates/common/resource.mako:7
 msgid "tasks"

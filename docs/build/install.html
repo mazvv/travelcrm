@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Установка &mdash; TravelCRM 0.6.3-dev documentation</title>
+    <title>Установка &mdash; TravelCRM 0.6.4-dev documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.3-dev',
+        VERSION:     '0.6.4-dev',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="TravelCRM 0.6.3-dev documentation" href="index.html" />
+    <link rel="top" title="TravelCRM 0.6.4-dev documentation" href="index.html" />
     <link rel="next" title="Изменения" href="changes.html" />
     <link rel="prev" title="Документация TravelCRM" href="index.html" />
 <meta charset='utf-8'>
@@ -50,7 +50,7 @@
         </button>
         <a class="navbar-brand" href="index.html">
           TravelCRM</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.6.3-dev</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.4-dev</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -152,18 +152,18 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Автор тестировал TravelCRM на Linux Fedora Core, Python 2.7 и
-Centos 5, Python 2.6; PostgreSQL 9.4</p>
+Centos 5; PostgreSQL 9.4</p>
 </div>
 </div>
 <div class="section" id="unix-linux">
 <h2>Установка на Unix/Linux<a class="headerlink" href="#unix-linux" title="Permalink to this headline">¶</a></h2>
-<p>Реккомендуемым способом установки TravelCRM является установка в виртуальном
+<p>Рекомендуемым способом установки TravelCRM является установка в виртуальном
 окружении Python, что обеспечивает локальную независимость пакетов Python от
-глобального окружения Python. Для этих целей можно воспользоваться пакетом
+глобального окружения. Для этих целей можно воспользоваться пакетом
 <em>virtualenv</em>.</p>
 <p>Чтобы настроить <em>virtualenv</em> в которую будет установлен TravelCRM,
 сначала убедитесь, что установлен пакет <em>setuptools</em></p>
-<div class="highlight-python"><div class="highlight"><pre>$ python2.7 -c &#39;import setuptools&#39;
+<div class="highlight-python"><div class="highlight"><pre>$ python -c &#39;import setuptools&#39;
 </pre></div>
 </div>
 <p>Если результатом этой комманды будет пустая строка, то <em>setuptools</em> уже установлен,
@@ -210,27 +210,22 @@ ImportError: No module named setuptools
 </pre></div>
 </div>
 <p>создаем в этой директории виртуальное окружение Python:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ virtualenv --no-site-packages ~/Projects/virtenv
+<div class="highlight-python"><div class="highlight"><pre>$ virtualenv ~/Projects/virtenv
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Опция &#8211;no-site-packages обеспечивает полную изоляцию вашей виртуальной среды
-от глобального окружения Python</p>
 </div>
 </div>
 <div class="section" id="travelcrm">
 <h2>Установка TravelCRM в виртуальное окружение<a class="headerlink" href="#travelcrm" title="Permalink to this headline">¶</a></h2>
 <p>Прежде всего нужно <a class="reference external" href="https://bitbucket.org/mazvv/travelcrm/downloads">скачать TravelCRM</a>
-и распаковать в дректорию с виртуальным окружением:</p>
+и распаковать в директорию с виртуальным окружением:</p>
 <div class="highlight-python"><div class="highlight"><pre>$ cd ~/Projects/virtenv
-$ wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6.3-dev.tar.gz
-$ tar -xzvf travelcrm-0.6.3-dev.tar.gz
-$ cd ./travelcrm-0.6.3-dev
+$ wget https://bitbucket.org/mazvv/travelcrm/downloads/travelcrm-0.6.4.dev0.tar.gz
+$ tar -xzvf travelcrm-0.6.4.dev0.tar.gz
+$ cd ./travelcrm-0.6.4.dev0
 </pre></div>
 </div>
 <p>Запустите установку TravelCRM:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ ./bin/python ./travelcrm-0.6.3-dev/setup.py develop
+<div class="highlight-python"><div class="highlight"><pre>$ ../bin/python ./setup.py develop
 </pre></div>
 </div>
 <p>Комманда установки автоматически установит все зависимые пакеты.</p>
@@ -269,20 +264,21 @@ $ exit
 </pre></div>
 </div>
 <p>Разварачиваем бекап:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ psql -U travelcrm travelcrm &lt; ./travelcrm-0.6.3-dev/travelcrm_en.sql
+<div class="highlight-python"><div class="highlight"><pre>$ psql -U travelcrm travelcrm &lt; ./travelcrm-0.6.4.dev0/sql/travelcrm_en.sql
 </pre></div>
 </div>
 </div>
 <div class="section" id="id8">
 <h2>Настройка приложения<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
-<p>Откройте в любом редакторе файл ./travelcrm-0.6.3-dev/development.ini
+<p>Откройте в любом редакторе файл ./travelcrm-0.6.4.dev0/development.ini
 и найдите там строку начинающуюся на <em>sqlalchemy.url</em>
 и установите свои параметры подкючения к базе данных.</p>
 </div>
 <div class="section" id="id9">
 <h2>Запуск приложения<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>Для запуска приложения выполните комманду:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ ./bin/pserve --reload ./travelcrm-0.6.3-dev/development.ini
+<div class="highlight-python"><div class="highlight"><pre>$ cd ~/Projects/virtenv
+$ ./bin/pserve --reload ./travelcrm-0.6.4.dev0/development.ini
 </pre></div>
 </div>
 <p>Вы должны увидеть что-то вроде:</p>

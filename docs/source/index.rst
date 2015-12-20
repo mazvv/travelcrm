@@ -12,4 +12,6 @@
    :maxdepth: 2
 
    install
+   setting
+   getting_started
    changes

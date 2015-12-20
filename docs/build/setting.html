@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Настройка &mdash; TravelCRM 0.6.4-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.1.0/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.6.4-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="TravelCRM 0.6.4-dev documentation" href="index.html" />
+    <link rel="next" title="Начала" href="getting_started.html" />
+    <link rel="prev" title="Установка" href="install.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          TravelCRM</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.4-dev</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Установка</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Настройка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Начала</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Изменения</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Настройка</a><ul>
+<li><a class="reference internal" href="#ini">Конфигурационный <cite>*</cite>.ini файл</a></li>
+<li><a class="reference internal" href="#id2">Параметры конфигурации</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="install.html" title="Previous Chapter: Установка"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Установка</span>
+    </a>
+  </li>
+  <li>
+    <a href="getting_started.html" title="Next Chapter: Начала"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Начала &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/setting.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="id1">
+<h1>Настройка<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ini">
+<h2>Конфигурационный <cite>*</cite>.ini файл<a class="headerlink" href="#ini" title="Permalink to this headline">¶</a></h2>
+<p>Конфигурационные файлы содержат параметры начальной настройки для запуска TravelCRM,
+подключения расширений, соединения с базой данных, настройки web сервера,
+параметры логирования и т.д.
+Конфигурация TravelCRM производится через конфигурационный файл с расширением
+<cite>*</cite>.ini. При запуске TravelCRM мы указываем, какой конфигурационный файл
+использовать.
+Рекоммендуем использовать разные файлы конфигурации для разработки и запуска
+приложения в продакшен. В архиве с исходным кодом TravelCRM имеется готовый
+конфигурационный файл <em>development.ini</em>, который используется для запуска приложения
+на этапе тестирования и разработки:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ ./bin/pserve --reload ./travelcrm-0.6.4.dev0/development.ini
+</pre></div>
+</div>
+<p>Используйте его для создания собственный конфигураций приложения.</p>
+</div>
+<div class="section" id="id2">
+<h2>Параметры конфигурации<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Рассмотрим наиболее полезные параметры конфигурационных файлов.</p>
+<dl class="docutils">
+<dt>pyramid.includes</dt>
+<dd>Содержит список подключаемых приложений, сюда следует указывать также
+сторонние приложения</dd>
+<dt>sqlalchemy.url</dt>
+<dd>Параметры подключения к базе данных в формате
+<em>postgres://&lt;username&gt;:&lt;password&gt;&#64;&lt;hostname&gt;/&lt;dbname&gt;</em></dd>
+<dt>public_domain</dt>
+<dd>Название основного домена, на котором работает TravelCRM, без <a class="reference external" href="http://">http://</a>.
+Для этого домена будет использовано подключение к схеме <em>public</em> базы данных.</dd>
+<dt>public_subdomain</dt>
+<dd><p class="first">Название субдомена, на котором работает TravelCRM со схемой <em>public</em>.
+Например, если вы хотите, чтобы ваша программа была доступна по адресу
+<a class="reference external" href="http://demo.travelcrm.org.ua">http://demo.travelcrm.org.ua</a>, нужно указать такие параметры:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">public_domain</span> <span class="o">=</span> <span class="n">travelcrm</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">ua</span>
+<span class="n">public_subdomain</span> <span class="o">=</span> <span class="n">demo</span>
+</pre></div>
+</div>
+</dd>
+<dt>multicompanies</dt>
+<dd>Включает и выключает возможность работы TravelCRM в режиме мультикомпаний.
+Может принимать значения 0 или 1. Если указать 1, то на публичном субдомене
+появиться возможность регистрации новых компаний со своими CRM.</dd>
+<dt>sessions.*</dt>
+<dd>Эти параметры служат для управления сессиями. Если вы не знаете, что это такое,
+лучше оставить их без изменений. Более детальная информация по настройке сессий
+доступна на <a class="reference external" href="http://docs.pylonsproject.org/projects/pyramid-beaker/en/latest/">официальном сайте pyramid_baker</a></dd>
+<dt>storage.max_size</dt>
+<dd>Максимальный размер загружаемых файлов. Указвается в мегабайтах</dd>
+<dt>storage.base_path</dt>
+<dd>Путь к директории, в которой хранятся файлы</dd>
+<dt>storage.extensions</dt>
+<dd>Расширения файлов, доступные для загрузки. Более детальная информация
+по настройке хранилища файлов доступна на
+оофициальном сайте <a class="reference external" href="http://pythonhosted.org/pyramid_storage/">pyramid_storage</a></dd>
+<dt>thumbs.*</dt>
+<dd>Настройки для работы с миниатюрами изображений. Более детальная информация
+по настройке обработки миниатюр доступна на
+сайте <a class="reference external" href="http://pythonhosted.org/wsgithumb/index.html">wsgithumb</a></dd>
+<dt>scheduler.*</dt>
+<dd>Настройки менеджера фоновых задач. Если вы не знаете, что это,
+оставьте без изменений. Более детальная информация по настройке
+менеджера задач доступна на сайте <a class="reference external" href="https://apscheduler.readthedocs.org/en/latest/">apscheduler</a></dd>
+<dt>mail.*</dt>
+<dd>Параметры электронной почты. Эти параметры используются для отправки системных
+сообщений, таких как информации о регистрации компаний, восстановления пароля и т.д.</dd>
+</dl>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Vitalii Mazur.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
