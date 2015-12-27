@@ -51,6 +51,7 @@ requires = [
     'smpplib>=0.1',
     'Mock>=1.3.0',
     'python_dateutil>=2.4.0',
+    'pyramid_robot>=1.1',
 ]
 
 setup(
