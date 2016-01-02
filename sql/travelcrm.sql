@@ -10,41 +10,35 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: company; Type: SCHEMA; Schema: -; Owner: mazvv
+-- Name: company; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA company;
 
 
-ALTER SCHEMA company OWNER TO mazvv;
-
 --
--- Name: demo_ru; Type: SCHEMA; Schema: -; Owner: mazvv
+-- Name: demo_ru; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA demo_ru;
 
 
-ALTER SCHEMA demo_ru OWNER TO mazvv;
-
 --
--- Name: test; Type: SCHEMA; Schema: -; Owner: mazvv
+-- Name: test; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA test;
 
 
-ALTER SCHEMA test OWNER TO mazvv;
-
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -57,7 +51,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: accomodation; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: accomodation; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE accomodation (
@@ -67,10 +61,8 @@ CREATE TABLE accomodation (
 );
 
 
-ALTER TABLE company.accomodation OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE accomodation_id_seq
@@ -81,17 +73,15 @@ CREATE SEQUENCE accomodation_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.accomodation_id_seq OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
 
 
 --
--- Name: account; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: account; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account (
@@ -106,10 +96,8 @@ CREATE TABLE account (
 );
 
 
-ALTER TABLE company.account OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE account_id_seq
@@ -120,17 +108,15 @@ CREATE SEQUENCE account_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.account_id_seq OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE account_id_seq OWNED BY account.id;
 
 
 --
--- Name: account_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: account_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account_item (
@@ -144,10 +130,8 @@ CREATE TABLE account_item (
 );
 
 
-ALTER TABLE company.account_item OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE account_item_id_seq
@@ -158,17 +142,15 @@ CREATE SEQUENCE account_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.account_item_id_seq OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE account_item_id_seq OWNED BY account_item.id;
 
 
 --
--- Name: address; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE address (
@@ -180,10 +162,8 @@ CREATE TABLE address (
 );
 
 
-ALTER TABLE company.address OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE address_id_seq
@@ -194,17 +174,15 @@ CREATE SEQUENCE address_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.address_id_seq OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE address_id_seq OWNED BY address.id;
 
 
 --
--- Name: advsource; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: advsource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE advsource (
@@ -214,10 +192,8 @@ CREATE TABLE advsource (
 );
 
 
-ALTER TABLE company.advsource OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE advsource_id_seq
@@ -228,17 +204,15 @@ CREATE SEQUENCE advsource_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.advsource_id_seq OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: appointment; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: appointment; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE appointment (
@@ -252,10 +226,8 @@ CREATE TABLE appointment (
 );
 
 
-ALTER TABLE company.appointment OWNER TO mazvv;
-
 --
--- Name: bank; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bank; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank (
@@ -265,10 +237,8 @@ CREATE TABLE bank (
 );
 
 
-ALTER TABLE company.bank OWNER TO mazvv;
-
 --
--- Name: bank_address; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bank_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_address (
@@ -277,10 +247,8 @@ CREATE TABLE bank_address (
 );
 
 
-ALTER TABLE company.bank_address OWNER TO mazvv;
-
 --
--- Name: bank_detail; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bank_detail; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_detail (
@@ -294,10 +262,8 @@ CREATE TABLE bank_detail (
 );
 
 
-ALTER TABLE company.bank_detail OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE bank_detail_id_seq
@@ -308,17 +274,15 @@ CREATE SEQUENCE bank_detail_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.bank_detail_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE bank_detail_id_seq OWNED BY bank_detail.id;
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE bank_id_seq
@@ -329,17 +293,15 @@ CREATE SEQUENCE bank_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.bank_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE bank_id_seq OWNED BY bank.id;
 
 
 --
--- Name: bperson; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bperson; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson (
@@ -354,10 +316,8 @@ CREATE TABLE bperson (
 );
 
 
-ALTER TABLE company.bperson OWNER TO mazvv;
-
 --
--- Name: bperson_contact; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson_contact (
@@ -366,10 +326,8 @@ CREATE TABLE bperson_contact (
 );
 
 
-ALTER TABLE company.bperson_contact OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE bperson_id_seq
@@ -380,17 +338,15 @@ CREATE SEQUENCE bperson_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.bperson_id_seq OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 
 
 --
--- Name: calculation; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: calculation; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE calculation (
@@ -401,10 +357,8 @@ CREATE TABLE calculation (
 );
 
 
-ALTER TABLE company.calculation OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE calculation_id_seq
@@ -415,17 +369,15 @@ CREATE SEQUENCE calculation_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.calculation_id_seq OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE calculation_id_seq OWNED BY calculation.id;
 
 
 --
--- Name: campaign; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: campaign; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE campaign (
@@ -440,10 +392,8 @@ CREATE TABLE campaign (
 );
 
 
-ALTER TABLE company.campaign OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE campaign_id_seq
@@ -454,17 +404,15 @@ CREATE SEQUENCE campaign_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.campaign_id_seq OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE campaign_id_seq OWNED BY campaign.id;
 
 
 --
--- Name: cashflow; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: cashflow; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cashflow (
@@ -478,10 +426,8 @@ CREATE TABLE cashflow (
 );
 
 
-ALTER TABLE company.cashflow OWNER TO mazvv;
-
 --
--- Name: commission; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: commission; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE commission (
@@ -496,10 +442,8 @@ CREATE TABLE commission (
 );
 
 
-ALTER TABLE company.commission OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE commission_id_seq
@@ -510,17 +454,15 @@ CREATE SEQUENCE commission_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.commission_id_seq OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
 
 
 --
--- Name: companies_counter; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: companies_counter; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE companies_counter
@@ -531,10 +473,8 @@ CREATE SEQUENCE companies_counter
     CACHE 1;
 
 
-ALTER TABLE company.companies_counter OWNER TO mazvv;
-
 --
--- Name: position; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: position; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "position" (
@@ -545,10 +485,8 @@ CREATE TABLE "position" (
 );
 
 
-ALTER TABLE company."position" OWNER TO mazvv;
-
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE companies_positions_id_seq
@@ -559,17 +497,15 @@ CREATE SEQUENCE companies_positions_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.companies_positions_id_seq OWNER TO mazvv;
-
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
 
 --
--- Name: company; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: company; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company (
@@ -582,10 +518,8 @@ CREATE TABLE company (
 );
 
 
-ALTER TABLE company.company OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE company_id_seq
@@ -596,17 +530,15 @@ CREATE SEQUENCE company_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.company_id_seq OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE company_id_seq OWNED BY company.id;
 
 
 --
--- Name: company_subaccount; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company_subaccount (
@@ -615,10 +547,8 @@ CREATE TABLE company_subaccount (
 );
 
 
-ALTER TABLE company.company_subaccount OWNER TO mazvv;
-
 --
--- Name: contact; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contact (
@@ -631,10 +561,8 @@ CREATE TABLE contact (
 );
 
 
-ALTER TABLE company.contact OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE contact_id_seq
@@ -645,17 +573,15 @@ CREATE SEQUENCE contact_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.contact_id_seq OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
 
 
 --
--- Name: contract; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: contract; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract (
@@ -668,10 +594,8 @@ CREATE TABLE contract (
 );
 
 
-ALTER TABLE company.contract OWNER TO mazvv;
-
 --
--- Name: contract_commission; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: contract_commission; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract_commission (
@@ -680,10 +604,8 @@ CREATE TABLE contract_commission (
 );
 
 
-ALTER TABLE company.contract_commission OWNER TO mazvv;
-
 --
--- Name: country; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: country; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE country (
@@ -694,10 +616,8 @@ CREATE TABLE country (
 );
 
 
-ALTER TABLE company.country OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE country_id_seq
@@ -708,17 +628,15 @@ CREATE SEQUENCE country_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.country_id_seq OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
--- Name: crosspayment; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: crosspayment; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE crosspayment (
@@ -729,10 +647,8 @@ CREATE TABLE crosspayment (
 );
 
 
-ALTER TABLE company.crosspayment OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE crosspayment_id_seq
@@ -743,17 +659,15 @@ CREATE SEQUENCE crosspayment_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.crosspayment_id_seq OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
 
 
 --
--- Name: currency; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: currency; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency (
@@ -763,10 +677,8 @@ CREATE TABLE currency (
 );
 
 
-ALTER TABLE company.currency OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE currency_id_seq
@@ -777,17 +689,15 @@ CREATE SEQUENCE currency_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.currency_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE currency_id_seq OWNED BY currency.id;
 
 
 --
--- Name: currency_rate; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: currency_rate; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency_rate (
@@ -800,10 +710,8 @@ CREATE TABLE currency_rate (
 );
 
 
-ALTER TABLE company.currency_rate OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE currency_rate_id_seq
@@ -814,17 +722,15 @@ CREATE SEQUENCE currency_rate_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.currency_rate_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
 
 
 --
--- Name: employee; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee (
@@ -839,10 +745,8 @@ CREATE TABLE employee (
 );
 
 
-ALTER TABLE company.employee OWNER TO mazvv;
-
 --
--- Name: employee_address; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_address (
@@ -851,10 +755,8 @@ CREATE TABLE employee_address (
 );
 
 
-ALTER TABLE company.employee_address OWNER TO mazvv;
-
 --
--- Name: employee_contact; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_contact (
@@ -863,10 +765,8 @@ CREATE TABLE employee_contact (
 );
 
 
-ALTER TABLE company.employee_contact OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE employee_id_seq
@@ -877,17 +777,15 @@ CREATE SEQUENCE employee_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.employee_id_seq OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE employee_id_seq OWNED BY employee.id;
 
 
 --
--- Name: employee_notification; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_notification; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_notification (
@@ -897,10 +795,8 @@ CREATE TABLE employee_notification (
 );
 
 
-ALTER TABLE company.employee_notification OWNER TO mazvv;
-
 --
--- Name: employee_passport; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_passport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_passport (
@@ -909,10 +805,8 @@ CREATE TABLE employee_passport (
 );
 
 
-ALTER TABLE company.employee_passport OWNER TO mazvv;
-
 --
--- Name: employee_subaccount; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_subaccount (
@@ -921,10 +815,8 @@ CREATE TABLE employee_subaccount (
 );
 
 
-ALTER TABLE company.employee_subaccount OWNER TO mazvv;
-
 --
--- Name: employee_upload; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_upload (
@@ -933,10 +825,8 @@ CREATE TABLE employee_upload (
 );
 
 
-ALTER TABLE company.employee_upload OWNER TO mazvv;
-
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE employees_appointments_h_id_seq
@@ -947,17 +837,15 @@ CREATE SEQUENCE employees_appointments_h_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.employees_appointments_h_id_seq OWNER TO mazvv;
-
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE employees_appointments_h_id_seq OWNED BY appointment.id;
 
 
 --
--- Name: foodcat; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: foodcat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE foodcat (
@@ -967,10 +855,8 @@ CREATE TABLE foodcat (
 );
 
 
-ALTER TABLE company.foodcat OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE foodcat_id_seq
@@ -981,17 +867,15 @@ CREATE SEQUENCE foodcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.foodcat_id_seq OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
 
 
 --
--- Name: hotel; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: hotel; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotel (
@@ -1003,10 +887,8 @@ CREATE TABLE hotel (
 );
 
 
-ALTER TABLE company.hotel OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE hotel_id_seq
@@ -1017,17 +899,15 @@ CREATE SEQUENCE hotel_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.hotel_id_seq OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE hotel_id_seq OWNED BY hotel.id;
 
 
 --
--- Name: hotelcat; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: hotelcat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotelcat (
@@ -1037,10 +917,8 @@ CREATE TABLE hotelcat (
 );
 
 
-ALTER TABLE company.hotelcat OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE hotelcat_id_seq
@@ -1051,17 +929,15 @@ CREATE SEQUENCE hotelcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.hotelcat_id_seq OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
 
 
 --
--- Name: income; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: income; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income (
@@ -1075,10 +951,8 @@ CREATE TABLE income (
 );
 
 
-ALTER TABLE company.income OWNER TO mazvv;
-
 --
--- Name: income_cashflow; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income_cashflow (
@@ -1087,10 +961,8 @@ CREATE TABLE income_cashflow (
 );
 
 
-ALTER TABLE company.income_cashflow OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE income_id_seq
@@ -1101,17 +973,15 @@ CREATE SEQUENCE income_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.income_id_seq OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: invoice; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: invoice; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice (
@@ -1125,10 +995,8 @@ CREATE TABLE invoice (
 );
 
 
-ALTER TABLE company.invoice OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE invoice_id_seq
@@ -1139,17 +1007,15 @@ CREATE SEQUENCE invoice_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.invoice_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
--- Name: invoice_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: invoice_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice_item (
@@ -1163,10 +1029,8 @@ CREATE TABLE invoice_item (
 );
 
 
-ALTER TABLE company.invoice_item OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE invoice_item_id_seq
@@ -1177,17 +1041,15 @@ CREATE SEQUENCE invoice_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.invoice_item_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE invoice_item_id_seq OWNED BY invoice_item.id;
 
 
 --
--- Name: lead; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: lead; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead (
@@ -1201,10 +1063,8 @@ CREATE TABLE lead (
 );
 
 
-ALTER TABLE company.lead OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE lead_id_seq
@@ -1215,17 +1075,15 @@ CREATE SEQUENCE lead_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.lead_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
 
 
 --
--- Name: lead_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: lead_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_item (
@@ -1240,10 +1098,8 @@ CREATE TABLE lead_item (
 );
 
 
-ALTER TABLE company.lead_item OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE lead_item_id_seq
@@ -1254,17 +1110,15 @@ CREATE SEQUENCE lead_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.lead_item_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE lead_item_id_seq OWNED BY lead_item.id;
 
 
 --
--- Name: lead_offer; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: lead_offer; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_offer (
@@ -1280,10 +1134,8 @@ CREATE TABLE lead_offer (
 );
 
 
-ALTER TABLE company.lead_offer OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE lead_offer_id_seq
@@ -1294,17 +1146,15 @@ CREATE SEQUENCE lead_offer_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.lead_offer_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE lead_offer_id_seq OWNED BY lead_offer.id;
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: licence_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE licence_id_seq
@@ -1315,17 +1165,15 @@ CREATE SEQUENCE licence_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.licence_id_seq OWNER TO mazvv;
-
 --
--- Name: licence_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: licence_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE licence_id_seq OWNED BY contract.id;
 
 
 --
--- Name: location; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: location; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE location (
@@ -1336,10 +1184,8 @@ CREATE TABLE location (
 );
 
 
-ALTER TABLE company.location OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE location_id_seq
@@ -1350,17 +1196,15 @@ CREATE SEQUENCE location_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.location_id_seq OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE location_id_seq OWNED BY location.id;
 
 
 --
--- Name: navigation; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: navigation; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE navigation (
@@ -1377,10 +1221,8 @@ CREATE TABLE navigation (
 );
 
 
-ALTER TABLE company.navigation OWNER TO mazvv;
-
 --
--- Name: note; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: note; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note (
@@ -1391,10 +1233,8 @@ CREATE TABLE note (
 );
 
 
-ALTER TABLE company.note OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE note_id_seq
@@ -1405,17 +1245,15 @@ CREATE SEQUENCE note_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.note_id_seq OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE note_id_seq OWNED BY note.id;
 
 
 --
--- Name: note_resource; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: note_resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_resource (
@@ -1424,10 +1262,8 @@ CREATE TABLE note_resource (
 );
 
 
-ALTER TABLE company.note_resource OWNER TO mazvv;
-
 --
--- Name: note_upload; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: note_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_upload (
@@ -1436,10 +1272,8 @@ CREATE TABLE note_upload (
 );
 
 
-ALTER TABLE company.note_upload OWNER TO mazvv;
-
 --
--- Name: notification; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: notification; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification (
@@ -1452,10 +1286,8 @@ CREATE TABLE notification (
 );
 
 
-ALTER TABLE company.notification OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE notification_id_seq
@@ -1466,17 +1298,15 @@ CREATE SEQUENCE notification_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.notification_id_seq OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
--- Name: notification_resource; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: notification_resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification_resource (
@@ -1485,10 +1315,8 @@ CREATE TABLE notification_resource (
 );
 
 
-ALTER TABLE company.notification_resource OWNER TO mazvv;
-
 --
--- Name: order; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: order; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "order" (
@@ -1503,10 +1331,8 @@ CREATE TABLE "order" (
 );
 
 
-ALTER TABLE company."order" OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE order_id_seq
@@ -1517,17 +1343,15 @@ CREATE SEQUENCE order_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.order_id_seq OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE order_id_seq OWNED BY "order".id;
 
 
 --
--- Name: order_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE order_item (
@@ -1546,10 +1370,8 @@ CREATE TABLE order_item (
 );
 
 
-ALTER TABLE company.order_item OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE order_item_id_seq
@@ -1560,17 +1382,15 @@ CREATE SEQUENCE order_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.order_item_id_seq OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
 
 
 --
--- Name: outgoing; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: outgoing; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing (
@@ -1584,10 +1404,8 @@ CREATE TABLE outgoing (
 );
 
 
-ALTER TABLE company.outgoing OWNER TO mazvv;
-
 --
--- Name: outgoing_cashflow; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing_cashflow (
@@ -1596,10 +1414,8 @@ CREATE TABLE outgoing_cashflow (
 );
 
 
-ALTER TABLE company.outgoing_cashflow OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE outgoing_id_seq
@@ -1610,17 +1426,15 @@ CREATE SEQUENCE outgoing_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.outgoing_id_seq OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
 
 
 --
--- Name: passport; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: passport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport (
@@ -1634,10 +1448,8 @@ CREATE TABLE passport (
 );
 
 
-ALTER TABLE company.passport OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE passport_id_seq
@@ -1648,17 +1460,15 @@ CREATE SEQUENCE passport_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.passport_id_seq OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE passport_id_seq OWNED BY passport.id;
 
 
 --
--- Name: passport_upload; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: passport_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport_upload (
@@ -1667,10 +1477,8 @@ CREATE TABLE passport_upload (
 );
 
 
-ALTER TABLE company.passport_upload OWNER TO mazvv;
-
 --
--- Name: permision; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: permision; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE permision (
@@ -1683,10 +1491,8 @@ CREATE TABLE permision (
 );
 
 
-ALTER TABLE company.permision OWNER TO mazvv;
-
 --
--- Name: person; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person (
@@ -1704,10 +1510,8 @@ CREATE TABLE person (
 );
 
 
-ALTER TABLE company.person OWNER TO mazvv;
-
 --
--- Name: person_address; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_address (
@@ -1716,10 +1520,8 @@ CREATE TABLE person_address (
 );
 
 
-ALTER TABLE company.person_address OWNER TO mazvv;
-
 --
--- Name: person_category; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_category; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_category (
@@ -1729,10 +1531,8 @@ CREATE TABLE person_category (
 );
 
 
-ALTER TABLE company.person_category OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE person_category_id_seq
@@ -1743,17 +1543,15 @@ CREATE SEQUENCE person_category_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.person_category_id_seq OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE person_category_id_seq OWNED BY person_category.id;
 
 
 --
--- Name: person_contact; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_contact (
@@ -1762,10 +1560,8 @@ CREATE TABLE person_contact (
 );
 
 
-ALTER TABLE company.person_contact OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE person_id_seq
@@ -1776,17 +1572,15 @@ CREATE SEQUENCE person_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.person_id_seq OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE person_id_seq OWNED BY person.id;
 
 
 --
--- Name: person_order_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_order_item (
@@ -1795,10 +1589,8 @@ CREATE TABLE person_order_item (
 );
 
 
-ALTER TABLE company.person_order_item OWNER TO mazvv;
-
 --
--- Name: person_passport; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_passport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_passport (
@@ -1807,10 +1599,8 @@ CREATE TABLE person_passport (
 );
 
 
-ALTER TABLE company.person_passport OWNER TO mazvv;
-
 --
--- Name: person_subaccount; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_subaccount (
@@ -1819,10 +1609,8 @@ CREATE TABLE person_subaccount (
 );
 
 
-ALTER TABLE company.person_subaccount OWNER TO mazvv;
-
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE positions_navigations_id_seq
@@ -1833,17 +1621,15 @@ CREATE SEQUENCE positions_navigations_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.positions_navigations_id_seq OWNER TO mazvv;
-
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE positions_navigations_id_seq OWNED BY navigation.id;
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE positions_permisions_id_seq
@@ -1854,17 +1640,15 @@ CREATE SEQUENCE positions_permisions_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.positions_permisions_id_seq OWNER TO mazvv;
-
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
 
 --
--- Name: region; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: region; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE region (
@@ -1875,10 +1659,8 @@ CREATE TABLE region (
 );
 
 
-ALTER TABLE company.region OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE region_id_seq
@@ -1889,17 +1671,15 @@ CREATE SEQUENCE region_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.region_id_seq OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE region_id_seq OWNED BY region.id;
 
 
 --
--- Name: resource; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource (
@@ -1910,10 +1690,8 @@ CREATE TABLE resource (
 );
 
 
-ALTER TABLE company.resource OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE resource_id_seq
@@ -1924,17 +1702,15 @@ CREATE SEQUENCE resource_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.resource_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
 
 
 --
--- Name: resource_log; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: resource_log; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_log (
@@ -1946,10 +1722,8 @@ CREATE TABLE resource_log (
 );
 
 
-ALTER TABLE company.resource_log OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE resource_log_id_seq
@@ -1960,17 +1734,15 @@ CREATE SEQUENCE resource_log_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.resource_log_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_type (
@@ -1986,10 +1758,8 @@ CREATE TABLE resource_type (
 );
 
 
-ALTER TABLE company.resource_type OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE resource_type_id_seq
@@ -2000,17 +1770,15 @@ CREATE SEQUENCE resource_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.resource_type_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
--- Name: roomcat; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: roomcat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE roomcat (
@@ -2020,10 +1788,8 @@ CREATE TABLE roomcat (
 );
 
 
-ALTER TABLE company.roomcat OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE roomcat_id_seq
@@ -2034,17 +1800,15 @@ CREATE SEQUENCE roomcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.roomcat_id_seq OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
 
 
 --
--- Name: service; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: service; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE service (
@@ -2057,10 +1821,8 @@ CREATE TABLE service (
 );
 
 
-ALTER TABLE company.service OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE service_id_seq
@@ -2071,17 +1833,15 @@ CREATE SEQUENCE service_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.service_id_seq OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE service_id_seq OWNED BY service.id;
 
 
 --
--- Name: spassport; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: spassport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport (
@@ -2095,10 +1855,8 @@ CREATE TABLE spassport (
 );
 
 
-ALTER TABLE company.spassport OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE spassport_id_seq
@@ -2109,17 +1867,15 @@ CREATE SEQUENCE spassport_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.spassport_id_seq OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE spassport_id_seq OWNED BY spassport.id;
 
 
 --
--- Name: spassport_order_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport_order_item (
@@ -2128,10 +1884,8 @@ CREATE TABLE spassport_order_item (
 );
 
 
-ALTER TABLE company.spassport_order_item OWNER TO mazvv;
-
 --
--- Name: structure; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure (
@@ -2143,10 +1897,8 @@ CREATE TABLE structure (
 );
 
 
-ALTER TABLE company.structure OWNER TO mazvv;
-
 --
--- Name: structure_address; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_address (
@@ -2155,10 +1907,8 @@ CREATE TABLE structure_address (
 );
 
 
-ALTER TABLE company.structure_address OWNER TO mazvv;
-
 --
--- Name: structure_bank_detail; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_bank_detail (
@@ -2167,10 +1917,8 @@ CREATE TABLE structure_bank_detail (
 );
 
 
-ALTER TABLE company.structure_bank_detail OWNER TO mazvv;
-
 --
--- Name: structure_contact; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_contact (
@@ -2179,10 +1927,8 @@ CREATE TABLE structure_contact (
 );
 
 
-ALTER TABLE company.structure_contact OWNER TO mazvv;
-
 --
--- Name: structures_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE structures_id_seq
@@ -2193,17 +1939,15 @@ CREATE SEQUENCE structures_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.structures_id_seq OWNER TO mazvv;
-
 --
--- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
 
 
 --
--- Name: subaccount; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE subaccount (
@@ -2216,10 +1960,8 @@ CREATE TABLE subaccount (
 );
 
 
-ALTER TABLE company.subaccount OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE subaccount_id_seq
@@ -2230,17 +1972,15 @@ CREATE SEQUENCE subaccount_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.subaccount_id_seq OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE subaccount_id_seq OWNED BY subaccount.id;
 
 
 --
--- Name: supplier; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier (
@@ -2253,10 +1993,8 @@ CREATE TABLE supplier (
 );
 
 
-ALTER TABLE company.supplier OWNER TO mazvv;
-
 --
--- Name: supplier_bank_detail; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bank_detail (
@@ -2265,10 +2003,8 @@ CREATE TABLE supplier_bank_detail (
 );
 
 
-ALTER TABLE company.supplier_bank_detail OWNER TO mazvv;
-
 --
--- Name: supplier_bperson; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bperson (
@@ -2277,10 +2013,8 @@ CREATE TABLE supplier_bperson (
 );
 
 
-ALTER TABLE company.supplier_bperson OWNER TO mazvv;
-
 --
--- Name: supplier_contract; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_contract (
@@ -2289,10 +2023,8 @@ CREATE TABLE supplier_contract (
 );
 
 
-ALTER TABLE company.supplier_contract OWNER TO mazvv;
-
 --
--- Name: supplier_subaccount; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_subaccount (
@@ -2301,10 +2033,8 @@ CREATE TABLE supplier_subaccount (
 );
 
 
-ALTER TABLE company.supplier_subaccount OWNER TO mazvv;
-
 --
--- Name: supplier_type; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_type; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_type (
@@ -2315,10 +2045,8 @@ CREATE TABLE supplier_type (
 );
 
 
-ALTER TABLE company.supplier_type OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE supplier_type_id_seq
@@ -2329,17 +2057,15 @@ CREATE SEQUENCE supplier_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.supplier_type_id_seq OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
--- Name: task; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: task; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task (
@@ -2354,10 +2080,8 @@ CREATE TABLE task (
 );
 
 
-ALTER TABLE company.task OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE task_id_seq
@@ -2368,17 +2092,15 @@ CREATE SEQUENCE task_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.task_id_seq OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE task_id_seq OWNED BY task.id;
 
 
 --
--- Name: task_resource; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: task_resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_resource (
@@ -2387,10 +2109,8 @@ CREATE TABLE task_resource (
 );
 
 
-ALTER TABLE company.task_resource OWNER TO mazvv;
-
 --
--- Name: task_upload; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: task_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_upload (
@@ -2399,10 +2119,8 @@ CREATE TABLE task_upload (
 );
 
 
-ALTER TABLE company.task_upload OWNER TO mazvv;
-
 --
--- Name: ticket; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: ticket; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket (
@@ -2422,10 +2140,8 @@ CREATE TABLE ticket (
 );
 
 
-ALTER TABLE company.ticket OWNER TO mazvv;
-
 --
--- Name: ticket_class; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: ticket_class; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_class (
@@ -2435,10 +2151,8 @@ CREATE TABLE ticket_class (
 );
 
 
-ALTER TABLE company.ticket_class OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE ticket_class_id_seq
@@ -2449,17 +2163,15 @@ CREATE SEQUENCE ticket_class_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.ticket_class_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE ticket_class_id_seq OWNED BY ticket_class.id;
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE ticket_id_seq
@@ -2470,17 +2182,15 @@ CREATE SEQUENCE ticket_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.ticket_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE ticket_id_seq OWNED BY ticket.id;
 
 
 --
--- Name: ticket_order_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_order_item (
@@ -2489,10 +2199,8 @@ CREATE TABLE ticket_order_item (
 );
 
 
-ALTER TABLE company.ticket_order_item OWNER TO mazvv;
-
 --
--- Name: tour; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: tour; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour (
@@ -2517,10 +2225,8 @@ CREATE TABLE tour (
 );
 
 
-ALTER TABLE company.tour OWNER TO mazvv;
-
 --
--- Name: tour_id_seq1; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: tour_id_seq1; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE tour_id_seq1
@@ -2531,17 +2237,15 @@ CREATE SEQUENCE tour_id_seq1
     CACHE 1;
 
 
-ALTER TABLE company.tour_id_seq1 OWNER TO mazvv;
-
 --
--- Name: tour_id_seq1; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: tour_id_seq1; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE tour_id_seq1 OWNED BY tour.id;
 
 
 --
--- Name: tour_order_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour_order_item (
@@ -2550,10 +2254,8 @@ CREATE TABLE tour_order_item (
 );
 
 
-ALTER TABLE company.tour_order_item OWNER TO mazvv;
-
 --
--- Name: touroperator_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: touroperator_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE touroperator_id_seq
@@ -2564,17 +2266,15 @@ CREATE SEQUENCE touroperator_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.touroperator_id_seq OWNER TO mazvv;
-
 --
--- Name: touroperator_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: touroperator_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE touroperator_id_seq OWNED BY supplier.id;
 
 
 --
--- Name: transfer; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: transfer; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transfer (
@@ -2584,10 +2284,8 @@ CREATE TABLE transfer (
 );
 
 
-ALTER TABLE company.transfer OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq
@@ -2598,17 +2296,15 @@ CREATE SEQUENCE transfer_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.transfer_id_seq OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq OWNED BY cashflow.id;
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: transfer_id_seq1; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq1
@@ -2619,17 +2315,15 @@ CREATE SEQUENCE transfer_id_seq1
     CACHE 1;
 
 
-ALTER TABLE company.transfer_id_seq1 OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq1; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: transfer_id_seq1; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq1 OWNED BY transfer.id;
 
 
 --
--- Name: transport; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: transport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transport (
@@ -2639,10 +2333,8 @@ CREATE TABLE transport (
 );
 
 
-ALTER TABLE company.transport OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE transport_id_seq
@@ -2653,17 +2345,15 @@ CREATE SEQUENCE transport_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.transport_id_seq OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE transport_id_seq OWNED BY transport.id;
 
 
 --
--- Name: uni_list; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: uni_list; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE uni_list (
@@ -2673,10 +2363,8 @@ CREATE TABLE uni_list (
 );
 
 
-ALTER TABLE company.uni_list OWNER TO mazvv;
-
 --
--- Name: uni_list_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: uni_list_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE uni_list_id_seq
@@ -2687,17 +2375,15 @@ CREATE SEQUENCE uni_list_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.uni_list_id_seq OWNER TO mazvv;
-
 --
--- Name: uni_list_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: uni_list_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE uni_list_id_seq OWNED BY uni_list.id;
 
 
 --
--- Name: upload; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE upload (
@@ -2711,10 +2397,8 @@ CREATE TABLE upload (
 );
 
 
-ALTER TABLE company.upload OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE upload_id_seq
@@ -2725,17 +2409,15 @@ CREATE SEQUENCE upload_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.upload_id_seq OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE upload_id_seq OWNED BY upload.id;
 
 
 --
--- Name: user; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: user; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -2748,10 +2430,8 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE company."user" OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE user_id_seq
@@ -2762,17 +2442,15 @@ CREATE SEQUENCE user_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.user_id_seq OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
--- Name: vat; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: vat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE vat (
@@ -2787,10 +2465,8 @@ CREATE TABLE vat (
 );
 
 
-ALTER TABLE company.vat OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE vat_id_seq
@@ -2801,17 +2477,15 @@ CREATE SEQUENCE vat_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.vat_id_seq OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE vat_id_seq OWNED BY vat.id;
 
 
 --
--- Name: visa; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: visa; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa (
@@ -2825,10 +2499,8 @@ CREATE TABLE visa (
 );
 
 
-ALTER TABLE company.visa OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE; Schema: company; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE; Schema: company; Owner: -
 --
 
 CREATE SEQUENCE visa_id_seq
@@ -2839,17 +2511,15 @@ CREATE SEQUENCE visa_id_seq
     CACHE 1;
 
 
-ALTER TABLE company.visa_id_seq OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
 --
 
 ALTER SEQUENCE visa_id_seq OWNED BY visa.id;
 
 
 --
--- Name: visa_order_item; Type: TABLE; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa_order_item (
@@ -2858,12 +2528,10 @@ CREATE TABLE visa_order_item (
 );
 
 
-ALTER TABLE company.visa_order_item OWNER TO mazvv;
-
 SET search_path = demo_ru, pg_catalog;
 
 --
--- Name: accomodation; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: accomodation; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE accomodation (
@@ -2873,10 +2541,8 @@ CREATE TABLE accomodation (
 );
 
 
-ALTER TABLE demo_ru.accomodation OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE accomodation_id_seq
@@ -2887,17 +2553,15 @@ CREATE SEQUENCE accomodation_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.accomodation_id_seq OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
 
 
 --
--- Name: account; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: account; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account (
@@ -2912,10 +2576,8 @@ CREATE TABLE account (
 );
 
 
-ALTER TABLE demo_ru.account OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE account_id_seq
@@ -2926,17 +2588,15 @@ CREATE SEQUENCE account_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.account_id_seq OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE account_id_seq OWNED BY account.id;
 
 
 --
--- Name: account_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: account_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account_item (
@@ -2950,10 +2610,8 @@ CREATE TABLE account_item (
 );
 
 
-ALTER TABLE demo_ru.account_item OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE account_item_id_seq
@@ -2964,17 +2622,15 @@ CREATE SEQUENCE account_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.account_item_id_seq OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE account_item_id_seq OWNED BY account_item.id;
 
 
 --
--- Name: address; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: address; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE address (
@@ -2986,10 +2642,8 @@ CREATE TABLE address (
 );
 
 
-ALTER TABLE demo_ru.address OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE address_id_seq
@@ -3000,17 +2654,15 @@ CREATE SEQUENCE address_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.address_id_seq OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE address_id_seq OWNED BY address.id;
 
 
 --
--- Name: advsource; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: advsource; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE advsource (
@@ -3020,10 +2672,8 @@ CREATE TABLE advsource (
 );
 
 
-ALTER TABLE demo_ru.advsource OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE advsource_id_seq
@@ -3034,17 +2684,15 @@ CREATE SEQUENCE advsource_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.advsource_id_seq OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: appointment; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: appointment; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE appointment (
@@ -3058,10 +2706,8 @@ CREATE TABLE appointment (
 );
 
 
-ALTER TABLE demo_ru.appointment OWNER TO mazvv;
-
 --
--- Name: appointment_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: appointment_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE appointment_id_seq
@@ -3072,17 +2718,15 @@ CREATE SEQUENCE appointment_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.appointment_id_seq OWNER TO mazvv;
-
 --
--- Name: appointment_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: appointment_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE appointment_id_seq OWNED BY appointment.id;
 
 
 --
--- Name: bank; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bank; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank (
@@ -3092,10 +2736,8 @@ CREATE TABLE bank (
 );
 
 
-ALTER TABLE demo_ru.bank OWNER TO mazvv;
-
 --
--- Name: bank_address; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bank_address; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_address (
@@ -3104,10 +2746,8 @@ CREATE TABLE bank_address (
 );
 
 
-ALTER TABLE demo_ru.bank_address OWNER TO mazvv;
-
 --
--- Name: bank_detail; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bank_detail; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_detail (
@@ -3121,10 +2761,8 @@ CREATE TABLE bank_detail (
 );
 
 
-ALTER TABLE demo_ru.bank_detail OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE bank_detail_id_seq
@@ -3135,17 +2773,15 @@ CREATE SEQUENCE bank_detail_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.bank_detail_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE bank_detail_id_seq OWNED BY bank_detail.id;
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE bank_id_seq
@@ -3156,17 +2792,15 @@ CREATE SEQUENCE bank_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.bank_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE bank_id_seq OWNED BY bank.id;
 
 
 --
--- Name: bperson; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bperson; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson (
@@ -3181,10 +2815,8 @@ CREATE TABLE bperson (
 );
 
 
-ALTER TABLE demo_ru.bperson OWNER TO mazvv;
-
 --
--- Name: bperson_contact; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson_contact (
@@ -3193,10 +2825,8 @@ CREATE TABLE bperson_contact (
 );
 
 
-ALTER TABLE demo_ru.bperson_contact OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE bperson_id_seq
@@ -3207,17 +2837,15 @@ CREATE SEQUENCE bperson_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.bperson_id_seq OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 
 
 --
--- Name: calculation; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: calculation; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE calculation (
@@ -3228,10 +2856,8 @@ CREATE TABLE calculation (
 );
 
 
-ALTER TABLE demo_ru.calculation OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE calculation_id_seq
@@ -3242,17 +2868,15 @@ CREATE SEQUENCE calculation_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.calculation_id_seq OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE calculation_id_seq OWNED BY calculation.id;
 
 
 --
--- Name: campaign; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: campaign; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE campaign (
@@ -3267,10 +2891,8 @@ CREATE TABLE campaign (
 );
 
 
-ALTER TABLE demo_ru.campaign OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE campaign_id_seq
@@ -3281,17 +2903,15 @@ CREATE SEQUENCE campaign_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.campaign_id_seq OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE campaign_id_seq OWNED BY campaign.id;
 
 
 --
--- Name: cashflow; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: cashflow; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cashflow (
@@ -3306,10 +2926,8 @@ CREATE TABLE cashflow (
 );
 
 
-ALTER TABLE demo_ru.cashflow OWNER TO mazvv;
-
 --
--- Name: cashflow_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: cashflow_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE cashflow_id_seq
@@ -3320,17 +2938,15 @@ CREATE SEQUENCE cashflow_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.cashflow_id_seq OWNER TO mazvv;
-
 --
--- Name: cashflow_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: cashflow_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE cashflow_id_seq OWNED BY cashflow.id;
 
 
 --
--- Name: commission; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: commission; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE commission (
@@ -3345,10 +2961,8 @@ CREATE TABLE commission (
 );
 
 
-ALTER TABLE demo_ru.commission OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE commission_id_seq
@@ -3359,17 +2973,15 @@ CREATE SEQUENCE commission_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.commission_id_seq OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
 
 
 --
--- Name: company; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: company; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company (
@@ -3382,10 +2994,8 @@ CREATE TABLE company (
 );
 
 
-ALTER TABLE demo_ru.company OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE company_id_seq
@@ -3396,17 +3006,15 @@ CREATE SEQUENCE company_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.company_id_seq OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE company_id_seq OWNED BY company.id;
 
 
 --
--- Name: company_subaccount; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company_subaccount (
@@ -3415,10 +3023,8 @@ CREATE TABLE company_subaccount (
 );
 
 
-ALTER TABLE demo_ru.company_subaccount OWNER TO mazvv;
-
 --
--- Name: contact; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: contact; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contact (
@@ -3431,10 +3037,8 @@ CREATE TABLE contact (
 );
 
 
-ALTER TABLE demo_ru.contact OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE contact_id_seq
@@ -3445,17 +3049,15 @@ CREATE SEQUENCE contact_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.contact_id_seq OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
 
 
 --
--- Name: contract; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: contract; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract (
@@ -3468,10 +3070,8 @@ CREATE TABLE contract (
 );
 
 
-ALTER TABLE demo_ru.contract OWNER TO mazvv;
-
 --
--- Name: contract_commission; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: contract_commission; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract_commission (
@@ -3480,10 +3080,8 @@ CREATE TABLE contract_commission (
 );
 
 
-ALTER TABLE demo_ru.contract_commission OWNER TO mazvv;
-
 --
--- Name: contract_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: contract_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE contract_id_seq
@@ -3494,17 +3092,15 @@ CREATE SEQUENCE contract_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.contract_id_seq OWNER TO mazvv;
-
 --
--- Name: contract_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: contract_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE contract_id_seq OWNED BY contract.id;
 
 
 --
--- Name: country; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: country; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE country (
@@ -3515,10 +3111,8 @@ CREATE TABLE country (
 );
 
 
-ALTER TABLE demo_ru.country OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE country_id_seq
@@ -3529,17 +3123,15 @@ CREATE SEQUENCE country_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.country_id_seq OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
--- Name: crosspayment; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: crosspayment; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE crosspayment (
@@ -3550,10 +3142,8 @@ CREATE TABLE crosspayment (
 );
 
 
-ALTER TABLE demo_ru.crosspayment OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE crosspayment_id_seq
@@ -3564,17 +3154,15 @@ CREATE SEQUENCE crosspayment_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.crosspayment_id_seq OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
 
 
 --
--- Name: currency; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: currency; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency (
@@ -3584,10 +3172,8 @@ CREATE TABLE currency (
 );
 
 
-ALTER TABLE demo_ru.currency OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE currency_id_seq
@@ -3598,17 +3184,15 @@ CREATE SEQUENCE currency_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.currency_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE currency_id_seq OWNED BY currency.id;
 
 
 --
--- Name: currency_rate; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: currency_rate; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency_rate (
@@ -3621,10 +3205,8 @@ CREATE TABLE currency_rate (
 );
 
 
-ALTER TABLE demo_ru.currency_rate OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE currency_rate_id_seq
@@ -3635,17 +3217,15 @@ CREATE SEQUENCE currency_rate_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.currency_rate_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
 
 
 --
--- Name: employee; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee (
@@ -3660,10 +3240,8 @@ CREATE TABLE employee (
 );
 
 
-ALTER TABLE demo_ru.employee OWNER TO mazvv;
-
 --
--- Name: employee_address; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_address; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_address (
@@ -3672,10 +3250,8 @@ CREATE TABLE employee_address (
 );
 
 
-ALTER TABLE demo_ru.employee_address OWNER TO mazvv;
-
 --
--- Name: employee_contact; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_contact; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_contact (
@@ -3684,10 +3260,8 @@ CREATE TABLE employee_contact (
 );
 
 
-ALTER TABLE demo_ru.employee_contact OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE employee_id_seq
@@ -3698,17 +3272,15 @@ CREATE SEQUENCE employee_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.employee_id_seq OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE employee_id_seq OWNED BY employee.id;
 
 
 --
--- Name: employee_notification; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_notification; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_notification (
@@ -3718,10 +3290,8 @@ CREATE TABLE employee_notification (
 );
 
 
-ALTER TABLE demo_ru.employee_notification OWNER TO mazvv;
-
 --
--- Name: employee_passport; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_passport; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_passport (
@@ -3730,10 +3300,8 @@ CREATE TABLE employee_passport (
 );
 
 
-ALTER TABLE demo_ru.employee_passport OWNER TO mazvv;
-
 --
--- Name: employee_subaccount; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_subaccount (
@@ -3742,10 +3310,8 @@ CREATE TABLE employee_subaccount (
 );
 
 
-ALTER TABLE demo_ru.employee_subaccount OWNER TO mazvv;
-
 --
--- Name: employee_upload; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_upload; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_upload (
@@ -3754,10 +3320,8 @@ CREATE TABLE employee_upload (
 );
 
 
-ALTER TABLE demo_ru.employee_upload OWNER TO mazvv;
-
 --
--- Name: foodcat; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: foodcat; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE foodcat (
@@ -3767,10 +3331,8 @@ CREATE TABLE foodcat (
 );
 
 
-ALTER TABLE demo_ru.foodcat OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE foodcat_id_seq
@@ -3781,17 +3343,15 @@ CREATE SEQUENCE foodcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.foodcat_id_seq OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
 
 
 --
--- Name: hotel; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: hotel; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotel (
@@ -3803,10 +3363,8 @@ CREATE TABLE hotel (
 );
 
 
-ALTER TABLE demo_ru.hotel OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE hotel_id_seq
@@ -3817,17 +3375,15 @@ CREATE SEQUENCE hotel_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.hotel_id_seq OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE hotel_id_seq OWNED BY hotel.id;
 
 
 --
--- Name: hotelcat; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: hotelcat; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotelcat (
@@ -3837,10 +3393,8 @@ CREATE TABLE hotelcat (
 );
 
 
-ALTER TABLE demo_ru.hotelcat OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE hotelcat_id_seq
@@ -3851,17 +3405,15 @@ CREATE SEQUENCE hotelcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.hotelcat_id_seq OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
 
 
 --
--- Name: income; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: income; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income (
@@ -3875,10 +3427,8 @@ CREATE TABLE income (
 );
 
 
-ALTER TABLE demo_ru.income OWNER TO mazvv;
-
 --
--- Name: income_cashflow; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income_cashflow (
@@ -3887,10 +3437,8 @@ CREATE TABLE income_cashflow (
 );
 
 
-ALTER TABLE demo_ru.income_cashflow OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE income_id_seq
@@ -3901,17 +3449,15 @@ CREATE SEQUENCE income_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.income_id_seq OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: invoice; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: invoice; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice (
@@ -3925,10 +3471,8 @@ CREATE TABLE invoice (
 );
 
 
-ALTER TABLE demo_ru.invoice OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE invoice_id_seq
@@ -3939,17 +3483,15 @@ CREATE SEQUENCE invoice_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.invoice_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
--- Name: invoice_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: invoice_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice_item (
@@ -3963,10 +3505,8 @@ CREATE TABLE invoice_item (
 );
 
 
-ALTER TABLE demo_ru.invoice_item OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE invoice_item_id_seq
@@ -3977,17 +3517,15 @@ CREATE SEQUENCE invoice_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.invoice_item_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE invoice_item_id_seq OWNED BY invoice_item.id;
 
 
 --
--- Name: lead; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: lead; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead (
@@ -4001,10 +3539,8 @@ CREATE TABLE lead (
 );
 
 
-ALTER TABLE demo_ru.lead OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE lead_id_seq
@@ -4015,17 +3551,15 @@ CREATE SEQUENCE lead_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.lead_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
 
 
 --
--- Name: lead_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: lead_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_item (
@@ -4040,10 +3574,8 @@ CREATE TABLE lead_item (
 );
 
 
-ALTER TABLE demo_ru.lead_item OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE lead_item_id_seq
@@ -4054,17 +3586,15 @@ CREATE SEQUENCE lead_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.lead_item_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE lead_item_id_seq OWNED BY lead_item.id;
 
 
 --
--- Name: lead_offer; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: lead_offer; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_offer (
@@ -4080,10 +3610,8 @@ CREATE TABLE lead_offer (
 );
 
 
-ALTER TABLE demo_ru.lead_offer OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE lead_offer_id_seq
@@ -4094,17 +3622,15 @@ CREATE SEQUENCE lead_offer_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.lead_offer_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE lead_offer_id_seq OWNED BY lead_offer.id;
 
 
 --
--- Name: location; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: location; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE location (
@@ -4115,10 +3641,8 @@ CREATE TABLE location (
 );
 
 
-ALTER TABLE demo_ru.location OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE location_id_seq
@@ -4129,17 +3653,15 @@ CREATE SEQUENCE location_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.location_id_seq OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE location_id_seq OWNED BY location.id;
 
 
 --
--- Name: navigation; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: navigation; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE navigation (
@@ -4156,10 +3678,8 @@ CREATE TABLE navigation (
 );
 
 
-ALTER TABLE demo_ru.navigation OWNER TO mazvv;
-
 --
--- Name: navigation_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: navigation_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE navigation_id_seq
@@ -4170,17 +3690,15 @@ CREATE SEQUENCE navigation_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.navigation_id_seq OWNER TO mazvv;
-
 --
--- Name: navigation_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: navigation_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE navigation_id_seq OWNED BY navigation.id;
 
 
 --
--- Name: note; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: note; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note (
@@ -4191,10 +3709,8 @@ CREATE TABLE note (
 );
 
 
-ALTER TABLE demo_ru.note OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE note_id_seq
@@ -4205,17 +3721,15 @@ CREATE SEQUENCE note_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.note_id_seq OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE note_id_seq OWNED BY note.id;
 
 
 --
--- Name: note_resource; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: note_resource; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_resource (
@@ -4224,10 +3738,8 @@ CREATE TABLE note_resource (
 );
 
 
-ALTER TABLE demo_ru.note_resource OWNER TO mazvv;
-
 --
--- Name: note_upload; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: note_upload; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_upload (
@@ -4236,10 +3748,8 @@ CREATE TABLE note_upload (
 );
 
 
-ALTER TABLE demo_ru.note_upload OWNER TO mazvv;
-
 --
--- Name: notification; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: notification; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification (
@@ -4252,10 +3762,8 @@ CREATE TABLE notification (
 );
 
 
-ALTER TABLE demo_ru.notification OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE notification_id_seq
@@ -4266,17 +3774,15 @@ CREATE SEQUENCE notification_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.notification_id_seq OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
--- Name: notification_resource; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: notification_resource; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification_resource (
@@ -4285,10 +3791,8 @@ CREATE TABLE notification_resource (
 );
 
 
-ALTER TABLE demo_ru.notification_resource OWNER TO mazvv;
-
 --
--- Name: order; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: order; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "order" (
@@ -4303,10 +3807,8 @@ CREATE TABLE "order" (
 );
 
 
-ALTER TABLE demo_ru."order" OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE order_id_seq
@@ -4317,17 +3819,15 @@ CREATE SEQUENCE order_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.order_id_seq OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE order_id_seq OWNED BY "order".id;
 
 
 --
--- Name: order_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: order_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE order_item (
@@ -4346,10 +3846,8 @@ CREATE TABLE order_item (
 );
 
 
-ALTER TABLE demo_ru.order_item OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE order_item_id_seq
@@ -4360,17 +3858,15 @@ CREATE SEQUENCE order_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.order_item_id_seq OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
 
 
 --
--- Name: outgoing; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: outgoing; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing (
@@ -4384,10 +3880,8 @@ CREATE TABLE outgoing (
 );
 
 
-ALTER TABLE demo_ru.outgoing OWNER TO mazvv;
-
 --
--- Name: outgoing_cashflow; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing_cashflow (
@@ -4396,10 +3890,8 @@ CREATE TABLE outgoing_cashflow (
 );
 
 
-ALTER TABLE demo_ru.outgoing_cashflow OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE outgoing_id_seq
@@ -4410,17 +3902,15 @@ CREATE SEQUENCE outgoing_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.outgoing_id_seq OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
 
 
 --
--- Name: passport; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: passport; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport (
@@ -4434,10 +3924,8 @@ CREATE TABLE passport (
 );
 
 
-ALTER TABLE demo_ru.passport OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE passport_id_seq
@@ -4448,17 +3936,15 @@ CREATE SEQUENCE passport_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.passport_id_seq OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE passport_id_seq OWNED BY passport.id;
 
 
 --
--- Name: passport_upload; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: passport_upload; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport_upload (
@@ -4467,10 +3953,8 @@ CREATE TABLE passport_upload (
 );
 
 
-ALTER TABLE demo_ru.passport_upload OWNER TO mazvv;
-
 --
--- Name: permision; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: permision; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE permision (
@@ -4483,10 +3967,8 @@ CREATE TABLE permision (
 );
 
 
-ALTER TABLE demo_ru.permision OWNER TO mazvv;
-
 --
--- Name: permision_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: permision_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE permision_id_seq
@@ -4497,17 +3979,15 @@ CREATE SEQUENCE permision_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.permision_id_seq OWNER TO mazvv;
-
 --
--- Name: permision_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: permision_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE permision_id_seq OWNED BY permision.id;
 
 
 --
--- Name: person; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person (
@@ -4525,10 +4005,8 @@ CREATE TABLE person (
 );
 
 
-ALTER TABLE demo_ru.person OWNER TO mazvv;
-
 --
--- Name: person_address; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_address; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_address (
@@ -4537,10 +4015,8 @@ CREATE TABLE person_address (
 );
 
 
-ALTER TABLE demo_ru.person_address OWNER TO mazvv;
-
 --
--- Name: person_category; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_category; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_category (
@@ -4550,10 +4026,8 @@ CREATE TABLE person_category (
 );
 
 
-ALTER TABLE demo_ru.person_category OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE person_category_id_seq
@@ -4564,17 +4038,15 @@ CREATE SEQUENCE person_category_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.person_category_id_seq OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE person_category_id_seq OWNED BY person_category.id;
 
 
 --
--- Name: person_contact; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_contact; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_contact (
@@ -4583,10 +4055,8 @@ CREATE TABLE person_contact (
 );
 
 
-ALTER TABLE demo_ru.person_contact OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE person_id_seq
@@ -4597,17 +4067,15 @@ CREATE SEQUENCE person_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.person_id_seq OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE person_id_seq OWNED BY person.id;
 
 
 --
--- Name: person_order_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_order_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_order_item (
@@ -4616,10 +4084,8 @@ CREATE TABLE person_order_item (
 );
 
 
-ALTER TABLE demo_ru.person_order_item OWNER TO mazvv;
-
 --
--- Name: person_passport; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_passport; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_passport (
@@ -4628,10 +4094,8 @@ CREATE TABLE person_passport (
 );
 
 
-ALTER TABLE demo_ru.person_passport OWNER TO mazvv;
-
 --
--- Name: person_subaccount; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_subaccount (
@@ -4640,10 +4104,8 @@ CREATE TABLE person_subaccount (
 );
 
 
-ALTER TABLE demo_ru.person_subaccount OWNER TO mazvv;
-
 --
--- Name: position; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: position; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "position" (
@@ -4654,10 +4116,8 @@ CREATE TABLE "position" (
 );
 
 
-ALTER TABLE demo_ru."position" OWNER TO mazvv;
-
 --
--- Name: position_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: position_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE position_id_seq
@@ -4668,17 +4128,15 @@ CREATE SEQUENCE position_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.position_id_seq OWNER TO mazvv;
-
 --
--- Name: position_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: position_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE position_id_seq OWNED BY "position".id;
 
 
 --
--- Name: region; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: region; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE region (
@@ -4689,10 +4147,8 @@ CREATE TABLE region (
 );
 
 
-ALTER TABLE demo_ru.region OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE region_id_seq
@@ -4703,17 +4159,15 @@ CREATE SEQUENCE region_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.region_id_seq OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE region_id_seq OWNED BY region.id;
 
 
 --
--- Name: resource; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: resource; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource (
@@ -4724,10 +4178,8 @@ CREATE TABLE resource (
 );
 
 
-ALTER TABLE demo_ru.resource OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE resource_id_seq
@@ -4738,17 +4190,15 @@ CREATE SEQUENCE resource_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.resource_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
 
 
 --
--- Name: resource_log; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: resource_log; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_log (
@@ -4760,10 +4210,8 @@ CREATE TABLE resource_log (
 );
 
 
-ALTER TABLE demo_ru.resource_log OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE resource_log_id_seq
@@ -4774,17 +4222,15 @@ CREATE SEQUENCE resource_log_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.resource_log_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_type (
@@ -4800,10 +4246,8 @@ CREATE TABLE resource_type (
 );
 
 
-ALTER TABLE demo_ru.resource_type OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE resource_type_id_seq
@@ -4814,17 +4258,15 @@ CREATE SEQUENCE resource_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.resource_type_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
--- Name: roomcat; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: roomcat; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE roomcat (
@@ -4834,10 +4276,8 @@ CREATE TABLE roomcat (
 );
 
 
-ALTER TABLE demo_ru.roomcat OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE roomcat_id_seq
@@ -4848,17 +4288,15 @@ CREATE SEQUENCE roomcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.roomcat_id_seq OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
 
 
 --
--- Name: service; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: service; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE service (
@@ -4871,10 +4309,8 @@ CREATE TABLE service (
 );
 
 
-ALTER TABLE demo_ru.service OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE service_id_seq
@@ -4885,17 +4321,15 @@ CREATE SEQUENCE service_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.service_id_seq OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE service_id_seq OWNED BY service.id;
 
 
 --
--- Name: spassport; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: spassport; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport (
@@ -4909,10 +4343,8 @@ CREATE TABLE spassport (
 );
 
 
-ALTER TABLE demo_ru.spassport OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE spassport_id_seq
@@ -4923,17 +4355,15 @@ CREATE SEQUENCE spassport_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.spassport_id_seq OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE spassport_id_seq OWNED BY spassport.id;
 
 
 --
--- Name: spassport_order_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport_order_item (
@@ -4942,10 +4372,8 @@ CREATE TABLE spassport_order_item (
 );
 
 
-ALTER TABLE demo_ru.spassport_order_item OWNER TO mazvv;
-
 --
--- Name: structure; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure (
@@ -4957,10 +4385,8 @@ CREATE TABLE structure (
 );
 
 
-ALTER TABLE demo_ru.structure OWNER TO mazvv;
-
 --
--- Name: structure_address; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_address; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_address (
@@ -4969,10 +4395,8 @@ CREATE TABLE structure_address (
 );
 
 
-ALTER TABLE demo_ru.structure_address OWNER TO mazvv;
-
 --
--- Name: structure_bank_detail; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_bank_detail (
@@ -4981,10 +4405,8 @@ CREATE TABLE structure_bank_detail (
 );
 
 
-ALTER TABLE demo_ru.structure_bank_detail OWNER TO mazvv;
-
 --
--- Name: structure_contact; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_contact; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_contact (
@@ -4993,10 +4415,8 @@ CREATE TABLE structure_contact (
 );
 
 
-ALTER TABLE demo_ru.structure_contact OWNER TO mazvv;
-
 --
--- Name: structure_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: structure_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE structure_id_seq
@@ -5007,17 +4427,15 @@ CREATE SEQUENCE structure_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.structure_id_seq OWNER TO mazvv;
-
 --
--- Name: structure_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: structure_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE structure_id_seq OWNED BY structure.id;
 
 
 --
--- Name: subaccount; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: subaccount; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE subaccount (
@@ -5030,10 +4448,8 @@ CREATE TABLE subaccount (
 );
 
 
-ALTER TABLE demo_ru.subaccount OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE subaccount_id_seq
@@ -5044,17 +4460,15 @@ CREATE SEQUENCE subaccount_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.subaccount_id_seq OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE subaccount_id_seq OWNED BY subaccount.id;
 
 
 --
--- Name: supplier; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier (
@@ -5067,10 +4481,8 @@ CREATE TABLE supplier (
 );
 
 
-ALTER TABLE demo_ru.supplier OWNER TO mazvv;
-
 --
--- Name: supplier_bank_detail; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bank_detail (
@@ -5079,10 +4491,8 @@ CREATE TABLE supplier_bank_detail (
 );
 
 
-ALTER TABLE demo_ru.supplier_bank_detail OWNER TO mazvv;
-
 --
--- Name: supplier_bperson; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bperson (
@@ -5091,10 +4501,8 @@ CREATE TABLE supplier_bperson (
 );
 
 
-ALTER TABLE demo_ru.supplier_bperson OWNER TO mazvv;
-
 --
--- Name: supplier_contract; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_contract (
@@ -5103,10 +4511,8 @@ CREATE TABLE supplier_contract (
 );
 
 
-ALTER TABLE demo_ru.supplier_contract OWNER TO mazvv;
-
 --
--- Name: supplier_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: supplier_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE supplier_id_seq
@@ -5117,17 +4523,15 @@ CREATE SEQUENCE supplier_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.supplier_id_seq OWNER TO mazvv;
-
 --
--- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE supplier_id_seq OWNED BY supplier.id;
 
 
 --
--- Name: supplier_subaccount; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_subaccount (
@@ -5136,10 +4540,8 @@ CREATE TABLE supplier_subaccount (
 );
 
 
-ALTER TABLE demo_ru.supplier_subaccount OWNER TO mazvv;
-
 --
--- Name: supplier_type; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_type; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_type (
@@ -5150,10 +4552,8 @@ CREATE TABLE supplier_type (
 );
 
 
-ALTER TABLE demo_ru.supplier_type OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE supplier_type_id_seq
@@ -5164,17 +4564,15 @@ CREATE SEQUENCE supplier_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.supplier_type_id_seq OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
--- Name: task; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: task; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task (
@@ -5189,10 +4587,8 @@ CREATE TABLE task (
 );
 
 
-ALTER TABLE demo_ru.task OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE task_id_seq
@@ -5203,17 +4599,15 @@ CREATE SEQUENCE task_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.task_id_seq OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE task_id_seq OWNED BY task.id;
 
 
 --
--- Name: task_resource; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: task_resource; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_resource (
@@ -5222,10 +4616,8 @@ CREATE TABLE task_resource (
 );
 
 
-ALTER TABLE demo_ru.task_resource OWNER TO mazvv;
-
 --
--- Name: task_upload; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: task_upload; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_upload (
@@ -5234,10 +4626,8 @@ CREATE TABLE task_upload (
 );
 
 
-ALTER TABLE demo_ru.task_upload OWNER TO mazvv;
-
 --
--- Name: ticket; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: ticket; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket (
@@ -5257,10 +4647,8 @@ CREATE TABLE ticket (
 );
 
 
-ALTER TABLE demo_ru.ticket OWNER TO mazvv;
-
 --
--- Name: ticket_class; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: ticket_class; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_class (
@@ -5270,10 +4658,8 @@ CREATE TABLE ticket_class (
 );
 
 
-ALTER TABLE demo_ru.ticket_class OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE ticket_class_id_seq
@@ -5284,17 +4670,15 @@ CREATE SEQUENCE ticket_class_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.ticket_class_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE ticket_class_id_seq OWNED BY ticket_class.id;
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE ticket_id_seq
@@ -5305,17 +4689,15 @@ CREATE SEQUENCE ticket_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.ticket_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE ticket_id_seq OWNED BY ticket.id;
 
 
 --
--- Name: ticket_order_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_order_item (
@@ -5324,10 +4706,8 @@ CREATE TABLE ticket_order_item (
 );
 
 
-ALTER TABLE demo_ru.ticket_order_item OWNER TO mazvv;
-
 --
--- Name: tour; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: tour; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour (
@@ -5352,10 +4732,8 @@ CREATE TABLE tour (
 );
 
 
-ALTER TABLE demo_ru.tour OWNER TO mazvv;
-
 --
--- Name: tour_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE tour_id_seq
@@ -5366,17 +4744,15 @@ CREATE SEQUENCE tour_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.tour_id_seq OWNER TO mazvv;
-
 --
--- Name: tour_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE tour_id_seq OWNED BY tour.id;
 
 
 --
--- Name: tour_order_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour_order_item (
@@ -5385,10 +4761,8 @@ CREATE TABLE tour_order_item (
 );
 
 
-ALTER TABLE demo_ru.tour_order_item OWNER TO mazvv;
-
 --
--- Name: transfer; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: transfer; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transfer (
@@ -5398,10 +4772,8 @@ CREATE TABLE transfer (
 );
 
 
-ALTER TABLE demo_ru.transfer OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq
@@ -5412,17 +4784,15 @@ CREATE SEQUENCE transfer_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.transfer_id_seq OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq OWNED BY transfer.id;
 
 
 --
--- Name: transport; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: transport; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transport (
@@ -5432,10 +4802,8 @@ CREATE TABLE transport (
 );
 
 
-ALTER TABLE demo_ru.transport OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE transport_id_seq
@@ -5446,17 +4814,15 @@ CREATE SEQUENCE transport_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.transport_id_seq OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE transport_id_seq OWNED BY transport.id;
 
 
 --
--- Name: upload; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: upload; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE upload (
@@ -5470,10 +4836,8 @@ CREATE TABLE upload (
 );
 
 
-ALTER TABLE demo_ru.upload OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE upload_id_seq
@@ -5484,17 +4848,15 @@ CREATE SEQUENCE upload_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.upload_id_seq OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE upload_id_seq OWNED BY upload.id;
 
 
 --
--- Name: user; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: user; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -5507,10 +4869,8 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE demo_ru."user" OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE user_id_seq
@@ -5521,17 +4881,15 @@ CREATE SEQUENCE user_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.user_id_seq OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
--- Name: vat; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: vat; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE vat (
@@ -5546,10 +4904,8 @@ CREATE TABLE vat (
 );
 
 
-ALTER TABLE demo_ru.vat OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE vat_id_seq
@@ -5560,17 +4916,15 @@ CREATE SEQUENCE vat_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.vat_id_seq OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE vat_id_seq OWNED BY vat.id;
 
 
 --
--- Name: visa; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: visa; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa (
@@ -5584,10 +4938,8 @@ CREATE TABLE visa (
 );
 
 
-ALTER TABLE demo_ru.visa OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
 --
 
 CREATE SEQUENCE visa_id_seq
@@ -5598,17 +4950,15 @@ CREATE SEQUENCE visa_id_seq
     CACHE 1;
 
 
-ALTER TABLE demo_ru.visa_id_seq OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
 --
 
 ALTER SEQUENCE visa_id_seq OWNED BY visa.id;
 
 
 --
--- Name: visa_order_item; Type: TABLE; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa_order_item (
@@ -5617,12 +4967,10 @@ CREATE TABLE visa_order_item (
 );
 
 
-ALTER TABLE demo_ru.visa_order_item OWNER TO mazvv;
-
 SET search_path = public, pg_catalog;
 
 --
--- Name: accomodation; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: accomodation; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE accomodation (
@@ -5632,10 +4980,8 @@ CREATE TABLE accomodation (
 );
 
 
-ALTER TABLE public.accomodation OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE accomodation_id_seq
@@ -5646,17 +4992,15 @@ CREATE SEQUENCE accomodation_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.accomodation_id_seq OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
 
 
 --
--- Name: account; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: account; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account (
@@ -5671,10 +5015,8 @@ CREATE TABLE account (
 );
 
 
-ALTER TABLE public.account OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE account_id_seq
@@ -5685,17 +5027,15 @@ CREATE SEQUENCE account_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.account_id_seq OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE account_id_seq OWNED BY account.id;
 
 
 --
--- Name: account_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: account_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account_item (
@@ -5709,10 +5049,8 @@ CREATE TABLE account_item (
 );
 
 
-ALTER TABLE public.account_item OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE account_item_id_seq
@@ -5723,17 +5061,15 @@ CREATE SEQUENCE account_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.account_item_id_seq OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE account_item_id_seq OWNED BY account_item.id;
 
 
 --
--- Name: address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: address; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE address (
@@ -5745,10 +5081,8 @@ CREATE TABLE address (
 );
 
 
-ALTER TABLE public.address OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE address_id_seq
@@ -5759,17 +5093,15 @@ CREATE SEQUENCE address_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.address_id_seq OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE address_id_seq OWNED BY address.id;
 
 
 --
--- Name: advsource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: advsource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE advsource (
@@ -5779,10 +5111,8 @@ CREATE TABLE advsource (
 );
 
 
-ALTER TABLE public.advsource OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE advsource_id_seq
@@ -5793,17 +5123,15 @@ CREATE SEQUENCE advsource_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.advsource_id_seq OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: appointment; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: appointment; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE appointment (
@@ -5817,10 +5145,8 @@ CREATE TABLE appointment (
 );
 
 
-ALTER TABLE public.appointment OWNER TO mazvv;
-
 --
--- Name: bank; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bank; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank (
@@ -5830,10 +5156,8 @@ CREATE TABLE bank (
 );
 
 
-ALTER TABLE public.bank OWNER TO mazvv;
-
 --
--- Name: bank_address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bank_address; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_address (
@@ -5842,10 +5166,8 @@ CREATE TABLE bank_address (
 );
 
 
-ALTER TABLE public.bank_address OWNER TO mazvv;
-
 --
--- Name: bank_detail; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bank_detail; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_detail (
@@ -5859,10 +5181,8 @@ CREATE TABLE bank_detail (
 );
 
 
-ALTER TABLE public.bank_detail OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE bank_detail_id_seq
@@ -5873,17 +5193,15 @@ CREATE SEQUENCE bank_detail_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.bank_detail_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE bank_detail_id_seq OWNED BY bank_detail.id;
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE bank_id_seq
@@ -5894,17 +5212,15 @@ CREATE SEQUENCE bank_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.bank_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE bank_id_seq OWNED BY bank.id;
 
 
 --
--- Name: bperson; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bperson; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson (
@@ -5919,10 +5235,8 @@ CREATE TABLE bperson (
 );
 
 
-ALTER TABLE public.bperson OWNER TO mazvv;
-
 --
--- Name: bperson_contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson_contact (
@@ -5931,10 +5245,8 @@ CREATE TABLE bperson_contact (
 );
 
 
-ALTER TABLE public.bperson_contact OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE bperson_id_seq
@@ -5945,17 +5257,15 @@ CREATE SEQUENCE bperson_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.bperson_id_seq OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 
 
 --
--- Name: calculation; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: calculation; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE calculation (
@@ -5966,10 +5276,8 @@ CREATE TABLE calculation (
 );
 
 
-ALTER TABLE public.calculation OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE calculation_id_seq
@@ -5980,17 +5288,15 @@ CREATE SEQUENCE calculation_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.calculation_id_seq OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE calculation_id_seq OWNED BY calculation.id;
 
 
 --
--- Name: campaign; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: campaign; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE campaign (
@@ -6005,10 +5311,8 @@ CREATE TABLE campaign (
 );
 
 
-ALTER TABLE public.campaign OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE campaign_id_seq
@@ -6019,17 +5323,15 @@ CREATE SEQUENCE campaign_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.campaign_id_seq OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE campaign_id_seq OWNED BY campaign.id;
 
 
 --
--- Name: cashflow; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: cashflow; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cashflow (
@@ -6043,10 +5345,8 @@ CREATE TABLE cashflow (
 );
 
 
-ALTER TABLE public.cashflow OWNER TO mazvv;
-
 --
--- Name: commission; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: commission; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE commission (
@@ -6061,10 +5361,8 @@ CREATE TABLE commission (
 );
 
 
-ALTER TABLE public.commission OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE commission_id_seq
@@ -6075,17 +5373,15 @@ CREATE SEQUENCE commission_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.commission_id_seq OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
 
 
 --
--- Name: companies_counter; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: companies_counter; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE companies_counter
@@ -6096,10 +5392,8 @@ CREATE SEQUENCE companies_counter
     CACHE 1;
 
 
-ALTER TABLE public.companies_counter OWNER TO mazvv;
-
 --
--- Name: position; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: position; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "position" (
@@ -6110,10 +5404,8 @@ CREATE TABLE "position" (
 );
 
 
-ALTER TABLE public."position" OWNER TO mazvv;
-
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE companies_positions_id_seq
@@ -6124,17 +5416,15 @@ CREATE SEQUENCE companies_positions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.companies_positions_id_seq OWNER TO mazvv;
-
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
 
 --
--- Name: company; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: company; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company (
@@ -6147,10 +5437,8 @@ CREATE TABLE company (
 );
 
 
-ALTER TABLE public.company OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE company_id_seq
@@ -6161,17 +5449,15 @@ CREATE SEQUENCE company_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.company_id_seq OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE company_id_seq OWNED BY company.id;
 
 
 --
--- Name: company_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company_subaccount (
@@ -6180,10 +5466,8 @@ CREATE TABLE company_subaccount (
 );
 
 
-ALTER TABLE public.company_subaccount OWNER TO mazvv;
-
 --
--- Name: contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: contact; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contact (
@@ -6196,10 +5480,8 @@ CREATE TABLE contact (
 );
 
 
-ALTER TABLE public.contact OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE contact_id_seq
@@ -6210,17 +5492,15 @@ CREATE SEQUENCE contact_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.contact_id_seq OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
 
 
 --
--- Name: contract; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: contract; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract (
@@ -6233,10 +5513,8 @@ CREATE TABLE contract (
 );
 
 
-ALTER TABLE public.contract OWNER TO mazvv;
-
 --
--- Name: contract_commission; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: contract_commission; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract_commission (
@@ -6245,10 +5523,8 @@ CREATE TABLE contract_commission (
 );
 
 
-ALTER TABLE public.contract_commission OWNER TO mazvv;
-
 --
--- Name: country; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: country; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE country (
@@ -6259,10 +5535,8 @@ CREATE TABLE country (
 );
 
 
-ALTER TABLE public.country OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE country_id_seq
@@ -6273,17 +5547,15 @@ CREATE SEQUENCE country_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.country_id_seq OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
--- Name: crosspayment; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: crosspayment; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE crosspayment (
@@ -6294,10 +5566,8 @@ CREATE TABLE crosspayment (
 );
 
 
-ALTER TABLE public.crosspayment OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE crosspayment_id_seq
@@ -6308,17 +5578,15 @@ CREATE SEQUENCE crosspayment_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.crosspayment_id_seq OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
 
 
 --
--- Name: currency; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: currency; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency (
@@ -6328,10 +5596,8 @@ CREATE TABLE currency (
 );
 
 
-ALTER TABLE public.currency OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE currency_id_seq
@@ -6342,17 +5608,15 @@ CREATE SEQUENCE currency_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.currency_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE currency_id_seq OWNED BY currency.id;
 
 
 --
--- Name: currency_rate; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: currency_rate; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency_rate (
@@ -6365,10 +5629,8 @@ CREATE TABLE currency_rate (
 );
 
 
-ALTER TABLE public.currency_rate OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE currency_rate_id_seq
@@ -6379,17 +5641,15 @@ CREATE SEQUENCE currency_rate_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.currency_rate_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
 
 
 --
--- Name: employee; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee (
@@ -6404,10 +5664,8 @@ CREATE TABLE employee (
 );
 
 
-ALTER TABLE public.employee OWNER TO mazvv;
-
 --
--- Name: employee_address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_address; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_address (
@@ -6416,10 +5674,8 @@ CREATE TABLE employee_address (
 );
 
 
-ALTER TABLE public.employee_address OWNER TO mazvv;
-
 --
--- Name: employee_contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_contact; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_contact (
@@ -6428,10 +5684,8 @@ CREATE TABLE employee_contact (
 );
 
 
-ALTER TABLE public.employee_contact OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE employee_id_seq
@@ -6442,17 +5696,15 @@ CREATE SEQUENCE employee_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.employee_id_seq OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE employee_id_seq OWNED BY employee.id;
 
 
 --
--- Name: employee_notification; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_notification; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_notification (
@@ -6462,10 +5714,8 @@ CREATE TABLE employee_notification (
 );
 
 
-ALTER TABLE public.employee_notification OWNER TO mazvv;
-
 --
--- Name: employee_passport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_passport; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_passport (
@@ -6474,10 +5724,8 @@ CREATE TABLE employee_passport (
 );
 
 
-ALTER TABLE public.employee_passport OWNER TO mazvv;
-
 --
--- Name: employee_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_subaccount (
@@ -6486,10 +5734,8 @@ CREATE TABLE employee_subaccount (
 );
 
 
-ALTER TABLE public.employee_subaccount OWNER TO mazvv;
-
 --
--- Name: employee_upload; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_upload; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_upload (
@@ -6498,10 +5744,8 @@ CREATE TABLE employee_upload (
 );
 
 
-ALTER TABLE public.employee_upload OWNER TO mazvv;
-
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE employees_appointments_h_id_seq
@@ -6512,17 +5756,15 @@ CREATE SEQUENCE employees_appointments_h_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.employees_appointments_h_id_seq OWNER TO mazvv;
-
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE employees_appointments_h_id_seq OWNED BY appointment.id;
 
 
 --
--- Name: foodcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: foodcat; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE foodcat (
@@ -6532,10 +5774,8 @@ CREATE TABLE foodcat (
 );
 
 
-ALTER TABLE public.foodcat OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE foodcat_id_seq
@@ -6546,17 +5786,15 @@ CREATE SEQUENCE foodcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.foodcat_id_seq OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
 
 
 --
--- Name: hotel; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: hotel; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotel (
@@ -6568,10 +5806,8 @@ CREATE TABLE hotel (
 );
 
 
-ALTER TABLE public.hotel OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE hotel_id_seq
@@ -6582,17 +5818,15 @@ CREATE SEQUENCE hotel_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.hotel_id_seq OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE hotel_id_seq OWNED BY hotel.id;
 
 
 --
--- Name: hotelcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: hotelcat; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotelcat (
@@ -6602,10 +5836,8 @@ CREATE TABLE hotelcat (
 );
 
 
-ALTER TABLE public.hotelcat OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE hotelcat_id_seq
@@ -6616,17 +5848,15 @@ CREATE SEQUENCE hotelcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.hotelcat_id_seq OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
 
 
 --
--- Name: income; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income (
@@ -6640,10 +5870,8 @@ CREATE TABLE income (
 );
 
 
-ALTER TABLE public.income OWNER TO mazvv;
-
 --
--- Name: income_cashflow; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income_cashflow (
@@ -6652,10 +5880,8 @@ CREATE TABLE income_cashflow (
 );
 
 
-ALTER TABLE public.income_cashflow OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE income_id_seq
@@ -6666,17 +5892,15 @@ CREATE SEQUENCE income_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.income_id_seq OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: invoice; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: invoice; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice (
@@ -6690,10 +5914,8 @@ CREATE TABLE invoice (
 );
 
 
-ALTER TABLE public.invoice OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE invoice_id_seq
@@ -6704,17 +5926,15 @@ CREATE SEQUENCE invoice_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.invoice_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
--- Name: invoice_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: invoice_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice_item (
@@ -6728,10 +5948,8 @@ CREATE TABLE invoice_item (
 );
 
 
-ALTER TABLE public.invoice_item OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE invoice_item_id_seq
@@ -6742,17 +5960,15 @@ CREATE SEQUENCE invoice_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.invoice_item_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE invoice_item_id_seq OWNED BY invoice_item.id;
 
 
 --
--- Name: lead; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: lead; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead (
@@ -6766,10 +5982,8 @@ CREATE TABLE lead (
 );
 
 
-ALTER TABLE public.lead OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE lead_id_seq
@@ -6780,17 +5994,15 @@ CREATE SEQUENCE lead_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.lead_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
 
 
 --
--- Name: lead_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: lead_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_item (
@@ -6805,10 +6017,8 @@ CREATE TABLE lead_item (
 );
 
 
-ALTER TABLE public.lead_item OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE lead_item_id_seq
@@ -6819,17 +6029,15 @@ CREATE SEQUENCE lead_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.lead_item_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE lead_item_id_seq OWNED BY lead_item.id;
 
 
 --
--- Name: lead_offer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: lead_offer; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_offer (
@@ -6845,10 +6053,8 @@ CREATE TABLE lead_offer (
 );
 
 
-ALTER TABLE public.lead_offer OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE lead_offer_id_seq
@@ -6859,17 +6065,15 @@ CREATE SEQUENCE lead_offer_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.lead_offer_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE lead_offer_id_seq OWNED BY lead_offer.id;
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: licence_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE licence_id_seq
@@ -6880,17 +6084,15 @@ CREATE SEQUENCE licence_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.licence_id_seq OWNER TO mazvv;
-
 --
--- Name: licence_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: licence_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE licence_id_seq OWNED BY contract.id;
 
 
 --
--- Name: location; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: location; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE location (
@@ -6901,10 +6103,8 @@ CREATE TABLE location (
 );
 
 
-ALTER TABLE public.location OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE location_id_seq
@@ -6915,17 +6115,15 @@ CREATE SEQUENCE location_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.location_id_seq OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE location_id_seq OWNED BY location.id;
 
 
 --
--- Name: navigation; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: navigation; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE navigation (
@@ -6942,10 +6140,8 @@ CREATE TABLE navigation (
 );
 
 
-ALTER TABLE public.navigation OWNER TO mazvv;
-
 --
--- Name: note; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: note; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note (
@@ -6956,10 +6152,8 @@ CREATE TABLE note (
 );
 
 
-ALTER TABLE public.note OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE note_id_seq
@@ -6970,17 +6164,15 @@ CREATE SEQUENCE note_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.note_id_seq OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE note_id_seq OWNED BY note.id;
 
 
 --
--- Name: note_resource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: note_resource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_resource (
@@ -6989,10 +6181,8 @@ CREATE TABLE note_resource (
 );
 
 
-ALTER TABLE public.note_resource OWNER TO mazvv;
-
 --
--- Name: note_upload; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: note_upload; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_upload (
@@ -7001,10 +6191,8 @@ CREATE TABLE note_upload (
 );
 
 
-ALTER TABLE public.note_upload OWNER TO mazvv;
-
 --
--- Name: notification; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: notification; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification (
@@ -7017,10 +6205,8 @@ CREATE TABLE notification (
 );
 
 
-ALTER TABLE public.notification OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE notification_id_seq
@@ -7031,17 +6217,15 @@ CREATE SEQUENCE notification_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.notification_id_seq OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
--- Name: notification_resource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: notification_resource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification_resource (
@@ -7050,10 +6234,8 @@ CREATE TABLE notification_resource (
 );
 
 
-ALTER TABLE public.notification_resource OWNER TO mazvv;
-
 --
--- Name: order; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: order; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "order" (
@@ -7068,10 +6250,8 @@ CREATE TABLE "order" (
 );
 
 
-ALTER TABLE public."order" OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE order_id_seq
@@ -7082,17 +6262,15 @@ CREATE SEQUENCE order_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.order_id_seq OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE order_id_seq OWNED BY "order".id;
 
 
 --
--- Name: order_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE order_item (
@@ -7111,10 +6289,8 @@ CREATE TABLE order_item (
 );
 
 
-ALTER TABLE public.order_item OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE order_item_id_seq
@@ -7125,17 +6301,15 @@ CREATE SEQUENCE order_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.order_item_id_seq OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
 
 
 --
--- Name: outgoing; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: outgoing; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing (
@@ -7149,10 +6323,8 @@ CREATE TABLE outgoing (
 );
 
 
-ALTER TABLE public.outgoing OWNER TO mazvv;
-
 --
--- Name: outgoing_cashflow; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing_cashflow (
@@ -7161,10 +6333,8 @@ CREATE TABLE outgoing_cashflow (
 );
 
 
-ALTER TABLE public.outgoing_cashflow OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE outgoing_id_seq
@@ -7175,17 +6345,15 @@ CREATE SEQUENCE outgoing_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.outgoing_id_seq OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
 
 
 --
--- Name: passport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: passport; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport (
@@ -7199,10 +6367,8 @@ CREATE TABLE passport (
 );
 
 
-ALTER TABLE public.passport OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE passport_id_seq
@@ -7213,17 +6379,15 @@ CREATE SEQUENCE passport_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.passport_id_seq OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE passport_id_seq OWNED BY passport.id;
 
 
 --
--- Name: passport_upload; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: passport_upload; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport_upload (
@@ -7232,10 +6396,8 @@ CREATE TABLE passport_upload (
 );
 
 
-ALTER TABLE public.passport_upload OWNER TO mazvv;
-
 --
--- Name: permision; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: permision; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE permision (
@@ -7248,10 +6410,8 @@ CREATE TABLE permision (
 );
 
 
-ALTER TABLE public.permision OWNER TO mazvv;
-
 --
--- Name: person; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person (
@@ -7269,10 +6429,8 @@ CREATE TABLE person (
 );
 
 
-ALTER TABLE public.person OWNER TO mazvv;
-
 --
--- Name: person_address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_address; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_address (
@@ -7281,10 +6439,8 @@ CREATE TABLE person_address (
 );
 
 
-ALTER TABLE public.person_address OWNER TO mazvv;
-
 --
--- Name: person_category; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_category; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_category (
@@ -7294,10 +6450,8 @@ CREATE TABLE person_category (
 );
 
 
-ALTER TABLE public.person_category OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE person_category_id_seq
@@ -7308,17 +6462,15 @@ CREATE SEQUENCE person_category_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.person_category_id_seq OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE person_category_id_seq OWNED BY person_category.id;
 
 
 --
--- Name: person_contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_contact; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_contact (
@@ -7327,10 +6479,8 @@ CREATE TABLE person_contact (
 );
 
 
-ALTER TABLE public.person_contact OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE person_id_seq
@@ -7341,17 +6491,15 @@ CREATE SEQUENCE person_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.person_id_seq OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE person_id_seq OWNED BY person.id;
 
 
 --
--- Name: person_order_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_order_item (
@@ -7360,10 +6508,8 @@ CREATE TABLE person_order_item (
 );
 
 
-ALTER TABLE public.person_order_item OWNER TO mazvv;
-
 --
--- Name: person_passport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_passport; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_passport (
@@ -7372,10 +6518,8 @@ CREATE TABLE person_passport (
 );
 
 
-ALTER TABLE public.person_passport OWNER TO mazvv;
-
 --
--- Name: person_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_subaccount (
@@ -7384,10 +6528,8 @@ CREATE TABLE person_subaccount (
 );
 
 
-ALTER TABLE public.person_subaccount OWNER TO mazvv;
-
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE positions_navigations_id_seq
@@ -7398,17 +6540,15 @@ CREATE SEQUENCE positions_navigations_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.positions_navigations_id_seq OWNER TO mazvv;
-
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE positions_navigations_id_seq OWNED BY navigation.id;
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE positions_permisions_id_seq
@@ -7419,17 +6559,15 @@ CREATE SEQUENCE positions_permisions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.positions_permisions_id_seq OWNER TO mazvv;
-
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
 
 --
--- Name: region; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: region; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE region (
@@ -7440,10 +6578,8 @@ CREATE TABLE region (
 );
 
 
-ALTER TABLE public.region OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE region_id_seq
@@ -7454,17 +6590,15 @@ CREATE SEQUENCE region_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.region_id_seq OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE region_id_seq OWNED BY region.id;
 
 
 --
--- Name: resource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource (
@@ -7475,10 +6609,8 @@ CREATE TABLE resource (
 );
 
 
-ALTER TABLE public.resource OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE resource_id_seq
@@ -7489,17 +6621,15 @@ CREATE SEQUENCE resource_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.resource_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
 
 
 --
--- Name: resource_log; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_log; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_log (
@@ -7511,10 +6641,8 @@ CREATE TABLE resource_log (
 );
 
 
-ALTER TABLE public.resource_log OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE resource_log_id_seq
@@ -7525,17 +6653,15 @@ CREATE SEQUENCE resource_log_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.resource_log_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_type (
@@ -7551,10 +6677,8 @@ CREATE TABLE resource_type (
 );
 
 
-ALTER TABLE public.resource_type OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE resource_type_id_seq
@@ -7565,17 +6689,15 @@ CREATE SEQUENCE resource_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.resource_type_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
--- Name: roomcat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: roomcat; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE roomcat (
@@ -7585,10 +6707,8 @@ CREATE TABLE roomcat (
 );
 
 
-ALTER TABLE public.roomcat OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE roomcat_id_seq
@@ -7599,17 +6719,15 @@ CREATE SEQUENCE roomcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.roomcat_id_seq OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
 
 
 --
--- Name: service; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: service; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE service (
@@ -7622,10 +6740,8 @@ CREATE TABLE service (
 );
 
 
-ALTER TABLE public.service OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE service_id_seq
@@ -7636,17 +6752,15 @@ CREATE SEQUENCE service_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.service_id_seq OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE service_id_seq OWNED BY service.id;
 
 
 --
--- Name: spassport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: spassport; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport (
@@ -7660,10 +6774,8 @@ CREATE TABLE spassport (
 );
 
 
-ALTER TABLE public.spassport OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE spassport_id_seq
@@ -7674,17 +6786,15 @@ CREATE SEQUENCE spassport_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.spassport_id_seq OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE spassport_id_seq OWNED BY spassport.id;
 
 
 --
--- Name: spassport_order_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport_order_item (
@@ -7693,10 +6803,8 @@ CREATE TABLE spassport_order_item (
 );
 
 
-ALTER TABLE public.spassport_order_item OWNER TO mazvv;
-
 --
--- Name: structure; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure (
@@ -7708,10 +6816,8 @@ CREATE TABLE structure (
 );
 
 
-ALTER TABLE public.structure OWNER TO mazvv;
-
 --
--- Name: structure_address; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_address; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_address (
@@ -7720,10 +6826,8 @@ CREATE TABLE structure_address (
 );
 
 
-ALTER TABLE public.structure_address OWNER TO mazvv;
-
 --
--- Name: structure_bank_detail; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_bank_detail (
@@ -7732,10 +6836,8 @@ CREATE TABLE structure_bank_detail (
 );
 
 
-ALTER TABLE public.structure_bank_detail OWNER TO mazvv;
-
 --
--- Name: structure_contact; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_contact; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_contact (
@@ -7744,10 +6846,8 @@ CREATE TABLE structure_contact (
 );
 
 
-ALTER TABLE public.structure_contact OWNER TO mazvv;
-
 --
--- Name: structures_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE structures_id_seq
@@ -7758,17 +6858,15 @@ CREATE SEQUENCE structures_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.structures_id_seq OWNER TO mazvv;
-
 --
--- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
 
 
 --
--- Name: subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: subaccount; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE subaccount (
@@ -7781,10 +6879,8 @@ CREATE TABLE subaccount (
 );
 
 
-ALTER TABLE public.subaccount OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE subaccount_id_seq
@@ -7795,17 +6891,15 @@ CREATE SEQUENCE subaccount_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.subaccount_id_seq OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE subaccount_id_seq OWNED BY subaccount.id;
 
 
 --
--- Name: supplier; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier (
@@ -7818,10 +6912,8 @@ CREATE TABLE supplier (
 );
 
 
-ALTER TABLE public.supplier OWNER TO mazvv;
-
 --
--- Name: supplier_bank_detail; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bank_detail (
@@ -7830,10 +6922,8 @@ CREATE TABLE supplier_bank_detail (
 );
 
 
-ALTER TABLE public.supplier_bank_detail OWNER TO mazvv;
-
 --
--- Name: supplier_bperson; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bperson (
@@ -7842,10 +6932,8 @@ CREATE TABLE supplier_bperson (
 );
 
 
-ALTER TABLE public.supplier_bperson OWNER TO mazvv;
-
 --
--- Name: supplier_contract; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_contract (
@@ -7854,10 +6942,8 @@ CREATE TABLE supplier_contract (
 );
 
 
-ALTER TABLE public.supplier_contract OWNER TO mazvv;
-
 --
--- Name: supplier_subaccount; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_subaccount (
@@ -7866,10 +6952,8 @@ CREATE TABLE supplier_subaccount (
 );
 
 
-ALTER TABLE public.supplier_subaccount OWNER TO mazvv;
-
 --
--- Name: supplier_type; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_type; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_type (
@@ -7880,10 +6964,8 @@ CREATE TABLE supplier_type (
 );
 
 
-ALTER TABLE public.supplier_type OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE supplier_type_id_seq
@@ -7894,17 +6976,15 @@ CREATE SEQUENCE supplier_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.supplier_type_id_seq OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
--- Name: task; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: task; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task (
@@ -7919,10 +6999,8 @@ CREATE TABLE task (
 );
 
 
-ALTER TABLE public.task OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE task_id_seq
@@ -7933,17 +7011,15 @@ CREATE SEQUENCE task_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.task_id_seq OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE task_id_seq OWNED BY task.id;
 
 
 --
--- Name: task_resource; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: task_resource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_resource (
@@ -7952,10 +7028,8 @@ CREATE TABLE task_resource (
 );
 
 
-ALTER TABLE public.task_resource OWNER TO mazvv;
-
 --
--- Name: task_upload; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: task_upload; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_upload (
@@ -7964,10 +7038,8 @@ CREATE TABLE task_upload (
 );
 
 
-ALTER TABLE public.task_upload OWNER TO mazvv;
-
 --
--- Name: ticket; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: ticket; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket (
@@ -7987,10 +7059,8 @@ CREATE TABLE ticket (
 );
 
 
-ALTER TABLE public.ticket OWNER TO mazvv;
-
 --
--- Name: ticket_class; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: ticket_class; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_class (
@@ -8000,10 +7070,8 @@ CREATE TABLE ticket_class (
 );
 
 
-ALTER TABLE public.ticket_class OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE ticket_class_id_seq
@@ -8014,17 +7082,15 @@ CREATE SEQUENCE ticket_class_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.ticket_class_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE ticket_class_id_seq OWNED BY ticket_class.id;
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE ticket_id_seq
@@ -8035,17 +7101,15 @@ CREATE SEQUENCE ticket_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.ticket_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE ticket_id_seq OWNED BY ticket.id;
 
 
 --
--- Name: ticket_order_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_order_item (
@@ -8054,10 +7118,8 @@ CREATE TABLE ticket_order_item (
 );
 
 
-ALTER TABLE public.ticket_order_item OWNER TO mazvv;
-
 --
--- Name: tour; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: tour; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour (
@@ -8082,10 +7144,8 @@ CREATE TABLE tour (
 );
 
 
-ALTER TABLE public.tour OWNER TO mazvv;
-
 --
--- Name: tour_id_seq1; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: tour_id_seq1; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE tour_id_seq1
@@ -8096,17 +7156,15 @@ CREATE SEQUENCE tour_id_seq1
     CACHE 1;
 
 
-ALTER TABLE public.tour_id_seq1 OWNER TO mazvv;
-
 --
--- Name: tour_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: tour_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE tour_id_seq1 OWNED BY tour.id;
 
 
 --
--- Name: tour_order_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour_order_item (
@@ -8115,10 +7173,8 @@ CREATE TABLE tour_order_item (
 );
 
 
-ALTER TABLE public.tour_order_item OWNER TO mazvv;
-
 --
--- Name: touroperator_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: touroperator_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE touroperator_id_seq
@@ -8129,17 +7185,15 @@ CREATE SEQUENCE touroperator_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.touroperator_id_seq OWNER TO mazvv;
-
 --
--- Name: touroperator_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: touroperator_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE touroperator_id_seq OWNED BY supplier.id;
 
 
 --
--- Name: transfer; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: transfer; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transfer (
@@ -8149,10 +7203,8 @@ CREATE TABLE transfer (
 );
 
 
-ALTER TABLE public.transfer OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq
@@ -8163,17 +7215,15 @@ CREATE SEQUENCE transfer_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.transfer_id_seq OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq OWNED BY cashflow.id;
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: transfer_id_seq1; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq1
@@ -8184,17 +7234,15 @@ CREATE SEQUENCE transfer_id_seq1
     CACHE 1;
 
 
-ALTER TABLE public.transfer_id_seq1 OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: transfer_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq1 OWNED BY transfer.id;
 
 
 --
--- Name: transport; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: transport; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transport (
@@ -8204,10 +7252,8 @@ CREATE TABLE transport (
 );
 
 
-ALTER TABLE public.transport OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE transport_id_seq
@@ -8218,17 +7264,15 @@ CREATE SEQUENCE transport_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.transport_id_seq OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE transport_id_seq OWNED BY transport.id;
 
 
 --
--- Name: upload; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: upload; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE upload (
@@ -8242,10 +7286,8 @@ CREATE TABLE upload (
 );
 
 
-ALTER TABLE public.upload OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE upload_id_seq
@@ -8256,17 +7298,15 @@ CREATE SEQUENCE upload_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.upload_id_seq OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE upload_id_seq OWNED BY upload.id;
 
 
 --
--- Name: user; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: user; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -8279,10 +7319,8 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE user_id_seq
@@ -8293,17 +7331,15 @@ CREATE SEQUENCE user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_id_seq OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
--- Name: vat; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: vat; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE vat (
@@ -8318,10 +7354,8 @@ CREATE TABLE vat (
 );
 
 
-ALTER TABLE public.vat OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE vat_id_seq
@@ -8332,17 +7366,15 @@ CREATE SEQUENCE vat_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.vat_id_seq OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE vat_id_seq OWNED BY vat.id;
 
 
 --
--- Name: visa; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: visa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa (
@@ -8356,10 +7388,8 @@ CREATE TABLE visa (
 );
 
 
-ALTER TABLE public.visa OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE; Schema: public; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE visa_id_seq
@@ -8370,17 +7400,15 @@ CREATE SEQUENCE visa_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.visa_id_seq OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE visa_id_seq OWNED BY visa.id;
 
 
 --
--- Name: visa_order_item; Type: TABLE; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa_order_item (
@@ -8389,12 +7417,10 @@ CREATE TABLE visa_order_item (
 );
 
 
-ALTER TABLE public.visa_order_item OWNER TO mazvv;
-
 SET search_path = test, pg_catalog;
 
 --
--- Name: accomodation; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: accomodation; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE accomodation (
@@ -8404,10 +7430,8 @@ CREATE TABLE accomodation (
 );
 
 
-ALTER TABLE test.accomodation OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE accomodation_id_seq
@@ -8418,17 +7442,15 @@ CREATE SEQUENCE accomodation_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.accomodation_id_seq OWNER TO mazvv;
-
 --
--- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
 
 
 --
--- Name: account; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: account; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account (
@@ -8443,10 +7465,8 @@ CREATE TABLE account (
 );
 
 
-ALTER TABLE test.account OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE account_id_seq
@@ -8457,17 +7477,15 @@ CREATE SEQUENCE account_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.account_id_seq OWNER TO mazvv;
-
 --
--- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE account_id_seq OWNED BY account.id;
 
 
 --
--- Name: account_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: account_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account_item (
@@ -8481,10 +7499,8 @@ CREATE TABLE account_item (
 );
 
 
-ALTER TABLE test.account_item OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE account_item_id_seq
@@ -8495,17 +7511,15 @@ CREATE SEQUENCE account_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.account_item_id_seq OWNER TO mazvv;
-
 --
--- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE account_item_id_seq OWNED BY account_item.id;
 
 
 --
--- Name: address; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: address; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE address (
@@ -8517,10 +7531,8 @@ CREATE TABLE address (
 );
 
 
-ALTER TABLE test.address OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE address_id_seq
@@ -8531,17 +7543,15 @@ CREATE SEQUENCE address_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.address_id_seq OWNER TO mazvv;
-
 --
--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE address_id_seq OWNED BY address.id;
 
 
 --
--- Name: advsource; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: advsource; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE advsource (
@@ -8551,10 +7561,8 @@ CREATE TABLE advsource (
 );
 
 
-ALTER TABLE test.advsource OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE advsource_id_seq
@@ -8565,17 +7573,15 @@ CREATE SEQUENCE advsource_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.advsource_id_seq OWNER TO mazvv;
-
 --
--- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: appointment; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: appointment; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE appointment (
@@ -8589,10 +7595,8 @@ CREATE TABLE appointment (
 );
 
 
-ALTER TABLE test.appointment OWNER TO mazvv;
-
 --
--- Name: appointment_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: appointment_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE appointment_id_seq
@@ -8603,17 +7607,15 @@ CREATE SEQUENCE appointment_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.appointment_id_seq OWNER TO mazvv;
-
 --
--- Name: appointment_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: appointment_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE appointment_id_seq OWNED BY appointment.id;
 
 
 --
--- Name: bank; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bank; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank (
@@ -8623,10 +7625,8 @@ CREATE TABLE bank (
 );
 
 
-ALTER TABLE test.bank OWNER TO mazvv;
-
 --
--- Name: bank_address; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bank_address; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_address (
@@ -8635,10 +7635,8 @@ CREATE TABLE bank_address (
 );
 
 
-ALTER TABLE test.bank_address OWNER TO mazvv;
-
 --
--- Name: bank_detail; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bank_detail; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_detail (
@@ -8652,10 +7650,8 @@ CREATE TABLE bank_detail (
 );
 
 
-ALTER TABLE test.bank_detail OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE bank_detail_id_seq
@@ -8666,17 +7662,15 @@ CREATE SEQUENCE bank_detail_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.bank_detail_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE bank_detail_id_seq OWNED BY bank_detail.id;
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE bank_id_seq
@@ -8687,17 +7681,15 @@ CREATE SEQUENCE bank_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.bank_id_seq OWNER TO mazvv;
-
 --
--- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE bank_id_seq OWNED BY bank.id;
 
 
 --
--- Name: bperson; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bperson; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson (
@@ -8712,10 +7704,8 @@ CREATE TABLE bperson (
 );
 
 
-ALTER TABLE test.bperson OWNER TO mazvv;
-
 --
--- Name: bperson_contact; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson_contact (
@@ -8724,10 +7714,8 @@ CREATE TABLE bperson_contact (
 );
 
 
-ALTER TABLE test.bperson_contact OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE bperson_id_seq
@@ -8738,17 +7726,15 @@ CREATE SEQUENCE bperson_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.bperson_id_seq OWNER TO mazvv;
-
 --
--- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 
 
 --
--- Name: calculation; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: calculation; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE calculation (
@@ -8759,10 +7745,8 @@ CREATE TABLE calculation (
 );
 
 
-ALTER TABLE test.calculation OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE calculation_id_seq
@@ -8773,17 +7757,15 @@ CREATE SEQUENCE calculation_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.calculation_id_seq OWNER TO mazvv;
-
 --
--- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE calculation_id_seq OWNED BY calculation.id;
 
 
 --
--- Name: campaign; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: campaign; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE campaign (
@@ -8798,10 +7780,8 @@ CREATE TABLE campaign (
 );
 
 
-ALTER TABLE test.campaign OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE campaign_id_seq
@@ -8812,17 +7792,15 @@ CREATE SEQUENCE campaign_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.campaign_id_seq OWNER TO mazvv;
-
 --
--- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE campaign_id_seq OWNED BY campaign.id;
 
 
 --
--- Name: cashflow; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: cashflow; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cashflow (
@@ -8837,10 +7815,8 @@ CREATE TABLE cashflow (
 );
 
 
-ALTER TABLE test.cashflow OWNER TO mazvv;
-
 --
--- Name: cashflow_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: cashflow_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE cashflow_id_seq
@@ -8851,17 +7827,15 @@ CREATE SEQUENCE cashflow_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.cashflow_id_seq OWNER TO mazvv;
-
 --
--- Name: cashflow_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: cashflow_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE cashflow_id_seq OWNED BY cashflow.id;
 
 
 --
--- Name: commission; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: commission; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE commission (
@@ -8876,10 +7850,8 @@ CREATE TABLE commission (
 );
 
 
-ALTER TABLE test.commission OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE commission_id_seq
@@ -8890,17 +7862,15 @@ CREATE SEQUENCE commission_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.commission_id_seq OWNER TO mazvv;
-
 --
--- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
 
 
 --
--- Name: company; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: company; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company (
@@ -8913,10 +7883,8 @@ CREATE TABLE company (
 );
 
 
-ALTER TABLE test.company OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE company_id_seq
@@ -8927,17 +7895,15 @@ CREATE SEQUENCE company_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.company_id_seq OWNER TO mazvv;
-
 --
--- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE company_id_seq OWNED BY company.id;
 
 
 --
--- Name: company_subaccount; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company_subaccount (
@@ -8946,10 +7912,8 @@ CREATE TABLE company_subaccount (
 );
 
 
-ALTER TABLE test.company_subaccount OWNER TO mazvv;
-
 --
--- Name: contact; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: contact; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contact (
@@ -8962,10 +7926,8 @@ CREATE TABLE contact (
 );
 
 
-ALTER TABLE test.contact OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE contact_id_seq
@@ -8976,17 +7938,15 @@ CREATE SEQUENCE contact_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.contact_id_seq OWNER TO mazvv;
-
 --
--- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
 
 
 --
--- Name: contract; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: contract; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract (
@@ -8999,10 +7959,8 @@ CREATE TABLE contract (
 );
 
 
-ALTER TABLE test.contract OWNER TO mazvv;
-
 --
--- Name: contract_commission; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: contract_commission; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract_commission (
@@ -9011,10 +7969,8 @@ CREATE TABLE contract_commission (
 );
 
 
-ALTER TABLE test.contract_commission OWNER TO mazvv;
-
 --
--- Name: contract_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: contract_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE contract_id_seq
@@ -9025,17 +7981,15 @@ CREATE SEQUENCE contract_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.contract_id_seq OWNER TO mazvv;
-
 --
--- Name: contract_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: contract_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE contract_id_seq OWNED BY contract.id;
 
 
 --
--- Name: country; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: country; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE country (
@@ -9046,10 +8000,8 @@ CREATE TABLE country (
 );
 
 
-ALTER TABLE test.country OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE country_id_seq
@@ -9060,17 +8012,15 @@ CREATE SEQUENCE country_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.country_id_seq OWNER TO mazvv;
-
 --
--- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
--- Name: crosspayment; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: crosspayment; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE crosspayment (
@@ -9081,10 +8031,8 @@ CREATE TABLE crosspayment (
 );
 
 
-ALTER TABLE test.crosspayment OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE crosspayment_id_seq
@@ -9095,17 +8043,15 @@ CREATE SEQUENCE crosspayment_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.crosspayment_id_seq OWNER TO mazvv;
-
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
 
 
 --
--- Name: currency; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: currency; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency (
@@ -9115,10 +8061,8 @@ CREATE TABLE currency (
 );
 
 
-ALTER TABLE test.currency OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE currency_id_seq
@@ -9129,17 +8073,15 @@ CREATE SEQUENCE currency_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.currency_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE currency_id_seq OWNED BY currency.id;
 
 
 --
--- Name: currency_rate; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: currency_rate; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency_rate (
@@ -9152,10 +8094,8 @@ CREATE TABLE currency_rate (
 );
 
 
-ALTER TABLE test.currency_rate OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE currency_rate_id_seq
@@ -9166,17 +8106,15 @@ CREATE SEQUENCE currency_rate_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.currency_rate_id_seq OWNER TO mazvv;
-
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
 
 
 --
--- Name: employee; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee (
@@ -9191,10 +8129,8 @@ CREATE TABLE employee (
 );
 
 
-ALTER TABLE test.employee OWNER TO mazvv;
-
 --
--- Name: employee_address; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_address; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_address (
@@ -9203,10 +8139,8 @@ CREATE TABLE employee_address (
 );
 
 
-ALTER TABLE test.employee_address OWNER TO mazvv;
-
 --
--- Name: employee_contact; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_contact; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_contact (
@@ -9215,10 +8149,8 @@ CREATE TABLE employee_contact (
 );
 
 
-ALTER TABLE test.employee_contact OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE employee_id_seq
@@ -9229,17 +8161,15 @@ CREATE SEQUENCE employee_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.employee_id_seq OWNER TO mazvv;
-
 --
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE employee_id_seq OWNED BY employee.id;
 
 
 --
--- Name: employee_notification; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_notification; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_notification (
@@ -9249,10 +8179,8 @@ CREATE TABLE employee_notification (
 );
 
 
-ALTER TABLE test.employee_notification OWNER TO mazvv;
-
 --
--- Name: employee_passport; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_passport; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_passport (
@@ -9261,10 +8189,8 @@ CREATE TABLE employee_passport (
 );
 
 
-ALTER TABLE test.employee_passport OWNER TO mazvv;
-
 --
--- Name: employee_subaccount; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_subaccount (
@@ -9273,10 +8199,8 @@ CREATE TABLE employee_subaccount (
 );
 
 
-ALTER TABLE test.employee_subaccount OWNER TO mazvv;
-
 --
--- Name: employee_upload; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_upload; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_upload (
@@ -9285,10 +8209,8 @@ CREATE TABLE employee_upload (
 );
 
 
-ALTER TABLE test.employee_upload OWNER TO mazvv;
-
 --
--- Name: foodcat; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: foodcat; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE foodcat (
@@ -9298,10 +8220,8 @@ CREATE TABLE foodcat (
 );
 
 
-ALTER TABLE test.foodcat OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE foodcat_id_seq
@@ -9312,17 +8232,15 @@ CREATE SEQUENCE foodcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.foodcat_id_seq OWNER TO mazvv;
-
 --
--- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
 
 
 --
--- Name: hotel; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: hotel; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotel (
@@ -9334,10 +8252,8 @@ CREATE TABLE hotel (
 );
 
 
-ALTER TABLE test.hotel OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE hotel_id_seq
@@ -9348,17 +8264,15 @@ CREATE SEQUENCE hotel_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.hotel_id_seq OWNER TO mazvv;
-
 --
--- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE hotel_id_seq OWNED BY hotel.id;
 
 
 --
--- Name: hotelcat; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: hotelcat; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotelcat (
@@ -9368,10 +8282,8 @@ CREATE TABLE hotelcat (
 );
 
 
-ALTER TABLE test.hotelcat OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE hotelcat_id_seq
@@ -9382,17 +8294,15 @@ CREATE SEQUENCE hotelcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.hotelcat_id_seq OWNER TO mazvv;
-
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
 
 
 --
--- Name: income; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: income; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income (
@@ -9406,10 +8316,8 @@ CREATE TABLE income (
 );
 
 
-ALTER TABLE test.income OWNER TO mazvv;
-
 --
--- Name: income_cashflow; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income_cashflow (
@@ -9418,10 +8326,8 @@ CREATE TABLE income_cashflow (
 );
 
 
-ALTER TABLE test.income_cashflow OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE income_id_seq
@@ -9432,17 +8338,15 @@ CREATE SEQUENCE income_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.income_id_seq OWNER TO mazvv;
-
 --
--- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: invoice; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: invoice; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice (
@@ -9456,10 +8360,8 @@ CREATE TABLE invoice (
 );
 
 
-ALTER TABLE test.invoice OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE invoice_id_seq
@@ -9470,17 +8372,15 @@ CREATE SEQUENCE invoice_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.invoice_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
--- Name: invoice_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: invoice_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice_item (
@@ -9494,10 +8394,8 @@ CREATE TABLE invoice_item (
 );
 
 
-ALTER TABLE test.invoice_item OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE invoice_item_id_seq
@@ -9508,17 +8406,15 @@ CREATE SEQUENCE invoice_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.invoice_item_id_seq OWNER TO mazvv;
-
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE invoice_item_id_seq OWNED BY invoice_item.id;
 
 
 --
--- Name: lead; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: lead; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead (
@@ -9532,10 +8428,8 @@ CREATE TABLE lead (
 );
 
 
-ALTER TABLE test.lead OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE lead_id_seq
@@ -9546,17 +8440,15 @@ CREATE SEQUENCE lead_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.lead_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
 
 
 --
--- Name: lead_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: lead_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_item (
@@ -9571,10 +8463,8 @@ CREATE TABLE lead_item (
 );
 
 
-ALTER TABLE test.lead_item OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE lead_item_id_seq
@@ -9585,17 +8475,15 @@ CREATE SEQUENCE lead_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.lead_item_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE lead_item_id_seq OWNED BY lead_item.id;
 
 
 --
--- Name: lead_offer; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: lead_offer; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_offer (
@@ -9611,10 +8499,8 @@ CREATE TABLE lead_offer (
 );
 
 
-ALTER TABLE test.lead_offer OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE lead_offer_id_seq
@@ -9625,17 +8511,15 @@ CREATE SEQUENCE lead_offer_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.lead_offer_id_seq OWNER TO mazvv;
-
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE lead_offer_id_seq OWNED BY lead_offer.id;
 
 
 --
--- Name: location; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: location; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE location (
@@ -9646,10 +8530,8 @@ CREATE TABLE location (
 );
 
 
-ALTER TABLE test.location OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE location_id_seq
@@ -9660,17 +8542,15 @@ CREATE SEQUENCE location_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.location_id_seq OWNER TO mazvv;
-
 --
--- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE location_id_seq OWNED BY location.id;
 
 
 --
--- Name: navigation; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: navigation; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE navigation (
@@ -9687,10 +8567,8 @@ CREATE TABLE navigation (
 );
 
 
-ALTER TABLE test.navigation OWNER TO mazvv;
-
 --
--- Name: navigation_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: navigation_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE navigation_id_seq
@@ -9701,17 +8579,15 @@ CREATE SEQUENCE navigation_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.navigation_id_seq OWNER TO mazvv;
-
 --
--- Name: navigation_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: navigation_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE navigation_id_seq OWNED BY navigation.id;
 
 
 --
--- Name: note; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: note; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note (
@@ -9722,10 +8598,8 @@ CREATE TABLE note (
 );
 
 
-ALTER TABLE test.note OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE note_id_seq
@@ -9736,17 +8610,15 @@ CREATE SEQUENCE note_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.note_id_seq OWNER TO mazvv;
-
 --
--- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE note_id_seq OWNED BY note.id;
 
 
 --
--- Name: note_resource; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: note_resource; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_resource (
@@ -9755,10 +8627,8 @@ CREATE TABLE note_resource (
 );
 
 
-ALTER TABLE test.note_resource OWNER TO mazvv;
-
 --
--- Name: note_upload; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: note_upload; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_upload (
@@ -9767,10 +8637,8 @@ CREATE TABLE note_upload (
 );
 
 
-ALTER TABLE test.note_upload OWNER TO mazvv;
-
 --
--- Name: notification; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: notification; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification (
@@ -9783,10 +8651,8 @@ CREATE TABLE notification (
 );
 
 
-ALTER TABLE test.notification OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE notification_id_seq
@@ -9797,17 +8663,15 @@ CREATE SEQUENCE notification_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.notification_id_seq OWNER TO mazvv;
-
 --
--- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
--- Name: notification_resource; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: notification_resource; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification_resource (
@@ -9816,10 +8680,8 @@ CREATE TABLE notification_resource (
 );
 
 
-ALTER TABLE test.notification_resource OWNER TO mazvv;
-
 --
--- Name: order; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: order; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "order" (
@@ -9834,10 +8696,8 @@ CREATE TABLE "order" (
 );
 
 
-ALTER TABLE test."order" OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE order_id_seq
@@ -9848,17 +8708,15 @@ CREATE SEQUENCE order_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.order_id_seq OWNER TO mazvv;
-
 --
--- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE order_id_seq OWNED BY "order".id;
 
 
 --
--- Name: order_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: order_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE order_item (
@@ -9877,10 +8735,8 @@ CREATE TABLE order_item (
 );
 
 
-ALTER TABLE test.order_item OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE order_item_id_seq
@@ -9891,17 +8747,15 @@ CREATE SEQUENCE order_item_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.order_item_id_seq OWNER TO mazvv;
-
 --
--- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
 
 
 --
--- Name: outgoing; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: outgoing; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing (
@@ -9915,10 +8769,8 @@ CREATE TABLE outgoing (
 );
 
 
-ALTER TABLE test.outgoing OWNER TO mazvv;
-
 --
--- Name: outgoing_cashflow; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing_cashflow (
@@ -9927,10 +8779,8 @@ CREATE TABLE outgoing_cashflow (
 );
 
 
-ALTER TABLE test.outgoing_cashflow OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE outgoing_id_seq
@@ -9941,17 +8791,15 @@ CREATE SEQUENCE outgoing_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.outgoing_id_seq OWNER TO mazvv;
-
 --
--- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
 
 
 --
--- Name: passport; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: passport; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport (
@@ -9965,10 +8813,8 @@ CREATE TABLE passport (
 );
 
 
-ALTER TABLE test.passport OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE passport_id_seq
@@ -9979,17 +8825,15 @@ CREATE SEQUENCE passport_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.passport_id_seq OWNER TO mazvv;
-
 --
--- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE passport_id_seq OWNED BY passport.id;
 
 
 --
--- Name: passport_upload; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: passport_upload; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport_upload (
@@ -9998,10 +8842,8 @@ CREATE TABLE passport_upload (
 );
 
 
-ALTER TABLE test.passport_upload OWNER TO mazvv;
-
 --
--- Name: permision; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: permision; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE permision (
@@ -10014,10 +8856,8 @@ CREATE TABLE permision (
 );
 
 
-ALTER TABLE test.permision OWNER TO mazvv;
-
 --
--- Name: permision_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: permision_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE permision_id_seq
@@ -10028,17 +8868,15 @@ CREATE SEQUENCE permision_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.permision_id_seq OWNER TO mazvv;
-
 --
--- Name: permision_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: permision_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE permision_id_seq OWNED BY permision.id;
 
 
 --
--- Name: person; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person (
@@ -10056,10 +8894,8 @@ CREATE TABLE person (
 );
 
 
-ALTER TABLE test.person OWNER TO mazvv;
-
 --
--- Name: person_address; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_address; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_address (
@@ -10068,10 +8904,8 @@ CREATE TABLE person_address (
 );
 
 
-ALTER TABLE test.person_address OWNER TO mazvv;
-
 --
--- Name: person_category; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_category; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_category (
@@ -10081,10 +8915,8 @@ CREATE TABLE person_category (
 );
 
 
-ALTER TABLE test.person_category OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE person_category_id_seq
@@ -10095,17 +8927,15 @@ CREATE SEQUENCE person_category_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.person_category_id_seq OWNER TO mazvv;
-
 --
--- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE person_category_id_seq OWNED BY person_category.id;
 
 
 --
--- Name: person_contact; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_contact; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_contact (
@@ -10114,10 +8944,8 @@ CREATE TABLE person_contact (
 );
 
 
-ALTER TABLE test.person_contact OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE person_id_seq
@@ -10128,17 +8956,15 @@ CREATE SEQUENCE person_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.person_id_seq OWNER TO mazvv;
-
 --
--- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE person_id_seq OWNED BY person.id;
 
 
 --
--- Name: person_order_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_order_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_order_item (
@@ -10147,10 +8973,8 @@ CREATE TABLE person_order_item (
 );
 
 
-ALTER TABLE test.person_order_item OWNER TO mazvv;
-
 --
--- Name: person_passport; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_passport; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_passport (
@@ -10159,10 +8983,8 @@ CREATE TABLE person_passport (
 );
 
 
-ALTER TABLE test.person_passport OWNER TO mazvv;
-
 --
--- Name: person_subaccount; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_subaccount (
@@ -10171,10 +8993,8 @@ CREATE TABLE person_subaccount (
 );
 
 
-ALTER TABLE test.person_subaccount OWNER TO mazvv;
-
 --
--- Name: position; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: position; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "position" (
@@ -10185,10 +9005,8 @@ CREATE TABLE "position" (
 );
 
 
-ALTER TABLE test."position" OWNER TO mazvv;
-
 --
--- Name: position_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: position_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE position_id_seq
@@ -10199,17 +9017,15 @@ CREATE SEQUENCE position_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.position_id_seq OWNER TO mazvv;
-
 --
--- Name: position_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: position_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE position_id_seq OWNED BY "position".id;
 
 
 --
--- Name: region; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: region; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE region (
@@ -10220,10 +9036,8 @@ CREATE TABLE region (
 );
 
 
-ALTER TABLE test.region OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE region_id_seq
@@ -10234,17 +9048,15 @@ CREATE SEQUENCE region_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.region_id_seq OWNER TO mazvv;
-
 --
--- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE region_id_seq OWNED BY region.id;
 
 
 --
--- Name: resource; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: resource; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource (
@@ -10255,10 +9067,8 @@ CREATE TABLE resource (
 );
 
 
-ALTER TABLE test.resource OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE resource_id_seq
@@ -10269,17 +9079,15 @@ CREATE SEQUENCE resource_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.resource_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
 
 
 --
--- Name: resource_log; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: resource_log; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_log (
@@ -10291,10 +9099,8 @@ CREATE TABLE resource_log (
 );
 
 
-ALTER TABLE test.resource_log OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE resource_log_id_seq
@@ -10305,17 +9111,15 @@ CREATE SEQUENCE resource_log_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.resource_log_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_type (
@@ -10331,10 +9135,8 @@ CREATE TABLE resource_type (
 );
 
 
-ALTER TABLE test.resource_type OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE resource_type_id_seq
@@ -10345,17 +9147,15 @@ CREATE SEQUENCE resource_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.resource_type_id_seq OWNER TO mazvv;
-
 --
--- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
--- Name: roomcat; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: roomcat; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE roomcat (
@@ -10365,10 +9165,8 @@ CREATE TABLE roomcat (
 );
 
 
-ALTER TABLE test.roomcat OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE roomcat_id_seq
@@ -10379,17 +9177,15 @@ CREATE SEQUENCE roomcat_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.roomcat_id_seq OWNER TO mazvv;
-
 --
--- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
 
 
 --
--- Name: service; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: service; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE service (
@@ -10402,10 +9198,8 @@ CREATE TABLE service (
 );
 
 
-ALTER TABLE test.service OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE service_id_seq
@@ -10416,17 +9210,15 @@ CREATE SEQUENCE service_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.service_id_seq OWNER TO mazvv;
-
 --
--- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE service_id_seq OWNED BY service.id;
 
 
 --
--- Name: spassport; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: spassport; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport (
@@ -10440,10 +9232,8 @@ CREATE TABLE spassport (
 );
 
 
-ALTER TABLE test.spassport OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE spassport_id_seq
@@ -10454,17 +9244,15 @@ CREATE SEQUENCE spassport_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.spassport_id_seq OWNER TO mazvv;
-
 --
--- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE spassport_id_seq OWNED BY spassport.id;
 
 
 --
--- Name: spassport_order_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport_order_item (
@@ -10473,10 +9261,8 @@ CREATE TABLE spassport_order_item (
 );
 
 
-ALTER TABLE test.spassport_order_item OWNER TO mazvv;
-
 --
--- Name: structure; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure (
@@ -10488,10 +9274,8 @@ CREATE TABLE structure (
 );
 
 
-ALTER TABLE test.structure OWNER TO mazvv;
-
 --
--- Name: structure_address; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_address; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_address (
@@ -10500,10 +9284,8 @@ CREATE TABLE structure_address (
 );
 
 
-ALTER TABLE test.structure_address OWNER TO mazvv;
-
 --
--- Name: structure_bank_detail; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_bank_detail (
@@ -10512,10 +9294,8 @@ CREATE TABLE structure_bank_detail (
 );
 
 
-ALTER TABLE test.structure_bank_detail OWNER TO mazvv;
-
 --
--- Name: structure_contact; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_contact; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_contact (
@@ -10524,10 +9304,8 @@ CREATE TABLE structure_contact (
 );
 
 
-ALTER TABLE test.structure_contact OWNER TO mazvv;
-
 --
--- Name: structure_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: structure_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE structure_id_seq
@@ -10538,17 +9316,15 @@ CREATE SEQUENCE structure_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.structure_id_seq OWNER TO mazvv;
-
 --
--- Name: structure_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: structure_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE structure_id_seq OWNED BY structure.id;
 
 
 --
--- Name: subaccount; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: subaccount; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE subaccount (
@@ -10561,10 +9337,8 @@ CREATE TABLE subaccount (
 );
 
 
-ALTER TABLE test.subaccount OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE subaccount_id_seq
@@ -10575,17 +9349,15 @@ CREATE SEQUENCE subaccount_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.subaccount_id_seq OWNER TO mazvv;
-
 --
--- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE subaccount_id_seq OWNED BY subaccount.id;
 
 
 --
--- Name: supplier; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier (
@@ -10598,10 +9370,8 @@ CREATE TABLE supplier (
 );
 
 
-ALTER TABLE test.supplier OWNER TO mazvv;
-
 --
--- Name: supplier_bank_detail; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bank_detail (
@@ -10610,10 +9380,8 @@ CREATE TABLE supplier_bank_detail (
 );
 
 
-ALTER TABLE test.supplier_bank_detail OWNER TO mazvv;
-
 --
--- Name: supplier_bperson; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bperson (
@@ -10622,10 +9390,8 @@ CREATE TABLE supplier_bperson (
 );
 
 
-ALTER TABLE test.supplier_bperson OWNER TO mazvv;
-
 --
--- Name: supplier_contract; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_contract (
@@ -10634,10 +9400,8 @@ CREATE TABLE supplier_contract (
 );
 
 
-ALTER TABLE test.supplier_contract OWNER TO mazvv;
-
 --
--- Name: supplier_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: supplier_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE supplier_id_seq
@@ -10648,17 +9412,15 @@ CREATE SEQUENCE supplier_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.supplier_id_seq OWNER TO mazvv;
-
 --
--- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE supplier_id_seq OWNED BY supplier.id;
 
 
 --
--- Name: supplier_subaccount; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_subaccount (
@@ -10667,10 +9429,8 @@ CREATE TABLE supplier_subaccount (
 );
 
 
-ALTER TABLE test.supplier_subaccount OWNER TO mazvv;
-
 --
--- Name: supplier_type; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_type; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_type (
@@ -10681,10 +9441,8 @@ CREATE TABLE supplier_type (
 );
 
 
-ALTER TABLE test.supplier_type OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE supplier_type_id_seq
@@ -10695,17 +9453,15 @@ CREATE SEQUENCE supplier_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.supplier_type_id_seq OWNER TO mazvv;
-
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
--- Name: task; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: task; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task (
@@ -10720,10 +9476,8 @@ CREATE TABLE task (
 );
 
 
-ALTER TABLE test.task OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE task_id_seq
@@ -10734,17 +9488,15 @@ CREATE SEQUENCE task_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.task_id_seq OWNER TO mazvv;
-
 --
--- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE task_id_seq OWNED BY task.id;
 
 
 --
--- Name: task_resource; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: task_resource; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_resource (
@@ -10753,10 +9505,8 @@ CREATE TABLE task_resource (
 );
 
 
-ALTER TABLE test.task_resource OWNER TO mazvv;
-
 --
--- Name: task_upload; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: task_upload; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_upload (
@@ -10765,10 +9515,8 @@ CREATE TABLE task_upload (
 );
 
 
-ALTER TABLE test.task_upload OWNER TO mazvv;
-
 --
--- Name: ticket; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: ticket; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket (
@@ -10788,10 +9536,8 @@ CREATE TABLE ticket (
 );
 
 
-ALTER TABLE test.ticket OWNER TO mazvv;
-
 --
--- Name: ticket_class; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: ticket_class; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_class (
@@ -10801,10 +9547,8 @@ CREATE TABLE ticket_class (
 );
 
 
-ALTER TABLE test.ticket_class OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE ticket_class_id_seq
@@ -10815,17 +9559,15 @@ CREATE SEQUENCE ticket_class_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.ticket_class_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE ticket_class_id_seq OWNED BY ticket_class.id;
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE ticket_id_seq
@@ -10836,17 +9578,15 @@ CREATE SEQUENCE ticket_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.ticket_id_seq OWNER TO mazvv;
-
 --
--- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE ticket_id_seq OWNED BY ticket.id;
 
 
 --
--- Name: ticket_order_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_order_item (
@@ -10855,10 +9595,8 @@ CREATE TABLE ticket_order_item (
 );
 
 
-ALTER TABLE test.ticket_order_item OWNER TO mazvv;
-
 --
--- Name: tour; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: tour; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour (
@@ -10883,10 +9621,8 @@ CREATE TABLE tour (
 );
 
 
-ALTER TABLE test.tour OWNER TO mazvv;
-
 --
--- Name: tour_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE tour_id_seq
@@ -10897,17 +9633,15 @@ CREATE SEQUENCE tour_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.tour_id_seq OWNER TO mazvv;
-
 --
--- Name: tour_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE tour_id_seq OWNED BY tour.id;
 
 
 --
--- Name: tour_order_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour_order_item (
@@ -10916,10 +9650,8 @@ CREATE TABLE tour_order_item (
 );
 
 
-ALTER TABLE test.tour_order_item OWNER TO mazvv;
-
 --
--- Name: transfer; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: transfer; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transfer (
@@ -10929,10 +9661,8 @@ CREATE TABLE transfer (
 );
 
 
-ALTER TABLE test.transfer OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq
@@ -10943,17 +9673,15 @@ CREATE SEQUENCE transfer_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.transfer_id_seq OWNER TO mazvv;
-
 --
--- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq OWNED BY transfer.id;
 
 
 --
--- Name: transport; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: transport; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transport (
@@ -10963,10 +9691,8 @@ CREATE TABLE transport (
 );
 
 
-ALTER TABLE test.transport OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE transport_id_seq
@@ -10977,17 +9703,15 @@ CREATE SEQUENCE transport_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.transport_id_seq OWNER TO mazvv;
-
 --
--- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE transport_id_seq OWNED BY transport.id;
 
 
 --
--- Name: upload; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: upload; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE upload (
@@ -11001,10 +9725,8 @@ CREATE TABLE upload (
 );
 
 
-ALTER TABLE test.upload OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE upload_id_seq
@@ -11015,17 +9737,15 @@ CREATE SEQUENCE upload_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.upload_id_seq OWNER TO mazvv;
-
 --
--- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE upload_id_seq OWNED BY upload.id;
 
 
 --
--- Name: user; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: user; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -11038,10 +9758,8 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE test."user" OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE user_id_seq
@@ -11052,17 +9770,15 @@ CREATE SEQUENCE user_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.user_id_seq OWNER TO mazvv;
-
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
--- Name: vat; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: vat; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE vat (
@@ -11077,10 +9793,8 @@ CREATE TABLE vat (
 );
 
 
-ALTER TABLE test.vat OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE vat_id_seq
@@ -11091,17 +9805,15 @@ CREATE SEQUENCE vat_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.vat_id_seq OWNER TO mazvv;
-
 --
--- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE vat_id_seq OWNED BY vat.id;
 
 
 --
--- Name: visa; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: visa; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa (
@@ -11115,10 +9827,8 @@ CREATE TABLE visa (
 );
 
 
-ALTER TABLE test.visa OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE; Schema: test; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE; Schema: test; Owner: -
 --
 
 CREATE SEQUENCE visa_id_seq
@@ -11129,17 +9839,15 @@ CREATE SEQUENCE visa_id_seq
     CACHE 1;
 
 
-ALTER TABLE test.visa_id_seq OWNER TO mazvv;
-
 --
--- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
 --
 
 ALTER SEQUENCE visa_id_seq OWNED BY visa.id;
 
 
 --
--- Name: visa_order_item; Type: TABLE; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa_order_item (
@@ -11148,453 +9856,451 @@ CREATE TABLE visa_order_item (
 );
 
 
-ALTER TABLE test.visa_order_item OWNER TO mazvv;
-
 SET search_path = company, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY account ALTER COLUMN id SET DEFAULT nextval('account_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY account_item ALTER COLUMN id SET DEFAULT nextval('account_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('employees_appointments_h_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY calculation ALTER COLUMN id SET DEFAULT nextval('calculation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY campaign ALTER COLUMN id SET DEFAULT nextval('campaign_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY cashflow ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY contract ALTER COLUMN id SET DEFAULT nextval('licence_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('currency_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rate_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('employee_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY income ALTER COLUMN id SET DEFAULT nextval('income_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item ALTER COLUMN id SET DEFAULT nextval('invoice_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_item ALTER COLUMN id SET DEFAULT nextval('lead_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer ALTER COLUMN id SET DEFAULT nextval('lead_offer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navigations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('positions_permisions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_category ALTER COLUMN id SET DEFAULT nextval('person_category_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY spassport ALTER COLUMN id SET DEFAULT nextval('spassport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY subaccount ALTER COLUMN id SET DEFAULT nextval('subaccount_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('touroperator_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket ALTER COLUMN id SET DEFAULT nextval('ticket_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class ALTER COLUMN id SET DEFAULT nextval('ticket_class_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY transport ALTER COLUMN id SET DEFAULT nextval('transport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY uni_list ALTER COLUMN id SET DEFAULT nextval('uni_list_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY upload ALTER COLUMN id SET DEFAULT nextval('upload_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
@@ -11603,441 +10309,441 @@ ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclas
 SET search_path = demo_ru, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY account ALTER COLUMN id SET DEFAULT nextval('account_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY account_item ALTER COLUMN id SET DEFAULT nextval('account_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('appointment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY calculation ALTER COLUMN id SET DEFAULT nextval('calculation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY campaign ALTER COLUMN id SET DEFAULT nextval('campaign_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY cashflow ALTER COLUMN id SET DEFAULT nextval('cashflow_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY contract ALTER COLUMN id SET DEFAULT nextval('contract_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('currency_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rate_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('employee_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY income ALTER COLUMN id SET DEFAULT nextval('income_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item ALTER COLUMN id SET DEFAULT nextval('invoice_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_item ALTER COLUMN id SET DEFAULT nextval('lead_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer ALTER COLUMN id SET DEFAULT nextval('lead_offer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('navigation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('permision_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_category ALTER COLUMN id SET DEFAULT nextval('person_category_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('position_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY spassport ALTER COLUMN id SET DEFAULT nextval('spassport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structure_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY subaccount ALTER COLUMN id SET DEFAULT nextval('subaccount_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('supplier_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket ALTER COLUMN id SET DEFAULT nextval('ticket_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class ALTER COLUMN id SET DEFAULT nextval('ticket_class_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY transport ALTER COLUMN id SET DEFAULT nextval('transport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY upload ALTER COLUMN id SET DEFAULT nextval('upload_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
@@ -12046,441 +10752,441 @@ ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclas
 SET search_path = public, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY account ALTER COLUMN id SET DEFAULT nextval('account_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY account_item ALTER COLUMN id SET DEFAULT nextval('account_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('employees_appointments_h_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY calculation ALTER COLUMN id SET DEFAULT nextval('calculation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY campaign ALTER COLUMN id SET DEFAULT nextval('campaign_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cashflow ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contract ALTER COLUMN id SET DEFAULT nextval('licence_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('currency_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rate_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('employee_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY income ALTER COLUMN id SET DEFAULT nextval('income_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item ALTER COLUMN id SET DEFAULT nextval('invoice_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_item ALTER COLUMN id SET DEFAULT nextval('lead_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer ALTER COLUMN id SET DEFAULT nextval('lead_offer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navigations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('positions_permisions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_category ALTER COLUMN id SET DEFAULT nextval('person_category_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY spassport ALTER COLUMN id SET DEFAULT nextval('spassport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subaccount ALTER COLUMN id SET DEFAULT nextval('subaccount_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('touroperator_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket ALTER COLUMN id SET DEFAULT nextval('ticket_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class ALTER COLUMN id SET DEFAULT nextval('ticket_class_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY transport ALTER COLUMN id SET DEFAULT nextval('transport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY upload ALTER COLUMN id SET DEFAULT nextval('upload_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
@@ -12489,441 +11195,441 @@ ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclas
 SET search_path = test, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY account ALTER COLUMN id SET DEFAULT nextval('account_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY account_item ALTER COLUMN id SET DEFAULT nextval('account_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('appointment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY calculation ALTER COLUMN id SET DEFAULT nextval('calculation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY campaign ALTER COLUMN id SET DEFAULT nextval('campaign_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY cashflow ALTER COLUMN id SET DEFAULT nextval('cashflow_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY contract ALTER COLUMN id SET DEFAULT nextval('contract_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('currency_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rate_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('employee_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY income ALTER COLUMN id SET DEFAULT nextval('income_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item ALTER COLUMN id SET DEFAULT nextval('invoice_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_item ALTER COLUMN id SET DEFAULT nextval('lead_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer ALTER COLUMN id SET DEFAULT nextval('lead_offer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('navigation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('permision_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_category ALTER COLUMN id SET DEFAULT nextval('person_category_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('position_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY spassport ALTER COLUMN id SET DEFAULT nextval('spassport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structure_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY subaccount ALTER COLUMN id SET DEFAULT nextval('subaccount_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('supplier_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket ALTER COLUMN id SET DEFAULT nextval('ticket_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class ALTER COLUMN id SET DEFAULT nextval('ticket_class_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY transport ALTER COLUMN id SET DEFAULT nextval('transport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY upload ALTER COLUMN id SET DEFAULT nextval('upload_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: test; Owner: mazvv
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
@@ -12932,7 +11638,7 @@ ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclas
 SET search_path = company, pg_catalog;
 
 --
--- Data for Name: accomodation; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY accomodation (id, resource_id, name) FROM stdin;
@@ -12940,14 +11646,14 @@ COPY accomodation (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('accomodation_id_seq', 1, true);
 
 
 --
--- Data for Name: account; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: account; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY account (id, resource_id, currency_id, account_type, name, display_text, descr, status) FROM stdin;
@@ -12955,14 +11661,14 @@ COPY account (id, resource_id, currency_id, account_type, name, display_text, de
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 
 --
--- Data for Name: account_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: account_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY account_item (id, resource_id, name, parent_id, type, status, descr) FROM stdin;
@@ -12970,14 +11676,14 @@ COPY account_item (id, resource_id, name, parent_id, type, status, descr) FROM s
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('account_item_id_seq', 1, true);
 
 
 --
--- Data for Name: address; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: address; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
@@ -12985,14 +11691,14 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('address_id_seq', 1, true);
 
 
 --
--- Data for Name: advsource; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: advsource; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY advsource (id, resource_id, name) FROM stdin;
@@ -13000,14 +11706,14 @@ COPY advsource (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
--- Data for Name: appointment; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: appointment; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary, date) FROM stdin;
@@ -13016,7 +11722,7 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 
 
 --
--- Data for Name: bank; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: bank; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY bank (id, resource_id, name) FROM stdin;
@@ -13024,7 +11730,7 @@ COPY bank (id, resource_id, name) FROM stdin;
 
 
 --
--- Data for Name: bank_address; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: bank_address; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY bank_address (bank_id, address_id) FROM stdin;
@@ -13032,7 +11738,7 @@ COPY bank_address (bank_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: bank_detail; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: bank_detail; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
@@ -13040,21 +11746,21 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_detail_id_seq', 1, true);
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_id_seq', 1, true);
 
 
 --
--- Data for Name: bperson; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: bperson; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY bperson (id, resource_id, first_name, last_name, second_name, position_name, descr, status) FROM stdin;
@@ -13062,7 +11768,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 
 
 --
--- Data for Name: bperson_contact; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: bperson_contact; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY bperson_contact (bperson_id, contact_id) FROM stdin;
@@ -13070,14 +11776,14 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 
 
 --
--- Data for Name: calculation; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: calculation; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
@@ -13085,14 +11791,14 @@ COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 
 
 --
--- Data for Name: campaign; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: campaign; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
@@ -13100,14 +11806,14 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('campaign_id_seq', 1, true);
 
 
 --
--- Data for Name: cashflow; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: cashflow; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, date, vat) FROM stdin;
@@ -13115,7 +11821,7 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, d
 
 
 --
--- Data for Name: commission; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: commission; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY commission (id, resource_id, service_id, percentage, price, currency_id, descr) FROM stdin;
@@ -13123,28 +11829,28 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('commission_id_seq', 1, true);
 
 
 --
--- Name: companies_counter; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: companies_counter; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('companies_counter', 1065, true);
 
 
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 
 
 --
--- Data for Name: company; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: company; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
@@ -13153,14 +11859,14 @@ COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('company_id_seq', 1, true);
 
 
 --
--- Data for Name: company_subaccount; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: company_subaccount; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY company_subaccount (company_id, subaccount_id) FROM stdin;
@@ -13168,7 +11874,7 @@ COPY company_subaccount (company_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: contact; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: contact; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
@@ -13176,14 +11882,14 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('contact_id_seq', 1, true);
 
 
 --
--- Data for Name: contract; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: contract; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
@@ -13191,7 +11897,7 @@ COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
 
 
 --
--- Data for Name: contract_commission; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: contract_commission; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY contract_commission (contract_id, commission_id) FROM stdin;
@@ -13199,7 +11905,7 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: country; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY country (id, resource_id, iso_code, name) FROM stdin;
@@ -13214,14 +11920,14 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('country_id_seq', 11, true);
 
 
 --
--- Data for Name: crosspayment; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
@@ -13229,14 +11935,14 @@ COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('crosspayment_id_seq', 1, true);
 
 
 --
--- Data for Name: currency; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: currency; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY currency (id, resource_id, iso_code) FROM stdin;
@@ -13250,14 +11956,14 @@ COPY currency (id, resource_id, iso_code) FROM stdin;
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_id_seq', 57, true);
 
 
 --
--- Data for Name: currency_rate; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: currency_rate; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM stdin;
@@ -13265,14 +11971,14 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_rate_id_seq', 1, true);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismissal_date, photo_upload_id) FROM stdin;
@@ -13281,7 +11987,7 @@ COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismiss
 
 
 --
--- Data for Name: employee_address; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee_address; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee_address (employee_id, address_id) FROM stdin;
@@ -13289,7 +11995,7 @@ COPY employee_address (employee_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: employee_contact; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee_contact; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee_contact (employee_id, contact_id) FROM stdin;
@@ -13297,14 +12003,14 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('employee_id_seq', 2, true);
 
 
 --
--- Data for Name: employee_notification; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee_notification (employee_id, notification_id, status) FROM stdin;
@@ -13312,7 +12018,7 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 
 
 --
--- Data for Name: employee_passport; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee_passport (employee_id, passport_id) FROM stdin;
@@ -13320,7 +12026,7 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
@@ -13328,7 +12034,7 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: employee_upload; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: employee_upload; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY employee_upload (employee_id, upload_id) FROM stdin;
@@ -13336,14 +12042,14 @@ COPY employee_upload (employee_id, upload_id) FROM stdin;
 
 
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('employees_appointments_h_id_seq', 12, true);
 
 
 --
--- Data for Name: foodcat; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY foodcat (id, resource_id, name) FROM stdin;
@@ -13351,14 +12057,14 @@ COPY foodcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('foodcat_id_seq', 1, true);
 
 
 --
--- Data for Name: hotel; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: hotel; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
@@ -13366,14 +12072,14 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('hotel_id_seq', 1, true);
 
 
 --
--- Data for Name: hotelcat; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY hotelcat (id, resource_id, name) FROM stdin;
@@ -13381,14 +12087,14 @@ COPY hotelcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('hotelcat_id_seq', 1, true);
 
 
 --
--- Data for Name: income; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: income; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FROM stdin;
@@ -13396,7 +12102,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FRO
 
 
 --
--- Data for Name: income_cashflow; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: income_cashflow; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY income_cashflow (income_id, cashflow_id) FROM stdin;
@@ -13404,14 +12110,14 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('income_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: invoice; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) FROM stdin;
@@ -13419,14 +12125,14 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: invoice_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) FROM stdin;
@@ -13434,14 +12140,14 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: lead; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr) FROM stdin;
@@ -13449,14 +12155,14 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: lead_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, price_to, descr) FROM stdin;
@@ -13464,14 +12170,14 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_offer; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id, price, status, descr) FROM stdin;
@@ -13479,21 +12185,21 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_offer_id_seq', 1, true);
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: licence_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('licence_id_seq', 59, true);
 
 
 --
--- Data for Name: location; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: location; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY location (id, resource_id, name, region_id) FROM stdin;
@@ -13501,14 +12207,14 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('location_id_seq', 1, true);
 
 
 --
--- Data for Name: navigation; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: navigation; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before, action) FROM stdin;
@@ -13572,7 +12278,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 
 
 --
--- Data for Name: note; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: note; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY note (id, resource_id, title, descr) FROM stdin;
@@ -13580,14 +12286,14 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('note_id_seq', 1, true);
 
 
 --
--- Data for Name: note_resource; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: note_resource; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY note_resource (note_id, resource_id) FROM stdin;
@@ -13595,7 +12301,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: note_upload; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: note_upload; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY note_upload (note_id, upload_id) FROM stdin;
@@ -13603,7 +12309,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: notification; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: notification; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
@@ -13611,14 +12317,14 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('notification_id_seq', 1, true);
 
 
 --
--- Data for Name: notification_resource; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
@@ -13626,7 +12332,7 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: order; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead_id, status) FROM stdin;
@@ -13634,14 +12340,14 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('order_id_seq', 1, true);
 
 
 --
--- Data for Name: order_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: order_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY order_item (id, resource_id, order_id, service_id, currency_id, price, status, status_date, status_info, supplier_id, discount_sum, discount_percent) FROM stdin;
@@ -13649,14 +12355,14 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('order_item_id_seq', 1, true);
 
 
 --
--- Data for Name: outgoing; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr) FROM stdin;
@@ -13664,7 +12370,7 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr
 
 
 --
--- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
@@ -13672,14 +12378,14 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('outgoing_id_seq', 1, true);
 
 
 --
--- Data for Name: passport; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: passport; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY passport (id, country_id, num, descr, resource_id, end_date, passport_type) FROM stdin;
@@ -13687,14 +12393,14 @@ COPY passport (id, country_id, num, descr, resource_id, end_date, passport_type)
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('passport_id_seq', 1, true);
 
 
 --
--- Data for Name: passport_upload; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: passport_upload; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY passport_upload (passport_id, upload_id) FROM stdin;
@@ -13702,7 +12408,7 @@ COPY passport_upload (passport_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: permision; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: permision; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY permision (id, resource_type_id, position_id, permisions, structure_id, scope_type) FROM stdin;
@@ -13774,7 +12480,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 
 
 --
--- Data for Name: person; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person (id, resource_id, first_name, last_name, second_name, birthday, gender, descr, person_category_id, email_subscription, sms_subscription) FROM stdin;
@@ -13782,7 +12488,7 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 
 
 --
--- Data for Name: person_address; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person_address; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person_address (person_id, address_id) FROM stdin;
@@ -13790,7 +12496,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: person_category; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person_category; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person_category (id, resource_id, name) FROM stdin;
@@ -13798,14 +12504,14 @@ COPY person_category (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('person_category_id_seq', 1, true);
 
 
 --
--- Data for Name: person_contact; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person_contact (person_id, contact_id) FROM stdin;
@@ -13813,14 +12519,14 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('person_id_seq', 1, true);
 
 
 --
--- Data for Name: person_order_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person_order_item (order_item_id, person_id) FROM stdin;
@@ -13828,7 +12534,7 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 
 
 --
--- Data for Name: person_passport; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person_passport; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person_passport (person_id, passport_id) FROM stdin;
@@ -13836,7 +12542,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: person_subaccount; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY person_subaccount (person_id, subaccount_id) FROM stdin;
@@ -13844,7 +12550,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: position; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: position; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY "position" (id, resource_id, structure_id, name) FROM stdin;
@@ -13853,21 +12559,21 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 
 
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('positions_navigations_id_seq', 236, true);
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('positions_permisions_id_seq', 296, true);
 
 
 --
--- Data for Name: region; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: region; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY region (id, resource_id, country_id, name) FROM stdin;
@@ -13875,14 +12581,14 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('region_id_seq', 1, true);
 
 
 --
--- Data for Name: resource; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: resource; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
@@ -14861,14 +13567,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2790, true);
 
 
 --
--- Data for Name: resource_log; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
@@ -14957,14 +13663,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_log_id_seq', 7752, true);
 
 
 --
--- Data for Name: resource_type; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, descr, settings, status) FROM stdin;
@@ -15036,14 +13742,14 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_type_id_seq', 158, true);
 
 
 --
--- Data for Name: roomcat; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY roomcat (id, resource_id, name) FROM stdin;
@@ -15051,14 +13757,14 @@ COPY roomcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('roomcat_id_seq', 1, true);
 
 
 --
--- Data for Name: service; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: service; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY service (id, resource_id, name, descr, display_text, resource_type_id) FROM stdin;
@@ -15070,14 +13776,14 @@ COPY service (id, resource_id, name, descr, display_text, resource_type_id) FROM
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('service_id_seq', 7, true);
 
 
 --
--- Data for Name: spassport; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: spassport; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
@@ -15085,14 +13791,14 @@ COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_da
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('spassport_id_seq', 1, true);
 
 
 --
--- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
@@ -15100,7 +13806,7 @@ COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
 
 
 --
--- Data for Name: structure; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: structure; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
@@ -15109,7 +13815,7 @@ COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
 
 
 --
--- Data for Name: structure_address; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: structure_address; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY structure_address (structure_id, address_id) FROM stdin;
@@ -15117,7 +13823,7 @@ COPY structure_address (structure_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
@@ -15125,7 +13831,7 @@ COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: structure_contact; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: structure_contact; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY structure_contact (structure_id, contact_id) FROM stdin;
@@ -15133,14 +13839,14 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 
 
 --
--- Name: structures_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('structures_id_seq', 2, false);
 
 
 --
--- Data for Name: subaccount; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: subaccount; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
@@ -15148,14 +13854,14 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('subaccount_id_seq', 1, true);
 
 
 --
--- Data for Name: supplier; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: supplier; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdin;
@@ -15163,7 +13869,7 @@ COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdi
 
 
 --
--- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
@@ -15171,7 +13877,7 @@ COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
@@ -15179,7 +13885,7 @@ COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_contract; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: supplier_contract; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY supplier_contract (supplier_id, contract_id) FROM stdin;
@@ -15187,7 +13893,7 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
@@ -15195,7 +13901,7 @@ COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_type; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: supplier_type; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY supplier_type (id, resource_id, name, descr) FROM stdin;
@@ -15203,14 +13909,14 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
 
 
 --
--- Data for Name: task; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: task; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminder) FROM stdin;
@@ -15218,14 +13924,14 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('task_id_seq', 1, true);
 
 
 --
--- Data for Name: task_resource; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: task_resource; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
@@ -15233,7 +13939,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: task_upload; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: task_upload; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY task_upload (task_id, upload_id) FROM stdin;
@@ -15241,7 +13947,7 @@ COPY task_upload (task_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: ticket; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: ticket; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_id, transport_id, start_dt, start_additional_info, end_dt, end_additional_info, adults, children, descr) FROM stdin;
@@ -15249,7 +13955,7 @@ COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_i
 
 
 --
--- Data for Name: ticket_class; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: ticket_class; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY ticket_class (id, resource_id, name) FROM stdin;
@@ -15257,21 +13963,21 @@ COPY ticket_class (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_class_id_seq', 1, true);
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_id_seq', 1, true);
 
 
 --
--- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
@@ -15279,7 +13985,7 @@ COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
 
 
 --
--- Data for Name: tour; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: tour; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, adults, children, start_date, end_date, descr, end_transport_id, start_transport_id, transfer_id, end_additional_info, start_additional_info) FROM stdin;
@@ -15287,14 +13993,14 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 
 
 --
--- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('tour_id_seq1', 28, true);
 
 
 --
--- Data for Name: tour_order_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: tour_order_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY tour_order_item (order_item_id, tour_id) FROM stdin;
@@ -15302,14 +14008,14 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 
 
 --
--- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('touroperator_id_seq', 102, true);
 
 
 --
--- Data for Name: transfer; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: transfer; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY transfer (id, resource_id, name) FROM stdin;
@@ -15317,21 +14023,21 @@ COPY transfer (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq', 1, true);
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: transfer_id_seq1; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq1', 3, true);
 
 
 --
--- Data for Name: transport; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: transport; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY transport (id, resource_id, name) FROM stdin;
@@ -15339,14 +14045,14 @@ COPY transport (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('transport_id_seq', 1, true);
 
 
 --
--- Data for Name: uni_list; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: uni_list; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY uni_list (id, resource_id, name) FROM stdin;
@@ -15354,14 +14060,14 @@ COPY uni_list (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: uni_list_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: uni_list_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('uni_list_id_seq', 1, false);
 
 
 --
--- Data for Name: upload; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: upload; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
@@ -15370,14 +14076,14 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('upload_id_seq', 7, true);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: user; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
@@ -15386,14 +14092,14 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('user_id_seq', 2, true);
 
 
 --
--- Data for Name: vat; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: vat; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id) FROM stdin;
@@ -15401,14 +14107,14 @@ COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('vat_id_seq', 1, true);
 
 
 --
--- Data for Name: visa; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: visa; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM stdin;
@@ -15416,14 +14122,14 @@ COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM 
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE SET; Schema: company; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
 --
 
 SELECT pg_catalog.setval('visa_id_seq', 1, true);
 
 
 --
--- Data for Name: visa_order_item; Type: TABLE DATA; Schema: company; Owner: mazvv
+-- Data for Name: visa_order_item; Type: TABLE DATA; Schema: company; Owner: -
 --
 
 COPY visa_order_item (order_item_id, visa_id) FROM stdin;
@@ -15433,7 +14139,7 @@ COPY visa_order_item (order_item_id, visa_id) FROM stdin;
 SET search_path = demo_ru, pg_catalog;
 
 --
--- Data for Name: accomodation; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY accomodation (id, resource_id, name) FROM stdin;
@@ -15441,14 +14147,14 @@ COPY accomodation (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('accomodation_id_seq', 1, true);
 
 
 --
--- Data for Name: account; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: account; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY account (id, resource_id, currency_id, account_type, name, display_text, status, descr) FROM stdin;
@@ -15456,14 +14162,14 @@ COPY account (id, resource_id, currency_id, account_type, name, display_text, st
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 
 --
--- Data for Name: account_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: account_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY account_item (id, resource_id, parent_id, name, type, status, descr) FROM stdin;
@@ -15471,14 +14177,14 @@ COPY account_item (id, resource_id, parent_id, name, type, status, descr) FROM s
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('account_item_id_seq', 1, true);
 
 
 --
--- Data for Name: address; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: address; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
@@ -15486,14 +14192,14 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('address_id_seq', 1, true);
 
 
 --
--- Data for Name: advsource; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: advsource; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY advsource (id, resource_id, name) FROM stdin;
@@ -15501,14 +14207,14 @@ COPY advsource (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
--- Data for Name: appointment; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: appointment; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY appointment (id, resource_id, date, employee_id, position_id, salary, currency_id) FROM stdin;
@@ -15517,14 +14223,14 @@ COPY appointment (id, resource_id, date, employee_id, position_id, salary, curre
 
 
 --
--- Name: appointment_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: appointment_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('appointment_id_seq', 1, true);
 
 
 --
--- Data for Name: bank; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: bank; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY bank (id, resource_id, name) FROM stdin;
@@ -15532,7 +14238,7 @@ COPY bank (id, resource_id, name) FROM stdin;
 
 
 --
--- Data for Name: bank_address; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: bank_address; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY bank_address (bank_id, address_id) FROM stdin;
@@ -15540,7 +14246,7 @@ COPY bank_address (bank_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: bank_detail; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: bank_detail; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
@@ -15548,21 +14254,21 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_detail_id_seq', 1, true);
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_id_seq', 1, true);
 
 
 --
--- Data for Name: bperson; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: bperson; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY bperson (id, resource_id, first_name, last_name, second_name, position_name, status, descr) FROM stdin;
@@ -15570,7 +14276,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 
 
 --
--- Data for Name: bperson_contact; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: bperson_contact; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY bperson_contact (bperson_id, contact_id) FROM stdin;
@@ -15578,14 +14284,14 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 
 
 --
--- Data for Name: calculation; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: calculation; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY calculation (id, resource_id, order_item_id, price) FROM stdin;
@@ -15593,14 +14299,14 @@ COPY calculation (id, resource_id, order_item_id, price) FROM stdin;
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 
 
 --
--- Data for Name: campaign; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: campaign; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
@@ -15608,14 +14314,14 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('campaign_id_seq', 1, true);
 
 
 --
--- Data for Name: cashflow; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: cashflow; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, vat, date) FROM stdin;
@@ -15623,14 +14329,14 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, v
 
 
 --
--- Name: cashflow_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: cashflow_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('cashflow_id_seq', 1, true);
 
 
 --
--- Data for Name: commission; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: commission; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY commission (id, resource_id, service_id, percentage, price, currency_id, descr) FROM stdin;
@@ -15638,14 +14344,14 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('commission_id_seq', 1, true);
 
 
 --
--- Data for Name: company; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: company; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
@@ -15654,14 +14360,14 @@ COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('company_id_seq', 1, true);
 
 
 --
--- Data for Name: company_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: company_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY company_subaccount (company_id, subaccount_id) FROM stdin;
@@ -15669,7 +14375,7 @@ COPY company_subaccount (company_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: contact; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: contact; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
@@ -15677,14 +14383,14 @@ COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('contact_id_seq', 1, true);
 
 
 --
--- Data for Name: contract; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: contract; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY contract (id, resource_id, num, date, status, descr) FROM stdin;
@@ -15692,7 +14398,7 @@ COPY contract (id, resource_id, num, date, status, descr) FROM stdin;
 
 
 --
--- Data for Name: contract_commission; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: contract_commission; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY contract_commission (contract_id, commission_id) FROM stdin;
@@ -15700,14 +14406,14 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 
 
 --
--- Name: contract_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: contract_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('contract_id_seq', 1, true);
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: country; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY country (id, resource_id, iso_code, name) FROM stdin;
@@ -15722,14 +14428,14 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('country_id_seq', 11, true);
 
 
 --
--- Data for Name: crosspayment; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
@@ -15737,14 +14443,14 @@ COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('crosspayment_id_seq', 1, true);
 
 
 --
--- Data for Name: currency; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: currency; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY currency (id, resource_id, iso_code) FROM stdin;
@@ -15758,14 +14464,14 @@ COPY currency (id, resource_id, iso_code) FROM stdin;
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_id_seq', 57, true);
 
 
 --
--- Data for Name: currency_rate; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: currency_rate; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY currency_rate (id, resource_id, currency_id, supplier_id, date, rate) FROM stdin;
@@ -15773,14 +14479,14 @@ COPY currency_rate (id, resource_id, currency_id, supplier_id, date, rate) FROM 
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_rate_id_seq', 1, true);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee (id, resource_id, photo_upload_id, first_name, last_name, second_name, itn, dismissal_date) FROM stdin;
@@ -15789,7 +14495,7 @@ COPY employee (id, resource_id, photo_upload_id, first_name, last_name, second_n
 
 
 --
--- Data for Name: employee_address; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee_address; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee_address (employee_id, address_id) FROM stdin;
@@ -15797,7 +14503,7 @@ COPY employee_address (employee_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: employee_contact; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee_contact; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee_contact (employee_id, contact_id) FROM stdin;
@@ -15805,14 +14511,14 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('employee_id_seq', 2, true);
 
 
 --
--- Data for Name: employee_notification; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee_notification (employee_id, notification_id, status) FROM stdin;
@@ -15820,7 +14526,7 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 
 
 --
--- Data for Name: employee_passport; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee_passport (employee_id, passport_id) FROM stdin;
@@ -15828,7 +14534,7 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
@@ -15836,7 +14542,7 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: employee_upload; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: employee_upload; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY employee_upload (employee_id, upload_id) FROM stdin;
@@ -15844,7 +14550,7 @@ COPY employee_upload (employee_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: foodcat; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY foodcat (id, resource_id, name) FROM stdin;
@@ -15852,14 +14558,14 @@ COPY foodcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('foodcat_id_seq', 1, true);
 
 
 --
--- Data for Name: hotel; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: hotel; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY hotel (id, resource_id, hotelcat_id, location_id, name) FROM stdin;
@@ -15867,14 +14573,14 @@ COPY hotel (id, resource_id, hotelcat_id, location_id, name) FROM stdin;
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('hotel_id_seq', 1, true);
 
 
 --
--- Data for Name: hotelcat; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY hotelcat (id, resource_id, name) FROM stdin;
@@ -15882,14 +14588,14 @@ COPY hotelcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('hotelcat_id_seq', 1, true);
 
 
 --
--- Data for Name: income; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: income; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY income (id, resource_id, invoice_id, account_item_id, sum, date, descr) FROM stdin;
@@ -15897,7 +14603,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, sum, date, descr) FRO
 
 
 --
--- Data for Name: income_cashflow; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: income_cashflow; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY income_cashflow (income_id, cashflow_id) FROM stdin;
@@ -15905,14 +14611,14 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('income_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: invoice; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY invoice (id, date, active_until, resource_id, order_id, account_id, descr) FROM stdin;
@@ -15920,14 +14626,14 @@ COPY invoice (id, date, active_until, resource_id, order_id, account_id, descr) 
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: invoice_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY invoice_item (id, invoice_id, order_item_id, price, vat, discount, descr) FROM stdin;
@@ -15935,14 +14641,14 @@ COPY invoice_item (id, invoice_id, order_item_id, price, vat, discount, descr) F
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: lead; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr) FROM stdin;
@@ -15950,14 +14656,14 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: lead_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, price_to, descr) FROM stdin;
@@ -15965,14 +14671,14 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_offer; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id, price, status, descr) FROM stdin;
@@ -15980,14 +14686,14 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_offer_id_seq', 1, true);
 
 
 --
--- Data for Name: location; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: location; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY location (id, resource_id, region_id, name) FROM stdin;
@@ -15995,14 +14701,14 @@ COPY location (id, resource_id, region_id, name) FROM stdin;
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('location_id_seq', 1, true);
 
 
 --
--- Data for Name: navigation; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: navigation; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY navigation (id, resource_id, position_id, parent_id, name, url, action, icon_cls, separator_before, sort_order) FROM stdin;
@@ -16066,14 +14772,14 @@ COPY navigation (id, resource_id, position_id, parent_id, name, url, action, ico
 
 
 --
--- Name: navigation_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: navigation_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('navigation_id_seq', 236, true);
 
 
 --
--- Data for Name: note; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: note; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY note (id, resource_id, title, descr) FROM stdin;
@@ -16081,14 +14787,14 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('note_id_seq', 1, true);
 
 
 --
--- Data for Name: note_resource; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: note_resource; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY note_resource (note_id, resource_id) FROM stdin;
@@ -16096,7 +14802,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: note_upload; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: note_upload; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY note_upload (note_id, upload_id) FROM stdin;
@@ -16104,7 +14810,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: notification; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: notification; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
@@ -16112,14 +14818,14 @@ COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('notification_id_seq', 1, true);
 
 
 --
--- Data for Name: notification_resource; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
@@ -16127,7 +14833,7 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: order; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY "order" (id, deal_date, resource_id, customer_id, lead_id, advsource_id, status, descr) FROM stdin;
@@ -16135,14 +14841,14 @@ COPY "order" (id, deal_date, resource_id, customer_id, lead_id, advsource_id, st
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('order_id_seq', 1, true);
 
 
 --
--- Data for Name: order_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: order_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY order_item (id, resource_id, order_id, service_id, currency_id, supplier_id, price, discount_sum, discount_percent, status, status_date, status_info) FROM stdin;
@@ -16150,14 +14856,14 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, supplier_id
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('order_item_id_seq', 1, true);
 
 
 --
--- Data for Name: outgoing; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY outgoing (id, date, resource_id, account_item_id, subaccount_id, sum, descr) FROM stdin;
@@ -16165,7 +14871,7 @@ COPY outgoing (id, date, resource_id, account_item_id, subaccount_id, sum, descr
 
 
 --
--- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
@@ -16173,14 +14879,14 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('outgoing_id_seq', 1, true);
 
 
 --
--- Data for Name: passport; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: passport; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY passport (id, resource_id, country_id, passport_type, num, end_date, descr) FROM stdin;
@@ -16188,14 +14894,14 @@ COPY passport (id, resource_id, country_id, passport_type, num, end_date, descr)
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('passport_id_seq', 1, true);
 
 
 --
--- Data for Name: passport_upload; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: passport_upload; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY passport_upload (passport_id, upload_id) FROM stdin;
@@ -16203,7 +14909,7 @@ COPY passport_upload (passport_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: permision; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: permision; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY permision (id, resource_type_id, position_id, permisions, scope_type, structure_id) FROM stdin;
@@ -16275,14 +14981,14 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 
 
 --
--- Name: permision_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: permision_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('permision_id_seq', 295, true);
 
 
 --
--- Data for Name: person; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person (id, resource_id, person_category_id, first_name, last_name, second_name, birthday, gender, email_subscription, sms_subscription, descr) FROM stdin;
@@ -16290,7 +14996,7 @@ COPY person (id, resource_id, person_category_id, first_name, last_name, second_
 
 
 --
--- Data for Name: person_address; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person_address; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person_address (person_id, address_id) FROM stdin;
@@ -16298,7 +15004,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: person_category; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person_category; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person_category (id, resource_id, name) FROM stdin;
@@ -16306,14 +15012,14 @@ COPY person_category (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('person_category_id_seq', 1, true);
 
 
 --
--- Data for Name: person_contact; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person_contact (person_id, contact_id) FROM stdin;
@@ -16321,14 +15027,14 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('person_id_seq', 1, true);
 
 
 --
--- Data for Name: person_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person_order_item (order_item_id, person_id) FROM stdin;
@@ -16336,7 +15042,7 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 
 
 --
--- Data for Name: person_passport; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person_passport; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person_passport (person_id, passport_id) FROM stdin;
@@ -16344,7 +15050,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: person_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY person_subaccount (person_id, subaccount_id) FROM stdin;
@@ -16352,7 +15058,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: position; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: position; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY "position" (id, resource_id, structure_id, name) FROM stdin;
@@ -16361,14 +15067,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 
 
 --
--- Name: position_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: position_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('position_id_seq', 4, true);
 
 
 --
--- Data for Name: region; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: region; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY region (id, resource_id, country_id, name) FROM stdin;
@@ -16376,14 +15082,14 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('region_id_seq', 1, true);
 
 
 --
--- Data for Name: resource; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: resource; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
@@ -17362,14 +16068,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2790, true);
 
 
 --
--- Data for Name: resource_log; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
@@ -17591,14 +16297,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_log_id_seq', 7885, true);
 
 
 --
--- Data for Name: resource_type; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, settings, descr, status) FROM stdin;
@@ -17670,14 +16376,14 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_type_id_seq', 157, true);
 
 
 --
--- Data for Name: roomcat; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY roomcat (id, resource_id, name) FROM stdin;
@@ -17685,14 +16391,14 @@ COPY roomcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('roomcat_id_seq', 1, true);
 
 
 --
--- Data for Name: service; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: service; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY service (id, resource_id, resource_type_id, name, display_text, descr) FROM stdin;
@@ -17704,14 +16410,14 @@ COPY service (id, resource_id, resource_type_id, name, display_text, descr) FROM
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('service_id_seq', 7, true);
 
 
 --
--- Data for Name: spassport; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: spassport; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
@@ -17719,14 +16425,14 @@ COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_da
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('spassport_id_seq', 1, true);
 
 
 --
--- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
@@ -17734,7 +16440,7 @@ COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
 
 
 --
--- Data for Name: structure; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: structure; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY structure (id, resource_id, parent_id, company_id, name) FROM stdin;
@@ -17743,7 +16449,7 @@ COPY structure (id, resource_id, parent_id, company_id, name) FROM stdin;
 
 
 --
--- Data for Name: structure_address; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: structure_address; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY structure_address (structure_id, address_id) FROM stdin;
@@ -17751,7 +16457,7 @@ COPY structure_address (structure_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
@@ -17759,7 +16465,7 @@ COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: structure_contact; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: structure_contact; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY structure_contact (structure_id, contact_id) FROM stdin;
@@ -17767,14 +16473,14 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 
 
 --
--- Name: structure_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: structure_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('structure_id_seq', 1, true);
 
 
 --
--- Data for Name: subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY subaccount (id, resource_id, account_id, name, status, descr) FROM stdin;
@@ -17782,14 +16488,14 @@ COPY subaccount (id, resource_id, account_id, name, status, descr) FROM stdin;
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('subaccount_id_seq', 1, true);
 
 
 --
--- Data for Name: supplier; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: supplier; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY supplier (id, resource_id, supplier_type_id, name, status, descr) FROM stdin;
@@ -17797,7 +16503,7 @@ COPY supplier (id, resource_id, supplier_type_id, name, status, descr) FROM stdi
 
 
 --
--- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
@@ -17805,7 +16511,7 @@ COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
@@ -17813,7 +16519,7 @@ COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_contract; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: supplier_contract; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY supplier_contract (supplier_id, contract_id) FROM stdin;
@@ -17821,14 +16527,14 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 
 
 --
--- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_id_seq', 1, true);
 
 
 --
--- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
@@ -17836,7 +16542,7 @@ COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_type; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: supplier_type; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY supplier_type (id, resource_id, name, descr) FROM stdin;
@@ -17844,14 +16550,14 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
 
 
 --
--- Data for Name: task; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: task; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, status) FROM stdin;
@@ -17859,14 +16565,14 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, statu
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('task_id_seq', 1, true);
 
 
 --
--- Data for Name: task_resource; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: task_resource; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
@@ -17874,7 +16580,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: task_upload; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: task_upload; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY task_upload (task_id, upload_id) FROM stdin;
@@ -17882,7 +16588,7 @@ COPY task_upload (task_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: ticket; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: ticket; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_id, transport_id, start_dt, start_additional_info, end_dt, end_additional_info, adults, children, descr) FROM stdin;
@@ -17890,7 +16596,7 @@ COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_i
 
 
 --
--- Data for Name: ticket_class; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: ticket_class; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY ticket_class (id, resource_id, name) FROM stdin;
@@ -17898,21 +16604,21 @@ COPY ticket_class (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_class_id_seq', 1, true);
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_id_seq', 1, true);
 
 
 --
--- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
@@ -17920,7 +16626,7 @@ COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
 
 
 --
--- Data for Name: tour; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: tour; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY tour (id, resource_id, start_location_id, start_transport_id, end_location_id, end_transport_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, transfer_id, adults, children, start_date, start_additional_info, end_date, end_additional_info, descr) FROM stdin;
@@ -17928,14 +16634,14 @@ COPY tour (id, resource_id, start_location_id, start_transport_id, end_location_
 
 
 --
--- Name: tour_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('tour_id_seq', 1, true);
 
 
 --
--- Data for Name: tour_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: tour_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY tour_order_item (order_item_id, tour_id) FROM stdin;
@@ -17943,7 +16649,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 
 
 --
--- Data for Name: transfer; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: transfer; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY transfer (id, resource_id, name) FROM stdin;
@@ -17951,14 +16657,14 @@ COPY transfer (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq', 1, true);
 
 
 --
--- Data for Name: transport; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: transport; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY transport (id, resource_id, name) FROM stdin;
@@ -17966,14 +16672,14 @@ COPY transport (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('transport_id_seq', 1, true);
 
 
 --
--- Data for Name: upload; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: upload; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY upload (id, resource_id, name, path, size, media_type, descr) FROM stdin;
@@ -17981,14 +16687,14 @@ COPY upload (id, resource_id, name, path, size, media_type, descr) FROM stdin;
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('upload_id_seq', 1, true);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: user; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY "user" (id, resource_id, employee_id, username, email, password) FROM stdin;
@@ -17997,14 +16703,14 @@ COPY "user" (id, resource_id, employee_id, username, email, password) FROM stdin
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('user_id_seq', 2, true);
 
 
 --
--- Data for Name: vat; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: vat; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY vat (id, resource_id, account_id, service_id, date, vat, calc_method, descr) FROM stdin;
@@ -18012,14 +16718,14 @@ COPY vat (id, resource_id, account_id, service_id, date, vat, calc_method, descr
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('vat_id_seq', 1, true);
 
 
 --
--- Data for Name: visa; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: visa; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM stdin;
@@ -18027,14 +16733,14 @@ COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM 
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
 SELECT pg_catalog.setval('visa_id_seq', 1, true);
 
 
 --
--- Data for Name: visa_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: mazvv
+-- Data for Name: visa_order_item; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
 COPY visa_order_item (order_item_id, visa_id) FROM stdin;
@@ -18044,7 +16750,7 @@ COPY visa_order_item (order_item_id, visa_id) FROM stdin;
 SET search_path = public, pg_catalog;
 
 --
--- Data for Name: accomodation; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY accomodation (id, resource_id, name) FROM stdin;
@@ -18067,14 +16773,14 @@ COPY accomodation (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('accomodation_id_seq', 17, true);
 
 
 --
--- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY account (id, resource_id, currency_id, account_type, name, display_text, descr, status) FROM stdin;
@@ -18085,14 +16791,14 @@ COPY account (id, resource_id, currency_id, account_type, name, display_text, de
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('account_id_seq', 4, true);
 
 
 --
--- Data for Name: account_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: account_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY account_item (id, resource_id, name, parent_id, type, status, descr) FROM stdin;
@@ -18157,14 +16863,14 @@ COPY account_item (id, resource_id, name, parent_id, type, status, descr) FROM s
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('account_item_id_seq', 57, true);
 
 
 --
--- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
@@ -18196,14 +16902,14 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('address_id_seq', 35, true);
 
 
 --
--- Data for Name: advsource; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: advsource; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY advsource (id, resource_id, name) FROM stdin;
@@ -18217,14 +16923,14 @@ COPY advsource (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 
 
 --
--- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary, date) FROM stdin;
@@ -18236,7 +16942,7 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 
 
 --
--- Data for Name: bank; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: bank; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY bank (id, resource_id, name) FROM stdin;
@@ -18247,7 +16953,7 @@ COPY bank (id, resource_id, name) FROM stdin;
 
 
 --
--- Data for Name: bank_address; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: bank_address; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY bank_address (bank_id, address_id) FROM stdin;
@@ -18257,7 +16963,7 @@ COPY bank_address (bank_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: bank_detail; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: bank_detail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
@@ -18279,21 +16985,21 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_detail_id_seq', 19, true);
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_id_seq', 6, true);
 
 
 --
--- Data for Name: bperson; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: bperson; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY bperson (id, resource_id, first_name, last_name, second_name, position_name, descr, status) FROM stdin;
@@ -18307,7 +17013,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 
 
 --
--- Data for Name: bperson_contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: bperson_contact; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY bperson_contact (bperson_id, contact_id) FROM stdin;
@@ -18326,14 +17032,14 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('bperson_id_seq', 9, true);
 
 
 --
--- Data for Name: calculation; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: calculation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
@@ -18386,14 +17092,14 @@ COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('calculation_id_seq', 85, true);
 
 
 --
--- Data for Name: campaign; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: campaign; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
@@ -18401,14 +17107,14 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('campaign_id_seq', 23, true);
 
 
 --
--- Data for Name: cashflow; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: cashflow; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, date, vat) FROM stdin;
@@ -18429,7 +17135,7 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, d
 
 
 --
--- Data for Name: commission; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: commission; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY commission (id, resource_id, service_id, percentage, price, currency_id, descr) FROM stdin;
@@ -18450,28 +17156,28 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('commission_id_seq', 48, true);
 
 
 --
--- Name: companies_counter; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: companies_counter; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('companies_counter', 1077, true);
 
 
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 
 
 --
--- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: company; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
@@ -18480,14 +17186,14 @@ COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('company_id_seq', 14, true);
 
 
 --
--- Data for Name: company_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: company_subaccount; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY company_subaccount (company_id, subaccount_id) FROM stdin;
@@ -18498,7 +17204,7 @@ COPY company_subaccount (company_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: contact; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
@@ -18574,14 +17280,14 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('contact_id_seq', 98, true);
 
 
 --
--- Data for Name: contract; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: contract; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
@@ -18601,7 +17307,7 @@ COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
 
 
 --
--- Data for Name: contract_commission; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: contract_commission; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY contract_commission (contract_id, commission_id) FROM stdin;
@@ -18622,7 +17328,7 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: country; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY country (id, resource_id, iso_code, name) FROM stdin;
@@ -18646,14 +17352,14 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('country_id_seq', 21, true);
 
 
 --
--- Data for Name: crosspayment; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
@@ -18662,14 +17368,14 @@ COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('crosspayment_id_seq', 10, true);
 
 
 --
--- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: currency; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY currency (id, resource_id, iso_code) FROM stdin;
@@ -18683,14 +17389,14 @@ COPY currency (id, resource_id, iso_code) FROM stdin;
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_id_seq', 57, true);
 
 
 --
--- Data for Name: currency_rate; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: currency_rate; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM stdin;
@@ -18711,14 +17417,14 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_rate_id_seq', 31, true);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismissal_date, photo_upload_id) FROM stdin;
@@ -18740,7 +17446,7 @@ COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismiss
 
 
 --
--- Data for Name: employee_address; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee_address; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee_address (employee_id, address_id) FROM stdin;
@@ -18748,7 +17454,7 @@ COPY employee_address (employee_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: employee_contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee_contact; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee_contact (employee_id, contact_id) FROM stdin;
@@ -18761,14 +17467,14 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('employee_id_seq', 32, true);
 
 
 --
--- Data for Name: employee_notification; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee_notification (employee_id, notification_id, status) FROM stdin;
@@ -18789,7 +17495,7 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 
 
 --
--- Data for Name: employee_passport; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee_passport (employee_id, passport_id) FROM stdin;
@@ -18798,7 +17504,7 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
@@ -18807,7 +17513,7 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: employee_upload; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: employee_upload; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY employee_upload (employee_id, upload_id) FROM stdin;
@@ -18815,14 +17521,14 @@ COPY employee_upload (employee_id, upload_id) FROM stdin;
 
 
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('employees_appointments_h_id_seq', 12, true);
 
 
 --
--- Data for Name: foodcat; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY foodcat (id, resource_id, name) FROM stdin;
@@ -18844,14 +17550,14 @@ COPY foodcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('foodcat_id_seq', 17, true);
 
 
 --
--- Data for Name: hotel; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: hotel; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
@@ -18889,14 +17595,14 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('hotel_id_seq', 40, true);
 
 
 --
--- Data for Name: hotelcat; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY hotelcat (id, resource_id, name) FROM stdin;
@@ -18912,14 +17618,14 @@ COPY hotelcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('hotelcat_id_seq', 8, true);
 
 
 --
--- Data for Name: income; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: income; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FROM stdin;
@@ -18932,7 +17638,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FRO
 
 
 --
--- Data for Name: income_cashflow; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: income_cashflow; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY income_cashflow (income_id, cashflow_id) FROM stdin;
@@ -18950,14 +17656,14 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('income_id_seq', 68, true);
 
 
 --
--- Data for Name: invoice; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: invoice; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) FROM stdin;
@@ -18968,14 +17674,14 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_id_seq', 32, true);
 
 
 --
--- Data for Name: invoice_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: invoice_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) FROM stdin;
@@ -18988,14 +17694,14 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_item_id_seq', 33, true);
 
 
 --
--- Data for Name: lead; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: lead; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr) FROM stdin;
@@ -19019,14 +17725,14 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_id_seq', 16, true);
 
 
 --
--- Data for Name: lead_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: lead_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, price_to, descr) FROM stdin;
@@ -19060,14 +17766,14 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_item_id_seq', 26, true);
 
 
 --
--- Data for Name: lead_offer; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id, price, status, descr) FROM stdin;
@@ -19084,21 +17790,21 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_offer_id_seq', 10, true);
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: licence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('licence_id_seq', 59, true);
 
 
 --
--- Data for Name: location; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: location; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY location (id, resource_id, name, region_id) FROM stdin;
@@ -19136,14 +17842,14 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('location_id_seq', 40, true);
 
 
 --
--- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: navigation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before, action) FROM stdin;
@@ -19237,7 +17943,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 
 
 --
--- Data for Name: note; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: note; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY note (id, resource_id, title, descr) FROM stdin;
@@ -19267,14 +17973,14 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('note_id_seq', 59, true);
 
 
 --
--- Data for Name: note_resource; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: note_resource; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY note_resource (note_id, resource_id) FROM stdin;
@@ -19299,7 +18005,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: note_upload; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: note_upload; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY note_upload (note_id, upload_id) FROM stdin;
@@ -19308,7 +18014,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
@@ -19349,14 +18055,14 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('notification_id_seq', 36, true);
 
 
 --
--- Data for Name: notification_resource; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
@@ -19379,7 +18085,7 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead_id, status) FROM stdin;
@@ -19396,14 +18102,14 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('order_id_seq', 10, true);
 
 
 --
--- Data for Name: order_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: order_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY order_item (id, resource_id, order_id, service_id, currency_id, price, status, status_date, status_info, supplier_id, discount_sum, discount_percent) FROM stdin;
@@ -19429,14 +18135,14 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('order_item_id_seq', 45, true);
 
 
 --
--- Data for Name: outgoing; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr) FROM stdin;
@@ -19448,7 +18154,7 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr
 
 
 --
--- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
@@ -19458,14 +18164,14 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('outgoing_id_seq', 23, true);
 
 
 --
--- Data for Name: passport; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: passport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY passport (id, country_id, num, descr, resource_id, end_date, passport_type) FROM stdin;
@@ -19504,14 +18210,14 @@ COPY passport (id, country_id, num, descr, resource_id, end_date, passport_type)
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('passport_id_seq', 32, true);
 
 
 --
--- Data for Name: passport_upload; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: passport_upload; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY passport_upload (passport_id, upload_id) FROM stdin;
@@ -19520,7 +18226,7 @@ COPY passport_upload (passport_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: permision; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: permision; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY permision (id, resource_type_id, position_id, permisions, structure_id, scope_type) FROM stdin;
@@ -19695,7 +18401,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 
 
 --
--- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person (id, resource_id, first_name, last_name, second_name, birthday, gender, descr, person_category_id, email_subscription, sms_subscription) FROM stdin;
@@ -19759,7 +18465,7 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 
 
 --
--- Data for Name: person_address; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person_address; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person_address (person_id, address_id) FROM stdin;
@@ -19783,7 +18489,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: person_category; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person_category; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person_category (id, resource_id, name) FROM stdin;
@@ -19794,14 +18500,14 @@ COPY person_category (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('person_category_id_seq', 3, true);
 
 
 --
--- Data for Name: person_contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person_contact (person_id, contact_id) FROM stdin;
@@ -19849,14 +18555,14 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('person_id_seq', 69, true);
 
 
 --
--- Data for Name: person_order_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person_order_item (order_item_id, person_id) FROM stdin;
@@ -19901,7 +18607,7 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 
 
 --
--- Data for Name: person_passport; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person_passport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person_passport (person_id, passport_id) FROM stdin;
@@ -19932,7 +18638,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: person_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY person_subaccount (person_id, subaccount_id) FROM stdin;
@@ -19953,7 +18659,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: position; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: position; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY "position" (id, resource_id, structure_id, name) FROM stdin;
@@ -19966,21 +18672,21 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 
 
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('positions_navigations_id_seq', 236, true);
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('positions_permisions_id_seq', 296, true);
 
 
 --
--- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: region; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY region (id, resource_id, country_id, name) FROM stdin;
@@ -20016,14 +18722,14 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('region_id_seq', 39, true);
 
 
 --
--- Data for Name: resource; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: resource; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
@@ -21282,14 +19988,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2819, true);
 
 
 --
--- Data for Name: resource_log; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
@@ -23294,14 +22000,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_log_id_seq', 7704, true);
 
 
 --
--- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, descr, settings, status) FROM stdin;
@@ -23373,14 +22079,14 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_type_id_seq', 158, true);
 
 
 --
--- Data for Name: roomcat; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY roomcat (id, resource_id, name) FROM stdin;
@@ -23418,14 +22124,14 @@ COPY roomcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('roomcat_id_seq', 34, true);
 
 
 --
--- Data for Name: service; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: service; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY service (id, resource_id, name, descr, display_text, resource_type_id) FROM stdin;
@@ -23437,14 +22143,14 @@ COPY service (id, resource_id, name, descr, display_text, resource_type_id) FROM
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('service_id_seq', 7, true);
 
 
 --
--- Data for Name: spassport; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: spassport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
@@ -23453,14 +22159,14 @@ COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_da
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('spassport_id_seq', 1, true);
 
 
 --
--- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
@@ -23469,7 +22175,7 @@ COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
 
 
 --
--- Data for Name: structure; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: structure; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
@@ -23488,7 +22194,7 @@ COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
 
 
 --
--- Data for Name: structure_address; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: structure_address; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY structure_address (structure_id, address_id) FROM stdin;
@@ -23497,7 +22203,7 @@ COPY structure_address (structure_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
@@ -23505,7 +22211,7 @@ COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: structure_contact; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: structure_contact; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY structure_contact (structure_id, contact_id) FROM stdin;
@@ -23513,14 +22219,14 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 
 
 --
--- Name: structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('structures_id_seq', 13, true);
 
 
 --
--- Data for Name: subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: subaccount; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
@@ -23550,14 +22256,14 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('subaccount_id_seq', 24, true);
 
 
 --
--- Data for Name: supplier; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: supplier; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdin;
@@ -23587,7 +22293,7 @@ COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdi
 
 
 --
--- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
@@ -23595,7 +22301,7 @@ COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
@@ -23604,7 +22310,7 @@ COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_contract; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: supplier_contract; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY supplier_contract (supplier_id, contract_id) FROM stdin;
@@ -23623,7 +22329,7 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
@@ -23632,7 +22338,7 @@ COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_type; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: supplier_type; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY supplier_type (id, resource_id, name, descr) FROM stdin;
@@ -23643,14 +22349,14 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_type_id_seq', 3, true);
 
 
 --
--- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminder) FROM stdin;
@@ -23697,14 +22403,14 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('task_id_seq', 83, true);
 
 
 --
--- Data for Name: task_resource; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: task_resource; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
@@ -23728,7 +22434,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: task_upload; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: task_upload; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY task_upload (task_id, upload_id) FROM stdin;
@@ -23736,7 +22442,7 @@ COPY task_upload (task_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: ticket; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: ticket; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_id, transport_id, start_dt, start_additional_info, end_dt, end_additional_info, adults, children, descr) FROM stdin;
@@ -23750,7 +22456,7 @@ COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_i
 
 
 --
--- Data for Name: ticket_class; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: ticket_class; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY ticket_class (id, resource_id, name) FROM stdin;
@@ -23760,21 +22466,21 @@ COPY ticket_class (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_class_id_seq', 2, true);
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_id_seq', 7, true);
 
 
 --
--- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
@@ -23788,7 +22494,7 @@ COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
 
 
 --
--- Data for Name: tour; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: tour; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, adults, children, start_date, end_date, descr, end_transport_id, start_transport_id, transfer_id, end_additional_info, start_additional_info) FROM stdin;
@@ -23824,14 +22530,14 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 
 
 --
--- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('tour_id_seq1', 28, true);
 
 
 --
--- Data for Name: tour_order_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: tour_order_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY tour_order_item (order_item_id, tour_id) FROM stdin;
@@ -23846,14 +22552,14 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 
 
 --
--- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('touroperator_id_seq', 102, true);
 
 
 --
--- Data for Name: transfer; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: transfer; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY transfer (id, resource_id, name) FROM stdin;
@@ -23863,21 +22569,21 @@ COPY transfer (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq', 261, true);
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: transfer_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq1', 3, true);
 
 
 --
--- Data for Name: transport; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: transport; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY transport (id, resource_id, name) FROM stdin;
@@ -23888,14 +22594,14 @@ COPY transport (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('transport_id_seq', 3, true);
 
 
 --
--- Data for Name: upload; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: upload; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
@@ -23919,14 +22625,14 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('upload_id_seq', 20, true);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
@@ -23940,14 +22646,14 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('user_id_seq', 34, true);
 
 
 --
--- Data for Name: vat; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: vat; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id) FROM stdin;
@@ -23961,14 +22667,14 @@ COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('vat_id_seq', 6, true);
 
 
 --
--- Data for Name: visa; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: visa; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM stdin;
@@ -23980,14 +22686,14 @@ COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM 
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('visa_id_seq', 4, true);
 
 
 --
--- Data for Name: visa_order_item; Type: TABLE DATA; Schema: public; Owner: mazvv
+-- Data for Name: visa_order_item; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY visa_order_item (order_item_id, visa_id) FROM stdin;
@@ -24001,7 +22707,7 @@ COPY visa_order_item (order_item_id, visa_id) FROM stdin;
 SET search_path = test, pg_catalog;
 
 --
--- Data for Name: accomodation; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY accomodation (id, resource_id, name) FROM stdin;
@@ -24009,14 +22715,14 @@ COPY accomodation (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('accomodation_id_seq', 1, true);
 
 
 --
--- Data for Name: account; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: account; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY account (id, resource_id, currency_id, account_type, name, display_text, status, descr) FROM stdin;
@@ -24024,14 +22730,14 @@ COPY account (id, resource_id, currency_id, account_type, name, display_text, st
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: account_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 
 --
--- Data for Name: account_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: account_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY account_item (id, resource_id, parent_id, name, type, status, descr) FROM stdin;
@@ -24039,14 +22745,14 @@ COPY account_item (id, resource_id, parent_id, name, type, status, descr) FROM s
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('account_item_id_seq', 1, true);
 
 
 --
--- Data for Name: address; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: address; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
@@ -24054,14 +22760,14 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('address_id_seq', 1, true);
 
 
 --
--- Data for Name: advsource; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: advsource; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY advsource (id, resource_id, name) FROM stdin;
@@ -24069,14 +22775,14 @@ COPY advsource (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
--- Data for Name: appointment; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: appointment; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY appointment (id, resource_id, date, employee_id, position_id, salary, currency_id) FROM stdin;
@@ -24085,14 +22791,14 @@ COPY appointment (id, resource_id, date, employee_id, position_id, salary, curre
 
 
 --
--- Name: appointment_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: appointment_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('appointment_id_seq', 1, true);
 
 
 --
--- Data for Name: bank; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: bank; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY bank (id, resource_id, name) FROM stdin;
@@ -24100,7 +22806,7 @@ COPY bank (id, resource_id, name) FROM stdin;
 
 
 --
--- Data for Name: bank_address; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: bank_address; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY bank_address (bank_id, address_id) FROM stdin;
@@ -24108,7 +22814,7 @@ COPY bank_address (bank_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: bank_detail; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: bank_detail; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
@@ -24116,21 +22822,21 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_detail_id_seq', 1, true);
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: bank_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_id_seq', 1, true);
 
 
 --
--- Data for Name: bperson; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: bperson; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY bperson (id, resource_id, first_name, last_name, second_name, position_name, status, descr) FROM stdin;
@@ -24138,7 +22844,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 
 
 --
--- Data for Name: bperson_contact; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: bperson_contact; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY bperson_contact (bperson_id, contact_id) FROM stdin;
@@ -24146,14 +22852,14 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 
 
 --
--- Data for Name: calculation; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: calculation; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY calculation (id, resource_id, order_item_id, price) FROM stdin;
@@ -24161,14 +22867,14 @@ COPY calculation (id, resource_id, order_item_id, price) FROM stdin;
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 
 
 --
--- Data for Name: campaign; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: campaign; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
@@ -24176,14 +22882,14 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('campaign_id_seq', 1, true);
 
 
 --
--- Data for Name: cashflow; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: cashflow; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, vat, date) FROM stdin;
@@ -24191,14 +22897,14 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, v
 
 
 --
--- Name: cashflow_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: cashflow_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('cashflow_id_seq', 1, true);
 
 
 --
--- Data for Name: commission; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: commission; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY commission (id, resource_id, service_id, percentage, price, currency_id, descr) FROM stdin;
@@ -24206,14 +22912,14 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('commission_id_seq', 1, true);
 
 
 --
--- Data for Name: company; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: company; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
@@ -24222,14 +22928,14 @@ COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('company_id_seq', 1, true);
 
 
 --
--- Data for Name: company_subaccount; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: company_subaccount; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY company_subaccount (company_id, subaccount_id) FROM stdin;
@@ -24237,7 +22943,7 @@ COPY company_subaccount (company_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: contact; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: contact; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
@@ -24245,14 +22951,14 @@ COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('contact_id_seq', 1, true);
 
 
 --
--- Data for Name: contract; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: contract; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY contract (id, resource_id, num, date, status, descr) FROM stdin;
@@ -24260,7 +22966,7 @@ COPY contract (id, resource_id, num, date, status, descr) FROM stdin;
 
 
 --
--- Data for Name: contract_commission; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: contract_commission; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY contract_commission (contract_id, commission_id) FROM stdin;
@@ -24268,14 +22974,14 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 
 
 --
--- Name: contract_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: contract_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('contract_id_seq', 1, true);
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: country; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY country (id, resource_id, iso_code, name) FROM stdin;
@@ -24290,14 +22996,14 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('country_id_seq', 11, true);
 
 
 --
--- Data for Name: crosspayment; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
@@ -24305,14 +23011,14 @@ COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('crosspayment_id_seq', 1, true);
 
 
 --
--- Data for Name: currency; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: currency; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY currency (id, resource_id, iso_code) FROM stdin;
@@ -24326,14 +23032,14 @@ COPY currency (id, resource_id, iso_code) FROM stdin;
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: currency_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_id_seq', 57, true);
 
 
 --
--- Data for Name: currency_rate; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: currency_rate; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY currency_rate (id, resource_id, currency_id, supplier_id, date, rate) FROM stdin;
@@ -24341,14 +23047,14 @@ COPY currency_rate (id, resource_id, currency_id, supplier_id, date, rate) FROM 
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_rate_id_seq', 1, true);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee (id, resource_id, photo_upload_id, first_name, last_name, second_name, itn, dismissal_date) FROM stdin;
@@ -24357,7 +23063,7 @@ COPY employee (id, resource_id, photo_upload_id, first_name, last_name, second_n
 
 
 --
--- Data for Name: employee_address; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee_address; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee_address (employee_id, address_id) FROM stdin;
@@ -24365,7 +23071,7 @@ COPY employee_address (employee_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: employee_contact; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee_contact; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee_contact (employee_id, contact_id) FROM stdin;
@@ -24373,14 +23079,14 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('employee_id_seq', 2, true);
 
 
 --
--- Data for Name: employee_notification; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee_notification (employee_id, notification_id, status) FROM stdin;
@@ -24388,7 +23094,7 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 
 
 --
--- Data for Name: employee_passport; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee_passport (employee_id, passport_id) FROM stdin;
@@ -24396,7 +23102,7 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
@@ -24404,7 +23110,7 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: employee_upload; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: employee_upload; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY employee_upload (employee_id, upload_id) FROM stdin;
@@ -24412,7 +23118,7 @@ COPY employee_upload (employee_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: foodcat; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY foodcat (id, resource_id, name) FROM stdin;
@@ -24420,14 +23126,14 @@ COPY foodcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('foodcat_id_seq', 1, true);
 
 
 --
--- Data for Name: hotel; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: hotel; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY hotel (id, resource_id, hotelcat_id, location_id, name) FROM stdin;
@@ -24435,14 +23141,14 @@ COPY hotel (id, resource_id, hotelcat_id, location_id, name) FROM stdin;
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('hotel_id_seq', 1, true);
 
 
 --
--- Data for Name: hotelcat; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY hotelcat (id, resource_id, name) FROM stdin;
@@ -24450,14 +23156,14 @@ COPY hotelcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('hotelcat_id_seq', 1, true);
 
 
 --
--- Data for Name: income; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: income; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY income (id, resource_id, invoice_id, account_item_id, sum, date, descr) FROM stdin;
@@ -24465,7 +23171,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, sum, date, descr) FRO
 
 
 --
--- Data for Name: income_cashflow; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: income_cashflow; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY income_cashflow (income_id, cashflow_id) FROM stdin;
@@ -24473,14 +23179,14 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: income_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('income_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: invoice; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY invoice (id, date, active_until, resource_id, order_id, account_id, descr) FROM stdin;
@@ -24488,14 +23194,14 @@ COPY invoice (id, date, active_until, resource_id, order_id, account_id, descr) 
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: invoice_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY invoice_item (id, invoice_id, order_item_id, price, vat, discount, descr) FROM stdin;
@@ -24503,14 +23209,14 @@ COPY invoice_item (id, invoice_id, order_item_id, price, vat, discount, descr) F
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: lead; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr) FROM stdin;
@@ -24518,14 +23224,14 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: lead_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, price_to, descr) FROM stdin;
@@ -24533,14 +23239,14 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_offer; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id, price, status, descr) FROM stdin;
@@ -24548,14 +23254,14 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_offer_id_seq', 1, true);
 
 
 --
--- Data for Name: location; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: location; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY location (id, resource_id, region_id, name) FROM stdin;
@@ -24563,14 +23269,14 @@ COPY location (id, resource_id, region_id, name) FROM stdin;
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('location_id_seq', 1, true);
 
 
 --
--- Data for Name: navigation; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: navigation; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY navigation (id, resource_id, position_id, parent_id, name, url, action, icon_cls, separator_before, sort_order) FROM stdin;
@@ -24634,14 +23340,14 @@ COPY navigation (id, resource_id, position_id, parent_id, name, url, action, ico
 
 
 --
--- Name: navigation_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: navigation_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('navigation_id_seq', 236, true);
 
 
 --
--- Data for Name: note; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: note; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY note (id, resource_id, title, descr) FROM stdin;
@@ -24649,14 +23355,14 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: note_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('note_id_seq', 1, true);
 
 
 --
--- Data for Name: note_resource; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: note_resource; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY note_resource (note_id, resource_id) FROM stdin;
@@ -24664,7 +23370,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: note_upload; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: note_upload; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY note_upload (note_id, upload_id) FROM stdin;
@@ -24672,7 +23378,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: notification; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: notification; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
@@ -24680,14 +23386,14 @@ COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('notification_id_seq', 1, true);
 
 
 --
--- Data for Name: notification_resource; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
@@ -24695,7 +23401,7 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: order; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY "order" (id, deal_date, resource_id, customer_id, lead_id, advsource_id, status, descr) FROM stdin;
@@ -24703,14 +23409,14 @@ COPY "order" (id, deal_date, resource_id, customer_id, lead_id, advsource_id, st
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('order_id_seq', 1, true);
 
 
 --
--- Data for Name: order_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: order_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY order_item (id, resource_id, order_id, service_id, currency_id, supplier_id, price, discount_sum, discount_percent, status, status_date, status_info) FROM stdin;
@@ -24718,14 +23424,14 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, supplier_id
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('order_item_id_seq', 1, true);
 
 
 --
--- Data for Name: outgoing; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY outgoing (id, date, resource_id, account_item_id, subaccount_id, sum, descr) FROM stdin;
@@ -24733,7 +23439,7 @@ COPY outgoing (id, date, resource_id, account_item_id, subaccount_id, sum, descr
 
 
 --
--- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
@@ -24741,14 +23447,14 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('outgoing_id_seq', 1, true);
 
 
 --
--- Data for Name: passport; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: passport; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY passport (id, resource_id, country_id, passport_type, num, end_date, descr) FROM stdin;
@@ -24756,14 +23462,14 @@ COPY passport (id, resource_id, country_id, passport_type, num, end_date, descr)
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: passport_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('passport_id_seq', 1, true);
 
 
 --
--- Data for Name: passport_upload; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: passport_upload; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY passport_upload (passport_id, upload_id) FROM stdin;
@@ -24771,7 +23477,7 @@ COPY passport_upload (passport_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: permision; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: permision; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY permision (id, resource_type_id, position_id, permisions, scope_type, structure_id) FROM stdin;
@@ -24843,14 +23549,14 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 
 
 --
--- Name: permision_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: permision_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('permision_id_seq', 295, true);
 
 
 --
--- Data for Name: person; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person (id, resource_id, person_category_id, first_name, last_name, second_name, birthday, gender, email_subscription, sms_subscription, descr) FROM stdin;
@@ -24858,7 +23564,7 @@ COPY person (id, resource_id, person_category_id, first_name, last_name, second_
 
 
 --
--- Data for Name: person_address; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person_address; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person_address (person_id, address_id) FROM stdin;
@@ -24866,7 +23572,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: person_category; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person_category; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person_category (id, resource_id, name) FROM stdin;
@@ -24874,14 +23580,14 @@ COPY person_category (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('person_category_id_seq', 1, true);
 
 
 --
--- Data for Name: person_contact; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person_contact (person_id, contact_id) FROM stdin;
@@ -24889,14 +23595,14 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('person_id_seq', 1, true);
 
 
 --
--- Data for Name: person_order_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person_order_item (order_item_id, person_id) FROM stdin;
@@ -24904,7 +23610,7 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 
 
 --
--- Data for Name: person_passport; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person_passport; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person_passport (person_id, passport_id) FROM stdin;
@@ -24912,7 +23618,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: person_subaccount; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY person_subaccount (person_id, subaccount_id) FROM stdin;
@@ -24920,7 +23626,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: position; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: position; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY "position" (id, resource_id, structure_id, name) FROM stdin;
@@ -24929,14 +23635,14 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 
 
 --
--- Name: position_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: position_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('position_id_seq', 4, true);
 
 
 --
--- Data for Name: region; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: region; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY region (id, resource_id, country_id, name) FROM stdin;
@@ -24944,14 +23650,14 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('region_id_seq', 1, true);
 
 
 --
--- Data for Name: resource; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: resource; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
@@ -25930,14 +24636,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: resource_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2790, true);
 
 
 --
--- Data for Name: resource_log; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
@@ -26026,14 +24732,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_log_id_seq', 7752, true);
 
 
 --
--- Data for Name: resource_type; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, settings, descr, status) FROM stdin;
@@ -26105,14 +24811,14 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_type_id_seq', 157, true);
 
 
 --
--- Data for Name: roomcat; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY roomcat (id, resource_id, name) FROM stdin;
@@ -26120,14 +24826,14 @@ COPY roomcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('roomcat_id_seq', 1, true);
 
 
 --
--- Data for Name: service; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: service; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY service (id, resource_id, resource_type_id, name, display_text, descr) FROM stdin;
@@ -26139,14 +24845,14 @@ COPY service (id, resource_id, resource_type_id, name, display_text, descr) FROM
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: service_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('service_id_seq', 7, true);
 
 
 --
--- Data for Name: spassport; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: spassport; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
@@ -26154,14 +24860,14 @@ COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_da
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('spassport_id_seq', 1, true);
 
 
 --
--- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
@@ -26169,7 +24875,7 @@ COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
 
 
 --
--- Data for Name: structure; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: structure; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY structure (id, resource_id, parent_id, company_id, name) FROM stdin;
@@ -26178,7 +24884,7 @@ COPY structure (id, resource_id, parent_id, company_id, name) FROM stdin;
 
 
 --
--- Data for Name: structure_address; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: structure_address; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY structure_address (structure_id, address_id) FROM stdin;
@@ -26186,7 +24892,7 @@ COPY structure_address (structure_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
@@ -26194,7 +24900,7 @@ COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: structure_contact; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: structure_contact; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY structure_contact (structure_id, contact_id) FROM stdin;
@@ -26202,14 +24908,14 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 
 
 --
--- Name: structure_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: structure_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('structure_id_seq', 1, true);
 
 
 --
--- Data for Name: subaccount; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: subaccount; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY subaccount (id, resource_id, account_id, name, status, descr) FROM stdin;
@@ -26217,14 +24923,14 @@ COPY subaccount (id, resource_id, account_id, name, status, descr) FROM stdin;
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('subaccount_id_seq', 1, true);
 
 
 --
--- Data for Name: supplier; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: supplier; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY supplier (id, resource_id, supplier_type_id, name, status, descr) FROM stdin;
@@ -26232,7 +24938,7 @@ COPY supplier (id, resource_id, supplier_type_id, name, status, descr) FROM stdi
 
 
 --
--- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
@@ -26240,7 +24946,7 @@ COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
@@ -26248,7 +24954,7 @@ COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_contract; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: supplier_contract; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY supplier_contract (supplier_id, contract_id) FROM stdin;
@@ -26256,14 +24962,14 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 
 
 --
--- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_id_seq', 1, true);
 
 
 --
--- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
@@ -26271,7 +24977,7 @@ COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_type; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: supplier_type; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY supplier_type (id, resource_id, name, descr) FROM stdin;
@@ -26279,14 +24985,14 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
 
 
 --
--- Data for Name: task; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: task; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, status) FROM stdin;
@@ -26294,14 +25000,14 @@ COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, statu
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('task_id_seq', 1, true);
 
 
 --
--- Data for Name: task_resource; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: task_resource; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
@@ -26309,7 +25015,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: task_upload; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: task_upload; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY task_upload (task_id, upload_id) FROM stdin;
@@ -26317,7 +25023,7 @@ COPY task_upload (task_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: ticket; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: ticket; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_id, transport_id, start_dt, start_additional_info, end_dt, end_additional_info, adults, children, descr) FROM stdin;
@@ -26325,7 +25031,7 @@ COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_i
 
 
 --
--- Data for Name: ticket_class; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: ticket_class; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY ticket_class (id, resource_id, name) FROM stdin;
@@ -26333,21 +25039,21 @@ COPY ticket_class (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_class_id_seq', 1, true);
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_id_seq', 1, true);
 
 
 --
--- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
@@ -26355,7 +25061,7 @@ COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
 
 
 --
--- Data for Name: tour; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: tour; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY tour (id, resource_id, start_location_id, start_transport_id, end_location_id, end_transport_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, transfer_id, adults, children, start_date, start_additional_info, end_date, end_additional_info, descr) FROM stdin;
@@ -26363,14 +25069,14 @@ COPY tour (id, resource_id, start_location_id, start_transport_id, end_location_
 
 
 --
--- Name: tour_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: tour_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('tour_id_seq', 1, true);
 
 
 --
--- Data for Name: tour_order_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: tour_order_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY tour_order_item (order_item_id, tour_id) FROM stdin;
@@ -26378,7 +25084,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 
 
 --
--- Data for Name: transfer; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: transfer; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY transfer (id, resource_id, name) FROM stdin;
@@ -26386,14 +25092,14 @@ COPY transfer (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq', 1, true);
 
 
 --
--- Data for Name: transport; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: transport; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY transport (id, resource_id, name) FROM stdin;
@@ -26401,14 +25107,14 @@ COPY transport (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: transport_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('transport_id_seq', 1, true);
 
 
 --
--- Data for Name: upload; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: upload; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY upload (id, resource_id, name, path, size, media_type, descr) FROM stdin;
@@ -26416,14 +25122,14 @@ COPY upload (id, resource_id, name, path, size, media_type, descr) FROM stdin;
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: upload_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('upload_id_seq', 1, true);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: user; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY "user" (id, resource_id, employee_id, username, email, password) FROM stdin;
@@ -26432,14 +25138,14 @@ COPY "user" (id, resource_id, employee_id, username, email, password) FROM stdin
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('user_id_seq', 2, true);
 
 
 --
--- Data for Name: vat; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: vat; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY vat (id, resource_id, account_id, service_id, date, vat, calc_method, descr) FROM stdin;
@@ -26447,14 +25153,14 @@ COPY vat (id, resource_id, account_id, service_id, date, vat, calc_method, descr
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: vat_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('vat_id_seq', 1, true);
 
 
 --
--- Data for Name: visa; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: visa; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM stdin;
@@ -26462,14 +25168,14 @@ COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM 
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE SET; Schema: test; Owner: mazvv
+-- Name: visa_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
 --
 
 SELECT pg_catalog.setval('visa_id_seq', 1, true);
 
 
 --
--- Data for Name: visa_order_item; Type: TABLE DATA; Schema: test; Owner: mazvv
+-- Data for Name: visa_order_item; Type: TABLE DATA; Schema: test; Owner: -
 --
 
 COPY visa_order_item (order_item_id, visa_id) FROM stdin;
@@ -26479,7 +25185,7 @@ COPY visa_order_item (order_item_id, visa_id) FROM stdin;
 SET search_path = company, pg_catalog;
 
 --
--- Name: accomodation_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -26487,7 +25193,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: account_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: account_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -26495,7 +25201,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: account_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: account_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -26503,7 +25209,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: address_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY address
@@ -26511,7 +25217,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: advsource_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -26519,7 +25225,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: appointment_header_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: appointment_header_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY appointment
@@ -26527,7 +25233,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: bank_address_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bank_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_address
@@ -26535,7 +25241,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_detail
@@ -26543,7 +25249,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: bank_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bank_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -26551,7 +25257,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -26559,7 +25265,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: bperson_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: bperson_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson
@@ -26567,7 +25273,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: calculation_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: calculation_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY calculation
@@ -26575,7 +25281,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: campaign_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: campaign_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY campaign
@@ -26583,7 +25289,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: commission_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY commission
@@ -26591,7 +25297,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: company_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: company_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -26599,7 +25305,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -26607,7 +25313,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: contact_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contact
@@ -26615,7 +25321,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract_commission
@@ -26623,7 +25329,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: country_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: country_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -26631,7 +25337,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY crosspayment
@@ -26639,7 +25345,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: currency_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: currency_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -26647,7 +25353,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -26655,7 +25361,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: employee_address_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_address
@@ -26663,7 +25369,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_contact
@@ -26671,7 +25377,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_notification
@@ -26679,7 +25385,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_passport
@@ -26687,7 +25393,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: employee_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -26695,7 +25401,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -26703,7 +25409,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_upload
@@ -26711,7 +25417,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: foodcat_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -26719,7 +25425,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: hotel_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: hotel_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotel
@@ -26727,7 +25433,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -26735,7 +25441,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -26743,7 +25449,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: income_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: income_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income
@@ -26751,7 +25457,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice_item
@@ -26759,7 +25465,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: invoice_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: invoice_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice
@@ -26767,7 +25473,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: lead_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: lead_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_item
@@ -26775,7 +25481,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_offer
@@ -26783,7 +25489,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: lead_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead
@@ -26791,7 +25497,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: licence_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: licence_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract
@@ -26799,7 +25505,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: location_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: location_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -26807,7 +25513,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: navigation_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: navigation_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY navigation
@@ -26815,7 +25521,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: note_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: note_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note
@@ -26823,7 +25529,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: note_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: note_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_resource
@@ -26831,7 +25537,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: note_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: note_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_upload
@@ -26839,7 +25545,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: notification_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification
@@ -26847,7 +25553,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification_resource
@@ -26855,7 +25561,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY order_item
@@ -26863,7 +25569,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: order_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: order_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "order"
@@ -26871,7 +25577,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -26879,7 +25585,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: outgoing_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing
@@ -26887,7 +25593,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: passport_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: passport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport
@@ -26895,7 +25601,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport_upload
@@ -26903,7 +25609,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: permision_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: permision_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -26911,7 +25617,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: person_address_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_address
@@ -26919,7 +25625,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: person_category_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_category_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -26927,7 +25633,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: person_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_contact
@@ -26935,7 +25641,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_order_item
@@ -26943,7 +25649,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: person_passport_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_passport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_passport
@@ -26951,7 +25657,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: person_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person
@@ -26959,7 +25665,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -26967,7 +25673,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: position_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: position_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -26975,7 +25681,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: region_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: region_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -26983,7 +25689,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: resource_log_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: resource_log_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_log
@@ -26991,7 +25697,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: resource_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: resource_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource
@@ -26999,7 +25705,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: resource_type_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: resource_type_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -27007,7 +25713,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: roomcat_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -27015,7 +25721,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: service_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: service_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -27023,7 +25729,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -27031,7 +25737,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: spassport_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: spassport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport
@@ -27039,7 +25745,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: structure_address_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_address
@@ -27047,7 +25753,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -27055,7 +25761,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_contact
@@ -27063,7 +25769,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: structure_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: structure_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure
@@ -27071,7 +25777,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -27079,7 +25785,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -27087,7 +25793,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -27095,7 +25801,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -27103,7 +25809,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -27111,7 +25817,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -27119,7 +25825,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: task_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: task_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task
@@ -27127,7 +25833,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: task_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: task_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_resource
@@ -27135,7 +25841,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: task_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: task_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_upload
@@ -27143,7 +25849,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -27151,7 +25857,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -27159,7 +25865,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: ticket_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket
@@ -27167,7 +25873,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -27175,7 +25881,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: tour_pkey1; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: tour_pkey1; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour
@@ -27183,7 +25889,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: touroperator_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: touroperator_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier
@@ -27191,7 +25897,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: transfer_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY cashflow
@@ -27199,7 +25905,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: transfer_pkey1; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: transfer_pkey1; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -27207,7 +25913,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: transport_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -27215,7 +25921,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: uni_list_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: uni_list_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY uni_list
@@ -27223,7 +25929,7 @@ ALTER TABLE ONLY uni_list
 
 
 --
--- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -27231,7 +25937,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -27239,7 +25945,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -27247,7 +25953,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -27255,7 +25961,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -27263,7 +25969,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -27271,7 +25977,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -27279,7 +25985,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -27287,7 +25993,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -27295,7 +26001,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -27303,7 +26009,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -27311,7 +26017,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -27319,7 +26025,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -27327,7 +26033,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -27335,7 +26041,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -27343,7 +26049,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -27351,7 +26057,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -27359,7 +26065,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -27367,7 +26073,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -27375,7 +26081,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -27383,7 +26089,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -27391,7 +26097,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -27399,7 +26105,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_name_uni_list; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_uni_list; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY uni_list
@@ -27407,7 +26113,7 @@ ALTER TABLE ONLY uni_list
 
 
 --
--- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -27415,7 +26121,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -27423,7 +26129,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -27431,7 +26137,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -27439,7 +26145,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -27447,7 +26153,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -27455,7 +26161,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: upload_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -27463,7 +26169,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: user_pk; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: user_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -27471,7 +26177,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: vat_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: vat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY vat
@@ -27479,7 +26185,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -27487,7 +26193,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: visa_pkey; Type: CONSTRAINT; Schema: company; Owner: mazvv; Tablespace: 
+-- Name: visa_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa
@@ -27497,7 +26203,7 @@ ALTER TABLE ONLY visa
 SET search_path = demo_ru, pg_catalog;
 
 --
--- Name: accomodation_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -27505,7 +26211,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: account_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: account_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -27513,7 +26219,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: account_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: account_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -27521,7 +26227,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY address
@@ -27529,7 +26235,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: advsource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -27537,7 +26243,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: appointment_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: appointment_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY appointment
@@ -27545,7 +26251,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: bank_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bank_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_address
@@ -27553,7 +26259,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_detail
@@ -27561,7 +26267,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: bank_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bank_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -27569,7 +26275,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -27577,7 +26283,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: bperson_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: bperson_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson
@@ -27585,7 +26291,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: calculation_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: calculation_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY calculation
@@ -27593,7 +26299,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: campaign_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: campaign_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY campaign
@@ -27601,7 +26307,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: cashflow_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: cashflow_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY cashflow
@@ -27609,7 +26315,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: commission_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY commission
@@ -27617,7 +26323,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: company_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: company_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -27625,7 +26331,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -27633,7 +26339,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contact
@@ -27641,7 +26347,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract_commission
@@ -27649,7 +26355,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: contract_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: contract_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract
@@ -27657,7 +26363,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: country_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: country_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -27665,7 +26371,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY crosspayment
@@ -27673,7 +26379,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: currency_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: currency_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -27681,7 +26387,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -27689,7 +26395,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: employee_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_address
@@ -27697,7 +26403,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_contact
@@ -27705,7 +26411,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_notification
@@ -27713,7 +26419,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_passport
@@ -27721,7 +26427,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: employee_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -27729,7 +26435,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -27737,7 +26443,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_upload
@@ -27745,7 +26451,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: foodcat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -27753,7 +26459,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: hotel_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: hotel_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotel
@@ -27761,7 +26467,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -27769,7 +26475,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -27777,7 +26483,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: income_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: income_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income
@@ -27785,7 +26491,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice_item
@@ -27793,7 +26499,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: invoice_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: invoice_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice
@@ -27801,7 +26507,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: lead_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: lead_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_item
@@ -27809,7 +26515,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_offer
@@ -27817,7 +26523,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: lead_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead
@@ -27825,7 +26531,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: location_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: location_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -27833,7 +26539,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: navigation_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: navigation_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY navigation
@@ -27841,7 +26547,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: note_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: note_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note
@@ -27849,7 +26555,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: note_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: note_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_resource
@@ -27857,7 +26563,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: note_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: note_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_upload
@@ -27865,7 +26571,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: notification_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification
@@ -27873,7 +26579,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification_resource
@@ -27881,7 +26587,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY order_item
@@ -27889,7 +26595,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: order_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: order_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "order"
@@ -27897,7 +26603,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -27905,7 +26611,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: outgoing_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing
@@ -27913,7 +26619,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: passport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: passport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport
@@ -27921,7 +26627,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport_upload
@@ -27929,7 +26635,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: permision_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: permision_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -27937,7 +26643,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: person_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_address
@@ -27945,7 +26651,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: person_category_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_category_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -27953,7 +26659,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: person_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_contact
@@ -27961,7 +26667,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_order_item
@@ -27969,7 +26675,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: person_passport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_passport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_passport
@@ -27977,7 +26683,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: person_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person
@@ -27985,7 +26691,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -27993,7 +26699,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: position_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: position_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -28001,7 +26707,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: region_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: region_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -28009,7 +26715,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: resource_log_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: resource_log_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_log
@@ -28017,7 +26723,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource
@@ -28025,7 +26731,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: resource_type_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: resource_type_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -28033,7 +26739,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: roomcat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -28041,7 +26747,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: service_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: service_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -28049,7 +26755,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -28057,7 +26763,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: spassport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: spassport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport
@@ -28065,7 +26771,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: structure_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_address_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_address
@@ -28073,7 +26779,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -28081,7 +26787,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_contact
@@ -28089,7 +26795,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: structure_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: structure_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure
@@ -28097,7 +26803,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -28105,7 +26811,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -28113,7 +26819,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -28121,7 +26827,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -28129,7 +26835,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: supplier_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier
@@ -28137,7 +26843,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -28145,7 +26851,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -28153,7 +26859,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: task_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: task_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task
@@ -28161,7 +26867,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: task_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: task_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_resource
@@ -28169,7 +26875,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: task_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: task_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_upload
@@ -28177,7 +26883,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -28185,7 +26891,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -28193,7 +26899,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: ticket_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket
@@ -28201,7 +26907,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -28209,7 +26915,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: tour_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: tour_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour
@@ -28217,7 +26923,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: transfer_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -28225,7 +26931,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: transport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -28233,7 +26939,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -28241,7 +26947,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -28249,7 +26955,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -28257,7 +26963,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -28265,7 +26971,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -28273,7 +26979,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -28281,7 +26987,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -28289,7 +26995,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -28297,7 +27003,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -28305,7 +27011,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -28313,7 +27019,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -28321,7 +27027,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -28329,7 +27035,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -28337,7 +27043,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -28345,7 +27051,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -28353,7 +27059,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -28361,7 +27067,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -28369,7 +27075,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -28377,7 +27083,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -28385,7 +27091,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -28393,7 +27099,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -28401,7 +27107,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -28409,7 +27115,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -28417,7 +27123,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -28425,7 +27131,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -28433,7 +27139,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -28441,7 +27147,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -28449,7 +27155,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -28457,7 +27163,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -28465,7 +27171,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: user_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: user_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -28473,7 +27179,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: vat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: vat_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY vat
@@ -28481,7 +27187,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -28489,7 +27195,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: visa_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: mazvv; Tablespace: 
+-- Name: visa_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa
@@ -28499,7 +27205,7 @@ ALTER TABLE ONLY visa
 SET search_path = public, pg_catalog;
 
 --
--- Name: accomodation_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -28507,7 +27213,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: account_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: account_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -28515,7 +27221,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: account_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: account_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -28523,7 +27229,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: address_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY address
@@ -28531,7 +27237,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: advsource_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -28539,7 +27245,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: appointment_header_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: appointment_header_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY appointment
@@ -28547,7 +27253,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: bank_address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bank_address_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_address
@@ -28555,7 +27261,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_detail
@@ -28563,7 +27269,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: bank_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bank_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -28571,7 +27277,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -28579,7 +27285,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: bperson_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: bperson_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson
@@ -28587,7 +27293,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: calculation_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: calculation_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY calculation
@@ -28595,7 +27301,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: campaign_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: campaign_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY campaign
@@ -28603,7 +27309,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: commission_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY commission
@@ -28611,7 +27317,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: company_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: company_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -28619,7 +27325,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -28627,7 +27333,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contact
@@ -28635,7 +27341,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract_commission
@@ -28643,7 +27349,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: country_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: country_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -28651,7 +27357,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY crosspayment
@@ -28659,7 +27365,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: currency_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: currency_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -28667,7 +27373,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -28675,7 +27381,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: employee_address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_address_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_address
@@ -28683,7 +27389,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_contact
@@ -28691,7 +27397,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_notification
@@ -28699,7 +27405,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_passport
@@ -28707,7 +27413,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: employee_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -28715,7 +27421,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -28723,7 +27429,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_upload
@@ -28731,7 +27437,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: foodcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -28739,7 +27445,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: hotel_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: hotel_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotel
@@ -28747,7 +27453,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -28755,7 +27461,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -28763,7 +27469,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: income_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: income_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income
@@ -28771,7 +27477,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice_item
@@ -28779,7 +27485,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: invoice_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: invoice_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice
@@ -28787,7 +27493,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: lead_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: lead_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_item
@@ -28795,7 +27501,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_offer
@@ -28803,7 +27509,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: lead_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead
@@ -28811,7 +27517,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: licence_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: licence_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract
@@ -28819,7 +27525,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: location_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: location_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -28827,7 +27533,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: navigation_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: navigation_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY navigation
@@ -28835,7 +27541,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: note_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: note_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note
@@ -28843,7 +27549,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: note_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: note_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_resource
@@ -28851,7 +27557,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: note_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: note_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_upload
@@ -28859,7 +27565,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: notification_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification
@@ -28867,7 +27573,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification_resource
@@ -28875,7 +27581,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY order_item
@@ -28883,7 +27589,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: order_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: order_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "order"
@@ -28891,7 +27597,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -28899,7 +27605,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: outgoing_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing
@@ -28907,7 +27613,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: passport_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: passport_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport
@@ -28915,7 +27621,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport_upload
@@ -28923,7 +27629,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: permision_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: permision_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -28931,7 +27637,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: person_address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_address_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_address
@@ -28939,7 +27645,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: person_category_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_category_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -28947,7 +27653,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: person_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_contact
@@ -28955,7 +27661,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_order_item
@@ -28963,7 +27669,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: person_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_passport_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_passport
@@ -28971,7 +27677,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: person_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person
@@ -28979,7 +27685,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -28987,7 +27693,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: position_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: position_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -28995,7 +27701,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: region_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: region_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -29003,7 +27709,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: resource_log_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_log_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_log
@@ -29011,7 +27717,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: resource_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource
@@ -29019,7 +27725,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: resource_type_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: resource_type_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -29027,7 +27733,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: roomcat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -29035,7 +27741,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: service_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: service_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -29043,7 +27749,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -29051,7 +27757,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: spassport_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: spassport_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport
@@ -29059,7 +27765,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: structure_address_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_address_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_address
@@ -29067,7 +27773,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -29075,7 +27781,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_contact
@@ -29083,7 +27789,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: structure_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: structure_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure
@@ -29091,7 +27797,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -29099,7 +27805,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -29107,7 +27813,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -29115,7 +27821,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -29123,7 +27829,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -29131,7 +27837,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -29139,7 +27845,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: task_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: task_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task
@@ -29147,7 +27853,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: task_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: task_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_resource
@@ -29155,7 +27861,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: task_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: task_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_upload
@@ -29163,7 +27869,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -29171,7 +27877,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -29179,7 +27885,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: ticket_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket
@@ -29187,7 +27893,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -29195,7 +27901,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: tour_pkey1; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: tour_pkey1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour
@@ -29203,7 +27909,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: touroperator_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: touroperator_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier
@@ -29211,7 +27917,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY cashflow
@@ -29219,7 +27925,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: transfer_pkey1; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: transfer_pkey1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -29227,7 +27933,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: transport_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -29235,7 +27941,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -29243,7 +27949,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -29251,7 +27957,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -29259,7 +27965,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -29267,7 +27973,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -29275,7 +27981,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -29283,7 +27989,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -29291,7 +27997,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -29299,7 +28005,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -29307,7 +28013,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -29315,7 +28021,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -29323,7 +28029,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -29331,7 +28037,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -29339,7 +28045,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -29347,7 +28053,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -29355,7 +28061,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -29363,7 +28069,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -29371,7 +28077,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -29379,7 +28085,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -29387,7 +28093,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -29395,7 +28101,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -29403,7 +28109,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -29411,7 +28117,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -29419,7 +28125,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -29427,7 +28133,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -29435,7 +28141,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -29443,7 +28149,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -29451,7 +28157,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -29459,7 +28165,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: upload_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: upload_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -29467,7 +28173,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: user_pk; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: user_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -29475,7 +28181,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: vat_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: vat_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY vat
@@ -29483,7 +28189,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -29491,7 +28197,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: visa_pkey; Type: CONSTRAINT; Schema: public; Owner: mazvv; Tablespace: 
+-- Name: visa_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa
@@ -29501,7 +28207,7 @@ ALTER TABLE ONLY visa
 SET search_path = test, pg_catalog;
 
 --
--- Name: accomodation_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -29509,7 +28215,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: account_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: account_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -29517,7 +28223,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: account_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: account_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -29525,7 +28231,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: address_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: address_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY address
@@ -29533,7 +28239,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: advsource_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -29541,7 +28247,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: appointment_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: appointment_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY appointment
@@ -29549,7 +28255,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: bank_address_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bank_address_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_address
@@ -29557,7 +28263,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_detail
@@ -29565,7 +28271,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: bank_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bank_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -29573,7 +28279,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -29581,7 +28287,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: bperson_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: bperson_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson
@@ -29589,7 +28295,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: calculation_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: calculation_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY calculation
@@ -29597,7 +28303,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: campaign_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: campaign_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY campaign
@@ -29605,7 +28311,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: cashflow_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: cashflow_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY cashflow
@@ -29613,7 +28319,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: commission_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY commission
@@ -29621,7 +28327,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: company_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: company_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -29629,7 +28335,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -29637,7 +28343,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: contact_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contact
@@ -29645,7 +28351,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract_commission
@@ -29653,7 +28359,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: contract_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: contract_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract
@@ -29661,7 +28367,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: country_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: country_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -29669,7 +28375,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY crosspayment
@@ -29677,7 +28383,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: currency_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: currency_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -29685,7 +28391,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -29693,7 +28399,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: employee_address_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_address_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_address
@@ -29701,7 +28407,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_contact
@@ -29709,7 +28415,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_notification
@@ -29717,7 +28423,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_passport
@@ -29725,7 +28431,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: employee_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -29733,7 +28439,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -29741,7 +28447,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_upload
@@ -29749,7 +28455,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: foodcat_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -29757,7 +28463,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: hotel_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: hotel_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotel
@@ -29765,7 +28471,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -29773,7 +28479,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -29781,7 +28487,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: income_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: income_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income
@@ -29789,7 +28495,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice_item
@@ -29797,7 +28503,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: invoice_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: invoice_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice
@@ -29805,7 +28511,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: lead_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: lead_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_item
@@ -29813,7 +28519,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_offer
@@ -29821,7 +28527,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: lead_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead
@@ -29829,7 +28535,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: location_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: location_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -29837,7 +28543,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: navigation_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: navigation_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY navigation
@@ -29845,7 +28551,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: note_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: note_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note
@@ -29853,7 +28559,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: note_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: note_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_resource
@@ -29861,7 +28567,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: note_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: note_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_upload
@@ -29869,7 +28575,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: notification_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification
@@ -29877,7 +28583,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification_resource
@@ -29885,7 +28591,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY order_item
@@ -29893,7 +28599,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: order_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: order_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "order"
@@ -29901,7 +28607,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -29909,7 +28615,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: outgoing_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing
@@ -29917,7 +28623,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: passport_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: passport_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport
@@ -29925,7 +28631,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport_upload
@@ -29933,7 +28639,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: permision_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: permision_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -29941,7 +28647,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: person_address_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_address_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_address
@@ -29949,7 +28655,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: person_category_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_category_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -29957,7 +28663,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: person_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_contact
@@ -29965,7 +28671,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_order_item
@@ -29973,7 +28679,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: person_passport_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_passport_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_passport
@@ -29981,7 +28687,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: person_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person
@@ -29989,7 +28695,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -29997,7 +28703,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: position_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: position_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -30005,7 +28711,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: region_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: region_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -30013,7 +28719,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: resource_log_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: resource_log_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_log
@@ -30021,7 +28727,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: resource_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: resource_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource
@@ -30029,7 +28735,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: resource_type_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: resource_type_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -30037,7 +28743,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: roomcat_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -30045,7 +28751,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: service_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: service_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -30053,7 +28759,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -30061,7 +28767,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: spassport_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: spassport_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport
@@ -30069,7 +28775,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: structure_address_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_address_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_address
@@ -30077,7 +28783,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -30085,7 +28791,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_contact
@@ -30093,7 +28799,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: structure_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: structure_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure
@@ -30101,7 +28807,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -30109,7 +28815,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -30117,7 +28823,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -30125,7 +28831,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -30133,7 +28839,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: supplier_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier
@@ -30141,7 +28847,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -30149,7 +28855,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -30157,7 +28863,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: task_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: task_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task
@@ -30165,7 +28871,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: task_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: task_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_resource
@@ -30173,7 +28879,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: task_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: task_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_upload
@@ -30181,7 +28887,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -30189,7 +28895,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -30197,7 +28903,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: ticket_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket
@@ -30205,7 +28911,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -30213,7 +28919,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: tour_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: tour_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour
@@ -30221,7 +28927,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: transfer_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -30229,7 +28935,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: transport_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -30237,7 +28943,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -30245,7 +28951,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -30253,7 +28959,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -30261,7 +28967,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -30269,7 +28975,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -30277,7 +28983,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -30285,7 +28991,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -30293,7 +28999,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -30301,7 +29007,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -30309,7 +29015,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -30317,7 +29023,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -30325,7 +29031,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -30333,7 +29039,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -30341,7 +29047,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -30349,7 +29055,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -30357,7 +29063,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -30365,7 +29071,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -30373,7 +29079,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -30381,7 +29087,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -30389,7 +29095,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -30397,7 +29103,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -30405,7 +29111,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -30413,7 +29119,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -30421,7 +29127,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -30429,7 +29135,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -30437,7 +29143,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -30445,7 +29151,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -30453,7 +29159,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -30461,7 +29167,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: upload_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: upload_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -30469,7 +29175,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: user_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: user_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -30477,7 +29183,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: vat_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: vat_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY vat
@@ -30485,7 +29191,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -30493,7 +29199,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: visa_pkey; Type: CONSTRAINT; Schema: test; Owner: mazvv; Tablespace: 
+-- Name: visa_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa
@@ -30503,7 +29209,7 @@ ALTER TABLE ONLY visa
 SET search_path = company, pg_catalog;
 
 --
--- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30511,7 +29217,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -30519,7 +29225,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -30527,7 +29233,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -30535,7 +29241,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -30543,7 +29249,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -30551,7 +29257,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -30559,7 +29265,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -30567,7 +29273,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -30575,7 +29281,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -30583,7 +29289,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -30591,7 +29297,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -30599,7 +29305,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -30607,7 +29313,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -30615,7 +29321,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -30623,7 +29329,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -30631,7 +29337,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -30639,7 +29345,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -30647,7 +29353,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -30655,7 +29361,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -30663,7 +29369,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -30671,7 +29377,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -30679,7 +29385,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -30687,7 +29393,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -30695,7 +29401,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -30703,7 +29409,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -30711,7 +29417,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -30719,7 +29425,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -30727,7 +29433,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -30735,7 +29441,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -30743,7 +29449,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -30751,7 +29457,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -30759,7 +29465,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -30767,7 +29473,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -30775,7 +29481,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -30783,7 +29489,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -30791,7 +29497,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -30799,7 +29505,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -30807,7 +29513,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -30815,7 +29521,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -30823,7 +29529,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -30831,7 +29537,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -30839,7 +29545,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -30847,7 +29553,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -30855,7 +29561,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -30863,7 +29569,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -30871,7 +29577,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -30879,7 +29585,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -30887,7 +29593,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -30895,7 +29601,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -30903,7 +29609,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -30911,7 +29617,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -30919,7 +29625,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -30927,7 +29633,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -30935,7 +29641,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -30943,7 +29649,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30951,7 +29657,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30959,7 +29665,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30967,7 +29673,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30975,7 +29681,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -30983,7 +29689,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -30991,7 +29697,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -30999,7 +29705,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -31007,7 +29713,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -31015,7 +29721,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -31023,7 +29729,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -31031,7 +29737,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -31039,7 +29745,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -31047,7 +29753,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -31055,7 +29761,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -31063,7 +29769,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -31071,7 +29777,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -31079,7 +29785,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -31087,7 +29793,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -31095,7 +29801,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -31103,7 +29809,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -31111,7 +29817,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -31119,7 +29825,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -31127,7 +29833,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -31135,7 +29841,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -31143,7 +29849,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -31151,7 +29857,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -31159,7 +29865,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -31167,7 +29873,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -31175,7 +29881,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -31183,7 +29889,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -31191,7 +29897,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -31199,7 +29905,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -31207,7 +29913,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -31215,7 +29921,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -31223,7 +29929,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -31231,7 +29937,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -31239,7 +29945,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -31247,7 +29953,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -31255,7 +29961,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -31263,7 +29969,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -31271,7 +29977,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -31279,7 +29985,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -31287,7 +29993,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -31295,7 +30001,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY accomodation
@@ -31303,7 +30009,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -31311,7 +30017,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -31319,7 +30025,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -31327,7 +30033,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY advsource
@@ -31335,7 +30041,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -31343,7 +30049,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank
@@ -31351,7 +30057,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -31359,7 +30065,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY bperson
@@ -31367,7 +30073,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -31375,7 +30081,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY campaign
@@ -31383,7 +30089,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -31391,7 +30097,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -31399,7 +30105,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY contact
@@ -31407,7 +30113,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY upload
@@ -31415,7 +30121,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY country
@@ -31423,7 +30129,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -31431,7 +30137,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY currency
@@ -31439,7 +30145,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -31447,7 +30153,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY foodcat
@@ -31455,7 +30161,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -31463,7 +30169,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat
@@ -31471,7 +30177,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -31479,7 +30185,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -31487,7 +30193,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -31495,7 +30201,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -31503,7 +30209,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -31511,7 +30217,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY contract
@@ -31519,7 +30225,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -31527,7 +30233,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -31535,7 +30241,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY note
@@ -31543,7 +30249,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -31551,7 +30257,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY notification
@@ -31559,7 +30265,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -31567,7 +30273,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -31575,7 +30281,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -31583,7 +30289,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -31591,7 +30297,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -31599,7 +30305,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -31607,7 +30313,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_category
@@ -31615,7 +30321,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -31623,7 +30329,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -31631,7 +30337,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -31639,7 +30345,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource_type
@@ -31647,7 +30353,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY roomcat
@@ -31655,7 +30361,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -31663,7 +30369,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY spassport
@@ -31671,7 +30377,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -31679,7 +30385,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -31687,7 +30393,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type
@@ -31695,7 +30401,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -31703,7 +30409,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -31711,7 +30417,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -31719,7 +30425,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class
@@ -31727,7 +30433,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -31735,7 +30441,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -31743,7 +30449,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_resource_id_touroperator; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_touroperator; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -31751,7 +30457,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY transfer
@@ -31759,7 +30465,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY transport
@@ -31767,7 +30473,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: fk_resource_id_uni_list; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_uni_list; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY uni_list
@@ -31775,7 +30481,7 @@ ALTER TABLE ONLY uni_list
 
 
 --
--- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -31783,7 +30489,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -31791,7 +30497,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -31799,7 +30505,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -31807,7 +30513,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -31815,7 +30521,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -31823,7 +30529,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -31831,7 +30537,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -31839,7 +30545,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -31847,7 +30553,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -31855,7 +30561,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -31863,7 +30569,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -31871,7 +30577,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -31879,7 +30585,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -31887,7 +30593,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -31895,7 +30601,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -31903,7 +30609,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -31911,7 +30617,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -31919,7 +30625,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -31927,7 +30633,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -31935,7 +30641,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -31943,7 +30649,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -31951,7 +30657,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -31959,7 +30665,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -31967,7 +30673,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -31975,7 +30681,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -31983,7 +30689,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -31991,7 +30697,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -31999,7 +30705,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -32007,7 +30713,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -32015,7 +30721,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -32023,7 +30729,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -32031,7 +30737,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -32039,7 +30745,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -32047,7 +30753,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -32055,7 +30761,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -32063,7 +30769,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -32071,7 +30777,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -32079,7 +30785,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -32087,7 +30793,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -32095,7 +30801,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -32103,7 +30809,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -32111,7 +30817,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -32119,7 +30825,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -32127,7 +30833,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -32135,7 +30841,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -32143,7 +30849,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -32151,7 +30857,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -32159,7 +30865,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -32167,7 +30873,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: company; Owner: mazvv
+-- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -32177,7 +30883,7 @@ ALTER TABLE ONLY visa_order_item
 SET search_path = demo_ru, pg_catalog;
 
 --
--- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -32185,7 +30891,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -32193,7 +30899,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -32201,7 +30907,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -32209,7 +30915,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -32217,7 +30923,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -32225,7 +30931,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -32233,7 +30939,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -32241,7 +30947,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -32249,7 +30955,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -32257,7 +30963,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -32265,7 +30971,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -32273,7 +30979,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -32281,7 +30987,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -32289,7 +30995,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -32297,7 +31003,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -32305,7 +31011,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -32313,7 +31019,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -32321,7 +31027,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -32329,7 +31035,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -32337,7 +31043,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -32345,7 +31051,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -32353,7 +31059,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -32361,7 +31067,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -32369,7 +31075,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -32377,7 +31083,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -32385,7 +31091,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -32393,7 +31099,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -32401,7 +31107,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -32409,7 +31115,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -32417,7 +31123,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -32425,7 +31131,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -32433,7 +31139,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -32441,7 +31147,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -32449,7 +31155,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -32457,7 +31163,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -32465,7 +31171,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -32473,7 +31179,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_currency_id_currency_rate; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_currency_rate; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -32481,7 +31187,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -32489,7 +31195,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -32497,7 +31203,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -32505,7 +31211,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -32513,7 +31219,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -32521,7 +31227,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -32529,7 +31235,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -32537,7 +31243,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -32545,7 +31251,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -32553,7 +31259,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -32561,7 +31267,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -32569,7 +31275,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -32577,7 +31283,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -32585,7 +31291,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -32593,7 +31299,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -32601,7 +31307,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -32609,7 +31315,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -32617,7 +31323,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -32625,7 +31331,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -32633,7 +31339,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -32641,7 +31347,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -32649,7 +31355,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -32657,7 +31363,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -32665,7 +31371,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -32673,7 +31379,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -32681,7 +31387,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -32689,7 +31395,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -32697,7 +31403,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -32705,7 +31411,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -32713,7 +31419,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -32721,7 +31427,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -32729,7 +31435,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -32737,7 +31443,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_notification_id_employee_notification; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_notification_id_employee_notification; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -32745,7 +31451,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -32753,7 +31459,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -32761,7 +31467,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -32769,7 +31475,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -32777,7 +31483,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -32785,7 +31491,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -32793,7 +31499,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -32801,7 +31507,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -32809,7 +31515,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -32817,7 +31523,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -32825,7 +31531,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -32833,7 +31539,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -32841,7 +31547,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -32849,7 +31555,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -32857,7 +31563,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -32865,7 +31571,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -32873,7 +31579,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -32881,7 +31587,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -32889,7 +31595,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -32897,7 +31603,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -32905,7 +31611,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -32913,7 +31619,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -32921,7 +31627,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -32929,7 +31635,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -32937,7 +31643,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -32945,7 +31651,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -32953,7 +31659,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -32961,7 +31667,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -32969,7 +31675,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY accomodation
@@ -32977,7 +31683,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -32985,7 +31691,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -32993,7 +31699,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -33001,7 +31707,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY advsource
@@ -33009,7 +31715,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -33017,7 +31723,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank
@@ -33025,7 +31731,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -33033,7 +31739,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY bperson
@@ -33041,7 +31747,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -33049,7 +31755,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY campaign
@@ -33057,7 +31763,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -33065,7 +31771,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -33073,7 +31779,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY contact
@@ -33081,7 +31787,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY upload
@@ -33089,7 +31795,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: fk_resource_id_contract; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_contract; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY contract
@@ -33097,7 +31803,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY country
@@ -33105,7 +31811,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -33113,7 +31819,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY currency
@@ -33121,7 +31827,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: fk_resource_id_currency_rate; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_currency_rate; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -33129,7 +31835,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -33137,7 +31843,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY foodcat
@@ -33145,7 +31851,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -33153,7 +31859,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat
@@ -33161,7 +31867,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -33169,7 +31875,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -33177,7 +31883,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -33185,7 +31891,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -33193,7 +31899,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -33201,7 +31907,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -33209,7 +31915,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -33217,7 +31923,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY note
@@ -33225,7 +31931,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -33233,7 +31939,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY notification
@@ -33241,7 +31947,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -33249,7 +31955,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -33257,7 +31963,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -33265,7 +31971,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -33273,7 +31979,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -33281,7 +31987,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -33289,7 +31995,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_category
@@ -33297,7 +32003,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -33305,7 +32011,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -33313,7 +32019,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -33321,7 +32027,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource_type
@@ -33329,7 +32035,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY roomcat
@@ -33337,7 +32043,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -33345,7 +32051,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY spassport
@@ -33353,7 +32059,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -33361,7 +32067,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -33369,7 +32075,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_resource_id_supplier; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_supplier; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -33377,7 +32083,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type
@@ -33385,7 +32091,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -33393,7 +32099,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -33401,7 +32107,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -33409,7 +32115,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class
@@ -33417,7 +32123,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -33425,7 +32131,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY transfer
@@ -33433,7 +32139,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY transport
@@ -33441,7 +32147,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -33449,7 +32155,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -33457,7 +32163,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -33465,7 +32171,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -33473,7 +32179,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -33481,7 +32187,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -33489,7 +32195,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -33497,7 +32203,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -33505,7 +32211,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -33513,7 +32219,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -33521,7 +32227,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -33529,7 +32235,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_service_id_vat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_service_id_vat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -33537,7 +32243,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -33545,7 +32251,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -33553,7 +32259,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -33561,7 +32267,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -33569,7 +32275,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -33577,7 +32283,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -33585,7 +32291,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -33593,7 +32299,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -33601,7 +32307,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -33609,7 +32315,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -33617,7 +32323,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -33625,7 +32331,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_subaccount_from_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_from_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -33633,7 +32339,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -33641,7 +32347,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -33649,7 +32355,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -33657,7 +32363,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -33665,7 +32371,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -33673,7 +32379,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_subaccount_to_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_subaccount_to_id_cashflow; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -33681,7 +32387,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -33689,7 +32395,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -33697,7 +32403,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -33705,7 +32411,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -33713,7 +32419,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -33721,7 +32427,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -33729,7 +32435,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -33737,7 +32443,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -33745,7 +32451,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -33753,7 +32459,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -33761,7 +32467,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -33769,7 +32475,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -33777,7 +32483,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -33785,7 +32491,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -33793,7 +32499,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -33801,7 +32507,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -33809,7 +32515,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -33817,7 +32523,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -33825,7 +32531,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -33833,7 +32539,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: mazvv
+-- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -33843,7 +32549,7 @@ ALTER TABLE ONLY visa_order_item
 SET search_path = public, pg_catalog;
 
 --
--- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -33851,7 +32557,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -33859,7 +32565,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -33867,7 +32573,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -33875,7 +32581,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -33883,7 +32589,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -33891,7 +32597,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -33899,7 +32605,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -33907,7 +32613,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -33915,7 +32621,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -33923,7 +32629,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -33931,7 +32637,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -33939,7 +32645,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -33947,7 +32653,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -33955,7 +32661,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -33963,7 +32669,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -33971,7 +32677,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -33979,7 +32685,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -33987,7 +32693,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -33995,7 +32701,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -34003,7 +32709,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -34011,7 +32717,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -34019,7 +32725,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -34027,7 +32733,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -34035,7 +32741,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -34043,7 +32749,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -34051,7 +32757,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -34059,7 +32765,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -34067,7 +32773,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -34075,7 +32781,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -34083,7 +32789,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -34091,7 +32797,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -34099,7 +32805,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -34107,7 +32813,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -34115,7 +32821,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -34123,7 +32829,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -34131,7 +32837,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -34139,7 +32845,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -34147,7 +32853,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -34155,7 +32861,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -34163,7 +32869,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -34171,7 +32877,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -34179,7 +32885,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -34187,7 +32893,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -34195,7 +32901,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -34203,7 +32909,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -34211,7 +32917,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -34219,7 +32925,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -34227,7 +32933,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -34235,7 +32941,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -34243,7 +32949,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -34251,7 +32957,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -34259,7 +32965,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -34267,7 +32973,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -34275,7 +32981,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -34283,7 +32989,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -34291,7 +32997,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -34299,7 +33005,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -34307,7 +33013,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -34315,7 +33021,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -34323,7 +33029,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -34331,7 +33037,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -34339,7 +33045,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -34347,7 +33053,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -34355,7 +33061,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -34363,7 +33069,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -34371,7 +33077,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -34379,7 +33085,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -34387,7 +33093,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -34395,7 +33101,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -34403,7 +33109,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -34411,7 +33117,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -34419,7 +33125,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -34427,7 +33133,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -34435,7 +33141,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -34443,7 +33149,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -34451,7 +33157,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -34459,7 +33165,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -34467,7 +33173,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -34475,7 +33181,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -34483,7 +33189,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -34491,7 +33197,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -34499,7 +33205,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -34507,7 +33213,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -34515,7 +33221,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -34523,7 +33229,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -34531,7 +33237,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -34539,7 +33245,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -34547,7 +33253,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -34555,7 +33261,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -34563,7 +33269,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -34571,7 +33277,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -34579,7 +33285,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -34587,7 +33293,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -34595,7 +33301,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -34603,7 +33309,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -34611,7 +33317,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -34619,7 +33325,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -34627,7 +33333,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -34635,7 +33341,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY accomodation
@@ -34643,7 +33349,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -34651,7 +33357,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -34659,7 +33365,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -34667,7 +33373,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY advsource
@@ -34675,7 +33381,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -34683,7 +33389,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank
@@ -34691,7 +33397,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -34699,7 +33405,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY bperson
@@ -34707,7 +33413,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -34715,7 +33421,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY campaign
@@ -34723,7 +33429,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -34731,7 +33437,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -34739,7 +33445,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contact
@@ -34747,7 +33453,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY upload
@@ -34755,7 +33461,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY country
@@ -34763,7 +33469,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -34771,7 +33477,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY currency
@@ -34779,7 +33485,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -34787,7 +33493,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY foodcat
@@ -34795,7 +33501,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -34803,7 +33509,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat
@@ -34811,7 +33517,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -34819,7 +33525,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -34827,7 +33533,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -34835,7 +33541,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -34843,7 +33549,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -34851,7 +33557,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY contract
@@ -34859,7 +33565,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -34867,7 +33573,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -34875,7 +33581,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY note
@@ -34883,7 +33589,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -34891,7 +33597,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notification
@@ -34899,7 +33605,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -34907,7 +33613,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -34915,7 +33621,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -34923,7 +33629,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -34931,7 +33637,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -34939,7 +33645,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -34947,7 +33653,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_category
@@ -34955,7 +33661,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -34963,7 +33669,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -34971,7 +33677,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -34979,7 +33685,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource_type
@@ -34987,7 +33693,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY roomcat
@@ -34995,7 +33701,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -35003,7 +33709,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY spassport
@@ -35011,7 +33717,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -35019,7 +33725,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -35027,7 +33733,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type
@@ -35035,7 +33741,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -35043,7 +33749,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -35051,7 +33757,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -35059,7 +33765,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class
@@ -35067,7 +33773,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -35075,7 +33781,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35083,7 +33789,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_resource_id_touroperator; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_touroperator; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -35091,7 +33797,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY transfer
@@ -35099,7 +33805,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY transport
@@ -35107,7 +33813,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -35115,7 +33821,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -35123,7 +33829,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -35131,7 +33837,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -35139,7 +33845,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -35147,7 +33853,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -35155,7 +33861,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35163,7 +33869,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -35171,7 +33877,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -35179,7 +33885,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -35187,7 +33893,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -35195,7 +33901,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -35203,7 +33909,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -35211,7 +33917,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -35219,7 +33925,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35227,7 +33933,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35235,7 +33941,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -35243,7 +33949,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -35251,7 +33957,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -35259,7 +33965,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -35267,7 +33973,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -35275,7 +33981,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -35283,7 +33989,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -35291,7 +33997,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -35299,7 +34005,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -35307,7 +34013,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -35315,7 +34021,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -35323,7 +34029,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -35331,7 +34037,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -35339,7 +34045,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -35347,7 +34053,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -35355,7 +34061,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -35363,7 +34069,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -35371,7 +34077,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -35379,7 +34085,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -35387,7 +34093,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -35395,7 +34101,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -35403,7 +34109,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -35411,7 +34117,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -35419,7 +34125,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -35427,7 +34133,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -35435,7 +34141,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -35443,7 +34149,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -35451,7 +34157,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35459,7 +34165,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -35467,7 +34173,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -35475,7 +34181,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -35483,7 +34189,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -35491,7 +34197,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -35499,7 +34205,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: public; Owner: mazvv
+-- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -35509,7 +34215,7 @@ ALTER TABLE ONLY visa_order_item
 SET search_path = test, pg_catalog;
 
 --
--- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35517,7 +34223,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -35525,7 +34231,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -35533,7 +34239,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -35541,7 +34247,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -35549,7 +34255,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -35557,7 +34263,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -35565,7 +34271,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -35573,7 +34279,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -35581,7 +34287,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -35589,7 +34295,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -35597,7 +34303,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -35605,7 +34311,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -35613,7 +34319,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -35621,7 +34327,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -35629,7 +34335,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -35637,7 +34343,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -35645,7 +34351,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -35653,7 +34359,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -35661,7 +34367,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -35669,7 +34375,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -35677,7 +34383,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -35685,7 +34391,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -35693,7 +34399,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -35701,7 +34407,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -35709,7 +34415,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -35717,7 +34423,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -35725,7 +34431,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -35733,7 +34439,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -35741,7 +34447,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -35749,7 +34455,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -35757,7 +34463,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -35765,7 +34471,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -35773,7 +34479,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -35781,7 +34487,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -35789,7 +34495,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -35797,7 +34503,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -35805,7 +34511,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_currency_id_currency_rate; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_currency_rate; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -35813,7 +34519,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -35821,7 +34527,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -35829,7 +34535,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -35837,7 +34543,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -35845,7 +34551,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -35853,7 +34559,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -35861,7 +34567,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -35869,7 +34575,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -35877,7 +34583,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -35885,7 +34591,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -35893,7 +34599,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -35901,7 +34607,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -35909,7 +34615,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -35917,7 +34623,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -35925,7 +34631,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -35933,7 +34639,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -35941,7 +34647,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35949,7 +34655,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35957,7 +34663,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35965,7 +34671,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -35973,7 +34679,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -35981,7 +34687,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -35989,7 +34695,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -35997,7 +34703,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -36005,7 +34711,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -36013,7 +34719,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -36021,7 +34727,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -36029,7 +34735,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -36037,7 +34743,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -36045,7 +34751,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -36053,7 +34759,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -36061,7 +34767,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -36069,7 +34775,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_notification_id_employee_notification; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_notification_id_employee_notification; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -36077,7 +34783,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -36085,7 +34791,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -36093,7 +34799,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -36101,7 +34807,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -36109,7 +34815,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -36117,7 +34823,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -36125,7 +34831,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -36133,7 +34839,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -36141,7 +34847,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -36149,7 +34855,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -36157,7 +34863,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -36165,7 +34871,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -36173,7 +34879,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -36181,7 +34887,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -36189,7 +34895,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -36197,7 +34903,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -36205,7 +34911,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -36213,7 +34919,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -36221,7 +34927,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -36229,7 +34935,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -36237,7 +34943,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -36245,7 +34951,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -36253,7 +34959,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -36261,7 +34967,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -36269,7 +34975,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -36277,7 +34983,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -36285,7 +34991,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -36293,7 +34999,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -36301,7 +35007,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY accomodation
@@ -36309,7 +35015,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -36317,7 +35023,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -36325,7 +35031,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -36333,7 +35039,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY advsource
@@ -36341,7 +35047,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -36349,7 +35055,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank
@@ -36357,7 +35063,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -36365,7 +35071,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY bperson
@@ -36373,7 +35079,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -36381,7 +35087,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY campaign
@@ -36389,7 +35095,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -36397,7 +35103,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -36405,7 +35111,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY upload
@@ -36413,7 +35119,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY contact
@@ -36421,7 +35127,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: fk_resource_id_contract; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_contract; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY contract
@@ -36429,7 +35135,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY country
@@ -36437,7 +35143,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -36445,7 +35151,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY currency
@@ -36453,7 +35159,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: fk_resource_id_currency_rate; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_currency_rate; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -36461,7 +35167,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -36469,7 +35175,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY foodcat
@@ -36477,7 +35183,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -36485,7 +35191,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat
@@ -36493,7 +35199,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -36501,7 +35207,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -36509,7 +35215,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -36517,7 +35223,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -36525,7 +35231,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -36533,7 +35239,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -36541,7 +35247,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -36549,7 +35255,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY note
@@ -36557,7 +35263,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -36565,7 +35271,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY notification
@@ -36573,7 +35279,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -36581,7 +35287,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -36589,7 +35295,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -36597,7 +35303,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -36605,7 +35311,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -36613,7 +35319,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -36621,7 +35327,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_category
@@ -36629,7 +35335,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -36637,7 +35343,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -36645,7 +35351,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -36653,7 +35359,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource_type
@@ -36661,7 +35367,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY roomcat
@@ -36669,7 +35375,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -36677,7 +35383,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY spassport
@@ -36685,7 +35391,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -36693,7 +35399,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -36701,7 +35407,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_resource_id_supplier; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_supplier; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -36709,7 +35415,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type
@@ -36717,7 +35423,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -36725,7 +35431,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -36733,7 +35439,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -36741,7 +35447,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class
@@ -36749,7 +35455,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -36757,7 +35463,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY transfer
@@ -36765,7 +35471,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY transport
@@ -36773,7 +35479,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -36781,7 +35487,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -36789,7 +35495,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -36797,7 +35503,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -36805,7 +35511,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -36813,7 +35519,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -36821,7 +35527,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -36829,7 +35535,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -36837,7 +35543,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -36845,7 +35551,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -36853,7 +35559,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -36861,7 +35567,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_service_id_vat; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_service_id_vat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -36869,7 +35575,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -36877,7 +35583,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -36885,7 +35591,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -36893,7 +35599,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -36901,7 +35607,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -36909,7 +35615,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -36917,7 +35623,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -36925,7 +35631,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -36933,7 +35639,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -36941,7 +35647,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -36949,7 +35655,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -36957,7 +35663,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_subaccount_from_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_from_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -36965,7 +35671,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -36973,7 +35679,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -36981,7 +35687,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -36989,7 +35695,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -36997,7 +35703,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -37005,7 +35711,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_subaccount_to_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_subaccount_to_id_cashflow; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -37013,7 +35719,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -37021,7 +35727,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -37029,7 +35735,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -37037,7 +35743,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -37045,7 +35751,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -37053,7 +35759,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -37061,7 +35767,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -37069,7 +35775,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -37077,7 +35783,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -37085,7 +35791,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -37093,7 +35799,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -37101,7 +35807,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -37109,7 +35815,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -37117,7 +35823,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -37125,7 +35831,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -37133,7 +35839,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -37141,7 +35847,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -37149,7 +35855,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -37157,7 +35863,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -37165,21 +35871,11 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: test; Owner: mazvv
+-- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
     ADD CONSTRAINT fk_visa_id_visa_order_item FOREIGN KEY (visa_id) REFERENCES visa(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
