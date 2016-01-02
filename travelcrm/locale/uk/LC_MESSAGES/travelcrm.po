@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-19 22:01+0200\n"
+"POT-Creation-Date: 2016-01-02 19:55+0200\n"
 "PO-Revision-Date: 2014-07-13 13:47+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: uk <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Room category with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/accounts.py:29
+#: travelcrm/forms/accounts.py:30
 msgid "Account with the same name exists"
 msgstr ""
 
@@ -2527,6 +2527,7 @@ msgid "resource stats"
 msgstr ""
 
 #: travelcrm/templates/common/resource.mako:7
+#: travelcrm/templates/panels/common.mako:60
 msgid "tasks"
 msgstr ""
 
@@ -3090,7 +3091,7 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: travelcrm/templates/panels/common.mako:60
+#: travelcrm/templates/panels/common.mako:67
 msgid "notifications"
 msgstr ""
 

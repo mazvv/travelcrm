@@ -9,7 +9,8 @@ import phonenumbers
 from ..lib.qb import ResourcesQueryBuilder
 from ..lib.utils.common_utils import (
     get_locale_name, 
-    parse_datetime
+    parse_datetime,
+    parse_date,
 )
 from ..lib.utils.common_utils import translate as _
 
@@ -86,7 +87,7 @@ class Date(colander.Date):
         if not cstruct:
             return colander.null
         try:
-            result = parse_datetime(cstruct)
+            result = parse_date(cstruct)
         except:
             raise colander.Invalid(
                 node,

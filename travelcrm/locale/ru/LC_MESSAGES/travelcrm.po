@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-19 22:01+0200\n"
+"POT-Creation-Date: 2016-01-02 19:55+0200\n"
 "PO-Revision-Date: 2015-07-24 22:55+0300\n"
 "Last-Translator: Vitalii Mazur <vitalii.mazur@gmail.com>\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "Неверный телефон"
 msgid "Room category with the same name exists"
 msgstr "Категория номера с таким названием уже есть"
 
-#: travelcrm/forms/accounts.py:29
+#: travelcrm/forms/accounts.py:30
 msgid "Account with the same name exists"
 msgstr "Счет с таким названием уже есть"
 
@@ -2529,6 +2529,7 @@ msgid "resource stats"
 msgstr "статистика"
 
 #: travelcrm/templates/common/resource.mako:7
+#: travelcrm/templates/panels/common.mako:60
 msgid "tasks"
 msgstr "задачи"
 
@@ -3092,7 +3093,7 @@ msgstr "выход"
 msgid "in"
 msgstr "в"
 
-#: travelcrm/templates/panels/common.mako:60
+#: travelcrm/templates/panels/common.mako:67
 msgid "notifications"
 msgstr "уведомления"
 
@@ -4401,4 +4402,103 @@ msgstr "всего"
 
 #~ msgid "sec."
 #~ msgstr "сек."
+
+#~ msgid "\"${val}\" is required but missing"
+#~ msgstr "\"${val}\" является обязательным для заполнения"
+
+#~ msgid "${val} cannot be parsed as an iso8601 date: ${err}"
+#~ msgstr ""
+
+#~ msgid "Invalid value"
+#~ msgstr "Неверное значение"
+
+#~ msgid "String does not match expected pattern"
+#~ msgstr "Строка не соответствует заданному шаблону"
+
+#~ msgid "Invalid email address"
+#~ msgstr "Неверный адрес электронной почты"
+
+#~ msgid "${val} is less than minimum value ${min}"
+#~ msgstr "${val} меньше чем ${min}"
+
+#~ msgid "${val} is greater than maximum value ${max}"
+#~ msgstr "${val} больше чем ${max}"
+
+#~ msgid "Shorter than minimum length ${min}"
+#~ msgstr "Меньше, чем минимальная длина {$min}"
+
+#~ msgid "Longer than maximum length ${max}"
+#~ msgstr "Больше, чем максимальная длина {$min}"
+
+#~ msgid "\"${val}\" is not one of ${choices}"
+#~ msgstr "\"${val}\" не является одним из ${choices}"
+
+#~ msgid "One or more of the choices you made was not acceptable"
+#~ msgstr ""
+
+#~ msgid "Must be a URL"
+#~ msgstr ""
+
+#~ msgid "\"${val}\" is not a mapping type: ${err}"
+#~ msgstr "\"${val}\" содержит неверный тип данных: ${err}"
+
+#~ msgid "Unrecognized keys in mapping: \"${val}\""
+#~ msgstr "Неизвестные ключи: \"${val}\""
+
+#~ msgid "\"${val}\" is not iterable"
+#~ msgstr "\"${val}\" не является итератором"
+
+#~ msgid ""
+#~ msgstr ""
+
+#~ msgid "${cstruct} is not iterable"
+#~ msgstr "${cstruct} не является итератором"
+
+#~ msgid "${val} cannot be serialized: ${err}"
+#~ msgstr "${val} не может быть сериализовано в строку: ${err}"
+
+#~ msgid "${val} is not a string: ${err}"
+#~ msgstr "${val} не является строкой: ${err}"
+
+#~ msgid "\"${val}\" is not a number"
+#~ msgstr "\"${val}\" не является числом"
+
+#~ msgid "${val} is not a string"
+#~ msgstr "${val} не является строкой"
+
+#~ msgid "\"${val}\" is neither in (${false_choices}) nor in (${true_choices})"
+#~ msgstr ""
+
+#~ msgid "relative name \"${val}\" irresolveable without package"
+#~ msgstr ""
+
+#~ msgid "\"${val}\" has no __name__"
+#~ msgstr "\"${val}\" не имеет аттрибута __name__"
+
+#~ msgid "\"${val}\" is not a string"
+#~ msgstr "\"${val}\" не является строкой"
+
+#~ msgid "The dotted name \"${name}\" cannot be imported"
+#~ msgstr ""
+
+# | msgid "Invalid value"
+#~ msgid "Invalid date"
+#~ msgstr "Неверное значение"
+
+#~ msgid "\"${val}\" is not a datetime object"
+#~ msgstr "\"${val}\" не является объектом datetime"
+
+#~ msgid "\"${val}\" is not a date object"
+#~ msgstr "\"${val}\" не является объектом date"
+
+# | msgid "Invalid value"
+#~ msgid "Invalid time"
+#~ msgstr "Неверное значение"
+
+# | msgid "\"${val}\" is not a datetime object"
+#~ msgid "\"${val}\" is not a time object"
+#~ msgstr "\"${val}\" не является объектом datetime"
+
+#~ msgid "Required"
+#~ msgstr "Требуется"
 

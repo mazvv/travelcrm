@@ -39,9 +39,10 @@ class CalculationAutoloadForm(BaseForm):
                 continue
             contract = get_contract(
                 order_item.supplier_id,
+                order_item.service_id,
                 order.deal_date
             )
-            commission = 0
+            commission = order_item.price
             if contract:
                 _commission = get_commission(
                     contract.id, 
@@ -58,6 +59,7 @@ class CalculationAutoloadForm(BaseForm):
             calculation = Calculation(
                 price=(order_item.price - commission),
                 order_item=order_item,
+                contract=contract,
                 resource=context.create_resource()
             )
             calculation.resource.notes = []

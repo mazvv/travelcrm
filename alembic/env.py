@@ -68,7 +68,7 @@ def run_migrations_online():
             row[0] for row in connection.execute(
                 'select schema_name from information_schema.schemata'
             )
-            if row[0] in ['public', 'company', 'test'] or re.match('r^(c\d+)', row[0])
+            if row[0] in ['public', 'company', 'test', 'demo_ru'] or re.match('r^(c\d+)', row[0])
         ]
 
         for schema in schemas:

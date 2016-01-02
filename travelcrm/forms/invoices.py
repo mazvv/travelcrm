@@ -25,7 +25,7 @@ from ..lib.bl.orders_items import (
     get_discount, get_price, get_calculation_price
 )
 from ..lib.bl.vats import get_vat, calc_vat
-from ..lib.utils.common_utils import parse_datetime
+from ..lib.utils.common_utils import parse_date
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_type_by_resource
 
@@ -35,7 +35,7 @@ def valid_until_validator(node, kw):
     request = kw.get('request')
 
     def validator(node, value):
-        date = parse_datetime(request.params.get('date'))
+        date = parse_date(request.params.get('date'))
         if date > value:
             raise colander.Invalid(
                 node,

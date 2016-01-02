@@ -699,6 +699,7 @@ div.payment-indicator div{
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
+    font-size: 8px;
 }
 
 /** details **/

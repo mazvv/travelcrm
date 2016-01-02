@@ -14,6 +14,7 @@ from babel.dates import (
     get_date_format as gdf,
     get_time_format as gtf,
     get_datetime_format as gdtf,
+    parse_date as pd
 )
 from babel.numbers import (
     format_decimal as fdc,
@@ -66,7 +67,7 @@ def translate(*args, **kwargs):
     if request is None:
         localizer = _get_localizer_for_locale_name(DEFAULT_LOCALE_NAME)
     else:
-        locale_name = get_locale_name()
+        locale_name = get_locale_name() or DEFAULT_LOCALE_NAME
         localizer = _get_localizer_for_locale_name(locale_name)
     return localizer.translate(tsf(*args, **kwargs))
 
@@ -109,6 +110,10 @@ def get_datetime_format():
 
 def parse_datetime(s):
     return timezone(get_timezone()).localize(pdt(s))
+
+
+def parse_date(s):
+    return pd(s, locale=get_locale_name())
 
 
 def format_date(value):

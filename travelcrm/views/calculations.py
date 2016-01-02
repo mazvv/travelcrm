@@ -15,6 +15,7 @@ from ..forms.calculations import (
     CalculationAutoloadForm,
     CalculationSearchForm
 )
+from ..lib.utils.resources_utils import get_resource_class
 
 
 log = logging.getLogger(__name__)
@@ -144,8 +145,15 @@ class CalculationsView(BaseView):
     )
     def details(self):
         calculation = Calculation.get(self.request.params.get('id'))
+        contract_resource = None
+        if calculation.contract:
+            resource_cls = get_resource_class(
+                calculation.contract.resource.resource_type.name
+            )
+            contract_resource = resource_cls(self.request)
         return {
             'item': calculation,
+            'contract_resource': contract_resource
         }
 
     @view_config(

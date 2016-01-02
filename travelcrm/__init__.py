@@ -42,8 +42,8 @@ def main(global_config, **settings):
         session_factory=session_factory,
     )
     config.add_translation_dirs(
-        'colander:locale',
-        'travelcrm:locale',
+        'colander:locale/',
+        'travelcrm:locale/',
     )
     config.add_subscriber(
         '.lib.subscribers.company_schema',

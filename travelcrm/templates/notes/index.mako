@@ -40,7 +40,7 @@
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'title',sortable:true,width:230">${_(u"title")}</th>
-            <th data-options="field:'modifydt',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
         </thead>
     </table>
 

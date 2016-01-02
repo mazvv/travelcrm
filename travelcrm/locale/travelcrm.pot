@@ -1,14 +1,14 @@
 # Translations template for travelcrm.
-# Copyright (C) 2015 ORGANIZATION
+# Copyright (C) 2016 ORGANIZATION
 # This file is distributed under the same license as the travelcrm project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.4.dev0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-12-19 22:01+0200\n"
+"POT-Creation-Date: 2016-01-02 19:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Room category with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/accounts.py:29
+#: travelcrm/forms/accounts.py:30
 msgid "Account with the same name exists"
 msgstr ""
 
@@ -2447,6 +2447,7 @@ msgid "resource stats"
 msgstr ""
 
 #: travelcrm/templates/common/resource.mako:7
+#: travelcrm/templates/panels/common.mako:60
 msgid "tasks"
 msgstr ""
 
@@ -3001,7 +3002,7 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: travelcrm/templates/panels/common.mako:60
+#: travelcrm/templates/panels/common.mako:67
 msgid "notifications"
 msgstr ""
 

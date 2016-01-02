@@ -66,7 +66,7 @@
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-            <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
+            <th data-options="field:'name',sortable:true,width:250">${_(u"name")}</th>
             <th data-options="field:'birthday',sortable:true,width:100">${_(u"birthday")}</th>
             <th data-options="field:'age',sortable:true,width:60">${_(u"age")}</th>
         </thead>

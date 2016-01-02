@@ -12,6 +12,7 @@ from ..models.account import Account
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.accounts import AccountsQueryBuilder
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred

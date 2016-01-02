@@ -212,6 +212,15 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
+-- Name: alembic_version; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+--
 -- Name: appointment; Type: TABLE; Schema: company; Owner: -; Tablespace: 
 --
 
@@ -353,7 +362,8 @@ CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     price numeric(16,2) NOT NULL,
-    order_item_id integer
+    order_item_id integer,
+    contract_id integer
 );
 
 
@@ -2692,6 +2702,15 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
+-- Name: alembic_version; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+--
 -- Name: appointment; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
@@ -2852,7 +2871,8 @@ CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     order_item_id integer,
-    price numeric(16,2) NOT NULL
+    price numeric(16,2) NOT NULL,
+    contract_id integer
 );
 
 
@@ -5131,6 +5151,15 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+--
 -- Name: appointment; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5272,7 +5301,8 @@ CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     price numeric(16,2) NOT NULL,
-    order_item_id integer
+    order_item_id integer,
+    contract_id integer
 );
 
 
@@ -7581,6 +7611,15 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
+-- Name: alembic_version; Type: TABLE; Schema: test; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+--
 -- Name: appointment; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
@@ -7741,7 +7780,8 @@ CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     order_item_id integer,
-    price numeric(16,2) NOT NULL
+    price numeric(16,2) NOT NULL,
+    contract_id integer
 );
 
 
@@ -11713,6 +11753,15 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: company; Owner: -
+--
+
+COPY alembic_version (version_num) FROM stdin;
+1502d7ef7d40
+\.
+
+
+--
 -- Data for Name: appointment; Type: TABLE DATA; Schema: company; Owner: -
 --
 
@@ -11786,7 +11835,7 @@ SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 -- Data for Name: calculation; Type: TABLE DATA; Schema: company; Owner: -
 --
 
-COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
+COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin;
 \.
 
 
@@ -14214,6 +14263,15 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: demo_ru; Owner: -
+--
+
+COPY alembic_version (version_num) FROM stdin;
+1502d7ef7d40
+\.
+
+
+--
 -- Data for Name: appointment; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
@@ -14294,7 +14352,7 @@ SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 -- Data for Name: calculation; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
-COPY calculation (id, resource_id, order_item_id, price) FROM stdin;
+COPY calculation (id, resource_id, order_item_id, price, contract_id) FROM stdin;
 \.
 
 
@@ -16930,6 +16988,15 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 
 
 --
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY alembic_version (version_num) FROM stdin;
+1502d7ef7d40
+\.
+
+
+--
 -- Data for Name: appointment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -17042,52 +17109,70 @@ SELECT pg_catalog.setval('bperson_id_seq', 9, true);
 -- Data for Name: calculation; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
-33	2468	300.00	\N
-34	2469	54462.00	\N
-37	2503	3201.00	\N
-35	2470	300.00	\N
-41	2529	270.00	\N
-42	2530	270.00	\N
-43	2531	54462.75	\N
-46	2534	3201.00	\N
-47	2535	3201.00	\N
-48	2537	2788.50	40
-49	2538	1760.00	\N
-44	2532	270.00	\N
-45	2533	54462.75	\N
-57	2700	1496.40	\N
-58	2701	30.00	\N
-59	2702	1680.60	\N
-60	2703	30.00	\N
-61	2704	1715.00	\N
-62	2705	30.00	\N
-63	2706	1720.00	\N
-64	2707	30.00	\N
-65	2708	1525.80	\N
-66	2709	30.00	\N
-67	2710	1530.80	\N
-68	2711	30.00	\N
-69	2712	1525.80	\N
-70	2713	30.00	\N
-71	2715	1525.80	\N
-72	2716	30.00	\N
-73	2717	1398.95	\N
-74	2718	30.00	\N
-75	2719	1398.95	\N
-76	2720	30.00	\N
-77	2721	1398.95	\N
-78	2722	30.00	\N
-79	2724	1525.30	\N
-80	2725	30.00	\N
-81	2727	1525.30	44
-82	2728	26.70	45
-50	2541	1548.80	\N
-83	2734	1548.80	39
-51	2547	270.00	\N
-52	2548	47611.95	\N
-84	2735	270.00	43
-85	2736	50239.20	42
+COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin;
+33	2468	300.00	\N	\N
+34	2469	54462.00	\N	\N
+37	2503	3201.00	\N	\N
+35	2470	300.00	\N	\N
+41	2529	270.00	\N	\N
+42	2530	270.00	\N	\N
+43	2531	54462.75	\N	\N
+46	2534	3201.00	\N	\N
+47	2535	3201.00	\N	\N
+48	2537	2788.50	40	\N
+49	2538	1760.00	\N	\N
+44	2532	270.00	\N	\N
+45	2533	54462.75	\N	\N
+57	2700	1496.40	\N	\N
+58	2701	30.00	\N	\N
+59	2702	1680.60	\N	\N
+60	2703	30.00	\N	\N
+61	2704	1715.00	\N	\N
+62	2705	30.00	\N	\N
+63	2706	1720.00	\N	\N
+64	2707	30.00	\N	\N
+65	2708	1525.80	\N	\N
+66	2709	30.00	\N	\N
+67	2710	1530.80	\N	\N
+68	2711	30.00	\N	\N
+69	2712	1525.80	\N	\N
+70	2713	30.00	\N	\N
+71	2715	1525.80	\N	\N
+72	2716	30.00	\N	\N
+73	2717	1398.95	\N	\N
+74	2718	30.00	\N	\N
+75	2719	1398.95	\N	\N
+76	2720	30.00	\N	\N
+77	2721	1398.95	\N	\N
+78	2722	30.00	\N	\N
+79	2724	1525.30	\N	\N
+80	2725	30.00	\N	\N
+81	2727	1525.30	44	\N
+82	2728	26.70	45	\N
+50	2541	1548.80	\N	\N
+83	2734	1548.80	39	\N
+51	2547	270.00	\N	\N
+52	2548	47611.95	\N	\N
+84	2735	270.00	43	\N
+85	2736	50239.20	42	\N
+86	2832	2024.00	\N	\N
+87	2836	2091.66	\N	\N
+88	2839	2090.15	\N	\N
+89	2840	25.00	\N	\N
+90	2842	2090.15	\N	\N
+91	2843	25.00	\N	\N
+92	2844	2090.15	\N	\N
+93	2845	25.00	\N	\N
+94	2846	2090.15	\N	\N
+95	2847	25.00	\N	\N
+96	2848	2090.15	\N	\N
+97	2849	0.00	\N	\N
+98	2850	2090.15	\N	60
+99	2851	0.00	\N	\N
+100	2854	2090.15	\N	60
+101	2855	0.00	\N	\N
+102	2856	2090.15	46	60
+103	2857	15.50	47	61
 \.
 
 
@@ -17095,7 +17180,7 @@ COPY calculation (id, resource_id, price, order_item_id) FROM stdin;
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 85, true);
+SELECT pg_catalog.setval('calculation_id_seq', 103, true);
 
 
 --
@@ -17131,6 +17216,12 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, d
 259	22	\N	17	108.00	2015-06-14	\N
 260	\N	24	16	25000.00	2015-07-22	6856.68
 261	24	20	\N	25000.00	2015-07-22	\N
+262	\N	25	16	59782.12	2016-01-02	937.77
+263	25	19	\N	59782.12	2016-01-02	\N
+264	18	26	\N	1600.00	2016-01-02	\N
+265	26	\N	18	1600.00	2016-01-02	\N
+266	20	27	\N	760.35	2016-01-02	\N
+267	27	\N	36	760.35	2016-01-02	\N
 \.
 
 
@@ -17152,6 +17243,8 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 46	2694	4	0.00	5.00	54	
 47	2698	5	11.00	5.00	54	
 48	2726	4	0.00	3.00	54	
+49	2833	5	8.50	330.00	56	
+50	2852	1	0.00	10.00	57	
 \.
 
 
@@ -17159,7 +17252,7 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 -- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('commission_id_seq', 48, true);
+SELECT pg_catalog.setval('commission_id_seq', 50, true);
 
 
 --
@@ -17276,6 +17369,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 96	+380673508989	2666	0		0
 97	+380504538765	2676	0		0
 98	+380681983869	2814	0		0
+99	+380386754543	2821	0		0
 \.
 
 
@@ -17283,7 +17377,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 98, true);
+SELECT pg_catalog.setval('contact_id_seq', 99, true);
 
 
 --
@@ -17299,10 +17393,12 @@ COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
 54	2506	2015-06-01	36542-89.77		0
 55	2511	2015-06-01	678/90		0
 53	2491	2015-06-01	19/06/15		0
-56	2540	2015-05-01	0987-97	Contract with teztour	0
 57	2545	2015-06-01	TUI-09-15		0
 58	2695	2015-08-01	#08-01		0
 59	2699	2015-07-01	#07-01		0
+60	2834	2016-01-01	TT-000139	New Tez Tour Contract	0
+56	2540	2015-01-05	0987-97	Contract with teztour	1
+61	2853	2016-01-01	TT-00154		0
 \.
 
 
@@ -17324,6 +17420,8 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 58	46
 59	47
 59	48
+60	49
+61	50
 \.
 
 
@@ -17413,6 +17511,8 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 29	2385	2015-06-06	57	21.50	92
 30	2714	2015-07-22	54	26.37	101
 31	2723	2015-07-22	57	23.98	101
+33	2841	2016-01-01	54	28.30	87
+32	2835	2016-01-01	57	25.70	87
 \.
 
 
@@ -17420,7 +17520,7 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 -- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('currency_rate_id_seq', 31, true);
+SELECT pg_catalog.setval('currency_rate_id_seq', 33, true);
 
 
 --
@@ -17634,6 +17734,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FRO
 67	2459	30	16	2015-06-14	5000.00	\N
 60	2451	31	16	2015-06-13	1400.73	\N
 68	2737	32	16	2015-07-22	25000.00	\N
+69	2860	33	16	2016-01-02	59782.12	\N
 \.
 
 
@@ -17652,6 +17753,8 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 60	257
 68	260
 68	261
+69	262
+69	263
 \.
 
 
@@ -17659,7 +17762,7 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('income_id_seq', 68, true);
+SELECT pg_catalog.setval('income_id_seq', 69, true);
 
 
 --
@@ -17670,6 +17773,7 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 32	2015-07-22	2729	2	2015-07-25	10	\N
 30	2015-06-06	2388	3	2015-06-09	9	\N
 31	2015-06-13	2450	4	2015-06-16	7	\N
+33	2016-01-02	2858	3	2016-01-05	11	\N
 \.
 
 
@@ -17677,7 +17781,7 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 32, true);
+SELECT pg_catalog.setval('invoice_id_seq', 33, true);
 
 
 --
@@ -17690,6 +17794,8 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 33	32	719.40	119.90	0.00	The issues for visas	45
 30	30	57090.00	703.93	2627.25	Tour booking service	42
 31	31	1672.73	33.45	0.00	Tour booking service	39
+34	33	59110.00	898.86	0.00	Tour booking service	46
+35	33	707.50	38.91	35.38	Formulation of foreign passport	47
 \.
 
 
@@ -17697,7 +17803,7 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 -- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_item_id_seq', 33, true);
+SELECT pg_catalog.setval('invoice_item_id_seq', 35, true);
 
 
 --
@@ -17721,6 +17827,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 14	2015-07-20	2599	6	63	0	\N
 15	2015-07-21	2662	6	65	1	\N
 16	2015-07-22	2669	2	66	3	\N
+17	2016-01-01	2824	6	70	0	\N
 \.
 
 
@@ -17728,7 +17835,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 -- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_id_seq', 16, true);
+SELECT pg_catalog.setval('lead_id_seq', 17, true);
 
 
 --
@@ -17762,6 +17869,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 24	2598	14	1	\N	\N	\N	Foreign passport for single person and QUICK!
 25	2661	15	5	57	\N	2200.00	OAE, 5* not less, UAI, for single person near the sea. Need perfect appartaments with SPA for 5 days
 26	2668	16	5	57	1500.00	1700.00	Kiprus from 24.07 to 30.07 for 2 adult persons 4* or more.
+27	2823	17	5	56	\N	60000.00	Egypt tour for 2 persons from fubruary begining
 \.
 
 
@@ -17769,7 +17877,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 -- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_item_id_seq', 26, true);
+SELECT pg_catalog.setval('lead_item_id_seq', 27, true);
 
 
 --
@@ -17786,6 +17894,7 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 9	2437	6	5	57	99	1400.00	1	Egypt, Sharm El Sheih, 5 UAI, 10 days for 2 adult persons and 1 child
 8	2435	6	5	57	100	1800.00	2	Turkey Kemer for 7 days with AI for 2 adults and single child. Hotel is uknown this is hot tour with caurosel.\r\n\r\nThis offer was not approved by customer, its too expensive
 10	2670	16	5	57	100	1720.00	1	4* pansionat, 2 adult from 24.07 to 30.07
+11	2825	17	5	57	87	2300.00	1	Sharm el Sheih from 12.02-19.02
 \.
 
 
@@ -17793,14 +17902,14 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 -- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_offer_id_seq', 10, true);
+SELECT pg_catalog.setval('lead_offer_id_seq', 11, true);
 
 
 --
 -- Name: licence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('licence_id_seq', 59, true);
+SELECT pg_catalog.setval('licence_id_seq', 61, true);
 
 
 --
@@ -17969,6 +18078,8 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 42	2302	Cant call	\N
 43	2370	Very promissed	Very promised client, redy to make business
 59	2663	Details contacts	Need to details contacts for this person. He can be perfect VIP client
+60	2820	Important	Make this very carefully
+61	2826	offer taken	Offer taken by client\r\n
 \.
 
 
@@ -17976,7 +18087,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 59, true);
+SELECT pg_catalog.setval('note_id_seq', 61, true);
 
 
 --
@@ -17997,10 +18108,12 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 43	2372
 35	1413
 18	784
-26	1930
 28	3
 36	2126
 59	2662
+60	1930
+26	1930
+61	2824
 \.
 
 
@@ -18098,6 +18211,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 8	2015-06-02	2345	50	2	\N	4	1
 10	2015-07-22	2690	66	2	\N	16	1
 7	2015-05-26	2317	48	4	For Lead testing	3	3
+11	2016-01-02	2831	70	6	\N	17	0
 \.
 
 
@@ -18105,7 +18219,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_id_seq', 10, true);
+SELECT pg_catalog.setval('order_id_seq', 11, true);
 
 
 --
@@ -18131,6 +18245,8 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 41	2343	8	4	54	130.00	2	2015-06-20	#6509-9	100	0.00	2.00
 44	2686	10	5	57	1720.00	1	2015-07-22	BOOKING #: 1239642	101	0.00	2.00
 45	2688	10	4	57	30.00	1	2015-07-22	succesfully confirmed	101	0.00	0.00
+46	2827	11	5	57	2300.00	1	2016-01-02	TREYW6754-16	87	0.00	0.00
+47	2837	11	1	54	25.00	1	2016-02-01	\N	87	0.00	5.00
 \.
 
 
@@ -18138,7 +18254,7 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 -- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_item_id_seq', 45, true);
+SELECT pg_catalog.setval('order_item_id_seq', 47, true);
 
 
 --
@@ -18150,6 +18266,8 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr
 16	1915	6	2014-11-23	12	15000.00	\N
 23	2467	18	2015-06-14	23	15000.00	\N
 21	2463	17	2015-06-14	22	108.00	Test for outgoing cashflows
+24	2863	18	2016-01-02	26	1600.00	\N
+25	2867	36	2016-01-02	27	760.35	\N
 \.
 
 
@@ -18160,6 +18278,10 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr
 COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 23	258
 21	259
+24	264
+24	265
+25	266
+25	267
 \.
 
 
@@ -18167,7 +18289,7 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 -- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('outgoing_id_seq', 23, true);
+SELECT pg_catalog.setval('outgoing_id_seq', 25, true);
 
 
 --
@@ -18461,6 +18583,8 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 56	2563	Alex	Saveliev		\N	0	\N	3	t	\N
 63	2593	Maria	Fed'ko		1993-05-19	1	\N	3	t	f
 69	2739	Vitalii			\N	\N	\N	\N	t	t
+70	2822	Pavel	Romanuta		1986-03-28	0	\N	3	f	f
+71	2830	Helen	Romanuta		1986-12-12	1	\N	3	f	f
 \.
 
 
@@ -18551,6 +18675,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 65	95
 66	96
 67	97
+70	99
 \.
 
 
@@ -18558,7 +18683,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 69, true);
+SELECT pg_catalog.setval('person_id_seq', 71, true);
 
 
 --
@@ -18603,6 +18728,10 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 44	67
 45	66
 45	67
+46	70
+46	71
+47	71
+47	70
 \.
 
 
@@ -18655,6 +18784,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 53	21
 48	22
 66	24
+70	25
 \.
 
 
@@ -19984,6 +20114,54 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2817	123	32	f
 2818	93	32	f
 2819	123	32	f
+2820	118	32	f
+2821	87	32	f
+2822	69	32	f
+2823	145	32	f
+2824	130	32	f
+2825	146	32	f
+2826	118	32	f
+2827	135	32	f
+2828	137	32	f
+2829	93	32	f
+2830	69	32	f
+2831	134	32	f
+2832	119	32	f
+2833	110	32	f
+2834	86	32	f
+2835	104	32	f
+2836	119	32	f
+2837	135	32	f
+2838	144	32	f
+2839	119	32	f
+2840	119	32	f
+2841	104	32	f
+2842	119	32	f
+2843	119	32	f
+2844	119	32	f
+2845	119	32	f
+2846	119	32	f
+2847	119	32	f
+2848	119	32	f
+2849	119	32	f
+2850	119	32	f
+2851	119	32	f
+2852	110	32	f
+2853	86	32	f
+2854	119	32	f
+2855	119	32	f
+2856	119	32	f
+2857	119	32	f
+2858	103	32	f
+2859	148	32	f
+2860	106	32	f
+2861	117	32	f
+2862	117	32	f
+2863	111	32	f
+2864	140	32	f
+2866	117	32	f
+2867	111	32	f
+2865	78	32	f
 \.
 
 
@@ -19991,7 +20169,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2819, true);
+SELECT pg_catalog.setval('resource_id_seq', 2867, true);
 
 
 --
@@ -21996,6 +22174,79 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7702	2815	2	\N	2015-11-29 18:03:23.32558+02
 7703	2816	2	\N	2015-11-29 18:05:24.319676+02
 7704	2818	2	\N	2015-11-29 19:06:37.534692+02
+7705	2820	2	\N	2016-01-02 19:03:39.167822+02
+7706	1930	2	\N	2016-01-02 19:03:41.6491+02
+7707	2821	2	\N	2016-01-02 20:11:21.358279+02
+7708	2822	2	\N	2016-01-02 20:11:24.233178+02
+7709	2823	2	\N	2016-01-02 20:12:21.682793+02
+7710	2824	2	\N	2016-01-02 20:12:46.762385+02
+7711	2825	2	\N	2016-01-02 20:15:08.259398+02
+7712	2824	2	\N	2016-01-02 20:15:26.352748+02
+7713	2826	2	\N	2016-01-02 20:15:55.52191+02
+7714	2824	2	\N	2016-01-02 20:17:19.972235+02
+7715	2822	2	\N	2016-01-02 20:21:41.413863+02
+7716	2827	2	\N	2016-01-02 20:24:24.220398+02
+7717	2828	2	\N	2016-01-02 20:24:24.220398+02
+7718	2829	2	\N	2016-01-02 20:25:00.491155+02
+7719	2830	2	\N	2016-01-02 20:25:43.115841+02
+7720	2831	2	\N	2016-01-02 20:26:37.333884+02
+7721	2832	2	\N	2016-01-02 20:27:25.581765+02
+7722	2833	2	\N	2016-01-02 20:36:13.937348+02
+7723	2834	2	\N	2016-01-02 20:36:20.489746+02
+7724	2834	2	\N	2016-01-02 20:36:41.364121+02
+7725	2835	2	\N	2016-01-02 20:42:25.330155+02
+7726	2836	2	\N	2016-01-02 20:42:56.538052+02
+7727	2837	2	\N	2016-01-02 20:50:50.737933+02
+7728	2838	2	\N	2016-01-02 20:50:50.737933+02
+7729	2831	2	\N	2016-01-02 20:50:54.803525+02
+7730	2839	2	\N	2016-01-02 20:51:13.095185+02
+7731	2840	2	\N	2016-01-02 20:51:13.095185+02
+7732	2841	2	\N	2016-01-02 20:52:40.961629+02
+7733	2540	2	\N	2016-01-02 20:53:36.703713+02
+7734	2842	2	\N	2016-01-02 20:53:48.427475+02
+7735	2843	2	\N	2016-01-02 20:53:48.427475+02
+7736	2844	2	\N	2016-01-02 21:00:05.527737+02
+7737	2845	2	\N	2016-01-02 21:00:05.527737+02
+7738	2846	2	\N	2016-01-02 21:03:59.88429+02
+7739	2847	2	\N	2016-01-02 21:03:59.88429+02
+7740	2848	2	\N	2016-01-02 21:08:47.993297+02
+7741	2849	2	\N	2016-01-02 21:08:47.993297+02
+7742	2850	2	\N	2016-01-02 21:16:40.983488+02
+7743	2851	2	\N	2016-01-02 21:16:40.983488+02
+7744	2852	2	\N	2016-01-02 21:36:46.646531+02
+7745	2853	2	\N	2016-01-02 21:36:49.099159+02
+7746	2854	2	\N	2016-01-02 21:37:14.376182+02
+7747	2855	2	\N	2016-01-02 21:37:14.376182+02
+7748	2853	2	\N	2016-01-02 21:38:33.232425+02
+7749	2853	2	\N	2016-01-02 21:39:02.581845+02
+7751	2856	2	\N	2016-01-02 21:39:38.718674+02
+7752	2857	2	\N	2016-01-02 21:39:38.718674+02
+7755	2858	2	\N	2016-01-02 21:48:47.109583+02
+7756	2858	2	\N	2016-01-02 21:49:26.302355+02
+7757	2858	2	\N	2016-01-02 21:50:13.774213+02
+7759	2841	2	\N	2016-01-02 22:14:54.924705+02
+7763	2858	2	\N	2016-01-02 22:21:07.90205+02
+7750	2853	2	\N	2016-01-02 21:39:16.771773+02
+7753	2858	2	\N	2016-01-02 21:43:29.317483+02
+7754	2859	2	\N	2016-01-02 21:48:34.392885+02
+7758	2858	2	\N	2016-01-02 21:50:34.02702+02
+7760	2835	2	\N	2016-01-02 22:15:05.490599+02
+7761	2858	2	\N	2016-01-02 22:15:28.276336+02
+7762	2858	2	\N	2016-01-02 22:20:37.944351+02
+7764	2858	2	\N	2016-01-02 22:23:01.500364+02
+7765	2858	2	\N	2016-01-02 22:24:07.265807+02
+7766	2858	2	\N	2016-01-02 22:57:12.346032+02
+7767	2858	2	\N	2016-01-02 22:57:27.435802+02
+7768	2858	2	\N	2016-01-02 22:58:10.983876+02
+7769	2860	2	\N	2016-01-02 23:22:02.986231+02
+7770	2861	2	\N	2016-01-02 23:22:02.986231+02
+7771	2862	2	\N	2016-01-02 23:29:14.591921+02
+7772	2863	2	\N	2016-01-02 23:29:43.595496+02
+7773	2864	2	\N	2016-01-02 23:32:59.025447+02
+7774	2865	2	\N	2016-01-02 23:33:17.678918+02
+7775	2866	2	\N	2016-01-02 23:33:24.314299+02
+7776	2867	2	\N	2016-01-02 23:34:03.051927+02
+7777	2824	2	\N	2016-01-02 23:39:00.961892+02
 \.
 
 
@@ -22003,7 +22254,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7704, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7777, true);
 
 
 --
@@ -22155,6 +22406,7 @@ SELECT pg_catalog.setval('service_id_seq', 7, true);
 
 COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
 1	2279	t	2015-04-29	2015-04-30	2015-05-10	Must be done in 10 days after docs recieved
+2	2838	f	\N	\N	\N	\N
 \.
 
 
@@ -22162,7 +22414,7 @@ COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_da
 -- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('spassport_id_seq', 1, true);
+SELECT pg_catalog.setval('spassport_id_seq', 2, true);
 
 
 --
@@ -22171,6 +22423,7 @@ SELECT pg_catalog.setval('spassport_id_seq', 1, true);
 
 COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
 35	1
+47	2
 \.
 
 
@@ -22252,6 +22505,9 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 22	2452	4	Oleg, EUR, cash	\N	0
 23	2466	3	Tez Tour UAH, cash	Tez tour cash UAH subaccount	0
 24	2738	2	Fedirko Anatoliy, UAH, bank	\N	0
+25	2861	3	Romanuta Pavel, UAH, cash	\N	0
+26	2862	4	TEZ Tour EUR	\N	0
+27	2866	2	Information Technology Inc.	\N	0
 \.
 
 
@@ -22259,7 +22515,7 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 24, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 27, true);
 
 
 --
@@ -22289,6 +22545,7 @@ COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdi
 101	2242	Orbita	0		1
 95	2236	Pan Ukraine	1		1
 102	2272	Ukrainian Visa Center	0	Quick Visas in EU and helps to get visas in any other countries	3
+103	2865	Information Technology Inc.	0		4
 \.
 
 
@@ -22325,6 +22582,8 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 92	57
 101	58
 101	59
+87	60
+87	61
 \.
 
 
@@ -22334,6 +22593,8 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 
 COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 87	23
+87	26
+103	27
 \.
 
 
@@ -22345,6 +22606,7 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 1	2218	Touroperator	
 2	2221	Aircompany	
 3	2271	Visa Center	
+4	2864	Other suppliers	
 \.
 
 
@@ -22352,7 +22614,7 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 -- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('supplier_type_id_seq', 3, true);
+SELECT pg_catalog.setval('supplier_type_id_seq', 4, true);
 
 
 --
@@ -22391,7 +22653,6 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 71	2371	2	Call to client	2015-06-08 15:00:00+03	Call to client with success bucking	0	30
 72	2381	2	Make an Invoice	2015-06-06 22:12:00+03	Make invoice for this order	0	10
 73	2436	2	Позвонить клиент	2015-06-11 08:12:00+03	\N	0	10
-35	1930	2	Check Person Details	2014-12-11 21:43:00+02	We'll reuse the Amount type from last week. It's mostly the same, except we'll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we'll use when dealing with SQL expressions.	2	10
 78	2584	2	JEasyui 1.4.3 migration	2015-07-20 00:05:00+03	Migrate to new version of JEasyui	0	10
 36	1932	2	Call and remind about payments	2014-12-11 22:48:00+02	Bla-Bla	3	10
 79	2671	2	Call to customer!	2015-07-22 12:05:00+03	call to customer and ask for offer	0	10
@@ -22399,6 +22660,8 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 81	2815	2	Test for notifications	2015-11-29 18:04:00+02	For test purposes only	0	10
 82	2816	2	Test for notifications 2	2015-11-29 18:16:00+02	For test purpose only	0	10
 83	2818	2	Check for notofications	2015-11-29 19:17:00+02	Test this one	0	10
+35	1930	2	Check Person Details	2014-11-12 21:43:00+02	We'll reuse the Amount type from last week. It's mostly the same, except we'll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we'll use when dealing with SQL expressions.	2	10
+84	2829	2	Docs for client	2016-01-15 20:24:00+02	Make docs for client	0	10
 \.
 
 
@@ -22406,7 +22669,7 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 83, true);
+SELECT pg_catalog.setval('task_id_seq', 84, true);
 
 
 --
@@ -22430,6 +22693,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 59	2126
 79	2669
 80	2729
+84	2831
 \.
 
 
@@ -22526,6 +22790,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 27	2378	15	39	39	10	10	\N	2	0	2015-06-28	2015-07-04	\N	1	1	\N	#MAU	#MAU
 25	2316	15	19	18	10	10	33	2	0	2015-06-21	2015-06-27	\N	1	1	\N	# MAU	# MAU
 28	2687	14	40	40	10	3	\N	2	1	2015-07-24	2015-07-30	\N	1	1	\N	#MAU 892134	#MAU 127193
+29	2828	15	31	32	13	16	30	2	0	2016-02-12	2016-02-19	\N	1	1	\N	TREY0987YUt	TYU9881623
 \.
 
 
@@ -22533,7 +22798,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 -- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tour_id_seq1', 28, true);
+SELECT pg_catalog.setval('tour_id_seq1', 29, true);
 
 
 --
@@ -22548,6 +22813,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 40	26
 42	27
 44	28
+46	29
 \.
 
 
@@ -22555,7 +22821,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 -- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('touroperator_id_seq', 102, true);
+SELECT pg_catalog.setval('touroperator_id_seq', 103, true);
 
 
 --
@@ -22572,7 +22838,7 @@ COPY transfer (id, resource_id, name) FROM stdin;
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 261, true);
+SELECT pg_catalog.setval('transfer_id_seq', 267, true);
 
 
 --
@@ -22663,6 +22929,7 @@ COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id
 5	2732	5	2015-08-01	20.00	1	\N	2
 1	2515	5	2015-06-01	20.00	1	Vat on Tours is only for commission	2
 6	2733	4	2015-07-01	20.00	1	\N	2
+7	2859	1	2016-01-01	20.00	0	\N	3
 \.
 
 
@@ -22670,7 +22937,7 @@ COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id
 -- Name: vat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('vat_id_seq', 6, true);
+SELECT pg_catalog.setval('vat_id_seq', 7, true);
 
 
 --
@@ -22782,6 +23049,15 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: test; Owner: -
+--
+
+COPY alembic_version (version_num) FROM stdin;
+1502d7ef7d40
+\.
+
+
+--
 -- Data for Name: appointment; Type: TABLE DATA; Schema: test; Owner: -
 --
 
@@ -22862,7 +23138,7 @@ SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 -- Data for Name: calculation; Type: TABLE DATA; Schema: test; Owner: -
 --
 
-COPY calculation (id, resource_id, order_item_id, price) FROM stdin;
+COPY calculation (id, resource_id, order_item_id, price, contract_id) FROM stdin;
 \.
 
 
@@ -29441,6 +29717,14 @@ ALTER TABLE ONLY structure_contact
 
 
 --
+-- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: company; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id);
+
+
+--
 -- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
 --
 
@@ -31104,6 +31388,14 @@ ALTER TABLE ONLY person_contact
 
 ALTER TABLE ONLY structure_contact
     ADD CONSTRAINT fk_contact_id_structure_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id);
 
 
 --
@@ -32781,6 +33073,14 @@ ALTER TABLE ONLY structure_contact
 
 
 --
+-- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id);
+
+
+--
 -- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -34436,6 +34736,14 @@ ALTER TABLE ONLY person_contact
 
 ALTER TABLE ONLY structure_contact
     ADD CONSTRAINT fk_contact_id_structure_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id);
 
 
 --

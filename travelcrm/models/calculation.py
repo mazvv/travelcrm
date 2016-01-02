@@ -42,6 +42,16 @@ class Calculation(Base):
         ),
         nullable=True,
     )
+    contract_id = Column(
+        Integer,
+        ForeignKey(
+            'contract.id',
+            name="fk_contract_id_caluclation",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+        nullable=True,
+    )
     price = Column(
         Numeric(16, 2),
         nullable=False,
@@ -61,6 +71,15 @@ class Calculation(Base):
         backref=backref(
             'calculation',
             uselist=False,
+        ),
+        uselist=False,
+    )
+    contract = relationship(
+        'Contract',
+        backref=backref(
+            'calculations',
+            lazy='dynamic',
+            uselist=True,
         ),
         uselist=False,
     )
