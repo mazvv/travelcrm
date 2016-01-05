@@ -83,6 +83,7 @@ class Permision(Base):
             'resource_type_permisions',
             uselist=True,
             lazy='dynamic',
+            cascade='all, delete-orphan'
         ),
         uselist=False
     )

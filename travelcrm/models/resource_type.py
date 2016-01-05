@@ -3,7 +3,6 @@
 from sqlalchemy import (
     Integer,
     String,
-    Boolean,
     Column,
     UniqueConstraint,
     ForeignKey,

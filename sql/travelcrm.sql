@@ -12524,7 +12524,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 163	151	4	{view,add,edit,delete}	\N	all
 164	152	4	{view,settings}	\N	all
 165	153	4	{view,settings}	\N	all
-295	157	4	{send,settings}	\N	all
 \.
 
 
@@ -13610,7 +13609,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2785	47	1	f
 2786	2	1	f
 2787	2	1	f
-2789	12	1	f
 2790	12	1	f
 \.
 
@@ -13706,7 +13704,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7748	878	2	\N	2015-10-25 21:20:36.956871+02
 7749	2788	2	\N	2015-11-15 11:41:32.753196+02
 7750	2741	2	\N	2015-11-15 11:42:42.182101+02
-7751	2789	2	\N	2015-11-22 20:53:32.477901+02
 7752	2790	2	\N	2015-11-22 22:04:31.745001+02
 \.
 
@@ -13786,7 +13783,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 143	2268	visas	Visas	VisasResource	travelcrm.resources.visas	Visa is a service for sale visas	null	0
 144	2276	spassports	Passports Services	SpassportsResource	travelcrm.resources.spassports	Service formulation of foreign passports	null	0
 156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	Marketings campaigns	{"username": "--", "host": "--", "password": "--", "port": "2525", "default_sender": "--"}	0
-157	2789	turbosms	Turbosms	TurbosmsResource	travelcrm_turbosms.resources.turbosms	SMS getway with TorboSMS	null	0
 \.
 
 
@@ -15034,7 +15030,6 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 163	151	4	{view,add,edit,delete}	all	\N
 164	152	4	{view,settings}	all	\N
 165	153	4	{view,settings}	all	\N
-295	157	4	{send,settings}	all	\N
 \.
 
 
@@ -16120,7 +16115,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2785	47	1	f
 2786	2	1	f
 2787	2	1	f
-2789	12	1	f
 2790	12	1	f
 \.
 
@@ -16216,7 +16210,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7748	878	2	\N	2015-10-25 21:20:36.956871+02
 7749	2788	2	\N	2015-11-15 11:41:32.753196+02
 7750	2741	2	\N	2015-11-15 11:42:42.182101+02
-7751	2789	2	\N	2015-11-22 20:53:32.477901+02
 7752	2790	2	\N	2015-11-22 22:04:31.745001+02
 7753	998	2	\N	2015-12-19 18:58:53.274875+02
 7754	864	2	\N	2015-12-19 18:59:12.993038+02
@@ -16274,7 +16267,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7806	1798	2	\N	2015-12-19 19:56:29.707064+02
 7807	1425	2	\N	2015-12-19 19:57:48.500731+02
 7808	2514	2	\N	2015-12-19 19:58:18.992544+02
-7809	2789	2	\N	2015-12-19 22:00:11.541719+02
 7810	2788	2	\N	2015-12-19 22:02:14.069026+02
 7811	2583	2	\N	2015-12-19 22:02:47.427632+02
 7812	2558	2	\N	2015-12-19 22:03:01.721374+02
@@ -16413,7 +16405,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 74	953	accomodations	Типы размещения	AccomodationsResource	travelcrm.resources.accomodations	null	Accomodations Types list	0
 73	909	roomcats	Категории номеров	RoomcatsResource	travelcrm.resources.roomcats	null	Categories of the rooms	0
 72	908	hotelcats	Категории отелей	HotelcatsResource	travelcrm.resources.hotelcats	null	Hotels categories	0
-157	2789	turbosms	ТурбоСМС	TurbosmsResource	travelcrm_turbosms.resources.turbosms	null	SMS getway with TorboSMS	0
 156	2788	campaigns	Кампании	CampaignsResource	travelcrm.resources.campaigns	{"username": "--", "host": "--", "password": "--", "port": "2525", "default_sender": "--"}	Marketings campaigns	0
 153	2583	activities	Активность	ActivitiesResource	travelcrm.resources.activities	{"column_index": 1}	My last activities	0
 152	2558	leads_stats	Статистика по лидам	LeadsStatsResource	travelcrm.resources.leads_stats	{"column_index": 0}	Portlet with leads statistics	0
@@ -18518,7 +18509,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 245	47	6	{view}	\N	all
 235	69	6	{view,add,edit,delete}	\N	all
 294	156	4	{view,add,edit,delete,settings}	\N	all
-295	157	4	{send,settings}	\N	all
 \.
 
 
@@ -20106,7 +20096,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2786	2	32	f
 2787	2	32	f
 2788	12	32	f
-2812	12	32	f
 2813	12	32	f
 2814	87	32	f
 2815	93	32	f
@@ -22166,7 +22155,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7677	2593	2	\N	2015-10-31 10:32:28.375294+02
 7678	2788	2	\N	2015-10-31 11:46:02.329007+02
 7679	2741	2	\N	2015-10-31 11:48:54.106885+02
-7697	2812	2	\N	2015-11-22 20:39:40.441717+02
 7698	2813	2	\N	2015-11-22 21:52:45.311354+02
 7699	2814	2	\N	2015-11-22 21:57:07.211721+02
 7700	2739	2	\N	2015-11-22 21:57:09.506917+02
@@ -22325,7 +22313,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 143	2268	visas	Visas	VisasResource	travelcrm.resources.visas	Visa is a service for sale visas	null	0
 144	2276	spassports	Passports Services	SpassportsResource	travelcrm.resources.spassports	Service formulation of foreign passports	null	0
 156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	Marketings campaigns	{"host_smpp": "94.249.146.183", "system_type_smpp": "transceiver", "password_smpp": "korn17", "port_smtp": "2525", "username_smtp": "mazvv@mail.ru", "password_smtp": "GmA67mpqqYjKQ", "port_smpp": "29900", "username_smpp": "mazvv", "host_smtp": "smtp-pulse.com", "default_sender_smtp": "mazvv@mail.ru"}	0
-157	2812	turbosms	Turbosms	TurbosmsResource	travelcrm_turbosms.resources.turbosms	SMS getway with TorboSMS	{"username": "---", "password": "---", "default_sender": "TravelCRM"}	0
 \.
 
 
@@ -23820,7 +23807,6 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 163	151	4	{view,add,edit,delete}	all	\N
 164	152	4	{view,settings}	all	\N
 165	153	4	{view,settings}	all	\N
-295	157	4	{send,settings}	all	\N
 \.
 
 
@@ -24906,7 +24892,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2785	47	1	f
 2786	2	1	f
 2787	2	1	f
-2789	12	1	f
 2790	12	1	f
 \.
 
@@ -25002,7 +24987,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7748	878	2	\N	2015-10-25 21:20:36.956871+02
 7749	2788	2	\N	2015-11-15 11:41:32.753196+02
 7750	2741	2	\N	2015-11-15 11:42:42.182101+02
-7751	2789	2	\N	2015-11-22 20:53:32.477901+02
 7752	2790	2	\N	2015-11-22 22:04:31.745001+02
 \.
 
@@ -25082,7 +25066,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 143	2268	visas	Visas	VisasResource	travelcrm.resources.visas	null	Visa is a service for sale visas	0
 144	2276	spassports	Passports Services	SpassportsResource	travelcrm.resources.spassports	null	Service formulation of foreign passports	0
 156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	{"username": "--", "host": "--", "password": "--", "port": "2525", "default_sender": "--"}	Marketings campaigns	0
-157	2789	turbosms	Turbosms	TurbosmsResource	travelcrm_turbosms.resources.turbosms	null	SMS getway with TorboSMS	0
 \.
 
 
