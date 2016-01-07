@@ -23,7 +23,7 @@ if 'sdist' in sys.argv or 'bdist' in sys.argv:
 
 
 requires = [
-    'setuptools>=17.1',
+    'setuptools>=19.2',
     'pyramid',
     'pyramid_mako',
     'pyramid_debugtoolbar',
