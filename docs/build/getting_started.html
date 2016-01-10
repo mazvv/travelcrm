@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.1.0/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/cosmo/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="TravelCRM 0.6.4-dev documentation" href="index.html" />
     <link rel="next" title="Изменения" href="changes.html" />
@@ -37,7 +37,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
   </head>
-  <body>
+  <body role="document">
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -55,7 +55,6 @@
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
-            <li class="divider-vertical"></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -87,7 +86,10 @@
 <li><a class="reference internal" href="#">Начала</a><ul>
 <li><a class="reference internal" href="#id2">Вход в систему</a></li>
 <li><a class="reference internal" href="#id4">Режим мультикомпаний</a></li>
-<li><a class="reference internal" href="#id5">Рабочий стол</a></li>
+<li><a class="reference internal" href="#id5">Элементы рабочего стола</a></li>
+<li><a class="reference internal" href="#id6">Меню навигации</a></li>
+<li><a class="reference internal" href="#id7">Рабочее пространство</a></li>
+<li><a class="reference internal" href="#id8">Панель инструментов</a></li>
 </ul>
 </li>
 </ul>
@@ -99,11 +101,11 @@
               
                 
   <li>
-    <a href="setting.html" title="Previous Chapter: Настройка"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Настройка</span>
+    <a href="setting.html" title="Previous Chapter: Настройка"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Настройка</span>
     </a>
   </li>
   <li>
-    <a href="changes.html" title="Next Chapter: Изменения"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Изменения &raquo;</span>
+    <a href="changes.html" title="Next Chapter: Изменения"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Изменения &raquo;</span>
     </a>
   </li>
               
@@ -168,8 +170,35 @@
 </div>
 </div>
 <div class="section" id="id5">
-<h2>Рабочий стол<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<h2>Элементы рабочего стола<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Рабочий стол в TravelCRM состоит из двух частей: рабочего пространства и панели
+инструментов.</p>
+<img alt="_images/workspace.png" src="_images/workspace.png" />
+<ol class="arabic simple">
+<li>Меню навигации</li>
+<li>Рабочее пространство</li>
+<li>Панель инструментов</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h2>Меню навигации<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>Содержит рабочии пункты меню. Меню навигации полностью конфигурируемо
+и его содержание зависит от должности текущего пользователя. Кнопка &#8220;Обновить&#8221;
+обновляет содержимое меню навигации без перезагрузки рабочего пространства. Это
+бывает полезно после редактирования содержания меню для должности.</p>
+</div>
+<div class="section" id="id7">
+<h2>Рабочее пространство<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>Рабочее пространство содержит вкладки с открытыми типами ресурсов. По умолчанию
+открыта только основная вкладка - Домашняя. При клике на меню навигации будут
+открываться вкладки с другими типами ресурсов. Хотя стоит заметить, что не все
+типы ресурсов могут открываться во вкладках - это зависит от настроек пунктов
+навигационного меню и технической реализации конкретного типа ресурсов.</p>
+</div>
+<div class="section" id="id8">
+<h2>Панель инструментов<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>Состоит из трех типов ресурсов: задач, заметок и уведомлений.
+В список задач попадают все задачи, назначенные на текущего пользователя.</p>
 </div>
 </div>
 
@@ -186,7 +215,7 @@
     </p>
     <p>
         &copy; Copyright 2015, Vitalii Mazur.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3b2.<br/>
     </p>
   </div>
 </footer>
