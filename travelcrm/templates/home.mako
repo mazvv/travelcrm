@@ -43,10 +43,15 @@
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/ace/theme-chrome.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jquery-ace.min.js'))}
     <script type="text/javascript">
-        var eventSource = new EventSource("/notifications/counter?sort=id&employee_id=${h.common.get_auth_employee(request).id}");
-        eventSource.onmessage = function(e) {
+        var tasksSource = new EventSource("/tasks/counter?sort=id&employee_id=${h.common.get_auth_employee(request).id}");
+        tasksSource.onmessage = function(e) {
         	var data = $.parseJSON(e.data);
-        	$('.indicator.notifications-counter').html(data.count);
+        	$('.indicator.tasks-counter').html(data.count);
+        }
+        var notificationsSource = new EventSource("/notifications/counter?sort=id&employee_id=${h.common.get_auth_employee(request).id}");
+        notificationsSource.onmessage = function(e) {
+            var data = $.parseJSON(e.data);
+            $('.indicator.notifications-counter').html(data.count);
         }
     </script>
 </%block>

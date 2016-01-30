@@ -60,14 +60,12 @@
                 title="${_(u'tasks')}" onclick="$('#_tasks_').closest('.easyui-tabs').tabs('select', 0);"
             >
                 <div class="indicator tasks-counter">
-                    ${employee.tasks.count()}
                 </div>
             </a>
             <a class="fa fa-bell-o quick-menu-item _action easyui-tooltip ml1"
                 title="${_(u'notifications')}" onclick="$('#_notifications_').closest('.easyui-tabs').tabs('select', 2);"
             >
                 <div class="indicator notifications-counter">
-                    ${employee.notifications.count()}
                 </div>
             </a>
         </div>

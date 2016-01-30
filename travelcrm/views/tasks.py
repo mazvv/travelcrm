@@ -56,6 +56,21 @@ class TasksView(BaseView):
         }
 
     @view_config(
+        name='counter',
+        request_method='GET',
+        renderer='sse',
+        permission='view'
+    )
+    def counter(self):
+        form = TaskSearchForm(self.request, self.context)
+        form.validate()
+        qb = form.submit()
+        qb.advanced_search(**{'status': 'new'})
+        return {
+            'count': qb.query.count(),
+        }
+
+    @view_config(
         name='view',
         request_method='GET',
         renderer='travelcrm:templates/tasks/form.mako',

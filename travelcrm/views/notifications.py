@@ -58,6 +58,7 @@ class NotificationsView(BaseView):
         form = NotificationSearchForm(self.request, self.context)
         form.validate()
         qb = form.submit()
+        qb.advanced_search(**{'status': 'new'})
         return {
             'count': qb.query.count(),
         }
