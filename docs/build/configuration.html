@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Конфигурация &mdash; TravelCRM 0.6.4-dev documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.1.0/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.6.4-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="TravelCRM 0.6.4-dev documentation" href="index.html" />
+    <link rel="next" title="Изменения" href="changes.html" />
+    <link rel="prev" title="Начала" href="getting_started.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          TravelCRM</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.4-dev</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Установка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setting.html">Настройка</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Начала</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Конфигурация</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Изменения</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Конфигурация</a><ul>
+<li><a class="reference internal" href="#id2">Типы ресурсов</a></li>
+<li><a class="reference internal" href="#id3">Структура компании</a></li>
+<li><a class="reference internal" href="#id4">Должности сотрудников</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="getting_started.html" title="Previous Chapter: Начала"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Начала</span>
+    </a>
+  </li>
+  <li>
+    <a href="changes.html" title="Next Chapter: Изменения"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Изменения &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/configuration.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="id1">
+<h1>Конфигурация<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>Типы ресурсов<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Основным фундаментом, на котором построена TravelCRM, являются &#8220;Типы ресурсов&#8221;.
+Вся информация в базе данных относится к тому или иному типу ресурсов. Полный
+справочник типов ресурсов, которые установлены в системе, можно посмотреть,
+перейдя в пункт навигационного меню <strong>Система - Типы ресурсов</strong>. Не стоит
+редактировать этот справочник, если вы не уверены в том, что делаете, так как
+вмешательство в этот справочник может иметь негативные последствия для работы
+и стабильности системы.
+Добавление новых типов ресурсов может понадобиться только для добавления нового
+функционала в систему.</p>
+</div>
+<div class="section" id="id3">
+<h2>Структура компании<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>Откройте справочник <strong>Компания - Структура</strong>. По-умолчанию этот справочник содержит
+только одну запись &#8220;Головной офис&#8221;. Структура компании отражает реальную иерархию
+вашей компании. Элементами структуры компании являются офисы, дочерние компании
+и даже отдельные подразделения компании. Для каждого структурного элемента в
+дальнейшем можно будет определить должности и области видимости типов ресурсов.
+Например, менеджер головного офиса может видеть только заявки, созданные
+сотрудниками головного офиса, но не может видеть заявки, созданные сотрудниками
+других подразделений.
+Для удобства структура компании имеет вид дерева.</p>
+</div>
+<div class="section" id="id4">
+<h2>Должности сотрудников<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Элемент структуры компании может содержать одну или несколько должностей. Перейдите
+в справочник должностей <strong>Компания - Должности</strong>. На этой странице можно не только
+добавить должности в структуру, но и описать другие настройки рабочего пространства
+для сотрудников, которые будут назначены на должности.
+Нажмите на пункт меню <strong>Доступ</strong>. В открывшемся окен можно указать доступ должности
+к типам ресурсов.</p>
+<img alt="_images/permissions.png" src="_images/permissions.png" />
+<p>Здесь вы можете указать не только права доступа, но и область видимости типов
+ресурсов, указав элемент структуры.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Если указанный элемент структуры компании содержит дочерние элементы, то область
+видимости распространяется и на все дочерние элементы.</p>
+</div>
+<p>Для настройки меню для должности нажмите на пункт меню <strong>Меню</strong>. В открывшемся
+окне можно увидеть меню в виде дерева.</p>
+<img alt="_images/menu_tree.png" src="_images/menu_tree.png" />
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, Vitalii Mazur.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

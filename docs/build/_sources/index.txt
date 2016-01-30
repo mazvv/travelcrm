@@ -14,4 +14,5 @@
    install
    setting
    getting_started
+   configuration
    changes
