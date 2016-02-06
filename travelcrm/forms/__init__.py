@@ -80,7 +80,6 @@ class ResourceSchema(CSRFSchema):
         return super(ResourceSchema, self).deserialize(cstruct)
 
 
-
 class Date(colander.Date):
 
     def deserialize(self, node, cstruct):

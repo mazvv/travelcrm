@@ -477,18 +477,23 @@ def permisions_scope_type_field(
 
 def date_field(name, value=None, data_options=None, **kwargs):
     id = gen_id()
+    format = get_date_format()
+    
+    # this hack is need for datebox correct working
+    format = format.replace('yy', 'yyyy')
+
     _data_options = """
         editable:false,
         formatter:function(date){return dt_formatter(date, %s);},
         parser:function(s){return dt_parser(s, %s);}
         """ % (
-       json.dumps(get_date_format()),
-       json.dumps(get_date_format())
+       json.dumps(format),
+       json.dumps(format)
     )
     if data_options:
         _data_options += ",%s" % data_options
     if value:
-        value = format_date(value)
+        value = format_date(value, format)
     html = tags.text(
         name, value, class_="easyui-datebox text w10",
         id=id, data_options=_data_options, **kwargs

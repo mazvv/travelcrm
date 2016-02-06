@@ -116,9 +116,9 @@ def parse_date(s):
     return pd(s, locale=get_locale_name())
 
 
-def format_date(value):
+def format_date(value, format=None):
     return fd(
-        value, format='short', locale=get_locale_name()
+        value, format=(format or get_date_format()), locale=get_locale_name()
     )
 
 
