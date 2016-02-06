@@ -11903,7 +11903,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	LuxTravel, Inc	56	{"locale": "en", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
+1	1970	LuxTravel, Inc	56	{"locale": "ru", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
 \.
 
 
@@ -17265,7 +17265,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	LuxTravel, Inc	56	{"locale": "ru", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
+1	1970	LuxTravel, Inc	56	{"locale": "en", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
 \.
 
 
@@ -18574,7 +18574,7 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 63	2593	Maria	Fed'ko		1993-05-19	1	\N	3	t	f
 69	2739	Vitalii			\N	\N	\N	\N	t	t
 70	2822	Pavel	Romanuta		1986-03-28	0	\N	3	f	f
-71	2830	Helen	Romanuta		1986-12-12	1	\N	3	f	f
+71	2830	Helen	Romanuta		1986-07-23	1	\N	3	f	f
 \.
 
 
@@ -20151,6 +20151,8 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2866	117	32	f
 2867	111	32	f
 2865	78	32	f
+2868	93	32	f
+2869	93	32	f
 \.
 
 
@@ -20158,7 +20160,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2867, true);
+SELECT pg_catalog.setval('resource_id_seq', 2869, true);
 
 
 --
@@ -22235,6 +22237,22 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7775	2866	2	\N	2016-01-02 23:33:24.314299+02
 7776	2867	2	\N	2016-01-02 23:34:03.051927+02
 7777	2824	2	\N	2016-01-02 23:39:00.961892+02
+7778	2868	2	\N	2016-01-30 20:55:14.786454+02
+7779	2869	2	\N	2016-01-30 20:59:30.856249+02
+7780	2830	2	\N	2016-01-30 21:00:27.913502+02
+7781	2830	2	\N	2016-01-30 21:01:18.072032+02
+7782	2830	2	\N	2016-01-30 21:01:36.444194+02
+7783	2830	2	\N	2016-02-06 15:26:53.662979+02
+7784	2830	2	\N	2016-02-06 15:33:10.739181+02
+7785	2830	2	\N	2016-02-06 15:34:22.381065+02
+7786	2830	2	\N	2016-02-06 15:35:20.238203+02
+7787	2830	2	\N	2016-02-06 15:36:19.423459+02
+7788	2830	2	\N	2016-02-06 15:45:57.869458+02
+7789	2830	2	\N	2016-02-06 15:55:27.857802+02
+7790	2830	2	\N	2016-02-06 16:02:20.536632+02
+7791	2830	2	\N	2016-02-06 16:19:02.587853+02
+7792	2830	2	\N	2016-02-06 16:19:14.340638+02
+7793	2830	2	\N	2016-02-06 16:19:40.099469+02
 \.
 
 
@@ -22242,7 +22260,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7777, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7793, true);
 
 
 --
@@ -22649,6 +22667,8 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 83	2818	2	Check for notofications	2015-11-29 19:17:00+02	Test this one	0	10
 35	1930	2	Check Person Details	2014-11-12 21:43:00+02	We'll reuse the Amount type from last week. It's mostly the same, except we'll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we'll use when dealing with SQL expressions.	2	10
 84	2829	2	Docs for client	2016-01-15 20:24:00+02	Make docs for client	0	10
+85	2868	2	New My Task	2016-01-31 20:54:00+02	DEscription for task	0	10
+86	2869	2	NExt new task	2016-02-03 20:59:00+02	Description not empty	0	10
 \.
 
 
@@ -22656,7 +22676,7 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 84, true);
+SELECT pg_catalog.setval('task_id_seq', 86, true);
 
 
 --
