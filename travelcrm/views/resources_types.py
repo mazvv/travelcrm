@@ -227,7 +227,7 @@ class ResourcesTypesView(BaseView):
         rt = ResourceType.get(id)
         rt_ctx = get_resource_class(rt.name)
         rt_ctx = rt_ctx(self.request)
-        if rt_ctx.allowed_settings:
+        if getattr(rt_ctx, 'allowed_settings', False):
             return HTTPFound(
                 location=self.request.resource_url(rt_ctx, 'settings')
             )
