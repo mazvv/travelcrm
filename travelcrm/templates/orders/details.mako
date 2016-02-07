@@ -24,6 +24,18 @@
     </div>
     <div class="dp100">
         <div class="dp15 b">
+            ${_(u'invoice')}
+        </div>
+        <div class="dp85">
+            % if item.invoice:
+                 ${item.invoice.final_price} ${item.invoice.account.currency.iso_code}, ${item.invoice.account.name}, ${item.invoice.account.account_type.title}
+            % else:
+                -
+            % endif
+        </div>
+    </div>
+    <div class="dp100">
+        <div class="dp15 b">
             ${_(u'services')}
         </div>
         <div class="dp85">

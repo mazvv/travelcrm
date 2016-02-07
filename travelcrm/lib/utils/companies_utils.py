@@ -31,7 +31,7 @@ TABLES = (
 )
 
 
-def create_company_schema(schema_name=None):
+def create_company_schema(schema_name=None, locale=None):
     if not schema_name:
         schema_name = generate_company_schema()
     engine = DBSession.get_bind()
@@ -42,7 +42,7 @@ def create_company_schema(schema_name=None):
     Base.metadata.create_all(
         tables=[t.tometadata(metadata) for t in Base.metadata.sorted_tables]
     )
-    transfer_data(schema_name)
+    transfer_data(schema_name, locale)
     log.info(u'Company creation complete')
     return schema_name
 
@@ -52,12 +52,17 @@ def generate_company_schema():
     return 'c%d' % DBSession.execute(sequence.next_value()).scalar()
 
 
-def transfer_data(schema_name):
-    set_search_path(SOURCE_SCHEMA)
+def transfer_data(schema_name, locale=None):
+    source_schema = (
+        SOURCE_SCHEMA
+        if not locale 
+        else SOURCE_SCHEMA + '_' +locale
+    )
+    set_search_path(source_schema)
     tables = Base.metadata.sorted_tables
 
     for table in tables:
-        set_search_path(SOURCE_SCHEMA)
+        set_search_path(source_schema)
         rows = DBSession.query(table).all()
         set_search_path(schema_name)
         DBSession.execute('alter table "%s" disable trigger all' % table.name)

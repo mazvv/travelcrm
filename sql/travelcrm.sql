@@ -10,10 +10,17 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: company; Type: SCHEMA; Schema: -; Owner: -
+-- Name: company_en; Type: SCHEMA; Schema: -; Owner: -
 --
 
-CREATE SCHEMA company;
+CREATE SCHEMA company_en;
+
+
+--
+-- Name: company_ru; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA company_ru;
 
 
 --
@@ -44,14 +51,14 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET search_path = company, pg_catalog;
+SET search_path = company_en, pg_catalog;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: accomodation; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: accomodation; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE accomodation (
@@ -62,7 +69,7 @@ CREATE TABLE accomodation (
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE accomodation_id_seq
@@ -74,14 +81,14 @@ CREATE SEQUENCE accomodation_id_seq
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
 
 
 --
--- Name: account; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: account; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account (
@@ -97,7 +104,7 @@ CREATE TABLE account (
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: account_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE account_id_seq
@@ -109,14 +116,14 @@ CREATE SEQUENCE account_id_seq
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE account_id_seq OWNED BY account.id;
 
 
 --
--- Name: account_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: account_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE account_item (
@@ -131,7 +138,7 @@ CREATE TABLE account_item (
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: account_item_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE account_item_id_seq
@@ -143,14 +150,14 @@ CREATE SEQUENCE account_item_id_seq
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE account_item_id_seq OWNED BY account_item.id;
 
 
 --
--- Name: address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: address; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE address (
@@ -163,7 +170,7 @@ CREATE TABLE address (
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: address_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE address_id_seq
@@ -175,14 +182,14 @@ CREATE SEQUENCE address_id_seq
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE address_id_seq OWNED BY address.id;
 
 
 --
--- Name: advsource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: advsource; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE advsource (
@@ -193,7 +200,7 @@ CREATE TABLE advsource (
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE advsource_id_seq
@@ -205,14 +212,14 @@ CREATE SEQUENCE advsource_id_seq
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: alembic_version; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: alembic_version; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE alembic_version (
@@ -221,7 +228,7 @@ CREATE TABLE alembic_version (
 
 
 --
--- Name: appointment; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: appointment; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE appointment (
@@ -236,7 +243,7 @@ CREATE TABLE appointment (
 
 
 --
--- Name: bank; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: bank; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank (
@@ -247,7 +254,7 @@ CREATE TABLE bank (
 
 
 --
--- Name: bank_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: bank_address; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_address (
@@ -257,7 +264,7 @@ CREATE TABLE bank_address (
 
 
 --
--- Name: bank_detail; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: bank_detail; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bank_detail (
@@ -272,7 +279,7 @@ CREATE TABLE bank_detail (
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE bank_detail_id_seq
@@ -284,14 +291,14 @@ CREATE SEQUENCE bank_detail_id_seq
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE bank_detail_id_seq OWNED BY bank_detail.id;
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: bank_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE bank_id_seq
@@ -303,14 +310,14 @@ CREATE SEQUENCE bank_id_seq
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE bank_id_seq OWNED BY bank.id;
 
 
 --
--- Name: bperson; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: bperson; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson (
@@ -326,7 +333,7 @@ CREATE TABLE bperson (
 
 
 --
--- Name: bperson_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: bperson_contact; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE bperson_contact (
@@ -336,7 +343,7 @@ CREATE TABLE bperson_contact (
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: bperson_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE bperson_id_seq
@@ -348,14 +355,14 @@ CREATE SEQUENCE bperson_id_seq
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
 
 
 --
--- Name: calculation; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: calculation; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE calculation (
@@ -368,7 +375,7 @@ CREATE TABLE calculation (
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: calculation_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE calculation_id_seq
@@ -380,14 +387,14 @@ CREATE SEQUENCE calculation_id_seq
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE calculation_id_seq OWNED BY calculation.id;
 
 
 --
--- Name: campaign; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: campaign; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE campaign (
@@ -403,7 +410,7 @@ CREATE TABLE campaign (
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: campaign_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE campaign_id_seq
@@ -415,14 +422,14 @@ CREATE SEQUENCE campaign_id_seq
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE campaign_id_seq OWNED BY campaign.id;
 
 
 --
--- Name: cashflow; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: cashflow; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cashflow (
@@ -437,7 +444,7 @@ CREATE TABLE cashflow (
 
 
 --
--- Name: commission; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: commission; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE commission (
@@ -453,7 +460,7 @@ CREATE TABLE commission (
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE commission_id_seq
@@ -465,14 +472,14 @@ CREATE SEQUENCE commission_id_seq
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
 
 
 --
--- Name: companies_counter; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: companies_counter; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE companies_counter
@@ -484,7 +491,7 @@ CREATE SEQUENCE companies_counter
 
 
 --
--- Name: position; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: position; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "position" (
@@ -496,7 +503,7 @@ CREATE TABLE "position" (
 
 
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: companies_positions_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE companies_positions_id_seq
@@ -508,14 +515,14 @@ CREATE SEQUENCE companies_positions_id_seq
 
 
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: companies_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE companies_positions_id_seq OWNED BY "position".id;
 
 
 --
--- Name: company; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: company; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company (
@@ -529,7 +536,7 @@ CREATE TABLE company (
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: company_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE company_id_seq
@@ -541,14 +548,14 @@ CREATE SEQUENCE company_id_seq
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE company_id_seq OWNED BY company.id;
 
 
 --
--- Name: company_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: company_subaccount; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE company_subaccount (
@@ -558,7 +565,7 @@ CREATE TABLE company_subaccount (
 
 
 --
--- Name: contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: contact; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contact (
@@ -572,7 +579,7 @@ CREATE TABLE contact (
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE contact_id_seq
@@ -584,14 +591,14 @@ CREATE SEQUENCE contact_id_seq
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
 
 
 --
--- Name: contract; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: contract; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract (
@@ -605,7 +612,7 @@ CREATE TABLE contract (
 
 
 --
--- Name: contract_commission; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: contract_commission; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE contract_commission (
@@ -615,7 +622,7 @@ CREATE TABLE contract_commission (
 
 
 --
--- Name: country; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: country; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE country (
@@ -627,7 +634,7 @@ CREATE TABLE country (
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: country_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE country_id_seq
@@ -639,14 +646,14 @@ CREATE SEQUENCE country_id_seq
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE country_id_seq OWNED BY country.id;
 
 
 --
--- Name: crosspayment; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: crosspayment; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE crosspayment (
@@ -658,7 +665,7 @@ CREATE TABLE crosspayment (
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE crosspayment_id_seq
@@ -670,14 +677,14 @@ CREATE SEQUENCE crosspayment_id_seq
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
 
 
 --
--- Name: currency; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: currency; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency (
@@ -688,7 +695,7 @@ CREATE TABLE currency (
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: currency_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE currency_id_seq
@@ -700,14 +707,14 @@ CREATE SEQUENCE currency_id_seq
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE currency_id_seq OWNED BY currency.id;
 
 
 --
--- Name: currency_rate; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: currency_rate; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE currency_rate (
@@ -721,7 +728,7 @@ CREATE TABLE currency_rate (
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE currency_rate_id_seq
@@ -733,14 +740,14 @@ CREATE SEQUENCE currency_rate_id_seq
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
 
 
 --
--- Name: employee; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee (
@@ -756,7 +763,7 @@ CREATE TABLE employee (
 
 
 --
--- Name: employee_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_address; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_address (
@@ -766,7 +773,7 @@ CREATE TABLE employee_address (
 
 
 --
--- Name: employee_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_contact; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_contact (
@@ -776,7 +783,7 @@ CREATE TABLE employee_contact (
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE employee_id_seq
@@ -788,14 +795,14 @@ CREATE SEQUENCE employee_id_seq
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE employee_id_seq OWNED BY employee.id;
 
 
 --
--- Name: employee_notification; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_notification; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_notification (
@@ -806,7 +813,7 @@ CREATE TABLE employee_notification (
 
 
 --
--- Name: employee_passport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_passport; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_passport (
@@ -816,7 +823,7 @@ CREATE TABLE employee_passport (
 
 
 --
--- Name: employee_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_subaccount; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_subaccount (
@@ -826,7 +833,7 @@ CREATE TABLE employee_subaccount (
 
 
 --
--- Name: employee_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_upload; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE employee_upload (
@@ -836,7 +843,7 @@ CREATE TABLE employee_upload (
 
 
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE employees_appointments_h_id_seq
@@ -848,14 +855,14 @@ CREATE SEQUENCE employees_appointments_h_id_seq
 
 
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE employees_appointments_h_id_seq OWNED BY appointment.id;
 
 
 --
--- Name: foodcat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: foodcat; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE foodcat (
@@ -866,7 +873,7 @@ CREATE TABLE foodcat (
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE foodcat_id_seq
@@ -878,14 +885,14 @@ CREATE SEQUENCE foodcat_id_seq
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
 
 
 --
--- Name: hotel; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: hotel; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotel (
@@ -898,7 +905,7 @@ CREATE TABLE hotel (
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: hotel_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE hotel_id_seq
@@ -910,14 +917,14 @@ CREATE SEQUENCE hotel_id_seq
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE hotel_id_seq OWNED BY hotel.id;
 
 
 --
--- Name: hotelcat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: hotelcat; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE hotelcat (
@@ -928,7 +935,7 @@ CREATE TABLE hotelcat (
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE hotelcat_id_seq
@@ -940,14 +947,14 @@ CREATE SEQUENCE hotelcat_id_seq
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
 
 
 --
--- Name: income; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: income; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income (
@@ -962,7 +969,7 @@ CREATE TABLE income (
 
 
 --
--- Name: income_cashflow; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: income_cashflow; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE income_cashflow (
@@ -972,7 +979,7 @@ CREATE TABLE income_cashflow (
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: income_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE income_id_seq
@@ -984,14 +991,14 @@ CREATE SEQUENCE income_id_seq
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE income_id_seq OWNED BY income.id;
 
 
 --
--- Name: invoice; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: invoice; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice (
@@ -1006,7 +1013,7 @@ CREATE TABLE invoice (
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: invoice_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE invoice_id_seq
@@ -1018,14 +1025,14 @@ CREATE SEQUENCE invoice_id_seq
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
 
 
 --
--- Name: invoice_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: invoice_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE invoice_item (
@@ -1040,7 +1047,7 @@ CREATE TABLE invoice_item (
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE invoice_item_id_seq
@@ -1052,14 +1059,14 @@ CREATE SEQUENCE invoice_item_id_seq
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE invoice_item_id_seq OWNED BY invoice_item.id;
 
 
 --
--- Name: lead; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: lead; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead (
@@ -1074,7 +1081,7 @@ CREATE TABLE lead (
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE lead_id_seq
@@ -1086,14 +1093,14 @@ CREATE SEQUENCE lead_id_seq
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
 
 
 --
--- Name: lead_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: lead_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_item (
@@ -1109,7 +1116,7 @@ CREATE TABLE lead_item (
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: lead_item_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE lead_item_id_seq
@@ -1121,14 +1128,14 @@ CREATE SEQUENCE lead_item_id_seq
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE lead_item_id_seq OWNED BY lead_item.id;
 
 
 --
--- Name: lead_offer; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: lead_offer; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE lead_offer (
@@ -1145,7 +1152,7 @@ CREATE TABLE lead_offer (
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE lead_offer_id_seq
@@ -1157,14 +1164,14 @@ CREATE SEQUENCE lead_offer_id_seq
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE lead_offer_id_seq OWNED BY lead_offer.id;
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: licence_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE licence_id_seq
@@ -1176,14 +1183,14 @@ CREATE SEQUENCE licence_id_seq
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: licence_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE licence_id_seq OWNED BY contract.id;
 
 
 --
--- Name: location; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: location; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE location (
@@ -1195,7 +1202,7 @@ CREATE TABLE location (
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: location_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE location_id_seq
@@ -1207,14 +1214,14 @@ CREATE SEQUENCE location_id_seq
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE location_id_seq OWNED BY location.id;
 
 
 --
--- Name: navigation; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: navigation; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE navigation (
@@ -1232,7 +1239,7 @@ CREATE TABLE navigation (
 
 
 --
--- Name: note; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: note; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note (
@@ -1244,7 +1251,7 @@ CREATE TABLE note (
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: note_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE note_id_seq
@@ -1256,14 +1263,14 @@ CREATE SEQUENCE note_id_seq
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE note_id_seq OWNED BY note.id;
 
 
 --
--- Name: note_resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: note_resource; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_resource (
@@ -1273,7 +1280,7 @@ CREATE TABLE note_resource (
 
 
 --
--- Name: note_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: note_upload; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE note_upload (
@@ -1283,7 +1290,7 @@ CREATE TABLE note_upload (
 
 
 --
--- Name: notification; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: notification; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification (
@@ -1297,7 +1304,7 @@ CREATE TABLE notification (
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE notification_id_seq
@@ -1309,14 +1316,14 @@ CREATE SEQUENCE notification_id_seq
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
--- Name: notification_resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: notification_resource; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE notification_resource (
@@ -1326,7 +1333,7 @@ CREATE TABLE notification_resource (
 
 
 --
--- Name: order; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: order; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "order" (
@@ -1342,7 +1349,7 @@ CREATE TABLE "order" (
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: order_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE order_id_seq
@@ -1354,14 +1361,14 @@ CREATE SEQUENCE order_id_seq
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE order_id_seq OWNED BY "order".id;
 
 
 --
--- Name: order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: order_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE order_item (
@@ -1381,7 +1388,7 @@ CREATE TABLE order_item (
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE order_item_id_seq
@@ -1393,14 +1400,14 @@ CREATE SEQUENCE order_item_id_seq
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
 
 
 --
--- Name: outgoing; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: outgoing; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing (
@@ -1415,7 +1422,7 @@ CREATE TABLE outgoing (
 
 
 --
--- Name: outgoing_cashflow; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: outgoing_cashflow; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE outgoing_cashflow (
@@ -1425,7 +1432,7 @@ CREATE TABLE outgoing_cashflow (
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE outgoing_id_seq
@@ -1437,14 +1444,14 @@ CREATE SEQUENCE outgoing_id_seq
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
 
 
 --
--- Name: passport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: passport; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport (
@@ -1459,7 +1466,7 @@ CREATE TABLE passport (
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: passport_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE passport_id_seq
@@ -1471,14 +1478,14 @@ CREATE SEQUENCE passport_id_seq
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE passport_id_seq OWNED BY passport.id;
 
 
 --
--- Name: passport_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: passport_upload; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE passport_upload (
@@ -1488,7 +1495,7 @@ CREATE TABLE passport_upload (
 
 
 --
--- Name: permision; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: permision; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE permision (
@@ -1502,7 +1509,7 @@ CREATE TABLE permision (
 
 
 --
--- Name: person; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person (
@@ -1521,7 +1528,7 @@ CREATE TABLE person (
 
 
 --
--- Name: person_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person_address; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_address (
@@ -1531,7 +1538,7 @@ CREATE TABLE person_address (
 
 
 --
--- Name: person_category; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person_category; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_category (
@@ -1542,7 +1549,7 @@ CREATE TABLE person_category (
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: person_category_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE person_category_id_seq
@@ -1554,14 +1561,14 @@ CREATE SEQUENCE person_category_id_seq
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE person_category_id_seq OWNED BY person_category.id;
 
 
 --
--- Name: person_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person_contact; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_contact (
@@ -1571,7 +1578,7 @@ CREATE TABLE person_contact (
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: person_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE person_id_seq
@@ -1583,14 +1590,14 @@ CREATE SEQUENCE person_id_seq
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE person_id_seq OWNED BY person.id;
 
 
 --
--- Name: person_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person_order_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_order_item (
@@ -1600,7 +1607,7 @@ CREATE TABLE person_order_item (
 
 
 --
--- Name: person_passport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person_passport; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_passport (
@@ -1610,7 +1617,7 @@ CREATE TABLE person_passport (
 
 
 --
--- Name: person_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: person_subaccount; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE person_subaccount (
@@ -1620,7 +1627,7 @@ CREATE TABLE person_subaccount (
 
 
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: positions_navigations_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE positions_navigations_id_seq
@@ -1632,14 +1639,14 @@ CREATE SEQUENCE positions_navigations_id_seq
 
 
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: positions_navigations_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE positions_navigations_id_seq OWNED BY navigation.id;
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: positions_permisions_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE positions_permisions_id_seq
@@ -1651,14 +1658,14 @@ CREATE SEQUENCE positions_permisions_id_seq
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: positions_permisions_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE positions_permisions_id_seq OWNED BY permision.id;
 
 
 --
--- Name: region; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: region; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE region (
@@ -1670,7 +1677,7 @@ CREATE TABLE region (
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: region_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE region_id_seq
@@ -1682,14 +1689,14 @@ CREATE SEQUENCE region_id_seq
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE region_id_seq OWNED BY region.id;
 
 
 --
--- Name: resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: resource; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource (
@@ -1701,7 +1708,7 @@ CREATE TABLE resource (
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: resource_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE resource_id_seq
@@ -1713,14 +1720,14 @@ CREATE SEQUENCE resource_id_seq
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
 
 
 --
--- Name: resource_log; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: resource_log; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_log (
@@ -1733,7 +1740,7 @@ CREATE TABLE resource_log (
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE resource_log_id_seq
@@ -1745,14 +1752,14 @@ CREATE SEQUENCE resource_log_id_seq
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
--- Name: resource_type; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: resource_type; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE resource_type (
@@ -1769,7 +1776,7 @@ CREATE TABLE resource_type (
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE resource_type_id_seq
@@ -1781,14 +1788,14 @@ CREATE SEQUENCE resource_type_id_seq
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
 
 
 --
--- Name: roomcat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: roomcat; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE roomcat (
@@ -1799,7 +1806,7 @@ CREATE TABLE roomcat (
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE roomcat_id_seq
@@ -1811,14 +1818,14 @@ CREATE SEQUENCE roomcat_id_seq
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
 
 
 --
--- Name: service; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: service; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE service (
@@ -1832,7 +1839,7 @@ CREATE TABLE service (
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: service_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE service_id_seq
@@ -1844,14 +1851,14 @@ CREATE SEQUENCE service_id_seq
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE service_id_seq OWNED BY service.id;
 
 
 --
--- Name: spassport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: spassport; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport (
@@ -1866,7 +1873,7 @@ CREATE TABLE spassport (
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: spassport_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE spassport_id_seq
@@ -1878,14 +1885,14 @@ CREATE SEQUENCE spassport_id_seq
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE spassport_id_seq OWNED BY spassport.id;
 
 
 --
--- Name: spassport_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: spassport_order_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE spassport_order_item (
@@ -1895,7 +1902,7 @@ CREATE TABLE spassport_order_item (
 
 
 --
--- Name: structure; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: structure; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure (
@@ -1908,7 +1915,7 @@ CREATE TABLE structure (
 
 
 --
--- Name: structure_address; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_address; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_address (
@@ -1918,7 +1925,7 @@ CREATE TABLE structure_address (
 
 
 --
--- Name: structure_bank_detail; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_bank_detail; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_bank_detail (
@@ -1928,7 +1935,7 @@ CREATE TABLE structure_bank_detail (
 
 
 --
--- Name: structure_contact; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_contact; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE structure_contact (
@@ -1938,7 +1945,7 @@ CREATE TABLE structure_contact (
 
 
 --
--- Name: structures_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: structures_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE structures_id_seq
@@ -1950,14 +1957,14 @@ CREATE SEQUENCE structures_id_seq
 
 
 --
--- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE structures_id_seq OWNED BY structure.id;
 
 
 --
--- Name: subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: subaccount; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE subaccount (
@@ -1971,7 +1978,7 @@ CREATE TABLE subaccount (
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: subaccount_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE subaccount_id_seq
@@ -1983,14 +1990,14 @@ CREATE SEQUENCE subaccount_id_seq
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE subaccount_id_seq OWNED BY subaccount.id;
 
 
 --
--- Name: supplier; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier (
@@ -2004,7 +2011,7 @@ CREATE TABLE supplier (
 
 
 --
--- Name: supplier_bank_detail; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_bank_detail; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bank_detail (
@@ -2014,7 +2021,7 @@ CREATE TABLE supplier_bank_detail (
 
 
 --
--- Name: supplier_bperson; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_bperson; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_bperson (
@@ -2024,7 +2031,7 @@ CREATE TABLE supplier_bperson (
 
 
 --
--- Name: supplier_contract; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_contract; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_contract (
@@ -2034,7 +2041,7 @@ CREATE TABLE supplier_contract (
 
 
 --
--- Name: supplier_subaccount; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_subaccount; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_subaccount (
@@ -2044,7 +2051,7 @@ CREATE TABLE supplier_subaccount (
 
 
 --
--- Name: supplier_type; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_type; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE supplier_type (
@@ -2056,7 +2063,7 @@ CREATE TABLE supplier_type (
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE supplier_type_id_seq
@@ -2068,14 +2075,14 @@ CREATE SEQUENCE supplier_type_id_seq
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
--- Name: task; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: task; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task (
@@ -2091,7 +2098,7 @@ CREATE TABLE task (
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: task_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE task_id_seq
@@ -2103,14 +2110,14 @@ CREATE SEQUENCE task_id_seq
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE task_id_seq OWNED BY task.id;
 
 
 --
--- Name: task_resource; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: task_resource; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_resource (
@@ -2120,7 +2127,7 @@ CREATE TABLE task_resource (
 
 
 --
--- Name: task_upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: task_upload; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE task_upload (
@@ -2130,7 +2137,7 @@ CREATE TABLE task_upload (
 
 
 --
--- Name: ticket; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: ticket; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket (
@@ -2151,7 +2158,7 @@ CREATE TABLE ticket (
 
 
 --
--- Name: ticket_class; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: ticket_class; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_class (
@@ -2162,7 +2169,7 @@ CREATE TABLE ticket_class (
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE ticket_class_id_seq
@@ -2174,14 +2181,14 @@ CREATE SEQUENCE ticket_class_id_seq
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE ticket_class_id_seq OWNED BY ticket_class.id;
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: ticket_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE ticket_id_seq
@@ -2193,14 +2200,14 @@ CREATE SEQUENCE ticket_id_seq
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE ticket_id_seq OWNED BY ticket.id;
 
 
 --
--- Name: ticket_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: ticket_order_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ticket_order_item (
@@ -2210,7 +2217,7 @@ CREATE TABLE ticket_order_item (
 
 
 --
--- Name: tour; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: tour; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour (
@@ -2236,7 +2243,7 @@ CREATE TABLE tour (
 
 
 --
--- Name: tour_id_seq1; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: tour_id_seq1; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE tour_id_seq1
@@ -2248,14 +2255,14 @@ CREATE SEQUENCE tour_id_seq1
 
 
 --
--- Name: tour_id_seq1; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: tour_id_seq1; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE tour_id_seq1 OWNED BY tour.id;
 
 
 --
--- Name: tour_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: tour_order_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tour_order_item (
@@ -2265,7 +2272,7 @@ CREATE TABLE tour_order_item (
 
 
 --
--- Name: touroperator_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: touroperator_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE touroperator_id_seq
@@ -2277,14 +2284,14 @@ CREATE SEQUENCE touroperator_id_seq
 
 
 --
--- Name: touroperator_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: touroperator_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE touroperator_id_seq OWNED BY supplier.id;
 
 
 --
--- Name: transfer; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: transfer; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transfer (
@@ -2295,7 +2302,7 @@ CREATE TABLE transfer (
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq
@@ -2307,14 +2314,14 @@ CREATE SEQUENCE transfer_id_seq
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq OWNED BY cashflow.id;
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: transfer_id_seq1; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE transfer_id_seq1
@@ -2326,14 +2333,14 @@ CREATE SEQUENCE transfer_id_seq1
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: transfer_id_seq1; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE transfer_id_seq1 OWNED BY transfer.id;
 
 
 --
--- Name: transport; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: transport; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE transport (
@@ -2344,7 +2351,7 @@ CREATE TABLE transport (
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: transport_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE transport_id_seq
@@ -2356,14 +2363,14 @@ CREATE SEQUENCE transport_id_seq
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE transport_id_seq OWNED BY transport.id;
 
 
 --
--- Name: uni_list; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: uni_list; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE uni_list (
@@ -2374,7 +2381,7 @@ CREATE TABLE uni_list (
 
 
 --
--- Name: uni_list_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: uni_list_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE uni_list_id_seq
@@ -2386,14 +2393,14 @@ CREATE SEQUENCE uni_list_id_seq
 
 
 --
--- Name: uni_list_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: uni_list_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE uni_list_id_seq OWNED BY uni_list.id;
 
 
 --
--- Name: upload; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: upload; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE upload (
@@ -2408,7 +2415,7 @@ CREATE TABLE upload (
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: upload_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE upload_id_seq
@@ -2420,14 +2427,14 @@ CREATE SEQUENCE upload_id_seq
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE upload_id_seq OWNED BY upload.id;
 
 
 --
--- Name: user; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: user; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -2441,7 +2448,7 @@ CREATE TABLE "user" (
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: user_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE user_id_seq
@@ -2453,14 +2460,14 @@ CREATE SEQUENCE user_id_seq
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 
 
 --
--- Name: vat; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: vat; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE vat (
@@ -2476,7 +2483,7 @@ CREATE TABLE vat (
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: vat_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE vat_id_seq
@@ -2488,14 +2495,14 @@ CREATE SEQUENCE vat_id_seq
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE vat_id_seq OWNED BY vat.id;
 
 
 --
--- Name: visa; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: visa; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa (
@@ -2510,7 +2517,7 @@ CREATE TABLE visa (
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE; Schema: company; Owner: -
+-- Name: visa_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
 --
 
 CREATE SEQUENCE visa_id_seq
@@ -2522,14 +2529,2463 @@ CREATE SEQUENCE visa_id_seq
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: company; Owner: -
+-- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
 --
 
 ALTER SEQUENCE visa_id_seq OWNED BY visa.id;
 
 
 --
--- Name: visa_order_item; Type: TABLE; Schema: company; Owner: -; Tablespace: 
+-- Name: visa_order_item; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
+--
+
+CREATE TABLE visa_order_item (
+    order_item_id integer NOT NULL,
+    visa_id integer NOT NULL
+);
+
+
+SET search_path = company_ru, pg_catalog;
+
+--
+-- Name: accomodation; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE accomodation (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: accomodation_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE accomodation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: accomodation_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE accomodation_id_seq OWNED BY accomodation.id;
+
+
+--
+-- Name: account; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE account (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    account_type smallint NOT NULL,
+    name character varying(255) NOT NULL,
+    display_text character varying(255) NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: account_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE account_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE account_id_seq OWNED BY account.id;
+
+
+--
+-- Name: account_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE account_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    parent_id integer,
+    name character varying(128) NOT NULL,
+    type smallint NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(128)
+);
+
+
+--
+-- Name: account_item_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE account_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: account_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE account_item_id_seq OWNED BY account_item.id;
+
+
+--
+-- Name: address; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE address (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    location_id integer NOT NULL,
+    zip_code character varying(12) NOT NULL,
+    address character varying(255) NOT NULL
+);
+
+
+--
+-- Name: address_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE address_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE address_id_seq OWNED BY address.id;
+
+
+--
+-- Name: advsource; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE advsource (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: advsource_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE advsource_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: advsource_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
+
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+--
+-- Name: appointment; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE appointment (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    date date,
+    employee_id integer NOT NULL,
+    position_id integer NOT NULL,
+    salary numeric(16,2) NOT NULL,
+    currency_id integer NOT NULL
+);
+
+
+--
+-- Name: appointment_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE appointment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: appointment_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE appointment_id_seq OWNED BY appointment.id;
+
+
+--
+-- Name: bank; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bank (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: bank_address; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bank_address (
+    bank_id integer NOT NULL,
+    address_id integer NOT NULL
+);
+
+
+--
+-- Name: bank_detail; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bank_detail (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    bank_id integer NOT NULL,
+    beneficiary character varying(255),
+    account character varying(32) NOT NULL,
+    swift_code character varying(32) NOT NULL
+);
+
+
+--
+-- Name: bank_detail_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE bank_detail_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: bank_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE bank_detail_id_seq OWNED BY bank_detail.id;
+
+
+--
+-- Name: bank_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE bank_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: bank_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE bank_id_seq OWNED BY bank.id;
+
+
+--
+-- Name: bperson; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bperson (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    first_name character varying(32) NOT NULL,
+    last_name character varying(32),
+    second_name character varying(32),
+    position_name character varying(64),
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: bperson_contact; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE bperson_contact (
+    bperson_id integer NOT NULL,
+    contact_id integer NOT NULL
+);
+
+
+--
+-- Name: bperson_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE bperson_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: bperson_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE bperson_id_seq OWNED BY bperson.id;
+
+
+--
+-- Name: calculation; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE calculation (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    order_item_id integer,
+    price numeric(16,2) NOT NULL,
+    contract_id integer
+);
+
+
+--
+-- Name: calculation_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE calculation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: calculation_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE calculation_id_seq OWNED BY calculation.id;
+
+
+--
+-- Name: campaign; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE campaign (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    subject character varying(128) NOT NULL,
+    plain_content text,
+    html_content text,
+    start_dt timestamp with time zone NOT NULL,
+    status smallint NOT NULL
+);
+
+
+--
+-- Name: campaign_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE campaign_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: campaign_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE campaign_id_seq OWNED BY campaign.id;
+
+
+--
+-- Name: cashflow; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cashflow (
+    id integer NOT NULL,
+    subaccount_from_id integer,
+    subaccount_to_id integer,
+    account_item_id integer,
+    sum numeric(16,2) NOT NULL,
+    vat numeric(16,2),
+    date date NOT NULL,
+    CONSTRAINT constraint_cashflow_subaccount CHECK (((subaccount_from_id IS NOT NULL) OR (subaccount_to_id IS NOT NULL)))
+);
+
+
+--
+-- Name: cashflow_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE cashflow_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cashflow_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE cashflow_id_seq OWNED BY cashflow.id;
+
+
+--
+-- Name: commission; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE commission (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    service_id integer NOT NULL,
+    percentage numeric(5,2) NOT NULL,
+    price numeric(16,2) NOT NULL,
+    currency_id integer NOT NULL,
+    descr character varying(255),
+    CONSTRAINT chk_commission_percentage CHECK (((percentage >= (0)::numeric) AND (percentage <= (100)::numeric)))
+);
+
+
+--
+-- Name: commission_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE commission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: commission_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE commission_id_seq OWNED BY commission.id;
+
+
+--
+-- Name: company; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE company (
+    id integer NOT NULL,
+    resource_id integer,
+    currency_id integer,
+    name character varying(32) NOT NULL,
+    email character varying(32) NOT NULL,
+    settings json
+);
+
+
+--
+-- Name: company_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE company_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: company_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE company_id_seq OWNED BY company.id;
+
+
+--
+-- Name: company_subaccount; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE company_subaccount (
+    company_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+--
+-- Name: contact; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE contact (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    contact_type smallint NOT NULL,
+    contact character varying NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: contact_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE contact_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contact_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE contact_id_seq OWNED BY contact.id;
+
+
+--
+-- Name: contract; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE contract (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    num character varying NOT NULL,
+    date date NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: contract_commission; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE contract_commission (
+    contract_id integer NOT NULL,
+    commission_id integer NOT NULL
+);
+
+
+--
+-- Name: contract_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE contract_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: contract_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE contract_id_seq OWNED BY contract.id;
+
+
+--
+-- Name: country; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE country (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    iso_code character varying(2) NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: country_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE country_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: country_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE country_id_seq OWNED BY country.id;
+
+
+--
+-- Name: crosspayment; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE crosspayment (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    cashflow_id integer NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: crosspayment_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE crosspayment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: crosspayment_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE crosspayment_id_seq OWNED BY crosspayment.id;
+
+
+--
+-- Name: currency; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE currency (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    iso_code character varying(3) NOT NULL
+);
+
+
+--
+-- Name: currency_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE currency_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: currency_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE currency_id_seq OWNED BY currency.id;
+
+
+--
+-- Name: currency_rate; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE currency_rate (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    supplier_id integer NOT NULL,
+    date date NOT NULL,
+    rate numeric(16,2) NOT NULL
+);
+
+
+--
+-- Name: currency_rate_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE currency_rate_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: currency_rate_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE currency_rate_id_seq OWNED BY currency_rate.id;
+
+
+--
+-- Name: employee; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    photo_upload_id integer,
+    first_name character varying(32) NOT NULL,
+    last_name character varying(32) NOT NULL,
+    second_name character varying(32),
+    itn character varying(32),
+    dismissal_date date
+);
+
+
+--
+-- Name: employee_address; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_address (
+    employee_id integer NOT NULL,
+    address_id integer NOT NULL
+);
+
+
+--
+-- Name: employee_contact; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_contact (
+    employee_id integer NOT NULL,
+    contact_id integer NOT NULL
+);
+
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE employee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE employee_id_seq OWNED BY employee.id;
+
+
+--
+-- Name: employee_notification; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_notification (
+    employee_id integer NOT NULL,
+    notification_id integer NOT NULL,
+    status smallint NOT NULL
+);
+
+
+--
+-- Name: employee_passport; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_passport (
+    employee_id integer NOT NULL,
+    passport_id integer NOT NULL
+);
+
+
+--
+-- Name: employee_subaccount; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_subaccount (
+    employee_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+--
+-- Name: employee_upload; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_upload (
+    employee_id integer NOT NULL,
+    upload_id integer NOT NULL
+);
+
+
+--
+-- Name: foodcat; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE foodcat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: foodcat_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE foodcat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: foodcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE foodcat_id_seq OWNED BY foodcat.id;
+
+
+--
+-- Name: hotel; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE hotel (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    hotelcat_id integer NOT NULL,
+    location_id integer,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: hotel_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE hotel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: hotel_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE hotel_id_seq OWNED BY hotel.id;
+
+
+--
+-- Name: hotelcat; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE hotelcat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: hotelcat_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE hotelcat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: hotelcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE hotelcat_id_seq OWNED BY hotelcat.id;
+
+
+--
+-- Name: income; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE income (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    invoice_id integer NOT NULL,
+    account_item_id integer NOT NULL,
+    sum numeric(16,2) NOT NULL,
+    date date NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: income_cashflow; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE income_cashflow (
+    income_id integer NOT NULL,
+    cashflow_id integer NOT NULL
+);
+
+
+--
+-- Name: income_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE income_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: income_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE income_id_seq OWNED BY income.id;
+
+
+--
+-- Name: invoice; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invoice (
+    id integer NOT NULL,
+    date date NOT NULL,
+    active_until date NOT NULL,
+    resource_id integer NOT NULL,
+    order_id integer NOT NULL,
+    account_id integer NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: invoice_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE invoice_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invoice_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE invoice_id_seq OWNED BY invoice.id;
+
+
+--
+-- Name: invoice_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invoice_item (
+    id integer NOT NULL,
+    invoice_id integer NOT NULL,
+    order_item_id integer NOT NULL,
+    price numeric(16,2) NOT NULL,
+    vat numeric(16,2) NOT NULL,
+    discount numeric(16,2) NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: invoice_item_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE invoice_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invoice_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE invoice_item_id_seq OWNED BY invoice_item.id;
+
+
+--
+-- Name: lead; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lead (
+    id integer NOT NULL,
+    lead_date date NOT NULL,
+    resource_id integer NOT NULL,
+    advsource_id integer NOT NULL,
+    customer_id integer NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: lead_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE lead_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE lead_id_seq OWNED BY lead.id;
+
+
+--
+-- Name: lead_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lead_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    lead_id integer,
+    service_id integer NOT NULL,
+    currency_id integer,
+    price_from numeric(16,2),
+    price_to numeric(16,2),
+    descr character varying
+);
+
+
+--
+-- Name: lead_item_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE lead_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE lead_item_id_seq OWNED BY lead_item.id;
+
+
+--
+-- Name: lead_offer; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lead_offer (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    lead_id integer,
+    service_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    supplier_id integer NOT NULL,
+    price numeric(16,2) NOT NULL,
+    status smallint NOT NULL,
+    descr character varying
+);
+
+
+--
+-- Name: lead_offer_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE lead_offer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lead_offer_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE lead_offer_id_seq OWNED BY lead_offer.id;
+
+
+--
+-- Name: location; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE location (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    region_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: location_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE location_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: location_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE location_id_seq OWNED BY location.id;
+
+
+--
+-- Name: navigation; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE navigation (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    position_id integer,
+    parent_id integer,
+    name character varying(32) NOT NULL,
+    url character varying(128) NOT NULL,
+    action character varying(32),
+    icon_cls character varying(32),
+    separator_before boolean,
+    sort_order integer NOT NULL
+);
+
+
+--
+-- Name: navigation_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE navigation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: navigation_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE navigation_id_seq OWNED BY navigation.id;
+
+
+--
+-- Name: note; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE note (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    descr character varying
+);
+
+
+--
+-- Name: note_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE note_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: note_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE note_id_seq OWNED BY note.id;
+
+
+--
+-- Name: note_resource; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE note_resource (
+    note_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
+-- Name: note_upload; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE note_upload (
+    note_id integer NOT NULL,
+    upload_id integer NOT NULL
+);
+
+
+--
+-- Name: notification; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notification (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    title character varying NOT NULL,
+    descr character varying NOT NULL,
+    url character varying,
+    created timestamp with time zone
+);
+
+
+--
+-- Name: notification_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE notification_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notification_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
+
+
+--
+-- Name: notification_resource; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notification_resource (
+    notification_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
+-- Name: order; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE "order" (
+    id integer NOT NULL,
+    deal_date date NOT NULL,
+    resource_id integer NOT NULL,
+    customer_id integer NOT NULL,
+    lead_id integer,
+    advsource_id integer NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: order_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE order_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: order_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE order_id_seq OWNED BY "order".id;
+
+
+--
+-- Name: order_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE order_item (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    order_id integer,
+    service_id integer NOT NULL,
+    currency_id integer NOT NULL,
+    supplier_id integer NOT NULL,
+    price numeric(16,2) NOT NULL,
+    discount_sum numeric(16,2) NOT NULL,
+    discount_percent numeric(16,2) NOT NULL,
+    status smallint NOT NULL,
+    status_date date,
+    status_info character varying(128)
+);
+
+
+--
+-- Name: order_item_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE order_item_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: order_item_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE order_item_id_seq OWNED BY order_item.id;
+
+
+--
+-- Name: outgoing; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE outgoing (
+    id integer NOT NULL,
+    date date NOT NULL,
+    resource_id integer NOT NULL,
+    account_item_id integer NOT NULL,
+    subaccount_id integer NOT NULL,
+    sum numeric(16,2) NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: outgoing_cashflow; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE outgoing_cashflow (
+    outgoing_id integer NOT NULL,
+    cashflow_id integer NOT NULL
+);
+
+
+--
+-- Name: outgoing_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE outgoing_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: outgoing_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE outgoing_id_seq OWNED BY outgoing.id;
+
+
+--
+-- Name: passport; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE passport (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    country_id integer NOT NULL,
+    passport_type smallint NOT NULL,
+    num character varying(32) NOT NULL,
+    end_date date,
+    descr character varying(255)
+);
+
+
+--
+-- Name: passport_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE passport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: passport_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE passport_id_seq OWNED BY passport.id;
+
+
+--
+-- Name: passport_upload; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE passport_upload (
+    passport_id integer NOT NULL,
+    upload_id integer NOT NULL
+);
+
+
+--
+-- Name: permision; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE permision (
+    id integer NOT NULL,
+    resource_type_id integer NOT NULL,
+    position_id integer NOT NULL,
+    permisions character varying[],
+    scope_type character varying,
+    structure_id integer
+);
+
+
+--
+-- Name: permision_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE permision_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: permision_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE permision_id_seq OWNED BY permision.id;
+
+
+--
+-- Name: person; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    person_category_id integer,
+    first_name character varying(32) NOT NULL,
+    last_name character varying(32),
+    second_name character varying(32),
+    birthday date,
+    gender smallint,
+    email_subscription boolean,
+    sms_subscription boolean,
+    descr character varying(255)
+);
+
+
+--
+-- Name: person_address; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_address (
+    person_id integer NOT NULL,
+    address_id integer NOT NULL
+);
+
+
+--
+-- Name: person_category; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_category (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: person_category_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE person_category_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: person_category_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE person_category_id_seq OWNED BY person_category.id;
+
+
+--
+-- Name: person_contact; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_contact (
+    person_id integer NOT NULL,
+    contact_id integer NOT NULL
+);
+
+
+--
+-- Name: person_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE person_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: person_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE person_id_seq OWNED BY person.id;
+
+
+--
+-- Name: person_order_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_order_item (
+    order_item_id integer NOT NULL,
+    person_id integer NOT NULL
+);
+
+
+--
+-- Name: person_passport; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_passport (
+    person_id integer NOT NULL,
+    passport_id integer NOT NULL
+);
+
+
+--
+-- Name: person_subaccount; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE person_subaccount (
+    person_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+--
+-- Name: position; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE "position" (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    structure_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: position_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE position_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: position_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE position_id_seq OWNED BY "position".id;
+
+
+--
+-- Name: region; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE region (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    country_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: region_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE region_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE region_id_seq OWNED BY region.id;
+
+
+--
+-- Name: resource; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE resource (
+    id integer NOT NULL,
+    resource_type_id integer NOT NULL,
+    structure_id integer NOT NULL,
+    protected boolean
+);
+
+
+--
+-- Name: resource_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE resource_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resource_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
+
+
+--
+-- Name: resource_log; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE resource_log (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    comment character varying(512),
+    modifydt timestamp with time zone
+);
+
+
+--
+-- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE resource_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
+
+
+--
+-- Name: resource_type; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE resource_type (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    humanize character varying(32) NOT NULL,
+    resource_name character varying(32) NOT NULL,
+    module character varying(128) NOT NULL,
+    settings json,
+    descr character varying(255),
+    status smallint NOT NULL
+);
+
+
+--
+-- Name: resource_type_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE resource_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: resource_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE resource_type_id_seq OWNED BY resource_type.id;
+
+
+--
+-- Name: roomcat; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE roomcat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: roomcat_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE roomcat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: roomcat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE roomcat_id_seq OWNED BY roomcat.id;
+
+
+--
+-- Name: service; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE service (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    resource_type_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    display_text character varying(255) NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: service_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE service_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: service_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE service_id_seq OWNED BY service.id;
+
+
+--
+-- Name: spassport; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spassport (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    photo_done boolean NOT NULL,
+    docs_receive_date date,
+    docs_transfer_date date,
+    passport_receive_date date,
+    descr character varying(255)
+);
+
+
+--
+-- Name: spassport_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE spassport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: spassport_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE spassport_id_seq OWNED BY spassport.id;
+
+
+--
+-- Name: spassport_order_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE spassport_order_item (
+    order_item_id integer NOT NULL,
+    spassport_id integer NOT NULL
+);
+
+
+--
+-- Name: structure; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE structure (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    parent_id integer,
+    company_id integer NOT NULL,
+    name character varying(32) NOT NULL
+);
+
+
+--
+-- Name: structure_address; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE structure_address (
+    structure_id integer NOT NULL,
+    address_id integer NOT NULL
+);
+
+
+--
+-- Name: structure_bank_detail; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE structure_bank_detail (
+    structure_id integer NOT NULL,
+    bank_detail_id integer NOT NULL
+);
+
+
+--
+-- Name: structure_contact; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE structure_contact (
+    structure_id integer NOT NULL,
+    contact_id integer NOT NULL
+);
+
+
+--
+-- Name: structure_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE structure_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: structure_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE structure_id_seq OWNED BY structure.id;
+
+
+--
+-- Name: subaccount; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE subaccount (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    account_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: subaccount_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE subaccount_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: subaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE subaccount_id_seq OWNED BY subaccount.id;
+
+
+--
+-- Name: supplier; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE supplier (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    supplier_type_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    status smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: supplier_bank_detail; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE supplier_bank_detail (
+    supplier_id integer NOT NULL,
+    bank_detail_id integer NOT NULL
+);
+
+
+--
+-- Name: supplier_bperson; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE supplier_bperson (
+    supplier_id integer NOT NULL,
+    bperson_id integer NOT NULL
+);
+
+
+--
+-- Name: supplier_contract; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE supplier_contract (
+    supplier_id integer NOT NULL,
+    contract_id integer NOT NULL
+);
+
+
+--
+-- Name: supplier_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE supplier_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE supplier_id_seq OWNED BY supplier.id;
+
+
+--
+-- Name: supplier_subaccount; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE supplier_subaccount (
+    supplier_id integer NOT NULL,
+    subaccount_id integer NOT NULL
+);
+
+
+--
+-- Name: supplier_type; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE supplier_type (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(32) NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: supplier_type_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE supplier_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: supplier_type_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
+
+
+--
+-- Name: task; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE task (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    title character varying(128) NOT NULL,
+    deadline timestamp with time zone NOT NULL,
+    reminder integer,
+    descr character varying,
+    status smallint NOT NULL
+);
+
+
+--
+-- Name: task_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE task_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: task_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE task_id_seq OWNED BY task.id;
+
+
+--
+-- Name: task_resource; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE task_resource (
+    task_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
+-- Name: task_upload; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE task_upload (
+    task_id integer NOT NULL,
+    upload_id integer NOT NULL
+);
+
+
+--
+-- Name: ticket; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ticket (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    start_location_id integer NOT NULL,
+    end_location_id integer NOT NULL,
+    ticket_class_id integer NOT NULL,
+    transport_id integer NOT NULL,
+    start_dt timestamp with time zone NOT NULL,
+    start_additional_info character varying(128),
+    end_dt timestamp with time zone NOT NULL,
+    end_additional_info character varying(128),
+    adults integer NOT NULL,
+    children integer NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: ticket_class; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ticket_class (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: ticket_class_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE ticket_class_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ticket_class_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE ticket_class_id_seq OWNED BY ticket_class.id;
+
+
+--
+-- Name: ticket_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE ticket_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ticket_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE ticket_id_seq OWNED BY ticket.id;
+
+
+--
+-- Name: ticket_order_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ticket_order_item (
+    order_item_id integer NOT NULL,
+    ticket_id integer NOT NULL
+);
+
+
+--
+-- Name: tour; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tour (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    start_location_id integer NOT NULL,
+    start_transport_id integer NOT NULL,
+    end_location_id integer NOT NULL,
+    end_transport_id integer NOT NULL,
+    hotel_id integer,
+    accomodation_id integer,
+    foodcat_id integer,
+    roomcat_id integer,
+    transfer_id integer,
+    adults integer NOT NULL,
+    children integer NOT NULL,
+    start_date date NOT NULL,
+    start_additional_info character varying(128),
+    end_date date NOT NULL,
+    end_additional_info character varying(128),
+    descr character varying(255)
+);
+
+
+--
+-- Name: tour_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE tour_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tour_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE tour_id_seq OWNED BY tour.id;
+
+
+--
+-- Name: tour_order_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tour_order_item (
+    order_item_id integer NOT NULL,
+    tour_id integer NOT NULL
+);
+
+
+--
+-- Name: transfer; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE transfer (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: transfer_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE transfer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transfer_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE transfer_id_seq OWNED BY transfer.id;
+
+
+--
+-- Name: transport; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE transport (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: transport_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE transport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transport_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE transport_id_seq OWNED BY transport.id;
+
+
+--
+-- Name: upload; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE upload (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    path character varying(255) NOT NULL,
+    size numeric(16,2) NOT NULL,
+    media_type character varying(32) NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: upload_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE upload_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: upload_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE upload_id_seq OWNED BY upload.id;
+
+
+--
+-- Name: user; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE "user" (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    username character varying(32) NOT NULL,
+    email character varying(128) NOT NULL,
+    password character varying(128) NOT NULL
+);
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE user_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: vat; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE vat (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    account_id integer NOT NULL,
+    service_id integer NOT NULL,
+    date date NOT NULL,
+    vat numeric(5,2) NOT NULL,
+    calc_method smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: vat_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE vat_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: vat_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE vat_id_seq OWNED BY vat.id;
+
+
+--
+-- Name: visa; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE visa (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    country_id integer NOT NULL,
+    start_date date NOT NULL,
+    end_date date,
+    type smallint NOT NULL,
+    descr character varying(255)
+);
+
+
+--
+-- Name: visa_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE visa_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: visa_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE visa_id_seq OWNED BY visa.id;
+
+
+--
+-- Name: visa_order_item; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
 --
 
 CREATE TABLE visa_order_item (
@@ -2702,15 +5158,6 @@ ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
 
 
 --
--- Name: alembic_version; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
---
-
-CREATE TABLE alembic_version (
-    version_num character varying(32) NOT NULL
-);
-
-
---
 -- Name: appointment; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
@@ -2871,8 +5318,8 @@ CREATE TABLE calculation (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     order_item_id integer,
-    price numeric(16,2) NOT NULL,
-    contract_id integer
+    contract_id integer,
+    price numeric(16,2) NOT NULL
 );
 
 
@@ -9896,451 +12343,894 @@ CREATE TABLE visa_order_item (
 );
 
 
-SET search_path = company, pg_catalog;
+SET search_path = company_en, pg_catalog;
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY account ALTER COLUMN id SET DEFAULT nextval('account_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY account_item ALTER COLUMN id SET DEFAULT nextval('account_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('employees_appointments_h_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY calculation ALTER COLUMN id SET DEFAULT nextval('calculation_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY campaign ALTER COLUMN id SET DEFAULT nextval('campaign_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY cashflow ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY contract ALTER COLUMN id SET DEFAULT nextval('licence_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('currency_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rate_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('employee_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY income ALTER COLUMN id SET DEFAULT nextval('income_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item ALTER COLUMN id SET DEFAULT nextval('invoice_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_item ALTER COLUMN id SET DEFAULT nextval('lead_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer ALTER COLUMN id SET DEFAULT nextval('lead_offer_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('positions_navigations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('positions_permisions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_category ALTER COLUMN id SET DEFAULT nextval('person_category_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('companies_positions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY spassport ALTER COLUMN id SET DEFAULT nextval('spassport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structures_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY subaccount ALTER COLUMN id SET DEFAULT nextval('subaccount_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('touroperator_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket ALTER COLUMN id SET DEFAULT nextval('ticket_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class ALTER COLUMN id SET DEFAULT nextval('ticket_class_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq1'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY transport ALTER COLUMN id SET DEFAULT nextval('transport_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY uni_list ALTER COLUMN id SET DEFAULT nextval('uni_list_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY upload ALTER COLUMN id SET DEFAULT nextval('upload_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: company; Owner: -
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
+
+
+SET search_path = company_ru, pg_catalog;
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY accomodation ALTER COLUMN id SET DEFAULT nextval('accomodation_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY account ALTER COLUMN id SET DEFAULT nextval('account_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY account_item ALTER COLUMN id SET DEFAULT nextval('account_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY advsource ALTER COLUMN id SET DEFAULT nextval('advsource_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY appointment ALTER COLUMN id SET DEFAULT nextval('appointment_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank ALTER COLUMN id SET DEFAULT nextval('bank_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank_detail ALTER COLUMN id SET DEFAULT nextval('bank_detail_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bperson ALTER COLUMN id SET DEFAULT nextval('bperson_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY calculation ALTER COLUMN id SET DEFAULT nextval('calculation_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY campaign ALTER COLUMN id SET DEFAULT nextval('campaign_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY cashflow ALTER COLUMN id SET DEFAULT nextval('cashflow_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY commission ALTER COLUMN id SET DEFAULT nextval('commission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY company ALTER COLUMN id SET DEFAULT nextval('company_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY contact ALTER COLUMN id SET DEFAULT nextval('contact_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY contract ALTER COLUMN id SET DEFAULT nextval('contract_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY country ALTER COLUMN id SET DEFAULT nextval('country_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY crosspayment ALTER COLUMN id SET DEFAULT nextval('crosspayment_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY currency ALTER COLUMN id SET DEFAULT nextval('currency_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY currency_rate ALTER COLUMN id SET DEFAULT nextval('currency_rate_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee ALTER COLUMN id SET DEFAULT nextval('employee_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY foodcat ALTER COLUMN id SET DEFAULT nextval('foodcat_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY hotel ALTER COLUMN id SET DEFAULT nextval('hotel_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY hotelcat ALTER COLUMN id SET DEFAULT nextval('hotelcat_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY income ALTER COLUMN id SET DEFAULT nextval('income_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice ALTER COLUMN id SET DEFAULT nextval('invoice_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice_item ALTER COLUMN id SET DEFAULT nextval('invoice_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead ALTER COLUMN id SET DEFAULT nextval('lead_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_item ALTER COLUMN id SET DEFAULT nextval('lead_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer ALTER COLUMN id SET DEFAULT nextval('lead_offer_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY location ALTER COLUMN id SET DEFAULT nextval('location_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY navigation ALTER COLUMN id SET DEFAULT nextval('navigation_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY note ALTER COLUMN id SET DEFAULT nextval('note_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('order_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY order_item ALTER COLUMN id SET DEFAULT nextval('order_item_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY outgoing ALTER COLUMN id SET DEFAULT nextval('outgoing_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY passport ALTER COLUMN id SET DEFAULT nextval('passport_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY permision ALTER COLUMN id SET DEFAULT nextval('permision_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person ALTER COLUMN id SET DEFAULT nextval('person_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_category ALTER COLUMN id SET DEFAULT nextval('person_category_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "position" ALTER COLUMN id SET DEFAULT nextval('position_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY roomcat ALTER COLUMN id SET DEFAULT nextval('roomcat_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY spassport ALTER COLUMN id SET DEFAULT nextval('spassport_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure ALTER COLUMN id SET DEFAULT nextval('structure_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY subaccount ALTER COLUMN id SET DEFAULT nextval('subaccount_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('supplier_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket ALTER COLUMN id SET DEFAULT nextval('ticket_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket_class ALTER COLUMN id SET DEFAULT nextval('ticket_class_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour ALTER COLUMN id SET DEFAULT nextval('tour_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY transfer ALTER COLUMN id SET DEFAULT nextval('transfer_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY transport ALTER COLUMN id SET DEFAULT nextval('transport_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY upload ALTER COLUMN id SET DEFAULT nextval('upload_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
@@ -11675,10 +14565,10 @@ ALTER TABLE ONLY vat ALTER COLUMN id SET DEFAULT nextval('vat_id_seq'::regclass)
 ALTER TABLE ONLY visa ALTER COLUMN id SET DEFAULT nextval('visa_id_seq'::regclass);
 
 
-SET search_path = company, pg_catalog;
+SET search_path = company_en, pg_catalog;
 
 --
--- Data for Name: accomodation; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY accomodation (id, resource_id, name) FROM stdin;
@@ -11686,14 +14576,14 @@ COPY accomodation (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('accomodation_id_seq', 1, true);
 
 
 --
--- Data for Name: account; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: account; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY account (id, resource_id, currency_id, account_type, name, display_text, descr, status) FROM stdin;
@@ -11701,14 +14591,14 @@ COPY account (id, resource_id, currency_id, account_type, name, display_text, de
 
 
 --
--- Name: account_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: account_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('account_id_seq', 1, true);
 
 
 --
--- Data for Name: account_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: account_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY account_item (id, resource_id, name, parent_id, type, status, descr) FROM stdin;
@@ -11716,14 +14606,14 @@ COPY account_item (id, resource_id, name, parent_id, type, status, descr) FROM s
 
 
 --
--- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('account_item_id_seq', 1, true);
 
 
 --
--- Data for Name: address; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: address; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
@@ -11731,14 +14621,14 @@ COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
 
 
 --
--- Name: address_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('address_id_seq', 1, true);
 
 
 --
--- Data for Name: advsource; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: advsource; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY advsource (id, resource_id, name) FROM stdin;
@@ -11746,14 +14636,14 @@ COPY advsource (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
--- Data for Name: alembic_version; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY alembic_version (version_num) FROM stdin;
@@ -11762,7 +14652,7 @@ COPY alembic_version (version_num) FROM stdin;
 
 
 --
--- Data for Name: appointment; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: appointment; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary, date) FROM stdin;
@@ -11771,7 +14661,7 @@ COPY appointment (id, resource_id, currency_id, employee_id, position_id, salary
 
 
 --
--- Data for Name: bank; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: bank; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY bank (id, resource_id, name) FROM stdin;
@@ -11779,7 +14669,7 @@ COPY bank (id, resource_id, name) FROM stdin;
 
 
 --
--- Data for Name: bank_address; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: bank_address; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY bank_address (bank_id, address_id) FROM stdin;
@@ -11787,7 +14677,7 @@ COPY bank_address (bank_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: bank_detail; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: bank_detail; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
@@ -11795,21 +14685,21 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 
 
 --
--- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_detail_id_seq', 1, true);
 
 
 --
--- Name: bank_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: bank_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('bank_id_seq', 1, true);
 
 
 --
--- Data for Name: bperson; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: bperson; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY bperson (id, resource_id, first_name, last_name, second_name, position_name, descr, status) FROM stdin;
@@ -11817,7 +14707,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 
 
 --
--- Data for Name: bperson_contact; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: bperson_contact; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY bperson_contact (bperson_id, contact_id) FROM stdin;
@@ -11825,14 +14715,14 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 
 
 --
--- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 
 
 --
--- Data for Name: calculation; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: calculation; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin;
@@ -11840,14 +14730,14 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 
 
 --
--- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 
 
 --
--- Data for Name: campaign; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: campaign; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
@@ -11855,14 +14745,14 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 
 
 --
--- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('campaign_id_seq', 1, true);
 
 
 --
--- Data for Name: cashflow; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: cashflow; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, date, vat) FROM stdin;
@@ -11870,7 +14760,7 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, d
 
 
 --
--- Data for Name: commission; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: commission; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY commission (id, resource_id, service_id, percentage, price, currency_id, descr) FROM stdin;
@@ -11878,28 +14768,28 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 
 
 --
--- Name: commission_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('commission_id_seq', 1, true);
 
 
 --
--- Name: companies_counter; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: companies_counter; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('companies_counter', 1065, true);
 
 
 --
--- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: companies_positions_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 
 
 --
--- Data for Name: company; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: company; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
@@ -11908,14 +14798,14 @@ COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
 
 
 --
--- Name: company_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('company_id_seq', 1, true);
 
 
 --
--- Data for Name: company_subaccount; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: company_subaccount; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY company_subaccount (company_id, subaccount_id) FROM stdin;
@@ -11923,7 +14813,7 @@ COPY company_subaccount (company_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: contact; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: contact; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
@@ -11931,14 +14821,14 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 
 
 --
--- Name: contact_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('contact_id_seq', 1, true);
 
 
 --
--- Data for Name: contract; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: contract; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
@@ -11946,7 +14836,7 @@ COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
 
 
 --
--- Data for Name: contract_commission; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: contract_commission; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY contract_commission (contract_id, commission_id) FROM stdin;
@@ -11954,7 +14844,7 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 
 
 --
--- Data for Name: country; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: country; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY country (id, resource_id, iso_code, name) FROM stdin;
@@ -11969,14 +14859,14 @@ COPY country (id, resource_id, iso_code, name) FROM stdin;
 
 
 --
--- Name: country_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('country_id_seq', 11, true);
 
 
 --
--- Data for Name: crosspayment; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
@@ -11984,14 +14874,14 @@ COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
 
 
 --
--- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('crosspayment_id_seq', 1, true);
 
 
 --
--- Data for Name: currency; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: currency; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY currency (id, resource_id, iso_code) FROM stdin;
@@ -12005,14 +14895,14 @@ COPY currency (id, resource_id, iso_code) FROM stdin;
 
 
 --
--- Name: currency_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: currency_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_id_seq', 57, true);
 
 
 --
--- Data for Name: currency_rate; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: currency_rate; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM stdin;
@@ -12020,14 +14910,14 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 
 
 --
--- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('currency_rate_id_seq', 1, true);
 
 
 --
--- Data for Name: employee; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismissal_date, photo_upload_id) FROM stdin;
@@ -12036,7 +14926,7 @@ COPY employee (id, resource_id, first_name, last_name, second_name, itn, dismiss
 
 
 --
--- Data for Name: employee_address; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee_address; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee_address (employee_id, address_id) FROM stdin;
@@ -12044,7 +14934,7 @@ COPY employee_address (employee_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: employee_contact; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee_contact; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee_contact (employee_id, contact_id) FROM stdin;
@@ -12052,14 +14942,14 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 
 
 --
--- Name: employee_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('employee_id_seq', 2, true);
 
 
 --
--- Data for Name: employee_notification; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee_notification (employee_id, notification_id, status) FROM stdin;
@@ -12067,7 +14957,7 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 
 
 --
--- Data for Name: employee_passport; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee_passport (employee_id, passport_id) FROM stdin;
@@ -12075,7 +14965,7 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
@@ -12083,7 +14973,7 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: employee_upload; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: employee_upload; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY employee_upload (employee_id, upload_id) FROM stdin;
@@ -12091,14 +14981,14 @@ COPY employee_upload (employee_id, upload_id) FROM stdin;
 
 
 --
--- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('employees_appointments_h_id_seq', 12, true);
 
 
 --
--- Data for Name: foodcat; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY foodcat (id, resource_id, name) FROM stdin;
@@ -12106,14 +14996,14 @@ COPY foodcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('foodcat_id_seq', 1, true);
 
 
 --
--- Data for Name: hotel; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: hotel; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
@@ -12121,14 +15011,14 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 
 
 --
--- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('hotel_id_seq', 1, true);
 
 
 --
--- Data for Name: hotelcat; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY hotelcat (id, resource_id, name) FROM stdin;
@@ -12136,14 +15026,14 @@ COPY hotelcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('hotelcat_id_seq', 1, true);
 
 
 --
--- Data for Name: income; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: income; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FROM stdin;
@@ -12151,7 +15041,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FRO
 
 
 --
--- Data for Name: income_cashflow; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: income_cashflow; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY income_cashflow (income_id, cashflow_id) FROM stdin;
@@ -12159,14 +15049,14 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: income_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: income_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('income_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: invoice; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) FROM stdin;
@@ -12174,14 +15064,14 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 
 
 --
--- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_id_seq', 1, true);
 
 
 --
--- Data for Name: invoice_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: invoice_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) FROM stdin;
@@ -12189,14 +15079,14 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 
 
 --
--- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('invoice_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: lead; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr) FROM stdin;
@@ -12204,14 +15094,14 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 
 
 --
--- Name: lead_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: lead_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, price_to, descr) FROM stdin;
@@ -12219,14 +15109,14 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 
 
 --
--- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_item_id_seq', 1, true);
 
 
 --
--- Data for Name: lead_offer; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id, price, status, descr) FROM stdin;
@@ -12234,21 +15124,21 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 
 
 --
--- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('lead_offer_id_seq', 1, true);
 
 
 --
--- Name: licence_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: licence_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('licence_id_seq', 59, true);
 
 
 --
--- Data for Name: location; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: location; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY location (id, resource_id, name, region_id) FROM stdin;
@@ -12256,14 +15146,14 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 
 
 --
--- Name: location_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('location_id_seq', 1, true);
 
 
 --
--- Data for Name: navigation; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: navigation; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, resource_id, separator_before, action) FROM stdin;
@@ -12327,7 +15217,7 @@ COPY navigation (id, position_id, parent_id, name, url, icon_cls, sort_order, re
 
 
 --
--- Data for Name: note; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: note; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY note (id, resource_id, title, descr) FROM stdin;
@@ -12335,14 +15225,14 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 
 
 --
--- Name: note_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: note_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('note_id_seq', 1, true);
 
 
 --
--- Data for Name: note_resource; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: note_resource; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY note_resource (note_id, resource_id) FROM stdin;
@@ -12350,7 +15240,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: note_upload; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: note_upload; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY note_upload (note_id, upload_id) FROM stdin;
@@ -12358,7 +15248,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: notification; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: notification; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
@@ -12366,14 +15256,14 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 
 
 --
--- Name: notification_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('notification_id_seq', 1, true);
 
 
 --
--- Data for Name: notification_resource; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
@@ -12381,7 +15271,7 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: order; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead_id, status) FROM stdin;
@@ -12389,14 +15279,14 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 
 
 --
--- Name: order_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('order_id_seq', 1, true);
 
 
 --
--- Data for Name: order_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: order_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY order_item (id, resource_id, order_id, service_id, currency_id, price, status, status_date, status_info, supplier_id, discount_sum, discount_percent) FROM stdin;
@@ -12404,14 +15294,14 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 
 
 --
--- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('order_item_id_seq', 1, true);
 
 
 --
--- Data for Name: outgoing; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr) FROM stdin;
@@ -12419,7 +15309,7 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr
 
 
 --
--- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
@@ -12427,14 +15317,14 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 
 
 --
--- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('outgoing_id_seq', 1, true);
 
 
 --
--- Data for Name: passport; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: passport; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY passport (id, country_id, num, descr, resource_id, end_date, passport_type) FROM stdin;
@@ -12442,14 +15332,14 @@ COPY passport (id, country_id, num, descr, resource_id, end_date, passport_type)
 
 
 --
--- Name: passport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: passport_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('passport_id_seq', 1, true);
 
 
 --
--- Data for Name: passport_upload; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: passport_upload; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY passport_upload (passport_id, upload_id) FROM stdin;
@@ -12457,7 +15347,7 @@ COPY passport_upload (passport_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: permision; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: permision; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY permision (id, resource_type_id, position_id, permisions, structure_id, scope_type) FROM stdin;
@@ -12528,7 +15418,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 
 
 --
--- Data for Name: person; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person (id, resource_id, first_name, last_name, second_name, birthday, gender, descr, person_category_id, email_subscription, sms_subscription) FROM stdin;
@@ -12536,7 +15426,7 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 
 
 --
--- Data for Name: person_address; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person_address; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person_address (person_id, address_id) FROM stdin;
@@ -12544,7 +15434,7 @@ COPY person_address (person_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: person_category; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person_category; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person_category (id, resource_id, name) FROM stdin;
@@ -12552,14 +15442,14 @@ COPY person_category (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('person_category_id_seq', 1, true);
 
 
 --
--- Data for Name: person_contact; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person_contact (person_id, contact_id) FROM stdin;
@@ -12567,14 +15457,14 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 
 
 --
--- Name: person_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('person_id_seq', 1, true);
 
 
 --
--- Data for Name: person_order_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person_order_item (order_item_id, person_id) FROM stdin;
@@ -12582,7 +15472,7 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 
 
 --
--- Data for Name: person_passport; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person_passport; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person_passport (person_id, passport_id) FROM stdin;
@@ -12590,7 +15480,7 @@ COPY person_passport (person_id, passport_id) FROM stdin;
 
 
 --
--- Data for Name: person_subaccount; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY person_subaccount (person_id, subaccount_id) FROM stdin;
@@ -12598,7 +15488,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: position; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: position; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY "position" (id, resource_id, structure_id, name) FROM stdin;
@@ -12607,21 +15497,21 @@ COPY "position" (id, resource_id, structure_id, name) FROM stdin;
 
 
 --
--- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: positions_navigations_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('positions_navigations_id_seq', 236, true);
 
 
 --
--- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('positions_permisions_id_seq', 296, true);
 
 
 --
--- Data for Name: region; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: region; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY region (id, resource_id, country_id, name) FROM stdin;
@@ -12629,14 +15519,14 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('region_id_seq', 1, true);
 
 
 --
--- Data for Name: resource; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: resource; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
@@ -13614,14 +16504,14 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 
 
 --
--- Name: resource_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: resource_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2790, true);
 
 
 --
--- Data for Name: resource_log; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
@@ -13709,14 +16599,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 
 
 --
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_log_id_seq', 7752, true);
 
 
 --
--- Data for Name: resource_type; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY resource_type (id, resource_id, name, humanize, resource_name, module, descr, settings, status) FROM stdin;
@@ -13787,14 +16677,14 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 
 
 --
--- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('resource_type_id_seq', 158, true);
 
 
 --
--- Data for Name: roomcat; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY roomcat (id, resource_id, name) FROM stdin;
@@ -13802,14 +16692,14 @@ COPY roomcat (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('roomcat_id_seq', 1, true);
 
 
 --
--- Data for Name: service; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: service; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY service (id, resource_id, name, descr, display_text, resource_type_id) FROM stdin;
@@ -13821,14 +16711,14 @@ COPY service (id, resource_id, name, descr, display_text, resource_type_id) FROM
 
 
 --
--- Name: service_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: service_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('service_id_seq', 7, true);
 
 
 --
--- Data for Name: spassport; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: spassport; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
@@ -13836,14 +16726,14 @@ COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_da
 
 
 --
--- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('spassport_id_seq', 1, true);
 
 
 --
--- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
@@ -13851,7 +16741,7 @@ COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
 
 
 --
--- Data for Name: structure; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: structure; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
@@ -13860,7 +16750,7 @@ COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
 
 
 --
--- Data for Name: structure_address; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: structure_address; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY structure_address (structure_id, address_id) FROM stdin;
@@ -13868,7 +16758,7 @@ COPY structure_address (structure_id, address_id) FROM stdin;
 
 
 --
--- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
@@ -13876,7 +16766,7 @@ COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: structure_contact; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: structure_contact; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY structure_contact (structure_id, contact_id) FROM stdin;
@@ -13884,14 +16774,14 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 
 
 --
--- Name: structures_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: structures_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('structures_id_seq', 2, false);
 
 
 --
--- Data for Name: subaccount; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: subaccount; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
@@ -13899,14 +16789,14 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 
 
 --
--- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('subaccount_id_seq', 1, true);
 
 
 --
--- Data for Name: supplier; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: supplier; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdin;
@@ -13914,7 +16804,7 @@ COPY supplier (id, resource_id, name, status, descr, supplier_type_id) FROM stdi
 
 
 --
--- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
@@ -13922,7 +16812,7 @@ COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
@@ -13930,7 +16820,7 @@ COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_contract; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: supplier_contract; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY supplier_contract (supplier_id, contract_id) FROM stdin;
@@ -13938,7 +16828,7 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
@@ -13946,7 +16836,7 @@ COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
 
 
 --
--- Data for Name: supplier_type; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: supplier_type; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY supplier_type (id, resource_id, name, descr) FROM stdin;
@@ -13954,14 +16844,14 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 
 
 --
--- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
 
 
 --
--- Data for Name: task; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: task; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminder) FROM stdin;
@@ -13969,14 +16859,14 @@ COPY task (id, resource_id, employee_id, title, deadline, descr, status, reminde
 
 
 --
--- Name: task_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('task_id_seq', 1, true);
 
 
 --
--- Data for Name: task_resource; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: task_resource; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
@@ -13984,7 +16874,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 
 
 --
--- Data for Name: task_upload; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: task_upload; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY task_upload (task_id, upload_id) FROM stdin;
@@ -13992,7 +16882,7 @@ COPY task_upload (task_id, upload_id) FROM stdin;
 
 
 --
--- Data for Name: ticket; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: ticket; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_id, transport_id, start_dt, start_additional_info, end_dt, end_additional_info, adults, children, descr) FROM stdin;
@@ -14000,7 +16890,7 @@ COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_i
 
 
 --
--- Data for Name: ticket_class; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: ticket_class; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY ticket_class (id, resource_id, name) FROM stdin;
@@ -14008,21 +16898,21 @@ COPY ticket_class (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_class_id_seq', 1, true);
 
 
 --
--- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('ticket_id_seq', 1, true);
 
 
 --
--- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
@@ -14030,7 +16920,7 @@ COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
 
 
 --
--- Data for Name: tour; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: tour; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, adults, children, start_date, end_date, descr, end_transport_id, start_transport_id, transfer_id, end_additional_info, start_additional_info) FROM stdin;
@@ -14038,14 +16928,14 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 
 
 --
--- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('tour_id_seq1', 28, true);
 
 
 --
--- Data for Name: tour_order_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: tour_order_item; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY tour_order_item (order_item_id, tour_id) FROM stdin;
@@ -14053,14 +16943,14 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 
 
 --
--- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('touroperator_id_seq', 102, true);
 
 
 --
--- Data for Name: transfer; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: transfer; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY transfer (id, resource_id, name) FROM stdin;
@@ -14068,21 +16958,21 @@ COPY transfer (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq', 1, true);
 
 
 --
--- Name: transfer_id_seq1; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: transfer_id_seq1; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('transfer_id_seq1', 3, true);
 
 
 --
--- Data for Name: transport; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: transport; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY transport (id, resource_id, name) FROM stdin;
@@ -14090,14 +16980,14 @@ COPY transport (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: transport_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: transport_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('transport_id_seq', 1, true);
 
 
 --
--- Data for Name: uni_list; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: uni_list; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY uni_list (id, resource_id, name) FROM stdin;
@@ -14105,14 +16995,14 @@ COPY uni_list (id, resource_id, name) FROM stdin;
 
 
 --
--- Name: uni_list_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: uni_list_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('uni_list_id_seq', 1, false);
 
 
 --
--- Data for Name: upload; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: upload; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
@@ -14121,14 +17011,14 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 
 
 --
--- Name: upload_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: upload_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('upload_id_seq', 7, true);
 
 
 --
--- Data for Name: user; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: user; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
@@ -14137,14 +17027,14 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 
 
 --
--- Name: user_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('user_id_seq', 2, true);
 
 
 --
--- Data for Name: vat; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: vat; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id) FROM stdin;
@@ -14152,14 +17042,14 @@ COPY vat (id, resource_id, service_id, date, vat, calc_method, descr, account_id
 
 
 --
--- Name: vat_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: vat_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('vat_id_seq', 1, true);
 
 
 --
--- Data for Name: visa; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: visa; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
 COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM stdin;
@@ -14167,14 +17057,2629 @@ COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM 
 
 
 --
--- Name: visa_id_seq; Type: SEQUENCE SET; Schema: company; Owner: -
+-- Name: visa_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
 --
 
 SELECT pg_catalog.setval('visa_id_seq', 1, true);
 
 
 --
--- Data for Name: visa_order_item; Type: TABLE DATA; Schema: company; Owner: -
+-- Data for Name: visa_order_item; Type: TABLE DATA; Schema: company_en; Owner: -
+--
+
+COPY visa_order_item (order_item_id, visa_id) FROM stdin;
+\.
+
+
+SET search_path = company_ru, pg_catalog;
+
+--
+-- Data for Name: accomodation; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY accomodation (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: accomodation_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('accomodation_id_seq', 1, true);
+
+
+--
+-- Data for Name: account; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY account (id, resource_id, currency_id, account_type, name, display_text, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: account_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('account_id_seq', 1, true);
+
+
+--
+-- Data for Name: account_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY account_item (id, resource_id, parent_id, name, type, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: account_item_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('account_item_id_seq', 1, true);
+
+
+--
+-- Data for Name: address; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY address (id, resource_id, location_id, zip_code, address) FROM stdin;
+\.
+
+
+--
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('address_id_seq', 1, true);
+
+
+--
+-- Data for Name: advsource; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY advsource (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('advsource_id_seq', 1, true);
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY alembic_version (version_num) FROM stdin;
+1502d7ef7d40
+\.
+
+
+--
+-- Data for Name: appointment; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY appointment (id, resource_id, date, employee_id, position_id, salary, currency_id) FROM stdin;
+1	789	2014-02-02	2	4	4000.00	54
+\.
+
+
+--
+-- Name: appointment_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('appointment_id_seq', 1, true);
+
+
+--
+-- Data for Name: bank; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY bank (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: bank_address; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY bank_address (bank_id, address_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: bank_detail; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, swift_code) FROM stdin;
+\.
+
+
+--
+-- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('bank_detail_id_seq', 1, true);
+
+
+--
+-- Name: bank_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('bank_id_seq', 1, true);
+
+
+--
+-- Data for Name: bperson; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY bperson (id, resource_id, first_name, last_name, second_name, position_name, status, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: bperson_contact; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY bperson_contact (bperson_id, contact_id) FROM stdin;
+\.
+
+
+--
+-- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('bperson_id_seq', 1, true);
+
+
+--
+-- Data for Name: calculation; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY calculation (id, resource_id, order_item_id, price, contract_id) FROM stdin;
+\.
+
+
+--
+-- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('calculation_id_seq', 1, true);
+
+
+--
+-- Data for Name: campaign; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
+\.
+
+
+--
+-- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('campaign_id_seq', 1, true);
+
+
+--
+-- Data for Name: cashflow; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, vat, date) FROM stdin;
+\.
+
+
+--
+-- Name: cashflow_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('cashflow_id_seq', 1, true);
+
+
+--
+-- Data for Name: commission; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY commission (id, resource_id, service_id, percentage, price, currency_id, descr) FROM stdin;
+\.
+
+
+--
+-- Name: commission_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('commission_id_seq', 1, true);
+
+
+--
+-- Data for Name: company; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
+1	1970	56	Туристическая компания	email@email.com	{"locale": "ru", "timezone": "Africa/Abidjan"}
+\.
+
+
+--
+-- Name: company_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('company_id_seq', 1, true);
+
+
+--
+-- Data for Name: company_subaccount; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY company_subaccount (company_id, subaccount_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: contact; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY contact (id, resource_id, contact_type, contact, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: contact_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('contact_id_seq', 1, true);
+
+
+--
+-- Data for Name: contract; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY contract (id, resource_id, num, date, status, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: contract_commission; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY contract_commission (contract_id, commission_id) FROM stdin;
+\.
+
+
+--
+-- Name: contract_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('contract_id_seq', 1, true);
+
+
+--
+-- Data for Name: country; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY country (id, resource_id, iso_code, name) FROM stdin;
+3	878	UA	Ukraine
+4	880	EG	Egypt
+5	881	TR	Turkey
+6	882	GB	United Kingdom
+7	883	US	United States
+9	1095	RU	Russian Federation
+11	1100	DE	Germany
+\.
+
+
+--
+-- Name: country_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('country_id_seq', 11, true);
+
+
+--
+-- Data for Name: crosspayment; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
+\.
+
+
+--
+-- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('crosspayment_id_seq', 1, true);
+
+
+--
+-- Data for Name: currency; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY currency (id, resource_id, iso_code) FROM stdin;
+44	849	RUB
+50	1060	KZT
+52	1168	BYR
+54	1240	EUR
+56	1310	UAH
+57	1311	USD
+\.
+
+
+--
+-- Name: currency_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('currency_id_seq', 57, true);
+
+
+--
+-- Data for Name: currency_rate; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY currency_rate (id, resource_id, currency_id, supplier_id, date, rate) FROM stdin;
+\.
+
+
+--
+-- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('currency_rate_id_seq', 1, true);
+
+
+--
+-- Data for Name: employee; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee (id, resource_id, photo_upload_id, first_name, last_name, second_name, itn, dismissal_date) FROM stdin;
+2	784	7	Василий	Пупкин	\N	\N	\N
+\.
+
+
+--
+-- Data for Name: employee_address; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_address (employee_id, address_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: employee_contact; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_contact (employee_id, contact_id) FROM stdin;
+\.
+
+
+--
+-- Name: employee_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('employee_id_seq', 2, true);
+
+
+--
+-- Data for Name: employee_notification; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_notification (employee_id, notification_id, status) FROM stdin;
+\.
+
+
+--
+-- Data for Name: employee_passport; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_passport (employee_id, passport_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: employee_subaccount; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: employee_upload; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_upload (employee_id, upload_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: foodcat; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY foodcat (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: foodcat_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('foodcat_id_seq', 1, true);
+
+
+--
+-- Data for Name: hotel; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY hotel (id, resource_id, hotelcat_id, location_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('hotel_id_seq', 1, true);
+
+
+--
+-- Data for Name: hotelcat; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY hotelcat (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: hotelcat_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('hotelcat_id_seq', 1, true);
+
+
+--
+-- Data for Name: income; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY income (id, resource_id, invoice_id, account_item_id, sum, date, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: income_cashflow; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY income_cashflow (income_id, cashflow_id) FROM stdin;
+\.
+
+
+--
+-- Name: income_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('income_id_seq', 1, true);
+
+
+--
+-- Data for Name: invoice; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY invoice (id, date, active_until, resource_id, order_id, account_id, descr) FROM stdin;
+\.
+
+
+--
+-- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('invoice_id_seq', 1, true);
+
+
+--
+-- Data for Name: invoice_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY invoice_item (id, invoice_id, order_item_id, price, vat, discount, descr) FROM stdin;
+\.
+
+
+--
+-- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('invoice_item_id_seq', 1, true);
+
+
+--
+-- Data for Name: lead; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: lead_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('lead_id_seq', 1, true);
+
+
+--
+-- Data for Name: lead_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, price_to, descr) FROM stdin;
+\.
+
+
+--
+-- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('lead_item_id_seq', 1, true);
+
+
+--
+-- Data for Name: lead_offer; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id, price, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('lead_offer_id_seq', 1, true);
+
+
+--
+-- Data for Name: location; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY location (id, resource_id, region_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: location_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('location_id_seq', 1, true);
+
+
+--
+-- Data for Name: navigation; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY navigation (id, resource_id, position_id, parent_id, name, url, action, icon_cls, separator_before, sort_order) FROM stdin;
+57	1436	4	156	Счета	/accounts	tab_open	\N	f	1
+107	1777	4	\N	Домашняя	/	\N	fa fa-home	f	1
+150	1798	4	156	Субсчета	/subaccounts	tab_open	\N	f	2
+21	864	4	\N	Клиенты	/	tab -open	fa fa-briefcase	f	3
+55	1425	4	156	Статьи учета	/accounts_items	tab_open	\N	f	3
+174	2514	4	156	Настройки НДС	/vats	tab_open	\N	t	5
+8	778	4	\N	Система	/	tab_open	fa fa-cog	f	11
+166	2048	4	32	Лиды	/leads	tab_open	\N	f	2
+168	2101	4	32	Заявки	/orders	tab_open	\N	f	4
+51	1368	4	32	Инвойсы	/invoices	tab_open	\N	t	5
+236	2741	4	26	Кампании	/campaigns	tab_open	\N	t	3
+45	1212	4	53	Банки	/banks	tab_open	\N	f	6
+153	1896	4	152	Обороты	/turnovers	tab_open	\N	f	2
+165	1975	4	8	Настройки компании	/companies/edit	dialog_open	\N	t	4
+60	1550	4	23	Поставщики	/suppliers	tab_open	\N	f	1
+172	2222	4	23	Договора	/contracts	tab_open	\N	f	2
+171	2219	4	23	Типы поставщиков	/suppliers_types	tab_open	\N	f	3
+36	1008	4	23	Бизнес контакты	/bpersons	tab_open	\N	f	4
+169	2128	4	23	Типы трансферов	/transfers	tab_open	\N	t	5
+170	2136	4	23	Транспорт	/transports	tab_open	\N	f	6
+173	2245	4	23	Класс билетов	/tickets_classes	tab_open	\N	f	7
+175	2552	4	23	Категория клиентов	/persons_categories	tab_open	\N	f	8
+30	955	4	159	Тип размещения	/accomodations	tab_open	\N	f	10
+19	838	4	18	Структура	/structures	\N	\N	f	1
+28	910	4	159	Категории отелей	/hotelcats	tab_open	\N	f	6
+32	998	4	\N	Продажи	/	tab_open	fa fa-legal	f	2
+26	900	4	\N	Маркетинг	/	tab_open	fa fa-bullhorn	f	4
+18	837	4	\N	Компания	/	tab_open	fa fa-building-o	f	6
+23	873	4	\N	Справочники	/	tab_open	fa fa-book	f	8
+152	1895	4	\N	Отчеты	/	tab_open	fa fa-pie-chart	f	9
+22	866	4	21	Физ. лица	/persons	tab_open	\N	f	1
+27	902	4	26	Источники рекламы	/advsources	tab_open	\N	f	1
+13	790	4	10	Сотрудники	/employees	tab_open	\N	f	1
+14	791	4	10	Назначения сотрудников	/appointments	tab_open	\N	f	2
+20	863	4	18	Должности	/positions	tab_open	\N	f	2
+50	1312	4	53	Сервисы	/services	tab_open	\N	f	6
+157	1906	4	53	Валюты		tab_open	\N	t	7
+17	802	4	157	Список валют	/currencies	tab_open	\N	f	7
+54	1395	4	157	Курсы валют	/currencies_rates	tab_open	\N	f	8
+56	1434	4	155	Входящие платежи	/incomes	tab_open	\N	f	9
+156	1905	4	53	Биллинг	/	tab_open	\N	f	10
+155	1904	4	53	Платежи	/	tab_open	\N	f	12
+61	1571	4	155	Исходящие платежи	/outgoings	tab_open	\N	f	10
+151	1885	4	155	Кросс платежи	/crosspayments	tab_open	\N	f	11
+9	779	4	8	Типы ресурсов	/resources_types	tab_open	\N	f	1
+15	792	4	8	Пользователи	/users	tab_open	\N	f	3
+53	1394	4	\N	Финансы	/	tab_open	fa fa-credit-card	f	7
+10	780	4	\N	HR	/	tab_open	fa fa-group	f	5
+159	1908	4	23	Отели	/	tab_open	\N	t	9
+158	1907	4	23	География	/	tab_open	\N	f	10
+42	1080	4	159	Справочник отелей	/hotels	tab_open	\N	f	5
+29	911	4	159	Категории номеров	/roomcats	tab_open	\N	f	7
+31	956	4	159	Категории питания	/foodcats	tab_open	\N	f	9
+25	879	4	158	Регионы	/regions	tab_open	\N	f	3
+43	1089	4	158	Населенные пункты	/locations	tab_open	\N	f	3
+24	874	4	158	Страны	/countries	tab_open	\N	f	4
+\.
+
+
+--
+-- Name: navigation_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('navigation_id_seq', 236, true);
+
+
+--
+-- Data for Name: note; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY note (id, resource_id, title, descr) FROM stdin;
+\.
+
+
+--
+-- Name: note_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('note_id_seq', 1, true);
+
+
+--
+-- Data for Name: note_resource; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY note_resource (note_id, resource_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: note_upload; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY note_upload (note_id, upload_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: notification; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
+\.
+
+
+--
+-- Name: notification_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('notification_id_seq', 1, true);
+
+
+--
+-- Data for Name: notification_resource; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY notification_resource (notification_id, resource_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: order; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY "order" (id, deal_date, resource_id, customer_id, lead_id, advsource_id, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: order_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('order_id_seq', 1, true);
+
+
+--
+-- Data for Name: order_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY order_item (id, resource_id, order_id, service_id, currency_id, supplier_id, price, discount_sum, discount_percent, status, status_date, status_info) FROM stdin;
+\.
+
+
+--
+-- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('order_item_id_seq', 1, true);
+
+
+--
+-- Data for Name: outgoing; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY outgoing (id, date, resource_id, account_item_id, subaccount_id, sum, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: outgoing_cashflow; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
+\.
+
+
+--
+-- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('outgoing_id_seq', 1, true);
+
+
+--
+-- Data for Name: passport; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY passport (id, resource_id, country_id, passport_type, num, end_date, descr) FROM stdin;
+\.
+
+
+--
+-- Name: passport_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('passport_id_seq', 1, true);
+
+
+--
+-- Data for Name: passport_upload; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY passport_upload (passport_id, upload_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: permision; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY permision (id, resource_type_id, position_id, permisions, scope_type, structure_id) FROM stdin;
+35	65	4	{view,add,edit,delete}	all	\N
+34	61	4	{view,add,edit,delete}	all	\N
+32	59	4	{view,add,edit,delete}	all	\N
+30	55	4	{view,add,edit,delete}	all	\N
+38	41	4	{view,add,edit,delete}	all	\N
+37	67	4	{view,add,edit,delete}	all	\N
+39	69	4	{view,add,edit,delete}	all	\N
+40	39	4	{view,add,edit,delete}	all	\N
+41	70	4	{view,add,edit,delete}	all	\N
+42	71	4	{view,add,edit,delete}	all	\N
+43	72	4	{view,add,edit,delete}	all	\N
+44	73	4	{view,add,edit,delete}	all	\N
+45	74	4	{view,add,edit,delete}	all	\N
+46	75	4	{view,add,edit,delete}	all	\N
+48	78	4	{view,add,edit,delete}	all	\N
+49	79	4	{view,add,edit,delete}	all	\N
+26	47	4	{view,add,edit,delete}	all	\N
+294	156	4	{view,add,edit,delete,settings}	all	\N
+55	83	4	{view,add,edit,delete}	all	\N
+56	84	4	{view,add,edit,delete}	all	\N
+58	86	4	{view,add,edit,delete}	all	\N
+59	87	4	{view,add,edit,delete}	all	\N
+61	89	4	{view,add,edit,delete}	all	\N
+62	90	4	{view,add,edit,delete}	all	\N
+63	91	4	{view,add,edit,delete}	all	\N
+21	1	4	{view}	all	\N
+65	93	4	{view,add,edit,delete}	all	\N
+70	101	4	{view,add,edit,delete}	all	\N
+22	2	4	{view,add,edit,delete}	all	\N
+71	102	4	{view,add,edit,delete}	all	\N
+73	104	4	{view,add,edit,delete}	all	\N
+74	105	4	{view,add,edit,delete}	all	\N
+76	107	4	{view,add,edit,delete}	all	\N
+79	110	4	{view,add,edit,delete}	all	\N
+80	111	4	{view,add,edit,delete}	all	\N
+128	117	4	{view,add,edit,delete}	all	\N
+129	118	4	{view,add,edit,delete}	all	\N
+130	119	4	{autoload,view,edit,delete}	all	\N
+131	120	4	{view,add,edit,delete}	all	\N
+132	121	4	{view}	all	\N
+24	12	4	{view,add,edit,delete,settings}	all	\N
+134	123	4	{view,close}	all	\N
+137	126	4	{view,edit}	all	\N
+158	146	4	{view,add,edit,delete}	all	\N
+141	130	4	{view,add,edit,delete,order}	all	\N
+157	145	4	{view,add,edit,delete}	all	\N
+155	144	4	{view,add,edit,delete}	all	\N
+154	143	4	{view,add,edit,delete}	all	\N
+153	142	4	{view,add,edit,delete}	all	\N
+152	141	4	{view,add,edit,delete}	all	\N
+151	140	4	{view,add,edit,delete}	all	\N
+150	139	4	{view,add,edit,delete}	all	\N
+149	138	4	{view,add,edit,delete}	all	\N
+148	137	4	{view,add,edit,delete}	all	\N
+146	135	4	{view,add,edit,delete}	all	\N
+145	134	4	{view,add,edit,delete,calculation,invoice,contract}	all	\N
+75	106	4	{view,add,edit,delete}	all	\N
+72	103	4	{view,add,edit,delete,settings}	all	\N
+160	148	4	{view,add,edit,delete}	all	\N
+161	149	4	{view,add,edit,delete}	all	\N
+163	151	4	{view,add,edit,delete}	all	\N
+164	152	4	{view,settings}	all	\N
+165	153	4	{view,settings}	all	\N
+\.
+
+
+--
+-- Name: permision_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('permision_id_seq', 295, true);
+
+
+--
+-- Data for Name: person; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person (id, resource_id, person_category_id, first_name, last_name, second_name, birthday, gender, email_subscription, sms_subscription, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: person_address; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person_address (person_id, address_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: person_category; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person_category (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: person_category_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('person_category_id_seq', 1, true);
+
+
+--
+-- Data for Name: person_contact; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person_contact (person_id, contact_id) FROM stdin;
+\.
+
+
+--
+-- Name: person_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('person_id_seq', 1, true);
+
+
+--
+-- Data for Name: person_order_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person_order_item (order_item_id, person_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: person_passport; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person_passport (person_id, passport_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: person_subaccount; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY person_subaccount (person_id, subaccount_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: position; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY "position" (id, resource_id, structure_id, name) FROM stdin;
+4	772	1	Главный разработчик
+\.
+
+
+--
+-- Name: position_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('position_id_seq', 4, true);
+
+
+--
+-- Data for Name: region; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY region (id, resource_id, country_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: region_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('region_id_seq', 1, true);
+
+
+--
+-- Data for Name: resource; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
+1080	65	1	\N
+1081	12	1	\N
+863	65	1	\N
+875	70	1	\N
+885	47	1	\N
+1100	70	1	\N
+895	39	1	\N
+1101	39	1	\N
+1268	12	1	f
+998	65	1	\N
+1284	69	1	f
+728	55	1	\N
+784	47	1	\N
+1306	90	1	f
+2788	12	1	f
+1312	65	1	f
+786	47	1	\N
+802	65	1	\N
+769	12	1	\N
+30	12	1	\N
+31	12	1	\N
+32	12	1	\N
+33	12	1	\N
+34	12	1	\N
+35	12	1	\N
+36	12	1	\N
+837	65	1	\N
+1336	39	1	f
+1165	39	1	\N
+1347	39	1	f
+1355	39	1	f
+1204	87	1	\N
+1207	12	1	\N
+1218	39	1	\N
+1365	39	1	f
+1240	41	1	f
+1398	104	1	f
+1257	87	1	f
+1258	87	1	f
+1413	102	1	f
+849	41	1	\N
+851	41	1	\N
+852	41	1	\N
+1285	87	1	f
+864	65	1	\N
+876	41	1	\N
+1286	89	1	f
+896	39	1	\N
+897	39	1	\N
+772	59	1	\N
+788	12	1	\N
+706	12	1	\N
+771	55	1	\N
+838	65	1	\N
+734	55	1	\N
+898	39	1	\N
+899	39	1	\N
+900	65	1	\N
+901	12	1	\N
+902	65	1	\N
+1304	87	1	f
+1011	12	1	\N
+1307	90	1	f
+1313	12	1	f
+1368	65	1	f
+1414	90	1	f
+1185	39	1	\N
+1198	12	1	\N
+1205	89	1	\N
+1221	12	1	\N
+1227	93	1	\N
+1241	39	1	f
+1259	87	1	f
+1260	87	1	f
+853	41	1	\N
+865	12	1	\N
+866	65	1	\N
+789	67	1	\N
+1288	90	1	f
+887	69	1	\N
+1290	39	1	f
+773	12	1	\N
+1308	90	1	f
+1314	102	1	f
+1372	69	1	f
+1375	69	1	f
+1382	90	1	f
+1168	41	1	\N
+1040	47	1	\N
+1041	47	1	\N
+1042	47	1	\N
+1043	47	1	\N
+1044	47	1	\N
+1045	47	1	\N
+1046	47	1	\N
+1388	90	1	f
+1391	90	1	f
+1067	78	1	\N
+1400	104	1	f
+1401	104	1	f
+1199	89	1	\N
+1206	89	1	\N
+1209	90	1	\N
+1402	104	1	f
+726	55	1	\N
+1416	39	1	f
+1418	90	1	f
+1251	55	1	f
+1261	89	1	f
+854	2	1	\N
+855	2	1	\N
+1278	39	1	f
+878	70	1	\N
+1293	69	1	f
+893	47	1	\N
+894	2	1	\N
+908	12	1	\N
+909	12	1	\N
+910	65	1	\N
+911	65	1	\N
+743	55	1	\N
+790	65	1	\N
+1294	69	1	f
+763	55	1	\N
+723	12	1	\N
+791	65	1	\N
+775	12	1	\N
+37	12	1	\N
+38	12	1	\N
+39	12	1	\N
+40	12	1	\N
+43	12	1	\N
+10	12	1	\N
+792	65	1	\N
+12	12	1	\N
+14	12	1	\N
+44	12	1	\N
+16	12	1	\N
+45	12	1	\N
+1309	90	1	f
+2	2	1	\N
+3	2	1	\N
+84	2	1	\N
+83	2	1	\N
+940	73	1	\N
+941	73	1	\N
+942	73	1	\N
+943	73	1	\N
+944	73	1	\N
+945	73	1	\N
+946	73	1	\N
+947	73	1	\N
+948	73	1	\N
+949	73	1	\N
+950	73	1	\N
+1316	102	1	f
+952	73	1	\N
+939	73	1	\N
+938	73	1	\N
+937	73	1	\N
+936	73	1	\N
+935	73	1	\N
+1370	90	1	f
+933	73	1	\N
+932	73	1	\N
+931	73	1	\N
+930	73	1	\N
+929	73	1	\N
+928	73	1	\N
+927	73	1	\N
+926	73	1	\N
+925	73	1	\N
+924	73	1	\N
+923	73	1	\N
+922	73	1	\N
+921	73	1	\N
+1371	87	1	f
+919	72	1	\N
+918	72	1	\N
+917	72	1	\N
+916	72	1	\N
+915	72	1	\N
+914	72	1	\N
+913	72	1	\N
+912	72	1	\N
+1373	87	1	f
+1376	89	1	f
+1378	78	1	f
+1060	41	1	\N
+1068	12	1	\N
+1390	69	1	f
+1403	104	1	f
+1170	39	1	\N
+1179	39	1	\N
+1189	12	1	\N
+1190	12	1	\N
+1200	89	1	\N
+1210	90	1	\N
+1225	12	1	\N
+1230	93	1	\N
+1243	87	1	f
+1253	65	1	f
+1263	87	1	f
+856	2	1	\N
+870	69	1	\N
+1088	12	1	\N
+879	65	1	\N
+1089	65	1	\N
+953	12	1	\N
+954	12	1	\N
+764	12	1	\N
+955	65	1	\N
+956	65	1	\N
+957	74	1	\N
+958	74	1	\N
+959	74	1	\N
+960	74	1	\N
+961	74	1	\N
+962	74	1	\N
+963	74	1	\N
+964	74	1	\N
+965	74	1	\N
+966	74	1	\N
+967	74	1	\N
+968	74	1	\N
+969	74	1	\N
+970	74	1	\N
+971	74	1	\N
+1310	41	1	f
+973	75	1	\N
+1317	12	1	f
+975	75	1	\N
+976	75	1	\N
+977	75	1	\N
+978	75	1	\N
+274	12	1	\N
+283	12	1	\N
+1318	102	1	f
+778	65	1	\N
+779	65	1	\N
+780	65	1	\N
+286	41	1	\N
+287	41	1	\N
+288	41	1	\N
+289	41	1	\N
+290	41	1	\N
+291	41	1	\N
+292	41	1	\N
+306	41	1	\N
+277	39	1	\N
+279	39	1	\N
+280	39	1	\N
+281	39	1	\N
+278	39	1	\N
+282	39	1	\N
+979	75	1	\N
+980	75	1	\N
+981	75	1	\N
+982	75	1	\N
+983	75	1	\N
+984	75	1	\N
+985	75	1	\N
+987	75	1	\N
+988	75	1	\N
+1003	12	1	\N
+1004	78	1	\N
+1005	78	1	\N
+1328	39	1	f
+1374	90	1	f
+1191	86	1	\N
+1201	87	1	\N
+1211	12	1	\N
+1212	65	1	\N
+1213	90	1	\N
+1380	87	1	f
+1383	69	1	f
+1244	87	1	f
+1264	87	1	f
+1387	87	1	f
+1393	12	1	f
+1394	65	1	f
+1404	87	1	f
+1406	89	1	f
+1409	69	1	f
+857	55	1	\N
+859	55	1	\N
+860	55	1	\N
+861	55	1	\N
+794	55	1	\N
+800	55	1	\N
+801	55	1	\N
+1090	39	1	\N
+2586	87	1	f
+2587	87	1	f
+2588	89	1	f
+2589	89	1	f
+2590	90	1	f
+2591	69	1	f
+871	69	1	\N
+880	70	1	\N
+881	70	1	\N
+882	70	1	\N
+883	70	1	\N
+1007	12	1	\N
+1008	65	1	\N
+1311	41	1	f
+1078	12	1	\N
+1332	39	1	f
+1192	86	1	\N
+1379	87	1	f
+1381	89	1	f
+1265	89	1	f
+1384	39	1	f
+1389	69	1	f
+1395	65	1	f
+1407	90	1	f
+1411	69	1	f
+872	12	1	\N
+873	65	1	\N
+874	65	1	\N
+725	55	1	\N
+1282	87	1	f
+1095	70	1	\N
+1096	39	1	\N
+1079	65	1	\N
+1099	39	1	\N
+1340	39	1	f
+1344	39	1	f
+1159	78	1	\N
+1193	87	1	\N
+1194	87	1	\N
+1195	87	1	\N
+1352	39	1	f
+1396	104	1	f
+1408	69	1	f
+1410	69	1	f
+1424	12	1	f
+1425	65	1	f
+1426	105	1	f
+1431	105	1	f
+1432	105	1	f
+1433	12	1	f
+1434	65	1	f
+1435	12	1	f
+1436	65	1	f
+1440	103	1	f
+1442	103	1	f
+1447	106	1	f
+1448	106	1	f
+1450	12	1	f
+1452	12	1	f
+1464	87	1	f
+1465	69	1	f
+1467	89	1	f
+1469	90	1	f
+1471	69	1	f
+1472	69	1	f
+1473	69	1	f
+1485	106	1	f
+1487	103	1	f
+1500	106	1	f
+1502	103	1	f
+1503	103	1	f
+1504	104	1	f
+1505	104	1	f
+1506	104	1	f
+1509	106	1	f
+1516	87	1	f
+1517	87	1	f
+1518	87	1	f
+1519	87	1	f
+1521	12	1	f
+1535	110	1	f
+1536	110	1	f
+1537	110	1	f
+1538	110	1	f
+1539	110	1	f
+1540	110	1	f
+1541	110	1	f
+1543	87	1	f
+1544	87	1	f
+1545	87	1	f
+1546	106	1	f
+1547	106	1	f
+1548	12	1	f
+1549	12	1	f
+1550	65	1	f
+1551	87	1	f
+1552	87	1	f
+1559	87	1	f
+1561	87	1	f
+1562	87	1	f
+1571	65	1	f
+1575	65	1	f
+1576	86	1	f
+1577	87	1	f
+1579	110	1	f
+1580	78	1	f
+1581	87	1	f
+1582	89	1	f
+1584	89	1	f
+1585	90	1	f
+1586	69	1	f
+1587	39	1	f
+1591	87	1	f
+1592	89	1	f
+1593	69	1	f
+1597	104	1	f
+1598	103	1	f
+1607	106	1	f
+1608	105	1	f
+1609	105	1	f
+1610	87	1	f
+1611	87	1	f
+1612	89	1	f
+1613	89	1	f
+1614	90	1	f
+1615	69	1	f
+1616	69	1	f
+1619	69	1	f
+1620	87	1	f
+1621	87	1	f
+1622	89	1	f
+1623	90	1	f
+1624	87	1	f
+1625	89	1	f
+1626	69	1	f
+1627	69	1	f
+1628	69	1	f
+1634	103	1	f
+1639	106	1	f
+1640	87	1	f
+1641	87	1	f
+1642	89	1	f
+1643	89	1	f
+1644	90	1	f
+1645	69	1	f
+1647	39	1	f
+1650	87	1	f
+1651	89	1	f
+1652	90	1	f
+1653	69	1	f
+1657	103	1	f
+1659	65	1	f
+1660	106	1	f
+1714	110	1	f
+1721	110	1	f
+1764	111	1	f
+1766	111	1	f
+1769	105	1	f
+1771	111	1	f
+1773	111	1	f
+1774	111	1	f
+1777	65	1	f
+1780	105	1	f
+1797	12	1	f
+1798	65	1	f
+1799	12	1	f
+1807	90	1	f
+1839	103	1	f
+1840	103	1	f
+1849	12	1	f
+1852	119	1	f
+1853	119	1	f
+1854	119	1	f
+1855	119	1	f
+1859	119	1	f
+1860	119	1	f
+1866	117	1	f
+1869	69	1	f
+1870	78	1	f
+1873	105	1	f
+1876	106	1	f
+1880	106	1	f
+1882	106	1	f
+1884	12	1	f
+1885	65	1	f
+1888	117	1	f
+1893	120	1	f
+1894	12	1	f
+1895	65	1	f
+1896	65	1	f
+1898	105	1	f
+1900	120	1	f
+1901	120	1	f
+1902	117	1	f
+1903	111	1	f
+1904	65	1	f
+1905	65	1	f
+1906	65	1	f
+1907	65	1	f
+1908	65	1	f
+1910	106	1	f
+1913	117	1	f
+1915	111	1	f
+1917	110	1	f
+1918	119	1	f
+1919	12	1	f
+1922	93	1	f
+1925	89	1	f
+1926	90	1	f
+1927	87	1	f
+1941	12	1	f
+1945	123	1	f
+1946	123	1	f
+1947	123	1	f
+1948	123	1	f
+1949	123	1	f
+1950	123	1	f
+1951	90	1	f
+1952	86	1	f
+1954	12	1	f
+1956	87	1	f
+1959	123	1	f
+1961	123	1	f
+1963	123	1	f
+1965	123	1	f
+1966	12	1	f
+1968	12	1	f
+1970	126	1	f
+1972	123	1	f
+1973	123	1	f
+1975	65	1	f
+1977	12	1	f
+1978	2	1	f
+1984	123	1	f
+1986	123	1	f
+1987	103	1	f
+1988	119	1	f
+1989	12	1	f
+1990	106	1	f
+1992	106	1	f
+1993	106	1	f
+1994	106	1	f
+1995	106	1	f
+1996	106	1	f
+2000	103	1	f
+2001	106	1	f
+2005	103	1	f
+2006	106	1	f
+2010	123	1	f
+2011	110	1	f
+2013	87	1	f
+2014	89	1	f
+2015	90	1	f
+2017	69	1	f
+2018	87	1	f
+2019	89	1	f
+2020	69	1	f
+2023	104	1	f
+2024	104	1	f
+2026	103	1	f
+2027	106	1	f
+2029	119	1	f
+2030	119	1	f
+2031	119	1	f
+2032	110	1	f
+2038	119	1	f
+2039	119	1	f
+2044	119	1	f
+2045	119	1	f
+2046	119	1	f
+2047	119	1	f
+2048	65	1	f
+2049	12	1	f
+2050	87	1	f
+2051	69	1	f
+2053	47	1	f
+2054	2	1	f
+2055	12	1	f
+2064	123	1	f
+2067	123	1	f
+2069	123	1	f
+2070	12	1	f
+2076	123	1	f
+2077	12	1	f
+2089	87	1	f
+2090	69	1	f
+2095	87	1	f
+2099	12	1	f
+2100	12	1	f
+2101	65	1	f
+2104	135	1	f
+2105	135	1	f
+2106	135	1	f
+2107	12	1	f
+2108	12	1	f
+2115	39	1	f
+2119	90	1	f
+2126	2	1	f
+2127	12	1	f
+2128	65	1	f
+2129	138	1	f
+2130	138	1	f
+2133	123	1	f
+2135	12	1	f
+2136	65	1	f
+2137	139	1	f
+2138	139	1	f
+2139	139	1	f
+2144	135	1	f
+2145	137	1	f
+2146	135	1	f
+2147	137	1	f
+2148	135	1	f
+2149	137	1	f
+2150	135	1	f
+2151	137	1	f
+2152	135	1	f
+2153	137	1	f
+2154	135	1	f
+2155	137	1	f
+2156	135	1	f
+2157	137	1	f
+2158	135	1	f
+2159	137	1	f
+2160	135	1	f
+2161	137	1	f
+2162	135	1	f
+2163	137	1	f
+2164	135	1	f
+2165	137	1	f
+2167	135	1	f
+2168	137	1	f
+2172	135	1	f
+2173	137	1	f
+2174	135	1	f
+2175	137	1	f
+2176	135	1	f
+2177	137	1	f
+2178	135	1	f
+2179	137	1	f
+2180	135	1	f
+2181	137	1	f
+2182	135	1	f
+2183	137	1	f
+2184	135	1	f
+2185	137	1	f
+2186	134	1	f
+2187	135	1	f
+2188	137	1	f
+2189	135	1	f
+2190	137	1	f
+2198	123	1	f
+2199	105	1	f
+2200	104	1	f
+2201	104	1	f
+2203	104	1	f
+2205	110	1	f
+2206	110	1	f
+2207	110	1	f
+2208	110	1	f
+2209	110	1	f
+2210	86	1	f
+2211	110	1	f
+2212	110	1	f
+2213	86	1	f
+2214	110	1	f
+2215	86	1	f
+2217	12	1	f
+2219	65	1	f
+2222	65	1	f
+2243	12	1	f
+2244	12	1	f
+2245	65	1	f
+2246	105	1	f
+2247	102	1	f
+2248	141	1	f
+2249	141	1	f
+2254	135	1	f
+2255	142	1	f
+2256	135	1	f
+2257	142	1	f
+2258	135	1	f
+2259	142	1	f
+2260	135	1	f
+2261	142	1	f
+2262	135	1	f
+2263	142	1	f
+2265	135	1	f
+2266	137	1	f
+2268	12	1	f
+2269	105	1	f
+2273	135	1	f
+2274	143	1	f
+2276	12	1	f
+2277	105	1	f
+2278	135	1	f
+2279	144	1	f
+2282	135	1	f
+2283	137	1	f
+2285	135	1	f
+2286	137	1	f
+2287	135	1	f
+2288	142	1	f
+2292	12	1	f
+2293	145	1	f
+2294	145	1	f
+2295	145	1	f
+2296	12	1	f
+2297	145	1	f
+2299	146	1	f
+2300	145	1	f
+2301	146	1	f
+2304	123	1	f
+2305	145	1	f
+2306	146	1	f
+2307	87	1	f
+2308	87	1	f
+2309	69	1	f
+2310	145	1	f
+2313	145	1	f
+2314	69	1	f
+2315	135	1	f
+2316	137	1	f
+2320	12	1	f
+2327	87	1	f
+2328	69	1	f
+2329	145	1	f
+2330	145	1	f
+2331	146	1	f
+2332	146	1	f
+2338	87	1	f
+2339	69	1	f
+2340	69	1	f
+2341	135	1	f
+2342	137	1	f
+2343	135	1	f
+2344	143	1	f
+2366	87	1	f
+2367	69	1	f
+2368	145	1	f
+2369	146	1	f
+2373	39	1	f
+2376	69	1	f
+2377	135	1	f
+2378	137	1	f
+2379	135	1	f
+2380	143	1	f
+2389	105	1	f
+2390	105	1	f
+2391	105	1	f
+2392	105	1	f
+2393	105	1	f
+2394	105	1	f
+2395	105	1	f
+2396	105	1	f
+2397	105	1	f
+2398	105	1	f
+2399	105	1	f
+2400	105	1	f
+2401	105	1	f
+2402	105	1	f
+2403	105	1	f
+2404	105	1	f
+2405	105	1	f
+2406	105	1	f
+2407	105	1	f
+2408	105	1	f
+2409	105	1	f
+2410	105	1	f
+2411	105	1	f
+2412	105	1	f
+2413	105	1	f
+2414	105	1	f
+2415	105	1	f
+2416	105	1	f
+2417	105	1	f
+2418	105	1	f
+2419	105	1	f
+2420	105	1	f
+2421	105	1	f
+2422	105	1	f
+2423	105	1	f
+2424	105	1	f
+2425	105	1	f
+2426	105	1	f
+2427	105	1	f
+2428	105	1	f
+2429	105	1	f
+2430	105	1	f
+2431	105	1	f
+2432	105	1	f
+2433	145	1	f
+2435	146	1	f
+2437	146	1	f
+2465	120	1	f
+2468	119	1	f
+2469	119	1	f
+2470	119	1	f
+2475	90	1	f
+2477	47	1	f
+2484	2	1	f
+2489	86	1	f
+2490	86	1	f
+2491	86	1	f
+2493	87	1	f
+2501	110	1	f
+2502	110	1	f
+2503	119	1	f
+2505	110	1	f
+2506	86	1	f
+2507	110	1	f
+2508	110	1	f
+2510	110	1	f
+2511	86	1	f
+2513	12	1	f
+2514	65	1	f
+2516	12	1	f
+2517	149	1	f
+2518	149	1	f
+2519	47	1	f
+2520	149	1	f
+2521	149	1	f
+2522	149	1	f
+2523	149	1	f
+2524	149	1	f
+2525	149	1	f
+2526	149	1	f
+2527	149	1	f
+2528	149	1	f
+2529	119	1	f
+2530	119	1	f
+2531	119	1	f
+2532	119	1	f
+2533	119	1	f
+2534	119	1	f
+2535	119	1	f
+2536	110	1	f
+2537	119	1	f
+2538	119	1	f
+2539	110	1	f
+2540	86	1	f
+2541	119	1	f
+2545	86	1	f
+2546	110	1	f
+2547	119	1	f
+2548	119	1	f
+2549	12	1	f
+2550	87	1	f
+2551	12	1	f
+2552	65	1	f
+2553	65	1	f
+2554	65	1	f
+2556	151	1	f
+2557	151	1	f
+2558	12	1	f
+2559	151	1	f
+2560	69	1	f
+2561	145	1	f
+2563	69	1	f
+2564	145	1	f
+2566	69	1	f
+2567	145	1	f
+2568	145	1	f
+2570	69	1	f
+2571	145	1	f
+2573	69	1	f
+2574	145	1	f
+2576	69	1	f
+2577	145	1	f
+2578	145	1	f
+2580	69	1	f
+2581	145	1	f
+2583	12	1	f
+2585	87	1	f
+2592	123	1	f
+2593	69	1	f
+2594	87	1	f
+2595	69	1	f
+2596	145	1	f
+2597	145	1	f
+2598	145	1	f
+2602	65	1	f
+2603	65	1	f
+2604	65	1	f
+2605	65	1	f
+2608	65	1	f
+2612	65	1	f
+2613	65	1	f
+2617	65	1	f
+2631	65	1	f
+2632	65	1	f
+2633	65	1	f
+2634	65	1	f
+2635	65	1	f
+2636	65	1	f
+2637	65	1	f
+2638	65	1	f
+2642	65	1	f
+2643	65	1	f
+2646	65	1	f
+2647	65	1	f
+2648	65	1	f
+2649	65	1	f
+2650	65	1	f
+2651	65	1	f
+2652	65	1	f
+2653	65	1	f
+2654	65	1	f
+2655	65	1	f
+2665	149	1	f
+2666	87	1	f
+2667	69	1	f
+2668	145	1	f
+2670	146	1	f
+2672	123	1	f
+2673	39	1	f
+2676	87	1	f
+2677	89	1	f
+2678	69	1	f
+2679	69	1	f
+2680	89	1	f
+2681	89	1	f
+2682	149	1	f
+2683	89	1	f
+2684	149	1	f
+2685	89	1	f
+2686	135	1	f
+2687	137	1	f
+2688	135	1	f
+2689	143	1	f
+2693	110	1	f
+2694	110	1	f
+2695	86	1	f
+2698	110	1	f
+2699	86	1	f
+2700	119	1	f
+2701	119	1	f
+2702	119	1	f
+2703	119	1	f
+2704	119	1	f
+2705	119	1	f
+2706	119	1	f
+2707	119	1	f
+2708	119	1	f
+2709	119	1	f
+2710	119	1	f
+2711	119	1	f
+2712	119	1	f
+2713	119	1	f
+2715	119	1	f
+2716	119	1	f
+2717	119	1	f
+2718	119	1	f
+2719	119	1	f
+2720	119	1	f
+2721	119	1	f
+2722	119	1	f
+2724	119	1	f
+2725	119	1	f
+2726	110	1	f
+2727	119	1	f
+2728	119	1	f
+2729	103	1	f
+2731	123	1	f
+2734	119	1	f
+2735	119	1	f
+2736	119	1	f
+2739	69	1	f
+2740	12	1	f
+2741	65	1	f
+2742	12	1	f
+2779	123	1	f
+2780	123	1	f
+2781	123	1	f
+2785	47	1	f
+2786	2	1	f
+2787	2	1	f
+2790	12	1	f
+\.
+
+
+--
+-- Name: resource_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('resource_id_seq', 2790, true);
+
+
+--
+-- Data for Name: resource_log; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
+7672	725	2	\N	2015-10-25 18:29:36.485331+02
+7673	772	2	\N	2015-10-25 18:29:48.734406+02
+7674	2742	2	\N	2015-10-25 21:14:37.429267+02
+7675	2740	2	\N	2015-10-25 21:14:41.037197+02
+7676	2583	2	\N	2015-10-25 21:14:44.152213+02
+7677	2558	2	\N	2015-10-25 21:14:47.468287+02
+7678	2551	2	\N	2015-10-25 21:14:50.661752+02
+7679	2516	2	\N	2015-10-25 21:14:54.043974+02
+7680	2513	2	\N	2015-10-25 21:14:57.515749+02
+7681	2296	2	\N	2015-10-25 21:15:00.801576+02
+7682	2292	2	\N	2015-10-25 21:15:04.579697+02
+7683	2276	2	\N	2015-10-25 21:15:07.859876+02
+7684	2268	2	\N	2015-10-25 21:15:11.41355+02
+7685	2244	2	\N	2015-10-25 21:15:15.08087+02
+7686	2243	2	\N	2015-10-25 21:15:18.415374+02
+7687	2217	2	\N	2015-10-25 21:15:22.580956+02
+7688	2135	2	\N	2015-10-25 21:15:26.822285+02
+7689	2127	2	\N	2015-10-25 21:15:30.469938+02
+7690	2108	2	\N	2015-10-25 21:15:35.148375+02
+7691	2100	2	\N	2015-10-25 21:15:38.483633+02
+7692	2099	2	\N	2015-10-25 21:15:43.982787+02
+7693	2049	2	\N	2015-10-25 21:15:49.162966+02
+7694	1968	2	\N	2015-10-25 21:15:53.440626+02
+7695	1941	2	\N	2015-10-25 21:15:57.551908+02
+7696	1884	2	\N	2015-10-25 21:16:01.935865+02
+7697	1894	2	\N	2015-10-25 21:16:05.350861+02
+7698	1849	2	\N	2015-10-25 21:16:08.565296+02
+7699	1799	2	\N	2015-10-25 21:16:11.898419+02
+7700	1797	2	\N	2015-10-25 21:16:17.305403+02
+7701	1548	2	\N	2015-10-25 21:16:20.933341+02
+7702	1521	2	\N	2015-10-25 21:16:24.346478+02
+7703	1435	2	\N	2015-10-25 21:16:28.278231+02
+7704	1433	2	\N	2015-10-25 21:16:32.204893+02
+7705	1424	2	\N	2015-10-25 21:16:37.127758+02
+7706	1393	2	\N	2015-10-25 21:16:40.502794+02
+7707	1317	2	\N	2015-10-25 21:16:43.978797+02
+7708	1313	2	\N	2015-10-25 21:16:48.394405+02
+7709	1268	2	\N	2015-10-25 21:16:52.253586+02
+7710	1225	2	\N	2015-10-25 21:16:55.883212+02
+7711	1211	2	\N	2015-10-25 21:17:02.365419+02
+7712	1207	2	\N	2015-10-25 21:17:11.228895+02
+7713	1198	2	\N	2015-10-25 21:17:14.605706+02
+7714	1190	2	\N	2015-10-25 21:17:17.962226+02
+7715	1189	2	\N	2015-10-25 21:17:22.169824+02
+7716	1088	2	\N	2015-10-25 21:17:27.123342+02
+7717	1081	2	\N	2015-10-25 21:17:30.484303+02
+7718	1007	2	\N	2015-10-25 21:17:33.84324+02
+7719	1003	2	\N	2015-10-25 21:17:37.28513+02
+7720	954	2	\N	2015-10-25 21:17:41.191895+02
+7721	953	2	\N	2015-10-25 21:17:45.458502+02
+7722	909	2	\N	2015-10-25 21:17:49.385186+02
+7723	908	2	\N	2015-10-25 21:17:53.112889+02
+7724	901	2	\N	2015-10-25 21:17:58.692045+02
+7725	872	2	\N	2015-10-25 21:18:02.214698+02
+7726	865	2	\N	2015-10-25 21:18:05.09372+02
+7727	788	2	\N	2015-10-25 21:18:08.146867+02
+7728	775	2	\N	2015-10-25 21:18:11.413701+02
+7729	769	2	\N	2015-10-25 21:18:14.703555+02
+7730	764	2	\N	2015-10-25 21:18:17.786192+02
+7731	723	2	\N	2015-10-25 21:18:21.267664+02
+7732	706	2	\N	2015-10-25 21:18:24.219742+02
+7733	283	2	\N	2015-10-25 21:18:27.627488+02
+7734	274	2	\N	2015-10-25 21:18:30.883104+02
+7735	16	2	\N	2015-10-25 21:18:33.921184+02
+7736	10	2	\N	2015-10-25 21:18:37.163922+02
+7737	773	2	\N	2015-10-25 21:18:49.306767+02
+7738	3	2	\N	2015-10-25 21:19:10.539731+02
+7739	784	2	\N	2015-10-25 21:19:27.565925+02
+7740	789	2	\N	2015-10-25 21:19:38.951573+02
+7741	772	2	\N	2015-10-25 21:19:53.535469+02
+7742	1100	2	\N	2015-10-25 21:20:18.256979+02
+7743	1095	2	\N	2015-10-25 21:20:21.415245+02
+7744	883	2	\N	2015-10-25 21:20:24.411401+02
+7745	882	2	\N	2015-10-25 21:20:27.610602+02
+7746	881	2	\N	2015-10-25 21:20:30.548418+02
+7747	880	2	\N	2015-10-25 21:20:34.03857+02
+7748	878	2	\N	2015-10-25 21:20:36.956871+02
+7749	2788	2	\N	2015-11-15 11:41:32.753196+02
+7750	2741	2	\N	2015-11-15 11:42:42.182101+02
+7752	2790	2	\N	2015-11-22 22:04:31.745001+02
+7753	998	2	\N	2015-12-19 18:58:53.274875+02
+7754	864	2	\N	2015-12-19 18:59:12.993038+02
+7755	900	2	\N	2015-12-19 18:59:28.904635+02
+7756	837	2	\N	2015-12-19 18:59:47.892138+02
+7757	873	2	\N	2015-12-19 19:00:17.462583+02
+7758	1895	2	\N	2015-12-19 19:00:42.041626+02
+7759	778	2	\N	2015-12-19 19:00:56.774689+02
+7760	2048	2	\N	2015-12-19 19:01:12.925063+02
+7761	2101	2	\N	2015-12-19 19:01:30.542048+02
+7762	1368	2	\N	2015-12-19 19:01:45.470669+02
+7763	866	2	\N	2015-12-19 19:02:19.68642+02
+7764	902	2	\N	2015-12-19 19:03:00.164077+02
+7765	2741	2	\N	2015-12-19 19:03:14.621449+02
+7766	790	2	\N	2015-12-19 19:03:40.873053+02
+7767	791	2	\N	2015-12-19 19:04:11.128561+02
+7768	838	2	\N	2015-12-19 19:04:47.126719+02
+7769	863	2	\N	2015-12-19 19:05:01.927793+02
+7770	1312	2	\N	2015-12-19 19:11:29.692654+02
+7771	1212	2	\N	2015-12-19 19:11:42.401036+02
+7772	1906	2	\N	2015-12-19 19:12:07.282949+02
+7773	802	2	\N	2015-12-19 19:12:35.147785+02
+7774	1395	2	\N	2015-12-19 19:13:03.538972+02
+7775	1905	2	\N	2015-12-19 19:13:29.909671+02
+7776	1905	2	\N	2015-12-19 19:13:43.05814+02
+7777	1904	2	\N	2015-12-19 19:14:08.86286+02
+7778	1434	2	\N	2015-12-19 19:14:42.669227+02
+7779	1571	2	\N	2015-12-19 19:15:08.72348+02
+7780	1885	2	\N	2015-12-19 19:15:31.549063+02
+7781	1896	2	\N	2015-12-19 19:17:48.737362+02
+7782	779	2	\N	2015-12-19 19:18:09.272548+02
+7783	792	2	\N	2015-12-19 19:18:27.223073+02
+7784	1975	2	\N	2015-12-19 19:18:45.712798+02
+7785	1550	2	\N	2015-12-19 19:19:10.04637+02
+7786	2222	2	\N	2015-12-19 19:19:23.129832+02
+7787	2219	2	\N	2015-12-19 19:19:37.815734+02
+7788	1008	2	\N	2015-12-19 19:19:57.484164+02
+7789	1394	2	\N	2015-12-19 19:20:16.701021+02
+7790	780	2	\N	2015-12-19 19:20:28.354133+02
+7791	2128	2	\N	2015-12-19 19:20:48.362209+02
+7792	2136	2	\N	2015-12-19 19:21:00.415791+02
+7793	2245	2	\N	2015-12-19 19:21:15.736704+02
+7794	2552	2	\N	2015-12-19 19:21:33.532013+02
+7795	1908	2	\N	2015-12-19 19:21:49.622808+02
+7796	1907	2	\N	2015-12-19 19:22:06.733382+02
+7797	1080	2	\N	2015-12-19 19:22:39.105738+02
+7798	910	2	\N	2015-12-19 19:23:14.279406+02
+7799	911	2	\N	2015-12-19 19:23:45.913381+02
+7800	956	2	\N	2015-12-19 19:24:08.184513+02
+7801	955	2	\N	2015-12-19 19:24:26.990458+02
+7802	879	2	\N	2015-12-19 19:24:49.931923+02
+7803	1089	2	\N	2015-12-19 19:25:10.514211+02
+7804	874	2	\N	2015-12-19 19:25:27.130616+02
+7805	1436	2	\N	2015-12-19 19:55:59.961598+02
+7806	1798	2	\N	2015-12-19 19:56:29.707064+02
+7807	1425	2	\N	2015-12-19 19:57:48.500731+02
+7808	2514	2	\N	2015-12-19 19:58:18.992544+02
+7810	2788	2	\N	2015-12-19 22:02:14.069026+02
+7811	2583	2	\N	2015-12-19 22:02:47.427632+02
+7812	2558	2	\N	2015-12-19 22:03:01.721374+02
+7813	2551	2	\N	2015-12-19 22:03:16.895798+02
+7814	2516	2	\N	2015-12-19 22:03:26.242027+02
+7815	2513	2	\N	2015-12-19 22:03:35.240474+02
+7816	2296	2	\N	2015-12-19 22:03:49.365283+02
+7817	2292	2	\N	2015-12-19 22:04:09.175036+02
+7818	2276	2	\N	2015-12-19 22:04:30.952139+02
+7819	2268	2	\N	2015-12-19 22:04:38.996063+02
+7820	2244	2	\N	2015-12-19 22:04:46.546011+02
+7821	2243	2	\N	2015-12-19 22:05:00.185389+02
+7822	2217	2	\N	2015-12-19 22:05:13.507764+02
+7823	2135	2	\N	2015-12-19 22:05:21.728269+02
+7824	2127	2	\N	2015-12-19 22:05:34.042409+02
+7825	2127	2	\N	2015-12-19 22:05:41.058239+02
+7826	2108	2	\N	2015-12-19 22:05:50.198094+02
+7827	2100	2	\N	2015-12-19 22:06:03.58054+02
+7828	2099	2	\N	2015-12-19 22:06:12.023947+02
+7829	2049	2	\N	2015-12-19 22:06:19.296484+02
+7830	1968	2	\N	2015-12-19 22:06:27.461482+02
+7832	1894	2	\N	2015-12-19 22:06:49.847649+02
+7834	1849	2	\N	2015-12-19 22:07:13.830825+02
+7836	1797	2	\N	2015-12-19 22:07:38.267483+02
+7840	1433	2	\N	2015-12-19 22:08:29.052796+02
+7843	1317	2	\N	2015-12-19 22:09:05.307643+02
+7845	2513	2	\N	2015-12-19 22:09:47.524464+02
+7849	274	2	\N	2015-12-19 22:10:38.840667+02
+7851	706	2	\N	2015-12-19 22:10:55.732613+02
+7854	769	2	\N	2015-12-19 22:11:19.431344+02
+7857	865	2	\N	2015-12-19 22:12:01.90528+02
+7859	901	2	\N	2015-12-19 22:12:26.005959+02
+7861	1225	2	\N	2015-12-19 22:12:58.217044+02
+7863	1207	2	\N	2015-12-19 22:13:14.285855+02
+7864	1198	2	\N	2015-12-19 22:13:22.924173+02
+7866	1189	2	\N	2015-12-19 22:13:39.095813+02
+7868	1081	2	\N	2015-12-19 22:13:59.753756+02
+7870	1003	2	\N	2015-12-19 22:14:20.298224+02
+7873	909	2	\N	2015-12-19 22:14:54.326966+02
+7882	2276	2	\N	2015-12-19 22:18:13.736045+02
+7831	1941	2	\N	2015-12-19 22:06:41.107604+02
+7833	1884	2	\N	2015-12-19 22:07:02.728022+02
+7835	1799	2	\N	2015-12-19 22:07:23.304713+02
+7837	1548	2	\N	2015-12-19 22:07:56.719874+02
+7838	1521	2	\N	2015-12-19 22:08:07.633327+02
+7839	1435	2	\N	2015-12-19 22:08:15.283625+02
+7841	1424	2	\N	2015-12-19 22:08:40.943186+02
+7842	1393	2	\N	2015-12-19 22:08:53.488969+02
+7844	1313	2	\N	2015-12-19 22:09:18.933898+02
+7846	773	2	\N	2015-12-19 22:10:10.177732+02
+7847	10	2	\N	2015-12-19 22:10:19.923385+02
+7848	16	2	\N	2015-12-19 22:10:31.364704+02
+7850	283	2	\N	2015-12-19 22:10:47.472805+02
+7852	723	2	\N	2015-12-19 22:11:03.855144+02
+7853	764	2	\N	2015-12-19 22:11:11.06599+02
+7855	775	2	\N	2015-12-19 22:11:37.854087+02
+7856	788	2	\N	2015-12-19 22:11:52.422586+02
+7858	872	2	\N	2015-12-19 22:12:11.983192+02
+7860	1268	2	\N	2015-12-19 22:12:51.356992+02
+7862	1211	2	\N	2015-12-19 22:13:06.641889+02
+7865	1190	2	\N	2015-12-19 22:13:31.70604+02
+7867	1088	2	\N	2015-12-19 22:13:50.598753+02
+7869	1007	2	\N	2015-12-19 22:14:11.463114+02
+7871	954	2	\N	2015-12-19 22:14:34.426344+02
+7872	953	2	\N	2015-12-19 22:14:43.642625+02
+7874	908	2	\N	2015-12-19 22:15:05.092951+02
+7875	784	2	\N	2015-12-19 22:16:07.26156+02
+7876	725	2	\N	2015-12-19 22:16:34.527916+02
+7877	2247	2	\N	2015-12-19 22:17:03.184025+02
+7878	1413	2	\N	2015-12-19 22:17:11.942957+02
+7879	1318	2	\N	2015-12-19 22:17:24.515341+02
+7880	1314	2	\N	2015-12-19 22:17:50.177423+02
+7881	2276	2	\N	2015-12-19 22:18:05.676719+02
+7883	772	2	\N	2015-12-19 22:19:32.565016+02
+7884	772	2	\N	2015-12-19 22:19:39.21454+02
+7885	789	2	\N	2015-12-19 22:19:58.837279+02
+\.
+
+
+--
+-- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('resource_log_id_seq', 7885, true);
+
+
+--
+-- Data for Name: resource_type; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY resource_type (id, resource_id, name, humanize, resource_name, module, settings, descr, status) FROM stdin;
+149	2516	uploads	Загрузки	UploadsResource	travelcrm.resources.uploads	null	Uploads for any type of resources	0
+1	773	 	Домашняя	Root	travelcrm.resources	null	Home Page of Travelcrm	0
+146	2296	leads_offers	Предложения по лидам	LeadsOffersResource	travelcrm.resources.leads_offers	null	Leads Offers	0
+145	2292	leads_items	Содержимое лидов	LeadsItemsResource	travelcrm.resources.leads_items	null	Leads Items	0
+137	2108	tours	Туры	ToursResource	travelcrm.resources.tours	null	Tour Service	0
+135	2100	orders_items	Содержимое заявки	OrdersItemsResource	travelcrm.resources.orders_items	null	Orders Items	0
+134	2099	orders	Заявки	OrdersResource	travelcrm.resources.orders	null	Orders	0
+130	2049	leads	Лиды	LeadsResource	travelcrm.resources.leads	null	Leads that can be converted into contacts	0
+126	1968	companies	Компании	CompaniesResource	travelcrm.resources.companies	null	Multicompanies functionality	0
+121	1894	turnovers	Обороты	TurnoversResource	travelcrm.resources.turnovers	null	Turnovers on Accounts and Subaccounts	0
+118	1799	notes	Заметки	NotesResource	travelcrm.resources.notes	null	Resources Notes	0
+117	1797	subaccounts	Субсчета	SubaccountsResource	travelcrm.resources.subaccounts	null	Subaccounts are accounts from other objects such as clients, touroperators and so on	0
+111	1548	outgoings	Исходящие платежи	OutgoingsResource	travelcrm.resources.outgoings	null	Outgoings payments for touroperators, suppliers, payback payments and so on	0
+110	1521	commissions	Комиссии	CommissionsResource	travelcrm.resources.commissions	null	Services sales commissions	0
+107	1435	accounts	Счета	AccountsResource	travelcrm.resources.accounts	null	Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible	0
+106	1433	incomes	Входящие платежи	IncomesResource	travelcrm.resources.incomes	{"account_item_id": 8}	Incomes Payments Document for invoices	0
+105	1424	accounts_items	Статьи учета	AccountsItemsResource	travelcrm.resources.accounts_items	null	Finance accounts items	0
+103	1317	invoices	Инвойсы	InvoicesResource	travelcrm.resources.invoices	{"active_days": 3}	Invoices list. Invoice can't be created manualy - only using source document such as Tours	0
+102	1313	services	Сервисы	ServicesResource	travelcrm.resources.services	null	Additional Services that can be provide with tours sales or separate	0
+148	2513	vats	Настройки НДС	VatsResource	travelcrm.resources.vats	null	Vat for accounts and services	0
+2	10	users	Пользователи	UsersResource	travelcrm.resources.users	null	Users list	0
+12	16	resources_types	Типы ресурсов	ResourcesTypesResource	travelcrm.resources.resources_types	null	Resources types list	0
+39	274	regions	Регионы	RegionsResource	travelcrm.resources.regions	null		0
+41	283	currencies	Валюты	CurrenciesResource	travelcrm.resources.currencies	null		0
+47	706	employees	Сотрудники	EmployeesResource	travelcrm.resources.employees	null	Employees Container Datagrid	0
+55	723	structures	Структура	StructuresResource	travelcrm.resources.structures	null	Companies structures is a tree of company structure. It's can be offices, filials, departments and so and so	0
+59	764	positions	Должности	PositionsResource	travelcrm.resources.positions	null	Companies positions is a point of company structure where emplyees can be appointed	0
+61	769	permisions	Доступ	PermisionsResource	travelcrm.resources.permisions	null	Permisions list of company structure position. It's list of resources and permisions	0
+65	775	navigations	Меню	NavigationsResource	travelcrm.resources.navigations	null	Navigations list of company structure position.	0
+67	788	appointments	Назначения сотрудников	AppointmentsResource	travelcrm.resources.appointments	null	Employees to positions of company appointments	0
+69	865	persons	Физ. лица	PersonsResource	travelcrm.resources.persons	null	Persons directory. Person can be client or potential client	0
+70	872	countries	Страны	CountriesResource	travelcrm.resources.countries	null	Countries directory	0
+71	901	advsources	Источники рекламы	AdvsourcesResource	travelcrm.resources.advsources	null	Types of advertises	0
+93	1225	tasks	Задачи	TasksResource	travelcrm.resources.tasks	null	Task manager	0
+91	1211	banks	Банки	BanksResource	travelcrm.resources.banks	null	Banks list to create bank details and for other reasons	0
+90	1207	addresses	Адреса	AddressesResource	travelcrm.resources.addresses	null	Addresses of any type of resources, such as persons, bpersons, hotels etc.	0
+89	1198	passports	Паспорта	PassportsResource	travelcrm.resources.passports	null	Clients persons passports lists	0
+87	1190	contacts	Контакты	ContactsResource	travelcrm.resources.contacts	null	Contacts for persons, business persons etc.	0
+86	1189	contracts	Договора	ContractsResource	travelcrm.resources.contracts	null	Licences list for any type of resources as need	0
+84	1088	locations	Населенные пункты	LocationsResource	travelcrm.resources.locations	null	Locations list is list of cities, vilages etc. places to use to identify part of region	0
+83	1081	hotels	Отели	HotelsResource	travelcrm.resources.hotels	null	Hotels directory	0
+79	1007	bpersons	Бизнес контакты	BPersonsResource	travelcrm.resources.bpersons	null	Business Persons is not clients it's simple business contacts that can be referenced objects that needs to have contacts	0
+78	1003	suppliers	Поставщики	SuppliersResource	travelcrm.resources.suppliers	null	Suppliers, such as touroperators, aircompanies, IATA etc.	0
+75	954	foodcats	Категории питания	FoodcatsResource	travelcrm.resources.foodcats	null	Food types in hotels	0
+74	953	accomodations	Типы размещения	AccomodationsResource	travelcrm.resources.accomodations	null	Accomodations Types list	0
+73	909	roomcats	Категории номеров	RoomcatsResource	travelcrm.resources.roomcats	null	Categories of the rooms	0
+72	908	hotelcats	Категории отелей	HotelcatsResource	travelcrm.resources.hotelcats	null	Hotels categories	0
+156	2788	campaigns	Кампании	CampaignsResource	travelcrm.resources.campaigns	{"username": "--", "host": "--", "password": "--", "port": "2525", "default_sender": "--"}	Marketings campaigns	0
+153	2583	activities	Активность	ActivitiesResource	travelcrm.resources.activities	{"column_index": 1}	My last activities	0
+152	2558	leads_stats	Статистика по лидам	LeadsStatsResource	travelcrm.resources.leads_stats	{"column_index": 0}	Portlet with leads statistics	0
+151	2551	persons_categories	Категории физ. лиц	PersonsCategoriesResource	travelcrm.resources.persons_categories	null	Categorise your clients with categories of persons	0
+143	2268	visas	Визы	VisasResource	travelcrm.resources.visas	null	Visa is a service for sale visas	0
+142	2244	tickets	Билеты	TicketsResource	travelcrm.resources.tickets	null	Ticket is a service for sale tickets of any type	0
+141	2243	tickets_classes	Классы билетов	TicketsClassesResource	travelcrm.resources.tickets_classes	null	Tickets Classes list, such as first class, business class etc	0
+140	2217	suppliers_types	Типы поставщиков	SuppliersTypesResource	travelcrm.resources.suppliers_types	null	Suppliers Types list	0
+139	2135	transports	Транспорт	TransportsResource	travelcrm.resources.transports	null	Transports Types List	0
+138	2127	transfers	Трансфер	TransfersResource	travelcrm.resources.transfers	null	Transfers for tours	0
+123	1941	notifications	Уведомления	NotificationsResource	travelcrm.resources.notifications	null	Employee Notifications	0
+120	1884	crosspayments	Кросс оплаты	CrosspaymentsResource	travelcrm.resources.crosspayments	null	Cross payments between accounts and subaccounts. This document is for balance corrections to.	0
+119	1849	calculations	Калькуляции	CalculationsResource	travelcrm.resources.calculations	null	Calculations of Sale Documents	0
+104	1393	currencies_rates	Курсы валют	CurrenciesRatesResource	travelcrm.resources.currencies_rates	null	Currencies Rates. Values from this dir used by billing to calc prices in base currency.	0
+101	1268	banks_details	Реквизиты	BanksDetailsResource	travelcrm.resources.banks_details	null	Banks Details that can be attached to any client or business partner to define account	0
+144	2276	spassports	Оформление паспортов	SpassportsResource	travelcrm.resources.spassports	null	Service formulation of foreign passports	0
+\.
+
+
+--
+-- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('resource_type_id_seq', 157, true);
+
+
+--
+-- Data for Name: roomcat; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY roomcat (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: roomcat_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('roomcat_id_seq', 1, true);
+
+
+--
+-- Data for Name: service; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY service (id, resource_id, resource_type_id, name, display_text, descr) FROM stdin;
+7	2247	142	Продажа билетов	Ticket booking service	\N
+5	1413	137	Продажа туров	Tour booking service	Use this service for tour sales
+4	1318	143	Оформление виз	The issues for visas	\N
+1	1314	144	Оформление загран. паспортов	Formulation of foreign passport	\N
+\.
+
+
+--
+-- Name: service_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('service_id_seq', 7, true);
+
+
+--
+-- Data for Name: spassport; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY spassport (id, resource_id, photo_done, docs_receive_date, docs_transfer_date, passport_receive_date, descr) FROM stdin;
+\.
+
+
+--
+-- Name: spassport_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('spassport_id_seq', 1, true);
+
+
+--
+-- Data for Name: spassport_order_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY spassport_order_item (order_item_id, spassport_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: structure; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY structure (id, resource_id, parent_id, company_id, name) FROM stdin;
+1	725	\N	1	Головной Офис
+\.
+
+
+--
+-- Data for Name: structure_address; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY structure_address (structure_id, address_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: structure_bank_detail; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY structure_bank_detail (structure_id, bank_detail_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: structure_contact; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY structure_contact (structure_id, contact_id) FROM stdin;
+\.
+
+
+--
+-- Name: structure_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('structure_id_seq', 1, true);
+
+
+--
+-- Data for Name: subaccount; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY subaccount (id, resource_id, account_id, name, status, descr) FROM stdin;
+\.
+
+
+--
+-- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('subaccount_id_seq', 1, true);
+
+
+--
+-- Data for Name: supplier; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY supplier (id, resource_id, supplier_type_id, name, status, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: supplier_bank_detail; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY supplier_bank_detail (supplier_id, bank_detail_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: supplier_bperson; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY supplier_bperson (supplier_id, bperson_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: supplier_contract; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY supplier_contract (supplier_id, contract_id) FROM stdin;
+\.
+
+
+--
+-- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('supplier_id_seq', 1, true);
+
+
+--
+-- Data for Name: supplier_subaccount; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY supplier_subaccount (supplier_id, subaccount_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: supplier_type; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY supplier_type (id, resource_id, name, descr) FROM stdin;
+\.
+
+
+--
+-- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
+
+
+--
+-- Data for Name: task; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY task (id, resource_id, employee_id, title, deadline, reminder, descr, status) FROM stdin;
+\.
+
+
+--
+-- Name: task_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('task_id_seq', 1, true);
+
+
+--
+-- Data for Name: task_resource; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY task_resource (task_id, resource_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: task_upload; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY task_upload (task_id, upload_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: ticket; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY ticket (id, resource_id, start_location_id, end_location_id, ticket_class_id, transport_id, start_dt, start_additional_info, end_dt, end_additional_info, adults, children, descr) FROM stdin;
+\.
+
+
+--
+-- Data for Name: ticket_class; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY ticket_class (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: ticket_class_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('ticket_class_id_seq', 1, true);
+
+
+--
+-- Name: ticket_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('ticket_id_seq', 1, true);
+
+
+--
+-- Data for Name: ticket_order_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY ticket_order_item (order_item_id, ticket_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: tour; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY tour (id, resource_id, start_location_id, start_transport_id, end_location_id, end_transport_id, hotel_id, accomodation_id, foodcat_id, roomcat_id, transfer_id, adults, children, start_date, start_additional_info, end_date, end_additional_info, descr) FROM stdin;
+\.
+
+
+--
+-- Name: tour_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('tour_id_seq', 1, true);
+
+
+--
+-- Data for Name: tour_order_item; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY tour_order_item (order_item_id, tour_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: transfer; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY transfer (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('transfer_id_seq', 1, true);
+
+
+--
+-- Data for Name: transport; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY transport (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: transport_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('transport_id_seq', 1, true);
+
+
+--
+-- Data for Name: upload; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY upload (id, resource_id, name, path, size, media_type, descr) FROM stdin;
+\.
+
+
+--
+-- Name: upload_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('upload_id_seq', 1, true);
+
+
+--
+-- Data for Name: user; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY "user" (id, resource_id, employee_id, username, email, password) FROM stdin;
+2	3	2	admin	admin@mail.ru	adminadmin
+\.
+
+
+--
+-- Name: user_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('user_id_seq', 2, true);
+
+
+--
+-- Data for Name: vat; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY vat (id, resource_id, account_id, service_id, date, vat, calc_method, descr) FROM stdin;
+\.
+
+
+--
+-- Name: vat_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('vat_id_seq', 1, true);
+
+
+--
+-- Data for Name: visa; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY visa (id, resource_id, country_id, start_date, end_date, type, descr) FROM stdin;
+\.
+
+
+--
+-- Name: visa_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('visa_id_seq', 1, true);
+
+
+--
+-- Data for Name: visa_order_item; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
 COPY visa_order_item (order_item_id, visa_id) FROM stdin;
@@ -14259,15 +19764,6 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 
 
 --
--- Data for Name: alembic_version; Type: TABLE DATA; Schema: demo_ru; Owner: -
---
-
-COPY alembic_version (version_num) FROM stdin;
-1502d7ef7d40
-\.
-
-
---
 -- Data for Name: appointment; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
@@ -14348,7 +19844,7 @@ SELECT pg_catalog.setval('bperson_id_seq', 1, true);
 -- Data for Name: calculation; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
-COPY calculation (id, resource_id, order_item_id, price, contract_id) FROM stdin;
+COPY calculation (id, resource_id, order_item_id, contract_id, price) FROM stdin;
 \.
 
 
@@ -14409,7 +19905,7 @@ SELECT pg_catalog.setval('commission_id_seq', 1, true);
 --
 
 COPY company (id, resource_id, currency_id, name, email, settings) FROM stdin;
-1	1970	56	Туристическая компания	email@email.com	{"locale": "ru", "timezone": "Africa/Abidjan"}
+1	1970	56	TravelCRM Inc.	vitalii.mazur@gmail.com	{"locale": "ru", "timezone": "Africa/Abidjan"}
 \.
 
 
@@ -15037,7 +20533,7 @@ COPY permision (id, resource_type_id, position_id, permisions, scope_type, struc
 -- Name: permision_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
-SELECT pg_catalog.setval('permision_id_seq', 295, true);
+SELECT pg_catalog.setval('permision_id_seq', 294, true);
 
 
 --
@@ -16428,7 +21924,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, sett
 -- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_type_id_seq', 157, true);
+SELECT pg_catalog.setval('resource_type_id_seq', 156, true);
 
 
 --
@@ -17162,8 +22658,9 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 99	2851	0.00	\N	\N
 100	2854	2090.15	\N	60
 101	2855	0.00	\N	\N
-102	2856	2090.15	46	60
-103	2857	15.50	47	61
+103	2857	15.50	\N	61
+104	2870	2091.66	46	60
+105	2871	15.92	47	61
 \.
 
 
@@ -17171,7 +22668,7 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 103, true);
+SELECT pg_catalog.setval('calculation_id_seq', 105, true);
 
 
 --
@@ -17250,7 +22747,7 @@ SELECT pg_catalog.setval('commission_id_seq', 50, true);
 -- Name: companies_counter; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('companies_counter', 1077, true);
+SELECT pg_catalog.setval('companies_counter', 1082, true);
 
 
 --
@@ -20139,7 +25636,6 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2853	86	32	f
 2854	119	32	f
 2855	119	32	f
-2856	119	32	f
 2857	119	32	f
 2858	103	32	f
 2859	148	32	f
@@ -20153,6 +25649,8 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2865	78	32	f
 2868	93	32	f
 2869	93	32	f
+2870	119	32	f
+2871	119	32	f
 \.
 
 
@@ -20160,7 +25658,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2869, true);
+SELECT pg_catalog.setval('resource_id_seq', 2871, true);
 
 
 --
@@ -22209,7 +27707,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7747	2855	2	\N	2016-01-02 21:37:14.376182+02
 7748	2853	2	\N	2016-01-02 21:38:33.232425+02
 7749	2853	2	\N	2016-01-02 21:39:02.581845+02
-7751	2856	2	\N	2016-01-02 21:39:38.718674+02
 7752	2857	2	\N	2016-01-02 21:39:38.718674+02
 7755	2858	2	\N	2016-01-02 21:48:47.109583+02
 7756	2858	2	\N	2016-01-02 21:49:26.302355+02
@@ -22253,6 +27750,8 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7791	2830	2	\N	2016-02-06 16:19:02.587853+02
 7792	2830	2	\N	2016-02-06 16:19:14.340638+02
 7793	2830	2	\N	2016-02-06 16:19:40.099469+02
+7794	2870	2	\N	2016-02-07 17:23:20.218116+02
+7795	2871	2	\N	2016-02-07 17:23:20.218116+02
 \.
 
 
@@ -22260,7 +27759,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7793, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7795, true);
 
 
 --
@@ -25461,10 +30960,10 @@ COPY visa_order_item (order_item_id, visa_id) FROM stdin;
 \.
 
 
-SET search_path = company, pg_catalog;
+SET search_path = company_en, pg_catalog;
 
 --
--- Name: accomodation_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -25472,7 +30971,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: account_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: account_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -25480,7 +30979,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: account_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: account_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -25488,7 +30987,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: address_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY address
@@ -25496,7 +30995,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: advsource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -25504,7 +31003,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: appointment_header_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: appointment_header_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY appointment
@@ -25512,7 +31011,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: bank_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: bank_address_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_address
@@ -25520,7 +31019,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank_detail
@@ -25528,7 +31027,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: bank_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: bank_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -25536,7 +31035,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -25544,7 +31043,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: bperson_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: bperson_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bperson
@@ -25552,7 +31051,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: calculation_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: calculation_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY calculation
@@ -25560,7 +31059,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: campaign_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: campaign_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY campaign
@@ -25568,7 +31067,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: commission_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY commission
@@ -25576,7 +31075,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: company_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: company_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -25584,7 +31083,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -25592,7 +31091,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contact
@@ -25600,7 +31099,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract_commission
@@ -25608,7 +31107,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: country_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: country_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -25616,7 +31115,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY crosspayment
@@ -25624,7 +31123,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: currency_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: currency_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -25632,7 +31131,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -25640,7 +31139,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: employee_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_address_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_address
@@ -25648,7 +31147,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_contact
@@ -25656,7 +31155,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_notification
@@ -25664,7 +31163,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_passport
@@ -25672,7 +31171,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: employee_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee
@@ -25680,7 +31179,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -25688,7 +31187,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY employee_upload
@@ -25696,7 +31195,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: foodcat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -25704,7 +31203,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: hotel_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: hotel_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotel
@@ -25712,7 +31211,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -25720,7 +31219,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -25728,7 +31227,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: income_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: income_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY income
@@ -25736,7 +31235,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice_item
@@ -25744,7 +31243,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: invoice_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: invoice_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY invoice
@@ -25752,7 +31251,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: lead_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: lead_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_item
@@ -25760,7 +31259,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead_offer
@@ -25768,7 +31267,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: lead_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY lead
@@ -25776,7 +31275,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: licence_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: licence_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY contract
@@ -25784,7 +31283,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: location_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: location_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -25792,7 +31291,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: navigation_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: navigation_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY navigation
@@ -25800,7 +31299,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: note_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: note_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note
@@ -25808,7 +31307,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: note_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: note_resource_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_resource
@@ -25816,7 +31315,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: note_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: note_upload_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY note_upload
@@ -25824,7 +31323,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: notification_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification
@@ -25832,7 +31331,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY notification_resource
@@ -25840,7 +31339,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY order_item
@@ -25848,7 +31347,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: order_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: order_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "order"
@@ -25856,7 +31355,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -25864,7 +31363,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: outgoing_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY outgoing
@@ -25872,7 +31371,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: passport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: passport_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport
@@ -25880,7 +31379,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY passport_upload
@@ -25888,7 +31387,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: permision_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: permision_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -25896,7 +31395,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: person_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_address_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_address
@@ -25904,7 +31403,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: person_category_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_category_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -25912,7 +31411,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: person_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_contact
@@ -25920,7 +31419,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_order_item
@@ -25928,7 +31427,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: person_passport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_passport_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_passport
@@ -25936,7 +31435,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: person_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person
@@ -25944,7 +31443,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -25952,7 +31451,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: position_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: position_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -25960,7 +31459,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: region_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: region_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -25968,7 +31467,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: resource_log_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: resource_log_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_log
@@ -25976,7 +31475,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: resource_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: resource_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource
@@ -25984,7 +31483,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: resource_type_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: resource_type_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -25992,7 +31491,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: roomcat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -26000,7 +31499,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: service_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: service_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -26008,7 +31507,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -26016,7 +31515,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: spassport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: spassport_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY spassport
@@ -26024,7 +31523,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: structure_address_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_address_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_address
@@ -26032,7 +31531,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -26040,7 +31539,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure_contact
@@ -26048,7 +31547,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: structure_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: structure_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY structure
@@ -26056,7 +31555,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: subaccount_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -26064,7 +31563,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -26072,7 +31571,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -26080,7 +31579,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -26088,7 +31587,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -26096,7 +31595,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -26104,7 +31603,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: task_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: task_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task
@@ -26112,7 +31611,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: task_resource_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: task_resource_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_resource
@@ -26120,7 +31619,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: task_upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: task_upload_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY task_upload
@@ -26128,7 +31627,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -26136,7 +31635,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -26144,7 +31643,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: ticket_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket
@@ -26152,7 +31651,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -26160,7 +31659,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: tour_pkey1; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: tour_pkey1; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tour
@@ -26168,7 +31667,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: touroperator_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: touroperator_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier
@@ -26176,7 +31675,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: transfer_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY cashflow
@@ -26184,7 +31683,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: transfer_pkey1; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: transfer_pkey1; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -26192,7 +31691,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: transport_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -26200,7 +31699,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: uni_list_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: uni_list_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY uni_list
@@ -26208,7 +31707,7 @@ ALTER TABLE ONLY uni_list
 
 
 --
--- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY accomodation
@@ -26216,7 +31715,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY country
@@ -26224,7 +31723,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency
@@ -26232,7 +31731,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY currency_rate
@@ -26240,7 +31739,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account
@@ -26248,7 +31747,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY subaccount
@@ -26256,7 +31755,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY account_item
@@ -26264,7 +31763,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY advsource
@@ -26272,7 +31771,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY bank
@@ -26280,7 +31779,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY company
@@ -26288,7 +31787,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY region
@@ -26296,7 +31795,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY foodcat
@@ -26304,7 +31803,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hotelcat
@@ -26312,7 +31811,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY person_category
@@ -26320,7 +31819,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY location
@@ -26328,7 +31827,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roomcat
@@ -26336,7 +31835,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY service
@@ -26344,7 +31843,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "position"
@@ -26352,7 +31851,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY supplier_type
@@ -26360,7 +31859,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ticket_class
@@ -26368,7 +31867,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transfer
@@ -26376,7 +31875,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY transport
@@ -26384,7 +31883,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: unique_idx_name_uni_list; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_name_uni_list; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY uni_list
@@ -26392,7 +31891,7 @@ ALTER TABLE ONLY uni_list
 
 
 --
--- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -26400,7 +31899,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY permision
@@ -26408,7 +31907,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -26416,7 +31915,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY resource_type
@@ -26424,7 +31923,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -26432,7 +31931,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -26440,7 +31939,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: upload_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: upload_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY upload
@@ -26448,7 +31947,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: user_pk; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: user_pk; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -26456,7 +31955,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: vat_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: vat_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY vat
@@ -26464,7 +31963,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -26472,7 +31971,1009 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: visa_pkey; Type: CONSTRAINT; Schema: company; Owner: -; Tablespace: 
+-- Name: visa_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY visa
+    ADD CONSTRAINT visa_pkey PRIMARY KEY (id);
+
+
+SET search_path = company_ru, pg_catalog;
+
+--
+-- Name: accomodation_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY accomodation
+    ADD CONSTRAINT accomodation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY account_item
+    ADD CONSTRAINT account_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY account
+    ADD CONSTRAINT account_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: address_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: advsource_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY advsource
+    ADD CONSTRAINT advsource_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appointment_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT appointment_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: bank_address_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bank_address
+    ADD CONSTRAINT bank_address_pkey PRIMARY KEY (bank_id, address_id);
+
+
+--
+-- Name: bank_detail_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT bank_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: bank_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bank
+    ADD CONSTRAINT bank_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: bperson_contact_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bperson_contact
+    ADD CONSTRAINT bperson_contact_pkey PRIMARY KEY (bperson_id, contact_id);
+
+
+--
+-- Name: bperson_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bperson
+    ADD CONSTRAINT bperson_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: calculation_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT calculation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: campaign_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT campaign_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cashflow_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cashflow
+    ADD CONSTRAINT cashflow_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: commission_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT commission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT company_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company_subaccount_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY company_subaccount
+    ADD CONSTRAINT company_subaccount_pkey PRIMARY KEY (company_id, subaccount_id);
+
+
+--
+-- Name: contact_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY contact
+    ADD CONSTRAINT contact_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: contract_commission_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY contract_commission
+    ADD CONSTRAINT contract_commission_pkey PRIMARY KEY (contract_id, commission_id);
+
+
+--
+-- Name: contract_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY contract
+    ADD CONSTRAINT contract_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: country_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY country
+    ADD CONSTRAINT country_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: crosspayment_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY crosspayment
+    ADD CONSTRAINT crosspayment_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: currency_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT currency_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: currency_rate_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY currency_rate
+    ADD CONSTRAINT currency_rate_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employee_address_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_address
+    ADD CONSTRAINT employee_address_pkey PRIMARY KEY (employee_id, address_id);
+
+
+--
+-- Name: employee_contact_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_contact
+    ADD CONSTRAINT employee_contact_pkey PRIMARY KEY (employee_id, contact_id);
+
+
+--
+-- Name: employee_notification_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_notification
+    ADD CONSTRAINT employee_notification_pkey PRIMARY KEY (employee_id, notification_id);
+
+
+--
+-- Name: employee_passport_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_passport
+    ADD CONSTRAINT employee_passport_pkey PRIMARY KEY (employee_id, passport_id);
+
+
+--
+-- Name: employee_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: employee_subaccount_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subaccount
+    ADD CONSTRAINT employee_subaccount_pkey PRIMARY KEY (employee_id, subaccount_id);
+
+
+--
+-- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_upload
+    ADD CONSTRAINT employee_upload_pkey PRIMARY KEY (employee_id, upload_id);
+
+
+--
+-- Name: foodcat_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY foodcat
+    ADD CONSTRAINT foodcat_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hotel_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT hotel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hotelcat_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY hotelcat
+    ADD CONSTRAINT hotelcat_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: income_cashflow_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY income_cashflow
+    ADD CONSTRAINT income_cashflow_pkey PRIMARY KEY (income_id, cashflow_id);
+
+
+--
+-- Name: income_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY income
+    ADD CONSTRAINT income_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invoice_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invoice_item
+    ADD CONSTRAINT invoice_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invoice_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invoice
+    ADD CONSTRAINT invoice_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lead_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lead_item
+    ADD CONSTRAINT lead_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lead_offer_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT lead_offer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lead_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT lead_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: location_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT location_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: navigation_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT navigation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: note_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY note
+    ADD CONSTRAINT note_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: note_resource_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY note_resource
+    ADD CONSTRAINT note_resource_pkey PRIMARY KEY (note_id, resource_id);
+
+
+--
+-- Name: note_upload_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY note_upload
+    ADD CONSTRAINT note_upload_pkey PRIMARY KEY (note_id, upload_id);
+
+
+--
+-- Name: notification_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notification
+    ADD CONSTRAINT notification_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notification_resource_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notification_resource
+    ADD CONSTRAINT notification_resource_pkey PRIMARY KEY (notification_id, resource_id);
+
+
+--
+-- Name: order_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT order_item_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT order_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: outgoing_cashflow_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY outgoing_cashflow
+    ADD CONSTRAINT outgoing_cashflow_pkey PRIMARY KEY (outgoing_id, cashflow_id);
+
+
+--
+-- Name: outgoing_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT outgoing_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: passport_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY passport
+    ADD CONSTRAINT passport_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: passport_upload_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY passport_upload
+    ADD CONSTRAINT passport_upload_pkey PRIMARY KEY (passport_id, upload_id);
+
+
+--
+-- Name: permision_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT permision_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: person_address_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_address
+    ADD CONSTRAINT person_address_pkey PRIMARY KEY (person_id, address_id);
+
+
+--
+-- Name: person_category_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_category
+    ADD CONSTRAINT person_category_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: person_contact_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT person_contact_pkey PRIMARY KEY (person_id, contact_id);
+
+
+--
+-- Name: person_order_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_order_item
+    ADD CONSTRAINT person_order_item_pkey PRIMARY KEY (order_item_id, person_id);
+
+
+--
+-- Name: person_passport_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_passport
+    ADD CONSTRAINT person_passport_pkey PRIMARY KEY (person_id, passport_id);
+
+
+--
+-- Name: person_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT person_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: person_subaccount_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_subaccount
+    ADD CONSTRAINT person_subaccount_pkey PRIMARY KEY (person_id, subaccount_id);
+
+
+--
+-- Name: position_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT position_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: region_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT region_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: resource_log_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resource_log
+    ADD CONSTRAINT resource_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: resource_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resource
+    ADD CONSTRAINT resource_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: resource_type_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: roomcat_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY roomcat
+    ADD CONSTRAINT roomcat_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY service
+    ADD CONSTRAINT service_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: spassport_order_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY spassport_order_item
+    ADD CONSTRAINT spassport_order_item_pkey PRIMARY KEY (order_item_id, spassport_id);
+
+
+--
+-- Name: spassport_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY spassport
+    ADD CONSTRAINT spassport_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: structure_address_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY structure_address
+    ADD CONSTRAINT structure_address_pkey PRIMARY KEY (structure_id, address_id);
+
+
+--
+-- Name: structure_bank_detail_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY structure_bank_detail
+    ADD CONSTRAINT structure_bank_detail_pkey PRIMARY KEY (structure_id, bank_detail_id);
+
+
+--
+-- Name: structure_contact_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY structure_contact
+    ADD CONSTRAINT structure_contact_pkey PRIMARY KEY (structure_id, contact_id);
+
+
+--
+-- Name: structure_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT structure_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: subaccount_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY subaccount
+    ADD CONSTRAINT subaccount_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: supplier_bank_detail_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_bank_detail
+    ADD CONSTRAINT supplier_bank_detail_pkey PRIMARY KEY (supplier_id, bank_detail_id);
+
+
+--
+-- Name: supplier_bperson_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_bperson
+    ADD CONSTRAINT supplier_bperson_pkey PRIMARY KEY (supplier_id, bperson_id);
+
+
+--
+-- Name: supplier_contract_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_contract
+    ADD CONSTRAINT supplier_contract_pkey PRIMARY KEY (supplier_id, contract_id);
+
+
+--
+-- Name: supplier_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier
+    ADD CONSTRAINT supplier_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: supplier_subaccount_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_subaccount
+    ADD CONSTRAINT supplier_subaccount_pkey PRIMARY KEY (supplier_id, subaccount_id);
+
+
+--
+-- Name: supplier_type_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_type
+    ADD CONSTRAINT supplier_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: task_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY task
+    ADD CONSTRAINT task_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: task_resource_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY task_resource
+    ADD CONSTRAINT task_resource_pkey PRIMARY KEY (task_id, resource_id);
+
+
+--
+-- Name: task_upload_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY task_upload
+    ADD CONSTRAINT task_upload_pkey PRIMARY KEY (task_id, upload_id);
+
+
+--
+-- Name: ticket_class_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket_class
+    ADD CONSTRAINT ticket_class_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ticket_order_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket_order_item
+    ADD CONSTRAINT ticket_order_item_pkey PRIMARY KEY (order_item_id, ticket_id);
+
+
+--
+-- Name: ticket_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT ticket_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tour_order_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tour_order_item
+    ADD CONSTRAINT tour_order_item_pkey PRIMARY KEY (order_item_id, tour_id);
+
+
+--
+-- Name: tour_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT tour_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: transfer_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT transfer_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: transport_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY transport
+    ADD CONSTRAINT transport_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_idx_accomodation_name; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY accomodation
+    ADD CONSTRAINT unique_idx_accomodation_name UNIQUE (name);
+
+
+--
+-- Name: unique_idx_country_iso_code; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY country
+    ADD CONSTRAINT unique_idx_country_iso_code UNIQUE (iso_code);
+
+
+--
+-- Name: unique_idx_currency_iso_code; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT unique_idx_currency_iso_code UNIQUE (iso_code);
+
+
+--
+-- Name: unique_idx_currency_rate_currency_id_date; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY currency_rate
+    ADD CONSTRAINT unique_idx_currency_rate_currency_id_date UNIQUE (currency_id, date, supplier_id);
+
+
+--
+-- Name: unique_idx_name_account; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY account
+    ADD CONSTRAINT unique_idx_name_account UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_account_id_subaccount; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY subaccount
+    ADD CONSTRAINT unique_idx_name_account_id_subaccount UNIQUE (name, account_id);
+
+
+--
+-- Name: unique_idx_name_account_item; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY account_item
+    ADD CONSTRAINT unique_idx_name_account_item UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_advsource; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY advsource
+    ADD CONSTRAINT unique_idx_name_advsource UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_bank; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY bank
+    ADD CONSTRAINT unique_idx_name_bank UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_company; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT unique_idx_name_company UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_country_id_region; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT unique_idx_name_country_id_region UNIQUE (name, country_id);
+
+
+--
+-- Name: unique_idx_name_foodcat; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY foodcat
+    ADD CONSTRAINT unique_idx_name_foodcat UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_hotelcat; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY hotelcat
+    ADD CONSTRAINT unique_idx_name_hotelcat UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_person_category; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY person_category
+    ADD CONSTRAINT unique_idx_name_person_category UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_region_id_location; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT unique_idx_name_region_id_location UNIQUE (name, region_id);
+
+
+--
+-- Name: unique_idx_name_roomcat; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY roomcat
+    ADD CONSTRAINT unique_idx_name_roomcat UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_service; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY service
+    ADD CONSTRAINT unique_idx_name_service UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_strcuture_id_position; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT unique_idx_name_strcuture_id_position UNIQUE (name, structure_id);
+
+
+--
+-- Name: unique_idx_name_supplier_type; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY supplier_type
+    ADD CONSTRAINT unique_idx_name_supplier_type UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_ticket_class; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ticket_class
+    ADD CONSTRAINT unique_idx_name_ticket_class UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_transfer; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT unique_idx_name_transfer UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_transport; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY transport
+    ADD CONSTRAINT unique_idx_name_transport UNIQUE (name);
+
+
+--
+-- Name: unique_idx_path_upload; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY upload
+    ADD CONSTRAINT unique_idx_path_upload UNIQUE (path);
+
+
+--
+-- Name: unique_idx_resource_type_id_position_id_permision; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT unique_idx_resource_type_id_position_id_permision UNIQUE (resource_type_id, position_id);
+
+
+--
+-- Name: unique_idx_resource_type_module; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT unique_idx_resource_type_module UNIQUE (module, resource_name);
+
+
+--
+-- Name: unique_idx_resource_type_name; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT unique_idx_resource_type_name UNIQUE (name);
+
+
+--
+-- Name: unique_idx_users_email; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT unique_idx_users_email UNIQUE (email);
+
+
+--
+-- Name: unique_idx_users_username; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT unique_idx_users_username UNIQUE (username);
+
+
+--
+-- Name: upload_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY upload
+    ADD CONSTRAINT upload_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: vat_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY vat
+    ADD CONSTRAINT vat_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: visa_order_item_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY visa_order_item
+    ADD CONSTRAINT visa_order_item_pkey PRIMARY KEY (order_item_id, visa_id);
+
+
+--
+-- Name: visa_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY visa
@@ -29485,10 +35986,10 @@ ALTER TABLE ONLY visa
     ADD CONSTRAINT visa_pkey PRIMARY KEY (id);
 
 
-SET search_path = company, pg_catalog;
+SET search_path = company_en, pg_catalog;
 
 --
--- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -29496,7 +35997,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -29504,7 +36005,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -29512,7 +36013,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -29520,7 +36021,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -29528,7 +36029,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_account_item_id_transfer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -29536,7 +36037,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -29544,7 +36045,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -29552,7 +36053,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -29560,7 +36061,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -29568,7 +36069,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -29576,7 +36077,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -29584,7 +36085,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -29592,7 +36093,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -29600,7 +36101,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -29608,7 +36109,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank_address
@@ -29616,7 +36117,7 @@ ALTER TABLE ONLY bank_address
 
 
 --
--- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -29624,7 +36125,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -29632,7 +36133,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -29640,7 +36141,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -29648,7 +36149,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -29656,7 +36157,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -29664,7 +36165,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -29672,7 +36173,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -29680,7 +36181,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bperson_contact
@@ -29688,7 +36189,7 @@ ALTER TABLE ONLY bperson_contact
 
 
 --
--- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -29696,7 +36197,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contact_id_employee_notification; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -29704,7 +36205,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -29712,7 +36213,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -29720,7 +36221,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -29728,7 +36229,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY contract_commission
@@ -29736,7 +36237,7 @@ ALTER TABLE ONLY contract_commission
 
 
 --
--- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -29744,7 +36245,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -29752,7 +36253,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -29760,7 +36261,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -29768,7 +36269,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -29776,7 +36277,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -29784,7 +36285,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -29792,7 +36293,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -29800,7 +36301,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -29808,7 +36309,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -29816,7 +36317,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -29824,7 +36325,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_currency_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -29832,7 +36333,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -29840,7 +36341,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -29848,7 +36349,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -29856,7 +36357,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_address
@@ -29864,7 +36365,7 @@ ALTER TABLE ONLY employee_address
 
 
 --
--- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_contact
@@ -29872,7 +36373,7 @@ ALTER TABLE ONLY employee_contact
 
 
 --
--- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_notification
@@ -29880,7 +36381,7 @@ ALTER TABLE ONLY employee_notification
 
 
 --
--- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -29888,7 +36389,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -29896,7 +36397,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -29904,7 +36405,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -29912,7 +36413,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -29920,7 +36421,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -29928,7 +36429,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -29936,7 +36437,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -29944,7 +36445,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -29952,7 +36453,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -29960,7 +36461,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -29968,7 +36469,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -29976,7 +36477,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY income_cashflow
@@ -29984,7 +36485,7 @@ ALTER TABLE ONLY income_cashflow
 
 
 --
--- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -29992,7 +36493,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -30000,7 +36501,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -30008,7 +36509,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -30016,7 +36517,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -30024,7 +36525,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -30032,7 +36533,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -30040,7 +36541,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -30048,7 +36549,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -30056,7 +36557,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -30064,7 +36565,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -30072,7 +36573,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -30080,7 +36581,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -30088,7 +36589,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -30096,7 +36597,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice_item
@@ -30104,7 +36605,7 @@ ALTER TABLE ONLY invoice_item
 
 
 --
--- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -30112,7 +36613,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -30120,7 +36621,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -30128,7 +36629,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -30136,7 +36637,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -30144,7 +36645,7 @@ ALTER TABLE ONLY visa_order_item
 
 
 --
--- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY outgoing_cashflow
@@ -30152,7 +36653,7 @@ ALTER TABLE ONLY outgoing_cashflow
 
 
 --
--- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -30160,7 +36661,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_passport
@@ -30168,7 +36669,7 @@ ALTER TABLE ONLY employee_passport
 
 
 --
--- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -30176,7 +36677,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -30184,7 +36685,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -30192,7 +36693,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -30200,7 +36701,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_address
@@ -30208,7 +36709,7 @@ ALTER TABLE ONLY person_address
 
 
 --
--- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_contact
@@ -30216,7 +36717,7 @@ ALTER TABLE ONLY person_contact
 
 
 --
--- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_order_item
@@ -30224,7 +36725,7 @@ ALTER TABLE ONLY person_order_item
 
 
 --
--- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_passport
@@ -30232,7 +36733,7 @@ ALTER TABLE ONLY person_passport
 
 
 --
--- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -30240,7 +36741,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -30248,7 +36749,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -30256,7 +36757,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -30264,7 +36765,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -30272,7 +36773,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -30280,7 +36781,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -30288,7 +36789,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY accomodation
@@ -30296,7 +36797,7 @@ ALTER TABLE ONLY accomodation
 
 
 --
--- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY account
@@ -30304,7 +36805,7 @@ ALTER TABLE ONLY account
 
 
 --
--- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY account_item
@@ -30312,7 +36813,7 @@ ALTER TABLE ONLY account_item
 
 
 --
--- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY address
@@ -30320,7 +36821,7 @@ ALTER TABLE ONLY address
 
 
 --
--- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY advsource
@@ -30328,7 +36829,7 @@ ALTER TABLE ONLY advsource
 
 
 --
--- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY appointment
@@ -30336,7 +36837,7 @@ ALTER TABLE ONLY appointment
 
 
 --
--- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank
@@ -30344,7 +36845,7 @@ ALTER TABLE ONLY bank
 
 
 --
--- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bank_detail
@@ -30352,7 +36853,7 @@ ALTER TABLE ONLY bank_detail
 
 
 --
--- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY bperson
@@ -30360,7 +36861,7 @@ ALTER TABLE ONLY bperson
 
 
 --
--- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY calculation
@@ -30368,7 +36869,7 @@ ALTER TABLE ONLY calculation
 
 
 --
--- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY campaign
@@ -30376,7 +36877,7 @@ ALTER TABLE ONLY campaign
 
 
 --
--- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -30384,7 +36885,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY company
@@ -30392,7 +36893,7 @@ ALTER TABLE ONLY company
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY contact
@@ -30400,7 +36901,7 @@ ALTER TABLE ONLY contact
 
 
 --
--- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY upload
@@ -30408,7 +36909,7 @@ ALTER TABLE ONLY upload
 
 
 --
--- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY country
@@ -30416,7 +36917,7 @@ ALTER TABLE ONLY country
 
 
 --
--- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY crosspayment
@@ -30424,7 +36925,7 @@ ALTER TABLE ONLY crosspayment
 
 
 --
--- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY currency
@@ -30432,7 +36933,7 @@ ALTER TABLE ONLY currency
 
 
 --
--- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee
@@ -30440,7 +36941,7 @@ ALTER TABLE ONLY employee
 
 
 --
--- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY foodcat
@@ -30448,7 +36949,7 @@ ALTER TABLE ONLY foodcat
 
 
 --
--- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY hotel
@@ -30456,7 +36957,7 @@ ALTER TABLE ONLY hotel
 
 
 --
--- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY hotelcat
@@ -30464,7 +36965,7 @@ ALTER TABLE ONLY hotelcat
 
 
 --
--- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY income
@@ -30472,7 +36973,7 @@ ALTER TABLE ONLY income
 
 
 --
--- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY invoice
@@ -30480,7 +36981,7 @@ ALTER TABLE ONLY invoice
 
 
 --
--- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead
@@ -30488,7 +36989,7 @@ ALTER TABLE ONLY lead
 
 
 --
--- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -30496,7 +36997,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -30504,7 +37005,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_licence; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY contract
@@ -30512,7 +37013,7 @@ ALTER TABLE ONLY contract
 
 
 --
--- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY location
@@ -30520,7 +37021,7 @@ ALTER TABLE ONLY location
 
 
 --
--- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY navigation
@@ -30528,7 +37029,7 @@ ALTER TABLE ONLY navigation
 
 
 --
--- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY note
@@ -30536,7 +37037,7 @@ ALTER TABLE ONLY note
 
 
 --
--- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY note_resource
@@ -30544,7 +37045,7 @@ ALTER TABLE ONLY note_resource
 
 
 --
--- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY notification
@@ -30552,7 +37053,7 @@ ALTER TABLE ONLY notification
 
 
 --
--- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY notification_resource
@@ -30560,7 +37061,7 @@ ALTER TABLE ONLY notification_resource
 
 
 --
--- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "order"
@@ -30568,7 +37069,7 @@ ALTER TABLE ONLY "order"
 
 
 --
--- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -30576,7 +37077,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -30584,7 +37085,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY passport
@@ -30592,7 +37093,7 @@ ALTER TABLE ONLY passport
 
 
 --
--- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person
@@ -30600,7 +37101,7 @@ ALTER TABLE ONLY person
 
 
 --
--- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_category
@@ -30608,7 +37109,7 @@ ALTER TABLE ONLY person_category
 
 
 --
--- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "position"
@@ -30616,7 +37117,7 @@ ALTER TABLE ONLY "position"
 
 
 --
--- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY region
@@ -30624,7 +37125,7 @@ ALTER TABLE ONLY region
 
 
 --
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource_log
@@ -30632,7 +37133,7 @@ ALTER TABLE ONLY resource_log
 
 
 --
--- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource_type
@@ -30640,7 +37141,7 @@ ALTER TABLE ONLY resource_type
 
 
 --
--- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY roomcat
@@ -30648,7 +37149,7 @@ ALTER TABLE ONLY roomcat
 
 
 --
--- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -30656,7 +37157,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY spassport
@@ -30664,7 +37165,7 @@ ALTER TABLE ONLY spassport
 
 
 --
--- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -30672,7 +37173,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -30680,7 +37181,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_type
@@ -30688,7 +37189,7 @@ ALTER TABLE ONLY supplier_type
 
 
 --
--- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task
@@ -30696,7 +37197,7 @@ ALTER TABLE ONLY task
 
 
 --
--- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -30704,7 +37205,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -30712,7 +37213,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket_class
@@ -30720,7 +37221,7 @@ ALTER TABLE ONLY ticket_class
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -30728,7 +37229,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30736,7 +37237,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_resource_id_touroperator; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_touroperator; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -30744,7 +37245,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY transfer
@@ -30752,7 +37253,7 @@ ALTER TABLE ONLY transfer
 
 
 --
--- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY transport
@@ -30760,7 +37261,7 @@ ALTER TABLE ONLY transport
 
 
 --
--- Name: fk_resource_id_uni_list; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_uni_list; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY uni_list
@@ -30768,7 +37269,7 @@ ALTER TABLE ONLY uni_list
 
 
 --
--- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY "user"
@@ -30776,7 +37277,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -30784,7 +37285,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY visa
@@ -30792,7 +37293,7 @@ ALTER TABLE ONLY visa
 
 
 --
--- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY permision
@@ -30800,7 +37301,7 @@ ALTER TABLE ONLY permision
 
 
 --
--- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -30808,7 +37309,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY service
@@ -30816,7 +37317,7 @@ ALTER TABLE ONLY service
 
 
 --
--- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30824,7 +37325,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY commission
@@ -30832,7 +37333,7 @@ ALTER TABLE ONLY commission
 
 
 --
--- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_item
@@ -30840,7 +37341,7 @@ ALTER TABLE ONLY lead_item
 
 
 --
--- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -30848,7 +37349,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -30856,7 +37357,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY vat
@@ -30864,7 +37365,7 @@ ALTER TABLE ONLY vat
 
 
 --
--- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY spassport_order_item
@@ -30872,7 +37373,7 @@ ALTER TABLE ONLY spassport_order_item
 
 
 --
--- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -30880,7 +37381,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30888,7 +37389,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -30896,7 +37397,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -30904,7 +37405,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY resource
@@ -30912,7 +37413,7 @@ ALTER TABLE ONLY resource
 
 
 --
--- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure_address
@@ -30920,7 +37421,7 @@ ALTER TABLE ONLY structure_address
 
 
 --
--- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure_bank_detail
@@ -30928,7 +37429,7 @@ ALTER TABLE ONLY structure_bank_detail
 
 
 --
--- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure_contact
@@ -30936,7 +37437,7 @@ ALTER TABLE ONLY structure_contact
 
 
 --
--- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY structure
@@ -30944,7 +37445,7 @@ ALTER TABLE ONLY structure
 
 
 --
--- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY subaccount
@@ -30952,7 +37453,7 @@ ALTER TABLE ONLY subaccount
 
 
 --
--- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_from_id_transfer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -30960,7 +37461,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY company_subaccount
@@ -30968,7 +37469,7 @@ ALTER TABLE ONLY company_subaccount
 
 
 --
--- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_subaccount
@@ -30976,7 +37477,7 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
--- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY outgoing
@@ -30984,7 +37485,7 @@ ALTER TABLE ONLY outgoing
 
 
 --
--- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY person_subaccount
@@ -30992,7 +37493,7 @@ ALTER TABLE ONLY person_subaccount
 
 
 --
--- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -31000,7 +37501,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_subaccount_to_id_transfer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY cashflow
@@ -31008,7 +37509,7 @@ ALTER TABLE ONLY cashflow
 
 
 --
--- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY currency_rate
@@ -31016,7 +37517,7 @@ ALTER TABLE ONLY currency_rate
 
 
 --
--- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY lead_offer
@@ -31024,7 +37525,7 @@ ALTER TABLE ONLY lead_offer
 
 
 --
--- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY order_item
@@ -31032,7 +37533,7 @@ ALTER TABLE ONLY order_item
 
 
 --
--- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bank_detail
@@ -31040,7 +37541,7 @@ ALTER TABLE ONLY supplier_bank_detail
 
 
 --
--- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_bperson
@@ -31048,7 +37549,7 @@ ALTER TABLE ONLY supplier_bperson
 
 
 --
--- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_contract
@@ -31056,7 +37557,7 @@ ALTER TABLE ONLY supplier_contract
 
 
 --
--- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier_subaccount
@@ -31064,7 +37565,7 @@ ALTER TABLE ONLY supplier_subaccount
 
 
 --
--- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY supplier
@@ -31072,7 +37573,7 @@ ALTER TABLE ONLY supplier
 
 
 --
--- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task_resource
@@ -31080,7 +37581,7 @@ ALTER TABLE ONLY task_resource
 
 
 --
--- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -31088,7 +37589,7 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -31096,7 +37597,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket_order_item
@@ -31104,7 +37605,7 @@ ALTER TABLE ONLY ticket_order_item
 
 
 --
--- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour_order_item
@@ -31112,7 +37613,7 @@ ALTER TABLE ONLY tour_order_item
 
 
 --
--- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY tour
@@ -31120,7 +37621,7 @@ ALTER TABLE ONLY tour
 
 
 --
--- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY ticket
@@ -31128,7 +37629,7 @@ ALTER TABLE ONLY ticket
 
 
 --
--- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
@@ -31136,7 +37637,7 @@ ALTER TABLE ONLY employee_upload
 
 
 --
--- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY note_upload
@@ -31144,7 +37645,7 @@ ALTER TABLE ONLY note_upload
 
 
 --
--- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY passport_upload
@@ -31152,7 +37653,7 @@ ALTER TABLE ONLY passport_upload
 
 
 --
--- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY task_upload
@@ -31160,7 +37661,1681 @@ ALTER TABLE ONLY task_upload
 
 
 --
--- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: company; Owner: -
+-- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY visa_order_item
+    ADD CONSTRAINT fk_visa_id_visa_order_item FOREIGN KEY (visa_id) REFERENCES visa(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+SET search_path = company_ru, pg_catalog;
+
+--
+-- Name: fk_accomodation_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_accomodation_id_tour FOREIGN KEY (accomodation_id) REFERENCES accomodation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_id_invoice; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice
+    ADD CONSTRAINT fk_account_id_invoice FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_id_vat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY vat
+    ADD CONSTRAINT fk_account_id_vat FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY cashflow
+    ADD CONSTRAINT fk_account_item_id_cashflow FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_item_id_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY income
+    ADD CONSTRAINT fk_account_item_id_cashflow FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_item_id_outgoing; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_account_item_id_outgoing FOREIGN KEY (account_item_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_account_item_parent_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY account_item
+    ADD CONSTRAINT fk_account_item_parent_id FOREIGN KEY (parent_id) REFERENCES account_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_bank_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank_address
+    ADD CONSTRAINT fk_address_id_bank_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_employee_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_address
+    ADD CONSTRAINT fk_address_id_employee_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_person_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_address
+    ADD CONSTRAINT fk_address_id_person_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_address_id_structure_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure_address
+    ADD CONSTRAINT fk_address_id_structure_address FOREIGN KEY (address_id) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_advsource_id_lead; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT fk_advsource_id_lead FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_advsource_id_order; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_advsource_id_order FOREIGN KEY (advsource_id) REFERENCES advsource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_detail_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure_bank_detail
+    ADD CONSTRAINT fk_bank_detail_id_structure_bank_detail FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_detail_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_bank_detail
+    ADD CONSTRAINT fk_bank_detail_id_supplier_bank_detail FOREIGN KEY (bank_detail_id) REFERENCES bank_detail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_id_bank_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank_address
+    ADD CONSTRAINT fk_bank_id_bank_address FOREIGN KEY (bank_id) REFERENCES bank(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bank_id_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT fk_bank_id_bank_detail FOREIGN KEY (bank_id) REFERENCES bank(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_bperson_id_bperson_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bperson_contact
+    ADD CONSTRAINT fk_bperson_id_bperson_contact FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_bperson_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_bperson
+    ADD CONSTRAINT fk_bperson_id_supplier_bperson FOREIGN KEY (bperson_id) REFERENCES bperson(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_cashflow_id_crosspayment; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY crosspayment
+    ADD CONSTRAINT fk_cashflow_id_crosspayment FOREIGN KEY (cashflow_id) REFERENCES cashflow(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_cashflow_id_income_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY income_cashflow
+    ADD CONSTRAINT fk_cashflow_id_income_cashflow FOREIGN KEY (cashflow_id) REFERENCES cashflow(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_cashflow_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY outgoing_cashflow
+    ADD CONSTRAINT fk_cashflow_id_outgoing_cashflow FOREIGN KEY (cashflow_id) REFERENCES cashflow(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_commission_id_contract_commission; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY contract_commission
+    ADD CONSTRAINT fk_commission_id_contract_commission FOREIGN KEY (commission_id) REFERENCES commission(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_company_id_company_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY company_subaccount
+    ADD CONSTRAINT fk_company_id_company_subaccount FOREIGN KEY (company_id) REFERENCES company(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_bperson_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bperson_contact
+    ADD CONSTRAINT fk_contact_id_bperson_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_employee_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_contact
+    ADD CONSTRAINT fk_contact_id_employee_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_person_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT fk_contact_id_person_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contact_id_structure_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure_contact
+    ADD CONSTRAINT fk_contact_id_structure_contact FOREIGN KEY (contact_id) REFERENCES contact(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contract_id_caluclation; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id);
+
+
+--
+-- Name: fk_contract_id_contract_commission; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY contract_commission
+    ADD CONSTRAINT fk_contract_id_contract_commission FOREIGN KEY (contract_id) REFERENCES contract(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_contract_id_supplier_contract; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_contract
+    ADD CONSTRAINT fk_contract_id_supplier_contract FOREIGN KEY (contract_id) REFERENCES contract(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_country_id_passport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY passport
+    ADD CONSTRAINT fk_country_id_passport FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_country_id_visa; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY visa
+    ADD CONSTRAINT fk_country_id_visa FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_account; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY account
+    ADD CONSTRAINT fk_currency_id_account FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_appointment; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_currency_id_appointment FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT fk_currency_id_bank_detail FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_commission; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT fk_currency_id_commission FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_company; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT fk_currency_id_company FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_currency_rate; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY currency_rate
+    ADD CONSTRAINT fk_currency_id_currency_rate FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_lead_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_item
+    ADD CONSTRAINT fk_currency_id_lead_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_lead_offer; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_currency_id_lead_offer FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_currency_id_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_currency_id_order_item FOREIGN KEY (currency_id) REFERENCES currency(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_customer_id_lead; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT fk_customer_id_lead FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_customer_id_order; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_customer_id_order FOREIGN KEY (customer_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_appointment; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_employee_id_appointment FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_address
+    ADD CONSTRAINT fk_employee_id_employee_address FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_contact
+    ADD CONSTRAINT fk_employee_id_employee_contact FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_notification; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_notification
+    ADD CONSTRAINT fk_employee_id_employee_notification FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_passport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_passport
+    ADD CONSTRAINT fk_employee_id_employee_passport FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_subaccount
+    ADD CONSTRAINT fk_employee_id_employee_subaccount FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_upload
+    ADD CONSTRAINT fk_employee_id_employee_upload FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource_log
+    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_task; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task
+    ADD CONSTRAINT fk_employee_id_task FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_employee_id_user; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT fk_employee_id_user FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_end_location_id_ticket; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk_end_location_id_ticket FOREIGN KEY (end_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_end_location_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_end_location_id_tour FOREIGN KEY (end_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_end_transport_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_end_transport_id_tour FOREIGN KEY (end_transport_id) REFERENCES transport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_foodcat_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_foodcat_id_tour FOREIGN KEY (foodcat_id) REFERENCES foodcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_hotel_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_hotel_id_tour FOREIGN KEY (hotel_id) REFERENCES hotel(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_hotelcat_id_hotel; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT fk_hotelcat_id_hotel FOREIGN KEY (hotelcat_id) REFERENCES hotelcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_income_id_income_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY income_cashflow
+    ADD CONSTRAINT fk_income_id_income_cashflow FOREIGN KEY (income_id) REFERENCES income(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_invoice_id_income; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY income
+    ADD CONSTRAINT fk_invoice_id_income FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_invoice_id_invoice_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice_item
+    ADD CONSTRAINT fk_invoice_id_invoice_item FOREIGN KEY (invoice_id) REFERENCES invoice(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_lead_id_lead_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_item
+    ADD CONSTRAINT fk_lead_id_lead_item FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_lead_id_lead_offer; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_lead_id_lead_offer FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_lead_id_order; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_lead_id_order FOREIGN KEY (lead_id) REFERENCES lead(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_location_id_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT fk_location_id_address FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_location_id_hotel; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_navigation_position_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_navigation_position_id FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_note_id_note_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY note_resource
+    ADD CONSTRAINT fk_note_id_note_resource FOREIGN KEY (note_id) REFERENCES note(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_note_id_note_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY note_upload
+    ADD CONSTRAINT fk_note_id_note_upload FOREIGN KEY (note_id) REFERENCES note(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_notification_id_employee_notification; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_notification
+    ADD CONSTRAINT fk_notification_id_employee_notification FOREIGN KEY (notification_id) REFERENCES notification(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_notification_id_notification_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY notification_resource
+    ADD CONSTRAINT fk_notification_id_notification_resource FOREIGN KEY (notification_id) REFERENCES notification(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_id_invoice; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice
+    ADD CONSTRAINT fk_order_id_invoice FOREIGN KEY (order_id) REFERENCES "order"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_id_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_order_id_order_item FOREIGN KEY (order_id) REFERENCES "order"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_caluclation; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_order_item_id_caluclation FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_invoice_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice_item
+    ADD CONSTRAINT fk_order_item_id_invoice_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_person_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_order_item
+    ADD CONSTRAINT fk_order_item_id_person_order_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY spassport_order_item
+    ADD CONSTRAINT fk_order_item_id_spassport_order_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket_order_item
+    ADD CONSTRAINT fk_order_item_id_ticket_order_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_tour_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour_order_item
+    ADD CONSTRAINT fk_order_item_id_tour_order_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_order_item_id_visa_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY visa_order_item
+    ADD CONSTRAINT fk_order_item_id_visa_order_item FOREIGN KEY (order_item_id) REFERENCES order_item(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_outgoing_id_outgoing_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY outgoing_cashflow
+    ADD CONSTRAINT fk_outgoing_id_outgoing_cashflow FOREIGN KEY (outgoing_id) REFERENCES outgoing(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_parent_id_navigation; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_parent_id_navigation FOREIGN KEY (parent_id) REFERENCES navigation(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_passport_id_employee_passport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_passport
+    ADD CONSTRAINT fk_passport_id_employee_passport FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_passport_id_passport_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY passport_upload
+    ADD CONSTRAINT fk_passport_id_passport_upload FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_passport_id_person_passport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_passport
+    ADD CONSTRAINT fk_passport_id_person_passport FOREIGN KEY (passport_id) REFERENCES passport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_permision_structure_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_category_id_person; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT fk_person_category_id_person FOREIGN KEY (person_category_id) REFERENCES person_category(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_address
+    ADD CONSTRAINT fk_person_id_person_address FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_contact
+    ADD CONSTRAINT fk_person_id_person_contact FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_order_item
+    ADD CONSTRAINT fk_person_id_person_order_item FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_passport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_passport
+    ADD CONSTRAINT fk_person_id_person_passport FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_id_person_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_subaccount
+    ADD CONSTRAINT fk_person_id_person_subaccount FOREIGN KEY (person_id) REFERENCES person(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_photo_upload_id_employee; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT fk_photo_upload_id_employee FOREIGN KEY (photo_upload_id) REFERENCES upload(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_position_id_appointment; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_position_id_appointment FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_position_id_permision; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT fk_position_id_permision FOREIGN KEY (position_id) REFERENCES "position"(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_position_structure_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT fk_position_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_region_country_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT fk_region_country_id FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_region_id_location; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT fk_region_id_location FOREIGN KEY (region_id) REFERENCES region(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_accomodation; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY accomodation
+    ADD CONSTRAINT fk_resource_id_accomodation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_account; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY account
+    ADD CONSTRAINT fk_resource_id_account FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_account_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY account_item
+    ADD CONSTRAINT fk_resource_id_account_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT fk_resource_id_address FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_advsource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY advsource
+    ADD CONSTRAINT fk_resource_id_advsource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_appointment; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY appointment
+    ADD CONSTRAINT fk_resource_id_appointment FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_bank; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank
+    ADD CONSTRAINT fk_resource_id_bank FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bank_detail
+    ADD CONSTRAINT fk_resource_id_bank_detail FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_bperson; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY bperson
+    ADD CONSTRAINT fk_resource_id_bperson FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_calculation; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY calculation
+    ADD CONSTRAINT fk_resource_id_calculation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_campaign; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_resource_id_campaign FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_commission; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT fk_resource_id_commission FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_company; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY company
+    ADD CONSTRAINT fk_resource_id_company FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY contact
+    ADD CONSTRAINT fk_resource_id_contact FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY upload
+    ADD CONSTRAINT fk_resource_id_contact FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_contract; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY contract
+    ADD CONSTRAINT fk_resource_id_contract FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_country; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY country
+    ADD CONSTRAINT fk_resource_id_country FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_crosspayment; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY crosspayment
+    ADD CONSTRAINT fk_resource_id_crosspayment FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_currency; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY currency
+    ADD CONSTRAINT fk_resource_id_currency FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_currency_rate; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY currency_rate
+    ADD CONSTRAINT fk_resource_id_currency_rate FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_employee; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee
+    ADD CONSTRAINT fk_resource_id_employee FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY foodcat
+    ADD CONSTRAINT fk_resource_id_foodcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_hotel; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY hotel
+    ADD CONSTRAINT fk_resource_id_hotel FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_hotelcat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY hotelcat
+    ADD CONSTRAINT fk_resource_id_hotelcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_income; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY income
+    ADD CONSTRAINT fk_resource_id_income FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_invoice; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY invoice
+    ADD CONSTRAINT fk_resource_id_invoice FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_lead; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead
+    ADD CONSTRAINT fk_resource_id_lead FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_lead_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_item
+    ADD CONSTRAINT fk_resource_id_lead_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_lead_offer; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_resource_id_lead_offer FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_location; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY location
+    ADD CONSTRAINT fk_resource_id_location FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_navigation; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY navigation
+    ADD CONSTRAINT fk_resource_id_navigation FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_note; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY note
+    ADD CONSTRAINT fk_resource_id_note FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_note_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY note_resource
+    ADD CONSTRAINT fk_resource_id_note_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_notification; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY notification
+    ADD CONSTRAINT fk_resource_id_notification FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_notification_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY notification_resource
+    ADD CONSTRAINT fk_resource_id_notification_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_order; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT fk_resource_id_order FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_resource_id_order_item FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_outgoing; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_resource_id_outgoing FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_passport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY passport
+    ADD CONSTRAINT fk_resource_id_passport FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_person; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person
+    ADD CONSTRAINT fk_resource_id_person FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_person_category; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_category
+    ADD CONSTRAINT fk_resource_id_person_category FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_position; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "position"
+    ADD CONSTRAINT fk_resource_id_position FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_region; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY region
+    ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource_log
+    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_id_resource_type; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource_type
+    ADD CONSTRAINT fk_resource_id_resource_type FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_roomcat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY roomcat
+    ADD CONSTRAINT fk_resource_id_roomcat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_service; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY service
+    ADD CONSTRAINT fk_resource_id_service FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_spassport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY spassport
+    ADD CONSTRAINT fk_resource_id_spassport FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_structure; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT fk_resource_id_structure FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY subaccount
+    ADD CONSTRAINT fk_resource_id_subaccount FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_supplier; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier
+    ADD CONSTRAINT fk_resource_id_supplier FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_supplier_type; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_type
+    ADD CONSTRAINT fk_resource_id_supplier_type FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task
+    ADD CONSTRAINT fk_resource_id_task FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_task_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task_resource
+    ADD CONSTRAINT fk_resource_id_task_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_ticket; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk_resource_id_ticket FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_ticket_class; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket_class
+    ADD CONSTRAINT fk_resource_id_ticket_class FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_resource_id_tour FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_transfer; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY transfer
+    ADD CONSTRAINT fk_resource_id_transfer FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_transport; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY transport
+    ADD CONSTRAINT fk_resource_id_transport FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_user; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT fk_resource_id_user FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_vat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY vat
+    ADD CONSTRAINT fk_resource_id_vat FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_visa; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY visa
+    ADD CONSTRAINT fk_resource_id_visa FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_type_id_permission; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY permision
+    ADD CONSTRAINT fk_resource_type_id_permission FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: fk_resource_type_id_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource
+    ADD CONSTRAINT fk_resource_type_id_resource FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_type_id_service; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY service
+    ADD CONSTRAINT fk_resource_type_id_service FOREIGN KEY (resource_type_id) REFERENCES resource_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_roomcat_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_roomcat_id_tour FOREIGN KEY (roomcat_id) REFERENCES roomcat(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_commission; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY commission
+    ADD CONSTRAINT fk_service_id_commission FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_lead_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_item
+    ADD CONSTRAINT fk_service_id_lead_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_lead_offer; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_service_id_lead_offer FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_service_id_order_item FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_service_id_vat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY vat
+    ADD CONSTRAINT fk_service_id_vat FOREIGN KEY (service_id) REFERENCES service(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_spassport_id_spassport_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY spassport_order_item
+    ADD CONSTRAINT fk_spassport_id_spassport_order_item FOREIGN KEY (spassport_id) REFERENCES spassport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_start_location_id_ticket; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk_start_location_id_ticket FOREIGN KEY (start_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_start_location_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_start_location_id_tour FOREIGN KEY (start_location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_start_transport_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_start_transport_id_tour FOREIGN KEY (start_transport_id) REFERENCES transport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_company_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT fk_structure_company_id FOREIGN KEY (company_id) REFERENCES company(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY resource
+    ADD CONSTRAINT fk_structure_id_resource FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_structure_address; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure_address
+    ADD CONSTRAINT fk_structure_id_structure_address FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_structure_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure_bank_detail
+    ADD CONSTRAINT fk_structure_id_structure_bank_detail FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_id_structure_contact; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure_contact
+    ADD CONSTRAINT fk_structure_id_structure_contact FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_structure_parent_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY structure
+    ADD CONSTRAINT fk_structure_parent_id FOREIGN KEY (parent_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_account_id; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY subaccount
+    ADD CONSTRAINT fk_subaccount_account_id FOREIGN KEY (account_id) REFERENCES account(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_from_id_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY cashflow
+    ADD CONSTRAINT fk_subaccount_from_id_cashflow FOREIGN KEY (subaccount_from_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_company_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY company_subaccount
+    ADD CONSTRAINT fk_subaccount_id_company_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_employee_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_subaccount
+    ADD CONSTRAINT fk_subaccount_id_employee_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_outgoing; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY outgoing
+    ADD CONSTRAINT fk_subaccount_id_outgoing FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_person_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY person_subaccount
+    ADD CONSTRAINT fk_subaccount_id_person_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_subaccount
+    ADD CONSTRAINT fk_subaccount_id_supplier_subaccount FOREIGN KEY (subaccount_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_subaccount_to_id_cashflow; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY cashflow
+    ADD CONSTRAINT fk_subaccount_to_id_cashflow FOREIGN KEY (subaccount_to_id) REFERENCES subaccount(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_currency_rate; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY currency_rate
+    ADD CONSTRAINT fk_supplier_id_currency_rate FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_lead_offer; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY lead_offer
+    ADD CONSTRAINT fk_supplier_id_lead_offer FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY order_item
+    ADD CONSTRAINT fk_supplier_id_order_item FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_supplier_bank_detail; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_bank_detail
+    ADD CONSTRAINT fk_supplier_id_supplier_bank_detail FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_supplier_bperson; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_bperson
+    ADD CONSTRAINT fk_supplier_id_supplier_bperson FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_supplier_contract; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_contract
+    ADD CONSTRAINT fk_supplier_id_supplier_contract FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_id_supplier_subaccount; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier_subaccount
+    ADD CONSTRAINT fk_supplier_id_supplier_subaccount FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_supplier_type_id_supplier; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY supplier
+    ADD CONSTRAINT fk_supplier_type_id_supplier FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_task_id_task_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task_resource
+    ADD CONSTRAINT fk_task_id_task_resource FOREIGN KEY (task_id) REFERENCES task(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_task_id_task_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task_upload
+    ADD CONSTRAINT fk_task_id_task_upload FOREIGN KEY (task_id) REFERENCES task(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_ticket_class_id_ticket; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk_ticket_class_id_ticket FOREIGN KEY (ticket_class_id) REFERENCES ticket_class(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_ticket_id_ticket_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket_order_item
+    ADD CONSTRAINT fk_ticket_id_ticket_order_item FOREIGN KEY (ticket_id) REFERENCES ticket(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tour_id_tour_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour_order_item
+    ADD CONSTRAINT fk_tour_id_tour_order_item FOREIGN KEY (tour_id) REFERENCES tour(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_transfer_id_tour; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tour
+    ADD CONSTRAINT fk_transfer_id_tour FOREIGN KEY (transfer_id) REFERENCES transfer(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_transport_id_ticket; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY ticket
+    ADD CONSTRAINT fk_transport_id_ticket FOREIGN KEY (transport_id) REFERENCES transport(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_upload_id_employee_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_upload
+    ADD CONSTRAINT fk_upload_id_employee_upload FOREIGN KEY (upload_id) REFERENCES upload(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_upload_id_note_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY note_upload
+    ADD CONSTRAINT fk_upload_id_note_upload FOREIGN KEY (upload_id) REFERENCES upload(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_upload_id_passport_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY passport_upload
+    ADD CONSTRAINT fk_upload_id_passport_upload FOREIGN KEY (upload_id) REFERENCES upload(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_upload_id_task_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY task_upload
+    ADD CONSTRAINT fk_upload_id_task_upload FOREIGN KEY (upload_id) REFERENCES upload(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_visa_id_visa_order_item; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
 --
 
 ALTER TABLE ONLY visa_order_item
@@ -31398,7 +39573,7 @@ ALTER TABLE ONLY structure_contact
 --
 
 ALTER TABLE ONLY calculation
-    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id);
+    ADD CONSTRAINT fk_contract_id_caluclation FOREIGN KEY (contract_id) REFERENCES contract(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --

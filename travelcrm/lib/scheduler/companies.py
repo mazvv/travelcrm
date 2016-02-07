@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 
 def _company_creation(company_name, schema_name, email, timezone, locale):
     with transaction.manager:
-        schema_name = create_company_schema(schema_name)
+        schema_name = create_company_schema(schema_name, locale)
         company = DBSession.query(Company).first()
         company.name = company_name
         company.email = email
