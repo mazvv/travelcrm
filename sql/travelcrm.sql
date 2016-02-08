@@ -22858,6 +22858,8 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 97	+380504538765	2676	0		0
 98	+380681983869	2814	0		0
 99	+380386754543	2821	0		0
+100	+380675437656	2873	0		0
+101	+380681995427	2874	0		0
 \.
 
 
@@ -22865,7 +22867,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 99, true);
+SELECT pg_catalog.setval('contact_id_seq', 101, true);
 
 
 --
@@ -23316,6 +23318,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 15	2015-07-21	2662	6	65	1	\N
 16	2015-07-22	2669	2	66	3	\N
 17	2016-01-01	2824	6	70	0	\N
+18	2016-02-07	2877	2	72	0	\N
 \.
 
 
@@ -23323,7 +23326,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 -- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_id_seq', 17, true);
+SELECT pg_catalog.setval('lead_id_seq', 18, true);
 
 
 --
@@ -23358,6 +23361,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 25	2661	15	5	57	\N	2200.00	OAE, 5* not less, UAI, for single person near the sea. Need perfect appartaments with SPA for 5 days
 26	2668	16	5	57	1500.00	1700.00	Kiprus from 24.07 to 30.07 for 2 adult persons 4* or more.
 27	2823	17	5	56	\N	60000.00	Egypt tour for 2 persons from fubruary begining
+28	2876	18	5	57	\N	2000.00	Egypt, 4* al inclusive Sharm El Sheih
 \.
 
 
@@ -23365,7 +23369,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 -- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_item_id_seq', 27, true);
+SELECT pg_catalog.setval('lead_item_id_seq', 28, true);
 
 
 --
@@ -24072,6 +24076,7 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 69	2739	Vitalii			\N	\N	\N	\N	t	t
 70	2822	Pavel	Romanuta		1986-03-28	0	\N	3	f	f
 71	2830	Helen	Romanuta		1986-07-23	1	\N	3	f	f
+72	2875	Anatoly			\N	\N	\N	\N	f	f
 \.
 
 
@@ -24163,6 +24168,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 66	96
 67	97
 70	99
+72	101
 \.
 
 
@@ -24170,7 +24176,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 71, true);
+SELECT pg_catalog.setval('person_id_seq', 72, true);
 
 
 --
@@ -25651,6 +25657,12 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 2869	93	32	f
 2870	119	32	f
 2871	119	32	f
+2872	55	32	f
+2873	87	32	f
+2874	87	32	f
+2875	69	32	f
+2876	145	32	f
+2877	130	32	f
 \.
 
 
@@ -25658,7 +25670,7 @@ COPY resource (id, resource_type_id, structure_id, protected) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2871, true);
+SELECT pg_catalog.setval('resource_id_seq', 2877, true);
 
 
 --
@@ -27752,6 +27764,14 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7793	2830	2	\N	2016-02-06 16:19:40.099469+02
 7794	2870	2	\N	2016-02-07 17:23:20.218116+02
 7795	2871	2	\N	2016-02-07 17:23:20.218116+02
+7796	2872	2	\N	2016-02-07 21:04:30.754221+02
+7797	2872	2	\N	2016-02-07 21:05:54.259693+02
+7798	2872	2	\N	2016-02-07 21:07:48.965918+02
+7799	2873	2	\N	2016-02-07 21:19:25.018357+02
+7800	2874	2	\N	2016-02-07 21:20:02.361201+02
+7801	2875	2	\N	2016-02-07 21:20:21.884033+02
+7802	2876	2	\N	2016-02-07 21:21:03.816914+02
+7803	2877	2	\N	2016-02-07 21:21:07.920879+02
 \.
 
 
@@ -27759,7 +27779,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7795, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7803, true);
 
 
 --
@@ -27947,6 +27967,7 @@ COPY structure (id, resource_id, parent_id, name, company_id) FROM stdin;
 11	1277	\N	Lviv Office	1
 32	725	\N	Head Office	1
 13	1976	\N	Dnepropetrovsk Office	1
+14	2872	1	Test	1
 \.
 
 
@@ -27979,7 +28000,7 @@ COPY structure_contact (structure_id, contact_id) FROM stdin;
 -- Name: structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('structures_id_seq', 13, true);
+SELECT pg_catalog.setval('structures_id_seq', 14, true);
 
 
 --
