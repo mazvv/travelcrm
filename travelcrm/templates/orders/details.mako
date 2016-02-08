@@ -22,18 +22,16 @@
             ${item.advsource.name}
         </div>
     </div>
-    <div class="dp100">
-        <div class="dp15 b">
-            ${_(u'invoice')}
+    % if item.invoice:
+        <div class="dp100">
+            <div class="dp15 b">
+                ${_(u'invoice')}
+            </div>
+            <div class="dp85">
+                ${item.invoice.final_price} ${item.invoice.account.currency.iso_code}, ${item.invoice.account.name}, ${item.invoice.account.account_type.title}
+            </div>
         </div>
-        <div class="dp85">
-            % if item.invoice:
-                 ${item.invoice.final_price} ${item.invoice.account.currency.iso_code}, ${item.invoice.account.name}, ${item.invoice.account.account_type.title}
-            % else:
-                -
-            % endif
-        </div>
-    </div>
+    % endif
     <div class="dp100">
         <div class="dp15 b">
             ${_(u'services')}
