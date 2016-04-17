@@ -1,4 +1,4 @@
-${h.tags.Doctype().html5()}
+<!DOCTYPE html>
 <html>
     <head>        
         <meta http-equiv="Content-Type" content="easyui-textbox/html; charset=utf-8" />

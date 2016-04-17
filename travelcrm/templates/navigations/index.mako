@@ -41,38 +41,38 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container">
             % if _context.has_permision('add'):
-            <a href="#" class="button primary _action" 
+            <a href="#" class="button primary easyui-linkbutton _action" 
                 data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add', query={'position_id': position.id})}'">
                 <span class="fa fa-plus"></span>${_(u'Add New')}
             </a>
             % endif
             <div class="button-group">
                 % if _context.has_permision('view'):
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'view')}'">
                     <span class="fa fa-circle-o"></span>${_(u'View')}
                 </a>
                 % endif
                 % if _context.has_permision('edit'):
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'copy', query={'position_id': position.id})}'">
                     <span class="fa fa-copy"></span>${_(u'Copy From ...')}
                 </a>
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'container_action',property:'with_row',url:'${request.resource_url(_context, 'up')}'">
                     <span class="fa fa-arrow-up"></span>${_(u'Up')}
                 </a>
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'container_action',property:'with_row',url:'${request.resource_url(_context, 'down')}'">
                     <span class="fa fa-arrow-down"></span>${_(u'Down')}
                 </a>
                 % endif
                 % if _context.has_permision('delete'):
-                <a href="#" class="button danger _action" 
+                <a href="#" class="button danger easyui-linkbutton _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
                     <span class="fa fa-times"></span>${_(u'Delete')}
                 </a>

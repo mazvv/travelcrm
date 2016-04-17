@@ -49,7 +49,7 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl20">
             % if _context.has_permision('close'):
-            <a href="#" class="button _action" 
+            <a href="#" class="button easyui-linkbutton _action" 
                 data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'close')}'">
                 <span class="fa fa-times"></span>${_(u'Close')}
             </a>

@@ -59,16 +59,16 @@
             	}
             </script>
             % if _context.has_permision('view'):
-            <a href="#" class="button primary _action" 
+            <a href="#" class="button primary easyui-linkbutton _action" 
                 data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export')}',params_str:get_params_${_id}(true)">
                 <span class="fa fa-file-pdf-o"></span>${_(u'Export To PDF')}
             </a>
             % endif
             <div class="button-group">
-                <a href="#" class="button" onclick="$('#${_id}').treegrid('expandAll');">
+                <a href="#" class="button easyui-linkbutton" onclick="$('#${_id}').treegrid('expandAll');">
                     <span class="fa fa-plus-square-o"></span>
                 </a>
-                <a href="#" class="button" onclick="$('#${_id}').treegrid('collapseAll')">
+                <a href="#" class="button easyui-linkbutton" onclick="$('#${_id}').treegrid('collapseAll')">
                     <span class="fa fa-minus-square-o"></span>
                 </a>
             </div>
@@ -92,7 +92,7 @@
                     )}
                 </div>
                 <div class="dl5 tr" style="width: 100px;">
-                    <a href="#" class="button" onclick="refresh_container('#${_id}');">
+                    <a href="#" class="button easyui-linkbutton" onclick="refresh_container('#${_id}');">
                         <span class="fa fa-search"></span>${_(u"Find")}
                     </a>
                 </div>

@@ -109,13 +109,13 @@
                 )}
             </div>
             <div class="button-group minor-group ml1">
-                <a href="#" class="button" onclick="_do_add_${_func_id}('${_f_id}');">${_(u"Add")}</a>
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton" onclick="_do_add_${_func_id}('${_f_id}');">${_(u"Add")}</a>
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/orders_items/copy',property:'with_row'
                     ">
                     ${_(u"Copy")}</a>
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/orders_items/edit',property:'with_row'
                     ">

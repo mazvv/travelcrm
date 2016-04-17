@@ -89,9 +89,9 @@
                 ${h.fields.bpersons_combogrid_field(request, f_id, id=f_id)}
             </div>
             <div class="button-group minor-group ml1">
-                <a href="#" class="button" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>
+                <a href="#" class="button easyui-linkbutton" onclick="add_${_func_id}('${f_id}');">${_(u"Add")}</a>
                 % if 'edit' in h.permisions.get_bpersons_permisions(request):
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/bpersons/edit',property:'with_row'
                     ">

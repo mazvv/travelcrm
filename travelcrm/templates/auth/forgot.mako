@@ -28,7 +28,7 @@
                 <i class="fa fa-info-circle fa-lg"></i> ${_(u"Please, enter your email")}
             </div>
             <div class="ml20 tr">
-                ${h.tags.submit('send', _(u"Send"), class_="button")}
+                ${h.tags.submit('send', _(u"Send"), class_="button easyui-linkbutton")}
             </div>
         </div>
     ${h.tags.end_form()}

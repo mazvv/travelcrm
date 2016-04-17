@@ -75,12 +75,12 @@
                 f_id = h.common.gen_id()
             %>
             <div class="button-group minor-group">
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/passports/add'
                     ">
                     ${_(u"Add")}</a>
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/passports/edit',property:'with_row'
                     ">

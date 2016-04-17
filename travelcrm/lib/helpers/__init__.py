@@ -4,19 +4,24 @@ import json
 import common
 import fields
 import permisions
-from webhelpers.html import tags
-from webhelpers.html import builder
-from webhelpers import util
+from webhelpers2.html import tags
+from webhelpers2.html import builder
 
 
-# need it to possibility use of data-options
-def attr_decode():
-    from webhelpers.html.builder import _attr_decode
+def title(title, required=False, label_for=None):
+    """ label helper
+    """
+    title_html = title
+    if label_for:
+        title_html = builder.HTML.label(title_html, for_=label_for)
+    if required:
+        required_symbol = builder.HTML.span("*", class_="required-symbol")
+        return builder.HTML.span(
+            title_html, 
+            " ",
+            required_symbol,
+            class_="required")
+    else:
+        return builder.HTML.span(title_html, class_="not-required")
 
-    def _helpers_attr_decode(v):
-        if v == 'data_options':
-            return 'data-options'
-        return _attr_decode(v)
-    return _helpers_attr_decode
-
-builder._attr_decode = attr_decode()
+tags.title = title

@@ -61,6 +61,15 @@ class Resource(Base):
         ),
         nullable=False
     )
+    maintainer_id = Column(
+        Integer(),
+        ForeignKey('employee.id',
+            name='fk_maintainer_id_resource',
+            onupdate='cascade',
+            ondelete='restrict',
+            use_alter=True,
+        )
+    )
     protected = Column(
         Boolean,
         default=False,
@@ -84,6 +93,16 @@ class Resource(Base):
             lazy='dynamic'
         ),
         foreign_keys=[structure_id],
+        uselist=False
+    )
+    maintainer = relationship(
+        'Employee',
+        backref=backref(
+            'maintained_resources',
+            uselist=True,
+            lazy='dynamic'
+        ),
+        foreign_keys=[maintainer_id],
         uselist=False
     )
 

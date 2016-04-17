@@ -4,9 +4,9 @@ import pkg_resources
 import json
 from datetime import datetime
 
-from webhelpers.html import tags
-from webhelpers.html import HTML
-from webhelpers.misc import NotGiven
+from webhelpers2.html import tags
+from webhelpers2.html import HTML
+from webhelpers2.misc import NotGiven
 
 from ..utils.common_utils import (
     gen_id as u_gen_id,

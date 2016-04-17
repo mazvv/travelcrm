@@ -4,8 +4,8 @@ import json
 from collections import namedtuple
 
 from pytz import common_timezones
-from webhelpers.html import tags
-from webhelpers.html import HTML
+from webhelpers2.html import tags
+from webhelpers2.html import HTML
 
 from ...interfaces import IServiceType
 from ...resources.accomodations import AccomodationsResource
@@ -69,6 +69,13 @@ from ..bl.subaccounts import get_subaccounts_types
 
 
 tool = namedtuple('tool', ('name', 'url', 'icon', 'title', 'with_row'))
+
+
+class _Option(tags.Option):
+    """private Option class for backward compatible 
+    """
+    def __init__(self, value=None, label=None):
+        super(_Option, self).__init__(label, value)
 
 
 class _ComboGridField(object):
@@ -363,8 +370,8 @@ def accomodations_combogrid_field(
 
 def yes_no_field(name, value=None, data_options=None, **kwargs):
     choices = [
-        (0, _(u'no')),
-        (1, _(u'yes')),
+        _Option(0, _(u'no')),
+        _Option(1, _(u'yes')),
     ]
     _data_options = "panelHeight:'auto',editable:false"
     if data_options:
@@ -407,8 +414,8 @@ def permisions_yes_no_field(
     name, value, permision, data_options=None, **kwargs
 ):
     choices = [
-        ("", _(u'no')),
-        (permision, _(u'yes')),
+        _Option("", _(u'no')),
+        _Option(permision, _(u'yes')),
     ]
     _data_options = "panelHeight:'auto',editable:false"
     if data_options:
@@ -463,8 +470,8 @@ def permisions_scope_type_field(
     name, value, data_options=None, **kwargs
 ):
     choices = [
-        ("all", _(u'all')),
-        ("structure", _(u'structure')),
+        _Option("all", _(u'all')),
+        _Option("structure", _(u'structure')),
     ]
     _data_options = "panelHeight:'auto',editable:false"
     if data_options:
@@ -532,7 +539,10 @@ def datetime_field(name, value=None, data_options=None, **kwargs):
 
 
 def gender_combobox_field(name, value=None, data_options=None, **kwargs):
-    choices = [('', '--None--'),] + list(Person.GENDER)
+    choices = (
+        [_Option('', '--None--'),]
+        + list(map(lambda x: _Option(*x), Person.GENDER))
+    )
     _data_options = "panelHeight:'auto',editable:false,width:126"
     if data_options:
         _data_options += ",%s" % data_options
@@ -547,7 +557,7 @@ def contact_type_combobox_field(name, value=None, data_options=None, **kwargs):
     if data_options:
         _data_options += ",%s" % data_options
     return tags.select(
-        name, value, Contact.CONTACT_TYPE,
+        name, value, map(lambda x: _Option(*x), Contact.CONTACT_TYPE),
         class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
     )
@@ -776,7 +786,8 @@ def passport_type_field(name, value=None, data_options=None, **kwargs):
     if data_options:
         _data_options += ",%s" % data_options
     return tags.select(
-        name, value, Passport.PASSPORT_TYPE, class_='easyui-combobox text w20',
+        name, value, map(lambda x: _Option(*x), Passport.PASSPORT_TYPE),
+        class_='easyui-combobox text w20',
         data_options=_data_options, **kwargs
     )
 
@@ -830,7 +841,8 @@ def accounts_types_combobox_field(
     if data_options:
         _data_options += ",%s" % data_options
     return tags.select(
-        name, value, Account.ACCOUNTS_TYPES, class_='easyui-combobox text w10',
+        name, value, map(lambda x: _Option(*x), Account.ACCOUNTS_TYPES),
+        class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
     )
 
@@ -903,7 +915,7 @@ def subaccounts_types_combobox_field(
     if data_options:
         _data_options += ",%s" % data_options
     choices = [
-        (rt.name, rt.humanize)
+        _Option(rt.name, rt.humanize)
         for rt in get_subaccounts_types()
     ]
     return tags.select(
@@ -963,8 +975,8 @@ def locales_field(
     if data_options:
         _data_options += ",%s" % data_options
     choices = [
-        (u'en', _(u'en')),
-        (u'ru', _(u'ru')),
+        _Option(u'en', _(u'en')),
+        _Option(u'ru', _(u'ru')),
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
@@ -979,7 +991,8 @@ def resources_types_statuses_combobox_field(
     if data_options:
         _data_options += ",%s" % data_options
     return tags.select(
-        name, value, ResourceType.STATUS, class_='easyui-combobox text w10',
+        name, value, map(lambda x: _Option(*x), ResourceType.STATUS),
+        class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
     )
 
@@ -990,9 +1003,9 @@ def tasks_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Task.STATUS
+    choices = map(lambda x: _Option(*x), Task.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1005,9 +1018,9 @@ def notifications_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = EmployeeNotification.STATUS
+    choices = map(lambda x: _Option(*x), EmployeeNotification.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1020,9 +1033,9 @@ def leads_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Lead.STATUS
+    choices = map(lambda x: _Option(*x), Lead.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1124,9 +1137,9 @@ def orders_items_statuses_combobox_field(
     _data_options = "panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = OrderItem.STATUS
+    choices = map(lambda x: _Option(*x), OrderItem.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options
@@ -1139,9 +1152,9 @@ def tasks_reminders_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = [(t, t) for t in range(10, 70, 10)]
+    choices = [_Option(t, t) for t in range(10, 70, 10)]
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
         data_options=_data_options, **kwargs
@@ -1154,9 +1167,9 @@ def accounts_items_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = AccountItem.STATUS
+    choices = map(lambda x: _Option(*x), AccountItem.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1169,9 +1182,9 @@ def accounts_items_types_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = AccountItem.TYPE
+    choices = map(lambda x: _Option(*x), AccountItem.TYPE)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1183,9 +1196,9 @@ def suppliers_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Supplier.STATUS
+    choices = map(lambda x: _Option(*x), Supplier.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1219,9 +1232,9 @@ def contracts_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Contract.STATUS
+    choices = map(lambda x: _Option(*x), Contract.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1234,9 +1247,9 @@ def bpersons_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = BPerson.STATUS
+    choices = map(lambda x: _Option(*x), BPerson.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1249,9 +1262,9 @@ def visas_types_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Visa.TYPE
+    choices = map(lambda x: _Option(*x), Visa.TYPE)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1264,9 +1277,9 @@ def leads_offers_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = LeadOffer.STATUS
+    choices = map(lambda x: _Option(*x), LeadOffer.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1334,9 +1347,9 @@ def accounts_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Account.STATUS
+    choices = map(lambda x: _Option(*x), Account.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1349,9 +1362,9 @@ def orders_statuses_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Order.STATUS
+    choices = map(lambda x: _Option(*x), Order.STATUS)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1385,9 +1398,9 @@ def vats_calc_methods_combobox_field(
     _data_options="panelHeight:'auto',editable:false"
     if data_options:
         _data_options += ",%s" % data_options
-    choices = Vat.CALC_METHOD
+    choices = map(lambda x: _Option(*x), Vat.CALC_METHOD)
     if with_all:
-        choices = [('', _(u'--all--'))] + list(choices)
+        choices = [_Option('', _(u'--all--'))] + list(choices)
     return tags.select(
         name, value, choices, class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
@@ -1422,6 +1435,7 @@ def campaigns_statuses_combobox_field(
     if data_options:
         _data_options += ",%s" % data_options
     return tags.select(
-        name, value, Campaign.STATUS, class_='easyui-combobox text w10',
+        name, value, map(lambda x: _Option(*x), Campaign.STATUS),
+        class_='easyui-combobox text w10',
         data_options=_data_options, **kwargs
     )

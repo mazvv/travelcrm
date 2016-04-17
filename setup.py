@@ -35,7 +35,7 @@ requires = [
     'colander',
     'wsgithumb',
     'alembic',
-    'webhelpers',
+    'webhelpers2',
     'pyramid_layout',
     'psycopg2',
     'pyramid_beaker',
@@ -51,7 +51,7 @@ requires = [
     'smpplib>=0.1',
     'Mock>=1.3.0',
     'python_dateutil>=2.4.0',
-    'pyramid_robot>=1.1',
+    'nose'
 ]
 
 setup(

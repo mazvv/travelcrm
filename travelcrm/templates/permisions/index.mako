@@ -43,11 +43,11 @@
         <div class="actions button-container dl25">
             <div class="button-group">
                 % if _context.has_permision('edit'):
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit', query=[('position_id', position.id)])}'">
                     <span class="fa fa-pencil"></span>${_(u'Edit Permissions')}
                 </a>
-                <a href="#" class="button _action"
+                <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'copy', query=[('position_id', position.id)])}'">
                     <span class="fa fa-copy"></span>${_(u'Copy From ...')}
                 </a>

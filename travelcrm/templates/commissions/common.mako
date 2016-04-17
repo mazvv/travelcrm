@@ -73,17 +73,17 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container">
             <div class="button-group minor-group">
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/commissions/add'
                     ">
                     ${_(u"Add")}</a>
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/commissions/copy',property:'with_row'
                     ">
                     ${_(u"Copy")}</a>
-                <a href="#" class="button _action" 
+                <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
                         container:'#${_id}',action:'dialog_open',url:'/commissions/edit',property:'with_row'
                     ">

@@ -362,6 +362,12 @@ a:hover.l-btn-plain{
 .easyui-calendar.tasks .calendar-day .tasks-container .task-status.task-open{
 	color: black;
 }
+.button .l-btn-text{
+	line-height: 12px;
+	margin: 0px;
+	font-size: 11px;
+}
+
 
 /* navigation */
 #_navigation_ .easyui-linkbutton, #_navigation_ .easyui-menubutton{

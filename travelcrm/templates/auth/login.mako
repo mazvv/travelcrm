@@ -49,7 +49,7 @@
                 <i class="fa fa-info-circle fa-lg"></i> ${_(u"Please, enter username and password")}
             </div>
             <div class="ml20 tr">
-                ${h.tags.submit('login', _(u"Login"), class_="button")}
+                ${h.tags.submit('login', _(u"Login"), class_="button easyui-linkbutton")}
             </div>
         </div>
     ${h.tags.end_form()}

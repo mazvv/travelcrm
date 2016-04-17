@@ -60,7 +60,7 @@
                 <i class="fa fa-info-circle fa-lg"></i> ${_(u"Please, feel all fields")}
             </div>
             <div class="ml20 tr">
-                ${h.tags.submit('create', _(u"Create"), class_="button")}
+                ${h.tags.submit('create', _(u"Create"), class_="button easyui-linkbutton")}
             </div>
         </div>
     ${h.tags.end_form()}

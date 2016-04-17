@@ -13,10 +13,10 @@
         <div class="form-buttons">
             <div class="dl10 status-bar"></div>
             <div class="ml10 tr button-group">
-                ${h.tags.submit('logout', _(u"Logout"), class_="button")}
+                ${h.tags.submit('logout', _(u"Logout"), class_="button easyui-linkbutton")}
                 ${h.common.reset(
                     'cancel', _(u"Cancel"), 
-                    class_="button danger", 
+                    class_="button danger easyui-linkbutton", 
                     onclick="$(this).closest('.easyui-dialog').dialog('destroy');delete_container();"
                 )}
             </div>

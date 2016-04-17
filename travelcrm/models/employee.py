@@ -211,6 +211,7 @@ class Employee(Base):
             cascade="all,delete"
         ),
         cascade="all,delete",
+        foreign_keys=[resource_id],
         uselist=False,
     )
     photo = relationship(

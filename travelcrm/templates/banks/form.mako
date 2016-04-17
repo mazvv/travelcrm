@@ -64,8 +64,8 @@
         <div class="form-buttons">
             <div class="dl20 status-bar"></div>
             <div class="ml20 tr button-group">
-                ${h.tags.submit('save', _(u"Save"), class_="button")}
-                ${h.common.reset('cancel', _(u"Cancel"), class_="button danger")}
+                ${h.tags.submit('save', _(u"Save"), class_="button easyui-linkbutton")}
+                ${h.common.reset('cancel', _(u"Cancel"), class_="button danger easyui-linkbutton")}
             </div>
         </div>
     ${h.tags.end_form()}
