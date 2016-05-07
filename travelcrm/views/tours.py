@@ -10,7 +10,6 @@ from ..models import DBSession
 from ..models.tour import Tour
 from ..models.order_item import OrderItem
 
-from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..lib.utils.common_utils import translate as _
 from ..forms.tours import (
     TourForm,
@@ -147,35 +146,3 @@ class ToursView(BaseView):
         return {
             'item': order_item.tour,
         }
-
-    @view_config(
-        name='settings',
-        request_method='GET',
-        renderer='travelcrm:templates/tours/settings.mako',
-        permission='settings',
-    )
-    def settings(self):
-        rt = get_resource_type_by_resource(self.context)
-        return {
-            'title': self._get_title(_(u'Settings')),
-            'rt': rt,
-        }
-
-    @view_config(
-        name='settings',
-        request_method='POST',
-        renderer='json',
-        permission='settings',
-    )
-    def _settings(self):
-        schema = SettingsSchema().bind(request=self.request)
-        try:
-            controls = schema.deserialize(self.request.params)
-            rt = get_resource_type_by_resource(self.context)
-            rt.settings = {'column_index': controls.get('column_index')}
-            return {'success_message': _(u'Saved')}
-        except colander.Invalid, e:
-            return {
-                'error_message': _(u'Please, check errors'),
-                'errors': e.asdict()
-            }

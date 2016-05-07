@@ -4,7 +4,8 @@
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
     _t_id = "t-%s" % _id
-    _s_id = "s-%s" % _id    
+    _s_id = "s-%s" % _id
+    _m_id = "m-%s" % _id  
 %>
 <div class="easyui-panel unselectable"
     data-options="
@@ -86,11 +87,11 @@
                 </a>
                 % endif
             </div>
-            <a href="#" class="button danger easyui-splitbutton" 
-                data-options="menu:'#mm3'">
+            <a href="#" class="button easyui-splitbutton" 
+                data-options="menu:'#${_m_id}',plain:false">
                 ${_(u'More')}
             </a>
-		    <div id="mm3" style="width:150px;">
+		    <div id="${_m_id}" style="width:150px;">
 		        <div>Import Persons</div>
 		        <div>Update</div>
 		    </div>            

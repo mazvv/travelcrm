@@ -23,7 +23,7 @@ if 'sdist' in sys.argv or 'bdist' in sys.argv:
 
 
 requires = [
-    'setuptools>=19.2',
+    'setuptools==19.2',
     'pyramid',
     'pyramid_mako',
     'pyramid_debugtoolbar',
@@ -49,7 +49,7 @@ requires = [
     'apscheduler>=3.0.1',
     'bitmath>=1.0.2-3',
     'smpplib>=0.1',
-    'Mock>=1.3.0',
+    'Mock>=2.0.0',
     'python_dateutil>=2.4.0',
     'nose'
 ]
@@ -79,6 +79,8 @@ setup(
     main = travelcrm:main
     [console_scripts]
     initialize_travelcrm_db = travelcrm.scripts.initializedb:main
+    [pyramid.scaffold]
+    travelcrm = scaffold:TravelcrmProjectTemplate
     """,
     message_extractors={
         'travelcrm': [
