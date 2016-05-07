@@ -24,6 +24,7 @@
             ${item.gender.title}
         </div>
     </div>
+    % if item.birthday:
     <div class="dp100">
         <div class="dp15 b">
             ${_(u'birthday')}
@@ -32,6 +33,7 @@
             ${h.common.format_date(item.birthday)}
         </div>
     </div>
+    % endif
     % if item.addresses:
     <div class="dp100">
         <div class="dp15 b">
