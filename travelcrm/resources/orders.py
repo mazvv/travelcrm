@@ -22,3 +22,7 @@ class OrdersResource(ResourceTypeBase):
             ('invoice', _(u'invoice')),
             ('contract', _(u'contract')),
         ]
+
+    @property
+    def allowed_assign(self):
+        return True

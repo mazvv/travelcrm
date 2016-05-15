@@ -6,6 +6,7 @@ from . import(
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,    
 )
 from ..resources.accomodations import AccomodationsResource
 from ..models.accomodation import Accomodation
@@ -13,6 +14,7 @@ from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.accomodations import AccomodationsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class AccomodationForm(BaseForm):
     _schema = _AccomodationSchema
 
     def submit(self, accomodation=None):
-        context = AccomodationsResource(self.request)
         if not accomodation:
             accomodation = Accomodation(
-                resource=context.create_resource()
+                resource=AccomodationsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             accomodation.resource.notes = []
@@ -63,3 +66,12 @@ class AccomodationForm(BaseForm):
 
 class AccomodationSearchForm(BaseSearchForm):
     _qb = AccomodationsQueryBuilder
+
+
+class AccomodationAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            accomodation = Accomodation.get(id)
+            accomodation.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

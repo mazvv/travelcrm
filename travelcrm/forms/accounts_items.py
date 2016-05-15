@@ -7,6 +7,7 @@ from . import (
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.accounts_items import AccountsItemsResource
 from ..models.account_item import AccountItem
@@ -14,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.accounts_items import AccountsItemsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -73,10 +75,11 @@ class AccountItemForm(BaseForm):
     _schema = _AccountItemSchema
 
     def submit(self, account_item=None):
-        context = AccountsItemsResource(self.request)
         if not account_item:
             account_item = AccountItem(
-                resource=context.create_resource()
+                resource=AccountsItemsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             account_item.resource.notes = []
@@ -112,4 +115,12 @@ class AccountItemSearchForm(BaseSearchForm):
             parent_id,
             with_chain=self._controls.get('with_chain')
         )
-        
+
+
+class AccountItemAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            account_item = AccountItem.get(id)
+            account_item.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

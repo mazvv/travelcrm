@@ -8,6 +8,7 @@ from . import (
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.orders import OrdersResource
 from ..models.order import Order
@@ -16,6 +17,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.orders import OrdersQueryBuilder
 from ..lib.bl.currencies_rates import currency_base_exchange
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _OrderSchema(ResourceSchema):
@@ -87,10 +89,11 @@ class OrderForm(BaseForm):
     _schema = _OrderSchema
 
     def submit(self, order=None):
-        context = OrdersResource(self.request)
         if not order:
             order = Order(
-                resource=context.create_resource()
+                resource=OrdersResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             order.orders_items = []
@@ -125,3 +128,12 @@ class OrderForm(BaseForm):
 class OrderSearchForm(BaseSearchForm):
     _schema = _OrderSearchSchema
     _qb = OrdersQueryBuilder
+
+
+class OrderAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            order = Order.get(id)
+            order.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

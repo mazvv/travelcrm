@@ -7,6 +7,7 @@ from . import (
     ResourceSchema, 
     BaseForm, 
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.resources_types import ResourcesTypesResource
 from ..models.resource_type import ResourceType
@@ -14,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.resources_types import ResourcesTypesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -124,10 +126,11 @@ class ResourceTypeForm(BaseForm):
     _schema = _ResourceTypeSchema
 
     def submit(self, resource_type=None):
-        context = ResourcesTypesResource(self.request)
         if not resource_type:
             resource_type = ResourceType(
-                resource_obj=context.create_resource()
+                resource_obj=ResourcesTypesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             resource_type.resource_obj.notes = []
@@ -147,3 +150,12 @@ class ResourceTypeForm(BaseForm):
 
 class ResourceTypeSearchForm(BaseSearchForm):
     _qb = ResourcesTypesQueryBuilder
+
+
+class ResourceTypeAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            resource_type = ResourceType.get(id)
+            resource_type.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

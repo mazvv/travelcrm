@@ -7,6 +7,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.vats import VatsResource
 from ..models import DBSession
@@ -14,6 +15,7 @@ from ..models.vat import Vat
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.vats import VatsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -70,10 +72,11 @@ class VatForm(BaseForm):
     _schema = _VatSchema
 
     def submit(self, vat=None):
-        context = VatsResource(self.request)
         if not vat:
             vat = Vat(
-                resource=context.create_resource()
+                resource=VatsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             vat.resource.notes = []
@@ -95,3 +98,12 @@ class VatForm(BaseForm):
 
 class VatSearchForm(BaseSearchForm):
     _qb = VatsQueryBuilder
+
+
+class VatAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            vat = Vat.get(id)
+            vat.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

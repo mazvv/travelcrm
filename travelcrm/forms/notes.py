@@ -11,6 +11,7 @@ from ..resources.notes import NotesResource
 from ..models.note import Note
 from ..models.upload import Upload
 from ..lib.qb.notes import NotesQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _NoteSchema(ResourceSchema):
@@ -42,10 +43,11 @@ class NoteForm(BaseForm):
     _schema = _NoteSchema
 
     def submit(self, note=None):
-        context = NotesResource(self.request)
         if not note:
             note = Note(
-                resource=context.create_resource()
+                resource=NotesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             note.uploads = []

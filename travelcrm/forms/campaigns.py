@@ -9,6 +9,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.campaigns import CampaignsResource
 from ..models.campaign import Campaign
@@ -17,6 +18,7 @@ from ..models.task import Task
 from ..lib.qb.campaigns import CampaignsQueryBuilder
 from ..lib.utils.common_utils import parse_datetime
 from ..lib.utils.resources_utils import get_resource_type_by_resource
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -83,10 +85,11 @@ class CampaignForm(BaseForm):
     _schema = _CampaignSchema
 
     def submit(self, campaign=None):
-        context = CampaignsResource(self.request)
         if not campaign:
             campaign = Campaign(
-                resource=context.create_resource()
+                resource=CampaignsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             campaign.resource.notes = []
@@ -123,3 +126,12 @@ class CampaignsSettingsForm(BaseForm):
             'password': self._controls.get('password'),
             'default_sender': self._controls.get('default_sender'),
         }
+
+
+class CampaignAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            campaign = Campaign.get(id)
+            campaign.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

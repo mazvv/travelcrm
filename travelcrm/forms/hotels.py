@@ -5,13 +5,15 @@ import colander
 from . import (
     ResourceSchema, 
     BaseForm, 
-    BaseSearchForm
+    BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.hotels import HotelsResource
 from ..models.hotel import Hotel
 from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.hotels import HotelsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _HotelSchema(ResourceSchema):
@@ -32,10 +34,11 @@ class HotelForm(BaseForm):
     _schema = _HotelSchema
 
     def submit(self, hotel=None):
-        context = HotelsResource(self.request)
         if not hotel:
             hotel = Hotel(
-                resource=context.create_resource()
+                resource=HotelsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             hotel.resource.notes = []
@@ -54,3 +57,12 @@ class HotelForm(BaseForm):
 
 class HotelSearchForm(BaseSearchForm):
     _qb = HotelsQueryBuilder
+    
+
+class HotelAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            hotel = Hotel.get(id)
+            hotel.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

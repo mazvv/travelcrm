@@ -14,3 +14,7 @@ from ..resources import (
 class AdvsourcesResource(ResourceTypeBase):
 
     __name__ = 'advsources'
+
+    @property
+    def allowed_assign(self):
+        return True

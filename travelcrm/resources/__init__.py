@@ -50,6 +50,18 @@ class SecuredBase(object):
     def has_permision(self, permision):
         return has_permission(permision, self, self.request)
 
+    def has_all_permisions(self, permissions):
+        for permision in permissions:
+            if not has_permission(permision, self, self.request):
+                return False
+        return True
+
+    def has_any_permision(self, permissions):
+        for permision in permissions:
+            if has_permission(permision, self, self.request):
+                return True
+        return False
+
     @staticmethod
     def get_permisions(obj, request):
         employee = get_auth_employee(request)
@@ -92,6 +104,10 @@ class ResourceTypeBase(SecuredBase):
         return False
 
     @property
+    def allowed_assign(self):
+        return False
+
+    @property
     def allowed_permisions(self):
         permisions = [
             ('view', _(u'view')),
@@ -101,13 +117,13 @@ class ResourceTypeBase(SecuredBase):
         ]
         if self.allowed_settings:
             permisions.append(('settings', _(u'settings')))
+        if self.allowed_assign:
+            permisions.append(('assign', _(u'assign')))
         return permisions
 
-    def create_resource(self):
-        auth_employee = get_auth_employee(self.request)
-        assert auth_employee, "Not auth user can't create resource"
-        owner_structure = get_employee_structure(auth_employee)
-        resource = Resource(self.__class__, owner_structure)
+    @classmethod
+    def create_resource(cls, employee):
+        resource = Resource(cls, employee)
         return resource
 
     def get_settings(self):

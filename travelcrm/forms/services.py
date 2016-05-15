@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.services import ServicesResource
 from ..models.service import Service
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.services import ServicesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -55,10 +57,11 @@ class ServiceForm(BaseForm):
     _schema = _ServiceSchema
 
     def submit(self, service=None):
-        context = ServicesResource(self.request)
         if not service:
             service = Service(
-                resource=context.create_resource()
+                resource=ServicesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             service.resource.notes = []
@@ -78,3 +81,12 @@ class ServiceForm(BaseForm):
 
 class ServiceSearchForm(BaseSearchForm):
     _qb = ServicesQueryBuilder
+
+
+class ServiceAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            service = Service.get(id)
+            service.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

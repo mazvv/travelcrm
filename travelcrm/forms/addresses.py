@@ -10,6 +10,7 @@ from . import (
 from ..resources.addresses import AddressesResource
 from ..models.address import Address
 from ..lib.qb.addresses import AddressesQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _AddressSchema(ResourceSchema):
@@ -29,10 +30,11 @@ class AddressForm(BaseForm):
     _schema = _AddressSchema
 
     def submit(self, address=None):
-        context = AddressesResource(self.request)
         if not address:
             address = Address(
-                resource=context.create_resource()
+                resource=AddressesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         address.location_id = self._controls.get('location_id')
         address.zip_code = self._controls.get('zip_code')

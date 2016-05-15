@@ -14,3 +14,7 @@ from ..resources import (
 class TasksResource(ResourceTypeBase):
 
     __name__ = 'tasks'
+
+    @property
+    def allowed_assign(self):
+        return True

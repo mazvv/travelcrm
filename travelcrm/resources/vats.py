@@ -13,3 +13,7 @@ from ..resources import (
 class VatsResource(ResourceTypeBase):
 
     __name__ = 'vats'
+
+    @property
+    def allowed_assign(self):
+        return True

@@ -17,6 +17,7 @@ from ..lib.bl.storages import (
 )
 from ..lib.utils.common_utils import get_storage_dir
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -57,10 +58,11 @@ class UploadForm(BaseForm):
     _schema = _UploadSchema
 
     def submit(self, upload=None):
-        context = UploadsResource(self.request)
         if not upload:
             upload = Upload(
-                resource=context.create_resource()
+                resource=UploadsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         upload.path = self.request.storage.save(
             self._controls.get('upload'),

@@ -7,6 +7,7 @@ from . import(
     BaseForm,
     ResourceSearchSchema,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.structures import StructuresResource
 from ..models.structure import Structure
@@ -89,13 +90,14 @@ class StructureForm(BaseForm):
     _schema = _StructureSchema
 
     def submit(self, structure=None):
-        context = StructuresResource(self.request)
         if not structure:
             employee = get_auth_employee(self.request)
             employee_structure = get_employee_structure(employee)
             structure = Structure(
                 company_id=employee_structure.company_id,
-                resource=context.create_resource()
+                resource=StructuresResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             structure.addresses = []
@@ -140,3 +142,12 @@ class StructureSearchForm(BaseSearchForm):
             parent_id,
             with_chain=self._controls.get('with_chain')
         )
+
+
+class StructureAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            structure = Structure.get(id)
+            structure.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

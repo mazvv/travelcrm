@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.banks import BanksResource
 from ..models.bank import Bank
@@ -14,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.banks import BanksQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -58,10 +60,11 @@ class BankForm(BaseForm):
     _schema = _BankSchema
 
     def submit(self, bank=None):
-        context = BanksResource(self.request)
         if not bank:
             bank = Bank(
-                resource=context.create_resource()
+                resource=BanksResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             bank.addresses = []
@@ -82,3 +85,12 @@ class BankForm(BaseForm):
 
 class BankSearchForm(BaseSearchForm):
     _qb = BanksQueryBuilder
+
+
+class BankAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            bank = Bank.get(id)
+            bank.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

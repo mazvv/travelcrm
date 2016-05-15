@@ -9,6 +9,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.employees import EmployeesResource
 from ..resources.uploads import UploadsResource
@@ -26,6 +27,7 @@ from ..lib.bl.storages import (
 )
 from ..lib.utils.common_utils import get_storage_dir
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -74,10 +76,6 @@ class _EmployeeSchema(ResourceSchema):
         colander.String(),
         missing=None,
         validator=colander.Length(min=2, max=32)
-    )
-    dismissal_date = colander.SchemaNode(
-        Date(),
-        missing=None
     )
     contact_id = colander.SchemaNode(
         colander.Set(),
@@ -136,10 +134,11 @@ class EmployeeForm(BaseForm):
     _schema = _EmployeeSchema
 
     def submit(self, employee=None):
-        context = EmployeesResource(self.request)
         if not employee:
             employee = Employee(
-                resource=context.create_resource()
+                resource=EmployeesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             employee.addresses = []
@@ -152,12 +151,12 @@ class EmployeeForm(BaseForm):
         employee.last_name = self._controls.get('last_name')
         employee.second_name = self._controls.get('second_name')
         employee.itn = self._controls.get('itn')
-        employee.dismissal_date = self._controls.get('dismissal_date')
 
         if self._controls.get('photo') is not None:
-            upload_context = UploadsResource(context.request)
             employee.photo = Upload(
-                resource=upload_context.create_resource(),
+                resource=UploadsResource.create_resource(
+                    get_auth_employee(self.request)
+                ),
                 name=self._controls.get('photo').filename,
                 path = self.request.storage.save(
                     self._controls.get('photo'),
@@ -193,3 +192,12 @@ class EmployeeForm(BaseForm):
 
 class EmployeeSearchForm(BaseSearchForm):
     _qb = EmployeesQueryBuilder
+
+
+class EmployeeAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            employee = Employee.get(id)
+            employee.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

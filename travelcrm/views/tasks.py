@@ -12,7 +12,8 @@ from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_class
 from ..forms.tasks import (
     TaskForm, 
-    TaskSearchForm
+    TaskSearchForm,
+    TaskAssignForm,
 )
 from ..lib.events.tasks import (
     TaskCreated,
@@ -222,3 +223,34 @@ class TasksView(BaseView):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='assign',
+        request_method='GET',
+        renderer='travelcrm:templates/tasks/assign.mako',
+        permission='assign'
+    )
+    def assign(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Assign Maintainer')),
+        }
+
+    @view_config(
+        name='assign',
+        request_method='POST',
+        renderer='json',
+        permission='assign'
+    )
+    def _assign(self):
+        form = TaskAssignForm(self.request)
+        if form.validate():
+            form.submit(self.request.params.getall('id'))
+            return {
+                'success_message': _(u'Assigned'),
+            }
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }

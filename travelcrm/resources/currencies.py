@@ -13,3 +13,7 @@ from ..resources import (
 class CurrenciesResource(ResourceTypeBase):
 
     __name__ = 'currencies'
+
+    @property
+    def allowed_assign(self):
+        return True

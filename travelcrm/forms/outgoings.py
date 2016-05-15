@@ -10,6 +10,7 @@ from . import(
     BaseForm,
     BaseSearchForm,
     ResourceSearchSchema,
+    BaseAssignForm,
 )
 from ..resources.outgoings import OutgoingsResource
 from ..models.outgoing import Outgoing
@@ -23,6 +24,7 @@ from ..lib.bl.outgoings import make_payment
 from ..lib.bl.subaccounts import get_company_subaccount
 from ..lib.bl.cashflows import get_account_balance
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -102,10 +104,11 @@ class OutgoingForm(BaseForm):
     _schema = _OutgoingSchema
 
     def submit(self, outgoing=None):
-        context = OutgoingsResource(self.request)
         if not outgoing:
             outgoing = Outgoing(
-                resource=context.create_resource()
+                resource=OutgoingsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             outgoing.rollback()
@@ -149,3 +152,12 @@ class _OutgoingSearchSchema(ResourceSearchSchema):
 class OutgoingSearchForm(BaseSearchForm):
     _qb = OutgoingsQueryBuilder
     _schema = _OutgoingSearchSchema
+
+
+class OutgoingAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            outgoing = Outgoing.get(id)
+            outgoing.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

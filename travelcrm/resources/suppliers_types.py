@@ -13,3 +13,7 @@ from ..resources import (
 class SuppliersTypesResource(ResourceTypeBase):
 
     __name__ = 'suppliers_types'
+
+    @property
+    def allowed_assign(self):
+        return True

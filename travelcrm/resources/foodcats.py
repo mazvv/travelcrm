@@ -13,3 +13,7 @@ from ..resources import (
 class FoodcatsResource(ResourceTypeBase):
 
     __name__ = 'foodcats'
+
+    @property
+    def allowed_assign(self):
+        return True

@@ -5,7 +5,8 @@ import colander
 from . import (
     ResourceSchema, 
     BaseForm, 
-    BaseSearchForm
+    BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.hotelcats import HotelcatsResource
 from ..models.hotelcat import Hotelcat
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.hotelcats import HotelcatsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class HotelcatForm(BaseForm):
     _schema = _HotelcatSchema
 
     def submit(self, hotelcat=None):
-        context = HotelcatsResource(self.request)
         if not hotelcat:
             hotelcat = Hotelcat(
-                resource=context.create_resource()
+                resource=HotelcatsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             hotelcat.resource.notes = []
@@ -63,3 +66,12 @@ class HotelcatForm(BaseForm):
 
 class HotelcatSearchForm(BaseSearchForm):
     _qb = HotelcatsQueryBuilder
+
+
+class HotelcatAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            hotelcat = Hotelcat.get(id)
+            hotelcat.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

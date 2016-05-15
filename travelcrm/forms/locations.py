@@ -5,7 +5,8 @@ import colander
 from . import (
     ResourceSchema, 
     BaseForm, 
-    BaseSearchForm
+    BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.locations import LocationsResource
 from ..models import DBSession
@@ -14,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.locations import LocationsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -60,10 +62,11 @@ class LocationForm(BaseForm):
     _schema = _LocationSchema
 
     def submit(self, location=None):
-        context = LocationsResource(self.request)
         if not location:
             location = Location(
-                resource=context.create_resource()
+                resource=LocationsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             location.resource.notes = []
@@ -81,3 +84,12 @@ class LocationForm(BaseForm):
 
 class LocationSearchForm(BaseSearchForm):
     _qb = LocationsQueryBuilder
+
+
+class LocationAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            location = Location.get(id)
+            location.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

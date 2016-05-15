@@ -8,6 +8,7 @@ from . import (
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.leads import LeadsResource
 from ..models.lead import Lead
@@ -16,6 +17,7 @@ from ..models.task import Task
 from ..models.lead_item import LeadItem
 from ..models.lead_offer import LeadOffer
 from ..lib.qb.leads import LeadsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _LeadSchema(ResourceSchema):
@@ -68,10 +70,11 @@ class LeadForm(BaseForm):
     _schema = _LeadSchema
 
     def submit(self, lead=None):
-        context = LeadsResource(self.request)
         if not lead:
             lead = Lead(
-                resource=context.create_resource()
+                resource=LeadsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             lead.leads_offers = []
@@ -136,3 +139,12 @@ class _LeadSearchSchema(ResourceSearchSchema):
 class LeadSearchForm(BaseSearchForm):
     _qb = LeadsQueryBuilder
     _schema = _LeadSearchSchema
+
+
+class LeadAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            lead = Lead.get(id)
+            lead.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

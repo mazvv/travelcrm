@@ -13,3 +13,7 @@ from ..resources import (
 class OutgoingsResource(ResourceTypeBase):
 
     __name__ = 'outgoings'
+
+    @property
+    def allowed_assign(self):
+        return True

@@ -7,6 +7,7 @@ from . import(
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.persons import PersonsResource
 from ..models.person import Person
@@ -16,6 +17,7 @@ from ..models.address import Address
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.persons import PersonsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _PersonSchema(ResourceSchema):
@@ -98,10 +100,11 @@ class PersonForm(BaseForm):
     _schema = _PersonSchema
 
     def submit(self, person=None):
-        context = PersonsResource(self.request)
         if not person:
             person = Person(
-                resource=context.create_resource()
+                resource=PersonsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             person.contacts = []
@@ -138,3 +141,10 @@ class PersonForm(BaseForm):
 
 class PersonSearchForm(BaseSearchForm):
     _qb = PersonsQueryBuilder
+
+
+class PersonAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            person = Person.get(id)
+            person.resource.maintainer_id = self._controls.get('maintainer_id')

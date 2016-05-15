@@ -18,6 +18,7 @@ from ..lib.bl.commissions import (
     get_commission_sum
 )
 from ..lib.qb.calculations import CalculationsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _CalculationAutoloadSchema(ResourceSchema):
@@ -30,7 +31,6 @@ class CalculationAutoloadForm(BaseForm):
     _schema = _CalculationAutoloadSchema
 
     def submit(self):
-        context = CalculationsResource(self.request)
         order = Order.get(self._controls.get('id'))
         calculations = []
         for order_item in order.orders_items:
@@ -60,7 +60,9 @@ class CalculationAutoloadForm(BaseForm):
                 price=(order_item.price - commission),
                 order_item=order_item,
                 contract=contract,
-                resource=context.create_resource()
+                resource=CalculationsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
             calculation.resource.notes = []
             calculation.resource.tasks = []
@@ -78,10 +80,11 @@ class CalculationForm(BaseForm):
     _schema = _CalculationSchema
 
     def submit(self, calculation=None):
-        context = CalculationsResource(self.request)
         if not calculation:
             calculation = Calculation(
-                resource=context.create_resource()
+                resource=CalculationsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             calculation.resource.notes = []

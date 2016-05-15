@@ -13,3 +13,7 @@ from ..resources import (
 class CrosspaymentsResource(ResourceTypeBase):
 
     __name__ = 'crosspayments'
+
+    @property
+    def allowed_assign(self):
+        return True

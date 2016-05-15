@@ -11,6 +11,7 @@ from . import(
 from ..resources.contacts import ContactsResource
 from ..models.contact import Contact
 from ..lib.qb.contacts import ContactsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -48,10 +49,11 @@ class ContactForm(BaseForm):
     _schema = _ContactSchema
 
     def submit(self, contact=None):
-        context = ContactsResource(self.request)
         if not contact:
             contact = Contact(
-                resource=context.create_resource()
+                resource=ContactsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         contact.contact_type = self._controls.get('contact_type')
         contact.contact = self._controls.get('contact')

@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.roomcats import RoomcatsResource
 from ..models.roomcat import Roomcat
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.roomcats import RoomcatsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class RoomcatForm(BaseForm):
     _schema = _RoomcatSchema
 
     def submit(self, roomcat=None):
-        context = RoomcatsResource(self.request)
         if not roomcat:
             roomcat = Roomcat(
-                resource=context.create_resource()
+                resource=RoomcatsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             roomcat.resource.notes = []
@@ -63,3 +66,12 @@ class RoomcatForm(BaseForm):
 
 class RoomcatSearchForm(BaseSearchForm):
     _qb = RoomcatsQueryBuilder
+
+
+class RoomcatAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            roomcat = Roomcat.get(id)
+            roomcat.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

@@ -51,7 +51,8 @@ requires = [
     'smpplib>=0.1',
     'Mock>=2.0.0',
     'python_dateutil>=2.4.0',
-    'nose'
+    'nose',
+    'redis>=2.10.5',
 ]
 
 setup(

@@ -5,7 +5,6 @@
     _tb_id = "tb-%s" % _id
     _t_id = "t-%s" % _id
     _s_id = "s-%s" % _id
-    _m_id = "m-%s" % _id  
 %>
 <div class="easyui-panel unselectable"
     data-options="
@@ -55,7 +54,7 @@
             <th data-options="field:'age',sortable:true,width:60">${_(u"age")}</th>
             <th data-options="field:'person_category',sortable:true,width:120">${_(u"person category")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
 
@@ -80,6 +79,12 @@
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
                 % endif
+                % if _context.has_permision('assign'):
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
+                    <span class="fa fa-user-secret"></span>${_(u'Assign')}
+                </a>
+                % endif
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger easyui-linkbutton _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
@@ -87,14 +92,6 @@
                 </a>
                 % endif
             </div>
-            <a href="#" class="button easyui-splitbutton" 
-                data-options="menu:'#${_m_id}',plain:false">
-                ${_(u'More')}
-            </a>
-		    <div id="${_m_id}" style="width:150px;">
-		        <div>Import Persons</div>
-		        <div>Update</div>
-		    </div>            
         </div>
         <div class="ml45 tr">
             <div class="search">
@@ -109,10 +106,10 @@
                         ${h.fields.date_field('updated_to')}
                     </div>
                     <div class="mt05">
-                        ${h.tags.title(_(u"modifier"))}
+                        ${h.tags.title(_(u"maintainer"))}
                     </div>
                     <div>
-                        ${h.fields.employees_combogrid_field(request, 'modifier_id', show_toolbar=False)}
+                        ${h.fields.employees_combogrid_field(request, 'maintainer_id', show_toolbar=False)}
                     </div>
                     <div class="mt1">
                         <div class="button-group minor-group">

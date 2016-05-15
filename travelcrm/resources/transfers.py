@@ -13,3 +13,7 @@ from ..resources import (
 class TransfersResource(ResourceTypeBase):
 
     __name__ = 'transfers'
+
+    @property
+    def allowed_assign(self):
+        return True

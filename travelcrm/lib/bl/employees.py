@@ -1,8 +1,9 @@
 # -*coding: utf-8-*-
 
 from types import ClassType
+from datetime import datetime
 
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 
 from ...models import DBSession
 from ...models.employee import Employee
@@ -10,29 +11,75 @@ from ...models.appointment import Appointment
 from ...models.permision import Permision
 from ...models.structure import Structure
 from ...models.position import Position
+from ...models.dismissal import Dismissal
 from ..utils.resources_utils import (
     get_resource_type_by_resource,
     get_resource_type_by_resource_cls
 )
 
 
-def get_employee_position(employee, date=None):
-    """get employee position by date
-    if date is None return current employee position
+def query_employees_dismissed():
+    subq = (
+        DBSession.query(Appointment.employee_id, Appointment.date)
+        .distinct(Appointment.employee_id)
+        .order_by(
+            Appointment.employee_id, Appointment.date.desc()
+        )
+        .subquery()
+    )
+    return (
+        DBSession.query(Dismissal.employee_id, Dismissal.date)
+        .distinct(Dismissal.employee_id)
+        .outerjoin(subq, Dismissal.employee_id == subq.c.employee_id)
+        .filter(Dismissal.date > subq.c.date)
+        .order_by(
+            Dismissal.employee_id,
+            Dismissal.date.desc()
+        )
+    )
+
+
+def is_employee_currently_dismissed(employee):
+    """check if employee is dismissed now
     """
-    assert isinstance(employee, Employee), type(employee)
-    if employee.is_currently_dismissed():
-        return None
+    query = (
+        query_employees_dismissed()
+        .filter(
+            Dismissal.employee_id == employee.id,
+            Dismissal.date < datetime.now()
+        )
+    )
+    return DBSession.query(query.exists()).scalar()
+    
+
+def query_employees_position(date=None):
     query = (
         DBSession.query(Position)
+        .distinct(Appointment.employee_id)
         .join(Appointment, Position.appointments)
-        .filter(Appointment.condition_employee_id(employee.id))
     )
     if date:
         query = query.filter(
             Appointment.date <= date
         )
-    query = query.order_by(desc(Appointment.date))
+    else:
+        query = query.filter(
+            Appointment.date <= func.now()
+        )
+    return query.order_by(Appointment.employee_id, desc(Appointment.date))
+    
+
+def get_employee_position(employee, date=None):
+    """get employee position by date
+    if date is None return current employee position
+    """
+    assert isinstance(employee, Employee), type(employee)
+    if is_employee_currently_dismissed(employee):
+        return None
+    query = (
+        query_employees_position(date)
+        .filter(Appointment.condition_employee_id(employee.id))
+    )
     return query.first()
 
 

@@ -14,6 +14,7 @@ from ..models.spassport import Spassport
 from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -57,10 +58,11 @@ class SpassportForm(OrderItemForm):
 
     def submit(self, spassport=None):
         order_item = super(SpassportForm, self).submit(spassport and spassport.order_item)
-        context = SpassportsResource(self.request)
         if not spassport:
             spassport = Spassport(
-                resource=context.create_resource()
+                resource=SpassportsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         spassport.order_item = order_item
         spassport.photo_done = self._controls.get('photo_done')

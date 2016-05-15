@@ -44,7 +44,7 @@
         </thead>
     </table>
 
-    <div class="datagrid-toolbar" id="${_tb_id}">
+    <div class="datagrid-toolbar no-height" id="${_tb_id}">
         <div class="actions button-container">
             <div class="button-group minor-group">
                 % if _context.has_permision('add'):
@@ -73,5 +73,20 @@
                 % endif
             </div>
         </div>
+        <hr class="dashed"></hr>
+        <div class="dp100">
+            <div class="dp10 b pt02">
+                ${_(u'Filter')}:
+            </div>
+            <div class="searchbar dp90">
+                ${h.fields.employees_combogrid_field(
+                    request, 'maintainer_id',
+                    value=h.common.get_auth_employee(request).id,
+                    show_toolbar=False,
+                    data_options="onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
+                )}
+            </div>
+        </div>
+        <div class="clear"></div>
     </div>
 </div>

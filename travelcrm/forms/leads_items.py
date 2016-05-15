@@ -10,6 +10,7 @@ from . import (
 from ..resources.leads_items import LeadsItemsResource
 from ..models.lead_item import LeadItem
 from ..lib.qb.leads_items import LeadsItemsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _LeadItemSchema(ResourceSchema):
@@ -38,10 +39,11 @@ class LeadItemForm(BaseForm):
     _schema = _LeadItemSchema
 
     def submit(self, lead_item=None):
-        context = LeadsItemsResource(self.request)
         if not lead_item:
             lead_item = LeadItem(
-                resource=context.create_resource()
+                resource=LeadsItemsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
 
         lead_item.service_id = self._controls.get('service_id')

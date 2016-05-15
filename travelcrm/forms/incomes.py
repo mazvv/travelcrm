@@ -8,6 +8,7 @@ from . import(
     BaseForm,
     BaseSearchForm,
     ResourceSearchSchema,
+    BaseAssignForm,
 )
 from ..resources.incomes import IncomesResource
 from ..models.income import Income
@@ -19,6 +20,7 @@ from ..lib.qb.incomes import IncomesQueryBuilder
 from ..lib.bl.incomes import make_payment
 from ..lib.bl.subaccounts import get_company_subaccount
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -106,10 +108,11 @@ class IncomeForm(BaseForm):
     _schema = _IncomeSchema
 
     def submit(self, income=None):
-        context = IncomesResource(self.request)
         if not income:
             income = Income(
-                resource=context.create_resource()
+                resource=IncomesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             income.rollback()
@@ -133,3 +136,12 @@ class IncomeForm(BaseForm):
 class IncomeSearchForm(BaseSearchForm):
     _qb = IncomesQueryBuilder
     _schema = _IncomeSearchSchema
+
+
+class IncomeAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            income = Income.get(id)
+            income.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

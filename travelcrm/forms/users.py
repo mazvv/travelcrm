@@ -6,6 +6,7 @@ from . import (
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.users import UsersResource
 from ..models.user import User
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.users import UsersQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -113,10 +115,11 @@ class _UserEditSchema(_UserAddSchema):
 class _UserForm(BaseForm):
 
     def submit(self, user=None):
-        context = UsersResource(self.request)
         if not user:
             user = User(
-                resource=context.create_resource()
+                resource=UsersResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             user.resource.notes = []
@@ -144,3 +147,12 @@ class UserEditForm(_UserForm):
 
 class UserSearchForm(BaseSearchForm):
     _qb = UsersQueryBuilder
+
+
+class UserAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            user = User.get(id)
+            user.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

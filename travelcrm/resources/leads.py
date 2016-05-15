@@ -20,3 +20,7 @@ class LeadsResource(ResourceTypeBase):
         return super(LeadsResource, self).allowed_permisions + [
             ('order', _(u'order')),
         ]
+
+    @property
+    def allowed_assign(self):
+        return True

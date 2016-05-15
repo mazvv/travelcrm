@@ -10,6 +10,7 @@ from . import(
 from ..resources.commissions import CommissionsResource
 from ..models.commission import Commission
 from ..lib.qb.commissions import CommissionsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _CommissionSchema(ResourceSchema):
@@ -37,10 +38,11 @@ class CommissionForm(BaseForm):
     _schema = _CommissionSchema
 
     def submit(self, commission=None):
-        context = CommissionsResource(self.request)
         if not commission:
             commission = Commission(
-                resource=context.create_resource()
+                resource=CommissionsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         commission.service_id = self._controls.get('service_id')
         commission.percentage = self._controls.get('percentage')

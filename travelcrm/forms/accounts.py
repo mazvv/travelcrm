@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.accounts import AccountsResource
 from ..models.account import Account
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.accounts import AccountsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -62,10 +64,11 @@ class AccountForm(BaseForm):
     _schema = _AccountSchema
 
     def submit(self, account=None):
-        context = AccountsResource(self.request)
         if not account:
             account = Account(
-                resource=context.create_resource()
+                resource=AccountsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             account.resource.notes = []
@@ -87,3 +90,12 @@ class AccountForm(BaseForm):
 
 class AccountSearchForm(BaseSearchForm):
     _qb = AccountsQueryBuilder
+
+
+class AccountAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            account = Account.get(id)
+            account.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

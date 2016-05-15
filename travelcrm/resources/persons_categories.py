@@ -13,3 +13,7 @@ from ..resources import (
 class PersonsCategoriesResource(ResourceTypeBase):
 
     __name__ = 'persons_categories'
+
+    @property
+    def allowed_assign(self):
+        return True

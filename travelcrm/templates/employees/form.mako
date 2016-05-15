@@ -84,15 +84,6 @@
                         ${h.common.error_container(name='itn')}
                     </div>
                 </div>
-                <div class="form-field">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"dismissal date"), False, "dismissal_date")}
-                    </div>
-                    <div class="ml15">
-                        ${h.fields.date_field('dismissal_date', item.dismissal_date if item else None)}
-                        ${h.common.error_container(name='dismissal_date')}
-                    </div>
-                </div>
             </div>
             <div title="${_(u'Contacts')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">

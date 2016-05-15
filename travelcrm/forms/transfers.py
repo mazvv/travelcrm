@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.transfers import TransfersResource
 from ..models.transfer import Transfer
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.transfers import TransfersQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class TransferForm(BaseForm):
     _schema = _TransferSchema
 
     def submit(self, transfer=None):
-        context = TransfersResource(self.request)
         if not transfer:
             transfer = Transfer(
-                resource=context.create_resource()
+                resource=TransfersResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             transfer.resource.notes = []
@@ -63,3 +66,12 @@ class TransferForm(BaseForm):
 
 class TransferSearchForm(BaseSearchForm):
     _qb = TransfersQueryBuilder
+
+
+class TransferAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            transfer = Transfer.get(id)
+            transfer.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

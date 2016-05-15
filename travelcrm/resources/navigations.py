@@ -13,3 +13,7 @@ from ..resources import (
 class NavigationsResource(ResourceTypeBase):
 
     __name__ = 'navigations'
+
+    @property
+    def allowed_assign(self):
+        return True

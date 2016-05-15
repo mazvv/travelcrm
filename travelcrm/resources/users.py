@@ -14,3 +14,7 @@ from ..resources import (
 class UsersResource(ResourceTypeBase):
 
     __name__ = 'users'
+
+    @property
+    def allowed_assign(self):
+        return True

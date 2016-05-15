@@ -17,3 +17,7 @@ class InvoicesResource(ResourceTypeBase):
     @property
     def allowed_settings(self):
         return True
+
+    @property
+    def allowed_assign(self):
+        return True

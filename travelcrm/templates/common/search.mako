@@ -3,7 +3,7 @@
         id = 'search' + container
     %>
     <div class="searchbar" style="padding-top: 2px;">
-        ${h.tags.text("q", None, class_="easyui-textbox w30 searchbox", id=id, data_options="prompt:'%s'" % prompt)}
+        ${h.tags.text("q", None, class_="easyui-textbox w25 searchbox", id=id, data_options="prompt:'%s'" % prompt)}
         <span class="field-actions">
             <span class="fa fa-search easyui-tooltip field-action _action" 
                   title="${_(u'search')}"

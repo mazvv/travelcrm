@@ -8,12 +8,18 @@ from ...interfaces import IResourceType
 from ...models import DBSession
 from ...models.resource import Resource
 from ...models.structure import Structure
+from ...models.employee import Employee
+from ...models.position import Position
+from ...models.appointment import Appointment
 from ...models.resource_log import ResourceLog
 
 from ..utils.common_utils import serialize
 from ..utils.security_utils import get_auth_employee
 
-from ..bl.employees import query_employee_scope
+from ..bl.employees import (
+    query_employee_scope,
+    query_employees_position
+)
 
 
 class NotValidContextError(Exception):
@@ -111,10 +117,12 @@ class GeneralQueryBuilder(object):
 class ResourcesQueryBuilder(GeneralQueryBuilder):
 
     _log_subquery = ResourceLog.query_last_max_entries().subquery()
+    _aEmployee = aliased(Employee)
+    _aStructure = aliased(Structure)
     _base_fields = {
         'rid': Resource.id.label('rid'),
         'modifydt': _log_subquery.c.modifydt.label('modifydt'),
-        'modifier': _log_subquery.c.modifier.label('modifier'),
+        'maintainer': _aEmployee.name,
     }
 
     def __init__(self, context=None):
@@ -123,10 +131,24 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
         self.context = context
 
     def build_base_query(self):
-        aStructure = aliased(Structure)
+        structure_subq = (
+            query_employees_position()
+            .with_entities(
+                Position.structure_id.label('structure_id'),
+            )
+            .subquery()
+        )
         self.query = (
             DBSession.query(*self.get_base_fields().values())
-            .join(aStructure, Resource.owner_structure)
+            .join(self._aEmployee, Resource.maintainer)
+            .join(
+                structure_subq,
+                self._aEmployee.id == structure_subq.c.employee_id
+            )
+            .join(
+                self._aStructure,
+                structure_subq.c.structure_id == self._aStructure.id
+            )
             .outerjoin(
                 self._log_subquery,
                 Resource.id == self._log_subquery.c.id
@@ -137,7 +159,9 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
             query = query_employee_scope(employee, self.context)
             if query:
                 subq = query.subquery()
-                self.query = self.query.join(subq, subq.c.id == aStructure.id)
+                self.query = self.query.join(
+                    subq, subq.c.id == self._aStructure.id
+                )
 
     def update_fields(self, fields):
         self._fields.update(fields)
@@ -154,7 +178,7 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
         self._filter_updated_date(
             kwargs.get('updated_from'), kwargs.get('updated_to')
         )
-        self._filter_modifier(kwargs.get('modifier_id'))
+        self._filter_maintainer(kwargs.get('maintainer_id'))
 
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
@@ -166,8 +190,8 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
                 self._log_subquery.c.modifydt <= updated_to
             )
 
-    def _filter_modifier(self, modifier_id):
-        if modifier_id:
+    def _filter_maintainer(self, maintainer_id):
+        if maintainer_id:
             self.query = self.query.filter(
-                self._log_subquery.c.modifier_id == modifier_id
+                Resource.maintainer_id == maintainer_id
             )

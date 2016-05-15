@@ -13,3 +13,7 @@ from ..resources import (
 class ContractsResource(ResourceTypeBase):
 
     __name__ = 'contracts'
+
+    @property
+    def allowed_assign(self):
+        return True

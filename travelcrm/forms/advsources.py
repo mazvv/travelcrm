@@ -6,6 +6,7 @@ from . import (
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.advsources import AdvsourcesResource
 from ..models.advsource import Advsource
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.advsources import AdvsourcesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class AdvsourceForm(BaseForm):
     _schema = _AdvsourceSchema
 
     def submit(self, advsource=None):
-        context = AdvsourcesResource(self.request)
         if not advsource:
             advsource = Advsource(
-                resource=context.create_resource()
+                resource=AdvsourcesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             advsource.resource.notes = []
@@ -63,3 +66,12 @@ class AdvsourceForm(BaseForm):
 
 class AdvsourceSearchForm(BaseSearchForm):
     _qb = AdvsourcesQueryBuilder
+
+
+class AdvsourceAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            advsource = Advsource.get(id)
+            advsource.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

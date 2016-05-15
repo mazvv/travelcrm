@@ -7,6 +7,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.contracts import ContractsResource
 from ..models.supplier import Supplier
@@ -15,6 +16,7 @@ from ..models.commission import Commission
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.contracts import ContractsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _ContractSchema(ResourceSchema):
@@ -56,10 +58,11 @@ class ContractForm(BaseForm):
     _schema = _ContractSchema
 
     def submit(self, contract=None):
-        context = ContractsResource(self.request)
         if not contract:
             contract = Contract(
-                resource=context.create_resource()
+                resource=ContractsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             contract.commissions = []
@@ -84,3 +87,12 @@ class ContractForm(BaseForm):
 
 class ContractSearchForm(BaseSearchForm):
     _qb = ContractsQueryBuilder
+
+
+class ContractAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            contract = Contract.get(id)
+            contract.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

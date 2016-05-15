@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.tickets_classes import TicketsClassesResource
 from ..models.ticket_class import TicketClass
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.tickets_classes import TicketsClassesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class TicketClassForm(BaseForm):
     _schema = _TicketClassSchema
 
     def submit(self, ticket_class=None):
-        context = TicketsClassesResource(self.request)
         if not ticket_class:
             ticket_class = TicketClass(
-                resource=context.create_resource()
+                resource=TicketsClassesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             ticket_class.resource.notes = []
@@ -63,3 +66,12 @@ class TicketClassForm(BaseForm):
 
 class TicketClassSearchForm(BaseSearchForm):
     _qb = TicketsClassesQueryBuilder
+
+
+class TicketClassAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            ticket_class = TicketClass.get(id)
+            ticket_class.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

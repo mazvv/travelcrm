@@ -13,3 +13,7 @@ from ..resources import (
 class HotelcatsResource(ResourceTypeBase):
 
     __name__ = 'hotelcats'
+
+    @property
+    def allowed_assign(self):
+        return True

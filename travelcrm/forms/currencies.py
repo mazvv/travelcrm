@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.currencies import CurrenciesResource
 from ..models.currency import Currency
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.currencies import CurrenciesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class CurrencyForm(BaseForm):
     _schema = _CurrencySchema
 
     def submit(self, currency=None):
-        context = CurrenciesResource(self.request)
         if not currency:
             currency = Currency(
-                resource=context.create_resource()
+                resource=CurrenciesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             currency.resource.notes = []
@@ -63,3 +66,12 @@ class CurrencyForm(BaseForm):
 
 class CurrencySearchForm(BaseSearchForm):
     _qb = CurrenciesQueryBuilder
+
+
+class CurrencyAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            currency = Currency.get(id)
+            currency.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

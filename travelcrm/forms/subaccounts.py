@@ -6,7 +6,8 @@ from . import(
     ResourceSchema, 
     ResourceSearchSchema,
     BaseForm,
-    BaseSearchForm
+    BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.subaccounts import SubaccountsResource
 from ..models.subaccount import Subaccount
@@ -22,6 +23,7 @@ from ..lib.utils.resources_utils import (
 )
 from ..lib.qb.subaccounts import SubaccountsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -106,10 +108,11 @@ class SubaccountForm(BaseForm):
     _schema = _SubaccountSchema
 
     def submit(self, subaccount=None):
-        context = SubaccountsResource(self.request)
         if not subaccount:
             subaccount = Subaccount(
-                resource=context.create_resource()
+                resource=SubaccountsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             subaccount.resource.notes = []
@@ -138,3 +141,12 @@ class SubaccountForm(BaseForm):
 class SubaccountSearchForm(BaseSearchForm):
     _qb = SubaccountsQueryBuilder
     _schema = _SubaccountSearchSchema
+
+
+class SubaccountAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            subaccount = Subaccount.get(id)
+            subaccount.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

@@ -7,6 +7,7 @@ from . import(
     BaseForm,
     ResourceSearchSchema,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.navigations import NavigationsResource
 from ..models.navigation import Navigation
@@ -19,6 +20,7 @@ from ..lib.bl.navigations import (
     update_sort_orders,
 )
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -84,10 +86,11 @@ class NavigationForm(BaseForm):
     _schema = _NavigationSchema
 
     def submit(self, navigation=None):
-        context = NavigationsResource(self.request)
         if not navigation:
             navigation = Navigation(
-                resource=context.create_resource()
+                resource=NavigationsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
             update_sort_orders(
                 self._controls.get('position_id'),
@@ -159,3 +162,12 @@ class NavigationCopyForm(BaseForm):
             self._controls.get('from_position_id'),
             self._controls.get('position_id'),
         )        
+
+
+class NavigationAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            navigation = Navigation.get(id)
+            navigation.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

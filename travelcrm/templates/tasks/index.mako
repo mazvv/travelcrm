@@ -29,7 +29,6 @@
                 return '<div id=' + row_id + '></div>';
             },          
             onBeforeLoad: function(param){
-                param.performer_id = ${h.common.get_auth_employee(request).id};
                 $.each($('#${_tb_id} .searchbar').find('input'), function(i, el){
                     if(!is_undefined($(el).attr('name')))
                         param[$(el).attr('name')] = $(el).val();
@@ -46,8 +45,8 @@
         </thead>
     </table>
 
-    <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container dl25">
+    <div class="datagrid-toolbar no-height" id="${_tb_id}">
+        <div class="actions button-container">
             <div class="button-group minor-group">
                 % if _context.has_permision('add'):
                 <a href="#" class="button primary easyui-linkbutton _action" 
@@ -67,6 +66,12 @@
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
                 % endif
+                % if _context.has_permision('assign'):
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
+                    <span class="fa fa-user-secret"></span>${_(u'Assign')}
+                </a>
+                % endif
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger easyui-linkbutton _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
@@ -75,15 +80,26 @@
                 % endif
             </div>
         </div>
-        <div class="ml25 tr">
-            <div class="searchbar" style="margin-top: 2px;">
+        <hr class="dashed"></hr>
+        <div class="dp100">
+            <div class="dp10 b pt02">
+                ${_(u'Filter')}:
+            </div>
+            <div class="searchbar dp90">
+                ${h.fields.employees_combogrid_field(
+                    request, 'maintainer_id',
+                    value=h.common.get_auth_employee(request).id,
+                    show_toolbar=False,
+                    data_options="onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
+                )}
                 ${h.fields.tasks_statuses_combobox_field(
                     'status',
                     'in_work',
                     with_all=True,
-                    data_options="width:100,onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
+                    data_options="width:80,onChange:function(o_v, n_v){$('#%s').datagrid('load');}" % _id
                 )}
             </div>
         </div>
+        <div class="clear"></div>
     </div>
 </div>

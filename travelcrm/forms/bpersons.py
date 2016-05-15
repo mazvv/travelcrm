@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.bpersons import BPersonsResource
 from ..models.bperson import BPerson
@@ -13,6 +14,7 @@ from ..models.contact import Contact
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.bpersons import BPersonsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _BPersonSchema(ResourceSchema):
@@ -59,10 +61,11 @@ class BPersonForm(BaseForm):
     _schema = _BPersonSchema
 
     def submit(self, bperson=None):
-        context = BPersonsResource(self.request)
         if not bperson:
             bperson = BPerson(
-                resource=context.create_resource()
+                resource=BPersonsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             bperson.contacts = []
@@ -88,3 +91,12 @@ class BPersonForm(BaseForm):
 
 class BPersonSearchForm(BaseSearchForm):
     _qb = BPersonsQueryBuilder
+
+
+class BPersonAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            bperson = BPerson.get(id)
+            bperson.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

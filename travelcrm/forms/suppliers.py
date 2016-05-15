@@ -7,6 +7,7 @@ from . import (
     ResourceSearchSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.suppliers import SuppliersResource
 from ..models.supplier import Supplier
@@ -16,6 +17,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.suppliers import SuppliersQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -84,10 +86,11 @@ class SupplierForm(BaseForm):
     _schema = _SupplierSchema
 
     def submit(self, supplier=None):
-        context = SuppliersResource(self.request)
         if not supplier:
             supplier = Supplier(
-                resource=context.create_resource()
+                resource=SuppliersResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             supplier.bpersons = []
@@ -123,3 +126,12 @@ class _SupplierSearchSchema(ResourceSearchSchema):
 class SupplierSearchForm(BaseSearchForm):
     _schema = _SupplierSearchSchema
     _qb = SuppliersQueryBuilder
+
+
+class SupplierAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            supplier = Supplier.get(id)
+            supplier.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

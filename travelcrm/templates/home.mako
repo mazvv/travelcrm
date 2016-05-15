@@ -43,7 +43,7 @@
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/ace/theme-chrome.js'))}
     ${h.tags.javascript_link(request.static_url('travelcrm:static/js/jquery-ace.min.js'))}
     <script type="text/javascript">
-        var tasksSource = new EventSource("/tasks/counter?sort=id&employee_id=${h.common.get_auth_employee(request).id}");
+        var tasksSource = new EventSource("/tasks/counter?sort=id&maintainer_id=${h.common.get_auth_employee(request).id}");
         tasksSource.onmessage = function(e) {
         	var data = $.parseJSON(e.data);
         	$('.indicator.tasks-counter').html(data.count);

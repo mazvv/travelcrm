@@ -14,6 +14,7 @@ from ..models.visa import Visa
 from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -55,10 +56,11 @@ class VisaForm(OrderItemForm):
 
     def submit(self, visa=None):
         order_item = super(VisaForm, self).submit(visa and visa.order_item)
-        context = VisasResource(self.request)
         if not visa:
             visa = Visa(
-                resource=context.create_resource()
+                resource=VisasResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         visa.order_item = order_item
         visa.country_id = self._controls.get('country_id')

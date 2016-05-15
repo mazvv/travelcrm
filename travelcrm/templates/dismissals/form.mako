@@ -18,41 +18,25 @@
             <div title="${_(u'Main')}">
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"name"), True, "name")}
+                        ${h.tags.title(_(u"dismissal date"), True, "date")}
                     </div>
                     <div class="ml15">
-                        ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
-                        ${h.common.error_container(name='name')}
+                        ${h.fields.date_field('date', item.date if item else None)}
+                        ${h.common.error_container(name='date')}
                     </div>
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"resource type"), True, "resource_type_id")}
+                        ${h.tags.title(_(u"employee"), True, "employee_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.services_types_combobox_field(
-                            'resource_type_id',
-                            item.resource_type_id if item else None,
-                        )}
-                        ${h.common.error_container(name='resource_type_id')}
-                    </div>
-                </div>
-                <div class="form-field">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"invoice text"), True, "display_text")}
-                    </div>
-                    <div class="ml15">
-                        ${h.tags.text('display_text', item.display_text if item else None, class_="easyui-textbox w20")}
-                        ${h.common.error_container(name='display_text')}
-                    </div>
-                </div>
-                <div class="form-field mb05">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"description"), False, "descr")}
-                    </div>
-                    <div class="ml15">
-                        ${h.tags.text('descr', item.descr if item else None, class_="easyui-textbox w20", data_options="multiline:true,height:80")}
-                        ${h.common.error_container(name='descr')}
+                       ${h.fields.employees_combogrid_field(
+                           request,
+                           'employee_id',
+                           value=item.employee_id if item else None,
+                           show_toolbar=(not readonly if readonly else True),
+                       )}
+                       ${h.common.error_container(name='employee_id')}
                     </div>
                 </div>
             </div>

@@ -10,6 +10,7 @@ from . import (
 from ..resources.leads_offers import LeadsOffersResource
 from ..models.lead_offer import LeadOffer
 from ..lib.qb.leads_offers import LeadsOffersQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _LeadOfferSchema(ResourceSchema):
@@ -38,10 +39,11 @@ class LeadOfferForm(BaseForm):
     _schema = _LeadOfferSchema
 
     def submit(self, lead_offer=None):
-        context = LeadsOffersResource(self.request)
         if not lead_offer:
             lead_offer = LeadOffer(
-                resource=context.create_resource()
+                resource=LeadsOffersResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
 
         lead_offer.service_id = self._controls.get('service_id')

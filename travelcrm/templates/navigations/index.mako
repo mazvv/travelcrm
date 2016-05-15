@@ -34,7 +34,7 @@
             <th align="center" data-options="field:'icon_cls',width:20,formatter:function(value,row,index){if(value) return '<i class=\'' + value + '\'></i>';}"></th>
             <th data-options="field:'name',width:300">${_(u"name")}</th>
             <th data-options="field:'modifydt',width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
 
@@ -69,6 +69,12 @@
                 <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'container_action',property:'with_row',url:'${request.resource_url(_context, 'down')}'">
                     <span class="fa fa-arrow-down"></span>${_(u'Down')}
+                </a>
+                % endif
+                % if _context.has_permision('assign'):
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
+                    <span class="fa fa-user-secret"></span>${_(u'Assign')}
                 </a>
                 % endif
                 % if _context.has_permision('delete'):

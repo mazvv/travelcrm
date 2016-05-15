@@ -13,6 +13,7 @@ from ..models.passport import Passport
 from ..models.upload import Upload
 from ..lib.qb.passports import PassportsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -69,10 +70,11 @@ class PassportForm(BaseForm):
     _schema = _PassportSchema
 
     def submit(self, passport=None):
-        context = PassportsResource(self.request)
         if not passport:
             passport = Passport(
-                resource=context.create_resource()
+                resource=PassportsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             passport.uploads = []

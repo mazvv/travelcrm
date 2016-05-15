@@ -200,9 +200,6 @@ class Employee(Base):
     itn = Column(
         String(length=32),
     )
-    dismissal_date = Column(
-        Date,
-    )
     resource = relationship(
         'Resource',
         backref=backref(
@@ -286,10 +283,4 @@ class Employee(Base):
             return None
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
-        )
-
-    def is_currently_dismissed(self):
-        return (
-            self.dismissal_date != None
-            and self.dismissal_date < datetime.now().date()
         )

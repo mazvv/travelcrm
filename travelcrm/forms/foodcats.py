@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.foodcats import FoodcatsResource
 from ..models.foodcat import Foodcat
@@ -13,6 +14,7 @@ from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.foodcats import FoodcatsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -43,10 +45,11 @@ class FoodcatForm(BaseForm):
     _schema = _FoodcatSchema
 
     def submit(self, foodcat=None):
-        context = FoodcatsResource(self.request)
         if not foodcat:
             foodcat = Foodcat(
-                resource=context.create_resource()
+                resource=FoodcatsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             foodcat.resource.notes = []
@@ -63,3 +66,13 @@ class FoodcatForm(BaseForm):
 
 class FoodcatSearchForm(BaseSearchForm):
     _qb = FoodcatsQueryBuilder
+
+
+class FoodcatAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            foodcat = Foodcat.get(id)
+            foodcat.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )
+    

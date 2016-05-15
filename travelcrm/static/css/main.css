@@ -115,6 +115,9 @@ hr.dashed{
 a.dashed{
 	border-bottom: 1px dashed #d3d3d3;
 }
+.menu a:hover{
+    text-decoration: none;	
+}
 
 /** paddings **/
 .p1 {
@@ -125,6 +128,15 @@ a.dashed{
 }
 .pt1{
 	padding-top: 1em;
+}
+.pt02{
+    padding-top: 0.2em;
+}
+.pt03{
+    padding-top: 0.3em;
+}
+.pt04{
+    padding-top: 0.4em;
 }
 .pt05{
 	padding-top: 0.5em;
@@ -530,6 +542,10 @@ input{
 	height: 26px;
 }
 
+.datagrid-toolbar.no-height{
+    height: auto;	
+}
+
 /** document rows **/
 .document-rows{
 	margin-top: 0.5em;
@@ -558,7 +574,7 @@ input{
 	right: 0px;
 	z-index: 2;
 	background-color: #fff;
-	width: 390px;
+	width: 323px;
 	display: none;
 	padding: 5px 5px 0px 5px;
 }

@@ -11,6 +11,7 @@ from ...lib.utils.resources_utils import get_resources_types_by_interface
 from ...lib.bl.factories import get_subaccounts_factories_resources_types
 from ...lib.utils.resources_utils import get_resource_class
 from ...lib.utils.sql_utils import build_union_query
+from ...lib.bl.employees import get_employee_structure
 
 
 def get_subaccounts_types():
@@ -79,7 +80,9 @@ def generate_subaccount_name(name, account_id):
 
 def get_company_subaccount(account_id):
     account = Account.get(account_id)
+    maintainer_structure = get_employee_structure(
+        account.resource.maintainer
+    )
     return get_subaccount_by_source_resource_id(
-        account.resource.owner_structure.company.resource.id,
-        account_id,
+        maintainer_structure.company.resource.id, account_id,
     )

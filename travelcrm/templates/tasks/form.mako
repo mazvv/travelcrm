@@ -27,16 +27,16 @@
                 </div>
                 <div class="form-field">
                     <div class="dl15">
-                        ${h.tags.title(_(u"performer"), True, "employee_id")}
+                        ${h.tags.title(_(u"maintainer"), True, "maintainer_id")}
                     </div>
                     <div class="ml15">
                         ${h.fields.employees_combogrid_field(
                         	request,
-                        	'employee_id',
-                        	value=item.employee_id if item else h.common.get_auth_employee(request).id, 
+                        	'maintainer_id',
+                        	value=item.resource.maintainer_id if item else h.common.get_auth_employee(request).id, 
                         	show_toolbar=False
                         )}
-                        ${h.common.error_container(name='employee_id')}
+                        ${h.common.error_container(name='maintainer_id')}
                     </div>
                 </div>
                 <div class="form-field">

@@ -4,6 +4,7 @@ from pytz import timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.jobstores.redis import RedisJobStore
 from apscheduler.executors.pool import ProcessPoolExecutor
 from apscheduler.events import EVENT_JOB_ADDED
 
@@ -13,7 +14,7 @@ scheduler = BackgroundScheduler()
 
 def start_scheduler(settings):
     jobstores = {
-        'default': SQLAlchemyJobStore(url=settings['scheduler.url'])
+        'default': RedisJobStore(db=settings['scheduler.db'])
     }
     executors = {
         'default': {

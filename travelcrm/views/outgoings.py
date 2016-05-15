@@ -14,7 +14,8 @@ from ..lib.utils.common_utils import translate as _
 
 from ..forms.outgoings import (
     OutgoingForm, 
-    OutgoingSearchForm
+    OutgoingSearchForm,
+    OutgoingAssignForm,
 )
 
 
@@ -118,10 +119,12 @@ class OutgoingsView(BaseView):
     )
     def edit(self):
         outgoing = Outgoing.get(self.request.params.get('id'))
-        structure_id = outgoing.resource.owner_structure.id
+        maintainer_structure = get_employee_structure(
+            outgoing.resource.maintainer
+        )
         return {
             'item': outgoing,
-            'structure_id': structure_id,
+            'structure_id': maintainer_structure.id,
             'title': self._get_title(_(u'Edit')),
         }
 
@@ -218,3 +221,34 @@ class OutgoingsView(BaseView):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='assign',
+        request_method='GET',
+        renderer='travelcrm:templates/outgoings/assign.mako',
+        permission='assign'
+    )
+    def assign(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Assign Maintainer')),
+        }
+
+    @view_config(
+        name='assign',
+        request_method='POST',
+        renderer='json',
+        permission='assign'
+    )
+    def _assign(self):
+        form = OutgoingAssignForm(self.request)
+        if form.validate():
+            form.submit(self.request.params.getall('id'))
+            return {
+                'success_message': _(u'Assigned'),
+            }
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }

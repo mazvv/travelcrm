@@ -13,3 +13,7 @@ from ..resources import (
 class TicketsClassesResource(ResourceTypeBase):
 
     __name__ = 'tickets_classes'
+
+    @property
+    def allowed_assign(self):
+        return True

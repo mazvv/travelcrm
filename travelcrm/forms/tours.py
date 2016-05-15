@@ -14,6 +14,7 @@ from ..models.tour import Tour
 from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -96,10 +97,11 @@ class TourForm(OrderItemForm):
 
     def submit(self, tour=None):
         order_item = super(TourForm, self).submit(tour and tour.order_item)
-        context = ToursResource(self.request)
         if not tour:
             tour = Tour(
-                resource=context.create_resource()
+                resource=ToursResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         tour.order_item = order_item
         tour.adults = self._controls.get('adults')

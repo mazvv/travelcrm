@@ -6,6 +6,7 @@ from . import(
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.positions import PositionsResource
 from ..models import DBSession
@@ -14,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.positions import PositionsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -59,10 +61,11 @@ class PositionForm(BaseForm):
     _schema = _PositionSchema
 
     def submit(self, position=None):
-        context = PositionsResource(self.request)
         if not position:
             position = Position(
-                resource=context.create_resource()
+                resource=PositionsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             position.addresses = []
@@ -81,3 +84,12 @@ class PositionForm(BaseForm):
 
 class PositionSearchForm(BaseSearchForm):
     _qb = PositionsQueryBuilder
+
+
+class PositionAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            position = Position.get(id)
+            position.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

@@ -10,6 +10,7 @@ from . import (
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.invoices import InvoicesResource
 from ..models import DBSession
@@ -28,6 +29,7 @@ from ..lib.bl.vats import get_vat, calc_vat
 from ..lib.utils.common_utils import parse_date
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_type_by_resource
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -129,10 +131,11 @@ class InvoiceForm(BaseForm):
     _schema = _InvoiceSchema
 
     def submit(self, invoice=None):
-        context = InvoicesResource(self.request)
         if not invoice:
             invoice = Invoice(
-                resource=context.create_resource()
+                resource=InvoicesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             invoice.invoices_items = []
@@ -252,3 +255,12 @@ class InvoiceSumForm(BaseForm):
             self._controls.get('date'), 
             account.currency_id
         )
+
+
+class InvoiceAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            invoice = Invoice.get(id)
+            invoice.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

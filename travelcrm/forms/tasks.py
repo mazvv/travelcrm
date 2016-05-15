@@ -7,6 +7,7 @@ from . import (
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
     DateTime
 )
 from ..resources.tasks import TasksResource
@@ -14,12 +15,10 @@ from ..models.upload import Upload
 from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.tasks import TasksQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _TaskSchema(ResourceSchema):
-    employee_id = colander.SchemaNode(
-        colander.Integer(),
-    )
     task_resource_id = colander.SchemaNode(
         colander.Integer(),
         missing=None,
@@ -58,7 +57,7 @@ class _TaskSchema(ResourceSchema):
 
 
 class TaskSearchSchema(ResourceSearchSchema):
-    performer_id = colander.SchemaNode(
+    maintainer_id = colander.SchemaNode(
         colander.Integer(),
         missing=None,
     )
@@ -72,15 +71,18 @@ class TaskForm(BaseForm):
     _schema = _TaskSchema
 
     def submit(self, task=None):
-        context = TasksResource(self.request)
         if not task:
             task = Task(
-                resource=context.create_resource()
+                resource=TasksResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             task.uploads = []
             task.resource.notes = []
-        task.employee_id = self._controls.get('employee_id')
+        task.resource.maintainer_id = self._controls.get(
+            'maintainer_id'
+        )
         task.title = self._controls.get('title')
         task.deadline = self._controls.get('deadline')
         task.reminder = self._controls.get('reminder')
@@ -98,3 +100,12 @@ class TaskForm(BaseForm):
 class TaskSearchForm(BaseSearchForm):
     _schema = TaskSearchSchema
     _qb = TasksQueryBuilder
+
+
+class TaskAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            task = Task.get(id)
+            task.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

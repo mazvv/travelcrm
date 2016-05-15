@@ -10,6 +10,7 @@ from . import (
     BaseForm,
     BaseSearchForm,
     ResourceSearchSchema,
+    BaseAssignForm,
 )
 
 from ..resources.crosspayments import CrosspaymentsResource
@@ -22,6 +23,7 @@ from ..lib.qb.crosspayments import CrosspaymentsQueryBuilder
 from ..lib.bl.cashflows import get_account_balance
 from ..lib.utils.common_utils import cast_int, parse_datetime
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -138,11 +140,12 @@ class CrosspaymentForm(BaseForm):
     _schema = _CrosspaymentSchema
 
     def submit(self, crosspayment=None):
-        context = CrosspaymentsResource(self.request)
         if not crosspayment:
             crosspayment = Crosspayment(
                 cashflow=Cashflow(),
-                resource=context.create_resource()
+                resource=CrosspaymentsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             crosspayment.resource.notes = []
@@ -169,3 +172,12 @@ class CrosspaymentForm(BaseForm):
 class CrosspaymentSearchForm(BaseSearchForm):
     _qb = CrosspaymentsQueryBuilder
     _schema = _CrosspaymentSearchSchema
+
+
+class CrosspaymentAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            crosspayment = Crosspayment.get(id)
+            crosspayment.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

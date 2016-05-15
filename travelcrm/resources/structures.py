@@ -17,3 +17,7 @@ class StructuresResource(ResourceTypeBase):
     @classmethod
     def get_subaccount_factory(cls):
         return None
+
+    @property
+    def allowed_assign(self):
+        return True

@@ -10,6 +10,7 @@ from . import (
 from ..resources.banks_details import BanksDetailsResource
 from ..models.bank_detail import BankDetail
 from ..lib.qb.banks_details import BanksDetailsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _BankDetailSchema(ResourceSchema):
@@ -37,10 +38,11 @@ class BankDetailForm(BaseForm):
     _schema = _BankDetailSchema
 
     def submit(self, bank_detail=None):
-        context = BanksDetailsResource(self.request)
         if not bank_detail:
             bank_detail = BankDetail(
-                resource=context.create_resource()
+                resource=BanksDetailsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         bank_detail.bank_id = self._controls.get('bank_id')
         bank_detail.currency_id = self._controls.get('currency_id')

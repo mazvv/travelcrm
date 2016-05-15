@@ -5,7 +5,8 @@ import colander
 from . import(
     ResourceSchema, 
     BaseForm,
-    BaseSearchForm
+    BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.regions import RegionsResource
 from ..models import DBSession
@@ -14,6 +15,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.regions import RegionsQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -55,7 +57,9 @@ class RegionForm(BaseForm):
         context = RegionsResource(self.request)
         if not region:
             region = Region(
-                resource=context.create_resource()
+                resource=RegionsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             region.resource.notes = []
@@ -73,3 +77,12 @@ class RegionForm(BaseForm):
 
 class RegionSearchForm(BaseSearchForm):
     _qb = RegionsQueryBuilder
+
+
+class RegionAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            region = Region.get(id)
+            region.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

@@ -20,3 +20,7 @@ class EmployeesResource(ResourceTypeBase):
     @staticmethod
     def get_subaccount_factory():
         return EmployeeSubaccountFactory
+
+    @property
+    def allowed_assign(self):
+        return True

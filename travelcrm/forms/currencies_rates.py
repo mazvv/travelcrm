@@ -8,6 +8,7 @@ from . import (
     Date,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
 )
 from ..models.currency import Currency
 from ..models.supplier import Supplier
@@ -18,6 +19,7 @@ from ..resources.currencies_rates import CurrenciesRatesResource
 from ..lib.qb.currencies_rates import CurrenciesRatesQueryBuilder
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.common_utils import get_base_currency
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -108,10 +110,11 @@ class CurrencyRateForm(BaseForm):
     _schema = _CurrencyRateSchema
 
     def submit(self, currency_rate=None):
-        context = CurrenciesRatesResource(self.request)
         if not currency_rate:
             currency_rate = CurrencyRate(
-                resource=context.create_resource()
+                resource=CurrenciesRatesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             currency_rate.resource.notes = []
@@ -132,3 +135,12 @@ class CurrencyRateForm(BaseForm):
 class CurrencyRateSearchForm(BaseSearchForm):
     _schema = _CurrencyRateSearchSchema
     _qb = CurrenciesRatesQueryBuilder
+    
+
+class CurrencyRateAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            currency_rate = CurrencyRate.get(id)
+            currency_rate.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

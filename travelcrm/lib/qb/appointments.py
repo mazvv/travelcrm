@@ -1,5 +1,7 @@
 # -*coding: utf-8-*-
 
+from collections import Iterable
+
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.employee import Employee
@@ -44,3 +46,8 @@ class AppointmentsQueryBuilder(ResourcesQueryBuilder):
             )
         )
         super(AppointmentsQueryBuilder, self).build_query()
+
+    def filter_id(self, id):
+        assert isinstance(id, Iterable), u"Must be iterable object"
+        if id:
+            self.query = self.query.filter(Appointment.id.in_(id))

@@ -6,6 +6,7 @@ from . import (
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
+    BaseAssignForm,
     Date
 )
 from ..resources.appointments import AppointmentsResource
@@ -13,6 +14,7 @@ from ..models.appointment import Appointment
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.appointments import AppointmentsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class _AppointmentSchema(ResourceSchema):
@@ -37,10 +39,11 @@ class AppointmentForm(BaseForm):
     _schema = _AppointmentSchema
 
     def submit(self, appointment=None):
-        context = AppointmentsResource(self.request)
         if not appointment:
             appointment = Appointment(
-                resource=context.create_resource()
+                resource=AppointmentsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             appointment.resource.notes = []
@@ -61,3 +64,12 @@ class AppointmentForm(BaseForm):
 
 class AppointmentSearchForm(BaseSearchForm):
     _qb = AppointmentsQueryBuilder
+
+
+class AppointmentAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            appointment = Appointment.get(id)
+            appointment.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

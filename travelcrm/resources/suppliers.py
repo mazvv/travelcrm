@@ -21,3 +21,7 @@ class SuppliersResource(ResourceTypeBase):
     @staticmethod
     def get_subaccount_factory():
         return SupplierSubaccountFactory
+
+    @property
+    def allowed_assign(self):
+        return True

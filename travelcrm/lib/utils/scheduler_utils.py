@@ -1,8 +1,10 @@
 # -*coding: utf-8-*-
 
 import logging
+import transaction
 from functools import wraps
 
+from ...models import DBSession
 from ...lib.utils.sql_utils import get_current_schema, set_search_path
 from ...lib.utils.common_utils import gen_id  
 from ...lib.utils.common_utils import translate as _
@@ -22,6 +24,7 @@ def get_schema_from_job_id(job_id):
 
 def bucket(limit):
     def wrapper(func):
+        @wraps(func)
         def _wrapper(*args, **kwargs):
             offset = getattr(func, '_offset', 0)
             gen = func(*args, **kwargs)
@@ -31,6 +34,7 @@ def bucket(limit):
                 raise RuntimeError(_(u'Generator need'))
             
             query = query.limit(limit).offset(offset)
+            log.info('Bucket limit: %s, offset: %s' % (limit, offset))
             try:
                 if query.count() == 0:
                     raise RuntimeError()
@@ -59,3 +63,12 @@ def scopped_task(task):
         set_search_path(current_schema)
         return result
     return _task
+
+
+def transactional(task):
+    @wraps(task)
+    def _task(*args, **kwargs):
+        with transaction.manager:
+            task(*args, **kwargs)
+    return _task
+

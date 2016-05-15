@@ -7,13 +7,14 @@ from . import (
 )
 from ..forms.orders_items import (
     OrderItemSchema, 
-    OrderItemForm
+    OrderItemForm,
 )
 from ..resources.tickets import TicketsResource
 from ..models.ticket import Ticket
 from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -77,10 +78,11 @@ class TicketForm(OrderItemForm):
 
     def submit(self, ticket=None):
         order_item = super(TicketForm, self).submit(ticket and ticket.order_item)
-        context = TicketsResource(self.request)
         if not ticket:
             ticket = Ticket(
-                resource=context.create_resource()
+                resource=TicketsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         ticket.order_item = order_item
         ticket.adults = self._controls.get('adults')

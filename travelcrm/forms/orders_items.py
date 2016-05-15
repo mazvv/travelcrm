@@ -12,6 +12,7 @@ from ..resources.orders_items import OrdersItemsResource
 from ..models.order_item import OrderItem
 from ..models.person import Person
 from ..lib.qb.orders_items import OrdersItemsQueryBuilder
+from ..lib.utils.security_utils import get_auth_employee
 
 
 class OrderItemSchema(ResourceSchema):
@@ -67,10 +68,11 @@ class OrderItemForm(BaseForm):
     _schema = OrderItemSchema
 
     def submit(self, order_item=None):
-        context = OrdersItemsResource(self.request)
         if not order_item:
             order_item = OrderItem(
-                resource=context.create_resource()
+                resource=OrdersItemsResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             order_item.persons = []

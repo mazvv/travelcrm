@@ -6,6 +6,7 @@ from cgi import FieldStorage
 import colander
 import phonenumbers
 
+from ..models.employee import Employee
 from ..lib.qb import ResourcesQueryBuilder
 from ..lib.utils.common_utils import (
     get_locale_name, 
@@ -13,6 +14,9 @@ from ..lib.utils.common_utils import (
     parse_date,
 )
 from ..lib.utils.common_utils import translate as _
+from ..lib.bl.employees import (
+    get_employee_position, is_employee_currently_dismissed
+)
 
 
 @colander.deferred
@@ -26,6 +30,25 @@ def csrf_token_validator(node, kw):
                 _(u'Invalid CSRF token'),
             )
     return colander.All(colander.Length(max=255), validator,)
+
+
+@colander.deferred
+def maintainer_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        employee = Employee.get(value)
+        if is_employee_currently_dismissed(employee):
+            raise colander.Invalid(
+                node,
+                _(u'Employee is dismissed'),
+            )
+        if not get_employee_position(employee):
+            raise colander.Invalid(
+                node,
+                _(u'Employee has no appointment'),
+            )
+    return validator
 
 
 class CSRFSchema(colander.Schema):
@@ -170,7 +193,7 @@ class ResourceSearchSchema(colander.Schema):
         Date(),
         missing=None
     )
-    modifier_id = colander.SchemaNode(
+    maintainer_id = colander.SchemaNode(
         colander.Int(),
         missing=None
     )
@@ -192,6 +215,13 @@ class ResourceSearchSchema(colander.Schema):
     )
 
 
+class ResourceAssignSchema(colander.Schema):
+    maintainer_id = colander.SchemaNode(
+        colander.Int(),
+        validator=maintainer_validator
+    )
+
+    
 class BaseForm(object):
     _schema = None
     _controls = None
@@ -255,3 +285,7 @@ class BaseSearchForm(BaseForm):
         self._sort()
         self._page()
         return self.qb
+
+
+class BaseAssignForm(BaseForm):
+    _schema = ResourceAssignSchema

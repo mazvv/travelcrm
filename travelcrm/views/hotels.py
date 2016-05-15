@@ -12,7 +12,8 @@ from ..lib.utils.common_utils import translate as _
 
 from ..forms.hotels import (
     HotelForm, 
-    HotelSearchForm
+    HotelSearchForm,
+    HotelAssignForm,
 )
 
 
@@ -199,3 +200,35 @@ class HotelsView(BaseView):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='assign',
+        request_method='GET',
+        renderer='travelcrm:templates/hotels/assign.mako',
+        permission='assign'
+    )
+    def assign(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Assign Maintainer')),
+        }
+
+    @view_config(
+        name='assign',
+        request_method='POST',
+        renderer='json',
+        permission='assign'
+    )
+    def _assign(self):
+        form = HotelAssignForm(self.request)
+        if form.validate():
+            form.submit(self.request.params.getall('id'))
+            return {
+                'success_message': _(u'Assigned'),
+            }
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }
+

@@ -51,16 +51,6 @@ class Resource(Base):
         ),
         nullable=False
     )
-    structure_id = Column(
-        Integer(),
-        ForeignKey('structure.id',
-            name='fk_structure_id_resource',
-            onupdate='cascade',
-            ondelete='restrict',
-            use_alter=True,
-        ),
-        nullable=False
-    )
     maintainer_id = Column(
         Integer(),
         ForeignKey('employee.id',
@@ -85,16 +75,6 @@ class Resource(Base):
         foreign_keys=[resource_type_id],
         uselist=False
     )
-    owner_structure = relationship(
-        'Structure',
-        backref=backref(
-            'resources',
-            uselist=True,
-            lazy='dynamic'
-        ),
-        foreign_keys=[structure_id],
-        uselist=False
-    )
     maintainer = relationship(
         'Employee',
         backref=backref(
@@ -106,16 +86,15 @@ class Resource(Base):
         uselist=False
     )
 
-    def __init__(self, resource_type_cls, owner_structure):
+    def __init__(self, resource_type_cls, maintainer):
         assert verifyClass(IResourceType, resource_type_cls), \
             type(resource_type_cls)
-        assert isinstance(owner_structure, Structure), type(owner_structure)
         resource_cls_module = get_resource_class_module(resource_type_cls)
         resource_cls_name = get_resource_class_name(resource_type_cls)
         self.resource_type = ResourceType.by_resource_name(
             resource_cls_module, resource_cls_name
         )
-        self.owner_structure = owner_structure
+        self.maintainer = maintainer
 
     @classmethod
     def get(cls, id):

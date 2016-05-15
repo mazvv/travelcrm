@@ -4,10 +4,10 @@
 </div>
 % endif
 
-% if item.resource.creator:
+% if item.resource.maintainer:
 <div class="dp100">
-    <div class="dp25 b">${_(u'creator')}</div>
-    <div class="dp75">${item.resource.creator.name}</div>
+    <div class="dp25 b">${_(u'author')}</div>
+    <div class="dp75">${item.resource.maintainer.name}</div>
 </div>
 % endif
 

@@ -60,7 +60,7 @@
             <th data-options="field:'contact',sortable:true,width:200">${_(u"contact")}</th>
             <th data-options="field:'status',sortable:false,width:70,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
     <div id="${_storage_id}">

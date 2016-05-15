@@ -13,6 +13,7 @@ from ...lib.bl.subaccounts import (
 )
 from ...lib.bl.invoices import get_invoice_payments_sum
 from ...lib.utils.resources_utils import get_resource_class
+from ...lib.utils.security_utils import get_auth_employee
 
 
 def make_payment(request, income):
@@ -30,7 +31,9 @@ def make_payment(request, income):
         subaccount = Subaccount(
             name=name,
             account_id=invoice.account_id,
-            resource=SubaccountsResource(request).create_resource()
+            resource=SubaccountsResource.create_resource(
+                get_auth_employee(request)
+            )
         )
         customer_resource_cls = get_resource_class(
             customer.resource.resource_type.name

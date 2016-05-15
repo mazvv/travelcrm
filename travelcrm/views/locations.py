@@ -12,7 +12,8 @@ from ..lib.utils.common_utils import translate as _
 
 from ..forms.locations import (
     LocationForm, 
-    LocationSearchForm
+    LocationSearchForm,
+    LocationAssignForm,
 )
 
 
@@ -199,3 +200,34 @@ class LocationsView(BaseView):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='assign',
+        request_method='GET',
+        renderer='travelcrm:templates/locations/assign.mako',
+        permission='assign'
+    )
+    def assign(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Assign Maintainer')),
+        }
+
+    @view_config(
+        name='assign',
+        request_method='POST',
+        renderer='json',
+        permission='assign'
+    )
+    def _assign(self):
+        form = LocationAssignForm(self.request)
+        if form.validate():
+            form.submit(self.request.params.getall('id'))
+            return {
+                'success_message': _(u'Assigned'),
+            }
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }

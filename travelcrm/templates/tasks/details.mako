@@ -4,12 +4,10 @@
 </div>
 % endif
 
-% if item.employee:
 <div class="dp100">
-    <div class="dp25 b">${_(u'performer')}</div>
-    <div class="dp75">${item.employee.name}</div>
+    <div class="dp25 b">${_(u'maintainer')}</div>
+    <div class="dp75">${item.resource.maintainer.name}</div>
 </div>
-% endif
 
 <div class="dp100">
     <div class="dp25 b">${_(u'terms')}</div>

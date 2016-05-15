@@ -34,13 +34,7 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
         super(TasksQueryBuilder, self).advanced_search(**kwargs)
         if 'status' in kwargs:
             self._filter_status(kwargs.get('status'))
-        if 'performer_id' in kwargs:
-            self._filter_performer_id(kwargs.get('performer_id'))
 
     def _filter_status(self, status):
         if status:
             self.query = self.query.filter(Task.status == status)
-
-    def _filter_performer_id(self, performer_id):
-        if performer_id:
-            self.query = self.query.filter(Task.employee_id == performer_id)

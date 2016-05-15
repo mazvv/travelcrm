@@ -5,7 +5,8 @@ import colander
 from . import (
     ResourceSchema, 
     BaseForm, 
-    BaseSearchForm
+    BaseSearchForm,
+    BaseAssignForm,
 )
 from ..resources.countries import CountriesResource
 from ..models.country import Country
@@ -13,6 +14,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.countries import CountriesQueryBuilder
 from ..lib.utils.common_utils import translate as _
+from ..lib.utils.security_utils import get_auth_employee
 
 
 @colander.deferred
@@ -47,10 +49,11 @@ class CountryForm(BaseForm):
     _schema = _CountrySchema
 
     def submit(self, country=None):
-        context = CountriesResource(self.request)
         if not country:
             country = Country(
-                resource=context.create_resource()
+                resource=CountriesResource.create_resource(
+                    get_auth_employee(self.request)
+                )
             )
         else:
             country.resource.notes = []
@@ -68,3 +71,12 @@ class CountryForm(BaseForm):
 
 class CountrySearchForm(BaseSearchForm):
     _qb = CountriesQueryBuilder
+
+
+class CountryAssignForm(BaseAssignForm):
+    def submit(self, ids):
+        for id in ids:
+            country = Country.get(id)
+            country.resource.maintainer_id = self._controls.get(
+                'maintainer_id'
+            )

@@ -3,7 +3,7 @@
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
     _t_id = "t-%s" % _id
-    _s_id = "s-%s" % _id    
+    _s_id = "s-%s" % _id
 %>
 <div class="dl70 easyui-dialog"
     title="${title}"
@@ -54,7 +54,7 @@
             <th data-options="field:'price',sortable:true,width:80">${_(u"price")}</th>
             <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'modifier',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"modifier")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
 

@@ -101,16 +101,6 @@ class Task(Base):
         ),
         nullable=False,
     )
-    employee_id = Column(
-        Integer,
-        ForeignKey(
-            'employee.id',
-            name="fk_employee_id_task",
-            ondelete='restrict',
-            onupdate='cascade',
-        ),
-        nullable=False,
-    )
     title = Column(
         String(length=128),
         nullable=False,
@@ -150,15 +140,6 @@ class Task(Base):
             lazy='dynamic',
         ),
         uselist=False,
-    )
-    employee = relationship(
-        'Employee',
-        backref=backref(
-            'tasks',
-            uselist=True,
-            lazy="dynamic"
-        ),
-        uselist=False
     )
     uploads = relationship(
         'Upload',
