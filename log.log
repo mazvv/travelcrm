@@ -1,1 +1,142 @@
 2016-05-22 20:49:59,501 INFO  [apscheduler.scheduler][MainThread] Scheduler started
+2016-05-22 20:52:08,853 INFO  [apscheduler.scheduler][MainThread] Scheduler started
+2016-05-22 20:58:20,208 INFO  [apscheduler.scheduler][MainThread] Scheduler started
+2016-05-22 20:58:33,740 INFO  [apscheduler.scheduler][MainThread] Scheduler started
+2016-05-22 20:58:44,330 ERROR [waitress][waitress] Exception when serving /permisions/edit
+Traceback (most recent call last):
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/waitress-0.9.0-py2.7.egg/waitress/channel.py", line 338, in service
+    task.service()
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/waitress-0.9.0-py2.7.egg/waitress/task.py", line 169, in service
+    self.execute()
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/waitress-0.9.0-py2.7.egg/waitress/task.py", line 399, in execute
+    app_iter = self.channel.server.application(env, start_response)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/router.py", line 236, in __call__
+    response = self.invoke_subrequest(request, use_tweens=True)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/router.py", line 211, in invoke_subrequest
+    response = handle_request(request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/tweens.py", line 20, in excview_tween
+    response = handler(request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_tm-0.12.1-py2.7.egg/pyramid_tm/__init__.py", line 101, in tm_tween
+    reraise(*exc_info)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_tm-0.12.1-py2.7.egg/pyramid_tm/__init__.py", line 83, in tm_tween
+    response = handler(request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/router.py", line 158, in handle_request
+    view_name
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/view.py", line 546, in _call_view
+    response = view_callable(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/config/views.py", line 182, in __call__
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 393, in attr_view
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 371, in predicate_wrapper
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 302, in _secured_view
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 465, in rendered_view
+    request, result, view_inst, context)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/renderers.py", line 432, in render_view
+    return self.render_to_response(response, system, request=request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/renderers.py", line 455, in render_to_response
+    result = self.render(value, system_values, request=request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/renderers.py", line 451, in render
+    result = renderer(value, system_values)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_mako-1.0.2-py2.7.egg/pyramid_mako/__init__.py", line 156, in __call__
+    reraise(MakoRenderingException(errtext), None, exc_info[2])
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_mako-1.0.2-py2.7.egg/pyramid_mako/__init__.py", line 148, in __call__
+    result = template.render_unicode(**system)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/template.py", line 454, in render_unicode
+    as_unicode=True)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 829, in _render
+    **_kwargs_for_callable(callable_, data))
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 864, in _render_context
+    _exec_template(inherit, lclcontext, args=args, kwargs=kwargs)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 890, in _exec_template
+    callable_(context, *args, **kwargs)
+  File "travelcrm_templates_permisions_form_mako", line 51, in render_body
+MakoRenderingException: 
+
+Traceback (most recent call last):
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_mako-1.0.2-py2.7.egg/pyramid_mako/__init__.py", line 148, in __call__
+    result = template.render_unicode(**system)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/template.py", line 454, in render_unicode
+    as_unicode=True)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 829, in _render
+    **_kwargs_for_callable(callable_, data))
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 864, in _render_context
+    _exec_template(inherit, lclcontext, args=args, kwargs=kwargs)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 890, in _exec_template
+    callable_(context, *args, **kwargs)
+  File "/home/mazvv/Projects/Pyramid/travelcrm/travelcrm/templates/permisions/form.mako", line 16, in render_body
+    % for permision in allowed_permisions:
+TypeError: 'NoneType' object is not iterable
+
+2016-05-22 20:59:10,227 ERROR [waitress][waitress] Exception when serving /permisions/edit
+Traceback (most recent call last):
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/waitress-0.9.0-py2.7.egg/waitress/channel.py", line 338, in service
+    task.service()
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/waitress-0.9.0-py2.7.egg/waitress/task.py", line 169, in service
+    self.execute()
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/waitress-0.9.0-py2.7.egg/waitress/task.py", line 399, in execute
+    app_iter = self.channel.server.application(env, start_response)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/router.py", line 236, in __call__
+    response = self.invoke_subrequest(request, use_tweens=True)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/router.py", line 211, in invoke_subrequest
+    response = handle_request(request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/tweens.py", line 20, in excview_tween
+    response = handler(request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_tm-0.12.1-py2.7.egg/pyramid_tm/__init__.py", line 101, in tm_tween
+    reraise(*exc_info)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_tm-0.12.1-py2.7.egg/pyramid_tm/__init__.py", line 83, in tm_tween
+    response = handler(request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/router.py", line 158, in handle_request
+    view_name
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/view.py", line 546, in _call_view
+    response = view_callable(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/config/views.py", line 182, in __call__
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 393, in attr_view
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 371, in predicate_wrapper
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 302, in _secured_view
+    return view(context, request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/viewderivers.py", line 465, in rendered_view
+    request, result, view_inst, context)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/renderers.py", line 432, in render_view
+    return self.render_to_response(response, system, request=request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/renderers.py", line 455, in render_to_response
+    result = self.render(value, system_values, request=request)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid-1.7b2-py2.7.egg/pyramid/renderers.py", line 451, in render
+    result = renderer(value, system_values)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_mako-1.0.2-py2.7.egg/pyramid_mako/__init__.py", line 156, in __call__
+    reraise(MakoRenderingException(errtext), None, exc_info[2])
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_mako-1.0.2-py2.7.egg/pyramid_mako/__init__.py", line 148, in __call__
+    result = template.render_unicode(**system)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/template.py", line 454, in render_unicode
+    as_unicode=True)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 829, in _render
+    **_kwargs_for_callable(callable_, data))
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 864, in _render_context
+    _exec_template(inherit, lclcontext, args=args, kwargs=kwargs)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 890, in _exec_template
+    callable_(context, *args, **kwargs)
+  File "travelcrm_templates_permisions_form_mako", line 51, in render_body
+MakoRenderingException: 
+
+Traceback (most recent call last):
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/pyramid_mako-1.0.2-py2.7.egg/pyramid_mako/__init__.py", line 148, in __call__
+    result = template.render_unicode(**system)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/template.py", line 454, in render_unicode
+    as_unicode=True)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 829, in _render
+    **_kwargs_for_callable(callable_, data))
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 864, in _render_context
+    _exec_template(inherit, lclcontext, args=args, kwargs=kwargs)
+  File "/home/mazvv/Projects/Pyramid/lib/python2.7/site-packages/Mako-1.0.4-py2.7.egg/mako/runtime.py", line 890, in _exec_template
+    callable_(context, *args, **kwargs)
+  File "/home/mazvv/Projects/Pyramid/travelcrm/travelcrm/templates/permisions/form.mako", line 16, in render_body
+    % for permision in allowed_permisions:
+TypeError: 'NoneType' object is not iterable
+
+2016-05-22 20:59:45,610 INFO  [apscheduler.scheduler][MainThread] Scheduler started
+2016-05-22 20:59:57,611 INFO  [apscheduler.scheduler][MainThread] Scheduler started
