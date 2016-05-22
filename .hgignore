@@ -24,3 +24,5 @@ syntax: glob
 ./data/cache
 ./dist
 *.sqlite
+*.rdb
+*.log

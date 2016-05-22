@@ -43,7 +43,7 @@
     </table>
 
     <div class="datagrid-toolbar" id="${_tb_id}">
-        <div class="actions button-container dl45">
+        <div class="actions button-container dl50">
             % if _context.has_permision('add'):
             <a href="#" class="button primary easyui-linkbutton _action" 
                 data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add')}'">
@@ -77,7 +77,7 @@
                 % endif
             </div>
         </div>
-        <div class="ml45 tr">
+        <div class="ml50 tr">
             <div class="search">
                 ${searchbar(_id, _s_id, prompt=_(u'Enter region name or country name'))}
                 <div class="advanced-search tl hidden" id = "${_s_id}">

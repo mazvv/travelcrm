@@ -3331,6 +3331,7 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 103	2857	15.50	\N	61
 104	2870	2091.66	46	60
 105	2871	15.92	47	61
+106	2903	1663.20	48	58
 \.
 
 
@@ -3338,7 +3339,7 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 105, true);
+SELECT pg_catalog.setval('calculation_id_seq', 106, true);
 
 
 --
@@ -3532,6 +3533,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 101	+380681995427	2874	0		0
 102	elineckiy@gavab.com	2878	1		0
 103	+380976868681	2880	0		0
+104	+380670987654	2891	0		0
 \.
 
 
@@ -3539,7 +3541,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 103, true);
+SELECT pg_catalog.setval('contact_id_seq', 104, true);
 
 
 --
@@ -3868,6 +3870,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 38	2111	5	Spirit of the Knights Boutique	36
 39	2375	5	Radisson Blu Resort & Spa	39
 40	2675	4	Frangiorgio Hotel Apartments	40
+41	2897	5	Bodrum Butick Royal	41
 \.
 
 
@@ -3875,7 +3878,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 -- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('hotel_id_seq', 40, true);
+SELECT pg_catalog.setval('hotel_id_seq', 41, true);
 
 
 --
@@ -3951,6 +3954,7 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 30	2015-06-06	2388	3	2015-06-09	9	\N
 31	2015-06-13	2450	4	2015-06-16	7	\N
 33	2016-01-02	2858	3	2016-01-05	11	\N
+34	2016-05-22	2904	3	2016-05-25	12	\N
 \.
 
 
@@ -3958,7 +3962,7 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 33, true);
+SELECT pg_catalog.setval('invoice_id_seq', 34, true);
 
 
 --
@@ -3973,6 +3977,7 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 31	31	1672.73	33.45	0.00	Tour booking service	39
 34	33	59110.00	898.86	0.00	Tour booking service	46
 35	33	707.50	38.91	35.38	Formulation of foreign passport	47
+36	34	45322.20	906.44	0.00	Tour booking service	48
 \.
 
 
@@ -3980,7 +3985,7 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 -- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_item_id_seq', 35, true);
+SELECT pg_catalog.setval('invoice_item_id_seq', 36, true);
 
 
 --
@@ -4006,6 +4011,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 16	2015-07-22	2669	2	66	3	\N
 17	2016-01-01	2824	6	70	0	\N
 18	2016-02-07	2877	2	72	0	\N
+19	2016-05-22	2894	5	75	0	\N
 \.
 
 
@@ -4013,7 +4019,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 -- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_id_seq', 18, true);
+SELECT pg_catalog.setval('lead_id_seq', 19, true);
 
 
 --
@@ -4049,6 +4055,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 26	2668	16	5	57	1500.00	1700.00	Kiprus from 24.07 to 30.07 for 2 adult persons 4* or more.
 27	2823	17	5	56	\N	60000.00	Egypt tour for 2 persons from fubruary begining
 28	2876	18	5	57	\N	2000.00	Egypt, 4* al inclusive Sharm El Sheih
+29	2893	19	5	57	\N	2000.00	Turkey for two persons 7 days Bodrum
 \.
 
 
@@ -4056,7 +4063,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 -- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_item_id_seq', 28, true);
+SELECT pg_catalog.setval('lead_item_id_seq', 29, true);
 
 
 --
@@ -4126,6 +4133,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 37	1648	Saint-Tropez	36
 39	2374	Orashac	38
 40	2674	Larnaka	39
+41	2896	Bodrum	40
 \.
 
 
@@ -4133,7 +4141,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 -- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('location_id_seq', 40, true);
+SELECT pg_catalog.setval('location_id_seq', 41, true);
 
 
 --
@@ -4394,6 +4402,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 10	2015-07-22	2690	66	2	\N	16	1
 7	2015-05-26	2317	48	4	For Lead testing	3	3
 11	2016-01-02	2831	70	6	\N	17	0
+12	2016-05-22	2902	75	5	\N	19	3
 \.
 
 
@@ -4401,7 +4410,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_id_seq', 11, true);
+SELECT pg_catalog.setval('order_id_seq', 12, true);
 
 
 --
@@ -4429,6 +4438,7 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 45	2688	10	4	57	30.00	1	2015-07-22	succesfully confirmed	101	0.00	0.00
 46	2827	11	5	57	2300.00	1	2016-01-02	TREYW6754-16	87	0.00	0.00
 47	2837	11	1	54	25.00	1	2016-02-01	\N	87	0.00	5.00
+48	2899	12	5	57	1890.00	1	2016-05-22	\N	101	0.00	0.00
 \.
 
 
@@ -4436,7 +4446,7 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 -- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_item_id_seq', 47, true);
+SELECT pg_catalog.setval('order_item_id_seq', 48, true);
 
 
 --
@@ -4669,7 +4679,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 290	152	6	{view,settings}	\N	all
 291	153	6	{view}	\N	all
 75	106	4	{view,add,edit,delete,assign}	\N	all
-130	119	4	{view,edit,delete}	\N	all
 146	135	4	{view,add,edit,delete}	\N	all
 141	130	4	{view,add,edit,delete,assign,order}	\N	all
 145	134	4	{view,add,edit,delete,assign,calculation,invoice,contract}	\N	all
@@ -4687,6 +4696,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 24	12	4	{view,add,edit,delete,assign}	\N	all
 163	151	4	{view,add,edit,delete,assign}	\N	all
 129	118	4	{view,add,edit,delete}	\N	all
+130	119	4	{view,add,edit,delete,autoload}	\N	all
 289	151	6	{view}	\N	all
 287	148	6	{view}	\N	all
 232	55	6	{view}	\N	all
@@ -4771,6 +4781,8 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 72	2875	Anatoly			\N	\N	\N	\N	f	f
 73	2879	Eugeniy	Lineckiy		\N	\N	\N	\N	f	f
 74	2881	Sergey			\N	\N	\N	\N	f	f
+75	2892	Igor	Vovk		\N	\N	\N	\N	f	f
+76	2898	Ella	Vovk		1994-04-13	1	\N	3	f	f
 \.
 
 
@@ -4865,6 +4877,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 72	101
 73	102
 74	103
+75	104
 \.
 
 
@@ -4872,7 +4885,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 74, true);
+SELECT pg_catalog.setval('person_id_seq', 76, true);
 
 
 --
@@ -4921,6 +4934,8 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 46	71
 47	71
 47	70
+48	76
+48	75
 \.
 
 
@@ -5037,6 +5052,7 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 36	1647	19	Chemiu Due Capon
 38	2373	12	South Dalmacia
 39	2673	16	Larnaka
+40	2895	5	Bodrum
 \.
 
 
@@ -5044,7 +5060,7 @@ COPY region (id, resource_id, country_id, name) FROM stdin;
 -- Name: region_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('region_id_seq', 39, true);
+SELECT pg_catalog.setval('region_id_seq', 40, true);
 
 
 --
@@ -5130,6 +5146,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 939	73	\N	2
 961	74	\N	2
 962	74	\N	2
+2891	87	f	7
+2894	130	f	7
+2901	93	f	7
 963	74	\N	2
 964	74	\N	2
 965	74	\N	2
@@ -5176,6 +5195,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 945	73	\N	2
 946	73	\N	2
 947	73	\N	2
+2892	69	f	7
 998	65	\N	2
 1005	78	\N	2
 1007	12	\N	2
@@ -5248,6 +5268,8 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1650	87	f	2
 2569	130	f	2
 2570	69	f	2
+2893	145	f	7
+2897	83	f	7
 922	73	\N	2
 923	73	\N	2
 924	73	\N	2
@@ -5345,15 +5367,21 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2	2	\N	2
 2127	12	f	2
 2131	93	f	7
+2895	39	f	7
 3	2	\N	2
 10	12	\N	2
 1010	79	\N	2
+2896	84	f	7
 1080	65	\N	2
 1081	12	\N	2
+2898	69	f	7
 1099	39	\N	2
+2899	135	f	7
+2900	137	f	7
 2309	69	f	2
 1100	70	\N	2
 2128	65	f	2
+2902	134	f	7
 2129	138	f	2
 2130	138	f	2
 2132	118	f	2
@@ -5448,6 +5476,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2308	87	f	2
 2032	110	f	2
 2038	119	f	2
+2903	119	f	2
 2514	65	f	2
 2515	148	f	2
 2516	12	f	2
@@ -5455,6 +5484,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2872	55	f	2
 2517	149	f	2
 2518	149	f	2
+2904	103	f	2
 2519	47	f	2
 2520	149	f	2
 2521	149	f	2
@@ -6376,7 +6406,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2890, true);
+SELECT pg_catalog.setval('resource_id_seq', 2904, true);
 
 
 --
@@ -8504,6 +8534,23 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7830	1939	2	\N	2016-05-15 18:01:28.601998+03
 7831	2131	2	\N	2016-05-15 18:01:28.601998+03
 7832	2890	2	\N	2016-05-15 18:35:21.882133+03
+7833	2891	7	\N	2016-05-22 19:55:08.969532+03
+7834	2892	7	\N	2016-05-22 19:55:14.973042+03
+7835	2893	7	\N	2016-05-22 19:56:54.291848+03
+7836	2894	7	\N	2016-05-22 19:57:34.361739+03
+7837	2895	7	\N	2016-05-22 20:02:06.06185+03
+7838	2896	7	\N	2016-05-22 20:02:08.989653+03
+7839	2897	7	\N	2016-05-22 20:02:51.686319+03
+7840	2898	7	\N	2016-05-22 20:04:51.844389+03
+7841	2899	7	\N	2016-05-22 20:05:17.325444+03
+7842	2900	7	\N	2016-05-22 20:05:17.325444+03
+7843	2901	7	\N	2016-05-22 20:06:02.253214+03
+7844	2902	7	\N	2016-05-22 20:06:48.112563+03
+7845	2902	7	\N	2016-05-22 20:07:40.428098+03
+7846	2902	7	\N	2016-05-22 20:07:58.637089+03
+7847	1849	2	\N	2016-05-22 20:11:06.601318+03
+7848	2903	2	\N	2016-05-22 20:42:01.686171+03
+7849	2904	2	\N	2016-05-22 20:43:32.285069+03
 \.
 
 
@@ -8511,7 +8558,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7832, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7849, true);
 
 
 --
@@ -8559,7 +8606,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 107	1435	accounts	Accounts	AccountsResource	travelcrm.resources.accounts	Billing Accounts. It can be bank accouts, cash accounts etc. and has company wide visible	null	0
 117	1797	subaccounts	Subaccounts	SubaccountsResource	travelcrm.resources.subaccounts	Subaccounts are accounts from other objects such as clients, touroperators and so on	null	0
 118	1799	notes	Notes	NotesResource	travelcrm.resources.notes	Resources Notes	null	0
-119	1849	calculations	Caluclations	CalculationsResource	travelcrm.resources.calculations	Calculations of Sale Documents	null	0
 121	1894	turnovers	Turnovers	TurnoversResource	travelcrm.resources.turnovers	Turnovers on Accounts and Subaccounts	null	0
 126	1968	companies	Companies	CompaniesResource	travelcrm.resources.companies	Multicompanies functionality	null	0
 130	2049	leads	Leads	LeadsResource	travelcrm.resources.leads	Leads that can be converted into contacts	null	0
@@ -8584,6 +8630,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 156	2788	campaigns	Campaigns	CampaignsResource	travelcrm.resources.campaigns	Marketings campaigns	{"host_smpp": "94.249.146.183", "system_type_smpp": "transceiver", "password_smpp": "korn17", "port_smtp": "2525", "username_smtp": "mazvv@mail.ru", "password_smtp": "GmA67mpqqYjKQ", "port_smpp": "29900", "username_smpp": "mazvv", "host_smtp": "smtp-pulse.com", "default_sender_smtp": "mazvv@mail.ru"}	0
 160	2887	assigns	Assign resources	AssignsResource	travelcrm.resources.assigns	Assigns all resources between employees	null	0
 159	2882	dismissals	Dismissals	DismissalsResource	travelcrm.resources.dismissals	Dismissal employees	null	0
+119	1849	calculations	Calculations	CalculationsResource	travelcrm.resources.calculations	Calculations of Sale Documents	null	0
 \.
 
 
@@ -8924,6 +8971,7 @@ COPY task (id, resource_id, title, deadline, descr, status, reminder) FROM stdin
 85	2868	New My Task	2016-01-31 20:54:00+02	DEscription for task	0	10
 86	2869	NExt new task	2016-02-03 20:59:00+02	Description not empty	0	10
 87	2890	Test with maintainers	2016-05-16 18:35:00+03	Test description for maintainers	0	10
+88	2901	Prepare documents	2016-05-23 20:05:00+03	They need all documents to do it	0	10
 \.
 
 
@@ -8931,7 +8979,7 @@ COPY task (id, resource_id, title, deadline, descr, status, reminder) FROM stdin
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 87, true);
+SELECT pg_catalog.setval('task_id_seq', 88, true);
 
 
 --
@@ -8956,6 +9004,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 79	2669
 80	2729
 84	2831
+88	2902
 \.
 
 
@@ -9053,6 +9102,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 25	2316	15	19	18	10	10	33	2	0	2015-06-21	2015-06-27	\N	1	1	\N	# MAU	# MAU
 28	2687	14	40	40	10	3	\N	2	1	2015-07-24	2015-07-30	\N	1	1	\N	#MAU 892134	#MAU 127193
 29	2828	15	31	32	13	16	30	2	0	2016-02-12	2016-02-19	\N	1	1	\N	TREY0987YUt	TYU9881623
+30	2900	15	41	41	11	10	33	2	0	2016-06-18	2016-06-24	tour to Bodrum	1	1	\N	TYOII-089873	TYU12128-09
 \.
 
 
@@ -9060,7 +9110,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 -- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tour_id_seq1', 29, true);
+SELECT pg_catalog.setval('tour_id_seq1', 30, true);
 
 
 --
@@ -9076,6 +9126,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 42	27
 44	28
 46	29
+48	30
 \.
 
 
