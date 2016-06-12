@@ -5,6 +5,7 @@
     _tb_id = "tb-%s" % _id
     _t_id = "t-%s" % _id
     _s_id = "s-%s" % _id
+    _m_id = "m-%s" % _id
 %>
 <div class="easyui-panel unselectable"
     data-options="
@@ -99,20 +100,36 @@
             </div>
 
             % if _context.has_any_permision(('invoice', 'calculation')):
-            <div class="button-group">
+            <a href="#" class="button easyui-menubutton" 
+                data-options="menu:'#${_m_id}',plain:false">
+                ${_(u'More')}
+            </a>
+            <div id="${_m_id}" style="width:150px;">
+                % if _context.has_permision('view'):
+                <div>
+                    <a href="#" class="_action"
+                        data-options="container:'#${_id}',action:'blank_open',property:'with_row',url:'${request.resource_url(_context, 'print')}'">
+                        ${_(u'Print')}
+                    </a>
+                </div>
+                % endif
                 % if _context.has_permision('invoice'):
-                <a href="#" class="button easyui-linkbutton _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'invoice')}'">
-                    <span class="fa fa-file-o"></span>${_(u'Invoice')}
-                </a>
+                <div>
+                    <a href="#" class="_action"
+                        data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'invoice')}'">
+                        ${_(u'Invoice')}
+                    </a>
+                </div>
                 % endif
                 % if _context.has_permision('calculation'):
-                <a href="#" class="button easyui-linkbutton _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'calculation')}'">
-                    <span class="fa fa-calculator"></span>${_(u'Calculation')}
-                </a>
+                <div>
+                    <a href="#" class="_action"
+                        data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'calculation')}'">
+                        ${_(u'Calculation')}
+                    </a>
+                </div>
                 % endif
-            </div>
+            </div>            
             % endif
 
         </div>

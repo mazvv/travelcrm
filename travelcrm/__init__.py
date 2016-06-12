@@ -15,6 +15,7 @@ from .models import (
 from .resources import Root
 from .lib.renderers.pdf import PDFRendererFactory
 from .lib.renderers.sse import SSERendererFactory
+from .lib.renderers.str import STRRendererFactory
 
 
 def root_factory(request):
@@ -64,6 +65,7 @@ def main(global_config, **settings):
 
     config.add_renderer('pdf', PDFRendererFactory)
     config.add_renderer('sse', SSERendererFactory)
+    config.add_renderer('str', STRRendererFactory)
     config.add_static_view('css', 'static/css', cache_max_age=3600)
     config.add_static_view('js', 'static/js', cache_max_age=3600)
     config.add_thumb_view('thumbs')

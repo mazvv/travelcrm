@@ -232,6 +232,7 @@ class LeadsView(BaseView):
                     DBSession.delete(item)
                     event = LeadDeleted(self.request, item)
                     self.request.registry.notify(event)
+                DBSession.flush()
             except:
                 errors=True
                 DBSession.rollback()

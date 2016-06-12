@@ -51,7 +51,8 @@
                         params[$(el).attr('name')] = $(el).val();
                     });
             		if(use_sort_options){
-            			var dg_options = $('#${_id}').datagrid('options');
+            			$('#${_id}').treegrid();
+            			var dg_options = $('#${_id}').treegrid().treegrid('options');
             			params['sort'] = dg_options.sortName;
             			params['order'] = dg_options.sortOrder;
             		}

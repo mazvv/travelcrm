@@ -182,9 +182,8 @@ class PersonsView(BaseView):
                     Person.id.in_(ids)
                 )
                 for item in items:
-                    DBSession.nested_begin()
                     DBSession.delete(item)
-                    DBSession.commit()
+                DBSession.flush()
             except:
                 errors=True
                 DBSession.rollback()

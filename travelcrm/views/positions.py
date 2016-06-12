@@ -188,7 +188,9 @@ class PositionsView(BaseView):
                 items = DBSession.query(Position).filter(Position.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
-            except:
+                DBSession.flush()
+            except Exception as e:
+                log.exception(e)
                 errors=True
                 DBSession.rollback()
         if errors:

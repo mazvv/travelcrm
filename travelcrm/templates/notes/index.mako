@@ -75,10 +75,10 @@
         </div>
         <hr class="dashed"></hr>
         <div class="dp100">
-            <div class="dp10 b pt02">
-                ${_(u'Filter')}:
+            <div class="dp5 b pt02">
+                <span class="fa fa-arrow-right"></span>
             </div>
-            <div class="searchbar dp90">
+            <div class="searchbar dp95">
                 ${h.fields.employees_combogrid_field(
                     request, 'maintainer_id',
                     value=h.common.get_auth_employee(request).id,

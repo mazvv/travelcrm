@@ -25,9 +25,14 @@ def _assign(resources_ids, new_maintainer_id):
     log.info('Resources to proceed: %s' % ', '.join(map(str, resources_ids)))
     for id in resources_ids:
         resource = Resource.get(id)
+        log.info(
+            'Change maintainer of rid %s: %s -> %s'
+            % (resource.id, resource.maintainer_id, new_maintainer_id)
+        )
         resource.maintainer_id = new_maintainer_id
 
 
+@scopped_task
 def _assigns(from_employee_id, to_employee_id):
     def _task(ids):
         scheduler.add_job(

@@ -13,13 +13,18 @@ from ...lib.utils.common_utils import translate as _
 log = logging.getLogger(__name__)
 
 
-def gen_task_id():
+def gen_task_id(suffix=None):
     current_schema = get_current_schema()
-    return gen_id(prefix=current_schema + '_', limit=12)
+    return (
+        gen_id(prefix=current_schema + '_', limit=12)
+        if not suffix else
+        current_schema + '_' + suffix
+    )
 
 
 def get_schema_from_job_id(job_id):
-    return job_id.split('_')[0]
+    segments = job_id.split('_')
+    return '_'.join(segments[:-1])
     
 
 def bucket(limit):
@@ -58,9 +63,11 @@ def scopped_task(task):
         if not job_id:
             raise ValueError(u'Job Id is not defined')
         current_schema = get_current_schema()
+        log.info('Switch to schema: %s' % get_schema_from_job_id(job_id))
         set_search_path(get_schema_from_job_id(job_id))
         result = task(*args, **kwargs)
         set_search_path(current_schema)
+        log.info('Return to schema: %s' % get_schema_from_job_id(job_id))
         return result
     return _task
 

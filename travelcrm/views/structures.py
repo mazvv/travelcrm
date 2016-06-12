@@ -179,7 +179,9 @@ class StructuresView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
-            except:
+                DBSession.flush()
+            except Exception as e:
+                log.exception(e)
                 errors=True
                 DBSession.rollback()
         if errors:

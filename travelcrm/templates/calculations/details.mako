@@ -25,7 +25,7 @@
     </div>
     <div class="dp100">
         <div class="dp15 b">
-            ${_(u'контракт')}
+            ${_(u'contract')}
         </div>
         <div class="dp85">
             % if contract_resource:

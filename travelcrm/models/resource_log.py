@@ -44,7 +44,7 @@ class ResourceLog(Base):
         ForeignKey('employee.id',
             name='fk_employee_id_resource_log',
             onupdate='cascade',
-            ondelete='restrict',
+            ondelete='cascade',
         ),
         nullable=False
     )
@@ -74,7 +74,7 @@ class ResourceLog(Base):
         backref=backref(
             'resources_logs',
             uselist=True,
-            lazy='dynamic'
+            lazy='dynamic',
         ),
         uselist=False,
     )

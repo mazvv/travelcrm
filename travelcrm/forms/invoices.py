@@ -204,6 +204,9 @@ class _InvoiceSettingsSchema(colander.Schema):
     active_days = colander.SchemaNode(
         colander.Integer(),
     )
+    html_template = colander.SchemaNode(
+        colander.String(),
+    )
 
 
 class InvoiceSettingsForm(BaseForm):
@@ -213,7 +216,8 @@ class InvoiceSettingsForm(BaseForm):
         context = InvoicesResource(self.request)
         rt = get_resource_type_by_resource(context)
         rt.settings = {
-            'active_days': self._controls.get('active_days')
+            'active_days': self._controls.get('active_days'),
+            'html_template': self._controls.get('html_template'),
         }
 
 

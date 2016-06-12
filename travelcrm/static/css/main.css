@@ -585,6 +585,9 @@ input{
 }
 
 /** buttons **/
+.datagrid-toolbar .button{
+	padding: 0.5em 0.9em;
+}
 .button .fa{
 	margin-right: 4px;
 }

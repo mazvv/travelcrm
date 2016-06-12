@@ -168,6 +168,7 @@ class BanksView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                DBSession.flush()
             except:
                 errors=True
                 DBSession.rollback()

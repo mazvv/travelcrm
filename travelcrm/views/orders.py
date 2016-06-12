@@ -17,7 +17,11 @@ from ..forms.orders import (
     OrderForm, 
     OrderSearchForm,
     OrderAssignForm,
+    OrderSettingsForm,
 )
+from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.resources_utils import get_resource_type_by_resource
+from ..lib.bl.employees import get_employee_structure
 
 
 log = logging.getLogger(__name__)
@@ -284,3 +288,49 @@ class OrdersView(BaseView):
                     query={'id': order.id}
                 )
             )
+
+    @view_config(
+        name='print',
+        request_method='GET',
+        renderer='str',
+        permission='view',
+    )
+    def print_invoice(self):
+        order = Order.get(self.request.params.get('id'))
+        employee = get_auth_employee(self.request)
+        structure = get_employee_structure(employee)
+        return {
+            'order': order,
+            'employee': employee,
+            'structure': structure,
+        }
+
+    @view_config(
+        name='settings',
+        request_method='GET',
+        renderer='travelcrm:templates/orders/settings.mako',
+        permission='settings',
+    )
+    def settings(self):
+        rt = get_resource_type_by_resource(self.context)
+        return {
+            'title': self._get_title(_(u'Settings')),
+            'rt': rt,
+        }
+
+    @view_config(
+        name='settings',
+        request_method='POST',
+        renderer='json',
+        permission='settings',
+    )
+    def _settings(self):
+        form = OrderSettingsForm(self.request)
+        if form.validate():
+            form.submit()
+            return {'success_message': _(u'Saved')}
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }

@@ -18,6 +18,7 @@ from ..models.task import Task
 from ..lib.qb.orders import OrdersQueryBuilder
 from ..lib.bl.currencies_rates import currency_base_exchange
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.resources_utils import get_resource_type_by_resource
 
 
 class _OrderSchema(ResourceSchema):
@@ -137,3 +138,19 @@ class OrderAssignForm(BaseAssignForm):
             order.resource.maintainer_id = self._controls.get(
                 'maintainer_id'
             )
+
+class _OrderSettingsSchema(colander.Schema):
+    html_template = colander.SchemaNode(
+        colander.String(),
+    )
+
+
+class OrderSettingsForm(BaseForm):
+    _schema = _OrderSettingsSchema
+
+    def submit(self):
+        context = OrdersResource(self.request)
+        rt = get_resource_type_by_resource(context)
+        rt.settings = {
+            'html_template': self._controls.get('html_template'),
+        }

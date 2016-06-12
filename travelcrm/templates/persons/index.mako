@@ -50,7 +50,7 @@
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
             <th data-options="field:'name',sortable:true,width:200">${_(u"name")}</th>
-            <th data-options="field:'birthday',sortable:true,width:80">${_(u"birthday")}</th>
+            <th data-options="field:'birthday',sortable:true,width:100">${_(u"birthday")}</th>
             <th data-options="field:'age',sortable:true,width:60">${_(u"age")}</th>
             <th data-options="field:'person_category',sortable:true,width:120">${_(u"person category")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>

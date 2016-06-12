@@ -3,7 +3,6 @@
 import logging
 
 from pyramid.view import view_config, view_defaults
-from pyramid.renderers import render
 from pyramid.httpexceptions import HTTPFound
 
 from . import BaseView
@@ -22,6 +21,8 @@ from ..forms.invoices import (
     InvoiceSettingsForm,
 )
 from ..lib.utils.resources_utils import get_resource_type_by_resource
+from ..lib.utils.security_utils import get_auth_employee
+from ..lib.bl.employees import get_employee_structure
 
 log = logging.getLogger(__name__)
 
@@ -194,6 +195,7 @@ class InvoicesView(BaseView):
             for item in items:
                 try:
                     DBSession.delete(item)
+                    DBSession.flush()
                 except:
                     errors=True
                     DBSession.rollback()
@@ -239,18 +241,17 @@ class InvoicesView(BaseView):
     @view_config(
         name='print',
         request_method='GET',
-        renderer='pdf',
+        renderer='str',
         permission='view',
     )
     def print_invoice(self):
         invoice = Invoice.get(self.request.params.get('id'))
-        body = render(
-            'travelcrm:templates/invoices/print.mako',
-            {'invoice': invoice},
-            self.request,
-        )
+        employee = get_auth_employee(self.request)
+        structure = get_employee_structure(employee)
         return {
-            'body': body,
+            'invoice': invoice,
+            'employee': employee,
+            'structure': structure,
         }
 
     @view_config(

@@ -166,7 +166,6 @@ class AccountsView(BaseView):
             )
             for item in items:
                 try:
-                    DBSession.begin_nested()
                     DBSession.delete(item)
                     DBSession.flush()
                 except Exception as e:
