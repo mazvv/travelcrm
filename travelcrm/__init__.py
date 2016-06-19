@@ -28,7 +28,6 @@ def main(global_config, **settings):
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
-
     session_factory = session_factory_from_settings(settings)
     authentication = AuthTktAuthenticationPolicy(
         settings.get('session.secret'),
