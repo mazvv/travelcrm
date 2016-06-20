@@ -25,4 +25,4 @@ syntax: glob
 ./dist
 *.sqlite
 *.rdb
-*.log
+log.log

@@ -239,7 +239,7 @@ class BaseForm(object):
             )
             return True
         except colander.Invalid as e:
-            self._errors = e.asdict()
+            self._errors = e.asdict(_)
             return False
 
     @property
