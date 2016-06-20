@@ -1,5 +1,7 @@
 # -*-coding: utf-8-*-
 
+from datetime import datetime
+
 from sqlalchemy import desc, asc, or_
 from sqlalchemy.orm import aliased
 from zope.interface.verify import verifyObject
@@ -182,10 +184,12 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
 
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
+            updated_from = datetime.combine(updated_from, datetime.min.time())
             self.query = self.query.filter(
                 self._log_subquery.c.modifydt >= updated_from
             )
         if updated_to:
+            updated_to = datetime.combine(updated_to, datetime.max.time())
             self.query = self.query.filter(
                 self._log_subquery.c.modifydt <= updated_to
             )

@@ -264,6 +264,7 @@ function get_action_url(options){
 		    break;
 		case('with_rows'):
 		    var rows = get_checked(container);
+			console.log(rows);
 	 	    if(!rows.length){
 			    _dialog_open('/system_need_select_rows');
 				return;
@@ -321,6 +322,18 @@ function get_checked(container){
 		    break;
 	}
 	return rows;
+}
+
+function clear_checked(container){
+	var container_type = get_container_type(container);
+	switch(container_type){
+		case('datagrid'):
+		    container.datagrid('clearChecked');
+		    break;
+		case('treegrid'):
+		    container.treegrid('clearChecked');
+		    break;
+	}
 }
 
 function get_container_type(container){

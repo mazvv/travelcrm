@@ -53,7 +53,7 @@ class Upload(Base):
         nullable=False,
     )
     media_type = Column(
-        String(length=32),
+        String(length=128),
         nullable=False,
     )
     descr = Column(

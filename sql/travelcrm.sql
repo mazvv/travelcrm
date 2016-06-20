@@ -2397,7 +2397,7 @@ CREATE TABLE upload (
     name character varying(255) NOT NULL,
     path character varying(255) NOT NULL,
     size numeric(16,2) NOT NULL,
-    media_type character varying(32) NOT NULL,
+    media_type character varying(128) NOT NULL,
     descr character varying(255)
 );
 
@@ -4875,7 +4875,7 @@ CREATE TABLE upload (
     name character varying(255) NOT NULL,
     path character varying(255) NOT NULL,
     size numeric(16,2) NOT NULL,
-    media_type character varying(32) NOT NULL,
+    media_type character varying(128) NOT NULL,
     descr character varying(255)
 );
 
@@ -5172,6 +5172,15 @@ CREATE SEQUENCE advsource_id_seq
 --
 
 ALTER SEQUENCE advsource_id_seq OWNED BY advsource.id;
+
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE alembic_version (
+    version_num character varying(32) NOT NULL
+);
 
 
 --
@@ -7344,7 +7353,7 @@ CREATE TABLE upload (
     name character varying(255) NOT NULL,
     path character varying(255) NOT NULL,
     size numeric(16,2) NOT NULL,
-    media_type character varying(32) NOT NULL,
+    media_type character varying(128) NOT NULL,
     descr character varying(255)
 );
 
@@ -9831,7 +9840,7 @@ CREATE TABLE upload (
     id integer NOT NULL,
     path character varying(255) NOT NULL,
     size numeric(16,2) NOT NULL,
-    media_type character varying(32) NOT NULL,
+    media_type character varying(128) NOT NULL,
     descr character varying(255),
     name character varying(255) NOT NULL,
     resource_id integer NOT NULL
@@ -12311,7 +12320,7 @@ CREATE TABLE upload (
     name character varying(255) NOT NULL,
     path character varying(255) NOT NULL,
     size numeric(16,2) NOT NULL,
-    media_type character varying(32) NOT NULL,
+    media_type character varying(128) NOT NULL,
     descr character varying(255)
 );
 
@@ -14779,7 +14788,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-1cde57b13267
+0dde2b383d6b
 \.
 
 
@@ -19626,7 +19635,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-1cde57b13267
+0dde2b383d6b
 \.
 
 
@@ -24374,6 +24383,15 @@ COPY advsource (id, resource_id, name) FROM stdin;
 --
 
 SELECT pg_catalog.setval('advsource_id_seq', 1, true);
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: demo_ru; Owner: -
+--
+
+COPY alembic_version (version_num) FROM stdin;
+0dde2b383d6b
+\.
 
 
 --
@@ -29232,7 +29250,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-1cde57b13267
+0dde2b383d6b
 \.
 
 
@@ -29316,6 +29334,7 @@ COPY bperson (id, resource_id, first_name, last_name, second_name, position_name
 7	1563	Alexander	Tkachuk		manager		0
 8	1578	Anna			Manager		0
 2	1010	Umberto			Accounting		1
+10	2915	Anton 	Andreev		manager		0
 \.
 
 
@@ -29342,7 +29361,7 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 -- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('bperson_id_seq', 9, true);
+SELECT pg_catalog.setval('bperson_id_seq', 10, true);
 
 
 --
@@ -30353,6 +30372,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 59	2663	Details contacts	Need to details contacts for this person. He can be perfect VIP client
 60	2820	Important	Make this very carefully
 61	2826	offer taken	Offer taken by client\r\n
+62	2909	New Note	hello, its test note
 \.
 
 
@@ -30360,7 +30380,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 61, true);
+SELECT pg_catalog.setval('note_id_seq', 62, true);
 
 
 --
@@ -30387,6 +30407,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 60	1930
 26	1930
 61	2824
+62	2887
 \.
 
 
@@ -30396,6 +30417,7 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 
 COPY note_upload (note_id, upload_id) FROM stdin;
 59	17
+62	21
 \.
 
 
@@ -31177,6 +31199,8 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 916	72	\N	2
 917	72	\N	2
 2890	93	f	2
+2909	118	f	2
+2913	2	f	2
 918	72	\N	2
 919	72	\N	2
 928	73	\N	2
@@ -31232,6 +31256,8 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2891	87	f	2
 2894	130	f	2
 2901	93	f	2
+2910	149	f	2
+2912	2	f	2
 963	74	\N	2
 964	74	\N	2
 965	74	\N	2
@@ -31279,6 +31305,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 946	73	\N	2
 947	73	\N	2
 2892	69	f	2
+2911	93	f	2
 998	65	\N	2
 1005	78	\N	2
 1007	12	\N	2
@@ -31354,6 +31381,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2893	145	f	2
 2897	83	f	2
 922	73	\N	2
+2914	2	f	2
 923	73	\N	2
 924	73	\N	2
 1651	89	f	2
@@ -31546,6 +31574,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2092	118	f	2
 2095	87	f	2
 2096	118	f	2
+2915	79	f	2
 2097	118	f	2
 2307	87	f	2
 2120	101	f	2
@@ -32489,7 +32518,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2908, true);
+SELECT pg_catalog.setval('resource_id_seq', 2915, true);
 
 
 --
@@ -34634,6 +34663,20 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7847	1849	2	\N	2016-05-22 20:11:06.601318+03
 7848	2903	2	\N	2016-05-22 20:42:01.686171+03
 7849	2904	2	\N	2016-05-22 20:43:32.285069+03
+7858	2887	2	\N	2016-06-20 11:34:01.085463+03
+7859	2909	2	\N	2016-06-20 12:26:00.939764+03
+7860	2910	2	\N	2016-06-20 12:26:29.268002+03
+7861	2911	2	\N	2016-06-20 12:27:31.820161+03
+7862	2887	2	\N	2016-06-20 12:27:37.92458+03
+7863	2912	2	\N	2016-06-20 12:38:09.013321+03
+7864	2913	2	\N	2016-06-20 13:20:01.073862+03
+7865	2914	2	\N	2016-06-20 14:11:04.911508+03
+7866	2912	2	\N	2016-06-20 15:20:01.64695+03
+7867	2912	2	\N	2016-06-20 15:20:15.219041+03
+7868	2912	2	\N	2016-06-20 15:32:44.861221+03
+7869	2912	2	\N	2016-06-20 15:33:07.606499+03
+7870	2912	2	\N	2016-06-20 16:02:21.203464+03
+7871	2915	2	\N	2016-06-20 16:06:07.075108+03
 \.
 
 
@@ -34641,7 +34684,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7857, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7871, true);
 
 
 --
@@ -35055,6 +35098,7 @@ COPY task (id, resource_id, title, deadline, descr, status, reminder) FROM stdin
 86	2869	NExt new task	2016-02-03 20:59:00+02	Description not empty	0	10
 87	2890	Test with maintainers	2016-05-16 18:35:00+03	Test description for maintainers	0	10
 88	2901	Prepare documents	2016-05-23 20:05:00+03	They need all documents to do it	0	10
+89	2911	Test task	2016-06-20 13:27:00+03	This is test task	0	10
 \.
 
 
@@ -35062,7 +35106,7 @@ COPY task (id, resource_id, title, deadline, descr, status, reminder) FROM stdin
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 88, true);
+SELECT pg_catalog.setval('task_id_seq', 89, true);
 
 
 --
@@ -35088,6 +35132,7 @@ COPY task_resource (task_id, resource_id) FROM stdin;
 80	2729
 84	2831
 88	2902
+89	2887
 \.
 
 
@@ -35283,6 +35328,7 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 18	2015722/b32166eb-971c-4ce2-a05a-be76bed46579.jpg	0.00	image/jpeg	\N	kabaeva_150.jpg	2665
 19	2015722/1ef77eb8-790f-4494-a9de-ae383a4b7142.jpg	0.00	image/jpeg	passport scan	20120908105644_brooks.jpg	2682
 20	2015722/317847e8-f61f-404c-91b9-d6f03c8228dd.jpg	0.00	image/jpeg		20120908105644_brooks.jpg	2684
+21	2016620/99153520-cf16-4587-be81-c482839844a8.jpg	0.00	image/jpeg		YniVN8l0kTY.jpg	2910
 \.
 
 
@@ -35290,7 +35336,7 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 -- Name: upload_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('upload_id_seq', 20, true);
+SELECT pg_catalog.setval('upload_id_seq', 21, true);
 
 
 --
@@ -35298,12 +35344,11 @@ SELECT pg_catalog.setval('upload_id_seq', 20, true);
 --
 
 COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin;
-25	2054	maz_iv	maz_iv@travelcrm.org.ua	111111	30
 31	2126	v.lastovec	lastovec@travelcrm.org.ua	111111	15
 2	3	admin	admin@mail.ru	adminadmin	2
-32	2484	alinka	kabaeva_alinka@mail.ru	123456	31
 23	894	maziv	maziv@mail.ru	123456	7
 34	2787	c.theron	vitalii.mazur@gmail.com	041035	32
+35	2912	s.dima	s.dima@gmail.com	892648	14
 \.
 
 
@@ -35311,7 +35356,7 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 34, true);
+SELECT pg_catalog.setval('user_id_seq', 37, true);
 
 
 --
@@ -35449,7 +35494,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-1cde57b13267
+0dde2b383d6b
 \.
 
 

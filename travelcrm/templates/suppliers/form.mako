@@ -2,7 +2,7 @@
 <%namespace file="../banks_details/common.mako" import="bank_detail_selector"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
-<div class="dl60 easyui-dialog"
+<div class="dl65 easyui-dialog"
     title="${title}"
     data-options="
         modal:true,
