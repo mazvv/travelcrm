@@ -9,6 +9,7 @@ from . import(
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import account_validator
 from ..resources.subaccounts import SubaccountsResource
 from ..models.subaccount import Subaccount
 from ..models.note import Note
@@ -76,7 +77,8 @@ def source_id_validator(node, kw):
 
 class _SubaccountSchema(ResourceSchema):
     account_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=account_validator
     )
     subaccount_type = colander.SchemaNode(
         colander.String(),

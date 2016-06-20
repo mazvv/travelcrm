@@ -9,6 +9,7 @@ from . import(
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import supplier_validator
 from ..resources.contracts import ContractsResource
 from ..models.supplier import Supplier
 from ..models.contract import Contract
@@ -21,7 +22,8 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _ContractSchema(ResourceSchema):
     supplier_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=supplier_validator,
     )
     num = colander.SchemaNode(
         colander.String(),

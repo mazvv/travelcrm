@@ -8,6 +8,7 @@ from . import(
     BaseForm,
     BaseSearchForm,
 )
+from .common import country_validator
 from ..resources.passports import PassportsResource
 from ..models.passport import Passport
 from ..models.upload import Upload
@@ -31,7 +32,8 @@ def date_validator(node, kw):
 
 class _PassportSchema(ResourceSchema):
     country_id = colander.SchemaNode(
-        colander.Integer()
+        colander.String(),
+        validator=country_validator
     )
     passport_type = colander.SchemaNode(
         colander.String(),

@@ -81,9 +81,9 @@ def gen_id(prefix='', limit=6):
 def cast_int(val):
     try:
         return int(val)
-    except ValueError:
+    except:
         return None
-
+    
 
 def get_company_name():
     settings = get_settings()

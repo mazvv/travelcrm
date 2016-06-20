@@ -51,6 +51,20 @@ def maintainer_validator(node, kw):
     return validator
 
 
+class DeferredAll(colander.deferred):
+    def __init__(self, *validators):
+        self.validators = list(validators)
+  
+    def __call__(self, node, kwargs):
+        full = []
+        for x in self.validators:
+            if isinstance(x, colander.deferred):
+                full.append(x(node, kwargs))
+            else:
+                full.append(x)
+        return colander.All(*full)
+
+
 class CSRFSchema(colander.Schema):
     csrf_token = colander.SchemaNode(
         colander.String(),

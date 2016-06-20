@@ -65,17 +65,8 @@ class TurnoversView(BaseView):
     @view_config(
         name='export',
         request_method='GET',
-        renderer='pdf',
-        permission='view'
+        permission='view',
+        renderer='travelcrm:templates/turnovers/export.mako'
     )
     def export(self):
-        data = self.list()
-        body = render(
-            'travelcrm:templates/turnovers/export.mako',
-            data,
-            self.request,
-        )
-        return {
-            'body': body,
-            'css': './travelcrm/static/css/main.css'
-        }
+        return self.list()

@@ -8,6 +8,11 @@ from . import (
     BaseForm,
     BaseSearchForm,
 )
+from .common import (
+    currency_validator,
+    supplier_validator,
+    service_validator
+)
 from ..resources.orders_items import OrdersItemsResource
 from ..models.order_item import OrderItem
 from ..models.person import Person
@@ -17,13 +22,16 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class OrderItemSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=service_validator
     )
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=currency_validator
     )
     supplier_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=supplier_validator,
     )
     price = colander.SchemaNode(
         colander.Money()

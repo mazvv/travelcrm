@@ -7,6 +7,10 @@ from . import(
     BaseForm,
     BaseSearchForm,
 )
+from .common import (
+    currency_validator,
+    service_validator
+)
 from ..resources.commissions import CommissionsResource
 from ..models.commission import Commission
 from ..lib.qb.commissions import CommissionsQueryBuilder
@@ -15,7 +19,8 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _CommissionSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.Integer()
+        colander.String(),
+        validator=service_validator
     )
     percentage = colander.SchemaNode(
         colander.Decimal(),
@@ -25,7 +30,8 @@ class _CommissionSchema(ResourceSchema):
         colander.Money(),
     )
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=currency_validator,
     )
     descr = colander.SchemaNode(
         colander.String(),

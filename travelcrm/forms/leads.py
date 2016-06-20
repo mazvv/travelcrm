@@ -10,6 +10,7 @@ from . import (
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import currency_validator
 from ..resources.leads import LeadsResource
 from ..models.lead import Lead
 from ..models.note import Note
@@ -123,8 +124,9 @@ class _LeadSearchSchema(ResourceSearchSchema):
         missing=None,
     )
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
         missing=None,
+        validator=currency_validator,
     )
     lead_from = colander.SchemaNode(
         Date(),

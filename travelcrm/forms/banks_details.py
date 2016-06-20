@@ -7,6 +7,10 @@ from . import (
     BaseForm, 
     BaseSearchForm
 )
+from .common import (
+    currency_validator,
+    bank_validator
+)
 from ..resources.banks_details import BanksDetailsResource
 from ..models.bank_detail import BankDetail
 from ..lib.qb.banks_details import BanksDetailsQueryBuilder
@@ -15,10 +19,12 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _BankDetailSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=currency_validator
     )
     bank_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=bank_validator
     )
     beneficiary = colander.SchemaNode(
         colander.String(),

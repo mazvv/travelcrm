@@ -8,6 +8,7 @@ from . import(
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import currency_validator
 from ..resources.accounts import AccountsResource
 from ..models.account import Account
 from ..models.note import Note
@@ -36,7 +37,8 @@ def name_validator(node, kw):
 
 class _AccountSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=currency_validator
     )
     name = colander.SchemaNode(
         colander.String(),

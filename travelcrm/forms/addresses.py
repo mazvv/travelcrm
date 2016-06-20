@@ -7,6 +7,7 @@ from . import (
     BaseForm, 
     BaseSearchForm
 )
+from .common import location_validator
 from ..resources.addresses import AddressesResource
 from ..models.address import Address
 from ..lib.qb.addresses import AddressesQueryBuilder
@@ -15,7 +16,8 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _AddressSchema(ResourceSchema):
     location_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=location_validator
     )
     zip_code = colander.SchemaNode(
         colander.String()

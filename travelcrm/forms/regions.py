@@ -8,6 +8,7 @@ from . import(
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import country_validator
 from ..resources.regions import RegionsResource
 from ..models import DBSession
 from ..models.region import Region
@@ -42,7 +43,8 @@ def name_validator(node, kw):
 
 class _RegionSchema(ResourceSchema):
     country_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=country_validator
     )
     name = colander.SchemaNode(
         colander.String(),

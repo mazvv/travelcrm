@@ -47,7 +47,7 @@ def sum_validator(node, kw):
                 node,
                 _(u'Max sum for payment %s' % balance),
             )
-    return colander.All(validator,)
+    return validator
 
 
 @colander.deferred
@@ -61,7 +61,7 @@ def subaccount_validator(node, kw):
                 node,
                 _(u'Create company subaccount for this account first'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 @colander.deferred
@@ -74,7 +74,7 @@ def account_item_validator(node, kw):
                 node,
                 _(u'Only revenue account item allowed'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 class _OutgoingSchema(ResourceSchema):

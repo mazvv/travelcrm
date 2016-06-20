@@ -32,7 +32,7 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
-    'colander',
+    'colander>=1.3.1',
     'wsgithumb',
     'alembic',
     'webhelpers2',

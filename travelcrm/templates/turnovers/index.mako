@@ -62,7 +62,7 @@
             % if _context.has_permision('view'):
             <a href="#" class="button primary easyui-linkbutton _action" 
                 data-options="container:'#${_id}',action:'blank_open',url:'${request.resource_url(_context, 'export')}',params_str:get_params_${_id}(true)">
-                <span class="fa fa-file-pdf-o"></span>${_(u'Export To PDF')}
+                <span class="fa fa-print"></span>${_(u'Print')}
             </a>
             % endif
             <div class="button-group">

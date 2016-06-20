@@ -9,6 +9,11 @@ from . import (
     BaseAssignForm,
     Date
 )
+from .common import (
+    currency_validator,
+    employee_validator,
+    position_validator
+)
 from ..resources.appointments import AppointmentsResource
 from ..models.appointment import Appointment
 from ..models.note import Note
@@ -22,16 +27,19 @@ class _AppointmentSchema(ResourceSchema):
         Date(),
     )
     employee_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=employee_validator
     )
     position_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=position_validator
     )
     salary = colander.SchemaNode(
         colander.Money(),
     )
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=currency_validator
     )
 
 

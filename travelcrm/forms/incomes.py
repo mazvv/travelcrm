@@ -10,6 +10,7 @@ from . import(
     ResourceSearchSchema,
     BaseAssignForm,
 )
+from .common import currency_validator
 from ..resources.incomes import IncomesResource
 from ..models.income import Income
 from ..models.invoice import Invoice
@@ -83,8 +84,9 @@ class _IncomeSearchSchema(ResourceSearchSchema):
         missing=None
     )
     currency_id = colander.SchemaNode(
-        colander.Integer(),
-        missing=None
+        colander.String(),
+        missing=None,
+        validator=currency_validator,
     )
     payment_from = colander.SchemaNode(
         Date(),

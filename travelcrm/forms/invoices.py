@@ -12,6 +12,7 @@ from . import (
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import account_validator
 from ..resources.invoices import InvoicesResource
 from ..models import DBSession
 from ..models.invoice import Invoice
@@ -80,7 +81,8 @@ class _InvoiceSchema(ResourceSchema):
         validator=order_id_validator
     )
     account_id = colander.SchemaNode(
-        colander.Integer()
+        colander.String(),
+        validator=account_validator,
     )
     date = colander.SchemaNode(
         Date(),
@@ -245,7 +247,8 @@ class _InvoiceSumSchema(ResourceSchema):
         Date(),
     )
     account_id = colander.SchemaNode(
-        colander.Integer()
+        colander.String(),
+        validator=account_validator,
     )
 
 

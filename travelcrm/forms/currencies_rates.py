@@ -4,11 +4,16 @@ import colander
 
 from . import (
     ResourceSchema,
-    ResourceSearchSchema, 
+    ResourceSearchSchema,
+    DeferredAll, 
     Date,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
+)
+from .common import (
+    currency_validator as _currency_validator,
+    supplier_validator
 )
 from ..models.currency import Currency
 from ..models.supplier import Supplier
@@ -18,7 +23,7 @@ from ..models.task import Task
 from ..resources.currencies_rates import CurrenciesRatesResource
 from ..lib.qb.currencies_rates import CurrenciesRatesQueryBuilder
 from ..lib.utils.common_utils import translate as _
-from ..lib.utils.common_utils import get_base_currency
+from ..lib.utils.common_utils import get_base_currency, cast_int
 from ..lib.utils.security_utils import get_auth_employee
 
 
@@ -27,10 +32,11 @@ def date_validator(node, kw):
     request = kw.get('request')
 
     def validator(node, value):
-        currency = Currency.get(request.params.get('currency_id'))
-        supplier = Supplier.get(request.params.get('supplier_id'))
+        currency = Currency.get(cast_int(request.params.get('currency_id')))
+        supplier = Supplier.get(cast_int(request.params.get('supplier_id')))
+        
         rate = CurrencyRate.get_by_currency(
-            currency.id, supplier.id, value
+            currency and currency.id, supplier and supplier.id, value
         )
         if (
             rate
@@ -46,20 +52,20 @@ def date_validator(node, kw):
                 node,
                 _(u'Currency rate for this date exists'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 @colander.deferred
 def currency_validator(node, kw):
 
     def validator(node, value):
-        currency = Currency.get(value)
-        if currency.iso_code == get_base_currency():
+        currency = Currency.get(cast_int(value))
+        if currency and currency.iso_code == get_base_currency():
             raise colander.Invalid(
                 node,
                 _(u'This is base currency'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 @colander.deferred
@@ -71,16 +77,17 @@ def rate_validator(node, kw):
                 node,
                 _(u'Must be more then 0'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 class _CurrencyRateSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
-        colander.Integer(),
-        validator=currency_validator
+        colander.String(),
+        validator=DeferredAll(currency_validator, _currency_validator)
     )
     supplier_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=supplier_validator
     )
     rate = colander.SchemaNode(
         colander.Money(),

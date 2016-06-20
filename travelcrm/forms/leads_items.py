@@ -7,6 +7,10 @@ from . import (
     BaseForm,
     BaseSearchForm,
 )
+from .common import (
+    currency_validator,
+    service_validator
+)
 from ..resources.leads_items import LeadsItemsResource
 from ..models.lead_item import LeadItem
 from ..lib.qb.leads_items import LeadsItemsQueryBuilder
@@ -15,11 +19,13 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _LeadItemSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=service_validator
     )
     currency_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
         missing=None,
+        validator=currency_validator,
     )
     price_from = colander.SchemaNode(
         colander.Money(),

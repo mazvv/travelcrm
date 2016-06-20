@@ -5,6 +5,7 @@ import colander
 from . import (
     Date,
 )
+from .common import country_validator
 from ..forms.orders_items import (
     OrderItemSchema, 
     OrderItemForm
@@ -32,7 +33,8 @@ def adults_validator(node, kw):
 
 class _VisaSchema(OrderItemSchema):
     country_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=country_validator
     )
     type = colander.SchemaNode(
         colander.String()

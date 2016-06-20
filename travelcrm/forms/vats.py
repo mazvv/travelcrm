@@ -9,6 +9,10 @@ from . import(
     BaseSearchForm,
     BaseAssignForm,
 )
+from .common import (
+    service_validator,
+    account_validator
+)
 from ..resources.vats import VatsResource
 from ..models import DBSession
 from ..models.vat import Vat
@@ -49,10 +53,12 @@ class _VatSchema(ResourceSchema):
         validator=date_validator,
     )
     account_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=account_validator
     )
     service_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=service_validator
     )
     vat = colander.SchemaNode(
         colander.Decimal('.01'),

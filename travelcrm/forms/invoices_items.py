@@ -6,12 +6,14 @@ from . import (
     ResourceSchema,
     BaseSearchForm,
 )
+from .common import service_validator
 from ..lib.qb.invoices_items import InvoicesItemsQueryBuilder
 
 
 class _InvoiceItemSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.Integer(),
+        colander.String(),
+        validator=service_validator
     )
     price = colander.SchemaNode(
         colander.Money()
