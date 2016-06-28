@@ -29851,7 +29851,7 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 -- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('employee_id_seq', 32, true);
+SELECT pg_catalog.setval('employee_id_seq', 33, true);
 
 
 --
@@ -31597,6 +31597,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2517	149	f	2
 2518	149	f	2
 2904	103	f	2
+2916	149	f	2
 2519	47	f	2
 2520	149	f	2
 2521	149	f	2
@@ -32518,7 +32519,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2915, true);
+SELECT pg_catalog.setval('resource_id_seq', 2918, true);
 
 
 --
@@ -34677,6 +34678,11 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7869	2912	2	\N	2016-06-20 15:33:07.606499+03
 7870	2912	2	\N	2016-06-20 16:02:21.203464+03
 7871	2915	2	\N	2016-06-20 16:06:07.075108+03
+7872	2785	2	\N	2016-06-20 16:35:58.751634+03
+7873	2916	2	\N	2016-06-20 16:35:58.751634+03
+7874	2785	2	\N	2016-06-20 16:36:09.547187+03
+7877	2859	2	\N	2016-06-20 18:03:05.509688+03
+7878	1542	2	\N	2016-06-27 22:07:41.304565+03
 \.
 
 
@@ -34684,7 +34690,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7871, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 7878, true);
 
 
 --
@@ -35329,6 +35335,7 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 19	2015722/1ef77eb8-790f-4494-a9de-ae383a4b7142.jpg	0.00	image/jpeg	passport scan	20120908105644_brooks.jpg	2682
 20	2015722/317847e8-f61f-404c-91b9-d6f03c8228dd.jpg	0.00	image/jpeg		20120908105644_brooks.jpg	2684
 21	2016620/99153520-cf16-4587-be81-c482839844a8.jpg	0.00	image/jpeg		YniVN8l0kTY.jpg	2910
+22	2016620/2593da53-9d16-4207-95d6-002d819fe807.jpg	0.00	image/jpeg	\N	YniVN8l0kTY.jpg	2916
 \.
 
 
@@ -35336,7 +35343,7 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 -- Name: upload_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('upload_id_seq', 21, true);
+SELECT pg_catalog.setval('upload_id_seq', 23, true);
 
 
 --
