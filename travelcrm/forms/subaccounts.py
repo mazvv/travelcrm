@@ -3,15 +3,16 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import account_validator
 from ..resources.subaccounts import SubaccountsResource
 from ..models.subaccount import Subaccount
+from ..models.account import Account
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.bl.subaccounts import (
@@ -77,8 +78,7 @@ def source_id_validator(node, kw):
 
 class _SubaccountSchema(ResourceSchema):
     account_id = colander.SchemaNode(
-        colander.String(),
-        validator=account_validator
+        SelectInteger(Account),
     )
     subaccount_type = colander.SchemaNode(
         colander.String(),

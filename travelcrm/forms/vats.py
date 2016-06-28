@@ -4,18 +4,17 @@ import colander
 
 from . import(
     Date,
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import (
-    service_validator,
-    account_validator
-)
 from ..resources.vats import VatsResource
 from ..models import DBSession
 from ..models.vat import Vat
+from ..models.service import Service
+from ..models.account import Account
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.vats import VatsQueryBuilder
@@ -53,12 +52,10 @@ class _VatSchema(ResourceSchema):
         validator=date_validator,
     )
     account_id = colander.SchemaNode(
-        colander.String(),
-        validator=account_validator
+        SelectInteger(Account),
     )
     service_id = colander.SchemaNode(
-        colander.String(),
-        validator=service_validator
+        SelectInteger(Service),
     )
     vat = colander.SchemaNode(
         colander.Decimal('.01'),

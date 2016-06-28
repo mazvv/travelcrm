@@ -5,7 +5,7 @@ from decimal import Decimal
 import colander
 
 from . import (
-    DeferredAll,
+    SelectInteger,
     Date,
     ResourceSchema, 
     BaseForm,
@@ -13,13 +13,10 @@ from . import (
     ResourceSearchSchema,
     BaseAssignForm,
 )
-from .common import (
-    subaccount_validator,
-    account_item_validator
-)
 from ..resources.crosspayments import CrosspaymentsResource
 from ..models.crosspayment import Crosspayment
 from ..models.subaccount import Subaccount
+from ..models.account import Account
 from ..models.cashflow import Cashflow
 from ..models.note import Note
 from ..models.task import Task
@@ -88,18 +85,17 @@ class _CrosspaymentSchema(ResourceSchema):
         Date(),
     )
     subaccount_from_id = colander.SchemaNode(
-        colander.String(),
-        validator=DeferredAll(subaccount_validator, subaccount_from_validator),
+        SelectInteger(Subaccount),
+        validator=subaccount_from_validator,
         missing=None,
     )
     subaccount_to_id = colander.SchemaNode(
-        colander.String(),
-        validator=DeferredAll(subaccount_validator, subaccount_to_validator),
+        SelectInteger(Subaccount),
+        validator=subaccount_to_validator,
         missing=None,
     )
     account_item_id = colander.SchemaNode(
-        colander.String(),
-        validator=account_item_validator,
+        SelectInteger(Account),
     )
     sum = colander.SchemaNode(
         colander.Money(),

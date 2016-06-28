@@ -4,6 +4,7 @@ import colander
 
 from . import (
     Date,
+    SelectInteger,
     ResourceSchema,
     ResourceSearchSchema,
     BaseForm,
@@ -13,6 +14,9 @@ from . import (
 from ..resources.orders import OrdersResource
 from ..models.order import Order
 from ..models.order_item import OrderItem
+from ..models.lead import Lead
+from ..models.person import Person
+from ..models.advsource import Advsource
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.orders import OrdersQueryBuilder
@@ -26,14 +30,14 @@ class _OrderSchema(ResourceSchema):
         Date()
     )
     lead_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Lead),
         missing=None,
     )
     customer_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Person),
     )
     advsource_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Advsource),
     )
     order_item_id = colander.SchemaNode(
         colander.Set(),

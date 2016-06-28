@@ -3,11 +3,10 @@
 import colander
 
 from . import (
-    DeferredAll,
+    SelectInteger,
     ResourceSchema,
     BaseForm,
 )
-from .common import employee_validator
 from ..models.employee import Employee
 from ..lib.utils.common_utils import translate as _
 from ..lib.bl.employees import (
@@ -42,12 +41,11 @@ def maintainer_validator(node, kw):
 
 class _AssignsSchema(ResourceSchema):
     employee_id = colander.SchemaNode(
-        colander.String(),
-        validator=employee_validator
+        SelectInteger(Employee),
     )
     maintainer_id = colander.SchemaNode(
-        colander.Integer(),
-        validator=DeferredAll(maintainer_validator, employee_validator)
+        SelectInteger(Employee),
+        validator=maintainer_validator
     )
 
 

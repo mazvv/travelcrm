@@ -3,12 +3,13 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
 )
-from .common import currency_validator
 from ..lib.qb.companies import CompaniesQueryBuilder
+from ..models.currency import Currency
 from ..lib.scheduler.companies import schedule_company_creation
 
 
@@ -27,16 +28,14 @@ class _CompanyAddSchema(ResourceSchema):
         colander.String(),
     )
     currency_id = colander.SchemaNode(
-        colander.String(),
+        SelectInteger(Currency),
         missing=None,
-        validator=currency_validator,
     )
 
 
 class _CompanySchema(_CompanyAddSchema):
     currency_id = colander.SchemaNode(
-        colander.Integer(),
-        validator=currency_validator,
+        SelectInteger(Currency),
     )
 
 

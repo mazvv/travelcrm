@@ -3,12 +3,16 @@
 import colander
 
 from . import(
+    SelectInteger,
     BaseForm,
     ResourceSearchSchema,
     BaseSearchForm,
 )
 from ..models import DBSession
 from ..models.permision import Permision
+from ..models.position import Position
+from ..models.resource_type import ResourceType
+from ..models.structure import Structure
 from ..lib.qb.permisions import PermisionsQueryBuilder
 from ..lib.bl.permisions import copy_from_position
 from ..lib.utils.common_utils import translate as _
@@ -29,10 +33,10 @@ def scope_type_validator(node, kw):
 
 class _PermisionSchema(colander.Schema):
     position_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Position),
     )
     resource_type_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(ResourceType),
     )
     scope_type = colander.SchemaNode(
         colander.String(),
@@ -40,7 +44,7 @@ class _PermisionSchema(colander.Schema):
         validator=scope_type_validator
     )
     structure_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Structure),
         missing=None
     )
     permisions = colander.Set()

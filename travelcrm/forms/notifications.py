@@ -3,15 +3,17 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSearchSchema, 
     BaseSearchForm
 )
+from ..models.employee import Employee
 from ..lib.qb.notifications import NotificationsQueryBuilder
 
 
 class _NotificationSearchSchema(ResourceSearchSchema):
     employee_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Employee)
     )
     status = colander.SchemaNode(
         colander.String(),

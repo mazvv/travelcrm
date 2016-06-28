@@ -4,12 +4,13 @@ import colander
 
 from . import(
     Date,
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
 )
-from .common import country_validator
 from ..resources.passports import PassportsResource
+from ..models.country import Country
 from ..models.passport import Passport
 from ..models.upload import Upload
 from ..lib.qb.passports import PassportsQueryBuilder
@@ -32,8 +33,7 @@ def date_validator(node, kw):
 
 class _PassportSchema(ResourceSchema):
     country_id = colander.SchemaNode(
-        colander.String(),
-        validator=country_validator
+        SelectInteger(Country),
     )
     passport_type = colander.SchemaNode(
         colander.String(),

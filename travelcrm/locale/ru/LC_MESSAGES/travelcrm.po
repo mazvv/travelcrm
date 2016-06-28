@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-12 20:25+0300\n"
+"POT-Creation-Date: 2016-06-28 13:58+0300\n"
 "PO-Revision-Date: 2015-07-24 22:55+0300\n"
 "Last-Translator: Vitalii Mazur <vitalii.mazur@gmail.com>\n"
 "Language: ru\n"
@@ -18,40 +18,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: travelcrm/forms/__init__.py:30
+#: travelcrm/forms/__init__.py:32
 msgid "Invalid CSRF token"
 msgstr "Неверный CSRF токен"
 
-#: travelcrm/forms/__init__.py:44
+#: travelcrm/forms/__init__.py:46
 msgid "Employee is dismissed"
 msgstr "Сотрудник уволен"
 
-#: travelcrm/forms/__init__.py:49
+#: travelcrm/forms/__init__.py:51
 msgid "Employee has no appointment"
 msgstr "Сотрудник не назначен"
 
-#: travelcrm/forms/__init__.py:150
+#: travelcrm/forms/__init__.py:166
 msgid "Phone must be in format +XXXXXXXXXXX and contains country code"
 msgstr "Номер телефона должен быть в формате +XXXXXXXXXXX с кодом страны"
 
-#: travelcrm/forms/__init__.py:159
+#: travelcrm/forms/__init__.py:175
 msgid "Phone is not valid"
 msgstr "Неверный телефон"
+
+#: travelcrm/forms/__init__.py:199
+msgid "Object does not exists"
+msgstr "Объект не существует"
 
 #: travelcrm/forms/accomodations.py:32 travelcrm/forms/roomcats.py:32
 msgid "Room category with the same name exists"
 msgstr "Категория номера с таким названием уже есть"
 
-#: travelcrm/forms/accounts.py:32
+#: travelcrm/forms/accounts.py:34
 msgid "Account with the same name exists"
 msgstr "Счет с таким названием уже есть"
 
-#: travelcrm/forms/accounts_items.py:33
+#: travelcrm/forms/accounts_items.py:34
 msgid "Account Item with the same name exists"
 msgstr "Статья учета с таким названием уже есть"
 
-#: travelcrm/forms/accounts_items.py:46 travelcrm/forms/navigations.py:34
-#: travelcrm/forms/structures.py:33
+#: travelcrm/forms/accounts_items.py:47 travelcrm/forms/navigations.py:36
+#: travelcrm/forms/structures.py:34
 msgid "Can not be parent of self"
 msgstr "Не может быть родительским себя самого"
 
@@ -59,15 +63,15 @@ msgstr "Не может быть родительским себя самого"
 msgid "Advertise source with the same name exists"
 msgstr "Источник рекламы с таким названием уже есть"
 
-#: travelcrm/forms/assigns.py:26
+#: travelcrm/forms/assigns.py:27
 msgid "Select another employee."
 msgstr "Выберите другого сотрудника"
 
-#: travelcrm/forms/assigns.py:31
+#: travelcrm/forms/assigns.py:32
 msgid "Employee is dismissed."
 msgstr "Сотрудник уволен"
 
-#: travelcrm/forms/assigns.py:36
+#: travelcrm/forms/assigns.py:37
 msgid "Can't assign resources to employee without position."
 msgstr "Нельзя делегировать ресурсы на неназначенного сотрудника"
 
@@ -87,16 +91,16 @@ msgstr "Проверьте дату"
 msgid "Country with the same iso code exists"
 msgstr "Страна с таким кодом уже есть"
 
-#: travelcrm/forms/crosspayments.py:42
+#: travelcrm/forms/crosspayments.py:43
 #, python-format
 msgid "Max sum for transfer %s"
 msgstr "Максимальная сумма трансфера %s"
 
-#: travelcrm/forms/crosspayments.py:50
+#: travelcrm/forms/crosspayments.py:51
 msgid "Set at least subaccount from any section"
 msgstr "Укажите субсчет из любой секции"
 
-#: travelcrm/forms/crosspayments.py:76
+#: travelcrm/forms/crosspayments.py:77
 msgid "Cashflow with same currency allowed only"
 msgstr "Мультивалютный трансфер не возможен"
 
@@ -104,31 +108,31 @@ msgstr "Мультивалютный трансфер не возможен"
 msgid "Currency with the same iso code exists"
 msgstr "Валюта с таким кодом уже есть"
 
-#: travelcrm/forms/currencies_rates.py:47
+#: travelcrm/forms/currencies_rates.py:49
 msgid "Currency rate for this date exists"
 msgstr "Курс валюты для этой даты уже есть"
 
-#: travelcrm/forms/currencies_rates.py:60
+#: travelcrm/forms/currencies_rates.py:62
 msgid "This is base currency"
 msgstr "Это базовая валюта"
 
-#: travelcrm/forms/currencies_rates.py:72
+#: travelcrm/forms/currencies_rates.py:74
 msgid "Must be more then 0"
 msgstr "Должно быть больше 0"
 
-#: travelcrm/forms/dismissals.py:35
+#: travelcrm/forms/dismissals.py:36
 msgid "Employee is dismissed already."
 msgstr "Сотрудник уже уволен"
 
-#: travelcrm/forms/dismissals.py:40
+#: travelcrm/forms/dismissals.py:41
 msgid "Can't dismiss employee without position."
 msgstr "Нельзя уволить неназначенного сотрудника"
 
-#: travelcrm/forms/employees.py:41 travelcrm/forms/uploads.py:31
+#: travelcrm/forms/employees.py:40 travelcrm/forms/uploads.py:31
 msgid "File is too big"
 msgstr "Файл слишком большой"
 
-#: travelcrm/forms/employees.py:48
+#: travelcrm/forms/employees.py:47
 msgid "Only images allowed"
 msgstr "Допусткаются только изображения"
 
@@ -140,52 +144,52 @@ msgstr "Категория питания с таким названием уж�
 msgid "Hotel category with the same name exists"
 msgstr "Категория отеля с таким названием уже сущестует"
 
-#: travelcrm/forms/incomes.py:34 travelcrm/forms/outgoings.py:75
+#: travelcrm/forms/incomes.py:35 travelcrm/forms/outgoings.py:76
 msgid "Only revenue account item allowed"
 msgstr "Разрешены только доходные статьи"
 
-#: travelcrm/forms/incomes.py:48
+#: travelcrm/forms/incomes.py:49
 msgid "Create company subaccount for account from invoice"
 msgstr "Создайте субcчет компании для счета из инвойса"
 
-#: travelcrm/forms/invoices.py:44
+#: travelcrm/forms/invoices.py:45
 msgid "Active until date must be more than invoice date"
 msgstr "Макс. дата оплаты должна быть больше даты инвойса"
 
-#: travelcrm/forms/invoices.py:65
+#: travelcrm/forms/invoices.py:66
 msgid "Invoice for this order already exists"
 msgstr "Инвойс для этой заявки уже есть"
 
-#: travelcrm/forms/invoices.py:72
+#: travelcrm/forms/invoices.py:73
 msgid "Some order items has no calculations"
 msgstr "Для некоторых позиций заявки не созданы калькуляции"
 
-#: travelcrm/forms/locations.py:46
+#: travelcrm/forms/locations.py:48
 msgid "Location with the same name exists"
 msgstr "Такая запись уже существует"
 
-#: travelcrm/forms/navigations.py:80 travelcrm/forms/permisions.py:109
+#: travelcrm/forms/navigations.py:82 travelcrm/forms/permisions.py:113
 msgid "Can not copy to itself"
 msgstr "Нельзя копировать в себя"
 
-#: travelcrm/forms/outgoings.py:38
+#: travelcrm/forms/outgoings.py:39
 msgid "Sum must be more then zero"
 msgstr "Сумма должна быть больше 0"
 
-#: travelcrm/forms/outgoings.py:48
+#: travelcrm/forms/outgoings.py:49
 #, python-format
 msgid "Max sum for payment %s"
 msgstr "Максимальная сумма оплаты %s"
 
-#: travelcrm/forms/outgoings.py:62
+#: travelcrm/forms/outgoings.py:63
 msgid "Create company subaccount for this account first"
 msgstr "Создайте сначала субсчет компании для этого счета"
 
-#: travelcrm/forms/passports.py:27
+#: travelcrm/forms/passports.py:29
 msgid "You must set end date for foreign passport"
 msgstr "Нужно указать дату действия для загранпаспорта"
 
-#: travelcrm/forms/permisions.py:25
+#: travelcrm/forms/permisions.py:29
 msgid "Set structure for scope"
 msgstr "Укажите структуру для области видимости"
 
@@ -193,11 +197,11 @@ msgstr "Укажите структуру для области видимост
 msgid "Person Category with the same name exists"
 msgstr "Такое название уже существует"
 
-#: travelcrm/forms/positions.py:46
+#: travelcrm/forms/positions.py:48
 msgid "Position with the same name for structure exists"
 msgstr "Должность с таким названием для этой структуры уже есть"
 
-#: travelcrm/forms/regions.py:38
+#: travelcrm/forms/regions.py:40
 msgid "Region already exists"
 msgstr "Регион уже есть"
 
@@ -225,20 +229,20 @@ msgstr "Тип русурсов с таким названием уже есть
 msgid "Resource Type with the same humanize exists"
 msgstr "Тип ресурсов с таким публичным именем уже есть"
 
-#: travelcrm/forms/services.py:32
+#: travelcrm/forms/services.py:34
 msgid "Service with the same name exists"
 msgstr "Сервис с таким названием уже есть"
 
-#: travelcrm/forms/spassports.py:28 travelcrm/forms/tickets.py:28
-#: travelcrm/forms/tours.py:28 travelcrm/forms/visas.py:28
+#: travelcrm/forms/spassports.py:28 travelcrm/forms/tickets.py:32
+#: travelcrm/forms/tours.py:36 travelcrm/forms/visas.py:30
 msgid "Adult or Children must be more than 0"
 msgstr "Укажите к-во взрослых и / или детей"
 
-#: travelcrm/forms/subaccounts.py:41
+#: travelcrm/forms/subaccounts.py:43
 msgid "Subaccount with the same name exists"
 msgstr "Субсчет с таким названием уже есть"
 
-#: travelcrm/forms/subaccounts.py:71
+#: travelcrm/forms/subaccounts.py:73
 msgid "Subaccount for this account already exists"
 msgstr "Субсчет для этого счета уже есть"
 
@@ -258,23 +262,23 @@ msgstr "Такое название уже существует"
 msgid "This files types is not allowed"
 msgstr "Неразрешенный тип файлов"
 
-#: travelcrm/forms/users.py:32
+#: travelcrm/forms/users.py:34
 msgid "User with the same username exists"
 msgstr "Пользователь с таким логином уже есть"
 
-#: travelcrm/forms/users.py:49
+#: travelcrm/forms/users.py:51
 msgid "User with the same email exists"
 msgstr "Такой email уже существует"
 
-#: travelcrm/forms/users.py:66
+#: travelcrm/forms/users.py:68
 msgid "User for this employee already exists"
 msgstr "Пользователь для этого сотрудника уже есть"
 
-#: travelcrm/forms/users.py:79
+#: travelcrm/forms/users.py:81
 msgid "Password and confirm is not equal"
 msgstr "Пароль и подтверждение разные"
 
-#: travelcrm/forms/vats.py:41
+#: travelcrm/forms/vats.py:44
 msgid "Vat for this date exists"
 msgstr "НДС на эту дату уже есть"
 
@@ -2063,7 +2067,7 @@ msgstr "Тип размещения"
 #: travelcrm/templates/tickets_classes/index.mako:99
 #: travelcrm/templates/transfers/index.mako:99
 #: travelcrm/templates/transports/index.mako:99
-#: travelcrm/templates/turnovers/index.mako:96
+#: travelcrm/templates/turnovers/index.mako:97
 #: travelcrm/templates/users/index.mako:101
 #: travelcrm/templates/vats/index.mako:103
 msgid "Find"
@@ -3104,6 +3108,7 @@ msgstr "оплачено, %"
 
 #: travelcrm/templates/invoices/index.mako:89
 #: travelcrm/templates/orders/index.mako:112
+#: travelcrm/templates/turnovers/index.mako:65
 msgid "Print"
 msgstr "Печать"
 
@@ -3240,10 +3245,6 @@ msgstr "название"
 #: travelcrm/templates/notes/details.mako:9
 msgid "author"
 msgstr "автор"
-
-#: travelcrm/templates/notes/index.mako:79
-msgid "Filter"
-msgstr "Поиск"
 
 #: travelcrm/templates/notifications/close.mako:12
 msgid "Do you really want to close checked notifications?"
@@ -3678,11 +3679,7 @@ msgstr "Отчет о движении ДС"
 msgid "balance"
 msgstr "баланс"
 
-#: travelcrm/templates/turnovers/index.mako:64
-msgid "Export To PDF"
-msgstr "Экспорт в PDF"
-
-#: travelcrm/templates/turnovers/index.mako:91
+#: travelcrm/templates/turnovers/index.mako:92
 msgid "Select account"
 msgstr "Выбрать счет"
 

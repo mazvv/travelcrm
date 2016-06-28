@@ -4,17 +4,16 @@ import colander
 
 from . import (
     Date,
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
 )
-from .common import (
-    currency_validator,
-    supplier_validator,
-    service_validator
-)
 from ..resources.orders_items import OrdersItemsResource
 from ..models.order_item import OrderItem
+from ..models.currency import Currency
+from ..models.supplier import Supplier
+from ..models.service import Service
 from ..models.person import Person
 from ..lib.qb.orders_items import OrdersItemsQueryBuilder
 from ..lib.utils.security_utils import get_auth_employee
@@ -22,16 +21,13 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class OrderItemSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.String(),
-        validator=service_validator
+        SelectInteger(Service),
     )
     currency_id = colander.SchemaNode(
-        colander.String(),
-        validator=currency_validator
+        SelectInteger(Currency),
     )
     supplier_id = colander.SchemaNode(
-        colander.String(),
-        validator=supplier_validator,
+        SelectInteger(Supplier),
     )
     price = colander.SchemaNode(
         colander.Money()

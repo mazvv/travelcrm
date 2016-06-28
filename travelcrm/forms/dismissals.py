@@ -3,14 +3,13 @@
 import colander
 
 from . import (
-    DeferredAll,
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
     Date
 )
-from .common import employee_validator as _employee_validator
 from ..resources.dismissals import DismissalsResource
 from ..models.dismissal import Dismissal
 from ..models.employee import Employee
@@ -49,8 +48,8 @@ class _DismissalSchema(ResourceSchema):
         Date(),
     )
     employee_id = colander.SchemaNode(
-        colander.String(),
-        validator=DeferredAll(employee_validator, _employee_validator),
+        SelectInteger(Employee),
+        validator=employee_validator,
     )
 
 

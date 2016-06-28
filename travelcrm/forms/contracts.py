@@ -3,13 +3,13 @@
 import colander
 
 from . import(
+    SelectInteger,
     Date,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import supplier_validator
 from ..resources.contracts import ContractsResource
 from ..models.supplier import Supplier
 from ..models.contract import Contract
@@ -22,8 +22,7 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _ContractSchema(ResourceSchema):
     supplier_id = colander.SchemaNode(
-        colander.String(),
-        validator=supplier_validator,
+        SelectInteger(Supplier),
     )
     num = colander.SchemaNode(
         colander.String(),

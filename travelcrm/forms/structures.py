@@ -3,6 +3,7 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     ResourceSearchSchema,
@@ -37,7 +38,7 @@ def parent_validator(node, kw):
 
 class _StructureSchema(ResourceSchema):
     parent_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Structure),
         missing=None,
         validator=parent_validator
     )

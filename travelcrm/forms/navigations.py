@@ -3,6 +3,7 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     ResourceSearchSchema,
@@ -11,6 +12,7 @@ from . import(
 )
 from ..resources.navigations import NavigationsResource
 from ..models.navigation import Navigation
+from ..models.position import Position
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.navigations import NavigationsQueryBuilder
@@ -38,10 +40,10 @@ def parent_validator(node, kw):
 
 class _NavigationSchema(ResourceSchema):
     position_id = colander.SchemaNode(
-        colander.Integer()
+        SelectInteger(Position)
     )
     parent_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Navigation),
         missing=None,
         validator=parent_validator
     )

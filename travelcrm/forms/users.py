@@ -3,6 +3,7 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
@@ -10,6 +11,7 @@ from . import (
 )
 from ..resources.users import UsersResource
 from ..models.user import User
+from ..models.employee import Employee
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.users import UsersQueryBuilder
@@ -95,7 +97,7 @@ class _UserAddSchema(ResourceSchema):
         validator=password_validator
     )
     employee_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Employee),
         validator=employee_validator
     )
 

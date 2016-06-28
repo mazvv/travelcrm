@@ -4,6 +4,7 @@ import colander
 
 from . import (
     DateTime,
+    SelectInteger,
 )
 from ..forms.orders_items import (
     OrderItemSchema, 
@@ -12,6 +13,9 @@ from ..forms.orders_items import (
 from ..resources.tickets import TicketsResource
 from ..models.ticket import Ticket
 from ..models.person import Person
+from ..models.location import Location
+from ..models.ticket_class import TicketClass
+from ..models.transport import Transport
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.security_utils import get_auth_employee
@@ -39,16 +43,16 @@ class _TicketSchema(OrderItemSchema):
         colander.Integer(),
     )
     start_location_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Location),
     )
     end_location_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Location),
     )
     ticket_class_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(TicketClass),
     )
     transport_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Transport),
     )
     start_additional_info = colander.SchemaNode(
         colander.String(),

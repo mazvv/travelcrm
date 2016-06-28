@@ -3,33 +3,29 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
 )
-from .common import (
-    currency_validator,
-    supplier_validator,
-    service_validator,
-)
 from ..resources.leads_offers import LeadsOffersResource
 from ..models.lead_offer import LeadOffer
+from ..models.currency import Currency
+from ..models.supplier import Supplier
+from ..models.service import Service
 from ..lib.qb.leads_offers import LeadsOffersQueryBuilder
 from ..lib.utils.security_utils import get_auth_employee
 
 
 class _LeadOfferSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.String(),
-        validator=service_validator
+        SelectInteger(Service),
     )
     supplier_id = colander.SchemaNode(
-        colander.String(),
-        validator=supplier_validator,
+        SelectInteger(Supplier),
     )
     currency_id = colander.SchemaNode(
-        colander.String(),
-        validator=currency_validator
+        SelectInteger(Currency),
     )
     price = colander.SchemaNode(
         colander.Money(),

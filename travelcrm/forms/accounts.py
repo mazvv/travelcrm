@@ -3,14 +3,15 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import currency_validator
 from ..resources.accounts import AccountsResource
 from ..models.account import Account
+from ..models.currency import Currency
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.accounts import AccountsQueryBuilder
@@ -37,8 +38,7 @@ def name_validator(node, kw):
 
 class _AccountSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
-        colander.String(),
-        validator=currency_validator
+        SelectInteger(Currency),
     )
     name = colander.SchemaNode(
         colander.String(),

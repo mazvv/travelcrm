@@ -3,19 +3,18 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
     Date
 )
-from .common import (
-    currency_validator,
-    employee_validator,
-    position_validator
-)
 from ..resources.appointments import AppointmentsResource
 from ..models.appointment import Appointment
+from ..models.currency import Currency
+from ..models.position import Position
+from ..models.employee import Employee
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.appointments import AppointmentsQueryBuilder
@@ -27,19 +26,16 @@ class _AppointmentSchema(ResourceSchema):
         Date(),
     )
     employee_id = colander.SchemaNode(
-        colander.String(),
-        validator=employee_validator
+        SelectInteger(Employee),
     )
     position_id = colander.SchemaNode(
-        colander.String(),
-        validator=position_validator
+        SelectInteger(Position),
     )
     salary = colander.SchemaNode(
         colander.Money(),
     )
     currency_id = colander.SchemaNode(
-        colander.String(),
-        validator=currency_validator
+        SelectInteger(Currency),
     )
 
 

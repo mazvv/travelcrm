@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-06-12 20:25+0300\n"
+"POT-Creation-Date: 2016-06-28 13:58+0300\n"
 "PO-Revision-Date: 2014-07-13 13:47+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -19,40 +19,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: travelcrm/forms/__init__.py:30
+#: travelcrm/forms/__init__.py:32
 msgid "Invalid CSRF token"
 msgstr ""
 
-#: travelcrm/forms/__init__.py:44
+#: travelcrm/forms/__init__.py:46
 msgid "Employee is dismissed"
 msgstr ""
 
-#: travelcrm/forms/__init__.py:49
+#: travelcrm/forms/__init__.py:51
 msgid "Employee has no appointment"
 msgstr ""
 
-#: travelcrm/forms/__init__.py:150
+#: travelcrm/forms/__init__.py:166
 msgid "Phone must be in format +XXXXXXXXXXX and contains country code"
 msgstr ""
 
-#: travelcrm/forms/__init__.py:159
+#: travelcrm/forms/__init__.py:175
 msgid "Phone is not valid"
+msgstr ""
+
+#: travelcrm/forms/__init__.py:199
+msgid "Object does not exists"
 msgstr ""
 
 #: travelcrm/forms/accomodations.py:32 travelcrm/forms/roomcats.py:32
 msgid "Room category with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/accounts.py:32
+#: travelcrm/forms/accounts.py:34
 msgid "Account with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/accounts_items.py:33
+#: travelcrm/forms/accounts_items.py:34
 msgid "Account Item with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/accounts_items.py:46 travelcrm/forms/navigations.py:34
-#: travelcrm/forms/structures.py:33
+#: travelcrm/forms/accounts_items.py:47 travelcrm/forms/navigations.py:36
+#: travelcrm/forms/structures.py:34
 msgid "Can not be parent of self"
 msgstr ""
 
@@ -60,15 +64,15 @@ msgstr ""
 msgid "Advertise source with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/assigns.py:26
+#: travelcrm/forms/assigns.py:27
 msgid "Select another employee."
 msgstr ""
 
-#: travelcrm/forms/assigns.py:31
+#: travelcrm/forms/assigns.py:32
 msgid "Employee is dismissed."
 msgstr ""
 
-#: travelcrm/forms/assigns.py:36
+#: travelcrm/forms/assigns.py:37
 msgid "Can't assign resources to employee without position."
 msgstr ""
 
@@ -88,16 +92,16 @@ msgstr ""
 msgid "Country with the same iso code exists"
 msgstr ""
 
-#: travelcrm/forms/crosspayments.py:42
+#: travelcrm/forms/crosspayments.py:43
 #, python-format
 msgid "Max sum for transfer %s"
 msgstr ""
 
-#: travelcrm/forms/crosspayments.py:50
+#: travelcrm/forms/crosspayments.py:51
 msgid "Set at least subaccount from any section"
 msgstr ""
 
-#: travelcrm/forms/crosspayments.py:76
+#: travelcrm/forms/crosspayments.py:77
 msgid "Cashflow with same currency allowed only"
 msgstr ""
 
@@ -105,31 +109,31 @@ msgstr ""
 msgid "Currency with the same iso code exists"
 msgstr ""
 
-#: travelcrm/forms/currencies_rates.py:47
+#: travelcrm/forms/currencies_rates.py:49
 msgid "Currency rate for this date exists"
 msgstr ""
 
-#: travelcrm/forms/currencies_rates.py:60
+#: travelcrm/forms/currencies_rates.py:62
 msgid "This is base currency"
 msgstr ""
 
-#: travelcrm/forms/currencies_rates.py:72
+#: travelcrm/forms/currencies_rates.py:74
 msgid "Must be more then 0"
 msgstr ""
 
-#: travelcrm/forms/dismissals.py:35
+#: travelcrm/forms/dismissals.py:36
 msgid "Employee is dismissed already."
 msgstr ""
 
-#: travelcrm/forms/dismissals.py:40
+#: travelcrm/forms/dismissals.py:41
 msgid "Can't dismiss employee without position."
 msgstr ""
 
-#: travelcrm/forms/employees.py:41 travelcrm/forms/uploads.py:31
+#: travelcrm/forms/employees.py:40 travelcrm/forms/uploads.py:31
 msgid "File is too big"
 msgstr ""
 
-#: travelcrm/forms/employees.py:48
+#: travelcrm/forms/employees.py:47
 msgid "Only images allowed"
 msgstr ""
 
@@ -141,52 +145,52 @@ msgstr ""
 msgid "Hotel category with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/incomes.py:34 travelcrm/forms/outgoings.py:75
+#: travelcrm/forms/incomes.py:35 travelcrm/forms/outgoings.py:76
 msgid "Only revenue account item allowed"
 msgstr ""
 
-#: travelcrm/forms/incomes.py:48
+#: travelcrm/forms/incomes.py:49
 msgid "Create company subaccount for account from invoice"
 msgstr ""
 
-#: travelcrm/forms/invoices.py:44
+#: travelcrm/forms/invoices.py:45
 msgid "Active until date must be more than invoice date"
 msgstr ""
 
-#: travelcrm/forms/invoices.py:65
+#: travelcrm/forms/invoices.py:66
 msgid "Invoice for this order already exists"
 msgstr ""
 
-#: travelcrm/forms/invoices.py:72
+#: travelcrm/forms/invoices.py:73
 msgid "Some order items has no calculations"
 msgstr ""
 
-#: travelcrm/forms/locations.py:46
+#: travelcrm/forms/locations.py:48
 msgid "Location with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/navigations.py:80 travelcrm/forms/permisions.py:109
+#: travelcrm/forms/navigations.py:82 travelcrm/forms/permisions.py:113
 msgid "Can not copy to itself"
 msgstr ""
 
-#: travelcrm/forms/outgoings.py:38
+#: travelcrm/forms/outgoings.py:39
 msgid "Sum must be more then zero"
 msgstr ""
 
-#: travelcrm/forms/outgoings.py:48
+#: travelcrm/forms/outgoings.py:49
 #, python-format
 msgid "Max sum for payment %s"
 msgstr ""
 
-#: travelcrm/forms/outgoings.py:62
+#: travelcrm/forms/outgoings.py:63
 msgid "Create company subaccount for this account first"
 msgstr ""
 
-#: travelcrm/forms/passports.py:27
+#: travelcrm/forms/passports.py:29
 msgid "You must set end date for foreign passport"
 msgstr ""
 
-#: travelcrm/forms/permisions.py:25
+#: travelcrm/forms/permisions.py:29
 msgid "Set structure for scope"
 msgstr ""
 
@@ -194,11 +198,11 @@ msgstr ""
 msgid "Person Category with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/positions.py:46
+#: travelcrm/forms/positions.py:48
 msgid "Position with the same name for structure exists"
 msgstr ""
 
-#: travelcrm/forms/regions.py:38
+#: travelcrm/forms/regions.py:40
 msgid "Region already exists"
 msgstr ""
 
@@ -226,20 +230,20 @@ msgstr ""
 msgid "Resource Type with the same humanize exists"
 msgstr ""
 
-#: travelcrm/forms/services.py:32
+#: travelcrm/forms/services.py:34
 msgid "Service with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/spassports.py:28 travelcrm/forms/tickets.py:28
-#: travelcrm/forms/tours.py:28 travelcrm/forms/visas.py:28
+#: travelcrm/forms/spassports.py:28 travelcrm/forms/tickets.py:32
+#: travelcrm/forms/tours.py:36 travelcrm/forms/visas.py:30
 msgid "Adult or Children must be more than 0"
 msgstr ""
 
-#: travelcrm/forms/subaccounts.py:41
+#: travelcrm/forms/subaccounts.py:43
 msgid "Subaccount with the same name exists"
 msgstr ""
 
-#: travelcrm/forms/subaccounts.py:71
+#: travelcrm/forms/subaccounts.py:73
 msgid "Subaccount for this account already exists"
 msgstr ""
 
@@ -259,23 +263,23 @@ msgstr ""
 msgid "This files types is not allowed"
 msgstr ""
 
-#: travelcrm/forms/users.py:32
+#: travelcrm/forms/users.py:34
 msgid "User with the same username exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:49
+#: travelcrm/forms/users.py:51
 msgid "User with the same email exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:66
+#: travelcrm/forms/users.py:68
 msgid "User for this employee already exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:79
+#: travelcrm/forms/users.py:81
 msgid "Password and confirm is not equal"
 msgstr ""
 
-#: travelcrm/forms/vats.py:41
+#: travelcrm/forms/vats.py:44
 msgid "Vat for this date exists"
 msgstr ""
 
@@ -2064,7 +2068,7 @@ msgstr ""
 #: travelcrm/templates/tickets_classes/index.mako:99
 #: travelcrm/templates/transfers/index.mako:99
 #: travelcrm/templates/transports/index.mako:99
-#: travelcrm/templates/turnovers/index.mako:96
+#: travelcrm/templates/turnovers/index.mako:97
 #: travelcrm/templates/users/index.mako:101
 #: travelcrm/templates/vats/index.mako:103
 msgid "Find"
@@ -3103,6 +3107,7 @@ msgstr ""
 
 #: travelcrm/templates/invoices/index.mako:89
 #: travelcrm/templates/orders/index.mako:112
+#: travelcrm/templates/turnovers/index.mako:65
 msgid "Print"
 msgstr ""
 
@@ -3238,10 +3243,6 @@ msgstr ""
 
 #: travelcrm/templates/notes/details.mako:9
 msgid "author"
-msgstr ""
-
-#: travelcrm/templates/notes/index.mako:79
-msgid "Filter"
 msgstr ""
 
 #: travelcrm/templates/notifications/close.mako:12
@@ -3677,11 +3678,7 @@ msgstr ""
 msgid "balance"
 msgstr ""
 
-#: travelcrm/templates/turnovers/index.mako:64
-msgid "Export To PDF"
-msgstr ""
-
-#: travelcrm/templates/turnovers/index.mako:91
+#: travelcrm/templates/turnovers/index.mako:92
 msgid "Select account"
 msgstr ""
 
@@ -5452,5 +5449,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "performer"
+#~ msgstr ""
+
+#~ msgid "Filter"
+#~ msgstr ""
+
+#~ msgid "Export To PDF"
 #~ msgstr ""
 

@@ -4,14 +4,15 @@ import colander
 
 from . import (
     Date,
+    SelectInteger,
 )
-from .common import country_validator
 from ..forms.orders_items import (
     OrderItemSchema, 
     OrderItemForm
 )
 from ..resources.visas import VisasResource
 from ..models.visa import Visa
+from ..models.country import Country
 from ..models.person import Person
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
@@ -33,8 +34,7 @@ def adults_validator(node, kw):
 
 class _VisaSchema(OrderItemSchema):
     country_id = colander.SchemaNode(
-        colander.String(),
-        validator=country_validator
+        SelectInteger(Country),
     )
     type = colander.SchemaNode(
         colander.String()

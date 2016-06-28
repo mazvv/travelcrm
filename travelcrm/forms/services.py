@@ -3,6 +3,7 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
@@ -10,6 +11,7 @@ from . import(
 )
 from ..resources.services import ServicesResource
 from ..models.service import Service
+from ..models.resource_type import ResourceType
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.services import ServicesQueryBuilder
@@ -44,7 +46,7 @@ class _ServiceSchema(ResourceSchema):
         validator=colander.Length(max=255),
     )
     resource_type_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(ResourceType),
     )
     descr = colander.SchemaNode(
         colander.String(),

@@ -6,6 +6,7 @@ import colander
 
 from . import(
     Date,
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
@@ -86,11 +87,11 @@ class _OutgoingSchema(ResourceSchema):
         validator=sum_validator,
     )
     account_item_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(AccountItem),
         validator=account_item_validator,
     )
     subaccount_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Subaccount),
         validator=subaccount_validator,
     )
     descr = colander.SchemaNode(

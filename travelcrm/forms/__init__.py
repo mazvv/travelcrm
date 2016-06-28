@@ -7,12 +7,14 @@ import colander
 import phonenumbers
 
 from ..models.employee import Employee
+
 from ..lib.qb import ResourcesQueryBuilder
 from ..lib.utils.common_utils import (
     get_locale_name, 
     parse_datetime,
     parse_date,
 )
+from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
 from ..lib.bl.employees import (
     get_employee_position, is_employee_currently_dismissed
@@ -188,6 +190,35 @@ class File(colander.SchemaType):
         if cstruct is None or not isinstance(cstruct, FieldStorage):
             return colander.null
         return cstruct
+
+
+class SelectInteger(colander.Integer):
+
+    def __init__(self, model, msg=None):
+        self.model = model
+        self.msg = msg or _(u'Object does not exists')
+
+    def num(self, val):
+        return cast_int(val)
+        
+    def serialize(self, node, appstruct):
+        if appstruct is colander.null:
+            return colander.null
+
+        val = self.num(appstruct)
+        item = self.model.get(val)
+        if not item:
+            raise colander.Invalid(node, self.msg)
+        return str(val)
+
+    def deserialize(self, node, cstruct):
+        if cstruct != 0 and not cstruct:
+            return colander.null
+        val = self.num(cstruct)
+        item = self.model.get(val)
+        if not item:
+            raise colander.Invalid(node, self.msg)
+        return val
 
 
 class ResourceSearchSchema(colander.Schema):

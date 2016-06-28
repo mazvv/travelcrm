@@ -3,6 +3,7 @@
 import colander
 
 from . import(
+    SelectInteger,
     Date,
     ResourceSchema, 
     BaseForm,
@@ -10,7 +11,6 @@ from . import(
     ResourceSearchSchema,
     BaseAssignForm,
 )
-from .common import currency_validator
 from ..resources.incomes import IncomesResource
 from ..models.income import Income
 from ..models.invoice import Invoice
@@ -34,7 +34,7 @@ def account_item_validator(node, kw):
                 node,
                 _(u'Only revenue account item allowed'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 @colander.deferred
@@ -48,16 +48,16 @@ def invoice_validator(node, kw):
                 node,
                 _(u'Create company subaccount for account from invoice'),
             )
-    return colander.All(validator,)
+    return validator
 
 
 class _IncomeSchema(ResourceSchema):
     invoice_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Invoice),
         validator=invoice_validator
     )
     account_item_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(AccountItem),
         validator=account_item_validator
     )
     date = colander.SchemaNode(
@@ -84,9 +84,8 @@ class _IncomeSearchSchema(ResourceSearchSchema):
         missing=None
     )
     currency_id = colander.SchemaNode(
-        colander.String(),
+        colander.Integer(),
         missing=None,
-        validator=currency_validator,
     )
     payment_from = colander.SchemaNode(
         Date(),

@@ -4,6 +4,7 @@ import colander
 
 from . import(
     Date,
+    SelectInteger,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
@@ -14,6 +15,7 @@ from ..models.person import Person
 from ..models.contact import Contact
 from ..models.passport import Passport
 from ..models.address import Address
+from ..models.person_category import PersonCategory
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.persons import PersonsQueryBuilder
@@ -22,7 +24,7 @@ from ..lib.utils.security_utils import get_auth_employee
 
 class _PersonSchema(ResourceSchema):
     person_category_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(PersonCategory),
         missing=None,
     )
     first_name = colander.SchemaNode(

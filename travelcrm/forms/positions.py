@@ -3,6 +3,7 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
@@ -11,6 +12,7 @@ from . import(
 from ..resources.positions import PositionsResource
 from ..models import DBSession
 from ..models.position import Position
+from ..models.structure import Structure
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.positions import PositionsQueryBuilder
@@ -50,7 +52,7 @@ def name_validator(node, kw):
 
 class _PositionSchema(ResourceSchema):
     structure_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Structure),
     )
     name = colander.SchemaNode(
         colander.String(),

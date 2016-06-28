@@ -3,6 +3,7 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema, 
     BaseForm, 
     BaseSearchForm,
@@ -10,6 +11,8 @@ from . import (
 )
 from ..resources.hotels import HotelsResource
 from ..models.hotel import Hotel
+from ..models.hotelcat import Hotelcat
+from ..models.location import Location
 from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.hotels import HotelsQueryBuilder
@@ -22,11 +25,11 @@ class _HotelSchema(ResourceSchema):
         validator=colander.Length(max=32),
     )
     hotelcat_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Hotelcat),
     )
     location_id = colander.SchemaNode(
-        colander.Integer(),
-        missing=None
+        SelectInteger(Location),
+        missing=None,
     )
 
 

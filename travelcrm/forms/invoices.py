@@ -5,6 +5,7 @@ from datetime import timedelta
 import colander
 
 from . import (
+    SelectInteger,
     Date,
     ResourceSchema,
     ResourceSearchSchema,
@@ -12,7 +13,6 @@ from . import (
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import account_validator
 from ..resources.invoices import InvoicesResource
 from ..models import DBSession
 from ..models.invoice import Invoice
@@ -77,12 +77,11 @@ def order_id_validator(node, kw):
 
 class _InvoiceSchema(ResourceSchema):
     order_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Order),
         validator=order_id_validator
     )
     account_id = colander.SchemaNode(
-        colander.String(),
-        validator=account_validator,
+        SelectInteger(Account),
     )
     date = colander.SchemaNode(
         Date(),
@@ -247,8 +246,7 @@ class _InvoiceSumSchema(ResourceSchema):
         Date(),
     )
     account_id = colander.SchemaNode(
-        colander.String(),
-        validator=account_validator,
+        colander.Integer(),
     )
 
 

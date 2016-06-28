@@ -3,15 +3,16 @@
 import colander
 
 from . import(
+    SelectInteger,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import country_validator
 from ..resources.regions import RegionsResource
 from ..models import DBSession
 from ..models.region import Region
+from ..models.country import Country
 from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.regions import RegionsQueryBuilder
@@ -43,8 +44,7 @@ def name_validator(node, kw):
 
 class _RegionSchema(ResourceSchema):
     country_id = colander.SchemaNode(
-        colander.String(),
-        validator=country_validator
+        SelectInteger(Country),
     )
     name = colander.SchemaNode(
         colander.String(),

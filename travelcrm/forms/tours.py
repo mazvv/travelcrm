@@ -4,6 +4,7 @@ import colander
 
 from . import (
     Date,
+    SelectInteger,
 )
 from ..forms.orders_items import (
     OrderItemSchema, 
@@ -12,6 +13,13 @@ from ..forms.orders_items import (
 from ..resources.tours import ToursResource
 from ..models.tour import Tour
 from ..models.person import Person
+from ..models.location import Location
+from ..models.transport import Transport
+from ..models.hotel import Hotel
+from ..models.roomcat import Roomcat
+from ..models.foodcat import Foodcat
+from ..models.accomodation import Accomodation
+from ..models.transfer import Transfer
 from ..lib.utils.common_utils import cast_int
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.security_utils import get_auth_employee
@@ -39,16 +47,16 @@ class _TourSchema(OrderItemSchema):
         colander.Integer(),
     )
     start_location_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Location),
     )
     end_location_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Location),
     )
     start_transport_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Transport),
     )
     end_transport_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Transport),
     )
     start_additional_info = colander.SchemaNode(
         colander.String(),
@@ -67,22 +75,22 @@ class _TourSchema(OrderItemSchema):
         Date()
     )
     hotel_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Hotel),
     )
     accomodation_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Accomodation),
         missing=None
     )
     foodcat_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Foodcat),
         missing=None
     )
     roomcat_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Roomcat),
         missing=None
     )
     transfer_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Transfer),
         missing=None
     )
     descr = colander.SchemaNode(

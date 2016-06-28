@@ -3,28 +3,25 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema, 
     BaseForm, 
     BaseSearchForm
 )
-from .common import (
-    currency_validator,
-    bank_validator
-)
 from ..resources.banks_details import BanksDetailsResource
 from ..models.bank_detail import BankDetail
+from ..models.currency import Currency
+from ..models.bank import Bank
 from ..lib.qb.banks_details import BanksDetailsQueryBuilder
 from ..lib.utils.security_utils import get_auth_employee
 
 
 class _BankDetailSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
-        colander.String(),
-        validator=currency_validator
+        SelectInteger(Currency),
     )
     bank_id = colander.SchemaNode(
-        colander.String(),
-        validator=bank_validator
+        SelectInteger(Bank),
     )
     beneficiary = colander.SchemaNode(
         colander.String(),

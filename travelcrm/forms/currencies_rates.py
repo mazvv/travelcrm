@@ -3,17 +3,13 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
     ResourceSearchSchema,
-    DeferredAll, 
     Date,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
-)
-from .common import (
-    currency_validator as _currency_validator,
-    supplier_validator
 )
 from ..models.currency import Currency
 from ..models.supplier import Supplier
@@ -82,12 +78,11 @@ def rate_validator(node, kw):
 
 class _CurrencyRateSchema(ResourceSchema):
     currency_id = colander.SchemaNode(
-        colander.String(),
-        validator=DeferredAll(currency_validator, _currency_validator)
+        SelectInteger(Currency),
+        validator=currency_validator
     )
     supplier_id = colander.SchemaNode(
-        colander.String(),
-        validator=supplier_validator
+        SelectInteger(Supplier),
     )
     rate = colander.SchemaNode(
         colander.Money(),

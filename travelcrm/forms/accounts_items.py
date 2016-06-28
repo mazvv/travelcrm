@@ -3,14 +3,13 @@
 import colander
 
 from . import (
-    DeferredAll,
+    SelectInteger,
     ResourceSchema,
     ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import account_validator
 from ..resources.accounts_items import AccountsItemsResource
 from ..models.account_item import AccountItem
 from ..models.note import Note
@@ -52,8 +51,8 @@ def parent_validator(node, kw):
 
 class _AccountItemSchema(ResourceSchema):
     parent_id = colander.SchemaNode(
-        colander.Integer(),
-        validator=DeferredAll(parent_validator, account_validator),
+        SelectInteger(AccountItem),
+        validator=parent_validator,
         missing=None,
     )
     name = colander.SchemaNode(

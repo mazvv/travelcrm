@@ -3,17 +3,17 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
     BaseSearchForm,
 )
-from .common import service_validator
+from ..models.service import Service
 from ..lib.qb.invoices_items import InvoicesItemsQueryBuilder
 
 
 class _InvoiceItemSchema(ResourceSchema):
     service_id = colander.SchemaNode(
-        colander.String(),
-        validator=service_validator
+        SelectInteger(Service),
     )
     price = colander.SchemaNode(
         colander.Money()

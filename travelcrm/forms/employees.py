@@ -5,7 +5,6 @@ from pyramid_storage.extensions import IMAGES
 
 from . import(
     File,
-    Date,
     ResourceSchema, 
     BaseForm,
     BaseSearchForm,

@@ -3,6 +3,7 @@
 import colander
 
 from . import (
+    SelectInteger,
     Date,
     ResourceSchema,
     ResourceSearchSchema,
@@ -10,9 +11,10 @@ from . import (
     BaseSearchForm,
     BaseAssignForm,
 )
-from .common import currency_validator
 from ..resources.leads import LeadsResource
 from ..models.lead import Lead
+from ..models.person import Person
+from ..models.advsource import Advsource
 from ..models.note import Note
 from ..models.task import Task
 from ..models.lead_item import LeadItem
@@ -26,10 +28,10 @@ class _LeadSchema(ResourceSchema):
         Date()
     )
     customer_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Person),
     )
     advsource_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(Advsource),
     )
     status = colander.SchemaNode(
         colander.String(),
@@ -124,9 +126,8 @@ class _LeadSearchSchema(ResourceSearchSchema):
         missing=None,
     )
     currency_id = colander.SchemaNode(
-        colander.String(),
+        colander.Integer(),
         missing=None,
-        validator=currency_validator,
     )
     lead_from = colander.SchemaNode(
         Date(),
