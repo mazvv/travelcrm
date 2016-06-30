@@ -3,8 +3,9 @@
 import colander
 
 from . import (
+    SelectInteger,
     ResourceSchema,
-    ResourceSearchSchema, 
+    ResourceSearchSchema,
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
@@ -12,6 +13,7 @@ from . import (
 from ..resources.suppliers import SuppliersResource
 from ..models.supplier import Supplier
 from ..models.bperson import BPerson
+from ..models.supplier_type import SupplierType
 from ..models.bank_detail import BankDetail
 from ..models.note import Note
 from ..models.task import Task
@@ -51,7 +53,7 @@ class _SupplierSchema(ResourceSchema):
         colander.String(),
     )
     supplier_type_id = colander.SchemaNode(
-        colander.Integer(),
+        SelectInteger(SupplierType)
     )
     bperson_id = colander.SchemaNode(
         colander.Set(),
