@@ -16,7 +16,7 @@ from . import (
 from ..resources.crosspayments import CrosspaymentsResource
 from ..models.crosspayment import Crosspayment
 from ..models.subaccount import Subaccount
-from ..models.account import Account
+from ..models.account_item import AccountItem
 from ..models.cashflow import Cashflow
 from ..models.note import Note
 from ..models.task import Task
@@ -95,7 +95,7 @@ class _CrosspaymentSchema(ResourceSchema):
         missing=None,
     )
     account_item_id = colander.SchemaNode(
-        SelectInteger(Account),
+        SelectInteger(AccountItem),
     )
     sum = colander.SchemaNode(
         colander.Money(),
