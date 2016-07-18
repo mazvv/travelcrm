@@ -141,6 +141,29 @@ class SuppliersTypesView(BaseView):
             }
 
     @view_config(
+        name='copy',
+        request_method='GET',
+        renderer='travelcrm:templates/suppliers_types/form.mako',
+        permission='add'
+    )
+    def copy(self):
+        supplier_type = SupplierType.get_copy(self.request.params.get('id'))
+        return {
+            'action': self.request.path_url,
+            'item': supplier_type,
+            'title': self._get_title(_(u'Copy')),
+        }
+
+    @view_config(
+        name='copy',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
         name='delete',
         request_method='GET',
         renderer='travelcrm:templates/suppliers_types/delete.mako',

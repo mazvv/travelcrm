@@ -64,6 +64,10 @@
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'copy')}'">
+                    <span class="fa fa-copy"></span>${_(u'Copy')}
+                </a>
                 % endif
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger easyui-linkbutton _action" 

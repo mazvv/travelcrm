@@ -1,5 +1,8 @@
 # -*-coding: utf-8 -*-
 
+from datetime import datetime
+from pytz import timezone
+
 import colander
 
 from . import (
@@ -8,14 +11,34 @@ from . import (
     BaseForm,
     BaseSearchForm,
     BaseAssignForm,
+    SelectInteger,
     DateTime
 )
 from ..resources.tasks import TasksResource
 from ..models.upload import Upload
+from ..models.employee import Employee
 from ..models.task import Task
 from ..models.note import Note
 from ..lib.qb.tasks import TasksQueryBuilder
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.common_utils import get_timezone
+from ..lib.utils.common_utils import translate as _
+
+
+@colander.deferred
+def deadline_validator(node, kw):
+    request = kw.get('request')
+
+    def validator(node, value):
+        if (
+            not Task.get(request.params.get('id'))
+            and value <= datetime.now(tz=timezone(get_timezone()))
+        ):
+            raise colander.Invalid(
+                node,
+                _(u'Must be in the feature'),
+            )
+    return validator
 
 
 class _TaskSchema(ResourceSchema):
@@ -28,7 +51,11 @@ class _TaskSchema(ResourceSchema):
         validator=colander.Length(min=2, max=128)
     )
     deadline = colander.SchemaNode(
-        DateTime()
+        DateTime(),
+        validator=deadline_validator
+    )
+    maintainer_id = colander.SchemaNode(
+        SelectInteger(Employee),
     )
     reminder = colander.SchemaNode(
         colander.Integer(),

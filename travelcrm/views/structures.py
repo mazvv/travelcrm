@@ -136,8 +136,9 @@ class StructuresView(BaseView):
         permission='add'
     )
     def copy(self):
-        structure = Structure.get(self.request.params.get('id'))
+        structure = Structure.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'title': self._get_title(_(u'Copy')),
             'item': structure,
         }

@@ -119,8 +119,11 @@ class SpassportsView(BaseView):
     )
     def copy(self):
         order_item = OrderItem.get(self.request.params.get('id'))
+        spassport = Spassport.get_copy(order_item.spassport.id)
+        spassport.order_item = order_item
         return {
-            'item': order_item.spassport,
+            'action': self.request.path_url,
+            'item': spassport,
             'title': self._get_title(_(u'Copy')),
         }
 

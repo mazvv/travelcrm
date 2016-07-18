@@ -148,8 +148,9 @@ class ResourcesTypesView(BaseView):
         permission='add'
     )
     def copy(self):
-        resources_type = ResourceType.get(self.request.params.get('id'))
+        resources_type = ResourceType.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': resources_type,
             'title': self._get_title(_(u'Copy')),
         }

@@ -141,6 +141,29 @@ class TransportsView(BaseView):
             }
 
     @view_config(
+        name='copy',
+        request_method='GET',
+        renderer='travelcrm:templates/transports/form.mako',
+        permission='add'
+    )
+    def copy(self):
+        transport = Transport.get_copy(self.request.params.get('id'))
+        return {
+            'action': self.request.path_url,
+            'item': transport,
+            'title': self._get_title(_(u'Copy')),
+        }
+
+    @view_config(
+        name='copy',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
         name='delete',
         request_method='GET',
         renderer='travelcrm:templates/transports/delete.mako',

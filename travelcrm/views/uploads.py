@@ -147,8 +147,9 @@ class UploadsView(BaseView):
         permission='add'
     )
     def copy(self):
-        upload = Upload.get(self.request.params.get('id'))
+        upload = Upload.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': upload,
             'title': self._get_title(_(u'Copy')),
         }

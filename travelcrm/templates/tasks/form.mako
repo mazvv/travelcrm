@@ -9,7 +9,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(
-        request.url, 
+        action or request.url, 
         class_="_ajax %s" % ('readonly' if readonly else ''), 
         autocomplete="off",
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]
@@ -33,7 +33,11 @@
                         ${h.fields.employees_combogrid_field(
                         	request,
                         	'maintainer_id',
-                        	value=item.resource.maintainer_id if item else h.common.get_auth_employee(request).id, 
+                        	value=(
+                                item.resource.maintainer_id
+                                if item and item.resource else 
+                                h.common.get_auth_employee(request).id
+                            ), 
                         	show_toolbar=False
                         )}
                         ${h.common.error_container(name='maintainer_id')}

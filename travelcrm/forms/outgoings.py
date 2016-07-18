@@ -7,7 +7,7 @@ import colander
 from . import(
     Date,
     SelectInteger,
-    ResourceSchema, 
+    ResourceSchema,
     BaseForm,
     BaseSearchForm,
     ResourceSearchSchema,

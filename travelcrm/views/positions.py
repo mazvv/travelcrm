@@ -147,8 +147,9 @@ class PositionsView(BaseView):
         permission='add'
     )
     def copy(self):
-        position = Position.get(self.request.params.get('id'))
+        position = Position.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': position,
             'title': self._get_title(_(u'Copy')),
         }

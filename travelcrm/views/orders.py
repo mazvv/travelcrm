@@ -156,8 +156,9 @@ class OrdersView(BaseView):
         permission='add'
     )
     def copy(self):
-        order = Order.get(self.request.params.get('id'))
+        order = Order.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': order,
             'title': self._get_title(_(u'Copy')),
         }

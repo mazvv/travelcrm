@@ -146,8 +146,9 @@ class CurrenciesRatesView(BaseView):
         permission='add'
     )
     def copy(self):
-        currency_rate = CurrencyRate.get(self.request.params.get('id'))
+        currency_rate = CurrencyRate.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': currency_rate,
             'title': self._get_title(_(u'Copy')),
         }

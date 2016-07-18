@@ -146,8 +146,9 @@ class ContactsView(BaseView):
         permission='add'
     )
     def copy(self):
-        contact = Contact.get(self.request.params.get('id'))
+        contact = Contact.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': contact,
             'title': self._get_title(_(u'Copy')),
         }

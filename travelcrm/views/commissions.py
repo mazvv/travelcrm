@@ -146,8 +146,9 @@ class CommissionsView(BaseView):
         permission='add'
     )
     def copy(self):
-        commission = Commission.get(self.request.params.get('id'))
+        commission = Commission.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': commission,
             'title': self._get_title(_(u'Copy')),
         }

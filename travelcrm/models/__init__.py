@@ -3,11 +3,13 @@
 import datetime
 
 from sqlalchemy.orm import (
+    make_transient,
     scoped_session,
     sessionmaker,
 )
 from sqlalchemy.ext.declarative import declarative_base
 from zope.sqlalchemy import ZopeTransactionExtension
+
 
 DBSession = scoped_session(
     sessionmaker(
@@ -16,7 +18,20 @@ DBSession = scoped_session(
     ),
 )
 
-Base = declarative_base()
+
+class _BaseCls(object):
+    @classmethod
+    def get_copy(cls, id):
+        inst = cls.get(id)
+        if not inst:
+            return inst
+        DBSession.expunge(inst)
+        make_transient(inst)
+        inst.id = None
+        return inst
+
+
+Base = declarative_base(cls=_BaseCls)
 
 from resource_type import ResourceType
 from resource import Resource

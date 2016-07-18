@@ -146,8 +146,9 @@ class PassportsView(BaseView):
         permission='add'
     )
     def copy(self):
-        passport = Passport.get(self.request.params.get('id'))
+        passport = Passport.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': passport,
             'title': self._get_title(_(u'Copy')),
         }

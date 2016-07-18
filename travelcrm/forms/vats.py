@@ -19,6 +19,7 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.vats import VatsQueryBuilder
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.common_utils import translate as _
 
 
 @colander.deferred

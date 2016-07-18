@@ -145,8 +145,9 @@ class AppointmentsView(BaseView):
         permission='add'
     )
     def copy(self):
-        resources_type = Appointment.get(self.request.params.get('id'))
+        resources_type = Appointment.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': resources_type,
             'title': self._get_title(_(u'Copy')),
         }

@@ -3,7 +3,6 @@
 import logging
 
 from pyramid.view import view_config, view_defaults
-from pyramid.renderers import render
 
 from . import BaseView
 from ..lib.utils.common_utils import serialize

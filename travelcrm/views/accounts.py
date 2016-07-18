@@ -140,6 +140,29 @@ class AccountsView(BaseView):
             }
 
     @view_config(
+        name='copy',
+        request_method='GET',
+        renderer='travelcrm:templates/accounts/form.mako',
+        permission='add'
+    )
+    def copy(self):
+        account = Account.get_copy(self.request.params.get('id'))
+        return {
+            'action': self.request.path_url,
+            'item': account,
+            'title': self._get_title(_(u'Copy')),
+        }
+
+    @view_config(
+        name='copy',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
         name='delete',
         request_method='GET',
         renderer='travelcrm:templates/accounts/delete.mako',

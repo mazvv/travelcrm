@@ -25,7 +25,7 @@ def make_payment(outgoing):
             Cashflow(
                 subaccount_from_id=company_subaccount.id,
                 subaccount_to_id=subaccount.id,
-#                 account_item_id=outgoing.account_item_id,
+                #account_item_id=outgoing.account_item_id,
                 sum=transfer_amount,
                 date=outgoing.date,
             )

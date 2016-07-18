@@ -11,7 +11,7 @@ from ..models.crosspayment import Crosspayment
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.crosspayments import (
-    CrosspaymentForm, 
+    CrosspaymentForm,
     CrosspaymentSearchForm,
     CrosspaymentAssignForm,
 )
@@ -148,7 +148,11 @@ class CrosspaymentsView(BaseView):
     )
     def copy(self):
         crosspayment = Crosspayment.get(self.request.params.get('id'))
+        cashflow = crosspayment.cashflow
+        crosspayment = Crosspayment.get_copy(self.request.params.get('id'))
+        crosspayment.cashflow = cashflow
         return {
+            'action': self.request.path_url,
             'item': crosspayment,
             'title': self._get_title(_(u'Copy')),
         }

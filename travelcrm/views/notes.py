@@ -147,8 +147,9 @@ class NotesView(BaseView):
         permission='add'
     )
     def copy(self):
-        note = Note.get(self.request.params.get('id'))
+        note = Note.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': note,
             'title': self._get_title(_(u'Copy')),
         }

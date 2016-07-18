@@ -146,8 +146,9 @@ class AddressesView(BaseView):
         permission='add'
     )
     def copy(self):
-        address = Address.get(self.request.params.get('id'))
+        address = Address.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': address,
             'title': self._get_title(_(u'Copy')),
         }

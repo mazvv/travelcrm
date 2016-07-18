@@ -121,8 +121,11 @@ class VisasView(BaseView):
     )
     def copy(self):
         order_item = OrderItem.get(self.request.params.get('id'))
+        visa = Visa.get_copy(order_item.visa.id)
+        visa.order_item = order_item
         return {
-            'item': order_item.visa,
+            'action': self.request.path_url,
+            'item': visa,
             'title': self._get_title(_(u'Copy')),
         }
 

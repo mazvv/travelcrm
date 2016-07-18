@@ -120,6 +120,7 @@ class PermisionsView(BaseView):
     def copy(self):
         position = Position.get(self.request.params.get('position_id'))
         return {
+            'action': self.request.path_url,
             'position': position,
             'title': self._get_title(_(u'Copy')),
         }

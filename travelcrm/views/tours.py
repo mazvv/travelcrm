@@ -121,8 +121,11 @@ class ToursView(BaseView):
     )
     def copy(self):
         order_item = OrderItem.get(self.request.params.get('id'))
+        tour = Tour.get_copy(order_item.tour.id)
+        tour.order_item = order_item
         return {
-            'item': order_item.tour,
+            'action': self.request.path_url,
+            'item': tour,
             'title': self._get_title(_(u'Copy')),
         }
 

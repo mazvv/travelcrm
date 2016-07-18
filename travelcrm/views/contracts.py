@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.contract import Contract
+from ..lib.bl.contracts import get_contract_copy
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.contracts import (
@@ -147,8 +148,11 @@ class ContractsView(BaseView):
         permission='add'
     )
     def copy(self):
-        contract = Contract.get(self.request.params.get('id'))
+        contract = get_contract_copy(
+            self.request.params.get('id'), self.request
+        )
         return {
+            'action': self.request.path_url,
             'item': contract,
             'title': self._get_title(_(u'Copy')),
         }

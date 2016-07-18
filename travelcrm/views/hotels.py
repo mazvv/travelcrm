@@ -147,8 +147,9 @@ class HotelsView(BaseView):
         permission='add'
     )
     def copy(self):
-        hotel = Hotel.get(self.request.params.get('id'))
+        hotel = Hotel.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': hotel,
             'title': self._get_title(_(u'Copy')),
         }

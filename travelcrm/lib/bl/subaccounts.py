@@ -86,3 +86,29 @@ def get_company_subaccount(account_id):
     return get_subaccount_by_source_resource_id(
         maintainer_structure.company.resource.id, account_id,
     )
+
+
+def get_subaccount_copy(subaccount_id, request):
+    contract = Contract.get(contract_id)
+    supplier = contract.supplier
+
+    commissions = []
+    for commission in list(contract.commissions):
+        commission = Commission.get_copy(commission.id)
+        resource = CommissionsResource.create_resource(
+            get_auth_employee(request)
+        )        
+        DBSession.add(resource)
+        DBSession.flush([resource,])
+        commission.resource = resource
+        commissions.append(commission)
+    DBSession.add_all(commissions)
+    DBSession.flush(commissions)
+
+    contract = Contract.get_copy(contract.id)
+    if not contract:
+        return
+
+    contract.supplier = supplier
+    contract.commissions = commissions
+    return contract

@@ -147,8 +147,9 @@ class LocationsView(BaseView):
         permission='add'
     )
     def copy(self):
-        location = Location.get(self.request.params.get('id'))
+        location = Location.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': location,
             'title': self._get_title(_(u'Copy')),
         }

@@ -57,6 +57,12 @@
                 </div>
             </div>
             <div id="_dialog_"></div>
+            <div id="_progress_" class="easyui-dialog"
+                data-options="title:'${_(u'In Progress')}',modal:true,closed:true,closable:false">
+                <div class="dl30 tc mt1 mb1">
+                    <span class="fa fa-spinner fa-spin"></span> ${_(u'Please, wait ...')}
+                </div>
+            </div>
         </div>
         <div id="_footer_">
             <div class="main">

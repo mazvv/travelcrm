@@ -121,8 +121,11 @@ class TicketsView(BaseView):
     )
     def copy(self):
         order_item = OrderItem.get(self.request.params.get('id'))
+        ticket = Ticket.get_copy(order_item.ticket.id)
+        ticket.order_item = order_item
         return {
-            'item': order_item.ticket,
+            'action': self.request.path_url,
+            'item': ticket,
             'title': self._get_title(_(u'Copy')),
         }
 

@@ -146,8 +146,9 @@ class LeadsOffersView(BaseView):
         permission='add'
     )
     def copy(self):
-        lead_offer = LeadOffer.get(self.request.params.get('id'))
+        lead_offer = LeadOffer.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': lead_offer,
             'title': self._get_title(_(u'Copy')),
         }

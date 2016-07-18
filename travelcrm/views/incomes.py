@@ -147,8 +147,9 @@ class IncomesView(BaseView):
         permission='add'
     )
     def copy(self):
-        income = Income.get(self.request.params.get('id'))
+        income = Income.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': income,
             'title': self._get_title(_(u'Copy')),
         }

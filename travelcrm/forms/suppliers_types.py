@@ -29,7 +29,7 @@ def name_validator(node, kw):
         ):
             raise colander.Invalid(
                 node,
-                _(u'Hotel category with the same name exists'),
+                _(u'Supplier type with the same name exists'),
             )
     return colander.All(colander.Length(max=32), validator,)
 

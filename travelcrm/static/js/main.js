@@ -347,10 +347,12 @@ function get_container_type(container){
 }
 
 function _dialog_open(url){
+	//$('#_progress_').dialog('open');
 	$('#_dialog_').load(url,
 		function(data){
 			data = disable_inputs(data);
 			$('#_dialog_').html(data);
+			//$('#_progress_').dialog('close');
 			$.parser.parse('#_dialog_');
 		}
 	);

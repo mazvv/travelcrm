@@ -146,8 +146,9 @@ class BPersonsView(BaseView):
         permission='add'
     )
     def copy(self):
-        bperson = BPerson.get(self.request.params.get('id'))
+        bperson = BPerson.get_copy(self.request.params.get('id'))
         return {
+            'action': self.request.path_url,
             'item': bperson,
             'title': self._get_title(_(u'Copy')),
         }

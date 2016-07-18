@@ -10,7 +10,7 @@ from ..resources.orders import OrdersResource
 from ..models import DBSession
 from ..models.lead import Lead
 from ..lib.utils.common_utils import translate as _
-
+from ..lib.bl.leads import get_lead_copy
 from ..forms.leads import (
     LeadForm, 
     LeadSearchForm,
@@ -157,8 +157,9 @@ class LeadsView(BaseView):
         permission='add'
     )
     def copy(self):
-        lead = Lead.get(self.request.params.get('id'))
+        lead = get_lead_copy(self.request.params.get('id'), self.request)
         return {
+            'action': self.request.path_url,
             'item': lead,
             'title': self._get_title(_(u'Copy')),
         }

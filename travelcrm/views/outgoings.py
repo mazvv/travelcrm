@@ -13,7 +13,7 @@ from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.outgoings import (
-    OutgoingForm, 
+    OutgoingForm,
     OutgoingSearchForm,
     OutgoingAssignForm,
 )
@@ -157,7 +157,11 @@ class OutgoingsView(BaseView):
     )
     def copy(self):
         outgoing = Outgoing.get(self.request.params.get('id'))
+        account_item = outgoing.account_item
+        outgoing = Outgoing.get_copy(self.request.params.get('id'))
+        outgoing.account_item = account_item
         return {
+            'action': self.request.path_url,
             'item': outgoing,
             'title': self._get_title(_(u'Copy')),
         }

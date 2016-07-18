@@ -9,7 +9,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(
-        request.url, 
+        action or request.url, 
         class_="_ajax %s" % ('readonly' if readonly else ''), 
         autocomplete="off",
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]
@@ -85,8 +85,8 @@
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(
                         values=(
-                            [note.id for note in item.resource.notes]
-                            if item and item.resource else []
+                            [note.id for note in item.resource_obj.notes]
+                            if item and item.resource_obj else []
                         ),
                         can_edit=(
                             not (readonly if readonly else False) and 
@@ -99,8 +99,8 @@
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${task_selector(
                         values=(
-                            [task.id for task in item.resource.tasks]
-                            if item and item.resource else []
+                            [task.id for task in item.resource_obj.tasks]
+                            if item and item.resource_obj else []
                         ),
                         can_edit=(
                             not (readonly if readonly else False) and 

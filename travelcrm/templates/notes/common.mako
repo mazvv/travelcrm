@@ -95,6 +95,11 @@
                     ${_(u"Add")}</a>
                 <a href="#" class="button easyui-linkbutton _action" 
                     data-options="
+                        container:'#${_id}',action:'dialog_open',url:'/notes/copy',property:'with_row'
+                    ">
+                    ${_(u"Copy")}</a>
+                <a href="#" class="button easyui-linkbutton _action" 
+                    data-options="
                         container:'#${_id}',action:'dialog_open',url:'/notes/edit',property:'with_row'
                     ">
                     ${_(u"Edit")}</a>

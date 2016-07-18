@@ -139,6 +139,29 @@ class DismissalsView(BaseView):
             }
 
     @view_config(
+        name='copy',
+        request_method='GET',
+        renderer='travelcrm:templates/dismissals/form.mako',
+        permission='add'
+    )
+    def copy(self):
+        dismissal = Dismissal.get_copy(self.request.params.get('id'))
+        return {
+            'action': self.request.path_url,
+            'item': dismissal,
+            'title': self._get_title(_(u'Copy')),
+        }
+
+    @view_config(
+        name='copy',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _copy(self):
+        return self._add()
+
+    @view_config(
         name='delete',
         request_method='GET',
         renderer='travelcrm:templates/dismissals/delete.mako',

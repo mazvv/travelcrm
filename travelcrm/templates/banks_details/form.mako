@@ -7,7 +7,7 @@
         iconCls:'fa fa-pencil-square-o'
     ">
     ${h.tags.form(
-        request.url, 
+        action or request.url, 
         class_="_ajax %s" % ('readonly' if readonly else ''), 
         autocomplete="off",
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]

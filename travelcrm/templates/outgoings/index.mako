@@ -27,7 +27,7 @@
             onExpandRow: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 $('#' + row_id).load(
-                    '/outgoings/details?id=' + row.id, 
+                    '/outgoings/details?id=' + row.id,
                     function(){
                         $('#${_id}').datagrid('fixDetailRowHeight', index);
                         $('#${_id}').datagrid('fixRowHeight', index);
@@ -38,7 +38,7 @@
             detailFormatter: function(index, row){
                 var row_id = 'row-${_id}-' + row.id;
                 return '<div id=' + row_id + '></div>';
-            },          
+            },
             onBeforeLoad: function(param){
                 var dg = $(this);
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
@@ -65,7 +65,7 @@
     <div class="datagrid-toolbar" id="${_tb_id}">
         <div class="actions button-container dl50">
             % if _context.has_permision('add'):
-            <a href="#" class="button primary easyui-linkbutton _action" 
+            <a href="#" class="button primary easyui-linkbutton _action"
                 data-options="container:'#${_id}',action:'dialog_open',url:'${request.resource_url(_context, 'add')}'">
                 <span class="fa fa-plus"></span>${_(u'Add New')}
             </a>
@@ -94,7 +94,7 @@
                 </a>
                 % endif
                 % if _context.has_permision('delete'):
-                <a href="#" class="button danger easyui-linkbutton _action" 
+                <a href="#" class="button danger easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
                     <span class="fa fa-times"></span>${_(u'Delete')}
                 </a>
