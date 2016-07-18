@@ -96,14 +96,46 @@
 </%def>
 
 
-<%def name="commission_list_details(commission)">
-    <span class="mr05">${commission.service.name}</span>
-    <%
-        data = []
-        if commission.percentage:
-            data.append('%s %%' % commission.percentage)
-        if commission.price:
-            data.append('%s %s' % (commission.currency.iso_code, commission.price))
-    %>
-    ${' + '.join(data)}
+<%def name="commission_list_details(commissions)">
+    <div class="dp100">
+        <div class="dp15 b">
+            ${_(u'services')}
+        </div>
+        <div class="dp85">
+            <div class="dp100">
+                <div class="b dp40">${_(u'service')}</div>
+                <div class="b dp20">${_(u'percentage')}</div>
+                <div class="b dp20">${_(u'price')}</div>
+                <div class="b dp20">${_(u'currency')}</div>
+            </div>
+            % for commission in commissions:
+            <div class="dp100">
+                <div class="dp40">
+                    ${commission.service.name}
+                </div>
+                <div class="dp20">
+                    % if commission.percentage:
+                        ${h.common.format_decimal(commission.percentage)}
+                    % else:
+                        &nbsp;
+                    % endif
+                </div>
+                <div class="dp20">
+                    % if commission.price:
+                        ${h.common.format_decimal(commission.price)}
+                    % else:
+                        &nbsp;
+                    % endif
+                </div>
+                <div class="dp20">
+                    % if commission.currency:
+                        ${commission.currency.iso_code}
+                    % else:
+                        &nbsp;
+                    % endif
+                </div>
+            </div>
+            % endfor
+        </div>
+    </div>
 </%def>

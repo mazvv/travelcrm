@@ -22,7 +22,9 @@ def _task_notification(task_id):
     with transaction.manager:
         task = Task.get(task_id)
         if task:
-            employee_structure = get_employee_structure(task.employee)
+            employee_structure = get_employee_structure(
+                task.resource.maintainer
+            )
             notification = Notification(
                 title=task.title,
                 descr=task.title,
