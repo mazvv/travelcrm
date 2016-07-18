@@ -87,6 +87,7 @@ class LeadItem(Base):
             lazy='dynamic',
             uselist=True,
         ),
+        cascade="all,delete",
         uselist=False,
     )
     service = relationship(

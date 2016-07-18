@@ -23,6 +23,21 @@
             rownumbers:true,sortName:'id',sortOrder:'desc',
             pageList:[50,100,500],idField:'_id',checkOnSelect:false,
             selectOnCheck:false,toolbar:'#${_tb_id}',
+            view: detailview,
+            onExpandRow: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                $('#' + row_id).load(
+                    '/appointments/details?id=' + row.id, 
+                    function(){
+                        $('#${_id}').datagrid('fixDetailRowHeight', index);
+                        $('#${_id}').datagrid('fixRowHeight', index);
+                    }
+                );
+            },
+            detailFormatter: function(index, row){
+                var row_id = 'row-${_id}-' + row.id;
+                return '<div id=' + row_id + '></div>';
+            },
             onBeforeLoad: function(param){
                 var dg = $(this);
                 $.each($('#${_s_id}, #${_tb_id} .searchbar').find('input'), function(i, el){
@@ -38,7 +53,6 @@
             <th data-options="field:'employee_name',sortable:true,width:150">${_(u"employee")}</th>
             <th data-options="field:'date',sortable:true,width:80">${_(u"date")}</th>
             <th data-options="field:'position_name',sortable:true,width:150">${_(u"position")}</th>
-            <th data-options="field:'structure_path',sortable:true,width:200,formatter:function(value,row,index){return (value)?value.join(' &rarr; '):'';}">${_(u"structure")}</th>
             <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
             <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
         </thead>
@@ -63,10 +77,6 @@
                 <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
-                </a>
-                <a href="#" class="button easyui-linkbutton _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'copy')}'">
-                    <span class="fa fa-copy"></span>${_(u'Copy')}
                 </a>
                 % endif
                 % if _context.has_permision('assign'):

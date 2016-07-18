@@ -9,6 +9,7 @@ from sqlalchemy import (
     func
 )
 from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import make_transient
 
 from ..models import (
     DBSession,
@@ -94,6 +95,15 @@ class Appointment(Base):
     )
     position = relationship(
         'Position',
+        backref=backref(
+            'appointments',
+            uselist=True,
+            lazy='dynamic'
+        ),
+        uselist=False
+    )
+    currency = relationship(
+        'Currency',
         backref=backref(
             'appointments',
             uselist=True,

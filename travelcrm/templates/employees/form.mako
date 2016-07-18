@@ -132,7 +132,10 @@
             <div title="${_(u'Notes')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(
-                        values=([note.id for note in item.resource.notes] if item else []),
+                        values=(
+                            [note.id for note in item.resource.notes]
+                            if item and item.resource else []
+                        ),
                         can_edit=(
                             not (readonly if readonly else False) and 
                             (_context.has_permision('add') if item else _context.has_permision('edit'))
@@ -143,7 +146,10 @@
             <div title="${_(u'Tasks')}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${task_selector(
-                        values=([task.id for task in item.resource.tasks] if item else []),
+                        values=(
+                            [task.id for task in item.resource.tasks]
+                            if item and item.resource else []
+                        ),
                         can_edit=(
                             not (readonly if readonly else False) and 
                             (_context.has_permision('add') if item else _context.has_permision('edit'))

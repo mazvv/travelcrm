@@ -73,7 +73,7 @@
                 <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
             <th data-options="field:'id',sortable:true,width:50">${_(u"id")}</th>
-            <th data-options="field:'service',sortable:true,width:100">${_(u"service")}</th>
+            <th data-options="field:'service',sortable:true,width:200">${_(u"service")}</th>
             <th data-options="field:'price_from',sortable:true,width:80">${_(u"price from")}</th>
             <th data-options="field:'price_to',sortable:true,width:80">${_(u"price to")}</th>
             <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
