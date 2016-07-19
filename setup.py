@@ -57,7 +57,7 @@ requires = [
 
 setup(
     name='travelcrm',
-    version='0.6.4-dev3',
+    version='0.6.4-beta',
     description='travelcrm',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
