@@ -182,6 +182,6 @@ def get_public_subdomain():
     
 def get_multicompanies():
     settings = get_settings()
-    return int(settings.get('multicompanies'))
+    return cast_int(settings.get('multicompanies'))
 
     

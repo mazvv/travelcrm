@@ -1,12 +1,16 @@
+#-*-coding: utf-8
 import logging
+import copy
+from datetime import datetime, timedelta
 
 from pyramid.security import forget
-from pyramid.httpexceptions import HTTPNotFound, HTTPFound
+from pyramid.httpexceptions import HTTPNotFound, HTTPFound, HTTPForbidden
 
 from ...lib import helpers as h
 from ...resources import Root
+from ...models import DBSession
 from ..utils.common_utils import translate as _
-from ..utils.common_utils import get_multicompanies
+from ..utils.common_utils import get_multicompanies, cast_int
 from ..bl.employees import get_employee_structure
 from ..scheduler import start_scheduler  
 from ..utils.security_utils import get_auth_employee
@@ -38,7 +42,51 @@ def _company_settings(request, company):
         }
         request.registry.settings.update(settings)
 
+
+def _check_ip_control(request, company):
+    """check the possibility to make request from current IP
+    """
+    settings = request.registry.settings
+    if not cast_int(settings.get('limits.enabled', 0)):
+        return
+
+    ip_limit = cast_int(company.settings.get('ip_limit'))
+    if not ip_limit:
+        return
+
+    ips = company.settings.get('ips', [])
     
+    new_ips = []
+    timeout = cast_int(settings.get('limits.timeout', 300))
+    ip_already_in = False
+    dt_format = '%Y-%m-%dT%H:%M:%S'
+    for ip, last_activity in ips:
+        last_activity = datetime.strptime(last_activity, dt_format)
+        if (
+            (last_activity + timedelta(seconds=timeout)) <= datetime.now()
+            and ip != request.client_addr
+        ):
+            continue
+        elif ip == request.client_addr:
+            new_ips.append((ip, datetime.now().strftime(dt_format)))
+            ip_already_in = True
+        else:
+            new_ips.append((ip, last_activity.strftime(dt_format)))
+
+    if len(new_ips) >= ip_limit and not ip_already_in:
+        log.error(_(u'IP limit exceeded'))
+        redirect_url = request.resource_url(Root(request))
+        raise HTTPFound(location=redirect_url, headers=forget(request))
+    
+    if not ip_already_in:
+        new_ips.append(
+            (request.client_addr, datetime.now().strftime(dt_format))
+        )
+    settings = copy.copy(company.settings)
+    settings['ips'] = new_ips
+    company.settings = settings
+
+
 def company_settings(event):
     request = event.request
     employee = get_auth_employee(request)
@@ -49,6 +97,7 @@ def company_settings(event):
     if not structure:
         redirect_url = request.resource_url(Root(request))
         raise HTTPFound(location=redirect_url, headers=forget(request))
+    _check_ip_control(request, structure.company)
     _company_settings(request, structure.company)
 
 
