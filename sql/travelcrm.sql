@@ -29306,6 +29306,8 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 16	1570	56	4	Intertelecom Internet Service Provider	9878723847	84758GH
 18	2120	57	4	sdghsdgh	sghsgh	dfghdfhgdfh
 19	2486	57	5	ghgh	ggh	hghg
+20	3639	56	4	SDfasdf	sdfasdf	asdfasdfasdf
+21	3640	56	4	SDfasdf	sdfasdf	asdfasdfasdf
 \.
 
 
@@ -29313,7 +29315,7 @@ COPY bank_detail (id, resource_id, currency_id, bank_id, beneficiary, account, s
 -- Name: bank_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('bank_detail_id_seq', 19, true);
+SELECT pg_catalog.setval('bank_detail_id_seq', 21, true);
 
 
 --
@@ -29361,7 +29363,7 @@ COPY bperson_contact (bperson_id, contact_id) FROM stdin;
 -- Name: bperson_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('bperson_id_seq', 10, true);
+SELECT pg_catalog.setval('bperson_id_seq', 11, true);
 
 
 --
@@ -29434,6 +29436,7 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 104	2870	2091.66	46	60
 105	2871	15.92	47	61
 106	2903	1663.20	48	58
+107	3687	1223.95	54	65
 \.
 
 
@@ -29441,7 +29444,7 @@ COPY calculation (id, resource_id, price, order_item_id, contract_id) FROM stdin
 -- Name: calculation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('calculation_id_seq', 106, true);
+SELECT pg_catalog.setval('calculation_id_seq', 107, true);
 
 
 --
@@ -29483,6 +29486,11 @@ COPY cashflow (id, subaccount_from_id, subaccount_to_id, account_item_id, sum, d
 265	26	\N	18	1600.00	2016-01-02	\N
 266	20	27	\N	760.35	2016-01-02	\N
 267	27	\N	36	760.35	2016-01-02	\N
+271	\N	28	16	34006.98	2016-07-18	404.85
+272	28	19	\N	34006.98	2016-07-18	\N
+280	19	23	\N	45000.00	2016-07-18	\N
+281	23	\N	18	30000.00	2016-07-18	\N
+284	23	\N	18	2000.00	2016-07-18	\N
 \.
 
 
@@ -29506,6 +29514,15 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 48	2726	4	0.00	3.00	54	
 49	2833	5	8.50	330.00	56	
 50	2852	1	0.00	10.00	57	
+53	3642	1	0.00	10.00	57	
+54	3643	1	0.00	10.00	57	
+55	3645	1	0.00	10.00	57	
+56	3647	5	11.00	5.00	54	
+57	3648	4	0.00	3.00	54	
+58	3668	1	0.00	12.00	57	
+59	3669	5	9.00	0.00	56	
+60	3670	7	5.00	2.00	54	
+61	3671	4	0.00	20.00	54	
 \.
 
 
@@ -29513,7 +29530,7 @@ COPY commission (id, resource_id, service_id, percentage, price, currency_id, de
 -- Name: commission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('commission_id_seq', 50, true);
+SELECT pg_catalog.setval('commission_id_seq', 61, true);
 
 
 --
@@ -29535,7 +29552,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	LuxTravel, Inc	56	{"locale": "en", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
+1	1970	Lux Travel Inc.	56	{"locale": "en", "timezone": "Europe/Kiev", "ip_limit": 1, "ips": [["127.0.0.1", "2016-07-19T13:46:21"]]}	lux.travel@gmai.com
 \.
 
 
@@ -29636,6 +29653,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 102	elineckiy@gavab.com	2878	1		0
 103	+380976868681	2880	0		0
 104	+380670987654	2891	0		0
+105	+380681234567	3675	0		0
 \.
 
 
@@ -29643,7 +29661,7 @@ COPY contact (id, contact, resource_id, contact_type, descr, status) FROM stdin;
 -- Name: contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('contact_id_seq', 104, true);
+SELECT pg_catalog.setval('contact_id_seq', 105, true);
 
 
 --
@@ -29665,6 +29683,8 @@ COPY contract (id, resource_id, date, num, descr, status) FROM stdin;
 60	2834	2016-01-01	TT-000139	New Tez Tour Contract	0
 56	2540	2015-01-05	0987-97	Contract with teztour	1
 61	2853	2016-01-01	TT-00154		0
+64	3646	2016-01-01	TT-00154		0
+65	3672	2016-07-01	TT-00155		0
 \.
 
 
@@ -29688,6 +29708,11 @@ COPY contract_commission (contract_id, commission_id) FROM stdin;
 59	48
 60	49
 61	50
+64	55
+65	60
+65	61
+65	59
+65	58
 \.
 
 
@@ -29735,7 +29760,7 @@ COPY crosspayment (id, resource_id, cashflow_id, descr) FROM stdin;
 -- Name: crosspayment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('crosspayment_id_seq', 10, true);
+SELECT pg_catalog.setval('crosspayment_id_seq', 11, true);
 
 
 --
@@ -29779,6 +29804,8 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 31	2723	2015-07-22	57	23.98	101
 33	2841	2016-01-01	54	28.30	87
 32	2835	2016-01-01	57	25.70	87
+34	3673	2016-07-18	54	28.60	87
+35	3674	2016-07-18	57	25.80	87
 \.
 
 
@@ -29786,7 +29813,7 @@ COPY currency_rate (id, resource_id, date, currency_id, rate, supplier_id) FROM 
 -- Name: currency_rate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('currency_rate_id_seq', 33, true);
+SELECT pg_catalog.setval('currency_rate_id_seq', 35, true);
 
 
 --
@@ -29801,7 +29828,7 @@ COPY dismissal (id, resource_id, date, employee_id) FROM stdin;
 -- Name: dismissal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('dismissal_id_seq', 3, true);
+SELECT pg_catalog.setval('dismissal_id_seq', 5, true);
 
 
 --
@@ -29851,7 +29878,7 @@ COPY employee_contact (employee_id, contact_id) FROM stdin;
 -- Name: employee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('employee_id_seq', 33, true);
+SELECT pg_catalog.setval('employee_id_seq', 34, true);
 
 
 --
@@ -29905,7 +29932,7 @@ COPY employee_upload (employee_id, upload_id) FROM stdin;
 -- Name: employees_appointments_h_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('employees_appointments_h_id_seq', 12, true);
+SELECT pg_catalog.setval('employees_appointments_h_id_seq', 17, true);
 
 
 --
@@ -29973,6 +30000,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 39	2375	5	Radisson Blu Resort & Spa	39
 40	2675	4	Frangiorgio Hotel Apartments	40
 41	2897	5	Bodrum Butick Royal	41
+42	3682	5	CRYSTAL PARAISO VERDE RESORT	42
 \.
 
 
@@ -29980,7 +30008,7 @@ COPY hotel (id, resource_id, hotelcat_id, name, location_id) FROM stdin;
 -- Name: hotel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('hotel_id_seq', 41, true);
+SELECT pg_catalog.setval('hotel_id_seq', 42, true);
 
 
 --
@@ -30017,6 +30045,7 @@ COPY income (id, resource_id, invoice_id, account_item_id, date, sum, descr) FRO
 60	2451	31	16	2015-06-13	1400.73	\N
 68	2737	32	16	2015-07-22	25000.00	\N
 69	2860	33	16	2016-01-02	59782.12	\N
+70	3689	35	16	2016-07-18	34006.98	\N
 \.
 
 
@@ -30037,6 +30066,8 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 68	261
 69	262
 69	263
+70	271
+70	272
 \.
 
 
@@ -30044,7 +30075,7 @@ COPY income_cashflow (income_id, cashflow_id) FROM stdin;
 -- Name: income_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('income_id_seq', 69, true);
+SELECT pg_catalog.setval('income_id_seq', 70, true);
 
 
 --
@@ -30057,6 +30088,7 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 31	2015-06-13	2450	4	2015-06-16	7	\N
 33	2016-01-02	2858	3	2016-01-05	11	\N
 34	2016-05-22	2904	3	2016-05-25	12	\N
+35	2016-07-18	3688	3	2016-07-31	15	\N
 \.
 
 
@@ -30064,7 +30096,7 @@ COPY invoice (id, date, resource_id, account_id, active_until, order_id, descr) 
 -- Name: invoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_id_seq', 34, true);
+SELECT pg_catalog.setval('invoice_id_seq', 35, true);
 
 
 --
@@ -30080,6 +30112,7 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 34	33	59110.00	898.86	0.00	Tour booking service	46
 35	33	707.50	38.91	35.38	Formulation of foreign passport	47
 36	34	45322.20	906.44	0.00	Tour booking service	48
+37	35	34701.00	404.85	694.02	Tour booking service	54
 \.
 
 
@@ -30087,7 +30120,7 @@ COPY invoice_item (id, invoice_id, price, vat, discount, descr, order_item_id) F
 -- Name: invoice_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('invoice_item_id_seq', 36, true);
+SELECT pg_catalog.setval('invoice_item_id_seq', 37, true);
 
 
 --
@@ -30102,7 +30135,6 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 5	2015-06-06	2372	6	53	1	\N
 6	2015-06-10	2434	6	53	3	\N
 7	2015-07-18	2562	4	55	0	\N
-8	2015-07-18	2565	6	56	0	\N
 9	2015-07-16	2569	2	57	0	\N
 10	2015-07-14	2572	6	58	0	\N
 11	2015-07-17	2575	6	59	0	\N
@@ -30114,6 +30146,9 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 17	2016-01-01	2824	6	70	0	\N
 18	2016-02-07	2877	2	72	0	\N
 19	2016-05-22	2894	5	75	0	\N
+66	2016-05-22	2894	5	75	0	\N
+67	2016-05-22	3659	5	75	0	\N
+68	2016-07-18	3678	6	77	3	\N
 \.
 
 
@@ -30121,7 +30156,7 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 -- Name: lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_id_seq', 19, true);
+SELECT pg_catalog.setval('lead_id_seq', 68, true);
 
 
 --
@@ -30139,10 +30174,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 8	2313	3	1	\N	\N	\N	Need a foreign passport for two persons very QUICK!
 9	2329	4	5	57	2500.00	3500.00	Turkey, 5* AI, 2 adults and child, Kemer prefered
 10	2330	4	4	54	\N	70.00	EU visa for 2 persons
-11	2368	5	5	57	2000.00	3000.00	Croatia for 2 persons, 5* on June or July beginings
-12	2433	6	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
 13	2561	7	5	56	\N	20000.00	Turkey, not less than 4* with AI for 2 person on 7 nights
-14	2564	8	4	54	\N	50.00	Shengen visas for 2 persons to Poland
 15	2567	9	1	\N	\N	\N	Need a foreign passport
 16	2568	9	5	57	\N	1500.00	Tour for 2 adult persons to Turkey
 17	2571	10	5	57	\N	900.00	Want tour into Bulgary, for single adult person, 7 nights
@@ -30158,6 +30190,238 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 27	2823	17	5	56	\N	60000.00	Egypt tour for 2 persons from fubruary begining
 28	2876	18	5	57	\N	2000.00	Egypt, 4* al inclusive Sharm El Sheih
 29	2893	19	5	57	\N	2000.00	Turkey for two persons 7 days Bodrum
+471	3373	\N	7	\N	\N	\N	dfgsdfgsdfg 
+690	3593	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+12	2433	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+11	2368	\N	5	57	2000.00	3000.00	Croatia for 2 persons, 5* on June or July beginings
+700	2564	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+14	2564	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+716	3610	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+79	2981	\N	4	\N	\N	100.00	Shcengen NEEDS!
+43	2940	\N	5	57	\N	2000.00	Egypt, 4* al inclusive Sharm El Sheih
+686	3588	\N	4	\N	\N	100.00	Shcengen NEEDS!
+687	3589	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+691	3594	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+688	3590	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+689	3592	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+83	2985	\N	4	\N	\N	100.00	Shcengen NEEDS!
+84	2986	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+85	2987	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+692	3596	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+718	3612	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+719	3613	\N	5	54	\N	2000.00	Kiprus, for 7 nights for 3 persons (2 adults, 1 child), 5* pansionat, near the sea
+720	3614	\N	4	\N	\N	\N	Shengen to Germany for 2 persons
+693	2433	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+721	3616	\N	4	\N	\N	100.00	Shcengen NEEDS!
+722	3617	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+723	3618	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+472	3374	\N	4	\N	\N	\N	dfg sdfgsdfg
+90	2992	\N	4	\N	\N	100.00	Shcengen NEEDS!
+91	2993	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+92	2994	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+93	2995	\N	4	\N	\N	100.00	Shcengen NEEDS!
+94	2996	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+95	2997	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+96	2998	\N	4	\N	\N	100.00	Shcengen NEEDS!
+97	2999	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+98	3000	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+99	3001	\N	4	\N	\N	100.00	Shcengen NEEDS!
+100	3002	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+101	3003	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+102	3004	\N	4	\N	\N	100.00	Shcengen NEEDS!
+103	3005	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+104	3006	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+105	3007	\N	4	\N	\N	100.00	Shcengen NEEDS!
+106	3008	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+107	3009	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+108	3010	\N	4	\N	\N	100.00	Shcengen NEEDS!
+109	3011	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+110	3012	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+111	3013	\N	4	\N	\N	100.00	Shcengen NEEDS!
+112	3014	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+113	3015	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+114	3016	\N	4	\N	\N	100.00	Shcengen NEEDS!
+115	3017	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+116	3018	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+117	3019	\N	4	\N	\N	100.00	Shcengen NEEDS!
+118	3020	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+119	3021	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+120	3022	\N	4	\N	\N	100.00	Shcengen NEEDS!
+121	3023	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+122	3024	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+123	3025	\N	4	\N	\N	100.00	Shcengen NEEDS!
+124	3026	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+125	3027	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+126	3028	\N	4	\N	\N	100.00	Shcengen NEEDS!
+127	3029	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+128	3030	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+129	3031	\N	4	\N	\N	100.00	Shcengen NEEDS!
+130	3032	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+131	3033	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+132	3034	\N	4	\N	\N	100.00	Shcengen NEEDS!
+133	3035	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+134	3036	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+135	3037	\N	4	\N	\N	100.00	Shcengen NEEDS!
+136	3038	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+137	3039	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+138	3040	\N	4	\N	\N	100.00	Shcengen NEEDS!
+139	3041	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+140	3042	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+141	3043	\N	4	\N	\N	100.00	Shcengen NEEDS!
+142	3044	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+143	3045	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+144	3046	\N	4	\N	\N	100.00	Shcengen NEEDS!
+145	3047	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+146	3048	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+147	3049	\N	4	\N	\N	100.00	Shcengen NEEDS!
+148	3050	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+149	3051	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+150	3052	\N	4	\N	\N	100.00	Shcengen NEEDS!
+151	3053	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+152	3054	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+153	3055	\N	4	\N	\N	100.00	Shcengen NEEDS!
+154	3056	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+155	3057	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+156	3058	\N	4	\N	\N	100.00	Shcengen NEEDS!
+157	3059	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+158	3060	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+159	3061	\N	4	\N	\N	100.00	Shcengen NEEDS!
+160	3062	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+161	3063	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+162	3064	\N	4	\N	\N	100.00	Shcengen NEEDS!
+163	3065	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+164	3066	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+165	3067	\N	4	\N	\N	100.00	Shcengen NEEDS!
+166	3068	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+167	3069	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+168	3070	\N	4	\N	\N	100.00	Shcengen NEEDS!
+169	3071	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+170	3072	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+171	3073	\N	4	\N	\N	100.00	Shcengen NEEDS!
+172	3074	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+173	3075	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+174	3076	\N	4	\N	\N	100.00	Shcengen NEEDS!
+175	3077	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+176	3078	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+177	3079	\N	4	\N	\N	100.00	Shcengen NEEDS!
+178	3080	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+179	3081	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+180	3082	\N	4	\N	\N	100.00	Shcengen NEEDS!
+181	3083	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+182	3084	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+183	3085	\N	4	\N	\N	100.00	Shcengen NEEDS!
+184	3086	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+185	3087	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+186	3088	\N	4	\N	\N	100.00	Shcengen NEEDS!
+187	3089	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+188	3090	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+189	3091	\N	4	\N	\N	100.00	Shcengen NEEDS!
+190	3092	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+191	3093	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+192	3094	\N	4	\N	\N	100.00	Shcengen NEEDS!
+193	3095	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+194	3096	\N	4	\N	\N	100.00	Shcengen NEEDS!
+195	3097	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+196	3098	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+197	3099	\N	4	\N	\N	100.00	Shcengen NEEDS!
+198	3100	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+199	3101	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+200	3102	\N	4	\N	\N	100.00	Shcengen NEEDS!
+201	3103	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+202	3104	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+203	3105	\N	4	\N	\N	100.00	Shcengen NEEDS!
+204	3106	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+205	3107	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+206	3108	\N	4	\N	\N	100.00	Shcengen NEEDS!
+207	3109	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+208	3110	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+209	3111	\N	4	\N	\N	100.00	Shcengen NEEDS!
+210	3112	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+211	3113	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+212	3114	\N	4	\N	\N	100.00	Shcengen NEEDS!
+213	3115	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+214	3116	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+215	3117	\N	4	\N	\N	100.00	Shcengen NEEDS!
+216	3118	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+217	3119	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+218	3120	\N	4	\N	\N	100.00	Shcengen NEEDS!
+694	2433	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+695	2433	\N	5	\N	\N	\N	Turkey or Egypt on the end of July, 5* with UAI for 3 persons
+711	3605	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+696	2368	\N	5	57	2000.00	3000.00	Croatia for 2 persons, 5* on June or July beginings
+726	3658	67	5	57	\N	2000.00	Turkey for two persons 7 days Bodrum
+219	3121	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+220	3122	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+221	3123	\N	4	\N	\N	100.00	Shcengen NEEDS!
+222	3124	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+223	3125	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+224	3126	\N	4	\N	\N	100.00	Shcengen NEEDS!
+225	3127	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+226	3128	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+227	3129	\N	4	\N	\N	100.00	Shcengen NEEDS!
+228	3130	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+229	3131	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+230	3132	\N	4	\N	\N	100.00	Shcengen NEEDS!
+231	3133	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+232	3134	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+233	3135	\N	4	\N	\N	100.00	Shcengen NEEDS!
+234	3136	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+235	3137	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+236	3138	\N	4	\N	\N	100.00	Shcengen NEEDS!
+237	3139	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+238	3140	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+239	3141	\N	4	\N	\N	100.00	Shcengen NEEDS!
+240	3142	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+241	3143	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+242	3144	\N	4	\N	\N	100.00	Shcengen NEEDS!
+243	3145	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+244	3146	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+245	3147	\N	4	\N	\N	100.00	Shcengen NEEDS!
+246	3148	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+247	3149	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+248	3150	\N	4	\N	\N	100.00	Shcengen NEEDS!
+249	3151	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+250	3152	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+251	3153	\N	4	\N	\N	100.00	Shcengen NEEDS!
+252	3154	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+253	3155	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+254	3156	\N	4	\N	\N	100.00	Shcengen NEEDS!
+255	3157	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+256	3158	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+257	3159	\N	4	\N	\N	100.00	Shcengen NEEDS!
+258	3160	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+259	3161	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+260	3162	\N	4	\N	\N	100.00	Shcengen NEEDS!
+261	3163	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+262	3164	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+263	3165	\N	4	\N	\N	100.00	Shcengen NEEDS!
+264	3166	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+265	3167	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+266	3168	\N	4	\N	\N	100.00	Shcengen NEEDS!
+267	3169	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+268	3170	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+269	3171	\N	4	\N	\N	100.00	Shcengen NEEDS!
+270	3172	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+271	3173	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+272	3174	\N	4	\N	\N	100.00	Shcengen NEEDS!
+273	3175	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+274	3176	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+275	3177	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+276	3178	\N	4	\N	\N	100.00	Shcengen NEEDS!
+277	3179	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+278	3180	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+713	3607	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+727	3677	68	5	\N	\N	\N	Turkey for 7 days
+698	2564	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+699	2564	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+714	3608	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+715	3609	\N	4	54	\N	50.00	Shengen visas for 2 persons to Poland
+680	3582	\N	4	\N	\N	100.00	Shcengen NEEDS!
+681	3583	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+682	3584	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
+683	3585	\N	4	\N	\N	100.00	Shcengen NEEDS!
+684	3586	\N	7	\N	\N	\N	Kiev - Frankfurt, Avia, 1.08 for single peron business class
+685	3587	\N	1	\N	\N	\N	Foreign passport for single person and QUICK!
 \.
 
 
@@ -30165,7 +30429,7 @@ COPY lead_item (id, resource_id, lead_id, service_id, currency_id, price_from, p
 -- Name: lead_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_item_id_seq', 29, true);
+SELECT pg_catalog.setval('lead_item_id_seq', 727, true);
 
 
 --
@@ -30183,6 +30447,7 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 8	2435	6	5	57	100	1800.00	2	Turkey Kemer for 7 days with AI for 2 adults and single child. Hotel is uknown this is hot tour with caurosel.\r\n\r\nThis offer was not approved by customer, its too expensive
 10	2670	16	5	57	100	1720.00	1	4* pansionat, 2 adult from 24.07 to 30.07
 11	2825	17	5	57	87	2300.00	1	Sharm el Sheih from 12.02-19.02
+12	3680	68	5	57	87	1345.00	1	CRYSTAL PARAISO VERDE RESORT 5 *Тип номера: Standard 2 Расположен : - Линия :вторая Подогреваемый бассейн : - От центра / от аэропорта :50 / 40Количество номеров :668 Интернет : есть Территория отеля : 42 000 кв.м.
 \.
 
 
@@ -30190,14 +30455,14 @@ COPY lead_offer (id, resource_id, lead_id, service_id, currency_id, supplier_id,
 -- Name: lead_offer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('lead_offer_id_seq', 11, true);
+SELECT pg_catalog.setval('lead_offer_id_seq', 12, true);
 
 
 --
 -- Name: licence_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('licence_id_seq', 61, true);
+SELECT pg_catalog.setval('licence_id_seq', 65, true);
 
 
 --
@@ -30236,6 +30501,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 39	2374	Orashac	38
 40	2674	Larnaka	39
 41	2896	Bodrum	40
+42	3681	Bogazkent	24
 \.
 
 
@@ -30243,7 +30509,7 @@ COPY location (id, resource_id, name, region_id) FROM stdin;
 -- Name: location_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('location_id_seq', 41, true);
+SELECT pg_catalog.setval('location_id_seq', 42, true);
 
 
 --
@@ -30373,6 +30639,14 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 60	2820	Important	Make this very carefully
 61	2826	offer taken	Offer taken by client\r\n
 62	2909	New Note	hello, its test note
+63	2919	title	it's simple note
+64	2921	test	test notes
+65	2923	note	note for source
+66	2924	my note 1	my note 1
+67	2925	sdfasdf	 sdfasdfs df
+68	2926	werqwer 	qwer qwer
+69	3630	zxvbzx vzxcv	zxc vzxcvzxcv
+70	3631	zxvbzx vzxcv	zxc vzxcvzxcv
 \.
 
 
@@ -30380,7 +30654,7 @@ COPY note (id, resource_id, title, descr) FROM stdin;
 -- Name: note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('note_id_seq', 62, true);
+SELECT pg_catalog.setval('note_id_seq', 70, true);
 
 
 --
@@ -30404,9 +30678,8 @@ COPY note_resource (note_id, resource_id) FROM stdin;
 28	3
 36	2126
 59	2662
-60	1930
-26	1930
 61	2824
+68	2658
 62	2887
 \.
 
@@ -30474,21 +30747,12 @@ SELECT pg_catalog.setval('notification_id_seq', 36, true);
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
-20	2068
 21	2075
-22	2131
-23	2197
-24	2303
-25	2584
-26	2671
-27	2730
 29	2484
 30	2484
 31	894
 32	894
 34	894
-35	2816
-36	2818
 \.
 
 
@@ -30508,6 +30772,9 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 7	2015-05-26	2317	48	4	For Lead testing	3	3
 11	2016-01-02	2831	70	6	\N	17	0
 12	2016-05-22	2902	75	5	\N	19	3
+13	2016-05-22	2902	75	5	\N	19	3
+14	2016-05-22	2902	75	5	\N	19	3
+15	2016-07-18	3686	77	6	\N	68	1
 \.
 
 
@@ -30515,7 +30782,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_id_seq', 12, true);
+SELECT pg_catalog.setval('order_id_seq', 15, true);
 
 
 --
@@ -30544,6 +30811,12 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 46	2827	11	5	57	2300.00	1	2016-01-02	TREYW6754-16	87	0.00	0.00
 47	2837	11	1	54	25.00	1	2016-02-01	\N	87	0.00	5.00
 48	2899	12	5	57	1890.00	1	2016-05-22	\N	101	0.00	0.00
+49	3660	\N	5	57	1890.00	1	2016-05-22	\N	101	0.00	0.00
+50	3662	13	5	57	1890.00	1	2016-05-22	\N	101	0.00	0.00
+51	3663	14	5	57	1890.00	1	2016-05-22	\N	101	0.00	0.00
+52	3664	\N	5	57	2000.00	1	2016-05-22	\N	101	0.00	0.00
+53	3666	\N	5	57	1890.00	1	2016-05-22	\N	101	0.00	0.00
+54	3684	15	5	57	1345.00	1	2016-07-18	TYU-0908732	87	0.00	2.00
 \.
 
 
@@ -30551,7 +30824,7 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 -- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_item_id_seq', 48, true);
+SELECT pg_catalog.setval('order_item_id_seq', 54, true);
 
 
 --
@@ -30565,6 +30838,8 @@ COPY outgoing (id, resource_id, account_item_id, date, subaccount_id, sum, descr
 21	2463	17	2015-06-14	22	108.00	Test for outgoing cashflows
 24	2863	18	2016-01-02	26	1600.00	\N
 25	2867	36	2016-01-02	27	760.35	\N
+28	3693	18	2016-07-18	23	30000.00	\N
+29	3694	18	2016-07-18	23	2000.00	\N
 \.
 
 
@@ -30579,6 +30854,9 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 24	265
 25	266
 25	267
+28	280
+28	281
+29	284
 \.
 
 
@@ -30586,7 +30864,7 @@ COPY outgoing_cashflow (outgoing_id, cashflow_id) FROM stdin;
 -- Name: outgoing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('outgoing_id_seq', 25, true);
+SELECT pg_catalog.setval('outgoing_id_seq', 29, true);
 
 
 --
@@ -30888,6 +31166,8 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 74	2881	Sergey			\N	\N	\N	\N	f	f
 75	2892	Igor	Vovk		\N	\N	\N	\N	f	f
 76	2898	Ella	Vovk		1994-04-13	1	\N	3	f	f
+77	3676	Artur	Musienko		\N	0	\N	\N	f	f
+78	3683	Julia	Musienko		\N	\N	\N	\N	f	f
 \.
 
 
@@ -30983,6 +31263,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 73	102
 74	103
 75	104
+77	105
 \.
 
 
@@ -30990,7 +31271,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 76, true);
+SELECT pg_catalog.setval('person_id_seq', 78, true);
 
 
 --
@@ -31041,6 +31322,13 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 47	70
 48	76
 48	75
+49	76
+49	75
+52	76
+52	75
+53	76
+54	77
+54	78
 \.
 
 
@@ -31094,6 +31382,7 @@ COPY person_subaccount (person_id, subaccount_id) FROM stdin;
 48	22
 66	24
 70	25
+77	28
 \.
 
 
@@ -31198,9 +31487,30 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 915	72	\N	2
 916	72	\N	2
 917	72	\N	2
-2890	93	f	2
 2909	118	f	2
 2913	2	f	2
+2919	118	f	2
+2955	130	f	2
+3085	145	f	2
+3086	145	f	2
+3087	145	f	2
+3088	145	f	2
+3089	145	f	2
+3090	145	f	2
+3091	145	f	2
+3092	145	f	2
+3093	145	f	2
+3094	145	f	2
+3095	145	f	2
+3096	145	f	2
+3097	145	f	2
+3098	145	f	2
+3099	145	f	2
+3100	145	f	2
+3101	145	f	2
+3102	145	f	2
+3103	145	f	2
+3104	145	f	2
 918	72	\N	2
 919	72	\N	2
 928	73	\N	2
@@ -31221,7 +31531,33 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 955	65	\N	2
 956	65	\N	2
 957	74	\N	2
+3105	145	f	2
+3106	145	f	2
+3107	145	f	2
+3108	145	f	2
+3109	145	f	2
+3110	145	f	2
+3111	145	f	2
+3112	145	f	2
+3113	145	f	2
+3114	145	f	2
+3115	145	f	2
+3116	145	f	2
+3117	145	f	2
+3118	145	f	2
+3119	145	f	2
+3120	145	f	2
+3121	145	f	2
+3122	145	f	2
+3123	145	f	2
+3124	145	f	2
+3125	145	f	2
 958	74	\N	2
+3126	145	f	2
+3127	145	f	2
+3128	145	f	2
+3129	145	f	2
+3130	145	f	2
 1647	39	f	2
 2266	137	f	2
 2267	134	f	2
@@ -31235,7 +31571,61 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2715	119	f	2
 2716	119	f	2
 2717	119	f	2
+3131	145	f	2
+3132	145	f	2
+3133	145	f	2
+3134	145	f	2
+3135	145	f	2
+3136	145	f	2
+3137	145	f	2
+3138	145	f	2
 2718	119	f	2
+3139	145	f	2
+3140	145	f	2
+3141	145	f	2
+3142	145	f	2
+3143	145	f	2
+3144	145	f	2
+3145	145	f	2
+3146	145	f	2
+3147	145	f	2
+3148	145	f	2
+3149	145	f	2
+3150	145	f	2
+3151	145	f	2
+3152	145	f	2
+3153	145	f	2
+3154	145	f	2
+3155	145	f	2
+3156	145	f	2
+3157	145	f	2
+3158	145	f	2
+3159	145	f	2
+3160	145	f	2
+3161	145	f	2
+3162	145	f	2
+3163	145	f	2
+3164	145	f	2
+3165	145	f	2
+3166	145	f	2
+3167	145	f	2
+3168	145	f	2
+3169	145	f	2
+3170	145	f	2
+3171	145	f	2
+3172	145	f	2
+3173	145	f	2
+3174	145	f	2
+3175	145	f	2
+3176	145	f	2
+3177	145	f	2
+3178	145	f	2
+3179	145	f	2
+3180	145	f	2
+3612	145	f	2
+3613	145	f	2
+3614	145	f	2
+3658	145	f	2
 2881	69	f	2
 2882	12	f	2
 2883	65	f	2
@@ -31253,11 +31643,43 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 939	73	\N	2
 961	74	\N	2
 962	74	\N	2
+3266	145	f	2
+3267	145	f	2
+3268	145	f	2
 2891	87	f	2
 2894	130	f	2
-2901	93	f	2
 2910	149	f	2
 2912	2	f	2
+2956	145	f	2
+2957	145	f	2
+2958	145	f	2
+3181	145	f	2
+3182	145	f	2
+3183	145	f	2
+3184	145	f	2
+3185	145	f	2
+3186	145	f	2
+3187	145	f	2
+3188	145	f	2
+3189	145	f	2
+3190	145	f	2
+3191	145	f	2
+3192	145	f	2
+3193	145	f	2
+3194	145	f	2
+3195	145	f	2
+3196	145	f	2
+3197	145	f	2
+3198	145	f	2
+3199	145	f	2
+3200	145	f	2
+3201	145	f	2
+3202	145	f	2
+3203	145	f	2
+3204	145	f	2
+3205	145	f	2
+3206	145	f	2
+3207	145	f	2
 963	74	\N	2
 964	74	\N	2
 965	74	\N	2
@@ -31272,6 +31694,17 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 976	75	\N	2
 977	75	\N	2
 978	75	\N	2
+3208	145	f	2
+3209	145	f	2
+3210	145	f	2
+3211	145	f	2
+3212	145	f	2
+3213	145	f	2
+3214	145	f	2
+3215	145	f	2
+3216	145	f	2
+3217	145	f	2
+3218	145	f	2
 979	75	\N	2
 980	75	\N	2
 981	75	\N	2
@@ -31293,8 +31726,79 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2788	12	f	2
 2813	12	f	2
 2814	87	f	2
-2815	93	f	2
 2842	119	f	2
+3219	145	f	2
+3220	145	f	2
+3221	145	f	2
+3222	145	f	2
+3223	145	f	2
+3224	145	f	2
+3225	145	f	2
+3226	145	f	2
+3227	145	f	2
+3228	145	f	2
+3229	145	f	2
+3230	145	f	2
+3231	145	f	2
+3232	145	f	2
+3233	145	f	2
+3234	145	f	2
+3235	145	f	2
+3236	145	f	2
+3237	145	f	2
+3238	145	f	2
+3239	145	f	2
+3240	145	f	2
+3241	145	f	2
+3242	145	f	2
+3243	145	f	2
+3244	145	f	2
+3245	145	f	2
+3246	145	f	2
+3247	145	f	2
+3248	145	f	2
+3249	145	f	2
+3250	145	f	2
+3251	145	f	2
+3252	145	f	2
+3253	145	f	2
+3254	145	f	2
+3255	145	f	2
+3256	145	f	2
+3257	145	f	2
+3258	145	f	2
+3259	145	f	2
+3260	145	f	2
+3261	145	f	2
+3262	145	f	2
+3263	145	f	2
+3264	145	f	2
+3265	145	f	2
+3269	145	f	2
+3270	145	f	2
+3271	145	f	2
+3272	145	f	2
+3273	145	f	2
+3274	145	f	2
+3275	145	f	2
+3276	145	f	2
+3277	145	f	2
+3278	145	f	2
+3279	145	f	2
+3280	145	f	2
+3281	145	f	2
+3282	145	f	2
+3283	145	f	2
+3284	145	f	2
+3285	145	f	2
+3286	145	f	2
+3287	145	f	2
+3288	145	f	2
+3289	145	f	2
+3290	145	f	2
+3291	145	f	2
+3292	145	f	2
+3293	145	f	2
 290	41	\N	2
 291	41	\N	2
 884	70	\N	2
@@ -31304,18 +31808,56 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 945	73	\N	2
 946	73	\N	2
 947	73	\N	2
+3368	145	f	2
 2892	69	f	2
-2911	93	f	2
+2921	118	f	2
+2959	145	f	2
+2960	145	f	2
+2961	145	f	2
+3294	145	f	2
+3295	145	f	2
+3296	145	f	2
+3297	145	f	2
+3298	145	f	2
+3299	145	f	2
+3300	145	f	2
+3301	145	f	2
 998	65	\N	2
 1005	78	\N	2
 1007	12	\N	2
 1008	65	\N	2
+3302	145	f	2
 1009	79	\N	2
+3303	145	f	2
+3304	145	f	2
+3305	145	f	2
+3306	145	f	2
+3307	145	f	2
+3308	145	f	2
+3309	145	f	2
+3310	145	f	2
+3311	145	f	2
+3312	145	f	2
+3313	145	f	2
+3314	145	f	2
+3315	145	f	2
+3316	145	f	2
+3317	145	f	2
+3318	145	f	2
+3319	145	f	2
+3320	145	f	2
+3321	145	f	2
+3322	145	f	2
+3323	145	f	2
 1325	83	f	2
 1326	84	f	2
 1327	83	f	2
 1328	39	f	2
+3324	145	f	2
 1329	84	f	2
+3325	145	f	2
+3326	145	f	2
+3327	145	f	2
 1330	83	f	2
 1331	83	f	2
 1332	39	f	2
@@ -31331,6 +31873,20 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1351	70	f	2
 1352	39	f	2
 1353	84	f	2
+3328	145	f	2
+3329	145	f	2
+3330	145	f	2
+3331	145	f	2
+3332	145	f	2
+3333	145	f	2
+3334	145	f	2
+3335	145	f	2
+3336	145	f	2
+3337	145	f	2
+3338	145	f	2
+3339	145	f	2
+3340	145	f	2
+3341	145	f	2
 1354	83	f	2
 1355	39	f	2
 1356	84	f	2
@@ -31343,14 +31899,22 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1641	87	f	2
 1642	89	f	2
 1643	89	f	2
+3342	145	f	2
 2047	119	f	2
+3343	145	f	2
+3344	145	f	2
+3345	145	f	2
+3346	145	f	2
+3347	145	f	2
+3348	145	f	2
+3349	145	f	2
+3350	145	f	2
 1764	111	f	2
 1766	111	f	2
 1769	105	f	2
 1771	111	f	2
 1773	111	f	2
 2285	135	f	2
-2291	93	f	2
 2292	12	f	2
 2293	145	f	2
 2048	65	f	2
@@ -31368,6 +31932,31 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2442	117	f	2
 2546	110	f	2
 2573	69	f	2
+3351	145	f	2
+3352	145	f	2
+3353	145	f	2
+3354	145	f	2
+3355	145	f	2
+3356	145	f	2
+3357	145	f	2
+3358	145	f	2
+3359	145	f	2
+3360	145	f	2
+3361	145	f	2
+3362	145	f	2
+3363	145	f	2
+3364	145	f	2
+3365	145	f	2
+3366	145	f	2
+3367	145	f	2
+3369	145	f	2
+3370	145	f	2
+3371	145	f	2
+3372	145	f	2
+3616	145	f	2
+3617	145	f	2
+3618	145	f	2
+3659	130	f	2
 921	73	\N	2
 1648	84	f	2
 2458	106	f	2
@@ -31378,12 +31967,17 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1650	87	f	2
 2569	130	f	2
 2570	69	f	2
+3416	145	f	2
+3417	145	f	2
 2893	145	f	2
 2897	83	f	2
 922	73	\N	2
 2914	2	f	2
 923	73	\N	2
+2923	118	f	2
 924	73	\N	2
+2962	130	f	2
+3373	145	f	2
 1651	89	f	2
 1652	90	f	2
 1653	69	f	2
@@ -31400,8 +31994,12 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1714	110	f	2
 985	75	\N	2
 987	75	\N	2
+3375	145	f	2
+3376	145	f	2
+3377	145	f	2
 1721	110	f	2
 1884	12	f	2
+3378	145	f	2
 1885	65	f	2
 1888	117	f	2
 1893	120	f	2
@@ -31409,20 +32007,49 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1004	78	\N	2
 1309	90	f	2
 1310	41	f	2
+3379	145	f	2
+3380	145	f	2
+3381	145	f	2
+3382	145	f	2
+3383	145	f	2
+3384	145	f	2
+3385	145	f	2
+3386	145	f	2
 1895	65	f	2
+3387	145	f	2
+3388	145	f	2
+3389	145	f	2
+3390	145	f	2
 1311	41	f	2
 1312	65	f	2
 1313	12	f	2
 1896	65	f	2
 1314	102	f	2
 1317	12	f	2
+3391	145	f	2
 1320	83	f	2
 1321	84	f	2
 1322	83	f	2
+3392	145	f	2
+3393	145	f	2
 1950	123	f	2
 1951	90	f	2
+3394	145	f	2
+3395	145	f	2
+3396	145	f	2
+3397	145	f	2
+3398	145	f	2
 1952	86	f	2
+3399	145	f	2
+3400	145	f	2
+3401	145	f	2
+3402	145	f	2
+3403	145	f	2
+3404	145	f	2
+3405	145	f	2
+3406	145	f	2
 1907	65	f	2
+3407	145	f	2
 1956	87	f	2
 1958	93	f	2
 1959	123	f	2
@@ -31430,14 +32057,20 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1323	83	f	2
 2105	135	f	2
 2106	135	f	2
+3408	145	f	2
+3409	145	f	2
 2107	12	f	2
+3410	145	f	2
+3411	145	f	2
+3412	145	f	2
 2108	12	f	2
+3413	145	f	2
 2111	83	f	2
 2115	39	f	2
 2119	90	f	2
 2168	137	f	2
-2171	93	f	2
 2172	135	f	2
+3414	145	f	2
 2173	137	f	2
 1324	83	f	2
 1358	83	f	2
@@ -31445,6 +32078,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1360	83	f	2
 2452	117	f	2
 2457	106	f	2
+3415	145	f	2
 1361	84	f	2
 1365	39	f	2
 1366	84	f	2
@@ -31454,12 +32088,17 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1373	87	f	2
 1374	90	f	2
 1624	87	f	2
+3418	145	f	2
+3419	145	f	2
+3420	145	f	2
 1625	89	f	2
 1376	89	f	2
 1626	69	f	2
 1378	78	f	2
 1627	69	f	2
 1628	69	f	2
+3421	145	f	2
+3422	145	f	2
 1379	87	f	2
 1634	103	f	2
 1380	87	f	2
@@ -31475,6 +32114,23 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1798	65	f	2
 1799	12	f	2
 1804	118	f	2
+3423	145	f	2
+3424	145	f	2
+3425	145	f	2
+3426	145	f	2
+3427	145	f	2
+3428	145	f	2
+3429	145	f	2
+3430	145	f	2
+3431	145	f	2
+3432	145	f	2
+3433	145	f	2
+3434	145	f	2
+3435	145	f	2
+3436	145	f	2
+3437	145	f	2
+3438	145	f	2
+3439	145	f	2
 2	2	\N	2
 2127	12	f	2
 3	2	\N	2
@@ -31497,7 +32153,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2465	120	f	2
 2563	69	f	2
 2564	145	f	2
-2565	130	f	2
 2203	104	f	2
 2205	110	f	2
 2234	78	f	2
@@ -31511,11 +32166,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2711	119	f	2
 2712	119	f	2
 2713	119	f	2
-2816	93	f	2
 2817	123	f	2
 2836	119	f	2
 2136	65	f	2
-2131	93	f	2
 2320	12	f	2
 2327	87	f	2
 2328	69	f	2
@@ -31576,9 +32229,18 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2096	118	f	2
 2915	79	f	2
 2097	118	f	2
+2924	118	f	2
 2307	87	f	2
+2963	145	f	2
+2964	145	f	2
 2120	101	f	2
+2965	145	f	2
+3374	145	f	2
 2126	2	f	2
+3620	149	f	2
+3639	101	f	2
+3660	135	f	2
+3661	137	f	2
 2341	135	f	2
 2342	137	f	2
 2343	135	f	2
@@ -31598,8 +32260,14 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2518	149	f	2
 2904	103	f	2
 2916	149	f	2
+2925	118	f	2
+2966	145	f	2
+2967	145	f	2
+2968	145	f	2
 2519	47	f	2
 2520	149	f	2
+3440	145	f	2
+3441	145	f	2
 2521	149	f	2
 2522	149	f	2
 2873	87	f	2
@@ -31665,11 +32333,42 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2582	130	f	2
 2345	134	f	2
 2366	87	f	2
+3442	145	f	2
 2367	69	f	2
+3443	145	f	2
+3444	145	f	2
+3445	145	f	2
+3446	145	f	2
+3447	145	f	2
+3448	145	f	2
+3449	145	f	2
+3450	145	f	2
+3451	145	f	2
+3452	145	f	2
+3453	145	f	2
+3454	145	f	2
+3455	145	f	2
+3456	145	f	2
+3457	145	f	2
+3458	145	f	2
+3459	145	f	2
+3460	145	f	2
 2368	145	f	2
 2369	146	f	2
+3461	145	f	2
+3462	145	f	2
+3463	145	f	2
+3464	145	f	2
+3465	145	f	2
+3466	145	f	2
+3467	145	f	2
+3468	145	f	2
+3469	145	f	2
 2370	118	f	2
-2371	93	f	2
+3470	145	f	2
+3471	145	f	2
+3472	145	f	2
+3473	145	f	2
 2372	130	f	2
 2373	39	f	2
 2648	65	f	2
@@ -31680,7 +32379,58 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2510	110	f	2
 2511	86	f	2
 2513	12	f	2
+3474	145	f	2
+3475	145	f	2
+3476	145	f	2
+3477	145	f	2
+3478	145	f	2
+3479	145	f	2
+3480	145	f	2
+3481	145	f	2
+3482	145	f	2
+3483	145	f	2
+3484	145	f	2
+3485	145	f	2
+3486	145	f	2
+3487	145	f	2
+3488	145	f	2
+3489	145	f	2
+3490	145	f	2
+3491	145	f	2
+3492	145	f	2
+3493	145	f	2
+3494	145	f	2
+3495	145	f	2
+3496	145	f	2
+3497	145	f	2
+3498	145	f	2
+3499	145	f	2
+3500	145	f	2
+3501	145	f	2
+3502	145	f	2
+3503	145	f	2
+3504	145	f	2
+3505	145	f	2
+3506	145	f	2
+3507	145	f	2
+3508	145	f	2
+3509	145	f	2
+3510	145	f	2
+3511	145	f	2
+3512	145	f	2
+3513	145	f	2
+3514	145	f	2
+3515	145	f	2
+3516	145	f	2
+3517	145	f	2
+3518	145	f	2
+3519	145	f	2
+3520	145	f	2
 2544	148	f	2
+2926	118	f	2
+2969	145	f	2
+2970	145	f	2
+2971	145	f	2
 907	71	\N	2
 908	12	\N	2
 909	12	\N	2
@@ -31689,11 +32439,23 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1043	47	\N	2
 1044	47	\N	2
 1045	47	\N	2
+3521	145	f	2
+3522	145	f	2
+3523	145	f	2
+3524	145	f	2
+3525	145	f	2
+3526	145	f	2
+3527	145	f	2
+3528	145	f	2
 2589	89	f	2
 2590	90	f	2
 2545	86	f	2
 2547	119	f	2
 2548	119	f	2
+3529	145	f	2
+3530	145	f	2
+3531	145	f	2
+3532	145	f	2
 2591	69	f	2
 2592	123	f	2
 2593	69	f	2
@@ -31715,23 +32477,34 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2727	119	f	2
 2728	119	f	2
 2729	103	f	2
-2730	93	f	2
 2731	123	f	2
 2732	148	f	2
-2818	93	f	2
 2819	123	f	2
+3533	145	f	2
+3534	145	f	2
+3535	145	f	2
+3536	145	f	2
+3537	145	f	2
+3538	145	f	2
 2380	143	f	2
-2381	93	f	2
+3539	145	f	2
+3540	145	f	2
 2382	134	f	2
 2383	104	f	2
 2384	104	f	2
 2385	104	f	2
 2388	103	f	2
+3541	145	f	2
 2389	105	f	2
+3542	145	f	2
 2390	105	f	2
+3543	145	f	2
 2391	105	f	2
+3544	145	f	2
 2396	105	f	2
+3545	145	f	2
 2397	105	f	2
+3546	145	f	2
 2398	105	f	2
 2415	105	f	2
 2416	105	f	2
@@ -31747,6 +32520,13 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2682	149	f	2
 2683	89	f	2
 2427	105	f	2
+3547	145	f	2
+3548	145	f	2
+3549	145	f	2
+3550	145	f	2
+3551	145	f	2
+3552	145	f	2
+3553	145	f	2
 2428	105	f	2
 2684	149	f	2
 2685	89	f	2
@@ -31755,6 +32535,25 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2687	137	f	2
 2690	134	f	2
 2693	110	f	2
+3554	145	f	2
+3555	145	f	2
+3556	145	f	2
+3557	145	f	2
+3558	145	f	2
+3559	145	f	2
+3560	145	f	2
+3561	145	f	2
+3562	145	f	2
+3563	145	f	2
+3564	145	f	2
+3565	145	f	2
+3566	145	f	2
+3621	149	f	2
+3622	93	f	\N
+3640	101	f	2
+3662	135	f	2
+3666	135	f	2
+3667	137	f	2
 2694	110	f	2
 2695	86	f	2
 2530	119	f	2
@@ -31769,6 +32568,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2542	148	f	2
 2543	148	f	2
 2820	118	f	2
+2972	145	f	2
+2973	145	f	2
+2974	145	f	2
 2821	87	f	2
 2822	69	f	2
 2823	145	f	2
@@ -31780,11 +32582,13 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2825	146	f	2
 2826	118	f	2
 2827	135	f	2
+3623	93	f	\N
 2828	137	f	2
 2841	104	f	2
 2865	78	f	2
 2866	117	f	2
 2867	111	f	2
+3663	135	f	2
 1550	65	f	2
 1551	87	f	2
 1552	87	f	2
@@ -31881,8 +32685,19 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2665	149	f	2
 2666	87	f	2
 2667	69	f	2
+2975	145	f	2
+2976	145	f	2
+2977	145	f	2
+3570	145	f	2
 892	67	\N	2
+3571	145	f	2
+3572	145	f	2
+3624	93	f	\N
+3642	110	f	2
 2668	145	f	2
+3646	86	f	2
+3664	135	f	2
+3665	137	f	2
 893	47	\N	2
 894	2	\N	2
 896	39	\N	2
@@ -31890,7 +32705,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1040	47	\N	2
 1277	55	f	2
 2669	130	f	2
-2671	93	f	2
 2672	123	f	2
 2673	39	f	2
 2839	119	f	2
@@ -31940,7 +32754,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1518	87	f	2
 1519	87	f	2
 1553	79	f	2
-2584	93	f	2
 2585	87	f	2
 2586	87	f	2
 2587	87	f	2
@@ -31986,17 +32799,39 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2832	119	f	2
 2863	111	f	2
 2864	140	f	2
+2930	145	f	2
+2933	145	f	2
+2935	130	f	2
+2939	130	f	2
+2940	145	f	2
+2945	130	f	2
+2978	145	f	2
+2979	145	f	2
+2980	145	f	2
+3573	145	f	2
+3574	145	f	2
+3575	145	f	2
 2274	143	f	2
+1962	93	f	\N
 2275	134	f	2
+3643	110	f	2
 2276	12	f	2
 2277	105	f	2
 2278	135	f	2
 2279	144	f	2
+3668	110	f	2
 2280	134	f	2
 2281	104	f	2
+3669	110	f	2
+3671	110	f	2
+3672	86	f	2
+3673	104	f	2
+3674	104	f	2
+3675	87	f	2
+3676	69	f	2
+3677	145	f	2
 2282	135	f	2
 2284	134	f	2
-1962	93	f	2
 1963	123	f	2
 1964	93	f	2
 1965	123	f	2
@@ -32061,19 +32896,30 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 800	55	\N	2
 801	55	\N	2
 802	65	\N	2
+2931	145	f	2
 1468	84	f	2
 1469	90	f	2
 1470	83	f	2
+2932	145	f	2
+2942	145	f	2
+2943	145	f	2
+2944	145	f	2
+2981	145	f	2
+3576	145	f	2
+3577	145	f	2
+3578	145	f	2
 1471	69	f	2
 1913	117	f	2
 1510	101	f	2
 1968	12	f	2
 1970	126	f	2
+3645	110	f	2
 1971	93	f	2
 1972	123	f	2
 1973	123	f	2
 1975	65	f	2
 1976	55	f	2
+3647	110	f	2
 1977	12	f	2
 1554	101	f	2
 1556	101	f	2
@@ -32086,6 +32932,17 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2145	137	f	2
 2146	135	f	2
 2147	137	f	2
+3648	110	f	2
+3670	110	f	2
+3678	130	f	2
+3682	83	f	2
+3683	69	f	2
+3686	134	f	2
+3687	119	f	2
+3688	103	f	2
+3689	106	f	2
+3690	117	f	2
+3694	111	f	2
 838	65	\N	2
 849	41	\N	2
 851	41	\N	2
@@ -32152,6 +33009,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2688	135	f	2
 2880	87	f	2
 904	71	\N	2
+2934	145	f	2
 905	71	\N	2
 906	71	\N	2
 910	65	\N	2
@@ -32165,10 +33023,15 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1608	105	f	2
 1341	84	f	2
 1609	105	f	2
+2982	145	f	2
+2983	145	f	2
+2984	145	f	2
 2433	145	f	2
 2689	143	f	2
 2558	12	f	2
 2559	151	f	2
+3605	145	f	2
+3627	93	f	\N
 1342	83	f	2
 1343	70	f	2
 1610	87	f	2
@@ -32180,6 +33043,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2561	145	f	2
 2562	130	f	2
 2733	148	f	2
+3679	93	f	2
+3680	146	f	2
+3693	111	f	2
 1615	69	f	2
 2208	110	f	2
 2209	110	f	2
@@ -32196,7 +33062,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1803	118	f	2
 2301	146	f	2
 2302	118	f	2
-2303	93	f	2
 1852	119	f	2
 1898	105	f	2
 1900	120	f	2
@@ -32233,8 +33098,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1582	89	f	2
 2598	145	f	2
 2599	130	f	2
-2868	93	f	2
-2869	93	f	2
 2870	119	f	2
 2151	137	f	2
 988	75	\N	2
@@ -32248,8 +33111,31 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1093	84	\N	2
 1095	70	\N	2
 1096	39	\N	2
-1932	93	f	2
-1939	93	f	2
+2936	145	f	2
+2937	145	f	2
+2938	145	f	2
+2985	145	f	2
+2986	145	f	2
+2987	145	f	2
+2988	145	f	2
+2989	145	f	2
+2990	145	f	2
+3582	145	f	2
+3583	145	f	2
+3584	145	f	2
+3585	145	f	2
+3586	145	f	2
+3587	145	f	2
+1922	93	f	\N
+1932	93	f	\N
+1933	93	f	\N
+1939	93	f	\N
+1940	93	f	\N
+3628	93	f	2
+3630	118	f	2
+3681	84	f	2
+3684	135	f	2
+3685	137	f	2
 1199	89	\N	2
 1204	87	\N	2
 1205	89	\N	2
@@ -32262,18 +33148,11 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1646	70	f	2
 1918	119	f	2
 1919	12	f	2
-1922	93	f	2
 1924	118	f	2
 1925	89	f	2
 1926	90	f	2
 1927	87	f	2
-1930	93	f	2
 1931	118	f	2
-1933	93	f	2
-1934	93	f	2
-1935	93	f	2
-1936	93	f	2
-1940	93	f	2
 1941	12	f	2
 1945	123	f	2
 1946	123	f	2
@@ -32295,7 +33174,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2632	65	f	2
 2702	119	f	2
 2703	119	f	2
-2829	93	f	2
 2830	69	f	2
 2831	134	f	2
 2833	110	f	2
@@ -32305,6 +33183,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2859	148	f	2
 2860	106	f	2
 885	47	\N	2
+2946	145	f	2
 895	39	\N	2
 940	73	\N	2
 941	73	\N	2
@@ -32331,12 +33210,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1908	65	f	2
 2055	12	f	2
 2062	93	f	2
-2063	93	f	2
 2064	123	f	2
 2065	118	f	2
-2066	93	f	2
 2067	123	f	2
-2068	93	f	2
 2069	123	f	2
 2070	12	f	2
 2305	145	f	2
@@ -32344,7 +33220,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1993	106	f	2
 2310	145	f	2
 1994	106	f	2
-2311	93	f	2
 1995	106	f	2
 1996	106	f	2
 2312	130	f	2
@@ -32372,13 +33247,23 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2017	69	f	2
 2018	87	f	2
 2019	89	f	2
+2947	145	f	2
+2948	145	f	2
+2949	130	f	2
+2991	130	f	2
+3588	145	f	2
+3589	145	f	2
+3590	145	f	2
+3592	145	f	2
+3607	145	f	2
+3629	93	f	2
+3695	93	f	2
 2020	69	f	2
 2023	104	f	2
 2024	104	f	2
 2026	103	f	2
 2027	106	f	2
 2028	106	f	2
-2436	93	f	2
 2437	146	f	2
 2438	117	f	2
 1880	106	f	2
@@ -32386,6 +33271,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2374	84	f	2
 2375	83	f	2
 2413	105	f	2
+2950	145	f	2
 871	69	\N	2
 872	12	\N	2
 873	65	\N	2
@@ -32399,6 +33285,47 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 882	70	\N	2
 883	70	\N	2
 1079	65	\N	2
+2951	145	f	2
+2952	145	f	2
+2992	145	f	2
+2993	145	f	2
+2994	145	f	2
+2995	145	f	2
+2996	145	f	2
+2997	145	f	2
+2998	145	f	2
+2999	145	f	2
+3000	145	f	2
+3013	145	f	2
+3014	145	f	2
+3015	145	f	2
+3016	145	f	2
+3017	145	f	2
+3018	145	f	2
+3019	145	f	2
+3020	145	f	2
+3021	145	f	2
+3022	145	f	2
+3023	145	f	2
+3024	145	f	2
+3025	145	f	2
+3026	145	f	2
+3027	145	f	2
+3028	145	f	2
+3029	145	f	2
+3030	145	f	2
+3031	145	f	2
+3032	145	f	2
+3033	145	f	2
+3034	145	f	2
+3035	145	f	2
+3036	145	f	2
+3593	145	f	2
+3608	145	f	2
+3609	145	f	2
+3631	118	f	2
+3632	93	f	2
+3633	93	f	2
 1097	84	\N	2
 1101	39	\N	2
 1102	84	\N	2
@@ -32428,7 +33355,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1264	87	f	2
 1265	89	f	2
 1268	12	f	2
-2197	93	f	2
 2198	123	f	2
 2199	105	f	2
 2240	78	f	2
@@ -32477,7 +33403,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 1980	93	f	2
 1981	118	f	2
 1982	93	f	2
-1983	93	f	2
 1984	123	f	2
 2404	105	f	2
 2405	105	f	2
@@ -32504,6 +33429,30 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2781	123	f	2
 2782	123	f	2
 2783	123	f	2
+2953	130	f	2
+3001	145	f	2
+3002	145	f	2
+3003	145	f	2
+3004	145	f	2
+3005	145	f	2
+3006	145	f	2
+3007	145	f	2
+3008	145	f	2
+3009	145	f	2
+3010	145	f	2
+3011	145	f	2
+3012	145	f	2
+3594	145	f	2
+3610	145	f	2
+1983	93	f	\N
+2954	145	f	2
+3037	145	f	2
+3038	145	f	2
+3039	145	f	2
+3040	145	f	2
+3041	145	f	2
+3042	145	f	2
+3043	145	f	2
 2466	117	f	2
 2467	111	f	2
 2468	119	f	2
@@ -32512,6 +33461,48 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2475	90	f	2
 2477	47	f	2
 2484	2	f	2
+3044	145	f	2
+3045	145	f	2
+3046	145	f	2
+3047	145	f	2
+3048	145	f	2
+3049	145	f	2
+3050	145	f	2
+3051	145	f	2
+3052	145	f	2
+3053	145	f	2
+3054	145	f	2
+3055	145	f	2
+3056	145	f	2
+3057	145	f	2
+3058	145	f	2
+3059	145	f	2
+3060	145	f	2
+3061	145	f	2
+3062	145	f	2
+3063	145	f	2
+3064	145	f	2
+3065	145	f	2
+3066	145	f	2
+3067	145	f	2
+3068	145	f	2
+3069	145	f	2
+3070	145	f	2
+3071	145	f	2
+3072	145	f	2
+3073	145	f	2
+3074	145	f	2
+3075	145	f	2
+3076	145	f	2
+3077	145	f	2
+3078	145	f	2
+3079	145	f	2
+3080	145	f	2
+3081	145	f	2
+3082	145	f	2
+3083	145	f	2
+3084	145	f	2
+3596	145	f	2
 \.
 
 
@@ -32519,7 +33510,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 2918, true);
+SELECT pg_catalog.setval('resource_id_seq', 3695, true);
 
 
 --
@@ -33413,44 +34404,27 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6279	1471	2	\N	2014-12-07 21:41:39.584636+02
 6280	1927	2	\N	2014-12-07 21:42:12.893528+02
 6281	1471	2	\N	2014-12-07 21:42:14.781639+02
-6285	1930	2	\N	2014-12-08 21:43:55.101305+02
 6286	1869	2	\N	2014-12-08 21:46:09.685953+02
 6287	1931	2	\N	2014-12-08 21:52:00.685674+02
-6288	1930	2	\N	2014-12-08 21:53:17.580512+02
 6289	1932	2	\N	2014-12-11 22:45:01.994257+02
 6290	1933	2	\N	2014-12-11 22:46:28.273472+02
-6291	1934	2	\N	2014-12-11 22:50:30.21811+02
-6293	1935	2	\N	2014-12-11 22:53:00.765244+02
-6295	1935	2	\N	2014-12-11 22:53:42.569877+02
-6297	1936	2	\N	2014-12-13 21:35:47.599877+02
 6298	1939	2	\N	2014-12-13 21:37:02.820409+02
 6299	1939	2	\N	2014-12-13 21:37:54.352906+02
-6300	1936	2	\N	2014-12-13 21:55:38.627009+02
 6301	1933	2	\N	2014-12-13 21:55:57.253566+02
 6302	1933	2	\N	2014-12-13 21:57:41.570228+02
 6303	1933	2	\N	2014-12-13 22:01:39.804954+02
-6304	1936	2	\N	2014-12-13 22:01:54.801501+02
-6305	1936	2	\N	2014-12-13 22:03:25.347584+02
 6306	1933	2	\N	2014-12-13 22:03:37.415197+02
 6307	1939	2	\N	2014-12-13 22:03:52.016284+02
-6308	1936	2	\N	2014-12-13 22:10:55.202627+02
-6309	1936	2	\N	2014-12-13 22:11:45.388631+02
-6310	1936	2	\N	2014-12-14 11:10:18.568487+02
-6311	1936	2	\N	2014-12-14 11:10:54.616091+02
-6312	1936	2	\N	2014-12-14 11:12:20.116844+02
 6313	1933	2	\N	2014-12-14 11:12:44.366886+02
-6314	1936	2	\N	2014-12-14 11:14:36.987112+02
 6315	1933	2	\N	2014-12-14 11:14:46.937016+02
 6316	1940	2	\N	2014-12-14 11:16:18.397912+02
 6317	1941	2	\N	2014-12-14 17:51:15.587939+02
 6318	1940	2	\N	2014-12-14 19:37:37.036036+02
-6319	1936	2	\N	2014-12-14 19:37:54.381361+02
 6320	1940	2	\N	2014-12-14 19:41:49.794566+02
 6321	1940	2	\N	2014-12-14 19:44:37.781977+02
 6322	1940	2	\N	2014-12-14 19:48:08.98232+02
 6323	1940	2	\N	2014-12-14 19:50:28.583831+02
 6324	1940	2	\N	2014-12-14 20:30:31.46273+02
-6325	1936	2	\N	2014-12-14 20:30:45.990313+02
 6326	1940	2	\N	2014-12-14 20:33:08.50634+02
 6327	1940	2	\N	2014-12-14 20:34:47.73587+02
 6328	1940	2	\N	2014-12-14 20:37:41.082704+02
@@ -33607,29 +34581,21 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6567	2062	2	\N	2015-03-07 20:44:22.388688+02
 6568	1958	2	\N	2015-03-07 20:44:57.143369+02
 6569	1922	2	\N	2015-03-07 21:16:33.311167+02
-6570	1930	2	\N	2015-03-07 21:18:30.204883+02
 6571	1980	2	\N	2015-03-07 21:18:36.892234+02
-6572	1930	2	\N	2015-03-07 21:21:01.745845+02
 6573	1982	2	\N	2015-03-07 21:45:35.899441+02
 6574	1983	2	\N	2015-03-07 21:45:46.115364+02
 6575	1985	2	\N	2015-03-07 21:45:53.837217+02
 6576	2016	2	\N	2015-03-07 21:46:03.965785+02
 6577	1940	2	\N	2015-03-07 21:46:13.798132+02
 6578	1932	2	\N	2015-03-07 21:46:22.868946+02
-6579	1934	2	\N	2015-03-07 21:46:33.42948+02
-6580	1935	2	\N	2015-03-07 21:46:42.582075+02
-6581	1936	2	\N	2015-03-07 21:46:53.561952+02
 6582	1933	2	\N	2015-03-07 21:47:06.74156+02
 6584	1922	2	\N	2015-03-08 18:02:14.423833+02
 6585	1922	2	\N	2015-03-08 18:02:24.288542+02
 6586	1989	2	\N	2015-03-08 18:07:00.091644+02
 6587	1922	2	\N	2015-03-08 18:17:03.971743+02
 6588	1922	2	\N	2015-03-08 18:29:12.5349+02
-6589	2063	2	\N	2015-03-08 18:41:45.468589+02
 6590	1989	2	\N	2015-03-08 18:41:51.822924+02
 6592	2065	2	\N	2015-03-09 14:02:38.899688+02
-6593	2066	2	\N	2015-03-09 17:16:22.759831+02
-6594	2068	2	\N	2015-03-09 19:28:40.834898+02
 6595	1980	2	\N	2015-03-09 19:37:29.594475+02
 6596	1389	2	\N	2015-03-15 19:00:11.360402+02
 6597	1389	2	\N	2015-03-15 19:07:00.022851+02
@@ -33745,7 +34711,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6732	2128	2	\N	2015-04-22 15:09:24.597951+03
 6733	2129	2	\N	2015-04-22 15:30:21.099029+03
 6734	2130	2	\N	2015-04-22 15:30:28.848383+03
-6735	2131	2	\N	2015-04-22 15:33:06.666889+03
 6736	2126	2	\N	2015-04-22 15:33:09.520564+03
 6737	2132	2	\N	2015-04-22 15:34:13.439147+03
 6738	2126	2	\N	2015-04-22 15:34:14.494849+03
@@ -33784,7 +34749,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6772	2165	2	\N	2015-04-26 10:23:35.980962+03
 6774	2167	2	\N	2015-04-26 10:30:42.474899+03
 6775	2168	2	\N	2015-04-26 10:30:42.474899+03
-6778	2171	2	\N	2015-04-26 10:38:49.924523+03
 6779	2172	2	\N	2015-04-26 10:41:15.682562+03
 6780	2173	2	\N	2015-04-26 10:41:15.682562+03
 6781	2174	2	\N	2015-04-26 10:51:18.425172+03
@@ -33805,10 +34769,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6796	2189	2	\N	2015-04-26 14:05:26.994527+03
 6797	2190	2	\N	2015-04-26 14:05:26.994527+03
 6798	2186	2	\N	2015-04-26 14:05:29.313624+03
-6801	2197	2	\N	2015-05-03 13:21:34.120955+03
-6802	2197	2	\N	2015-05-03 13:23:12.828981+03
-6803	2197	2	\N	2015-05-03 13:34:38.831852+03
-6804	2197	2	\N	2015-05-03 13:40:51.674186+03
 6805	2199	2	\N	2015-05-03 23:18:19.876372+03
 6806	1780	2	\N	2015-05-03 23:18:33.103558+03
 6807	1368	2	\N	2015-05-04 19:21:58.460934+03
@@ -33925,7 +34885,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6919	2280	2	\N	2015-05-17 21:31:48.129633+03
 6920	2284	2	\N	2015-05-17 22:02:03.373006+03
 6921	2284	2	\N	2015-05-17 22:02:31.027832+03
-6922	2291	2	\N	2015-05-18 16:39:17.24427+03
 6923	2284	2	\N	2015-05-18 16:40:09.305094+03
 6924	2284	2	\N	2015-05-18 20:31:39.659544+03
 6925	2284	2	\N	2015-05-18 20:34:34.03653+03
@@ -33946,7 +34905,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6940	2088	2	\N	2015-05-24 17:15:30.592241+03
 6941	2302	2	\N	2015-05-24 17:16:33.029089+03
 6942	2075	2	\N	2015-05-24 17:16:41.742578+03
-6943	2303	2	\N	2015-05-24 17:17:17.81127+03
 6944	2088	2	\N	2015-05-24 17:17:21.677682+03
 6945	2305	2	\N	2015-05-24 20:37:07.412723+03
 6946	2052	2	\N	2015-05-24 20:37:10.892479+03
@@ -33961,7 +34919,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 6955	2308	2	\N	2015-05-24 21:32:24.738611+03
 6956	2309	2	\N	2015-05-24 21:32:31.516248+03
 6957	2310	2	\N	2015-05-24 21:33:17.528061+03
-6958	2311	2	\N	2015-05-24 21:35:46.300244+03
 6959	2312	2	\N	2015-05-24 21:36:06.190691+03
 6960	2312	2	\N	2015-05-24 21:36:27.205265+03
 6961	2313	2	\N	2015-05-25 21:31:05.718794+03
@@ -34009,7 +34966,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7026	2368	2	\N	2015-06-06 21:49:00.661472+03
 7027	2369	2	\N	2015-06-06 21:50:18.211354+03
 7028	2370	2	\N	2015-06-06 21:51:07.167429+03
-7029	2371	2	\N	2015-06-06 21:52:21.362863+03
 7030	2372	2	\N	2015-06-06 21:52:25.91268+03
 7031	2367	2	\N	2015-06-06 22:01:59.580344+03
 7032	2373	2	\N	2015-06-06 22:05:50.240364+03
@@ -34020,7 +34976,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7037	2378	2	\N	2015-06-06 22:08:11.14074+03
 7038	2379	2	\N	2015-06-06 22:10:53.894076+03
 7039	2380	2	\N	2015-06-06 22:10:53.894076+03
-7040	2381	2	\N	2015-06-06 22:12:04.71986+03
 7041	2382	2	\N	2015-06-06 22:12:17.899878+03
 7042	2372	2	\N	2015-06-06 22:12:34.850437+03
 7043	2383	2	\N	2015-06-06 22:34:30.822368+03
@@ -34097,7 +35052,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7114	2434	2	\N	2015-06-10 21:10:58.272269+03
 7115	2434	2	\N	2015-06-10 21:11:16.546457+03
 7116	2435	2	\N	2015-06-10 21:11:49.343497+03
-7117	2436	2	\N	2015-06-10 21:12:20.087946+03
 7119	2437	2	\N	2015-06-10 21:13:28.379702+03
 7120	2434	2	\N	2015-06-10 21:13:35.658848+03
 7118	2434	2	\N	2015-06-10 21:12:30.557424+03
@@ -34235,8 +35189,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7330	784	2	\N	2015-06-27 22:49:40.054287+03
 7331	2526	2	\N	2015-06-28 15:48:24.134048+03
 7332	2527	2	\N	2015-06-28 15:49:06.934643+03
-7333	1930	2	\N	2015-06-28 15:49:08.476175+03
-7334	1930	2	\N	2015-06-28 15:49:15.43238+03
 7335	1286	2	\N	2015-06-28 16:19:06.654271+03
 7336	1284	2	\N	2015-06-28 16:19:08.822984+03
 7337	2528	2	\N	2015-06-28 16:27:58.214962+03
@@ -34306,7 +35258,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7403	2562	2	\N	2015-07-19 14:42:45.815524+03
 7404	2563	2	\N	2015-07-19 15:12:51.840188+03
 7405	2564	2	\N	2015-07-19 15:13:34.062285+03
-7406	2565	2	\N	2015-07-19 15:13:36.341158+03
 7407	2566	2	\N	2015-07-19 15:17:50.040034+03
 7408	2567	2	\N	2015-07-19 15:18:18.066263+03
 7409	2568	2	\N	2015-07-19 15:19:23.078636+03
@@ -34325,7 +35276,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7422	2581	2	\N	2015-07-19 16:08:00.994992+03
 7423	2582	2	\N	2015-07-19 16:08:03.06528+03
 7424	2583	2	\N	2015-07-19 22:56:54.154484+03
-7425	2584	2	\N	2015-07-19 23:47:28.340347+03
 7426	2585	2	\N	2015-07-19 23:52:14.447269+03
 7427	2586	2	\N	2015-07-19 23:52:36.403304+03
 7428	2587	2	\N	2015-07-19 23:52:50.958041+03
@@ -34391,7 +35341,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7516	2669	2	\N	2015-07-22 10:51:14.586916+03
 7517	2669	2	\N	2015-07-22 11:46:47.662266+03
 7518	2670	2	\N	2015-07-22 11:49:53.983401+03
-7519	2671	2	\N	2015-07-22 11:53:39.590503+03
 7520	2669	2	\N	2015-07-22 11:53:54.403754+03
 7521	2669	2	\N	2015-07-22 11:54:14.136266+03
 7522	2669	2	\N	2015-07-22 12:24:29.892068+03
@@ -34463,7 +35412,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7592	2727	2	\N	2015-07-22 15:05:43.153662+03
 7593	2728	2	\N	2015-07-22 15:05:43.153662+03
 7594	2729	2	\N	2015-07-22 15:13:21.269737+03
-7595	2730	2	\N	2015-07-22 15:19:08.113264+03
 7596	2729	2	\N	2015-07-22 15:19:11.19218+03
 7597	2729	2	\N	2015-07-22 15:35:51.754061+03
 7598	2732	2	\N	2015-07-22 15:38:41.939351+03
@@ -34520,11 +35468,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7699	2814	2	\N	2015-11-22 21:57:07.211721+02
 7700	2739	2	\N	2015-11-22 21:57:09.506917+02
 7701	2739	2	\N	2015-11-22 22:03:49.302367+02
-7702	2815	2	\N	2015-11-29 18:03:23.32558+02
-7703	2816	2	\N	2015-11-29 18:05:24.319676+02
-7704	2818	2	\N	2015-11-29 19:06:37.534692+02
 7705	2820	2	\N	2016-01-02 19:03:39.167822+02
-7706	1930	2	\N	2016-01-02 19:03:41.6491+02
 7707	2821	2	\N	2016-01-02 20:11:21.358279+02
 7708	2822	2	\N	2016-01-02 20:11:24.233178+02
 7709	2823	2	\N	2016-01-02 20:12:21.682793+02
@@ -34536,7 +35480,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7715	2822	2	\N	2016-01-02 20:21:41.413863+02
 7716	2827	2	\N	2016-01-02 20:24:24.220398+02
 7717	2828	2	\N	2016-01-02 20:24:24.220398+02
-7718	2829	2	\N	2016-01-02 20:25:00.491155+02
 7719	2830	2	\N	2016-01-02 20:25:43.115841+02
 7720	2831	2	\N	2016-01-02 20:26:37.333884+02
 7721	2832	2	\N	2016-01-02 20:27:25.581765+02
@@ -34595,8 +35538,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7775	2866	2	\N	2016-01-02 23:33:24.314299+02
 7776	2867	2	\N	2016-01-02 23:34:03.051927+02
 7777	2824	2	\N	2016-01-02 23:39:00.961892+02
-7778	2868	2	\N	2016-01-30 20:55:14.786454+02
-7779	2869	2	\N	2016-01-30 20:59:30.856249+02
 7780	2830	2	\N	2016-01-30 21:00:27.913502+02
 7781	2830	2	\N	2016-01-30 21:01:18.072032+02
 7782	2830	2	\N	2016-01-30 21:01:36.444194+02
@@ -34642,11 +35583,8 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7825	2889	2	\N	2016-05-14 19:27:41.044427+03
 7826	2888	2	\N	2016-05-14 19:28:16.54874+03
 7827	2889	2	\N	2016-05-14 19:33:22.988649+03
-7828	2131	2	\N	2016-05-15 18:01:05.003665+03
 7829	1932	2	\N	2016-05-15 18:01:28.601998+03
 7830	1939	2	\N	2016-05-15 18:01:28.601998+03
-7831	2131	2	\N	2016-05-15 18:01:28.601998+03
-7832	2890	2	\N	2016-05-15 18:35:21.882133+03
 7833	2891	7	\N	2016-05-22 19:55:08.969532+03
 7834	2892	7	\N	2016-05-22 19:55:14.973042+03
 7835	2893	7	\N	2016-05-22 19:56:54.291848+03
@@ -34657,7 +35595,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7840	2898	7	\N	2016-05-22 20:04:51.844389+03
 7841	2899	7	\N	2016-05-22 20:05:17.325444+03
 7842	2900	7	\N	2016-05-22 20:05:17.325444+03
-7843	2901	7	\N	2016-05-22 20:06:02.253214+03
 7844	2902	7	\N	2016-05-22 20:06:48.112563+03
 7845	2902	7	\N	2016-05-22 20:07:40.428098+03
 7846	2902	7	\N	2016-05-22 20:07:58.637089+03
@@ -34667,7 +35604,6 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7858	2887	2	\N	2016-06-20 11:34:01.085463+03
 7859	2909	2	\N	2016-06-20 12:26:00.939764+03
 7860	2910	2	\N	2016-06-20 12:26:29.268002+03
-7861	2911	2	\N	2016-06-20 12:27:31.820161+03
 7862	2887	2	\N	2016-06-20 12:27:37.92458+03
 7863	2912	2	\N	2016-06-20 12:38:09.013321+03
 7864	2913	2	\N	2016-06-20 13:20:01.073862+03
@@ -34683,6 +35619,1408 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 7874	2785	2	\N	2016-06-20 16:36:09.547187+03
 7877	2859	2	\N	2016-06-20 18:03:05.509688+03
 7878	1542	2	\N	2016-06-27 22:07:41.304565+03
+7879	2919	2	\N	2016-07-17 15:53:00.533693+03
+7880	2658	2	\N	2016-07-17 15:53:03.822052+03
+7881	2658	2	\N	2016-07-17 15:53:22.995918+03
+7883	2921	2	\N	2016-07-17 15:57:03.063727+03
+7885	2923	2	\N	2016-07-17 15:57:38.125422+03
+7886	2658	2	\N	2016-07-17 15:57:40.419292+03
+7887	2658	2	\N	2016-07-17 15:59:58.834721+03
+7888	2658	2	\N	2016-07-17 16:01:15.697493+03
+7889	2658	2	\N	2016-07-17 16:01:28.050755+03
+7890	2924	2	\N	2016-07-17 16:02:08.858252+03
+7891	2658	2	\N	2016-07-17 16:02:10.643204+03
+7892	2658	2	\N	2016-07-17 16:23:27.014208+03
+7893	2925	2	\N	2016-07-17 16:27:22.852465+03
+7894	2926	2	\N	2016-07-17 16:27:39.783198+03
+7895	2658	2	\N	2016-07-17 16:27:41.582264+03
+7899	2930	2	\N	2016-07-17 19:09:30.834678+03
+7900	2931	2	\N	2016-07-17 19:09:45.474753+03
+7901	2932	2	\N	2016-07-17 19:09:56.538156+03
+7902	2933	2	\N	2016-07-17 19:10:06.7265+03
+7903	2934	2	\N	2016-07-17 19:11:15.719986+03
+7904	2935	2	\N	2016-07-17 19:11:20.977505+03
+7905	2936	2	\N	2016-07-17 19:11:44.819805+03
+7906	2937	2	\N	2016-07-17 19:11:44.819805+03
+7907	2938	2	\N	2016-07-17 19:11:44.819805+03
+7908	2939	2	\N	2016-07-17 19:11:56.506982+03
+7909	2940	2	\N	2016-07-17 19:12:24.362788+03
+7911	2942	2	\N	2016-07-17 19:12:40.741111+03
+7912	2943	2	\N	2016-07-17 19:12:40.741111+03
+7913	2944	2	\N	2016-07-17 19:12:40.741111+03
+7914	2945	2	\N	2016-07-17 19:12:45.01282+03
+7915	2946	2	\N	2016-07-17 19:17:12.257123+03
+7916	2947	2	\N	2016-07-17 19:17:12.257123+03
+7917	2948	2	\N	2016-07-17 19:17:12.257123+03
+7918	2946	2	\N	2016-07-17 19:17:12.257123+03
+7919	2947	2	\N	2016-07-17 19:17:12.257123+03
+7920	2948	2	\N	2016-07-17 19:17:12.257123+03
+7921	2949	2	\N	2016-07-17 19:17:23.705373+03
+7922	2950	2	\N	2016-07-17 19:18:32.695032+03
+7923	2951	2	\N	2016-07-17 19:18:32.695032+03
+7924	2952	2	\N	2016-07-17 19:18:32.695032+03
+7925	2950	2	\N	2016-07-17 19:18:32.695032+03
+7926	2951	2	\N	2016-07-17 19:18:32.695032+03
+7927	2952	2	\N	2016-07-17 19:18:32.695032+03
+7928	2953	2	\N	2016-07-17 19:18:41.475223+03
+7929	2954	2	\N	2016-07-17 19:19:39.761987+03
+7930	2955	2	\N	2016-07-17 19:19:41.856204+03
+7931	2956	2	\N	2016-07-17 19:44:29.249691+03
+7932	2957	2	\N	2016-07-17 19:44:29.249691+03
+7933	2958	2	\N	2016-07-17 19:44:29.249691+03
+7934	2956	2	\N	2016-07-17 19:44:29.249691+03
+7935	2957	2	\N	2016-07-17 19:44:29.249691+03
+7936	2958	2	\N	2016-07-17 19:44:29.249691+03
+7937	2959	2	\N	2016-07-17 19:44:45.541927+03
+7938	2960	2	\N	2016-07-17 19:44:45.541927+03
+7939	2961	2	\N	2016-07-17 19:44:45.541927+03
+7940	2959	2	\N	2016-07-17 19:44:45.541927+03
+7941	2960	2	\N	2016-07-17 19:44:45.541927+03
+7942	2961	2	\N	2016-07-17 19:44:45.541927+03
+7943	2962	2	\N	2016-07-17 19:44:53.008531+03
+7944	2963	2	\N	2016-07-17 19:48:37.057009+03
+7945	2964	2	\N	2016-07-17 19:48:37.057009+03
+7946	2965	2	\N	2016-07-17 19:48:37.057009+03
+7947	2963	2	\N	2016-07-17 19:48:37.057009+03
+7948	2964	2	\N	2016-07-17 19:48:37.057009+03
+7949	2965	2	\N	2016-07-17 19:48:37.057009+03
+7950	2966	2	\N	2016-07-17 19:49:55.098489+03
+7951	2967	2	\N	2016-07-17 19:49:55.098489+03
+7952	2968	2	\N	2016-07-17 19:49:55.098489+03
+7953	2969	2	\N	2016-07-17 19:51:50.075187+03
+7954	2970	2	\N	2016-07-17 19:51:50.075187+03
+7955	2971	2	\N	2016-07-17 19:51:50.075187+03
+7956	2972	2	\N	2016-07-17 19:53:36.417745+03
+7957	2973	2	\N	2016-07-17 19:53:36.417745+03
+7958	2974	2	\N	2016-07-17 19:53:36.417745+03
+7959	2975	2	\N	2016-07-17 19:55:12.035104+03
+7960	2976	2	\N	2016-07-17 19:55:12.035104+03
+7961	2977	2	\N	2016-07-17 19:55:12.035104+03
+7962	2975	2	\N	2016-07-17 19:55:12.035104+03
+7963	2976	2	\N	2016-07-17 19:55:12.035104+03
+7964	2977	2	\N	2016-07-17 19:55:12.035104+03
+7965	2978	2	\N	2016-07-17 19:59:51.07105+03
+7966	2979	2	\N	2016-07-17 19:59:51.07105+03
+7967	2980	2	\N	2016-07-17 19:59:51.07105+03
+7968	2981	2	\N	2016-07-17 20:00:36.447131+03
+7969	2982	2	\N	2016-07-17 20:18:29.34352+03
+7970	2983	2	\N	2016-07-17 20:18:29.34352+03
+7971	2984	2	\N	2016-07-17 20:18:29.34352+03
+7972	2982	2	\N	2016-07-17 20:18:29.34352+03
+7973	2983	2	\N	2016-07-17 20:18:29.34352+03
+7974	2984	2	\N	2016-07-17 20:18:29.34352+03
+7975	2985	2	\N	2016-07-17 20:22:21.070941+03
+7976	2986	2	\N	2016-07-17 20:22:21.070941+03
+7977	2987	2	\N	2016-07-17 20:22:21.070941+03
+7978	2985	2	\N	2016-07-17 20:22:21.070941+03
+7979	2986	2	\N	2016-07-17 20:22:21.070941+03
+7980	2987	2	\N	2016-07-17 20:22:21.070941+03
+7981	2988	2	\N	2016-07-17 20:23:21.19496+03
+7982	2989	2	\N	2016-07-17 20:23:21.19496+03
+7983	2990	2	\N	2016-07-17 20:23:21.19496+03
+7984	2988	2	\N	2016-07-17 20:23:21.19496+03
+7985	2989	2	\N	2016-07-17 20:23:21.19496+03
+7986	2990	2	\N	2016-07-17 20:23:21.19496+03
+7987	2991	2	\N	2016-07-17 20:23:31.872753+03
+7988	2992	2	\N	2016-07-17 20:37:54.911856+03
+7989	2993	2	\N	2016-07-17 20:37:54.911856+03
+7990	2994	2	\N	2016-07-17 20:37:54.911856+03
+7991	2992	2	\N	2016-07-17 20:37:54.911856+03
+7992	2993	2	\N	2016-07-17 20:37:54.911856+03
+7993	2994	2	\N	2016-07-17 20:37:54.911856+03
+7994	2995	2	\N	2016-07-17 20:40:11.322545+03
+7995	2996	2	\N	2016-07-17 20:40:11.322545+03
+7996	2997	2	\N	2016-07-17 20:40:11.322545+03
+7997	2998	2	\N	2016-07-17 20:40:11.322545+03
+7998	2999	2	\N	2016-07-17 20:40:11.322545+03
+7999	3000	2	\N	2016-07-17 20:40:11.322545+03
+8000	2995	2	\N	2016-07-17 20:40:11.322545+03
+8001	2996	2	\N	2016-07-17 20:40:11.322545+03
+8002	2997	2	\N	2016-07-17 20:40:11.322545+03
+8003	2998	2	\N	2016-07-17 20:40:11.322545+03
+8004	2999	2	\N	2016-07-17 20:40:11.322545+03
+8005	3000	2	\N	2016-07-17 20:40:11.322545+03
+8006	3001	2	\N	2016-07-17 20:40:31.998753+03
+8007	3002	2	\N	2016-07-17 20:40:31.998753+03
+8008	3003	2	\N	2016-07-17 20:40:31.998753+03
+8009	3004	2	\N	2016-07-17 20:40:31.998753+03
+8010	3005	2	\N	2016-07-17 20:40:31.998753+03
+8011	3006	2	\N	2016-07-17 20:40:31.998753+03
+8012	3007	2	\N	2016-07-17 20:40:31.998753+03
+8013	3008	2	\N	2016-07-17 20:40:31.998753+03
+8014	3009	2	\N	2016-07-17 20:40:31.998753+03
+8015	3010	2	\N	2016-07-17 20:40:31.998753+03
+8016	3011	2	\N	2016-07-17 20:40:31.998753+03
+8017	3012	2	\N	2016-07-17 20:40:31.998753+03
+8018	3001	2	\N	2016-07-17 20:40:31.998753+03
+8019	3002	2	\N	2016-07-17 20:40:31.998753+03
+8020	3003	2	\N	2016-07-17 20:40:31.998753+03
+8021	3004	2	\N	2016-07-17 20:40:31.998753+03
+8022	3005	2	\N	2016-07-17 20:40:31.998753+03
+8023	3006	2	\N	2016-07-17 20:40:31.998753+03
+8024	3007	2	\N	2016-07-17 20:40:31.998753+03
+8025	3008	2	\N	2016-07-17 20:40:31.998753+03
+8026	3009	2	\N	2016-07-17 20:40:31.998753+03
+8027	3010	2	\N	2016-07-17 20:40:31.998753+03
+8028	3011	2	\N	2016-07-17 20:40:31.998753+03
+8029	3012	2	\N	2016-07-17 20:40:31.998753+03
+8030	3013	2	\N	2016-07-17 20:40:55.934302+03
+8031	3014	2	\N	2016-07-17 20:40:55.934302+03
+8032	3015	2	\N	2016-07-17 20:40:55.934302+03
+8033	3016	2	\N	2016-07-17 20:40:55.934302+03
+8034	3017	2	\N	2016-07-17 20:40:55.934302+03
+8035	3018	2	\N	2016-07-17 20:40:55.934302+03
+8036	3019	2	\N	2016-07-17 20:40:55.934302+03
+8037	3020	2	\N	2016-07-17 20:40:55.934302+03
+8038	3021	2	\N	2016-07-17 20:40:55.934302+03
+8039	3022	2	\N	2016-07-17 20:40:55.934302+03
+8040	3023	2	\N	2016-07-17 20:40:55.934302+03
+8041	3024	2	\N	2016-07-17 20:40:55.934302+03
+8042	3025	2	\N	2016-07-17 20:40:55.934302+03
+8043	3026	2	\N	2016-07-17 20:40:55.934302+03
+8044	3027	2	\N	2016-07-17 20:40:55.934302+03
+8045	3028	2	\N	2016-07-17 20:40:55.934302+03
+8046	3029	2	\N	2016-07-17 20:40:55.934302+03
+8047	3030	2	\N	2016-07-17 20:40:55.934302+03
+8048	3031	2	\N	2016-07-17 20:40:55.934302+03
+8049	3032	2	\N	2016-07-17 20:40:55.934302+03
+8050	3033	2	\N	2016-07-17 20:40:55.934302+03
+8051	3034	2	\N	2016-07-17 20:40:55.934302+03
+8052	3035	2	\N	2016-07-17 20:40:55.934302+03
+8053	3036	2	\N	2016-07-17 20:40:55.934302+03
+8054	3013	2	\N	2016-07-17 20:40:55.934302+03
+8055	3014	2	\N	2016-07-17 20:40:55.934302+03
+8056	3015	2	\N	2016-07-17 20:40:55.934302+03
+8057	3016	2	\N	2016-07-17 20:40:55.934302+03
+8058	3017	2	\N	2016-07-17 20:40:55.934302+03
+8059	3018	2	\N	2016-07-17 20:40:55.934302+03
+8060	3019	2	\N	2016-07-17 20:40:55.934302+03
+8061	3020	2	\N	2016-07-17 20:40:55.934302+03
+8062	3021	2	\N	2016-07-17 20:40:55.934302+03
+8063	3022	2	\N	2016-07-17 20:40:55.934302+03
+8064	3023	2	\N	2016-07-17 20:40:55.934302+03
+8065	3024	2	\N	2016-07-17 20:40:55.934302+03
+8066	3025	2	\N	2016-07-17 20:40:55.934302+03
+8067	3026	2	\N	2016-07-17 20:40:55.934302+03
+8068	3027	2	\N	2016-07-17 20:40:55.934302+03
+8069	3028	2	\N	2016-07-17 20:40:55.934302+03
+8070	3029	2	\N	2016-07-17 20:40:55.934302+03
+8071	3030	2	\N	2016-07-17 20:40:55.934302+03
+8072	3031	2	\N	2016-07-17 20:40:55.934302+03
+8073	3032	2	\N	2016-07-17 20:40:55.934302+03
+8074	3033	2	\N	2016-07-17 20:40:55.934302+03
+8075	3034	2	\N	2016-07-17 20:40:55.934302+03
+8076	3035	2	\N	2016-07-17 20:40:55.934302+03
+8077	3036	2	\N	2016-07-17 20:40:55.934302+03
+8078	3037	2	\N	2016-07-17 20:43:12.081292+03
+8079	3038	2	\N	2016-07-17 20:43:12.081292+03
+8080	3039	2	\N	2016-07-17 20:43:12.081292+03
+8081	3040	2	\N	2016-07-17 20:43:12.081292+03
+8082	3041	2	\N	2016-07-17 20:43:12.081292+03
+8083	3042	2	\N	2016-07-17 20:43:12.081292+03
+8084	3043	2	\N	2016-07-17 20:43:12.081292+03
+8085	3044	2	\N	2016-07-17 20:43:12.081292+03
+8086	3045	2	\N	2016-07-17 20:43:12.081292+03
+8087	3046	2	\N	2016-07-17 20:43:12.081292+03
+8088	3047	2	\N	2016-07-17 20:43:12.081292+03
+8089	3048	2	\N	2016-07-17 20:43:12.081292+03
+8090	3049	2	\N	2016-07-17 20:43:12.081292+03
+8091	3050	2	\N	2016-07-17 20:43:12.081292+03
+8092	3051	2	\N	2016-07-17 20:43:12.081292+03
+8093	3052	2	\N	2016-07-17 20:43:12.081292+03
+8094	3053	2	\N	2016-07-17 20:43:12.081292+03
+8095	3054	2	\N	2016-07-17 20:43:12.081292+03
+8096	3055	2	\N	2016-07-17 20:43:12.081292+03
+8097	3056	2	\N	2016-07-17 20:43:12.081292+03
+8098	3057	2	\N	2016-07-17 20:43:12.081292+03
+8099	3058	2	\N	2016-07-17 20:43:12.081292+03
+8100	3059	2	\N	2016-07-17 20:43:12.081292+03
+8101	3060	2	\N	2016-07-17 20:43:12.081292+03
+8102	3061	2	\N	2016-07-17 20:43:12.081292+03
+8103	3062	2	\N	2016-07-17 20:43:12.081292+03
+8104	3063	2	\N	2016-07-17 20:43:12.081292+03
+8105	3064	2	\N	2016-07-17 20:43:12.081292+03
+8106	3065	2	\N	2016-07-17 20:43:12.081292+03
+8107	3066	2	\N	2016-07-17 20:43:12.081292+03
+8108	3067	2	\N	2016-07-17 20:43:12.081292+03
+8109	3068	2	\N	2016-07-17 20:43:12.081292+03
+8110	3069	2	\N	2016-07-17 20:43:12.081292+03
+8111	3070	2	\N	2016-07-17 20:43:12.081292+03
+8112	3071	2	\N	2016-07-17 20:43:12.081292+03
+8113	3072	2	\N	2016-07-17 20:43:12.081292+03
+8114	3073	2	\N	2016-07-17 20:43:12.081292+03
+8115	3074	2	\N	2016-07-17 20:43:12.081292+03
+8116	3075	2	\N	2016-07-17 20:43:12.081292+03
+8117	3076	2	\N	2016-07-17 20:43:12.081292+03
+8118	3077	2	\N	2016-07-17 20:43:12.081292+03
+8119	3078	2	\N	2016-07-17 20:43:12.081292+03
+8120	3079	2	\N	2016-07-17 20:43:12.081292+03
+8121	3080	2	\N	2016-07-17 20:43:12.081292+03
+8122	3081	2	\N	2016-07-17 20:43:12.081292+03
+8123	3082	2	\N	2016-07-17 20:43:12.081292+03
+8124	3083	2	\N	2016-07-17 20:43:12.081292+03
+8125	3084	2	\N	2016-07-17 20:43:12.081292+03
+8126	3037	2	\N	2016-07-17 20:43:12.081292+03
+8127	3038	2	\N	2016-07-17 20:43:12.081292+03
+8128	3039	2	\N	2016-07-17 20:43:12.081292+03
+8129	3040	2	\N	2016-07-17 20:43:12.081292+03
+8130	3041	2	\N	2016-07-17 20:43:12.081292+03
+8131	3042	2	\N	2016-07-17 20:43:12.081292+03
+8132	3043	2	\N	2016-07-17 20:43:12.081292+03
+8133	3044	2	\N	2016-07-17 20:43:12.081292+03
+8134	3045	2	\N	2016-07-17 20:43:12.081292+03
+8135	3046	2	\N	2016-07-17 20:43:12.081292+03
+8136	3047	2	\N	2016-07-17 20:43:12.081292+03
+8137	3048	2	\N	2016-07-17 20:43:12.081292+03
+8138	3049	2	\N	2016-07-17 20:43:12.081292+03
+8139	3050	2	\N	2016-07-17 20:43:12.081292+03
+8140	3051	2	\N	2016-07-17 20:43:12.081292+03
+8141	3052	2	\N	2016-07-17 20:43:12.081292+03
+8142	3053	2	\N	2016-07-17 20:43:12.081292+03
+8143	3054	2	\N	2016-07-17 20:43:12.081292+03
+8144	3055	2	\N	2016-07-17 20:43:12.081292+03
+8145	3056	2	\N	2016-07-17 20:43:12.081292+03
+8146	3057	2	\N	2016-07-17 20:43:12.081292+03
+8147	3058	2	\N	2016-07-17 20:43:12.081292+03
+8148	3059	2	\N	2016-07-17 20:43:12.081292+03
+8149	3060	2	\N	2016-07-17 20:43:12.081292+03
+8150	3061	2	\N	2016-07-17 20:43:12.081292+03
+8151	3062	2	\N	2016-07-17 20:43:12.081292+03
+8152	3063	2	\N	2016-07-17 20:43:12.081292+03
+8153	3064	2	\N	2016-07-17 20:43:12.081292+03
+8154	3065	2	\N	2016-07-17 20:43:12.081292+03
+8155	3066	2	\N	2016-07-17 20:43:12.081292+03
+8156	3067	2	\N	2016-07-17 20:43:12.081292+03
+8157	3068	2	\N	2016-07-17 20:43:12.081292+03
+8158	3069	2	\N	2016-07-17 20:43:12.081292+03
+8159	3070	2	\N	2016-07-17 20:43:12.081292+03
+8160	3071	2	\N	2016-07-17 20:43:12.081292+03
+8161	3072	2	\N	2016-07-17 20:43:12.081292+03
+8162	3073	2	\N	2016-07-17 20:43:12.081292+03
+8163	3074	2	\N	2016-07-17 20:43:12.081292+03
+8164	3075	2	\N	2016-07-17 20:43:12.081292+03
+8165	3076	2	\N	2016-07-17 20:43:12.081292+03
+8166	3077	2	\N	2016-07-17 20:43:12.081292+03
+8167	3078	2	\N	2016-07-17 20:43:12.081292+03
+8168	3079	2	\N	2016-07-17 20:43:12.081292+03
+8169	3080	2	\N	2016-07-17 20:43:12.081292+03
+8170	3081	2	\N	2016-07-17 20:43:12.081292+03
+8171	3082	2	\N	2016-07-17 20:43:12.081292+03
+8172	3083	2	\N	2016-07-17 20:43:12.081292+03
+8173	3084	2	\N	2016-07-17 20:43:12.081292+03
+8174	3085	2	\N	2016-07-17 20:43:36.797856+03
+8175	3086	2	\N	2016-07-17 20:43:36.797856+03
+8176	3087	2	\N	2016-07-17 20:43:36.797856+03
+8177	3088	2	\N	2016-07-17 20:43:36.797856+03
+8178	3089	2	\N	2016-07-17 20:43:36.797856+03
+8179	3090	2	\N	2016-07-17 20:43:36.797856+03
+8180	3091	2	\N	2016-07-17 20:43:36.797856+03
+8181	3092	2	\N	2016-07-17 20:43:36.797856+03
+8182	3093	2	\N	2016-07-17 20:43:36.797856+03
+8183	3094	2	\N	2016-07-17 20:43:36.797856+03
+8184	3095	2	\N	2016-07-17 20:43:36.797856+03
+8185	3096	2	\N	2016-07-17 20:43:36.797856+03
+8186	3097	2	\N	2016-07-17 20:43:36.797856+03
+8187	3098	2	\N	2016-07-17 20:43:36.797856+03
+8188	3099	2	\N	2016-07-17 20:43:36.797856+03
+8189	3100	2	\N	2016-07-17 20:43:36.797856+03
+8190	3101	2	\N	2016-07-17 20:43:36.797856+03
+8191	3102	2	\N	2016-07-17 20:43:36.797856+03
+8192	3103	2	\N	2016-07-17 20:43:36.797856+03
+8193	3104	2	\N	2016-07-17 20:43:36.797856+03
+8194	3105	2	\N	2016-07-17 20:43:36.797856+03
+8195	3106	2	\N	2016-07-17 20:43:36.797856+03
+8196	3107	2	\N	2016-07-17 20:43:36.797856+03
+8197	3108	2	\N	2016-07-17 20:43:36.797856+03
+8198	3109	2	\N	2016-07-17 20:43:36.797856+03
+8199	3110	2	\N	2016-07-17 20:43:36.797856+03
+8200	3111	2	\N	2016-07-17 20:43:36.797856+03
+8201	3112	2	\N	2016-07-17 20:43:36.797856+03
+8202	3113	2	\N	2016-07-17 20:43:36.797856+03
+8203	3114	2	\N	2016-07-17 20:43:36.797856+03
+8204	3115	2	\N	2016-07-17 20:43:36.797856+03
+8205	3116	2	\N	2016-07-17 20:43:36.797856+03
+8206	3117	2	\N	2016-07-17 20:43:36.797856+03
+8207	3118	2	\N	2016-07-17 20:43:36.797856+03
+8208	3119	2	\N	2016-07-17 20:43:36.797856+03
+8209	3120	2	\N	2016-07-17 20:43:36.797856+03
+8210	3121	2	\N	2016-07-17 20:43:36.797856+03
+8211	3122	2	\N	2016-07-17 20:43:36.797856+03
+8212	3123	2	\N	2016-07-17 20:43:36.797856+03
+8213	3124	2	\N	2016-07-17 20:43:36.797856+03
+8214	3125	2	\N	2016-07-17 20:43:36.797856+03
+8215	3126	2	\N	2016-07-17 20:43:36.797856+03
+8216	3127	2	\N	2016-07-17 20:43:36.797856+03
+8217	3128	2	\N	2016-07-17 20:43:36.797856+03
+8218	3129	2	\N	2016-07-17 20:43:36.797856+03
+8219	3130	2	\N	2016-07-17 20:43:36.797856+03
+8220	3131	2	\N	2016-07-17 20:43:36.797856+03
+8221	3132	2	\N	2016-07-17 20:43:36.797856+03
+8222	3133	2	\N	2016-07-17 20:43:36.797856+03
+8223	3134	2	\N	2016-07-17 20:43:36.797856+03
+8224	3135	2	\N	2016-07-17 20:43:36.797856+03
+8225	3136	2	\N	2016-07-17 20:43:36.797856+03
+8226	3137	2	\N	2016-07-17 20:43:36.797856+03
+8227	3138	2	\N	2016-07-17 20:43:36.797856+03
+8228	3139	2	\N	2016-07-17 20:43:36.797856+03
+8229	3140	2	\N	2016-07-17 20:43:36.797856+03
+8230	3141	2	\N	2016-07-17 20:43:36.797856+03
+8231	3142	2	\N	2016-07-17 20:43:36.797856+03
+8232	3143	2	\N	2016-07-17 20:43:36.797856+03
+8233	3144	2	\N	2016-07-17 20:43:36.797856+03
+8234	3145	2	\N	2016-07-17 20:43:36.797856+03
+8235	3146	2	\N	2016-07-17 20:43:36.797856+03
+8236	3147	2	\N	2016-07-17 20:43:36.797856+03
+8237	3148	2	\N	2016-07-17 20:43:36.797856+03
+8238	3149	2	\N	2016-07-17 20:43:36.797856+03
+8239	3150	2	\N	2016-07-17 20:43:36.797856+03
+8240	3151	2	\N	2016-07-17 20:43:36.797856+03
+8241	3152	2	\N	2016-07-17 20:43:36.797856+03
+8242	3153	2	\N	2016-07-17 20:43:36.797856+03
+8243	3154	2	\N	2016-07-17 20:43:36.797856+03
+8244	3155	2	\N	2016-07-17 20:43:36.797856+03
+8245	3156	2	\N	2016-07-17 20:43:36.797856+03
+8246	3157	2	\N	2016-07-17 20:43:36.797856+03
+8247	3158	2	\N	2016-07-17 20:43:36.797856+03
+8248	3159	2	\N	2016-07-17 20:43:36.797856+03
+8249	3160	2	\N	2016-07-17 20:43:36.797856+03
+8250	3161	2	\N	2016-07-17 20:43:36.797856+03
+8251	3162	2	\N	2016-07-17 20:43:36.797856+03
+8252	3163	2	\N	2016-07-17 20:43:36.797856+03
+8253	3164	2	\N	2016-07-17 20:43:36.797856+03
+8254	3165	2	\N	2016-07-17 20:43:36.797856+03
+8255	3166	2	\N	2016-07-17 20:43:36.797856+03
+8256	3167	2	\N	2016-07-17 20:43:36.797856+03
+8257	3168	2	\N	2016-07-17 20:43:36.797856+03
+8258	3169	2	\N	2016-07-17 20:43:36.797856+03
+8259	3170	2	\N	2016-07-17 20:43:36.797856+03
+8260	3171	2	\N	2016-07-17 20:43:36.797856+03
+8261	3172	2	\N	2016-07-17 20:43:36.797856+03
+8262	3173	2	\N	2016-07-17 20:43:36.797856+03
+8263	3174	2	\N	2016-07-17 20:43:36.797856+03
+8264	3175	2	\N	2016-07-17 20:43:36.797856+03
+8265	3176	2	\N	2016-07-17 20:43:36.797856+03
+8266	3177	2	\N	2016-07-17 20:43:36.797856+03
+8267	3178	2	\N	2016-07-17 20:43:36.797856+03
+8268	3179	2	\N	2016-07-17 20:43:36.797856+03
+8269	3180	2	\N	2016-07-17 20:43:36.797856+03
+8270	3085	2	\N	2016-07-17 20:43:36.797856+03
+8271	3086	2	\N	2016-07-17 20:43:36.797856+03
+8272	3087	2	\N	2016-07-17 20:43:36.797856+03
+8273	3088	2	\N	2016-07-17 20:43:36.797856+03
+8274	3089	2	\N	2016-07-17 20:43:36.797856+03
+8275	3090	2	\N	2016-07-17 20:43:36.797856+03
+8276	3091	2	\N	2016-07-17 20:43:36.797856+03
+8277	3092	2	\N	2016-07-17 20:43:36.797856+03
+8278	3093	2	\N	2016-07-17 20:43:36.797856+03
+8279	3094	2	\N	2016-07-17 20:43:36.797856+03
+8280	3095	2	\N	2016-07-17 20:43:36.797856+03
+8281	3096	2	\N	2016-07-17 20:43:36.797856+03
+8282	3097	2	\N	2016-07-17 20:43:36.797856+03
+8283	3098	2	\N	2016-07-17 20:43:36.797856+03
+8284	3099	2	\N	2016-07-17 20:43:36.797856+03
+8285	3100	2	\N	2016-07-17 20:43:36.797856+03
+8286	3101	2	\N	2016-07-17 20:43:36.797856+03
+8287	3102	2	\N	2016-07-17 20:43:36.797856+03
+8288	3103	2	\N	2016-07-17 20:43:36.797856+03
+8289	3104	2	\N	2016-07-17 20:43:36.797856+03
+8290	3105	2	\N	2016-07-17 20:43:36.797856+03
+8291	3106	2	\N	2016-07-17 20:43:36.797856+03
+8292	3107	2	\N	2016-07-17 20:43:36.797856+03
+8293	3108	2	\N	2016-07-17 20:43:36.797856+03
+8294	3109	2	\N	2016-07-17 20:43:36.797856+03
+8295	3110	2	\N	2016-07-17 20:43:36.797856+03
+8296	3111	2	\N	2016-07-17 20:43:36.797856+03
+8297	3112	2	\N	2016-07-17 20:43:36.797856+03
+8298	3113	2	\N	2016-07-17 20:43:36.797856+03
+8299	3114	2	\N	2016-07-17 20:43:36.797856+03
+8300	3115	2	\N	2016-07-17 20:43:36.797856+03
+8301	3116	2	\N	2016-07-17 20:43:36.797856+03
+8302	3117	2	\N	2016-07-17 20:43:36.797856+03
+8303	3118	2	\N	2016-07-17 20:43:36.797856+03
+8304	3119	2	\N	2016-07-17 20:43:36.797856+03
+8305	3120	2	\N	2016-07-17 20:43:36.797856+03
+8306	3121	2	\N	2016-07-17 20:43:36.797856+03
+8307	3122	2	\N	2016-07-17 20:43:36.797856+03
+8308	3123	2	\N	2016-07-17 20:43:36.797856+03
+8309	3124	2	\N	2016-07-17 20:43:36.797856+03
+8310	3125	2	\N	2016-07-17 20:43:36.797856+03
+8311	3126	2	\N	2016-07-17 20:43:36.797856+03
+8312	3127	2	\N	2016-07-17 20:43:36.797856+03
+8313	3128	2	\N	2016-07-17 20:43:36.797856+03
+8314	3129	2	\N	2016-07-17 20:43:36.797856+03
+8315	3130	2	\N	2016-07-17 20:43:36.797856+03
+8316	3131	2	\N	2016-07-17 20:43:36.797856+03
+8317	3132	2	\N	2016-07-17 20:43:36.797856+03
+8318	3133	2	\N	2016-07-17 20:43:36.797856+03
+8319	3134	2	\N	2016-07-17 20:43:36.797856+03
+8320	3135	2	\N	2016-07-17 20:43:36.797856+03
+8321	3136	2	\N	2016-07-17 20:43:36.797856+03
+8322	3137	2	\N	2016-07-17 20:43:36.797856+03
+8323	3138	2	\N	2016-07-17 20:43:36.797856+03
+8324	3139	2	\N	2016-07-17 20:43:36.797856+03
+8325	3140	2	\N	2016-07-17 20:43:36.797856+03
+8326	3141	2	\N	2016-07-17 20:43:36.797856+03
+8327	3142	2	\N	2016-07-17 20:43:36.797856+03
+8328	3143	2	\N	2016-07-17 20:43:36.797856+03
+8329	3144	2	\N	2016-07-17 20:43:36.797856+03
+8330	3145	2	\N	2016-07-17 20:43:36.797856+03
+8331	3146	2	\N	2016-07-17 20:43:36.797856+03
+8332	3147	2	\N	2016-07-17 20:43:36.797856+03
+8333	3148	2	\N	2016-07-17 20:43:36.797856+03
+8334	3149	2	\N	2016-07-17 20:43:36.797856+03
+8335	3150	2	\N	2016-07-17 20:43:36.797856+03
+8336	3151	2	\N	2016-07-17 20:43:36.797856+03
+8337	3152	2	\N	2016-07-17 20:43:36.797856+03
+8338	3153	2	\N	2016-07-17 20:43:36.797856+03
+8339	3154	2	\N	2016-07-17 20:43:36.797856+03
+8340	3155	2	\N	2016-07-17 20:43:36.797856+03
+8341	3156	2	\N	2016-07-17 20:43:36.797856+03
+8342	3157	2	\N	2016-07-17 20:43:36.797856+03
+8343	3158	2	\N	2016-07-17 20:43:36.797856+03
+8344	3159	2	\N	2016-07-17 20:43:36.797856+03
+8345	3160	2	\N	2016-07-17 20:43:36.797856+03
+8346	3161	2	\N	2016-07-17 20:43:36.797856+03
+8347	3162	2	\N	2016-07-17 20:43:36.797856+03
+8348	3163	2	\N	2016-07-17 20:43:36.797856+03
+8349	3164	2	\N	2016-07-17 20:43:36.797856+03
+8350	3165	2	\N	2016-07-17 20:43:36.797856+03
+8351	3166	2	\N	2016-07-17 20:43:36.797856+03
+8352	3167	2	\N	2016-07-17 20:43:36.797856+03
+8353	3168	2	\N	2016-07-17 20:43:36.797856+03
+8354	3169	2	\N	2016-07-17 20:43:36.797856+03
+8355	3170	2	\N	2016-07-17 20:43:36.797856+03
+8356	3171	2	\N	2016-07-17 20:43:36.797856+03
+8357	3172	2	\N	2016-07-17 20:43:36.797856+03
+8358	3173	2	\N	2016-07-17 20:43:36.797856+03
+8359	3174	2	\N	2016-07-17 20:43:36.797856+03
+8360	3175	2	\N	2016-07-17 20:43:36.797856+03
+8361	3176	2	\N	2016-07-17 20:43:36.797856+03
+8362	3177	2	\N	2016-07-17 20:43:36.797856+03
+8363	3178	2	\N	2016-07-17 20:43:36.797856+03
+8364	3179	2	\N	2016-07-17 20:43:36.797856+03
+8365	3180	2	\N	2016-07-17 20:43:36.797856+03
+8366	3181	2	\N	2016-07-17 20:44:31.462356+03
+8367	3182	2	\N	2016-07-17 20:44:31.462356+03
+8368	3183	2	\N	2016-07-17 20:44:31.462356+03
+8369	3184	2	\N	2016-07-17 20:44:31.462356+03
+8370	3185	2	\N	2016-07-17 20:44:31.462356+03
+8371	3186	2	\N	2016-07-17 20:44:31.462356+03
+8372	3187	2	\N	2016-07-17 20:44:31.462356+03
+8373	3188	2	\N	2016-07-17 20:44:31.462356+03
+8374	3189	2	\N	2016-07-17 20:44:31.462356+03
+8375	3190	2	\N	2016-07-17 20:44:31.462356+03
+8376	3191	2	\N	2016-07-17 20:44:31.462356+03
+8377	3192	2	\N	2016-07-17 20:44:31.462356+03
+8378	3193	2	\N	2016-07-17 20:44:31.462356+03
+8379	3194	2	\N	2016-07-17 20:44:31.462356+03
+8380	3195	2	\N	2016-07-17 20:44:31.462356+03
+8381	3196	2	\N	2016-07-17 20:44:31.462356+03
+8382	3197	2	\N	2016-07-17 20:44:31.462356+03
+8383	3198	2	\N	2016-07-17 20:44:31.462356+03
+8384	3199	2	\N	2016-07-17 20:44:31.462356+03
+8385	3200	2	\N	2016-07-17 20:44:31.462356+03
+8386	3201	2	\N	2016-07-17 20:44:31.462356+03
+8387	3202	2	\N	2016-07-17 20:44:31.462356+03
+8388	3203	2	\N	2016-07-17 20:44:31.462356+03
+8389	3204	2	\N	2016-07-17 20:44:31.462356+03
+8390	3205	2	\N	2016-07-17 20:44:31.462356+03
+8391	3206	2	\N	2016-07-17 20:44:31.462356+03
+8392	3207	2	\N	2016-07-17 20:44:31.462356+03
+8393	3208	2	\N	2016-07-17 20:44:31.462356+03
+8394	3209	2	\N	2016-07-17 20:44:31.462356+03
+8395	3210	2	\N	2016-07-17 20:44:31.462356+03
+8396	3211	2	\N	2016-07-17 20:44:31.462356+03
+8397	3212	2	\N	2016-07-17 20:44:31.462356+03
+8398	3213	2	\N	2016-07-17 20:44:31.462356+03
+8399	3214	2	\N	2016-07-17 20:44:31.462356+03
+8400	3215	2	\N	2016-07-17 20:44:31.462356+03
+8401	3216	2	\N	2016-07-17 20:44:31.462356+03
+8402	3217	2	\N	2016-07-17 20:44:31.462356+03
+8403	3218	2	\N	2016-07-17 20:44:31.462356+03
+8404	3219	2	\N	2016-07-17 20:44:31.462356+03
+8405	3220	2	\N	2016-07-17 20:44:31.462356+03
+8406	3221	2	\N	2016-07-17 20:44:31.462356+03
+8407	3222	2	\N	2016-07-17 20:44:31.462356+03
+8408	3223	2	\N	2016-07-17 20:44:31.462356+03
+8409	3224	2	\N	2016-07-17 20:44:31.462356+03
+8410	3225	2	\N	2016-07-17 20:44:31.462356+03
+8411	3226	2	\N	2016-07-17 20:44:31.462356+03
+8412	3227	2	\N	2016-07-17 20:44:31.462356+03
+8413	3228	2	\N	2016-07-17 20:44:31.462356+03
+8414	3229	2	\N	2016-07-17 20:44:31.462356+03
+8415	3230	2	\N	2016-07-17 20:44:31.462356+03
+8416	3231	2	\N	2016-07-17 20:44:31.462356+03
+8417	3232	2	\N	2016-07-17 20:44:31.462356+03
+8418	3233	2	\N	2016-07-17 20:44:31.462356+03
+8419	3234	2	\N	2016-07-17 20:44:31.462356+03
+8420	3235	2	\N	2016-07-17 20:44:31.462356+03
+8421	3236	2	\N	2016-07-17 20:44:31.462356+03
+8422	3237	2	\N	2016-07-17 20:44:31.462356+03
+8423	3238	2	\N	2016-07-17 20:44:31.462356+03
+8424	3239	2	\N	2016-07-17 20:44:31.462356+03
+8425	3240	2	\N	2016-07-17 20:44:31.462356+03
+8426	3241	2	\N	2016-07-17 20:44:31.462356+03
+8427	3242	2	\N	2016-07-17 20:44:31.462356+03
+8428	3243	2	\N	2016-07-17 20:44:31.462356+03
+8429	3244	2	\N	2016-07-17 20:44:31.462356+03
+8430	3245	2	\N	2016-07-17 20:44:31.462356+03
+8431	3246	2	\N	2016-07-17 20:44:31.462356+03
+8432	3247	2	\N	2016-07-17 20:44:31.462356+03
+8433	3248	2	\N	2016-07-17 20:44:31.462356+03
+8434	3249	2	\N	2016-07-17 20:44:31.462356+03
+8435	3250	2	\N	2016-07-17 20:44:31.462356+03
+8436	3251	2	\N	2016-07-17 20:44:31.462356+03
+8437	3252	2	\N	2016-07-17 20:44:31.462356+03
+8438	3253	2	\N	2016-07-17 20:44:31.462356+03
+8439	3254	2	\N	2016-07-17 20:44:31.462356+03
+8440	3255	2	\N	2016-07-17 20:44:31.462356+03
+8441	3256	2	\N	2016-07-17 20:44:31.462356+03
+8442	3257	2	\N	2016-07-17 20:44:31.462356+03
+8443	3258	2	\N	2016-07-17 20:44:31.462356+03
+8444	3259	2	\N	2016-07-17 20:44:31.462356+03
+8445	3260	2	\N	2016-07-17 20:44:31.462356+03
+8446	3261	2	\N	2016-07-17 20:44:31.462356+03
+8447	3262	2	\N	2016-07-17 20:44:31.462356+03
+8448	3263	2	\N	2016-07-17 20:44:31.462356+03
+8449	3264	2	\N	2016-07-17 20:44:31.462356+03
+8450	3265	2	\N	2016-07-17 20:44:31.462356+03
+8451	3266	2	\N	2016-07-17 20:44:31.462356+03
+8452	3267	2	\N	2016-07-17 20:44:31.462356+03
+8453	3268	2	\N	2016-07-17 20:44:31.462356+03
+8454	3269	2	\N	2016-07-17 20:44:31.462356+03
+8455	3270	2	\N	2016-07-17 20:44:31.462356+03
+8456	3271	2	\N	2016-07-17 20:44:31.462356+03
+8457	3272	2	\N	2016-07-17 20:44:31.462356+03
+8458	3273	2	\N	2016-07-17 20:44:31.462356+03
+8459	3274	2	\N	2016-07-17 20:44:31.462356+03
+8460	3275	2	\N	2016-07-17 20:44:31.462356+03
+8461	3276	2	\N	2016-07-17 20:44:31.462356+03
+8462	3277	2	\N	2016-07-17 20:44:31.462356+03
+8463	3278	2	\N	2016-07-17 20:44:31.462356+03
+8464	3279	2	\N	2016-07-17 20:44:31.462356+03
+8465	3280	2	\N	2016-07-17 20:44:31.462356+03
+8466	3281	2	\N	2016-07-17 20:44:31.462356+03
+8467	3282	2	\N	2016-07-17 20:44:31.462356+03
+8468	3283	2	\N	2016-07-17 20:44:31.462356+03
+8469	3284	2	\N	2016-07-17 20:44:31.462356+03
+8470	3285	2	\N	2016-07-17 20:44:31.462356+03
+8471	3286	2	\N	2016-07-17 20:44:31.462356+03
+8472	3287	2	\N	2016-07-17 20:44:31.462356+03
+8473	3288	2	\N	2016-07-17 20:44:31.462356+03
+8474	3289	2	\N	2016-07-17 20:44:31.462356+03
+8475	3290	2	\N	2016-07-17 20:44:31.462356+03
+8476	3291	2	\N	2016-07-17 20:44:31.462356+03
+8477	3292	2	\N	2016-07-17 20:44:31.462356+03
+8478	3293	2	\N	2016-07-17 20:44:31.462356+03
+8479	3294	2	\N	2016-07-17 20:44:31.462356+03
+8480	3295	2	\N	2016-07-17 20:44:31.462356+03
+8481	3296	2	\N	2016-07-17 20:44:31.462356+03
+8482	3297	2	\N	2016-07-17 20:44:31.462356+03
+8483	3298	2	\N	2016-07-17 20:44:31.462356+03
+8484	3299	2	\N	2016-07-17 20:44:31.462356+03
+8485	3300	2	\N	2016-07-17 20:44:31.462356+03
+8486	3301	2	\N	2016-07-17 20:44:31.462356+03
+8487	3302	2	\N	2016-07-17 20:44:31.462356+03
+8488	3303	2	\N	2016-07-17 20:44:31.462356+03
+8489	3304	2	\N	2016-07-17 20:44:31.462356+03
+8490	3305	2	\N	2016-07-17 20:44:31.462356+03
+8491	3306	2	\N	2016-07-17 20:44:31.462356+03
+8492	3307	2	\N	2016-07-17 20:44:31.462356+03
+8493	3308	2	\N	2016-07-17 20:44:31.462356+03
+8494	3309	2	\N	2016-07-17 20:44:31.462356+03
+8495	3310	2	\N	2016-07-17 20:44:31.462356+03
+8496	3311	2	\N	2016-07-17 20:44:31.462356+03
+8497	3312	2	\N	2016-07-17 20:44:31.462356+03
+8498	3313	2	\N	2016-07-17 20:44:31.462356+03
+8499	3314	2	\N	2016-07-17 20:44:31.462356+03
+8500	3315	2	\N	2016-07-17 20:44:31.462356+03
+8501	3316	2	\N	2016-07-17 20:44:31.462356+03
+8502	3317	2	\N	2016-07-17 20:44:31.462356+03
+8503	3318	2	\N	2016-07-17 20:44:31.462356+03
+8504	3319	2	\N	2016-07-17 20:44:31.462356+03
+8505	3320	2	\N	2016-07-17 20:44:31.462356+03
+8506	3321	2	\N	2016-07-17 20:44:31.462356+03
+8507	3322	2	\N	2016-07-17 20:44:31.462356+03
+8508	3323	2	\N	2016-07-17 20:44:31.462356+03
+8509	3324	2	\N	2016-07-17 20:44:31.462356+03
+8510	3325	2	\N	2016-07-17 20:44:31.462356+03
+8511	3326	2	\N	2016-07-17 20:44:31.462356+03
+8512	3327	2	\N	2016-07-17 20:44:31.462356+03
+8513	3328	2	\N	2016-07-17 20:44:31.462356+03
+8514	3329	2	\N	2016-07-17 20:44:31.462356+03
+8515	3330	2	\N	2016-07-17 20:44:31.462356+03
+8516	3331	2	\N	2016-07-17 20:44:31.462356+03
+8517	3332	2	\N	2016-07-17 20:44:31.462356+03
+8518	3333	2	\N	2016-07-17 20:44:31.462356+03
+8519	3334	2	\N	2016-07-17 20:44:31.462356+03
+8520	3335	2	\N	2016-07-17 20:44:31.462356+03
+8521	3336	2	\N	2016-07-17 20:44:31.462356+03
+8522	3337	2	\N	2016-07-17 20:44:31.462356+03
+8523	3338	2	\N	2016-07-17 20:44:31.462356+03
+8524	3339	2	\N	2016-07-17 20:44:31.462356+03
+8525	3340	2	\N	2016-07-17 20:44:31.462356+03
+8526	3341	2	\N	2016-07-17 20:44:31.462356+03
+8527	3342	2	\N	2016-07-17 20:44:31.462356+03
+8528	3343	2	\N	2016-07-17 20:44:31.462356+03
+8529	3344	2	\N	2016-07-17 20:44:31.462356+03
+8530	3345	2	\N	2016-07-17 20:44:31.462356+03
+8531	3346	2	\N	2016-07-17 20:44:31.462356+03
+8532	3347	2	\N	2016-07-17 20:44:31.462356+03
+8533	3348	2	\N	2016-07-17 20:44:31.462356+03
+8534	3349	2	\N	2016-07-17 20:44:31.462356+03
+8535	3350	2	\N	2016-07-17 20:44:31.462356+03
+8536	3351	2	\N	2016-07-17 20:44:31.462356+03
+8537	3352	2	\N	2016-07-17 20:44:31.462356+03
+8538	3353	2	\N	2016-07-17 20:44:31.462356+03
+8539	3354	2	\N	2016-07-17 20:44:31.462356+03
+8540	3355	2	\N	2016-07-17 20:44:31.462356+03
+8541	3356	2	\N	2016-07-17 20:44:31.462356+03
+8542	3357	2	\N	2016-07-17 20:44:31.462356+03
+8543	3358	2	\N	2016-07-17 20:44:31.462356+03
+8544	3359	2	\N	2016-07-17 20:44:31.462356+03
+8545	3360	2	\N	2016-07-17 20:44:31.462356+03
+8546	3361	2	\N	2016-07-17 20:44:31.462356+03
+8547	3362	2	\N	2016-07-17 20:44:31.462356+03
+8548	3363	2	\N	2016-07-17 20:44:31.462356+03
+8549	3364	2	\N	2016-07-17 20:44:31.462356+03
+8550	3365	2	\N	2016-07-17 20:44:31.462356+03
+8551	3366	2	\N	2016-07-17 20:44:31.462356+03
+8552	3367	2	\N	2016-07-17 20:44:31.462356+03
+8553	3368	2	\N	2016-07-17 20:44:31.462356+03
+8554	3369	2	\N	2016-07-17 20:44:31.462356+03
+8555	3370	2	\N	2016-07-17 20:44:31.462356+03
+8556	3371	2	\N	2016-07-17 20:44:31.462356+03
+8557	3372	2	\N	2016-07-17 20:44:31.462356+03
+8558	3181	2	\N	2016-07-17 20:44:31.462356+03
+8559	3182	2	\N	2016-07-17 20:44:31.462356+03
+8560	3183	2	\N	2016-07-17 20:44:31.462356+03
+8561	3184	2	\N	2016-07-17 20:44:31.462356+03
+8562	3185	2	\N	2016-07-17 20:44:31.462356+03
+8563	3186	2	\N	2016-07-17 20:44:31.462356+03
+8564	3187	2	\N	2016-07-17 20:44:31.462356+03
+8565	3188	2	\N	2016-07-17 20:44:31.462356+03
+8566	3189	2	\N	2016-07-17 20:44:31.462356+03
+8567	3190	2	\N	2016-07-17 20:44:31.462356+03
+8568	3191	2	\N	2016-07-17 20:44:31.462356+03
+8569	3192	2	\N	2016-07-17 20:44:31.462356+03
+8570	3193	2	\N	2016-07-17 20:44:31.462356+03
+8571	3194	2	\N	2016-07-17 20:44:31.462356+03
+8572	3195	2	\N	2016-07-17 20:44:31.462356+03
+8573	3196	2	\N	2016-07-17 20:44:31.462356+03
+8574	3197	2	\N	2016-07-17 20:44:31.462356+03
+8575	3198	2	\N	2016-07-17 20:44:31.462356+03
+8576	3199	2	\N	2016-07-17 20:44:31.462356+03
+8577	3200	2	\N	2016-07-17 20:44:31.462356+03
+8578	3201	2	\N	2016-07-17 20:44:31.462356+03
+8579	3202	2	\N	2016-07-17 20:44:31.462356+03
+8580	3203	2	\N	2016-07-17 20:44:31.462356+03
+8581	3204	2	\N	2016-07-17 20:44:31.462356+03
+8582	3205	2	\N	2016-07-17 20:44:31.462356+03
+8583	3206	2	\N	2016-07-17 20:44:31.462356+03
+8584	3207	2	\N	2016-07-17 20:44:31.462356+03
+8585	3208	2	\N	2016-07-17 20:44:31.462356+03
+8586	3209	2	\N	2016-07-17 20:44:31.462356+03
+8587	3210	2	\N	2016-07-17 20:44:31.462356+03
+8588	3211	2	\N	2016-07-17 20:44:31.462356+03
+8589	3212	2	\N	2016-07-17 20:44:31.462356+03
+8590	3213	2	\N	2016-07-17 20:44:31.462356+03
+8591	3214	2	\N	2016-07-17 20:44:31.462356+03
+8592	3215	2	\N	2016-07-17 20:44:31.462356+03
+8593	3216	2	\N	2016-07-17 20:44:31.462356+03
+8594	3217	2	\N	2016-07-17 20:44:31.462356+03
+8595	3218	2	\N	2016-07-17 20:44:31.462356+03
+8596	3219	2	\N	2016-07-17 20:44:31.462356+03
+8597	3220	2	\N	2016-07-17 20:44:31.462356+03
+8598	3221	2	\N	2016-07-17 20:44:31.462356+03
+8599	3222	2	\N	2016-07-17 20:44:31.462356+03
+8600	3223	2	\N	2016-07-17 20:44:31.462356+03
+8601	3224	2	\N	2016-07-17 20:44:31.462356+03
+8602	3225	2	\N	2016-07-17 20:44:31.462356+03
+8603	3226	2	\N	2016-07-17 20:44:31.462356+03
+8604	3227	2	\N	2016-07-17 20:44:31.462356+03
+8605	3228	2	\N	2016-07-17 20:44:31.462356+03
+8606	3229	2	\N	2016-07-17 20:44:31.462356+03
+8607	3230	2	\N	2016-07-17 20:44:31.462356+03
+8608	3231	2	\N	2016-07-17 20:44:31.462356+03
+8609	3232	2	\N	2016-07-17 20:44:31.462356+03
+8610	3233	2	\N	2016-07-17 20:44:31.462356+03
+8611	3234	2	\N	2016-07-17 20:44:31.462356+03
+8612	3235	2	\N	2016-07-17 20:44:31.462356+03
+8613	3236	2	\N	2016-07-17 20:44:31.462356+03
+8614	3237	2	\N	2016-07-17 20:44:31.462356+03
+8615	3238	2	\N	2016-07-17 20:44:31.462356+03
+8616	3239	2	\N	2016-07-17 20:44:31.462356+03
+8617	3240	2	\N	2016-07-17 20:44:31.462356+03
+8618	3241	2	\N	2016-07-17 20:44:31.462356+03
+8619	3242	2	\N	2016-07-17 20:44:31.462356+03
+8620	3243	2	\N	2016-07-17 20:44:31.462356+03
+8621	3244	2	\N	2016-07-17 20:44:31.462356+03
+8622	3245	2	\N	2016-07-17 20:44:31.462356+03
+8623	3246	2	\N	2016-07-17 20:44:31.462356+03
+8624	3247	2	\N	2016-07-17 20:44:31.462356+03
+8625	3248	2	\N	2016-07-17 20:44:31.462356+03
+8626	3249	2	\N	2016-07-17 20:44:31.462356+03
+8627	3250	2	\N	2016-07-17 20:44:31.462356+03
+8628	3251	2	\N	2016-07-17 20:44:31.462356+03
+8629	3252	2	\N	2016-07-17 20:44:31.462356+03
+8630	3253	2	\N	2016-07-17 20:44:31.462356+03
+8631	3254	2	\N	2016-07-17 20:44:31.462356+03
+8632	3255	2	\N	2016-07-17 20:44:31.462356+03
+8633	3256	2	\N	2016-07-17 20:44:31.462356+03
+8634	3257	2	\N	2016-07-17 20:44:31.462356+03
+8635	3258	2	\N	2016-07-17 20:44:31.462356+03
+8636	3259	2	\N	2016-07-17 20:44:31.462356+03
+8637	3260	2	\N	2016-07-17 20:44:31.462356+03
+8638	3261	2	\N	2016-07-17 20:44:31.462356+03
+8639	3262	2	\N	2016-07-17 20:44:31.462356+03
+8640	3263	2	\N	2016-07-17 20:44:31.462356+03
+8641	3264	2	\N	2016-07-17 20:44:31.462356+03
+8642	3265	2	\N	2016-07-17 20:44:31.462356+03
+8643	3266	2	\N	2016-07-17 20:44:31.462356+03
+8644	3267	2	\N	2016-07-17 20:44:31.462356+03
+8645	3268	2	\N	2016-07-17 20:44:31.462356+03
+8646	3269	2	\N	2016-07-17 20:44:31.462356+03
+8647	3270	2	\N	2016-07-17 20:44:31.462356+03
+8648	3271	2	\N	2016-07-17 20:44:31.462356+03
+8649	3272	2	\N	2016-07-17 20:44:31.462356+03
+8650	3273	2	\N	2016-07-17 20:44:31.462356+03
+8651	3274	2	\N	2016-07-17 20:44:31.462356+03
+8652	3275	2	\N	2016-07-17 20:44:31.462356+03
+8653	3276	2	\N	2016-07-17 20:44:31.462356+03
+8654	3277	2	\N	2016-07-17 20:44:31.462356+03
+8655	3278	2	\N	2016-07-17 20:44:31.462356+03
+8656	3279	2	\N	2016-07-17 20:44:31.462356+03
+8657	3280	2	\N	2016-07-17 20:44:31.462356+03
+8658	3281	2	\N	2016-07-17 20:44:31.462356+03
+8659	3282	2	\N	2016-07-17 20:44:31.462356+03
+8660	3283	2	\N	2016-07-17 20:44:31.462356+03
+8661	3284	2	\N	2016-07-17 20:44:31.462356+03
+8662	3285	2	\N	2016-07-17 20:44:31.462356+03
+8663	3286	2	\N	2016-07-17 20:44:31.462356+03
+8664	3287	2	\N	2016-07-17 20:44:31.462356+03
+8665	3288	2	\N	2016-07-17 20:44:31.462356+03
+8666	3289	2	\N	2016-07-17 20:44:31.462356+03
+8667	3290	2	\N	2016-07-17 20:44:31.462356+03
+8668	3291	2	\N	2016-07-17 20:44:31.462356+03
+8669	3292	2	\N	2016-07-17 20:44:31.462356+03
+8670	3293	2	\N	2016-07-17 20:44:31.462356+03
+8671	3294	2	\N	2016-07-17 20:44:31.462356+03
+8672	3295	2	\N	2016-07-17 20:44:31.462356+03
+8673	3296	2	\N	2016-07-17 20:44:31.462356+03
+8674	3297	2	\N	2016-07-17 20:44:31.462356+03
+8675	3298	2	\N	2016-07-17 20:44:31.462356+03
+8676	3299	2	\N	2016-07-17 20:44:31.462356+03
+8677	3300	2	\N	2016-07-17 20:44:31.462356+03
+8678	3301	2	\N	2016-07-17 20:44:31.462356+03
+8679	3302	2	\N	2016-07-17 20:44:31.462356+03
+8680	3303	2	\N	2016-07-17 20:44:31.462356+03
+8681	3304	2	\N	2016-07-17 20:44:31.462356+03
+8682	3305	2	\N	2016-07-17 20:44:31.462356+03
+8683	3306	2	\N	2016-07-17 20:44:31.462356+03
+8684	3307	2	\N	2016-07-17 20:44:31.462356+03
+8685	3308	2	\N	2016-07-17 20:44:31.462356+03
+8686	3309	2	\N	2016-07-17 20:44:31.462356+03
+8687	3310	2	\N	2016-07-17 20:44:31.462356+03
+8688	3311	2	\N	2016-07-17 20:44:31.462356+03
+8689	3312	2	\N	2016-07-17 20:44:31.462356+03
+8690	3313	2	\N	2016-07-17 20:44:31.462356+03
+8691	3314	2	\N	2016-07-17 20:44:31.462356+03
+8692	3315	2	\N	2016-07-17 20:44:31.462356+03
+8693	3316	2	\N	2016-07-17 20:44:31.462356+03
+8694	3317	2	\N	2016-07-17 20:44:31.462356+03
+8695	3318	2	\N	2016-07-17 20:44:31.462356+03
+8696	3319	2	\N	2016-07-17 20:44:31.462356+03
+8697	3320	2	\N	2016-07-17 20:44:31.462356+03
+8698	3321	2	\N	2016-07-17 20:44:31.462356+03
+8699	3322	2	\N	2016-07-17 20:44:31.462356+03
+8700	3323	2	\N	2016-07-17 20:44:31.462356+03
+8701	3324	2	\N	2016-07-17 20:44:31.462356+03
+8702	3325	2	\N	2016-07-17 20:44:31.462356+03
+8703	3326	2	\N	2016-07-17 20:44:31.462356+03
+8704	3327	2	\N	2016-07-17 20:44:31.462356+03
+8705	3328	2	\N	2016-07-17 20:44:31.462356+03
+8706	3329	2	\N	2016-07-17 20:44:31.462356+03
+8707	3330	2	\N	2016-07-17 20:44:31.462356+03
+8708	3331	2	\N	2016-07-17 20:44:31.462356+03
+8709	3332	2	\N	2016-07-17 20:44:31.462356+03
+8710	3333	2	\N	2016-07-17 20:44:31.462356+03
+8711	3334	2	\N	2016-07-17 20:44:31.462356+03
+8712	3335	2	\N	2016-07-17 20:44:31.462356+03
+8713	3336	2	\N	2016-07-17 20:44:31.462356+03
+8714	3337	2	\N	2016-07-17 20:44:31.462356+03
+8715	3338	2	\N	2016-07-17 20:44:31.462356+03
+8716	3339	2	\N	2016-07-17 20:44:31.462356+03
+8717	3340	2	\N	2016-07-17 20:44:31.462356+03
+8718	3341	2	\N	2016-07-17 20:44:31.462356+03
+8719	3342	2	\N	2016-07-17 20:44:31.462356+03
+8720	3343	2	\N	2016-07-17 20:44:31.462356+03
+8721	3344	2	\N	2016-07-17 20:44:31.462356+03
+8722	3345	2	\N	2016-07-17 20:44:31.462356+03
+8723	3346	2	\N	2016-07-17 20:44:31.462356+03
+8724	3347	2	\N	2016-07-17 20:44:31.462356+03
+8725	3348	2	\N	2016-07-17 20:44:31.462356+03
+8726	3349	2	\N	2016-07-17 20:44:31.462356+03
+8727	3350	2	\N	2016-07-17 20:44:31.462356+03
+8728	3351	2	\N	2016-07-17 20:44:31.462356+03
+8729	3352	2	\N	2016-07-17 20:44:31.462356+03
+8730	3353	2	\N	2016-07-17 20:44:31.462356+03
+8731	3354	2	\N	2016-07-17 20:44:31.462356+03
+8732	3355	2	\N	2016-07-17 20:44:31.462356+03
+8733	3356	2	\N	2016-07-17 20:44:31.462356+03
+8734	3357	2	\N	2016-07-17 20:44:31.462356+03
+8735	3358	2	\N	2016-07-17 20:44:31.462356+03
+8736	3359	2	\N	2016-07-17 20:44:31.462356+03
+8737	3360	2	\N	2016-07-17 20:44:31.462356+03
+8738	3361	2	\N	2016-07-17 20:44:31.462356+03
+8739	3362	2	\N	2016-07-17 20:44:31.462356+03
+8740	3363	2	\N	2016-07-17 20:44:31.462356+03
+8741	3364	2	\N	2016-07-17 20:44:31.462356+03
+8742	3365	2	\N	2016-07-17 20:44:31.462356+03
+8743	3366	2	\N	2016-07-17 20:44:31.462356+03
+8744	3367	2	\N	2016-07-17 20:44:31.462356+03
+8745	3368	2	\N	2016-07-17 20:44:31.462356+03
+8746	3369	2	\N	2016-07-17 20:44:31.462356+03
+8747	3370	2	\N	2016-07-17 20:44:31.462356+03
+8748	3371	2	\N	2016-07-17 20:44:31.462356+03
+8749	3372	2	\N	2016-07-17 20:44:31.462356+03
+8750	3373	2	\N	2016-07-17 20:46:12.319426+03
+8751	3374	2	\N	2016-07-17 20:46:26.521028+03
+8752	3375	2	\N	2016-07-17 20:46:48.023232+03
+8753	3376	2	\N	2016-07-17 20:46:48.023232+03
+8754	3377	2	\N	2016-07-17 20:46:48.023232+03
+8755	3378	2	\N	2016-07-17 20:46:48.023232+03
+8756	3379	2	\N	2016-07-17 20:46:48.023232+03
+8757	3380	2	\N	2016-07-17 20:46:48.023232+03
+8758	3381	2	\N	2016-07-17 20:46:48.023232+03
+8759	3382	2	\N	2016-07-17 20:46:48.023232+03
+8760	3383	2	\N	2016-07-17 20:46:48.023232+03
+8761	3384	2	\N	2016-07-17 20:46:48.023232+03
+8762	3385	2	\N	2016-07-17 20:46:48.023232+03
+8763	3386	2	\N	2016-07-17 20:46:48.023232+03
+8764	3387	2	\N	2016-07-17 20:46:48.023232+03
+8765	3388	2	\N	2016-07-17 20:46:48.023232+03
+8766	3389	2	\N	2016-07-17 20:46:48.023232+03
+8767	3390	2	\N	2016-07-17 20:46:48.023232+03
+8768	3391	2	\N	2016-07-17 20:46:48.023232+03
+8769	3392	2	\N	2016-07-17 20:46:48.023232+03
+8770	3393	2	\N	2016-07-17 20:46:48.023232+03
+8771	3394	2	\N	2016-07-17 20:46:48.023232+03
+8772	3395	2	\N	2016-07-17 20:46:48.023232+03
+8773	3396	2	\N	2016-07-17 20:46:48.023232+03
+8774	3397	2	\N	2016-07-17 20:46:48.023232+03
+8775	3398	2	\N	2016-07-17 20:46:48.023232+03
+8776	3399	2	\N	2016-07-17 20:46:48.023232+03
+8777	3400	2	\N	2016-07-17 20:46:48.023232+03
+8778	3401	2	\N	2016-07-17 20:46:48.023232+03
+8779	3402	2	\N	2016-07-17 20:46:48.023232+03
+8780	3403	2	\N	2016-07-17 20:46:48.023232+03
+8781	3404	2	\N	2016-07-17 20:46:48.023232+03
+8782	3405	2	\N	2016-07-17 20:46:48.023232+03
+8783	3406	2	\N	2016-07-17 20:46:48.023232+03
+8784	3407	2	\N	2016-07-17 20:46:48.023232+03
+8785	3408	2	\N	2016-07-17 20:46:48.023232+03
+8786	3409	2	\N	2016-07-17 20:46:48.023232+03
+8787	3410	2	\N	2016-07-17 20:46:48.023232+03
+8788	3411	2	\N	2016-07-17 20:46:48.023232+03
+8789	3412	2	\N	2016-07-17 20:46:48.023232+03
+8790	3413	2	\N	2016-07-17 20:46:48.023232+03
+8791	3414	2	\N	2016-07-17 20:46:48.023232+03
+8792	3415	2	\N	2016-07-17 20:46:48.023232+03
+8793	3416	2	\N	2016-07-17 20:46:48.023232+03
+8794	3417	2	\N	2016-07-17 20:46:48.023232+03
+8795	3418	2	\N	2016-07-17 20:46:48.023232+03
+8796	3419	2	\N	2016-07-17 20:46:48.023232+03
+8797	3420	2	\N	2016-07-17 20:46:48.023232+03
+8798	3421	2	\N	2016-07-17 20:46:48.023232+03
+8799	3422	2	\N	2016-07-17 20:46:48.023232+03
+8800	3423	2	\N	2016-07-17 20:46:48.023232+03
+8801	3424	2	\N	2016-07-17 20:46:48.023232+03
+8802	3425	2	\N	2016-07-17 20:46:48.023232+03
+8803	3426	2	\N	2016-07-17 20:46:48.023232+03
+8804	3427	2	\N	2016-07-17 20:46:48.023232+03
+8805	3428	2	\N	2016-07-17 20:46:48.023232+03
+8806	3429	2	\N	2016-07-17 20:46:48.023232+03
+8807	3430	2	\N	2016-07-17 20:46:48.023232+03
+8808	3431	2	\N	2016-07-17 20:46:48.023232+03
+8809	3432	2	\N	2016-07-17 20:46:48.023232+03
+8810	3433	2	\N	2016-07-17 20:46:48.023232+03
+8811	3434	2	\N	2016-07-17 20:46:48.023232+03
+8812	3435	2	\N	2016-07-17 20:46:48.023232+03
+8813	3436	2	\N	2016-07-17 20:46:48.023232+03
+8814	3437	2	\N	2016-07-17 20:46:48.023232+03
+8815	3438	2	\N	2016-07-17 20:46:48.023232+03
+8816	3439	2	\N	2016-07-17 20:46:48.023232+03
+8817	3440	2	\N	2016-07-17 20:46:48.023232+03
+8818	3441	2	\N	2016-07-17 20:46:48.023232+03
+8819	3442	2	\N	2016-07-17 20:46:48.023232+03
+8820	3443	2	\N	2016-07-17 20:46:48.023232+03
+8821	3444	2	\N	2016-07-17 20:46:48.023232+03
+8822	3445	2	\N	2016-07-17 20:46:48.023232+03
+8823	3446	2	\N	2016-07-17 20:46:48.023232+03
+8824	3447	2	\N	2016-07-17 20:46:48.023232+03
+8825	3448	2	\N	2016-07-17 20:46:48.023232+03
+8826	3449	2	\N	2016-07-17 20:46:48.023232+03
+8827	3450	2	\N	2016-07-17 20:46:48.023232+03
+8828	3451	2	\N	2016-07-17 20:46:48.023232+03
+8829	3452	2	\N	2016-07-17 20:46:48.023232+03
+8830	3453	2	\N	2016-07-17 20:46:48.023232+03
+8831	3454	2	\N	2016-07-17 20:46:48.023232+03
+8832	3455	2	\N	2016-07-17 20:46:48.023232+03
+8833	3456	2	\N	2016-07-17 20:46:48.023232+03
+8834	3457	2	\N	2016-07-17 20:46:48.023232+03
+8835	3458	2	\N	2016-07-17 20:46:48.023232+03
+8836	3459	2	\N	2016-07-17 20:46:48.023232+03
+8837	3460	2	\N	2016-07-17 20:46:48.023232+03
+8838	3461	2	\N	2016-07-17 20:46:48.023232+03
+8839	3462	2	\N	2016-07-17 20:46:48.023232+03
+8840	3463	2	\N	2016-07-17 20:46:48.023232+03
+8841	3464	2	\N	2016-07-17 20:46:48.023232+03
+8842	3465	2	\N	2016-07-17 20:46:48.023232+03
+8843	3466	2	\N	2016-07-17 20:46:48.023232+03
+8844	3467	2	\N	2016-07-17 20:46:48.023232+03
+8845	3468	2	\N	2016-07-17 20:46:48.023232+03
+8846	3469	2	\N	2016-07-17 20:46:48.023232+03
+8847	3470	2	\N	2016-07-17 20:46:48.023232+03
+8848	3471	2	\N	2016-07-17 20:46:48.023232+03
+8849	3472	2	\N	2016-07-17 20:46:48.023232+03
+8850	3473	2	\N	2016-07-17 20:46:48.023232+03
+8851	3474	2	\N	2016-07-17 20:46:48.023232+03
+8852	3475	2	\N	2016-07-17 20:46:48.023232+03
+8853	3476	2	\N	2016-07-17 20:46:48.023232+03
+8854	3477	2	\N	2016-07-17 20:46:48.023232+03
+8855	3478	2	\N	2016-07-17 20:46:48.023232+03
+8856	3479	2	\N	2016-07-17 20:46:48.023232+03
+8857	3480	2	\N	2016-07-17 20:46:48.023232+03
+8858	3481	2	\N	2016-07-17 20:46:48.023232+03
+8859	3482	2	\N	2016-07-17 20:46:48.023232+03
+8860	3483	2	\N	2016-07-17 20:46:48.023232+03
+8861	3484	2	\N	2016-07-17 20:46:48.023232+03
+8862	3485	2	\N	2016-07-17 20:46:48.023232+03
+8863	3486	2	\N	2016-07-17 20:46:48.023232+03
+8864	3487	2	\N	2016-07-17 20:46:48.023232+03
+8865	3488	2	\N	2016-07-17 20:46:48.023232+03
+8866	3489	2	\N	2016-07-17 20:46:48.023232+03
+8867	3490	2	\N	2016-07-17 20:46:48.023232+03
+8868	3491	2	\N	2016-07-17 20:46:48.023232+03
+8869	3492	2	\N	2016-07-17 20:46:48.023232+03
+8870	3493	2	\N	2016-07-17 20:46:48.023232+03
+8871	3494	2	\N	2016-07-17 20:46:48.023232+03
+8872	3495	2	\N	2016-07-17 20:46:48.023232+03
+8873	3496	2	\N	2016-07-17 20:46:48.023232+03
+8874	3497	2	\N	2016-07-17 20:46:48.023232+03
+8875	3498	2	\N	2016-07-17 20:46:48.023232+03
+8876	3499	2	\N	2016-07-17 20:46:48.023232+03
+8877	3500	2	\N	2016-07-17 20:46:48.023232+03
+8878	3501	2	\N	2016-07-17 20:46:48.023232+03
+8879	3502	2	\N	2016-07-17 20:46:48.023232+03
+8880	3503	2	\N	2016-07-17 20:46:48.023232+03
+8881	3504	2	\N	2016-07-17 20:46:48.023232+03
+8882	3505	2	\N	2016-07-17 20:46:48.023232+03
+8883	3506	2	\N	2016-07-17 20:46:48.023232+03
+8884	3507	2	\N	2016-07-17 20:46:48.023232+03
+8885	3508	2	\N	2016-07-17 20:46:48.023232+03
+8886	3509	2	\N	2016-07-17 20:46:48.023232+03
+8887	3510	2	\N	2016-07-17 20:46:48.023232+03
+8888	3511	2	\N	2016-07-17 20:46:48.023232+03
+8889	3512	2	\N	2016-07-17 20:46:48.023232+03
+8890	3513	2	\N	2016-07-17 20:46:48.023232+03
+8891	3514	2	\N	2016-07-17 20:46:48.023232+03
+8892	3515	2	\N	2016-07-17 20:46:48.023232+03
+8893	3516	2	\N	2016-07-17 20:46:48.023232+03
+8894	3517	2	\N	2016-07-17 20:46:48.023232+03
+8895	3518	2	\N	2016-07-17 20:46:48.023232+03
+8896	3519	2	\N	2016-07-17 20:46:48.023232+03
+8897	3520	2	\N	2016-07-17 20:46:48.023232+03
+8898	3521	2	\N	2016-07-17 20:46:48.023232+03
+8899	3522	2	\N	2016-07-17 20:46:48.023232+03
+8900	3523	2	\N	2016-07-17 20:46:48.023232+03
+8901	3524	2	\N	2016-07-17 20:46:48.023232+03
+8902	3525	2	\N	2016-07-17 20:46:48.023232+03
+8903	3526	2	\N	2016-07-17 20:46:48.023232+03
+8904	3527	2	\N	2016-07-17 20:46:48.023232+03
+8905	3528	2	\N	2016-07-17 20:46:48.023232+03
+8906	3529	2	\N	2016-07-17 20:46:48.023232+03
+8907	3530	2	\N	2016-07-17 20:46:48.023232+03
+8908	3531	2	\N	2016-07-17 20:46:48.023232+03
+8909	3532	2	\N	2016-07-17 20:46:48.023232+03
+8910	3533	2	\N	2016-07-17 20:46:48.023232+03
+8911	3534	2	\N	2016-07-17 20:46:48.023232+03
+8912	3535	2	\N	2016-07-17 20:46:48.023232+03
+8913	3536	2	\N	2016-07-17 20:46:48.023232+03
+8914	3537	2	\N	2016-07-17 20:46:48.023232+03
+8915	3538	2	\N	2016-07-17 20:46:48.023232+03
+8916	3539	2	\N	2016-07-17 20:46:48.023232+03
+8917	3540	2	\N	2016-07-17 20:46:48.023232+03
+8918	3541	2	\N	2016-07-17 20:46:48.023232+03
+8919	3542	2	\N	2016-07-17 20:46:48.023232+03
+8920	3543	2	\N	2016-07-17 20:46:48.023232+03
+8921	3544	2	\N	2016-07-17 20:46:48.023232+03
+8922	3545	2	\N	2016-07-17 20:46:48.023232+03
+8923	3546	2	\N	2016-07-17 20:46:48.023232+03
+8924	3547	2	\N	2016-07-17 20:46:48.023232+03
+8925	3548	2	\N	2016-07-17 20:46:48.023232+03
+8926	3549	2	\N	2016-07-17 20:46:48.023232+03
+8927	3550	2	\N	2016-07-17 20:46:48.023232+03
+8928	3551	2	\N	2016-07-17 20:46:48.023232+03
+8929	3552	2	\N	2016-07-17 20:46:48.023232+03
+8930	3553	2	\N	2016-07-17 20:46:48.023232+03
+8931	3554	2	\N	2016-07-17 20:46:48.023232+03
+8932	3555	2	\N	2016-07-17 20:46:48.023232+03
+8933	3556	2	\N	2016-07-17 20:46:48.023232+03
+8934	3557	2	\N	2016-07-17 20:46:48.023232+03
+8935	3558	2	\N	2016-07-17 20:46:48.023232+03
+8936	3559	2	\N	2016-07-17 20:46:48.023232+03
+8937	3560	2	\N	2016-07-17 20:46:48.023232+03
+8938	3561	2	\N	2016-07-17 20:46:48.023232+03
+8939	3562	2	\N	2016-07-17 20:46:48.023232+03
+8940	3563	2	\N	2016-07-17 20:46:48.023232+03
+8941	3564	2	\N	2016-07-17 20:46:48.023232+03
+8942	3565	2	\N	2016-07-17 20:46:48.023232+03
+8943	3566	2	\N	2016-07-17 20:46:48.023232+03
+8944	3375	2	\N	2016-07-17 20:46:48.023232+03
+8945	3376	2	\N	2016-07-17 20:46:48.023232+03
+8946	3377	2	\N	2016-07-17 20:46:48.023232+03
+8947	3378	2	\N	2016-07-17 20:46:48.023232+03
+8948	3379	2	\N	2016-07-17 20:46:48.023232+03
+8949	3380	2	\N	2016-07-17 20:46:48.023232+03
+8950	3381	2	\N	2016-07-17 20:46:48.023232+03
+8951	3382	2	\N	2016-07-17 20:46:48.023232+03
+8952	3383	2	\N	2016-07-17 20:46:48.023232+03
+8953	3384	2	\N	2016-07-17 20:46:48.023232+03
+8954	3385	2	\N	2016-07-17 20:46:48.023232+03
+8955	3386	2	\N	2016-07-17 20:46:48.023232+03
+8956	3387	2	\N	2016-07-17 20:46:48.023232+03
+8957	3388	2	\N	2016-07-17 20:46:48.023232+03
+8958	3389	2	\N	2016-07-17 20:46:48.023232+03
+8959	3390	2	\N	2016-07-17 20:46:48.023232+03
+8960	3391	2	\N	2016-07-17 20:46:48.023232+03
+8961	3392	2	\N	2016-07-17 20:46:48.023232+03
+8962	3393	2	\N	2016-07-17 20:46:48.023232+03
+8963	3394	2	\N	2016-07-17 20:46:48.023232+03
+8964	3395	2	\N	2016-07-17 20:46:48.023232+03
+8965	3396	2	\N	2016-07-17 20:46:48.023232+03
+8966	3397	2	\N	2016-07-17 20:46:48.023232+03
+8967	3398	2	\N	2016-07-17 20:46:48.023232+03
+8968	3399	2	\N	2016-07-17 20:46:48.023232+03
+8969	3400	2	\N	2016-07-17 20:46:48.023232+03
+8970	3401	2	\N	2016-07-17 20:46:48.023232+03
+8971	3402	2	\N	2016-07-17 20:46:48.023232+03
+8972	3403	2	\N	2016-07-17 20:46:48.023232+03
+8973	3404	2	\N	2016-07-17 20:46:48.023232+03
+8974	3405	2	\N	2016-07-17 20:46:48.023232+03
+8975	3406	2	\N	2016-07-17 20:46:48.023232+03
+8976	3407	2	\N	2016-07-17 20:46:48.023232+03
+8977	3408	2	\N	2016-07-17 20:46:48.023232+03
+8978	3409	2	\N	2016-07-17 20:46:48.023232+03
+8979	3410	2	\N	2016-07-17 20:46:48.023232+03
+8980	3411	2	\N	2016-07-17 20:46:48.023232+03
+8981	3412	2	\N	2016-07-17 20:46:48.023232+03
+8982	3413	2	\N	2016-07-17 20:46:48.023232+03
+8983	3414	2	\N	2016-07-17 20:46:48.023232+03
+8984	3415	2	\N	2016-07-17 20:46:48.023232+03
+8985	3416	2	\N	2016-07-17 20:46:48.023232+03
+8986	3417	2	\N	2016-07-17 20:46:48.023232+03
+8987	3418	2	\N	2016-07-17 20:46:48.023232+03
+8988	3419	2	\N	2016-07-17 20:46:48.023232+03
+8989	3420	2	\N	2016-07-17 20:46:48.023232+03
+8990	3421	2	\N	2016-07-17 20:46:48.023232+03
+8991	3422	2	\N	2016-07-17 20:46:48.023232+03
+8992	3423	2	\N	2016-07-17 20:46:48.023232+03
+8993	3424	2	\N	2016-07-17 20:46:48.023232+03
+8994	3425	2	\N	2016-07-17 20:46:48.023232+03
+8995	3426	2	\N	2016-07-17 20:46:48.023232+03
+8996	3427	2	\N	2016-07-17 20:46:48.023232+03
+8997	3428	2	\N	2016-07-17 20:46:48.023232+03
+8998	3429	2	\N	2016-07-17 20:46:48.023232+03
+8999	3430	2	\N	2016-07-17 20:46:48.023232+03
+9000	3431	2	\N	2016-07-17 20:46:48.023232+03
+9001	3432	2	\N	2016-07-17 20:46:48.023232+03
+9002	3433	2	\N	2016-07-17 20:46:48.023232+03
+9003	3434	2	\N	2016-07-17 20:46:48.023232+03
+9004	3435	2	\N	2016-07-17 20:46:48.023232+03
+9005	3436	2	\N	2016-07-17 20:46:48.023232+03
+9006	3437	2	\N	2016-07-17 20:46:48.023232+03
+9007	3438	2	\N	2016-07-17 20:46:48.023232+03
+9008	3439	2	\N	2016-07-17 20:46:48.023232+03
+9009	3440	2	\N	2016-07-17 20:46:48.023232+03
+9010	3441	2	\N	2016-07-17 20:46:48.023232+03
+9011	3442	2	\N	2016-07-17 20:46:48.023232+03
+9012	3443	2	\N	2016-07-17 20:46:48.023232+03
+9013	3444	2	\N	2016-07-17 20:46:48.023232+03
+9014	3445	2	\N	2016-07-17 20:46:48.023232+03
+9015	3446	2	\N	2016-07-17 20:46:48.023232+03
+9016	3447	2	\N	2016-07-17 20:46:48.023232+03
+9017	3448	2	\N	2016-07-17 20:46:48.023232+03
+9018	3449	2	\N	2016-07-17 20:46:48.023232+03
+9019	3450	2	\N	2016-07-17 20:46:48.023232+03
+9020	3451	2	\N	2016-07-17 20:46:48.023232+03
+9021	3452	2	\N	2016-07-17 20:46:48.023232+03
+9022	3453	2	\N	2016-07-17 20:46:48.023232+03
+9023	3454	2	\N	2016-07-17 20:46:48.023232+03
+9024	3455	2	\N	2016-07-17 20:46:48.023232+03
+9025	3456	2	\N	2016-07-17 20:46:48.023232+03
+9026	3457	2	\N	2016-07-17 20:46:48.023232+03
+9027	3458	2	\N	2016-07-17 20:46:48.023232+03
+9028	3459	2	\N	2016-07-17 20:46:48.023232+03
+9029	3460	2	\N	2016-07-17 20:46:48.023232+03
+9030	3461	2	\N	2016-07-17 20:46:48.023232+03
+9031	3462	2	\N	2016-07-17 20:46:48.023232+03
+9032	3463	2	\N	2016-07-17 20:46:48.023232+03
+9033	3464	2	\N	2016-07-17 20:46:48.023232+03
+9034	3465	2	\N	2016-07-17 20:46:48.023232+03
+9035	3466	2	\N	2016-07-17 20:46:48.023232+03
+9036	3467	2	\N	2016-07-17 20:46:48.023232+03
+9037	3468	2	\N	2016-07-17 20:46:48.023232+03
+9038	3469	2	\N	2016-07-17 20:46:48.023232+03
+9039	3470	2	\N	2016-07-17 20:46:48.023232+03
+9040	3471	2	\N	2016-07-17 20:46:48.023232+03
+9041	3472	2	\N	2016-07-17 20:46:48.023232+03
+9042	3473	2	\N	2016-07-17 20:46:48.023232+03
+9043	3474	2	\N	2016-07-17 20:46:48.023232+03
+9044	3475	2	\N	2016-07-17 20:46:48.023232+03
+9045	3476	2	\N	2016-07-17 20:46:48.023232+03
+9046	3477	2	\N	2016-07-17 20:46:48.023232+03
+9047	3478	2	\N	2016-07-17 20:46:48.023232+03
+9048	3479	2	\N	2016-07-17 20:46:48.023232+03
+9049	3480	2	\N	2016-07-17 20:46:48.023232+03
+9050	3481	2	\N	2016-07-17 20:46:48.023232+03
+9051	3482	2	\N	2016-07-17 20:46:48.023232+03
+9052	3483	2	\N	2016-07-17 20:46:48.023232+03
+9053	3484	2	\N	2016-07-17 20:46:48.023232+03
+9054	3485	2	\N	2016-07-17 20:46:48.023232+03
+9055	3486	2	\N	2016-07-17 20:46:48.023232+03
+9056	3487	2	\N	2016-07-17 20:46:48.023232+03
+9057	3488	2	\N	2016-07-17 20:46:48.023232+03
+9058	3489	2	\N	2016-07-17 20:46:48.023232+03
+9059	3490	2	\N	2016-07-17 20:46:48.023232+03
+9060	3491	2	\N	2016-07-17 20:46:48.023232+03
+9061	3492	2	\N	2016-07-17 20:46:48.023232+03
+9062	3493	2	\N	2016-07-17 20:46:48.023232+03
+9063	3494	2	\N	2016-07-17 20:46:48.023232+03
+9064	3495	2	\N	2016-07-17 20:46:48.023232+03
+9065	3496	2	\N	2016-07-17 20:46:48.023232+03
+9066	3497	2	\N	2016-07-17 20:46:48.023232+03
+9067	3498	2	\N	2016-07-17 20:46:48.023232+03
+9068	3499	2	\N	2016-07-17 20:46:48.023232+03
+9069	3500	2	\N	2016-07-17 20:46:48.023232+03
+9070	3501	2	\N	2016-07-17 20:46:48.023232+03
+9071	3502	2	\N	2016-07-17 20:46:48.023232+03
+9072	3503	2	\N	2016-07-17 20:46:48.023232+03
+9073	3504	2	\N	2016-07-17 20:46:48.023232+03
+9074	3505	2	\N	2016-07-17 20:46:48.023232+03
+9075	3506	2	\N	2016-07-17 20:46:48.023232+03
+9076	3507	2	\N	2016-07-17 20:46:48.023232+03
+9077	3508	2	\N	2016-07-17 20:46:48.023232+03
+9078	3509	2	\N	2016-07-17 20:46:48.023232+03
+9079	3510	2	\N	2016-07-17 20:46:48.023232+03
+9080	3511	2	\N	2016-07-17 20:46:48.023232+03
+9081	3512	2	\N	2016-07-17 20:46:48.023232+03
+9082	3513	2	\N	2016-07-17 20:46:48.023232+03
+9083	3514	2	\N	2016-07-17 20:46:48.023232+03
+9084	3515	2	\N	2016-07-17 20:46:48.023232+03
+9085	3516	2	\N	2016-07-17 20:46:48.023232+03
+9086	3517	2	\N	2016-07-17 20:46:48.023232+03
+9087	3518	2	\N	2016-07-17 20:46:48.023232+03
+9088	3519	2	\N	2016-07-17 20:46:48.023232+03
+9089	3520	2	\N	2016-07-17 20:46:48.023232+03
+9090	3521	2	\N	2016-07-17 20:46:48.023232+03
+9091	3522	2	\N	2016-07-17 20:46:48.023232+03
+9092	3523	2	\N	2016-07-17 20:46:48.023232+03
+9093	3524	2	\N	2016-07-17 20:46:48.023232+03
+9094	3525	2	\N	2016-07-17 20:46:48.023232+03
+9095	3526	2	\N	2016-07-17 20:46:48.023232+03
+9096	3527	2	\N	2016-07-17 20:46:48.023232+03
+9097	3528	2	\N	2016-07-17 20:46:48.023232+03
+9098	3529	2	\N	2016-07-17 20:46:48.023232+03
+9099	3530	2	\N	2016-07-17 20:46:48.023232+03
+9100	3531	2	\N	2016-07-17 20:46:48.023232+03
+9101	3532	2	\N	2016-07-17 20:46:48.023232+03
+9102	3533	2	\N	2016-07-17 20:46:48.023232+03
+9103	3534	2	\N	2016-07-17 20:46:48.023232+03
+9104	3535	2	\N	2016-07-17 20:46:48.023232+03
+9105	3536	2	\N	2016-07-17 20:46:48.023232+03
+9106	3537	2	\N	2016-07-17 20:46:48.023232+03
+9107	3538	2	\N	2016-07-17 20:46:48.023232+03
+9108	3539	2	\N	2016-07-17 20:46:48.023232+03
+9109	3540	2	\N	2016-07-17 20:46:48.023232+03
+9110	3541	2	\N	2016-07-17 20:46:48.023232+03
+9111	3542	2	\N	2016-07-17 20:46:48.023232+03
+9112	3543	2	\N	2016-07-17 20:46:48.023232+03
+9113	3544	2	\N	2016-07-17 20:46:48.023232+03
+9114	3545	2	\N	2016-07-17 20:46:48.023232+03
+9115	3546	2	\N	2016-07-17 20:46:48.023232+03
+9116	3547	2	\N	2016-07-17 20:46:48.023232+03
+9117	3548	2	\N	2016-07-17 20:46:48.023232+03
+9118	3549	2	\N	2016-07-17 20:46:48.023232+03
+9119	3550	2	\N	2016-07-17 20:46:48.023232+03
+9120	3551	2	\N	2016-07-17 20:46:48.023232+03
+9121	3552	2	\N	2016-07-17 20:46:48.023232+03
+9122	3553	2	\N	2016-07-17 20:46:48.023232+03
+9123	3554	2	\N	2016-07-17 20:46:48.023232+03
+9124	3555	2	\N	2016-07-17 20:46:48.023232+03
+9125	3556	2	\N	2016-07-17 20:46:48.023232+03
+9126	3557	2	\N	2016-07-17 20:46:48.023232+03
+9127	3558	2	\N	2016-07-17 20:46:48.023232+03
+9128	3559	2	\N	2016-07-17 20:46:48.023232+03
+9129	3560	2	\N	2016-07-17 20:46:48.023232+03
+9130	3561	2	\N	2016-07-17 20:46:48.023232+03
+9131	3562	2	\N	2016-07-17 20:46:48.023232+03
+9132	3563	2	\N	2016-07-17 20:46:48.023232+03
+9133	3564	2	\N	2016-07-17 20:46:48.023232+03
+9134	3565	2	\N	2016-07-17 20:46:48.023232+03
+9135	3566	2	\N	2016-07-17 20:46:48.023232+03
+9136	2599	2	\N	2016-07-17 20:48:04.661938+03
+9137	3570	2	\N	2016-07-17 21:02:17.675936+03
+9138	3571	2	\N	2016-07-17 21:02:17.675936+03
+9139	3572	2	\N	2016-07-17 21:02:17.675936+03
+9140	3570	2	\N	2016-07-17 21:02:17.675936+03
+9141	3571	2	\N	2016-07-17 21:02:17.675936+03
+9142	3572	2	\N	2016-07-17 21:02:17.675936+03
+9143	3573	2	\N	2016-07-17 21:05:22.570637+03
+9144	3574	2	\N	2016-07-17 21:05:22.570637+03
+9145	3575	2	\N	2016-07-17 21:05:22.570637+03
+9146	3576	2	\N	2016-07-17 21:08:27.561499+03
+9147	3577	2	\N	2016-07-17 21:08:27.561499+03
+9148	3578	2	\N	2016-07-17 21:08:27.561499+03
+9149	3576	2	\N	2016-07-17 21:08:27.561499+03
+9150	3577	2	\N	2016-07-17 21:08:27.561499+03
+9151	3578	2	\N	2016-07-17 21:08:27.561499+03
+9152	3582	2	\N	2016-07-17 21:12:05.642895+03
+9153	3583	2	\N	2016-07-17 21:12:05.642895+03
+9154	3584	2	\N	2016-07-17 21:12:05.642895+03
+9155	3582	2	\N	2016-07-17 21:12:05.642895+03
+9156	3583	2	\N	2016-07-17 21:12:05.642895+03
+9157	3584	2	\N	2016-07-17 21:12:05.642895+03
+9158	3585	2	\N	2016-07-17 21:12:21.726146+03
+9159	3586	2	\N	2016-07-17 21:12:21.726146+03
+9160	3587	2	\N	2016-07-17 21:12:21.726146+03
+9161	3585	2	\N	2016-07-17 21:12:21.726146+03
+9162	3586	2	\N	2016-07-17 21:12:21.726146+03
+9163	3587	2	\N	2016-07-17 21:12:21.726146+03
+9164	3588	2	\N	2016-07-17 21:17:10.901576+03
+9165	3589	2	\N	2016-07-17 21:17:10.901576+03
+9166	3590	2	\N	2016-07-17 21:17:10.901576+03
+9167	3588	2	\N	2016-07-17 21:17:10.901576+03
+9168	3589	2	\N	2016-07-17 21:17:10.901576+03
+9169	3590	2	\N	2016-07-17 21:17:10.901576+03
+9171	3592	2	\N	2016-07-17 21:21:20.394001+03
+9172	3592	2	\N	2016-07-17 21:21:20.394001+03
+9173	3593	2	\N	2016-07-17 21:29:08.916392+03
+9174	3593	2	\N	2016-07-17 21:29:08.916392+03
+9175	3594	2	\N	2016-07-17 21:30:30.908087+03
+9176	3594	2	\N	2016-07-17 21:30:30.908087+03
+9178	3596	2	\N	2016-07-17 21:33:36.141508+03
+9179	3596	2	\N	2016-07-17 21:33:36.141508+03
+9184	3605	2	\N	2016-07-17 22:25:59.358206+03
+9185	3605	2	\N	2016-07-17 22:25:59.358206+03
+9186	3607	2	\N	2016-07-17 22:31:21.662461+03
+9187	3607	2	\N	2016-07-17 22:31:21.662461+03
+9188	3608	2	\N	2016-07-17 22:32:13.581054+03
+9189	3608	2	\N	2016-07-17 22:32:13.581054+03
+9190	3609	2	\N	2016-07-17 22:32:27.009091+03
+9191	3609	2	\N	2016-07-17 22:32:27.009091+03
+9192	3610	2	\N	2016-07-17 22:33:37.722643+03
+9193	3610	2	\N	2016-07-17 22:33:37.722643+03
+9194	3612	2	\N	2016-07-17 22:35:13.336053+03
+9195	3612	2	\N	2016-07-17 22:35:13.336053+03
+9196	3613	2	\N	2016-07-17 22:35:45.25705+03
+9197	3614	2	\N	2016-07-17 22:35:45.25705+03
+9198	3613	2	\N	2016-07-17 22:35:45.25705+03
+9199	3614	2	\N	2016-07-17 22:35:45.25705+03
+9201	3616	2	\N	2016-07-17 22:36:08.778333+03
+9202	3617	2	\N	2016-07-17 22:36:08.778333+03
+9203	3618	2	\N	2016-07-17 22:36:08.778333+03
+9204	3616	2	\N	2016-07-17 22:36:08.778333+03
+9205	3617	2	\N	2016-07-17 22:36:08.778333+03
+9206	3618	2	\N	2016-07-17 22:36:08.778333+03
+9208	3620	2	\N	2016-07-18 12:29:57.722776+03
+9209	3621	2	\N	2016-07-18 12:30:24.354102+03
+9210	3622	2	\N	2016-07-18 12:34:29.004462+03
+9211	3623	2	\N	2016-07-18 12:41:00.617011+03
+9212	3623	2	\N	2016-07-18 12:43:21.147788+03
+9213	3622	2	\N	2016-07-18 12:43:38.756454+03
+9214	3624	2	\N	2016-07-18 12:44:26.407128+03
+9217	3624	2	\N	2016-07-18 12:46:52.495098+03
+9218	1922	2	\N	2016-07-18 12:47:32.820453+03
+9219	1983	2	\N	2016-07-18 12:47:54.267133+03
+9220	1962	2	\N	2016-07-18 12:48:41.656842+03
+9221	1932	2	\N	2016-07-18 12:54:57.158012+03
+9222	1933	2	\N	2016-07-18 12:55:17.340595+03
+9223	1939	2	\N	2016-07-18 12:58:10.209253+03
+9224	3627	2	\N	2016-07-18 13:00:13.242889+03
+9225	3627	2	\N	2016-07-18 13:01:09.417903+03
+9226	1940	2	\N	2016-07-18 13:02:43.509957+03
+9227	3628	2	\N	2016-07-18 13:08:25.073278+03
+9228	1958	2	\N	2016-07-18 13:08:44.410771+03
+9229	1958	2	\N	2016-07-18 13:09:04.744269+03
+9230	1958	2	\N	2016-07-18 13:12:03.429991+03
+9231	3629	2	\N	2016-07-18 13:19:47.090059+03
+9232	3630	2	\N	2016-07-18 13:21:53.332214+03
+9233	3631	2	\N	2016-07-18 13:22:01.281437+03
+9234	3632	2	\N	2016-07-18 13:22:21.806846+03
+9235	3633	2	\N	2016-07-18 13:22:28.357783+03
+9236	2912	2	\N	2016-07-18 14:12:15.22966+03
+9238	3639	2	\N	2016-07-18 14:13:21.815056+03
+9239	3640	2	\N	2016-07-18 14:13:28.291542+03
+9240	2887	2	\N	2016-07-18 14:51:59.504724+03
+9242	3642	2	\N	2016-07-18 15:27:05.35429+03
+9243	3642	2	\N	2016-07-18 15:27:05.35429+03
+9244	3643	2	\N	2016-07-18 15:27:30.300315+03
+9245	3643	2	\N	2016-07-18 15:27:30.300315+03
+9247	3645	2	\N	2016-07-18 15:27:54.945725+03
+9248	3645	2	\N	2016-07-18 15:27:54.945725+03
+9249	3646	2	\N	2016-07-18 15:27:58.438715+03
+9250	3647	2	\N	2016-07-18 15:37:00.879253+03
+9251	3648	2	\N	2016-07-18 15:37:00.879253+03
+9252	3647	2	\N	2016-07-18 15:37:00.879253+03
+9253	3648	2	\N	2016-07-18 15:37:00.879253+03
+9261	3658	2	\N	2016-07-18 19:11:35.788936+03
+9262	3658	2	\N	2016-07-18 19:11:35.788936+03
+9263	3659	2	\N	2016-07-18 19:11:44.065391+03
+9264	3660	2	\N	2016-07-18 19:40:02.195879+03
+9265	3661	2	\N	2016-07-18 19:40:02.195879+03
+9266	3662	2	\N	2016-07-18 19:51:19.833083+03
+9267	3662	2	\N	2016-07-18 19:51:19.833083+03
+9268	3663	2	\N	2016-07-18 19:51:37.036363+03
+9269	3663	2	\N	2016-07-18 19:51:37.036363+03
+9270	3664	2	\N	2016-07-18 19:55:57.655398+03
+9271	3665	2	\N	2016-07-18 19:55:57.655398+03
+9272	3666	2	\N	2016-07-18 19:57:43.344153+03
+9273	3667	2	\N	2016-07-18 19:57:43.344153+03
+9274	3668	2	\N	2016-07-18 21:03:25.710082+03
+9275	3668	2	\N	2016-07-18 21:03:25.710082+03
+9276	3669	2	\N	2016-07-18 21:04:21.413092+03
+9277	3670	2	\N	2016-07-18 21:04:40.623581+03
+9278	3671	2	\N	2016-07-18 21:04:59.792668+03
+9279	3672	2	\N	2016-07-18 21:05:02.91989+03
+9280	3673	2	\N	2016-07-18 21:06:39.104567+03
+9281	3674	2	\N	2016-07-18 21:06:55.570741+03
+9282	3675	2	\N	2016-07-18 21:07:48.916968+03
+9283	3676	2	\N	2016-07-18 21:08:00.243833+03
+9284	3677	2	\N	2016-07-18 21:08:22.488718+03
+9285	3678	2	\N	2016-07-18 21:08:26.526063+03
+9286	3679	2	\N	2016-07-18 21:09:34.242752+03
+9287	3678	2	\N	2016-07-18 21:09:36.66136+03
+9288	3680	2	\N	2016-07-18 21:14:54.717502+03
+9289	3678	2	\N	2016-07-18 21:14:59.994018+03
+9290	3678	2	\N	2016-07-18 21:16:18.222388+03
+9291	3681	2	\N	2016-07-18 21:18:05.711913+03
+9292	3682	2	\N	2016-07-18 21:18:51.796771+03
+9293	3683	2	\N	2016-07-18 21:20:29.357465+03
+9294	3684	2	\N	2016-07-18 21:20:52.829476+03
+9295	3685	2	\N	2016-07-18 21:20:52.829476+03
+9296	3686	2	\N	2016-07-18 21:21:38.146958+03
+9297	3686	2	\N	2016-07-18 21:22:06.030007+03
+9298	3687	2	\N	2016-07-18 21:22:21.765401+03
+9299	3688	2	\N	2016-07-18 21:30:16.633492+03
+9300	3689	2	\N	2016-07-18 21:57:26.693111+03
+9301	3690	2	\N	2016-07-18 21:57:26.693111+03
+9302	3689	2	\N	2016-07-18 21:58:12.214847+03
+9307	3693	2	\N	2016-07-18 22:11:41.812087+03
+9308	3694	2	\N	2016-07-18 22:12:20.422263+03
+9309	3695	2	\N	2016-07-18 22:15:56.389648+03
+9310	3694	2	\N	2016-07-18 22:15:59.504984+03
 \.
 
 
@@ -34690,7 +37028,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 7878, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 9310, true);
 
 
 --
@@ -34946,6 +37284,7 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 25	2861	3	Romanuta Pavel, UAH, cash	\N	0
 26	2862	4	TEZ Tour EUR	\N	0
 27	2866	2	Information Technology Inc.	\N	0
+28	3690	3	Musienko Artur, UAH, cash	\N	0
 \.
 
 
@@ -34953,7 +37292,7 @@ COPY subaccount (id, resource_id, account_id, name, descr, status) FROM stdin;
 -- Name: subaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('subaccount_id_seq', 27, true);
+SELECT pg_catalog.setval('subaccount_id_seq', 28, true);
 
 
 --
@@ -35022,6 +37361,8 @@ COPY supplier_contract (supplier_id, contract_id) FROM stdin;
 101	59
 87	60
 87	61
+87	64
+87	65
 \.
 
 
@@ -35052,7 +37393,7 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 -- Name: supplier_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('supplier_type_id_seq', 4, true);
+SELECT pg_catalog.setval('supplier_type_id_seq', 5, true);
 
 
 --
@@ -35060,51 +37401,33 @@ SELECT pg_catalog.setval('supplier_type_id_seq', 4, true);
 --
 
 COPY task (id, resource_id, title, deadline, descr, status, reminder) FROM stdin;
-37	1933	Call and remind about payment	2014-12-14 22:46:00+02	\N	3	\N
-38	1934	Call and remind about payment	2014-12-12 22:50:00+02	Call and remind to pay invoice	0	\N
-39	1935	Review Calculation	2014-12-12 22:52:00+02	\N	0	\N
-40	1936	For testing Purpose only	2014-12-14 22:35:00+02	\N	0	\N
-33	1922	Test	2014-12-07 21:36:00+02	For testing purpose	1	\N
-55	2063	Revert status after testing	2015-03-08 19:41:00+02	Set status into active after testing	0	\N
-56	2066	Notifications testing #2	2015-03-11 17:16:00+02	\N	0	\N
-57	2068	Test Notification resource link	2015-03-11 19:28:00+02	\N	0	\N
 48	1980	Check Reminder	2015-01-08 18:21:00+02	Description to task	3	\N
 47	1971	Check Payments	2015-01-04 15:45:00+02	\N	1	\N
-41	1939	I have the following code	2014-12-13 23:36:00+02	\N	3	\N
 46	1964	For testing	2014-12-25 23:05:00+02	For testing purpose only	3	\N
-45	1962	Test	2014-12-24 23:32:00+02	\N	3	\N
 52	2009	I decided to try to follow the postgres approach as directly as possible and came up with the following migration.	2015-01-21 22:44:00+02	\N	1	\N
 54	2062	New JEasyui version migrate	2015-03-07 21:43:00+02	Migrate on new 0.4.2 jeasyui version, check all functionality.	2	\N
-44	1958	Test new scheduler realization	2014-12-22 19:18:00+02	New scheduler realizations notifications test.	3	\N
 49	1982	The second task	2015-01-08 18:30:00+02	Second test task	1	\N
-50	1983	Test	2015-01-13 17:06:00+02	\N	1	\N
 51	1985	Test 2	2015-01-14 17:02:00+02	\N	1	\N
 53	2016	Notify his	2015-02-02 17:09:00+02	Notify about the documents	3	\N
-42	1940	Test notifications	2014-12-14 21:37:00+02	\N	2	\N
-59	2131	Task For Lastovec	2015-04-23 15:32:00+03	Test description for task	0	\N
-60	2171	Test for	2015-04-28 10:38:00+03	\N	0	\N
-67	2197	Check reminder	2015-05-03 13:45:00+03	\N	0	10
-68	2291	Call and ansswer about discount	2015-05-19 16:39:00+03	talk about discount	0	10
 58	2075	Call about discounts	2015-03-21 17:20:00+02	Calls and talk about tour discounts	3	10
-69	2303	Call about offer	2015-05-24 17:30:00+03	\N	0	10
-70	2311	Select hotels and hot tours	2015-05-25 10:35:00+03	\N	0	10
-71	2371	Call to client	2015-06-08 15:00:00+03	Call to client with success bucking	0	30
-72	2381	Make an Invoice	2015-06-06 22:12:00+03	Make invoice for this order	0	10
-73	2436	Позвонить клиент	2015-06-11 08:12:00+03	\N	0	10
-78	2584	JEasyui 1.4.3 migration	2015-07-20 00:05:00+03	Migrate to new version of JEasyui	0	10
 36	1932	Call and remind about payments	2014-12-11 22:48:00+02	Bla-Bla	3	10
-79	2671	Call to customer!	2015-07-22 12:05:00+03	call to customer and ask for offer	0	10
-80	2730	Check invoice	2015-07-22 15:30:00+03	Check invoice sum and call about currencies rates	0	10
-81	2815	Test for notifications	2015-11-29 18:04:00+02	For test purposes only	0	10
-82	2816	Test for notifications 2	2015-11-29 18:16:00+02	For test purpose only	0	10
-83	2818	Check for notofications	2015-11-29 19:17:00+02	Test this one	0	10
-35	1930	Check Person Details	2014-11-12 21:43:00+02	We'll reuse the Amount type from last week. It's mostly the same, except we'll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we'll use when dealing with SQL expressions.	2	10
-84	2829	Docs for client	2016-01-15 20:24:00+02	Make docs for client	0	10
-85	2868	New My Task	2016-01-31 20:54:00+02	DEscription for task	0	10
-86	2869	NExt new task	2016-02-03 20:59:00+02	Description not empty	0	10
-87	2890	Test with maintainers	2016-05-16 18:35:00+03	Test description for maintainers	0	10
-88	2901	Prepare documents	2016-05-23 20:05:00+03	They need all documents to do it	0	10
-89	2911	Test task	2016-06-20 13:27:00+03	This is test task	0	10
+90	3622	Check Person Details	2014-11-12 21:43:00+02	We'll reuse the Amount type from last week. It's mostly the same, except we'll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we'll use when dealing with SQL expressions.	2	10
+91	3623	Check Person Details	2014-11-12 21:43:00+02	We'll reuse the Amount type from last week. It's mostly the same, except we'll remove __clause_element__(), and additionally provide a classmethod version of the as_currency() method, which we'll use when dealing with SQL expressions.	2	10
+92	3624	Task For Lastovec	2015-04-23 15:32:00+03	Test description for task	0	10
+33	1922	Test	2014-12-07 21:36:00+02	For testing purpose	1	10
+50	1983	Test	2015-01-13 17:06:00+02	cvxcvbxcvb	1	10
+45	1962	Test	2014-12-24 23:32:00+02	xcvbxcvbxcvxb	3	10
+37	1933	Call and remind about payment	2014-12-14 22:46:00+02	zdgdf gsdffgsdfgsdg	3	10
+41	1939	I have the following code	2014-12-13 23:36:00+02	sdfsd gsdfgsdfg	3	10
+95	3627	dfasdfasdf	2016-07-21 13:00:00+03	asdf asdf asdfasdf	0	10
+42	1940	Test notifications	2014-12-14 21:37:00+02	afsdf asdfasdf	2	10
+96	3628	asdf asdfasdf	2016-07-19 13:08:00+03	sdfasdf	0	10
+44	1958	Test new scheduler realization	2014-12-22 19:18:00+02	New scheduler realizations notifications test.	3	10
+97	3629	Test new scheduler realization	2014-12-22 19:18:00+02	New scheduler realizations notifications test.	3	10
+98	3632	zxcvzx cvzxcvzxcv	2016-07-27 13:22:00+03	xcv zxcvz xcvzxc vzxcv	0	10
+99	3633	zxcvzx cvzxcvzxcv	2016-07-27 13:22:00+03	xcv zxcvz xcvzxc vzxcv	0	10
+100	3679	Add offer	2016-07-18 21:20:00+03	Add tour offer	0	10
+101	3695	Check	2016-07-18 22:20:00+03	check billing	0	10
 \.
 
 
@@ -35112,7 +37435,7 @@ COPY task (id, resource_id, title, deadline, descr, status, reminder) FROM stdin
 -- Name: task_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('task_id_seq', 89, true);
+SELECT pg_catalog.setval('task_id_seq', 101, true);
 
 
 --
@@ -35120,25 +37443,13 @@ SELECT pg_catalog.setval('task_id_seq', 89, true);
 --
 
 COPY task_resource (task_id, resource_id) FROM stdin;
-35	1869
 47	1840
 53	2017
-55	1989
-69	2088
 58	2088
-70	2312
-68	2284
-71	2372
-72	2382
-73	2434
 48	3
 49	3
-59	2126
-79	2669
-80	2729
-84	2831
-88	2902
-89	2887
+100	3678
+101	3694
 \.
 
 
@@ -35237,6 +37548,10 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 28	2687	14	40	40	10	3	\N	2	1	2015-07-24	2015-07-30	\N	1	1	\N	#MAU 892134	#MAU 127193
 29	2828	15	31	32	13	16	30	2	0	2016-02-12	2016-02-19	\N	1	1	\N	TREY0987YUt	TYU9881623
 30	2900	15	41	41	11	10	33	2	0	2016-06-18	2016-06-24	tour to Bodrum	1	1	\N	TYOII-089873	TYU12128-09
+31	3661	15	41	41	11	10	33	2	0	2016-06-18	2016-06-24	tour to Bodrum	1	1	\N	TYOII-089873	TYU12128-09
+32	3665	15	41	41	11	10	33	2	0	2016-06-18	2016-06-25	tour to Bodrum	1	1	\N	TYOII-089873	TYU12128-09
+33	3667	15	41	41	11	10	33	2	0	2016-06-18	2016-06-25	tour to Bodrum	1	1	\N	TYOII-089873	TYU12128-09
+34	3685	15	42	42	\N	16	\N	2	0	2016-07-30	2016-08-06	Тип номера: Standard 2 Расположен : - Линия :вторая Подогреваемый бассейн : - От центра / от аэропорта :50 / 40Количество номеров :668 Интернет : есть Территория отеля : 42 000 кв.м.	1	1	\N	MAU6782	MAU987897
 \.
 
 
@@ -35244,7 +37559,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 -- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tour_id_seq1', 30, true);
+SELECT pg_catalog.setval('tour_id_seq1', 34, true);
 
 
 --
@@ -35261,6 +37576,10 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 44	28
 46	29
 48	30
+49	31
+52	32
+53	33
+54	34
 \.
 
 
@@ -35268,7 +37587,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 -- Name: touroperator_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('touroperator_id_seq', 103, true);
+SELECT pg_catalog.setval('touroperator_id_seq', 104, true);
 
 
 --
@@ -35285,7 +37604,7 @@ COPY transfer (id, resource_id, name) FROM stdin;
 -- Name: transfer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('transfer_id_seq', 267, true);
+SELECT pg_catalog.setval('transfer_id_seq', 284, true);
 
 
 --
@@ -35336,6 +37655,8 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 20	2015722/317847e8-f61f-404c-91b9-d6f03c8228dd.jpg	0.00	image/jpeg		20120908105644_brooks.jpg	2684
 21	2016620/99153520-cf16-4587-be81-c482839844a8.jpg	0.00	image/jpeg		YniVN8l0kTY.jpg	2910
 22	2016620/2593da53-9d16-4207-95d6-002d819fe807.jpg	0.00	image/jpeg	\N	YniVN8l0kTY.jpg	2916
+24	2016718/88ca36e1-f48f-4c73-a65d-f7d57dee6009.jpg	0.00	image/jpeg	test me	h3-factory-planet-mountains.jpg	3620
+25	2016718/a28f6012-e313-4635-a038-523c62b1e621.png	0.00	image/png	test me	Снимок экрана из 2016-03-06 13:14:11.png	3621
 \.
 
 
@@ -35343,7 +37664,7 @@ COPY upload (id, path, size, media_type, descr, name, resource_id) FROM stdin;
 -- Name: upload_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('upload_id_seq', 23, true);
+SELECT pg_catalog.setval('upload_id_seq', 26, true);
 
 
 --
@@ -35363,7 +37684,7 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('user_id_seq', 37, true);
+SELECT pg_catalog.setval('user_id_seq', 41, true);
 
 
 --
