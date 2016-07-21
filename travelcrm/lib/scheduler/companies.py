@@ -19,21 +19,31 @@ from ...lib.utils.companies_utils import (
     create_company_schema, generate_company_schema
 )
 from ...lib.utils.common_utils import translate as _
+from ...lib.bl.tarifs import get_tarif_by_code
 
 
 log = logging.getLogger(__name__)
 
 
-def _company_creation(company_name, schema_name, email, timezone, locale):
+def _company_creation(
+    company_name, schema_name, email, timezone, locale, tarif
+):
     with transaction.manager:
         schema_name = create_company_schema(schema_name, locale)
         company = DBSession.query(Company).first()
         company.name = company_name
         company.email = email
-        company.settings = {
+        settings = {
             'timezone': timezone,
             'locale': locale,
         }
+        if tarif:
+            tarif = get_tarif_by_code(tarif)
+            settings.update({
+                'tarif_code': tarif[0],
+                'tarif_limit': tarif[3],
+            })
+        company.settings = settings
         DBSession.add(company)
 
 
@@ -62,7 +72,9 @@ def _notification_callback(
     scheduler.remove_listener(_notification_callback)
     
 
-def schedule_company_creation(request, company_name, email, timezone, locale):
+def schedule_company_creation(
+    request, company_name, email, timezone, locale, tarif
+):
     """create new company schema
     """
     job_id = gen_id(limit=12)
@@ -72,7 +84,7 @@ def schedule_company_creation(request, company_name, email, timezone, locale):
         trigger='date',
         id=job_id,
         run_date=datetime.now(pytz.utc),
-        args=[company_name, schema_name, email, timezone, locale],
+        args=[company_name, schema_name, email, timezone, locale, tarif],
     )
 
     

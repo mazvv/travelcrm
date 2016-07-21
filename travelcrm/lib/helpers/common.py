@@ -18,6 +18,8 @@ from ..utils.common_utils import (
     get_base_currency as u_get_base_currency,
     format_currency as u_format_currency,
     get_multicompanies as u_get_multicompanies,
+    get_default_locale_name as u_get_default_locale_name,
+    get_tarifs as u_get_tarifs
 )
 from ..utils.security_utils import get_auth_employee as u_get_auth_employee
 from ..utils.companies_utils import (
@@ -26,6 +28,7 @@ from ..utils.companies_utils import (
     get_public_domain as u_get_public_domain,
 )
 from ..bl.employees import get_employee_structure
+from ..bl.tarifs import get_tarifs_list as u_get_tarifs_list
 
 
 def reset(name, value=None, id=NotGiven, **attrs):
@@ -139,3 +142,15 @@ def is_public_domain(request):
 
 def today():
     return datetime.today().date()
+
+
+def get_default_locale_name():
+    return u_get_default_locale_name()
+
+
+def get_tarifs():
+    return u_get_tarifs()
+
+
+def get_tarifs_list():
+    return u_get_tarifs_list()

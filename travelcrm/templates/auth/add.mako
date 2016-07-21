@@ -33,6 +33,38 @@
                 ${h.common.error_container(name='name')}
             </div>
         </div>
+        % if h.common.get_tarifs():
+            <div class="info-block mb05">
+                <div class="tc dl2">
+                    <span class="fa fa-credit-card">&nbsp;</span>
+                </div>
+                <div class="ml2 b">
+                    ${_(u'Select your tarif')}
+                </div>
+            </div>
+
+            % for tarif in h.common.get_tarifs_list():
+                <div class="form-field">
+                    <div class="dl15 b">${tarif[1]}</div>
+                    <div class="dl20 class="black-pepper">${tarif[2]}</div>
+                    <div class="ml30 b tr">${tarif[-1]}</div>
+                </div>
+            % endfor
+
+            <div class="form-field mt05">
+                <div class="dl15">
+                    ${h.tags.title(_(u"tarif"), True, "tarif")}
+                </div>
+                <div class="ml15">
+                    ${h.fields.tarifs_combobox_field(
+                        "tarif", value=request.params.get('tarif_code'),
+                        style="width:271px;"
+                    )}
+                    ${h.common.error_container(name='tarif')}
+                </div>
+            </div>
+            <div class="info-block mb05"></div>
+        % endif
         <div class="form-field">
             <div class="dl15">
                 ${h.tags.title(_(u"timezone"), True, "timezone")}
@@ -47,7 +79,9 @@
                 ${h.tags.title(_(u"locale"), True, "locale")}
             </div>
             <div class="ml15">
-                ${h.fields.locales_field('locale')}
+                ${h.fields.locales_field(
+                    'locale', value=h.common.get_default_locale_name()
+                )}
                 ${h.common.error_container(name='locale')}
             </div>
         </div>

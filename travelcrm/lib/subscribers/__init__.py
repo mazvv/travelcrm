@@ -10,13 +10,18 @@ from ...lib import helpers as h
 from ...resources import Root
 from ...models import DBSession
 from ..utils.common_utils import translate as _
-from ..utils.common_utils import get_multicompanies, cast_int
+from ..utils.common_utils import (
+    get_multicompanies,
+    cast_int,
+    get_tarifs,
+    get_tarifs_timeout
+)
 from ..bl.employees import get_employee_structure
 from ..scheduler import start_scheduler  
 from ..utils.security_utils import get_auth_employee
 from ..utils.companies_utils import (
     get_public_domain, 
-    get_company
+    get_company,
 )
 from ..utils.sql_utils import (
     get_default_schema,
@@ -39,25 +44,27 @@ def _company_settings(request, company):
             'company.base_currency': company.currency.iso_code,
             'company.locale_name': company.settings.get('locale'),
             'company.timezone': company.settings.get('timezone'),
+            'company.tarif_code': company.settings.get('tarif_code'),
+            'company.tarif_limit': company.settings.get('tarif_limit'),
+            'company.tarif_expired': company.settings.get('tarif_expired'),
         }
         request.registry.settings.update(settings)
 
 
-def _check_ip_control(request, company):
+def _check_tarif_control(request, company):
     """check the possibility to make request from current IP
     """
-    settings = request.registry.settings
-    if not cast_int(settings.get('limits.enabled', 0)):
+    if not get_tarifs():
         return
 
-    ip_limit = cast_int(company.settings.get('ip_limit'))
+    ip_limit = cast_int(company.settings.get('tarif_limit'))
     if not ip_limit:
         return
 
-    ips = company.settings.get('ips', [])
+    ips = company.settings.get('tarif_ips', [])
     
     new_ips = []
-    timeout = cast_int(settings.get('limits.timeout', 300))
+    timeout = get_tarifs_timeout()
     ip_already_in = False
     dt_format = '%Y-%m-%dT%H:%M:%S'
     for ip, last_activity in ips:
@@ -83,7 +90,7 @@ def _check_ip_control(request, company):
             (request.client_addr, datetime.now().strftime(dt_format))
         )
     settings = copy.copy(company.settings)
-    settings['ips'] = new_ips
+    settings['tarif_ips'] = new_ips
     company.settings = settings
 
 
@@ -97,7 +104,7 @@ def company_settings(event):
     if not structure:
         redirect_url = request.resource_url(Root(request))
         raise HTTPFound(location=redirect_url, headers=forget(request))
-    _check_ip_control(request, structure.company)
+    _check_tarif_control(request, structure.company)
     _company_settings(request, structure.company)
 
 

@@ -21,6 +21,7 @@ from babel.numbers import (
     format_currency as fc
 )
 
+from pyramid.settings import asbool, aslist
 from pyramid.threadlocal import get_current_registry
 from pyramid.threadlocal import get_current_request
 from pyramid.interfaces import ITranslationDirectories
@@ -30,9 +31,7 @@ from pyramid.i18n import (
     TranslationStringFactory
 )
 
-
 DEFAULT_LOCALE_NAME = 'en'
-
 tsf = TranslationStringFactory('travelcrm')
 
 
@@ -51,6 +50,16 @@ def get_locale_name():
     return settings.get('company.locale_name') 
 
 
+def get_default_locale_name():
+    settings = get_settings() or {}
+    return settings.get('pyramid.default_locale_name', DEFAULT_LOCALE_NAME) 
+
+
+def get_available_locales():
+    settings = get_settings()
+    return aslist(settings.get('pyramid.available_languages')) 
+    
+
 def get_timezone():
     settings = get_settings()
     return settings.get('company.timezone') 
@@ -65,9 +74,9 @@ def _get_localizer_for_locale_name(locale_name):
 def translate(*args, **kwargs):
     request = get_current_request()
     if request is None:
-        localizer = _get_localizer_for_locale_name(DEFAULT_LOCALE_NAME)
+        localizer = _get_localizer_for_locale_name(get_default_locale_name())
     else:
-        locale_name = get_locale_name() or DEFAULT_LOCALE_NAME
+        locale_name = get_locale_name() or get_default_locale_name()
         localizer = _get_localizer_for_locale_name(locale_name)
     return localizer.translate(tsf(*args, **kwargs))
 
@@ -182,6 +191,14 @@ def get_public_subdomain():
     
 def get_multicompanies():
     settings = get_settings()
-    return cast_int(settings.get('multicompanies'))
+    return asbool(settings.get('multicompanies'))
 
-    
+
+def get_tarifs():
+    settings = get_settings()
+    return asbool(settings.get('tarifs.enabled'))
+
+
+def get_tarifs_timeout():
+    settings = get_settings()
+    return asbool(settings.get('tarifs.timeout'))

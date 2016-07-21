@@ -64,8 +64,10 @@ from ..utils.common_utils import (
     format_datetime,
 )
 from ..utils.common_utils import translate as _
+from ..utils.common_utils import get_available_locales
 from ..utils.resources_utils import get_resources_types_by_interface
 from ..bl.subaccounts import get_subaccounts_types
+from ..bl.tarifs import get_tarifs_list
 
 
 tool = namedtuple('tool', ('name', 'url', 'icon', 'title', 'with_row'))
@@ -975,8 +977,7 @@ def locales_field(
     if data_options:
         _data_options += ",%s" % data_options
     choices = [
-        _Option(u'en', _(u'en')),
-        _Option(u'ru', _(u'ru')),
+        _Option(item, item) for item in get_available_locales()
     ]
     return tags.select(
         name, value, choices, class_='easyui-combobox text w5',
@@ -1437,5 +1438,19 @@ def campaigns_statuses_combobox_field(
     return tags.select(
         name, value, map(lambda x: _Option(*x), Campaign.STATUS),
         class_='easyui-combobox text w10',
+        data_options=_data_options, **kwargs
+    )
+
+
+def tarifs_combobox_field(
+    name, value=None, data_options=None, **kwargs
+):
+    _data_options="panelHeight:'auto',editable:false"
+    if data_options:
+        _data_options += ",%s" % data_options
+    choices = [item[:2] for item in get_tarifs_list()]
+    return tags.select(
+        name, value, map(lambda x: _Option(*x), choices),
+        class_='easyui-combobox text w20',
         data_options=_data_options, **kwargs
     )
