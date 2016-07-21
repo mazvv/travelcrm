@@ -11,16 +11,16 @@ def get_tarifs_list():
     return [
         (
             '1', _(u'Free'),
-            _('30 days free for single user, limit support'),
-            1, 30, '0.00 UAH'
+            _('free for single user, limit support'),
+            1, 30, _('0.00 UAH / month')
         ),
         (
-            '2', _(u'Standart'), _('30 days for 3 users with full support'),
-            3, 30, '120.00 UAH'
+            '2', _(u'Standart'), _('up to 3 users with full support'),
+            3, 30, _('120.00 UAH / month')
         ),
         (   
-            '3', _(u'Premium'), _('30 days for 10 users with full support'), 
-            10, 30, '250.00 UAH'
+            '3', _(u'Premium'), _('up to 10 users with full support'), 
+            10, 30, _('250.00 UAH / month')
         )
     ]
 

@@ -45,7 +45,7 @@
 
             % for tarif in h.common.get_tarifs_list():
                 <div class="form-field">
-                    <div class="dl15 b">${tarif[1]}</div>
+                    <div class="dl10 b">${tarif[1]}</div>
                     <div class="dl20 class="black-pepper">${tarif[2]}</div>
                     <div class="ml30 b tr">${tarif[-1]}</div>
                 </div>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-19 13:55+0300\n"
+"POT-Creation-Date: 2016-07-21 18:08+0300\n"
 "PO-Revision-Date: 2014-07-13 13:47+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: uk\n"
@@ -86,6 +86,10 @@ msgstr ""
 
 #: travelcrm/forms/campaigns.py:35
 msgid "Check datetime"
+msgstr ""
+
+#: travelcrm/forms/companies.py:28
+msgid "Tarif doe not exists"
 msgstr ""
 
 #: travelcrm/forms/countries.py:32
@@ -295,19 +299,55 @@ msgstr ""
 msgid "Vat for this date exists"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:266 travelcrm/lib/helpers/fields.py:292
-#: travelcrm/lib/helpers/fields.py:311 travelcrm/lib/helpers/fields.py:333
-#: travelcrm/lib/helpers/fields.py:355 travelcrm/lib/helpers/fields.py:572
-#: travelcrm/lib/helpers/fields.py:594 travelcrm/lib/helpers/fields.py:616
-#: travelcrm/lib/helpers/fields.py:638 travelcrm/lib/helpers/fields.py:660
-#: travelcrm/lib/helpers/fields.py:682 travelcrm/lib/helpers/fields.py:704
-#: travelcrm/lib/helpers/fields.py:747 travelcrm/lib/helpers/fields.py:768
-#: travelcrm/lib/helpers/fields.py:800 travelcrm/lib/helpers/fields.py:821
-#: travelcrm/lib/helpers/fields.py:864 travelcrm/lib/helpers/fields.py:941
-#: travelcrm/lib/helpers/fields.py:942 travelcrm/lib/helpers/fields.py:1075
-#: travelcrm/lib/helpers/fields.py:1096 travelcrm/lib/helpers/fields.py:1118
-#: travelcrm/lib/helpers/fields.py:1213 travelcrm/lib/helpers/fields.py:1380
-#: travelcrm/lib/helpers/fields.py:1415
+#: travelcrm/lib/bl/tarifs.py:13
+msgid "Free"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:14
+msgid "free for single user, limit support"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:15
+msgid "0.00 UAH / month"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:18
+msgid "Standart"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:18
+msgid "up to 3 users with full support"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:19
+msgid "120.00 UAH / month"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:22
+msgid "Premium"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:22
+msgid "up to 10 users with full support"
+msgstr ""
+
+#: travelcrm/lib/bl/tarifs.py:23
+msgid "250.00 UAH / month"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:268 travelcrm/lib/helpers/fields.py:294
+#: travelcrm/lib/helpers/fields.py:313 travelcrm/lib/helpers/fields.py:335
+#: travelcrm/lib/helpers/fields.py:357 travelcrm/lib/helpers/fields.py:574
+#: travelcrm/lib/helpers/fields.py:596 travelcrm/lib/helpers/fields.py:618
+#: travelcrm/lib/helpers/fields.py:640 travelcrm/lib/helpers/fields.py:662
+#: travelcrm/lib/helpers/fields.py:684 travelcrm/lib/helpers/fields.py:706
+#: travelcrm/lib/helpers/fields.py:749 travelcrm/lib/helpers/fields.py:770
+#: travelcrm/lib/helpers/fields.py:802 travelcrm/lib/helpers/fields.py:823
+#: travelcrm/lib/helpers/fields.py:866 travelcrm/lib/helpers/fields.py:943
+#: travelcrm/lib/helpers/fields.py:944 travelcrm/lib/helpers/fields.py:1076
+#: travelcrm/lib/helpers/fields.py:1097 travelcrm/lib/helpers/fields.py:1119
+#: travelcrm/lib/helpers/fields.py:1214 travelcrm/lib/helpers/fields.py:1381
+#: travelcrm/lib/helpers/fields.py:1416
 #: travelcrm/templates/accomodations/form.mako:21
 #: travelcrm/templates/accomodations/index.mako:38
 #: travelcrm/templates/accounts/common.mako:76
@@ -369,40 +409,6 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:269 travelcrm/lib/helpers/fields.py:294
-#: travelcrm/lib/helpers/fields.py:315 travelcrm/lib/helpers/fields.py:337
-#: travelcrm/lib/helpers/fields.py:359 travelcrm/lib/helpers/fields.py:576
-#: travelcrm/lib/helpers/fields.py:598 travelcrm/lib/helpers/fields.py:620
-#: travelcrm/lib/helpers/fields.py:642 travelcrm/lib/helpers/fields.py:664
-#: travelcrm/lib/helpers/fields.py:686 travelcrm/lib/helpers/fields.py:708
-#: travelcrm/lib/helpers/fields.py:730 travelcrm/lib/helpers/fields.py:751
-#: travelcrm/lib/helpers/fields.py:772 travelcrm/lib/helpers/fields.py:804
-#: travelcrm/lib/helpers/fields.py:825 travelcrm/lib/helpers/fields.py:867
-#: travelcrm/lib/helpers/fields.py:899 travelcrm/lib/helpers/fields.py:946
-#: travelcrm/lib/helpers/fields.py:1079 travelcrm/lib/helpers/fields.py:1100
-#: travelcrm/lib/helpers/fields.py:1122 travelcrm/lib/helpers/fields.py:1217
-#: travelcrm/lib/helpers/fields.py:1303 travelcrm/lib/helpers/fields.py:1332
-#: travelcrm/lib/helpers/fields.py:1419
-msgid "add new"
-msgstr ""
-
-#: travelcrm/lib/helpers/fields.py:270 travelcrm/lib/helpers/fields.py:295
-#: travelcrm/lib/helpers/fields.py:316 travelcrm/lib/helpers/fields.py:338
-#: travelcrm/lib/helpers/fields.py:360 travelcrm/lib/helpers/fields.py:577
-#: travelcrm/lib/helpers/fields.py:599 travelcrm/lib/helpers/fields.py:621
-#: travelcrm/lib/helpers/fields.py:643 travelcrm/lib/helpers/fields.py:665
-#: travelcrm/lib/helpers/fields.py:687 travelcrm/lib/helpers/fields.py:709
-#: travelcrm/lib/helpers/fields.py:731 travelcrm/lib/helpers/fields.py:752
-#: travelcrm/lib/helpers/fields.py:773 travelcrm/lib/helpers/fields.py:805
-#: travelcrm/lib/helpers/fields.py:826 travelcrm/lib/helpers/fields.py:868
-#: travelcrm/lib/helpers/fields.py:900 travelcrm/lib/helpers/fields.py:947
-#: travelcrm/lib/helpers/fields.py:1080 travelcrm/lib/helpers/fields.py:1101
-#: travelcrm/lib/helpers/fields.py:1123 travelcrm/lib/helpers/fields.py:1218
-#: travelcrm/lib/helpers/fields.py:1304 travelcrm/lib/helpers/fields.py:1333
-#: travelcrm/lib/helpers/fields.py:1384 travelcrm/lib/helpers/fields.py:1420
-msgid "view item"
-msgstr ""
-
 #: travelcrm/lib/helpers/fields.py:271 travelcrm/lib/helpers/fields.py:296
 #: travelcrm/lib/helpers/fields.py:317 travelcrm/lib/helpers/fields.py:339
 #: travelcrm/lib/helpers/fields.py:361 travelcrm/lib/helpers/fields.py:578
@@ -413,28 +419,62 @@ msgstr ""
 #: travelcrm/lib/helpers/fields.py:774 travelcrm/lib/helpers/fields.py:806
 #: travelcrm/lib/helpers/fields.py:827 travelcrm/lib/helpers/fields.py:869
 #: travelcrm/lib/helpers/fields.py:901 travelcrm/lib/helpers/fields.py:948
+#: travelcrm/lib/helpers/fields.py:1080 travelcrm/lib/helpers/fields.py:1101
+#: travelcrm/lib/helpers/fields.py:1123 travelcrm/lib/helpers/fields.py:1218
+#: travelcrm/lib/helpers/fields.py:1304 travelcrm/lib/helpers/fields.py:1333
+#: travelcrm/lib/helpers/fields.py:1420
+msgid "add new"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:272 travelcrm/lib/helpers/fields.py:297
+#: travelcrm/lib/helpers/fields.py:318 travelcrm/lib/helpers/fields.py:340
+#: travelcrm/lib/helpers/fields.py:362 travelcrm/lib/helpers/fields.py:579
+#: travelcrm/lib/helpers/fields.py:601 travelcrm/lib/helpers/fields.py:623
+#: travelcrm/lib/helpers/fields.py:645 travelcrm/lib/helpers/fields.py:667
+#: travelcrm/lib/helpers/fields.py:689 travelcrm/lib/helpers/fields.py:711
+#: travelcrm/lib/helpers/fields.py:733 travelcrm/lib/helpers/fields.py:754
+#: travelcrm/lib/helpers/fields.py:775 travelcrm/lib/helpers/fields.py:807
+#: travelcrm/lib/helpers/fields.py:828 travelcrm/lib/helpers/fields.py:870
+#: travelcrm/lib/helpers/fields.py:902 travelcrm/lib/helpers/fields.py:949
 #: travelcrm/lib/helpers/fields.py:1081 travelcrm/lib/helpers/fields.py:1102
 #: travelcrm/lib/helpers/fields.py:1124 travelcrm/lib/helpers/fields.py:1219
 #: travelcrm/lib/helpers/fields.py:1305 travelcrm/lib/helpers/fields.py:1334
 #: travelcrm/lib/helpers/fields.py:1385 travelcrm/lib/helpers/fields.py:1421
+msgid "view item"
+msgstr ""
+
+#: travelcrm/lib/helpers/fields.py:273 travelcrm/lib/helpers/fields.py:298
+#: travelcrm/lib/helpers/fields.py:319 travelcrm/lib/helpers/fields.py:341
+#: travelcrm/lib/helpers/fields.py:363 travelcrm/lib/helpers/fields.py:580
+#: travelcrm/lib/helpers/fields.py:602 travelcrm/lib/helpers/fields.py:624
+#: travelcrm/lib/helpers/fields.py:646 travelcrm/lib/helpers/fields.py:668
+#: travelcrm/lib/helpers/fields.py:690 travelcrm/lib/helpers/fields.py:712
+#: travelcrm/lib/helpers/fields.py:734 travelcrm/lib/helpers/fields.py:755
+#: travelcrm/lib/helpers/fields.py:776 travelcrm/lib/helpers/fields.py:808
+#: travelcrm/lib/helpers/fields.py:829 travelcrm/lib/helpers/fields.py:871
+#: travelcrm/lib/helpers/fields.py:903 travelcrm/lib/helpers/fields.py:950
+#: travelcrm/lib/helpers/fields.py:1082 travelcrm/lib/helpers/fields.py:1103
+#: travelcrm/lib/helpers/fields.py:1125 travelcrm/lib/helpers/fields.py:1220
+#: travelcrm/lib/helpers/fields.py:1306 travelcrm/lib/helpers/fields.py:1335
+#: travelcrm/lib/helpers/fields.py:1386 travelcrm/lib/helpers/fields.py:1422
 msgid "edit item"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:373 travelcrm/lib/helpers/fields.py:417
+#: travelcrm/lib/helpers/fields.py:375 travelcrm/lib/helpers/fields.py:419
 #: travelcrm/templates/resources_types/details.mako:37
 msgid "no"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:374 travelcrm/lib/helpers/fields.py:418
+#: travelcrm/lib/helpers/fields.py:376 travelcrm/lib/helpers/fields.py:420
 #: travelcrm/templates/resources_types/details.mako:37
 msgid "yes"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:473
+#: travelcrm/lib/helpers/fields.py:475
 msgid "all"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:474
+#: travelcrm/lib/helpers/fields.py:476
 #: travelcrm/templates/common/resource.mako:17
 #: travelcrm/templates/permisions/index.mako:38
 #: travelcrm/templates/positions/form.mako:30
@@ -442,7 +482,7 @@ msgstr ""
 msgid "structure"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:726
+#: travelcrm/lib/helpers/fields.py:728
 #: travelcrm/templates/countries/form.mako:21
 #: travelcrm/templates/countries/index.mako:38
 #: travelcrm/templates/currencies/form.mako:21
@@ -450,8 +490,8 @@ msgstr ""
 msgid "iso code"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:893 travelcrm/lib/helpers/fields.py:1300
-#: travelcrm/lib/helpers/fields.py:1327
+#: travelcrm/lib/helpers/fields.py:895 travelcrm/lib/helpers/fields.py:1301
+#: travelcrm/lib/helpers/fields.py:1328
 #: travelcrm/templates/incomes/index.mako:56
 #: travelcrm/templates/invoices/details.mako:11
 #: travelcrm/templates/invoices/index.mako:55
@@ -464,7 +504,7 @@ msgstr ""
 msgid "customer"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:894
+#: travelcrm/lib/helpers/fields.py:896
 #: travelcrm/templates/cashflows/common.mako:6
 #: travelcrm/templates/crosspayments/form.mako:81
 #: travelcrm/templates/crosspayments/index.mako:56
@@ -475,15 +515,15 @@ msgstr ""
 msgid "sum"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:895
+#: travelcrm/lib/helpers/fields.py:897
 msgid "num"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:896
+#: travelcrm/lib/helpers/fields.py:898
 msgid "from date"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:943
+#: travelcrm/lib/helpers/fields.py:945
 #: travelcrm/templates/notes/details.mako:16
 #: travelcrm/templates/notifications/details.mako:16
 #: travelcrm/templates/outgoings/index.mako:55
@@ -494,32 +534,24 @@ msgstr ""
 msgid "resource"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:978
-msgid "en"
-msgstr ""
-
-#: travelcrm/lib/helpers/fields.py:979
-msgid "ru"
-msgstr ""
-
-#: travelcrm/lib/helpers/fields.py:1008 travelcrm/lib/helpers/fields.py:1023
-#: travelcrm/lib/helpers/fields.py:1038 travelcrm/lib/helpers/fields.py:1142
-#: travelcrm/lib/helpers/fields.py:1157 travelcrm/lib/helpers/fields.py:1172
-#: travelcrm/lib/helpers/fields.py:1187 travelcrm/lib/helpers/fields.py:1201
-#: travelcrm/lib/helpers/fields.py:1237 travelcrm/lib/helpers/fields.py:1252
-#: travelcrm/lib/helpers/fields.py:1267 travelcrm/lib/helpers/fields.py:1282
-#: travelcrm/lib/helpers/fields.py:1352 travelcrm/lib/helpers/fields.py:1367
-#: travelcrm/lib/helpers/fields.py:1403
+#: travelcrm/lib/helpers/fields.py:1009 travelcrm/lib/helpers/fields.py:1024
+#: travelcrm/lib/helpers/fields.py:1039 travelcrm/lib/helpers/fields.py:1143
+#: travelcrm/lib/helpers/fields.py:1158 travelcrm/lib/helpers/fields.py:1173
+#: travelcrm/lib/helpers/fields.py:1188 travelcrm/lib/helpers/fields.py:1202
+#: travelcrm/lib/helpers/fields.py:1238 travelcrm/lib/helpers/fields.py:1253
+#: travelcrm/lib/helpers/fields.py:1268 travelcrm/lib/helpers/fields.py:1283
+#: travelcrm/lib/helpers/fields.py:1353 travelcrm/lib/helpers/fields.py:1368
+#: travelcrm/lib/helpers/fields.py:1404
 msgid "--all--"
 msgstr ""
 
-#: travelcrm/lib/helpers/fields.py:1300 travelcrm/lib/helpers/fields.py:1328
+#: travelcrm/lib/helpers/fields.py:1301 travelcrm/lib/helpers/fields.py:1329
 #: travelcrm/templates/cashflows/common.mako:4
 #: travelcrm/templates/visas/details.mako:18
 msgid "from"
 msgstr ""
 
-#: travelcrm/lib/scheduler/companies.py:47
+#: travelcrm/lib/scheduler/companies.py:57
 msgid "Company created"
 msgstr ""
 
@@ -532,7 +564,7 @@ msgstr ""
 msgid "New User created"
 msgstr ""
 
-#: travelcrm/lib/subscribers/__init__.py:77
+#: travelcrm/lib/subscribers/__init__.py:84
 msgid "IP limit exceeded"
 msgstr ""
 
@@ -2080,7 +2112,6 @@ msgstr ""
 #: travelcrm/templates/leads_offers/common.mako:103
 #: travelcrm/templates/locations/index.mako:67
 #: travelcrm/templates/notes/common.mako:100
-#: travelcrm/templates/notes/index.mako:69
 #: travelcrm/templates/orders/index.mako:85
 #: travelcrm/templates/orders_items/common.mako:117
 #: travelcrm/templates/outgoings/index.mako:87
@@ -2097,7 +2128,6 @@ msgstr ""
 #: travelcrm/templates/suppliers/index.mako:83
 #: travelcrm/templates/suppliers_types/index.mako:66
 #: travelcrm/templates/tasks/common.mako:102
-#: travelcrm/templates/tasks/index.mako:70
 #: travelcrm/templates/tickets_classes/index.mako:66
 #: travelcrm/templates/transfers/index.mako:66
 #: travelcrm/templates/transports/index.mako:66
@@ -2544,28 +2574,36 @@ msgstr ""
 msgid "Create company"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:38
+#: travelcrm/templates/auth/add.mako:42
+msgid "Select your tarif"
+msgstr ""
+
+#: travelcrm/templates/auth/add.mako:56
+msgid "tarif"
+msgstr ""
+
+#: travelcrm/templates/auth/add.mako:70
 #: travelcrm/templates/companies/form.mako:44
 msgid "timezone"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:47
+#: travelcrm/templates/auth/add.mako:79
 #: travelcrm/templates/companies/form.mako:53
 msgid "locale"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:56
+#: travelcrm/templates/auth/add.mako:90
 #: travelcrm/templates/auth/add_success.mako:17
 #: travelcrm/templates/auth/forgot.mako:24
 #: travelcrm/templates/auth/forgot_success.mako:17
 msgid "Back to autorization"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:60
+#: travelcrm/templates/auth/add.mako:94
 msgid "Please, feel all fields"
 msgstr ""
 
-#: travelcrm/templates/auth/add.mako:63
+#: travelcrm/templates/auth/add.mako:97
 msgid "Create"
 msgstr ""
 
@@ -5531,5 +5569,20 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "not exists"
+#~ msgstr ""
+
+#~ msgid "en"
+#~ msgstr ""
+
+#~ msgid "ru"
+#~ msgstr ""
+
+#~ msgid "30 days free for single user, limit support"
+#~ msgstr ""
+
+#~ msgid "30 days for 3 users with full support"
+#~ msgstr ""
+
+#~ msgid "30 days for 10 users with full support"
 #~ msgstr ""
 
