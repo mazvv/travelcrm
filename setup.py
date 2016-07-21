@@ -1,6 +1,9 @@
 import os
 import sys
-from subprocess import check_output
+try:
+    from subprocess import check_output
+except ImportError:
+    pass
 
 from setuptools import setup, find_packages
 
@@ -23,7 +26,7 @@ if 'sdist' in sys.argv or 'bdist' in sys.argv:
 
 
 requires = [
-    'setuptools==19.2',
+    'setuptools',
     'pyramid',
     'pyramid_mako',
     'pyramid_debugtoolbar',
@@ -44,7 +47,6 @@ requires = [
     'pyramid_storage>=0.0.5',
     'pyramid_mailer>=0.14',
     'Sphinx>=1.2.2',
-    'sphinx-bootstrap-theme>=0.4.0',
     'apscheduler>=3.0.1',
     'bitmath>=1.0.2-3',
     'smpplib>=0.1',
@@ -56,7 +58,7 @@ requires = [
 
 setup(
     name='travelcrm',
-    version='0.6.4-beta',
+    version='0.6.4-beta2',
     description='travelcrm',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
