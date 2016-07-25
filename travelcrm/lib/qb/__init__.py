@@ -137,6 +137,7 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
             query_employees_position()
             .with_entities(
                 Position.structure_id.label('structure_id'),
+                Appointment.employee_id.label('employee_id'),
             )
             .subquery()
         )

@@ -31,7 +31,7 @@ requires = [
     'pyramid_mako',
     'pyramid_debugtoolbar',
     'pyramid_tm',
-    'SQLAlchemy>=0.9.8',
+    'SQLAlchemy>=1.0.12',
     'transaction',
     'zope.sqlalchemy',
     'waitress',

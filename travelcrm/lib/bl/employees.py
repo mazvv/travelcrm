@@ -50,7 +50,7 @@ def is_employee_currently_dismissed(employee):
         )
     )
     return DBSession.query(query.exists()).scalar()
-    
+
 
 def query_employees_position(date=None):
     query = (
@@ -67,7 +67,7 @@ def query_employees_position(date=None):
             Appointment.date <= func.now()
         )
     return query.order_by(Appointment.employee_id, desc(Appointment.date))
-    
+
 
 def get_employee_position(employee, date=None):
     """get employee position by date
