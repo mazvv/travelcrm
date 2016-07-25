@@ -22,7 +22,6 @@ from ..models import (
 )
 from ..models.resource_type import ResourceType
 from ..models.resource_log import ResourceLog
-from ..models.structure import Structure
 from ..lib.utils.resources_utils import (
     get_resource_class_module,
     get_resource_class_name,
@@ -83,7 +82,8 @@ class Resource(Base):
             lazy='dynamic'
         ),
         foreign_keys=[maintainer_id],
-        uselist=False
+        uselist=False,
+        post_update=True,
     )
 
     def __init__(self, resource_type_cls, maintainer):
