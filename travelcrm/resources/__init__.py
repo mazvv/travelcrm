@@ -62,6 +62,14 @@ class SecuredBase(object):
                 return True
         return False
 
+    @property
+    def allowed_scopes(self):
+        return True
+
+    @property
+    def allowed_settings(self):
+        return False
+
     @staticmethod
     def get_permisions(obj, request):
         employee = get_auth_employee(request)
@@ -94,14 +102,6 @@ class ResourceTypeBase(SecuredBase):
     def __init__(self, request):
         self.__parent__ = Root(request)
         self.request = request
-
-    @property
-    def allowed_scopes(self):
-        return True
-
-    @property
-    def allowed_settings(self):
-        return False
 
     @property
     def allowed_assign(self):
