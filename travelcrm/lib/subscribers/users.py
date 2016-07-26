@@ -38,11 +38,10 @@ def changes_notify(event):
         or (employee.id and event.user.employee_id == employee.id)
     ):
         return
-    employee_structure = get_employee_structure(event.user.employee)
     notification = Notification(
         title=_(u'Your User profile was changed'),
         descr='',
         notification_resource=event.user.resource,
-        resource=Resource(NotificationsResource, employee_structure)
+        resource=Resource(NotificationsResource, event.user.employee)
     )
     event.user.employee.notifications.append(notification)
