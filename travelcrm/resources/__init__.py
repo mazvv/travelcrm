@@ -1,7 +1,6 @@
 # -*-coding:utf-8-*-
 
 import logging
-from zope.interface import implementer
 
 from pyramid.security import (
     Allow,
@@ -18,13 +17,9 @@ from ..lib.utils.resources_utils import (
 )
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
-from ..lib.bl.employees import (
-    get_employee_permisions,
-    get_employee_structure
-)
+from ..lib.bl.employees import get_employee_permisions
 
 from ..models.resource import Resource
-from ..models.user import User
 
 log = logging.getLogger(__name__)
 

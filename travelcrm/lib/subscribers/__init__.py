@@ -1,14 +1,14 @@
 #-*-coding: utf-8
+
 import logging
 import copy
 from datetime import datetime, timedelta
 
 from pyramid.security import forget
-from pyramid.httpexceptions import HTTPNotFound, HTTPFound, HTTPForbidden
+from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 
 from ...lib import helpers as h
 from ...resources import Root
-from ...models import DBSession
 from ..utils.common_utils import translate as _
 from ..utils.common_utils import (
     get_multicompanies,
@@ -17,10 +17,10 @@ from ..utils.common_utils import (
     get_tarifs_timeout
 )
 from ..bl.employees import get_employee_structure
-from ..scheduler import start_scheduler  
+from ..scheduler import start_scheduler
 from ..utils.security_utils import get_auth_employee
 from ..utils.companies_utils import (
-    get_public_domain, 
+    get_public_domain,
     get_company,
 )
 from ..utils.sql_utils import (
@@ -62,7 +62,6 @@ def _check_tarif_control(request, company):
         return
 
     ips = company.settings.get('tarif_ips', [])
-    
     new_ips = []
     timeout = get_tarifs_timeout()
     ip_already_in = False
@@ -84,7 +83,6 @@ def _check_tarif_control(request, company):
         log.error(_(u'IP limit exceeded'))
         redirect_url = request.resource_url(Root(request))
         raise HTTPFound(location=redirect_url, headers=forget(request))
-    
     if not ip_already_in:
         new_ips.append(
             (request.client_addr, datetime.now().strftime(dt_format))

@@ -1,6 +1,6 @@
 <%def name="header(company_name)">
     <div class="dl30 logo">
-        ${h.tags.image(request.static_url('travelcrm:static/css/img/logo.png'), _(u'TravelCRM'))} 
+        ${h.tags.image(request.static_url('travelcrm:static/css/img/logo.png'), _(u'TravelCRM'))}
         <span class="logo-big">Travel<span class="lipstick">CRM</span></span>
         <span class="ml1">${company_name}</span>
     </div>
@@ -17,7 +17,7 @@
                data-options="action:'dialog_open',url:'/logout'">
                ${_(u'logout')} <span class="fa fa-sign-out"></span>
            </a>
-       </div>    
+       </div>
     </div>
     % endif
 </%def>
@@ -26,7 +26,7 @@
     <div class="main tc">
         Powered by <a href="http://www.travelcrm.org.ua" class="project-link">Travelcrm</a> | ver. ${h.common.get_package_version('travelcrm')}
     </div>
-</%def>    
+</%def>
 
 
 <%def name="employee_info()">
@@ -37,8 +37,8 @@
             %>
             ${h.tags.image(
                 request.route_url(
-                    'thumbs', 
-                    size='small', 
+                    'thumbs',
+                    size='small',
                     path=request.storage.url(photo)
                 ),
                 employee.name,
@@ -49,7 +49,13 @@
         </div>
         <div class="ml5">
             <div class="pl05">
-                <div class="b">${employee.name}</div>
+                <div class="b">
+                    <a href="#" class="dashed white easyui-tooltip no-text-decoration _action"
+                       data-options="action:'dialog_open',url:'/users/profile'"
+                       title="${_(u'edit profile')}">
+                        ${employee.name}
+                    </a>
+                </div>
                 <div><span class="b">${position.name}</span> ${_(u'in')} ${h.tags.literal(' &rarr; '.join(structure_path))}</div>
             </div>
         </div>

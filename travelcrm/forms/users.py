@@ -4,6 +4,7 @@ import colander
 
 from . import (
     SelectInteger,
+    CSRFSchema,
     ResourceSchema,
     BaseForm,
     BaseSearchForm,
@@ -114,6 +115,18 @@ class _UserEditSchema(_UserAddSchema):
     )
 
 
+class _UserProfileSchema(CSRFSchema):
+    password = colander.SchemaNode(
+        colander.String(),
+        missing=None,
+        validator=password_validator
+    )
+    password_confirm = colander.SchemaNode(
+        colander.String(),
+        missing=None
+    )
+
+
 class _UserForm(BaseForm):
 
     def submit(self, user=None):
@@ -139,12 +152,22 @@ class _UserForm(BaseForm):
             user.resource.tasks.append(task)
         return user
 
+
 class UserAddForm(_UserForm):
     _schema = _UserAddSchema
 
 
 class UserEditForm(_UserForm):
     _schema = _UserEditSchema
+
+
+class UserProfileForm(BaseForm):
+    _schema = _UserProfileSchema
+
+    def submit(self, user):
+        if self._controls.get('password'):
+            user.password = self._controls.get('password')
+        return user
 
 
 class UserSearchForm(BaseSearchForm):

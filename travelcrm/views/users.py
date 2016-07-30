@@ -8,11 +8,13 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.user import User
+from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.users import (
     UserAddForm,
     UserEditForm,
+    UserProfileForm,
     UserSearchForm,
     UserAssignForm,
 )
@@ -242,6 +244,44 @@ class UsersView(BaseView):
             form.submit(self.request.params.getall('id'))
             return {
                 'success_message': _(u'Assigned'),
+            }
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }
+
+    @view_config(
+        name='profile',
+        request_method='GET',
+        renderer='travelcrm:templates/users/profile.mako',
+    )
+    def profile(self):
+        employee = get_auth_employee(self.request)
+        user = User.get(employee.id)
+        return {
+            'item': user,
+            'title': self._get_title(_(u'Edit Profile')),
+        }
+
+    @view_config(
+        name='profile',
+        request_method='POST',
+        renderer='json',
+    )
+    def _profile(self):
+        employee = get_auth_employee(self.request)
+        user = User.get(employee.id)
+        form = UserProfileForm(self.request)
+        if form.validate():
+            form.submit(user)
+
+            event = UserEdited(self.request, user)
+            self.request.registry.notify(event)
+
+            return {
+                'success_message': _(u'Saved'),
+                'response': user.id
             }
         else:
             return {
