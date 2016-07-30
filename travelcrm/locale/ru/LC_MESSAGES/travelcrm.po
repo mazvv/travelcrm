@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: travelcrm 0.6.1-dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-30 22:12+0300\n"
+"POT-Creation-Date: 2016-07-30 22:15+0300\n"
 "PO-Revision-Date: 2015-07-24 22:55+0300\n"
 "Last-Translator: Vitalii Mazur <vitalii.mazur@gmail.com>\n"
 "Language: ru\n"
@@ -4234,7 +4234,6 @@ msgstr "всего"
 
 #: travelcrm/views/users.py:264
 #, fuzzy
-#| msgid "edit item"
 msgid "Edit Profile"
 msgstr "правка"
 
