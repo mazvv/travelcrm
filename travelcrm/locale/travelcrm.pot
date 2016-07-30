@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: travelcrm 0.6.4b0\n"
+"Project-Id-Version: travelcrm 0.6.4b2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-07-21 18:08+0300\n"
+"POT-Creation-Date: 2016-07-30 22:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,19 +277,19 @@ msgstr ""
 msgid "This files types is not allowed"
 msgstr ""
 
-#: travelcrm/forms/users.py:34
+#: travelcrm/forms/users.py:35
 msgid "User with the same username exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:51
+#: travelcrm/forms/users.py:52
 msgid "User with the same email exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:68
+#: travelcrm/forms/users.py:69
 msgid "User for this employee already exists"
 msgstr ""
 
-#: travelcrm/forms/users.py:81
+#: travelcrm/forms/users.py:82
 msgid "Password and confirm is not equal"
 msgstr ""
 
@@ -554,11 +554,11 @@ msgstr ""
 msgid "New User created"
 msgstr ""
 
-#: travelcrm/lib/subscribers/__init__.py:84
+#: travelcrm/lib/subscribers/__init__.py:83
 msgid "IP limit exceeded"
 msgstr ""
 
-#: travelcrm/lib/subscribers/users.py:43
+#: travelcrm/lib/subscribers/users.py:42
 msgid "Your User profile was changed"
 msgstr ""
 
@@ -695,32 +695,32 @@ msgstr ""
 msgid "multi"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:88 travelcrm/resources/__init__.py:113
+#: travelcrm/resources/__init__.py:83 travelcrm/resources/__init__.py:116
 #: travelcrm/resources/activities.py:29 travelcrm/resources/companies.py:24
 #: travelcrm/resources/leads_stats.py:29 travelcrm/resources/notifications.py:21
 #: travelcrm/resources/turnovers.py:22
 msgid "view"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:114
+#: travelcrm/resources/__init__.py:117
 msgid "add"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:115 travelcrm/resources/companies.py:25
+#: travelcrm/resources/__init__.py:118 travelcrm/resources/companies.py:25
 msgid "edit"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:116
+#: travelcrm/resources/__init__.py:119
 msgid "delete"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:119 travelcrm/resources/activities.py:30
+#: travelcrm/resources/__init__.py:122 travelcrm/resources/activities.py:30
 #: travelcrm/resources/leads_stats.py:30 travelcrm/resources/resources_types.py:28
 #: travelcrm/templates/resources_types/details.mako:34
 msgid "settings"
 msgstr ""
 
-#: travelcrm/resources/__init__.py:121 travelcrm/resources/assigns.py:22
+#: travelcrm/resources/__init__.py:124 travelcrm/resources/assigns.py:22
 msgid "assign"
 msgstr ""
 
@@ -1195,6 +1195,7 @@ msgstr ""
 #: travelcrm/templates/uploads/form.mako:49
 #: travelcrm/templates/users/assign.mako:28
 #: travelcrm/templates/users/delete.mako:19 travelcrm/templates/users/form.mako:109
+#: travelcrm/templates/users/profile.mako:47
 #: travelcrm/templates/vats/assign.mako:28 travelcrm/templates/vats/delete.mako:19
 #: travelcrm/templates/vats/form.mako:130 travelcrm/templates/visas/form.mako:187
 msgid "Cancel"
@@ -1388,7 +1389,7 @@ msgstr ""
 #: travelcrm/views/suppliers.py:188 travelcrm/views/suppliers_types.py:174
 #: travelcrm/views/tasks.py:219 travelcrm/views/tickets_classes.py:174
 #: travelcrm/views/transfers.py:174 travelcrm/views/transports.py:174
-#: travelcrm/views/uploads.py:174 travelcrm/views/users.py:189
+#: travelcrm/views/uploads.py:174 travelcrm/views/users.py:191
 #: travelcrm/views/vats.py:174
 msgid "Delete"
 msgstr ""
@@ -1435,8 +1436,8 @@ msgstr ""
 #: travelcrm/templates/tours/form.mako:20
 #: travelcrm/templates/transfers/form.mako:18
 #: travelcrm/templates/transports/form.mako:18
-#: travelcrm/templates/users/form.mako:19 travelcrm/templates/vats/form.mako:18
-#: travelcrm/templates/visas/form.mako:20
+#: travelcrm/templates/users/form.mako:19 travelcrm/templates/users/profile.mako:17
+#: travelcrm/templates/vats/form.mako:18 travelcrm/templates/visas/form.mako:20
 msgid "Main"
 msgstr ""
 
@@ -1502,7 +1503,8 @@ msgstr ""
 #: travelcrm/templates/transfers/form.mako:61
 #: travelcrm/templates/transports/form.mako:61
 #: travelcrm/templates/uploads/form.mako:48 travelcrm/templates/users/form.mako:108
-#: travelcrm/templates/vats/form.mako:129 travelcrm/templates/visas/form.mako:186
+#: travelcrm/templates/users/profile.mako:46 travelcrm/templates/vats/form.mako:129
+#: travelcrm/templates/visas/form.mako:186
 msgid "Save"
 msgstr ""
 
@@ -1922,7 +1924,7 @@ msgstr ""
 #: travelcrm/views/tasks.py:91 travelcrm/views/tickets.py:44
 #: travelcrm/views/tickets_classes.py:71 travelcrm/views/tours.py:44
 #: travelcrm/views/transfers.py:71 travelcrm/views/transports.py:71
-#: travelcrm/views/uploads.py:71 travelcrm/views/users.py:78
+#: travelcrm/views/uploads.py:71 travelcrm/views/users.py:80
 #: travelcrm/views/vats.py:71 travelcrm/views/visas.py:44
 msgid "View"
 msgstr ""
@@ -2011,7 +2013,7 @@ msgstr ""
 #: travelcrm/views/tickets.py:92 travelcrm/views/tickets_classes.py:119
 #: travelcrm/views/tours.py:92 travelcrm/views/transfers.py:119
 #: travelcrm/views/transports.py:119 travelcrm/views/uploads.py:119
-#: travelcrm/views/users.py:130 travelcrm/views/vats.py:119
+#: travelcrm/views/users.py:132 travelcrm/views/vats.py:119
 #: travelcrm/views/visas.py:92
 msgid "Edit"
 msgstr ""
@@ -2092,7 +2094,7 @@ msgstr ""
 #: travelcrm/views/tasks.py:180 travelcrm/views/tickets.py:129
 #: travelcrm/views/tickets_classes.py:154 travelcrm/views/tours.py:129
 #: travelcrm/views/transfers.py:154 travelcrm/views/transports.py:154
-#: travelcrm/views/uploads.py:154 travelcrm/views/users.py:169
+#: travelcrm/views/uploads.py:154 travelcrm/views/users.py:171
 #: travelcrm/views/vats.py:154 travelcrm/views/visas.py:129
 msgid "Copy"
 msgstr ""
@@ -2331,7 +2333,7 @@ msgstr ""
 #: travelcrm/views/tasks.py:104 travelcrm/views/tickets.py:57
 #: travelcrm/views/tickets_classes.py:84 travelcrm/views/tours.py:57
 #: travelcrm/views/transfers.py:84 travelcrm/views/transports.py:84
-#: travelcrm/views/uploads.py:84 travelcrm/views/users.py:91
+#: travelcrm/views/uploads.py:84 travelcrm/views/users.py:93
 #: travelcrm/views/vats.py:84 travelcrm/views/visas.py:57
 msgid "Add"
 msgstr ""
@@ -2560,7 +2562,7 @@ msgstr ""
 
 #: travelcrm/templates/auth/login.mako:31
 #: travelcrm/templates/campaigns/settings.mako:51
-#: travelcrm/templates/users/form.mako:58
+#: travelcrm/templates/users/form.mako:58 travelcrm/templates/users/profile.mako:24
 msgid "password"
 msgstr ""
 
@@ -2841,7 +2843,7 @@ msgid "dissmissed"
 msgstr ""
 
 #: travelcrm/templates/common/resource.mako:21
-#: travelcrm/templates/panels/common.mako:53
+#: travelcrm/templates/panels/common.mako:59
 msgid "in"
 msgstr ""
 
@@ -2850,7 +2852,7 @@ msgid "resource stats"
 msgstr ""
 
 #: travelcrm/templates/common/resource.mako:36
-#: travelcrm/templates/panels/common.mako:60
+#: travelcrm/templates/panels/common.mako:66
 msgid "tasks"
 msgstr ""
 
@@ -3303,7 +3305,11 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
-#: travelcrm/templates/panels/common.mako:66
+#: travelcrm/templates/panels/common.mako:55
+msgid "edit profile"
+msgstr ""
+
+#: travelcrm/templates/panels/common.mako:72
 msgid "notifications"
 msgstr ""
 
@@ -3715,11 +3721,11 @@ msgstr ""
 msgid "You was added as new user of TravelCRM."
 msgstr ""
 
-#: travelcrm/templates/users/form.mako:54
+#: travelcrm/templates/users/form.mako:54 travelcrm/templates/users/profile.mako:20
 msgid "If you do not change password, take this fields empty"
 msgstr ""
 
-#: travelcrm/templates/users/form.mako:67
+#: travelcrm/templates/users/form.mako:67 travelcrm/templates/users/profile.mako:33
 msgid "confirm password"
 msgstr ""
 
@@ -3859,10 +3865,10 @@ msgstr ""
 #: travelcrm/views/tours.py:107 travelcrm/views/transfers.py:100
 #: travelcrm/views/transfers.py:134 travelcrm/views/transports.py:100
 #: travelcrm/views/transports.py:134 travelcrm/views/uploads.py:100
-#: travelcrm/views/uploads.py:134 travelcrm/views/users.py:111
-#: travelcrm/views/users.py:149 travelcrm/views/vats.py:100
-#: travelcrm/views/vats.py:134 travelcrm/views/visas.py:73
-#: travelcrm/views/visas.py:107
+#: travelcrm/views/uploads.py:134 travelcrm/views/users.py:113
+#: travelcrm/views/users.py:151 travelcrm/views/users.py:283
+#: travelcrm/views/vats.py:100 travelcrm/views/vats.py:134
+#: travelcrm/views/visas.py:73 travelcrm/views/visas.py:107
 msgid "Saved"
 msgstr ""
 
@@ -3946,10 +3952,11 @@ msgstr ""
 #: travelcrm/views/transfers.py:233 travelcrm/views/transports.py:105
 #: travelcrm/views/transports.py:139 travelcrm/views/transports.py:233
 #: travelcrm/views/uploads.py:105 travelcrm/views/uploads.py:139
-#: travelcrm/views/users.py:116 travelcrm/views/users.py:154
-#: travelcrm/views/users.py:248 travelcrm/views/vats.py:105
-#: travelcrm/views/vats.py:139 travelcrm/views/vats.py:233
-#: travelcrm/views/visas.py:78 travelcrm/views/visas.py:112
+#: travelcrm/views/users.py:118 travelcrm/views/users.py:156
+#: travelcrm/views/users.py:250 travelcrm/views/users.py:288
+#: travelcrm/views/vats.py:105 travelcrm/views/vats.py:139
+#: travelcrm/views/vats.py:233 travelcrm/views/visas.py:78
+#: travelcrm/views/visas.py:112
 msgid "Please, check errors"
 msgstr ""
 
@@ -3978,7 +3985,7 @@ msgstr ""
 #: travelcrm/views/suppliers_types.py:200 travelcrm/views/tasks.py:245
 #: travelcrm/views/tickets_classes.py:200 travelcrm/views/transfers.py:200
 #: travelcrm/views/transports.py:200 travelcrm/views/uploads.py:200
-#: travelcrm/views/users.py:215 travelcrm/views/vats.py:200
+#: travelcrm/views/users.py:217 travelcrm/views/vats.py:200
 msgid "Some objects could not be delete"
 msgstr ""
 
@@ -4007,7 +4014,7 @@ msgstr ""
 #: travelcrm/views/suppliers_types.py:204 travelcrm/views/tasks.py:249
 #: travelcrm/views/tickets_classes.py:204 travelcrm/views/transfers.py:204
 #: travelcrm/views/transports.py:204 travelcrm/views/uploads.py:204
-#: travelcrm/views/users.py:219 travelcrm/views/vats.py:204
+#: travelcrm/views/users.py:221 travelcrm/views/vats.py:204
 msgid "Deleted"
 msgstr ""
 
@@ -4031,7 +4038,7 @@ msgstr ""
 #: travelcrm/views/suppliers.py:229 travelcrm/views/suppliers_types.py:215
 #: travelcrm/views/tasks.py:260 travelcrm/views/tickets_classes.py:215
 #: travelcrm/views/transfers.py:215 travelcrm/views/transports.py:215
-#: travelcrm/views/users.py:230 travelcrm/views/vats.py:215
+#: travelcrm/views/users.py:232 travelcrm/views/vats.py:215
 msgid "Assign Maintainer"
 msgstr ""
 
@@ -4054,7 +4061,7 @@ msgstr ""
 #: travelcrm/views/subaccounts.py:248 travelcrm/views/suppliers.py:243
 #: travelcrm/views/suppliers_types.py:229 travelcrm/views/tasks.py:274
 #: travelcrm/views/tickets_classes.py:229 travelcrm/views/transfers.py:229
-#: travelcrm/views/transports.py:229 travelcrm/views/users.py:244
+#: travelcrm/views/transports.py:229 travelcrm/views/users.py:246
 #: travelcrm/views/vats.py:229
 msgid "Assigned"
 msgstr ""
@@ -4101,5 +4108,9 @@ msgstr ""
 
 #: travelcrm/views/turnovers.py:53
 msgid "total"
+msgstr ""
+
+#: travelcrm/views/users.py:264
+msgid "Edit Profile"
 msgstr ""
 
