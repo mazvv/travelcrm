@@ -1,6 +1,5 @@
 # -*coding: utf-8-*-
 
-import json
 from collections import namedtuple
 
 from pytz import common_timezones
@@ -62,6 +61,7 @@ from ..utils.common_utils import (
     get_datetime_format,
     format_date,
     format_datetime,
+    jsonify,
 )
 from ..utils.common_utils import translate as _
 from ..utils.common_utils import get_available_locales
@@ -96,7 +96,7 @@ class _ComboGridField(object):
         self._id_field = id_field
         self._text_field = text_field
         self._id = id or gen_id()
-        self._tools = tools
+        self._tools = []
         self._show_toolbar = show_toolbar
         self._data_options = data_options
         self._html_attrs = kwargs
@@ -152,7 +152,7 @@ class _ComboGridField(object):
                 }
             },
         """ % {
-            'id': json.dumps(self._value),
+            'id': jsonify(self._value),
             'obj_id': self._id,
         }
 
@@ -192,11 +192,11 @@ class _ComboGridField(object):
             'id_field': self._id_field,
             'text_field': self._text_field,
             'columns': (
-                json.dumps(self._fields) 
+                jsonify(self._fields) 
                 if not isinstance(self._fields, basestring) 
                 else self._fields
             ),
-            'id': json.dumps(self._value),
+            'id': jsonify(self._value),
             'obj_id': self._id,
             'on_before_load': self._render_on_before_load(),
             'on_success_load': self._render_on_load_success()
@@ -496,8 +496,8 @@ def date_field(name, value=None, data_options=None, **kwargs):
         formatter:function(date){return dt_formatter(date, %s);},
         parser:function(s){return dt_parser(s, %s);}
         """ % (
-       json.dumps(format),
-       json.dumps(format)
+       jsonify(format),
+       jsonify(format)
     )
     if data_options:
         _data_options += ",%s" % data_options
@@ -522,8 +522,8 @@ def datetime_field(name, value=None, data_options=None, **kwargs):
         formatter:function(date){return dt_formatter(date, %s);},
         parser:function(s){return dt_parser(s, %s);}
         """ % (
-            json.dumps(get_datetime_format()),
-            json.dumps(get_datetime_format())
+            jsonify(get_datetime_format()),
+            jsonify(get_datetime_format())
         )
     if data_options:
         _data_options += ",%s" % data_options
@@ -1061,7 +1061,7 @@ def services_types_combobox_field(name, value=None):
         loadFilter: function(data){
             return data.rows;
         }
-    """ % json.dumps(','.join(ids))
+    """ % jsonify(','.join(ids))
     return tags.text(
         name, value, class_="easyui-combobox text w20",
         data_options=data_options

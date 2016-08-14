@@ -2,6 +2,7 @@
 
 import random
 from uuid import uuid4
+from json import JSONEncoder, dumps
 from datetime import datetime, date, time
 from decimal import Decimal
 
@@ -69,6 +70,27 @@ def _get_localizer_for_locale_name(locale_name):
     registry = get_current_registry()
     tdirs = registry.queryUtility(ITranslationDirectories, default=[])
     return make_localizer(locale_name, tdirs)
+
+
+# class translate(object):
+#     def __init__(self, *args, **kwargs):
+#         self._args = args
+#         self._kwargs = kwargs
+# 
+#     def __call__(self):
+#         return _translate(*self._args, **self._kwargs)
+# 
+#     def __str__(self):
+#         return self.__call__()
+# 
+#     def serialize(self):
+#         return self.__call__()
+#     
+#     def __add__(self, other):
+#         return self.__call__() + other
+#  
+#     def __radd__(self, other):
+#         return other + self.__call__()
 
 
 def translate(*args, **kwargs):
@@ -202,3 +224,12 @@ def get_tarifs():
 def get_tarifs_timeout():
     settings = get_settings()
     return asbool(settings.get('tarifs.timeout'))
+
+
+class _JSONEncoder(JSONEncoder):
+    def default(self, obj):
+        return serialize(obj)
+
+
+def jsonify(obj):
+    return dumps(obj, cls=_JSONEncoder)

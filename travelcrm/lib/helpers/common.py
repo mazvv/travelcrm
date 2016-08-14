@@ -19,7 +19,8 @@ from ..utils.common_utils import (
     format_currency as u_format_currency,
     get_multicompanies as u_get_multicompanies,
     get_default_locale_name as u_get_default_locale_name,
-    get_tarifs as u_get_tarifs
+    get_tarifs as u_get_tarifs,
+    jsonify as _jsonify,
 )
 from ..utils.security_utils import get_auth_employee as u_get_auth_employee
 from ..utils.companies_utils import (
@@ -74,7 +75,7 @@ def button(context, permision, caption, **kwargs):
 
 
 def jsonify(val):
-    return json.dumps(val)
+    return _jsonify(val)
 
 
 def get_company_name():
