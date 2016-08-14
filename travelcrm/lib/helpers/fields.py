@@ -96,7 +96,7 @@ class _ComboGridField(object):
         self._id_field = id_field
         self._text_field = text_field
         self._id = id or gen_id()
-        self._tools = []
+        self._tools = tools
         self._show_toolbar = show_toolbar
         self._data_options = data_options
         self._html_attrs = kwargs
