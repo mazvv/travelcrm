@@ -5,6 +5,7 @@ from sqlalchemy import (
     String,
     Column,
     UniqueConstraint,
+    Index,
     ForeignKey,
 )
 from sqlalchemy.orm import (
@@ -33,6 +34,9 @@ class ResourceType(Base):
             'name',
             name='unique_idx_resource_type_name',
         ),
+        Index('idx_resource_type_name', 'name'),
+        Index('idx_resource_type_module', 'module'),
+        Index('idx_resource_type_resource_name', 'resource_name'),
     )
 
     STATUS = (

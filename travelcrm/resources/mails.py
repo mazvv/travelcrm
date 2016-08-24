@@ -1,4 +1,3 @@
-# -*-coding: utf-8 -*-
 from zope.interface import implementer
 
 from ..interfaces import (
@@ -10,6 +9,10 @@ from ..resources import (
 
 
 @implementer(IResourceType)
-class LeadsTypesResource(ResourceTypeBase):
+class MailsResource(ResourceTypeBase):
 
-    __name__ = 'leads_types'
+    __name__ = 'mails'
+
+    @property
+    def allowed_assign(self):
+        return True

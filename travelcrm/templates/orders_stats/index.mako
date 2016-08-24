@@ -13,7 +13,7 @@
     <div class="dp100 mb05 mt05">
         <span class="fa fa-bar-chart ml05"></span>
         <span class="fs110 ml05 b mr05">
-            ${_(u'Leads count dynamics for last week')}
+            ${_(u'Orders count dynamics for last week')}
         </span>
     </div>
     <canvas id="chart-${_id}" width="470" height="262"></canvas>

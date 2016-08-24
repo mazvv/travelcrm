@@ -133,3 +133,7 @@ class Order(Base):
         return (
             DBSession.query(cls).filter(cls.resource_id == resource_id).first()
         )
+
+    @classmethod
+    def condition_status_success(cls):
+        return cls.status == 'success'
