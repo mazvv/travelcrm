@@ -80,7 +80,7 @@
                     $('textarea[name=plain_content]').ace({lang: 'html'});
                 </script>
             </div>
-            <div title="${_(u'Notes')}">
+            <div title="${_(u'Notes')}" data-options="disabled:${h.common.jsonify(not bool(item))}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(
                         values=(
@@ -94,7 +94,7 @@
                     )}
                 </div>
             </div>
-            <div title="${_(u'Tasks')}">
+            <div title="${_(u'Tasks')}" data-options="disabled:${h.common.jsonify(not bool(item))}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${task_selector(
                         values=(

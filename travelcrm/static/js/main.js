@@ -58,6 +58,7 @@ function show_form_errors(form, errors){
 	    $.each(errors, function(input_name, error) {
 	    	set_field_error(form, input_name, error);
 	    });
+	    set_tabs_errors(form);
 	}
 }
 
@@ -70,8 +71,27 @@ function set_field_error(form, input_name, error){
 	form.find(selector).show();
 }
 
+function set_tabs_errors(form){
+    var tabs = form.find('.easyui-tabs');
+    if(tabs.length){
+        tabs = tabs.tabs('tabs');
+        $.each(tabs, function(i, tab){
+            $.each(tab.panel().find('span.error'), function(j, error){
+                if(
+                    $(error).css('display') != 'none'
+                    && $(error).css('visibility') != 'hidden'
+                ){
+                    tab.panel('options').tab.find('.tabs-inner').addClass('error');
+                }
+            });
+        });
+    }
+}
+
+
 function clear_form_errors(form){
     form.find('span.error').hide();
+    form.find('.tabs-inner.error').removeClass('error');
 }
 
 $(document).on('click', 'form._ajax input[type=reset]',
@@ -105,11 +125,11 @@ function submit(form){
                 show_status_bar_info(form.find('.status-bar'), 'success', json.success_message);
                 if(is_undefined(json.close) || json.close == true){
 	                form.closest('.easyui-dialog').dialog('destroy');
-	                if(!is_undefined(json.response)){
-	                	save_container_response(json.response);
-	                }
-	                refresh_container(null);
                 }
+                if(!is_undefined(json.response)){
+                    save_container_response(json.response);
+                }
+                refresh_container(null);
             }
         },
         onSubmit: function(){
@@ -264,7 +284,6 @@ function get_action_url(options){
 		    break;
 		case('with_rows'):
 		    var rows = get_checked(container);
-			console.log(rows);
 	 	    if(!rows.length){
 			    _dialog_open('/system_need_select_rows');
 				return;

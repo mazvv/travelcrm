@@ -35,6 +35,7 @@ from ...resources.leads import LeadsResource
 from ...resources.orders import OrdersResource
 from ...resources.companies import CompaniesResource
 from ...resources.persons_categories import PersonsCategoriesResource
+from ...resources.tags import TagsResource
 
 from ...models.task import Task
 from ...models.account import Account
@@ -409,6 +410,18 @@ def accounts_items_combotree_field(
     return _combotree_field(
         name, value, '/accounts_items/list', 'name', 'asc',
         data_options, **kwargs
+    )
+
+
+def permisions_switch_field(
+    name, value, permision, data_options=None, **kwargs
+):
+    _data_options = ""
+    if data_options:
+        _data_options += ('%s' % data_options)
+    return tags.checkbox(
+        name, permision, value == permision, class_='easyui-switchbutton',
+        data_options=_data_options, **kwargs
     )
 
 
@@ -1454,3 +1467,24 @@ def tarifs_combobox_field(
         class_='easyui-combobox text w20',
         data_options=_data_options, **kwargs
     )
+
+
+def tags_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+    tools = (
+        tool('add', '/tags/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/tags/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/tags/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, TagsResource, name, value, '/tags/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()

@@ -98,7 +98,7 @@
                     )}
                 </div>                
             </div>            
-            <div title="${_(u'Notes')}">
+            <div title="${_(u'Notes')}" data-options="disabled:${h.common.jsonify(not bool(item))}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(
                         values=(

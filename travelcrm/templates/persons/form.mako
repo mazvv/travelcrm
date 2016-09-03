@@ -78,6 +78,21 @@
                         ${h.common.error_container(name='person_category_id')}
                     </div>
                 </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"tags"), False, "tag_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.tags_combogrid_field(
+                            request, 
+                            'tag_id',
+                            item.resource.tags if item else None, 
+                            show_toolbar=(not readonly if readonly else True),
+                            data_options="multiple:true,multiline:true,height:66",
+                        )}
+                        ${h.common.error_container(name='tag_id')}
+                    </div>
+                </div>
                 <div class="form-field mb05">
                     <div class="dl15">
                         ${h.tags.title(_(u"description"), False, "descr")}
@@ -152,7 +167,7 @@
                     </div>
                 </div>
             </div>
-            <div title="${_(u'Notes')}">
+            <div title="${_(u'Notes')}" data-options="disabled:${h.common.jsonify(not bool(item))}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${note_selector(
                         values=(
@@ -166,7 +181,7 @@
                     )}
                 </div>
             </div>
-            <div title="${_(u'Tasks')}">
+            <div title="${_(u'Tasks')}" data-options="disabled:${h.common.jsonify(not bool(item))}">
                 <div class="easyui-panel" data-options="fit:true,border:false">
                     ${task_selector(
                         values=(

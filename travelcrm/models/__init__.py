@@ -98,3 +98,4 @@ from person_category import PersonCategory
 from campaign import Campaign
 from dismissal import Dismissal
 from mail import Mail
+from tag import Tag

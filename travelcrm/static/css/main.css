@@ -385,7 +385,9 @@ a:hover.l-btn-plain{
 	margin: 0px;
 	font-size: 11px;
 }
-
+.switchbutton-on {
+    background: #666;
+}
 
 /* navigation */
 #_navigation_ .easyui-linkbutton, #_navigation_ .easyui-menubutton{
@@ -477,6 +479,9 @@ form a:hover{
 }
 .status-bar.error{
     color: #900;
+}
+.tabs li a.tabs-inner.error{
+    border-top: 2px solid #900;
 }
 span.error.fa{
 	font-size: 16px;

@@ -19,7 +19,7 @@
                 ${h.tags.title(permision[1], False, "permisions")}
             </div>
             <div class="ml15">
-                ${h.fields.permisions_yes_no_field(
+                ${h.fields.permisions_switch_field(
                     'permisions', 
                     permision[0] if item and permision[0] in item.permisions else None,
                     permision=permision[0]

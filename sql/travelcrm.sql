@@ -12075,6 +12075,46 @@ ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
+-- Name: tag; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
+--
+
+CREATE SEQUENCE tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
+--
+
+ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_resource; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_resource (
+    tag_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: task; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
@@ -14582,6 +14622,46 @@ CREATE SEQUENCE supplier_type_id_seq
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
+
+
+--
+-- Name: tag; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
+--
+
+CREATE SEQUENCE tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
+--
+
+ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_resource; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_resource (
+    tag_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
 
 
 --
@@ -17095,6 +17175,46 @@ ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
 
 
 --
+-- Name: tag; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
+--
+
+CREATE SEQUENCE tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
+--
+
+ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_resource; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_resource (
+    tag_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: task; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
@@ -19575,6 +19695,46 @@ CREATE SEQUENCE supplier_type_id_seq
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
+
+
+--
+-- Name: tag; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_resource; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_resource (
+    tag_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
 
 
 --
@@ -22123,6 +22283,46 @@ CREATE SEQUENCE supplier_type_id_seq
 --
 
 ALTER SEQUENCE supplier_type_id_seq OWNED BY supplier_type.id;
+
+
+--
+-- Name: tag; Type: TABLE; Schema: test; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag (
+    id integer NOT NULL,
+    resource_id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE; Schema: test; Owner: -
+--
+
+CREATE SEQUENCE tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
+--
+
+ALTER SEQUENCE tag_id_seq OWNED BY tag.id;
+
+
+--
+-- Name: tag_resource; Type: TABLE; Schema: test; Owner: -; Tablespace: 
+--
+
+CREATE TABLE tag_resource (
+    tag_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
 
 
 --
@@ -24711,6 +24911,13 @@ ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_typ
 -- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
+--
+
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
@@ -25162,6 +25369,13 @@ ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('supplier_id_seq':
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
 
 
 --
@@ -25625,6 +25839,13 @@ ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_typ
 -- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
+--
+
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
@@ -26082,6 +26303,13 @@ ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_typ
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY task ALTER COLUMN id SET DEFAULT nextval('task_id_seq'::regclass);
 
 
@@ -26533,6 +26761,13 @@ ALTER TABLE ONLY supplier ALTER COLUMN id SET DEFAULT nextval('supplier_id_seq':
 --
 
 ALTER TABLE ONLY supplier_type ALTER COLUMN id SET DEFAULT nextval('supplier_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY tag ALTER COLUMN id SET DEFAULT nextval('tag_id_seq'::regclass);
 
 
 --
@@ -45671,7 +45906,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-d6bfdd337869
+106f13073959
 \.
 
 
@@ -50261,6 +50496,29 @@ SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
 
 
 --
+-- Data for Name: tag; Type: TABLE DATA; Schema: company_en; Owner: -
+--
+
+COPY tag (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag_resource; Type: TABLE DATA; Schema: company_en; Owner: -
+--
+
+COPY tag_resource (tag_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: task; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
@@ -50533,7 +50791,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-d6bfdd337869
+106f13073959
 \.
 
 
@@ -55031,6 +55289,29 @@ SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
 
 
 --
+-- Data for Name: tag; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY tag (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag_resource; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY tag_resource (tag_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: task; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
@@ -55305,7 +55586,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 2, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-d6bfdd337869
+106f13073959
 \.
 
 
@@ -59932,6 +60213,29 @@ SELECT pg_catalog.setval('supplier_type_id_seq', 2, true);
 
 
 --
+-- Data for Name: tag; Type: TABLE DATA; Schema: demo_ru; Owner: -
+--
+
+COPY tag (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag_resource; Type: TABLE DATA; Schema: demo_ru; Owner: -
+--
+
+COPY tag_resource (tag_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: task; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
@@ -60317,7 +60621,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-d6bfdd337869
+106f13073959
 \.
 
 
@@ -60619,7 +60923,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-08-16T09:19:36"]], "tarif_limit": 1}	lux.travel@gmai.com
+1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-08-28T21:52:03"]], "tarif_limit": 1}	lux.travel@gmai.com
 \.
 
 
@@ -62197,6 +62501,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 300	162	4	{view,settings}	\N	all
 301	163	4	{view,settings}	\N	all
 302	164	4	{view,add,edit,delete,assign}	\N	all
+303	165	4	{view,add,edit,delete}	\N	all
 \.
 
 
@@ -62516,7 +62821,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 241, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 302, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 303, true);
 
 
 --
@@ -63699,6 +64004,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3707	12	f	2
 1550	65	f	2
 1551	87	f	2
+3721	12	f	2
 1552	87	f	2
 2597	145	f	2
 2636	65	f	2
@@ -63810,6 +64116,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3702	149	f	2
 3708	135	f	2
 3709	143	f	2
+3722	165	f	2
 893	47	\N	2
 894	2	\N	2
 896	39	\N	2
@@ -63957,6 +64264,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2101	65	f	2
 1979	118	f	2
 1985	93	f	2
+3723	165	f	2
+3725	165	f	2
+3726	165	f	2
 1986	123	f	2
 1987	103	f	2
 1988	119	f	2
@@ -64059,6 +64369,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3694	111	f	2
 3704	149	f	2
 3711	12	f	2
+3724	165	f	2
 838	65	\N	2
 849	41	\N	2
 851	41	\N	2
@@ -64170,6 +64481,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2210	86	f	2
 2211	110	f	2
 2212	110	f	2
+3727	165	f	2
 2213	86	f	2
 2734	119	f	2
 2735	119	f	2
@@ -64256,6 +64568,8 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3685	137	f	2
 3706	123	f	7
 3714	134	f	2
+3728	165	f	2
+3729	165	f	2
 1199	89	\N	2
 1204	87	\N	2
 1205	89	\N	2
@@ -64380,6 +64694,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3695	93	f	2
 3715	12	f	2
 3716	65	f	2
+3730	165	f	2
 2020	69	f	2
 2023	104	f	2
 2024	104	f	2
@@ -64639,7 +64954,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 3720, true);
+SELECT pg_catalog.setval('resource_id_seq', 3730, true);
 
 
 --
@@ -68188,6 +68503,26 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 9346	3718	2	\N	2016-08-15 20:57:57.245736+03
 9347	3720	2	\N	2016-08-15 20:58:42.127593+03
 9348	3718	2	\N	2016-08-15 21:18:53.667685+03
+9349	2912	2	\N	2016-08-27 21:26:40.91456+03
+9350	2912	2	\N	2016-08-27 21:31:28.135513+03
+9351	2912	2	\N	2016-08-27 21:31:46.027601+03
+9352	2912	2	\N	2016-08-27 21:33:20.124147+03
+9353	2912	2	\N	2016-08-27 21:34:09.147611+03
+9354	2912	2	\N	2016-08-27 21:48:34.902922+03
+9355	2912	2	\N	2016-08-27 21:52:21.071017+03
+9356	2912	2	\N	2016-08-27 21:52:52.73815+03
+9357	2912	2	\N	2016-08-27 22:01:45.544281+03
+9358	2912	2	\N	2016-08-27 22:04:44.859232+03
+9359	3721	2	\N	2016-08-28 16:55:22.748938+03
+9360	3722	2	\N	2016-08-28 17:11:42.31609+03
+9361	3723	2	\N	2016-08-28 17:22:32.750103+03
+9362	3724	2	\N	2016-08-28 17:42:15.10767+03
+9363	3725	2	\N	2016-08-28 17:53:09.893739+03
+9364	3726	2	\N	2016-08-28 17:53:51.14716+03
+9365	3727	2	\N	2016-08-28 18:00:12.334877+03
+9366	3728	2	\N	2016-08-28 18:21:10.421011+03
+9367	3729	2	\N	2016-08-28 18:21:46.247351+03
+9368	3730	2	\N	2016-08-28 21:17:50.666763+03
 \.
 
 
@@ -68195,7 +68530,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 9348, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 9368, true);
 
 
 --
@@ -68271,6 +68606,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 162	3707	orders_stats	Orders Stats	OrdersStatsResource	travelcrm.resources.orders_stats	Portlet with orders statistics	{"column_index": 0}	0
 163	3711	countries_stats	Countries Stats	CountriesStatsResource	travelcrm.resources.countries_stats	Portlet with countries popularity statistics	{"column_index": 1}	0
 164	3715	mails	Mails	MailsResource	travelcrm.resources.mails	Mails templates for marketing campaigns	\N	0
+165	3721	tags	Tags	TagsResource	travelcrm.resources.tags	Tags for all types of resources	\N	0
 \.
 
 
@@ -68278,7 +68614,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 -- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_type_id_seq', 164, true);
+SELECT pg_catalog.setval('resource_type_id_seq', 165, true);
 
 
 --
@@ -68567,6 +68903,38 @@ SELECT pg_catalog.setval('supplier_type_id_seq', 5, true);
 
 
 --
+-- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY tag (id, resource_id, name) FROM stdin;
+1	3722	test
+2	3723	tag2
+3	3724	test3
+4	3725	zxcvzxcv
+5	3726	cvnbcvbcvbcv
+6	3727	sdfa sfasdfasd
+7	3728	czvcfgghd ghdfh f
+8	3729	ghgdfghdfg
+9	3730	uweyruiqwyeru
+\.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 9, true);
+
+
+--
+-- Data for Name: tag_resource; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY tag_resource (tag_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: task; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -68852,8 +69220,8 @@ COPY "user" (id, resource_id, username, email, password, employee_id) FROM stdin
 31	2126	v.lastovec	lastovec@travelcrm.org.ua	111111	15
 2	3	admin	admin@mail.ru	adminadmin	2
 34	2787	c.theron	vitalii.mazur@gmail.com	041035	32
-35	2912	s.dima	s.dima@gmail.com	892648	14
 23	894	maziv	maziv@mail.ru	korn17	7
+35	2912	s.dima	s.dima@gmail.com	892648	14
 \.
 
 
@@ -69001,7 +69369,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-d6bfdd337869
+106f13073959
 \.
 
 
@@ -73837,6 +74205,29 @@ COPY supplier_type (id, resource_id, name, descr) FROM stdin;
 --
 
 SELECT pg_catalog.setval('supplier_type_id_seq', 1, true);
+
+
+--
+-- Data for Name: tag; Type: TABLE DATA; Schema: test; Owner: -
+--
+
+COPY tag (id, resource_id, name) FROM stdin;
+\.
+
+
+--
+-- Name: tag_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
+--
+
+SELECT pg_catalog.setval('tag_id_seq', 1, false);
+
+
+--
+-- Data for Name: tag_resource; Type: TABLE DATA; Schema: test; Owner: -
+--
+
+COPY tag_resource (tag_id, resource_id) FROM stdin;
+\.
 
 
 --
@@ -78750,6 +79141,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_resource_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT tag_resource_pkey PRIMARY KEY (tag_id, resource_id);
+
+
+--
 -- Name: task_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
@@ -78987,6 +79394,14 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY supplier_type
     ADD CONSTRAINT unique_idx_name_supplier_type UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_tag; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT unique_idx_name_tag UNIQUE (name);
 
 
 --
@@ -79776,6 +80191,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_resource_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT tag_resource_pkey PRIMARY KEY (tag_id, resource_id);
+
+
+--
 -- Name: task_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
 --
 
@@ -80013,6 +80444,14 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY supplier_type
     ADD CONSTRAINT unique_idx_name_supplier_type UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_tag; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT unique_idx_name_tag UNIQUE (name);
 
 
 --
@@ -80802,6 +81241,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_resource_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT tag_resource_pkey PRIMARY KEY (tag_id, resource_id);
+
+
+--
 -- Name: task_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
@@ -81039,6 +81494,14 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY supplier_type
     ADD CONSTRAINT unique_idx_name_supplier_type UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_tag; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT unique_idx_name_tag UNIQUE (name);
 
 
 --
@@ -81812,6 +82275,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_resource_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT tag_resource_pkey PRIMARY KEY (tag_id, resource_id);
+
+
+--
 -- Name: task_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -82065,6 +82544,14 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY supplier_type
     ADD CONSTRAINT unique_idx_name_supplier_type UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_tag; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT unique_idx_name_tag UNIQUE (name);
 
 
 --
@@ -82854,6 +83341,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: tag_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tag_resource_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT tag_resource_pkey PRIMARY KEY (tag_id, resource_id);
+
+
+--
 -- Name: task_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
@@ -83091,6 +83594,14 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY supplier_type
     ADD CONSTRAINT unique_idx_name_supplier_type UNIQUE (name);
+
+
+--
+-- Name: unique_idx_name_tag; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT unique_idx_name_tag UNIQUE (name);
 
 
 --
@@ -91291,6 +91802,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: fk_resource_id_tag; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT fk_resource_id_tag FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tag_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_resource_id_tag_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
@@ -91640,6 +92167,14 @@ ALTER TABLE ONLY supplier_subaccount
 
 ALTER TABLE ONLY supplier
     ADD CONSTRAINT fk_supplier_type_id_supplier FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tag_id_tag_resource; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_tag_id_tag_resource FOREIGN KEY (tag_id) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -92981,6 +93516,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: fk_resource_id_tag; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT fk_resource_id_tag FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tag_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_resource_id_tag_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
 --
 
@@ -93330,6 +93881,14 @@ ALTER TABLE ONLY supplier_subaccount
 
 ALTER TABLE ONLY supplier
     ADD CONSTRAINT fk_supplier_type_id_supplier FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tag_id_tag_resource; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_tag_id_tag_resource FOREIGN KEY (tag_id) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -94671,6 +95230,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: fk_resource_id_tag; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT fk_resource_id_tag FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tag_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_resource_id_tag_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
@@ -95020,6 +95595,14 @@ ALTER TABLE ONLY supplier_subaccount
 
 ALTER TABLE ONLY supplier
     ADD CONSTRAINT fk_supplier_type_id_supplier FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tag_id_tag_resource; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_tag_id_tag_resource FOREIGN KEY (tag_id) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -96345,6 +96928,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: fk_resource_id_tag; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT fk_resource_id_tag FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tag_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_resource_id_tag_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -96710,6 +97309,14 @@ ALTER TABLE ONLY supplier_subaccount
 
 ALTER TABLE ONLY supplier
     ADD CONSTRAINT fk_supplier_type_id_supplier FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tag_id_tag_resource; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_tag_id_tag_resource FOREIGN KEY (tag_id) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -98051,6 +98658,22 @@ ALTER TABLE ONLY supplier_type
 
 
 --
+-- Name: fk_resource_id_tag; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY tag
+    ADD CONSTRAINT fk_resource_id_tag FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_resource_id_tag_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_resource_id_tag_resource FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_task; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -98400,6 +99023,14 @@ ALTER TABLE ONLY supplier_subaccount
 
 ALTER TABLE ONLY supplier
     ADD CONSTRAINT fk_supplier_type_id_supplier FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_tag_id_tag_resource; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY tag_resource
+    ADD CONSTRAINT fk_tag_id_tag_resource FOREIGN KEY (tag_id) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
