@@ -12,6 +12,7 @@ from . import(
 )
 from ..resources.persons import PersonsResource
 from ..models.person import Person
+from ..models.tag import Tag
 from ..models.contact import Contact
 from ..models.passport import Passport
 from ..models.address import Address
@@ -20,9 +21,12 @@ from ..models.note import Note
 from ..models.task import Task
 from ..lib.qb.persons import PersonsQueryBuilder
 from ..lib.utils.security_utils import get_auth_employee
+from ..lib.utils.common_utils import translate as _
 
 
 class _PersonSchema(ResourceSchema):
+    MAX_TAGS = 5
+
     person_category_id = colander.SchemaNode(
         SelectInteger(PersonCategory),
         missing=None,
@@ -46,6 +50,14 @@ class _PersonSchema(ResourceSchema):
         Date(),
         missing=None,
     )
+    tag_id = colander.SchemaNode(
+        colander.Set(),
+        validator=colander.Length(
+            max=MAX_TAGS, max_err=_(u'Max %s tags allowed') % MAX_TAGS
+        ),
+        missing=[],
+    )
+
     email_subscription = colander.SchemaNode(
         colander.Boolean(),
         missing=False,
@@ -73,6 +85,13 @@ class _PersonSchema(ResourceSchema):
     )
 
     def deserialize(self, cstruct):
+        if (
+            'tag_id' in cstruct
+            and not isinstance(cstruct.get('tag_id'), list)
+        ):
+            val = cstruct['tag_id']
+            cstruct['tag_id'] = list()
+            cstruct['tag_id'].append(val)
         if (
             'address_id' in cstruct
             and not isinstance(cstruct.get('address_id'), list)
@@ -110,6 +129,7 @@ class PersonForm(BaseForm):
             )
         else:
             person.contacts = []
+            person.resource.tags = []
             person.passports = []
             person.addresses = []
             person.resource.notes = []
@@ -123,6 +143,9 @@ class PersonForm(BaseForm):
         person.sms_subscription = self._controls.get('sms_subscription')
         person.birthday = self._controls.get('birthday')
         person.descr = self._controls.get('descr')
+        for id in self._controls.get('tag_id'):
+            tag = Tag.get(id)
+            person.resource.tags.append(tag)
         for id in self._controls.get('contact_id'):
             contact = Contact.get(id)
             person.contacts.append(contact)

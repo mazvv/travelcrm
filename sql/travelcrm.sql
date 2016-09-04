@@ -45906,7 +45906,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-106f13073959
+309c8478ded6
 \.
 
 
@@ -50791,7 +50791,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-106f13073959
+309c8478ded6
 \.
 
 
@@ -55586,7 +55586,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 2, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-106f13073959
+309c8478ded6
 \.
 
 
@@ -60606,6 +60606,7 @@ COPY advsource (id, resource_id, name) FROM stdin;
 5	907	Second appeal
 1	903	Internet Search Engines
 6	1283	Undefined
+7	3734	Yandex
 \.
 
 
@@ -60613,7 +60614,7 @@ COPY advsource (id, resource_id, name) FROM stdin;
 -- Name: advsource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('advsource_id_seq', 6, true);
+SELECT pg_catalog.setval('advsource_id_seq', 19, true);
 
 
 --
@@ -60621,7 +60622,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 6, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-106f13073959
+309c8478ded6
 \.
 
 
@@ -60923,7 +60924,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-08-28T21:52:03"]], "tarif_limit": 1}	lux.travel@gmai.com
+1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-09-04T18:58:25"]], "tarif_limit": 1}	lux.travel@gmai.com
 \.
 
 
@@ -62501,7 +62502,7 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 300	162	4	{view,settings}	\N	all
 301	163	4	{view,settings}	\N	all
 302	164	4	{view,add,edit,delete,assign}	\N	all
-303	165	4	{view,add,edit,delete}	\N	all
+304	166	4	{view,add,edit,delete}	\N	all
 \.
 
 
@@ -62821,7 +62822,7 @@ SELECT pg_catalog.setval('positions_navigations_id_seq', 241, true);
 -- Name: positions_permisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('positions_permisions_id_seq', 303, true);
+SELECT pg_catalog.setval('positions_permisions_id_seq', 304, true);
 
 
 --
@@ -63652,6 +63653,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3639	101	f	2
 3660	135	f	2
 3661	137	f	2
+3747	166	f	2
+3748	166	f	2
+3752	166	f	2
 2341	135	f	2
 2342	137	f	2
 2343	135	f	2
@@ -63969,6 +63973,8 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2695	86	f	2
 2530	119	f	2
 2531	119	f	2
+3749	166	f	2
+3754	166	f	2
 2532	119	f	2
 2533	119	f	2
 2534	119	f	2
@@ -64007,8 +64013,11 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3721	12	f	2
 1552	87	f	2
 2597	145	f	2
+3731	12	f	2
+3750	166	f	2
 2636	65	f	2
 2637	65	f	2
+3753	166	f	2
 2638	65	f	2
 2392	105	f	2
 2393	105	f	2
@@ -64116,13 +64125,15 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3702	149	f	2
 3708	135	f	2
 3709	143	f	2
-3722	165	f	2
+3732	166	f	2
+3733	166	f	2
 893	47	\N	2
 894	2	\N	2
 896	39	\N	2
 1011	12	\N	2
 1040	47	\N	2
 1277	55	f	2
+3751	166	f	2
 2669	130	f	2
 2672	123	f	2
 2673	39	f	2
@@ -64264,9 +64275,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2101	65	f	2
 1979	118	f	2
 1985	93	f	2
-3723	165	f	2
-3725	165	f	2
-3726	165	f	2
 1986	123	f	2
 1987	103	f	2
 1988	119	f	2
@@ -64300,6 +64308,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2403	105	f	2
 2704	119	f	2
 2705	119	f	2
+3734	71	f	2
 2706	119	f	2
 2707	119	f	2
 2708	119	f	2
@@ -64369,7 +64378,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3694	111	f	2
 3704	149	f	2
 3711	12	f	2
-3724	165	f	2
 838	65	\N	2
 849	41	\N	2
 851	41	\N	2
@@ -64481,7 +64489,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 2210	86	f	2
 2211	110	f	2
 2212	110	f	2
-3727	165	f	2
 2213	86	f	2
 2734	119	f	2
 2735	119	f	2
@@ -64568,8 +64575,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3685	137	f	2
 3706	123	f	7
 3714	134	f	2
-3728	165	f	2
-3729	165	f	2
 1199	89	\N	2
 1204	87	\N	2
 1205	89	\N	2
@@ -64694,7 +64699,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 3695	93	f	2
 3715	12	f	2
 3716	65	f	2
-3730	165	f	2
 2020	69	f	2
 2023	104	f	2
 2024	104	f	2
@@ -64954,7 +64958,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 3730, true);
+SELECT pg_catalog.setval('resource_id_seq', 3754, true);
 
 
 --
@@ -68514,15 +68518,26 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 9357	2912	2	\N	2016-08-27 22:01:45.544281+03
 9358	2912	2	\N	2016-08-27 22:04:44.859232+03
 9359	3721	2	\N	2016-08-28 16:55:22.748938+03
-9360	3722	2	\N	2016-08-28 17:11:42.31609+03
-9361	3723	2	\N	2016-08-28 17:22:32.750103+03
-9362	3724	2	\N	2016-08-28 17:42:15.10767+03
-9363	3725	2	\N	2016-08-28 17:53:09.893739+03
-9364	3726	2	\N	2016-08-28 17:53:51.14716+03
-9365	3727	2	\N	2016-08-28 18:00:12.334877+03
-9366	3728	2	\N	2016-08-28 18:21:10.421011+03
-9367	3729	2	\N	2016-08-28 18:21:46.247351+03
-9368	3730	2	\N	2016-08-28 21:17:50.666763+03
+9369	3731	2	\N	2016-09-03 18:16:12.222632+03
+9370	3732	2	\N	2016-09-03 20:47:56.689715+03
+9371	3733	2	\N	2016-09-03 20:48:05.472617+03
+9372	3683	2	\N	2016-09-03 20:49:50.534429+03
+9373	3734	2	\N	2016-09-04 12:40:39.029924+03
+9386	3747	2	\N	2016-09-04 17:39:08.071747+03
+9387	3748	2	\N	2016-09-04 17:42:17.365537+03
+9388	3749	2	\N	2016-09-04 17:42:30.613123+03
+9389	3750	2	\N	2016-09-04 17:42:39.06705+03
+9390	3751	2	\N	2016-09-04 18:09:51.063212+03
+9391	3752	2	\N	2016-09-04 18:10:07.743409+03
+9392	3753	2	\N	2016-09-04 18:10:15.921856+03
+9393	3754	2	\N	2016-09-04 18:13:53.544519+03
+9394	3683	2	\N	2016-09-04 18:41:46.535765+03
+9395	3683	2	\N	2016-09-04 18:43:15.40989+03
+9396	3683	2	\N	2016-09-04 18:44:21.567608+03
+9397	3683	2	\N	2016-09-04 18:44:44.396836+03
+9398	3683	2	\N	2016-09-04 18:52:21.038737+03
+9399	3683	2	\N	2016-09-04 18:54:11.707704+03
+9400	3683	2	\N	2016-09-04 18:55:55.405957+03
 \.
 
 
@@ -68530,7 +68545,7 @@ COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
 -- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_log_id_seq', 9368, true);
+SELECT pg_catalog.setval('resource_log_id_seq', 9400, true);
 
 
 --
@@ -68606,7 +68621,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 162	3707	orders_stats	Orders Stats	OrdersStatsResource	travelcrm.resources.orders_stats	Portlet with orders statistics	{"column_index": 0}	0
 163	3711	countries_stats	Countries Stats	CountriesStatsResource	travelcrm.resources.countries_stats	Portlet with countries popularity statistics	{"column_index": 1}	0
 164	3715	mails	Mails	MailsResource	travelcrm.resources.mails	Mails templates for marketing campaigns	\N	0
-165	3721	tags	Tags	TagsResource	travelcrm.resources.tags	Tags for all types of resources	\N	0
+166	3731	tags	Tags	TagsResource	travelcrm.resources.tags	Tags for any resource type	\N	0
 \.
 
 
@@ -68614,7 +68629,7 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 -- Name: resource_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_type_id_seq', 165, true);
+SELECT pg_catalog.setval('resource_type_id_seq', 166, true);
 
 
 --
@@ -68907,15 +68922,16 @@ SELECT pg_catalog.setval('supplier_type_id_seq', 5, true);
 --
 
 COPY tag (id, resource_id, name) FROM stdin;
-1	3722	test
-2	3723	tag2
-3	3724	test3
-4	3725	zxcvzxcv
-5	3726	cvnbcvbcvbcv
-6	3727	sdfa sfasdfasd
-7	3728	czvcfgghd ghdfh f
-8	3729	ghgdfghdfg
-9	3730	uweyruiqwyeru
+10	3732	test
+11	3733	bla
+12	3747	test 2
+13	3748	test 3
+14	3749	test 4
+15	3750	test 5
+16	3751	ewrqwerqwer
+17	3752	wtwertwertwert
+18	3753	opipoiqwer 
+19	3754	09887
 \.
 
 
@@ -68923,7 +68939,7 @@ COPY tag (id, resource_id, name) FROM stdin;
 -- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tag_id_seq', 9, true);
+SELECT pg_catalog.setval('tag_id_seq', 19, true);
 
 
 --
@@ -68931,6 +68947,7 @@ SELECT pg_catalog.setval('tag_id_seq', 9, true);
 --
 
 COPY tag_resource (tag_id, resource_id) FROM stdin;
+14	3683
 \.
 
 
@@ -69369,7 +69386,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-106f13073959
+309c8478ded6
 \.
 
 

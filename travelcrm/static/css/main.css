@@ -742,3 +742,20 @@ div.payment-indicator div{
 .item-details{
 	margin: 5px 0px;
 }
+
+/** tags input **/
+.tags-container{
+    width: 271px;
+    margin-bottom: 5px;
+    max-height: 50px;
+    overflow-y: scroll;
+}
+.tag{
+    padding: 3px;
+    margin-right: 5px;
+    background-color: #ccc;
+}
+.tag i{
+    margin-left: 3px;
+    cursor: pointer;
+}

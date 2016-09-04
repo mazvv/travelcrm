@@ -1,6 +1,7 @@
 <%namespace file="../contacts/common.mako" import="contact_selector"/>
 <%namespace file="../passports/common.mako" import="passports_selector"/>
 <%namespace file="../addresses/common.mako" import="address_selector"/>
+<%namespace file="../tags/common.mako" import="tags_selector"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
 <div class="dl70 easyui-dialog"
@@ -83,14 +84,12 @@
                         ${h.tags.title(_(u"tags"), False, "tag_id")}
                     </div>
                     <div class="ml15">
-                        ${h.fields.tags_combogrid_field(
-                            request, 
-                            'tag_id',
-                            item.resource.tags if item else None, 
-                            show_toolbar=(not readonly if readonly else True),
-                            data_options="multiple:true,multiline:true,height:66",
+                        ${tags_selector(
+                            values=[
+                                tag for tag in item.resource.tags
+                            ] if item and item.resource else [],
+                            can_edit=(not readonly if readonly else True)
                         )}
-                        ${h.common.error_container(name='tag_id')}
                     </div>
                 </div>
                 <div class="form-field mb05">

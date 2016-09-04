@@ -28,6 +28,20 @@
         </div>
         % endif
     % endif
+    % if resource.tags.count():
+        <div class="dp100">
+            <div class="dp15">
+                <span class="b">${_(u'tags')}</span>
+            </div>
+            <div class="dp85">
+                % for tag in resource.tags:
+                    <span class="mr1">
+                        <span class="fa fa-tag"></span> ${tag.name}
+                    </span>
+                % endfor
+            </div>
+        </div>
+    % endif
     <div class="dp100">
         <div class="dp15">
             <span class="b">${_(u'resource stats')}</span>
