@@ -26,9 +26,18 @@
                         ${h.common.error_container(name='name')}
                     </div>
                 </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"subject"), True, "subject")}
+                    </div>
+                    <div class="ml15">
+                        ${h.tags.text("subject", item.subject if item else None, class_="easyui-textbox w20")}
+                        ${h.common.error_container(name='subject')}
+                    </div>
+                </div>
                 <div class="form-field mb05">
                     <div class="dl15">
-                         ${h.tags.title(_(u"description"), False, "descr")}
+                         ${h.tags.title(_(u"description"), True, "descr")}
                     </div>
                     <div class="ml15">
                         ${h.tags.text(

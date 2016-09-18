@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.account_item import AccountItem
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
 from ..forms.accounts_items import (
     AccountItemForm,
@@ -197,3 +198,30 @@ class AccountsItemsView(BaseView):
                 ),
             }
         return {'success_message': _(u'Deleted')}
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/accounts_items/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            account_item = AccountItem.get(id)
+            subscribe_resource(self.request, account_item.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

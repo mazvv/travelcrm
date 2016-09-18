@@ -385,6 +385,23 @@ a:hover.l-btn-plain{
 	margin: 0px;
 	font-size: 11px;
 }
+/* a:hover.button.l-btn-plain{
+    border-color: #3072b3;
+    border-bottom-color: #2a65a0;
+    text-decoration: none;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+    color: #fff;
+    background-color: #3c8dde;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
+    background-image: -moz-linear-gradient(#599bdc, #3072b3);
+    background-image: -o-linear-gradient(#599bdc, #3072b3);
+    background-image: linear-gradient(#599bdc, #3072b3);
+}
+.button.l-btn-plain:hover{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+} */
 .switchbutton-on {
     background: #666;
 }
@@ -751,9 +768,11 @@ div.payment-indicator div{
     overflow-y: scroll;
 }
 .tag{
-    padding: 3px;
+    padding: 1px 3px;
     margin-right: 5px;
     background-color: #ccc;
+    margin-bottom: 3px;
+    display: inline-block;
 }
 .tag i{
     margin-left: 3px;

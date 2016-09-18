@@ -7,6 +7,7 @@ from pyramid.view import (
 
 from ..models.user import User
 from ..models.resource_type import ResourceType
+from ..models.resource import Resource
 from ..lib.bl.employees import get_employee_position, get_employee_permisions
 from ..lib.bl.structures import get_structure_name_path 
 from ..lib.utils.resources_utils import (

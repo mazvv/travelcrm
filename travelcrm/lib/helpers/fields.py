@@ -36,6 +36,7 @@ from ...resources.orders import OrdersResource
 from ...resources.companies import CompaniesResource
 from ...resources.persons_categories import PersonsCategoriesResource
 from ...resources.tags import TagsResource
+from ...resources.mails import MailsResource
 
 from ...models.task import Task
 from ...models.account import Account
@@ -1484,6 +1485,27 @@ def tags_combogrid_field(
     )
     field = _ComboGridField(
         request, TagsResource, name, value, '/tags/list', 
+        fields, 'id', 'name', tools, id, show_toolbar, 
+        data_options, **kwargs
+    )
+    return field()
+
+
+def mails_combogrid_field(
+    request, name, value=None,
+    id=None, show_toolbar=True, data_options=None, **kwargs
+):
+    fields = [[{
+        'field': 'name', 'title': _(u"name"),
+        'sortable': True, 'width': 200
+    }]]
+    tools = (
+        tool('add', '/mails/add', 'fa-plus', _(u'add new'), False),
+        tool('view', '/mails/view', 'fa-circle-o', _(u'view item'), True),
+        tool('edit', '/mails/edit', 'fa-pencil', _(u'edit item'), True)
+    )
+    field = _ComboGridField(
+        request, MailsResource, name, value, '/mails/list', 
         fields, 'id', 'name', tools, id, show_toolbar, 
         data_options, **kwargs
     )

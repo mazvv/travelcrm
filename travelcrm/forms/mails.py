@@ -40,6 +40,10 @@ class _MailSchema(ResourceSchema):
         colander.String(),
         validator=name_validator,
     )
+    subject = colander.SchemaNode(
+        colander.String(),
+        validator=colander.Length(max=255),
+    )
     descr = colander.SchemaNode(
         colander.String(),
         validator=colander.Length(max=255),
@@ -64,6 +68,7 @@ class MailForm(BaseForm):
             mail.resource.notes = []
             mail.resource.tasks = []
         mail.name = self._controls.get('name')
+        mail.subject = self._controls.get('subject')
         mail.html_content = self._controls.get('html_content')
         mail.descr = self._controls.get('descr')
         for id in self._controls.get('note_id'):

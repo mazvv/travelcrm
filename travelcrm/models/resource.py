@@ -2,13 +2,14 @@
 
 from zope.interface.verify import verifyClass
 
-from pyramid import threadlocal
 
 from sqlalchemy import (
     Integer,
     Boolean,
+    DateTime,
     Column,
     ForeignKey,
+    func,
     event,
 )
 from sqlalchemy.orm import (
@@ -21,12 +22,10 @@ from ..models import (
     Base
 )
 from ..models.resource_type import ResourceType
-from ..models.resource_log import ResourceLog
 from ..lib.utils.resources_utils import (
     get_resource_class_module,
     get_resource_class_name,
 )
-from ..lib.utils.security_utils import get_auth_employee
 from ..interfaces import IResourceType
 
 
@@ -58,6 +57,9 @@ class Resource(Base):
             ondelete='restrict',
             use_alter=True,
         )
+    )
+    modifydt = Column(
+        DateTime(),
     )
     protected = Column(
         Boolean,
@@ -102,30 +104,6 @@ class Resource(Base):
             return None
         return DBSession.query(cls).get(id)
 
-    @property
-    def creator(self):
-        rl = self.resources_logs.first()
-        if rl:
-            return rl.modifier
-
-    @property
-    def last_modifier(self):
-        rl = self.resources_logs[-1]
-        if rl:
-            return rl.modifier
-
-    def logging(self):
-        request = threadlocal.get_current_request()
-        if not request:
-            return
-        modifier = get_auth_employee(request)
-        assert modifier is not None, type(modifier)
-        self.resources_logs.append(
-            ResourceLog(
-                modifier=modifier,
-            )
-        )
-
     def __repr__(self):
         return (
             "%s (id=%d, resource_type_id=%d)"
@@ -133,8 +111,13 @@ class Resource(Base):
         )
 
 
-def logging_event(mapper, connection, target):
-    target.logging()
-
-event.listen(Resource, 'after_insert', logging_event)
-event.listen(Resource, 'after_update', logging_event)
+def update_event(mapper, connection, target):
+    """
+    ITS IMPORTANT! 
+    we need it because in most cases insert and update resource is implicit 
+    """
+    target.modifydt = func.now()
+ 
+ 
+event.listen(Resource, 'before_insert', update_event)
+event.listen(Resource, 'before_update', update_event)

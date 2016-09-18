@@ -266,7 +266,6 @@ class ResourceAssignSchema(colander.Schema):
         validator=maintainer_validator
     )
 
-    
 class BaseForm(object):
     _schema = None
     _controls = None

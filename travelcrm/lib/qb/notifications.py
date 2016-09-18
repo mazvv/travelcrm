@@ -2,11 +2,19 @@
 
 from . import ResourcesQueryBuilder
 
+from ...lib.helpers import text
 from ...models.resource import Resource
 from ...models.notification import (
     Notification,
     EmployeeNotification
 )
+
+
+class _TitleSerializer():
+    CHARACTERS_LIMIT = 28
+
+    def __call__(self, name, row):
+        return text.truncate(row.title, self.CHARACTERS_LIMIT)
 
 
 class NotificationsQueryBuilder(ResourcesQueryBuilder):
@@ -16,12 +24,15 @@ class NotificationsQueryBuilder(ResourcesQueryBuilder):
         self._fields = {
             'id': Notification.id,
             '_id': Notification.id,
-            'title': Notification.title,
             'status': EmployeeNotification.status,
+            'title': Notification.descr,
             'descr': Notification.descr,
             'created': Notification.created,
         }
         self.build_query()
+        self._serializers = {
+            'title': _TitleSerializer()
+        }
 
     def build_query(self):
         self.build_base_query()

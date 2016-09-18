@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.currency_rate import CurrencyRate
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
 from ..forms.currencies_rates import (
     CurrencyRateForm, 
@@ -232,3 +233,30 @@ class CurrenciesRatesView(BaseView):
                 'error_message': _(u'Please, check errors'),
                 'errors': form.errors
             }
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/currencies_rates/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            currency_rate = CurrencyRate.get(id)
+            subscribe_resource(self.request, currency_rate.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

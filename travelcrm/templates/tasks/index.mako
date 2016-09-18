@@ -2,6 +2,7 @@
 <%
     _id = h.common.gen_id()
     _tb_id = "tb-%s" % _id
+    _m_id = "m-%s" % _id
 %>
 <div class="easyui-panel" data-options="fit:true,border:false">
     <table class="easyui-datagrid"
@@ -39,9 +40,10 @@
             % if _context.has_permision('delete'):
             <th data-options="field:'_id',checkbox:true">${_(u"id")}</th>
             % endif
-            <th data-options="field:'title',sortable:true,width:180">${_(u"title")}</th>
+            <th data-options="field:'title',sortable:true,width:160">${_(u"title")}</th>
             <th data-options="field:'status',sortable:false,width:60,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
-            <th data-options="field:'deadline',sortable:true,width:110,styler:function(){return datagrid_resource_cell_styler();}">${_(u'deadline')}</th>
+            <th data-options="field:'subscriber',sortable:false,width:20,styler:datagrid_resource_cell_styler,formatter:subscriber_cell_formatter"><span class="fa fa-thumb-tack"></span></th>
+            <th data-options="field:'deadline',sortable:true,width:110,styler:datagrid_resource_cell_styler">${_(u'deadline')}</th>
         </thead>
     </table>
 
@@ -65,16 +67,6 @@
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'edit')}'">
                     <span class="fa fa-pencil"></span>${_(u'Edit')}
                 </a>
-                ##<a href="#" class="button easyui-linkbutton _action"
-                ##    data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'copy')}'">
-                ##   <span class="fa fa-copy"></span>${_(u'Copy')}
-                ##</a>
-                % endif
-                % if _context.has_permision('assign'):
-                <a href="#" class="button easyui-linkbutton _action"
-                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
-                    <span class="fa fa-user-secret"></span>${_(u'Assign')}
-                </a>
                 % endif
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger easyui-linkbutton _action" 
@@ -83,6 +75,32 @@
                 </a>
                 % endif
             </div>
+
+            % if _context.has_any_permision(('assign', 'view')):
+            <a href="#" class="button easyui-menubutton" 
+                data-options="menu:'#${_m_id}',plain:false">
+                ${_(u'More')}
+            </a>
+            <div id="${_m_id}">
+                % if _context.has_permision('assign'):
+                <div>
+                    <a href="#" class="_action"
+                        data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
+                        ${_(u'Assign')}
+                    </a>
+                </div>
+                % endif
+                % if _context.has_permision('view'):
+                <div>
+                    <a href="#" class="_action"
+                        data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'subscribe')}'">
+                        ${_(u'Subscribe')}
+                    </a>
+                </div>
+                % endif
+            </div>
+            % endif
+
         </div>
         <hr class="dashed"></hr>
         <div class="dp100">

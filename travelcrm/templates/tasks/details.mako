@@ -1,10 +1,15 @@
+<div class="dp100">
+    <div class="dp25 b">${_(u'title')}</div>
+    <div class="dp75">${item.title}</div>
+</div>
+
 % if item.descr:
 <div class="dp100">
     ${h.tags.literal(item.descr)}
 </div>
 % endif
 
-<div class="dp100">
+<div class="dp100 mt1">
     <div class="dp25 b">${_(u'maintainer')}</div>
     <div class="dp75">${item.resource.maintainer.name}</div>
 </div>

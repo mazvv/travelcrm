@@ -156,6 +156,33 @@ employee_upload = Table(
 )
 
 
+employee_subscription = Table(
+    'employee_subscription',
+    Base.metadata,
+    Column(
+        'employee_id',
+        Integer,
+        ForeignKey(
+            'employee.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_employee_id_employee_subscription',
+        ),
+        primary_key=True,
+    ),
+    Column(
+        'resource_id',
+        Integer,
+        ForeignKey(
+            'resource.id',
+            ondelete='restrict',
+            onupdate='cascade',
+            name='fk_resource_id_employee_subscription',
+        ),
+        primary_key=True,
+    )
+)
+
 class Employee(Base):
     __tablename__ = 'employee'
 
@@ -259,6 +286,17 @@ class Employee(Base):
         backref=backref(
             'employee',
             uselist=False,
+        ),
+        cascade="all,delete",
+        uselist=True,
+    )
+    subscriptions = relationship(
+        'Resource',
+        secondary=employee_subscription,
+        backref=backref(
+            'subscribers',
+            lazy='dynamic',
+            uselist=True,
         ),
         cascade="all,delete",
         uselist=True,

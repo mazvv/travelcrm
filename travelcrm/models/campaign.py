@@ -4,7 +4,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Text,
     DateTime,
     ForeignKey,
 )
@@ -23,6 +22,7 @@ class Campaign(Base):
 
     STATUS = (
         ('awaiting', _(u'awaiting')),
+        ('in_work', _(u'in work')),
         ('ready', _(u'ready')),
     )
 
@@ -41,19 +41,27 @@ class Campaign(Base):
         ),
         nullable=False,
     )
+    person_category_id = Column(
+        Integer,
+        ForeignKey(
+            'person_category.id',
+            name="fk_person_category_id_campaign",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
+    mail_id = Column(
+        Integer,
+        ForeignKey(
+            'mail.id',
+            name="fk_mail_id_campaign",
+            ondelete='restrict',
+            onupdate='cascade',
+        ),
+    )
     name = Column(
         String(length=32),
         nullable=False,
-    )
-    subject = Column(
-        String(length=128),
-        nullable=False,
-    )
-    plain_content = Column(
-        Text(),
-    )
-    html_content = Column(
-        Text(),
     )
     start_dt = Column(
         DateTime(timezone=True),
@@ -73,6 +81,23 @@ class Campaign(Base):
         cascade="all,delete",
         uselist=False,
     )
+    person_category = relationship(
+        'PersonCategory',
+        backref=backref(
+            'campaigns',
+            lazy='dynamic',
+        ),
+        cascade="all,delete",
+        uselist=False,
+    )
+    mail = relationship(
+        'Mail',
+        backref=backref(
+            'mails',
+            lazy='dynamic',
+        ),
+        uselist=False,
+    )
 
     @classmethod
     def get(cls, id):
@@ -90,3 +115,12 @@ class Campaign(Base):
 
     def set_status_ready(self):
         self.status = 'ready'
+
+    def is_status_ready(self):
+        return self.status == 'ready'
+
+    def set_status_in_work(self):
+        self.status = 'in_work'
+
+    def is_status_in_work(self):
+        return self.status == 'in_work'

@@ -59,8 +59,8 @@
             <th data-options="field:'passport_num',sortable:true,width:200">${_(u"passport num")}</th>
             <th data-options="field:'passport_type',sortable:true,width:80,formatter:function(value, row){return value.title;}">${_(u"type")}</th>
             <th data-options="field:'end_date',width:80">${_(u"end date")}</th>
-            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:datagrid_resource_cell_styler"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:datagrid_resource_cell_styler"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
     <div id="${_storage_id}">

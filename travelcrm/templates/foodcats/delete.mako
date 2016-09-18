@@ -13,8 +13,8 @@
             </div>
         </div>
         <div class="form-buttons">
-            <div class="dl20 status-bar"></div>
-            <div class="ml20 tr button-group">
+            <div class="dl25 status-bar"></div>
+            <div class="ml25 tr button-group">
                 ${h.tags.submit('delete', _(u"Delete"), class_="button easyui-linkbutton")}
                 ${h.common.reset('cancel', _(u"Cancel"), class_="button danger easyui-linkbutton")}
             </div>

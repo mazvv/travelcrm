@@ -2,9 +2,18 @@
 
 from collections import Iterable
 
+from ...lib.helpers import text
+
 from . import ResourcesQueryBuilder
 from ...models.resource import Resource
 from ...models.task import Task
+
+
+class _TitleSerializer():
+    CHARACTERS_LIMIT = 26
+
+    def __call__(self, name, row):
+        return text.truncate(row.title, self.CHARACTERS_LIMIT)
 
 
 class TasksQueryBuilder(ResourcesQueryBuilder):
@@ -19,6 +28,9 @@ class TasksQueryBuilder(ResourcesQueryBuilder):
             'status': Task.status,
         }
         self.build_query()
+        self._serializers = {
+            'title': _TitleSerializer()
+        }
 
     def build_query(self):
         self.build_base_query()

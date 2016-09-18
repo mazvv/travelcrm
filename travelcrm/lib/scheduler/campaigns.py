@@ -21,15 +21,19 @@ log = logging.getLogger(__name__)
 BUCKET_SIZE = 10
 
 
+def _gen_task_id(campaign_id):
+    return gen_task_id('camp_' + str(campaign_id))
+
+
 @scopped_task
 def _send_message(campaign_id, contacts):
     campaign = Campaign.get(campaign_id)
     mailer = get_mailer()
     for email in contacts:
         message = Message(
-            subject=campaign.subject,
+            subject=campaign.mail.subject,
             recipients=(email,),
-            html=campaign.html_content
+            html=campaign.mail.html_content
         )
         mailer.send_immediately(message)
     campaign.set_status_ready()
@@ -37,6 +41,8 @@ def _send_message(campaign_id, contacts):
 
 @bucket(BUCKET_SIZE)
 def schedule_campaign(campaign_id):
+    """ for task we set suffix manualy for replace it
+    """
     campaign = Campaign.get(campaign_id)
     contacts = yield (
         DBSession.query(Contact.contact.label('contact'))
@@ -48,12 +54,19 @@ def schedule_campaign(campaign_id):
         )
         .order_by(Contact.id)
     )
+
     contacts = tuple(contact.contact for contact in contacts)
     scheduler.add_job(
         _send_message,
         trigger='date',
-        id=gen_task_id(),
+        id=_gen_task_id(campaign_id),
         replace_existing=True,
         run_date=campaign.start_dt,
         args=[campaign_id, contacts],
     )
+
+
+def remove_job(campaign_id):
+    job_id = _gen_task_id(campaign_id)
+    if scheduler.get_job(job_id):
+        scheduler.remove_job(_gen_task_id(campaign_id))

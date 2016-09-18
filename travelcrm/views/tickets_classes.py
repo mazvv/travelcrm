@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.ticket_class import TicketClass
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
 
 from ..forms.tickets_classes import (
@@ -233,3 +234,30 @@ class TicketsClassesView(BaseView):
                 'error_message': _(u'Please, check errors'),
                 'errors': form.errors
             }
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/tickets_classes/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            ticket_class = TicketClass.get(id)
+            subscribe_resource(self.request, ticket_class.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

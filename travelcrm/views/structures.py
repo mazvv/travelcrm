@@ -8,6 +8,7 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.structure import Structure
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
 from ..forms.structures import (
     StructureForm, 
@@ -223,3 +224,30 @@ class StructuresView(BaseView):
                 'error_message': _(u'Please, check errors'),
                 'errors': form.errors
             }
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/structures/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            structure = Structure.get(id)
+            subscribe_resource(self.request, structure.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

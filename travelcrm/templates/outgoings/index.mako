@@ -57,8 +57,9 @@
             <th data-options="field:'account',sortable:true,width:150">${_(u"account")}</th>
             <th data-options="field:'sum',sortable:true,width:80">${_(u"sum")}</th>
             <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
-            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
+            <th data-options="field:'subscriber',sortable:false,width:20,styler:datagrid_resource_cell_styler,formatter:subscriber_cell_formatter"><span class="fa fa-thumb-tack"></span></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:datagrid_resource_cell_styler"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:datagrid_resource_cell_styler"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
 
@@ -91,6 +92,12 @@
                 <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
                     <span class="fa fa-user-secret"></span>${_(u'Assign')}
+                </a>
+                % endif
+                % if _context.has_permision('view'):
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'subscribe')}'">
+                    <span class="fa fa-thumb-tack"></span>${_(u'Subscribe')}
                 </a>
                 % endif
                 % if _context.has_permision('delete'):

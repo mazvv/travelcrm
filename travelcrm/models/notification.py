@@ -103,10 +103,6 @@ class Notification(Base):
         ),
         nullable=False,
     )
-    title = Column(
-        String,
-        nullable=False,
-    )
     descr = Column(
         String,
         nullable=False,
@@ -136,6 +132,7 @@ class Notification(Base):
             uselist=True,
             lazy='dynamic',
         ),
+        cascade='all,delete',
         uselist=False,
     )
     employees = relationship(

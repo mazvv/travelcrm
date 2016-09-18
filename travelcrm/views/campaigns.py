@@ -8,20 +8,20 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.campaign import Campaign
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
 from ..lib.utils.resources_utils import get_resource_type_by_resource
-
 from ..forms.campaigns import (
     CampaignForm,
     CampaignSearchForm,
     CampaignsSettingsForm,
     CampaignAssignForm,
+    CampaignCoverageForm,
 )
 from ..lib.events.campaigns import (
     CampaignCreated,
     CampaignEdited,
     CampaignDeleted,
-    CampaignSettings,
 )
 
 
@@ -105,7 +105,7 @@ class CampaignsView(BaseView):
             DBSession.add(campaign)
             DBSession.flush()
             event = CampaignCreated(self.request, campaign)
-            self.request.registry.notify(event)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': campaign.id
@@ -141,7 +141,7 @@ class CampaignsView(BaseView):
         if form.validate():
             form.submit(campaign)
             event = CampaignEdited(self.request, campaign)
-            self.request.registry.notify(event)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': campaign.id
@@ -204,7 +204,7 @@ class CampaignsView(BaseView):
                 for item in items:
                     DBSession.delete(item)
                     event = CampaignDeleted(self.request, item)
-                    self.request.registry.notify(event)
+                    event.registry()
                 DBSession.flush()
             except Exception, e:
                 log.error(e)
@@ -272,11 +272,54 @@ class CampaignsView(BaseView):
         form = CampaignsSettingsForm(self.request)
         if form.validate():
             form.submit()
-            event = CampaignSettings(self.request, None)
-            self.request.registry.notify(event)
             return {'success_message': _(u'Saved')}
         else:
             return {
                 'error_message': _(u'Please, check errors'),
                 'errors': form.errors
             }
+
+    @view_config(
+        name='coverage',
+        request_method='POST',
+        renderer='json',
+        permission='add'
+    )
+    def _coverage(self):
+        form = CampaignCoverageForm(self.request)
+        if form.validate():
+            return {
+                'response': form.submit()
+            }
+        else:
+            return {
+                'error_message': _(u'Please, check errors'),
+                'errors': form.errors
+            }
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/campaigns/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            campaign = Campaign.get(id)
+            subscribe_resource(self.request, campaign.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

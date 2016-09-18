@@ -1,21 +1,22 @@
 #-*-coding:utf-8-*-
 
-class _CampaignMixinEvent(object):
-    def __init__(self, request, campaign):
-        self.request = request
-        self.campaign = campaign
+from . import BaseMixinEvent
 
 
-class CampaignCreated(_CampaignMixinEvent):
+class CampaignCreated(BaseMixinEvent):
     pass
 
-class CampaignEdited(_CampaignMixinEvent):
+class CampaignEdited(BaseMixinEvent):
     pass
 
 
-class CampaignDeleted(_CampaignMixinEvent):
+class CampaignDeleted(BaseMixinEvent):
     pass
 
 
-class CampaignSettings(_CampaignMixinEvent):
+class CampaignSettings(BaseMixinEvent):
+    pass
+
+
+class CampaignAssigned(BaseMixinEvent):
     pass

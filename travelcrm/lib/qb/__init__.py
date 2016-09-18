@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from sqlalchemy import desc, asc, or_
+from sqlalchemy import desc, asc, or_, and_, text, cast, Boolean
 from sqlalchemy.orm import aliased
 from zope.interface.verify import verifyObject
 
@@ -13,7 +13,6 @@ from ...models.structure import Structure
 from ...models.employee import Employee
 from ...models.position import Position
 from ...models.appointment import Appointment
-from ...models.resource_log import ResourceLog
 
 from ..utils.common_utils import serialize
 from ..utils.security_utils import get_auth_employee
@@ -22,6 +21,7 @@ from ..bl.employees import (
     query_employee_scope,
     query_employees_position
 )
+from sqlalchemy.orm.util import outerjoin
 
 
 class NotValidContextError(Exception):
@@ -118,12 +118,12 @@ class GeneralQueryBuilder(object):
 
 class ResourcesQueryBuilder(GeneralQueryBuilder):
 
-    _log_subquery = ResourceLog.query_last_max_entries().subquery()
     _aEmployee = aliased(Employee)
+    _aSubscriber = aliased(Employee)
     _aStructure = aliased(Structure)
     _base_fields = {
         'rid': Resource.id.label('rid'),
-        'modifydt': _log_subquery.c.modifydt.label('modifydt'),
+        'modifydt': Resource.modifydt.label('modifydt'),
         'maintainer': _aEmployee.name,
     }
 
@@ -136,8 +136,8 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
         structure_subq = (
             query_employees_position()
             .with_entities(
-                Position.structure_id.label('structure_id'),
                 Appointment.employee_id.label('employee_id'),
+                Position.structure_id.label('structure_id'),
             )
             .subquery()
         )
@@ -152,10 +152,6 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
                 self._aStructure,
                 structure_subq.c.structure_id == self._aStructure.id
             )
-            .outerjoin(
-                self._log_subquery,
-                Resource.id == self._log_subquery.c.id
-            )
         )
         if self.context:
             employee = get_auth_employee(self.context.request)
@@ -165,6 +161,21 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
                 self.query = self.query.join(
                     subq, subq.c.id == self._aStructure.id
                 )
+            self._subscriptions(employee)
+
+    def _subscriptions(self, employee):
+        subscription_subq = (
+            DBSession.query(Resource.id)
+            .join(self._aSubscriber, Resource.subscribers)
+            .filter(self._aSubscriber.id == employee.id)
+            .subquery()
+        )
+        self.query = self.query.outerjoin(
+            subscription_subq, subscription_subq.c.id == Resource.id
+        )
+        self.update_fields({
+            'subscriber': subscription_subq.c.id
+        })
 
     def update_fields(self, fields):
         self._fields.update(fields)
@@ -186,14 +197,10 @@ class ResourcesQueryBuilder(GeneralQueryBuilder):
     def _filter_updated_date(self, updated_from, updated_to):
         if updated_from:
             updated_from = datetime.combine(updated_from, datetime.min.time())
-            self.query = self.query.filter(
-                self._log_subquery.c.modifydt >= updated_from
-            )
+            self.query = self.query.filter(Resource.modifydt >= updated_from)
         if updated_to:
             updated_to = datetime.combine(updated_to, datetime.max.time())
-            self.query = self.query.filter(
-                self._log_subquery.c.modifydt <= updated_to
-            )
+            self.query = self.query.filter(Resource.modifydt <= updated_to)
 
     def _filter_maintainer(self, maintainer_id):
         if maintainer_id:

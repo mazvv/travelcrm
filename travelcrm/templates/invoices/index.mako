@@ -55,11 +55,14 @@
             <th data-options="field:'customer',sortable:true,width:150">${_(u"customer")}</th>
             <th data-options="field:'final_price',sortable:true,width:80">${_(u"price")}</th>
             <th data-options="field:'payments',sortable:true,width:80">${_(u"payments")}</th>
+            <!--
             <th data-options="field:'debt',sortable:true,width:80">${_(u"debt")}</th>
+            -->
             <th data-options="field:'currency',sortable:true,width:60">${_(u"currency")}</th>
             <th data-options="field:'payments_percent',sortable:false,width:80,formatter:function(value, row, index){return payment_indicator(row.payments_percent);}">${_(u"payments, %")}</th>
-            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
+            <th data-options="field:'subscriber',sortable:false,width:20,styler:datagrid_resource_cell_styler,formatter:subscriber_cell_formatter"><span class="fa fa-thumb-tack"></span></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:datagrid_resource_cell_styler"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:datagrid_resource_cell_styler"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
 
@@ -96,6 +99,12 @@
                 <a href="#" class="button easyui-linkbutton _action"
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'assign')}'">
                     <span class="fa fa-user-secret"></span>${_(u'Assign')}
+                </a>
+                % endif
+                % if _context.has_permision('view'):
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'subscribe')}'">
+                    <span class="fa fa-thumb-tack"></span>${_(u'Subscribe')}
                 </a>
                 % endif
                 % if _context.has_permision('delete'):

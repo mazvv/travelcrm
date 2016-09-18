@@ -6,6 +6,7 @@ import fields
 import permisions
 import employees
 import structures
+from webhelpers2 import text
 from webhelpers2.html import tags
 from webhelpers2.html import builder
 

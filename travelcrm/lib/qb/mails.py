@@ -13,10 +13,11 @@ class MailsQueryBuilder(ResourcesQueryBuilder):
         self._fields = {
             'id': Mail.id,
             '_id': Mail.id,
-            'name': Mail.name
+            'name': Mail.name,
+            'subject': Mail.subject,
         }
         self._simple_search_fields = [
-            Mail.name
+            Mail.name, Mail.subject
         ]
         self.build_query()
 

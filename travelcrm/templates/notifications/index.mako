@@ -42,7 +42,7 @@
             % endif
             <th data-options="field:'title',sortable:true,width:180">${_(u"title")}</th>
             <th data-options="field:'status',sortable:false,width:60,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
-            <th data-options="field:'created',sortable:true,width:110,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"created")}</strong></th>
+            <th data-options="field:'created',sortable:true,width:110,styler:datagrid_resource_cell_styler"><strong>${_(u"created")}</strong></th>
         </thead>
     </table>
 

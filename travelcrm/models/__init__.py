@@ -36,7 +36,6 @@ Base = declarative_base(cls=_BaseCls)
 from resource_type import ResourceType
 from resource import Resource
 from user import User
-from resource_log import ResourceLog
 from region import Region
 from currency import Currency
 from employee import Employee

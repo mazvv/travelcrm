@@ -8,8 +8,8 @@ from pyramid.httpexceptions import HTTPFound
 from . import BaseView
 from ..models import DBSession
 from ..models.foodcat import Foodcat
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
-
 from ..forms.foodcats import (
     FoodcatForm,
     FoodcatSearchForm,
@@ -233,3 +233,30 @@ class FoodcatsView(BaseView):
                 'error_message': _(u'Please, check errors'),
                 'errors': form.errors
             }
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/foodcats/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            foodcat = Foodcat.get(id)
+            subscribe_resource(self.request, foodcat.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

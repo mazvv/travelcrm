@@ -59,8 +59,8 @@
             <th data-options="field:'name',sortable:true,width:140">${_(u"name")}</th>
             <th data-options="field:'media_type',sortable:false,width:100">${_(u"media type")}</th>
             <th data-options="field:'download',sortable:true,width:22,formatter:function(value, row){return format_download_link(value);}"></th>
-            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:datagrid_resource_cell_styler"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:datagrid_resource_cell_styler"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
     <div id="${_storage_id}">

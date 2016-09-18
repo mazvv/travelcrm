@@ -44,6 +44,10 @@ class Mail(Base):
         String(length=32),
         nullable=False,
     )
+    subject = Column(
+        String(length=128),
+        nullable=False,
+    )
     descr = Column(
         String(255),
     )

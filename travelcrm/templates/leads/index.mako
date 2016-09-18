@@ -5,6 +5,7 @@
     _tb_id = "tb-%s" % _id
     _t_id = "t-%s" % _id
     _s_id = "s-%s" % _id
+    _m_id = "m-%s" % _id
 %>
 <div class="easyui-panel unselectable"
     data-options="
@@ -54,8 +55,9 @@
             <th data-options="field:'customer',sortable:true,width:120">${_(u"customer")}</th>
             <th data-options="field:'advsource',sortable:true,width:180">${_(u"advertise")}</th>
             <th data-options="field:'status',sortable:false,width:60,formatter:function(value, row){return status_formatter(value);}">${_(u"status")}</th>
-            <th data-options="field:'modifydt',sortable:true,width:120,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"updated")}</strong></th>
-            <th data-options="field:'maintainer',width:100,styler:function(){return datagrid_resource_cell_styler();}"><strong>${_(u"maintainer")}</strong></th>
+            <th data-options="field:'subscriber',sortable:false,width:20,styler:datagrid_resource_cell_styler,formatter:subscriber_cell_formatter"><span class="fa fa-thumb-tack"></span></th>
+            <th data-options="field:'modifydt',sortable:true,width:120,styler:datagrid_resource_cell_styler"><strong>${_(u"updated")}</strong></th>
+            <th data-options="field:'maintainer',width:100,styler:datagrid_resource_cell_styler"><strong>${_(u"maintainer")}</strong></th>
         </thead>
     </table>
 
@@ -90,6 +92,12 @@
                     <span class="fa fa-user-secret"></span>${_(u'Assign')}
                 </a>
                 % endif
+                % if _context.has_permision('view'):
+                <a href="#" class="button easyui-linkbutton _action"
+                    data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'subscribe')}'">
+                    <span class="fa fa-thumb-tack"></span>${_(u'Subscribe')}
+                </a>
+                % endif
                 % if _context.has_permision('delete'):
                 <a href="#" class="button danger easyui-linkbutton _action" 
                     data-options="container:'#${_id}',action:'dialog_open',property:'with_rows',url:'${request.resource_url(_context, 'delete')}'">
@@ -97,12 +105,24 @@
                 </a>
                 % endif
             </div>
-            % if _context.has_permision('order'):
-            <a href="#" class="button easyui-linkbutton _action"
-                data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'order')}'">
-                <span class="fa fa-file-o"></span>${_(u'Order')}
+
+            % if _context.has_any_permision(('order',)):
+            <a href="#" class="button easyui-menubutton" 
+                data-options="menu:'#${_m_id}',plain:false">
+                ${_(u'More')}
             </a>
+            <div id="${_m_id}" style="width:150px;">
+                % if _context.has_permision('order'):
+                <div>
+                    <a href="#" class="_action"
+                        data-options="container:'#${_id}',action:'dialog_open',property:'with_row',url:'${request.resource_url(_context, 'order')}'">
+                        ${_(u'Order')}
+                    </a>
+                </div>
+                % endif
+            </div>
             % endif
+
         </div>
         <div class="ml50 tr">
             <div class="search">

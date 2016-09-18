@@ -540,3 +540,10 @@ function format_download_link(url){
 	var a = $('<a target="_blank"/>').attr('href', url).append(span);
 	return $('<div/>').append(a).html();
 }
+
+
+function subscriber_cell_formatter(val, row){
+    var span = $('<span/>').addClass('fa');
+    if(val) span.addClass('fa-thumb-tack');
+    return $('<div/>').append(span).html();
+}

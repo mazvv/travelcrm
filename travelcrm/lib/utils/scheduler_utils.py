@@ -79,3 +79,11 @@ def transactional(task):
             task(*args, **kwargs)
     return _task
 
+
+def after_commit(f):
+    def _wrapper_f(success, *args, **kwargs):
+        return f(*args, **kwargs)
+    def _wrapper(*args, **kwargs):
+        t = transaction.get()
+        t.addAfterCommitHook(_wrapper_f, args, kwargs)
+    return _wrapper

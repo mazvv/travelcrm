@@ -10,6 +10,7 @@ from . import BaseView
 from ..models import DBSession
 from ..models.resource import Resource
 from ..models.supplier import Supplier
+from ..lib.bl.subscriptions import subscribe_resource
 from ..lib.utils.common_utils import translate as _
 from ..lib.helpers.fields import suppliers_combogrid_field
 from ..forms.suppliers import (
@@ -263,3 +264,30 @@ class SuppliersView(BaseView):
                 self.request, self.request.params.get('name'), value
             )
         )
+
+    @view_config(
+        name='subscribe',
+        request_method='GET',
+        renderer='travelcrm:templates/suppliers/subscribe.mako',
+        permission='view'
+    )
+    def subscribe(self):
+        return {
+            'id': self.request.params.get('id'),
+            'title': self._get_title(_(u'Subscribe')),
+        }
+
+    @view_config(
+        name='subscribe',
+        request_method='POST',
+        renderer='json',
+        permission='view'
+    )
+    def _subscribe(self):
+        ids = self.request.params.getall('id')
+        for id in ids:
+            supplier = Supplier.get(id)
+            subscribe_resource(self.request, supplier.resource)
+        return {
+            'success_message': _(u'Subscribed'),
+        }

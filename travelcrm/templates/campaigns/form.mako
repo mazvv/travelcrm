@@ -1,3 +1,5 @@
+<%namespace file="../common/infoblock.mako" import="infoblock"/>
+<%namespace file="../tags/common.mako" import="tags_selector"/>
 <%namespace file="../notes/common.mako" import="note_selector"/>
 <%namespace file="../tasks/common.mako" import="task_selector"/>
 <div class="dl70 easyui-dialog"
@@ -14,7 +16,7 @@
         autocomplete="off",
         hidden_fields=[('csrf_token', request.session.get_csrf_token())]
     )}
-        <div class="easyui-tabs h100" data-options="border:false,height:300">
+        <div class="easyui-tabs h100" data-options="border:false,height:350">
             <div title="${_(u'Main')}">
                 <div class="form-field">
                     <div class="dl15">
@@ -23,15 +25,6 @@
                     <div class="ml15">
                         ${h.tags.text("name", item.name if item else None, class_="easyui-textbox w20")}
                         ${h.common.error_container(name='name')}
-                    </div>
-                </div>
-                <div class="form-field">
-                    <div class="dl15">
-                        ${h.tags.title(_(u"subject"), True, "subject")}
-                    </div>
-                    <div class="ml15">
-                        ${h.tags.text("subject", item.subject if item else None, class_="easyui-textbox w20")}
-                        ${h.common.error_container(name='subject')}
                     </div>
                 </div>
                 <div class="form-field">
@@ -51,34 +44,94 @@
                         ${h.fields.campaigns_statuses_combobox_field(
                             'status',
                             item.status.key if item else None,
-                            data_options='readonly:true'
                         )}
+                        ${h.common.error_container(name='status')}
                     </div>
                 </div>
             </div>
-            <div title="${_(u'HTML content')}">
-                ${h.tags.textarea(
-                    'html_content', 
-                    item.html_content if item else None,
-                    class_="rich-text-editor",
-                    cols=103,
-                    rows=18,
+            <div title="${_(u'Settings')}">
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"mail template"), True, "mail_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.mails_combogrid_field(
+                            request, 
+                            'mail_id',
+                            item.mail_id if item else None, 
+                            show_toolbar=(not readonly if readonly else True),
+                        )}
+                        ${h.common.error_container(name='mail_id')}
+                    </div>
+                </div>
+                ${infoblock(
+                    _(u"Filter settings. Only clients with criteria below will be processed or all clients DB")
                 )}
-                <script>
-                    $('textarea[name=html_content]').ace({lang: 'html'});
-                </script>
-            </div>
-            <div title="${_(u'Plain text')}">
-                ${h.tags.textarea(
-                    'plain_content',
-                    item.plain_content if item else None,
-                    class_="rich-text-editor",
-                    cols=103,
-                    rows=18,
-                )}
-                <script>
-                    $('textarea[name=plain_content]').ace({lang: 'html'});
-                </script>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"category"), False, "person_category_id")}
+                    </div>
+                    <div class="ml15">
+                        ${h.fields.persons_categories_combogrid_field(
+                            request, 
+                            'person_category_id',
+                            item.person_category_id if item else None, 
+                            show_toolbar=(not readonly if readonly else True),
+                        )}
+                        ${h.common.error_container(name='person_category_id')}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <div class="dl15">
+                        ${h.tags.title(_(u"tags"), False, "tag_id")}
+                    </div>
+                    <div class="ml15">
+                        ${tags_selector(
+                            values=[
+                                tag for tag in item.resource.tags
+                            ] if item and item.resource else [],
+                            can_edit=(not readonly if readonly else True)
+                        )}
+                    </div>
+                </div>
+                % if not readonly:
+                    ${infoblock(_(u"Tools"))}
+                    <div class="form-field">
+                        <div class="dl15">
+                            ${h.tags.title(_(u"coverage"), False, "coverage")}
+                        </div>
+                        <div class="ml15">
+                            ${h.tags.text(
+                                "coverage", None, class_="easyui-textbox w20",
+                                data_options='disabled:true'
+                            )}
+                            ${h.tags.link_to(
+                                _(u'Show'), '#',
+                                data_url=request.resource_url(_context, 'coverage'),
+                                class_="easyui-linkbutton button",
+                                data_options="""
+                                    onClick: function(){
+                                        var a = $(this);
+                                        var input = a.closest('form').find('#coverage');
+                                        var url = a.data('url');
+                                        var data = a.closest('form')
+                                            .find('[name=csrf_token], [name=person_category_id], [name=tag_id]')
+                                            .serialize();
+                                        $.ajax({
+                                            url: url,
+                                            type: 'post',
+                                            data: data,
+                                            dataType: 'json',
+                                            success: function(json){
+                                                input.textbox('setValue', json.response);
+                                            }
+                                        });
+                                    }
+                                """
+                            )}
+                        </div>
+                    </div>
+                % endif
             </div>
             <div title="${_(u'Notes')}" data-options="disabled:${h.common.jsonify(not bool(item))}">
                 <div class="easyui-panel" data-options="fit:true,border:false">

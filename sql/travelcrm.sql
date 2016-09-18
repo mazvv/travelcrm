@@ -10324,11 +10324,10 @@ CREATE TABLE campaign (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
-    subject character varying(128) NOT NULL,
-    plain_content text,
-    html_content text,
     start_dt timestamp with time zone NOT NULL,
-    status smallint NOT NULL
+    status smallint NOT NULL,
+    mail_id integer,
+    person_category_id integer
 );
 
 
@@ -10782,6 +10781,16 @@ CREATE TABLE employee_subaccount (
 
 
 --
+-- Name: employee_subscription; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_subscription (
+    employee_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: employee_upload; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
 --
 
@@ -11140,7 +11149,8 @@ CREATE TABLE mail (
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     html_content text,
-    descr character varying(255)
+    descr character varying(255),
+    subject character varying(128) NOT NULL
 );
 
 
@@ -11258,7 +11268,6 @@ CREATE TABLE note_upload (
 CREATE TABLE notification (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    title character varying NOT NULL,
     descr character varying NOT NULL,
     url character varying,
     created timestamp with time zone
@@ -11677,7 +11686,8 @@ CREATE TABLE resource (
     id integer NOT NULL,
     resource_type_id integer NOT NULL,
     maintainer_id integer,
-    protected boolean
+    protected boolean,
+    modifydt timestamp without time zone
 );
 
 
@@ -11698,38 +11708,6 @@ CREATE SEQUENCE resource_id_seq
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
-
-
---
--- Name: resource_log; Type: TABLE; Schema: company_en; Owner: -; Tablespace: 
---
-
-CREATE TABLE resource_log (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    employee_id integer NOT NULL,
-    comment character varying(512),
-    modifydt timestamp with time zone
-);
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company_en; Owner: -
---
-
-CREATE SEQUENCE resource_log_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company_en; Owner: -
---
-
-ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
@@ -12874,11 +12852,10 @@ CREATE TABLE campaign (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
-    subject character varying(128) NOT NULL,
-    plain_content text,
-    html_content text,
     start_dt timestamp with time zone NOT NULL,
-    status smallint NOT NULL
+    status smallint NOT NULL,
+    mail_id integer,
+    person_category_id integer
 );
 
 
@@ -13332,6 +13309,16 @@ CREATE TABLE employee_subaccount (
 
 
 --
+-- Name: employee_subscription; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_subscription (
+    employee_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: employee_upload; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
 --
 
@@ -13690,7 +13677,8 @@ CREATE TABLE mail (
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     html_content text,
-    descr character varying(255)
+    descr character varying(255),
+    subject character varying(128) NOT NULL
 );
 
 
@@ -13808,7 +13796,6 @@ CREATE TABLE note_upload (
 CREATE TABLE notification (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    title character varying NOT NULL,
     descr character varying NOT NULL,
     url character varying,
     created timestamp with time zone
@@ -14227,7 +14214,8 @@ CREATE TABLE resource (
     id integer NOT NULL,
     resource_type_id integer NOT NULL,
     maintainer_id integer,
-    protected boolean
+    protected boolean,
+    modifydt timestamp without time zone
 );
 
 
@@ -14248,38 +14236,6 @@ CREATE SEQUENCE resource_id_seq
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
-
-
---
--- Name: resource_log; Type: TABLE; Schema: company_ru; Owner: -; Tablespace: 
---
-
-CREATE TABLE resource_log (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    employee_id integer NOT NULL,
-    comment character varying(512),
-    modifydt timestamp with time zone
-);
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: company_ru; Owner: -
---
-
-CREATE SEQUENCE resource_log_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: company_ru; Owner: -
---
-
-ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
@@ -15424,11 +15380,10 @@ CREATE TABLE campaign (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
-    subject character varying(128) NOT NULL,
-    plain_content text,
-    html_content text,
     start_dt timestamp with time zone NOT NULL,
-    status smallint NOT NULL
+    status smallint NOT NULL,
+    mail_id integer,
+    person_category_id integer
 );
 
 
@@ -15882,6 +15837,16 @@ CREATE TABLE employee_subaccount (
 
 
 --
+-- Name: employee_subscription; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_subscription (
+    employee_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: employee_upload; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
@@ -16240,7 +16205,8 @@ CREATE TABLE mail (
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     html_content text,
-    descr character varying(255)
+    descr character varying(255),
+    subject character varying(128) NOT NULL
 );
 
 
@@ -16358,7 +16324,6 @@ CREATE TABLE note_upload (
 CREATE TABLE notification (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    title character varying NOT NULL,
     descr character varying NOT NULL,
     url character varying,
     created timestamp with time zone
@@ -16777,7 +16742,8 @@ CREATE TABLE resource (
     id integer NOT NULL,
     resource_type_id integer NOT NULL,
     maintainer_id integer,
-    protected boolean
+    protected boolean,
+    modifydt timestamp without time zone
 );
 
 
@@ -16798,38 +16764,6 @@ CREATE SEQUENCE resource_id_seq
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
-
-
---
--- Name: resource_log; Type: TABLE; Schema: demo_ru; Owner: -; Tablespace: 
---
-
-CREATE TABLE resource_log (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    employee_id integer NOT NULL,
-    comment character varying(512),
-    modifydt timestamp with time zone
-);
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: demo_ru; Owner: -
---
-
-CREATE SEQUENCE resource_log_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: demo_ru; Owner: -
---
-
-ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
@@ -17955,11 +17889,10 @@ CREATE TABLE campaign (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
-    subject character varying(128) NOT NULL,
-    plain_content text,
-    html_content text,
     start_dt timestamp with time zone NOT NULL,
-    status smallint NOT NULL
+    status smallint NOT NULL,
+    mail_id integer,
+    person_category_id integer
 );
 
 
@@ -18417,6 +18350,16 @@ CREATE TABLE employee_subaccount (
 
 
 --
+-- Name: employee_subscription; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_subscription (
+    employee_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: employee_upload; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -18813,7 +18756,8 @@ CREATE TABLE mail (
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     html_content text,
-    descr character varying(255)
+    descr character varying(255),
+    subject character varying(128) NOT NULL
 );
 
 
@@ -18912,7 +18856,6 @@ CREATE TABLE note_upload (
 CREATE TABLE notification (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    title character varying NOT NULL,
     descr character varying NOT NULL,
     created timestamp with time zone,
     url character varying
@@ -19319,7 +19262,8 @@ CREATE TABLE resource (
     id integer NOT NULL,
     resource_type_id integer NOT NULL,
     protected boolean,
-    maintainer_id integer
+    maintainer_id integer,
+    modifydt timestamp without time zone
 );
 
 
@@ -19340,38 +19284,6 @@ CREATE SEQUENCE resource_id_seq
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
-
-
---
--- Name: resource_log; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE resource_log (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    employee_id integer NOT NULL,
-    comment character varying(512),
-    modifydt timestamp with time zone
-);
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE resource_log_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
@@ -20535,11 +20447,10 @@ CREATE TABLE campaign (
     id integer NOT NULL,
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
-    subject character varying(128) NOT NULL,
-    plain_content text,
-    html_content text,
     start_dt timestamp with time zone NOT NULL,
-    status smallint NOT NULL
+    status smallint NOT NULL,
+    mail_id integer,
+    person_category_id integer
 );
 
 
@@ -20993,6 +20904,16 @@ CREATE TABLE employee_subaccount (
 
 
 --
+-- Name: employee_subscription; Type: TABLE; Schema: test; Owner: -; Tablespace: 
+--
+
+CREATE TABLE employee_subscription (
+    employee_id integer NOT NULL,
+    resource_id integer NOT NULL
+);
+
+
+--
 -- Name: employee_upload; Type: TABLE; Schema: test; Owner: -; Tablespace: 
 --
 
@@ -21351,7 +21272,8 @@ CREATE TABLE mail (
     resource_id integer NOT NULL,
     name character varying(32) NOT NULL,
     html_content text,
-    descr character varying(255)
+    descr character varying(255),
+    subject character varying(128) NOT NULL
 );
 
 
@@ -21469,7 +21391,6 @@ CREATE TABLE note_upload (
 CREATE TABLE notification (
     id integer NOT NULL,
     resource_id integer NOT NULL,
-    title character varying NOT NULL,
     descr character varying NOT NULL,
     url character varying,
     created timestamp with time zone
@@ -21888,7 +21809,8 @@ CREATE TABLE resource (
     id integer NOT NULL,
     resource_type_id integer NOT NULL,
     maintainer_id integer,
-    protected boolean
+    protected boolean,
+    modifydt timestamp without time zone
 );
 
 
@@ -21909,38 +21831,6 @@ CREATE SEQUENCE resource_id_seq
 --
 
 ALTER SEQUENCE resource_id_seq OWNED BY resource.id;
-
-
---
--- Name: resource_log; Type: TABLE; Schema: test; Owner: -; Tablespace: 
---
-
-CREATE TABLE resource_log (
-    id integer NOT NULL,
-    resource_id integer NOT NULL,
-    employee_id integer NOT NULL,
-    comment character varying(512),
-    modifydt timestamp with time zone
-);
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE; Schema: test; Owner: -
---
-
-CREATE SEQUENCE resource_log_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE OWNED BY; Schema: test; Owner: -
---
-
-ALTER SEQUENCE resource_log_id_seq OWNED BY resource_log.id;
 
 
 --
@@ -24848,13 +24738,6 @@ ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq':
 -- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
 --
 
-ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: company_en; Owner: -
---
-
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
@@ -25306,13 +25189,6 @@ ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::reg
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: company_ru; Owner: -
---
-
-ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
@@ -25776,13 +25652,6 @@ ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq':
 -- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
 --
 
-ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: demo_ru; Owner: -
---
-
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
@@ -26240,13 +26109,6 @@ ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY resource_type ALTER COLUMN id SET DEFAULT nextval('resource_type_id_seq'::regclass);
 
 
@@ -26698,13 +26560,6 @@ ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::reg
 --
 
 ALTER TABLE ONLY resource ALTER COLUMN id SET DEFAULT nextval('resource_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: test; Owner: -
---
-
-ALTER TABLE ONLY resource_log ALTER COLUMN id SET DEFAULT nextval('resource_log_id_seq'::regclass);
 
 
 --
@@ -45906,7 +45761,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-309c8478ded6
+c38723878dbe
 \.
 
 
@@ -46006,7 +45861,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
+COPY campaign (id, resource_id, name, start_dt, status, mail_id, person_category_id) FROM stdin;
 \.
 
 
@@ -46263,6 +46118,14 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
+-- Data for Name: employee_subscription; Type: TABLE DATA; Schema: company_en; Owner: -
+--
+
+COPY employee_subscription (employee_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: employee_upload; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
@@ -46432,7 +46295,7 @@ SELECT pg_catalog.setval('location_id_seq', 1, true);
 -- Data for Name: mail; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
-COPY mail (id, resource_id, name, html_content, descr) FROM stdin;
+COPY mail (id, resource_id, name, html_content, descr, subject) FROM stdin;
 \.
 
 
@@ -46582,7 +46445,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
-COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
+COPY notification (id, resource_id, descr, url, created) FROM stdin;
 \.
 
 
@@ -46862,1308 +46725,1308 @@ SELECT pg_catalog.setval('region_id_seq', 1, true);
 -- Data for Name: resource; Type: TABLE DATA; Schema: company_en; Owner: -
 --
 
-COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
-12	12	2	\N
-14	12	2	\N
-16	12	2	\N
-30	12	2	\N
-31	12	2	\N
-32	12	2	\N
-33	12	2	\N
-34	12	2	\N
-35	12	2	\N
-36	12	2	\N
-37	12	2	\N
-38	12	2	\N
-39	12	2	\N
-40	12	2	\N
-43	12	2	\N
-44	12	2	\N
-45	12	2	\N
-83	2	2	\N
-84	2	2	\N
-277	39	2	\N
-913	72	2	\N
-914	72	2	\N
-915	72	2	\N
-916	72	2	\N
-917	72	2	\N
-2890	93	2	f
-918	72	2	\N
-919	72	2	\N
-928	73	2	\N
-929	73	2	\N
-930	73	2	\N
-931	73	2	\N
-932	73	2	\N
-933	73	2	\N
-935	73	2	\N
-936	73	2	\N
-937	73	2	\N
-948	73	2	\N
-949	73	2	\N
-950	73	2	\N
-952	73	2	\N
-953	12	2	\N
-954	12	2	\N
-955	65	2	\N
-956	65	2	\N
-957	74	2	\N
-958	74	2	\N
-1647	39	2	f
-2266	137	2	f
-2267	134	2	f
-2268	12	2	f
-2269	105	2	f
-1915	111	2	f
-1917	110	2	f
-1949	123	2	f
-1961	123	2	f
-2714	104	2	f
-2715	119	2	f
-2716	119	2	f
-2717	119	2	f
-2718	119	2	f
-2881	69	2	f
-2882	12	2	f
-2883	65	2	f
-278	39	2	\N
-279	39	2	\N
-280	39	2	\N
-281	39	2	\N
-282	39	2	\N
-283	12	2	\N
-286	41	2	\N
-287	41	2	\N
-288	41	2	\N
-289	41	2	\N
-938	73	2	\N
-939	73	2	\N
-961	74	2	\N
-962	74	2	\N
-963	74	2	\N
-964	74	2	\N
-965	74	2	\N
-966	74	2	\N
-967	74	2	\N
-968	74	2	\N
-969	74	2	\N
-970	74	2	\N
-971	74	2	\N
-973	75	2	\N
-975	75	2	\N
-976	75	2	\N
-977	75	2	\N
-978	75	2	\N
-979	75	2	\N
-980	75	2	\N
-981	75	2	\N
-982	75	2	\N
-983	75	2	\N
-984	75	2	\N
-1616	69	2	f
-1619	69	2	f
-1620	87	2	f
-1621	87	2	f
-1622	89	2	f
-1623	90	2	f
-1381	89	2	f
-2439	117	2	f
-2784	123	2	f
-2786	2	2	f
-2787	2	2	f
-2788	12	2	f
-2813	12	2	f
-2814	87	2	f
-2815	93	2	f
-2842	119	2	f
-290	41	2	\N
-291	41	2	\N
-884	70	2	\N
-943	73	2	\N
-944	73	2	\N
-945	73	2	\N
-946	73	2	\N
-947	73	2	\N
-998	65	2	\N
-1005	78	2	\N
-1007	12	2	\N
-1008	65	2	\N
-1009	79	2	\N
-1325	83	2	f
-1326	84	2	f
-1327	83	2	f
-1328	39	2	f
-1329	84	2	f
-1330	83	2	f
-1331	83	2	f
-1332	39	2	f
-1333	84	2	f
-1334	83	2	f
-1335	83	2	f
-1339	70	2	f
-1340	39	2	f
-1344	39	2	f
-1345	84	2	f
-1346	83	2	f
-1350	83	2	f
-1351	70	2	f
-1352	39	2	f
-1353	84	2	f
-1354	83	2	f
-1355	39	2	f
-1356	84	2	f
-1357	83	2	f
-2231	78	2	f
-2232	78	2	f
-2233	78	2	f
-1639	106	2	f
-1640	87	2	f
-1641	87	2	f
-1642	89	2	f
-1643	89	2	f
-2047	119	2	f
-1764	111	2	f
-1766	111	2	f
-1769	105	2	f
-1771	111	2	f
-1773	111	2	f
-2285	135	2	f
-2291	93	2	f
-2292	12	2	f
-2293	145	2	f
-2048	65	2	f
-2049	12	2	f
-2050	87	2	f
-2051	69	2	f
-2052	130	2	f
-2054	2	2	f
-1906	65	2	f
-1990	106	2	f
-1991	106	2	f
-2891	87	2	f
-2892	69	2	f
-1992	106	2	f
-2029	119	2	f
-2442	117	2	f
-2546	110	2	f
-2573	69	2	f
-921	73	2	\N
-1648	84	2	f
-2458	106	2	f
-2556	151	2	f
-2557	151	2	f
-2568	145	2	f
-1649	83	2	f
-1650	87	2	f
-2569	130	2	f
-2570	69	2	f
-922	73	2	\N
-923	73	2	\N
-924	73	2	\N
-1651	89	2	f
-1652	90	2	f
-1653	69	2	f
-1657	103	2	f
-925	73	2	\N
-926	73	2	\N
-1659	65	2	f
-1882	106	2	f
-1660	106	2	f
-927	73	2	\N
-2046	119	2	f
-959	74	2	\N
-960	74	2	\N
-1714	110	2	f
-985	75	2	\N
-987	75	2	\N
-1721	110	2	f
-1884	12	2	f
-1885	65	2	f
-1888	117	2	f
-1893	120	2	f
-1894	12	2	f
-1004	78	2	\N
-1309	90	2	f
-1310	41	2	f
-1895	65	2	f
-1311	41	2	f
-1312	65	2	f
-1313	12	2	f
-1896	65	2	f
-1314	102	2	f
-1317	12	2	f
-1320	83	2	f
-1321	84	2	f
-1322	83	2	f
-1950	123	2	f
-1951	90	2	f
-1952	86	2	f
-1907	65	2	f
-1956	87	2	f
-1958	93	2	f
-1959	123	2	f
-2104	135	2	f
-1323	83	2	f
-2105	135	2	f
-2106	135	2	f
-2107	12	2	f
-2108	12	2	f
-2111	83	2	f
-2115	39	2	f
-2119	90	2	f
-2168	137	2	f
-2171	93	2	f
-2172	135	2	f
-2173	137	2	f
-1324	83	2	f
-1358	83	2	f
-1359	84	2	f
-1360	83	2	f
-2452	117	2	f
-2457	106	2	f
-1361	84	2	f
-1365	39	2	f
-1366	84	2	f
-1367	83	2	f
-1368	65	2	f
-1371	87	2	f
-1373	87	2	f
-1374	90	2	f
-1624	87	2	f
-1625	89	2	f
-1376	89	2	f
-1626	69	2	f
-1378	78	2	f
-1627	69	2	f
-1628	69	2	f
-1379	87	2	f
-1634	103	2	f
-1380	87	2	f
-1383	69	2	f
-2260	135	2	f
-2261	142	2	f
-2262	135	2	f
-2263	142	2	f
-2264	134	2	f
-2265	135	2	f
-1780	105	2	f
-1797	12	2	f
-1798	65	2	f
-1799	12	2	f
-1804	118	2	f
-2	2	2	\N
-2127	12	2	f
-3	2	2	\N
-10	12	2	\N
-1010	79	2	\N
-1080	65	2	\N
-1081	12	2	\N
-1099	39	2	\N
-2309	69	2	f
-1100	70	2	\N
-2128	65	2	f
-2129	138	2	f
-2130	138	2	f
-2132	118	2	f
-2440	117	2	f
-2201	104	2	f
-2459	106	2	f
-2463	111	2	f
-2465	120	2	f
-2563	69	2	f
-2564	145	2	f
-2565	130	2	f
-2203	104	2	f
-2205	110	2	f
-2234	78	2	f
-2566	69	2	f
-2133	123	2	f
-2567	145	2	f
-2571	145	2	f
-2135	12	2	f
-2572	130	2	f
-2710	119	2	f
-2711	119	2	f
-2712	119	2	f
-2713	119	2	f
-2816	93	2	f
-2817	123	2	f
-2836	119	2	f
-2136	65	2	f
-2320	12	2	f
-2327	87	2	f
-2328	69	2	f
-2583	12	2	f
-2329	145	2	f
-2330	145	2	f
-2331	146	2	f
-2837	135	2	f
-2332	146	2	f
-2333	130	2	f
-2838	144	2	f
-2855	119	2	f
-2861	117	2	f
-2862	117	2	f
-2334	104	2	f
-2335	104	2	f
-2336	104	2	f
-2235	78	2	f
-2236	78	2	f
-2337	104	2	f
-2338	87	2	f
-2339	69	2	f
-2340	69	2	f
-2237	78	2	f
-2238	78	2	f
-2239	78	2	f
-1774	111	2	f
-1777	65	2	f
-1778	12	2	f
-1800	118	2	f
-2294	145	2	f
-1801	118	2	f
-2295	145	2	f
-1802	118	2	f
-2296	12	2	f
-2297	145	2	f
-2299	146	2	f
-2300	145	2	f
-2304	123	2	f
-1910	106	2	f
-1911	106	2	f
-2075	93	2	f
-2076	123	2	f
-2077	12	2	f
-2087	118	2	f
-2088	130	2	f
-2089	87	2	f
-2090	69	2	f
-2092	118	2	f
-2095	87	2	f
-2096	118	2	f
-2097	118	2	f
-2307	87	2	f
-2120	101	2	f
-2126	2	2	f
-2341	135	2	f
-2342	137	2	f
-2343	135	2	f
-2344	143	2	f
-2030	119	2	f
-2031	119	2	f
-2308	87	2	f
-2032	110	2	f
-2038	119	2	f
-2903	119	2	f
-2514	65	2	f
-2515	148	2	f
-2516	12	2	f
-2871	119	2	f
-2517	149	2	f
-2518	149	2	f
-2904	103	2	f
-2519	47	2	f
-2520	149	2	f
-2521	149	2	f
-2522	149	2	f
-2873	87	2	f
-2874	87	2	f
-2875	69	2	f
-2876	145	2	f
-2877	130	2	f
-2878	87	2	f
-2887	12	2	f
-2888	65	2	f
-2889	65	2	f
-1316	102	2	f
-1336	39	2	f
-1362	83	2	f
-1363	84	2	f
-1364	83	2	f
-1372	69	2	f
-2523	149	2	f
-2524	149	2	f
-1375	69	2	f
-2525	149	2	f
-1382	90	2	f
-2526	149	2	f
-1385	84	2	f
-2527	149	2	f
-1386	83	2	f
-2528	149	2	f
-2529	119	2	f
-2536	110	2	f
-2537	119	2	f
-2538	119	2	f
-2574	145	2	f
-2575	130	2	f
-1387	87	2	f
-1388	90	2	f
-1389	69	2	f
-1390	69	2	f
-1391	90	2	f
-1416	39	2	f
-2270	70	2	f
-2271	140	2	f
-2272	78	2	f
-2273	135	2	f
-2286	137	2	f
-2287	135	2	f
-2288	142	2	f
-2289	104	2	f
-2290	104	2	f
-1424	12	2	f
-1425	65	2	f
-1426	105	2	f
-1431	105	2	f
-1432	105	2	f
-1433	12	2	f
-1434	65	2	f
-2576	69	2	f
-2577	145	2	f
-2578	145	2	f
-2579	130	2	f
-2580	69	2	f
-2581	145	2	f
-2582	130	2	f
-2345	134	2	f
-2366	87	2	f
-2367	69	2	f
-2368	145	2	f
-2369	146	2	f
-2370	118	2	f
-2371	93	2	f
-2372	130	2	f
-2373	39	2	f
-2648	65	2	f
-2649	65	2	f
-2650	65	2	f
-2429	105	2	f
-2430	105	2	f
-2510	110	2	f
-2511	86	2	f
-2513	12	2	f
-2544	148	2	f
-907	71	2	\N
-908	12	2	\N
-909	12	2	\N
-2589	89	2	f
-2590	90	2	f
-2545	86	2	f
-2547	119	2	f
-2548	119	2	f
-2591	69	2	f
-2592	123	2	f
-2593	69	2	f
-2594	87	2	f
-2595	69	2	f
-2596	145	2	f
-2376	69	2	f
-2377	135	2	f
-2549	12	2	f
-2378	137	2	f
-2550	87	2	f
-2379	135	2	f
-2551	12	2	f
-2552	65	2	f
-2553	65	2	f
-2554	65	2	f
-2725	119	2	f
-2726	110	2	f
-2727	119	2	f
-2728	119	2	f
-2729	103	2	f
-2730	93	2	f
-2731	123	2	f
-2732	148	2	f
-2818	93	2	f
-2819	123	2	f
-2380	143	2	f
-2381	93	2	f
-2382	134	2	f
-2383	104	2	f
-2384	104	2	f
-2385	104	2	f
-2388	103	2	f
-2389	105	2	f
-2390	105	2	f
-2391	105	2	f
-2396	105	2	f
-2397	105	2	f
-2398	105	2	f
-2415	105	2	f
-2416	105	2	f
-2670	146	2	f
-2677	89	2	f
-2678	69	2	f
-2679	69	2	f
-2680	89	2	f
-2681	89	2	f
-2424	105	2	f
-2425	105	2	f
-2426	105	2	f
-2682	149	2	f
-2683	89	2	f
-2427	105	2	f
-2428	105	2	f
-2684	149	2	f
-2685	89	2	f
-2686	135	2	f
-2431	105	2	f
-2687	137	2	f
-2690	134	2	f
-2693	110	2	f
-2694	110	2	f
-2695	86	2	f
-2530	119	2	f
-2531	119	2	f
-2532	119	2	f
-2533	119	2	f
-2534	119	2	f
-2535	119	2	f
-2539	110	2	f
-2540	86	2	f
-2541	119	2	f
-2542	148	2	f
-2543	148	2	f
-2820	118	2	f
-2821	87	2	f
-2822	69	2	f
-2823	145	2	f
-1546	106	2	f
-2824	130	2	f
-1547	106	2	f
-1548	12	2	f
-1549	12	2	f
-2825	146	2	f
-2826	118	2	f
-2827	135	2	f
-2828	137	2	f
-2841	104	2	f
-2865	78	2	f
-2866	117	2	f
-2867	111	2	f
-1550	65	2	f
-1551	87	2	f
-1552	87	2	f
-2597	145	2	f
-2636	65	2	f
-2637	65	2	f
-2638	65	2	f
-2392	105	2	f
-2393	105	2	f
-2394	105	2	f
-2395	105	2	f
-2642	65	2	f
-274	12	2	\N
-292	41	2	\N
-306	41	2	\N
-706	12	2	\N
-723	12	2	\N
-725	55	2	\N
-726	55	2	\N
-728	55	2	\N
-734	55	2	\N
-743	55	2	\N
-763	55	2	\N
-764	12	2	\N
-769	12	2	\N
-2643	65	2	f
-2646	65	2	f
-2647	65	2	f
-2651	65	2	f
-2652	65	2	f
-2653	65	2	f
-771	55	2	\N
-772	59	2	\N
-837	65	2	\N
-1067	78	2	\N
-1068	12	2	\N
-1164	70	2	\N
-1165	39	2	\N
-2654	65	2	f
-2655	65	2	f
-1168	41	2	\N
-1169	70	2	\N
-1185	39	2	\N
-1195	87	2	\N
-1198	12	2	\N
-1261	89	2	f
-1598	103	2	f
-1807	90	2	f
-1833	118	2	f
-1839	103	2	f
-1435	12	2	f
-1436	65	2	f
-1438	107	2	f
-1439	107	2	f
-1511	101	2	f
-1512	101	2	f
-1513	101	2	f
-1521	12	2	f
-1535	110	2	f
-1536	110	2	f
-1537	110	2	f
-1538	110	2	f
-1539	110	2	f
-1540	110	2	f
-1541	110	2	f
-2417	105	2	f
-1543	87	2	f
-1544	87	2	f
-1545	87	2	f
-2659	87	2	f
-2661	145	2	f
-2662	130	2	f
-2663	118	2	f
-2418	105	2	f
-2419	105	2	f
-2420	105	2	f
-2421	105	2	f
-2422	105	2	f
-2423	105	2	f
-2698	110	2	f
-2699	86	2	f
-2700	119	2	f
-2701	119	2	f
-2879	69	2	f
-773	12	2	\N
-887	69	2	\N
-2183	137	2	f
-2660	69	2	f
-2664	149	2	f
-2665	149	2	f
-2666	87	2	f
-2667	69	2	f
-2668	145	2	f
-894	2	2	\N
-896	39	2	\N
-1011	12	2	\N
-2669	130	2	f
-2671	93	2	f
-2672	123	2	f
-2673	39	2	f
-2839	119	2	f
-2840	119	2	f
-1278	39	2	f
-1283	71	2	f
-1284	69	2	f
-1285	87	2	f
-1286	89	2	f
-1287	84	2	f
-1288	90	2	f
-1289	84	2	f
-1290	39	2	f
-1291	84	2	f
-1292	83	2	f
-1293	69	2	f
-1294	69	2	f
-1304	87	2	f
-1306	90	2	f
-1840	103	2	f
-1849	12	2	f
-1440	103	2	f
-1442	103	2	f
-1447	106	2	f
-1448	106	2	f
-1450	12	2	f
-1452	12	2	f
-1464	87	2	f
-1465	69	2	f
-1467	89	2	f
-1472	69	2	f
-1473	69	2	f
-1485	106	2	f
-1487	103	2	f
-1500	106	2	f
-1502	103	2	f
-1503	103	2	f
-1504	104	2	f
-1505	104	2	f
-1506	104	2	f
-1507	107	2	f
-1509	106	2	f
-1514	101	2	f
-1515	101	2	f
-1516	87	2	f
-1517	87	2	f
-1518	87	2	f
-1519	87	2	f
-1553	79	2	f
-2584	93	2	f
-2585	87	2	f
-2586	87	2	f
-2587	87	2	f
-2588	89	2	f
-2633	65	2	f
-2634	65	2	f
-2635	65	2	f
-2174	135	2	f
-2175	137	2	f
-2176	135	2	f
-2177	137	2	f
-2178	135	2	f
-2179	137	2	f
-2180	135	2	f
-2181	137	2	f
-2182	135	2	f
-897	39	2	\N
-898	39	2	\N
-899	39	2	\N
-900	65	2	\N
-2435	146	2	f
-901	12	2	\N
-2450	103	2	f
-902	65	2	\N
-903	71	2	\N
-2451	106	2	f
-2486	101	2	f
-2489	86	2	f
-2490	86	2	f
-2491	86	2	f
-2493	87	2	f
-2501	110	2	f
-2502	110	2	f
-2503	119	2	f
-2505	110	2	f
-2506	86	2	f
-2507	110	2	f
-2508	110	2	f
-2737	106	2	f
-2738	117	2	f
-2739	69	2	f
-2740	12	2	f
-2832	119	2	f
-2863	111	2	f
-2864	140	2	f
-2274	143	2	f
-2275	134	2	f
-2276	12	2	f
-2277	105	2	f
-2278	135	2	f
-2279	144	2	f
-2280	134	2	f
-2281	104	2	f
-2282	135	2	f
-2284	134	2	f
-1962	93	2	f
-1963	123	2	f
-1964	93	2	f
-1965	123	2	f
-1966	12	2	f
-2098	118	2	f
-2099	12	2	f
-2100	12	2	f
-1978	2	2	f
-2101	65	2	f
-1979	118	2	f
-1985	93	2	f
-1986	123	2	f
-1987	103	2	f
-1988	119	2	f
-1989	12	2	f
-2602	65	2	f
-2603	65	2	f
-2604	65	2	f
-2605	65	2	f
-2608	65	2	f
-2612	65	2	f
-2613	65	2	f
-2617	65	2	f
-2039	119	2	f
-2044	119	2	f
-2156	135	2	f
-2157	137	2	f
-2158	135	2	f
-2159	137	2	f
-2160	135	2	f
-2161	137	2	f
-2162	135	2	f
-2163	137	2	f
-2164	135	2	f
-2165	137	2	f
-2167	135	2	f
-2045	119	2	f
-2399	105	2	f
-2400	105	2	f
-2401	105	2	f
-2402	105	2	f
-2403	105	2	f
-2704	119	2	f
-2705	119	2	f
-2706	119	2	f
-2707	119	2	f
-2708	119	2	f
-2709	119	2	f
-2434	130	2	f
-775	12	2	\N
-778	65	2	\N
-779	65	2	\N
-780	65	2	\N
-784	47	2	\N
-788	12	2	\N
-789	67	2	\N
-790	65	2	\N
-791	65	2	\N
-792	65	2	\N
-794	55	2	\N
-800	55	2	\N
-801	55	2	\N
-802	65	2	\N
-1468	84	2	f
-1469	90	2	f
-1470	83	2	f
-1471	69	2	f
-1913	117	2	f
-1510	101	2	f
-1968	12	2	f
-1970	126	2	f
-1971	93	2	f
-1972	123	2	f
-1973	123	2	f
-1975	65	2	f
-1977	12	2	f
-1554	101	2	f
-1556	101	2	f
-1559	87	2	f
-1560	79	2	f
-2137	139	2	f
-2138	139	2	f
-2139	139	2	f
-2144	135	2	f
-2145	137	2	f
-2146	135	2	f
-2147	137	2	f
-838	65	2	\N
-849	41	2	\N
-851	41	2	\N
-852	41	2	\N
-853	41	2	\N
-854	2	2	\N
-855	2	2	\N
-856	2	2	\N
-864	65	2	\N
-865	12	2	\N
-866	65	2	\N
-1307	90	2	f
-1308	90	2	f
-1337	84	2	f
-1338	83	2	f
-1347	39	2	f
-1348	84	2	f
-1349	83	2	f
-1393	12	2	f
-1394	65	2	f
-1395	65	2	f
-1396	104	2	f
-1398	104	2	f
-1400	104	2	f
-1401	104	2	f
-1402	104	2	f
-1403	104	2	f
-1404	87	2	f
-1406	89	2	f
-1407	90	2	f
-1408	69	2	f
-1409	69	2	f
-1410	69	2	f
-1411	69	2	f
-2148	135	2	f
-2149	137	2	f
-2150	135	2	f
-2187	135	2	f
-2188	137	2	f
-2189	135	2	f
-2190	137	2	f
-2674	84	2	f
-2675	83	2	f
-2676	87	2	f
-1413	102	2	f
-1414	90	2	f
-1415	91	2	f
-1417	84	2	f
-1418	90	2	f
-1419	91	2	f
-1420	101	2	f
-2152	135	2	f
-2153	137	2	f
-2154	135	2	f
-2155	137	2	f
-2184	135	2	f
-2185	137	2	f
-2186	134	2	f
-2688	135	2	f
-2880	87	2	f
-904	71	2	\N
-905	71	2	\N
-906	71	2	\N
-910	65	2	\N
-911	65	2	\N
-912	72	2	\N
-1318	102	2	f
-1319	84	2	f
-2206	110	2	f
-2207	110	2	f
-1607	106	2	f
-1608	105	2	f
-1341	84	2	f
-1609	105	2	f
-2433	145	2	f
-2689	143	2	f
-2558	12	2	f
-2559	151	2	f
-1342	83	2	f
-1343	70	2	f
-1610	87	2	f
-1611	87	2	f
-1612	89	2	f
-1613	89	2	f
-1614	90	2	f
-2560	69	2	f
-2561	145	2	f
-2562	130	2	f
-2733	148	2	f
-1615	69	2	f
-2208	110	2	f
-2209	110	2	f
-2210	86	2	f
-2211	110	2	f
-2212	110	2	f
-2213	86	2	f
-2734	119	2	f
-2735	119	2	f
-2843	119	2	f
-1370	90	2	f
-1384	39	2	f
-2283	137	2	f
-1803	118	2	f
-2301	146	2	f
-2302	118	2	f
-2303	93	2	f
-1852	119	2	f
-1898	105	2	f
-1900	120	2	f
-1901	120	2	f
-1902	117	2	f
-1903	111	2	f
-1904	65	2	f
-1905	65	2	f
-1561	87	2	f
-1562	87	2	f
-1563	79	2	f
-1564	101	2	f
-2844	119	2	f
-1569	101	2	f
-1570	101	2	f
-1571	65	2	f
-1575	65	2	f
-1576	86	2	f
-2845	119	2	f
-2846	119	2	f
-2847	119	2	f
-2848	119	2	f
-2849	119	2	f
-2850	119	2	f
-2851	119	2	f
-2852	110	2	f
-2853	86	2	f
-2854	119	2	f
-1577	87	2	f
-1578	79	2	f
-1579	110	2	f
-1580	78	2	f
-1581	87	2	f
-1582	89	2	f
-2598	145	2	f
-2599	130	2	f
-2868	93	2	f
-2869	93	2	f
-2870	119	2	f
-2151	137	2	f
-988	75	2	\N
-1003	12	2	\N
-1060	41	2	\N
-1078	12	2	\N
-1088	12	2	\N
-1089	65	2	\N
-1090	39	2	\N
-1091	84	2	\N
-1093	84	2	\N
-1095	70	2	\N
-1096	39	2	\N
-1199	89	2	\N
-1204	87	2	\N
-1205	89	2	\N
-1206	89	2	\N
-1257	87	2	f
-1258	87	2	f
-1644	90	2	f
-1645	69	2	f
-1646	70	2	f
-1918	119	2	f
-1919	12	2	f
-1922	93	2	f
-1924	118	2	f
-1925	89	2	f
-1926	90	2	f
-1927	87	2	f
-1930	93	2	f
-1931	118	2	f
-1933	93	2	f
-1934	93	2	f
-1935	93	2	f
-1936	93	2	f
-1940	93	2	f
-1941	12	2	f
-1945	123	2	f
-1946	123	2	f
-1947	123	2	f
-1948	123	2	f
-1954	12	2	f
-1584	89	2	f
-1585	90	2	f
-1586	69	2	f
-1587	39	2	f
-1588	84	2	f
-1589	84	2	f
-1590	83	2	f
-1591	87	2	f
-1592	89	2	f
-1593	69	2	f
-1597	104	2	f
-2631	65	2	f
-2632	65	2	f
-2702	119	2	f
-2703	119	2	f
-2829	93	2	f
-2830	69	2	f
-2831	134	2	f
-2833	110	2	f
-2834	86	2	f
-2835	104	2	f
-2858	103	2	f
-2859	148	2	f
-2860	106	2	f
-885	47	2	\N
-895	39	2	\N
-940	73	2	\N
-941	73	2	\N
-942	73	2	\N
-1259	87	2	f
-1260	87	2	f
-2200	104	2	f
-2214	110	2	f
-2215	86	2	f
-2216	78	2	f
-2217	12	2	f
-2218	140	2	f
-2219	65	2	f
-2221	140	2	f
-2222	65	2	f
-2223	78	2	f
-2224	78	2	f
-2225	78	2	f
-2226	78	2	f
-2227	78	2	f
-2228	78	2	f
-2229	78	2	f
-2230	78	2	f
-1908	65	2	f
-2055	12	2	f
-2062	93	2	f
-2063	93	2	f
-2064	123	2	f
-2065	118	2	f
-2066	93	2	f
-2067	123	2	f
-2068	93	2	f
-2069	123	2	f
-2070	12	2	f
-2305	145	2	f
-2306	146	2	f
-1993	106	2	f
-2310	145	2	f
-1994	106	2	f
-2311	93	2	f
-1995	106	2	f
-1996	106	2	f
-2312	130	2	f
-1997	106	2	f
-2313	145	2	f
-2314	69	2	f
-2000	103	2	f
-2315	135	2	f
-2001	106	2	f
-2316	137	2	f
-2002	106	2	f
-2317	134	2	f
-2005	103	2	f
-2319	104	2	f
-2006	106	2	f
-2007	106	2	f
-2009	93	2	f
-2010	123	2	f
-2011	110	2	f
-2012	118	2	f
-2013	87	2	f
-2014	89	2	f
-2015	90	2	f
-2016	93	2	f
-2017	69	2	f
-2018	87	2	f
-2019	89	2	f
-2020	69	2	f
-2023	104	2	f
-2024	104	2	f
-2026	103	2	f
-2027	106	2	f
-2028	106	2	f
-2436	93	2	f
-2437	146	2	f
-2438	117	2	f
-1880	106	2	f
-1881	106	2	f
-2374	84	2	f
-2375	83	2	f
-2413	105	2	f
-871	69	2	\N
-872	12	2	\N
-873	65	2	\N
-874	65	2	\N
-876	41	2	\N
-878	70	2	\N
-2857	119	2	f
-879	65	2	\N
-880	70	2	\N
-881	70	2	\N
-882	70	2	\N
-883	70	2	\N
-1079	65	2	\N
-1097	84	2	\N
-1101	39	2	\N
-1102	84	2	\N
-1159	78	2	\N
-1170	39	2	\N
-1178	70	2	\N
-1179	39	2	\N
-1189	12	2	\N
-1190	12	2	\N
-1191	86	2	\N
-1192	86	2	\N
-1193	87	2	\N
-1194	87	2	\N
-1200	89	2	\N
-1201	87	2	\N
-1210	90	2	\N
-1211	12	2	\N
-1212	65	2	\N
-1213	90	2	\N
-1214	91	2	\N
-1225	12	2	\N
-1230	93	2	\N
-1243	87	2	f
-1244	87	2	f
-1253	65	2	f
-1263	87	2	f
-1264	87	2	f
-1265	89	2	f
-1268	12	2	f
-2197	93	2	f
-2198	123	2	f
-2199	105	2	f
-2240	78	2	f
-2241	78	2	f
-2242	78	2	f
-2243	12	2	f
-2244	12	2	f
-2245	65	2	f
-2246	105	2	f
-2247	102	2	f
-2248	141	2	f
-2249	141	2	f
-2254	135	2	f
-2255	142	2	f
-2256	135	2	f
-2257	142	2	f
-2258	135	2	f
-2259	142	2	f
-1853	119	2	f
-1854	119	2	f
-1855	119	2	f
-1859	119	2	f
-1860	119	2	f
-1865	117	2	f
-1866	117	2	f
-1867	117	2	f
-1868	117	2	f
-1869	69	2	f
-1870	78	2	f
-1872	118	2	f
-1873	105	2	f
-1875	106	2	f
-1876	106	2	f
-863	65	2	\N
-870	69	2	\N
-875	70	2	\N
-1207	12	2	\N
-1209	90	2	\N
-1218	39	2	\N
-1221	12	2	\N
-1227	93	2	\N
-1240	41	2	f
-1241	39	2	f
-1282	87	2	f
-1980	93	2	f
-1981	118	2	f
-1982	93	2	f
-1983	93	2	f
-1984	123	2	f
-2404	105	2	f
-2405	105	2	f
-2406	105	2	f
-2407	105	2	f
-2408	105	2	f
-2409	105	2	f
-2410	105	2	f
-2411	105	2	f
-2412	105	2	f
-2414	105	2	f
-2432	105	2	f
-2719	119	2	f
-2720	119	2	f
-2721	119	2	f
-2722	119	2	f
-2723	104	2	f
-2724	119	2	f
-2736	119	2	f
-2741	65	2	f
-2742	12	2	f
-2779	123	2	f
-2780	123	2	f
-2781	123	2	f
-2782	123	2	f
-2783	123	2	f
-2466	117	2	f
-2467	111	2	f
-2468	119	2	f
-2469	119	2	f
-2470	119	2	f
-2475	90	2	f
-2484	2	2	f
-1932	93	2	f
-1939	93	2	f
-2131	93	2	f
-2893	145	2	f
-2894	130	2	f
-2895	39	2	f
-2896	84	2	f
-2897	83	2	f
-2898	69	2	f
-2899	135	2	f
-2900	137	2	f
-2901	93	2	f
-2902	134	2	f
+COPY resource (id, resource_type_id, maintainer_id, protected, modifydt) FROM stdin;
+12	12	2	\N	\N
+14	12	2	\N	\N
+16	12	2	\N	\N
+30	12	2	\N	\N
+31	12	2	\N	\N
+32	12	2	\N	\N
+33	12	2	\N	\N
+34	12	2	\N	\N
+35	12	2	\N	\N
+36	12	2	\N	\N
+37	12	2	\N	\N
+38	12	2	\N	\N
+39	12	2	\N	\N
+40	12	2	\N	\N
+43	12	2	\N	\N
+44	12	2	\N	\N
+45	12	2	\N	\N
+83	2	2	\N	\N
+84	2	2	\N	\N
+277	39	2	\N	\N
+913	72	2	\N	\N
+914	72	2	\N	\N
+915	72	2	\N	\N
+916	72	2	\N	\N
+917	72	2	\N	\N
+2890	93	2	f	\N
+918	72	2	\N	\N
+919	72	2	\N	\N
+928	73	2	\N	\N
+929	73	2	\N	\N
+930	73	2	\N	\N
+931	73	2	\N	\N
+932	73	2	\N	\N
+933	73	2	\N	\N
+935	73	2	\N	\N
+936	73	2	\N	\N
+937	73	2	\N	\N
+948	73	2	\N	\N
+949	73	2	\N	\N
+950	73	2	\N	\N
+952	73	2	\N	\N
+953	12	2	\N	\N
+954	12	2	\N	\N
+955	65	2	\N	\N
+956	65	2	\N	\N
+957	74	2	\N	\N
+958	74	2	\N	\N
+1647	39	2	f	\N
+2266	137	2	f	\N
+2267	134	2	f	\N
+2268	12	2	f	\N
+2269	105	2	f	\N
+1915	111	2	f	\N
+1917	110	2	f	\N
+1949	123	2	f	\N
+1961	123	2	f	\N
+2714	104	2	f	\N
+2715	119	2	f	\N
+2716	119	2	f	\N
+2717	119	2	f	\N
+2718	119	2	f	\N
+2881	69	2	f	\N
+2882	12	2	f	\N
+2883	65	2	f	\N
+278	39	2	\N	\N
+279	39	2	\N	\N
+280	39	2	\N	\N
+281	39	2	\N	\N
+282	39	2	\N	\N
+283	12	2	\N	\N
+286	41	2	\N	\N
+287	41	2	\N	\N
+288	41	2	\N	\N
+289	41	2	\N	\N
+938	73	2	\N	\N
+939	73	2	\N	\N
+961	74	2	\N	\N
+962	74	2	\N	\N
+963	74	2	\N	\N
+964	74	2	\N	\N
+965	74	2	\N	\N
+966	74	2	\N	\N
+967	74	2	\N	\N
+968	74	2	\N	\N
+969	74	2	\N	\N
+970	74	2	\N	\N
+971	74	2	\N	\N
+973	75	2	\N	\N
+975	75	2	\N	\N
+976	75	2	\N	\N
+977	75	2	\N	\N
+978	75	2	\N	\N
+979	75	2	\N	\N
+980	75	2	\N	\N
+981	75	2	\N	\N
+982	75	2	\N	\N
+983	75	2	\N	\N
+984	75	2	\N	\N
+1616	69	2	f	\N
+1619	69	2	f	\N
+1620	87	2	f	\N
+1621	87	2	f	\N
+1622	89	2	f	\N
+1623	90	2	f	\N
+1381	89	2	f	\N
+2439	117	2	f	\N
+2784	123	2	f	\N
+2786	2	2	f	\N
+2787	2	2	f	\N
+2788	12	2	f	\N
+2813	12	2	f	\N
+2814	87	2	f	\N
+2815	93	2	f	\N
+2842	119	2	f	\N
+290	41	2	\N	\N
+291	41	2	\N	\N
+884	70	2	\N	\N
+943	73	2	\N	\N
+944	73	2	\N	\N
+945	73	2	\N	\N
+946	73	2	\N	\N
+947	73	2	\N	\N
+998	65	2	\N	\N
+1005	78	2	\N	\N
+1007	12	2	\N	\N
+1008	65	2	\N	\N
+1009	79	2	\N	\N
+1325	83	2	f	\N
+1326	84	2	f	\N
+1327	83	2	f	\N
+1328	39	2	f	\N
+1329	84	2	f	\N
+1330	83	2	f	\N
+1331	83	2	f	\N
+1332	39	2	f	\N
+1333	84	2	f	\N
+1334	83	2	f	\N
+1335	83	2	f	\N
+1339	70	2	f	\N
+1340	39	2	f	\N
+1344	39	2	f	\N
+1345	84	2	f	\N
+1346	83	2	f	\N
+1350	83	2	f	\N
+1351	70	2	f	\N
+1352	39	2	f	\N
+1353	84	2	f	\N
+1354	83	2	f	\N
+1355	39	2	f	\N
+1356	84	2	f	\N
+1357	83	2	f	\N
+2231	78	2	f	\N
+2232	78	2	f	\N
+2233	78	2	f	\N
+1639	106	2	f	\N
+1640	87	2	f	\N
+1641	87	2	f	\N
+1642	89	2	f	\N
+1643	89	2	f	\N
+2047	119	2	f	\N
+1764	111	2	f	\N
+1766	111	2	f	\N
+1769	105	2	f	\N
+1771	111	2	f	\N
+1773	111	2	f	\N
+2285	135	2	f	\N
+2291	93	2	f	\N
+2292	12	2	f	\N
+2293	145	2	f	\N
+2048	65	2	f	\N
+2049	12	2	f	\N
+2050	87	2	f	\N
+2051	69	2	f	\N
+2052	130	2	f	\N
+2054	2	2	f	\N
+1906	65	2	f	\N
+1990	106	2	f	\N
+1991	106	2	f	\N
+2891	87	2	f	\N
+2892	69	2	f	\N
+1992	106	2	f	\N
+2029	119	2	f	\N
+2442	117	2	f	\N
+2546	110	2	f	\N
+2573	69	2	f	\N
+921	73	2	\N	\N
+1648	84	2	f	\N
+2458	106	2	f	\N
+2556	151	2	f	\N
+2557	151	2	f	\N
+2568	145	2	f	\N
+1649	83	2	f	\N
+1650	87	2	f	\N
+2569	130	2	f	\N
+2570	69	2	f	\N
+922	73	2	\N	\N
+923	73	2	\N	\N
+924	73	2	\N	\N
+1651	89	2	f	\N
+1652	90	2	f	\N
+1653	69	2	f	\N
+1657	103	2	f	\N
+925	73	2	\N	\N
+926	73	2	\N	\N
+1659	65	2	f	\N
+1882	106	2	f	\N
+1660	106	2	f	\N
+927	73	2	\N	\N
+2046	119	2	f	\N
+959	74	2	\N	\N
+960	74	2	\N	\N
+1714	110	2	f	\N
+985	75	2	\N	\N
+987	75	2	\N	\N
+1721	110	2	f	\N
+1884	12	2	f	\N
+1885	65	2	f	\N
+1888	117	2	f	\N
+1893	120	2	f	\N
+1894	12	2	f	\N
+1004	78	2	\N	\N
+1309	90	2	f	\N
+1310	41	2	f	\N
+1895	65	2	f	\N
+1311	41	2	f	\N
+1312	65	2	f	\N
+1313	12	2	f	\N
+1896	65	2	f	\N
+1314	102	2	f	\N
+1317	12	2	f	\N
+1320	83	2	f	\N
+1321	84	2	f	\N
+1322	83	2	f	\N
+1950	123	2	f	\N
+1951	90	2	f	\N
+1952	86	2	f	\N
+1907	65	2	f	\N
+1956	87	2	f	\N
+1958	93	2	f	\N
+1959	123	2	f	\N
+2104	135	2	f	\N
+1323	83	2	f	\N
+2105	135	2	f	\N
+2106	135	2	f	\N
+2107	12	2	f	\N
+2108	12	2	f	\N
+2111	83	2	f	\N
+2115	39	2	f	\N
+2119	90	2	f	\N
+2168	137	2	f	\N
+2171	93	2	f	\N
+2172	135	2	f	\N
+2173	137	2	f	\N
+1324	83	2	f	\N
+1358	83	2	f	\N
+1359	84	2	f	\N
+1360	83	2	f	\N
+2452	117	2	f	\N
+2457	106	2	f	\N
+1361	84	2	f	\N
+1365	39	2	f	\N
+1366	84	2	f	\N
+1367	83	2	f	\N
+1368	65	2	f	\N
+1371	87	2	f	\N
+1373	87	2	f	\N
+1374	90	2	f	\N
+1624	87	2	f	\N
+1625	89	2	f	\N
+1376	89	2	f	\N
+1626	69	2	f	\N
+1378	78	2	f	\N
+1627	69	2	f	\N
+1628	69	2	f	\N
+1379	87	2	f	\N
+1634	103	2	f	\N
+1380	87	2	f	\N
+1383	69	2	f	\N
+2260	135	2	f	\N
+2261	142	2	f	\N
+2262	135	2	f	\N
+2263	142	2	f	\N
+2264	134	2	f	\N
+2265	135	2	f	\N
+1780	105	2	f	\N
+1797	12	2	f	\N
+1798	65	2	f	\N
+1799	12	2	f	\N
+1804	118	2	f	\N
+2	2	2	\N	\N
+2127	12	2	f	\N
+3	2	2	\N	\N
+10	12	2	\N	\N
+1010	79	2	\N	\N
+1080	65	2	\N	\N
+1081	12	2	\N	\N
+1099	39	2	\N	\N
+2309	69	2	f	\N
+1100	70	2	\N	\N
+2128	65	2	f	\N
+2129	138	2	f	\N
+2130	138	2	f	\N
+2132	118	2	f	\N
+2440	117	2	f	\N
+2201	104	2	f	\N
+2459	106	2	f	\N
+2463	111	2	f	\N
+2465	120	2	f	\N
+2563	69	2	f	\N
+2564	145	2	f	\N
+2565	130	2	f	\N
+2203	104	2	f	\N
+2205	110	2	f	\N
+2234	78	2	f	\N
+2566	69	2	f	\N
+2133	123	2	f	\N
+2567	145	2	f	\N
+2571	145	2	f	\N
+2135	12	2	f	\N
+2572	130	2	f	\N
+2710	119	2	f	\N
+2711	119	2	f	\N
+2712	119	2	f	\N
+2713	119	2	f	\N
+2816	93	2	f	\N
+2817	123	2	f	\N
+2836	119	2	f	\N
+2136	65	2	f	\N
+2320	12	2	f	\N
+2327	87	2	f	\N
+2328	69	2	f	\N
+2583	12	2	f	\N
+2329	145	2	f	\N
+2330	145	2	f	\N
+2331	146	2	f	\N
+2837	135	2	f	\N
+2332	146	2	f	\N
+2333	130	2	f	\N
+2838	144	2	f	\N
+2855	119	2	f	\N
+2861	117	2	f	\N
+2862	117	2	f	\N
+2334	104	2	f	\N
+2335	104	2	f	\N
+2336	104	2	f	\N
+2235	78	2	f	\N
+2236	78	2	f	\N
+2337	104	2	f	\N
+2338	87	2	f	\N
+2339	69	2	f	\N
+2340	69	2	f	\N
+2237	78	2	f	\N
+2238	78	2	f	\N
+2239	78	2	f	\N
+1774	111	2	f	\N
+1777	65	2	f	\N
+1778	12	2	f	\N
+1800	118	2	f	\N
+2294	145	2	f	\N
+1801	118	2	f	\N
+2295	145	2	f	\N
+1802	118	2	f	\N
+2296	12	2	f	\N
+2297	145	2	f	\N
+2299	146	2	f	\N
+2300	145	2	f	\N
+2304	123	2	f	\N
+1910	106	2	f	\N
+1911	106	2	f	\N
+2075	93	2	f	\N
+2076	123	2	f	\N
+2077	12	2	f	\N
+2087	118	2	f	\N
+2088	130	2	f	\N
+2089	87	2	f	\N
+2090	69	2	f	\N
+2092	118	2	f	\N
+2095	87	2	f	\N
+2096	118	2	f	\N
+2097	118	2	f	\N
+2307	87	2	f	\N
+2120	101	2	f	\N
+2126	2	2	f	\N
+2341	135	2	f	\N
+2342	137	2	f	\N
+2343	135	2	f	\N
+2344	143	2	f	\N
+2030	119	2	f	\N
+2031	119	2	f	\N
+2308	87	2	f	\N
+2032	110	2	f	\N
+2038	119	2	f	\N
+2903	119	2	f	\N
+2514	65	2	f	\N
+2515	148	2	f	\N
+2516	12	2	f	\N
+2871	119	2	f	\N
+2517	149	2	f	\N
+2518	149	2	f	\N
+2904	103	2	f	\N
+2519	47	2	f	\N
+2520	149	2	f	\N
+2521	149	2	f	\N
+2522	149	2	f	\N
+2873	87	2	f	\N
+2874	87	2	f	\N
+2875	69	2	f	\N
+2876	145	2	f	\N
+2877	130	2	f	\N
+2878	87	2	f	\N
+2887	12	2	f	\N
+2888	65	2	f	\N
+2889	65	2	f	\N
+1316	102	2	f	\N
+1336	39	2	f	\N
+1362	83	2	f	\N
+1363	84	2	f	\N
+1364	83	2	f	\N
+1372	69	2	f	\N
+2523	149	2	f	\N
+2524	149	2	f	\N
+1375	69	2	f	\N
+2525	149	2	f	\N
+1382	90	2	f	\N
+2526	149	2	f	\N
+1385	84	2	f	\N
+2527	149	2	f	\N
+1386	83	2	f	\N
+2528	149	2	f	\N
+2529	119	2	f	\N
+2536	110	2	f	\N
+2537	119	2	f	\N
+2538	119	2	f	\N
+2574	145	2	f	\N
+2575	130	2	f	\N
+1387	87	2	f	\N
+1388	90	2	f	\N
+1389	69	2	f	\N
+1390	69	2	f	\N
+1391	90	2	f	\N
+1416	39	2	f	\N
+2270	70	2	f	\N
+2271	140	2	f	\N
+2272	78	2	f	\N
+2273	135	2	f	\N
+2286	137	2	f	\N
+2287	135	2	f	\N
+2288	142	2	f	\N
+2289	104	2	f	\N
+2290	104	2	f	\N
+1424	12	2	f	\N
+1425	65	2	f	\N
+1426	105	2	f	\N
+1431	105	2	f	\N
+1432	105	2	f	\N
+1433	12	2	f	\N
+1434	65	2	f	\N
+2576	69	2	f	\N
+2577	145	2	f	\N
+2578	145	2	f	\N
+2579	130	2	f	\N
+2580	69	2	f	\N
+2581	145	2	f	\N
+2582	130	2	f	\N
+2345	134	2	f	\N
+2366	87	2	f	\N
+2367	69	2	f	\N
+2368	145	2	f	\N
+2369	146	2	f	\N
+2370	118	2	f	\N
+2371	93	2	f	\N
+2372	130	2	f	\N
+2373	39	2	f	\N
+2648	65	2	f	\N
+2649	65	2	f	\N
+2650	65	2	f	\N
+2429	105	2	f	\N
+2430	105	2	f	\N
+2510	110	2	f	\N
+2511	86	2	f	\N
+2513	12	2	f	\N
+2544	148	2	f	\N
+907	71	2	\N	\N
+908	12	2	\N	\N
+909	12	2	\N	\N
+2589	89	2	f	\N
+2590	90	2	f	\N
+2545	86	2	f	\N
+2547	119	2	f	\N
+2548	119	2	f	\N
+2591	69	2	f	\N
+2592	123	2	f	\N
+2593	69	2	f	\N
+2594	87	2	f	\N
+2595	69	2	f	\N
+2596	145	2	f	\N
+2376	69	2	f	\N
+2377	135	2	f	\N
+2549	12	2	f	\N
+2378	137	2	f	\N
+2550	87	2	f	\N
+2379	135	2	f	\N
+2551	12	2	f	\N
+2552	65	2	f	\N
+2553	65	2	f	\N
+2554	65	2	f	\N
+2725	119	2	f	\N
+2726	110	2	f	\N
+2727	119	2	f	\N
+2728	119	2	f	\N
+2729	103	2	f	\N
+2730	93	2	f	\N
+2731	123	2	f	\N
+2732	148	2	f	\N
+2818	93	2	f	\N
+2819	123	2	f	\N
+2380	143	2	f	\N
+2381	93	2	f	\N
+2382	134	2	f	\N
+2383	104	2	f	\N
+2384	104	2	f	\N
+2385	104	2	f	\N
+2388	103	2	f	\N
+2389	105	2	f	\N
+2390	105	2	f	\N
+2391	105	2	f	\N
+2396	105	2	f	\N
+2397	105	2	f	\N
+2398	105	2	f	\N
+2415	105	2	f	\N
+2416	105	2	f	\N
+2670	146	2	f	\N
+2677	89	2	f	\N
+2678	69	2	f	\N
+2679	69	2	f	\N
+2680	89	2	f	\N
+2681	89	2	f	\N
+2424	105	2	f	\N
+2425	105	2	f	\N
+2426	105	2	f	\N
+2682	149	2	f	\N
+2683	89	2	f	\N
+2427	105	2	f	\N
+2428	105	2	f	\N
+2684	149	2	f	\N
+2685	89	2	f	\N
+2686	135	2	f	\N
+2431	105	2	f	\N
+2687	137	2	f	\N
+2690	134	2	f	\N
+2693	110	2	f	\N
+2694	110	2	f	\N
+2695	86	2	f	\N
+2530	119	2	f	\N
+2531	119	2	f	\N
+2532	119	2	f	\N
+2533	119	2	f	\N
+2534	119	2	f	\N
+2535	119	2	f	\N
+2539	110	2	f	\N
+2540	86	2	f	\N
+2541	119	2	f	\N
+2542	148	2	f	\N
+2543	148	2	f	\N
+2820	118	2	f	\N
+2821	87	2	f	\N
+2822	69	2	f	\N
+2823	145	2	f	\N
+1546	106	2	f	\N
+2824	130	2	f	\N
+1547	106	2	f	\N
+1548	12	2	f	\N
+1549	12	2	f	\N
+2825	146	2	f	\N
+2826	118	2	f	\N
+2827	135	2	f	\N
+2828	137	2	f	\N
+2841	104	2	f	\N
+2865	78	2	f	\N
+2866	117	2	f	\N
+2867	111	2	f	\N
+1550	65	2	f	\N
+1551	87	2	f	\N
+1552	87	2	f	\N
+2597	145	2	f	\N
+2636	65	2	f	\N
+2637	65	2	f	\N
+2638	65	2	f	\N
+2392	105	2	f	\N
+2393	105	2	f	\N
+2394	105	2	f	\N
+2395	105	2	f	\N
+2642	65	2	f	\N
+274	12	2	\N	\N
+292	41	2	\N	\N
+306	41	2	\N	\N
+706	12	2	\N	\N
+723	12	2	\N	\N
+725	55	2	\N	\N
+726	55	2	\N	\N
+728	55	2	\N	\N
+734	55	2	\N	\N
+743	55	2	\N	\N
+763	55	2	\N	\N
+764	12	2	\N	\N
+769	12	2	\N	\N
+2643	65	2	f	\N
+2646	65	2	f	\N
+2647	65	2	f	\N
+2651	65	2	f	\N
+2652	65	2	f	\N
+2653	65	2	f	\N
+771	55	2	\N	\N
+772	59	2	\N	\N
+837	65	2	\N	\N
+1067	78	2	\N	\N
+1068	12	2	\N	\N
+1164	70	2	\N	\N
+1165	39	2	\N	\N
+2654	65	2	f	\N
+2655	65	2	f	\N
+1168	41	2	\N	\N
+1169	70	2	\N	\N
+1185	39	2	\N	\N
+1195	87	2	\N	\N
+1198	12	2	\N	\N
+1261	89	2	f	\N
+1598	103	2	f	\N
+1807	90	2	f	\N
+1833	118	2	f	\N
+1839	103	2	f	\N
+1435	12	2	f	\N
+1436	65	2	f	\N
+1438	107	2	f	\N
+1439	107	2	f	\N
+1511	101	2	f	\N
+1512	101	2	f	\N
+1513	101	2	f	\N
+1521	12	2	f	\N
+1535	110	2	f	\N
+1536	110	2	f	\N
+1537	110	2	f	\N
+1538	110	2	f	\N
+1539	110	2	f	\N
+1540	110	2	f	\N
+1541	110	2	f	\N
+2417	105	2	f	\N
+1543	87	2	f	\N
+1544	87	2	f	\N
+1545	87	2	f	\N
+2659	87	2	f	\N
+2661	145	2	f	\N
+2662	130	2	f	\N
+2663	118	2	f	\N
+2418	105	2	f	\N
+2419	105	2	f	\N
+2420	105	2	f	\N
+2421	105	2	f	\N
+2422	105	2	f	\N
+2423	105	2	f	\N
+2698	110	2	f	\N
+2699	86	2	f	\N
+2700	119	2	f	\N
+2701	119	2	f	\N
+2879	69	2	f	\N
+773	12	2	\N	\N
+887	69	2	\N	\N
+2183	137	2	f	\N
+2660	69	2	f	\N
+2664	149	2	f	\N
+2665	149	2	f	\N
+2666	87	2	f	\N
+2667	69	2	f	\N
+2668	145	2	f	\N
+894	2	2	\N	\N
+896	39	2	\N	\N
+1011	12	2	\N	\N
+2669	130	2	f	\N
+2671	93	2	f	\N
+2672	123	2	f	\N
+2673	39	2	f	\N
+2839	119	2	f	\N
+2840	119	2	f	\N
+1278	39	2	f	\N
+1283	71	2	f	\N
+1284	69	2	f	\N
+1285	87	2	f	\N
+1286	89	2	f	\N
+1287	84	2	f	\N
+1288	90	2	f	\N
+1289	84	2	f	\N
+1290	39	2	f	\N
+1291	84	2	f	\N
+1292	83	2	f	\N
+1293	69	2	f	\N
+1294	69	2	f	\N
+1304	87	2	f	\N
+1306	90	2	f	\N
+1840	103	2	f	\N
+1849	12	2	f	\N
+1440	103	2	f	\N
+1442	103	2	f	\N
+1447	106	2	f	\N
+1448	106	2	f	\N
+1450	12	2	f	\N
+1452	12	2	f	\N
+1464	87	2	f	\N
+1465	69	2	f	\N
+1467	89	2	f	\N
+1472	69	2	f	\N
+1473	69	2	f	\N
+1485	106	2	f	\N
+1487	103	2	f	\N
+1500	106	2	f	\N
+1502	103	2	f	\N
+1503	103	2	f	\N
+1504	104	2	f	\N
+1505	104	2	f	\N
+1506	104	2	f	\N
+1507	107	2	f	\N
+1509	106	2	f	\N
+1514	101	2	f	\N
+1515	101	2	f	\N
+1516	87	2	f	\N
+1517	87	2	f	\N
+1518	87	2	f	\N
+1519	87	2	f	\N
+1553	79	2	f	\N
+2584	93	2	f	\N
+2585	87	2	f	\N
+2586	87	2	f	\N
+2587	87	2	f	\N
+2588	89	2	f	\N
+2633	65	2	f	\N
+2634	65	2	f	\N
+2635	65	2	f	\N
+2174	135	2	f	\N
+2175	137	2	f	\N
+2176	135	2	f	\N
+2177	137	2	f	\N
+2178	135	2	f	\N
+2179	137	2	f	\N
+2180	135	2	f	\N
+2181	137	2	f	\N
+2182	135	2	f	\N
+897	39	2	\N	\N
+898	39	2	\N	\N
+899	39	2	\N	\N
+900	65	2	\N	\N
+2435	146	2	f	\N
+901	12	2	\N	\N
+2450	103	2	f	\N
+902	65	2	\N	\N
+903	71	2	\N	\N
+2451	106	2	f	\N
+2486	101	2	f	\N
+2489	86	2	f	\N
+2490	86	2	f	\N
+2491	86	2	f	\N
+2493	87	2	f	\N
+2501	110	2	f	\N
+2502	110	2	f	\N
+2503	119	2	f	\N
+2505	110	2	f	\N
+2506	86	2	f	\N
+2507	110	2	f	\N
+2508	110	2	f	\N
+2737	106	2	f	\N
+2738	117	2	f	\N
+2739	69	2	f	\N
+2740	12	2	f	\N
+2832	119	2	f	\N
+2863	111	2	f	\N
+2864	140	2	f	\N
+2274	143	2	f	\N
+2275	134	2	f	\N
+2276	12	2	f	\N
+2277	105	2	f	\N
+2278	135	2	f	\N
+2279	144	2	f	\N
+2280	134	2	f	\N
+2281	104	2	f	\N
+2282	135	2	f	\N
+2284	134	2	f	\N
+1962	93	2	f	\N
+1963	123	2	f	\N
+1964	93	2	f	\N
+1965	123	2	f	\N
+1966	12	2	f	\N
+2098	118	2	f	\N
+2099	12	2	f	\N
+2100	12	2	f	\N
+1978	2	2	f	\N
+2101	65	2	f	\N
+1979	118	2	f	\N
+1985	93	2	f	\N
+1986	123	2	f	\N
+1987	103	2	f	\N
+1988	119	2	f	\N
+1989	12	2	f	\N
+2602	65	2	f	\N
+2603	65	2	f	\N
+2604	65	2	f	\N
+2605	65	2	f	\N
+2608	65	2	f	\N
+2612	65	2	f	\N
+2613	65	2	f	\N
+2617	65	2	f	\N
+2039	119	2	f	\N
+2044	119	2	f	\N
+2156	135	2	f	\N
+2157	137	2	f	\N
+2158	135	2	f	\N
+2159	137	2	f	\N
+2160	135	2	f	\N
+2161	137	2	f	\N
+2162	135	2	f	\N
+2163	137	2	f	\N
+2164	135	2	f	\N
+2165	137	2	f	\N
+2167	135	2	f	\N
+2045	119	2	f	\N
+2399	105	2	f	\N
+2400	105	2	f	\N
+2401	105	2	f	\N
+2402	105	2	f	\N
+2403	105	2	f	\N
+2704	119	2	f	\N
+2705	119	2	f	\N
+2706	119	2	f	\N
+2707	119	2	f	\N
+2708	119	2	f	\N
+2709	119	2	f	\N
+2434	130	2	f	\N
+775	12	2	\N	\N
+778	65	2	\N	\N
+779	65	2	\N	\N
+780	65	2	\N	\N
+784	47	2	\N	\N
+788	12	2	\N	\N
+789	67	2	\N	\N
+790	65	2	\N	\N
+791	65	2	\N	\N
+792	65	2	\N	\N
+794	55	2	\N	\N
+800	55	2	\N	\N
+801	55	2	\N	\N
+802	65	2	\N	\N
+1468	84	2	f	\N
+1469	90	2	f	\N
+1470	83	2	f	\N
+1471	69	2	f	\N
+1913	117	2	f	\N
+1510	101	2	f	\N
+1968	12	2	f	\N
+1970	126	2	f	\N
+1971	93	2	f	\N
+1972	123	2	f	\N
+1973	123	2	f	\N
+1975	65	2	f	\N
+1977	12	2	f	\N
+1554	101	2	f	\N
+1556	101	2	f	\N
+1559	87	2	f	\N
+1560	79	2	f	\N
+2137	139	2	f	\N
+2138	139	2	f	\N
+2139	139	2	f	\N
+2144	135	2	f	\N
+2145	137	2	f	\N
+2146	135	2	f	\N
+2147	137	2	f	\N
+838	65	2	\N	\N
+849	41	2	\N	\N
+851	41	2	\N	\N
+852	41	2	\N	\N
+853	41	2	\N	\N
+854	2	2	\N	\N
+855	2	2	\N	\N
+856	2	2	\N	\N
+864	65	2	\N	\N
+865	12	2	\N	\N
+866	65	2	\N	\N
+1307	90	2	f	\N
+1308	90	2	f	\N
+1337	84	2	f	\N
+1338	83	2	f	\N
+1347	39	2	f	\N
+1348	84	2	f	\N
+1349	83	2	f	\N
+1393	12	2	f	\N
+1394	65	2	f	\N
+1395	65	2	f	\N
+1396	104	2	f	\N
+1398	104	2	f	\N
+1400	104	2	f	\N
+1401	104	2	f	\N
+1402	104	2	f	\N
+1403	104	2	f	\N
+1404	87	2	f	\N
+1406	89	2	f	\N
+1407	90	2	f	\N
+1408	69	2	f	\N
+1409	69	2	f	\N
+1410	69	2	f	\N
+1411	69	2	f	\N
+2148	135	2	f	\N
+2149	137	2	f	\N
+2150	135	2	f	\N
+2187	135	2	f	\N
+2188	137	2	f	\N
+2189	135	2	f	\N
+2190	137	2	f	\N
+2674	84	2	f	\N
+2675	83	2	f	\N
+2676	87	2	f	\N
+1413	102	2	f	\N
+1414	90	2	f	\N
+1415	91	2	f	\N
+1417	84	2	f	\N
+1418	90	2	f	\N
+1419	91	2	f	\N
+1420	101	2	f	\N
+2152	135	2	f	\N
+2153	137	2	f	\N
+2154	135	2	f	\N
+2155	137	2	f	\N
+2184	135	2	f	\N
+2185	137	2	f	\N
+2186	134	2	f	\N
+2688	135	2	f	\N
+2880	87	2	f	\N
+904	71	2	\N	\N
+905	71	2	\N	\N
+906	71	2	\N	\N
+910	65	2	\N	\N
+911	65	2	\N	\N
+912	72	2	\N	\N
+1318	102	2	f	\N
+1319	84	2	f	\N
+2206	110	2	f	\N
+2207	110	2	f	\N
+1607	106	2	f	\N
+1608	105	2	f	\N
+1341	84	2	f	\N
+1609	105	2	f	\N
+2433	145	2	f	\N
+2689	143	2	f	\N
+2558	12	2	f	\N
+2559	151	2	f	\N
+1342	83	2	f	\N
+1343	70	2	f	\N
+1610	87	2	f	\N
+1611	87	2	f	\N
+1612	89	2	f	\N
+1613	89	2	f	\N
+1614	90	2	f	\N
+2560	69	2	f	\N
+2561	145	2	f	\N
+2562	130	2	f	\N
+2733	148	2	f	\N
+1615	69	2	f	\N
+2208	110	2	f	\N
+2209	110	2	f	\N
+2210	86	2	f	\N
+2211	110	2	f	\N
+2212	110	2	f	\N
+2213	86	2	f	\N
+2734	119	2	f	\N
+2735	119	2	f	\N
+2843	119	2	f	\N
+1370	90	2	f	\N
+1384	39	2	f	\N
+2283	137	2	f	\N
+1803	118	2	f	\N
+2301	146	2	f	\N
+2302	118	2	f	\N
+2303	93	2	f	\N
+1852	119	2	f	\N
+1898	105	2	f	\N
+1900	120	2	f	\N
+1901	120	2	f	\N
+1902	117	2	f	\N
+1903	111	2	f	\N
+1904	65	2	f	\N
+1905	65	2	f	\N
+1561	87	2	f	\N
+1562	87	2	f	\N
+1563	79	2	f	\N
+1564	101	2	f	\N
+2844	119	2	f	\N
+1569	101	2	f	\N
+1570	101	2	f	\N
+1571	65	2	f	\N
+1575	65	2	f	\N
+1576	86	2	f	\N
+2845	119	2	f	\N
+2846	119	2	f	\N
+2847	119	2	f	\N
+2848	119	2	f	\N
+2849	119	2	f	\N
+2850	119	2	f	\N
+2851	119	2	f	\N
+2852	110	2	f	\N
+2853	86	2	f	\N
+2854	119	2	f	\N
+1577	87	2	f	\N
+1578	79	2	f	\N
+1579	110	2	f	\N
+1580	78	2	f	\N
+1581	87	2	f	\N
+1582	89	2	f	\N
+2598	145	2	f	\N
+2599	130	2	f	\N
+2868	93	2	f	\N
+2869	93	2	f	\N
+2870	119	2	f	\N
+2151	137	2	f	\N
+988	75	2	\N	\N
+1003	12	2	\N	\N
+1060	41	2	\N	\N
+1078	12	2	\N	\N
+1088	12	2	\N	\N
+1089	65	2	\N	\N
+1090	39	2	\N	\N
+1091	84	2	\N	\N
+1093	84	2	\N	\N
+1095	70	2	\N	\N
+1096	39	2	\N	\N
+1199	89	2	\N	\N
+1204	87	2	\N	\N
+1205	89	2	\N	\N
+1206	89	2	\N	\N
+1257	87	2	f	\N
+1258	87	2	f	\N
+1644	90	2	f	\N
+1645	69	2	f	\N
+1646	70	2	f	\N
+1918	119	2	f	\N
+1919	12	2	f	\N
+1922	93	2	f	\N
+1924	118	2	f	\N
+1925	89	2	f	\N
+1926	90	2	f	\N
+1927	87	2	f	\N
+1930	93	2	f	\N
+1931	118	2	f	\N
+1933	93	2	f	\N
+1934	93	2	f	\N
+1935	93	2	f	\N
+1936	93	2	f	\N
+1940	93	2	f	\N
+1941	12	2	f	\N
+1945	123	2	f	\N
+1946	123	2	f	\N
+1947	123	2	f	\N
+1948	123	2	f	\N
+1954	12	2	f	\N
+1584	89	2	f	\N
+1585	90	2	f	\N
+1586	69	2	f	\N
+1587	39	2	f	\N
+1588	84	2	f	\N
+1589	84	2	f	\N
+1590	83	2	f	\N
+1591	87	2	f	\N
+1592	89	2	f	\N
+1593	69	2	f	\N
+1597	104	2	f	\N
+2631	65	2	f	\N
+2632	65	2	f	\N
+2702	119	2	f	\N
+2703	119	2	f	\N
+2829	93	2	f	\N
+2830	69	2	f	\N
+2831	134	2	f	\N
+2833	110	2	f	\N
+2834	86	2	f	\N
+2835	104	2	f	\N
+2858	103	2	f	\N
+2859	148	2	f	\N
+2860	106	2	f	\N
+885	47	2	\N	\N
+895	39	2	\N	\N
+940	73	2	\N	\N
+941	73	2	\N	\N
+942	73	2	\N	\N
+1259	87	2	f	\N
+1260	87	2	f	\N
+2200	104	2	f	\N
+2214	110	2	f	\N
+2215	86	2	f	\N
+2216	78	2	f	\N
+2217	12	2	f	\N
+2218	140	2	f	\N
+2219	65	2	f	\N
+2221	140	2	f	\N
+2222	65	2	f	\N
+2223	78	2	f	\N
+2224	78	2	f	\N
+2225	78	2	f	\N
+2226	78	2	f	\N
+2227	78	2	f	\N
+2228	78	2	f	\N
+2229	78	2	f	\N
+2230	78	2	f	\N
+1908	65	2	f	\N
+2055	12	2	f	\N
+2062	93	2	f	\N
+2063	93	2	f	\N
+2064	123	2	f	\N
+2065	118	2	f	\N
+2066	93	2	f	\N
+2067	123	2	f	\N
+2068	93	2	f	\N
+2069	123	2	f	\N
+2070	12	2	f	\N
+2305	145	2	f	\N
+2306	146	2	f	\N
+1993	106	2	f	\N
+2310	145	2	f	\N
+1994	106	2	f	\N
+2311	93	2	f	\N
+1995	106	2	f	\N
+1996	106	2	f	\N
+2312	130	2	f	\N
+1997	106	2	f	\N
+2313	145	2	f	\N
+2314	69	2	f	\N
+2000	103	2	f	\N
+2315	135	2	f	\N
+2001	106	2	f	\N
+2316	137	2	f	\N
+2002	106	2	f	\N
+2317	134	2	f	\N
+2005	103	2	f	\N
+2319	104	2	f	\N
+2006	106	2	f	\N
+2007	106	2	f	\N
+2009	93	2	f	\N
+2010	123	2	f	\N
+2011	110	2	f	\N
+2012	118	2	f	\N
+2013	87	2	f	\N
+2014	89	2	f	\N
+2015	90	2	f	\N
+2016	93	2	f	\N
+2017	69	2	f	\N
+2018	87	2	f	\N
+2019	89	2	f	\N
+2020	69	2	f	\N
+2023	104	2	f	\N
+2024	104	2	f	\N
+2026	103	2	f	\N
+2027	106	2	f	\N
+2028	106	2	f	\N
+2436	93	2	f	\N
+2437	146	2	f	\N
+2438	117	2	f	\N
+1880	106	2	f	\N
+1881	106	2	f	\N
+2374	84	2	f	\N
+2375	83	2	f	\N
+2413	105	2	f	\N
+871	69	2	\N	\N
+872	12	2	\N	\N
+873	65	2	\N	\N
+874	65	2	\N	\N
+876	41	2	\N	\N
+878	70	2	\N	\N
+2857	119	2	f	\N
+879	65	2	\N	\N
+880	70	2	\N	\N
+881	70	2	\N	\N
+882	70	2	\N	\N
+883	70	2	\N	\N
+1079	65	2	\N	\N
+1097	84	2	\N	\N
+1101	39	2	\N	\N
+1102	84	2	\N	\N
+1159	78	2	\N	\N
+1170	39	2	\N	\N
+1178	70	2	\N	\N
+1179	39	2	\N	\N
+1189	12	2	\N	\N
+1190	12	2	\N	\N
+1191	86	2	\N	\N
+1192	86	2	\N	\N
+1193	87	2	\N	\N
+1194	87	2	\N	\N
+1200	89	2	\N	\N
+1201	87	2	\N	\N
+1210	90	2	\N	\N
+1211	12	2	\N	\N
+1212	65	2	\N	\N
+1213	90	2	\N	\N
+1214	91	2	\N	\N
+1225	12	2	\N	\N
+1230	93	2	\N	\N
+1243	87	2	f	\N
+1244	87	2	f	\N
+1253	65	2	f	\N
+1263	87	2	f	\N
+1264	87	2	f	\N
+1265	89	2	f	\N
+1268	12	2	f	\N
+2197	93	2	f	\N
+2198	123	2	f	\N
+2199	105	2	f	\N
+2240	78	2	f	\N
+2241	78	2	f	\N
+2242	78	2	f	\N
+2243	12	2	f	\N
+2244	12	2	f	\N
+2245	65	2	f	\N
+2246	105	2	f	\N
+2247	102	2	f	\N
+2248	141	2	f	\N
+2249	141	2	f	\N
+2254	135	2	f	\N
+2255	142	2	f	\N
+2256	135	2	f	\N
+2257	142	2	f	\N
+2258	135	2	f	\N
+2259	142	2	f	\N
+1853	119	2	f	\N
+1854	119	2	f	\N
+1855	119	2	f	\N
+1859	119	2	f	\N
+1860	119	2	f	\N
+1865	117	2	f	\N
+1866	117	2	f	\N
+1867	117	2	f	\N
+1868	117	2	f	\N
+1869	69	2	f	\N
+1870	78	2	f	\N
+1872	118	2	f	\N
+1873	105	2	f	\N
+1875	106	2	f	\N
+1876	106	2	f	\N
+863	65	2	\N	\N
+870	69	2	\N	\N
+875	70	2	\N	\N
+1207	12	2	\N	\N
+1209	90	2	\N	\N
+1218	39	2	\N	\N
+1221	12	2	\N	\N
+1227	93	2	\N	\N
+1240	41	2	f	\N
+1241	39	2	f	\N
+1282	87	2	f	\N
+1980	93	2	f	\N
+1981	118	2	f	\N
+1982	93	2	f	\N
+1983	93	2	f	\N
+1984	123	2	f	\N
+2404	105	2	f	\N
+2405	105	2	f	\N
+2406	105	2	f	\N
+2407	105	2	f	\N
+2408	105	2	f	\N
+2409	105	2	f	\N
+2410	105	2	f	\N
+2411	105	2	f	\N
+2412	105	2	f	\N
+2414	105	2	f	\N
+2432	105	2	f	\N
+2719	119	2	f	\N
+2720	119	2	f	\N
+2721	119	2	f	\N
+2722	119	2	f	\N
+2723	104	2	f	\N
+2724	119	2	f	\N
+2736	119	2	f	\N
+2741	65	2	f	\N
+2742	12	2	f	\N
+2779	123	2	f	\N
+2780	123	2	f	\N
+2781	123	2	f	\N
+2782	123	2	f	\N
+2783	123	2	f	\N
+2466	117	2	f	\N
+2467	111	2	f	\N
+2468	119	2	f	\N
+2469	119	2	f	\N
+2470	119	2	f	\N
+2475	90	2	f	\N
+2484	2	2	f	\N
+1932	93	2	f	\N
+1939	93	2	f	\N
+2131	93	2	f	\N
+2893	145	2	f	\N
+2894	130	2	f	\N
+2895	39	2	f	\N
+2896	84	2	f	\N
+2897	83	2	f	\N
+2898	69	2	f	\N
+2899	135	2	f	\N
+2900	137	2	f	\N
+2901	93	2	f	\N
+2902	134	2	f	\N
 \.
 
 
@@ -48172,2073 +48035,6 @@ COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2905, true);
-
-
---
--- Data for Name: resource_log; Type: TABLE DATA; Schema: company_en; Owner: -
---
-
-COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
-142	83	2	\N	2013-12-07 16:38:38.11618+02
-143	84	2	\N	2013-12-07 16:39:56.788641+02
-144	3	2	\N	2013-12-07 16:41:27.65259+02
-145	2	2	\N	2013-12-07 16:41:31.748494+02
-146	83	2	\N	2013-12-07 16:58:05.802634+02
-147	83	2	\N	2013-12-07 17:00:14.544264+02
-4836	794	2	\N	2014-02-05 19:54:07.5415+02
-5406	1192	2	\N	2014-04-06 19:21:11.278173+03
-5407	1005	2	\N	2014-04-06 19:21:55.315341+03
-4845	283	2	\N	2014-02-06 11:38:41.090464+02
-2	10	2	\N	2013-11-16 19:00:14.24272+02
-4	12	2	\N	2013-11-16 19:00:15.497284+02
-6	14	2	\N	2013-11-16 19:00:16.696731+02
-8	16	2	\N	2013-11-16 19:00:17.960761+02
-5427	1204	2	\N	2014-04-09 18:54:09.146902+03
-12	30	2	\N	2013-11-23 19:26:00.193553+02
-13	30	2	\N	2013-11-23 22:02:37.363677+02
-14	10	2	\N	2013-11-23 22:11:01.634598+02
-15	30	2	\N	2013-11-23 22:11:14.939938+02
-16	30	2	\N	2013-11-23 22:11:38.396085+02
-19	30	2	\N	2013-11-24 10:30:59.830287+02
-20	30	2	\N	2013-11-24 10:31:22.936737+02
-21	30	2	\N	2013-11-24 10:38:08.07328+02
-22	30	2	\N	2013-11-24 10:38:10.703187+02
-23	30	2	\N	2013-11-24 10:38:11.896934+02
-24	30	2	\N	2013-11-24 10:42:19.397852+02
-25	30	2	\N	2013-11-24 10:42:50.772172+02
-26	30	2	\N	2013-11-24 10:45:56.399572+02
-27	30	2	\N	2013-11-24 10:48:29.950669+02
-28	30	2	\N	2013-11-24 10:49:23.616693+02
-29	30	2	\N	2013-11-24 10:50:05.878643+02
-30	30	2	\N	2013-11-24 10:51:02.465585+02
-31	30	2	\N	2013-11-24 10:54:21.011765+02
-32	30	2	\N	2013-11-24 10:54:28.775552+02
-33	30	2	\N	2013-11-24 10:58:34.152869+02
-34	30	2	\N	2013-11-24 10:58:36.766104+02
-35	30	2	\N	2013-11-24 10:58:38.767749+02
-36	30	2	\N	2013-11-24 10:58:42.533162+02
-37	30	2	\N	2013-11-24 10:58:43.55758+02
-38	30	2	\N	2013-11-24 10:58:47.40587+02
-39	30	2	\N	2013-11-24 11:00:56.130675+02
-40	30	2	\N	2013-11-24 11:01:17.637578+02
-41	30	2	\N	2013-11-24 11:01:20.639413+02
-42	30	2	\N	2013-11-24 11:01:25.957588+02
-43	30	2	\N	2013-11-24 11:01:28.015301+02
-44	30	2	\N	2013-11-24 11:01:49.505153+02
-45	30	2	\N	2013-11-24 11:01:54.465064+02
-46	30	2	\N	2013-11-24 11:01:56.828797+02
-47	30	2	\N	2013-11-24 11:02:00.873006+02
-48	30	2	\N	2013-11-24 11:02:06.385907+02
-49	30	2	\N	2013-11-24 11:02:08.474309+02
-50	30	2	\N	2013-11-24 11:02:11.823259+02
-51	30	2	\N	2013-11-24 11:02:15.084044+02
-52	30	2	\N	2013-11-24 11:23:59.150304+02
-53	30	2	\N	2013-11-24 12:41:22.004561+02
-54	30	2	\N	2013-11-24 12:41:27.704243+02
-55	30	2	\N	2013-11-24 12:41:32.588516+02
-5430	1207	2	\N	2014-04-09 20:43:13.852066+03
-5459	1227	2	\N	2014-04-19 13:04:24.512333+03
-5467	1230	2	\N	2014-04-23 11:53:28.979784+03
-5468	1230	2	\N	2014-04-23 11:53:45.572462+03
-5537	1306	2	\N	2014-04-30 11:04:50.581045+03
-66	16	2	\N	2013-11-30 12:57:27.26941+02
-67	31	2	\N	2013-11-30 14:25:42.040654+02
-68	32	2	\N	2013-11-30 14:27:55.708736+02
-69	33	2	\N	2013-11-30 14:28:30.596329+02
-70	34	2	\N	2013-11-30 14:29:07.205192+02
-71	35	2	\N	2013-11-30 14:30:10.653134+02
-72	36	2	\N	2013-11-30 14:31:39.751221+02
-73	37	2	\N	2013-11-30 14:32:36.035677+02
-74	38	2	\N	2013-11-30 14:55:27.691288+02
-75	39	2	\N	2013-11-30 14:58:07.249714+02
-76	40	2	\N	2013-11-30 14:58:34.364695+02
-79	43	2	\N	2013-11-30 15:08:29.574538+02
-80	43	2	\N	2013-11-30 15:08:52.114395+02
-81	43	2	\N	2013-11-30 15:09:21.51485+02
-82	44	2	\N	2013-11-30 15:09:54.961188+02
-83	45	2	\N	2013-12-01 13:04:27.697583+02
-84	45	2	\N	2013-12-01 13:04:40.716328+02
-85	14	2	\N	2013-12-01 14:31:19.374571+02
-87	12	2	\N	2013-12-01 18:21:35.266219+02
-104	10	2	\N	2013-12-02 20:43:38.334769+02
-130	10	2	\N	2013-12-06 21:10:25.807719+02
-4796	769	2	\N	2014-01-22 22:21:45.451623+02
-4820	16	2	\N	2014-02-01 21:09:43.821944+02
-5408	1192	2	\N	2014-04-06 19:22:16.361504+03
-5409	1005	2	\N	2014-04-06 19:22:18.74271+03
-4822	784	2	\N	2014-02-01 21:23:07.460721+02
-5410	1193	2	\N	2014-04-06 19:30:25.125445+03
-5411	1194	2	\N	2014-04-06 19:30:51.85642+03
-5412	1195	2	\N	2014-04-06 19:32:30.207073+03
-5428	1205	2	\N	2014-04-09 19:17:37.483997+03
-5431	1209	2	\N	2014-04-09 20:49:45.884539+03
-4843	800	2	\N	2014-02-05 19:58:31.619612+02
-4844	801	2	\N	2014-02-05 19:58:49.632624+02
-4951	885	2	\N	2014-02-14 21:23:40.101298+02
-4952	885	2	\N	2014-02-14 21:25:13.866935+02
-4974	849	2	\N	2014-02-23 22:41:46.113064+02
-4977	884	2	\N	2014-02-23 22:42:22.595852+02
-5143	1003	2	\N	2014-03-04 21:05:09.565466+02
-5144	1004	2	\N	2014-03-04 21:08:53.227171+02
-5145	1005	2	\N	2014-03-04 21:09:15.542733+02
-5471	1240	2	\N	2014-04-26 13:10:19.27836+03
-5538	1307	2	\N	2014-04-30 11:08:33.655971+03
-5544	1313	2	\N	2014-05-16 22:03:29.897662+03
-361	274	2	\N	2013-12-14 17:16:08.962259+02
-365	277	2	\N	2013-12-14 18:56:05.189747+02
-366	278	2	\N	2013-12-14 18:56:17.77025+02
-367	279	2	\N	2013-12-14 18:56:45.919492+02
-368	280	2	\N	2013-12-14 19:10:07.617582+02
-369	281	2	\N	2013-12-14 19:10:25.311427+02
-370	281	2	\N	2013-12-14 19:10:59.35028+02
-371	281	2	\N	2013-12-14 19:12:14.211139+02
-372	282	2	\N	2013-12-14 19:14:22.861495+02
-373	278	2	\N	2013-12-14 19:14:33.853691+02
-374	282	2	\N	2013-12-14 19:14:41.964012+02
-375	283	2	\N	2013-12-14 19:16:35.738242+02
-4882	706	2	\N	2014-02-08 19:59:59.160282+02
-377	283	2	\N	2013-12-14 19:18:21.622933+02
-5147	1004	2	\N	2014-03-04 21:17:22.306545+02
-5148	1004	2	\N	2014-03-04 21:23:04.343461+02
-386	286	2	\N	2013-12-14 20:46:34.653533+02
-387	287	2	\N	2013-12-14 20:46:47.37835+02
-388	288	2	\N	2013-12-14 20:47:08.024243+02
-389	289	2	\N	2013-12-14 20:47:28.256516+02
-390	290	2	\N	2013-12-14 20:52:40.953492+02
-391	291	2	\N	2013-12-14 20:53:08.057165+02
-392	292	2	\N	2013-12-14 20:53:33.598708+02
-5149	1004	2	\N	2014-03-04 21:23:17.093243+02
-5150	1004	2	\N	2014-03-04 21:23:25.611509+02
-4799	771	2	\N	2014-01-25 16:05:28.799345+02
-4800	771	2	\N	2014-01-25 16:05:38.705799+02
-4801	772	2	\N	2014-01-25 16:06:28.321244+02
-4826	788	2	\N	2014-02-01 22:03:21.899916+02
-5151	1004	2	\N	2014-03-04 21:23:52.466966+02
-5152	1004	2	\N	2014-03-04 21:24:11.351815+02
-5153	1004	2	\N	2014-03-04 21:24:20.614224+02
-5429	1206	2	\N	2014-04-09 19:21:09.215561+03
-5154	1004	2	\N	2014-03-04 21:35:47.600889+02
-5155	1004	2	\N	2014-03-04 21:36:05.835492+02
-5156	1004	2	\N	2014-03-04 21:36:16.322673+02
-5432	1210	2	\N	2014-04-12 13:10:08.842351+03
-5472	1241	2	\N	2014-04-26 19:16:28.009797+03
-5539	1308	2	\N	2014-04-30 11:20:34.938154+03
-5545	1314	2	\N	2014-05-17 13:42:16.369317+03
-422	306	2	\N	2013-12-15 21:45:32.990838+02
-4802	773	2	\N	2014-01-25 23:45:37.762081+02
-4827	789	2	\N	2014-02-02 16:45:11.830435+02
-4954	887	2	\N	2014-02-15 12:32:09.199652+02
-5415	1198	2	\N	2014-04-08 09:35:59.21042+03
-4979	885	2	\N	2014-02-24 12:50:26.694026+02
-4981	784	2	\N	2014-02-24 12:50:33.322359+02
-5157	1004	2	\N	2014-03-07 22:30:15.652582+02
-5230	894	2	\N	2014-03-16 11:54:19.683752+02
-5231	894	2	\N	2014-03-16 11:54:28.171778+02
-5232	894	2	\N	2014-03-16 11:54:33.774318+02
-5270	1004	2	\N	2014-03-17 10:50:39.781432+02
-5465	1230	2	\N	2014-04-19 21:03:03.225866+03
-5509	1278	2	\N	2014-04-29 10:09:19.421905+03
-5540	1309	2	\N	2014-04-30 11:32:51.070911+03
-5547	1316	2	\N	2014-05-17 14:00:25.111543+03
-4927	865	2	\N	2014-02-09 13:26:19.008763+02
-4804	775	2	\N	2014-01-26 15:30:50.636495+02
-4828	3	2	\N	2014-02-02 17:45:50.239397+02
-5416	1199	2	\N	2014-04-08 10:15:32.411146+03
-5434	1211	2	\N	2014-04-12 14:16:34.33498+03
-5435	1211	2	\N	2014-04-12 14:16:53.40729+03
-4982	895	2	\N	2014-02-25 19:06:42.158245+02
-5158	1007	2	\N	2014-03-08 10:30:25.61786+02
-5198	3	2	\N	2014-03-11 13:14:05.142514+02
-5233	1060	2	\N	2014-03-16 12:26:38.52955+02
-5437	1213	2	\N	2014-04-12 14:32:08.840037+03
-5466	1227	2	\N	2014-04-19 21:37:55.580038+03
-5474	1243	2	\N	2014-04-26 22:38:44.326007+03
-5541	1310	2	\N	2014-04-30 22:45:27.579715+03
-5548	1317	2	\N	2014-05-17 14:54:57.813145+03
-5549	1318	2	\N	2014-05-17 15:24:32.954365+03
-5550	1319	2	\N	2014-05-17 15:53:28.880817+03
-5551	1320	2	\N	2014-05-17 15:53:34.139717+03
-5552	1321	2	\N	2014-05-17 15:55:03.155317+03
-5553	1322	2	\N	2014-05-17 15:55:07.534203+03
-5557	1326	2	\N	2014-05-17 15:59:13.891973+03
-5558	1327	2	\N	2014-05-17 15:59:17.045556+03
-5559	1328	2	\N	2014-05-17 16:00:04.660539+03
-5560	1329	2	\N	2014-05-17 16:00:08.901641+03
-5561	1330	2	\N	2014-05-17 16:00:10.337355+03
-5566	1335	2	\N	2014-05-17 16:02:19.447311+03
-5570	1339	2	\N	2014-05-17 16:06:26.675372+03
-5571	1340	2	\N	2014-05-17 16:06:28.503991+03
-5572	1341	2	\N	2014-05-17 16:06:29.727144+03
-5573	1342	2	\N	2014-05-17 16:06:31.81672+03
-5574	1343	2	\N	2014-05-17 16:07:44.265465+03
-5575	1344	2	\N	2014-05-17 16:07:45.972655+03
-5576	1345	2	\N	2014-05-17 16:07:47.259172+03
-5577	1346	2	\N	2014-05-17 16:07:49.146563+03
-5581	1350	2	\N	2014-05-17 16:09:55.923893+03
-5582	1351	2	\N	2014-05-17 16:13:13.017272+03
-5583	1352	2	\N	2014-05-17 16:13:14.609527+03
-5584	1353	2	\N	2014-05-17 16:13:16.568079+03
-5585	1354	2	\N	2014-05-17 16:13:17.732756+03
-5370	1159	2	\N	2014-04-02 19:52:15.193771+03
-5417	1200	2	\N	2014-04-08 10:35:59.014802+03
-4890	784	2	\N	2014-02-08 21:26:51.98617+02
-4929	870	2	\N	2014-02-09 14:57:54.403714+02
-4983	896	2	\N	2014-02-25 19:37:56.226615+02
-4984	897	2	\N	2014-02-25 19:38:21.395798+02
-4985	898	2	\N	2014-02-25 19:38:30.353048+02
-4986	899	2	\N	2014-02-25 19:39:23.588225+02
-4988	901	2	\N	2014-02-25 19:47:57.884012+02
-5160	1009	2	\N	2014-03-08 10:49:52.0599+02
-5199	3	2	\N	2014-03-12 12:05:31.953558+02
-5438	1214	2	\N	2014-04-12 14:36:07.046988+03
-5475	1244	2	\N	2014-04-26 22:39:00.40778+03
-5542	1311	2	\N	2014-04-30 22:45:36.089534+03
-5554	1323	2	\N	2014-05-17 15:55:54.008685+03
-5555	1324	2	\N	2014-05-17 15:56:55.63522+03
-5556	1325	2	\N	2014-05-17 15:58:29.508912+03
-5562	1331	2	\N	2014-05-17 16:00:49.21287+03
-5563	1332	2	\N	2014-05-17 16:01:46.175183+03
-5564	1333	2	\N	2014-05-17 16:01:47.950656+03
-5565	1334	2	\N	2014-05-17 16:01:48.837764+03
-5567	1336	2	\N	2014-05-17 16:03:41.796945+03
-5568	1337	2	\N	2014-05-17 16:04:32.839289+03
-5569	1338	2	\N	2014-05-17 16:04:34.363533+03
-5578	1347	2	\N	2014-05-17 16:08:39.18466+03
-5579	1348	2	\N	2014-05-17 16:08:56.863828+03
-5580	1349	2	\N	2014-05-17 16:08:58.291349+03
-4894	849	2	\N	2014-02-08 21:32:14.802948+02
-4896	851	2	\N	2014-02-08 21:32:32.471247+02
-4897	852	2	\N	2014-02-08 21:36:44.493917+02
-4930	871	2	\N	2014-02-09 16:04:05.85568+02
-5161	1009	2	\N	2014-03-08 10:52:32.854366+02
-5162	1009	2	\N	2014-03-08 10:52:45.635015+02
-5163	1009	2	\N	2014-03-08 10:52:53.515357+02
-5164	1009	2	\N	2014-03-08 10:52:58.740536+02
-5165	1010	2	\N	2014-03-08 10:54:40.946487+02
-5166	1010	2	\N	2014-03-08 10:54:50.928085+02
-5200	3	2	\N	2014-03-12 12:14:05.203771+02
-5235	897	2	\N	2014-03-16 12:53:37.56753+02
-5278	1067	2	\N	2014-03-18 19:51:01.87448+02
-5375	1164	2	\N	2014-04-02 20:56:42.084197+03
-5376	1165	2	\N	2014-04-02 20:56:48.393173+03
-5419	1201	2	\N	2014-04-08 10:38:31.154572+03
-5440	1214	2	\N	2014-04-12 14:39:05.532456+03
-5442	1214	2	\N	2014-04-12 14:43:11.754556+03
-5513	1282	2	\N	2014-04-29 10:43:05.718429+03
-5586	1355	2	\N	2014-05-17 16:14:39.7443+03
-5587	1356	2	\N	2014-05-17 16:14:41.182697+03
-5588	1357	2	\N	2014-05-17 16:14:43.239633+03
-5590	1359	2	\N	2014-05-17 16:15:43.442935+03
-5591	1360	2	\N	2014-05-17 16:15:45.790483+03
-5596	1365	2	\N	2014-05-17 16:20:21.389915+03
-5597	1366	2	\N	2014-05-17 16:20:22.473385+03
-5598	1367	2	\N	2014-05-17 16:20:23.843632+03
-4898	853	2	\N	2014-02-08 21:39:09.10029+02
-4812	784	2	\N	2014-01-26 21:12:24.209136+02
-4813	784	2	\N	2014-01-26 21:13:10.546575+02
-4814	784	2	\N	2014-01-26 21:13:20.058093+02
-4815	784	2	\N	2014-01-26 21:13:24.693933+02
-4818	784	2	\N	2014-01-26 21:20:14.635984+02
-4819	784	2	\N	2014-01-26 21:20:34.941868+02
-4931	274	2	\N	2014-02-10 08:49:31.501202+02
-4970	894	2	\N	2014-02-22 17:27:40.771678+02
-4991	903	2	\N	2014-02-25 22:43:46.101171+02
-4992	904	2	\N	2014-02-25 22:43:53.30222+02
-4993	905	2	\N	2014-02-25 22:44:00.024066+02
-4994	906	2	\N	2014-02-25 22:44:13.035203+02
-4995	907	2	\N	2014-02-25 22:44:59.159297+02
-5167	1009	2	\N	2014-03-08 10:57:02.535973+02
-5168	1010	2	\N	2014-03-08 10:57:07.365849+02
-5201	3	2	\N	2014-03-12 12:29:57.686858+02
-5202	3	2	\N	2014-03-12 12:30:07.270368+02
-5203	3	2	\N	2014-03-12 12:30:09.982217+02
-5204	3	2	\N	2014-03-12 12:32:22.25189+02
-5205	894	2	\N	2014-03-12 12:32:26.366205+02
-5236	919	2	\N	2014-03-16 13:33:07.651832+02
-5444	1218	2	\N	2014-04-12 15:00:38.646853+03
-5447	1214	2	\N	2014-04-12 15:02:33.59771+03
-5514	1283	2	\N	2014-04-29 12:06:08.689068+03
-5515	1284	2	\N	2014-04-29 12:07:06.357367+03
-5518	1287	2	\N	2014-04-29 12:09:55.486785+03
-5520	1289	2	\N	2014-04-29 12:11:36.874588+03
-5589	1358	2	\N	2014-05-17 16:15:09.836615+03
-5592	1361	2	\N	2014-05-17 16:16:33.155307+03
-5593	1362	2	\N	2014-05-17 16:16:42.585648+03
-5594	1363	2	\N	2014-05-17 16:18:45.312153+03
-5595	1364	2	\N	2014-05-17 16:18:46.752544+03
-4932	872	2	\N	2014-02-10 14:29:53.759164+02
-4996	908	2	\N	2014-02-25 23:15:44.304324+02
-4997	909	2	\N	2014-02-25 23:16:53.455486+02
-5000	912	2	\N	2014-02-25 23:21:05.038132+02
-5001	913	2	\N	2014-02-25 23:21:10.720503+02
-5002	914	2	\N	2014-02-25 23:21:15.803027+02
-5003	915	2	\N	2014-02-25 23:21:21.245593+02
-5004	916	2	\N	2014-02-25 23:21:27.843749+02
-5005	917	2	\N	2014-02-25 23:21:40.705852+02
-5006	918	2	\N	2014-02-25 23:21:45.161533+02
-5007	918	2	\N	2014-02-25 23:21:53.74917+02
-5008	918	2	\N	2014-02-25 23:21:57.599668+02
-5009	919	2	\N	2014-02-25 23:22:22.789803+02
-5011	921	2	\N	2014-02-25 23:22:59.534922+02
-5012	922	2	\N	2014-02-25 23:23:04.765473+02
-5013	923	2	\N	2014-02-25 23:23:16.649188+02
-5014	924	2	\N	2014-02-25 23:23:30.151925+02
-5015	925	2	\N	2014-02-25 23:25:11.120354+02
-5016	926	2	\N	2014-02-25 23:26:11.314153+02
-5017	927	2	\N	2014-02-25 23:26:34.378644+02
-5018	928	2	\N	2014-02-25 23:26:49.163639+02
-5019	929	2	\N	2014-02-25 23:27:07.84413+02
-5020	930	2	\N	2014-02-25 23:27:30.797684+02
-5021	931	2	\N	2014-02-25 23:27:45.611037+02
-5022	932	2	\N	2014-02-25 23:28:05.678992+02
-5023	933	2	\N	2014-02-25 23:28:21.001129+02
-5025	935	2	\N	2014-02-25 23:28:49.565248+02
-5026	936	2	\N	2014-02-25 23:29:05.034117+02
-5027	937	2	\N	2014-02-25 23:29:16.11101+02
-5028	938	2	\N	2014-02-25 23:29:28.82178+02
-5029	939	2	\N	2014-02-25 23:29:41.159219+02
-5030	940	2	\N	2014-02-25 23:29:57.589154+02
-5031	941	2	\N	2014-02-25 23:30:12.260571+02
-5032	942	2	\N	2014-02-25 23:30:25.705958+02
-5033	943	2	\N	2014-02-25 23:30:39.278491+02
-5034	944	2	\N	2014-02-25 23:30:54.230938+02
-5035	945	2	\N	2014-02-25 23:31:08.136642+02
-5036	946	2	\N	2014-02-25 23:31:21.084682+02
-5037	947	2	\N	2014-02-25 23:31:35.443235+02
-5038	948	2	\N	2014-02-25 23:31:50.036032+02
-5039	949	2	\N	2014-02-25 23:32:16.232207+02
-5040	950	2	\N	2014-02-25 23:32:51.784126+02
-5169	1011	2	\N	2014-03-08 15:10:44.638516+02
-5206	3	2	\N	2014-03-12 13:00:24.217557+02
-5207	3	2	\N	2014-03-12 13:00:34.025605+02
-5241	903	2	\N	2014-03-16 15:12:25.130202+02
-5379	1168	2	\N	2014-04-03 12:39:52.988369+03
-5380	1169	2	\N	2014-04-03 12:49:06.139328+03
-5448	1221	2	\N	2014-04-12 16:44:14.810824+03
-5516	1285	2	\N	2014-04-29 12:08:23.116251+03
-5517	1286	2	\N	2014-04-29 12:09:10.712444+03
-5522	1291	2	\N	2014-04-29 12:13:37.203069+03
-5523	1292	2	\N	2014-04-29 12:14:34.180203+03
-4900	854	2	\N	2014-02-08 21:47:34.439997+02
-4901	855	2	\N	2014-02-08 21:54:55.399628+02
-4936	875	2	\N	2014-02-10 15:58:53.177719+02
-4937	875	2	\N	2014-02-10 15:59:03.43204+02
-5042	952	2	\N	2014-02-25 23:33:14.57009+02
-5043	939	2	\N	2014-02-25 23:33:37.281163+02
-5044	938	2	\N	2014-02-25 23:33:44.033176+02
-5045	937	2	\N	2014-02-25 23:33:51.697991+02
-5046	936	2	\N	2014-02-25 23:33:56.981908+02
-5047	935	2	\N	2014-02-25 23:34:03.037741+02
-5049	933	2	\N	2014-02-25 23:34:27.937885+02
-5050	932	2	\N	2014-02-25 23:34:34.767736+02
-5051	931	2	\N	2014-02-25 23:34:39.075165+02
-5052	930	2	\N	2014-02-25 23:34:43.896812+02
-5053	929	2	\N	2014-02-25 23:34:48.70472+02
-5054	928	2	\N	2014-02-25 23:34:54.494127+02
-5055	927	2	\N	2014-02-25 23:35:00.125101+02
-5056	926	2	\N	2014-02-25 23:35:05.399995+02
-5057	925	2	\N	2014-02-25 23:35:10.409443+02
-5058	924	2	\N	2014-02-25 23:35:16.447517+02
-5059	923	2	\N	2014-02-25 23:35:21.959285+02
-5060	922	2	\N	2014-02-25 23:35:27.383937+02
-5061	921	2	\N	2014-02-25 23:35:31.660307+02
-5063	919	2	\N	2014-02-25 23:35:43.645366+02
-5064	918	2	\N	2014-02-25 23:35:47.480218+02
-5065	917	2	\N	2014-02-25 23:35:52.042922+02
-5066	916	2	\N	2014-02-25 23:35:57.409224+02
-5067	915	2	\N	2014-02-25 23:36:01.802966+02
-5068	914	2	\N	2014-02-25 23:36:05.670476+02
-5069	913	2	\N	2014-02-25 23:36:10.129284+02
-5070	912	2	\N	2014-02-25 23:36:14.468359+02
-5286	1078	2	\N	2014-03-20 21:22:51.030666+02
-5381	1170	2	\N	2014-04-03 12:49:07.793292+03
-5519	1288	2	\N	2014-04-29 12:10:21.572462+03
-5521	1290	2	\N	2014-04-29 12:13:35.434847+03
-5603	1372	2	\N	2014-05-17 18:47:30.594446+03
-5606	1375	2	\N	2014-05-17 18:55:21.896666+03
-5613	1382	2	\N	2014-05-17 19:04:51.767284+03
-5619	1388	2	\N	2014-05-17 19:09:44.578209+03
-5622	1391	2	\N	2014-05-17 19:12:29.996417+03
-4902	856	2	\N	2014-02-08 21:59:04.719245+02
-4938	876	2	\N	2014-02-10 16:19:24.400952+02
-5071	953	2	\N	2014-02-26 23:25:15.548581+02
-5072	954	2	\N	2014-02-26 23:25:55.407709+02
-5075	957	2	\N	2014-02-26 23:28:34.003373+02
-5076	958	2	\N	2014-02-26 23:28:45.594179+02
-5077	959	2	\N	2014-02-26 23:28:57.004231+02
-5078	960	2	\N	2014-02-26 23:29:08.086342+02
-5079	961	2	\N	2014-02-26 23:29:17.646283+02
-5080	962	2	\N	2014-02-26 23:29:26.175631+02
-5081	963	2	\N	2014-02-26 23:29:35.761623+02
-5082	964	2	\N	2014-02-26 23:29:46.892804+02
-5083	965	2	\N	2014-02-26 23:29:54.140342+02
-5084	966	2	\N	2014-02-26 23:30:01.375033+02
-5085	967	2	\N	2014-02-26 23:30:08.774222+02
-5086	968	2	\N	2014-02-26 23:30:17.802323+02
-5087	969	2	\N	2014-02-26 23:30:29.097872+02
-5088	970	2	\N	2014-02-26 23:30:38.081009+02
-5089	971	2	\N	2014-02-26 23:30:52.902609+02
-5091	973	2	\N	2014-02-26 23:31:31.71567+02
-5093	975	2	\N	2014-02-26 23:32:13.646357+02
-5094	976	2	\N	2014-02-26 23:32:24.624636+02
-5095	977	2	\N	2014-02-26 23:32:34.606814+02
-5096	978	2	\N	2014-02-26 23:32:43.318943+02
-5097	979	2	\N	2014-02-26 23:32:54.081989+02
-5098	980	2	\N	2014-02-26 23:33:04.823892+02
-5099	981	2	\N	2014-02-26 23:33:16.574818+02
-5100	982	2	\N	2014-02-26 23:33:28.270884+02
-5101	983	2	\N	2014-02-26 23:33:40.854578+02
-5102	984	2	\N	2014-02-26 23:33:57.05943+02
-5103	985	2	\N	2014-02-26 23:34:08.238483+02
-5105	987	2	\N	2014-02-26 23:34:29.757456+02
-5106	988	2	\N	2014-02-26 23:34:37.99873+02
-5216	3	2	\N	2014-03-12 21:55:10.706584+02
-5287	1079	2	\N	2014-03-22 12:57:07.526655+02
-5524	1293	2	\N	2014-04-29 12:17:51.658135+03
-5525	1294	2	\N	2014-04-29 12:18:27.913053+03
-5601	1370	2	\N	2014-05-17 18:45:54.451262+03
-5602	1371	2	\N	2014-05-17 18:47:17.628356+03
-5604	1373	2	\N	2014-05-17 18:54:01.477094+03
-5607	1376	2	\N	2014-05-17 18:56:40.07768+03
-5609	1378	2	\N	2014-05-17 19:02:40.402053+03
-5616	1385	2	\N	2014-05-17 19:07:13.667811+03
-5617	1386	2	\N	2014-05-17 19:07:36.068126+03
-5621	1390	2	\N	2014-05-17 19:11:55.084234+03
-4789	763	2	\N	2014-01-12 19:51:49.157909+02
-4903	854	2	\N	2014-02-08 22:16:58.906498+02
-4904	3	2	\N	2014-02-08 22:17:06.939369+02
-4905	854	2	\N	2014-02-08 22:20:32.280238+02
-4906	784	2	\N	2014-02-08 22:21:01.290541+02
-5484	1253	2	\N	2014-04-28 00:03:49.599015+03
-5289	1081	2	\N	2014-03-22 17:57:05.076581+02
-5605	1374	2	\N	2014-05-17 18:55:03.070735+03
-5611	1380	2	\N	2014-05-17 19:03:57.212913+03
-5614	1383	2	\N	2014-05-17 19:04:59.867959+03
-5618	1387	2	\N	2014-05-17 19:09:22.594353+03
-5624	1393	2	\N	2014-05-18 10:14:28.009945+03
-4790	764	2	\N	2014-01-12 20:33:53.3138+02
-4909	723	2	\N	2014-02-08 22:28:37.868751+02
-4940	878	2	\N	2014-02-10 16:40:47.442615+02
-5610	1379	2	\N	2014-05-17 19:03:38.443538+03
-5612	1381	2	\N	2014-05-17 19:04:17.238286+03
-5615	1384	2	\N	2014-05-17 19:07:10.869783+03
-5620	1389	2	\N	2014-05-17 19:09:47.55779+03
-5291	1088	2	\N	2014-03-22 18:51:18.985681+02
-5292	1081	2	\N	2014-03-22 18:51:44.158872+02
-5458	1225	2	\N	2014-04-13 12:01:26.796233+03
-5627	1396	2	\N	2014-05-18 11:58:47.293591+03
-4917	764	2	\N	2014-02-09 00:53:58.264629+02
-4918	769	2	\N	2014-02-09 00:57:04.796409+02
-4919	775	2	\N	2014-02-09 00:57:24.917548+02
-4920	788	2	\N	2014-02-09 00:57:42.02056+02
-4942	878	2	\N	2014-02-10 22:47:18.374976+02
-4943	880	2	\N	2014-02-10 22:48:37.279277+02
-4944	881	2	\N	2014-02-10 22:49:24.829434+02
-4945	882	2	\N	2014-02-10 22:49:56.066237+02
-4946	883	2	\N	2014-02-10 22:50:06.121122+02
-4947	884	2	\N	2014-02-10 22:50:26.035905+02
-4948	884	2	\N	2014-02-10 22:53:06.689693+02
-5294	1090	2	\N	2014-03-22 20:34:50.666418+02
-5295	1091	2	\N	2014-03-22 20:36:11.95663+02
-5298	1093	2	\N	2014-03-22 20:40:16.040605+02
-5629	1398	2	\N	2014-05-18 12:12:21.975254+03
-4949	764	2	\N	2014-02-11 19:47:14.055452+02
-5488	1257	2	\N	2014-04-28 12:34:34.363475+03
-5300	1095	2	\N	2014-03-22 20:52:34.596466+02
-5301	1096	2	\N	2014-03-22 20:52:44.740475+02
-5302	1097	2	\N	2014-03-22 20:53:03.099066+02
-5489	1258	2	\N	2014-04-28 12:34:55.433659+03
-5304	1099	2	\N	2014-03-22 20:57:07.889521+02
-5535	1304	2	\N	2014-04-29 16:15:23.221696+03
-5389	1178	2	\N	2014-04-05 19:40:06.274566+03
-5390	1179	2	\N	2014-04-05 19:40:10.823684+03
-5490	1259	2	\N	2014-04-28 12:58:44.196537+03
-5305	1100	2	\N	2014-03-22 21:00:41.76813+02
-5306	1101	2	\N	2014-03-22 21:00:48.529148+02
-5307	1102	2	\N	2014-03-22 21:01:34.517288+02
-5491	1260	2	\N	2014-04-28 12:59:00.104464+03
-5631	1400	2	\N	2014-05-18 13:37:21.801854+03
-5632	1401	2	\N	2014-05-18 13:37:41.402585+03
-5633	1402	2	\N	2014-05-18 13:44:45.628784+03
-5492	1261	2	\N	2014-04-28 13:04:58.29173+03
-5634	1403	2	\N	2014-05-18 15:48:34.956287+03
-5256	1067	2	\N	2014-03-16 19:34:31.935568+02
-5494	1263	2	\N	2014-04-28 13:08:06.602496+03
-5635	1404	2	\N	2014-05-18 19:18:07.615122+03
-5636	1406	2	\N	2014-05-18 19:18:56.831097+03
-5639	1409	2	\N	2014-05-18 19:22:05.971396+03
-5394	1185	2	\N	2014-04-05 20:56:20.797318+03
-5257	1067	2	\N	2014-03-16 19:55:56.894484+02
-5495	1264	2	\N	2014-04-28 13:08:25.610345+03
-5637	1407	2	\N	2014-05-18 19:19:36.399614+03
-5641	1411	2	\N	2014-05-18 19:23:45.119721+03
-5496	1265	2	\N	2014-04-28 13:08:54.519921+03
-5638	1408	2	\N	2014-05-18 19:19:43.401474+03
-5258	1067	2	\N	2014-03-16 20:09:16.532934+02
-5311	1097	2	\N	2014-03-24 19:59:44.290142+02
-5640	1410	2	\N	2014-05-18 19:23:00.415796+03
-5643	1413	2	\N	2014-05-20 21:26:27.311927+03
-5259	1068	2	\N	2014-03-16 20:15:31.769185+02
-5499	1268	2	\N	2014-04-28 23:55:09.591646+03
-5644	1414	2	\N	2014-05-24 17:02:57.354915+03
-5645	1415	2	\N	2014-05-24 17:03:02.922541+03
-5646	1416	2	\N	2014-05-24 17:06:48.542492+03
-5647	1417	2	\N	2014-05-24 17:06:51.402853+03
-5648	1418	2	\N	2014-05-24 17:07:25.101929+03
-5649	1419	2	\N	2014-05-24 17:07:29.075778+03
-5650	1420	2	\N	2014-05-24 17:24:17.546972+03
-4120	16	2	\N	2014-01-01 13:19:09.979922+02
-4131	14	2	\N	2014-01-01 18:45:07.902745+02
-4144	706	2	\N	2014-01-03 16:12:41.015146+02
-4145	706	2	\N	2014-01-03 16:13:23.197097+02
-5402	1189	2	\N	2014-04-06 18:46:40.132797+03
-5403	1190	2	\N	2014-04-06 18:47:22.030146+03
-5138	865	2	\N	2014-03-03 21:09:34.254642+02
-5404	1191	2	\N	2014-04-06 18:53:34.002074+03
-5263	1009	2	\N	2014-03-16 21:40:10.728496+02
-5264	1009	2	\N	2014-03-16 21:44:11.742442+02
-5405	1192	2	\N	2014-04-06 19:20:55.890208+03
-5140	865	2	\N	2014-03-03 21:57:11.59945+02
-5265	1004	2	\N	2014-03-17 10:29:17.115979+02
-5266	1004	2	\N	2014-03-17 10:29:24.701637+02
-4744	723	2	\N	2014-01-04 23:58:55.624453+02
-4746	725	2	\N	2014-01-05 01:09:00.405742+02
-4747	726	2	\N	2014-01-05 01:09:15.602018+02
-4749	728	2	\N	2014-01-05 01:13:50.125212+02
-4756	734	2	\N	2014-01-05 12:36:48.48575+02
-4765	743	2	\N	2014-01-05 13:20:17.173661+02
-5654	1424	2	\N	2014-06-01 10:25:44.71461+03
-5656	1426	2	\N	2014-06-01 12:15:53.295347+03
-5661	1431	2	\N	2014-06-07 15:12:11.693366+03
-5662	1432	2	\N	2014-06-07 15:12:40.323386+03
-5663	1433	2	\N	2014-06-07 17:43:14.620483+03
-5665	1435	2	\N	2014-06-07 21:01:18.691193+03
-5667	1438	2	\N	2014-06-07 21:11:01.089928+03
-5668	1439	2	\N	2014-06-07 21:11:46.797584+03
-5669	1440	2	\N	2014-06-07 22:15:09.567299+03
-5671	1442	2	\N	2014-06-07 22:16:04.586659+03
-5676	1447	2	\N	2014-06-08 21:25:14.638119+03
-5677	1448	2	\N	2014-06-08 21:25:35.09515+03
-5679	1450	2	\N	2014-06-09 15:50:23.760428+03
-5681	1452	2	\N	2014-06-09 17:20:44.311452+03
-5693	1464	2	\N	2014-06-14 17:55:00.252916+03
-5694	1465	2	\N	2014-06-14 17:55:08.213215+03
-5695	1467	2	\N	2014-06-14 17:56:52.935007+03
-5696	1468	2	\N	2014-06-14 17:58:15.339465+03
-5697	1469	2	\N	2014-06-14 17:58:37.034547+03
-5698	1470	2	\N	2014-06-14 18:00:56.71432+03
-5699	1471	2	\N	2014-06-14 18:02:10.63169+03
-5700	1472	2	\N	2014-06-14 18:02:54.98084+03
-5701	1473	2	\N	2014-06-14 18:03:27.411198+03
-5713	1485	2	\N	2014-06-15 15:17:28.256792+03
-5715	1487	2	\N	2014-06-16 14:42:17.062016+03
-5728	1500	2	\N	2014-06-18 16:59:05.631362+03
-5730	1502	2	\N	2014-06-22 19:40:05.464875+03
-5731	1503	2	\N	2014-06-22 19:40:20.79663+03
-5732	1504	2	\N	2014-06-22 19:42:44.939368+03
-5733	1505	2	\N	2014-06-22 19:43:05.103699+03
-5734	1506	2	\N	2014-06-22 19:43:23.157992+03
-5735	1507	2	\N	2014-06-22 19:46:21.388635+03
-5737	1509	2	\N	2014-06-22 21:15:50.586549+03
-5738	1510	2	\N	2014-06-24 20:30:44.36129+03
-5739	1511	2	\N	2014-06-25 19:21:08.001771+03
-5740	1512	2	\N	2014-06-25 19:37:43.544622+03
-5741	1513	2	\N	2014-06-25 19:38:23.293423+03
-5742	1514	2	\N	2014-06-25 19:38:46.712804+03
-5743	1515	2	\N	2014-06-25 19:39:14.757449+03
-5744	1516	2	\N	2014-06-25 20:37:42.602785+03
-5745	1517	2	\N	2014-06-25 20:54:09.96009+03
-5746	1518	2	\N	2014-06-25 20:54:50.943042+03
-5747	1519	2	\N	2014-06-25 20:55:06.988343+03
-5749	1521	2	\N	2014-06-26 21:02:19.488826+03
-5750	1535	2	\N	2014-06-28 17:17:15.295903+03
-5751	1536	2	\N	2014-06-28 17:31:39.626186+03
-5752	1537	2	\N	2014-06-28 20:56:05.816704+03
-5753	1538	2	\N	2014-06-28 20:57:41.600837+03
-5754	1539	2	\N	2014-06-28 20:59:59.522314+03
-5755	1540	2	\N	2014-06-28 21:00:26.365557+03
-5756	1541	2	\N	2014-06-28 21:00:51.086753+03
-5758	1543	2	\N	2014-06-28 21:25:57.336069+03
-5759	1544	2	\N	2014-06-28 21:26:14.894807+03
-5760	1545	2	\N	2014-06-28 21:26:35.413657+03
-5761	1546	2	\N	2014-07-02 23:01:03.321441+03
-5762	1547	2	\N	2014-07-02 23:03:30.755887+03
-5763	1548	2	\N	2014-07-26 18:07:46.336433+03
-5764	1549	2	\N	2014-08-16 20:09:11.73959+03
-5766	1551	2	\N	2014-08-16 20:23:59.980051+03
-5767	1552	2	\N	2014-08-16 20:24:12.305446+03
-5768	1553	2	\N	2014-08-16 20:24:15.930016+03
-5769	1554	2	\N	2014-08-16 20:25:09.403552+03
-5771	1556	2	\N	2014-08-16 20:51:19.103778+03
-5773	1559	2	\N	2014-08-16 21:13:14.302214+03
-5774	1560	2	\N	2014-08-16 21:13:18.107616+03
-5775	1561	2	\N	2014-08-16 21:22:35.752473+03
-5776	1562	2	\N	2014-08-16 21:23:02.397566+03
-5777	1563	2	\N	2014-08-16 21:23:05.499294+03
-5778	1564	2	\N	2014-08-16 21:24:08.813965+03
-5783	1569	2	\N	2014-08-17 11:07:53.713228+03
-5784	1570	2	\N	2014-08-17 11:09:10.292392+03
-5790	1576	2	\N	2014-08-22 22:48:58.176695+03
-5791	1577	2	\N	2014-08-22 22:49:31.584667+03
-5792	1578	2	\N	2014-08-22 22:49:35.101959+03
-5793	1579	2	\N	2014-08-22 22:50:20.197271+03
-5794	1580	2	\N	2014-08-22 22:50:49.188036+03
-5795	1581	2	\N	2014-08-22 22:51:29.357367+03
-5796	1582	2	\N	2014-08-22 22:52:03.171722+03
-5797	1584	2	\N	2014-08-22 22:58:38.326467+03
-5798	1585	2	\N	2014-08-22 22:59:28.534906+03
-5799	1586	2	\N	2014-08-22 22:59:41.71816+03
-5800	1587	2	\N	2014-08-22 23:01:39.676197+03
-5801	1588	2	\N	2014-08-22 23:02:11.872661+03
-5802	1589	2	\N	2014-08-22 23:04:10.670971+03
-5803	1590	2	\N	2014-08-22 23:04:40.181387+03
-5804	1591	2	\N	2014-08-22 23:05:46.128053+03
-5805	1592	2	\N	2014-08-22 23:06:07.780481+03
-5806	1593	2	\N	2014-08-22 23:06:12.342153+03
-5810	1597	2	\N	2014-08-22 23:14:17.280337+03
-5811	1598	2	\N	2014-08-22 23:35:58.491964+03
-5820	1607	2	\N	2014-08-23 13:37:30.044239+03
-5821	1608	2	\N	2014-08-23 16:14:22.910225+03
-5822	1609	2	\N	2014-08-23 16:16:24.823791+03
-5823	1610	2	\N	2014-08-24 14:10:51.002759+03
-5824	1611	2	\N	2014-08-24 14:11:19.783792+03
-5825	1612	2	\N	2014-08-24 14:11:36.729128+03
-5826	1613	2	\N	2014-08-24 14:11:54.849623+03
-5827	1614	2	\N	2014-08-24 14:48:54.04485+03
-5828	1615	2	\N	2014-08-24 14:48:55.715304+03
-5829	1616	2	\N	2014-08-24 14:49:59.373945+03
-5832	1619	2	\N	2014-08-24 15:01:16.140346+03
-5833	1620	2	\N	2014-08-24 15:02:15.884894+03
-5834	1621	2	\N	2014-08-24 15:02:43.162974+03
-5835	1622	2	\N	2014-08-24 15:03:06.67481+03
-5836	1623	2	\N	2014-08-24 15:03:53.276198+03
-5837	1624	2	\N	2014-08-24 15:08:02.737031+03
-5838	1625	2	\N	2014-08-24 15:08:18.61161+03
-5839	1626	2	\N	2014-08-24 15:08:29.0077+03
-5840	1627	2	\N	2014-08-24 15:10:13.736496+03
-5841	1628	2	\N	2014-08-24 15:10:44.233145+03
-5847	1634	2	\N	2014-08-24 15:21:09.48427+03
-5852	1639	2	\N	2014-08-25 15:20:24.884947+03
-5853	1640	2	\N	2014-08-26 19:55:53.569882+03
-5854	1641	2	\N	2014-08-26 19:56:28.320221+03
-5858	1645	2	\N	2014-08-26 20:01:19.187139+03
-5860	1647	2	\N	2014-08-26 20:04:08.078366+03
-5862	1649	2	\N	2014-08-26 20:04:48.124422+03
-5855	1642	2	\N	2014-08-26 19:56:46.695581+03
-5856	1643	2	\N	2014-08-26 19:57:13.160198+03
-5857	1644	2	\N	2014-08-26 20:01:16.129984+03
-5859	1646	2	\N	2014-08-26 20:04:06.105786+03
-5861	1648	2	\N	2014-08-26 20:04:09.378364+03
-5863	1650	2	\N	2014-08-26 20:06:13.193356+03
-5864	1651	2	\N	2014-08-26 20:06:36.249641+03
-5865	1652	2	\N	2014-08-26 20:07:23.412381+03
-5866	1653	2	\N	2014-08-26 20:07:31.899383+03
-5870	1657	2	\N	2014-08-26 20:13:28.887297+03
-5873	1660	2	\N	2014-08-31 16:37:37.888486+03
-5919	1714	2	\N	2014-09-14 13:27:15.677766+03
-5926	1721	2	\N	2014-09-14 14:49:51.512979+03
-5967	1764	2	\N	2014-09-14 21:51:09.963908+03
-5968	1766	2	\N	2014-09-28 17:08:27.946698+03
-5971	1769	2	\N	2014-10-01 20:37:18.107894+03
-5972	1771	2	\N	2014-10-01 21:39:17.299667+03
-5973	1773	2	\N	2014-10-01 22:04:03.074823+03
-5974	1774	2	\N	2014-10-01 22:17:44.949656+03
-5977	1777	2	\N	2014-10-03 20:35:01.628264+03
-5978	1778	2	\N	2014-10-04 21:45:17.702702+03
-5980	1780	2	\N	2014-10-05 12:49:28.270538+03
-5982	1797	2	\N	2014-10-05 21:08:02.025119+03
-5983	1798	2	\N	2014-10-05 22:07:40.176836+03
-5984	1799	2	\N	2014-10-09 20:49:57.476724+03
-5985	1800	2	\N	2014-10-09 21:44:48.304991+03
-5986	1801	2	\N	2014-10-09 21:45:57.042916+03
-5987	1802	2	\N	2014-10-09 21:51:36.274928+03
-5988	1797	2	\N	2014-10-09 21:58:44.274487+03
-5989	1803	2	\N	2014-10-10 21:20:08.467997+03
-5990	1804	2	\N	2014-10-10 21:48:32.795064+03
-5991	1797	2	\N	2014-10-10 21:48:40.224687+03
-5994	1797	2	\N	2014-10-10 22:43:03.886027+03
-5995	1807	2	\N	2014-10-12 12:18:58.609492+03
-5996	1419	2	\N	2014-10-12 12:21:41.297126+03
-5999	1419	2	\N	2014-10-12 14:03:13.921521+03
-6000	1419	2	\N	2014-10-12 14:03:56.458732+03
-6002	1797	2	\N	2014-10-12 14:08:19.225786+03
-6003	1797	2	\N	2014-10-12 14:08:29.322661+03
-6005	1797	2	\N	2014-10-12 14:09:47.667654+03
-6006	1797	2	\N	2014-10-12 14:10:15.511498+03
-6008	894	2	\N	2014-10-12 14:15:30.839116+03
-6010	894	2	\N	2014-10-12 14:15:50.178579+03
-6011	894	2	\N	2014-10-12 14:16:00.712168+03
-6014	1507	2	\N	2014-10-12 14:21:53.792753+03
-6015	1507	2	\N	2014-10-12 14:22:06.118134+03
-6016	1439	2	\N	2014-10-12 14:22:17.008412+03
-6017	1438	2	\N	2014-10-12 14:22:21.965321+03
-6020	1780	2	\N	2014-10-12 14:25:19.014258+03
-6021	1780	2	\N	2014-10-12 14:25:28.403238+03
-6022	1780	2	\N	2014-10-12 14:25:37.930302+03
-6025	1413	2	\N	2014-10-12 14:31:06.237149+03
-6026	1413	2	\N	2014-10-12 14:31:16.507549+03
-6029	1415	2	\N	2014-10-12 14:34:22.672887+03
-6030	1415	2	\N	2014-10-12 14:34:32.05391+03
-6043	1657	2	\N	2014-10-12 15:41:58.778177+03
-6045	1657	2	\N	2014-10-12 15:42:13.36551+03
-6046	1657	2	\N	2014-10-12 15:42:24.726059+03
-6050	1653	2	\N	2014-10-12 16:27:20.425954+03
-6051	1653	2	\N	2014-10-12 16:27:45.783221+03
-6053	1283	2	\N	2014-10-12 16:28:08.925372+03
-6054	1283	2	\N	2014-10-12 16:28:17.376186+03
-6055	1833	2	\N	2014-10-12 16:29:10.045595+03
-6056	784	2	\N	2014-10-12 16:29:11.936722+03
-6066	998	2	\N	2014-10-18 11:46:31.67705+03
-6075	1657	2	\N	2014-10-18 23:25:55.139592+03
-6076	1657	2	\N	2014-10-18 23:26:04.397861+03
-6077	1839	2	\N	2014-10-18 23:26:44.642232+03
-6078	1634	2	\N	2014-10-18 23:26:52.975425+03
-6079	1598	2	\N	2014-10-18 23:27:05.648811+03
-6080	1502	2	\N	2014-10-18 23:27:11.743763+03
-6081	1503	2	\N	2014-10-18 23:27:18.622533+03
-6082	1440	2	\N	2014-10-18 23:27:25.765119+03
-6083	1442	2	\N	2014-10-18 23:27:32.509568+03
-6084	1840	2	\N	2014-10-18 23:35:01.43267+03
-6114	1598	2	\N	2014-10-25 20:24:45.191774+03
-6115	1840	2	\N	2014-10-25 20:25:16.419372+03
-6116	1839	2	\N	2014-10-25 20:25:25.421645+03
-6117	1657	2	\N	2014-10-25 20:25:34.041679+03
-6118	1634	2	\N	2014-10-25 20:25:41.778509+03
-6119	1598	2	\N	2014-10-25 20:25:49.974159+03
-6120	1503	2	\N	2014-10-25 20:25:56.790041+03
-6121	1502	2	\N	2014-10-25 20:26:11.552957+03
-6122	1487	2	\N	2014-10-25 20:26:20.033323+03
-6123	1442	2	\N	2014-10-25 20:26:26.124436+03
-6124	1440	2	\N	2014-10-25 20:26:33.450119+03
-6125	1660	2	\N	2014-10-25 20:27:51.453322+03
-6126	1639	2	\N	2014-10-25 20:27:59.032748+03
-6127	1607	2	\N	2014-10-25 20:28:26.48561+03
-6128	1547	2	\N	2014-10-25 20:31:18.593123+03
-6129	1546	2	\N	2014-10-25 20:31:27.322575+03
-6130	1509	2	\N	2014-10-25 20:31:34.596003+03
-6131	1500	2	\N	2014-10-25 20:31:41.235636+03
-6132	1485	2	\N	2014-10-25 20:31:48.295128+03
-6133	1448	2	\N	2014-10-25 20:31:55.364673+03
-6134	1447	2	\N	2014-10-25 20:32:03.232605+03
-6135	864	2	\N	2014-10-25 22:27:41.085522+03
-6136	900	2	\N	2014-10-25 22:27:48.659618+03
-6137	780	2	\N	2014-10-25 22:27:56.462817+03
-6138	837	2	\N	2014-10-25 22:28:02.931936+03
-6139	1394	2	\N	2014-10-25 22:28:08.943421+03
-6140	873	2	\N	2014-10-25 22:28:16.618586+03
-6141	778	2	\N	2014-10-25 22:28:22.956578+03
-6142	1659	2	\N	2014-10-25 22:39:28.23436+03
-6144	1849	2	\N	2014-10-25 23:00:37.016264+03
-6145	1852	2	\N	2014-10-28 19:57:41.751563+02
-6146	1853	2	\N	2014-10-28 20:23:48.907733+02
-6147	1854	2	\N	2014-10-28 20:24:58.380434+02
-6148	1855	2	\N	2014-10-28 20:25:08.681569+02
-6151	1859	2	\N	2014-10-29 12:48:22.905378+02
-6152	1860	2	\N	2014-10-30 22:03:33.988542+02
-6157	1865	2	\N	2014-11-03 21:33:49.462196+02
-6158	1866	2	\N	2014-11-03 21:38:54.729983+02
-6159	1867	2	\N	2014-11-03 21:39:31.824693+02
-6160	1868	2	\N	2014-11-03 21:40:02.647787+02
-6161	1869	2	\N	2014-11-05 21:10:08.261088+02
-6162	1870	2	\N	2014-11-05 21:10:38.427296+02
-6164	1872	2	\N	2014-11-08 19:05:48.520641+02
-6165	1868	2	\N	2014-11-08 19:07:32.928999+02
-6166	1868	2	\N	2014-11-08 19:07:58.653299+02
-6167	1873	2	\N	2014-11-09 14:14:33.279838+02
-6168	1433	2	\N	2014-11-09 14:15:02.053975+02
-6170	1875	2	\N	2014-11-09 20:43:57.157494+02
-6171	1876	2	\N	2014-11-09 20:50:09.776581+02
-6172	1876	2	\N	2014-11-09 21:46:07.106741+02
-6173	1876	2	\N	2014-11-09 21:46:46.766703+02
-6174	1876	2	\N	2014-11-12 18:42:47.24628+02
-6175	1876	2	\N	2014-11-12 18:43:00.917409+02
-6176	1876	2	\N	2014-11-12 18:43:51.052257+02
-6177	1876	2	\N	2014-11-12 18:49:19.486465+02
-6178	1876	2	\N	2014-11-12 18:49:50.992411+02
-6182	1880	2	\N	2014-11-12 18:58:13.464317+02
-6183	1881	2	\N	2014-11-12 18:58:13.464317+02
-6184	1876	2	\N	2014-11-12 19:19:20.155903+02
-6185	1880	2	\N	2014-11-12 19:20:04.488842+02
-6186	1882	2	\N	2014-11-12 19:21:49.754499+02
-6187	1882	2	\N	2014-11-12 20:48:55.295948+02
-6188	1876	2	\N	2014-11-13 18:36:19.360925+02
-6189	1876	2	\N	2014-11-13 18:36:40.275356+02
-6190	1876	2	\N	2014-11-13 18:36:53.848561+02
-6191	1876	2	\N	2014-11-13 18:37:04.828162+02
-6192	1876	2	\N	2014-11-13 18:44:14.058824+02
-6193	1880	2	\N	2014-11-14 13:23:46.652293+02
-6196	1884	2	\N	2014-11-15 12:46:51.68956+02
-6197	1885	2	\N	2014-11-15 12:55:58.618287+02
-6200	1647	2	\N	2014-11-15 19:54:17.589811+02
-6201	1647	2	\N	2014-11-15 19:57:05.325517+02
-6202	1587	2	\N	2014-11-15 19:57:11.689531+02
-6204	1888	2	\N	2014-11-15 20:54:18.530252+02
-6209	1893	2	\N	2014-11-15 21:10:00.852505+02
-6210	1894	2	\N	2014-11-16 11:36:20.360008+02
-6211	1895	2	\N	2014-11-16 11:38:31.304748+02
-6212	1896	2	\N	2014-11-16 11:52:22.859107+02
-6214	1896	2	\N	2014-11-16 17:28:25.282664+02
-6215	1898	2	\N	2014-11-18 19:36:00.947451+02
-6217	1900	2	\N	2014-11-18 19:59:41.794255+02
-6218	1901	2	\N	2014-11-18 20:00:50.313385+02
-6219	1902	2	\N	2014-11-18 20:05:55.399398+02
-6220	1903	2	\N	2014-11-18 20:06:23.495804+02
-6221	1225	2	\N	2014-11-20 20:55:40.655878+02
-6222	1904	2	\N	2014-11-21 20:47:35.513987+02
-6223	1434	2	\N	2014-11-21 20:48:05.829054+02
-6224	1571	2	\N	2014-11-21 20:48:27.000088+02
-6225	1885	2	\N	2014-11-21 20:48:44.475673+02
-6226	1905	2	\N	2014-11-21 21:17:50.885382+02
-6227	1436	2	\N	2014-11-21 21:19:06.360097+02
-6228	1798	2	\N	2014-11-21 21:19:19.899746+02
-6229	1425	2	\N	2014-11-21 21:19:42.772209+02
-6230	802	2	\N	2014-11-21 21:20:02.792752+02
-6231	1906	2	\N	2014-11-21 21:20:18.443474+02
-6232	802	2	\N	2014-11-21 21:20:33.430037+02
-6233	1395	2	\N	2014-11-21 21:20:55.244524+02
-6234	1907	2	\N	2014-11-21 21:25:23.260941+02
-6235	879	2	\N	2014-11-21 21:26:01.060638+02
-6236	1089	2	\N	2014-11-21 21:34:19.776611+02
-6237	874	2	\N	2014-11-21 21:34:45.906696+02
-6238	1080	2	\N	2014-11-21 21:35:09.652432+02
-6239	1908	2	\N	2014-11-21 21:35:29.643627+02
-6240	910	2	\N	2014-11-21 21:36:10.21074+02
-6241	1080	2	\N	2014-11-21 21:36:26.556412+02
-6242	911	2	\N	2014-11-21 21:36:37.408083+02
-6243	956	2	\N	2014-11-21 21:36:56.333028+02
-6244	955	2	\N	2014-11-21 21:37:09.845857+02
-6246	1896	2	\N	2014-11-21 21:43:10.139464+02
-6247	1910	2	\N	2014-11-22 17:58:53.151533+02
-6248	1911	2	\N	2014-11-22 17:58:53.151533+02
-6251	1903	2	\N	2014-11-23 17:42:18.707964+02
-6253	1903	2	\N	2014-11-23 18:15:04.669498+02
-6254	1913	2	\N	2014-11-23 18:22:07.34092+02
-6255	1915	2	\N	2014-11-23 18:25:34.975922+02
-6257	1917	2	\N	2014-11-23 18:40:26.695236+02
-6258	1918	2	\N	2014-11-23 18:40:42.249218+02
-6259	1919	2	\N	2014-11-27 21:56:12.900683+02
-6265	1906	2	\N	2014-11-28 22:02:27.025943+02
-6266	1908	2	\N	2014-11-28 22:03:25.613427+02
-6267	1919	2	\N	2014-11-30 11:21:31.130821+02
-6270	1368	2	\N	2014-11-30 18:22:02.736241+02
-6271	1922	2	\N	2014-12-07 14:34:35.538855+02
-6276	1924	2	\N	2014-12-07 21:40:24.739542+02
-6277	1925	2	\N	2014-12-07 21:41:09.94037+02
-6278	1926	2	\N	2014-12-07 21:41:37.63455+02
-6279	1471	2	\N	2014-12-07 21:41:39.584636+02
-6280	1927	2	\N	2014-12-07 21:42:12.893528+02
-6281	1471	2	\N	2014-12-07 21:42:14.781639+02
-6285	1930	2	\N	2014-12-08 21:43:55.101305+02
-6286	1869	2	\N	2014-12-08 21:46:09.685953+02
-6287	1931	2	\N	2014-12-08 21:52:00.685674+02
-6288	1930	2	\N	2014-12-08 21:53:17.580512+02
-6289	1932	2	\N	2014-12-11 22:45:01.994257+02
-6290	1933	2	\N	2014-12-11 22:46:28.273472+02
-6291	1934	2	\N	2014-12-11 22:50:30.21811+02
-6293	1935	2	\N	2014-12-11 22:53:00.765244+02
-6295	1935	2	\N	2014-12-11 22:53:42.569877+02
-6297	1936	2	\N	2014-12-13 21:35:47.599877+02
-6298	1939	2	\N	2014-12-13 21:37:02.820409+02
-6299	1939	2	\N	2014-12-13 21:37:54.352906+02
-6300	1936	2	\N	2014-12-13 21:55:38.627009+02
-6301	1933	2	\N	2014-12-13 21:55:57.253566+02
-6302	1933	2	\N	2014-12-13 21:57:41.570228+02
-6303	1933	2	\N	2014-12-13 22:01:39.804954+02
-6304	1936	2	\N	2014-12-13 22:01:54.801501+02
-6305	1936	2	\N	2014-12-13 22:03:25.347584+02
-6306	1933	2	\N	2014-12-13 22:03:37.415197+02
-6307	1939	2	\N	2014-12-13 22:03:52.016284+02
-6308	1936	2	\N	2014-12-13 22:10:55.202627+02
-6309	1936	2	\N	2014-12-13 22:11:45.388631+02
-6310	1936	2	\N	2014-12-14 11:10:18.568487+02
-6311	1936	2	\N	2014-12-14 11:10:54.616091+02
-6312	1936	2	\N	2014-12-14 11:12:20.116844+02
-6313	1933	2	\N	2014-12-14 11:12:44.366886+02
-6314	1936	2	\N	2014-12-14 11:14:36.987112+02
-6315	1933	2	\N	2014-12-14 11:14:46.937016+02
-6316	1940	2	\N	2014-12-14 11:16:18.397912+02
-6317	1941	2	\N	2014-12-14 17:51:15.587939+02
-6318	1940	2	\N	2014-12-14 19:37:37.036036+02
-6319	1936	2	\N	2014-12-14 19:37:54.381361+02
-6320	1940	2	\N	2014-12-14 19:41:49.794566+02
-6321	1940	2	\N	2014-12-14 19:44:37.781977+02
-6322	1940	2	\N	2014-12-14 19:48:08.98232+02
-6323	1940	2	\N	2014-12-14 19:50:28.583831+02
-6324	1940	2	\N	2014-12-14 20:30:31.46273+02
-6325	1936	2	\N	2014-12-14 20:30:45.990313+02
-6326	1940	2	\N	2014-12-14 20:33:08.50634+02
-6327	1940	2	\N	2014-12-14 20:34:47.73587+02
-6328	1940	2	\N	2014-12-14 20:37:41.082704+02
-6329	1653	2	\N	2014-12-19 21:31:43.967187+02
-6330	1653	2	\N	2014-12-19 21:37:31.746728+02
-6331	1951	2	\N	2014-12-19 21:38:17.300837+02
-6332	725	2	\N	2014-12-19 21:38:20.726452+02
-6333	1952	2	\N	2014-12-19 21:42:56.792366+02
-6334	1870	2	\N	2014-12-19 21:43:03.803839+02
-6335	1906	2	\N	2014-12-20 16:10:55.310323+02
-6338	1869	2	\N	2014-12-20 17:01:25.535753+02
-6339	1869	2	\N	2014-12-20 17:03:12.810766+02
-6340	1869	2	\N	2014-12-20 17:03:22.550854+02
-6341	1628	2	\N	2014-12-20 17:05:00.135486+02
-6342	1869	2	\N	2014-12-20 17:05:08.130568+02
-6343	1626	2	\N	2014-12-20 17:50:11.179188+02
-6344	1615	2	\N	2014-12-20 17:50:33.508978+02
-6345	1954	2	\N	2014-12-20 18:18:17.329483+02
-6346	1954	2	\N	2014-12-20 18:18:27.668631+02
-6349	1225	2	\N	2014-12-21 12:57:50.837529+02
-6350	1433	2	\N	2014-12-21 12:57:59.036844+02
-6351	1954	2	\N	2014-12-21 13:04:30.43023+02
-6355	1956	2	\N	2014-12-21 14:58:01.627945+02
-6356	1383	2	\N	2014-12-21 14:58:04.4436+02
-6357	1383	2	\N	2014-12-21 14:58:18.134114+02
-6387	1958	2	\N	2014-12-21 19:20:00.336409+02
-6388	1958	2	\N	2014-12-21 19:40:10.412709+02
-6389	1958	2	\N	2014-12-21 19:43:18.014602+02
-6393	1962	2	\N	2014-12-24 21:32:53.618984+02
-6400	1964	2	\N	2014-12-25 21:05:49.345482+02
-6411	1317	2	\N	2014-12-27 14:48:10.519499+02
-6412	1840	2	\N	2014-12-27 16:05:27.016889+02
-6413	1840	2	\N	2014-12-27 16:32:05.180181+02
-6414	1840	2	\N	2014-12-27 16:45:52.831401+02
-6415	1966	2	\N	2014-12-27 19:34:56.371248+02
-6418	1966	2	\N	2014-12-31 19:10:29.989911+02
-6420	1968	2	\N	2015-01-03 12:32:10.846571+02
-6422	1970	2	\N	2015-01-03 12:35:21.670372+02
-6423	1971	2	\N	2015-01-04 12:45:51.571627+02
-6424	1840	2	\N	2015-01-04 12:45:53.947837+02
-6425	1971	2	\N	2015-01-04 12:46:35.715575+02
-6426	1971	2	\N	2015-01-04 14:05:54.230775+02
-6428	1975	2	\N	2015-01-04 14:47:53.838979+02
-6430	1977	2	\N	2015-01-04 16:44:50.635763+02
-6431	1975	2	\N	2015-01-04 16:54:32.711408+02
-6432	1975	2	\N	2015-01-04 17:11:52.039507+02
-6433	1975	2	\N	2015-01-04 17:31:46.570967+02
-6434	1975	2	\N	2015-01-07 14:12:48.405815+02
-6435	1975	2	\N	2015-01-07 14:22:19.046581+02
-6436	1978	2	\N	2015-01-07 18:00:22.111119+02
-6437	1979	2	\N	2015-01-07 18:22:39.961593+02
-6438	1980	2	\N	2015-01-07 18:22:48.978415+02
-6439	1981	2	\N	2015-01-07 18:23:19.524712+02
-6440	3	2	\N	2015-01-07 18:23:30.384627+02
-6441	1982	2	\N	2015-01-07 18:30:42.662112+02
-6442	3	2	\N	2015-01-07 18:30:49.411934+02
-6443	3	2	\N	2015-01-07 18:31:24.902432+02
-6444	784	2	\N	2015-01-08 13:21:17.321066+02
-6445	784	2	\N	2015-01-08 13:27:01.529898+02
-6446	784	2	\N	2015-01-08 14:19:17.153858+02
-6447	784	2	\N	2015-01-08 14:20:23.527059+02
-6448	784	2	\N	2015-01-09 10:59:22.101268+02
-6453	1983	2	\N	2015-01-13 17:00:57.932019+02
-6454	1985	2	\N	2015-01-13 17:03:06.725248+02
-6455	1985	2	\N	2015-01-14 21:32:00.651438+02
-6457	1987	2	\N	2015-01-15 20:30:02.464255+02
-6458	1988	2	\N	2015-01-15 21:27:50.402917+02
-6459	1989	2	\N	2015-01-17 15:06:55.170629+02
-6460	1990	2	\N	2015-01-17 19:50:58.298272+02
-6461	1991	2	\N	2015-01-17 19:50:58.298272+02
-6462	1992	2	\N	2015-01-17 19:51:20.956564+02
-6463	1990	2	\N	2015-01-17 21:28:18.900625+02
-6464	1993	2	\N	2015-01-17 21:28:36.972519+02
-6465	1994	2	\N	2015-01-17 21:50:01.04394+02
-6466	1995	2	\N	2015-01-17 21:50:14.61181+02
-6467	1996	2	\N	2015-01-17 21:54:58.910426+02
-6468	1997	2	\N	2015-01-17 21:54:58.910426+02
-6471	2000	2	\N	2015-01-17 21:56:46.645017+02
-6472	2001	2	\N	2015-01-17 21:57:17.28338+02
-6473	2002	2	\N	2015-01-17 21:57:17.28338+02
-6476	2005	2	\N	2015-01-17 22:00:19.139836+02
-6477	2006	2	\N	2015-01-17 22:00:39.986496+02
-6478	2007	2	\N	2015-01-17 22:00:39.986496+02
-6479	2000	2	\N	2015-01-17 22:01:41.277766+02
-6480	2009	2	\N	2015-01-21 21:44:18.418746+02
-6481	1985	2	\N	2015-02-01 13:03:47.123323+02
-6482	2009	2	\N	2015-02-01 13:05:09.626214+02
-6483	2011	2	\N	2015-02-01 13:23:15.549518+02
-6484	1004	2	\N	2015-02-01 13:23:17.930893+02
-6485	2012	2	\N	2015-02-01 13:51:03.67962+02
-6486	1470	2	\N	2015-02-01 13:51:06.125989+02
-6487	2013	2	\N	2015-02-01 15:08:04.506074+02
-6488	2014	2	\N	2015-02-01 15:08:25.548868+02
-6489	2015	2	\N	2015-02-01 15:09:02.223788+02
-6490	2016	2	\N	2015-02-01 15:09:49.640295+02
-6491	2017	2	\N	2015-02-01 15:09:55.959842+02
-6492	2018	2	\N	2015-02-01 15:12:43.612773+02
-6493	2019	2	\N	2015-02-01 15:13:13.911124+02
-6494	2020	2	\N	2015-02-01 15:13:27.313034+02
-6497	2023	2	\N	2015-02-01 15:16:10.834689+02
-6498	2024	2	\N	2015-02-01 15:16:30.308954+02
-6501	2026	2	\N	2015-02-01 15:27:12.501194+02
-6502	2026	2	\N	2015-02-01 15:27:30.084405+02
-6503	2027	2	\N	2015-02-01 15:27:55.689729+02
-6504	2028	2	\N	2015-02-01 15:27:55.689729+02
-6505	2029	2	\N	2015-02-01 19:41:31.921287+02
-6506	2030	2	\N	2015-02-01 19:49:07.587188+02
-6507	2031	2	\N	2015-02-01 19:49:18.380376+02
-6508	2032	2	\N	2015-02-01 19:51:03.621123+02
-6509	1004	2	\N	2015-02-01 19:51:06.683043+02
-6515	2038	2	\N	2015-02-01 19:53:59.085718+02
-6516	2039	2	\N	2015-02-01 19:53:59.085718+02
-6521	2044	2	\N	2015-02-01 19:54:52.686809+02
-6522	2045	2	\N	2015-02-01 19:54:52.686809+02
-6523	2046	2	\N	2015-02-01 19:54:52.686809+02
-6524	2047	2	\N	2015-02-01 19:54:52.686809+02
-6525	2048	2	\N	2015-02-03 20:05:38.797054+02
-6526	2048	2	\N	2015-02-03 20:06:16.781057+02
-6528	2049	2	\N	2015-02-03 21:27:11.659126+02
-6529	2048	2	\N	2015-02-03 21:27:36.200475+02
-6530	2050	2	\N	2015-02-04 21:04:02.527314+02
-6531	2051	2	\N	2015-02-04 21:04:04.474427+02
-6532	2051	2	\N	2015-02-04 21:11:28.094987+02
-6533	2052	2	\N	2015-02-04 21:11:39.281593+02
-6534	2051	2	\N	2015-02-23 21:04:13.639992+02
-6535	1648	2	\N	2015-02-24 14:58:15.754816+02
-6537	2054	2	\N	2015-02-24 21:04:26.838046+02
-6539	2054	2	\N	2015-02-24 21:06:08.284296+02
-6541	2054	2	\N	2015-02-24 21:06:27.830735+02
-6542	2055	2	\N	2015-03-03 16:25:23.003263+02
-6553	2051	2	\N	2015-03-05 21:22:31.156271+02
-6554	2052	2	\N	2015-03-05 21:22:34.187754+02
-6555	2049	2	\N	2015-03-07 13:59:54.391614+02
-6556	2049	2	\N	2015-03-07 14:00:01.858793+02
-6557	2049	2	\N	2015-03-07 14:00:08.905813+02
-6558	2049	2	\N	2015-03-07 17:41:13.176137+02
-6559	2049	2	\N	2015-03-07 17:41:24.454712+02
-6560	2016	2	\N	2015-03-07 19:11:45.990005+02
-6561	1971	2	\N	2015-03-07 20:39:22.05432+02
-6562	1939	2	\N	2015-03-07 20:41:30.911568+02
-6563	1964	2	\N	2015-03-07 20:41:40.386597+02
-6564	1962	2	\N	2015-03-07 20:41:47.24255+02
-6565	2009	2	\N	2015-03-07 20:41:57.590912+02
-6566	1958	2	\N	2015-03-07 20:42:08.257141+02
-6567	2062	2	\N	2015-03-07 20:44:22.388688+02
-6568	1958	2	\N	2015-03-07 20:44:57.143369+02
-6569	1922	2	\N	2015-03-07 21:16:33.311167+02
-6570	1930	2	\N	2015-03-07 21:18:30.204883+02
-6571	1980	2	\N	2015-03-07 21:18:36.892234+02
-6572	1930	2	\N	2015-03-07 21:21:01.745845+02
-6573	1982	2	\N	2015-03-07 21:45:35.899441+02
-6574	1983	2	\N	2015-03-07 21:45:46.115364+02
-6575	1985	2	\N	2015-03-07 21:45:53.837217+02
-6576	2016	2	\N	2015-03-07 21:46:03.965785+02
-6577	1940	2	\N	2015-03-07 21:46:13.798132+02
-6578	1932	2	\N	2015-03-07 21:46:22.868946+02
-6579	1934	2	\N	2015-03-07 21:46:33.42948+02
-6580	1935	2	\N	2015-03-07 21:46:42.582075+02
-6581	1936	2	\N	2015-03-07 21:46:53.561952+02
-6582	1933	2	\N	2015-03-07 21:47:06.74156+02
-6584	1922	2	\N	2015-03-08 18:02:14.423833+02
-6585	1922	2	\N	2015-03-08 18:02:24.288542+02
-6586	1989	2	\N	2015-03-08 18:07:00.091644+02
-6587	1922	2	\N	2015-03-08 18:17:03.971743+02
-6588	1922	2	\N	2015-03-08 18:29:12.5349+02
-6589	2063	2	\N	2015-03-08 18:41:45.468589+02
-6590	1989	2	\N	2015-03-08 18:41:51.822924+02
-6592	2065	2	\N	2015-03-09 14:02:38.899688+02
-6593	2066	2	\N	2015-03-09 17:16:22.759831+02
-6594	2068	2	\N	2015-03-09 19:28:40.834898+02
-6595	1980	2	\N	2015-03-09 19:37:29.594475+02
-6596	1389	2	\N	2015-03-15 19:00:11.360402+02
-6597	1389	2	\N	2015-03-15 19:07:00.022851+02
-6598	1389	2	\N	2015-03-15 19:08:22.540227+02
-6599	2070	2	\N	2015-03-21 15:11:50.495946+02
-6600	1989	2	\N	2015-03-21 15:11:59.182752+02
-6603	2052	2	\N	2015-03-21 16:50:40.821135+02
-6605	2052	2	\N	2015-03-21 16:52:47.683727+02
-6606	2075	2	\N	2015-03-21 17:05:47.83578+02
-6607	2075	2	\N	2015-03-21 17:06:12.331454+02
-6608	2052	2	\N	2015-03-21 17:06:35.32059+02
-6609	2070	2	\N	2015-03-21 17:48:31.664941+02
-6610	2077	2	\N	2015-03-21 17:49:14.645342+02
-6618	2052	2	\N	2015-03-21 18:16:06.930298+02
-6621	2052	2	\N	2015-03-21 18:19:16.455929+02
-6622	2087	2	\N	2015-03-21 18:20:19.713186+02
-6623	2052	2	\N	2015-03-21 18:20:29.187736+02
-6624	2052	2	\N	2015-03-21 19:28:39.349206+02
-6625	2052	2	\N	2015-03-21 19:30:14.844869+02
-6626	2052	2	\N	2015-03-21 19:33:54.902921+02
-6627	2052	2	\N	2015-03-21 19:34:11.317898+02
-6628	2052	2	\N	2015-03-21 19:35:55.581037+02
-6629	2052	2	\N	2015-03-21 19:36:06.902031+02
-6630	2052	2	\N	2015-03-21 19:36:15.834648+02
-6631	2052	2	\N	2015-03-21 19:36:28.227499+02
-6632	2052	2	\N	2015-03-21 19:36:44.271289+02
-6633	2088	2	\N	2015-03-21 19:36:44.271289+02
-6634	2089	2	\N	2015-03-21 19:38:07.835672+02
-6635	2090	2	\N	2015-03-21 19:38:10.203402+02
-6637	2052	2	\N	2015-03-21 19:40:18.868487+02
-6638	2052	2	\N	2015-03-21 19:41:03.761402+02
-6639	2052	2	\N	2015-03-21 19:42:48.725752+02
-6640	2052	2	\N	2015-03-21 19:43:52.346215+02
-6641	2092	2	\N	2015-03-21 20:11:35.939948+02
-6642	2052	2	\N	2015-03-21 20:11:42.394011+02
-6643	2052	2	\N	2015-03-21 20:12:01.524624+02
-6646	2052	2	\N	2015-03-21 21:14:06.180767+02
-6647	2095	2	\N	2015-03-21 22:03:40.435063+02
-6648	2051	2	\N	2015-03-21 22:03:42.699321+02
-6649	2088	2	\N	2015-03-21 22:03:45.19164+02
-6650	2052	2	\N	2015-03-21 22:12:59.222848+02
-6651	971	2	\N	2015-03-22 16:55:09.922468+02
-6652	2096	2	\N	2015-03-22 17:22:28.394236+02
-6653	970	2	\N	2015-03-22 17:22:30.31308+02
-6654	971	2	\N	2015-03-22 17:32:58.675826+02
-6655	2097	2	\N	2015-03-22 17:35:36.969555+02
-6656	2052	2	\N	2015-03-22 17:35:38.710629+02
-6657	2052	2	\N	2015-03-22 17:35:54.667572+02
-6658	2052	2	\N	2015-03-22 17:36:02.394493+02
-6659	1413	2	\N	2015-03-22 21:10:23.96026+02
-6660	2098	2	\N	2015-03-22 21:12:12.040889+02
-6661	1413	2	\N	2015-03-22 21:12:14.574907+02
-6662	953	2	\N	2015-03-23 10:52:07.126828+02
-6663	955	2	\N	2015-03-23 10:52:46.434534+02
-6664	955	2	\N	2015-03-23 10:53:07.107505+02
-6665	971	2	\N	2015-03-23 11:17:09.549645+02
-6666	971	2	\N	2015-03-23 11:17:14.786132+02
-6667	971	2	\N	2015-03-23 22:30:47.611278+02
-6668	2099	2	\N	2015-03-24 19:25:49.743645+02
-6669	2100	2	\N	2015-03-24 19:26:22.746874+02
-6670	2101	2	\N	2015-03-24 19:30:50.825716+02
-6671	1413	2	\N	2015-03-24 21:27:29.027714+02
-6672	1413	2	\N	2015-03-24 21:27:56.025596+02
-6673	2104	2	\N	2015-03-25 22:08:36.018637+02
-6674	2105	2	\N	2015-03-25 22:09:11.121353+02
-6675	2106	2	\N	2015-03-25 22:10:32.26983+02
-6676	2107	2	\N	2015-03-27 21:02:27.365736+02
-6677	1413	2	\N	2015-03-27 22:11:48.664734+02
-6678	1318	2	\N	2015-03-27 22:11:57.175441+02
-6679	2108	2	\N	2015-03-27 22:14:09.702895+02
-6680	1413	2	\N	2015-03-27 22:14:23.177174+02
-6681	1975	2	\N	2015-03-29 14:54:09.090695+03
-6682	1975	2	\N	2015-03-29 14:56:05.558074+03
-6683	2054	2	\N	2015-03-29 18:10:37.298528+03
-6684	2054	2	\N	2015-03-29 18:10:44.494853+03
-6685	2054	2	\N	2015-03-29 18:11:59.351954+03
-6686	894	2	\N	2015-03-29 18:12:33.345883+03
-6687	2108	2	\N	2015-03-29 18:41:14.962865+03
-6688	2108	2	\N	2015-03-29 18:41:28.932911+03
-6689	2108	2	\N	2015-03-29 18:41:35.361837+03
-6693	1578	2	\N	2015-03-29 19:28:18.094577+03
-6694	1563	2	\N	2015-03-29 19:28:26.306719+03
-6695	1560	2	\N	2015-03-29 19:28:31.032916+03
-6696	1649	2	\N	2015-03-29 20:30:21.118741+03
-6698	2111	2	\N	2015-03-29 20:32:08.188477+03
-6699	918	2	\N	2015-03-29 20:45:02.042426+03
-6700	918	2	\N	2015-03-29 20:45:08.391579+03
-6701	917	2	\N	2015-03-29 20:45:13.080299+03
-6702	916	2	\N	2015-03-29 20:45:17.094049+03
-6703	952	2	\N	2015-03-29 20:51:29.823177+03
-6705	988	2	\N	2015-03-29 20:57:38.470567+03
-6707	971	2	\N	2015-03-29 21:04:32.587955+03
-6709	1647	2	\N	2015-03-29 21:11:13.101083+03
-6710	2115	2	\N	2015-03-29 21:11:20.771189+03
-6711	1648	2	\N	2015-03-29 21:19:19.348961+03
-6713	1646	2	\N	2015-03-29 21:25:36.400114+03
-6715	1419	2	\N	2015-03-31 18:55:34.756779+03
-6716	1415	2	\N	2015-03-31 18:55:54.50919+03
-6718	1507	2	\N	2015-03-31 19:11:10.805316+03
-6719	1507	2	\N	2015-03-31 19:11:17.000092+03
-6720	1507	2	\N	2015-03-31 19:11:23.716877+03
-6721	1898	2	\N	2015-03-31 19:19:08.662529+03
-6722	1898	2	\N	2015-03-31 19:19:13.979595+03
-6723	1898	2	\N	2015-03-31 19:19:19.541915+03
-6724	2119	2	\N	2015-03-31 19:31:32.255315+03
-6725	1419	2	\N	2015-03-31 19:31:35.171043+03
-6726	2120	2	\N	2015-03-31 21:42:30.209371+03
-6727	2107	2	\N	2015-04-06 22:18:27.344977+03
-6728	2054	2	\N	2015-04-22 09:31:23.533867+03
-6729	2126	2	\N	2015-04-22 10:21:50.083529+03
-6730	2126	2	\N	2015-04-22 10:34:35.83663+03
-6731	2127	2	\N	2015-04-22 15:08:30.934237+03
-6732	2128	2	\N	2015-04-22 15:09:24.597951+03
-6733	2129	2	\N	2015-04-22 15:30:21.099029+03
-6734	2130	2	\N	2015-04-22 15:30:28.848383+03
-6735	2131	2	\N	2015-04-22 15:33:06.666889+03
-6736	2126	2	\N	2015-04-22 15:33:09.520564+03
-6737	2132	2	\N	2015-04-22 15:34:13.439147+03
-6738	2126	2	\N	2015-04-22 15:34:14.494849+03
-6739	2126	2	\N	2015-04-22 15:34:41.240196+03
-6740	2130	2	\N	2015-04-24 21:16:26.897843+03
-6741	953	2	\N	2015-04-24 21:38:02.133997+03
-6742	955	2	\N	2015-04-24 21:39:08.574084+03
-6743	2108	2	\N	2015-04-25 13:14:21.858762+03
-6745	2135	2	\N	2015-04-25 16:39:24.611492+03
-6746	2128	2	\N	2015-04-25 16:59:29.339712+03
-6747	2136	2	\N	2015-04-25 16:59:52.412523+03
-6748	2137	2	\N	2015-04-25 21:29:39.820793+03
-6749	2138	2	\N	2015-04-25 21:29:47.819244+03
-6750	2139	2	\N	2015-04-25 21:29:55.72108+03
-6751	2144	2	\N	2015-04-26 00:17:08.072699+03
-6752	2145	2	\N	2015-04-26 00:17:08.072699+03
-6753	2146	2	\N	2015-04-26 00:22:46.640907+03
-6754	2147	2	\N	2015-04-26 00:22:46.640907+03
-6755	2148	2	\N	2015-04-26 00:26:59.761945+03
-6756	2149	2	\N	2015-04-26 00:26:59.761945+03
-6757	2150	2	\N	2015-04-26 00:30:11.687983+03
-6758	2151	2	\N	2015-04-26 00:30:11.687983+03
-6759	2152	2	\N	2015-04-26 00:36:42.355592+03
-6760	2153	2	\N	2015-04-26 00:36:42.355592+03
-6761	2154	2	\N	2015-04-26 00:44:52.209962+03
-6762	2155	2	\N	2015-04-26 00:44:52.209962+03
-6763	2156	2	\N	2015-04-26 09:56:13.81422+03
-6764	2157	2	\N	2015-04-26 09:56:13.81422+03
-6765	2158	2	\N	2015-04-26 10:00:13.021078+03
-6766	2159	2	\N	2015-04-26 10:00:13.021078+03
-6767	2160	2	\N	2015-04-26 10:09:07.981749+03
-6768	2161	2	\N	2015-04-26 10:09:07.981749+03
-6769	2162	2	\N	2015-04-26 10:11:20.869074+03
-6770	2163	2	\N	2015-04-26 10:11:20.869074+03
-6771	2164	2	\N	2015-04-26 10:23:35.980962+03
-6772	2165	2	\N	2015-04-26 10:23:35.980962+03
-6774	2167	2	\N	2015-04-26 10:30:42.474899+03
-6775	2168	2	\N	2015-04-26 10:30:42.474899+03
-6778	2171	2	\N	2015-04-26 10:38:49.924523+03
-6779	2172	2	\N	2015-04-26 10:41:15.682562+03
-6780	2173	2	\N	2015-04-26 10:41:15.682562+03
-6781	2174	2	\N	2015-04-26 10:51:18.425172+03
-6782	2175	2	\N	2015-04-26 10:51:18.425172+03
-6783	2176	2	\N	2015-04-26 10:54:26.243589+03
-6784	2177	2	\N	2015-04-26 10:54:26.243589+03
-6785	2178	2	\N	2015-04-26 10:57:26.669326+03
-6786	2179	2	\N	2015-04-26 10:57:26.669326+03
-6787	2180	2	\N	2015-04-26 11:08:04.739521+03
-6788	2181	2	\N	2015-04-26 11:08:04.739521+03
-6789	2182	2	\N	2015-04-26 11:13:10.975009+03
-6790	2183	2	\N	2015-04-26 11:13:10.975009+03
-6791	2184	2	\N	2015-04-26 13:03:25.416787+03
-6792	2185	2	\N	2015-04-26 13:03:25.416787+03
-6793	2186	2	\N	2015-04-26 13:42:49.969814+03
-6794	2187	2	\N	2015-04-26 14:04:42.384772+03
-6795	2188	2	\N	2015-04-26 14:04:42.384772+03
-6796	2189	2	\N	2015-04-26 14:05:26.994527+03
-6797	2190	2	\N	2015-04-26 14:05:26.994527+03
-6798	2186	2	\N	2015-04-26 14:05:29.313624+03
-6801	2197	2	\N	2015-05-03 13:21:34.120955+03
-6802	2197	2	\N	2015-05-03 13:23:12.828981+03
-6803	2197	2	\N	2015-05-03 13:34:38.831852+03
-6804	2197	2	\N	2015-05-03 13:40:51.674186+03
-6805	2199	2	\N	2015-05-03 23:18:19.876372+03
-6806	1780	2	\N	2015-05-03 23:18:33.103558+03
-6807	1368	2	\N	2015-05-04 19:21:58.460934+03
-6808	1368	2	\N	2015-05-04 19:22:20.533133+03
-6809	2200	2	\N	2015-05-04 20:57:01.637182+03
-6810	2201	2	\N	2015-05-04 20:58:33.565049+03
-6811	2203	2	\N	2015-05-04 21:30:33.485239+03
-6812	1003	2	\N	2015-05-08 21:15:22.303904+03
-6813	2205	2	\N	2015-05-08 22:38:40.1563+03
-6814	2206	2	\N	2015-05-08 22:40:57.101857+03
-6815	2207	2	\N	2015-05-08 22:43:00.228497+03
-6816	2208	2	\N	2015-05-08 22:43:46.205549+03
-6817	2209	2	\N	2015-05-09 15:04:04.437709+03
-6818	2210	2	\N	2015-05-09 15:18:42.295591+03
-6819	2211	2	\N	2015-05-09 15:20:41.04877+03
-6820	2212	2	\N	2015-05-09 15:21:16.54612+03
-6821	2213	2	\N	2015-05-09 15:21:20.750661+03
-6822	2214	2	\N	2015-05-09 15:27:46.304009+03
-6823	2215	2	\N	2015-05-09 15:27:52.157735+03
-6824	2216	2	\N	2015-05-09 15:32:20.738122+03
-6825	2216	2	\N	2015-05-09 15:34:43.153612+03
-6826	2216	2	\N	2015-05-09 15:35:37.080548+03
-6827	2216	2	\N	2015-05-09 15:36:20.491648+03
-6828	2216	2	\N	2015-05-09 15:36:28.290218+03
-6829	2217	2	\N	2015-05-09 16:10:30.715652+03
-6830	2218	2	\N	2015-05-09 16:40:29.294581+03
-6831	2216	2	\N	2015-05-09 16:40:47.688279+03
-6832	2219	2	\N	2015-05-09 16:52:43.81748+03
-6833	1550	2	\N	2015-05-09 16:53:04.04708+03
-6834	1008	2	\N	2015-05-09 16:53:15.905297+03
-6836	2218	2	\N	2015-05-09 16:56:24.612587+03
-6837	2221	2	\N	2015-05-09 16:58:37.060459+03
-6838	2216	2	\N	2015-05-09 17:04:04.921556+03
-6839	2216	2	\N	2015-05-09 17:04:48.531212+03
-6840	1563	2	\N	2015-05-09 19:32:44.822595+03
-6841	2222	2	\N	2015-05-09 19:43:25.178079+03
-6842	2215	2	\N	2015-05-09 20:07:16.539791+03
-6843	2216	2	\N	2015-05-09 20:07:46.078918+03
-6844	2223	2	\N	2015-05-09 20:08:53.78535+03
-6845	2224	2	\N	2015-05-09 20:09:23.379411+03
-6846	2225	2	\N	2015-05-09 20:09:44.887962+03
-6847	2226	2	\N	2015-05-09 20:17:22.088876+03
-6848	2227	2	\N	2015-05-09 20:29:08.971941+03
-6849	2228	2	\N	2015-05-09 20:29:24.701653+03
-6850	2229	2	\N	2015-05-09 20:29:40.419576+03
-6851	2224	2	\N	2015-05-09 20:29:49.729598+03
-6852	2230	2	\N	2015-05-09 20:30:09.233291+03
-6853	2231	2	\N	2015-05-09 20:30:23.623593+03
-6854	2232	2	\N	2015-05-09 20:30:35.560504+03
-6855	2233	2	\N	2015-05-09 20:30:51.356148+03
-6856	2234	2	\N	2015-05-09 20:31:09.312334+03
-6857	2235	2	\N	2015-05-09 20:31:21.029136+03
-6858	2236	2	\N	2015-05-09 20:31:43.127575+03
-6859	2237	2	\N	2015-05-09 20:31:57.326798+03
-6860	2238	2	\N	2015-05-09 20:32:20.746647+03
-6861	2239	2	\N	2015-05-09 20:32:35.107871+03
-6862	2240	2	\N	2015-05-09 20:32:50.419187+03
-6863	2241	2	\N	2015-05-09 20:33:01.999568+03
-6864	2242	2	\N	2015-05-09 20:33:16.190303+03
-6865	2236	2	\N	2015-05-09 20:54:08.857766+03
-6866	2216	2	\N	2015-05-09 21:04:14.03464+03
-6867	1578	2	\N	2015-05-09 21:16:42.718164+03
-6868	2243	2	\N	2015-05-10 13:44:27.494956+03
-6869	2244	2	\N	2015-05-10 13:45:29.048699+03
-6870	2245	2	\N	2015-05-10 13:46:40.29071+03
-6871	2246	2	\N	2015-05-10 14:01:26.829403+03
-6872	2247	2	\N	2015-05-10 14:01:57.254972+03
-6873	2248	2	\N	2015-05-10 14:10:42.034833+03
-6874	2249	2	\N	2015-05-10 14:10:53.000133+03
-6875	2254	2	\N	2015-05-10 14:35:53.336283+03
-6876	2255	2	\N	2015-05-10 14:35:53.336283+03
-6877	2256	2	\N	2015-05-10 14:39:45.730714+03
-6878	2257	2	\N	2015-05-10 14:39:45.730714+03
-6879	2258	2	\N	2015-05-10 14:45:11.098493+03
-6880	2259	2	\N	2015-05-10 14:45:11.098493+03
-6881	2260	2	\N	2015-05-10 14:53:32.27851+03
-6882	2261	2	\N	2015-05-10 14:53:32.27851+03
-6883	2262	2	\N	2015-05-10 14:57:13.121414+03
-6884	2263	2	\N	2015-05-10 14:57:13.121414+03
-6885	2264	2	\N	2015-05-10 14:57:55.441966+03
-6886	2265	2	\N	2015-05-10 15:07:20.399588+03
-6887	2266	2	\N	2015-05-10 15:07:20.399588+03
-6888	2267	2	\N	2015-05-10 15:07:27.786314+03
-6889	2268	2	\N	2015-05-10 16:04:17.22685+03
-6890	2269	2	\N	2015-05-10 16:04:56.471262+03
-6891	1318	2	\N	2015-05-10 16:05:16.31159+03
-6892	2270	2	\N	2015-05-10 16:07:24.626275+03
-6893	2271	2	\N	2015-05-10 16:08:32.663974+03
-6894	2272	2	\N	2015-05-10 16:08:35.587577+03
-6895	2273	2	\N	2015-05-10 16:08:47.271902+03
-6896	2274	2	\N	2015-05-10 16:08:47.271902+03
-6897	2275	2	\N	2015-05-10 16:09:34.650716+03
-6898	2276	2	\N	2015-05-10 22:11:18.586994+03
-6899	2277	2	\N	2015-05-10 22:12:40.523328+03
-6900	1314	2	\N	2015-05-10 22:12:56.872348+03
-6901	2278	2	\N	2015-05-10 22:14:48.438204+03
-6902	2279	2	\N	2015-05-10 22:14:48.438204+03
-6903	2280	2	\N	2015-05-10 22:19:21.083289+03
-6904	2280	2	\N	2015-05-13 21:55:52.759278+03
-6905	2275	2	\N	2015-05-13 21:56:48.008072+03
-6906	2267	2	\N	2015-05-13 21:56:54.031403+03
-6907	2264	2	\N	2015-05-13 21:56:59.496539+03
-6908	2281	2	\N	2015-05-16 15:29:57.002389+03
-6909	2282	2	\N	2015-05-16 15:34:53.800182+03
-6910	2283	2	\N	2015-05-16 15:34:53.800182+03
-6911	2284	2	\N	2015-05-16 15:36:09.929045+03
-6912	2285	2	\N	2015-05-16 15:45:33.371911+03
-6913	2286	2	\N	2015-05-16 15:45:33.371911+03
-6914	2287	2	\N	2015-05-16 15:48:18.436182+03
-6915	2288	2	\N	2015-05-16 15:48:18.436182+03
-6916	2289	2	\N	2015-05-17 21:30:51.134604+03
-6917	2280	2	\N	2015-05-17 21:31:00.094313+03
-6918	2290	2	\N	2015-05-17 21:31:39.003456+03
-6919	2280	2	\N	2015-05-17 21:31:48.129633+03
-6920	2284	2	\N	2015-05-17 22:02:03.373006+03
-6921	2284	2	\N	2015-05-17 22:02:31.027832+03
-6922	2291	2	\N	2015-05-18 16:39:17.24427+03
-6923	2284	2	\N	2015-05-18 16:40:09.305094+03
-6924	2284	2	\N	2015-05-18 20:31:39.659544+03
-6925	2284	2	\N	2015-05-18 20:34:34.03653+03
-6926	2284	2	\N	2015-05-18 21:22:46.805573+03
-6927	2292	2	\N	2015-05-24 12:55:28.784478+03
-6928	1212	2	\N	2015-05-24 13:06:21.488837+03
-6929	2293	2	\N	2015-05-24 15:06:40.212091+03
-6930	2294	2	\N	2015-05-24 15:11:44.965777+03
-6931	2295	2	\N	2015-05-24 16:49:53.513439+03
-6932	2296	2	\N	2015-05-24 16:50:41.467323+03
-6933	2297	2	\N	2015-05-24 16:55:00.642026+03
-6934	2299	2	\N	2015-05-24 16:57:39.672043+03
-6935	2300	2	\N	2015-05-24 17:03:51.85238+03
-6936	2088	2	\N	2015-05-24 17:03:55.878998+03
-6937	2301	2	\N	2015-05-24 17:04:54.502108+03
-6938	2088	2	\N	2015-05-24 17:10:16.729607+03
-6939	2088	2	\N	2015-05-24 17:10:29.437025+03
-6940	2088	2	\N	2015-05-24 17:15:30.592241+03
-6941	2302	2	\N	2015-05-24 17:16:33.029089+03
-6942	2075	2	\N	2015-05-24 17:16:41.742578+03
-6943	2303	2	\N	2015-05-24 17:17:17.81127+03
-6944	2088	2	\N	2015-05-24 17:17:21.677682+03
-6945	2305	2	\N	2015-05-24 20:37:07.412723+03
-6946	2052	2	\N	2015-05-24 20:37:10.892479+03
-6947	2088	2	\N	2015-05-24 21:01:25.501241+03
-6948	2052	2	\N	2015-05-24 21:13:25.598747+03
-6949	2306	2	\N	2015-05-24 21:14:39.628922+03
-6950	2052	2	\N	2015-05-24 21:14:43.723121+03
-6951	2280	2	\N	2015-05-24 21:21:32.476216+03
-6952	2280	2	\N	2015-05-24 21:22:00.849383+03
-6953	2280	2	\N	2015-05-24 21:22:09.702717+03
-6954	2307	2	\N	2015-05-24 21:32:02.910902+03
-6955	2308	2	\N	2015-05-24 21:32:24.738611+03
-6956	2309	2	\N	2015-05-24 21:32:31.516248+03
-6957	2310	2	\N	2015-05-24 21:33:17.528061+03
-6958	2311	2	\N	2015-05-24 21:35:46.300244+03
-6959	2312	2	\N	2015-05-24 21:36:06.190691+03
-6960	2312	2	\N	2015-05-24 21:36:27.205265+03
-6961	2313	2	\N	2015-05-25 21:31:05.718794+03
-6962	2312	2	\N	2015-05-25 21:31:08.674137+03
-6963	2314	2	\N	2015-05-26 20:44:11.702313+03
-6964	2315	2	\N	2015-05-26 20:44:48.242189+03
-6965	2316	2	\N	2015-05-26 20:44:48.242189+03
-6966	2317	2	\N	2015-05-26 20:45:01.161364+03
-6967	2284	2	\N	2015-05-28 13:46:35.94219+03
-6968	2317	2	\N	2015-05-28 13:46:45.92498+03
-6969	2280	2	\N	2015-05-28 13:46:51.874219+03
-6970	1507	2	\N	2015-05-31 21:55:12.660877+03
-6971	1507	2	\N	2015-05-31 21:56:27.809825+03
-6972	1439	2	\N	2015-05-31 21:57:11.520889+03
-6973	1507	2	\N	2015-05-31 21:58:33.173778+03
-6974	1507	2	\N	2015-05-31 22:00:02.964614+03
-6975	1507	2	\N	2015-05-31 22:00:38.733485+03
-6976	1507	2	\N	2015-05-31 22:11:01.827304+03
-6977	1507	2	\N	2015-06-01 09:54:54.423199+03
-6978	2284	2	\N	2015-06-01 11:22:28.244232+03
-6979	2319	2	\N	2015-06-01 11:37:24.071069+03
-6980	2320	2	\N	2015-06-01 12:56:01.185317+03
-6986	2327	2	\N	2015-06-02 13:22:30.670092+03
-6987	2328	2	\N	2015-06-02 13:22:36.147873+03
-6988	2329	2	\N	2015-06-02 13:23:35.222007+03
-6989	2330	2	\N	2015-06-02 13:24:32.384898+03
-6990	2331	2	\N	2015-06-02 13:25:52.745886+03
-6991	2332	2	\N	2015-06-02 13:27:31.983851+03
-6992	2333	2	\N	2015-06-02 13:27:36.950926+03
-6993	2334	2	\N	2015-06-02 13:28:43.733459+03
-6994	2335	2	\N	2015-06-02 13:29:10.771807+03
-6995	2336	2	\N	2015-06-02 13:29:57.138464+03
-6996	2337	2	\N	2015-06-02 13:30:11.199071+03
-6997	2338	2	\N	2015-06-02 13:34:47.558077+03
-6998	2339	2	\N	2015-06-02 13:34:50.130325+03
-6999	2340	2	\N	2015-06-02 13:35:46.336511+03
-7000	2341	2	\N	2015-06-02 13:36:09.066506+03
-7001	2342	2	\N	2015-06-02 13:36:09.066506+03
-7002	2343	2	\N	2015-06-02 13:37:26.99598+03
-7003	2344	2	\N	2015-06-02 13:37:26.99598+03
-7004	2345	2	\N	2015-06-02 13:37:42.100766+03
-7023	2345	2	\N	2015-06-06 20:33:35.089301+03
-7024	2366	2	\N	2015-06-06 21:47:05.357423+03
-7025	2367	2	\N	2015-06-06 21:47:08.978477+03
-7026	2368	2	\N	2015-06-06 21:49:00.661472+03
-7027	2369	2	\N	2015-06-06 21:50:18.211354+03
-7028	2370	2	\N	2015-06-06 21:51:07.167429+03
-7029	2371	2	\N	2015-06-06 21:52:21.362863+03
-7030	2372	2	\N	2015-06-06 21:52:25.91268+03
-7031	2367	2	\N	2015-06-06 22:01:59.580344+03
-7032	2373	2	\N	2015-06-06 22:05:50.240364+03
-7033	2374	2	\N	2015-06-06 22:06:07.223567+03
-7034	2375	2	\N	2015-06-06 22:06:55.79185+03
-7035	2376	2	\N	2015-06-06 22:07:46.643073+03
-7036	2377	2	\N	2015-06-06 22:08:11.14074+03
-7037	2378	2	\N	2015-06-06 22:08:11.14074+03
-7038	2379	2	\N	2015-06-06 22:10:53.894076+03
-7039	2380	2	\N	2015-06-06 22:10:53.894076+03
-7040	2381	2	\N	2015-06-06 22:12:04.71986+03
-7041	2382	2	\N	2015-06-06 22:12:17.899878+03
-7042	2372	2	\N	2015-06-06 22:12:34.850437+03
-7043	2383	2	\N	2015-06-06 22:34:30.822368+03
-7044	2384	2	\N	2015-06-06 22:35:06.098136+03
-7045	2385	2	\N	2015-06-06 22:35:22.838833+03
-7046	2382	2	\N	2015-06-06 22:36:33.646314+03
-7047	2388	2	\N	2015-06-06 22:43:36.614024+03
-7048	2382	2	\N	2015-06-07 15:30:58.294045+03
-7049	2247	2	\N	2015-06-07 17:10:29.033956+03
-7050	1413	2	\N	2015-06-07 17:10:56.929199+03
-7051	1318	2	\N	2015-06-07 17:11:36.862031+03
-7052	1314	2	\N	2015-06-07 17:12:28.161782+03
-7053	1431	2	\N	2015-06-07 19:55:54.571452+03
-7054	1898	2	\N	2015-06-07 19:59:40.465993+03
-7055	1898	2	\N	2015-06-07 20:00:47.882499+03
-7056	1432	2	\N	2015-06-07 20:00:59.808075+03
-7057	1608	2	\N	2015-06-07 20:01:30.177316+03
-7058	1609	2	\N	2015-06-07 20:02:19.266681+03
-7059	1769	2	\N	2015-06-07 20:03:05.939338+03
-7060	1780	2	\N	2015-06-07 20:04:36.345782+03
-7061	1873	2	\N	2015-06-07 20:05:07.816356+03
-7062	1898	2	\N	2015-06-07 20:05:26.076509+03
-7063	2199	2	\N	2015-06-07 20:05:57.959925+03
-7064	2246	2	\N	2015-06-07 20:06:32.075272+03
-7065	2246	2	\N	2015-06-07 20:06:41.085651+03
-7066	2269	2	\N	2015-06-07 20:07:23.767588+03
-7067	2277	2	\N	2015-06-07 20:07:57.192127+03
-7068	1426	2	\N	2015-06-07 20:09:52.309668+03
-7069	2389	2	\N	2015-06-07 20:10:03.246206+03
-7070	2390	2	\N	2015-06-07 20:10:21.42447+03
-7071	2391	2	\N	2015-06-07 20:10:54.694938+03
-7072	2392	2	\N	2015-06-07 20:11:12.709328+03
-7073	2393	2	\N	2015-06-07 20:11:33.449675+03
-7074	2394	2	\N	2015-06-07 20:11:54.80775+03
-7075	2395	2	\N	2015-06-07 20:12:24.648998+03
-7076	2396	2	\N	2015-06-07 20:12:47.549001+03
-7077	2397	2	\N	2015-06-07 20:13:09.482196+03
-7078	2398	2	\N	2015-06-07 20:13:26.815118+03
-7079	2399	2	\N	2015-06-07 20:13:43.442647+03
-7080	2400	2	\N	2015-06-07 20:13:57.868779+03
-7081	2401	2	\N	2015-06-07 20:14:15.895967+03
-7082	2402	2	\N	2015-06-07 20:14:42.501203+03
-7083	2403	2	\N	2015-06-07 20:15:33.611845+03
-7084	2404	2	\N	2015-06-07 20:15:53.460657+03
-7085	2405	2	\N	2015-06-07 20:16:10.772685+03
-7086	2406	2	\N	2015-06-07 20:16:32.442601+03
-7087	2407	2	\N	2015-06-07 20:16:56.509083+03
-7088	2408	2	\N	2015-06-07 20:17:19.457924+03
-7089	2409	2	\N	2015-06-07 20:17:39.828441+03
-7090	2410	2	\N	2015-06-07 20:17:59.953522+03
-7091	2411	2	\N	2015-06-07 20:18:15.36941+03
-7092	2412	2	\N	2015-06-07 20:18:33.319787+03
-7093	2413	2	\N	2015-06-07 20:18:53.786993+03
-7094	2414	2	\N	2015-06-07 20:19:17.251882+03
-7095	2415	2	\N	2015-06-07 20:34:54.782206+03
-7096	2416	2	\N	2015-06-07 20:35:11.96143+03
-7097	2417	2	\N	2015-06-07 20:35:33.998015+03
-7098	2418	2	\N	2015-06-07 20:36:01.596002+03
-7099	2419	2	\N	2015-06-07 20:36:15.960332+03
-7100	2420	2	\N	2015-06-07 20:36:35.413228+03
-7101	2421	2	\N	2015-06-07 20:37:30.352425+03
-7102	2422	2	\N	2015-06-07 20:37:53.888785+03
-7103	2423	2	\N	2015-06-07 20:38:10.610447+03
-7104	2424	2	\N	2015-06-07 20:38:59.517394+03
-7105	2425	2	\N	2015-06-07 20:39:26.415211+03
-7106	2426	2	\N	2015-06-07 20:40:05.840226+03
-7107	2427	2	\N	2015-06-07 20:40:46.537019+03
-7108	2428	2	\N	2015-06-07 20:41:01.3009+03
-7109	2429	2	\N	2015-06-07 20:41:17.634439+03
-7110	2430	2	\N	2015-06-07 20:41:36.56949+03
-7111	2431	2	\N	2015-06-07 20:41:54.944525+03
-7112	2432	2	\N	2015-06-07 20:42:11.063081+03
-7113	2433	2	\N	2015-06-10 21:10:55.543668+03
-7114	2434	2	\N	2015-06-10 21:10:58.272269+03
-7115	2434	2	\N	2015-06-10 21:11:16.546457+03
-7116	2435	2	\N	2015-06-10 21:11:49.343497+03
-7117	2436	2	\N	2015-06-10 21:12:20.087946+03
-7119	2437	2	\N	2015-06-10 21:13:28.379702+03
-7120	2434	2	\N	2015-06-10 21:13:35.658848+03
-7118	2434	2	\N	2015-06-10 21:12:30.557424+03
-7121	2434	2	\N	2015-06-13 11:08:16.884538+03
-7122	2438	2	\N	2015-06-13 12:24:23.664338+03
-7123	2439	2	\N	2015-06-13 12:25:12.11639+03
-7124	2440	2	\N	2015-06-13 12:25:55.053099+03
-7125	2439	2	\N	2015-06-13 12:28:23.509307+03
-7126	1431	2	\N	2015-06-13 16:13:14.891511+03
-7127	2269	2	\N	2015-06-13 16:29:21.58833+03
-7128	2391	2	\N	2015-06-13 16:29:38.922876+03
-7130	2442	2	\N	2015-06-13 17:22:11.365048+03
-7162	2450	2	\N	2015-06-13 19:58:22.391173+03
-7163	2317	2	\N	2015-06-13 19:58:33.103367+03
-7164	2451	2	\N	2015-06-13 19:59:50.784052+03
-7165	2452	2	\N	2015-06-13 19:59:50.784052+03
-7166	2317	2	\N	2015-06-13 20:00:28.712308+03
-7167	2317	2	\N	2015-06-13 20:01:26.421434+03
-7168	2317	2	\N	2015-06-13 20:03:24.653457+03
-7176	2451	2	\N	2015-06-14 10:07:32.690694+03
-7177	2451	2	\N	2015-06-14 10:16:32.619194+03
-7178	2451	2	\N	2015-06-14 13:13:57.393431+03
-7179	2451	2	\N	2015-06-14 13:21:50.094038+03
-7180	2451	2	\N	2015-06-14 13:22:37.050016+03
-7181	2451	2	\N	2015-06-14 13:23:13.387606+03
-7182	2451	2	\N	2015-06-14 13:23:25.25704+03
-7183	2457	2	\N	2015-06-14 13:25:18.074212+03
-7184	2451	2	\N	2015-06-14 13:26:56.97373+03
-7185	2458	2	\N	2015-06-14 13:28:59.472857+03
-7186	2459	2	\N	2015-06-14 13:29:40.688494+03
-7187	2457	2	\N	2015-06-14 14:17:22.935487+03
-7199	2463	2	\N	2015-06-14 16:30:22.760587+03
-7201	2463	2	\N	2015-06-14 16:43:36.808614+03
-7202	2465	2	\N	2015-06-14 18:28:13.295968+03
-7203	2466	2	\N	2015-06-14 18:50:25.96227+03
-7204	2467	2	\N	2015-06-14 18:50:57.662486+03
-7205	2468	2	\N	2015-06-17 21:13:39.6663+03
-7206	2469	2	\N	2015-06-17 21:13:39.6663+03
-7207	2469	2	\N	2015-06-17 21:39:31.5421+03
-7208	2470	2	\N	2015-06-17 21:39:43.056809+03
-7211	2296	2	\N	2015-06-17 22:28:24.889672+03
-7212	2296	2	\N	2015-06-17 22:28:44.137455+03
-7213	2296	2	\N	2015-06-17 22:28:55.531055+03
-7214	2296	2	\N	2015-06-17 22:29:04.688414+03
-7217	1190	2	\N	2015-06-18 08:41:45.975909+03
-7218	1190	2	\N	2015-06-18 08:41:55.712142+03
-7219	2475	2	\N	2015-06-18 08:47:40.598128+03
-7229	2484	2	\N	2015-06-18 09:11:44.190988+03
-7232	2486	2	\N	2015-06-19 08:53:30.530081+03
-7235	2489	2	\N	2015-06-19 08:57:56.925224+03
-7236	2490	2	\N	2015-06-19 08:58:47.001543+03
-7237	2491	2	\N	2015-06-19 09:01:01.141859+03
-7239	2493	2	\N	2015-06-19 09:05:15.381515+03
-7241	1010	2	\N	2015-06-19 09:18:51.710345+03
-7244	2129	2	\N	2015-06-19 09:22:37.844576+03
-7248	2137	2	\N	2015-06-19 09:24:18.706637+03
-7250	2248	2	\N	2015-06-19 09:24:53.046897+03
-7252	2484	2	\N	2015-06-20 10:13:59.32685+03
-7253	2501	2	\N	2015-06-20 10:23:36.01186+03
-7254	2490	2	\N	2015-06-20 10:24:30.090794+03
-7255	2502	2	\N	2015-06-20 10:25:23.92051+03
-7256	2490	2	\N	2015-06-20 10:25:26.171733+03
-7257	2503	2	\N	2015-06-20 10:58:18.119129+03
-7259	2505	2	\N	2015-06-20 11:21:58.139735+03
-7260	2506	2	\N	2015-06-20 11:22:00.401736+03
-7261	2507	2	\N	2015-06-20 11:22:46.430212+03
-7262	2506	2	\N	2015-06-20 11:22:51.478424+03
-7263	2508	2	\N	2015-06-20 11:23:54.736317+03
-7264	2506	2	\N	2015-06-20 11:23:56.167951+03
-7265	2345	2	\N	2015-06-20 11:26:36.603828+03
-7266	2345	2	\N	2015-06-20 11:27:18.047841+03
-7268	2345	2	\N	2015-06-20 11:46:46.13788+03
-7269	2510	2	\N	2015-06-20 11:50:12.161837+03
-7270	2511	2	\N	2015-06-20 11:50:13.525526+03
-7272	2463	2	\N	2015-06-20 23:00:10.769493+03
-7273	2467	2	\N	2015-06-20 23:00:18.463896+03
-7274	2459	2	\N	2015-06-20 23:00:44.920864+03
-7275	2458	2	\N	2015-06-20 23:00:51.132288+03
-7276	2457	2	\N	2015-06-20 23:00:57.565186+03
-7277	2451	2	\N	2015-06-20 23:01:04.368039+03
-7278	2451	2	\N	2015-06-20 23:04:17.342527+03
-7279	2457	2	\N	2015-06-20 23:04:23.315461+03
-7280	2458	2	\N	2015-06-20 23:04:30.160097+03
-7281	2459	2	\N	2015-06-20 23:04:35.721205+03
-7282	1896	2	\N	2015-06-21 11:16:22.975624+03
-7285	2459	2	\N	2015-06-21 11:19:17.963777+03
-7286	2458	2	\N	2015-06-21 11:19:23.880837+03
-7287	2457	2	\N	2015-06-21 11:19:29.44712+03
-7288	2451	2	\N	2015-06-21 11:19:35.471458+03
-7289	2467	2	\N	2015-06-21 11:19:54.443461+03
-7290	2463	2	\N	2015-06-21 11:20:00.085347+03
-7291	2465	2	\N	2015-06-21 11:21:33.270335+03
-7292	2513	2	\N	2015-06-23 22:26:54.54596+03
-7293	778	2	\N	2015-06-23 22:31:51.561928+03
-7294	2514	2	\N	2015-06-23 22:34:29.078834+03
-7295	2514	2	\N	2015-06-23 22:36:01.548881+03
-7296	2513	2	\N	2015-06-23 22:42:58.979814+03
-7297	2514	2	\N	2015-06-23 22:46:14.322892+03
-7298	2515	2	\N	2015-06-23 22:48:32.462285+03
-7306	784	2	\N	2015-06-27 17:39:03.474446+03
-7307	784	2	\N	2015-06-27 17:52:48.813097+03
-7308	885	2	\N	2015-06-27 17:53:15.731358+03
-7312	784	2	\N	2015-06-27 19:50:37.220816+03
-7313	784	2	\N	2015-06-27 19:50:45.528129+03
-7314	784	2	\N	2015-06-27 19:50:53.618877+03
-7315	784	2	\N	2015-06-27 19:52:29.5324+03
-7317	2516	2	\N	2015-06-27 20:34:38.335917+03
-7318	2517	2	\N	2015-06-27 21:02:52.190849+03
-7319	2518	2	\N	2015-06-27 22:00:11.577645+03
-7320	784	2	\N	2015-06-27 22:13:51.726755+03
-7321	2519	2	\N	2015-06-27 22:13:51.726755+03
-7322	2520	2	\N	2015-06-27 22:14:31.050053+03
-7323	2521	2	\N	2015-06-27 22:15:06.48124+03
-7324	2522	2	\N	2015-06-27 22:27:54.400494+03
-7325	2523	2	\N	2015-06-27 22:40:18.037224+03
-7326	2524	2	\N	2015-06-27 22:42:17.60206+03
-7327	2525	2	\N	2015-06-27 22:42:37.767083+03
-7328	784	2	\N	2015-06-27 22:49:09.961687+03
-7329	784	2	\N	2015-06-27 22:49:28.712758+03
-7330	784	2	\N	2015-06-27 22:49:40.054287+03
-7331	2526	2	\N	2015-06-28 15:48:24.134048+03
-7332	2527	2	\N	2015-06-28 15:49:06.934643+03
-7333	1930	2	\N	2015-06-28 15:49:08.476175+03
-7334	1930	2	\N	2015-06-28 15:49:15.43238+03
-7335	1286	2	\N	2015-06-28 16:19:06.654271+03
-7336	1284	2	\N	2015-06-28 16:19:08.822984+03
-7337	2528	2	\N	2015-06-28 16:27:58.214962+03
-7338	2529	2	\N	2015-07-04 20:12:31.951644+03
-7339	2530	2	\N	2015-07-04 20:16:08.99227+03
-7340	2531	2	\N	2015-07-04 20:16:08.99227+03
-7341	2532	2	\N	2015-07-04 20:36:07.167824+03
-7342	2533	2	\N	2015-07-04 20:36:07.167824+03
-7343	2534	2	\N	2015-07-04 20:57:32.449165+03
-7344	2491	2	\N	2015-07-04 20:58:12.716739+03
-7345	2535	2	\N	2015-07-04 20:58:36.935951+03
-7346	2536	2	\N	2015-07-04 20:59:39.366864+03
-7347	2491	2	\N	2015-07-04 20:59:49.220324+03
-7348	2537	2	\N	2015-07-04 21:00:02.518034+03
-7349	2538	2	\N	2015-07-04 21:13:08.541103+03
-7350	2539	2	\N	2015-07-04 21:14:30.611204+03
-7351	2540	2	\N	2015-07-04 21:14:32.763289+03
-7352	2541	2	\N	2015-07-04 21:14:50.821175+03
-7353	2450	2	\N	2015-07-04 21:16:23.905581+03
-7354	2542	2	\N	2015-07-04 21:17:54.658173+03
-7355	2450	2	\N	2015-07-04 21:20:36.496307+03
-7356	2450	2	\N	2015-07-04 21:22:20.163177+03
-7357	2450	2	\N	2015-07-04 21:25:41.863118+03
-7358	2543	2	\N	2015-07-04 21:26:56.584606+03
-7359	2544	2	\N	2015-07-04 21:27:23.469843+03
-7360	2388	2	\N	2015-07-04 21:27:31.474854+03
-7361	2545	2	\N	2015-07-04 21:30:18.47115+03
-7362	2546	2	\N	2015-07-04 21:30:37.579131+03
-7363	2545	2	\N	2015-07-04 21:30:38.730906+03
-7364	2547	2	\N	2015-07-04 21:30:51.680567+03
-7365	2548	2	\N	2015-07-04 21:30:51.680567+03
-7366	2388	2	\N	2015-07-04 21:31:14.422776+03
-7367	2451	2	\N	2015-07-05 14:30:51.54628+03
-7368	2457	2	\N	2015-07-05 14:33:01.814653+03
-7369	2458	2	\N	2015-07-05 14:33:47.939925+03
-7370	2459	2	\N	2015-07-05 14:33:59.629688+03
-7371	2451	2	\N	2015-07-05 14:39:43.167129+03
-7372	2467	2	\N	2015-07-05 14:49:52.691681+03
-7373	2463	2	\N	2015-07-05 14:50:06.470488+03
-7374	2549	2	\N	2015-07-05 15:34:32.780638+03
-7376	2434	2	\N	2015-07-05 19:13:53.412323+03
-7377	3	2	\N	2015-07-17 19:31:34.831317+03
-7378	894	2	\N	2015-07-17 19:34:30.132569+03
-7379	2054	2	\N	2015-07-17 19:34:44.345599+03
-7380	2126	2	\N	2015-07-17 19:35:00.154065+03
-7381	2484	2	\N	2015-07-17 19:35:15.872953+03
-7382	2550	2	\N	2015-07-18 10:57:05.728016+03
-7383	1372	2	\N	2015-07-18 10:57:08.110977+03
-7384	1372	2	\N	2015-07-18 10:57:38.113606+03
-7385	2551	2	\N	2015-07-18 11:02:48.147598+03
-7386	2552	2	\N	2015-07-18 11:22:14.245467+03
-7387	2552	2	\N	2015-07-18 11:24:17.241528+03
-7388	2553	2	\N	2015-07-18 11:32:44.472503+03
-7389	2554	2	\N	2015-07-18 11:46:38.401629+03
-7390	2554	2	\N	2015-07-18 11:47:52.858154+03
-7392	2556	2	\N	2015-07-18 11:55:59.961331+03
-7393	1372	2	\N	2015-07-18 11:56:18.816278+03
-7394	1375	2	\N	2015-07-18 11:56:26.8815+03
-7395	2557	2	\N	2015-07-18 12:01:04.237446+03
-7396	887	2	\N	2015-07-18 12:01:06.541839+03
-7397	2376	2	\N	2015-07-18 12:01:31.956124+03
-7398	2556	2	\N	2015-07-18 12:01:52.672293+03
-7399	2558	2	\N	2015-07-19 10:20:48.263335+03
-7400	2559	2	\N	2015-07-19 14:41:19.72071+03
-7401	2560	2	\N	2015-07-19 14:41:25.622087+03
-7402	2561	2	\N	2015-07-19 14:42:40.770503+03
-7403	2562	2	\N	2015-07-19 14:42:45.815524+03
-7404	2563	2	\N	2015-07-19 15:12:51.840188+03
-7405	2564	2	\N	2015-07-19 15:13:34.062285+03
-7406	2565	2	\N	2015-07-19 15:13:36.341158+03
-7407	2566	2	\N	2015-07-19 15:17:50.040034+03
-7408	2567	2	\N	2015-07-19 15:18:18.066263+03
-7409	2568	2	\N	2015-07-19 15:19:23.078636+03
-7410	2569	2	\N	2015-07-19 15:19:33.135472+03
-7411	2570	2	\N	2015-07-19 15:20:45.489438+03
-7412	2571	2	\N	2015-07-19 15:21:40.944498+03
-7413	2572	2	\N	2015-07-19 15:21:50.318605+03
-7414	2573	2	\N	2015-07-19 16:03:41.362252+03
-7415	2574	2	\N	2015-07-19 16:04:11.184096+03
-7416	2575	2	\N	2015-07-19 16:04:13.848246+03
-7417	2576	2	\N	2015-07-19 16:05:08.205201+03
-7418	2577	2	\N	2015-07-19 16:06:12.10907+03
-7419	2578	2	\N	2015-07-19 16:06:39.117569+03
-7420	2579	2	\N	2015-07-19 16:06:40.986562+03
-7421	2580	2	\N	2015-07-19 16:07:27.111556+03
-7422	2581	2	\N	2015-07-19 16:08:00.994992+03
-7423	2582	2	\N	2015-07-19 16:08:03.06528+03
-7424	2583	2	\N	2015-07-19 22:56:54.154484+03
-7425	2584	2	\N	2015-07-19 23:47:28.340347+03
-7426	2585	2	\N	2015-07-19 23:52:14.447269+03
-7427	2586	2	\N	2015-07-19 23:52:36.403304+03
-7428	2587	2	\N	2015-07-19 23:52:50.958041+03
-7429	2588	2	\N	2015-07-19 23:53:14.681932+03
-7430	2589	2	\N	2015-07-19 23:54:00.547115+03
-7431	2590	2	\N	2015-07-19 23:54:44.372371+03
-7432	2591	2	\N	2015-07-19 23:54:52.387429+03
-7433	2593	2	\N	2015-07-19 23:56:11.09679+03
-7434	2594	2	\N	2015-07-19 23:56:44.56359+03
-7435	2595	2	\N	2015-07-19 23:56:46.53373+03
-7436	1932	2	\N	2015-07-20 00:00:04.645587+03
-7437	2596	2	\N	2015-07-20 00:04:50.031308+03
-7438	2597	2	\N	2015-07-20 00:05:29.444039+03
-7439	2598	2	\N	2015-07-20 00:06:05.823851+03
-7440	2599	2	\N	2015-07-20 00:06:07.921437+03
-7443	2602	2	\N	2015-07-20 23:51:41.323724+03
-7444	2603	2	\N	2015-07-20 23:51:41.323724+03
-7445	2604	2	\N	2015-07-20 23:51:41.323724+03
-7446	2605	2	\N	2015-07-20 23:51:41.323724+03
-7449	2608	2	\N	2015-07-20 23:51:41.323724+03
-7453	2612	2	\N	2015-07-20 23:51:41.323724+03
-7454	2613	2	\N	2015-07-20 23:51:41.323724+03
-7458	2617	2	\N	2015-07-20 23:51:41.323724+03
-7472	2631	2	\N	2015-07-20 23:51:41.323724+03
-7473	2632	2	\N	2015-07-20 23:51:41.323724+03
-7474	2633	2	\N	2015-07-20 23:51:41.323724+03
-7475	2634	2	\N	2015-07-20 23:51:41.323724+03
-7476	2635	2	\N	2015-07-20 23:51:41.323724+03
-7477	2636	2	\N	2015-07-20 23:51:41.323724+03
-7478	2637	2	\N	2015-07-20 23:51:41.323724+03
-7479	2638	2	\N	2015-07-20 23:51:41.323724+03
-7483	2642	2	\N	2015-07-20 23:51:41.323724+03
-7484	2643	2	\N	2015-07-20 23:51:41.323724+03
-7487	2646	2	\N	2015-07-20 23:51:41.323724+03
-7488	2647	2	\N	2015-07-20 23:51:41.323724+03
-7489	2648	2	\N	2015-07-20 23:51:41.323724+03
-7490	2649	2	\N	2015-07-20 23:51:41.323724+03
-7491	2650	2	\N	2015-07-20 23:51:41.323724+03
-7492	2651	2	\N	2015-07-20 23:51:41.323724+03
-7493	2652	2	\N	2015-07-20 23:51:41.323724+03
-7494	2653	2	\N	2015-07-20 23:51:41.323724+03
-7495	2654	2	\N	2015-07-20 23:51:41.323724+03
-7496	2655	2	\N	2015-07-20 23:51:41.323724+03
-7498	894	2	\N	2015-07-20 23:59:14.903581+03
-7503	2663	2	\N	2015-07-21 00:42:13.515989+03
-7504	2664	2	\N	2015-07-21 00:44:32.068557+03
-7505	2662	2	\N	2015-07-21 00:45:19.305589+03
-7507	894	2	\N	2015-07-22 09:52:23.690178+03
-7508	885	2	\N	2015-07-22 09:53:01.082145+03
-7509	2665	2	\N	2015-07-22 09:53:01.082145+03
-7510	885	2	\N	2015-07-22 09:53:36.087021+03
-7511	2272	2	\N	2015-07-22 10:46:42.444349+03
-7512	2272	2	\N	2015-07-22 10:47:14.111233+03
-7513	2666	2	\N	2015-07-22 10:50:02.98887+03
-7514	2667	2	\N	2015-07-22 10:50:08.679496+03
-7515	2668	2	\N	2015-07-22 10:51:11.924694+03
-7516	2669	2	\N	2015-07-22 10:51:14.586916+03
-7517	2669	2	\N	2015-07-22 11:46:47.662266+03
-7518	2670	2	\N	2015-07-22 11:49:53.983401+03
-7519	2671	2	\N	2015-07-22 11:53:39.590503+03
-7520	2669	2	\N	2015-07-22 11:53:54.403754+03
-7521	2669	2	\N	2015-07-22 11:54:14.136266+03
-7522	2669	2	\N	2015-07-22 12:24:29.892068+03
-7523	2673	2	\N	2015-07-22 12:28:35.92606+03
-7524	2674	2	\N	2015-07-22 12:28:39.345269+03
-7525	2675	2	\N	2015-07-22 12:44:17.155133+03
-7526	2676	2	\N	2015-07-22 12:45:19.167404+03
-7527	2677	2	\N	2015-07-22 12:45:42.418521+03
-7528	2678	2	\N	2015-07-22 12:45:46.782121+03
-7529	2679	2	\N	2015-07-22 12:46:34.868393+03
-7530	2678	2	\N	2015-07-22 12:47:12.553819+03
-7531	2680	2	\N	2015-07-22 12:47:32.725361+03
-7532	2681	2	\N	2015-07-22 12:47:48.511246+03
-7533	2682	2	\N	2015-07-22 13:40:37.786999+03
-7534	2681	2	\N	2015-07-22 13:40:39.941316+03
-7535	2681	2	\N	2015-07-22 13:40:55.710058+03
-7536	2683	2	\N	2015-07-22 13:41:40.486853+03
-7537	2684	2	\N	2015-07-22 13:41:59.700406+03
-7538	2685	2	\N	2015-07-22 13:42:00.973433+03
-7539	2667	2	\N	2015-07-22 13:42:02.635972+03
-7540	2685	2	\N	2015-07-22 13:46:08.824214+03
-7541	2667	2	\N	2015-07-22 13:46:13.399464+03
-7542	2686	2	\N	2015-07-22 13:47:12.099197+03
-7543	2687	2	\N	2015-07-22 13:47:12.099197+03
-7544	2688	2	\N	2015-07-22 13:50:14.404321+03
-7545	2689	2	\N	2015-07-22 13:50:14.404321+03
-7546	2690	2	\N	2015-07-22 13:53:17.909433+03
-7547	2690	2	\N	2015-07-22 13:53:48.33605+03
-7550	2693	2	\N	2015-07-22 14:07:31.992976+03
-7551	2694	2	\N	2015-07-22 14:08:00.072596+03
-7552	2695	2	\N	2015-07-22 14:08:45.393051+03
-7555	2698	2	\N	2015-07-22 14:13:47.912163+03
-7556	2699	2	\N	2015-07-22 14:14:01.749177+03
-7557	2700	2	\N	2015-07-22 14:14:10.709485+03
-7558	2701	2	\N	2015-07-22 14:14:10.709485+03
-7559	2699	2	\N	2015-07-22 14:16:42.964801+03
-7560	2702	2	\N	2015-07-22 14:17:00.761945+03
-7561	2703	2	\N	2015-07-22 14:17:00.761945+03
-7562	2704	2	\N	2015-07-22 14:19:56.751612+03
-7563	2705	2	\N	2015-07-22 14:19:56.751612+03
-7564	2699	2	\N	2015-07-22 14:20:42.704316+03
-7565	2706	2	\N	2015-07-22 14:21:02.027005+03
-7566	2707	2	\N	2015-07-22 14:21:02.027005+03
-7567	2699	2	\N	2015-07-22 14:21:39.869597+03
-7568	2699	2	\N	2015-07-22 14:21:46.984305+03
-7569	2708	2	\N	2015-07-22 14:21:59.287338+03
-7570	2709	2	\N	2015-07-22 14:21:59.287338+03
-7571	2699	2	\N	2015-07-22 14:22:26.322903+03
-7572	2710	2	\N	2015-07-22 14:22:35.509695+03
-7573	2711	2	\N	2015-07-22 14:22:35.509695+03
-7574	2699	2	\N	2015-07-22 14:23:19.576335+03
-7575	2712	2	\N	2015-07-22 14:23:36.759685+03
-7576	2713	2	\N	2015-07-22 14:23:36.759685+03
-7577	2714	2	\N	2015-07-22 14:30:40.877306+03
-7578	2715	2	\N	2015-07-22 14:32:25.925422+03
-7579	2716	2	\N	2015-07-22 14:32:25.925422+03
-7580	2714	2	\N	2015-07-22 14:32:56.995021+03
-7581	2717	2	\N	2015-07-22 14:33:08.574387+03
-7582	2718	2	\N	2015-07-22 14:33:08.574387+03
-7583	2719	2	\N	2015-07-22 14:50:07.747456+03
-7584	2720	2	\N	2015-07-22 14:50:07.747456+03
-7585	2721	2	\N	2015-07-22 14:53:19.652254+03
-7586	2722	2	\N	2015-07-22 14:53:19.652254+03
-7587	2723	2	\N	2015-07-22 15:02:17.721876+03
-7588	2724	2	\N	2015-07-22 15:02:27.84792+03
-7589	2725	2	\N	2015-07-22 15:02:27.84792+03
-7590	2726	2	\N	2015-07-22 15:04:12.042101+03
-7591	2699	2	\N	2015-07-22 15:04:47.591373+03
-7592	2727	2	\N	2015-07-22 15:05:43.153662+03
-7593	2728	2	\N	2015-07-22 15:05:43.153662+03
-7594	2729	2	\N	2015-07-22 15:13:21.269737+03
-7595	2730	2	\N	2015-07-22 15:19:08.113264+03
-7596	2729	2	\N	2015-07-22 15:19:11.19218+03
-7597	2729	2	\N	2015-07-22 15:35:51.754061+03
-7598	2732	2	\N	2015-07-22 15:38:41.939351+03
-7599	2729	2	\N	2015-07-22 15:40:32.555996+03
-7600	2729	2	\N	2015-07-22 15:55:13.336651+03
-7601	2515	2	\N	2015-07-22 15:57:29.189389+03
-7602	2729	2	\N	2015-07-22 15:57:36.719306+03
-7603	2733	2	\N	2015-07-22 15:58:23.119691+03
-7604	2729	2	\N	2015-07-22 15:58:35.528196+03
-7605	2450	2	\N	2015-07-22 15:58:59.916186+03
-7606	2317	2	\N	2015-07-22 15:59:20.404832+03
-7607	2734	2	\N	2015-07-22 15:59:27.667185+03
-7608	2735	2	\N	2015-07-22 15:59:52.422862+03
-7609	2736	2	\N	2015-07-22 15:59:52.422862+03
-7610	2388	2	\N	2015-07-22 16:00:09.725539+03
-7611	2450	2	\N	2015-07-22 16:00:21.306194+03
-7612	1438	2	\N	2015-07-22 18:57:24.829162+03
-7613	2737	2	\N	2015-07-22 19:50:41.44109+03
-7614	2738	2	\N	2015-07-22 19:50:41.44109+03
-7615	2739	2	\N	2015-07-22 22:10:17.173605+03
-7616	2739	2	\N	2015-07-22 22:27:10.60758+03
-7617	2740	2	\N	2015-10-05 21:56:31.033698+03
-7618	2741	2	\N	2015-10-05 22:00:37.025784+03
-7619	2741	2	\N	2015-10-05 22:01:11.294026+03
-7620	2740	2	\N	2015-10-11 15:30:17.608326+03
-7621	2740	2	\N	2015-10-11 15:49:02.820999+03
-7622	2742	2	\N	2015-10-11 16:29:26.485453+03
-7655	2741	2	\N	2015-10-19 21:00:27.348936+03
-7656	2484	2	\N	2015-10-24 14:58:32.749242+03
-7657	2779	2	\N	2015-10-24 14:58:32.749242+03
-7658	2484	2	\N	2015-10-24 14:59:57.669772+03
-7659	2780	2	\N	2015-10-24 14:59:57.669772+03
-7660	894	2	\N	2015-10-24 15:00:56.289933+03
-7661	2781	2	\N	2015-10-24 15:00:56.289933+03
-7662	885	2	\N	2015-10-24 15:02:23.825848+03
-7663	894	2	\N	2015-10-24 15:06:44.559696+03
-7664	2782	2	\N	2015-10-24 15:06:44.559696+03
-7665	894	2	\N	2015-10-24 15:13:07.98256+03
-7666	2783	2	\N	2015-10-24 15:13:07.98256+03
-7667	894	2	\N	2015-10-24 15:16:03.818888+03
-7668	2784	2	\N	2015-10-24 15:16:03.818888+03
-7670	2786	2	\N	2015-10-24 15:24:48.816087+03
-7671	2787	2	\N	2015-10-24 15:30:54.642902+03
-7672	2739	2	\N	2015-10-31 09:47:11.166446+02
-7673	2739	2	\N	2015-10-31 09:48:54.569182+02
-7674	2739	2	\N	2015-10-31 09:52:21.217177+02
-7675	2739	2	\N	2015-10-31 09:52:28.501825+02
-7676	2739	2	\N	2015-10-31 10:25:38.872091+02
-7677	2593	2	\N	2015-10-31 10:32:28.375294+02
-7678	2788	2	\N	2015-10-31 11:46:02.329007+02
-7679	2741	2	\N	2015-10-31 11:48:54.106885+02
-7698	2813	2	\N	2015-11-22 21:52:45.311354+02
-7699	2814	2	\N	2015-11-22 21:57:07.211721+02
-7700	2739	2	\N	2015-11-22 21:57:09.506917+02
-7701	2739	2	\N	2015-11-22 22:03:49.302367+02
-7702	2815	2	\N	2015-11-29 18:03:23.32558+02
-7703	2816	2	\N	2015-11-29 18:05:24.319676+02
-7704	2818	2	\N	2015-11-29 19:06:37.534692+02
-7705	2820	2	\N	2016-01-02 19:03:39.167822+02
-7706	1930	2	\N	2016-01-02 19:03:41.6491+02
-7707	2821	2	\N	2016-01-02 20:11:21.358279+02
-7708	2822	2	\N	2016-01-02 20:11:24.233178+02
-7709	2823	2	\N	2016-01-02 20:12:21.682793+02
-7710	2824	2	\N	2016-01-02 20:12:46.762385+02
-7711	2825	2	\N	2016-01-02 20:15:08.259398+02
-7712	2824	2	\N	2016-01-02 20:15:26.352748+02
-7713	2826	2	\N	2016-01-02 20:15:55.52191+02
-7714	2824	2	\N	2016-01-02 20:17:19.972235+02
-7715	2822	2	\N	2016-01-02 20:21:41.413863+02
-7716	2827	2	\N	2016-01-02 20:24:24.220398+02
-7717	2828	2	\N	2016-01-02 20:24:24.220398+02
-7718	2829	2	\N	2016-01-02 20:25:00.491155+02
-7719	2830	2	\N	2016-01-02 20:25:43.115841+02
-7720	2831	2	\N	2016-01-02 20:26:37.333884+02
-7721	2832	2	\N	2016-01-02 20:27:25.581765+02
-7722	2833	2	\N	2016-01-02 20:36:13.937348+02
-7723	2834	2	\N	2016-01-02 20:36:20.489746+02
-7724	2834	2	\N	2016-01-02 20:36:41.364121+02
-7725	2835	2	\N	2016-01-02 20:42:25.330155+02
-7726	2836	2	\N	2016-01-02 20:42:56.538052+02
-7727	2837	2	\N	2016-01-02 20:50:50.737933+02
-7728	2838	2	\N	2016-01-02 20:50:50.737933+02
-7729	2831	2	\N	2016-01-02 20:50:54.803525+02
-7730	2839	2	\N	2016-01-02 20:51:13.095185+02
-7731	2840	2	\N	2016-01-02 20:51:13.095185+02
-7732	2841	2	\N	2016-01-02 20:52:40.961629+02
-7733	2540	2	\N	2016-01-02 20:53:36.703713+02
-7734	2842	2	\N	2016-01-02 20:53:48.427475+02
-7735	2843	2	\N	2016-01-02 20:53:48.427475+02
-7736	2844	2	\N	2016-01-02 21:00:05.527737+02
-7737	2845	2	\N	2016-01-02 21:00:05.527737+02
-7738	2846	2	\N	2016-01-02 21:03:59.88429+02
-7739	2847	2	\N	2016-01-02 21:03:59.88429+02
-7740	2848	2	\N	2016-01-02 21:08:47.993297+02
-7741	2849	2	\N	2016-01-02 21:08:47.993297+02
-7742	2850	2	\N	2016-01-02 21:16:40.983488+02
-7743	2851	2	\N	2016-01-02 21:16:40.983488+02
-7744	2852	2	\N	2016-01-02 21:36:46.646531+02
-7745	2853	2	\N	2016-01-02 21:36:49.099159+02
-7746	2854	2	\N	2016-01-02 21:37:14.376182+02
-7747	2855	2	\N	2016-01-02 21:37:14.376182+02
-7748	2853	2	\N	2016-01-02 21:38:33.232425+02
-7749	2853	2	\N	2016-01-02 21:39:02.581845+02
-7752	2857	2	\N	2016-01-02 21:39:38.718674+02
-7755	2858	2	\N	2016-01-02 21:48:47.109583+02
-7756	2858	2	\N	2016-01-02 21:49:26.302355+02
-7757	2858	2	\N	2016-01-02 21:50:13.774213+02
-7759	2841	2	\N	2016-01-02 22:14:54.924705+02
-7763	2858	2	\N	2016-01-02 22:21:07.90205+02
-7750	2853	2	\N	2016-01-02 21:39:16.771773+02
-7753	2858	2	\N	2016-01-02 21:43:29.317483+02
-7754	2859	2	\N	2016-01-02 21:48:34.392885+02
-7758	2858	2	\N	2016-01-02 21:50:34.02702+02
-7760	2835	2	\N	2016-01-02 22:15:05.490599+02
-7761	2858	2	\N	2016-01-02 22:15:28.276336+02
-7762	2858	2	\N	2016-01-02 22:20:37.944351+02
-7764	2858	2	\N	2016-01-02 22:23:01.500364+02
-7765	2858	2	\N	2016-01-02 22:24:07.265807+02
-7766	2858	2	\N	2016-01-02 22:57:12.346032+02
-7767	2858	2	\N	2016-01-02 22:57:27.435802+02
-7768	2858	2	\N	2016-01-02 22:58:10.983876+02
-7769	2860	2	\N	2016-01-02 23:22:02.986231+02
-7770	2861	2	\N	2016-01-02 23:22:02.986231+02
-7771	2862	2	\N	2016-01-02 23:29:14.591921+02
-7772	2863	2	\N	2016-01-02 23:29:43.595496+02
-7773	2864	2	\N	2016-01-02 23:32:59.025447+02
-7774	2865	2	\N	2016-01-02 23:33:17.678918+02
-7775	2866	2	\N	2016-01-02 23:33:24.314299+02
-7776	2867	2	\N	2016-01-02 23:34:03.051927+02
-7777	2824	2	\N	2016-01-02 23:39:00.961892+02
-7778	2868	2	\N	2016-01-30 20:55:14.786454+02
-7779	2869	2	\N	2016-01-30 20:59:30.856249+02
-7780	2830	2	\N	2016-01-30 21:00:27.913502+02
-7781	2830	2	\N	2016-01-30 21:01:18.072032+02
-7782	2830	2	\N	2016-01-30 21:01:36.444194+02
-7783	2830	2	\N	2016-02-06 15:26:53.662979+02
-7784	2830	2	\N	2016-02-06 15:33:10.739181+02
-7785	2830	2	\N	2016-02-06 15:34:22.381065+02
-7786	2830	2	\N	2016-02-06 15:35:20.238203+02
-7787	2830	2	\N	2016-02-06 15:36:19.423459+02
-7788	2830	2	\N	2016-02-06 15:45:57.869458+02
-7789	2830	2	\N	2016-02-06 15:55:27.857802+02
-7790	2830	2	\N	2016-02-06 16:02:20.536632+02
-7791	2830	2	\N	2016-02-06 16:19:02.587853+02
-7792	2830	2	\N	2016-02-06 16:19:14.340638+02
-7793	2830	2	\N	2016-02-06 16:19:40.099469+02
-7794	2870	2	\N	2016-02-07 17:23:20.218116+02
-7795	2871	2	\N	2016-02-07 17:23:20.218116+02
-7799	2873	2	\N	2016-02-07 21:19:25.018357+02
-7800	2874	2	\N	2016-02-07 21:20:02.361201+02
-7801	2875	2	\N	2016-02-07 21:20:21.884033+02
-7802	2876	2	\N	2016-02-07 21:21:03.816914+02
-7803	2877	2	\N	2016-02-07 21:21:07.920879+02
-7804	2788	2	\N	2016-05-09 12:53:56.945117+03
-7805	2878	2	\N	2016-05-09 12:57:37.410132+03
-7806	2879	2	\N	2016-05-09 12:58:01.601364+03
-7807	2875	2	\N	2016-05-09 14:19:09.461648+03
-7808	2879	2	\N	2016-05-09 14:19:09.461648+03
-7809	2875	2	\N	2016-05-09 14:21:24.121089+03
-7810	2879	2	\N	2016-05-09 14:21:24.121089+03
-7811	2877	2	\N	2016-05-09 19:49:23.40543+03
-7812	2877	2	\N	2016-05-09 20:42:10.779147+03
-7813	2877	2	\N	2016-05-09 20:59:03.503884+03
-7814	2877	2	\N	2016-05-09 20:59:20.181507+03
-7815	2880	2	\N	2016-05-14 12:24:09.362992+03
-7816	2881	2	\N	2016-05-14 12:24:17.0673+03
-7817	2882	2	\N	2016-05-14 12:40:37.631348+03
-7818	2883	2	\N	2016-05-14 12:42:08.065152+03
-7822	2887	2	\N	2016-05-14 19:24:38.497791+03
-7823	2882	2	\N	2016-05-14 19:25:04.0458+03
-7824	2888	2	\N	2016-05-14 19:26:49.355068+03
-7825	2889	2	\N	2016-05-14 19:27:41.044427+03
-7826	2888	2	\N	2016-05-14 19:28:16.54874+03
-7827	2889	2	\N	2016-05-14 19:33:22.988649+03
-7828	2131	2	\N	2016-05-15 18:01:05.003665+03
-7829	1932	2	\N	2016-05-15 18:01:28.601998+03
-7830	1939	2	\N	2016-05-15 18:01:28.601998+03
-7831	2131	2	\N	2016-05-15 18:01:28.601998+03
-7832	2890	2	\N	2016-05-15 18:35:21.882133+03
-7847	1849	2	\N	2016-05-22 20:11:06.601318+03
-7848	2903	2	\N	2016-05-22 20:42:01.686171+03
-7849	2904	2	\N	2016-05-22 20:43:32.285069+03
-\.
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company_en; Owner: -
---
-
-SELECT pg_catalog.setval('resource_log_id_seq', 7850, true);
 
 
 --
@@ -50791,7 +48587,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-309c8478ded6
+c38723878dbe
 \.
 
 
@@ -50891,7 +48687,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
+COPY campaign (id, resource_id, name, start_dt, status, mail_id, person_category_id) FROM stdin;
 \.
 
 
@@ -51132,6 +48928,14 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
+-- Data for Name: employee_subscription; Type: TABLE DATA; Schema: company_ru; Owner: -
+--
+
+COPY employee_subscription (employee_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: employee_upload; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
@@ -51301,7 +49105,7 @@ SELECT pg_catalog.setval('location_id_seq', 1, true);
 -- Data for Name: mail; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
-COPY mail (id, resource_id, name, html_content, descr) FROM stdin;
+COPY mail (id, resource_id, name, html_content, descr, subject) FROM stdin;
 \.
 
 
@@ -51421,7 +49225,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
-COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
+COPY notification (id, resource_id, descr, url, created) FROM stdin;
 \.
 
 
@@ -51701,1275 +49505,1275 @@ SELECT pg_catalog.setval('region_id_seq', 1, true);
 -- Data for Name: resource; Type: TABLE DATA; Schema: company_ru; Owner: -
 --
 
-COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
-12	12	2	\N
-14	12	2	\N
-16	12	2	\N
-30	12	2	\N
-31	12	2	\N
-32	12	2	\N
-33	12	2	\N
-34	12	2	\N
-35	12	2	\N
-36	12	2	\N
-37	12	2	\N
-38	12	2	\N
-39	12	2	\N
-40	12	2	\N
-43	12	2	\N
-44	12	2	\N
-45	12	2	\N
-83	2	2	\N
-84	2	2	\N
-277	39	2	\N
-913	72	2	\N
-914	72	2	\N
-915	72	2	\N
-916	72	2	\N
-917	72	2	\N
-2890	93	2	f
-918	72	2	\N
-919	72	2	\N
-928	73	2	\N
-929	73	2	\N
-930	73	2	\N
-931	73	2	\N
-932	73	2	\N
-933	73	2	\N
-935	73	2	\N
-936	73	2	\N
-937	73	2	\N
-948	73	2	\N
-949	73	2	\N
-950	73	2	\N
-952	73	2	\N
-953	12	2	\N
-954	12	2	\N
-955	65	2	\N
-956	65	2	\N
-957	74	2	\N
-958	74	2	\N
-1647	39	2	f
-2266	137	2	f
-2267	134	2	f
-2268	12	2	f
-2269	105	2	f
-1915	111	2	f
-1917	110	2	f
-1949	123	2	f
-1961	123	2	f
-2714	104	2	f
-2715	119	2	f
-2716	119	2	f
-2717	119	2	f
-2718	119	2	f
-2881	69	2	f
-2882	12	2	f
-2883	65	2	f
-278	39	2	\N
-279	39	2	\N
-280	39	2	\N
-281	39	2	\N
-282	39	2	\N
-283	12	2	\N
-286	41	2	\N
-287	41	2	\N
-288	41	2	\N
-289	41	2	\N
-938	73	2	\N
-939	73	2	\N
-961	74	2	\N
-962	74	2	\N
-963	74	2	\N
-964	74	2	\N
-965	74	2	\N
-966	74	2	\N
-967	74	2	\N
-968	74	2	\N
-969	74	2	\N
-970	74	2	\N
-971	74	2	\N
-973	75	2	\N
-975	75	2	\N
-976	75	2	\N
-977	75	2	\N
-978	75	2	\N
-979	75	2	\N
-980	75	2	\N
-981	75	2	\N
-982	75	2	\N
-983	75	2	\N
-984	75	2	\N
-1616	69	2	f
-1619	69	2	f
-1620	87	2	f
-1621	87	2	f
-1622	89	2	f
-1623	90	2	f
-1381	89	2	f
-2439	117	2	f
-2784	123	2	f
-1932	93	2	f
-2786	2	2	f
-2787	2	2	f
-2788	12	2	f
-2813	12	2	f
-2814	87	2	f
-2815	93	2	f
-2842	119	2	f
-290	41	2	\N
-291	41	2	\N
-943	73	2	\N
-944	73	2	\N
-945	73	2	\N
-946	73	2	\N
-947	73	2	\N
-998	65	2	\N
-1005	78	2	\N
-1007	12	2	\N
-1008	65	2	\N
-1009	79	2	\N
-1325	83	2	f
-1326	84	2	f
-1327	83	2	f
-1328	39	2	f
-1329	84	2	f
-1330	83	2	f
-1331	83	2	f
-1332	39	2	f
-1333	84	2	f
-1334	83	2	f
-1335	83	2	f
-1340	39	2	f
-1344	39	2	f
-1345	84	2	f
-1346	83	2	f
-1350	83	2	f
-1352	39	2	f
-1353	84	2	f
-1354	83	2	f
-1355	39	2	f
-1356	84	2	f
-1357	83	2	f
-2231	78	2	f
-2232	78	2	f
-2233	78	2	f
-1639	106	2	f
-1640	87	2	f
-1641	87	2	f
-1642	89	2	f
-1643	89	2	f
-2047	119	2	f
-1764	111	2	f
-1766	111	2	f
-1769	105	2	f
-1771	111	2	f
-1773	111	2	f
-2285	135	2	f
-2291	93	2	f
-2292	12	2	f
-2293	145	2	f
-2048	65	2	f
-2049	12	2	f
-2050	87	2	f
-2051	69	2	f
-2052	130	2	f
-1939	93	2	f
-2054	2	2	f
-1906	65	2	f
-1990	106	2	f
-1991	106	2	f
-1992	106	2	f
-2029	119	2	f
-2442	117	2	f
-2546	110	2	f
-2573	69	2	f
-921	73	2	\N
-1648	84	2	f
-2458	106	2	f
-2556	151	2	f
-2557	151	2	f
-2568	145	2	f
-1649	83	2	f
-1650	87	2	f
-2569	130	2	f
-2570	69	2	f
-922	73	2	\N
-923	73	2	\N
-924	73	2	\N
-1651	89	2	f
-1652	90	2	f
-1653	69	2	f
-925	73	2	\N
-926	73	2	\N
-1659	65	2	f
-1882	106	2	f
-1660	106	2	f
-927	73	2	\N
-2046	119	2	f
-959	74	2	\N
-960	74	2	\N
-1714	110	2	f
-985	75	2	\N
-987	75	2	\N
-1721	110	2	f
-1884	12	2	f
-1885	65	2	f
-1888	117	2	f
-1893	120	2	f
-1894	12	2	f
-1004	78	2	\N
-1309	90	2	f
-1310	41	2	f
-1895	65	2	f
-1311	41	2	f
-1312	65	2	f
-1313	12	2	f
-1896	65	2	f
-1314	102	2	f
-1317	12	2	f
-1320	83	2	f
-1321	84	2	f
-1322	83	2	f
-1950	123	2	f
-1951	90	2	f
-1952	86	2	f
-1907	65	2	f
-1956	87	2	f
-1958	93	2	f
-1959	123	2	f
-2104	135	2	f
-1323	83	2	f
-2105	135	2	f
-2106	135	2	f
-2107	12	2	f
-2108	12	2	f
-2111	83	2	f
-2115	39	2	f
-2119	90	2	f
-2168	137	2	f
-2171	93	2	f
-2172	135	2	f
-2173	137	2	f
-1324	83	2	f
-1358	83	2	f
-1359	84	2	f
-1360	83	2	f
-2452	117	2	f
-2457	106	2	f
-1361	84	2	f
-1365	39	2	f
-1366	84	2	f
-1367	83	2	f
-1368	65	2	f
-1371	87	2	f
-1373	87	2	f
-1374	90	2	f
-1624	87	2	f
-1625	89	2	f
-1376	89	2	f
-1626	69	2	f
-1378	78	2	f
-1627	69	2	f
-1628	69	2	f
-1379	87	2	f
-1380	87	2	f
-1383	69	2	f
-2260	135	2	f
-2261	142	2	f
-2262	135	2	f
-2263	142	2	f
-2264	134	2	f
-2265	135	2	f
-1780	105	2	f
-1797	12	2	f
-1798	65	2	f
-1799	12	2	f
-1804	118	2	f
-2	2	2	\N
-2127	12	2	f
-3	2	2	\N
-10	12	2	\N
-1010	79	2	\N
-1080	65	2	\N
-1081	12	2	\N
-1099	39	2	\N
-2309	69	2	f
-2128	65	2	f
-2129	138	2	f
-2130	138	2	f
-2132	118	2	f
-2440	117	2	f
-2201	104	2	f
-2459	106	2	f
-2463	111	2	f
-2465	120	2	f
-2563	69	2	f
-2564	145	2	f
-2565	130	2	f
-2203	104	2	f
-2205	110	2	f
-2234	78	2	f
-2566	69	2	f
-2133	123	2	f
-2567	145	2	f
-2571	145	2	f
-2135	12	2	f
-2572	130	2	f
-2710	119	2	f
-2711	119	2	f
-2712	119	2	f
-2713	119	2	f
-2816	93	2	f
-2817	123	2	f
-2836	119	2	f
-2136	65	2	f
-2320	12	2	f
-2327	87	2	f
-2328	69	2	f
-2583	12	2	f
-2329	145	2	f
-2330	145	2	f
-2331	146	2	f
-2837	135	2	f
-2332	146	2	f
-2333	130	2	f
-2838	144	2	f
-2855	119	2	f
-2861	117	2	f
-2862	117	2	f
-2334	104	2	f
-2335	104	2	f
-2336	104	2	f
-2235	78	2	f
-2236	78	2	f
-2337	104	2	f
-2338	87	2	f
-2339	69	2	f
-2340	69	2	f
-2237	78	2	f
-2238	78	2	f
-2239	78	2	f
-1774	111	2	f
-1775	59	2	f
-1777	65	2	f
-1778	12	2	f
-1800	118	2	f
-2294	145	2	f
-1801	118	2	f
-2295	145	2	f
-1802	118	2	f
-2296	12	2	f
-2297	145	2	f
-2299	146	2	f
-2300	145	2	f
-2304	123	2	f
-1910	106	2	f
-1911	106	2	f
-2075	93	2	f
-2076	123	2	f
-2077	12	2	f
-2087	118	2	f
-2088	130	2	f
-2089	87	2	f
-2090	69	2	f
-2092	118	2	f
-2095	87	2	f
-2096	118	2	f
-2097	118	2	f
-2307	87	2	f
-2120	101	2	f
-2126	2	2	f
-2341	135	2	f
-2342	137	2	f
-2343	135	2	f
-2344	143	2	f
-2030	119	2	f
-2031	119	2	f
-2308	87	2	f
-2032	110	2	f
-2038	119	2	f
-2903	119	2	f
-2514	65	2	f
-2515	148	2	f
-2516	12	2	f
-2871	119	2	f
-2517	149	2	f
-2518	149	2	f
-2519	47	2	f
-2520	149	2	f
-2521	149	2	f
-2522	149	2	f
-2873	87	2	f
-2874	87	2	f
-2875	69	2	f
-2876	145	2	f
-2877	130	2	f
-2878	87	2	f
-2887	12	2	f
-2888	65	2	f
-2889	65	2	f
-1316	102	2	f
-1336	39	2	f
-1362	83	2	f
-1363	84	2	f
-1364	83	2	f
-1372	69	2	f
-2523	149	2	f
-2524	149	2	f
-1375	69	2	f
-2525	149	2	f
-1382	90	2	f
-2526	149	2	f
-1385	84	2	f
-2527	149	2	f
-1386	83	2	f
-2528	149	2	f
-2529	119	2	f
-2536	110	2	f
-2537	119	2	f
-2538	119	2	f
-2574	145	2	f
-2575	130	2	f
-1387	87	2	f
-1388	90	2	f
-1389	69	2	f
-1390	69	2	f
-1391	90	2	f
-1416	39	2	f
-2271	140	2	f
-2272	78	2	f
-2273	135	2	f
-2286	137	2	f
-2287	135	2	f
-2288	142	2	f
-2289	104	2	f
-2290	104	2	f
-1424	12	2	f
-1425	65	2	f
-1426	105	2	f
-1431	105	2	f
-1432	105	2	f
-1433	12	2	f
-1434	65	2	f
-2576	69	2	f
-2577	145	2	f
-2578	145	2	f
-2579	130	2	f
-2580	69	2	f
-2581	145	2	f
-2582	130	2	f
-2345	134	2	f
-2366	87	2	f
-2367	69	2	f
-2368	145	2	f
-2369	146	2	f
-2370	118	2	f
-2371	93	2	f
-2372	130	2	f
-2373	39	2	f
-2648	65	2	f
-2649	65	2	f
-2650	65	2	f
-2429	105	2	f
-2430	105	2	f
-2510	110	2	f
-2511	86	2	f
-2513	12	2	f
-2544	148	2	f
-907	71	2	\N
-908	12	2	\N
-909	12	2	\N
-2131	93	2	f
-2891	87	2	f
-2892	69	2	f
-2893	145	2	f
-2894	130	2	f
-2589	89	2	f
-2590	90	2	f
-2545	86	2	f
-2547	119	2	f
-2548	119	2	f
-2591	69	2	f
-2592	123	2	f
-2593	69	2	f
-2594	87	2	f
-2595	69	2	f
-2596	145	2	f
-2376	69	2	f
-2377	135	2	f
-2549	12	2	f
-2378	137	2	f
-2550	87	2	f
-2379	135	2	f
-2551	12	2	f
-2552	65	2	f
-2553	65	2	f
-2554	65	2	f
-2725	119	2	f
-2726	110	2	f
-2727	119	2	f
-2728	119	2	f
-2730	93	2	f
-2731	123	2	f
-2732	148	2	f
-2818	93	2	f
-2819	123	2	f
-2380	143	2	f
-2381	93	2	f
-2382	134	2	f
-2383	104	2	f
-2384	104	2	f
-2385	104	2	f
-2389	105	2	f
-2390	105	2	f
-2391	105	2	f
-2396	105	2	f
-2397	105	2	f
-2398	105	2	f
-2415	105	2	f
-2416	105	2	f
-2670	146	2	f
-2677	89	2	f
-2678	69	2	f
-2679	69	2	f
-2680	89	2	f
-2681	89	2	f
-2424	105	2	f
-2425	105	2	f
-2426	105	2	f
-2682	149	2	f
-2683	89	2	f
-2427	105	2	f
-2428	105	2	f
-2684	149	2	f
-2685	89	2	f
-2686	135	2	f
-2431	105	2	f
-2687	137	2	f
-2690	134	2	f
-2693	110	2	f
-2694	110	2	f
-2695	86	2	f
-2530	119	2	f
-2531	119	2	f
-2532	119	2	f
-2533	119	2	f
-2534	119	2	f
-2535	119	2	f
-2539	110	2	f
-2540	86	2	f
-2541	119	2	f
-2542	148	2	f
-2543	148	2	f
-2820	118	2	f
-2821	87	2	f
-2822	69	2	f
-2823	145	2	f
-1546	106	2	f
-2824	130	2	f
-1547	106	2	f
-1548	12	2	f
-1549	12	2	f
-2825	146	2	f
-2826	118	2	f
-2827	135	2	f
-2828	137	2	f
-2841	104	2	f
-2865	78	2	f
-2866	117	2	f
-2867	111	2	f
-1550	65	2	f
-1551	87	2	f
-1552	87	2	f
-2597	145	2	f
-2636	65	2	f
-2637	65	2	f
-2638	65	2	f
-2392	105	2	f
-2393	105	2	f
-2394	105	2	f
-2395	105	2	f
-2642	65	2	f
-274	12	2	\N
-292	41	2	\N
-306	41	2	\N
-706	12	2	\N
-723	12	2	\N
-725	55	2	\N
-726	55	2	\N
-728	55	2	\N
-734	55	2	\N
-743	55	2	\N
-763	55	2	\N
-764	12	2	\N
-769	12	2	\N
-2643	65	2	f
-2646	65	2	f
-2647	65	2	f
-2651	65	2	f
-2652	65	2	f
-2653	65	2	f
-771	55	2	\N
-772	59	2	\N
-837	65	2	\N
-2895	39	2	f
-1067	78	2	\N
-1068	12	2	\N
-1165	39	2	\N
-2654	65	2	f
-2655	65	2	f
-2896	84	2	f
-1185	39	2	\N
-1195	87	2	\N
-1198	12	2	\N
-1261	89	2	f
-1807	90	2	f
-1833	118	2	f
-1435	12	2	f
-1436	65	2	f
-1438	107	2	f
-1439	107	2	f
-1511	101	2	f
-1512	101	2	f
-1513	101	2	f
-1521	12	2	f
-1535	110	2	f
-1536	110	2	f
-1537	110	2	f
-1538	110	2	f
-1539	110	2	f
-1540	110	2	f
-1541	110	2	f
-2897	83	2	f
-2417	105	2	f
-1543	87	2	f
-1544	87	2	f
-1545	87	2	f
-2659	87	2	f
-2661	145	2	f
-2662	130	2	f
-2663	118	2	f
-2418	105	2	f
-2419	105	2	f
-2420	105	2	f
-2421	105	2	f
-2422	105	2	f
-2423	105	2	f
-2698	110	2	f
-2699	86	2	f
-2700	119	2	f
-2701	119	2	f
-2879	69	2	f
-773	12	2	\N
-887	69	2	\N
-2183	137	2	f
-2660	69	2	f
-2664	149	2	f
-2665	149	2	f
-2666	87	2	f
-2667	69	2	f
-2898	69	2	f
-2668	145	2	f
-2899	135	2	f
-894	2	2	\N
-896	39	2	\N
-1011	12	2	\N
-2669	130	2	f
-2671	93	2	f
-2672	123	2	f
-2673	39	2	f
-2839	119	2	f
-2840	119	2	f
-1278	39	2	f
-1283	71	2	f
-1284	69	2	f
-1285	87	2	f
-1286	89	2	f
-1287	84	2	f
-1288	90	2	f
-1289	84	2	f
-1290	39	2	f
-1291	84	2	f
-1292	83	2	f
-1293	69	2	f
-1294	69	2	f
-1304	87	2	f
-1306	90	2	f
-1849	12	2	f
-1447	106	2	f
-1448	106	2	f
-1450	12	2	f
-1452	12	2	f
-1464	87	2	f
-1465	69	2	f
-1467	89	2	f
-1472	69	2	f
-1473	69	2	f
-1485	106	2	f
-1500	106	2	f
-1504	104	2	f
-1505	104	2	f
-1506	104	2	f
-1507	107	2	f
-1509	106	2	f
-1514	101	2	f
-1515	101	2	f
-1516	87	2	f
-1517	87	2	f
-1518	87	2	f
-1519	87	2	f
-1553	79	2	f
-2584	93	2	f
-2585	87	2	f
-2586	87	2	f
-2587	87	2	f
-2588	89	2	f
-2633	65	2	f
-2634	65	2	f
-2635	65	2	f
-2174	135	2	f
-2175	137	2	f
-2176	135	2	f
-2177	137	2	f
-2178	135	2	f
-2179	137	2	f
-2180	135	2	f
-2181	137	2	f
-2182	135	2	f
-897	39	2	\N
-898	39	2	\N
-899	39	2	\N
-900	65	2	\N
-2435	146	2	f
-901	12	2	\N
-902	65	2	\N
-903	71	2	\N
-2451	106	2	f
-2486	101	2	f
-2489	86	2	f
-2490	86	2	f
-2491	86	2	f
-2493	87	2	f
-2501	110	2	f
-2502	110	2	f
-2503	119	2	f
-2505	110	2	f
-2506	86	2	f
-2507	110	2	f
-2508	110	2	f
-2737	106	2	f
-2738	117	2	f
-2739	69	2	f
-2740	12	2	f
-2832	119	2	f
-2863	111	2	f
-2864	140	2	f
-2274	143	2	f
-2275	134	2	f
-2276	12	2	f
-2277	105	2	f
-2278	135	2	f
-2279	144	2	f
-2280	134	2	f
-2281	104	2	f
-2282	135	2	f
-2284	134	2	f
-1962	93	2	f
-1963	123	2	f
-1964	93	2	f
-1965	123	2	f
-1966	12	2	f
-2098	118	2	f
-2099	12	2	f
-2100	12	2	f
-1978	2	2	f
-2101	65	2	f
-1979	118	2	f
-1985	93	2	f
-1986	123	2	f
-1988	119	2	f
-1989	12	2	f
-2602	65	2	f
-2603	65	2	f
-2604	65	2	f
-2605	65	2	f
-2608	65	2	f
-2612	65	2	f
-2613	65	2	f
-2617	65	2	f
-2039	119	2	f
-2044	119	2	f
-2156	135	2	f
-2157	137	2	f
-2158	135	2	f
-2159	137	2	f
-2160	135	2	f
-2161	137	2	f
-2162	135	2	f
-2163	137	2	f
-2164	135	2	f
-2165	137	2	f
-2167	135	2	f
-2045	119	2	f
-2399	105	2	f
-2400	105	2	f
-2401	105	2	f
-2402	105	2	f
-2403	105	2	f
-2704	119	2	f
-2705	119	2	f
-2706	119	2	f
-2707	119	2	f
-2708	119	2	f
-2709	119	2	f
-2434	130	2	f
-775	12	2	\N
-778	65	2	\N
-779	65	2	\N
-780	65	2	\N
-784	47	2	\N
-788	12	2	\N
-789	67	2	\N
-790	65	2	\N
-791	65	2	\N
-792	65	2	\N
-794	55	2	\N
-800	55	2	\N
-801	55	2	\N
-802	65	2	\N
-1468	84	2	f
-1469	90	2	f
-1470	83	2	f
-1471	69	2	f
-1913	117	2	f
-1510	101	2	f
-1968	12	2	f
-1970	126	2	f
-1971	93	2	f
-1972	123	2	f
-1973	123	2	f
-1975	65	2	f
-1977	12	2	f
-1554	101	2	f
-1556	101	2	f
-1559	87	2	f
-1560	79	2	f
-2137	139	2	f
-2138	139	2	f
-2139	139	2	f
-2144	135	2	f
-2145	137	2	f
-2146	135	2	f
-2147	137	2	f
-838	65	2	\N
-849	41	2	\N
-851	41	2	\N
-852	41	2	\N
-853	41	2	\N
-854	2	2	\N
-855	2	2	\N
-856	2	2	\N
-864	65	2	\N
-865	12	2	\N
-866	65	2	\N
-1307	90	2	f
-1308	90	2	f
-1337	84	2	f
-1338	83	2	f
-1347	39	2	f
-1348	84	2	f
-1349	83	2	f
-1393	12	2	f
-1394	65	2	f
-1395	65	2	f
-1396	104	2	f
-1398	104	2	f
-1400	104	2	f
-1401	104	2	f
-1402	104	2	f
-1403	104	2	f
-1404	87	2	f
-1406	89	2	f
-1407	90	2	f
-1408	69	2	f
-1409	69	2	f
-1410	69	2	f
-1411	69	2	f
-2148	135	2	f
-2149	137	2	f
-2150	135	2	f
-2187	135	2	f
-2188	137	2	f
-2189	135	2	f
-2190	137	2	f
-2674	84	2	f
-2675	83	2	f
-2676	87	2	f
-1413	102	2	f
-1414	90	2	f
-1415	91	2	f
-1417	84	2	f
-1418	90	2	f
-1419	91	2	f
-1420	101	2	f
-2152	135	2	f
-2153	137	2	f
-2154	135	2	f
-2155	137	2	f
-2184	135	2	f
-2185	137	2	f
-2186	134	2	f
-2688	135	2	f
-2880	87	2	f
-904	71	2	\N
-905	71	2	\N
-906	71	2	\N
-910	65	2	\N
-911	65	2	\N
-912	72	2	\N
-1318	102	2	f
-1319	84	2	f
-2206	110	2	f
-2207	110	2	f
-1607	106	2	f
-1608	105	2	f
-1341	84	2	f
-1609	105	2	f
-2433	145	2	f
-2689	143	2	f
-2558	12	2	f
-2559	151	2	f
-1342	83	2	f
-1610	87	2	f
-1611	87	2	f
-1612	89	2	f
-1613	89	2	f
-1614	90	2	f
-2560	69	2	f
-2561	145	2	f
-2562	130	2	f
-2733	148	2	f
-1615	69	2	f
-2208	110	2	f
-2209	110	2	f
-2210	86	2	f
-2211	110	2	f
-2212	110	2	f
-2213	86	2	f
-2734	119	2	f
-2735	119	2	f
-2843	119	2	f
-1370	90	2	f
-1384	39	2	f
-2283	137	2	f
-1803	118	2	f
-2301	146	2	f
-2302	118	2	f
-2303	93	2	f
-1852	119	2	f
-1898	105	2	f
-1900	120	2	f
-1901	120	2	f
-1902	117	2	f
-1903	111	2	f
-1904	65	2	f
-1905	65	2	f
-1561	87	2	f
-1562	87	2	f
-1563	79	2	f
-1564	101	2	f
-2844	119	2	f
-1569	101	2	f
-1570	101	2	f
-1571	65	2	f
-1575	65	2	f
-1576	86	2	f
-2845	119	2	f
-2846	119	2	f
-2847	119	2	f
-2848	119	2	f
-2849	119	2	f
-2850	119	2	f
-2851	119	2	f
-2852	110	2	f
-2853	86	2	f
-2854	119	2	f
-1577	87	2	f
-1578	79	2	f
-1579	110	2	f
-1580	78	2	f
-1581	87	2	f
-1582	89	2	f
-2598	145	2	f
-2599	130	2	f
-2868	93	2	f
-2869	93	2	f
-2870	119	2	f
-2151	137	2	f
-988	75	2	\N
-1003	12	2	\N
-1078	12	2	\N
-1088	12	2	\N
-1089	65	2	\N
-1090	39	2	\N
-1091	84	2	\N
-1093	84	2	\N
-1095	70	2	\N
-1096	39	2	\N
-1199	89	2	\N
-1204	87	2	\N
-1205	89	2	\N
-1206	89	2	\N
-1252	59	2	f
-1257	87	2	f
-1258	87	2	f
-1644	90	2	f
-1645	69	2	f
-1918	119	2	f
-1919	12	2	f
-1922	93	2	f
-1924	118	2	f
-1925	89	2	f
-1926	90	2	f
-1927	87	2	f
-1930	93	2	f
-1931	118	2	f
-1933	93	2	f
-1934	93	2	f
-1935	93	2	f
-1936	93	2	f
-1940	93	2	f
-1941	12	2	f
-1945	123	2	f
-1946	123	2	f
-1947	123	2	f
-1948	123	2	f
-1954	12	2	f
-1584	89	2	f
-1585	90	2	f
-1586	69	2	f
-1587	39	2	f
-1588	84	2	f
-1589	84	2	f
-1590	83	2	f
-1591	87	2	f
-1592	89	2	f
-1593	69	2	f
-1597	104	2	f
-2631	65	2	f
-2632	65	2	f
-2702	119	2	f
-2703	119	2	f
-2829	93	2	f
-2830	69	2	f
-2831	134	2	f
-2833	110	2	f
-2834	86	2	f
-2835	104	2	f
-2859	148	2	f
-2860	106	2	f
-885	47	2	\N
-895	39	2	\N
-940	73	2	\N
-941	73	2	\N
-942	73	2	\N
-1259	87	2	f
-1260	87	2	f
-2200	104	2	f
-2214	110	2	f
-2215	86	2	f
-2216	78	2	f
-2217	12	2	f
-2218	140	2	f
-2219	65	2	f
-2221	140	2	f
-2222	65	2	f
-2223	78	2	f
-2224	78	2	f
-2225	78	2	f
-2226	78	2	f
-2227	78	2	f
-2228	78	2	f
-2229	78	2	f
-2230	78	2	f
-1908	65	2	f
-2055	12	2	f
-2062	93	2	f
-2063	93	2	f
-2064	123	2	f
-2065	118	2	f
-2066	93	2	f
-2067	123	2	f
-2068	93	2	f
-2069	123	2	f
-2070	12	2	f
-2305	145	2	f
-2306	146	2	f
-1993	106	2	f
-2310	145	2	f
-1994	106	2	f
-2311	93	2	f
-1995	106	2	f
-1996	106	2	f
-2312	130	2	f
-1997	106	2	f
-2313	145	2	f
-2314	69	2	f
-2315	135	2	f
-2001	106	2	f
-2316	137	2	f
-2002	106	2	f
-2317	134	2	f
-2319	104	2	f
-2006	106	2	f
-2007	106	2	f
-2009	93	2	f
-2010	123	2	f
-2011	110	2	f
-2012	118	2	f
-2013	87	2	f
-2014	89	2	f
-2015	90	2	f
-2016	93	2	f
-2017	69	2	f
-2018	87	2	f
-2019	89	2	f
-2020	69	2	f
-2023	104	2	f
-2024	104	2	f
-2027	106	2	f
-2028	106	2	f
-2436	93	2	f
-2437	146	2	f
-2438	117	2	f
-1880	106	2	f
-1881	106	2	f
-2374	84	2	f
-2375	83	2	f
-2413	105	2	f
-871	69	2	\N
-872	12	2	\N
-873	65	2	\N
-874	65	2	\N
-876	41	2	\N
-878	70	2	\N
-2857	119	2	f
-879	65	2	\N
-1079	65	2	\N
-1097	84	2	\N
-1101	39	2	\N
-1102	84	2	\N
-1159	78	2	\N
-1170	39	2	\N
-1179	39	2	\N
-1189	12	2	\N
-1190	12	2	\N
-1191	86	2	\N
-1192	86	2	\N
-1193	87	2	\N
-1194	87	2	\N
-1200	89	2	\N
-1201	87	2	\N
-1210	90	2	\N
-1211	12	2	\N
-1212	65	2	\N
-1213	90	2	\N
-1214	91	2	\N
-1225	12	2	\N
-1230	93	2	\N
-1243	87	2	f
-1244	87	2	f
-1253	65	2	f
-1263	87	2	f
-1264	87	2	f
-1265	89	2	f
-1268	12	2	f
-2197	93	2	f
-2198	123	2	f
-2199	105	2	f
-2240	78	2	f
-2241	78	2	f
-2242	78	2	f
-2243	12	2	f
-2244	12	2	f
-2245	65	2	f
-2246	105	2	f
-2247	102	2	f
-2248	141	2	f
-2249	141	2	f
-2254	135	2	f
-2255	142	2	f
-2256	135	2	f
-2257	142	2	f
-2258	135	2	f
-2259	142	2	f
-1853	119	2	f
-1854	119	2	f
-1855	119	2	f
-1859	119	2	f
-1860	119	2	f
-1865	117	2	f
-1866	117	2	f
-1867	117	2	f
-1868	117	2	f
-1869	69	2	f
-1870	78	2	f
-1872	118	2	f
-1873	105	2	f
-1875	106	2	f
-1876	106	2	f
-863	65	2	\N
-870	69	2	\N
-875	70	2	\N
-1207	12	2	\N
-1209	90	2	\N
-1218	39	2	\N
-1221	12	2	\N
-1227	93	2	\N
-1240	41	2	f
-1241	39	2	f
-1282	87	2	f
-1980	93	2	f
-1981	118	2	f
-1982	93	2	f
-1983	93	2	f
-1984	123	2	f
-2404	105	2	f
-2405	105	2	f
-2406	105	2	f
-2407	105	2	f
-2408	105	2	f
-2409	105	2	f
-2410	105	2	f
-2411	105	2	f
-2412	105	2	f
-2414	105	2	f
-2432	105	2	f
-2719	119	2	f
-2720	119	2	f
-2721	119	2	f
-2722	119	2	f
-2723	104	2	f
-2724	119	2	f
-2736	119	2	f
-2741	65	2	f
-2742	12	2	f
-2779	123	2	f
-2780	123	2	f
-2781	123	2	f
-2782	123	2	f
-2783	123	2	f
-2466	117	2	f
-2467	111	2	f
-2468	119	2	f
-2469	119	2	f
-2470	119	2	f
-2475	90	2	f
-2900	137	2	f
-2484	2	2	f
-2901	93	2	f
-2902	134	2	f
+COPY resource (id, resource_type_id, maintainer_id, protected, modifydt) FROM stdin;
+12	12	2	\N	\N
+14	12	2	\N	\N
+16	12	2	\N	\N
+30	12	2	\N	\N
+31	12	2	\N	\N
+32	12	2	\N	\N
+33	12	2	\N	\N
+34	12	2	\N	\N
+35	12	2	\N	\N
+36	12	2	\N	\N
+37	12	2	\N	\N
+38	12	2	\N	\N
+39	12	2	\N	\N
+40	12	2	\N	\N
+43	12	2	\N	\N
+44	12	2	\N	\N
+45	12	2	\N	\N
+83	2	2	\N	\N
+84	2	2	\N	\N
+277	39	2	\N	\N
+913	72	2	\N	\N
+914	72	2	\N	\N
+915	72	2	\N	\N
+916	72	2	\N	\N
+917	72	2	\N	\N
+2890	93	2	f	\N
+918	72	2	\N	\N
+919	72	2	\N	\N
+928	73	2	\N	\N
+929	73	2	\N	\N
+930	73	2	\N	\N
+931	73	2	\N	\N
+932	73	2	\N	\N
+933	73	2	\N	\N
+935	73	2	\N	\N
+936	73	2	\N	\N
+937	73	2	\N	\N
+948	73	2	\N	\N
+949	73	2	\N	\N
+950	73	2	\N	\N
+952	73	2	\N	\N
+953	12	2	\N	\N
+954	12	2	\N	\N
+955	65	2	\N	\N
+956	65	2	\N	\N
+957	74	2	\N	\N
+958	74	2	\N	\N
+1647	39	2	f	\N
+2266	137	2	f	\N
+2267	134	2	f	\N
+2268	12	2	f	\N
+2269	105	2	f	\N
+1915	111	2	f	\N
+1917	110	2	f	\N
+1949	123	2	f	\N
+1961	123	2	f	\N
+2714	104	2	f	\N
+2715	119	2	f	\N
+2716	119	2	f	\N
+2717	119	2	f	\N
+2718	119	2	f	\N
+2881	69	2	f	\N
+2882	12	2	f	\N
+2883	65	2	f	\N
+278	39	2	\N	\N
+279	39	2	\N	\N
+280	39	2	\N	\N
+281	39	2	\N	\N
+282	39	2	\N	\N
+283	12	2	\N	\N
+286	41	2	\N	\N
+287	41	2	\N	\N
+288	41	2	\N	\N
+289	41	2	\N	\N
+938	73	2	\N	\N
+939	73	2	\N	\N
+961	74	2	\N	\N
+962	74	2	\N	\N
+963	74	2	\N	\N
+964	74	2	\N	\N
+965	74	2	\N	\N
+966	74	2	\N	\N
+967	74	2	\N	\N
+968	74	2	\N	\N
+969	74	2	\N	\N
+970	74	2	\N	\N
+971	74	2	\N	\N
+973	75	2	\N	\N
+975	75	2	\N	\N
+976	75	2	\N	\N
+977	75	2	\N	\N
+978	75	2	\N	\N
+979	75	2	\N	\N
+980	75	2	\N	\N
+981	75	2	\N	\N
+982	75	2	\N	\N
+983	75	2	\N	\N
+984	75	2	\N	\N
+1616	69	2	f	\N
+1619	69	2	f	\N
+1620	87	2	f	\N
+1621	87	2	f	\N
+1622	89	2	f	\N
+1623	90	2	f	\N
+1381	89	2	f	\N
+2439	117	2	f	\N
+2784	123	2	f	\N
+1932	93	2	f	\N
+2786	2	2	f	\N
+2787	2	2	f	\N
+2788	12	2	f	\N
+2813	12	2	f	\N
+2814	87	2	f	\N
+2815	93	2	f	\N
+2842	119	2	f	\N
+290	41	2	\N	\N
+291	41	2	\N	\N
+943	73	2	\N	\N
+944	73	2	\N	\N
+945	73	2	\N	\N
+946	73	2	\N	\N
+947	73	2	\N	\N
+998	65	2	\N	\N
+1005	78	2	\N	\N
+1007	12	2	\N	\N
+1008	65	2	\N	\N
+1009	79	2	\N	\N
+1325	83	2	f	\N
+1326	84	2	f	\N
+1327	83	2	f	\N
+1328	39	2	f	\N
+1329	84	2	f	\N
+1330	83	2	f	\N
+1331	83	2	f	\N
+1332	39	2	f	\N
+1333	84	2	f	\N
+1334	83	2	f	\N
+1335	83	2	f	\N
+1340	39	2	f	\N
+1344	39	2	f	\N
+1345	84	2	f	\N
+1346	83	2	f	\N
+1350	83	2	f	\N
+1352	39	2	f	\N
+1353	84	2	f	\N
+1354	83	2	f	\N
+1355	39	2	f	\N
+1356	84	2	f	\N
+1357	83	2	f	\N
+2231	78	2	f	\N
+2232	78	2	f	\N
+2233	78	2	f	\N
+1639	106	2	f	\N
+1640	87	2	f	\N
+1641	87	2	f	\N
+1642	89	2	f	\N
+1643	89	2	f	\N
+2047	119	2	f	\N
+1764	111	2	f	\N
+1766	111	2	f	\N
+1769	105	2	f	\N
+1771	111	2	f	\N
+1773	111	2	f	\N
+2285	135	2	f	\N
+2291	93	2	f	\N
+2292	12	2	f	\N
+2293	145	2	f	\N
+2048	65	2	f	\N
+2049	12	2	f	\N
+2050	87	2	f	\N
+2051	69	2	f	\N
+2052	130	2	f	\N
+1939	93	2	f	\N
+2054	2	2	f	\N
+1906	65	2	f	\N
+1990	106	2	f	\N
+1991	106	2	f	\N
+1992	106	2	f	\N
+2029	119	2	f	\N
+2442	117	2	f	\N
+2546	110	2	f	\N
+2573	69	2	f	\N
+921	73	2	\N	\N
+1648	84	2	f	\N
+2458	106	2	f	\N
+2556	151	2	f	\N
+2557	151	2	f	\N
+2568	145	2	f	\N
+1649	83	2	f	\N
+1650	87	2	f	\N
+2569	130	2	f	\N
+2570	69	2	f	\N
+922	73	2	\N	\N
+923	73	2	\N	\N
+924	73	2	\N	\N
+1651	89	2	f	\N
+1652	90	2	f	\N
+1653	69	2	f	\N
+925	73	2	\N	\N
+926	73	2	\N	\N
+1659	65	2	f	\N
+1882	106	2	f	\N
+1660	106	2	f	\N
+927	73	2	\N	\N
+2046	119	2	f	\N
+959	74	2	\N	\N
+960	74	2	\N	\N
+1714	110	2	f	\N
+985	75	2	\N	\N
+987	75	2	\N	\N
+1721	110	2	f	\N
+1884	12	2	f	\N
+1885	65	2	f	\N
+1888	117	2	f	\N
+1893	120	2	f	\N
+1894	12	2	f	\N
+1004	78	2	\N	\N
+1309	90	2	f	\N
+1310	41	2	f	\N
+1895	65	2	f	\N
+1311	41	2	f	\N
+1312	65	2	f	\N
+1313	12	2	f	\N
+1896	65	2	f	\N
+1314	102	2	f	\N
+1317	12	2	f	\N
+1320	83	2	f	\N
+1321	84	2	f	\N
+1322	83	2	f	\N
+1950	123	2	f	\N
+1951	90	2	f	\N
+1952	86	2	f	\N
+1907	65	2	f	\N
+1956	87	2	f	\N
+1958	93	2	f	\N
+1959	123	2	f	\N
+2104	135	2	f	\N
+1323	83	2	f	\N
+2105	135	2	f	\N
+2106	135	2	f	\N
+2107	12	2	f	\N
+2108	12	2	f	\N
+2111	83	2	f	\N
+2115	39	2	f	\N
+2119	90	2	f	\N
+2168	137	2	f	\N
+2171	93	2	f	\N
+2172	135	2	f	\N
+2173	137	2	f	\N
+1324	83	2	f	\N
+1358	83	2	f	\N
+1359	84	2	f	\N
+1360	83	2	f	\N
+2452	117	2	f	\N
+2457	106	2	f	\N
+1361	84	2	f	\N
+1365	39	2	f	\N
+1366	84	2	f	\N
+1367	83	2	f	\N
+1368	65	2	f	\N
+1371	87	2	f	\N
+1373	87	2	f	\N
+1374	90	2	f	\N
+1624	87	2	f	\N
+1625	89	2	f	\N
+1376	89	2	f	\N
+1626	69	2	f	\N
+1378	78	2	f	\N
+1627	69	2	f	\N
+1628	69	2	f	\N
+1379	87	2	f	\N
+1380	87	2	f	\N
+1383	69	2	f	\N
+2260	135	2	f	\N
+2261	142	2	f	\N
+2262	135	2	f	\N
+2263	142	2	f	\N
+2264	134	2	f	\N
+2265	135	2	f	\N
+1780	105	2	f	\N
+1797	12	2	f	\N
+1798	65	2	f	\N
+1799	12	2	f	\N
+1804	118	2	f	\N
+2	2	2	\N	\N
+2127	12	2	f	\N
+3	2	2	\N	\N
+10	12	2	\N	\N
+1010	79	2	\N	\N
+1080	65	2	\N	\N
+1081	12	2	\N	\N
+1099	39	2	\N	\N
+2309	69	2	f	\N
+2128	65	2	f	\N
+2129	138	2	f	\N
+2130	138	2	f	\N
+2132	118	2	f	\N
+2440	117	2	f	\N
+2201	104	2	f	\N
+2459	106	2	f	\N
+2463	111	2	f	\N
+2465	120	2	f	\N
+2563	69	2	f	\N
+2564	145	2	f	\N
+2565	130	2	f	\N
+2203	104	2	f	\N
+2205	110	2	f	\N
+2234	78	2	f	\N
+2566	69	2	f	\N
+2133	123	2	f	\N
+2567	145	2	f	\N
+2571	145	2	f	\N
+2135	12	2	f	\N
+2572	130	2	f	\N
+2710	119	2	f	\N
+2711	119	2	f	\N
+2712	119	2	f	\N
+2713	119	2	f	\N
+2816	93	2	f	\N
+2817	123	2	f	\N
+2836	119	2	f	\N
+2136	65	2	f	\N
+2320	12	2	f	\N
+2327	87	2	f	\N
+2328	69	2	f	\N
+2583	12	2	f	\N
+2329	145	2	f	\N
+2330	145	2	f	\N
+2331	146	2	f	\N
+2837	135	2	f	\N
+2332	146	2	f	\N
+2333	130	2	f	\N
+2838	144	2	f	\N
+2855	119	2	f	\N
+2861	117	2	f	\N
+2862	117	2	f	\N
+2334	104	2	f	\N
+2335	104	2	f	\N
+2336	104	2	f	\N
+2235	78	2	f	\N
+2236	78	2	f	\N
+2337	104	2	f	\N
+2338	87	2	f	\N
+2339	69	2	f	\N
+2340	69	2	f	\N
+2237	78	2	f	\N
+2238	78	2	f	\N
+2239	78	2	f	\N
+1774	111	2	f	\N
+1775	59	2	f	\N
+1777	65	2	f	\N
+1778	12	2	f	\N
+1800	118	2	f	\N
+2294	145	2	f	\N
+1801	118	2	f	\N
+2295	145	2	f	\N
+1802	118	2	f	\N
+2296	12	2	f	\N
+2297	145	2	f	\N
+2299	146	2	f	\N
+2300	145	2	f	\N
+2304	123	2	f	\N
+1910	106	2	f	\N
+1911	106	2	f	\N
+2075	93	2	f	\N
+2076	123	2	f	\N
+2077	12	2	f	\N
+2087	118	2	f	\N
+2088	130	2	f	\N
+2089	87	2	f	\N
+2090	69	2	f	\N
+2092	118	2	f	\N
+2095	87	2	f	\N
+2096	118	2	f	\N
+2097	118	2	f	\N
+2307	87	2	f	\N
+2120	101	2	f	\N
+2126	2	2	f	\N
+2341	135	2	f	\N
+2342	137	2	f	\N
+2343	135	2	f	\N
+2344	143	2	f	\N
+2030	119	2	f	\N
+2031	119	2	f	\N
+2308	87	2	f	\N
+2032	110	2	f	\N
+2038	119	2	f	\N
+2903	119	2	f	\N
+2514	65	2	f	\N
+2515	148	2	f	\N
+2516	12	2	f	\N
+2871	119	2	f	\N
+2517	149	2	f	\N
+2518	149	2	f	\N
+2519	47	2	f	\N
+2520	149	2	f	\N
+2521	149	2	f	\N
+2522	149	2	f	\N
+2873	87	2	f	\N
+2874	87	2	f	\N
+2875	69	2	f	\N
+2876	145	2	f	\N
+2877	130	2	f	\N
+2878	87	2	f	\N
+2887	12	2	f	\N
+2888	65	2	f	\N
+2889	65	2	f	\N
+1316	102	2	f	\N
+1336	39	2	f	\N
+1362	83	2	f	\N
+1363	84	2	f	\N
+1364	83	2	f	\N
+1372	69	2	f	\N
+2523	149	2	f	\N
+2524	149	2	f	\N
+1375	69	2	f	\N
+2525	149	2	f	\N
+1382	90	2	f	\N
+2526	149	2	f	\N
+1385	84	2	f	\N
+2527	149	2	f	\N
+1386	83	2	f	\N
+2528	149	2	f	\N
+2529	119	2	f	\N
+2536	110	2	f	\N
+2537	119	2	f	\N
+2538	119	2	f	\N
+2574	145	2	f	\N
+2575	130	2	f	\N
+1387	87	2	f	\N
+1388	90	2	f	\N
+1389	69	2	f	\N
+1390	69	2	f	\N
+1391	90	2	f	\N
+1416	39	2	f	\N
+2271	140	2	f	\N
+2272	78	2	f	\N
+2273	135	2	f	\N
+2286	137	2	f	\N
+2287	135	2	f	\N
+2288	142	2	f	\N
+2289	104	2	f	\N
+2290	104	2	f	\N
+1424	12	2	f	\N
+1425	65	2	f	\N
+1426	105	2	f	\N
+1431	105	2	f	\N
+1432	105	2	f	\N
+1433	12	2	f	\N
+1434	65	2	f	\N
+2576	69	2	f	\N
+2577	145	2	f	\N
+2578	145	2	f	\N
+2579	130	2	f	\N
+2580	69	2	f	\N
+2581	145	2	f	\N
+2582	130	2	f	\N
+2345	134	2	f	\N
+2366	87	2	f	\N
+2367	69	2	f	\N
+2368	145	2	f	\N
+2369	146	2	f	\N
+2370	118	2	f	\N
+2371	93	2	f	\N
+2372	130	2	f	\N
+2373	39	2	f	\N
+2648	65	2	f	\N
+2649	65	2	f	\N
+2650	65	2	f	\N
+2429	105	2	f	\N
+2430	105	2	f	\N
+2510	110	2	f	\N
+2511	86	2	f	\N
+2513	12	2	f	\N
+2544	148	2	f	\N
+907	71	2	\N	\N
+908	12	2	\N	\N
+909	12	2	\N	\N
+2131	93	2	f	\N
+2891	87	2	f	\N
+2892	69	2	f	\N
+2893	145	2	f	\N
+2894	130	2	f	\N
+2589	89	2	f	\N
+2590	90	2	f	\N
+2545	86	2	f	\N
+2547	119	2	f	\N
+2548	119	2	f	\N
+2591	69	2	f	\N
+2592	123	2	f	\N
+2593	69	2	f	\N
+2594	87	2	f	\N
+2595	69	2	f	\N
+2596	145	2	f	\N
+2376	69	2	f	\N
+2377	135	2	f	\N
+2549	12	2	f	\N
+2378	137	2	f	\N
+2550	87	2	f	\N
+2379	135	2	f	\N
+2551	12	2	f	\N
+2552	65	2	f	\N
+2553	65	2	f	\N
+2554	65	2	f	\N
+2725	119	2	f	\N
+2726	110	2	f	\N
+2727	119	2	f	\N
+2728	119	2	f	\N
+2730	93	2	f	\N
+2731	123	2	f	\N
+2732	148	2	f	\N
+2818	93	2	f	\N
+2819	123	2	f	\N
+2380	143	2	f	\N
+2381	93	2	f	\N
+2382	134	2	f	\N
+2383	104	2	f	\N
+2384	104	2	f	\N
+2385	104	2	f	\N
+2389	105	2	f	\N
+2390	105	2	f	\N
+2391	105	2	f	\N
+2396	105	2	f	\N
+2397	105	2	f	\N
+2398	105	2	f	\N
+2415	105	2	f	\N
+2416	105	2	f	\N
+2670	146	2	f	\N
+2677	89	2	f	\N
+2678	69	2	f	\N
+2679	69	2	f	\N
+2680	89	2	f	\N
+2681	89	2	f	\N
+2424	105	2	f	\N
+2425	105	2	f	\N
+2426	105	2	f	\N
+2682	149	2	f	\N
+2683	89	2	f	\N
+2427	105	2	f	\N
+2428	105	2	f	\N
+2684	149	2	f	\N
+2685	89	2	f	\N
+2686	135	2	f	\N
+2431	105	2	f	\N
+2687	137	2	f	\N
+2690	134	2	f	\N
+2693	110	2	f	\N
+2694	110	2	f	\N
+2695	86	2	f	\N
+2530	119	2	f	\N
+2531	119	2	f	\N
+2532	119	2	f	\N
+2533	119	2	f	\N
+2534	119	2	f	\N
+2535	119	2	f	\N
+2539	110	2	f	\N
+2540	86	2	f	\N
+2541	119	2	f	\N
+2542	148	2	f	\N
+2543	148	2	f	\N
+2820	118	2	f	\N
+2821	87	2	f	\N
+2822	69	2	f	\N
+2823	145	2	f	\N
+1546	106	2	f	\N
+2824	130	2	f	\N
+1547	106	2	f	\N
+1548	12	2	f	\N
+1549	12	2	f	\N
+2825	146	2	f	\N
+2826	118	2	f	\N
+2827	135	2	f	\N
+2828	137	2	f	\N
+2841	104	2	f	\N
+2865	78	2	f	\N
+2866	117	2	f	\N
+2867	111	2	f	\N
+1550	65	2	f	\N
+1551	87	2	f	\N
+1552	87	2	f	\N
+2597	145	2	f	\N
+2636	65	2	f	\N
+2637	65	2	f	\N
+2638	65	2	f	\N
+2392	105	2	f	\N
+2393	105	2	f	\N
+2394	105	2	f	\N
+2395	105	2	f	\N
+2642	65	2	f	\N
+274	12	2	\N	\N
+292	41	2	\N	\N
+306	41	2	\N	\N
+706	12	2	\N	\N
+723	12	2	\N	\N
+725	55	2	\N	\N
+726	55	2	\N	\N
+728	55	2	\N	\N
+734	55	2	\N	\N
+743	55	2	\N	\N
+763	55	2	\N	\N
+764	12	2	\N	\N
+769	12	2	\N	\N
+2643	65	2	f	\N
+2646	65	2	f	\N
+2647	65	2	f	\N
+2651	65	2	f	\N
+2652	65	2	f	\N
+2653	65	2	f	\N
+771	55	2	\N	\N
+772	59	2	\N	\N
+837	65	2	\N	\N
+2895	39	2	f	\N
+1067	78	2	\N	\N
+1068	12	2	\N	\N
+1165	39	2	\N	\N
+2654	65	2	f	\N
+2655	65	2	f	\N
+2896	84	2	f	\N
+1185	39	2	\N	\N
+1195	87	2	\N	\N
+1198	12	2	\N	\N
+1261	89	2	f	\N
+1807	90	2	f	\N
+1833	118	2	f	\N
+1435	12	2	f	\N
+1436	65	2	f	\N
+1438	107	2	f	\N
+1439	107	2	f	\N
+1511	101	2	f	\N
+1512	101	2	f	\N
+1513	101	2	f	\N
+1521	12	2	f	\N
+1535	110	2	f	\N
+1536	110	2	f	\N
+1537	110	2	f	\N
+1538	110	2	f	\N
+1539	110	2	f	\N
+1540	110	2	f	\N
+1541	110	2	f	\N
+2897	83	2	f	\N
+2417	105	2	f	\N
+1543	87	2	f	\N
+1544	87	2	f	\N
+1545	87	2	f	\N
+2659	87	2	f	\N
+2661	145	2	f	\N
+2662	130	2	f	\N
+2663	118	2	f	\N
+2418	105	2	f	\N
+2419	105	2	f	\N
+2420	105	2	f	\N
+2421	105	2	f	\N
+2422	105	2	f	\N
+2423	105	2	f	\N
+2698	110	2	f	\N
+2699	86	2	f	\N
+2700	119	2	f	\N
+2701	119	2	f	\N
+2879	69	2	f	\N
+773	12	2	\N	\N
+887	69	2	\N	\N
+2183	137	2	f	\N
+2660	69	2	f	\N
+2664	149	2	f	\N
+2665	149	2	f	\N
+2666	87	2	f	\N
+2667	69	2	f	\N
+2898	69	2	f	\N
+2668	145	2	f	\N
+2899	135	2	f	\N
+894	2	2	\N	\N
+896	39	2	\N	\N
+1011	12	2	\N	\N
+2669	130	2	f	\N
+2671	93	2	f	\N
+2672	123	2	f	\N
+2673	39	2	f	\N
+2839	119	2	f	\N
+2840	119	2	f	\N
+1278	39	2	f	\N
+1283	71	2	f	\N
+1284	69	2	f	\N
+1285	87	2	f	\N
+1286	89	2	f	\N
+1287	84	2	f	\N
+1288	90	2	f	\N
+1289	84	2	f	\N
+1290	39	2	f	\N
+1291	84	2	f	\N
+1292	83	2	f	\N
+1293	69	2	f	\N
+1294	69	2	f	\N
+1304	87	2	f	\N
+1306	90	2	f	\N
+1849	12	2	f	\N
+1447	106	2	f	\N
+1448	106	2	f	\N
+1450	12	2	f	\N
+1452	12	2	f	\N
+1464	87	2	f	\N
+1465	69	2	f	\N
+1467	89	2	f	\N
+1472	69	2	f	\N
+1473	69	2	f	\N
+1485	106	2	f	\N
+1500	106	2	f	\N
+1504	104	2	f	\N
+1505	104	2	f	\N
+1506	104	2	f	\N
+1507	107	2	f	\N
+1509	106	2	f	\N
+1514	101	2	f	\N
+1515	101	2	f	\N
+1516	87	2	f	\N
+1517	87	2	f	\N
+1518	87	2	f	\N
+1519	87	2	f	\N
+1553	79	2	f	\N
+2584	93	2	f	\N
+2585	87	2	f	\N
+2586	87	2	f	\N
+2587	87	2	f	\N
+2588	89	2	f	\N
+2633	65	2	f	\N
+2634	65	2	f	\N
+2635	65	2	f	\N
+2174	135	2	f	\N
+2175	137	2	f	\N
+2176	135	2	f	\N
+2177	137	2	f	\N
+2178	135	2	f	\N
+2179	137	2	f	\N
+2180	135	2	f	\N
+2181	137	2	f	\N
+2182	135	2	f	\N
+897	39	2	\N	\N
+898	39	2	\N	\N
+899	39	2	\N	\N
+900	65	2	\N	\N
+2435	146	2	f	\N
+901	12	2	\N	\N
+902	65	2	\N	\N
+903	71	2	\N	\N
+2451	106	2	f	\N
+2486	101	2	f	\N
+2489	86	2	f	\N
+2490	86	2	f	\N
+2491	86	2	f	\N
+2493	87	2	f	\N
+2501	110	2	f	\N
+2502	110	2	f	\N
+2503	119	2	f	\N
+2505	110	2	f	\N
+2506	86	2	f	\N
+2507	110	2	f	\N
+2508	110	2	f	\N
+2737	106	2	f	\N
+2738	117	2	f	\N
+2739	69	2	f	\N
+2740	12	2	f	\N
+2832	119	2	f	\N
+2863	111	2	f	\N
+2864	140	2	f	\N
+2274	143	2	f	\N
+2275	134	2	f	\N
+2276	12	2	f	\N
+2277	105	2	f	\N
+2278	135	2	f	\N
+2279	144	2	f	\N
+2280	134	2	f	\N
+2281	104	2	f	\N
+2282	135	2	f	\N
+2284	134	2	f	\N
+1962	93	2	f	\N
+1963	123	2	f	\N
+1964	93	2	f	\N
+1965	123	2	f	\N
+1966	12	2	f	\N
+2098	118	2	f	\N
+2099	12	2	f	\N
+2100	12	2	f	\N
+1978	2	2	f	\N
+2101	65	2	f	\N
+1979	118	2	f	\N
+1985	93	2	f	\N
+1986	123	2	f	\N
+1988	119	2	f	\N
+1989	12	2	f	\N
+2602	65	2	f	\N
+2603	65	2	f	\N
+2604	65	2	f	\N
+2605	65	2	f	\N
+2608	65	2	f	\N
+2612	65	2	f	\N
+2613	65	2	f	\N
+2617	65	2	f	\N
+2039	119	2	f	\N
+2044	119	2	f	\N
+2156	135	2	f	\N
+2157	137	2	f	\N
+2158	135	2	f	\N
+2159	137	2	f	\N
+2160	135	2	f	\N
+2161	137	2	f	\N
+2162	135	2	f	\N
+2163	137	2	f	\N
+2164	135	2	f	\N
+2165	137	2	f	\N
+2167	135	2	f	\N
+2045	119	2	f	\N
+2399	105	2	f	\N
+2400	105	2	f	\N
+2401	105	2	f	\N
+2402	105	2	f	\N
+2403	105	2	f	\N
+2704	119	2	f	\N
+2705	119	2	f	\N
+2706	119	2	f	\N
+2707	119	2	f	\N
+2708	119	2	f	\N
+2709	119	2	f	\N
+2434	130	2	f	\N
+775	12	2	\N	\N
+778	65	2	\N	\N
+779	65	2	\N	\N
+780	65	2	\N	\N
+784	47	2	\N	\N
+788	12	2	\N	\N
+789	67	2	\N	\N
+790	65	2	\N	\N
+791	65	2	\N	\N
+792	65	2	\N	\N
+794	55	2	\N	\N
+800	55	2	\N	\N
+801	55	2	\N	\N
+802	65	2	\N	\N
+1468	84	2	f	\N
+1469	90	2	f	\N
+1470	83	2	f	\N
+1471	69	2	f	\N
+1913	117	2	f	\N
+1510	101	2	f	\N
+1968	12	2	f	\N
+1970	126	2	f	\N
+1971	93	2	f	\N
+1972	123	2	f	\N
+1973	123	2	f	\N
+1975	65	2	f	\N
+1977	12	2	f	\N
+1554	101	2	f	\N
+1556	101	2	f	\N
+1559	87	2	f	\N
+1560	79	2	f	\N
+2137	139	2	f	\N
+2138	139	2	f	\N
+2139	139	2	f	\N
+2144	135	2	f	\N
+2145	137	2	f	\N
+2146	135	2	f	\N
+2147	137	2	f	\N
+838	65	2	\N	\N
+849	41	2	\N	\N
+851	41	2	\N	\N
+852	41	2	\N	\N
+853	41	2	\N	\N
+854	2	2	\N	\N
+855	2	2	\N	\N
+856	2	2	\N	\N
+864	65	2	\N	\N
+865	12	2	\N	\N
+866	65	2	\N	\N
+1307	90	2	f	\N
+1308	90	2	f	\N
+1337	84	2	f	\N
+1338	83	2	f	\N
+1347	39	2	f	\N
+1348	84	2	f	\N
+1349	83	2	f	\N
+1393	12	2	f	\N
+1394	65	2	f	\N
+1395	65	2	f	\N
+1396	104	2	f	\N
+1398	104	2	f	\N
+1400	104	2	f	\N
+1401	104	2	f	\N
+1402	104	2	f	\N
+1403	104	2	f	\N
+1404	87	2	f	\N
+1406	89	2	f	\N
+1407	90	2	f	\N
+1408	69	2	f	\N
+1409	69	2	f	\N
+1410	69	2	f	\N
+1411	69	2	f	\N
+2148	135	2	f	\N
+2149	137	2	f	\N
+2150	135	2	f	\N
+2187	135	2	f	\N
+2188	137	2	f	\N
+2189	135	2	f	\N
+2190	137	2	f	\N
+2674	84	2	f	\N
+2675	83	2	f	\N
+2676	87	2	f	\N
+1413	102	2	f	\N
+1414	90	2	f	\N
+1415	91	2	f	\N
+1417	84	2	f	\N
+1418	90	2	f	\N
+1419	91	2	f	\N
+1420	101	2	f	\N
+2152	135	2	f	\N
+2153	137	2	f	\N
+2154	135	2	f	\N
+2155	137	2	f	\N
+2184	135	2	f	\N
+2185	137	2	f	\N
+2186	134	2	f	\N
+2688	135	2	f	\N
+2880	87	2	f	\N
+904	71	2	\N	\N
+905	71	2	\N	\N
+906	71	2	\N	\N
+910	65	2	\N	\N
+911	65	2	\N	\N
+912	72	2	\N	\N
+1318	102	2	f	\N
+1319	84	2	f	\N
+2206	110	2	f	\N
+2207	110	2	f	\N
+1607	106	2	f	\N
+1608	105	2	f	\N
+1341	84	2	f	\N
+1609	105	2	f	\N
+2433	145	2	f	\N
+2689	143	2	f	\N
+2558	12	2	f	\N
+2559	151	2	f	\N
+1342	83	2	f	\N
+1610	87	2	f	\N
+1611	87	2	f	\N
+1612	89	2	f	\N
+1613	89	2	f	\N
+1614	90	2	f	\N
+2560	69	2	f	\N
+2561	145	2	f	\N
+2562	130	2	f	\N
+2733	148	2	f	\N
+1615	69	2	f	\N
+2208	110	2	f	\N
+2209	110	2	f	\N
+2210	86	2	f	\N
+2211	110	2	f	\N
+2212	110	2	f	\N
+2213	86	2	f	\N
+2734	119	2	f	\N
+2735	119	2	f	\N
+2843	119	2	f	\N
+1370	90	2	f	\N
+1384	39	2	f	\N
+2283	137	2	f	\N
+1803	118	2	f	\N
+2301	146	2	f	\N
+2302	118	2	f	\N
+2303	93	2	f	\N
+1852	119	2	f	\N
+1898	105	2	f	\N
+1900	120	2	f	\N
+1901	120	2	f	\N
+1902	117	2	f	\N
+1903	111	2	f	\N
+1904	65	2	f	\N
+1905	65	2	f	\N
+1561	87	2	f	\N
+1562	87	2	f	\N
+1563	79	2	f	\N
+1564	101	2	f	\N
+2844	119	2	f	\N
+1569	101	2	f	\N
+1570	101	2	f	\N
+1571	65	2	f	\N
+1575	65	2	f	\N
+1576	86	2	f	\N
+2845	119	2	f	\N
+2846	119	2	f	\N
+2847	119	2	f	\N
+2848	119	2	f	\N
+2849	119	2	f	\N
+2850	119	2	f	\N
+2851	119	2	f	\N
+2852	110	2	f	\N
+2853	86	2	f	\N
+2854	119	2	f	\N
+1577	87	2	f	\N
+1578	79	2	f	\N
+1579	110	2	f	\N
+1580	78	2	f	\N
+1581	87	2	f	\N
+1582	89	2	f	\N
+2598	145	2	f	\N
+2599	130	2	f	\N
+2868	93	2	f	\N
+2869	93	2	f	\N
+2870	119	2	f	\N
+2151	137	2	f	\N
+988	75	2	\N	\N
+1003	12	2	\N	\N
+1078	12	2	\N	\N
+1088	12	2	\N	\N
+1089	65	2	\N	\N
+1090	39	2	\N	\N
+1091	84	2	\N	\N
+1093	84	2	\N	\N
+1095	70	2	\N	\N
+1096	39	2	\N	\N
+1199	89	2	\N	\N
+1204	87	2	\N	\N
+1205	89	2	\N	\N
+1206	89	2	\N	\N
+1252	59	2	f	\N
+1257	87	2	f	\N
+1258	87	2	f	\N
+1644	90	2	f	\N
+1645	69	2	f	\N
+1918	119	2	f	\N
+1919	12	2	f	\N
+1922	93	2	f	\N
+1924	118	2	f	\N
+1925	89	2	f	\N
+1926	90	2	f	\N
+1927	87	2	f	\N
+1930	93	2	f	\N
+1931	118	2	f	\N
+1933	93	2	f	\N
+1934	93	2	f	\N
+1935	93	2	f	\N
+1936	93	2	f	\N
+1940	93	2	f	\N
+1941	12	2	f	\N
+1945	123	2	f	\N
+1946	123	2	f	\N
+1947	123	2	f	\N
+1948	123	2	f	\N
+1954	12	2	f	\N
+1584	89	2	f	\N
+1585	90	2	f	\N
+1586	69	2	f	\N
+1587	39	2	f	\N
+1588	84	2	f	\N
+1589	84	2	f	\N
+1590	83	2	f	\N
+1591	87	2	f	\N
+1592	89	2	f	\N
+1593	69	2	f	\N
+1597	104	2	f	\N
+2631	65	2	f	\N
+2632	65	2	f	\N
+2702	119	2	f	\N
+2703	119	2	f	\N
+2829	93	2	f	\N
+2830	69	2	f	\N
+2831	134	2	f	\N
+2833	110	2	f	\N
+2834	86	2	f	\N
+2835	104	2	f	\N
+2859	148	2	f	\N
+2860	106	2	f	\N
+885	47	2	\N	\N
+895	39	2	\N	\N
+940	73	2	\N	\N
+941	73	2	\N	\N
+942	73	2	\N	\N
+1259	87	2	f	\N
+1260	87	2	f	\N
+2200	104	2	f	\N
+2214	110	2	f	\N
+2215	86	2	f	\N
+2216	78	2	f	\N
+2217	12	2	f	\N
+2218	140	2	f	\N
+2219	65	2	f	\N
+2221	140	2	f	\N
+2222	65	2	f	\N
+2223	78	2	f	\N
+2224	78	2	f	\N
+2225	78	2	f	\N
+2226	78	2	f	\N
+2227	78	2	f	\N
+2228	78	2	f	\N
+2229	78	2	f	\N
+2230	78	2	f	\N
+1908	65	2	f	\N
+2055	12	2	f	\N
+2062	93	2	f	\N
+2063	93	2	f	\N
+2064	123	2	f	\N
+2065	118	2	f	\N
+2066	93	2	f	\N
+2067	123	2	f	\N
+2068	93	2	f	\N
+2069	123	2	f	\N
+2070	12	2	f	\N
+2305	145	2	f	\N
+2306	146	2	f	\N
+1993	106	2	f	\N
+2310	145	2	f	\N
+1994	106	2	f	\N
+2311	93	2	f	\N
+1995	106	2	f	\N
+1996	106	2	f	\N
+2312	130	2	f	\N
+1997	106	2	f	\N
+2313	145	2	f	\N
+2314	69	2	f	\N
+2315	135	2	f	\N
+2001	106	2	f	\N
+2316	137	2	f	\N
+2002	106	2	f	\N
+2317	134	2	f	\N
+2319	104	2	f	\N
+2006	106	2	f	\N
+2007	106	2	f	\N
+2009	93	2	f	\N
+2010	123	2	f	\N
+2011	110	2	f	\N
+2012	118	2	f	\N
+2013	87	2	f	\N
+2014	89	2	f	\N
+2015	90	2	f	\N
+2016	93	2	f	\N
+2017	69	2	f	\N
+2018	87	2	f	\N
+2019	89	2	f	\N
+2020	69	2	f	\N
+2023	104	2	f	\N
+2024	104	2	f	\N
+2027	106	2	f	\N
+2028	106	2	f	\N
+2436	93	2	f	\N
+2437	146	2	f	\N
+2438	117	2	f	\N
+1880	106	2	f	\N
+1881	106	2	f	\N
+2374	84	2	f	\N
+2375	83	2	f	\N
+2413	105	2	f	\N
+871	69	2	\N	\N
+872	12	2	\N	\N
+873	65	2	\N	\N
+874	65	2	\N	\N
+876	41	2	\N	\N
+878	70	2	\N	\N
+2857	119	2	f	\N
+879	65	2	\N	\N
+1079	65	2	\N	\N
+1097	84	2	\N	\N
+1101	39	2	\N	\N
+1102	84	2	\N	\N
+1159	78	2	\N	\N
+1170	39	2	\N	\N
+1179	39	2	\N	\N
+1189	12	2	\N	\N
+1190	12	2	\N	\N
+1191	86	2	\N	\N
+1192	86	2	\N	\N
+1193	87	2	\N	\N
+1194	87	2	\N	\N
+1200	89	2	\N	\N
+1201	87	2	\N	\N
+1210	90	2	\N	\N
+1211	12	2	\N	\N
+1212	65	2	\N	\N
+1213	90	2	\N	\N
+1214	91	2	\N	\N
+1225	12	2	\N	\N
+1230	93	2	\N	\N
+1243	87	2	f	\N
+1244	87	2	f	\N
+1253	65	2	f	\N
+1263	87	2	f	\N
+1264	87	2	f	\N
+1265	89	2	f	\N
+1268	12	2	f	\N
+2197	93	2	f	\N
+2198	123	2	f	\N
+2199	105	2	f	\N
+2240	78	2	f	\N
+2241	78	2	f	\N
+2242	78	2	f	\N
+2243	12	2	f	\N
+2244	12	2	f	\N
+2245	65	2	f	\N
+2246	105	2	f	\N
+2247	102	2	f	\N
+2248	141	2	f	\N
+2249	141	2	f	\N
+2254	135	2	f	\N
+2255	142	2	f	\N
+2256	135	2	f	\N
+2257	142	2	f	\N
+2258	135	2	f	\N
+2259	142	2	f	\N
+1853	119	2	f	\N
+1854	119	2	f	\N
+1855	119	2	f	\N
+1859	119	2	f	\N
+1860	119	2	f	\N
+1865	117	2	f	\N
+1866	117	2	f	\N
+1867	117	2	f	\N
+1868	117	2	f	\N
+1869	69	2	f	\N
+1870	78	2	f	\N
+1872	118	2	f	\N
+1873	105	2	f	\N
+1875	106	2	f	\N
+1876	106	2	f	\N
+863	65	2	\N	\N
+870	69	2	\N	\N
+875	70	2	\N	\N
+1207	12	2	\N	\N
+1209	90	2	\N	\N
+1218	39	2	\N	\N
+1221	12	2	\N	\N
+1227	93	2	\N	\N
+1240	41	2	f	\N
+1241	39	2	f	\N
+1282	87	2	f	\N
+1980	93	2	f	\N
+1981	118	2	f	\N
+1982	93	2	f	\N
+1983	93	2	f	\N
+1984	123	2	f	\N
+2404	105	2	f	\N
+2405	105	2	f	\N
+2406	105	2	f	\N
+2407	105	2	f	\N
+2408	105	2	f	\N
+2409	105	2	f	\N
+2410	105	2	f	\N
+2411	105	2	f	\N
+2412	105	2	f	\N
+2414	105	2	f	\N
+2432	105	2	f	\N
+2719	119	2	f	\N
+2720	119	2	f	\N
+2721	119	2	f	\N
+2722	119	2	f	\N
+2723	104	2	f	\N
+2724	119	2	f	\N
+2736	119	2	f	\N
+2741	65	2	f	\N
+2742	12	2	f	\N
+2779	123	2	f	\N
+2780	123	2	f	\N
+2781	123	2	f	\N
+2782	123	2	f	\N
+2783	123	2	f	\N
+2466	117	2	f	\N
+2467	111	2	f	\N
+2468	119	2	f	\N
+2469	119	2	f	\N
+2470	119	2	f	\N
+2475	90	2	f	\N
+2900	137	2	f	\N
+2484	2	2	f	\N
+2901	93	2	f	\N
+2902	134	2	f	\N
 \.
 
 
@@ -52978,2060 +50782,6 @@ COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2904, true);
-
-
---
--- Data for Name: resource_log; Type: TABLE DATA; Schema: company_ru; Owner: -
---
-
-COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
-142	83	2	\N	2013-12-07 16:38:38.11618+02
-143	84	2	\N	2013-12-07 16:39:56.788641+02
-144	3	2	\N	2013-12-07 16:41:27.65259+02
-145	2	2	\N	2013-12-07 16:41:31.748494+02
-146	83	2	\N	2013-12-07 16:58:05.802634+02
-147	83	2	\N	2013-12-07 17:00:14.544264+02
-4836	794	2	\N	2014-02-05 19:54:07.5415+02
-5406	1192	2	\N	2014-04-06 19:21:11.278173+03
-5407	1005	2	\N	2014-04-06 19:21:55.315341+03
-4845	283	2	\N	2014-02-06 11:38:41.090464+02
-2	10	2	\N	2013-11-16 19:00:14.24272+02
-4	12	2	\N	2013-11-16 19:00:15.497284+02
-6	14	2	\N	2013-11-16 19:00:16.696731+02
-8	16	2	\N	2013-11-16 19:00:17.960761+02
-5427	1204	2	\N	2014-04-09 18:54:09.146902+03
-12	30	2	\N	2013-11-23 19:26:00.193553+02
-13	30	2	\N	2013-11-23 22:02:37.363677+02
-14	10	2	\N	2013-11-23 22:11:01.634598+02
-15	30	2	\N	2013-11-23 22:11:14.939938+02
-16	30	2	\N	2013-11-23 22:11:38.396085+02
-19	30	2	\N	2013-11-24 10:30:59.830287+02
-20	30	2	\N	2013-11-24 10:31:22.936737+02
-21	30	2	\N	2013-11-24 10:38:08.07328+02
-22	30	2	\N	2013-11-24 10:38:10.703187+02
-23	30	2	\N	2013-11-24 10:38:11.896934+02
-24	30	2	\N	2013-11-24 10:42:19.397852+02
-25	30	2	\N	2013-11-24 10:42:50.772172+02
-26	30	2	\N	2013-11-24 10:45:56.399572+02
-27	30	2	\N	2013-11-24 10:48:29.950669+02
-28	30	2	\N	2013-11-24 10:49:23.616693+02
-29	30	2	\N	2013-11-24 10:50:05.878643+02
-30	30	2	\N	2013-11-24 10:51:02.465585+02
-31	30	2	\N	2013-11-24 10:54:21.011765+02
-32	30	2	\N	2013-11-24 10:54:28.775552+02
-33	30	2	\N	2013-11-24 10:58:34.152869+02
-34	30	2	\N	2013-11-24 10:58:36.766104+02
-35	30	2	\N	2013-11-24 10:58:38.767749+02
-36	30	2	\N	2013-11-24 10:58:42.533162+02
-37	30	2	\N	2013-11-24 10:58:43.55758+02
-38	30	2	\N	2013-11-24 10:58:47.40587+02
-39	30	2	\N	2013-11-24 11:00:56.130675+02
-40	30	2	\N	2013-11-24 11:01:17.637578+02
-41	30	2	\N	2013-11-24 11:01:20.639413+02
-42	30	2	\N	2013-11-24 11:01:25.957588+02
-43	30	2	\N	2013-11-24 11:01:28.015301+02
-44	30	2	\N	2013-11-24 11:01:49.505153+02
-45	30	2	\N	2013-11-24 11:01:54.465064+02
-46	30	2	\N	2013-11-24 11:01:56.828797+02
-47	30	2	\N	2013-11-24 11:02:00.873006+02
-48	30	2	\N	2013-11-24 11:02:06.385907+02
-49	30	2	\N	2013-11-24 11:02:08.474309+02
-50	30	2	\N	2013-11-24 11:02:11.823259+02
-51	30	2	\N	2013-11-24 11:02:15.084044+02
-52	30	2	\N	2013-11-24 11:23:59.150304+02
-53	30	2	\N	2013-11-24 12:41:22.004561+02
-54	30	2	\N	2013-11-24 12:41:27.704243+02
-55	30	2	\N	2013-11-24 12:41:32.588516+02
-5430	1207	2	\N	2014-04-09 20:43:13.852066+03
-5459	1227	2	\N	2014-04-19 13:04:24.512333+03
-5467	1230	2	\N	2014-04-23 11:53:28.979784+03
-5468	1230	2	\N	2014-04-23 11:53:45.572462+03
-5537	1306	2	\N	2014-04-30 11:04:50.581045+03
-66	16	2	\N	2013-11-30 12:57:27.26941+02
-67	31	2	\N	2013-11-30 14:25:42.040654+02
-68	32	2	\N	2013-11-30 14:27:55.708736+02
-69	33	2	\N	2013-11-30 14:28:30.596329+02
-70	34	2	\N	2013-11-30 14:29:07.205192+02
-71	35	2	\N	2013-11-30 14:30:10.653134+02
-72	36	2	\N	2013-11-30 14:31:39.751221+02
-73	37	2	\N	2013-11-30 14:32:36.035677+02
-74	38	2	\N	2013-11-30 14:55:27.691288+02
-75	39	2	\N	2013-11-30 14:58:07.249714+02
-76	40	2	\N	2013-11-30 14:58:34.364695+02
-79	43	2	\N	2013-11-30 15:08:29.574538+02
-80	43	2	\N	2013-11-30 15:08:52.114395+02
-81	43	2	\N	2013-11-30 15:09:21.51485+02
-82	44	2	\N	2013-11-30 15:09:54.961188+02
-83	45	2	\N	2013-12-01 13:04:27.697583+02
-84	45	2	\N	2013-12-01 13:04:40.716328+02
-85	14	2	\N	2013-12-01 14:31:19.374571+02
-87	12	2	\N	2013-12-01 18:21:35.266219+02
-104	10	2	\N	2013-12-02 20:43:38.334769+02
-130	10	2	\N	2013-12-06 21:10:25.807719+02
-4796	769	2	\N	2014-01-22 22:21:45.451623+02
-4820	16	2	\N	2014-02-01 21:09:43.821944+02
-5408	1192	2	\N	2014-04-06 19:22:16.361504+03
-5409	1005	2	\N	2014-04-06 19:22:18.74271+03
-4822	784	2	\N	2014-02-01 21:23:07.460721+02
-5410	1193	2	\N	2014-04-06 19:30:25.125445+03
-5411	1194	2	\N	2014-04-06 19:30:51.85642+03
-5412	1195	2	\N	2014-04-06 19:32:30.207073+03
-5428	1205	2	\N	2014-04-09 19:17:37.483997+03
-5431	1209	2	\N	2014-04-09 20:49:45.884539+03
-4843	800	2	\N	2014-02-05 19:58:31.619612+02
-4844	801	2	\N	2014-02-05 19:58:49.632624+02
-4951	885	2	\N	2014-02-14 21:23:40.101298+02
-4952	885	2	\N	2014-02-14 21:25:13.866935+02
-4974	849	2	\N	2014-02-23 22:41:46.113064+02
-5143	1003	2	\N	2014-03-04 21:05:09.565466+02
-5144	1004	2	\N	2014-03-04 21:08:53.227171+02
-5145	1005	2	\N	2014-03-04 21:09:15.542733+02
-5471	1240	2	\N	2014-04-26 13:10:19.27836+03
-5538	1307	2	\N	2014-04-30 11:08:33.655971+03
-5544	1313	2	\N	2014-05-16 22:03:29.897662+03
-361	274	2	\N	2013-12-14 17:16:08.962259+02
-365	277	2	\N	2013-12-14 18:56:05.189747+02
-366	278	2	\N	2013-12-14 18:56:17.77025+02
-367	279	2	\N	2013-12-14 18:56:45.919492+02
-368	280	2	\N	2013-12-14 19:10:07.617582+02
-369	281	2	\N	2013-12-14 19:10:25.311427+02
-370	281	2	\N	2013-12-14 19:10:59.35028+02
-371	281	2	\N	2013-12-14 19:12:14.211139+02
-372	282	2	\N	2013-12-14 19:14:22.861495+02
-373	278	2	\N	2013-12-14 19:14:33.853691+02
-374	282	2	\N	2013-12-14 19:14:41.964012+02
-375	283	2	\N	2013-12-14 19:16:35.738242+02
-4882	706	2	\N	2014-02-08 19:59:59.160282+02
-377	283	2	\N	2013-12-14 19:18:21.622933+02
-5147	1004	2	\N	2014-03-04 21:17:22.306545+02
-5148	1004	2	\N	2014-03-04 21:23:04.343461+02
-386	286	2	\N	2013-12-14 20:46:34.653533+02
-387	287	2	\N	2013-12-14 20:46:47.37835+02
-388	288	2	\N	2013-12-14 20:47:08.024243+02
-389	289	2	\N	2013-12-14 20:47:28.256516+02
-390	290	2	\N	2013-12-14 20:52:40.953492+02
-391	291	2	\N	2013-12-14 20:53:08.057165+02
-392	292	2	\N	2013-12-14 20:53:33.598708+02
-5149	1004	2	\N	2014-03-04 21:23:17.093243+02
-5150	1004	2	\N	2014-03-04 21:23:25.611509+02
-4799	771	2	\N	2014-01-25 16:05:28.799345+02
-4800	771	2	\N	2014-01-25 16:05:38.705799+02
-4801	772	2	\N	2014-01-25 16:06:28.321244+02
-4826	788	2	\N	2014-02-01 22:03:21.899916+02
-5151	1004	2	\N	2014-03-04 21:23:52.466966+02
-5152	1004	2	\N	2014-03-04 21:24:11.351815+02
-5153	1004	2	\N	2014-03-04 21:24:20.614224+02
-5429	1206	2	\N	2014-04-09 19:21:09.215561+03
-5154	1004	2	\N	2014-03-04 21:35:47.600889+02
-5155	1004	2	\N	2014-03-04 21:36:05.835492+02
-5156	1004	2	\N	2014-03-04 21:36:16.322673+02
-5432	1210	2	\N	2014-04-12 13:10:08.842351+03
-5472	1241	2	\N	2014-04-26 19:16:28.009797+03
-5539	1308	2	\N	2014-04-30 11:20:34.938154+03
-5545	1314	2	\N	2014-05-17 13:42:16.369317+03
-422	306	2	\N	2013-12-15 21:45:32.990838+02
-4802	773	2	\N	2014-01-25 23:45:37.762081+02
-4827	789	2	\N	2014-02-02 16:45:11.830435+02
-4954	887	2	\N	2014-02-15 12:32:09.199652+02
-5415	1198	2	\N	2014-04-08 09:35:59.21042+03
-4979	885	2	\N	2014-02-24 12:50:26.694026+02
-4981	784	2	\N	2014-02-24 12:50:33.322359+02
-5157	1004	2	\N	2014-03-07 22:30:15.652582+02
-5230	894	2	\N	2014-03-16 11:54:19.683752+02
-5231	894	2	\N	2014-03-16 11:54:28.171778+02
-5232	894	2	\N	2014-03-16 11:54:33.774318+02
-5270	1004	2	\N	2014-03-17 10:50:39.781432+02
-5465	1230	2	\N	2014-04-19 21:03:03.225866+03
-5509	1278	2	\N	2014-04-29 10:09:19.421905+03
-5540	1309	2	\N	2014-04-30 11:32:51.070911+03
-5547	1316	2	\N	2014-05-17 14:00:25.111543+03
-4927	865	2	\N	2014-02-09 13:26:19.008763+02
-4804	775	2	\N	2014-01-26 15:30:50.636495+02
-4828	3	2	\N	2014-02-02 17:45:50.239397+02
-5416	1199	2	\N	2014-04-08 10:15:32.411146+03
-5434	1211	2	\N	2014-04-12 14:16:34.33498+03
-5435	1211	2	\N	2014-04-12 14:16:53.40729+03
-4982	895	2	\N	2014-02-25 19:06:42.158245+02
-5158	1007	2	\N	2014-03-08 10:30:25.61786+02
-5198	3	2	\N	2014-03-11 13:14:05.142514+02
-5437	1213	2	\N	2014-04-12 14:32:08.840037+03
-5466	1227	2	\N	2014-04-19 21:37:55.580038+03
-5474	1243	2	\N	2014-04-26 22:38:44.326007+03
-5541	1310	2	\N	2014-04-30 22:45:27.579715+03
-5548	1317	2	\N	2014-05-17 14:54:57.813145+03
-5549	1318	2	\N	2014-05-17 15:24:32.954365+03
-5550	1319	2	\N	2014-05-17 15:53:28.880817+03
-5551	1320	2	\N	2014-05-17 15:53:34.139717+03
-5552	1321	2	\N	2014-05-17 15:55:03.155317+03
-5553	1322	2	\N	2014-05-17 15:55:07.534203+03
-5557	1326	2	\N	2014-05-17 15:59:13.891973+03
-5558	1327	2	\N	2014-05-17 15:59:17.045556+03
-5559	1328	2	\N	2014-05-17 16:00:04.660539+03
-5560	1329	2	\N	2014-05-17 16:00:08.901641+03
-5561	1330	2	\N	2014-05-17 16:00:10.337355+03
-5566	1335	2	\N	2014-05-17 16:02:19.447311+03
-5571	1340	2	\N	2014-05-17 16:06:28.503991+03
-5572	1341	2	\N	2014-05-17 16:06:29.727144+03
-5573	1342	2	\N	2014-05-17 16:06:31.81672+03
-5575	1344	2	\N	2014-05-17 16:07:45.972655+03
-5576	1345	2	\N	2014-05-17 16:07:47.259172+03
-5577	1346	2	\N	2014-05-17 16:07:49.146563+03
-5581	1350	2	\N	2014-05-17 16:09:55.923893+03
-5583	1352	2	\N	2014-05-17 16:13:14.609527+03
-5584	1353	2	\N	2014-05-17 16:13:16.568079+03
-5585	1354	2	\N	2014-05-17 16:13:17.732756+03
-5370	1159	2	\N	2014-04-02 19:52:15.193771+03
-5417	1200	2	\N	2014-04-08 10:35:59.014802+03
-4890	784	2	\N	2014-02-08 21:26:51.98617+02
-4929	870	2	\N	2014-02-09 14:57:54.403714+02
-4983	896	2	\N	2014-02-25 19:37:56.226615+02
-4984	897	2	\N	2014-02-25 19:38:21.395798+02
-4985	898	2	\N	2014-02-25 19:38:30.353048+02
-4986	899	2	\N	2014-02-25 19:39:23.588225+02
-4988	901	2	\N	2014-02-25 19:47:57.884012+02
-5160	1009	2	\N	2014-03-08 10:49:52.0599+02
-5199	3	2	\N	2014-03-12 12:05:31.953558+02
-5438	1214	2	\N	2014-04-12 14:36:07.046988+03
-5475	1244	2	\N	2014-04-26 22:39:00.40778+03
-5542	1311	2	\N	2014-04-30 22:45:36.089534+03
-5554	1323	2	\N	2014-05-17 15:55:54.008685+03
-5555	1324	2	\N	2014-05-17 15:56:55.63522+03
-5556	1325	2	\N	2014-05-17 15:58:29.508912+03
-5562	1331	2	\N	2014-05-17 16:00:49.21287+03
-5563	1332	2	\N	2014-05-17 16:01:46.175183+03
-5564	1333	2	\N	2014-05-17 16:01:47.950656+03
-5565	1334	2	\N	2014-05-17 16:01:48.837764+03
-5567	1336	2	\N	2014-05-17 16:03:41.796945+03
-5568	1337	2	\N	2014-05-17 16:04:32.839289+03
-5569	1338	2	\N	2014-05-17 16:04:34.363533+03
-5578	1347	2	\N	2014-05-17 16:08:39.18466+03
-5579	1348	2	\N	2014-05-17 16:08:56.863828+03
-5580	1349	2	\N	2014-05-17 16:08:58.291349+03
-4894	849	2	\N	2014-02-08 21:32:14.802948+02
-4896	851	2	\N	2014-02-08 21:32:32.471247+02
-4897	852	2	\N	2014-02-08 21:36:44.493917+02
-4930	871	2	\N	2014-02-09 16:04:05.85568+02
-5161	1009	2	\N	2014-03-08 10:52:32.854366+02
-5162	1009	2	\N	2014-03-08 10:52:45.635015+02
-5163	1009	2	\N	2014-03-08 10:52:53.515357+02
-5164	1009	2	\N	2014-03-08 10:52:58.740536+02
-5165	1010	2	\N	2014-03-08 10:54:40.946487+02
-5166	1010	2	\N	2014-03-08 10:54:50.928085+02
-5200	3	2	\N	2014-03-12 12:14:05.203771+02
-5235	897	2	\N	2014-03-16 12:53:37.56753+02
-5278	1067	2	\N	2014-03-18 19:51:01.87448+02
-5376	1165	2	\N	2014-04-02 20:56:48.393173+03
-5419	1201	2	\N	2014-04-08 10:38:31.154572+03
-5440	1214	2	\N	2014-04-12 14:39:05.532456+03
-5442	1214	2	\N	2014-04-12 14:43:11.754556+03
-5513	1282	2	\N	2014-04-29 10:43:05.718429+03
-5586	1355	2	\N	2014-05-17 16:14:39.7443+03
-5587	1356	2	\N	2014-05-17 16:14:41.182697+03
-5588	1357	2	\N	2014-05-17 16:14:43.239633+03
-5590	1359	2	\N	2014-05-17 16:15:43.442935+03
-5591	1360	2	\N	2014-05-17 16:15:45.790483+03
-5596	1365	2	\N	2014-05-17 16:20:21.389915+03
-5597	1366	2	\N	2014-05-17 16:20:22.473385+03
-5598	1367	2	\N	2014-05-17 16:20:23.843632+03
-4898	853	2	\N	2014-02-08 21:39:09.10029+02
-4812	784	2	\N	2014-01-26 21:12:24.209136+02
-4813	784	2	\N	2014-01-26 21:13:10.546575+02
-4814	784	2	\N	2014-01-26 21:13:20.058093+02
-4815	784	2	\N	2014-01-26 21:13:24.693933+02
-4818	784	2	\N	2014-01-26 21:20:14.635984+02
-4819	784	2	\N	2014-01-26 21:20:34.941868+02
-4931	274	2	\N	2014-02-10 08:49:31.501202+02
-4970	894	2	\N	2014-02-22 17:27:40.771678+02
-4991	903	2	\N	2014-02-25 22:43:46.101171+02
-4992	904	2	\N	2014-02-25 22:43:53.30222+02
-4993	905	2	\N	2014-02-25 22:44:00.024066+02
-4994	906	2	\N	2014-02-25 22:44:13.035203+02
-4995	907	2	\N	2014-02-25 22:44:59.159297+02
-5167	1009	2	\N	2014-03-08 10:57:02.535973+02
-5168	1010	2	\N	2014-03-08 10:57:07.365849+02
-5201	3	2	\N	2014-03-12 12:29:57.686858+02
-5202	3	2	\N	2014-03-12 12:30:07.270368+02
-5203	3	2	\N	2014-03-12 12:30:09.982217+02
-5204	3	2	\N	2014-03-12 12:32:22.25189+02
-5205	894	2	\N	2014-03-12 12:32:26.366205+02
-5236	919	2	\N	2014-03-16 13:33:07.651832+02
-5444	1218	2	\N	2014-04-12 15:00:38.646853+03
-5447	1214	2	\N	2014-04-12 15:02:33.59771+03
-5514	1283	2	\N	2014-04-29 12:06:08.689068+03
-5515	1284	2	\N	2014-04-29 12:07:06.357367+03
-5518	1287	2	\N	2014-04-29 12:09:55.486785+03
-5520	1289	2	\N	2014-04-29 12:11:36.874588+03
-5589	1358	2	\N	2014-05-17 16:15:09.836615+03
-5592	1361	2	\N	2014-05-17 16:16:33.155307+03
-5593	1362	2	\N	2014-05-17 16:16:42.585648+03
-5594	1363	2	\N	2014-05-17 16:18:45.312153+03
-5595	1364	2	\N	2014-05-17 16:18:46.752544+03
-4932	872	2	\N	2014-02-10 14:29:53.759164+02
-4996	908	2	\N	2014-02-25 23:15:44.304324+02
-4997	909	2	\N	2014-02-25 23:16:53.455486+02
-5000	912	2	\N	2014-02-25 23:21:05.038132+02
-5001	913	2	\N	2014-02-25 23:21:10.720503+02
-5002	914	2	\N	2014-02-25 23:21:15.803027+02
-5003	915	2	\N	2014-02-25 23:21:21.245593+02
-5004	916	2	\N	2014-02-25 23:21:27.843749+02
-5005	917	2	\N	2014-02-25 23:21:40.705852+02
-5006	918	2	\N	2014-02-25 23:21:45.161533+02
-5007	918	2	\N	2014-02-25 23:21:53.74917+02
-5008	918	2	\N	2014-02-25 23:21:57.599668+02
-5009	919	2	\N	2014-02-25 23:22:22.789803+02
-5011	921	2	\N	2014-02-25 23:22:59.534922+02
-5012	922	2	\N	2014-02-25 23:23:04.765473+02
-5013	923	2	\N	2014-02-25 23:23:16.649188+02
-5014	924	2	\N	2014-02-25 23:23:30.151925+02
-5015	925	2	\N	2014-02-25 23:25:11.120354+02
-5016	926	2	\N	2014-02-25 23:26:11.314153+02
-5017	927	2	\N	2014-02-25 23:26:34.378644+02
-5018	928	2	\N	2014-02-25 23:26:49.163639+02
-5019	929	2	\N	2014-02-25 23:27:07.84413+02
-5020	930	2	\N	2014-02-25 23:27:30.797684+02
-5021	931	2	\N	2014-02-25 23:27:45.611037+02
-5022	932	2	\N	2014-02-25 23:28:05.678992+02
-5023	933	2	\N	2014-02-25 23:28:21.001129+02
-5025	935	2	\N	2014-02-25 23:28:49.565248+02
-5026	936	2	\N	2014-02-25 23:29:05.034117+02
-5027	937	2	\N	2014-02-25 23:29:16.11101+02
-5028	938	2	\N	2014-02-25 23:29:28.82178+02
-5029	939	2	\N	2014-02-25 23:29:41.159219+02
-5030	940	2	\N	2014-02-25 23:29:57.589154+02
-5031	941	2	\N	2014-02-25 23:30:12.260571+02
-5032	942	2	\N	2014-02-25 23:30:25.705958+02
-5033	943	2	\N	2014-02-25 23:30:39.278491+02
-5034	944	2	\N	2014-02-25 23:30:54.230938+02
-5035	945	2	\N	2014-02-25 23:31:08.136642+02
-5036	946	2	\N	2014-02-25 23:31:21.084682+02
-5037	947	2	\N	2014-02-25 23:31:35.443235+02
-5038	948	2	\N	2014-02-25 23:31:50.036032+02
-5039	949	2	\N	2014-02-25 23:32:16.232207+02
-5040	950	2	\N	2014-02-25 23:32:51.784126+02
-5169	1011	2	\N	2014-03-08 15:10:44.638516+02
-5206	3	2	\N	2014-03-12 13:00:24.217557+02
-5207	3	2	\N	2014-03-12 13:00:34.025605+02
-5241	903	2	\N	2014-03-16 15:12:25.130202+02
-5448	1221	2	\N	2014-04-12 16:44:14.810824+03
-5516	1285	2	\N	2014-04-29 12:08:23.116251+03
-5517	1286	2	\N	2014-04-29 12:09:10.712444+03
-5522	1291	2	\N	2014-04-29 12:13:37.203069+03
-5523	1292	2	\N	2014-04-29 12:14:34.180203+03
-4900	854	2	\N	2014-02-08 21:47:34.439997+02
-4901	855	2	\N	2014-02-08 21:54:55.399628+02
-4936	875	2	\N	2014-02-10 15:58:53.177719+02
-4937	875	2	\N	2014-02-10 15:59:03.43204+02
-5042	952	2	\N	2014-02-25 23:33:14.57009+02
-5043	939	2	\N	2014-02-25 23:33:37.281163+02
-5044	938	2	\N	2014-02-25 23:33:44.033176+02
-5045	937	2	\N	2014-02-25 23:33:51.697991+02
-5046	936	2	\N	2014-02-25 23:33:56.981908+02
-5047	935	2	\N	2014-02-25 23:34:03.037741+02
-5049	933	2	\N	2014-02-25 23:34:27.937885+02
-5050	932	2	\N	2014-02-25 23:34:34.767736+02
-5051	931	2	\N	2014-02-25 23:34:39.075165+02
-5052	930	2	\N	2014-02-25 23:34:43.896812+02
-5053	929	2	\N	2014-02-25 23:34:48.70472+02
-5054	928	2	\N	2014-02-25 23:34:54.494127+02
-5055	927	2	\N	2014-02-25 23:35:00.125101+02
-5056	926	2	\N	2014-02-25 23:35:05.399995+02
-5057	925	2	\N	2014-02-25 23:35:10.409443+02
-5058	924	2	\N	2014-02-25 23:35:16.447517+02
-5059	923	2	\N	2014-02-25 23:35:21.959285+02
-5060	922	2	\N	2014-02-25 23:35:27.383937+02
-5061	921	2	\N	2014-02-25 23:35:31.660307+02
-5063	919	2	\N	2014-02-25 23:35:43.645366+02
-5064	918	2	\N	2014-02-25 23:35:47.480218+02
-5065	917	2	\N	2014-02-25 23:35:52.042922+02
-5066	916	2	\N	2014-02-25 23:35:57.409224+02
-5067	915	2	\N	2014-02-25 23:36:01.802966+02
-5068	914	2	\N	2014-02-25 23:36:05.670476+02
-5069	913	2	\N	2014-02-25 23:36:10.129284+02
-5070	912	2	\N	2014-02-25 23:36:14.468359+02
-5286	1078	2	\N	2014-03-20 21:22:51.030666+02
-5381	1170	2	\N	2014-04-03 12:49:07.793292+03
-5519	1288	2	\N	2014-04-29 12:10:21.572462+03
-5521	1290	2	\N	2014-04-29 12:13:35.434847+03
-5603	1372	2	\N	2014-05-17 18:47:30.594446+03
-5606	1375	2	\N	2014-05-17 18:55:21.896666+03
-5613	1382	2	\N	2014-05-17 19:04:51.767284+03
-5619	1388	2	\N	2014-05-17 19:09:44.578209+03
-5622	1391	2	\N	2014-05-17 19:12:29.996417+03
-4902	856	2	\N	2014-02-08 21:59:04.719245+02
-4938	876	2	\N	2014-02-10 16:19:24.400952+02
-5071	953	2	\N	2014-02-26 23:25:15.548581+02
-5072	954	2	\N	2014-02-26 23:25:55.407709+02
-5075	957	2	\N	2014-02-26 23:28:34.003373+02
-5076	958	2	\N	2014-02-26 23:28:45.594179+02
-5077	959	2	\N	2014-02-26 23:28:57.004231+02
-5078	960	2	\N	2014-02-26 23:29:08.086342+02
-5079	961	2	\N	2014-02-26 23:29:17.646283+02
-5080	962	2	\N	2014-02-26 23:29:26.175631+02
-5081	963	2	\N	2014-02-26 23:29:35.761623+02
-5082	964	2	\N	2014-02-26 23:29:46.892804+02
-5083	965	2	\N	2014-02-26 23:29:54.140342+02
-5084	966	2	\N	2014-02-26 23:30:01.375033+02
-5085	967	2	\N	2014-02-26 23:30:08.774222+02
-5086	968	2	\N	2014-02-26 23:30:17.802323+02
-5087	969	2	\N	2014-02-26 23:30:29.097872+02
-5088	970	2	\N	2014-02-26 23:30:38.081009+02
-5089	971	2	\N	2014-02-26 23:30:52.902609+02
-5091	973	2	\N	2014-02-26 23:31:31.71567+02
-5093	975	2	\N	2014-02-26 23:32:13.646357+02
-5094	976	2	\N	2014-02-26 23:32:24.624636+02
-5095	977	2	\N	2014-02-26 23:32:34.606814+02
-5096	978	2	\N	2014-02-26 23:32:43.318943+02
-5097	979	2	\N	2014-02-26 23:32:54.081989+02
-5098	980	2	\N	2014-02-26 23:33:04.823892+02
-5099	981	2	\N	2014-02-26 23:33:16.574818+02
-5100	982	2	\N	2014-02-26 23:33:28.270884+02
-5101	983	2	\N	2014-02-26 23:33:40.854578+02
-5102	984	2	\N	2014-02-26 23:33:57.05943+02
-5103	985	2	\N	2014-02-26 23:34:08.238483+02
-5105	987	2	\N	2014-02-26 23:34:29.757456+02
-5106	988	2	\N	2014-02-26 23:34:37.99873+02
-5216	3	2	\N	2014-03-12 21:55:10.706584+02
-5287	1079	2	\N	2014-03-22 12:57:07.526655+02
-5483	1252	2	\N	2014-04-27 01:03:22.219667+03
-5524	1293	2	\N	2014-04-29 12:17:51.658135+03
-5525	1294	2	\N	2014-04-29 12:18:27.913053+03
-5601	1370	2	\N	2014-05-17 18:45:54.451262+03
-5602	1371	2	\N	2014-05-17 18:47:17.628356+03
-5604	1373	2	\N	2014-05-17 18:54:01.477094+03
-5607	1376	2	\N	2014-05-17 18:56:40.07768+03
-5609	1378	2	\N	2014-05-17 19:02:40.402053+03
-5616	1385	2	\N	2014-05-17 19:07:13.667811+03
-5617	1386	2	\N	2014-05-17 19:07:36.068126+03
-5621	1390	2	\N	2014-05-17 19:11:55.084234+03
-4789	763	2	\N	2014-01-12 19:51:49.157909+02
-4903	854	2	\N	2014-02-08 22:16:58.906498+02
-4904	3	2	\N	2014-02-08 22:17:06.939369+02
-4905	854	2	\N	2014-02-08 22:20:32.280238+02
-4906	784	2	\N	2014-02-08 22:21:01.290541+02
-5484	1253	2	\N	2014-04-28 00:03:49.599015+03
-5289	1081	2	\N	2014-03-22 17:57:05.076581+02
-5605	1374	2	\N	2014-05-17 18:55:03.070735+03
-5611	1380	2	\N	2014-05-17 19:03:57.212913+03
-5614	1383	2	\N	2014-05-17 19:04:59.867959+03
-5618	1387	2	\N	2014-05-17 19:09:22.594353+03
-5624	1393	2	\N	2014-05-18 10:14:28.009945+03
-4790	764	2	\N	2014-01-12 20:33:53.3138+02
-4909	723	2	\N	2014-02-08 22:28:37.868751+02
-4940	878	2	\N	2014-02-10 16:40:47.442615+02
-5610	1379	2	\N	2014-05-17 19:03:38.443538+03
-5612	1381	2	\N	2014-05-17 19:04:17.238286+03
-5615	1384	2	\N	2014-05-17 19:07:10.869783+03
-5620	1389	2	\N	2014-05-17 19:09:47.55779+03
-5291	1088	2	\N	2014-03-22 18:51:18.985681+02
-5292	1081	2	\N	2014-03-22 18:51:44.158872+02
-5458	1225	2	\N	2014-04-13 12:01:26.796233+03
-5627	1396	2	\N	2014-05-18 11:58:47.293591+03
-4917	764	2	\N	2014-02-09 00:53:58.264629+02
-4918	769	2	\N	2014-02-09 00:57:04.796409+02
-4919	775	2	\N	2014-02-09 00:57:24.917548+02
-4920	788	2	\N	2014-02-09 00:57:42.02056+02
-4942	878	2	\N	2014-02-10 22:47:18.374976+02
-5294	1090	2	\N	2014-03-22 20:34:50.666418+02
-5295	1091	2	\N	2014-03-22 20:36:11.95663+02
-5298	1093	2	\N	2014-03-22 20:40:16.040605+02
-5629	1398	2	\N	2014-05-18 12:12:21.975254+03
-4949	764	2	\N	2014-02-11 19:47:14.055452+02
-5488	1257	2	\N	2014-04-28 12:34:34.363475+03
-5300	1095	2	\N	2014-03-22 20:52:34.596466+02
-5301	1096	2	\N	2014-03-22 20:52:44.740475+02
-5302	1097	2	\N	2014-03-22 20:53:03.099066+02
-5489	1258	2	\N	2014-04-28 12:34:55.433659+03
-5304	1099	2	\N	2014-03-22 20:57:07.889521+02
-5535	1304	2	\N	2014-04-29 16:15:23.221696+03
-5390	1179	2	\N	2014-04-05 19:40:10.823684+03
-5490	1259	2	\N	2014-04-28 12:58:44.196537+03
-5306	1101	2	\N	2014-03-22 21:00:48.529148+02
-5307	1102	2	\N	2014-03-22 21:01:34.517288+02
-5491	1260	2	\N	2014-04-28 12:59:00.104464+03
-5631	1400	2	\N	2014-05-18 13:37:21.801854+03
-5632	1401	2	\N	2014-05-18 13:37:41.402585+03
-5633	1402	2	\N	2014-05-18 13:44:45.628784+03
-5492	1261	2	\N	2014-04-28 13:04:58.29173+03
-5634	1403	2	\N	2014-05-18 15:48:34.956287+03
-5256	1067	2	\N	2014-03-16 19:34:31.935568+02
-5494	1263	2	\N	2014-04-28 13:08:06.602496+03
-5635	1404	2	\N	2014-05-18 19:18:07.615122+03
-5636	1406	2	\N	2014-05-18 19:18:56.831097+03
-5639	1409	2	\N	2014-05-18 19:22:05.971396+03
-5394	1185	2	\N	2014-04-05 20:56:20.797318+03
-5257	1067	2	\N	2014-03-16 19:55:56.894484+02
-5495	1264	2	\N	2014-04-28 13:08:25.610345+03
-5637	1407	2	\N	2014-05-18 19:19:36.399614+03
-5641	1411	2	\N	2014-05-18 19:23:45.119721+03
-5496	1265	2	\N	2014-04-28 13:08:54.519921+03
-5638	1408	2	\N	2014-05-18 19:19:43.401474+03
-5258	1067	2	\N	2014-03-16 20:09:16.532934+02
-5311	1097	2	\N	2014-03-24 19:59:44.290142+02
-5640	1410	2	\N	2014-05-18 19:23:00.415796+03
-5643	1413	2	\N	2014-05-20 21:26:27.311927+03
-5259	1068	2	\N	2014-03-16 20:15:31.769185+02
-5499	1268	2	\N	2014-04-28 23:55:09.591646+03
-5644	1414	2	\N	2014-05-24 17:02:57.354915+03
-5645	1415	2	\N	2014-05-24 17:03:02.922541+03
-5646	1416	2	\N	2014-05-24 17:06:48.542492+03
-5647	1417	2	\N	2014-05-24 17:06:51.402853+03
-5648	1418	2	\N	2014-05-24 17:07:25.101929+03
-5649	1419	2	\N	2014-05-24 17:07:29.075778+03
-5650	1420	2	\N	2014-05-24 17:24:17.546972+03
-4120	16	2	\N	2014-01-01 13:19:09.979922+02
-4131	14	2	\N	2014-01-01 18:45:07.902745+02
-4144	706	2	\N	2014-01-03 16:12:41.015146+02
-4145	706	2	\N	2014-01-03 16:13:23.197097+02
-5402	1189	2	\N	2014-04-06 18:46:40.132797+03
-5403	1190	2	\N	2014-04-06 18:47:22.030146+03
-5138	865	2	\N	2014-03-03 21:09:34.254642+02
-5404	1191	2	\N	2014-04-06 18:53:34.002074+03
-5263	1009	2	\N	2014-03-16 21:40:10.728496+02
-5264	1009	2	\N	2014-03-16 21:44:11.742442+02
-5405	1192	2	\N	2014-04-06 19:20:55.890208+03
-5140	865	2	\N	2014-03-03 21:57:11.59945+02
-5265	1004	2	\N	2014-03-17 10:29:17.115979+02
-5266	1004	2	\N	2014-03-17 10:29:24.701637+02
-4744	723	2	\N	2014-01-04 23:58:55.624453+02
-4746	725	2	\N	2014-01-05 01:09:00.405742+02
-4747	726	2	\N	2014-01-05 01:09:15.602018+02
-4749	728	2	\N	2014-01-05 01:13:50.125212+02
-4756	734	2	\N	2014-01-05 12:36:48.48575+02
-4765	743	2	\N	2014-01-05 13:20:17.173661+02
-5654	1424	2	\N	2014-06-01 10:25:44.71461+03
-5656	1426	2	\N	2014-06-01 12:15:53.295347+03
-5661	1431	2	\N	2014-06-07 15:12:11.693366+03
-5662	1432	2	\N	2014-06-07 15:12:40.323386+03
-5663	1433	2	\N	2014-06-07 17:43:14.620483+03
-5665	1435	2	\N	2014-06-07 21:01:18.691193+03
-5667	1438	2	\N	2014-06-07 21:11:01.089928+03
-5668	1439	2	\N	2014-06-07 21:11:46.797584+03
-5676	1447	2	\N	2014-06-08 21:25:14.638119+03
-5677	1448	2	\N	2014-06-08 21:25:35.09515+03
-5679	1450	2	\N	2014-06-09 15:50:23.760428+03
-5681	1452	2	\N	2014-06-09 17:20:44.311452+03
-5693	1464	2	\N	2014-06-14 17:55:00.252916+03
-5694	1465	2	\N	2014-06-14 17:55:08.213215+03
-5695	1467	2	\N	2014-06-14 17:56:52.935007+03
-5696	1468	2	\N	2014-06-14 17:58:15.339465+03
-5697	1469	2	\N	2014-06-14 17:58:37.034547+03
-5698	1470	2	\N	2014-06-14 18:00:56.71432+03
-5699	1471	2	\N	2014-06-14 18:02:10.63169+03
-5700	1472	2	\N	2014-06-14 18:02:54.98084+03
-5701	1473	2	\N	2014-06-14 18:03:27.411198+03
-5713	1485	2	\N	2014-06-15 15:17:28.256792+03
-5728	1500	2	\N	2014-06-18 16:59:05.631362+03
-5732	1504	2	\N	2014-06-22 19:42:44.939368+03
-5733	1505	2	\N	2014-06-22 19:43:05.103699+03
-5734	1506	2	\N	2014-06-22 19:43:23.157992+03
-5735	1507	2	\N	2014-06-22 19:46:21.388635+03
-5737	1509	2	\N	2014-06-22 21:15:50.586549+03
-5738	1510	2	\N	2014-06-24 20:30:44.36129+03
-5739	1511	2	\N	2014-06-25 19:21:08.001771+03
-5740	1512	2	\N	2014-06-25 19:37:43.544622+03
-5741	1513	2	\N	2014-06-25 19:38:23.293423+03
-5742	1514	2	\N	2014-06-25 19:38:46.712804+03
-5743	1515	2	\N	2014-06-25 19:39:14.757449+03
-5744	1516	2	\N	2014-06-25 20:37:42.602785+03
-5745	1517	2	\N	2014-06-25 20:54:09.96009+03
-5746	1518	2	\N	2014-06-25 20:54:50.943042+03
-5747	1519	2	\N	2014-06-25 20:55:06.988343+03
-5749	1521	2	\N	2014-06-26 21:02:19.488826+03
-5750	1535	2	\N	2014-06-28 17:17:15.295903+03
-5751	1536	2	\N	2014-06-28 17:31:39.626186+03
-5752	1537	2	\N	2014-06-28 20:56:05.816704+03
-5753	1538	2	\N	2014-06-28 20:57:41.600837+03
-5754	1539	2	\N	2014-06-28 20:59:59.522314+03
-5755	1540	2	\N	2014-06-28 21:00:26.365557+03
-5756	1541	2	\N	2014-06-28 21:00:51.086753+03
-5758	1543	2	\N	2014-06-28 21:25:57.336069+03
-5759	1544	2	\N	2014-06-28 21:26:14.894807+03
-5760	1545	2	\N	2014-06-28 21:26:35.413657+03
-5761	1546	2	\N	2014-07-02 23:01:03.321441+03
-5762	1547	2	\N	2014-07-02 23:03:30.755887+03
-5763	1548	2	\N	2014-07-26 18:07:46.336433+03
-5764	1549	2	\N	2014-08-16 20:09:11.73959+03
-5766	1551	2	\N	2014-08-16 20:23:59.980051+03
-5767	1552	2	\N	2014-08-16 20:24:12.305446+03
-5768	1553	2	\N	2014-08-16 20:24:15.930016+03
-5769	1554	2	\N	2014-08-16 20:25:09.403552+03
-5771	1556	2	\N	2014-08-16 20:51:19.103778+03
-5773	1559	2	\N	2014-08-16 21:13:14.302214+03
-5774	1560	2	\N	2014-08-16 21:13:18.107616+03
-5775	1561	2	\N	2014-08-16 21:22:35.752473+03
-5776	1562	2	\N	2014-08-16 21:23:02.397566+03
-5777	1563	2	\N	2014-08-16 21:23:05.499294+03
-5778	1564	2	\N	2014-08-16 21:24:08.813965+03
-5783	1569	2	\N	2014-08-17 11:07:53.713228+03
-5784	1570	2	\N	2014-08-17 11:09:10.292392+03
-5790	1576	2	\N	2014-08-22 22:48:58.176695+03
-5791	1577	2	\N	2014-08-22 22:49:31.584667+03
-5792	1578	2	\N	2014-08-22 22:49:35.101959+03
-5793	1579	2	\N	2014-08-22 22:50:20.197271+03
-5794	1580	2	\N	2014-08-22 22:50:49.188036+03
-5795	1581	2	\N	2014-08-22 22:51:29.357367+03
-5796	1582	2	\N	2014-08-22 22:52:03.171722+03
-5797	1584	2	\N	2014-08-22 22:58:38.326467+03
-5798	1585	2	\N	2014-08-22 22:59:28.534906+03
-5799	1586	2	\N	2014-08-22 22:59:41.71816+03
-5800	1587	2	\N	2014-08-22 23:01:39.676197+03
-5801	1588	2	\N	2014-08-22 23:02:11.872661+03
-5802	1589	2	\N	2014-08-22 23:04:10.670971+03
-5803	1590	2	\N	2014-08-22 23:04:40.181387+03
-5804	1591	2	\N	2014-08-22 23:05:46.128053+03
-5805	1592	2	\N	2014-08-22 23:06:07.780481+03
-5806	1593	2	\N	2014-08-22 23:06:12.342153+03
-5810	1597	2	\N	2014-08-22 23:14:17.280337+03
-5820	1607	2	\N	2014-08-23 13:37:30.044239+03
-5821	1608	2	\N	2014-08-23 16:14:22.910225+03
-5822	1609	2	\N	2014-08-23 16:16:24.823791+03
-5823	1610	2	\N	2014-08-24 14:10:51.002759+03
-5824	1611	2	\N	2014-08-24 14:11:19.783792+03
-5825	1612	2	\N	2014-08-24 14:11:36.729128+03
-5826	1613	2	\N	2014-08-24 14:11:54.849623+03
-5827	1614	2	\N	2014-08-24 14:48:54.04485+03
-5828	1615	2	\N	2014-08-24 14:48:55.715304+03
-5829	1616	2	\N	2014-08-24 14:49:59.373945+03
-5832	1619	2	\N	2014-08-24 15:01:16.140346+03
-5833	1620	2	\N	2014-08-24 15:02:15.884894+03
-5834	1621	2	\N	2014-08-24 15:02:43.162974+03
-5835	1622	2	\N	2014-08-24 15:03:06.67481+03
-5836	1623	2	\N	2014-08-24 15:03:53.276198+03
-5837	1624	2	\N	2014-08-24 15:08:02.737031+03
-5838	1625	2	\N	2014-08-24 15:08:18.61161+03
-5839	1626	2	\N	2014-08-24 15:08:29.0077+03
-5840	1627	2	\N	2014-08-24 15:10:13.736496+03
-5841	1628	2	\N	2014-08-24 15:10:44.233145+03
-5852	1639	2	\N	2014-08-25 15:20:24.884947+03
-5853	1640	2	\N	2014-08-26 19:55:53.569882+03
-5854	1641	2	\N	2014-08-26 19:56:28.320221+03
-5858	1645	2	\N	2014-08-26 20:01:19.187139+03
-5860	1647	2	\N	2014-08-26 20:04:08.078366+03
-5862	1649	2	\N	2014-08-26 20:04:48.124422+03
-5855	1642	2	\N	2014-08-26 19:56:46.695581+03
-5856	1643	2	\N	2014-08-26 19:57:13.160198+03
-5857	1644	2	\N	2014-08-26 20:01:16.129984+03
-5861	1648	2	\N	2014-08-26 20:04:09.378364+03
-5863	1650	2	\N	2014-08-26 20:06:13.193356+03
-5864	1651	2	\N	2014-08-26 20:06:36.249641+03
-5865	1652	2	\N	2014-08-26 20:07:23.412381+03
-5866	1653	2	\N	2014-08-26 20:07:31.899383+03
-5873	1660	2	\N	2014-08-31 16:37:37.888486+03
-5919	1714	2	\N	2014-09-14 13:27:15.677766+03
-5926	1721	2	\N	2014-09-14 14:49:51.512979+03
-5967	1764	2	\N	2014-09-14 21:51:09.963908+03
-5968	1766	2	\N	2014-09-28 17:08:27.946698+03
-5971	1769	2	\N	2014-10-01 20:37:18.107894+03
-5972	1771	2	\N	2014-10-01 21:39:17.299667+03
-5973	1773	2	\N	2014-10-01 22:04:03.074823+03
-5974	1774	2	\N	2014-10-01 22:17:44.949656+03
-5975	1775	2	\N	2014-10-03 20:21:54.06353+03
-5977	1777	2	\N	2014-10-03 20:35:01.628264+03
-5978	1778	2	\N	2014-10-04 21:45:17.702702+03
-5980	1780	2	\N	2014-10-05 12:49:28.270538+03
-5982	1797	2	\N	2014-10-05 21:08:02.025119+03
-5983	1798	2	\N	2014-10-05 22:07:40.176836+03
-5984	1799	2	\N	2014-10-09 20:49:57.476724+03
-5985	1800	2	\N	2014-10-09 21:44:48.304991+03
-5986	1801	2	\N	2014-10-09 21:45:57.042916+03
-5987	1802	2	\N	2014-10-09 21:51:36.274928+03
-5988	1797	2	\N	2014-10-09 21:58:44.274487+03
-5989	1803	2	\N	2014-10-10 21:20:08.467997+03
-5990	1804	2	\N	2014-10-10 21:48:32.795064+03
-5991	1797	2	\N	2014-10-10 21:48:40.224687+03
-5994	1797	2	\N	2014-10-10 22:43:03.886027+03
-5995	1807	2	\N	2014-10-12 12:18:58.609492+03
-5996	1419	2	\N	2014-10-12 12:21:41.297126+03
-5999	1419	2	\N	2014-10-12 14:03:13.921521+03
-6000	1419	2	\N	2014-10-12 14:03:56.458732+03
-6002	1797	2	\N	2014-10-12 14:08:19.225786+03
-6003	1797	2	\N	2014-10-12 14:08:29.322661+03
-6005	1797	2	\N	2014-10-12 14:09:47.667654+03
-6006	1797	2	\N	2014-10-12 14:10:15.511498+03
-6008	894	2	\N	2014-10-12 14:15:30.839116+03
-6010	894	2	\N	2014-10-12 14:15:50.178579+03
-6011	894	2	\N	2014-10-12 14:16:00.712168+03
-6014	1507	2	\N	2014-10-12 14:21:53.792753+03
-6015	1507	2	\N	2014-10-12 14:22:06.118134+03
-6016	1439	2	\N	2014-10-12 14:22:17.008412+03
-6017	1438	2	\N	2014-10-12 14:22:21.965321+03
-6020	1780	2	\N	2014-10-12 14:25:19.014258+03
-6021	1780	2	\N	2014-10-12 14:25:28.403238+03
-6022	1780	2	\N	2014-10-12 14:25:37.930302+03
-6025	1413	2	\N	2014-10-12 14:31:06.237149+03
-6026	1413	2	\N	2014-10-12 14:31:16.507549+03
-6029	1415	2	\N	2014-10-12 14:34:22.672887+03
-6030	1415	2	\N	2014-10-12 14:34:32.05391+03
-6050	1653	2	\N	2014-10-12 16:27:20.425954+03
-6051	1653	2	\N	2014-10-12 16:27:45.783221+03
-6053	1283	2	\N	2014-10-12 16:28:08.925372+03
-6054	1283	2	\N	2014-10-12 16:28:17.376186+03
-6055	1833	2	\N	2014-10-12 16:29:10.045595+03
-6056	784	2	\N	2014-10-12 16:29:11.936722+03
-6066	998	2	\N	2014-10-18 11:46:31.67705+03
-6125	1660	2	\N	2014-10-25 20:27:51.453322+03
-6126	1639	2	\N	2014-10-25 20:27:59.032748+03
-6127	1607	2	\N	2014-10-25 20:28:26.48561+03
-6128	1547	2	\N	2014-10-25 20:31:18.593123+03
-6129	1546	2	\N	2014-10-25 20:31:27.322575+03
-6130	1509	2	\N	2014-10-25 20:31:34.596003+03
-6131	1500	2	\N	2014-10-25 20:31:41.235636+03
-6132	1485	2	\N	2014-10-25 20:31:48.295128+03
-6133	1448	2	\N	2014-10-25 20:31:55.364673+03
-6134	1447	2	\N	2014-10-25 20:32:03.232605+03
-6135	864	2	\N	2014-10-25 22:27:41.085522+03
-6136	900	2	\N	2014-10-25 22:27:48.659618+03
-6137	780	2	\N	2014-10-25 22:27:56.462817+03
-6138	837	2	\N	2014-10-25 22:28:02.931936+03
-6139	1394	2	\N	2014-10-25 22:28:08.943421+03
-6140	873	2	\N	2014-10-25 22:28:16.618586+03
-6141	778	2	\N	2014-10-25 22:28:22.956578+03
-6142	1659	2	\N	2014-10-25 22:39:28.23436+03
-6144	1849	2	\N	2014-10-25 23:00:37.016264+03
-6145	1852	2	\N	2014-10-28 19:57:41.751563+02
-6146	1853	2	\N	2014-10-28 20:23:48.907733+02
-6147	1854	2	\N	2014-10-28 20:24:58.380434+02
-6148	1855	2	\N	2014-10-28 20:25:08.681569+02
-6151	1859	2	\N	2014-10-29 12:48:22.905378+02
-6152	1860	2	\N	2014-10-30 22:03:33.988542+02
-6157	1865	2	\N	2014-11-03 21:33:49.462196+02
-6158	1866	2	\N	2014-11-03 21:38:54.729983+02
-6159	1867	2	\N	2014-11-03 21:39:31.824693+02
-6160	1868	2	\N	2014-11-03 21:40:02.647787+02
-6161	1869	2	\N	2014-11-05 21:10:08.261088+02
-6162	1870	2	\N	2014-11-05 21:10:38.427296+02
-6164	1872	2	\N	2014-11-08 19:05:48.520641+02
-6165	1868	2	\N	2014-11-08 19:07:32.928999+02
-6166	1868	2	\N	2014-11-08 19:07:58.653299+02
-6167	1873	2	\N	2014-11-09 14:14:33.279838+02
-6168	1433	2	\N	2014-11-09 14:15:02.053975+02
-6170	1875	2	\N	2014-11-09 20:43:57.157494+02
-6171	1876	2	\N	2014-11-09 20:50:09.776581+02
-6172	1876	2	\N	2014-11-09 21:46:07.106741+02
-6173	1876	2	\N	2014-11-09 21:46:46.766703+02
-6174	1876	2	\N	2014-11-12 18:42:47.24628+02
-6175	1876	2	\N	2014-11-12 18:43:00.917409+02
-6176	1876	2	\N	2014-11-12 18:43:51.052257+02
-6177	1876	2	\N	2014-11-12 18:49:19.486465+02
-6178	1876	2	\N	2014-11-12 18:49:50.992411+02
-6182	1880	2	\N	2014-11-12 18:58:13.464317+02
-6183	1881	2	\N	2014-11-12 18:58:13.464317+02
-6184	1876	2	\N	2014-11-12 19:19:20.155903+02
-6185	1880	2	\N	2014-11-12 19:20:04.488842+02
-6186	1882	2	\N	2014-11-12 19:21:49.754499+02
-6187	1882	2	\N	2014-11-12 20:48:55.295948+02
-6188	1876	2	\N	2014-11-13 18:36:19.360925+02
-6189	1876	2	\N	2014-11-13 18:36:40.275356+02
-6190	1876	2	\N	2014-11-13 18:36:53.848561+02
-6191	1876	2	\N	2014-11-13 18:37:04.828162+02
-6192	1876	2	\N	2014-11-13 18:44:14.058824+02
-6193	1880	2	\N	2014-11-14 13:23:46.652293+02
-6196	1884	2	\N	2014-11-15 12:46:51.68956+02
-6197	1885	2	\N	2014-11-15 12:55:58.618287+02
-6200	1647	2	\N	2014-11-15 19:54:17.589811+02
-6201	1647	2	\N	2014-11-15 19:57:05.325517+02
-6202	1587	2	\N	2014-11-15 19:57:11.689531+02
-6204	1888	2	\N	2014-11-15 20:54:18.530252+02
-6209	1893	2	\N	2014-11-15 21:10:00.852505+02
-6210	1894	2	\N	2014-11-16 11:36:20.360008+02
-6211	1895	2	\N	2014-11-16 11:38:31.304748+02
-6212	1896	2	\N	2014-11-16 11:52:22.859107+02
-6214	1896	2	\N	2014-11-16 17:28:25.282664+02
-6215	1898	2	\N	2014-11-18 19:36:00.947451+02
-6217	1900	2	\N	2014-11-18 19:59:41.794255+02
-6218	1901	2	\N	2014-11-18 20:00:50.313385+02
-6219	1902	2	\N	2014-11-18 20:05:55.399398+02
-6220	1903	2	\N	2014-11-18 20:06:23.495804+02
-6221	1225	2	\N	2014-11-20 20:55:40.655878+02
-6222	1904	2	\N	2014-11-21 20:47:35.513987+02
-6223	1434	2	\N	2014-11-21 20:48:05.829054+02
-6224	1571	2	\N	2014-11-21 20:48:27.000088+02
-6225	1885	2	\N	2014-11-21 20:48:44.475673+02
-6226	1905	2	\N	2014-11-21 21:17:50.885382+02
-6227	1436	2	\N	2014-11-21 21:19:06.360097+02
-6228	1798	2	\N	2014-11-21 21:19:19.899746+02
-6229	1425	2	\N	2014-11-21 21:19:42.772209+02
-6230	802	2	\N	2014-11-21 21:20:02.792752+02
-6231	1906	2	\N	2014-11-21 21:20:18.443474+02
-6232	802	2	\N	2014-11-21 21:20:33.430037+02
-6233	1395	2	\N	2014-11-21 21:20:55.244524+02
-6234	1907	2	\N	2014-11-21 21:25:23.260941+02
-6235	879	2	\N	2014-11-21 21:26:01.060638+02
-6236	1089	2	\N	2014-11-21 21:34:19.776611+02
-6237	874	2	\N	2014-11-21 21:34:45.906696+02
-6238	1080	2	\N	2014-11-21 21:35:09.652432+02
-6239	1908	2	\N	2014-11-21 21:35:29.643627+02
-6240	910	2	\N	2014-11-21 21:36:10.21074+02
-6241	1080	2	\N	2014-11-21 21:36:26.556412+02
-6242	911	2	\N	2014-11-21 21:36:37.408083+02
-6243	956	2	\N	2014-11-21 21:36:56.333028+02
-6244	955	2	\N	2014-11-21 21:37:09.845857+02
-6246	1896	2	\N	2014-11-21 21:43:10.139464+02
-6247	1910	2	\N	2014-11-22 17:58:53.151533+02
-6248	1911	2	\N	2014-11-22 17:58:53.151533+02
-6251	1903	2	\N	2014-11-23 17:42:18.707964+02
-6253	1903	2	\N	2014-11-23 18:15:04.669498+02
-6254	1913	2	\N	2014-11-23 18:22:07.34092+02
-6255	1915	2	\N	2014-11-23 18:25:34.975922+02
-6257	1917	2	\N	2014-11-23 18:40:26.695236+02
-6258	1918	2	\N	2014-11-23 18:40:42.249218+02
-6259	1919	2	\N	2014-11-27 21:56:12.900683+02
-6265	1906	2	\N	2014-11-28 22:02:27.025943+02
-6266	1908	2	\N	2014-11-28 22:03:25.613427+02
-6267	1919	2	\N	2014-11-30 11:21:31.130821+02
-6270	1368	2	\N	2014-11-30 18:22:02.736241+02
-6271	1922	2	\N	2014-12-07 14:34:35.538855+02
-6276	1924	2	\N	2014-12-07 21:40:24.739542+02
-6277	1925	2	\N	2014-12-07 21:41:09.94037+02
-6278	1926	2	\N	2014-12-07 21:41:37.63455+02
-6279	1471	2	\N	2014-12-07 21:41:39.584636+02
-6280	1927	2	\N	2014-12-07 21:42:12.893528+02
-6281	1471	2	\N	2014-12-07 21:42:14.781639+02
-6285	1930	2	\N	2014-12-08 21:43:55.101305+02
-6286	1869	2	\N	2014-12-08 21:46:09.685953+02
-6287	1931	2	\N	2014-12-08 21:52:00.685674+02
-6288	1930	2	\N	2014-12-08 21:53:17.580512+02
-6289	1932	2	\N	2014-12-11 22:45:01.994257+02
-6290	1933	2	\N	2014-12-11 22:46:28.273472+02
-6291	1934	2	\N	2014-12-11 22:50:30.21811+02
-6293	1935	2	\N	2014-12-11 22:53:00.765244+02
-6295	1935	2	\N	2014-12-11 22:53:42.569877+02
-6297	1936	2	\N	2014-12-13 21:35:47.599877+02
-6298	1939	2	\N	2014-12-13 21:37:02.820409+02
-6299	1939	2	\N	2014-12-13 21:37:54.352906+02
-6300	1936	2	\N	2014-12-13 21:55:38.627009+02
-6301	1933	2	\N	2014-12-13 21:55:57.253566+02
-6302	1933	2	\N	2014-12-13 21:57:41.570228+02
-6303	1933	2	\N	2014-12-13 22:01:39.804954+02
-6304	1936	2	\N	2014-12-13 22:01:54.801501+02
-6305	1936	2	\N	2014-12-13 22:03:25.347584+02
-6306	1933	2	\N	2014-12-13 22:03:37.415197+02
-6307	1939	2	\N	2014-12-13 22:03:52.016284+02
-6308	1936	2	\N	2014-12-13 22:10:55.202627+02
-6309	1936	2	\N	2014-12-13 22:11:45.388631+02
-6310	1936	2	\N	2014-12-14 11:10:18.568487+02
-6311	1936	2	\N	2014-12-14 11:10:54.616091+02
-6312	1936	2	\N	2014-12-14 11:12:20.116844+02
-6313	1933	2	\N	2014-12-14 11:12:44.366886+02
-6314	1936	2	\N	2014-12-14 11:14:36.987112+02
-6315	1933	2	\N	2014-12-14 11:14:46.937016+02
-6316	1940	2	\N	2014-12-14 11:16:18.397912+02
-6317	1941	2	\N	2014-12-14 17:51:15.587939+02
-6318	1940	2	\N	2014-12-14 19:37:37.036036+02
-6319	1936	2	\N	2014-12-14 19:37:54.381361+02
-6320	1940	2	\N	2014-12-14 19:41:49.794566+02
-6321	1940	2	\N	2014-12-14 19:44:37.781977+02
-6322	1940	2	\N	2014-12-14 19:48:08.98232+02
-6323	1940	2	\N	2014-12-14 19:50:28.583831+02
-6324	1940	2	\N	2014-12-14 20:30:31.46273+02
-6325	1936	2	\N	2014-12-14 20:30:45.990313+02
-6326	1940	2	\N	2014-12-14 20:33:08.50634+02
-6327	1940	2	\N	2014-12-14 20:34:47.73587+02
-6328	1940	2	\N	2014-12-14 20:37:41.082704+02
-6329	1653	2	\N	2014-12-19 21:31:43.967187+02
-6330	1653	2	\N	2014-12-19 21:37:31.746728+02
-6331	1951	2	\N	2014-12-19 21:38:17.300837+02
-6332	725	2	\N	2014-12-19 21:38:20.726452+02
-6333	1952	2	\N	2014-12-19 21:42:56.792366+02
-6334	1870	2	\N	2014-12-19 21:43:03.803839+02
-6335	1906	2	\N	2014-12-20 16:10:55.310323+02
-6338	1869	2	\N	2014-12-20 17:01:25.535753+02
-6339	1869	2	\N	2014-12-20 17:03:12.810766+02
-6340	1869	2	\N	2014-12-20 17:03:22.550854+02
-6341	1628	2	\N	2014-12-20 17:05:00.135486+02
-6342	1869	2	\N	2014-12-20 17:05:08.130568+02
-6343	1626	2	\N	2014-12-20 17:50:11.179188+02
-6344	1615	2	\N	2014-12-20 17:50:33.508978+02
-6345	1954	2	\N	2014-12-20 18:18:17.329483+02
-6346	1954	2	\N	2014-12-20 18:18:27.668631+02
-6349	1225	2	\N	2014-12-21 12:57:50.837529+02
-6350	1433	2	\N	2014-12-21 12:57:59.036844+02
-6351	1954	2	\N	2014-12-21 13:04:30.43023+02
-6355	1956	2	\N	2014-12-21 14:58:01.627945+02
-6356	1383	2	\N	2014-12-21 14:58:04.4436+02
-6357	1383	2	\N	2014-12-21 14:58:18.134114+02
-6387	1958	2	\N	2014-12-21 19:20:00.336409+02
-6388	1958	2	\N	2014-12-21 19:40:10.412709+02
-6389	1958	2	\N	2014-12-21 19:43:18.014602+02
-6393	1962	2	\N	2014-12-24 21:32:53.618984+02
-6400	1964	2	\N	2014-12-25 21:05:49.345482+02
-6411	1317	2	\N	2014-12-27 14:48:10.519499+02
-6415	1966	2	\N	2014-12-27 19:34:56.371248+02
-6418	1966	2	\N	2014-12-31 19:10:29.989911+02
-6420	1968	2	\N	2015-01-03 12:32:10.846571+02
-6422	1970	2	\N	2015-01-03 12:35:21.670372+02
-6423	1971	2	\N	2015-01-04 12:45:51.571627+02
-6425	1971	2	\N	2015-01-04 12:46:35.715575+02
-6426	1971	2	\N	2015-01-04 14:05:54.230775+02
-6428	1975	2	\N	2015-01-04 14:47:53.838979+02
-6430	1977	2	\N	2015-01-04 16:44:50.635763+02
-6431	1975	2	\N	2015-01-04 16:54:32.711408+02
-6432	1975	2	\N	2015-01-04 17:11:52.039507+02
-6433	1975	2	\N	2015-01-04 17:31:46.570967+02
-6434	1975	2	\N	2015-01-07 14:12:48.405815+02
-6435	1975	2	\N	2015-01-07 14:22:19.046581+02
-6436	1978	2	\N	2015-01-07 18:00:22.111119+02
-6437	1979	2	\N	2015-01-07 18:22:39.961593+02
-6438	1980	2	\N	2015-01-07 18:22:48.978415+02
-6439	1981	2	\N	2015-01-07 18:23:19.524712+02
-6440	3	2	\N	2015-01-07 18:23:30.384627+02
-6441	1982	2	\N	2015-01-07 18:30:42.662112+02
-6442	3	2	\N	2015-01-07 18:30:49.411934+02
-6443	3	2	\N	2015-01-07 18:31:24.902432+02
-6444	784	2	\N	2015-01-08 13:21:17.321066+02
-6445	784	2	\N	2015-01-08 13:27:01.529898+02
-6446	784	2	\N	2015-01-08 14:19:17.153858+02
-6447	784	2	\N	2015-01-08 14:20:23.527059+02
-6448	784	2	\N	2015-01-09 10:59:22.101268+02
-6453	1983	2	\N	2015-01-13 17:00:57.932019+02
-6454	1985	2	\N	2015-01-13 17:03:06.725248+02
-6455	1985	2	\N	2015-01-14 21:32:00.651438+02
-6458	1988	2	\N	2015-01-15 21:27:50.402917+02
-6459	1989	2	\N	2015-01-17 15:06:55.170629+02
-6460	1990	2	\N	2015-01-17 19:50:58.298272+02
-6461	1991	2	\N	2015-01-17 19:50:58.298272+02
-6462	1992	2	\N	2015-01-17 19:51:20.956564+02
-6463	1990	2	\N	2015-01-17 21:28:18.900625+02
-6464	1993	2	\N	2015-01-17 21:28:36.972519+02
-6465	1994	2	\N	2015-01-17 21:50:01.04394+02
-6466	1995	2	\N	2015-01-17 21:50:14.61181+02
-6467	1996	2	\N	2015-01-17 21:54:58.910426+02
-6468	1997	2	\N	2015-01-17 21:54:58.910426+02
-6472	2001	2	\N	2015-01-17 21:57:17.28338+02
-6473	2002	2	\N	2015-01-17 21:57:17.28338+02
-6477	2006	2	\N	2015-01-17 22:00:39.986496+02
-6478	2007	2	\N	2015-01-17 22:00:39.986496+02
-6480	2009	2	\N	2015-01-21 21:44:18.418746+02
-6481	1985	2	\N	2015-02-01 13:03:47.123323+02
-6482	2009	2	\N	2015-02-01 13:05:09.626214+02
-6483	2011	2	\N	2015-02-01 13:23:15.549518+02
-6484	1004	2	\N	2015-02-01 13:23:17.930893+02
-6485	2012	2	\N	2015-02-01 13:51:03.67962+02
-6486	1470	2	\N	2015-02-01 13:51:06.125989+02
-6487	2013	2	\N	2015-02-01 15:08:04.506074+02
-6488	2014	2	\N	2015-02-01 15:08:25.548868+02
-6489	2015	2	\N	2015-02-01 15:09:02.223788+02
-6490	2016	2	\N	2015-02-01 15:09:49.640295+02
-6491	2017	2	\N	2015-02-01 15:09:55.959842+02
-6492	2018	2	\N	2015-02-01 15:12:43.612773+02
-6493	2019	2	\N	2015-02-01 15:13:13.911124+02
-6494	2020	2	\N	2015-02-01 15:13:27.313034+02
-6497	2023	2	\N	2015-02-01 15:16:10.834689+02
-6498	2024	2	\N	2015-02-01 15:16:30.308954+02
-6503	2027	2	\N	2015-02-01 15:27:55.689729+02
-6504	2028	2	\N	2015-02-01 15:27:55.689729+02
-6505	2029	2	\N	2015-02-01 19:41:31.921287+02
-6506	2030	2	\N	2015-02-01 19:49:07.587188+02
-6507	2031	2	\N	2015-02-01 19:49:18.380376+02
-6508	2032	2	\N	2015-02-01 19:51:03.621123+02
-6509	1004	2	\N	2015-02-01 19:51:06.683043+02
-6515	2038	2	\N	2015-02-01 19:53:59.085718+02
-6516	2039	2	\N	2015-02-01 19:53:59.085718+02
-6521	2044	2	\N	2015-02-01 19:54:52.686809+02
-6522	2045	2	\N	2015-02-01 19:54:52.686809+02
-6523	2046	2	\N	2015-02-01 19:54:52.686809+02
-6524	2047	2	\N	2015-02-01 19:54:52.686809+02
-6525	2048	2	\N	2015-02-03 20:05:38.797054+02
-6526	2048	2	\N	2015-02-03 20:06:16.781057+02
-6528	2049	2	\N	2015-02-03 21:27:11.659126+02
-6529	2048	2	\N	2015-02-03 21:27:36.200475+02
-6530	2050	2	\N	2015-02-04 21:04:02.527314+02
-6531	2051	2	\N	2015-02-04 21:04:04.474427+02
-6532	2051	2	\N	2015-02-04 21:11:28.094987+02
-6533	2052	2	\N	2015-02-04 21:11:39.281593+02
-6534	2051	2	\N	2015-02-23 21:04:13.639992+02
-6535	1648	2	\N	2015-02-24 14:58:15.754816+02
-6537	2054	2	\N	2015-02-24 21:04:26.838046+02
-6539	2054	2	\N	2015-02-24 21:06:08.284296+02
-6541	2054	2	\N	2015-02-24 21:06:27.830735+02
-6542	2055	2	\N	2015-03-03 16:25:23.003263+02
-6553	2051	2	\N	2015-03-05 21:22:31.156271+02
-6554	2052	2	\N	2015-03-05 21:22:34.187754+02
-6555	2049	2	\N	2015-03-07 13:59:54.391614+02
-6556	2049	2	\N	2015-03-07 14:00:01.858793+02
-6557	2049	2	\N	2015-03-07 14:00:08.905813+02
-6558	2049	2	\N	2015-03-07 17:41:13.176137+02
-6559	2049	2	\N	2015-03-07 17:41:24.454712+02
-6560	2016	2	\N	2015-03-07 19:11:45.990005+02
-6561	1971	2	\N	2015-03-07 20:39:22.05432+02
-6562	1939	2	\N	2015-03-07 20:41:30.911568+02
-6563	1964	2	\N	2015-03-07 20:41:40.386597+02
-6564	1962	2	\N	2015-03-07 20:41:47.24255+02
-6565	2009	2	\N	2015-03-07 20:41:57.590912+02
-6566	1958	2	\N	2015-03-07 20:42:08.257141+02
-6567	2062	2	\N	2015-03-07 20:44:22.388688+02
-6568	1958	2	\N	2015-03-07 20:44:57.143369+02
-6569	1922	2	\N	2015-03-07 21:16:33.311167+02
-6570	1930	2	\N	2015-03-07 21:18:30.204883+02
-6571	1980	2	\N	2015-03-07 21:18:36.892234+02
-6572	1930	2	\N	2015-03-07 21:21:01.745845+02
-6573	1982	2	\N	2015-03-07 21:45:35.899441+02
-6574	1983	2	\N	2015-03-07 21:45:46.115364+02
-6575	1985	2	\N	2015-03-07 21:45:53.837217+02
-6576	2016	2	\N	2015-03-07 21:46:03.965785+02
-6577	1940	2	\N	2015-03-07 21:46:13.798132+02
-6578	1932	2	\N	2015-03-07 21:46:22.868946+02
-6579	1934	2	\N	2015-03-07 21:46:33.42948+02
-6580	1935	2	\N	2015-03-07 21:46:42.582075+02
-6581	1936	2	\N	2015-03-07 21:46:53.561952+02
-6582	1933	2	\N	2015-03-07 21:47:06.74156+02
-6584	1922	2	\N	2015-03-08 18:02:14.423833+02
-6585	1922	2	\N	2015-03-08 18:02:24.288542+02
-6586	1989	2	\N	2015-03-08 18:07:00.091644+02
-6587	1922	2	\N	2015-03-08 18:17:03.971743+02
-6588	1922	2	\N	2015-03-08 18:29:12.5349+02
-6589	2063	2	\N	2015-03-08 18:41:45.468589+02
-6590	1989	2	\N	2015-03-08 18:41:51.822924+02
-6592	2065	2	\N	2015-03-09 14:02:38.899688+02
-6593	2066	2	\N	2015-03-09 17:16:22.759831+02
-6594	2068	2	\N	2015-03-09 19:28:40.834898+02
-6595	1980	2	\N	2015-03-09 19:37:29.594475+02
-6596	1389	2	\N	2015-03-15 19:00:11.360402+02
-6597	1389	2	\N	2015-03-15 19:07:00.022851+02
-6598	1389	2	\N	2015-03-15 19:08:22.540227+02
-6599	2070	2	\N	2015-03-21 15:11:50.495946+02
-6600	1989	2	\N	2015-03-21 15:11:59.182752+02
-6603	2052	2	\N	2015-03-21 16:50:40.821135+02
-6605	2052	2	\N	2015-03-21 16:52:47.683727+02
-6606	2075	2	\N	2015-03-21 17:05:47.83578+02
-6607	2075	2	\N	2015-03-21 17:06:12.331454+02
-6608	2052	2	\N	2015-03-21 17:06:35.32059+02
-6609	2070	2	\N	2015-03-21 17:48:31.664941+02
-6610	2077	2	\N	2015-03-21 17:49:14.645342+02
-6618	2052	2	\N	2015-03-21 18:16:06.930298+02
-6621	2052	2	\N	2015-03-21 18:19:16.455929+02
-6622	2087	2	\N	2015-03-21 18:20:19.713186+02
-6623	2052	2	\N	2015-03-21 18:20:29.187736+02
-6624	2052	2	\N	2015-03-21 19:28:39.349206+02
-6625	2052	2	\N	2015-03-21 19:30:14.844869+02
-6626	2052	2	\N	2015-03-21 19:33:54.902921+02
-6627	2052	2	\N	2015-03-21 19:34:11.317898+02
-6628	2052	2	\N	2015-03-21 19:35:55.581037+02
-6629	2052	2	\N	2015-03-21 19:36:06.902031+02
-6630	2052	2	\N	2015-03-21 19:36:15.834648+02
-6631	2052	2	\N	2015-03-21 19:36:28.227499+02
-6632	2052	2	\N	2015-03-21 19:36:44.271289+02
-6633	2088	2	\N	2015-03-21 19:36:44.271289+02
-6634	2089	2	\N	2015-03-21 19:38:07.835672+02
-6635	2090	2	\N	2015-03-21 19:38:10.203402+02
-6637	2052	2	\N	2015-03-21 19:40:18.868487+02
-6638	2052	2	\N	2015-03-21 19:41:03.761402+02
-6639	2052	2	\N	2015-03-21 19:42:48.725752+02
-6640	2052	2	\N	2015-03-21 19:43:52.346215+02
-6641	2092	2	\N	2015-03-21 20:11:35.939948+02
-6642	2052	2	\N	2015-03-21 20:11:42.394011+02
-6643	2052	2	\N	2015-03-21 20:12:01.524624+02
-6646	2052	2	\N	2015-03-21 21:14:06.180767+02
-6647	2095	2	\N	2015-03-21 22:03:40.435063+02
-6648	2051	2	\N	2015-03-21 22:03:42.699321+02
-6649	2088	2	\N	2015-03-21 22:03:45.19164+02
-6650	2052	2	\N	2015-03-21 22:12:59.222848+02
-6651	971	2	\N	2015-03-22 16:55:09.922468+02
-6652	2096	2	\N	2015-03-22 17:22:28.394236+02
-6653	970	2	\N	2015-03-22 17:22:30.31308+02
-6654	971	2	\N	2015-03-22 17:32:58.675826+02
-6655	2097	2	\N	2015-03-22 17:35:36.969555+02
-6656	2052	2	\N	2015-03-22 17:35:38.710629+02
-6657	2052	2	\N	2015-03-22 17:35:54.667572+02
-6658	2052	2	\N	2015-03-22 17:36:02.394493+02
-6659	1413	2	\N	2015-03-22 21:10:23.96026+02
-6660	2098	2	\N	2015-03-22 21:12:12.040889+02
-6661	1413	2	\N	2015-03-22 21:12:14.574907+02
-6662	953	2	\N	2015-03-23 10:52:07.126828+02
-6663	955	2	\N	2015-03-23 10:52:46.434534+02
-6664	955	2	\N	2015-03-23 10:53:07.107505+02
-6665	971	2	\N	2015-03-23 11:17:09.549645+02
-6666	971	2	\N	2015-03-23 11:17:14.786132+02
-6667	971	2	\N	2015-03-23 22:30:47.611278+02
-6668	2099	2	\N	2015-03-24 19:25:49.743645+02
-6669	2100	2	\N	2015-03-24 19:26:22.746874+02
-6670	2101	2	\N	2015-03-24 19:30:50.825716+02
-6671	1413	2	\N	2015-03-24 21:27:29.027714+02
-6672	1413	2	\N	2015-03-24 21:27:56.025596+02
-6673	2104	2	\N	2015-03-25 22:08:36.018637+02
-6674	2105	2	\N	2015-03-25 22:09:11.121353+02
-6675	2106	2	\N	2015-03-25 22:10:32.26983+02
-6676	2107	2	\N	2015-03-27 21:02:27.365736+02
-6677	1413	2	\N	2015-03-27 22:11:48.664734+02
-6678	1318	2	\N	2015-03-27 22:11:57.175441+02
-6679	2108	2	\N	2015-03-27 22:14:09.702895+02
-6680	1413	2	\N	2015-03-27 22:14:23.177174+02
-6681	1975	2	\N	2015-03-29 14:54:09.090695+03
-6682	1975	2	\N	2015-03-29 14:56:05.558074+03
-6683	2054	2	\N	2015-03-29 18:10:37.298528+03
-6684	2054	2	\N	2015-03-29 18:10:44.494853+03
-6685	2054	2	\N	2015-03-29 18:11:59.351954+03
-6686	894	2	\N	2015-03-29 18:12:33.345883+03
-6687	2108	2	\N	2015-03-29 18:41:14.962865+03
-6688	2108	2	\N	2015-03-29 18:41:28.932911+03
-6689	2108	2	\N	2015-03-29 18:41:35.361837+03
-6693	1578	2	\N	2015-03-29 19:28:18.094577+03
-6694	1563	2	\N	2015-03-29 19:28:26.306719+03
-6695	1560	2	\N	2015-03-29 19:28:31.032916+03
-6696	1649	2	\N	2015-03-29 20:30:21.118741+03
-6698	2111	2	\N	2015-03-29 20:32:08.188477+03
-6699	918	2	\N	2015-03-29 20:45:02.042426+03
-6700	918	2	\N	2015-03-29 20:45:08.391579+03
-6701	917	2	\N	2015-03-29 20:45:13.080299+03
-6702	916	2	\N	2015-03-29 20:45:17.094049+03
-6703	952	2	\N	2015-03-29 20:51:29.823177+03
-6705	988	2	\N	2015-03-29 20:57:38.470567+03
-6707	971	2	\N	2015-03-29 21:04:32.587955+03
-6709	1647	2	\N	2015-03-29 21:11:13.101083+03
-6710	2115	2	\N	2015-03-29 21:11:20.771189+03
-6711	1648	2	\N	2015-03-29 21:19:19.348961+03
-6715	1419	2	\N	2015-03-31 18:55:34.756779+03
-6716	1415	2	\N	2015-03-31 18:55:54.50919+03
-6718	1507	2	\N	2015-03-31 19:11:10.805316+03
-6719	1507	2	\N	2015-03-31 19:11:17.000092+03
-6720	1507	2	\N	2015-03-31 19:11:23.716877+03
-6721	1898	2	\N	2015-03-31 19:19:08.662529+03
-6722	1898	2	\N	2015-03-31 19:19:13.979595+03
-6723	1898	2	\N	2015-03-31 19:19:19.541915+03
-6724	2119	2	\N	2015-03-31 19:31:32.255315+03
-6725	1419	2	\N	2015-03-31 19:31:35.171043+03
-6726	2120	2	\N	2015-03-31 21:42:30.209371+03
-6727	2107	2	\N	2015-04-06 22:18:27.344977+03
-6728	2054	2	\N	2015-04-22 09:31:23.533867+03
-6729	2126	2	\N	2015-04-22 10:21:50.083529+03
-6730	2126	2	\N	2015-04-22 10:34:35.83663+03
-6731	2127	2	\N	2015-04-22 15:08:30.934237+03
-6732	2128	2	\N	2015-04-22 15:09:24.597951+03
-6733	2129	2	\N	2015-04-22 15:30:21.099029+03
-6734	2130	2	\N	2015-04-22 15:30:28.848383+03
-6735	2131	2	\N	2015-04-22 15:33:06.666889+03
-6736	2126	2	\N	2015-04-22 15:33:09.520564+03
-6737	2132	2	\N	2015-04-22 15:34:13.439147+03
-6738	2126	2	\N	2015-04-22 15:34:14.494849+03
-6739	2126	2	\N	2015-04-22 15:34:41.240196+03
-6740	2130	2	\N	2015-04-24 21:16:26.897843+03
-6741	953	2	\N	2015-04-24 21:38:02.133997+03
-6742	955	2	\N	2015-04-24 21:39:08.574084+03
-6743	2108	2	\N	2015-04-25 13:14:21.858762+03
-6745	2135	2	\N	2015-04-25 16:39:24.611492+03
-6746	2128	2	\N	2015-04-25 16:59:29.339712+03
-6747	2136	2	\N	2015-04-25 16:59:52.412523+03
-6748	2137	2	\N	2015-04-25 21:29:39.820793+03
-6749	2138	2	\N	2015-04-25 21:29:47.819244+03
-6750	2139	2	\N	2015-04-25 21:29:55.72108+03
-6751	2144	2	\N	2015-04-26 00:17:08.072699+03
-6752	2145	2	\N	2015-04-26 00:17:08.072699+03
-6753	2146	2	\N	2015-04-26 00:22:46.640907+03
-6754	2147	2	\N	2015-04-26 00:22:46.640907+03
-6755	2148	2	\N	2015-04-26 00:26:59.761945+03
-6756	2149	2	\N	2015-04-26 00:26:59.761945+03
-6757	2150	2	\N	2015-04-26 00:30:11.687983+03
-6758	2151	2	\N	2015-04-26 00:30:11.687983+03
-6759	2152	2	\N	2015-04-26 00:36:42.355592+03
-6760	2153	2	\N	2015-04-26 00:36:42.355592+03
-6761	2154	2	\N	2015-04-26 00:44:52.209962+03
-6762	2155	2	\N	2015-04-26 00:44:52.209962+03
-6763	2156	2	\N	2015-04-26 09:56:13.81422+03
-6764	2157	2	\N	2015-04-26 09:56:13.81422+03
-6765	2158	2	\N	2015-04-26 10:00:13.021078+03
-6766	2159	2	\N	2015-04-26 10:00:13.021078+03
-6767	2160	2	\N	2015-04-26 10:09:07.981749+03
-6768	2161	2	\N	2015-04-26 10:09:07.981749+03
-6769	2162	2	\N	2015-04-26 10:11:20.869074+03
-6770	2163	2	\N	2015-04-26 10:11:20.869074+03
-6771	2164	2	\N	2015-04-26 10:23:35.980962+03
-6772	2165	2	\N	2015-04-26 10:23:35.980962+03
-6774	2167	2	\N	2015-04-26 10:30:42.474899+03
-6775	2168	2	\N	2015-04-26 10:30:42.474899+03
-6778	2171	2	\N	2015-04-26 10:38:49.924523+03
-6779	2172	2	\N	2015-04-26 10:41:15.682562+03
-6780	2173	2	\N	2015-04-26 10:41:15.682562+03
-6781	2174	2	\N	2015-04-26 10:51:18.425172+03
-6782	2175	2	\N	2015-04-26 10:51:18.425172+03
-6783	2176	2	\N	2015-04-26 10:54:26.243589+03
-6784	2177	2	\N	2015-04-26 10:54:26.243589+03
-6785	2178	2	\N	2015-04-26 10:57:26.669326+03
-6786	2179	2	\N	2015-04-26 10:57:26.669326+03
-6787	2180	2	\N	2015-04-26 11:08:04.739521+03
-6788	2181	2	\N	2015-04-26 11:08:04.739521+03
-6789	2182	2	\N	2015-04-26 11:13:10.975009+03
-6790	2183	2	\N	2015-04-26 11:13:10.975009+03
-6791	2184	2	\N	2015-04-26 13:03:25.416787+03
-6792	2185	2	\N	2015-04-26 13:03:25.416787+03
-6793	2186	2	\N	2015-04-26 13:42:49.969814+03
-6794	2187	2	\N	2015-04-26 14:04:42.384772+03
-6795	2188	2	\N	2015-04-26 14:04:42.384772+03
-6796	2189	2	\N	2015-04-26 14:05:26.994527+03
-6797	2190	2	\N	2015-04-26 14:05:26.994527+03
-6798	2186	2	\N	2015-04-26 14:05:29.313624+03
-6801	2197	2	\N	2015-05-03 13:21:34.120955+03
-6802	2197	2	\N	2015-05-03 13:23:12.828981+03
-6803	2197	2	\N	2015-05-03 13:34:38.831852+03
-6804	2197	2	\N	2015-05-03 13:40:51.674186+03
-6805	2199	2	\N	2015-05-03 23:18:19.876372+03
-6806	1780	2	\N	2015-05-03 23:18:33.103558+03
-6807	1368	2	\N	2015-05-04 19:21:58.460934+03
-6808	1368	2	\N	2015-05-04 19:22:20.533133+03
-6809	2200	2	\N	2015-05-04 20:57:01.637182+03
-6810	2201	2	\N	2015-05-04 20:58:33.565049+03
-6811	2203	2	\N	2015-05-04 21:30:33.485239+03
-6812	1003	2	\N	2015-05-08 21:15:22.303904+03
-6813	2205	2	\N	2015-05-08 22:38:40.1563+03
-6814	2206	2	\N	2015-05-08 22:40:57.101857+03
-6815	2207	2	\N	2015-05-08 22:43:00.228497+03
-6816	2208	2	\N	2015-05-08 22:43:46.205549+03
-6817	2209	2	\N	2015-05-09 15:04:04.437709+03
-6818	2210	2	\N	2015-05-09 15:18:42.295591+03
-6819	2211	2	\N	2015-05-09 15:20:41.04877+03
-6820	2212	2	\N	2015-05-09 15:21:16.54612+03
-6821	2213	2	\N	2015-05-09 15:21:20.750661+03
-6822	2214	2	\N	2015-05-09 15:27:46.304009+03
-6823	2215	2	\N	2015-05-09 15:27:52.157735+03
-6824	2216	2	\N	2015-05-09 15:32:20.738122+03
-6825	2216	2	\N	2015-05-09 15:34:43.153612+03
-6826	2216	2	\N	2015-05-09 15:35:37.080548+03
-6827	2216	2	\N	2015-05-09 15:36:20.491648+03
-6828	2216	2	\N	2015-05-09 15:36:28.290218+03
-6829	2217	2	\N	2015-05-09 16:10:30.715652+03
-6830	2218	2	\N	2015-05-09 16:40:29.294581+03
-6831	2216	2	\N	2015-05-09 16:40:47.688279+03
-6832	2219	2	\N	2015-05-09 16:52:43.81748+03
-6833	1550	2	\N	2015-05-09 16:53:04.04708+03
-6834	1008	2	\N	2015-05-09 16:53:15.905297+03
-6836	2218	2	\N	2015-05-09 16:56:24.612587+03
-6837	2221	2	\N	2015-05-09 16:58:37.060459+03
-6838	2216	2	\N	2015-05-09 17:04:04.921556+03
-6839	2216	2	\N	2015-05-09 17:04:48.531212+03
-6840	1563	2	\N	2015-05-09 19:32:44.822595+03
-6841	2222	2	\N	2015-05-09 19:43:25.178079+03
-6842	2215	2	\N	2015-05-09 20:07:16.539791+03
-6843	2216	2	\N	2015-05-09 20:07:46.078918+03
-6844	2223	2	\N	2015-05-09 20:08:53.78535+03
-6845	2224	2	\N	2015-05-09 20:09:23.379411+03
-6846	2225	2	\N	2015-05-09 20:09:44.887962+03
-6847	2226	2	\N	2015-05-09 20:17:22.088876+03
-6848	2227	2	\N	2015-05-09 20:29:08.971941+03
-6849	2228	2	\N	2015-05-09 20:29:24.701653+03
-6850	2229	2	\N	2015-05-09 20:29:40.419576+03
-6851	2224	2	\N	2015-05-09 20:29:49.729598+03
-6852	2230	2	\N	2015-05-09 20:30:09.233291+03
-6853	2231	2	\N	2015-05-09 20:30:23.623593+03
-6854	2232	2	\N	2015-05-09 20:30:35.560504+03
-6855	2233	2	\N	2015-05-09 20:30:51.356148+03
-6856	2234	2	\N	2015-05-09 20:31:09.312334+03
-6857	2235	2	\N	2015-05-09 20:31:21.029136+03
-6858	2236	2	\N	2015-05-09 20:31:43.127575+03
-6859	2237	2	\N	2015-05-09 20:31:57.326798+03
-6860	2238	2	\N	2015-05-09 20:32:20.746647+03
-6861	2239	2	\N	2015-05-09 20:32:35.107871+03
-6862	2240	2	\N	2015-05-09 20:32:50.419187+03
-6863	2241	2	\N	2015-05-09 20:33:01.999568+03
-6864	2242	2	\N	2015-05-09 20:33:16.190303+03
-6865	2236	2	\N	2015-05-09 20:54:08.857766+03
-6866	2216	2	\N	2015-05-09 21:04:14.03464+03
-6867	1578	2	\N	2015-05-09 21:16:42.718164+03
-6868	2243	2	\N	2015-05-10 13:44:27.494956+03
-6869	2244	2	\N	2015-05-10 13:45:29.048699+03
-6870	2245	2	\N	2015-05-10 13:46:40.29071+03
-6871	2246	2	\N	2015-05-10 14:01:26.829403+03
-6872	2247	2	\N	2015-05-10 14:01:57.254972+03
-6873	2248	2	\N	2015-05-10 14:10:42.034833+03
-6874	2249	2	\N	2015-05-10 14:10:53.000133+03
-6875	2254	2	\N	2015-05-10 14:35:53.336283+03
-6876	2255	2	\N	2015-05-10 14:35:53.336283+03
-6877	2256	2	\N	2015-05-10 14:39:45.730714+03
-6878	2257	2	\N	2015-05-10 14:39:45.730714+03
-6879	2258	2	\N	2015-05-10 14:45:11.098493+03
-6880	2259	2	\N	2015-05-10 14:45:11.098493+03
-6881	2260	2	\N	2015-05-10 14:53:32.27851+03
-6882	2261	2	\N	2015-05-10 14:53:32.27851+03
-6883	2262	2	\N	2015-05-10 14:57:13.121414+03
-6884	2263	2	\N	2015-05-10 14:57:13.121414+03
-6885	2264	2	\N	2015-05-10 14:57:55.441966+03
-6886	2265	2	\N	2015-05-10 15:07:20.399588+03
-6887	2266	2	\N	2015-05-10 15:07:20.399588+03
-6888	2267	2	\N	2015-05-10 15:07:27.786314+03
-6889	2268	2	\N	2015-05-10 16:04:17.22685+03
-6890	2269	2	\N	2015-05-10 16:04:56.471262+03
-6891	1318	2	\N	2015-05-10 16:05:16.31159+03
-6893	2271	2	\N	2015-05-10 16:08:32.663974+03
-6894	2272	2	\N	2015-05-10 16:08:35.587577+03
-6895	2273	2	\N	2015-05-10 16:08:47.271902+03
-6896	2274	2	\N	2015-05-10 16:08:47.271902+03
-6897	2275	2	\N	2015-05-10 16:09:34.650716+03
-6898	2276	2	\N	2015-05-10 22:11:18.586994+03
-6899	2277	2	\N	2015-05-10 22:12:40.523328+03
-6900	1314	2	\N	2015-05-10 22:12:56.872348+03
-6901	2278	2	\N	2015-05-10 22:14:48.438204+03
-6902	2279	2	\N	2015-05-10 22:14:48.438204+03
-6903	2280	2	\N	2015-05-10 22:19:21.083289+03
-6904	2280	2	\N	2015-05-13 21:55:52.759278+03
-6905	2275	2	\N	2015-05-13 21:56:48.008072+03
-6906	2267	2	\N	2015-05-13 21:56:54.031403+03
-6907	2264	2	\N	2015-05-13 21:56:59.496539+03
-6908	2281	2	\N	2015-05-16 15:29:57.002389+03
-6909	2282	2	\N	2015-05-16 15:34:53.800182+03
-6910	2283	2	\N	2015-05-16 15:34:53.800182+03
-6911	2284	2	\N	2015-05-16 15:36:09.929045+03
-6912	2285	2	\N	2015-05-16 15:45:33.371911+03
-6913	2286	2	\N	2015-05-16 15:45:33.371911+03
-6914	2287	2	\N	2015-05-16 15:48:18.436182+03
-6915	2288	2	\N	2015-05-16 15:48:18.436182+03
-6916	2289	2	\N	2015-05-17 21:30:51.134604+03
-6917	2280	2	\N	2015-05-17 21:31:00.094313+03
-6918	2290	2	\N	2015-05-17 21:31:39.003456+03
-6919	2280	2	\N	2015-05-17 21:31:48.129633+03
-6920	2284	2	\N	2015-05-17 22:02:03.373006+03
-6921	2284	2	\N	2015-05-17 22:02:31.027832+03
-6922	2291	2	\N	2015-05-18 16:39:17.24427+03
-6923	2284	2	\N	2015-05-18 16:40:09.305094+03
-6924	2284	2	\N	2015-05-18 20:31:39.659544+03
-6925	2284	2	\N	2015-05-18 20:34:34.03653+03
-6926	2284	2	\N	2015-05-18 21:22:46.805573+03
-6927	2292	2	\N	2015-05-24 12:55:28.784478+03
-6928	1212	2	\N	2015-05-24 13:06:21.488837+03
-6929	2293	2	\N	2015-05-24 15:06:40.212091+03
-6930	2294	2	\N	2015-05-24 15:11:44.965777+03
-6931	2295	2	\N	2015-05-24 16:49:53.513439+03
-6932	2296	2	\N	2015-05-24 16:50:41.467323+03
-6933	2297	2	\N	2015-05-24 16:55:00.642026+03
-6934	2299	2	\N	2015-05-24 16:57:39.672043+03
-6935	2300	2	\N	2015-05-24 17:03:51.85238+03
-6936	2088	2	\N	2015-05-24 17:03:55.878998+03
-6937	2301	2	\N	2015-05-24 17:04:54.502108+03
-6938	2088	2	\N	2015-05-24 17:10:16.729607+03
-6939	2088	2	\N	2015-05-24 17:10:29.437025+03
-6940	2088	2	\N	2015-05-24 17:15:30.592241+03
-6941	2302	2	\N	2015-05-24 17:16:33.029089+03
-6942	2075	2	\N	2015-05-24 17:16:41.742578+03
-6943	2303	2	\N	2015-05-24 17:17:17.81127+03
-6944	2088	2	\N	2015-05-24 17:17:21.677682+03
-6945	2305	2	\N	2015-05-24 20:37:07.412723+03
-6946	2052	2	\N	2015-05-24 20:37:10.892479+03
-6947	2088	2	\N	2015-05-24 21:01:25.501241+03
-6948	2052	2	\N	2015-05-24 21:13:25.598747+03
-6949	2306	2	\N	2015-05-24 21:14:39.628922+03
-6950	2052	2	\N	2015-05-24 21:14:43.723121+03
-6951	2280	2	\N	2015-05-24 21:21:32.476216+03
-6952	2280	2	\N	2015-05-24 21:22:00.849383+03
-6953	2280	2	\N	2015-05-24 21:22:09.702717+03
-6954	2307	2	\N	2015-05-24 21:32:02.910902+03
-6955	2308	2	\N	2015-05-24 21:32:24.738611+03
-6956	2309	2	\N	2015-05-24 21:32:31.516248+03
-6957	2310	2	\N	2015-05-24 21:33:17.528061+03
-6958	2311	2	\N	2015-05-24 21:35:46.300244+03
-6959	2312	2	\N	2015-05-24 21:36:06.190691+03
-6960	2312	2	\N	2015-05-24 21:36:27.205265+03
-6961	2313	2	\N	2015-05-25 21:31:05.718794+03
-6962	2312	2	\N	2015-05-25 21:31:08.674137+03
-6963	2314	2	\N	2015-05-26 20:44:11.702313+03
-6964	2315	2	\N	2015-05-26 20:44:48.242189+03
-6965	2316	2	\N	2015-05-26 20:44:48.242189+03
-6966	2317	2	\N	2015-05-26 20:45:01.161364+03
-6967	2284	2	\N	2015-05-28 13:46:35.94219+03
-6968	2317	2	\N	2015-05-28 13:46:45.92498+03
-6969	2280	2	\N	2015-05-28 13:46:51.874219+03
-6970	1507	2	\N	2015-05-31 21:55:12.660877+03
-6971	1507	2	\N	2015-05-31 21:56:27.809825+03
-6972	1439	2	\N	2015-05-31 21:57:11.520889+03
-6973	1507	2	\N	2015-05-31 21:58:33.173778+03
-6974	1507	2	\N	2015-05-31 22:00:02.964614+03
-6975	1507	2	\N	2015-05-31 22:00:38.733485+03
-6976	1507	2	\N	2015-05-31 22:11:01.827304+03
-6977	1507	2	\N	2015-06-01 09:54:54.423199+03
-6978	2284	2	\N	2015-06-01 11:22:28.244232+03
-6979	2319	2	\N	2015-06-01 11:37:24.071069+03
-6980	2320	2	\N	2015-06-01 12:56:01.185317+03
-6986	2327	2	\N	2015-06-02 13:22:30.670092+03
-6987	2328	2	\N	2015-06-02 13:22:36.147873+03
-6988	2329	2	\N	2015-06-02 13:23:35.222007+03
-6989	2330	2	\N	2015-06-02 13:24:32.384898+03
-6990	2331	2	\N	2015-06-02 13:25:52.745886+03
-6991	2332	2	\N	2015-06-02 13:27:31.983851+03
-6992	2333	2	\N	2015-06-02 13:27:36.950926+03
-6993	2334	2	\N	2015-06-02 13:28:43.733459+03
-6994	2335	2	\N	2015-06-02 13:29:10.771807+03
-6995	2336	2	\N	2015-06-02 13:29:57.138464+03
-6996	2337	2	\N	2015-06-02 13:30:11.199071+03
-6997	2338	2	\N	2015-06-02 13:34:47.558077+03
-6998	2339	2	\N	2015-06-02 13:34:50.130325+03
-6999	2340	2	\N	2015-06-02 13:35:46.336511+03
-7000	2341	2	\N	2015-06-02 13:36:09.066506+03
-7001	2342	2	\N	2015-06-02 13:36:09.066506+03
-7002	2343	2	\N	2015-06-02 13:37:26.99598+03
-7003	2344	2	\N	2015-06-02 13:37:26.99598+03
-7004	2345	2	\N	2015-06-02 13:37:42.100766+03
-7023	2345	2	\N	2015-06-06 20:33:35.089301+03
-7024	2366	2	\N	2015-06-06 21:47:05.357423+03
-7025	2367	2	\N	2015-06-06 21:47:08.978477+03
-7026	2368	2	\N	2015-06-06 21:49:00.661472+03
-7027	2369	2	\N	2015-06-06 21:50:18.211354+03
-7028	2370	2	\N	2015-06-06 21:51:07.167429+03
-7029	2371	2	\N	2015-06-06 21:52:21.362863+03
-7030	2372	2	\N	2015-06-06 21:52:25.91268+03
-7031	2367	2	\N	2015-06-06 22:01:59.580344+03
-7032	2373	2	\N	2015-06-06 22:05:50.240364+03
-7033	2374	2	\N	2015-06-06 22:06:07.223567+03
-7034	2375	2	\N	2015-06-06 22:06:55.79185+03
-7035	2376	2	\N	2015-06-06 22:07:46.643073+03
-7036	2377	2	\N	2015-06-06 22:08:11.14074+03
-7037	2378	2	\N	2015-06-06 22:08:11.14074+03
-7038	2379	2	\N	2015-06-06 22:10:53.894076+03
-7039	2380	2	\N	2015-06-06 22:10:53.894076+03
-7040	2381	2	\N	2015-06-06 22:12:04.71986+03
-7041	2382	2	\N	2015-06-06 22:12:17.899878+03
-7042	2372	2	\N	2015-06-06 22:12:34.850437+03
-7043	2383	2	\N	2015-06-06 22:34:30.822368+03
-7044	2384	2	\N	2015-06-06 22:35:06.098136+03
-7045	2385	2	\N	2015-06-06 22:35:22.838833+03
-7046	2382	2	\N	2015-06-06 22:36:33.646314+03
-7048	2382	2	\N	2015-06-07 15:30:58.294045+03
-7049	2247	2	\N	2015-06-07 17:10:29.033956+03
-7050	1413	2	\N	2015-06-07 17:10:56.929199+03
-7051	1318	2	\N	2015-06-07 17:11:36.862031+03
-7052	1314	2	\N	2015-06-07 17:12:28.161782+03
-7053	1431	2	\N	2015-06-07 19:55:54.571452+03
-7054	1898	2	\N	2015-06-07 19:59:40.465993+03
-7055	1898	2	\N	2015-06-07 20:00:47.882499+03
-7056	1432	2	\N	2015-06-07 20:00:59.808075+03
-7057	1608	2	\N	2015-06-07 20:01:30.177316+03
-7058	1609	2	\N	2015-06-07 20:02:19.266681+03
-7059	1769	2	\N	2015-06-07 20:03:05.939338+03
-7060	1780	2	\N	2015-06-07 20:04:36.345782+03
-7061	1873	2	\N	2015-06-07 20:05:07.816356+03
-7062	1898	2	\N	2015-06-07 20:05:26.076509+03
-7063	2199	2	\N	2015-06-07 20:05:57.959925+03
-7064	2246	2	\N	2015-06-07 20:06:32.075272+03
-7065	2246	2	\N	2015-06-07 20:06:41.085651+03
-7066	2269	2	\N	2015-06-07 20:07:23.767588+03
-7067	2277	2	\N	2015-06-07 20:07:57.192127+03
-7068	1426	2	\N	2015-06-07 20:09:52.309668+03
-7069	2389	2	\N	2015-06-07 20:10:03.246206+03
-7070	2390	2	\N	2015-06-07 20:10:21.42447+03
-7071	2391	2	\N	2015-06-07 20:10:54.694938+03
-7072	2392	2	\N	2015-06-07 20:11:12.709328+03
-7073	2393	2	\N	2015-06-07 20:11:33.449675+03
-7074	2394	2	\N	2015-06-07 20:11:54.80775+03
-7075	2395	2	\N	2015-06-07 20:12:24.648998+03
-7076	2396	2	\N	2015-06-07 20:12:47.549001+03
-7077	2397	2	\N	2015-06-07 20:13:09.482196+03
-7078	2398	2	\N	2015-06-07 20:13:26.815118+03
-7079	2399	2	\N	2015-06-07 20:13:43.442647+03
-7080	2400	2	\N	2015-06-07 20:13:57.868779+03
-7081	2401	2	\N	2015-06-07 20:14:15.895967+03
-7082	2402	2	\N	2015-06-07 20:14:42.501203+03
-7083	2403	2	\N	2015-06-07 20:15:33.611845+03
-7084	2404	2	\N	2015-06-07 20:15:53.460657+03
-7085	2405	2	\N	2015-06-07 20:16:10.772685+03
-7086	2406	2	\N	2015-06-07 20:16:32.442601+03
-7087	2407	2	\N	2015-06-07 20:16:56.509083+03
-7088	2408	2	\N	2015-06-07 20:17:19.457924+03
-7089	2409	2	\N	2015-06-07 20:17:39.828441+03
-7090	2410	2	\N	2015-06-07 20:17:59.953522+03
-7091	2411	2	\N	2015-06-07 20:18:15.36941+03
-7092	2412	2	\N	2015-06-07 20:18:33.319787+03
-7093	2413	2	\N	2015-06-07 20:18:53.786993+03
-7094	2414	2	\N	2015-06-07 20:19:17.251882+03
-7095	2415	2	\N	2015-06-07 20:34:54.782206+03
-7096	2416	2	\N	2015-06-07 20:35:11.96143+03
-7097	2417	2	\N	2015-06-07 20:35:33.998015+03
-7098	2418	2	\N	2015-06-07 20:36:01.596002+03
-7099	2419	2	\N	2015-06-07 20:36:15.960332+03
-7100	2420	2	\N	2015-06-07 20:36:35.413228+03
-7101	2421	2	\N	2015-06-07 20:37:30.352425+03
-7102	2422	2	\N	2015-06-07 20:37:53.888785+03
-7103	2423	2	\N	2015-06-07 20:38:10.610447+03
-7104	2424	2	\N	2015-06-07 20:38:59.517394+03
-7105	2425	2	\N	2015-06-07 20:39:26.415211+03
-7106	2426	2	\N	2015-06-07 20:40:05.840226+03
-7107	2427	2	\N	2015-06-07 20:40:46.537019+03
-7108	2428	2	\N	2015-06-07 20:41:01.3009+03
-7109	2429	2	\N	2015-06-07 20:41:17.634439+03
-7110	2430	2	\N	2015-06-07 20:41:36.56949+03
-7111	2431	2	\N	2015-06-07 20:41:54.944525+03
-7112	2432	2	\N	2015-06-07 20:42:11.063081+03
-7113	2433	2	\N	2015-06-10 21:10:55.543668+03
-7114	2434	2	\N	2015-06-10 21:10:58.272269+03
-7115	2434	2	\N	2015-06-10 21:11:16.546457+03
-7116	2435	2	\N	2015-06-10 21:11:49.343497+03
-7117	2436	2	\N	2015-06-10 21:12:20.087946+03
-7119	2437	2	\N	2015-06-10 21:13:28.379702+03
-7120	2434	2	\N	2015-06-10 21:13:35.658848+03
-7118	2434	2	\N	2015-06-10 21:12:30.557424+03
-7121	2434	2	\N	2015-06-13 11:08:16.884538+03
-7122	2438	2	\N	2015-06-13 12:24:23.664338+03
-7123	2439	2	\N	2015-06-13 12:25:12.11639+03
-7124	2440	2	\N	2015-06-13 12:25:55.053099+03
-7125	2439	2	\N	2015-06-13 12:28:23.509307+03
-7126	1431	2	\N	2015-06-13 16:13:14.891511+03
-7127	2269	2	\N	2015-06-13 16:29:21.58833+03
-7128	2391	2	\N	2015-06-13 16:29:38.922876+03
-7130	2442	2	\N	2015-06-13 17:22:11.365048+03
-7163	2317	2	\N	2015-06-13 19:58:33.103367+03
-7164	2451	2	\N	2015-06-13 19:59:50.784052+03
-7165	2452	2	\N	2015-06-13 19:59:50.784052+03
-7166	2317	2	\N	2015-06-13 20:00:28.712308+03
-7167	2317	2	\N	2015-06-13 20:01:26.421434+03
-7168	2317	2	\N	2015-06-13 20:03:24.653457+03
-7176	2451	2	\N	2015-06-14 10:07:32.690694+03
-7177	2451	2	\N	2015-06-14 10:16:32.619194+03
-7178	2451	2	\N	2015-06-14 13:13:57.393431+03
-7179	2451	2	\N	2015-06-14 13:21:50.094038+03
-7180	2451	2	\N	2015-06-14 13:22:37.050016+03
-7181	2451	2	\N	2015-06-14 13:23:13.387606+03
-7182	2451	2	\N	2015-06-14 13:23:25.25704+03
-7183	2457	2	\N	2015-06-14 13:25:18.074212+03
-7184	2451	2	\N	2015-06-14 13:26:56.97373+03
-7185	2458	2	\N	2015-06-14 13:28:59.472857+03
-7186	2459	2	\N	2015-06-14 13:29:40.688494+03
-7187	2457	2	\N	2015-06-14 14:17:22.935487+03
-7199	2463	2	\N	2015-06-14 16:30:22.760587+03
-7201	2463	2	\N	2015-06-14 16:43:36.808614+03
-7202	2465	2	\N	2015-06-14 18:28:13.295968+03
-7203	2466	2	\N	2015-06-14 18:50:25.96227+03
-7204	2467	2	\N	2015-06-14 18:50:57.662486+03
-7205	2468	2	\N	2015-06-17 21:13:39.6663+03
-7206	2469	2	\N	2015-06-17 21:13:39.6663+03
-7207	2469	2	\N	2015-06-17 21:39:31.5421+03
-7208	2470	2	\N	2015-06-17 21:39:43.056809+03
-7211	2296	2	\N	2015-06-17 22:28:24.889672+03
-7212	2296	2	\N	2015-06-17 22:28:44.137455+03
-7213	2296	2	\N	2015-06-17 22:28:55.531055+03
-7214	2296	2	\N	2015-06-17 22:29:04.688414+03
-7217	1190	2	\N	2015-06-18 08:41:45.975909+03
-7218	1190	2	\N	2015-06-18 08:41:55.712142+03
-7219	2475	2	\N	2015-06-18 08:47:40.598128+03
-7229	2484	2	\N	2015-06-18 09:11:44.190988+03
-7232	2486	2	\N	2015-06-19 08:53:30.530081+03
-7235	2489	2	\N	2015-06-19 08:57:56.925224+03
-7236	2490	2	\N	2015-06-19 08:58:47.001543+03
-7237	2491	2	\N	2015-06-19 09:01:01.141859+03
-7239	2493	2	\N	2015-06-19 09:05:15.381515+03
-7241	1010	2	\N	2015-06-19 09:18:51.710345+03
-7244	2129	2	\N	2015-06-19 09:22:37.844576+03
-7248	2137	2	\N	2015-06-19 09:24:18.706637+03
-7250	2248	2	\N	2015-06-19 09:24:53.046897+03
-7252	2484	2	\N	2015-06-20 10:13:59.32685+03
-7253	2501	2	\N	2015-06-20 10:23:36.01186+03
-7254	2490	2	\N	2015-06-20 10:24:30.090794+03
-7255	2502	2	\N	2015-06-20 10:25:23.92051+03
-7256	2490	2	\N	2015-06-20 10:25:26.171733+03
-7257	2503	2	\N	2015-06-20 10:58:18.119129+03
-7259	2505	2	\N	2015-06-20 11:21:58.139735+03
-7260	2506	2	\N	2015-06-20 11:22:00.401736+03
-7261	2507	2	\N	2015-06-20 11:22:46.430212+03
-7262	2506	2	\N	2015-06-20 11:22:51.478424+03
-7263	2508	2	\N	2015-06-20 11:23:54.736317+03
-7264	2506	2	\N	2015-06-20 11:23:56.167951+03
-7265	2345	2	\N	2015-06-20 11:26:36.603828+03
-7266	2345	2	\N	2015-06-20 11:27:18.047841+03
-7268	2345	2	\N	2015-06-20 11:46:46.13788+03
-7269	2510	2	\N	2015-06-20 11:50:12.161837+03
-7270	2511	2	\N	2015-06-20 11:50:13.525526+03
-7272	2463	2	\N	2015-06-20 23:00:10.769493+03
-7273	2467	2	\N	2015-06-20 23:00:18.463896+03
-7274	2459	2	\N	2015-06-20 23:00:44.920864+03
-7275	2458	2	\N	2015-06-20 23:00:51.132288+03
-7276	2457	2	\N	2015-06-20 23:00:57.565186+03
-7277	2451	2	\N	2015-06-20 23:01:04.368039+03
-7278	2451	2	\N	2015-06-20 23:04:17.342527+03
-7279	2457	2	\N	2015-06-20 23:04:23.315461+03
-7280	2458	2	\N	2015-06-20 23:04:30.160097+03
-7281	2459	2	\N	2015-06-20 23:04:35.721205+03
-7282	1896	2	\N	2015-06-21 11:16:22.975624+03
-7285	2459	2	\N	2015-06-21 11:19:17.963777+03
-7286	2458	2	\N	2015-06-21 11:19:23.880837+03
-7287	2457	2	\N	2015-06-21 11:19:29.44712+03
-7288	2451	2	\N	2015-06-21 11:19:35.471458+03
-7289	2467	2	\N	2015-06-21 11:19:54.443461+03
-7290	2463	2	\N	2015-06-21 11:20:00.085347+03
-7291	2465	2	\N	2015-06-21 11:21:33.270335+03
-7292	2513	2	\N	2015-06-23 22:26:54.54596+03
-7293	778	2	\N	2015-06-23 22:31:51.561928+03
-7294	2514	2	\N	2015-06-23 22:34:29.078834+03
-7295	2514	2	\N	2015-06-23 22:36:01.548881+03
-7296	2513	2	\N	2015-06-23 22:42:58.979814+03
-7297	2514	2	\N	2015-06-23 22:46:14.322892+03
-7298	2515	2	\N	2015-06-23 22:48:32.462285+03
-7306	784	2	\N	2015-06-27 17:39:03.474446+03
-7307	784	2	\N	2015-06-27 17:52:48.813097+03
-7308	885	2	\N	2015-06-27 17:53:15.731358+03
-7312	784	2	\N	2015-06-27 19:50:37.220816+03
-7313	784	2	\N	2015-06-27 19:50:45.528129+03
-7314	784	2	\N	2015-06-27 19:50:53.618877+03
-7315	784	2	\N	2015-06-27 19:52:29.5324+03
-7317	2516	2	\N	2015-06-27 20:34:38.335917+03
-7318	2517	2	\N	2015-06-27 21:02:52.190849+03
-7319	2518	2	\N	2015-06-27 22:00:11.577645+03
-7320	784	2	\N	2015-06-27 22:13:51.726755+03
-7321	2519	2	\N	2015-06-27 22:13:51.726755+03
-7322	2520	2	\N	2015-06-27 22:14:31.050053+03
-7323	2521	2	\N	2015-06-27 22:15:06.48124+03
-7324	2522	2	\N	2015-06-27 22:27:54.400494+03
-7325	2523	2	\N	2015-06-27 22:40:18.037224+03
-7326	2524	2	\N	2015-06-27 22:42:17.60206+03
-7327	2525	2	\N	2015-06-27 22:42:37.767083+03
-7328	784	2	\N	2015-06-27 22:49:09.961687+03
-7329	784	2	\N	2015-06-27 22:49:28.712758+03
-7330	784	2	\N	2015-06-27 22:49:40.054287+03
-7331	2526	2	\N	2015-06-28 15:48:24.134048+03
-7332	2527	2	\N	2015-06-28 15:49:06.934643+03
-7333	1930	2	\N	2015-06-28 15:49:08.476175+03
-7334	1930	2	\N	2015-06-28 15:49:15.43238+03
-7335	1286	2	\N	2015-06-28 16:19:06.654271+03
-7336	1284	2	\N	2015-06-28 16:19:08.822984+03
-7337	2528	2	\N	2015-06-28 16:27:58.214962+03
-7338	2529	2	\N	2015-07-04 20:12:31.951644+03
-7339	2530	2	\N	2015-07-04 20:16:08.99227+03
-7340	2531	2	\N	2015-07-04 20:16:08.99227+03
-7341	2532	2	\N	2015-07-04 20:36:07.167824+03
-7342	2533	2	\N	2015-07-04 20:36:07.167824+03
-7343	2534	2	\N	2015-07-04 20:57:32.449165+03
-7344	2491	2	\N	2015-07-04 20:58:12.716739+03
-7345	2535	2	\N	2015-07-04 20:58:36.935951+03
-7346	2536	2	\N	2015-07-04 20:59:39.366864+03
-7347	2491	2	\N	2015-07-04 20:59:49.220324+03
-7348	2537	2	\N	2015-07-04 21:00:02.518034+03
-7349	2538	2	\N	2015-07-04 21:13:08.541103+03
-7350	2539	2	\N	2015-07-04 21:14:30.611204+03
-7351	2540	2	\N	2015-07-04 21:14:32.763289+03
-7352	2541	2	\N	2015-07-04 21:14:50.821175+03
-7354	2542	2	\N	2015-07-04 21:17:54.658173+03
-7358	2543	2	\N	2015-07-04 21:26:56.584606+03
-7359	2544	2	\N	2015-07-04 21:27:23.469843+03
-7361	2545	2	\N	2015-07-04 21:30:18.47115+03
-7362	2546	2	\N	2015-07-04 21:30:37.579131+03
-7363	2545	2	\N	2015-07-04 21:30:38.730906+03
-7364	2547	2	\N	2015-07-04 21:30:51.680567+03
-7365	2548	2	\N	2015-07-04 21:30:51.680567+03
-7367	2451	2	\N	2015-07-05 14:30:51.54628+03
-7368	2457	2	\N	2015-07-05 14:33:01.814653+03
-7369	2458	2	\N	2015-07-05 14:33:47.939925+03
-7370	2459	2	\N	2015-07-05 14:33:59.629688+03
-7371	2451	2	\N	2015-07-05 14:39:43.167129+03
-7372	2467	2	\N	2015-07-05 14:49:52.691681+03
-7373	2463	2	\N	2015-07-05 14:50:06.470488+03
-7374	2549	2	\N	2015-07-05 15:34:32.780638+03
-7376	2434	2	\N	2015-07-05 19:13:53.412323+03
-7377	3	2	\N	2015-07-17 19:31:34.831317+03
-7378	894	2	\N	2015-07-17 19:34:30.132569+03
-7379	2054	2	\N	2015-07-17 19:34:44.345599+03
-7380	2126	2	\N	2015-07-17 19:35:00.154065+03
-7381	2484	2	\N	2015-07-17 19:35:15.872953+03
-7382	2550	2	\N	2015-07-18 10:57:05.728016+03
-7383	1372	2	\N	2015-07-18 10:57:08.110977+03
-7384	1372	2	\N	2015-07-18 10:57:38.113606+03
-7385	2551	2	\N	2015-07-18 11:02:48.147598+03
-7386	2552	2	\N	2015-07-18 11:22:14.245467+03
-7387	2552	2	\N	2015-07-18 11:24:17.241528+03
-7388	2553	2	\N	2015-07-18 11:32:44.472503+03
-7389	2554	2	\N	2015-07-18 11:46:38.401629+03
-7390	2554	2	\N	2015-07-18 11:47:52.858154+03
-7392	2556	2	\N	2015-07-18 11:55:59.961331+03
-7393	1372	2	\N	2015-07-18 11:56:18.816278+03
-7394	1375	2	\N	2015-07-18 11:56:26.8815+03
-7395	2557	2	\N	2015-07-18 12:01:04.237446+03
-7396	887	2	\N	2015-07-18 12:01:06.541839+03
-7397	2376	2	\N	2015-07-18 12:01:31.956124+03
-7398	2556	2	\N	2015-07-18 12:01:52.672293+03
-7399	2558	2	\N	2015-07-19 10:20:48.263335+03
-7400	2559	2	\N	2015-07-19 14:41:19.72071+03
-7401	2560	2	\N	2015-07-19 14:41:25.622087+03
-7402	2561	2	\N	2015-07-19 14:42:40.770503+03
-7403	2562	2	\N	2015-07-19 14:42:45.815524+03
-7404	2563	2	\N	2015-07-19 15:12:51.840188+03
-7405	2564	2	\N	2015-07-19 15:13:34.062285+03
-7406	2565	2	\N	2015-07-19 15:13:36.341158+03
-7407	2566	2	\N	2015-07-19 15:17:50.040034+03
-7408	2567	2	\N	2015-07-19 15:18:18.066263+03
-7409	2568	2	\N	2015-07-19 15:19:23.078636+03
-7410	2569	2	\N	2015-07-19 15:19:33.135472+03
-7411	2570	2	\N	2015-07-19 15:20:45.489438+03
-7412	2571	2	\N	2015-07-19 15:21:40.944498+03
-7413	2572	2	\N	2015-07-19 15:21:50.318605+03
-7414	2573	2	\N	2015-07-19 16:03:41.362252+03
-7415	2574	2	\N	2015-07-19 16:04:11.184096+03
-7416	2575	2	\N	2015-07-19 16:04:13.848246+03
-7417	2576	2	\N	2015-07-19 16:05:08.205201+03
-7418	2577	2	\N	2015-07-19 16:06:12.10907+03
-7419	2578	2	\N	2015-07-19 16:06:39.117569+03
-7420	2579	2	\N	2015-07-19 16:06:40.986562+03
-7421	2580	2	\N	2015-07-19 16:07:27.111556+03
-7422	2581	2	\N	2015-07-19 16:08:00.994992+03
-7423	2582	2	\N	2015-07-19 16:08:03.06528+03
-7424	2583	2	\N	2015-07-19 22:56:54.154484+03
-7425	2584	2	\N	2015-07-19 23:47:28.340347+03
-7426	2585	2	\N	2015-07-19 23:52:14.447269+03
-7427	2586	2	\N	2015-07-19 23:52:36.403304+03
-7428	2587	2	\N	2015-07-19 23:52:50.958041+03
-7429	2588	2	\N	2015-07-19 23:53:14.681932+03
-7430	2589	2	\N	2015-07-19 23:54:00.547115+03
-7431	2590	2	\N	2015-07-19 23:54:44.372371+03
-7432	2591	2	\N	2015-07-19 23:54:52.387429+03
-7433	2593	2	\N	2015-07-19 23:56:11.09679+03
-7434	2594	2	\N	2015-07-19 23:56:44.56359+03
-7435	2595	2	\N	2015-07-19 23:56:46.53373+03
-7436	1932	2	\N	2015-07-20 00:00:04.645587+03
-7437	2596	2	\N	2015-07-20 00:04:50.031308+03
-7438	2597	2	\N	2015-07-20 00:05:29.444039+03
-7439	2598	2	\N	2015-07-20 00:06:05.823851+03
-7440	2599	2	\N	2015-07-20 00:06:07.921437+03
-7443	2602	2	\N	2015-07-20 23:51:41.323724+03
-7444	2603	2	\N	2015-07-20 23:51:41.323724+03
-7445	2604	2	\N	2015-07-20 23:51:41.323724+03
-7446	2605	2	\N	2015-07-20 23:51:41.323724+03
-7449	2608	2	\N	2015-07-20 23:51:41.323724+03
-7453	2612	2	\N	2015-07-20 23:51:41.323724+03
-7454	2613	2	\N	2015-07-20 23:51:41.323724+03
-7458	2617	2	\N	2015-07-20 23:51:41.323724+03
-7472	2631	2	\N	2015-07-20 23:51:41.323724+03
-7473	2632	2	\N	2015-07-20 23:51:41.323724+03
-7474	2633	2	\N	2015-07-20 23:51:41.323724+03
-7475	2634	2	\N	2015-07-20 23:51:41.323724+03
-7476	2635	2	\N	2015-07-20 23:51:41.323724+03
-7477	2636	2	\N	2015-07-20 23:51:41.323724+03
-7478	2637	2	\N	2015-07-20 23:51:41.323724+03
-7479	2638	2	\N	2015-07-20 23:51:41.323724+03
-7483	2642	2	\N	2015-07-20 23:51:41.323724+03
-7484	2643	2	\N	2015-07-20 23:51:41.323724+03
-7487	2646	2	\N	2015-07-20 23:51:41.323724+03
-7488	2647	2	\N	2015-07-20 23:51:41.323724+03
-7489	2648	2	\N	2015-07-20 23:51:41.323724+03
-7490	2649	2	\N	2015-07-20 23:51:41.323724+03
-7491	2650	2	\N	2015-07-20 23:51:41.323724+03
-7492	2651	2	\N	2015-07-20 23:51:41.323724+03
-7493	2652	2	\N	2015-07-20 23:51:41.323724+03
-7494	2653	2	\N	2015-07-20 23:51:41.323724+03
-7495	2654	2	\N	2015-07-20 23:51:41.323724+03
-7496	2655	2	\N	2015-07-20 23:51:41.323724+03
-7498	894	2	\N	2015-07-20 23:59:14.903581+03
-7503	2663	2	\N	2015-07-21 00:42:13.515989+03
-7504	2664	2	\N	2015-07-21 00:44:32.068557+03
-7505	2662	2	\N	2015-07-21 00:45:19.305589+03
-7507	894	2	\N	2015-07-22 09:52:23.690178+03
-7508	885	2	\N	2015-07-22 09:53:01.082145+03
-7509	2665	2	\N	2015-07-22 09:53:01.082145+03
-7510	885	2	\N	2015-07-22 09:53:36.087021+03
-7511	2272	2	\N	2015-07-22 10:46:42.444349+03
-7512	2272	2	\N	2015-07-22 10:47:14.111233+03
-7513	2666	2	\N	2015-07-22 10:50:02.98887+03
-7514	2667	2	\N	2015-07-22 10:50:08.679496+03
-7515	2668	2	\N	2015-07-22 10:51:11.924694+03
-7516	2669	2	\N	2015-07-22 10:51:14.586916+03
-7517	2669	2	\N	2015-07-22 11:46:47.662266+03
-7518	2670	2	\N	2015-07-22 11:49:53.983401+03
-7519	2671	2	\N	2015-07-22 11:53:39.590503+03
-7520	2669	2	\N	2015-07-22 11:53:54.403754+03
-7521	2669	2	\N	2015-07-22 11:54:14.136266+03
-7522	2669	2	\N	2015-07-22 12:24:29.892068+03
-7523	2673	2	\N	2015-07-22 12:28:35.92606+03
-7524	2674	2	\N	2015-07-22 12:28:39.345269+03
-7525	2675	2	\N	2015-07-22 12:44:17.155133+03
-7526	2676	2	\N	2015-07-22 12:45:19.167404+03
-7527	2677	2	\N	2015-07-22 12:45:42.418521+03
-7528	2678	2	\N	2015-07-22 12:45:46.782121+03
-7529	2679	2	\N	2015-07-22 12:46:34.868393+03
-7530	2678	2	\N	2015-07-22 12:47:12.553819+03
-7531	2680	2	\N	2015-07-22 12:47:32.725361+03
-7532	2681	2	\N	2015-07-22 12:47:48.511246+03
-7533	2682	2	\N	2015-07-22 13:40:37.786999+03
-7534	2681	2	\N	2015-07-22 13:40:39.941316+03
-7535	2681	2	\N	2015-07-22 13:40:55.710058+03
-7536	2683	2	\N	2015-07-22 13:41:40.486853+03
-7537	2684	2	\N	2015-07-22 13:41:59.700406+03
-7538	2685	2	\N	2015-07-22 13:42:00.973433+03
-7539	2667	2	\N	2015-07-22 13:42:02.635972+03
-7540	2685	2	\N	2015-07-22 13:46:08.824214+03
-7541	2667	2	\N	2015-07-22 13:46:13.399464+03
-7542	2686	2	\N	2015-07-22 13:47:12.099197+03
-7543	2687	2	\N	2015-07-22 13:47:12.099197+03
-7544	2688	2	\N	2015-07-22 13:50:14.404321+03
-7545	2689	2	\N	2015-07-22 13:50:14.404321+03
-7546	2690	2	\N	2015-07-22 13:53:17.909433+03
-7547	2690	2	\N	2015-07-22 13:53:48.33605+03
-7550	2693	2	\N	2015-07-22 14:07:31.992976+03
-7551	2694	2	\N	2015-07-22 14:08:00.072596+03
-7552	2695	2	\N	2015-07-22 14:08:45.393051+03
-7555	2698	2	\N	2015-07-22 14:13:47.912163+03
-7556	2699	2	\N	2015-07-22 14:14:01.749177+03
-7557	2700	2	\N	2015-07-22 14:14:10.709485+03
-7558	2701	2	\N	2015-07-22 14:14:10.709485+03
-7559	2699	2	\N	2015-07-22 14:16:42.964801+03
-7560	2702	2	\N	2015-07-22 14:17:00.761945+03
-7561	2703	2	\N	2015-07-22 14:17:00.761945+03
-7562	2704	2	\N	2015-07-22 14:19:56.751612+03
-7563	2705	2	\N	2015-07-22 14:19:56.751612+03
-7564	2699	2	\N	2015-07-22 14:20:42.704316+03
-7565	2706	2	\N	2015-07-22 14:21:02.027005+03
-7566	2707	2	\N	2015-07-22 14:21:02.027005+03
-7567	2699	2	\N	2015-07-22 14:21:39.869597+03
-7568	2699	2	\N	2015-07-22 14:21:46.984305+03
-7569	2708	2	\N	2015-07-22 14:21:59.287338+03
-7570	2709	2	\N	2015-07-22 14:21:59.287338+03
-7571	2699	2	\N	2015-07-22 14:22:26.322903+03
-7572	2710	2	\N	2015-07-22 14:22:35.509695+03
-7573	2711	2	\N	2015-07-22 14:22:35.509695+03
-7574	2699	2	\N	2015-07-22 14:23:19.576335+03
-7575	2712	2	\N	2015-07-22 14:23:36.759685+03
-7576	2713	2	\N	2015-07-22 14:23:36.759685+03
-7577	2714	2	\N	2015-07-22 14:30:40.877306+03
-7578	2715	2	\N	2015-07-22 14:32:25.925422+03
-7579	2716	2	\N	2015-07-22 14:32:25.925422+03
-7580	2714	2	\N	2015-07-22 14:32:56.995021+03
-7581	2717	2	\N	2015-07-22 14:33:08.574387+03
-7582	2718	2	\N	2015-07-22 14:33:08.574387+03
-7583	2719	2	\N	2015-07-22 14:50:07.747456+03
-7584	2720	2	\N	2015-07-22 14:50:07.747456+03
-7585	2721	2	\N	2015-07-22 14:53:19.652254+03
-7586	2722	2	\N	2015-07-22 14:53:19.652254+03
-7587	2723	2	\N	2015-07-22 15:02:17.721876+03
-7588	2724	2	\N	2015-07-22 15:02:27.84792+03
-7589	2725	2	\N	2015-07-22 15:02:27.84792+03
-7590	2726	2	\N	2015-07-22 15:04:12.042101+03
-7591	2699	2	\N	2015-07-22 15:04:47.591373+03
-7592	2727	2	\N	2015-07-22 15:05:43.153662+03
-7593	2728	2	\N	2015-07-22 15:05:43.153662+03
-7595	2730	2	\N	2015-07-22 15:19:08.113264+03
-7598	2732	2	\N	2015-07-22 15:38:41.939351+03
-7601	2515	2	\N	2015-07-22 15:57:29.189389+03
-7603	2733	2	\N	2015-07-22 15:58:23.119691+03
-7606	2317	2	\N	2015-07-22 15:59:20.404832+03
-7607	2734	2	\N	2015-07-22 15:59:27.667185+03
-7608	2735	2	\N	2015-07-22 15:59:52.422862+03
-7609	2736	2	\N	2015-07-22 15:59:52.422862+03
-7612	1438	2	\N	2015-07-22 18:57:24.829162+03
-7613	2737	2	\N	2015-07-22 19:50:41.44109+03
-7614	2738	2	\N	2015-07-22 19:50:41.44109+03
-7615	2739	2	\N	2015-07-22 22:10:17.173605+03
-7616	2739	2	\N	2015-07-22 22:27:10.60758+03
-7617	2740	2	\N	2015-10-05 21:56:31.033698+03
-7618	2741	2	\N	2015-10-05 22:00:37.025784+03
-7619	2741	2	\N	2015-10-05 22:01:11.294026+03
-7620	2740	2	\N	2015-10-11 15:30:17.608326+03
-7621	2740	2	\N	2015-10-11 15:49:02.820999+03
-7622	2742	2	\N	2015-10-11 16:29:26.485453+03
-7655	2741	2	\N	2015-10-19 21:00:27.348936+03
-7656	2484	2	\N	2015-10-24 14:58:32.749242+03
-7657	2779	2	\N	2015-10-24 14:58:32.749242+03
-7658	2484	2	\N	2015-10-24 14:59:57.669772+03
-7659	2780	2	\N	2015-10-24 14:59:57.669772+03
-7660	894	2	\N	2015-10-24 15:00:56.289933+03
-7661	2781	2	\N	2015-10-24 15:00:56.289933+03
-7662	885	2	\N	2015-10-24 15:02:23.825848+03
-7663	894	2	\N	2015-10-24 15:06:44.559696+03
-7664	2782	2	\N	2015-10-24 15:06:44.559696+03
-7665	894	2	\N	2015-10-24 15:13:07.98256+03
-7666	2783	2	\N	2015-10-24 15:13:07.98256+03
-7667	894	2	\N	2015-10-24 15:16:03.818888+03
-7668	2784	2	\N	2015-10-24 15:16:03.818888+03
-7670	2786	2	\N	2015-10-24 15:24:48.816087+03
-7671	2787	2	\N	2015-10-24 15:30:54.642902+03
-7672	2739	2	\N	2015-10-31 09:47:11.166446+02
-7673	2739	2	\N	2015-10-31 09:48:54.569182+02
-7674	2739	2	\N	2015-10-31 09:52:21.217177+02
-7675	2739	2	\N	2015-10-31 09:52:28.501825+02
-7676	2739	2	\N	2015-10-31 10:25:38.872091+02
-7677	2593	2	\N	2015-10-31 10:32:28.375294+02
-7678	2788	2	\N	2015-10-31 11:46:02.329007+02
-7679	2741	2	\N	2015-10-31 11:48:54.106885+02
-7698	2813	2	\N	2015-11-22 21:52:45.311354+02
-7699	2814	2	\N	2015-11-22 21:57:07.211721+02
-7700	2739	2	\N	2015-11-22 21:57:09.506917+02
-7701	2739	2	\N	2015-11-22 22:03:49.302367+02
-7702	2815	2	\N	2015-11-29 18:03:23.32558+02
-7703	2816	2	\N	2015-11-29 18:05:24.319676+02
-7704	2818	2	\N	2015-11-29 19:06:37.534692+02
-7705	2820	2	\N	2016-01-02 19:03:39.167822+02
-7706	1930	2	\N	2016-01-02 19:03:41.6491+02
-7707	2821	2	\N	2016-01-02 20:11:21.358279+02
-7708	2822	2	\N	2016-01-02 20:11:24.233178+02
-7709	2823	2	\N	2016-01-02 20:12:21.682793+02
-7710	2824	2	\N	2016-01-02 20:12:46.762385+02
-7711	2825	2	\N	2016-01-02 20:15:08.259398+02
-7712	2824	2	\N	2016-01-02 20:15:26.352748+02
-7713	2826	2	\N	2016-01-02 20:15:55.52191+02
-7714	2824	2	\N	2016-01-02 20:17:19.972235+02
-7715	2822	2	\N	2016-01-02 20:21:41.413863+02
-7716	2827	2	\N	2016-01-02 20:24:24.220398+02
-7717	2828	2	\N	2016-01-02 20:24:24.220398+02
-7718	2829	2	\N	2016-01-02 20:25:00.491155+02
-7719	2830	2	\N	2016-01-02 20:25:43.115841+02
-7720	2831	2	\N	2016-01-02 20:26:37.333884+02
-7721	2832	2	\N	2016-01-02 20:27:25.581765+02
-7722	2833	2	\N	2016-01-02 20:36:13.937348+02
-7723	2834	2	\N	2016-01-02 20:36:20.489746+02
-7724	2834	2	\N	2016-01-02 20:36:41.364121+02
-7725	2835	2	\N	2016-01-02 20:42:25.330155+02
-7726	2836	2	\N	2016-01-02 20:42:56.538052+02
-7727	2837	2	\N	2016-01-02 20:50:50.737933+02
-7728	2838	2	\N	2016-01-02 20:50:50.737933+02
-7729	2831	2	\N	2016-01-02 20:50:54.803525+02
-7730	2839	2	\N	2016-01-02 20:51:13.095185+02
-7731	2840	2	\N	2016-01-02 20:51:13.095185+02
-7732	2841	2	\N	2016-01-02 20:52:40.961629+02
-7733	2540	2	\N	2016-01-02 20:53:36.703713+02
-7734	2842	2	\N	2016-01-02 20:53:48.427475+02
-7735	2843	2	\N	2016-01-02 20:53:48.427475+02
-7736	2844	2	\N	2016-01-02 21:00:05.527737+02
-7737	2845	2	\N	2016-01-02 21:00:05.527737+02
-7738	2846	2	\N	2016-01-02 21:03:59.88429+02
-7739	2847	2	\N	2016-01-02 21:03:59.88429+02
-7740	2848	2	\N	2016-01-02 21:08:47.993297+02
-7741	2849	2	\N	2016-01-02 21:08:47.993297+02
-7742	2850	2	\N	2016-01-02 21:16:40.983488+02
-7743	2851	2	\N	2016-01-02 21:16:40.983488+02
-7744	2852	2	\N	2016-01-02 21:36:46.646531+02
-7745	2853	2	\N	2016-01-02 21:36:49.099159+02
-7746	2854	2	\N	2016-01-02 21:37:14.376182+02
-7747	2855	2	\N	2016-01-02 21:37:14.376182+02
-7748	2853	2	\N	2016-01-02 21:38:33.232425+02
-7749	2853	2	\N	2016-01-02 21:39:02.581845+02
-7752	2857	2	\N	2016-01-02 21:39:38.718674+02
-7759	2841	2	\N	2016-01-02 22:14:54.924705+02
-7750	2853	2	\N	2016-01-02 21:39:16.771773+02
-7754	2859	2	\N	2016-01-02 21:48:34.392885+02
-7760	2835	2	\N	2016-01-02 22:15:05.490599+02
-7769	2860	2	\N	2016-01-02 23:22:02.986231+02
-7770	2861	2	\N	2016-01-02 23:22:02.986231+02
-7771	2862	2	\N	2016-01-02 23:29:14.591921+02
-7772	2863	2	\N	2016-01-02 23:29:43.595496+02
-7773	2864	2	\N	2016-01-02 23:32:59.025447+02
-7774	2865	2	\N	2016-01-02 23:33:17.678918+02
-7775	2866	2	\N	2016-01-02 23:33:24.314299+02
-7776	2867	2	\N	2016-01-02 23:34:03.051927+02
-7777	2824	2	\N	2016-01-02 23:39:00.961892+02
-7778	2868	2	\N	2016-01-30 20:55:14.786454+02
-7779	2869	2	\N	2016-01-30 20:59:30.856249+02
-7780	2830	2	\N	2016-01-30 21:00:27.913502+02
-7781	2830	2	\N	2016-01-30 21:01:18.072032+02
-7782	2830	2	\N	2016-01-30 21:01:36.444194+02
-7783	2830	2	\N	2016-02-06 15:26:53.662979+02
-7784	2830	2	\N	2016-02-06 15:33:10.739181+02
-7785	2830	2	\N	2016-02-06 15:34:22.381065+02
-7786	2830	2	\N	2016-02-06 15:35:20.238203+02
-7787	2830	2	\N	2016-02-06 15:36:19.423459+02
-7788	2830	2	\N	2016-02-06 15:45:57.869458+02
-7789	2830	2	\N	2016-02-06 15:55:27.857802+02
-7790	2830	2	\N	2016-02-06 16:02:20.536632+02
-7791	2830	2	\N	2016-02-06 16:19:02.587853+02
-7792	2830	2	\N	2016-02-06 16:19:14.340638+02
-7793	2830	2	\N	2016-02-06 16:19:40.099469+02
-7794	2870	2	\N	2016-02-07 17:23:20.218116+02
-7795	2871	2	\N	2016-02-07 17:23:20.218116+02
-7799	2873	2	\N	2016-02-07 21:19:25.018357+02
-7800	2874	2	\N	2016-02-07 21:20:02.361201+02
-7801	2875	2	\N	2016-02-07 21:20:21.884033+02
-7802	2876	2	\N	2016-02-07 21:21:03.816914+02
-7803	2877	2	\N	2016-02-07 21:21:07.920879+02
-7804	2788	2	\N	2016-05-09 12:53:56.945117+03
-7805	2878	2	\N	2016-05-09 12:57:37.410132+03
-7806	2879	2	\N	2016-05-09 12:58:01.601364+03
-7807	2875	2	\N	2016-05-09 14:19:09.461648+03
-7808	2879	2	\N	2016-05-09 14:19:09.461648+03
-7809	2875	2	\N	2016-05-09 14:21:24.121089+03
-7810	2879	2	\N	2016-05-09 14:21:24.121089+03
-7811	2877	2	\N	2016-05-09 19:49:23.40543+03
-7812	2877	2	\N	2016-05-09 20:42:10.779147+03
-7813	2877	2	\N	2016-05-09 20:59:03.503884+03
-7814	2877	2	\N	2016-05-09 20:59:20.181507+03
-7815	2880	2	\N	2016-05-14 12:24:09.362992+03
-7816	2881	2	\N	2016-05-14 12:24:17.0673+03
-7817	2882	2	\N	2016-05-14 12:40:37.631348+03
-7818	2883	2	\N	2016-05-14 12:42:08.065152+03
-7822	2887	2	\N	2016-05-14 19:24:38.497791+03
-7823	2882	2	\N	2016-05-14 19:25:04.0458+03
-7824	2888	2	\N	2016-05-14 19:26:49.355068+03
-7825	2889	2	\N	2016-05-14 19:27:41.044427+03
-7826	2888	2	\N	2016-05-14 19:28:16.54874+03
-7827	2889	2	\N	2016-05-14 19:33:22.988649+03
-7828	2131	2	\N	2016-05-15 18:01:05.003665+03
-7829	1932	2	\N	2016-05-15 18:01:28.601998+03
-7830	1939	2	\N	2016-05-15 18:01:28.601998+03
-7831	2131	2	\N	2016-05-15 18:01:28.601998+03
-7832	2890	2	\N	2016-05-15 18:35:21.882133+03
-7847	1849	2	\N	2016-05-22 20:11:06.601318+03
-7848	2903	2	\N	2016-05-22 20:42:01.686171+03
-7850	2888	2	\N	2016-06-12 18:45:48.22505+03
-7851	772	2	\N	2016-06-12 18:46:48.423567+03
-7852	725	2	\N	2016-06-12 18:47:13.092956+03
-7853	784	2	\N	2016-06-12 18:49:28.974684+03
-7854	784	2	\N	2016-06-12 18:51:26.23605+03
-7855	2247	2	\N	2016-06-12 18:52:17.724152+03
-7856	1413	2	\N	2016-06-12 18:52:55.036571+03
-7857	1318	2	\N	2016-06-12 18:53:39.336876+03
-7858	1314	2	\N	2016-06-12 18:54:40.013112+03
-7859	1095	2	\N	2016-06-12 18:57:44.248305+03
-7860	878	2	\N	2016-06-12 18:57:52.02832+03
-7861	2887	2	\N	2016-06-12 19:00:45.455196+03
-7862	2882	2	\N	2016-06-12 19:01:13.039783+03
-7863	2788	2	\N	2016-06-12 19:01:30.584665+03
-7864	2583	2	\N	2016-06-12 19:01:59.143077+03
-7865	2558	2	\N	2016-06-12 19:02:36.175946+03
-7866	2551	2	\N	2016-06-12 19:03:37.898942+03
-7867	2516	2	\N	2016-06-12 19:04:06.271906+03
-7868	2513	2	\N	2016-06-12 19:04:31.460583+03
-7869	2296	2	\N	2016-06-12 19:05:05.227+03
-7870	2292	2	\N	2016-06-12 19:06:37.050125+03
-7871	2276	2	\N	2016-06-12 19:07:27.341086+03
-7872	2268	2	\N	2016-06-12 19:07:46.312418+03
-7873	2244	2	\N	2016-06-12 19:08:11.579054+03
-7874	2243	2	\N	2016-06-12 19:08:39.453799+03
-7875	2217	2	\N	2016-06-12 19:09:02.580116+03
-7876	2135	2	\N	2016-06-12 19:09:39.794735+03
-7877	2127	2	\N	2016-06-12 19:10:08.975875+03
-7878	2108	2	\N	2016-06-12 19:10:27.895665+03
-7879	2276	2	\N	2016-06-12 19:10:41.100754+03
-7880	2100	2	\N	2016-06-12 19:11:17.465277+03
-7881	2099	2	\N	2016-06-12 19:11:33.334036+03
-7882	2049	2	\N	2016-06-12 19:11:50.921234+03
-7883	1968	2	\N	2016-06-12 19:12:07.782103+03
-7884	1941	2	\N	2016-06-12 19:12:30.504714+03
-7885	1894	2	\N	2016-06-12 19:13:06.764103+03
-7886	1884	2	\N	2016-06-12 19:14:14.633068+03
-7887	1849	2	\N	2016-06-12 19:14:36.013047+03
-7888	1799	2	\N	2016-06-12 19:14:52.646537+03
-7889	1797	2	\N	2016-06-12 19:15:54.892109+03
-7890	1548	2	\N	2016-06-12 19:16:37.7143+03
-7891	1521	2	\N	2016-06-12 19:17:04.475532+03
-7892	1435	2	\N	2016-06-12 19:17:55.308631+03
-7893	1433	2	\N	2016-06-12 19:18:27.119556+03
-7894	1424	2	\N	2016-06-12 19:18:54.681198+03
-7895	1393	2	\N	2016-06-12 19:19:41.040229+03
-7896	1317	2	\N	2016-06-12 19:20:07.122053+03
-7897	1313	2	\N	2016-06-12 19:20:43.704349+03
-7898	1268	2	\N	2016-06-12 19:21:17.457024+03
-7899	1225	2	\N	2016-06-12 19:21:42.431685+03
-7900	1211	2	\N	2016-06-12 19:21:57.927763+03
-7901	1207	2	\N	2016-06-12 19:22:13.829139+03
-7902	1198	2	\N	2016-06-12 19:22:32.264053+03
-7903	1190	2	\N	2016-06-12 19:22:54.801074+03
-7904	1189	2	\N	2016-06-12 19:23:36.149132+03
-7905	1088	2	\N	2016-06-12 19:24:03.186521+03
-7906	1081	2	\N	2016-06-12 19:24:18.841926+03
-7907	1007	2	\N	2016-06-12 19:24:41.063226+03
-7908	1003	2	\N	2016-06-12 19:25:01.6884+03
-7909	954	2	\N	2016-06-12 19:25:21.828467+03
-7910	953	2	\N	2016-06-12 19:25:35.283531+03
-7911	909	2	\N	2016-06-12 19:25:55.660588+03
-7912	954	2	\N	2016-06-12 19:26:03.832442+03
-7913	908	2	\N	2016-06-12 19:26:22.461914+03
-7914	901	2	\N	2016-06-12 19:26:39.035505+03
-7915	872	2	\N	2016-06-12 19:26:48.439834+03
-7916	865	2	\N	2016-06-12 19:27:18.908205+03
-7917	788	2	\N	2016-06-12 19:27:47.009299+03
-7918	775	2	\N	2016-06-12 19:28:17.716597+03
-7919	769	2	\N	2016-06-12 19:28:58.268968+03
-7920	764	2	\N	2016-06-12 19:29:16.089449+03
-7921	723	2	\N	2016-06-12 19:29:30.976297+03
-7922	706	2	\N	2016-06-12 19:29:46.837575+03
-7923	283	2	\N	2016-06-12 19:29:57.083572+03
-7924	274	2	\N	2016-06-12 19:30:06.053627+03
-7925	16	2	\N	2016-06-12 19:30:19.35102+03
-7926	10	2	\N	2016-06-12 19:30:32.966151+03
-7927	2887	2	\N	2016-06-12 19:59:55.740881+03
-\.
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: company_ru; Owner: -
---
-
-SELECT pg_catalog.setval('resource_log_id_seq', 7927, true);
 
 
 --
@@ -55586,7 +51336,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 2, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-309c8478ded6
+c38723878dbe
 \.
 
 
@@ -55686,7 +51436,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
+COPY campaign (id, resource_id, name, start_dt, status, mail_id, person_category_id) FROM stdin;
 \.
 
 
@@ -55936,6 +51686,14 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
+-- Data for Name: employee_subscription; Type: TABLE DATA; Schema: demo_ru; Owner: -
+--
+
+COPY employee_subscription (employee_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: employee_upload; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
@@ -56117,7 +51875,7 @@ SELECT pg_catalog.setval('location_id_seq', 4, true);
 -- Data for Name: mail; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
-COPY mail (id, resource_id, name, html_content, descr) FROM stdin;
+COPY mail (id, resource_id, name, html_content, descr, subject) FROM stdin;
 \.
 
 
@@ -56239,7 +51997,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
-COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
+COPY notification (id, resource_id, descr, url, created) FROM stdin;
 \.
 
 
@@ -56538,1316 +52296,1316 @@ SELECT pg_catalog.setval('region_id_seq', 4, true);
 -- Data for Name: resource; Type: TABLE DATA; Schema: demo_ru; Owner: -
 --
 
-COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
-12	12	2	\N
-14	12	2	\N
-16	12	2	\N
-30	12	2	\N
-31	12	2	\N
-32	12	2	\N
-33	12	2	\N
-34	12	2	\N
-35	12	2	\N
-36	12	2	\N
-37	12	2	\N
-38	12	2	\N
-39	12	2	\N
-40	12	2	\N
-43	12	2	\N
-44	12	2	\N
-45	12	2	\N
-83	2	2	\N
-84	2	2	\N
-277	39	2	\N
-913	72	2	\N
-914	72	2	\N
-915	72	2	\N
-916	72	2	\N
-917	72	2	\N
-2890	93	2	f
-918	72	2	\N
-919	72	2	\N
-928	73	2	\N
-929	73	2	\N
-930	73	2	\N
-931	73	2	\N
-932	73	2	\N
-933	73	2	\N
-935	73	2	\N
-936	73	2	\N
-937	73	2	\N
-948	73	2	\N
-949	73	2	\N
-950	73	2	\N
-952	73	2	\N
-953	12	2	\N
-954	12	2	\N
-955	65	2	\N
-956	65	2	\N
-957	74	2	\N
-958	74	2	\N
-1647	39	2	f
-2266	137	2	f
-2267	134	2	f
-2268	12	2	f
-2269	105	2	f
-1915	111	2	f
-1917	110	2	f
-1949	123	2	f
-1961	123	2	f
-2714	104	2	f
-2715	119	2	f
-2716	119	2	f
-2717	119	2	f
-2718	119	2	f
-2881	69	2	f
-2882	12	2	f
-2883	65	2	f
-278	39	2	\N
-279	39	2	\N
-280	39	2	\N
-281	39	2	\N
-282	39	2	\N
-283	12	2	\N
-286	41	2	\N
-287	41	2	\N
-288	41	2	\N
-289	41	2	\N
-938	73	2	\N
-939	73	2	\N
-961	74	2	\N
-962	74	2	\N
-963	74	2	\N
-964	74	2	\N
-965	74	2	\N
-966	74	2	\N
-967	74	2	\N
-968	74	2	\N
-969	74	2	\N
-970	74	2	\N
-971	74	2	\N
-973	75	2	\N
-975	75	2	\N
-976	75	2	\N
-977	75	2	\N
-978	75	2	\N
-979	75	2	\N
-980	75	2	\N
-981	75	2	\N
-982	75	2	\N
-983	75	2	\N
-984	75	2	\N
-1616	69	2	f
-1619	69	2	f
-1620	87	2	f
-1621	87	2	f
-1622	89	2	f
-1623	90	2	f
-1381	89	2	f
-2439	117	2	f
-2784	123	2	f
-1932	93	2	f
-2786	2	2	f
-2787	2	2	f
-2788	12	2	f
-2813	12	2	f
-2814	87	2	f
-2815	93	2	f
-2842	119	2	f
-290	41	2	\N
-291	41	2	\N
-943	73	2	\N
-944	73	2	\N
-945	73	2	\N
-946	73	2	\N
-947	73	2	\N
-998	65	2	\N
-1005	78	2	\N
-1007	12	2	\N
-1008	65	2	\N
-1009	79	2	\N
-1325	83	2	f
-1326	84	2	f
-1327	83	2	f
-1328	39	2	f
-1329	84	2	f
-1330	83	2	f
-1331	83	2	f
-1332	39	2	f
-1333	84	2	f
-1334	83	2	f
-1335	83	2	f
-1340	39	2	f
-1344	39	2	f
-1345	84	2	f
-1346	83	2	f
-1350	83	2	f
-1352	39	2	f
-1353	84	2	f
-1354	83	2	f
-1355	39	2	f
-1356	84	2	f
-1357	83	2	f
-2231	78	2	f
-2232	78	2	f
-2233	78	2	f
-1639	106	2	f
-1640	87	2	f
-1641	87	2	f
-1642	89	2	f
-1643	89	2	f
-2047	119	2	f
-1764	111	2	f
-1766	111	2	f
-1769	105	2	f
-1771	111	2	f
-1773	111	2	f
-2285	135	2	f
-2291	93	2	f
-2292	12	2	f
-2293	145	2	f
-2048	65	2	f
-2049	12	2	f
-2050	87	2	f
-2051	69	2	f
-2052	130	2	f
-1939	93	2	f
-2054	2	2	f
-1906	65	2	f
-1990	106	2	f
-1991	106	2	f
-1992	106	2	f
-2029	119	2	f
-2442	117	2	f
-2546	110	2	f
-2573	69	2	f
-921	73	2	\N
-1648	84	2	f
-2458	106	2	f
-2556	151	2	f
-2557	151	2	f
-2568	145	2	f
-1649	83	2	f
-1650	87	2	f
-2569	130	2	f
-2570	69	2	f
-922	73	2	\N
-923	73	2	\N
-924	73	2	\N
-1651	89	2	f
-1652	90	2	f
-1653	69	2	f
-925	73	2	\N
-926	73	2	\N
-1659	65	2	f
-1882	106	2	f
-1660	106	2	f
-927	73	2	\N
-2046	119	2	f
-959	74	2	\N
-960	74	2	\N
-1714	110	2	f
-985	75	2	\N
-987	75	2	\N
-1721	110	2	f
-1884	12	2	f
-1885	65	2	f
-1888	117	2	f
-1893	120	2	f
-1894	12	2	f
-1004	78	2	\N
-1309	90	2	f
-1310	41	2	f
-1895	65	2	f
-1311	41	2	f
-1312	65	2	f
-1313	12	2	f
-1896	65	2	f
-1314	102	2	f
-1317	12	2	f
-1320	83	2	f
-1321	84	2	f
-1322	83	2	f
-1950	123	2	f
-1951	90	2	f
-1952	86	2	f
-1907	65	2	f
-1956	87	2	f
-1958	93	2	f
-1959	123	2	f
-2104	135	2	f
-1323	83	2	f
-2105	135	2	f
-2106	135	2	f
-2107	12	2	f
-2108	12	2	f
-2111	83	2	f
-2115	39	2	f
-2119	90	2	f
-2168	137	2	f
-2171	93	2	f
-2172	135	2	f
-2173	137	2	f
-1324	83	2	f
-1358	83	2	f
-1359	84	2	f
-1360	83	2	f
-2452	117	2	f
-2457	106	2	f
-1361	84	2	f
-1365	39	2	f
-1366	84	2	f
-1367	83	2	f
-1368	65	2	f
-1371	87	2	f
-1373	87	2	f
-1374	90	2	f
-1624	87	2	f
-1625	89	2	f
-1376	89	2	f
-1626	69	2	f
-1378	78	2	f
-1627	69	2	f
-1628	69	2	f
-1379	87	2	f
-1380	87	2	f
-1383	69	2	f
-2260	135	2	f
-2261	142	2	f
-2262	135	2	f
-2263	142	2	f
-2264	134	2	f
-2265	135	2	f
-1780	105	2	f
-1797	12	2	f
-1798	65	2	f
-1799	12	2	f
-1804	118	2	f
-2	2	2	\N
-2127	12	2	f
-3	2	2	\N
-10	12	2	\N
-1010	79	2	\N
-1080	65	2	\N
-1081	12	2	\N
-1099	39	2	\N
-2309	69	2	f
-2128	65	2	f
-2129	138	2	f
-2130	138	2	f
-2132	118	2	f
-2440	117	2	f
-2201	104	2	f
-2459	106	2	f
-2463	111	2	f
-2465	120	2	f
-2563	69	2	f
-2564	145	2	f
-2565	130	2	f
-2203	104	2	f
-2205	110	2	f
-2234	78	2	f
-2566	69	2	f
-2133	123	2	f
-2567	145	2	f
-2571	145	2	f
-2135	12	2	f
-2572	130	2	f
-2710	119	2	f
-2711	119	2	f
-2712	119	2	f
-2713	119	2	f
-2816	93	2	f
-2817	123	2	f
-2836	119	2	f
-2136	65	2	f
-2320	12	2	f
-2327	87	2	f
-2328	69	2	f
-2583	12	2	f
-2329	145	2	f
-2330	145	2	f
-2331	146	2	f
-2837	135	2	f
-2332	146	2	f
-2333	130	2	f
-2838	144	2	f
-2855	119	2	f
-2861	117	2	f
-2862	117	2	f
-2334	104	2	f
-2335	104	2	f
-2336	104	2	f
-2235	78	2	f
-2236	78	2	f
-2337	104	2	f
-2338	87	2	f
-2339	69	2	f
-2340	69	2	f
-2237	78	2	f
-2238	78	2	f
-2239	78	2	f
-1774	111	2	f
-1775	59	2	f
-1777	65	2	f
-1778	12	2	f
-1800	118	2	f
-2294	145	2	f
-1801	118	2	f
-2295	145	2	f
-1802	118	2	f
-2296	12	2	f
-2297	145	2	f
-2299	146	2	f
-2300	145	2	f
-2304	123	2	f
-1910	106	2	f
-1911	106	2	f
-2075	93	2	f
-2076	123	2	f
-2077	12	2	f
-2087	118	2	f
-2088	130	2	f
-2089	87	2	f
-2090	69	2	f
-2092	118	2	f
-2095	87	2	f
-2096	118	2	f
-2097	118	2	f
-2307	87	2	f
-2120	101	2	f
-2126	2	2	f
-2341	135	2	f
-2342	137	2	f
-2343	135	2	f
-2344	143	2	f
-2030	119	2	f
-2031	119	2	f
-2308	87	2	f
-2032	110	2	f
-2038	119	2	f
-2903	119	2	f
-2514	65	2	f
-2515	148	2	f
-2516	12	2	f
-2871	119	2	f
-2517	149	2	f
-2518	149	2	f
-2519	47	2	f
-2520	149	2	f
-2521	149	2	f
-2522	149	2	f
-2873	87	2	f
-2874	87	2	f
-2875	69	2	f
-2876	145	2	f
-2877	130	2	f
-2878	87	2	f
-2887	12	2	f
-2888	65	2	f
-2889	65	2	f
-1316	102	2	f
-1336	39	2	f
-1362	83	2	f
-1363	84	2	f
-1364	83	2	f
-1372	69	2	f
-2523	149	2	f
-2524	149	2	f
-1375	69	2	f
-2525	149	2	f
-1382	90	2	f
-2526	149	2	f
-1385	84	2	f
-2527	149	2	f
-1386	83	2	f
-2528	149	2	f
-2529	119	2	f
-2536	110	2	f
-2537	119	2	f
-2538	119	2	f
-2574	145	2	f
-2575	130	2	f
-1387	87	2	f
-1388	90	2	f
-1389	69	2	f
-1390	69	2	f
-1391	90	2	f
-1416	39	2	f
-2271	140	2	f
-2272	78	2	f
-2273	135	2	f
-2286	137	2	f
-2287	135	2	f
-2288	142	2	f
-2289	104	2	f
-2290	104	2	f
-1424	12	2	f
-1425	65	2	f
-1426	105	2	f
-1431	105	2	f
-1432	105	2	f
-1433	12	2	f
-1434	65	2	f
-2576	69	2	f
-2577	145	2	f
-2578	145	2	f
-2579	130	2	f
-2580	69	2	f
-2581	145	2	f
-2582	130	2	f
-2345	134	2	f
-2366	87	2	f
-2367	69	2	f
-2368	145	2	f
-2369	146	2	f
-2370	118	2	f
-2371	93	2	f
-2372	130	2	f
-2373	39	2	f
-2648	65	2	f
-2649	65	2	f
-2650	65	2	f
-2429	105	2	f
-2430	105	2	f
-2510	110	2	f
-2511	86	2	f
-2513	12	2	f
-2544	148	2	f
-907	71	2	\N
-908	12	2	\N
-909	12	2	\N
-2131	93	2	f
-2891	87	2	f
-2892	69	2	f
-2893	145	2	f
-2894	130	2	f
-2589	89	2	f
-2590	90	2	f
-2545	86	2	f
-2547	119	2	f
-2548	119	2	f
-2591	69	2	f
-2592	123	2	f
-2593	69	2	f
-2594	87	2	f
-2595	69	2	f
-2596	145	2	f
-2376	69	2	f
-2377	135	2	f
-2549	12	2	f
-2378	137	2	f
-2550	87	2	f
-2379	135	2	f
-2551	12	2	f
-2552	65	2	f
-2553	65	2	f
-2554	65	2	f
-2725	119	2	f
-2726	110	2	f
-2727	119	2	f
-2728	119	2	f
-2730	93	2	f
-2731	123	2	f
-2732	148	2	f
-2818	93	2	f
-2819	123	2	f
-2380	143	2	f
-2381	93	2	f
-2382	134	2	f
-2383	104	2	f
-2384	104	2	f
-2385	104	2	f
-2389	105	2	f
-2390	105	2	f
-2391	105	2	f
-2396	105	2	f
-2397	105	2	f
-2398	105	2	f
-2415	105	2	f
-2416	105	2	f
-2670	146	2	f
-2677	89	2	f
-2678	69	2	f
-2679	69	2	f
-2680	89	2	f
-2681	89	2	f
-2424	105	2	f
-2425	105	2	f
-2426	105	2	f
-2682	149	2	f
-2683	89	2	f
-2427	105	2	f
-2428	105	2	f
-2684	149	2	f
-2685	89	2	f
-2686	135	2	f
-2431	105	2	f
-2687	137	2	f
-2690	134	2	f
-2693	110	2	f
-2694	110	2	f
-2695	86	2	f
-2530	119	2	f
-2531	119	2	f
-2532	119	2	f
-2533	119	2	f
-2534	119	2	f
-2535	119	2	f
-2539	110	2	f
-2540	86	2	f
-2541	119	2	f
-2542	148	2	f
-2543	148	2	f
-2820	118	2	f
-2821	87	2	f
-2822	69	2	f
-2823	145	2	f
-1546	106	2	f
-2824	130	2	f
-1547	106	2	f
-1548	12	2	f
-1549	12	2	f
-2825	146	2	f
-2826	118	2	f
-2827	135	2	f
-2828	137	2	f
-2841	104	2	f
-2865	78	2	f
-2866	117	2	f
-2867	111	2	f
-1550	65	2	f
-1551	87	2	f
-1552	87	2	f
-2597	145	2	f
-2636	65	2	f
-2637	65	2	f
-2638	65	2	f
-2392	105	2	f
-2393	105	2	f
-2394	105	2	f
-2395	105	2	f
-2642	65	2	f
-274	12	2	\N
-292	41	2	\N
-306	41	2	\N
-706	12	2	\N
-723	12	2	\N
-725	55	2	\N
-726	55	2	\N
-728	55	2	\N
-734	55	2	\N
-743	55	2	\N
-763	55	2	\N
-764	12	2	\N
-769	12	2	\N
-2643	65	2	f
-2646	65	2	f
-2647	65	2	f
-2651	65	2	f
-2652	65	2	f
-2653	65	2	f
-771	55	2	\N
-772	59	2	\N
-837	65	2	\N
-2895	39	2	f
-1067	78	2	\N
-1068	12	2	\N
-1165	39	2	\N
-2654	65	2	f
-2655	65	2	f
-2896	84	2	f
-1185	39	2	\N
-1195	87	2	\N
-1198	12	2	\N
-1261	89	2	f
-1807	90	2	f
-1833	118	2	f
-1435	12	2	f
-1436	65	2	f
-1438	107	2	f
-1439	107	2	f
-1511	101	2	f
-1512	101	2	f
-1513	101	2	f
-1521	12	2	f
-1535	110	2	f
-1536	110	2	f
-1537	110	2	f
-1538	110	2	f
-1539	110	2	f
-1540	110	2	f
-1541	110	2	f
-2897	83	2	f
-2417	105	2	f
-1543	87	2	f
-1544	87	2	f
-1545	87	2	f
-2659	87	2	f
-2661	145	2	f
-2662	130	2	f
-2663	118	2	f
-2418	105	2	f
-2419	105	2	f
-2420	105	2	f
-2421	105	2	f
-2422	105	2	f
-2423	105	2	f
-2698	110	2	f
-2699	86	2	f
-2700	119	2	f
-2701	119	2	f
-2879	69	2	f
-773	12	2	\N
-887	69	2	\N
-2183	137	2	f
-2660	69	2	f
-2664	149	2	f
-2665	149	2	f
-2666	87	2	f
-2667	69	2	f
-2898	69	2	f
-2668	145	2	f
-2899	135	2	f
-894	2	2	\N
-896	39	2	\N
-1011	12	2	\N
-2669	130	2	f
-2671	93	2	f
-2672	123	2	f
-2673	39	2	f
-2839	119	2	f
-2840	119	2	f
-1278	39	2	f
-1283	71	2	f
-1284	69	2	f
-1285	87	2	f
-1286	89	2	f
-1287	84	2	f
-1288	90	2	f
-1289	84	2	f
-1290	39	2	f
-1291	84	2	f
-1292	83	2	f
-1293	69	2	f
-1294	69	2	f
-1304	87	2	f
-1306	90	2	f
-1849	12	2	f
-1447	106	2	f
-1448	106	2	f
-1450	12	2	f
-1452	12	2	f
-1464	87	2	f
-1465	69	2	f
-1467	89	2	f
-1472	69	2	f
-1473	69	2	f
-1485	106	2	f
-1500	106	2	f
-1504	104	2	f
-1505	104	2	f
-1506	104	2	f
-1507	107	2	f
-1509	106	2	f
-1514	101	2	f
-1515	101	2	f
-1516	87	2	f
-1517	87	2	f
-1518	87	2	f
-1519	87	2	f
-1553	79	2	f
-2584	93	2	f
-2585	87	2	f
-2586	87	2	f
-2587	87	2	f
-2588	89	2	f
-2633	65	2	f
-2634	65	2	f
-2635	65	2	f
-2174	135	2	f
-2175	137	2	f
-2176	135	2	f
-2177	137	2	f
-2178	135	2	f
-2179	137	2	f
-2180	135	2	f
-2181	137	2	f
-2182	135	2	f
-897	39	2	\N
-898	39	2	\N
-899	39	2	\N
-900	65	2	\N
-2435	146	2	f
-901	12	2	\N
-902	65	2	\N
-903	71	2	\N
-2451	106	2	f
-2486	101	2	f
-2489	86	2	f
-2490	86	2	f
-2491	86	2	f
-2493	87	2	f
-2501	110	2	f
-2502	110	2	f
-2503	119	2	f
-2505	110	2	f
-2506	86	2	f
-2507	110	2	f
-2508	110	2	f
-2737	106	2	f
-2738	117	2	f
-2739	69	2	f
-2740	12	2	f
-2832	119	2	f
-2863	111	2	f
-2864	140	2	f
-2274	143	2	f
-2275	134	2	f
-2276	12	2	f
-2277	105	2	f
-2278	135	2	f
-2279	144	2	f
-2280	134	2	f
-2281	104	2	f
-2282	135	2	f
-2284	134	2	f
-1962	93	2	f
-1963	123	2	f
-1964	93	2	f
-1965	123	2	f
-1966	12	2	f
-2098	118	2	f
-2099	12	2	f
-2100	12	2	f
-1978	2	2	f
-2101	65	2	f
-1979	118	2	f
-1985	93	2	f
-1986	123	2	f
-1988	119	2	f
-1989	12	2	f
-2602	65	2	f
-2603	65	2	f
-2604	65	2	f
-2605	65	2	f
-2608	65	2	f
-2612	65	2	f
-2613	65	2	f
-2617	65	2	f
-2039	119	2	f
-2044	119	2	f
-2156	135	2	f
-2157	137	2	f
-2158	135	2	f
-2159	137	2	f
-2160	135	2	f
-2161	137	2	f
-2162	135	2	f
-2163	137	2	f
-2164	135	2	f
-2165	137	2	f
-2167	135	2	f
-2045	119	2	f
-2399	105	2	f
-2400	105	2	f
-2401	105	2	f
-2402	105	2	f
-2403	105	2	f
-2704	119	2	f
-2705	119	2	f
-2706	119	2	f
-2707	119	2	f
-2708	119	2	f
-2709	119	2	f
-2434	130	2	f
-775	12	2	\N
-778	65	2	\N
-779	65	2	\N
-780	65	2	\N
-784	47	2	\N
-788	12	2	\N
-789	67	2	\N
-790	65	2	\N
-791	65	2	\N
-792	65	2	\N
-794	55	2	\N
-800	55	2	\N
-801	55	2	\N
-802	65	2	\N
-1468	84	2	f
-1469	90	2	f
-1470	83	2	f
-1471	69	2	f
-1913	117	2	f
-1510	101	2	f
-1968	12	2	f
-1970	126	2	f
-1971	93	2	f
-1972	123	2	f
-1973	123	2	f
-1975	65	2	f
-1977	12	2	f
-1554	101	2	f
-1556	101	2	f
-1559	87	2	f
-1560	79	2	f
-2137	139	2	f
-2138	139	2	f
-2139	139	2	f
-2144	135	2	f
-2145	137	2	f
-2146	135	2	f
-2147	137	2	f
-838	65	2	\N
-849	41	2	\N
-851	41	2	\N
-852	41	2	\N
-853	41	2	\N
-854	2	2	\N
-855	2	2	\N
-856	2	2	\N
-864	65	2	\N
-865	12	2	\N
-866	65	2	\N
-1307	90	2	f
-1308	90	2	f
-1337	84	2	f
-1338	83	2	f
-1347	39	2	f
-1348	84	2	f
-1349	83	2	f
-1393	12	2	f
-1394	65	2	f
-1395	65	2	f
-1396	104	2	f
-1398	104	2	f
-1400	104	2	f
-1401	104	2	f
-1402	104	2	f
-1403	104	2	f
-1404	87	2	f
-1406	89	2	f
-1407	90	2	f
-1408	69	2	f
-1409	69	2	f
-1410	69	2	f
-1411	69	2	f
-2148	135	2	f
-2149	137	2	f
-2150	135	2	f
-2187	135	2	f
-2188	137	2	f
-2189	135	2	f
-2190	137	2	f
-2674	84	2	f
-2675	83	2	f
-2676	87	2	f
-1413	102	2	f
-1414	90	2	f
-1415	91	2	f
-1417	84	2	f
-1418	90	2	f
-1419	91	2	f
-1420	101	2	f
-2152	135	2	f
-2153	137	2	f
-2154	135	2	f
-2155	137	2	f
-2184	135	2	f
-2185	137	2	f
-2186	134	2	f
-2688	135	2	f
-2880	87	2	f
-904	71	2	\N
-905	71	2	\N
-906	71	2	\N
-910	65	2	\N
-911	65	2	\N
-912	72	2	\N
-1318	102	2	f
-1319	84	2	f
-2206	110	2	f
-2207	110	2	f
-1607	106	2	f
-1608	105	2	f
-1341	84	2	f
-1609	105	2	f
-2433	145	2	f
-2689	143	2	f
-2558	12	2	f
-2559	151	2	f
-1342	83	2	f
-1610	87	2	f
-1611	87	2	f
-1612	89	2	f
-1613	89	2	f
-1614	90	2	f
-2560	69	2	f
-2561	145	2	f
-2562	130	2	f
-2733	148	2	f
-1615	69	2	f
-2208	110	2	f
-2209	110	2	f
-2210	86	2	f
-2211	110	2	f
-2212	110	2	f
-2213	86	2	f
-2734	119	2	f
-2735	119	2	f
-2843	119	2	f
-1370	90	2	f
-1384	39	2	f
-2283	137	2	f
-1803	118	2	f
-2301	146	2	f
-2302	118	2	f
-2303	93	2	f
-1852	119	2	f
-1898	105	2	f
-1900	120	2	f
-1901	120	2	f
-1902	117	2	f
-1903	111	2	f
-1904	65	2	f
-1905	65	2	f
-1561	87	2	f
-1562	87	2	f
-1563	79	2	f
-1564	101	2	f
-2844	119	2	f
-1569	101	2	f
-1570	101	2	f
-1571	65	2	f
-1575	65	2	f
-1576	86	2	f
-2845	119	2	f
-2846	119	2	f
-2847	119	2	f
-2848	119	2	f
-2849	119	2	f
-2850	119	2	f
-2851	119	2	f
-2852	110	2	f
-2853	86	2	f
-2854	119	2	f
-1577	87	2	f
-1578	79	2	f
-1579	110	2	f
-1580	78	2	f
-1581	87	2	f
-1582	89	2	f
-2598	145	2	f
-2599	130	2	f
-2868	93	2	f
-2869	93	2	f
-2870	119	2	f
-2151	137	2	f
-988	75	2	\N
-1003	12	2	\N
-1078	12	2	\N
-1088	12	2	\N
-1089	65	2	\N
-1090	39	2	\N
-1091	84	2	\N
-1093	84	2	\N
-1095	70	2	\N
-1096	39	2	\N
-1199	89	2	\N
-1204	87	2	\N
-1205	89	2	\N
-1206	89	2	\N
-1252	59	2	f
-1257	87	2	f
-1258	87	2	f
-1644	90	2	f
-1645	69	2	f
-1918	119	2	f
-1919	12	2	f
-1922	93	2	f
-1924	118	2	f
-1925	89	2	f
-1926	90	2	f
-1927	87	2	f
-1930	93	2	f
-1931	118	2	f
-1933	93	2	f
-1934	93	2	f
-1935	93	2	f
-1936	93	2	f
-1940	93	2	f
-1941	12	2	f
-1945	123	2	f
-1946	123	2	f
-1947	123	2	f
-1948	123	2	f
-1954	12	2	f
-1584	89	2	f
-1585	90	2	f
-1586	69	2	f
-1587	39	2	f
-1588	84	2	f
-1589	84	2	f
-1590	83	2	f
-1591	87	2	f
-1592	89	2	f
-1593	69	2	f
-1597	104	2	f
-2631	65	2	f
-2632	65	2	f
-2702	119	2	f
-2703	119	2	f
-2829	93	2	f
-2830	69	2	f
-2831	134	2	f
-2833	110	2	f
-2834	86	2	f
-2835	104	2	f
-2859	148	2	f
-2860	106	2	f
-885	47	2	\N
-895	39	2	\N
-940	73	2	\N
-941	73	2	\N
-942	73	2	\N
-1259	87	2	f
-1260	87	2	f
-2200	104	2	f
-2214	110	2	f
-2215	86	2	f
-2216	78	2	f
-2217	12	2	f
-2218	140	2	f
-2219	65	2	f
-2221	140	2	f
-2222	65	2	f
-2223	78	2	f
-2224	78	2	f
-2225	78	2	f
-2226	78	2	f
-2227	78	2	f
-2228	78	2	f
-2229	78	2	f
-2230	78	2	f
-1908	65	2	f
-2055	12	2	f
-2062	93	2	f
-2063	93	2	f
-2064	123	2	f
-2065	118	2	f
-2066	93	2	f
-2067	123	2	f
-2068	93	2	f
-2069	123	2	f
-2070	12	2	f
-2305	145	2	f
-2306	146	2	f
-1993	106	2	f
-2310	145	2	f
-1994	106	2	f
-2311	93	2	f
-1995	106	2	f
-1996	106	2	f
-2312	130	2	f
-1997	106	2	f
-2313	145	2	f
-2314	69	2	f
-2315	135	2	f
-2001	106	2	f
-2316	137	2	f
-2002	106	2	f
-2317	134	2	f
-2319	104	2	f
-2006	106	2	f
-2007	106	2	f
-2009	93	2	f
-2010	123	2	f
-2011	110	2	f
-2012	118	2	f
-2013	87	2	f
-2014	89	2	f
-2015	90	2	f
-2016	93	2	f
-2017	69	2	f
-2018	87	2	f
-2019	89	2	f
-2020	69	2	f
-2023	104	2	f
-2024	104	2	f
-2027	106	2	f
-2028	106	2	f
-2436	93	2	f
-2437	146	2	f
-2438	117	2	f
-1880	106	2	f
-1881	106	2	f
-2374	84	2	f
-2375	83	2	f
-2413	105	2	f
-871	69	2	\N
-872	12	2	\N
-873	65	2	\N
-874	65	2	\N
-876	41	2	\N
-878	70	2	\N
-2857	119	2	f
-879	65	2	\N
-1079	65	2	\N
-1097	84	2	\N
-1101	39	2	\N
-1102	84	2	\N
-1159	78	2	\N
-1170	39	2	\N
-1179	39	2	\N
-1189	12	2	\N
-1190	12	2	\N
-1191	86	2	\N
-1192	86	2	\N
-1193	87	2	\N
-1194	87	2	\N
-1200	89	2	\N
-1201	87	2	\N
-1210	90	2	\N
-1211	12	2	\N
-1212	65	2	\N
-1213	90	2	\N
-1214	91	2	\N
-1225	12	2	\N
-1230	93	2	\N
-1243	87	2	f
-1244	87	2	f
-1253	65	2	f
-1263	87	2	f
-1264	87	2	f
-1265	89	2	f
-1268	12	2	f
-2197	93	2	f
-2198	123	2	f
-2199	105	2	f
-2240	78	2	f
-2241	78	2	f
-2242	78	2	f
-2243	12	2	f
-2244	12	2	f
-2245	65	2	f
-2246	105	2	f
-2247	102	2	f
-2248	141	2	f
-2249	141	2	f
-2254	135	2	f
-2255	142	2	f
-2256	135	2	f
-2257	142	2	f
-2258	135	2	f
-2259	142	2	f
-1853	119	2	f
-1854	119	2	f
-1855	119	2	f
-1859	119	2	f
-1860	119	2	f
-1865	117	2	f
-1866	117	2	f
-1867	117	2	f
-1868	117	2	f
-1869	69	2	f
-1870	78	2	f
-1872	118	2	f
-1873	105	2	f
-1875	106	2	f
-1876	106	2	f
-863	65	2	\N
-870	69	2	\N
-875	70	2	\N
-1207	12	2	\N
-1209	90	2	\N
-1218	39	2	\N
-1221	12	2	\N
-1227	93	2	\N
-1240	41	2	f
-1241	39	2	f
-1282	87	2	f
-1980	93	2	f
-1981	118	2	f
-1982	93	2	f
-1983	93	2	f
-1984	123	2	f
-2404	105	2	f
-2405	105	2	f
-2406	105	2	f
-2407	105	2	f
-2408	105	2	f
-2409	105	2	f
-2410	105	2	f
-2411	105	2	f
-2412	105	2	f
-2414	105	2	f
-2432	105	2	f
-2719	119	2	f
-2720	119	2	f
-2721	119	2	f
-2722	119	2	f
-2723	104	2	f
-2724	119	2	f
-2736	119	2	f
-2741	65	2	f
-2742	12	2	f
-2779	123	2	f
-2780	123	2	f
-2781	123	2	f
-2782	123	2	f
-2783	123	2	f
-2466	117	2	f
-2467	111	2	f
-2468	119	2	f
-2469	119	2	f
-2470	119	2	f
-2475	90	2	f
-2900	137	2	f
-2484	2	2	f
-2901	93	2	f
-2902	134	2	f
-2904	71	2	f
-2905	69	2	f
-2906	145	2	f
-2907	145	2	f
-2908	140	2	f
-2909	78	2	f
-2910	146	2	f
-2911	78	2	f
-2912	146	2	f
-2913	118	2	f
-2914	93	2	f
-2915	145	2	f
-2916	130	2	f
-2917	70	2	f
-2918	39	2	f
-2919	84	2	f
-2920	39	2	f
-2921	84	2	f
-2922	139	2	f
-2923	138	2	f
-2924	72	2	f
-2925	83	2	f
-2926	75	2	f
-2927	73	2	f
-2928	74	2	f
-2929	39	2	f
-2930	84	2	f
-2931	87	2	f
-2932	69	2	f
-2933	135	2	f
-2934	137	2	f
-2942	87	2	f
-2944	87	2	f
-2935	70	2	f
-2936	135	2	f
-2937	143	2	f
-2939	87	2	f
-2940	87	2	f
-2941	87	2	f
-2943	87	2	f
-2938	134	2	f
+COPY resource (id, resource_type_id, maintainer_id, protected, modifydt) FROM stdin;
+12	12	2	\N	\N
+14	12	2	\N	\N
+16	12	2	\N	\N
+30	12	2	\N	\N
+31	12	2	\N	\N
+32	12	2	\N	\N
+33	12	2	\N	\N
+34	12	2	\N	\N
+35	12	2	\N	\N
+36	12	2	\N	\N
+37	12	2	\N	\N
+38	12	2	\N	\N
+39	12	2	\N	\N
+40	12	2	\N	\N
+43	12	2	\N	\N
+44	12	2	\N	\N
+45	12	2	\N	\N
+83	2	2	\N	\N
+84	2	2	\N	\N
+277	39	2	\N	\N
+913	72	2	\N	\N
+914	72	2	\N	\N
+915	72	2	\N	\N
+916	72	2	\N	\N
+917	72	2	\N	\N
+2890	93	2	f	\N
+918	72	2	\N	\N
+919	72	2	\N	\N
+928	73	2	\N	\N
+929	73	2	\N	\N
+930	73	2	\N	\N
+931	73	2	\N	\N
+932	73	2	\N	\N
+933	73	2	\N	\N
+935	73	2	\N	\N
+936	73	2	\N	\N
+937	73	2	\N	\N
+948	73	2	\N	\N
+949	73	2	\N	\N
+950	73	2	\N	\N
+952	73	2	\N	\N
+953	12	2	\N	\N
+954	12	2	\N	\N
+955	65	2	\N	\N
+956	65	2	\N	\N
+957	74	2	\N	\N
+958	74	2	\N	\N
+1647	39	2	f	\N
+2266	137	2	f	\N
+2267	134	2	f	\N
+2268	12	2	f	\N
+2269	105	2	f	\N
+1915	111	2	f	\N
+1917	110	2	f	\N
+1949	123	2	f	\N
+1961	123	2	f	\N
+2714	104	2	f	\N
+2715	119	2	f	\N
+2716	119	2	f	\N
+2717	119	2	f	\N
+2718	119	2	f	\N
+2881	69	2	f	\N
+2882	12	2	f	\N
+2883	65	2	f	\N
+278	39	2	\N	\N
+279	39	2	\N	\N
+280	39	2	\N	\N
+281	39	2	\N	\N
+282	39	2	\N	\N
+283	12	2	\N	\N
+286	41	2	\N	\N
+287	41	2	\N	\N
+288	41	2	\N	\N
+289	41	2	\N	\N
+938	73	2	\N	\N
+939	73	2	\N	\N
+961	74	2	\N	\N
+962	74	2	\N	\N
+963	74	2	\N	\N
+964	74	2	\N	\N
+965	74	2	\N	\N
+966	74	2	\N	\N
+967	74	2	\N	\N
+968	74	2	\N	\N
+969	74	2	\N	\N
+970	74	2	\N	\N
+971	74	2	\N	\N
+973	75	2	\N	\N
+975	75	2	\N	\N
+976	75	2	\N	\N
+977	75	2	\N	\N
+978	75	2	\N	\N
+979	75	2	\N	\N
+980	75	2	\N	\N
+981	75	2	\N	\N
+982	75	2	\N	\N
+983	75	2	\N	\N
+984	75	2	\N	\N
+1616	69	2	f	\N
+1619	69	2	f	\N
+1620	87	2	f	\N
+1621	87	2	f	\N
+1622	89	2	f	\N
+1623	90	2	f	\N
+1381	89	2	f	\N
+2439	117	2	f	\N
+2784	123	2	f	\N
+1932	93	2	f	\N
+2786	2	2	f	\N
+2787	2	2	f	\N
+2788	12	2	f	\N
+2813	12	2	f	\N
+2814	87	2	f	\N
+2815	93	2	f	\N
+2842	119	2	f	\N
+290	41	2	\N	\N
+291	41	2	\N	\N
+943	73	2	\N	\N
+944	73	2	\N	\N
+945	73	2	\N	\N
+946	73	2	\N	\N
+947	73	2	\N	\N
+998	65	2	\N	\N
+1005	78	2	\N	\N
+1007	12	2	\N	\N
+1008	65	2	\N	\N
+1009	79	2	\N	\N
+1325	83	2	f	\N
+1326	84	2	f	\N
+1327	83	2	f	\N
+1328	39	2	f	\N
+1329	84	2	f	\N
+1330	83	2	f	\N
+1331	83	2	f	\N
+1332	39	2	f	\N
+1333	84	2	f	\N
+1334	83	2	f	\N
+1335	83	2	f	\N
+1340	39	2	f	\N
+1344	39	2	f	\N
+1345	84	2	f	\N
+1346	83	2	f	\N
+1350	83	2	f	\N
+1352	39	2	f	\N
+1353	84	2	f	\N
+1354	83	2	f	\N
+1355	39	2	f	\N
+1356	84	2	f	\N
+1357	83	2	f	\N
+2231	78	2	f	\N
+2232	78	2	f	\N
+2233	78	2	f	\N
+1639	106	2	f	\N
+1640	87	2	f	\N
+1641	87	2	f	\N
+1642	89	2	f	\N
+1643	89	2	f	\N
+2047	119	2	f	\N
+1764	111	2	f	\N
+1766	111	2	f	\N
+1769	105	2	f	\N
+1771	111	2	f	\N
+1773	111	2	f	\N
+2285	135	2	f	\N
+2291	93	2	f	\N
+2292	12	2	f	\N
+2293	145	2	f	\N
+2048	65	2	f	\N
+2049	12	2	f	\N
+2050	87	2	f	\N
+2051	69	2	f	\N
+2052	130	2	f	\N
+1939	93	2	f	\N
+2054	2	2	f	\N
+1906	65	2	f	\N
+1990	106	2	f	\N
+1991	106	2	f	\N
+1992	106	2	f	\N
+2029	119	2	f	\N
+2442	117	2	f	\N
+2546	110	2	f	\N
+2573	69	2	f	\N
+921	73	2	\N	\N
+1648	84	2	f	\N
+2458	106	2	f	\N
+2556	151	2	f	\N
+2557	151	2	f	\N
+2568	145	2	f	\N
+1649	83	2	f	\N
+1650	87	2	f	\N
+2569	130	2	f	\N
+2570	69	2	f	\N
+922	73	2	\N	\N
+923	73	2	\N	\N
+924	73	2	\N	\N
+1651	89	2	f	\N
+1652	90	2	f	\N
+1653	69	2	f	\N
+925	73	2	\N	\N
+926	73	2	\N	\N
+1659	65	2	f	\N
+1882	106	2	f	\N
+1660	106	2	f	\N
+927	73	2	\N	\N
+2046	119	2	f	\N
+959	74	2	\N	\N
+960	74	2	\N	\N
+1714	110	2	f	\N
+985	75	2	\N	\N
+987	75	2	\N	\N
+1721	110	2	f	\N
+1884	12	2	f	\N
+1885	65	2	f	\N
+1888	117	2	f	\N
+1893	120	2	f	\N
+1894	12	2	f	\N
+1004	78	2	\N	\N
+1309	90	2	f	\N
+1310	41	2	f	\N
+1895	65	2	f	\N
+1311	41	2	f	\N
+1312	65	2	f	\N
+1313	12	2	f	\N
+1896	65	2	f	\N
+1314	102	2	f	\N
+1317	12	2	f	\N
+1320	83	2	f	\N
+1321	84	2	f	\N
+1322	83	2	f	\N
+1950	123	2	f	\N
+1951	90	2	f	\N
+1952	86	2	f	\N
+1907	65	2	f	\N
+1956	87	2	f	\N
+1958	93	2	f	\N
+1959	123	2	f	\N
+2104	135	2	f	\N
+1323	83	2	f	\N
+2105	135	2	f	\N
+2106	135	2	f	\N
+2107	12	2	f	\N
+2108	12	2	f	\N
+2111	83	2	f	\N
+2115	39	2	f	\N
+2119	90	2	f	\N
+2168	137	2	f	\N
+2171	93	2	f	\N
+2172	135	2	f	\N
+2173	137	2	f	\N
+1324	83	2	f	\N
+1358	83	2	f	\N
+1359	84	2	f	\N
+1360	83	2	f	\N
+2452	117	2	f	\N
+2457	106	2	f	\N
+1361	84	2	f	\N
+1365	39	2	f	\N
+1366	84	2	f	\N
+1367	83	2	f	\N
+1368	65	2	f	\N
+1371	87	2	f	\N
+1373	87	2	f	\N
+1374	90	2	f	\N
+1624	87	2	f	\N
+1625	89	2	f	\N
+1376	89	2	f	\N
+1626	69	2	f	\N
+1378	78	2	f	\N
+1627	69	2	f	\N
+1628	69	2	f	\N
+1379	87	2	f	\N
+1380	87	2	f	\N
+1383	69	2	f	\N
+2260	135	2	f	\N
+2261	142	2	f	\N
+2262	135	2	f	\N
+2263	142	2	f	\N
+2264	134	2	f	\N
+2265	135	2	f	\N
+1780	105	2	f	\N
+1797	12	2	f	\N
+1798	65	2	f	\N
+1799	12	2	f	\N
+1804	118	2	f	\N
+2	2	2	\N	\N
+2127	12	2	f	\N
+3	2	2	\N	\N
+10	12	2	\N	\N
+1010	79	2	\N	\N
+1080	65	2	\N	\N
+1081	12	2	\N	\N
+1099	39	2	\N	\N
+2309	69	2	f	\N
+2128	65	2	f	\N
+2129	138	2	f	\N
+2130	138	2	f	\N
+2132	118	2	f	\N
+2440	117	2	f	\N
+2201	104	2	f	\N
+2459	106	2	f	\N
+2463	111	2	f	\N
+2465	120	2	f	\N
+2563	69	2	f	\N
+2564	145	2	f	\N
+2565	130	2	f	\N
+2203	104	2	f	\N
+2205	110	2	f	\N
+2234	78	2	f	\N
+2566	69	2	f	\N
+2133	123	2	f	\N
+2567	145	2	f	\N
+2571	145	2	f	\N
+2135	12	2	f	\N
+2572	130	2	f	\N
+2710	119	2	f	\N
+2711	119	2	f	\N
+2712	119	2	f	\N
+2713	119	2	f	\N
+2816	93	2	f	\N
+2817	123	2	f	\N
+2836	119	2	f	\N
+2136	65	2	f	\N
+2320	12	2	f	\N
+2327	87	2	f	\N
+2328	69	2	f	\N
+2583	12	2	f	\N
+2329	145	2	f	\N
+2330	145	2	f	\N
+2331	146	2	f	\N
+2837	135	2	f	\N
+2332	146	2	f	\N
+2333	130	2	f	\N
+2838	144	2	f	\N
+2855	119	2	f	\N
+2861	117	2	f	\N
+2862	117	2	f	\N
+2334	104	2	f	\N
+2335	104	2	f	\N
+2336	104	2	f	\N
+2235	78	2	f	\N
+2236	78	2	f	\N
+2337	104	2	f	\N
+2338	87	2	f	\N
+2339	69	2	f	\N
+2340	69	2	f	\N
+2237	78	2	f	\N
+2238	78	2	f	\N
+2239	78	2	f	\N
+1774	111	2	f	\N
+1775	59	2	f	\N
+1777	65	2	f	\N
+1778	12	2	f	\N
+1800	118	2	f	\N
+2294	145	2	f	\N
+1801	118	2	f	\N
+2295	145	2	f	\N
+1802	118	2	f	\N
+2296	12	2	f	\N
+2297	145	2	f	\N
+2299	146	2	f	\N
+2300	145	2	f	\N
+2304	123	2	f	\N
+1910	106	2	f	\N
+1911	106	2	f	\N
+2075	93	2	f	\N
+2076	123	2	f	\N
+2077	12	2	f	\N
+2087	118	2	f	\N
+2088	130	2	f	\N
+2089	87	2	f	\N
+2090	69	2	f	\N
+2092	118	2	f	\N
+2095	87	2	f	\N
+2096	118	2	f	\N
+2097	118	2	f	\N
+2307	87	2	f	\N
+2120	101	2	f	\N
+2126	2	2	f	\N
+2341	135	2	f	\N
+2342	137	2	f	\N
+2343	135	2	f	\N
+2344	143	2	f	\N
+2030	119	2	f	\N
+2031	119	2	f	\N
+2308	87	2	f	\N
+2032	110	2	f	\N
+2038	119	2	f	\N
+2903	119	2	f	\N
+2514	65	2	f	\N
+2515	148	2	f	\N
+2516	12	2	f	\N
+2871	119	2	f	\N
+2517	149	2	f	\N
+2518	149	2	f	\N
+2519	47	2	f	\N
+2520	149	2	f	\N
+2521	149	2	f	\N
+2522	149	2	f	\N
+2873	87	2	f	\N
+2874	87	2	f	\N
+2875	69	2	f	\N
+2876	145	2	f	\N
+2877	130	2	f	\N
+2878	87	2	f	\N
+2887	12	2	f	\N
+2888	65	2	f	\N
+2889	65	2	f	\N
+1316	102	2	f	\N
+1336	39	2	f	\N
+1362	83	2	f	\N
+1363	84	2	f	\N
+1364	83	2	f	\N
+1372	69	2	f	\N
+2523	149	2	f	\N
+2524	149	2	f	\N
+1375	69	2	f	\N
+2525	149	2	f	\N
+1382	90	2	f	\N
+2526	149	2	f	\N
+1385	84	2	f	\N
+2527	149	2	f	\N
+1386	83	2	f	\N
+2528	149	2	f	\N
+2529	119	2	f	\N
+2536	110	2	f	\N
+2537	119	2	f	\N
+2538	119	2	f	\N
+2574	145	2	f	\N
+2575	130	2	f	\N
+1387	87	2	f	\N
+1388	90	2	f	\N
+1389	69	2	f	\N
+1390	69	2	f	\N
+1391	90	2	f	\N
+1416	39	2	f	\N
+2271	140	2	f	\N
+2272	78	2	f	\N
+2273	135	2	f	\N
+2286	137	2	f	\N
+2287	135	2	f	\N
+2288	142	2	f	\N
+2289	104	2	f	\N
+2290	104	2	f	\N
+1424	12	2	f	\N
+1425	65	2	f	\N
+1426	105	2	f	\N
+1431	105	2	f	\N
+1432	105	2	f	\N
+1433	12	2	f	\N
+1434	65	2	f	\N
+2576	69	2	f	\N
+2577	145	2	f	\N
+2578	145	2	f	\N
+2579	130	2	f	\N
+2580	69	2	f	\N
+2581	145	2	f	\N
+2582	130	2	f	\N
+2345	134	2	f	\N
+2366	87	2	f	\N
+2367	69	2	f	\N
+2368	145	2	f	\N
+2369	146	2	f	\N
+2370	118	2	f	\N
+2371	93	2	f	\N
+2372	130	2	f	\N
+2373	39	2	f	\N
+2648	65	2	f	\N
+2649	65	2	f	\N
+2650	65	2	f	\N
+2429	105	2	f	\N
+2430	105	2	f	\N
+2510	110	2	f	\N
+2511	86	2	f	\N
+2513	12	2	f	\N
+2544	148	2	f	\N
+907	71	2	\N	\N
+908	12	2	\N	\N
+909	12	2	\N	\N
+2131	93	2	f	\N
+2891	87	2	f	\N
+2892	69	2	f	\N
+2893	145	2	f	\N
+2894	130	2	f	\N
+2589	89	2	f	\N
+2590	90	2	f	\N
+2545	86	2	f	\N
+2547	119	2	f	\N
+2548	119	2	f	\N
+2591	69	2	f	\N
+2592	123	2	f	\N
+2593	69	2	f	\N
+2594	87	2	f	\N
+2595	69	2	f	\N
+2596	145	2	f	\N
+2376	69	2	f	\N
+2377	135	2	f	\N
+2549	12	2	f	\N
+2378	137	2	f	\N
+2550	87	2	f	\N
+2379	135	2	f	\N
+2551	12	2	f	\N
+2552	65	2	f	\N
+2553	65	2	f	\N
+2554	65	2	f	\N
+2725	119	2	f	\N
+2726	110	2	f	\N
+2727	119	2	f	\N
+2728	119	2	f	\N
+2730	93	2	f	\N
+2731	123	2	f	\N
+2732	148	2	f	\N
+2818	93	2	f	\N
+2819	123	2	f	\N
+2380	143	2	f	\N
+2381	93	2	f	\N
+2382	134	2	f	\N
+2383	104	2	f	\N
+2384	104	2	f	\N
+2385	104	2	f	\N
+2389	105	2	f	\N
+2390	105	2	f	\N
+2391	105	2	f	\N
+2396	105	2	f	\N
+2397	105	2	f	\N
+2398	105	2	f	\N
+2415	105	2	f	\N
+2416	105	2	f	\N
+2670	146	2	f	\N
+2677	89	2	f	\N
+2678	69	2	f	\N
+2679	69	2	f	\N
+2680	89	2	f	\N
+2681	89	2	f	\N
+2424	105	2	f	\N
+2425	105	2	f	\N
+2426	105	2	f	\N
+2682	149	2	f	\N
+2683	89	2	f	\N
+2427	105	2	f	\N
+2428	105	2	f	\N
+2684	149	2	f	\N
+2685	89	2	f	\N
+2686	135	2	f	\N
+2431	105	2	f	\N
+2687	137	2	f	\N
+2690	134	2	f	\N
+2693	110	2	f	\N
+2694	110	2	f	\N
+2695	86	2	f	\N
+2530	119	2	f	\N
+2531	119	2	f	\N
+2532	119	2	f	\N
+2533	119	2	f	\N
+2534	119	2	f	\N
+2535	119	2	f	\N
+2539	110	2	f	\N
+2540	86	2	f	\N
+2541	119	2	f	\N
+2542	148	2	f	\N
+2543	148	2	f	\N
+2820	118	2	f	\N
+2821	87	2	f	\N
+2822	69	2	f	\N
+2823	145	2	f	\N
+1546	106	2	f	\N
+2824	130	2	f	\N
+1547	106	2	f	\N
+1548	12	2	f	\N
+1549	12	2	f	\N
+2825	146	2	f	\N
+2826	118	2	f	\N
+2827	135	2	f	\N
+2828	137	2	f	\N
+2841	104	2	f	\N
+2865	78	2	f	\N
+2866	117	2	f	\N
+2867	111	2	f	\N
+1550	65	2	f	\N
+1551	87	2	f	\N
+1552	87	2	f	\N
+2597	145	2	f	\N
+2636	65	2	f	\N
+2637	65	2	f	\N
+2638	65	2	f	\N
+2392	105	2	f	\N
+2393	105	2	f	\N
+2394	105	2	f	\N
+2395	105	2	f	\N
+2642	65	2	f	\N
+274	12	2	\N	\N
+292	41	2	\N	\N
+306	41	2	\N	\N
+706	12	2	\N	\N
+723	12	2	\N	\N
+725	55	2	\N	\N
+726	55	2	\N	\N
+728	55	2	\N	\N
+734	55	2	\N	\N
+743	55	2	\N	\N
+763	55	2	\N	\N
+764	12	2	\N	\N
+769	12	2	\N	\N
+2643	65	2	f	\N
+2646	65	2	f	\N
+2647	65	2	f	\N
+2651	65	2	f	\N
+2652	65	2	f	\N
+2653	65	2	f	\N
+771	55	2	\N	\N
+772	59	2	\N	\N
+837	65	2	\N	\N
+2895	39	2	f	\N
+1067	78	2	\N	\N
+1068	12	2	\N	\N
+1165	39	2	\N	\N
+2654	65	2	f	\N
+2655	65	2	f	\N
+2896	84	2	f	\N
+1185	39	2	\N	\N
+1195	87	2	\N	\N
+1198	12	2	\N	\N
+1261	89	2	f	\N
+1807	90	2	f	\N
+1833	118	2	f	\N
+1435	12	2	f	\N
+1436	65	2	f	\N
+1438	107	2	f	\N
+1439	107	2	f	\N
+1511	101	2	f	\N
+1512	101	2	f	\N
+1513	101	2	f	\N
+1521	12	2	f	\N
+1535	110	2	f	\N
+1536	110	2	f	\N
+1537	110	2	f	\N
+1538	110	2	f	\N
+1539	110	2	f	\N
+1540	110	2	f	\N
+1541	110	2	f	\N
+2897	83	2	f	\N
+2417	105	2	f	\N
+1543	87	2	f	\N
+1544	87	2	f	\N
+1545	87	2	f	\N
+2659	87	2	f	\N
+2661	145	2	f	\N
+2662	130	2	f	\N
+2663	118	2	f	\N
+2418	105	2	f	\N
+2419	105	2	f	\N
+2420	105	2	f	\N
+2421	105	2	f	\N
+2422	105	2	f	\N
+2423	105	2	f	\N
+2698	110	2	f	\N
+2699	86	2	f	\N
+2700	119	2	f	\N
+2701	119	2	f	\N
+2879	69	2	f	\N
+773	12	2	\N	\N
+887	69	2	\N	\N
+2183	137	2	f	\N
+2660	69	2	f	\N
+2664	149	2	f	\N
+2665	149	2	f	\N
+2666	87	2	f	\N
+2667	69	2	f	\N
+2898	69	2	f	\N
+2668	145	2	f	\N
+2899	135	2	f	\N
+894	2	2	\N	\N
+896	39	2	\N	\N
+1011	12	2	\N	\N
+2669	130	2	f	\N
+2671	93	2	f	\N
+2672	123	2	f	\N
+2673	39	2	f	\N
+2839	119	2	f	\N
+2840	119	2	f	\N
+1278	39	2	f	\N
+1283	71	2	f	\N
+1284	69	2	f	\N
+1285	87	2	f	\N
+1286	89	2	f	\N
+1287	84	2	f	\N
+1288	90	2	f	\N
+1289	84	2	f	\N
+1290	39	2	f	\N
+1291	84	2	f	\N
+1292	83	2	f	\N
+1293	69	2	f	\N
+1294	69	2	f	\N
+1304	87	2	f	\N
+1306	90	2	f	\N
+1849	12	2	f	\N
+1447	106	2	f	\N
+1448	106	2	f	\N
+1450	12	2	f	\N
+1452	12	2	f	\N
+1464	87	2	f	\N
+1465	69	2	f	\N
+1467	89	2	f	\N
+1472	69	2	f	\N
+1473	69	2	f	\N
+1485	106	2	f	\N
+1500	106	2	f	\N
+1504	104	2	f	\N
+1505	104	2	f	\N
+1506	104	2	f	\N
+1507	107	2	f	\N
+1509	106	2	f	\N
+1514	101	2	f	\N
+1515	101	2	f	\N
+1516	87	2	f	\N
+1517	87	2	f	\N
+1518	87	2	f	\N
+1519	87	2	f	\N
+1553	79	2	f	\N
+2584	93	2	f	\N
+2585	87	2	f	\N
+2586	87	2	f	\N
+2587	87	2	f	\N
+2588	89	2	f	\N
+2633	65	2	f	\N
+2634	65	2	f	\N
+2635	65	2	f	\N
+2174	135	2	f	\N
+2175	137	2	f	\N
+2176	135	2	f	\N
+2177	137	2	f	\N
+2178	135	2	f	\N
+2179	137	2	f	\N
+2180	135	2	f	\N
+2181	137	2	f	\N
+2182	135	2	f	\N
+897	39	2	\N	\N
+898	39	2	\N	\N
+899	39	2	\N	\N
+900	65	2	\N	\N
+2435	146	2	f	\N
+901	12	2	\N	\N
+902	65	2	\N	\N
+903	71	2	\N	\N
+2451	106	2	f	\N
+2486	101	2	f	\N
+2489	86	2	f	\N
+2490	86	2	f	\N
+2491	86	2	f	\N
+2493	87	2	f	\N
+2501	110	2	f	\N
+2502	110	2	f	\N
+2503	119	2	f	\N
+2505	110	2	f	\N
+2506	86	2	f	\N
+2507	110	2	f	\N
+2508	110	2	f	\N
+2737	106	2	f	\N
+2738	117	2	f	\N
+2739	69	2	f	\N
+2740	12	2	f	\N
+2832	119	2	f	\N
+2863	111	2	f	\N
+2864	140	2	f	\N
+2274	143	2	f	\N
+2275	134	2	f	\N
+2276	12	2	f	\N
+2277	105	2	f	\N
+2278	135	2	f	\N
+2279	144	2	f	\N
+2280	134	2	f	\N
+2281	104	2	f	\N
+2282	135	2	f	\N
+2284	134	2	f	\N
+1962	93	2	f	\N
+1963	123	2	f	\N
+1964	93	2	f	\N
+1965	123	2	f	\N
+1966	12	2	f	\N
+2098	118	2	f	\N
+2099	12	2	f	\N
+2100	12	2	f	\N
+1978	2	2	f	\N
+2101	65	2	f	\N
+1979	118	2	f	\N
+1985	93	2	f	\N
+1986	123	2	f	\N
+1988	119	2	f	\N
+1989	12	2	f	\N
+2602	65	2	f	\N
+2603	65	2	f	\N
+2604	65	2	f	\N
+2605	65	2	f	\N
+2608	65	2	f	\N
+2612	65	2	f	\N
+2613	65	2	f	\N
+2617	65	2	f	\N
+2039	119	2	f	\N
+2044	119	2	f	\N
+2156	135	2	f	\N
+2157	137	2	f	\N
+2158	135	2	f	\N
+2159	137	2	f	\N
+2160	135	2	f	\N
+2161	137	2	f	\N
+2162	135	2	f	\N
+2163	137	2	f	\N
+2164	135	2	f	\N
+2165	137	2	f	\N
+2167	135	2	f	\N
+2045	119	2	f	\N
+2399	105	2	f	\N
+2400	105	2	f	\N
+2401	105	2	f	\N
+2402	105	2	f	\N
+2403	105	2	f	\N
+2704	119	2	f	\N
+2705	119	2	f	\N
+2706	119	2	f	\N
+2707	119	2	f	\N
+2708	119	2	f	\N
+2709	119	2	f	\N
+2434	130	2	f	\N
+775	12	2	\N	\N
+778	65	2	\N	\N
+779	65	2	\N	\N
+780	65	2	\N	\N
+784	47	2	\N	\N
+788	12	2	\N	\N
+789	67	2	\N	\N
+790	65	2	\N	\N
+791	65	2	\N	\N
+792	65	2	\N	\N
+794	55	2	\N	\N
+800	55	2	\N	\N
+801	55	2	\N	\N
+802	65	2	\N	\N
+1468	84	2	f	\N
+1469	90	2	f	\N
+1470	83	2	f	\N
+1471	69	2	f	\N
+1913	117	2	f	\N
+1510	101	2	f	\N
+1968	12	2	f	\N
+1970	126	2	f	\N
+1971	93	2	f	\N
+1972	123	2	f	\N
+1973	123	2	f	\N
+1975	65	2	f	\N
+1977	12	2	f	\N
+1554	101	2	f	\N
+1556	101	2	f	\N
+1559	87	2	f	\N
+1560	79	2	f	\N
+2137	139	2	f	\N
+2138	139	2	f	\N
+2139	139	2	f	\N
+2144	135	2	f	\N
+2145	137	2	f	\N
+2146	135	2	f	\N
+2147	137	2	f	\N
+838	65	2	\N	\N
+849	41	2	\N	\N
+851	41	2	\N	\N
+852	41	2	\N	\N
+853	41	2	\N	\N
+854	2	2	\N	\N
+855	2	2	\N	\N
+856	2	2	\N	\N
+864	65	2	\N	\N
+865	12	2	\N	\N
+866	65	2	\N	\N
+1307	90	2	f	\N
+1308	90	2	f	\N
+1337	84	2	f	\N
+1338	83	2	f	\N
+1347	39	2	f	\N
+1348	84	2	f	\N
+1349	83	2	f	\N
+1393	12	2	f	\N
+1394	65	2	f	\N
+1395	65	2	f	\N
+1396	104	2	f	\N
+1398	104	2	f	\N
+1400	104	2	f	\N
+1401	104	2	f	\N
+1402	104	2	f	\N
+1403	104	2	f	\N
+1404	87	2	f	\N
+1406	89	2	f	\N
+1407	90	2	f	\N
+1408	69	2	f	\N
+1409	69	2	f	\N
+1410	69	2	f	\N
+1411	69	2	f	\N
+2148	135	2	f	\N
+2149	137	2	f	\N
+2150	135	2	f	\N
+2187	135	2	f	\N
+2188	137	2	f	\N
+2189	135	2	f	\N
+2190	137	2	f	\N
+2674	84	2	f	\N
+2675	83	2	f	\N
+2676	87	2	f	\N
+1413	102	2	f	\N
+1414	90	2	f	\N
+1415	91	2	f	\N
+1417	84	2	f	\N
+1418	90	2	f	\N
+1419	91	2	f	\N
+1420	101	2	f	\N
+2152	135	2	f	\N
+2153	137	2	f	\N
+2154	135	2	f	\N
+2155	137	2	f	\N
+2184	135	2	f	\N
+2185	137	2	f	\N
+2186	134	2	f	\N
+2688	135	2	f	\N
+2880	87	2	f	\N
+904	71	2	\N	\N
+905	71	2	\N	\N
+906	71	2	\N	\N
+910	65	2	\N	\N
+911	65	2	\N	\N
+912	72	2	\N	\N
+1318	102	2	f	\N
+1319	84	2	f	\N
+2206	110	2	f	\N
+2207	110	2	f	\N
+1607	106	2	f	\N
+1608	105	2	f	\N
+1341	84	2	f	\N
+1609	105	2	f	\N
+2433	145	2	f	\N
+2689	143	2	f	\N
+2558	12	2	f	\N
+2559	151	2	f	\N
+1342	83	2	f	\N
+1610	87	2	f	\N
+1611	87	2	f	\N
+1612	89	2	f	\N
+1613	89	2	f	\N
+1614	90	2	f	\N
+2560	69	2	f	\N
+2561	145	2	f	\N
+2562	130	2	f	\N
+2733	148	2	f	\N
+1615	69	2	f	\N
+2208	110	2	f	\N
+2209	110	2	f	\N
+2210	86	2	f	\N
+2211	110	2	f	\N
+2212	110	2	f	\N
+2213	86	2	f	\N
+2734	119	2	f	\N
+2735	119	2	f	\N
+2843	119	2	f	\N
+1370	90	2	f	\N
+1384	39	2	f	\N
+2283	137	2	f	\N
+1803	118	2	f	\N
+2301	146	2	f	\N
+2302	118	2	f	\N
+2303	93	2	f	\N
+1852	119	2	f	\N
+1898	105	2	f	\N
+1900	120	2	f	\N
+1901	120	2	f	\N
+1902	117	2	f	\N
+1903	111	2	f	\N
+1904	65	2	f	\N
+1905	65	2	f	\N
+1561	87	2	f	\N
+1562	87	2	f	\N
+1563	79	2	f	\N
+1564	101	2	f	\N
+2844	119	2	f	\N
+1569	101	2	f	\N
+1570	101	2	f	\N
+1571	65	2	f	\N
+1575	65	2	f	\N
+1576	86	2	f	\N
+2845	119	2	f	\N
+2846	119	2	f	\N
+2847	119	2	f	\N
+2848	119	2	f	\N
+2849	119	2	f	\N
+2850	119	2	f	\N
+2851	119	2	f	\N
+2852	110	2	f	\N
+2853	86	2	f	\N
+2854	119	2	f	\N
+1577	87	2	f	\N
+1578	79	2	f	\N
+1579	110	2	f	\N
+1580	78	2	f	\N
+1581	87	2	f	\N
+1582	89	2	f	\N
+2598	145	2	f	\N
+2599	130	2	f	\N
+2868	93	2	f	\N
+2869	93	2	f	\N
+2870	119	2	f	\N
+2151	137	2	f	\N
+988	75	2	\N	\N
+1003	12	2	\N	\N
+1078	12	2	\N	\N
+1088	12	2	\N	\N
+1089	65	2	\N	\N
+1090	39	2	\N	\N
+1091	84	2	\N	\N
+1093	84	2	\N	\N
+1095	70	2	\N	\N
+1096	39	2	\N	\N
+1199	89	2	\N	\N
+1204	87	2	\N	\N
+1205	89	2	\N	\N
+1206	89	2	\N	\N
+1252	59	2	f	\N
+1257	87	2	f	\N
+1258	87	2	f	\N
+1644	90	2	f	\N
+1645	69	2	f	\N
+1918	119	2	f	\N
+1919	12	2	f	\N
+1922	93	2	f	\N
+1924	118	2	f	\N
+1925	89	2	f	\N
+1926	90	2	f	\N
+1927	87	2	f	\N
+1930	93	2	f	\N
+1931	118	2	f	\N
+1933	93	2	f	\N
+1934	93	2	f	\N
+1935	93	2	f	\N
+1936	93	2	f	\N
+1940	93	2	f	\N
+1941	12	2	f	\N
+1945	123	2	f	\N
+1946	123	2	f	\N
+1947	123	2	f	\N
+1948	123	2	f	\N
+1954	12	2	f	\N
+1584	89	2	f	\N
+1585	90	2	f	\N
+1586	69	2	f	\N
+1587	39	2	f	\N
+1588	84	2	f	\N
+1589	84	2	f	\N
+1590	83	2	f	\N
+1591	87	2	f	\N
+1592	89	2	f	\N
+1593	69	2	f	\N
+1597	104	2	f	\N
+2631	65	2	f	\N
+2632	65	2	f	\N
+2702	119	2	f	\N
+2703	119	2	f	\N
+2829	93	2	f	\N
+2830	69	2	f	\N
+2831	134	2	f	\N
+2833	110	2	f	\N
+2834	86	2	f	\N
+2835	104	2	f	\N
+2859	148	2	f	\N
+2860	106	2	f	\N
+885	47	2	\N	\N
+895	39	2	\N	\N
+940	73	2	\N	\N
+941	73	2	\N	\N
+942	73	2	\N	\N
+1259	87	2	f	\N
+1260	87	2	f	\N
+2200	104	2	f	\N
+2214	110	2	f	\N
+2215	86	2	f	\N
+2216	78	2	f	\N
+2217	12	2	f	\N
+2218	140	2	f	\N
+2219	65	2	f	\N
+2221	140	2	f	\N
+2222	65	2	f	\N
+2223	78	2	f	\N
+2224	78	2	f	\N
+2225	78	2	f	\N
+2226	78	2	f	\N
+2227	78	2	f	\N
+2228	78	2	f	\N
+2229	78	2	f	\N
+2230	78	2	f	\N
+1908	65	2	f	\N
+2055	12	2	f	\N
+2062	93	2	f	\N
+2063	93	2	f	\N
+2064	123	2	f	\N
+2065	118	2	f	\N
+2066	93	2	f	\N
+2067	123	2	f	\N
+2068	93	2	f	\N
+2069	123	2	f	\N
+2070	12	2	f	\N
+2305	145	2	f	\N
+2306	146	2	f	\N
+1993	106	2	f	\N
+2310	145	2	f	\N
+1994	106	2	f	\N
+2311	93	2	f	\N
+1995	106	2	f	\N
+1996	106	2	f	\N
+2312	130	2	f	\N
+1997	106	2	f	\N
+2313	145	2	f	\N
+2314	69	2	f	\N
+2315	135	2	f	\N
+2001	106	2	f	\N
+2316	137	2	f	\N
+2002	106	2	f	\N
+2317	134	2	f	\N
+2319	104	2	f	\N
+2006	106	2	f	\N
+2007	106	2	f	\N
+2009	93	2	f	\N
+2010	123	2	f	\N
+2011	110	2	f	\N
+2012	118	2	f	\N
+2013	87	2	f	\N
+2014	89	2	f	\N
+2015	90	2	f	\N
+2016	93	2	f	\N
+2017	69	2	f	\N
+2018	87	2	f	\N
+2019	89	2	f	\N
+2020	69	2	f	\N
+2023	104	2	f	\N
+2024	104	2	f	\N
+2027	106	2	f	\N
+2028	106	2	f	\N
+2436	93	2	f	\N
+2437	146	2	f	\N
+2438	117	2	f	\N
+1880	106	2	f	\N
+1881	106	2	f	\N
+2374	84	2	f	\N
+2375	83	2	f	\N
+2413	105	2	f	\N
+871	69	2	\N	\N
+872	12	2	\N	\N
+873	65	2	\N	\N
+874	65	2	\N	\N
+876	41	2	\N	\N
+878	70	2	\N	\N
+2857	119	2	f	\N
+879	65	2	\N	\N
+1079	65	2	\N	\N
+1097	84	2	\N	\N
+1101	39	2	\N	\N
+1102	84	2	\N	\N
+1159	78	2	\N	\N
+1170	39	2	\N	\N
+1179	39	2	\N	\N
+1189	12	2	\N	\N
+1190	12	2	\N	\N
+1191	86	2	\N	\N
+1192	86	2	\N	\N
+1193	87	2	\N	\N
+1194	87	2	\N	\N
+1200	89	2	\N	\N
+1201	87	2	\N	\N
+1210	90	2	\N	\N
+1211	12	2	\N	\N
+1212	65	2	\N	\N
+1213	90	2	\N	\N
+1214	91	2	\N	\N
+1225	12	2	\N	\N
+1230	93	2	\N	\N
+1243	87	2	f	\N
+1244	87	2	f	\N
+1253	65	2	f	\N
+1263	87	2	f	\N
+1264	87	2	f	\N
+1265	89	2	f	\N
+1268	12	2	f	\N
+2197	93	2	f	\N
+2198	123	2	f	\N
+2199	105	2	f	\N
+2240	78	2	f	\N
+2241	78	2	f	\N
+2242	78	2	f	\N
+2243	12	2	f	\N
+2244	12	2	f	\N
+2245	65	2	f	\N
+2246	105	2	f	\N
+2247	102	2	f	\N
+2248	141	2	f	\N
+2249	141	2	f	\N
+2254	135	2	f	\N
+2255	142	2	f	\N
+2256	135	2	f	\N
+2257	142	2	f	\N
+2258	135	2	f	\N
+2259	142	2	f	\N
+1853	119	2	f	\N
+1854	119	2	f	\N
+1855	119	2	f	\N
+1859	119	2	f	\N
+1860	119	2	f	\N
+1865	117	2	f	\N
+1866	117	2	f	\N
+1867	117	2	f	\N
+1868	117	2	f	\N
+1869	69	2	f	\N
+1870	78	2	f	\N
+1872	118	2	f	\N
+1873	105	2	f	\N
+1875	106	2	f	\N
+1876	106	2	f	\N
+863	65	2	\N	\N
+870	69	2	\N	\N
+875	70	2	\N	\N
+1207	12	2	\N	\N
+1209	90	2	\N	\N
+1218	39	2	\N	\N
+1221	12	2	\N	\N
+1227	93	2	\N	\N
+1240	41	2	f	\N
+1241	39	2	f	\N
+1282	87	2	f	\N
+1980	93	2	f	\N
+1981	118	2	f	\N
+1982	93	2	f	\N
+1983	93	2	f	\N
+1984	123	2	f	\N
+2404	105	2	f	\N
+2405	105	2	f	\N
+2406	105	2	f	\N
+2407	105	2	f	\N
+2408	105	2	f	\N
+2409	105	2	f	\N
+2410	105	2	f	\N
+2411	105	2	f	\N
+2412	105	2	f	\N
+2414	105	2	f	\N
+2432	105	2	f	\N
+2719	119	2	f	\N
+2720	119	2	f	\N
+2721	119	2	f	\N
+2722	119	2	f	\N
+2723	104	2	f	\N
+2724	119	2	f	\N
+2736	119	2	f	\N
+2741	65	2	f	\N
+2742	12	2	f	\N
+2779	123	2	f	\N
+2780	123	2	f	\N
+2781	123	2	f	\N
+2782	123	2	f	\N
+2783	123	2	f	\N
+2466	117	2	f	\N
+2467	111	2	f	\N
+2468	119	2	f	\N
+2469	119	2	f	\N
+2470	119	2	f	\N
+2475	90	2	f	\N
+2900	137	2	f	\N
+2484	2	2	f	\N
+2901	93	2	f	\N
+2902	134	2	f	\N
+2904	71	2	f	\N
+2905	69	2	f	\N
+2906	145	2	f	\N
+2907	145	2	f	\N
+2908	140	2	f	\N
+2909	78	2	f	\N
+2910	146	2	f	\N
+2911	78	2	f	\N
+2912	146	2	f	\N
+2913	118	2	f	\N
+2914	93	2	f	\N
+2915	145	2	f	\N
+2916	130	2	f	\N
+2917	70	2	f	\N
+2918	39	2	f	\N
+2919	84	2	f	\N
+2920	39	2	f	\N
+2921	84	2	f	\N
+2922	139	2	f	\N
+2923	138	2	f	\N
+2924	72	2	f	\N
+2925	83	2	f	\N
+2926	75	2	f	\N
+2927	73	2	f	\N
+2928	74	2	f	\N
+2929	39	2	f	\N
+2930	84	2	f	\N
+2931	87	2	f	\N
+2932	69	2	f	\N
+2933	135	2	f	\N
+2934	137	2	f	\N
+2942	87	2	f	\N
+2944	87	2	f	\N
+2935	70	2	f	\N
+2936	135	2	f	\N
+2937	143	2	f	\N
+2939	87	2	f	\N
+2940	87	2	f	\N
+2941	87	2	f	\N
+2943	87	2	f	\N
+2938	134	2	f	\N
 \.
 
 
@@ -57856,2102 +53614,6 @@ COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2944, true);
-
-
---
--- Data for Name: resource_log; Type: TABLE DATA; Schema: demo_ru; Owner: -
---
-
-COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
-142	83	2	\N	2013-12-07 16:38:38.11618+02
-143	84	2	\N	2013-12-07 16:39:56.788641+02
-144	3	2	\N	2013-12-07 16:41:27.65259+02
-145	2	2	\N	2013-12-07 16:41:31.748494+02
-146	83	2	\N	2013-12-07 16:58:05.802634+02
-147	83	2	\N	2013-12-07 17:00:14.544264+02
-4836	794	2	\N	2014-02-05 19:54:07.5415+02
-5406	1192	2	\N	2014-04-06 19:21:11.278173+03
-5407	1005	2	\N	2014-04-06 19:21:55.315341+03
-4845	283	2	\N	2014-02-06 11:38:41.090464+02
-2	10	2	\N	2013-11-16 19:00:14.24272+02
-4	12	2	\N	2013-11-16 19:00:15.497284+02
-6	14	2	\N	2013-11-16 19:00:16.696731+02
-8	16	2	\N	2013-11-16 19:00:17.960761+02
-5427	1204	2	\N	2014-04-09 18:54:09.146902+03
-12	30	2	\N	2013-11-23 19:26:00.193553+02
-13	30	2	\N	2013-11-23 22:02:37.363677+02
-14	10	2	\N	2013-11-23 22:11:01.634598+02
-15	30	2	\N	2013-11-23 22:11:14.939938+02
-16	30	2	\N	2013-11-23 22:11:38.396085+02
-19	30	2	\N	2013-11-24 10:30:59.830287+02
-20	30	2	\N	2013-11-24 10:31:22.936737+02
-21	30	2	\N	2013-11-24 10:38:08.07328+02
-22	30	2	\N	2013-11-24 10:38:10.703187+02
-23	30	2	\N	2013-11-24 10:38:11.896934+02
-24	30	2	\N	2013-11-24 10:42:19.397852+02
-25	30	2	\N	2013-11-24 10:42:50.772172+02
-26	30	2	\N	2013-11-24 10:45:56.399572+02
-27	30	2	\N	2013-11-24 10:48:29.950669+02
-28	30	2	\N	2013-11-24 10:49:23.616693+02
-29	30	2	\N	2013-11-24 10:50:05.878643+02
-30	30	2	\N	2013-11-24 10:51:02.465585+02
-31	30	2	\N	2013-11-24 10:54:21.011765+02
-32	30	2	\N	2013-11-24 10:54:28.775552+02
-33	30	2	\N	2013-11-24 10:58:34.152869+02
-34	30	2	\N	2013-11-24 10:58:36.766104+02
-35	30	2	\N	2013-11-24 10:58:38.767749+02
-36	30	2	\N	2013-11-24 10:58:42.533162+02
-37	30	2	\N	2013-11-24 10:58:43.55758+02
-38	30	2	\N	2013-11-24 10:58:47.40587+02
-39	30	2	\N	2013-11-24 11:00:56.130675+02
-40	30	2	\N	2013-11-24 11:01:17.637578+02
-41	30	2	\N	2013-11-24 11:01:20.639413+02
-42	30	2	\N	2013-11-24 11:01:25.957588+02
-43	30	2	\N	2013-11-24 11:01:28.015301+02
-44	30	2	\N	2013-11-24 11:01:49.505153+02
-45	30	2	\N	2013-11-24 11:01:54.465064+02
-46	30	2	\N	2013-11-24 11:01:56.828797+02
-47	30	2	\N	2013-11-24 11:02:00.873006+02
-48	30	2	\N	2013-11-24 11:02:06.385907+02
-49	30	2	\N	2013-11-24 11:02:08.474309+02
-50	30	2	\N	2013-11-24 11:02:11.823259+02
-51	30	2	\N	2013-11-24 11:02:15.084044+02
-52	30	2	\N	2013-11-24 11:23:59.150304+02
-53	30	2	\N	2013-11-24 12:41:22.004561+02
-54	30	2	\N	2013-11-24 12:41:27.704243+02
-55	30	2	\N	2013-11-24 12:41:32.588516+02
-5430	1207	2	\N	2014-04-09 20:43:13.852066+03
-5459	1227	2	\N	2014-04-19 13:04:24.512333+03
-5467	1230	2	\N	2014-04-23 11:53:28.979784+03
-5468	1230	2	\N	2014-04-23 11:53:45.572462+03
-5537	1306	2	\N	2014-04-30 11:04:50.581045+03
-66	16	2	\N	2013-11-30 12:57:27.26941+02
-67	31	2	\N	2013-11-30 14:25:42.040654+02
-68	32	2	\N	2013-11-30 14:27:55.708736+02
-69	33	2	\N	2013-11-30 14:28:30.596329+02
-70	34	2	\N	2013-11-30 14:29:07.205192+02
-71	35	2	\N	2013-11-30 14:30:10.653134+02
-72	36	2	\N	2013-11-30 14:31:39.751221+02
-73	37	2	\N	2013-11-30 14:32:36.035677+02
-74	38	2	\N	2013-11-30 14:55:27.691288+02
-75	39	2	\N	2013-11-30 14:58:07.249714+02
-76	40	2	\N	2013-11-30 14:58:34.364695+02
-79	43	2	\N	2013-11-30 15:08:29.574538+02
-80	43	2	\N	2013-11-30 15:08:52.114395+02
-81	43	2	\N	2013-11-30 15:09:21.51485+02
-82	44	2	\N	2013-11-30 15:09:54.961188+02
-83	45	2	\N	2013-12-01 13:04:27.697583+02
-84	45	2	\N	2013-12-01 13:04:40.716328+02
-85	14	2	\N	2013-12-01 14:31:19.374571+02
-87	12	2	\N	2013-12-01 18:21:35.266219+02
-104	10	2	\N	2013-12-02 20:43:38.334769+02
-130	10	2	\N	2013-12-06 21:10:25.807719+02
-4796	769	2	\N	2014-01-22 22:21:45.451623+02
-4820	16	2	\N	2014-02-01 21:09:43.821944+02
-5408	1192	2	\N	2014-04-06 19:22:16.361504+03
-5409	1005	2	\N	2014-04-06 19:22:18.74271+03
-4822	784	2	\N	2014-02-01 21:23:07.460721+02
-5410	1193	2	\N	2014-04-06 19:30:25.125445+03
-5411	1194	2	\N	2014-04-06 19:30:51.85642+03
-5412	1195	2	\N	2014-04-06 19:32:30.207073+03
-5428	1205	2	\N	2014-04-09 19:17:37.483997+03
-5431	1209	2	\N	2014-04-09 20:49:45.884539+03
-4843	800	2	\N	2014-02-05 19:58:31.619612+02
-4844	801	2	\N	2014-02-05 19:58:49.632624+02
-4951	885	2	\N	2014-02-14 21:23:40.101298+02
-4952	885	2	\N	2014-02-14 21:25:13.866935+02
-4974	849	2	\N	2014-02-23 22:41:46.113064+02
-5143	1003	2	\N	2014-03-04 21:05:09.565466+02
-5144	1004	2	\N	2014-03-04 21:08:53.227171+02
-5145	1005	2	\N	2014-03-04 21:09:15.542733+02
-5471	1240	2	\N	2014-04-26 13:10:19.27836+03
-5538	1307	2	\N	2014-04-30 11:08:33.655971+03
-5544	1313	2	\N	2014-05-16 22:03:29.897662+03
-361	274	2	\N	2013-12-14 17:16:08.962259+02
-365	277	2	\N	2013-12-14 18:56:05.189747+02
-366	278	2	\N	2013-12-14 18:56:17.77025+02
-367	279	2	\N	2013-12-14 18:56:45.919492+02
-368	280	2	\N	2013-12-14 19:10:07.617582+02
-369	281	2	\N	2013-12-14 19:10:25.311427+02
-370	281	2	\N	2013-12-14 19:10:59.35028+02
-371	281	2	\N	2013-12-14 19:12:14.211139+02
-372	282	2	\N	2013-12-14 19:14:22.861495+02
-373	278	2	\N	2013-12-14 19:14:33.853691+02
-374	282	2	\N	2013-12-14 19:14:41.964012+02
-375	283	2	\N	2013-12-14 19:16:35.738242+02
-4882	706	2	\N	2014-02-08 19:59:59.160282+02
-377	283	2	\N	2013-12-14 19:18:21.622933+02
-5147	1004	2	\N	2014-03-04 21:17:22.306545+02
-5148	1004	2	\N	2014-03-04 21:23:04.343461+02
-386	286	2	\N	2013-12-14 20:46:34.653533+02
-387	287	2	\N	2013-12-14 20:46:47.37835+02
-388	288	2	\N	2013-12-14 20:47:08.024243+02
-389	289	2	\N	2013-12-14 20:47:28.256516+02
-390	290	2	\N	2013-12-14 20:52:40.953492+02
-391	291	2	\N	2013-12-14 20:53:08.057165+02
-392	292	2	\N	2013-12-14 20:53:33.598708+02
-5149	1004	2	\N	2014-03-04 21:23:17.093243+02
-5150	1004	2	\N	2014-03-04 21:23:25.611509+02
-4799	771	2	\N	2014-01-25 16:05:28.799345+02
-4800	771	2	\N	2014-01-25 16:05:38.705799+02
-4801	772	2	\N	2014-01-25 16:06:28.321244+02
-4826	788	2	\N	2014-02-01 22:03:21.899916+02
-5151	1004	2	\N	2014-03-04 21:23:52.466966+02
-5152	1004	2	\N	2014-03-04 21:24:11.351815+02
-5153	1004	2	\N	2014-03-04 21:24:20.614224+02
-5429	1206	2	\N	2014-04-09 19:21:09.215561+03
-5154	1004	2	\N	2014-03-04 21:35:47.600889+02
-5155	1004	2	\N	2014-03-04 21:36:05.835492+02
-5156	1004	2	\N	2014-03-04 21:36:16.322673+02
-5432	1210	2	\N	2014-04-12 13:10:08.842351+03
-5472	1241	2	\N	2014-04-26 19:16:28.009797+03
-5539	1308	2	\N	2014-04-30 11:20:34.938154+03
-5545	1314	2	\N	2014-05-17 13:42:16.369317+03
-422	306	2	\N	2013-12-15 21:45:32.990838+02
-4802	773	2	\N	2014-01-25 23:45:37.762081+02
-4827	789	2	\N	2014-02-02 16:45:11.830435+02
-4954	887	2	\N	2014-02-15 12:32:09.199652+02
-5415	1198	2	\N	2014-04-08 09:35:59.21042+03
-4979	885	2	\N	2014-02-24 12:50:26.694026+02
-4981	784	2	\N	2014-02-24 12:50:33.322359+02
-5157	1004	2	\N	2014-03-07 22:30:15.652582+02
-5230	894	2	\N	2014-03-16 11:54:19.683752+02
-5231	894	2	\N	2014-03-16 11:54:28.171778+02
-5232	894	2	\N	2014-03-16 11:54:33.774318+02
-5270	1004	2	\N	2014-03-17 10:50:39.781432+02
-5465	1230	2	\N	2014-04-19 21:03:03.225866+03
-5509	1278	2	\N	2014-04-29 10:09:19.421905+03
-5540	1309	2	\N	2014-04-30 11:32:51.070911+03
-5547	1316	2	\N	2014-05-17 14:00:25.111543+03
-4927	865	2	\N	2014-02-09 13:26:19.008763+02
-4804	775	2	\N	2014-01-26 15:30:50.636495+02
-4828	3	2	\N	2014-02-02 17:45:50.239397+02
-5416	1199	2	\N	2014-04-08 10:15:32.411146+03
-5434	1211	2	\N	2014-04-12 14:16:34.33498+03
-5435	1211	2	\N	2014-04-12 14:16:53.40729+03
-4982	895	2	\N	2014-02-25 19:06:42.158245+02
-5158	1007	2	\N	2014-03-08 10:30:25.61786+02
-5198	3	2	\N	2014-03-11 13:14:05.142514+02
-5437	1213	2	\N	2014-04-12 14:32:08.840037+03
-5466	1227	2	\N	2014-04-19 21:37:55.580038+03
-5474	1243	2	\N	2014-04-26 22:38:44.326007+03
-5541	1310	2	\N	2014-04-30 22:45:27.579715+03
-5548	1317	2	\N	2014-05-17 14:54:57.813145+03
-5549	1318	2	\N	2014-05-17 15:24:32.954365+03
-5550	1319	2	\N	2014-05-17 15:53:28.880817+03
-5551	1320	2	\N	2014-05-17 15:53:34.139717+03
-5552	1321	2	\N	2014-05-17 15:55:03.155317+03
-5553	1322	2	\N	2014-05-17 15:55:07.534203+03
-5557	1326	2	\N	2014-05-17 15:59:13.891973+03
-5558	1327	2	\N	2014-05-17 15:59:17.045556+03
-5559	1328	2	\N	2014-05-17 16:00:04.660539+03
-5560	1329	2	\N	2014-05-17 16:00:08.901641+03
-5561	1330	2	\N	2014-05-17 16:00:10.337355+03
-5566	1335	2	\N	2014-05-17 16:02:19.447311+03
-5571	1340	2	\N	2014-05-17 16:06:28.503991+03
-5572	1341	2	\N	2014-05-17 16:06:29.727144+03
-5573	1342	2	\N	2014-05-17 16:06:31.81672+03
-5575	1344	2	\N	2014-05-17 16:07:45.972655+03
-5576	1345	2	\N	2014-05-17 16:07:47.259172+03
-5577	1346	2	\N	2014-05-17 16:07:49.146563+03
-5581	1350	2	\N	2014-05-17 16:09:55.923893+03
-5583	1352	2	\N	2014-05-17 16:13:14.609527+03
-5584	1353	2	\N	2014-05-17 16:13:16.568079+03
-5585	1354	2	\N	2014-05-17 16:13:17.732756+03
-5370	1159	2	\N	2014-04-02 19:52:15.193771+03
-5417	1200	2	\N	2014-04-08 10:35:59.014802+03
-4890	784	2	\N	2014-02-08 21:26:51.98617+02
-4929	870	2	\N	2014-02-09 14:57:54.403714+02
-4983	896	2	\N	2014-02-25 19:37:56.226615+02
-4984	897	2	\N	2014-02-25 19:38:21.395798+02
-4985	898	2	\N	2014-02-25 19:38:30.353048+02
-4986	899	2	\N	2014-02-25 19:39:23.588225+02
-4988	901	2	\N	2014-02-25 19:47:57.884012+02
-5160	1009	2	\N	2014-03-08 10:49:52.0599+02
-5199	3	2	\N	2014-03-12 12:05:31.953558+02
-5438	1214	2	\N	2014-04-12 14:36:07.046988+03
-5475	1244	2	\N	2014-04-26 22:39:00.40778+03
-5542	1311	2	\N	2014-04-30 22:45:36.089534+03
-5554	1323	2	\N	2014-05-17 15:55:54.008685+03
-5555	1324	2	\N	2014-05-17 15:56:55.63522+03
-5556	1325	2	\N	2014-05-17 15:58:29.508912+03
-5562	1331	2	\N	2014-05-17 16:00:49.21287+03
-5563	1332	2	\N	2014-05-17 16:01:46.175183+03
-5564	1333	2	\N	2014-05-17 16:01:47.950656+03
-5565	1334	2	\N	2014-05-17 16:01:48.837764+03
-5567	1336	2	\N	2014-05-17 16:03:41.796945+03
-5568	1337	2	\N	2014-05-17 16:04:32.839289+03
-5569	1338	2	\N	2014-05-17 16:04:34.363533+03
-5578	1347	2	\N	2014-05-17 16:08:39.18466+03
-5579	1348	2	\N	2014-05-17 16:08:56.863828+03
-5580	1349	2	\N	2014-05-17 16:08:58.291349+03
-4894	849	2	\N	2014-02-08 21:32:14.802948+02
-4896	851	2	\N	2014-02-08 21:32:32.471247+02
-4897	852	2	\N	2014-02-08 21:36:44.493917+02
-4930	871	2	\N	2014-02-09 16:04:05.85568+02
-5161	1009	2	\N	2014-03-08 10:52:32.854366+02
-5162	1009	2	\N	2014-03-08 10:52:45.635015+02
-5163	1009	2	\N	2014-03-08 10:52:53.515357+02
-5164	1009	2	\N	2014-03-08 10:52:58.740536+02
-5165	1010	2	\N	2014-03-08 10:54:40.946487+02
-5166	1010	2	\N	2014-03-08 10:54:50.928085+02
-5200	3	2	\N	2014-03-12 12:14:05.203771+02
-5235	897	2	\N	2014-03-16 12:53:37.56753+02
-5278	1067	2	\N	2014-03-18 19:51:01.87448+02
-5376	1165	2	\N	2014-04-02 20:56:48.393173+03
-5419	1201	2	\N	2014-04-08 10:38:31.154572+03
-5440	1214	2	\N	2014-04-12 14:39:05.532456+03
-5442	1214	2	\N	2014-04-12 14:43:11.754556+03
-5513	1282	2	\N	2014-04-29 10:43:05.718429+03
-5586	1355	2	\N	2014-05-17 16:14:39.7443+03
-5587	1356	2	\N	2014-05-17 16:14:41.182697+03
-5588	1357	2	\N	2014-05-17 16:14:43.239633+03
-5590	1359	2	\N	2014-05-17 16:15:43.442935+03
-5591	1360	2	\N	2014-05-17 16:15:45.790483+03
-5596	1365	2	\N	2014-05-17 16:20:21.389915+03
-5597	1366	2	\N	2014-05-17 16:20:22.473385+03
-5598	1367	2	\N	2014-05-17 16:20:23.843632+03
-4898	853	2	\N	2014-02-08 21:39:09.10029+02
-4812	784	2	\N	2014-01-26 21:12:24.209136+02
-4813	784	2	\N	2014-01-26 21:13:10.546575+02
-4814	784	2	\N	2014-01-26 21:13:20.058093+02
-4815	784	2	\N	2014-01-26 21:13:24.693933+02
-4818	784	2	\N	2014-01-26 21:20:14.635984+02
-4819	784	2	\N	2014-01-26 21:20:34.941868+02
-4931	274	2	\N	2014-02-10 08:49:31.501202+02
-4970	894	2	\N	2014-02-22 17:27:40.771678+02
-4991	903	2	\N	2014-02-25 22:43:46.101171+02
-4992	904	2	\N	2014-02-25 22:43:53.30222+02
-4993	905	2	\N	2014-02-25 22:44:00.024066+02
-4994	906	2	\N	2014-02-25 22:44:13.035203+02
-4995	907	2	\N	2014-02-25 22:44:59.159297+02
-5167	1009	2	\N	2014-03-08 10:57:02.535973+02
-5168	1010	2	\N	2014-03-08 10:57:07.365849+02
-5201	3	2	\N	2014-03-12 12:29:57.686858+02
-5202	3	2	\N	2014-03-12 12:30:07.270368+02
-5203	3	2	\N	2014-03-12 12:30:09.982217+02
-5204	3	2	\N	2014-03-12 12:32:22.25189+02
-5205	894	2	\N	2014-03-12 12:32:26.366205+02
-5236	919	2	\N	2014-03-16 13:33:07.651832+02
-5444	1218	2	\N	2014-04-12 15:00:38.646853+03
-5447	1214	2	\N	2014-04-12 15:02:33.59771+03
-5514	1283	2	\N	2014-04-29 12:06:08.689068+03
-5515	1284	2	\N	2014-04-29 12:07:06.357367+03
-5518	1287	2	\N	2014-04-29 12:09:55.486785+03
-5520	1289	2	\N	2014-04-29 12:11:36.874588+03
-5589	1358	2	\N	2014-05-17 16:15:09.836615+03
-5592	1361	2	\N	2014-05-17 16:16:33.155307+03
-5593	1362	2	\N	2014-05-17 16:16:42.585648+03
-5594	1363	2	\N	2014-05-17 16:18:45.312153+03
-5595	1364	2	\N	2014-05-17 16:18:46.752544+03
-4932	872	2	\N	2014-02-10 14:29:53.759164+02
-4996	908	2	\N	2014-02-25 23:15:44.304324+02
-4997	909	2	\N	2014-02-25 23:16:53.455486+02
-5000	912	2	\N	2014-02-25 23:21:05.038132+02
-5001	913	2	\N	2014-02-25 23:21:10.720503+02
-5002	914	2	\N	2014-02-25 23:21:15.803027+02
-5003	915	2	\N	2014-02-25 23:21:21.245593+02
-5004	916	2	\N	2014-02-25 23:21:27.843749+02
-5005	917	2	\N	2014-02-25 23:21:40.705852+02
-5006	918	2	\N	2014-02-25 23:21:45.161533+02
-5007	918	2	\N	2014-02-25 23:21:53.74917+02
-5008	918	2	\N	2014-02-25 23:21:57.599668+02
-5009	919	2	\N	2014-02-25 23:22:22.789803+02
-5011	921	2	\N	2014-02-25 23:22:59.534922+02
-5012	922	2	\N	2014-02-25 23:23:04.765473+02
-5013	923	2	\N	2014-02-25 23:23:16.649188+02
-5014	924	2	\N	2014-02-25 23:23:30.151925+02
-5015	925	2	\N	2014-02-25 23:25:11.120354+02
-5016	926	2	\N	2014-02-25 23:26:11.314153+02
-5017	927	2	\N	2014-02-25 23:26:34.378644+02
-5018	928	2	\N	2014-02-25 23:26:49.163639+02
-5019	929	2	\N	2014-02-25 23:27:07.84413+02
-5020	930	2	\N	2014-02-25 23:27:30.797684+02
-5021	931	2	\N	2014-02-25 23:27:45.611037+02
-5022	932	2	\N	2014-02-25 23:28:05.678992+02
-5023	933	2	\N	2014-02-25 23:28:21.001129+02
-5025	935	2	\N	2014-02-25 23:28:49.565248+02
-5026	936	2	\N	2014-02-25 23:29:05.034117+02
-5027	937	2	\N	2014-02-25 23:29:16.11101+02
-5028	938	2	\N	2014-02-25 23:29:28.82178+02
-5029	939	2	\N	2014-02-25 23:29:41.159219+02
-5030	940	2	\N	2014-02-25 23:29:57.589154+02
-5031	941	2	\N	2014-02-25 23:30:12.260571+02
-5032	942	2	\N	2014-02-25 23:30:25.705958+02
-5033	943	2	\N	2014-02-25 23:30:39.278491+02
-5034	944	2	\N	2014-02-25 23:30:54.230938+02
-5035	945	2	\N	2014-02-25 23:31:08.136642+02
-5036	946	2	\N	2014-02-25 23:31:21.084682+02
-5037	947	2	\N	2014-02-25 23:31:35.443235+02
-5038	948	2	\N	2014-02-25 23:31:50.036032+02
-5039	949	2	\N	2014-02-25 23:32:16.232207+02
-5040	950	2	\N	2014-02-25 23:32:51.784126+02
-5169	1011	2	\N	2014-03-08 15:10:44.638516+02
-5206	3	2	\N	2014-03-12 13:00:24.217557+02
-5207	3	2	\N	2014-03-12 13:00:34.025605+02
-5241	903	2	\N	2014-03-16 15:12:25.130202+02
-5448	1221	2	\N	2014-04-12 16:44:14.810824+03
-5516	1285	2	\N	2014-04-29 12:08:23.116251+03
-5517	1286	2	\N	2014-04-29 12:09:10.712444+03
-5522	1291	2	\N	2014-04-29 12:13:37.203069+03
-5523	1292	2	\N	2014-04-29 12:14:34.180203+03
-4900	854	2	\N	2014-02-08 21:47:34.439997+02
-4901	855	2	\N	2014-02-08 21:54:55.399628+02
-4936	875	2	\N	2014-02-10 15:58:53.177719+02
-4937	875	2	\N	2014-02-10 15:59:03.43204+02
-5042	952	2	\N	2014-02-25 23:33:14.57009+02
-5043	939	2	\N	2014-02-25 23:33:37.281163+02
-5044	938	2	\N	2014-02-25 23:33:44.033176+02
-5045	937	2	\N	2014-02-25 23:33:51.697991+02
-5046	936	2	\N	2014-02-25 23:33:56.981908+02
-5047	935	2	\N	2014-02-25 23:34:03.037741+02
-5049	933	2	\N	2014-02-25 23:34:27.937885+02
-5050	932	2	\N	2014-02-25 23:34:34.767736+02
-5051	931	2	\N	2014-02-25 23:34:39.075165+02
-5052	930	2	\N	2014-02-25 23:34:43.896812+02
-5053	929	2	\N	2014-02-25 23:34:48.70472+02
-5054	928	2	\N	2014-02-25 23:34:54.494127+02
-5055	927	2	\N	2014-02-25 23:35:00.125101+02
-5056	926	2	\N	2014-02-25 23:35:05.399995+02
-5057	925	2	\N	2014-02-25 23:35:10.409443+02
-5058	924	2	\N	2014-02-25 23:35:16.447517+02
-5059	923	2	\N	2014-02-25 23:35:21.959285+02
-5060	922	2	\N	2014-02-25 23:35:27.383937+02
-5061	921	2	\N	2014-02-25 23:35:31.660307+02
-5063	919	2	\N	2014-02-25 23:35:43.645366+02
-5064	918	2	\N	2014-02-25 23:35:47.480218+02
-5065	917	2	\N	2014-02-25 23:35:52.042922+02
-5066	916	2	\N	2014-02-25 23:35:57.409224+02
-5067	915	2	\N	2014-02-25 23:36:01.802966+02
-5068	914	2	\N	2014-02-25 23:36:05.670476+02
-5069	913	2	\N	2014-02-25 23:36:10.129284+02
-5070	912	2	\N	2014-02-25 23:36:14.468359+02
-5286	1078	2	\N	2014-03-20 21:22:51.030666+02
-5381	1170	2	\N	2014-04-03 12:49:07.793292+03
-5519	1288	2	\N	2014-04-29 12:10:21.572462+03
-5521	1290	2	\N	2014-04-29 12:13:35.434847+03
-5603	1372	2	\N	2014-05-17 18:47:30.594446+03
-5606	1375	2	\N	2014-05-17 18:55:21.896666+03
-5613	1382	2	\N	2014-05-17 19:04:51.767284+03
-5619	1388	2	\N	2014-05-17 19:09:44.578209+03
-5622	1391	2	\N	2014-05-17 19:12:29.996417+03
-4902	856	2	\N	2014-02-08 21:59:04.719245+02
-4938	876	2	\N	2014-02-10 16:19:24.400952+02
-5071	953	2	\N	2014-02-26 23:25:15.548581+02
-5072	954	2	\N	2014-02-26 23:25:55.407709+02
-5075	957	2	\N	2014-02-26 23:28:34.003373+02
-5076	958	2	\N	2014-02-26 23:28:45.594179+02
-5077	959	2	\N	2014-02-26 23:28:57.004231+02
-5078	960	2	\N	2014-02-26 23:29:08.086342+02
-5079	961	2	\N	2014-02-26 23:29:17.646283+02
-5080	962	2	\N	2014-02-26 23:29:26.175631+02
-5081	963	2	\N	2014-02-26 23:29:35.761623+02
-5082	964	2	\N	2014-02-26 23:29:46.892804+02
-5083	965	2	\N	2014-02-26 23:29:54.140342+02
-5084	966	2	\N	2014-02-26 23:30:01.375033+02
-5085	967	2	\N	2014-02-26 23:30:08.774222+02
-5086	968	2	\N	2014-02-26 23:30:17.802323+02
-5087	969	2	\N	2014-02-26 23:30:29.097872+02
-5088	970	2	\N	2014-02-26 23:30:38.081009+02
-5089	971	2	\N	2014-02-26 23:30:52.902609+02
-5091	973	2	\N	2014-02-26 23:31:31.71567+02
-5093	975	2	\N	2014-02-26 23:32:13.646357+02
-5094	976	2	\N	2014-02-26 23:32:24.624636+02
-5095	977	2	\N	2014-02-26 23:32:34.606814+02
-5096	978	2	\N	2014-02-26 23:32:43.318943+02
-5097	979	2	\N	2014-02-26 23:32:54.081989+02
-5098	980	2	\N	2014-02-26 23:33:04.823892+02
-5099	981	2	\N	2014-02-26 23:33:16.574818+02
-5100	982	2	\N	2014-02-26 23:33:28.270884+02
-5101	983	2	\N	2014-02-26 23:33:40.854578+02
-5102	984	2	\N	2014-02-26 23:33:57.05943+02
-5103	985	2	\N	2014-02-26 23:34:08.238483+02
-5105	987	2	\N	2014-02-26 23:34:29.757456+02
-5106	988	2	\N	2014-02-26 23:34:37.99873+02
-5216	3	2	\N	2014-03-12 21:55:10.706584+02
-5287	1079	2	\N	2014-03-22 12:57:07.526655+02
-5483	1252	2	\N	2014-04-27 01:03:22.219667+03
-5524	1293	2	\N	2014-04-29 12:17:51.658135+03
-5525	1294	2	\N	2014-04-29 12:18:27.913053+03
-5601	1370	2	\N	2014-05-17 18:45:54.451262+03
-5602	1371	2	\N	2014-05-17 18:47:17.628356+03
-5604	1373	2	\N	2014-05-17 18:54:01.477094+03
-5607	1376	2	\N	2014-05-17 18:56:40.07768+03
-5609	1378	2	\N	2014-05-17 19:02:40.402053+03
-5616	1385	2	\N	2014-05-17 19:07:13.667811+03
-5617	1386	2	\N	2014-05-17 19:07:36.068126+03
-5621	1390	2	\N	2014-05-17 19:11:55.084234+03
-4789	763	2	\N	2014-01-12 19:51:49.157909+02
-4903	854	2	\N	2014-02-08 22:16:58.906498+02
-4904	3	2	\N	2014-02-08 22:17:06.939369+02
-4905	854	2	\N	2014-02-08 22:20:32.280238+02
-4906	784	2	\N	2014-02-08 22:21:01.290541+02
-5484	1253	2	\N	2014-04-28 00:03:49.599015+03
-5289	1081	2	\N	2014-03-22 17:57:05.076581+02
-5605	1374	2	\N	2014-05-17 18:55:03.070735+03
-5611	1380	2	\N	2014-05-17 19:03:57.212913+03
-5614	1383	2	\N	2014-05-17 19:04:59.867959+03
-5618	1387	2	\N	2014-05-17 19:09:22.594353+03
-5624	1393	2	\N	2014-05-18 10:14:28.009945+03
-4790	764	2	\N	2014-01-12 20:33:53.3138+02
-4909	723	2	\N	2014-02-08 22:28:37.868751+02
-4940	878	2	\N	2014-02-10 16:40:47.442615+02
-5610	1379	2	\N	2014-05-17 19:03:38.443538+03
-5612	1381	2	\N	2014-05-17 19:04:17.238286+03
-5615	1384	2	\N	2014-05-17 19:07:10.869783+03
-5620	1389	2	\N	2014-05-17 19:09:47.55779+03
-5291	1088	2	\N	2014-03-22 18:51:18.985681+02
-5292	1081	2	\N	2014-03-22 18:51:44.158872+02
-5458	1225	2	\N	2014-04-13 12:01:26.796233+03
-5627	1396	2	\N	2014-05-18 11:58:47.293591+03
-4917	764	2	\N	2014-02-09 00:53:58.264629+02
-4918	769	2	\N	2014-02-09 00:57:04.796409+02
-4919	775	2	\N	2014-02-09 00:57:24.917548+02
-4920	788	2	\N	2014-02-09 00:57:42.02056+02
-4942	878	2	\N	2014-02-10 22:47:18.374976+02
-5294	1090	2	\N	2014-03-22 20:34:50.666418+02
-5295	1091	2	\N	2014-03-22 20:36:11.95663+02
-5298	1093	2	\N	2014-03-22 20:40:16.040605+02
-5629	1398	2	\N	2014-05-18 12:12:21.975254+03
-4949	764	2	\N	2014-02-11 19:47:14.055452+02
-5488	1257	2	\N	2014-04-28 12:34:34.363475+03
-5300	1095	2	\N	2014-03-22 20:52:34.596466+02
-5301	1096	2	\N	2014-03-22 20:52:44.740475+02
-5302	1097	2	\N	2014-03-22 20:53:03.099066+02
-5489	1258	2	\N	2014-04-28 12:34:55.433659+03
-5304	1099	2	\N	2014-03-22 20:57:07.889521+02
-5535	1304	2	\N	2014-04-29 16:15:23.221696+03
-5390	1179	2	\N	2014-04-05 19:40:10.823684+03
-5490	1259	2	\N	2014-04-28 12:58:44.196537+03
-5306	1101	2	\N	2014-03-22 21:00:48.529148+02
-5307	1102	2	\N	2014-03-22 21:01:34.517288+02
-5491	1260	2	\N	2014-04-28 12:59:00.104464+03
-5631	1400	2	\N	2014-05-18 13:37:21.801854+03
-5632	1401	2	\N	2014-05-18 13:37:41.402585+03
-5633	1402	2	\N	2014-05-18 13:44:45.628784+03
-5492	1261	2	\N	2014-04-28 13:04:58.29173+03
-5634	1403	2	\N	2014-05-18 15:48:34.956287+03
-5256	1067	2	\N	2014-03-16 19:34:31.935568+02
-5494	1263	2	\N	2014-04-28 13:08:06.602496+03
-5635	1404	2	\N	2014-05-18 19:18:07.615122+03
-5636	1406	2	\N	2014-05-18 19:18:56.831097+03
-5639	1409	2	\N	2014-05-18 19:22:05.971396+03
-5394	1185	2	\N	2014-04-05 20:56:20.797318+03
-5257	1067	2	\N	2014-03-16 19:55:56.894484+02
-5495	1264	2	\N	2014-04-28 13:08:25.610345+03
-5637	1407	2	\N	2014-05-18 19:19:36.399614+03
-5641	1411	2	\N	2014-05-18 19:23:45.119721+03
-5496	1265	2	\N	2014-04-28 13:08:54.519921+03
-5638	1408	2	\N	2014-05-18 19:19:43.401474+03
-5258	1067	2	\N	2014-03-16 20:09:16.532934+02
-5311	1097	2	\N	2014-03-24 19:59:44.290142+02
-5640	1410	2	\N	2014-05-18 19:23:00.415796+03
-5643	1413	2	\N	2014-05-20 21:26:27.311927+03
-5259	1068	2	\N	2014-03-16 20:15:31.769185+02
-5499	1268	2	\N	2014-04-28 23:55:09.591646+03
-5644	1414	2	\N	2014-05-24 17:02:57.354915+03
-5645	1415	2	\N	2014-05-24 17:03:02.922541+03
-5646	1416	2	\N	2014-05-24 17:06:48.542492+03
-5647	1417	2	\N	2014-05-24 17:06:51.402853+03
-5648	1418	2	\N	2014-05-24 17:07:25.101929+03
-5649	1419	2	\N	2014-05-24 17:07:29.075778+03
-5650	1420	2	\N	2014-05-24 17:24:17.546972+03
-4120	16	2	\N	2014-01-01 13:19:09.979922+02
-4131	14	2	\N	2014-01-01 18:45:07.902745+02
-4144	706	2	\N	2014-01-03 16:12:41.015146+02
-4145	706	2	\N	2014-01-03 16:13:23.197097+02
-5402	1189	2	\N	2014-04-06 18:46:40.132797+03
-5403	1190	2	\N	2014-04-06 18:47:22.030146+03
-5138	865	2	\N	2014-03-03 21:09:34.254642+02
-5404	1191	2	\N	2014-04-06 18:53:34.002074+03
-5263	1009	2	\N	2014-03-16 21:40:10.728496+02
-5264	1009	2	\N	2014-03-16 21:44:11.742442+02
-5405	1192	2	\N	2014-04-06 19:20:55.890208+03
-5140	865	2	\N	2014-03-03 21:57:11.59945+02
-5265	1004	2	\N	2014-03-17 10:29:17.115979+02
-5266	1004	2	\N	2014-03-17 10:29:24.701637+02
-4744	723	2	\N	2014-01-04 23:58:55.624453+02
-4746	725	2	\N	2014-01-05 01:09:00.405742+02
-4747	726	2	\N	2014-01-05 01:09:15.602018+02
-4749	728	2	\N	2014-01-05 01:13:50.125212+02
-4756	734	2	\N	2014-01-05 12:36:48.48575+02
-4765	743	2	\N	2014-01-05 13:20:17.173661+02
-5654	1424	2	\N	2014-06-01 10:25:44.71461+03
-5656	1426	2	\N	2014-06-01 12:15:53.295347+03
-5661	1431	2	\N	2014-06-07 15:12:11.693366+03
-5662	1432	2	\N	2014-06-07 15:12:40.323386+03
-5663	1433	2	\N	2014-06-07 17:43:14.620483+03
-5665	1435	2	\N	2014-06-07 21:01:18.691193+03
-5667	1438	2	\N	2014-06-07 21:11:01.089928+03
-5668	1439	2	\N	2014-06-07 21:11:46.797584+03
-5676	1447	2	\N	2014-06-08 21:25:14.638119+03
-5677	1448	2	\N	2014-06-08 21:25:35.09515+03
-5679	1450	2	\N	2014-06-09 15:50:23.760428+03
-5681	1452	2	\N	2014-06-09 17:20:44.311452+03
-5693	1464	2	\N	2014-06-14 17:55:00.252916+03
-5694	1465	2	\N	2014-06-14 17:55:08.213215+03
-5695	1467	2	\N	2014-06-14 17:56:52.935007+03
-5696	1468	2	\N	2014-06-14 17:58:15.339465+03
-5697	1469	2	\N	2014-06-14 17:58:37.034547+03
-5698	1470	2	\N	2014-06-14 18:00:56.71432+03
-5699	1471	2	\N	2014-06-14 18:02:10.63169+03
-5700	1472	2	\N	2014-06-14 18:02:54.98084+03
-5701	1473	2	\N	2014-06-14 18:03:27.411198+03
-5713	1485	2	\N	2014-06-15 15:17:28.256792+03
-5728	1500	2	\N	2014-06-18 16:59:05.631362+03
-5732	1504	2	\N	2014-06-22 19:42:44.939368+03
-5733	1505	2	\N	2014-06-22 19:43:05.103699+03
-5734	1506	2	\N	2014-06-22 19:43:23.157992+03
-5735	1507	2	\N	2014-06-22 19:46:21.388635+03
-5737	1509	2	\N	2014-06-22 21:15:50.586549+03
-5738	1510	2	\N	2014-06-24 20:30:44.36129+03
-5739	1511	2	\N	2014-06-25 19:21:08.001771+03
-5740	1512	2	\N	2014-06-25 19:37:43.544622+03
-5741	1513	2	\N	2014-06-25 19:38:23.293423+03
-5742	1514	2	\N	2014-06-25 19:38:46.712804+03
-5743	1515	2	\N	2014-06-25 19:39:14.757449+03
-5744	1516	2	\N	2014-06-25 20:37:42.602785+03
-5745	1517	2	\N	2014-06-25 20:54:09.96009+03
-5746	1518	2	\N	2014-06-25 20:54:50.943042+03
-5747	1519	2	\N	2014-06-25 20:55:06.988343+03
-5749	1521	2	\N	2014-06-26 21:02:19.488826+03
-5750	1535	2	\N	2014-06-28 17:17:15.295903+03
-5751	1536	2	\N	2014-06-28 17:31:39.626186+03
-5752	1537	2	\N	2014-06-28 20:56:05.816704+03
-5753	1538	2	\N	2014-06-28 20:57:41.600837+03
-5754	1539	2	\N	2014-06-28 20:59:59.522314+03
-5755	1540	2	\N	2014-06-28 21:00:26.365557+03
-5756	1541	2	\N	2014-06-28 21:00:51.086753+03
-5758	1543	2	\N	2014-06-28 21:25:57.336069+03
-5759	1544	2	\N	2014-06-28 21:26:14.894807+03
-5760	1545	2	\N	2014-06-28 21:26:35.413657+03
-5761	1546	2	\N	2014-07-02 23:01:03.321441+03
-5762	1547	2	\N	2014-07-02 23:03:30.755887+03
-5763	1548	2	\N	2014-07-26 18:07:46.336433+03
-5764	1549	2	\N	2014-08-16 20:09:11.73959+03
-5766	1551	2	\N	2014-08-16 20:23:59.980051+03
-5767	1552	2	\N	2014-08-16 20:24:12.305446+03
-5768	1553	2	\N	2014-08-16 20:24:15.930016+03
-5769	1554	2	\N	2014-08-16 20:25:09.403552+03
-5771	1556	2	\N	2014-08-16 20:51:19.103778+03
-5773	1559	2	\N	2014-08-16 21:13:14.302214+03
-5774	1560	2	\N	2014-08-16 21:13:18.107616+03
-5775	1561	2	\N	2014-08-16 21:22:35.752473+03
-5776	1562	2	\N	2014-08-16 21:23:02.397566+03
-5777	1563	2	\N	2014-08-16 21:23:05.499294+03
-5778	1564	2	\N	2014-08-16 21:24:08.813965+03
-5783	1569	2	\N	2014-08-17 11:07:53.713228+03
-5784	1570	2	\N	2014-08-17 11:09:10.292392+03
-5790	1576	2	\N	2014-08-22 22:48:58.176695+03
-5791	1577	2	\N	2014-08-22 22:49:31.584667+03
-5792	1578	2	\N	2014-08-22 22:49:35.101959+03
-5793	1579	2	\N	2014-08-22 22:50:20.197271+03
-5794	1580	2	\N	2014-08-22 22:50:49.188036+03
-5795	1581	2	\N	2014-08-22 22:51:29.357367+03
-5796	1582	2	\N	2014-08-22 22:52:03.171722+03
-5797	1584	2	\N	2014-08-22 22:58:38.326467+03
-5798	1585	2	\N	2014-08-22 22:59:28.534906+03
-5799	1586	2	\N	2014-08-22 22:59:41.71816+03
-5800	1587	2	\N	2014-08-22 23:01:39.676197+03
-5801	1588	2	\N	2014-08-22 23:02:11.872661+03
-5802	1589	2	\N	2014-08-22 23:04:10.670971+03
-5803	1590	2	\N	2014-08-22 23:04:40.181387+03
-5804	1591	2	\N	2014-08-22 23:05:46.128053+03
-5805	1592	2	\N	2014-08-22 23:06:07.780481+03
-5806	1593	2	\N	2014-08-22 23:06:12.342153+03
-5810	1597	2	\N	2014-08-22 23:14:17.280337+03
-5820	1607	2	\N	2014-08-23 13:37:30.044239+03
-5821	1608	2	\N	2014-08-23 16:14:22.910225+03
-5822	1609	2	\N	2014-08-23 16:16:24.823791+03
-5823	1610	2	\N	2014-08-24 14:10:51.002759+03
-5824	1611	2	\N	2014-08-24 14:11:19.783792+03
-5825	1612	2	\N	2014-08-24 14:11:36.729128+03
-5826	1613	2	\N	2014-08-24 14:11:54.849623+03
-5827	1614	2	\N	2014-08-24 14:48:54.04485+03
-5828	1615	2	\N	2014-08-24 14:48:55.715304+03
-5829	1616	2	\N	2014-08-24 14:49:59.373945+03
-5832	1619	2	\N	2014-08-24 15:01:16.140346+03
-5833	1620	2	\N	2014-08-24 15:02:15.884894+03
-5834	1621	2	\N	2014-08-24 15:02:43.162974+03
-5835	1622	2	\N	2014-08-24 15:03:06.67481+03
-5836	1623	2	\N	2014-08-24 15:03:53.276198+03
-5837	1624	2	\N	2014-08-24 15:08:02.737031+03
-5838	1625	2	\N	2014-08-24 15:08:18.61161+03
-5839	1626	2	\N	2014-08-24 15:08:29.0077+03
-5840	1627	2	\N	2014-08-24 15:10:13.736496+03
-5841	1628	2	\N	2014-08-24 15:10:44.233145+03
-5852	1639	2	\N	2014-08-25 15:20:24.884947+03
-5853	1640	2	\N	2014-08-26 19:55:53.569882+03
-5854	1641	2	\N	2014-08-26 19:56:28.320221+03
-5858	1645	2	\N	2014-08-26 20:01:19.187139+03
-5860	1647	2	\N	2014-08-26 20:04:08.078366+03
-5862	1649	2	\N	2014-08-26 20:04:48.124422+03
-5855	1642	2	\N	2014-08-26 19:56:46.695581+03
-5856	1643	2	\N	2014-08-26 19:57:13.160198+03
-5857	1644	2	\N	2014-08-26 20:01:16.129984+03
-5861	1648	2	\N	2014-08-26 20:04:09.378364+03
-5863	1650	2	\N	2014-08-26 20:06:13.193356+03
-5864	1651	2	\N	2014-08-26 20:06:36.249641+03
-5865	1652	2	\N	2014-08-26 20:07:23.412381+03
-5866	1653	2	\N	2014-08-26 20:07:31.899383+03
-5873	1660	2	\N	2014-08-31 16:37:37.888486+03
-5919	1714	2	\N	2014-09-14 13:27:15.677766+03
-5926	1721	2	\N	2014-09-14 14:49:51.512979+03
-5967	1764	2	\N	2014-09-14 21:51:09.963908+03
-5968	1766	2	\N	2014-09-28 17:08:27.946698+03
-5971	1769	2	\N	2014-10-01 20:37:18.107894+03
-5972	1771	2	\N	2014-10-01 21:39:17.299667+03
-5973	1773	2	\N	2014-10-01 22:04:03.074823+03
-5974	1774	2	\N	2014-10-01 22:17:44.949656+03
-5975	1775	2	\N	2014-10-03 20:21:54.06353+03
-5977	1777	2	\N	2014-10-03 20:35:01.628264+03
-5978	1778	2	\N	2014-10-04 21:45:17.702702+03
-5980	1780	2	\N	2014-10-05 12:49:28.270538+03
-5982	1797	2	\N	2014-10-05 21:08:02.025119+03
-5983	1798	2	\N	2014-10-05 22:07:40.176836+03
-5984	1799	2	\N	2014-10-09 20:49:57.476724+03
-5985	1800	2	\N	2014-10-09 21:44:48.304991+03
-5986	1801	2	\N	2014-10-09 21:45:57.042916+03
-5987	1802	2	\N	2014-10-09 21:51:36.274928+03
-5988	1797	2	\N	2014-10-09 21:58:44.274487+03
-5989	1803	2	\N	2014-10-10 21:20:08.467997+03
-5990	1804	2	\N	2014-10-10 21:48:32.795064+03
-5991	1797	2	\N	2014-10-10 21:48:40.224687+03
-5994	1797	2	\N	2014-10-10 22:43:03.886027+03
-5995	1807	2	\N	2014-10-12 12:18:58.609492+03
-5996	1419	2	\N	2014-10-12 12:21:41.297126+03
-5999	1419	2	\N	2014-10-12 14:03:13.921521+03
-6000	1419	2	\N	2014-10-12 14:03:56.458732+03
-6002	1797	2	\N	2014-10-12 14:08:19.225786+03
-6003	1797	2	\N	2014-10-12 14:08:29.322661+03
-6005	1797	2	\N	2014-10-12 14:09:47.667654+03
-6006	1797	2	\N	2014-10-12 14:10:15.511498+03
-6008	894	2	\N	2014-10-12 14:15:30.839116+03
-6010	894	2	\N	2014-10-12 14:15:50.178579+03
-6011	894	2	\N	2014-10-12 14:16:00.712168+03
-6014	1507	2	\N	2014-10-12 14:21:53.792753+03
-6015	1507	2	\N	2014-10-12 14:22:06.118134+03
-6016	1439	2	\N	2014-10-12 14:22:17.008412+03
-6017	1438	2	\N	2014-10-12 14:22:21.965321+03
-6020	1780	2	\N	2014-10-12 14:25:19.014258+03
-6021	1780	2	\N	2014-10-12 14:25:28.403238+03
-6022	1780	2	\N	2014-10-12 14:25:37.930302+03
-6025	1413	2	\N	2014-10-12 14:31:06.237149+03
-6026	1413	2	\N	2014-10-12 14:31:16.507549+03
-6029	1415	2	\N	2014-10-12 14:34:22.672887+03
-6030	1415	2	\N	2014-10-12 14:34:32.05391+03
-6050	1653	2	\N	2014-10-12 16:27:20.425954+03
-6051	1653	2	\N	2014-10-12 16:27:45.783221+03
-6053	1283	2	\N	2014-10-12 16:28:08.925372+03
-6054	1283	2	\N	2014-10-12 16:28:17.376186+03
-6055	1833	2	\N	2014-10-12 16:29:10.045595+03
-6056	784	2	\N	2014-10-12 16:29:11.936722+03
-6066	998	2	\N	2014-10-18 11:46:31.67705+03
-6125	1660	2	\N	2014-10-25 20:27:51.453322+03
-6126	1639	2	\N	2014-10-25 20:27:59.032748+03
-6127	1607	2	\N	2014-10-25 20:28:26.48561+03
-6128	1547	2	\N	2014-10-25 20:31:18.593123+03
-6129	1546	2	\N	2014-10-25 20:31:27.322575+03
-6130	1509	2	\N	2014-10-25 20:31:34.596003+03
-6131	1500	2	\N	2014-10-25 20:31:41.235636+03
-6132	1485	2	\N	2014-10-25 20:31:48.295128+03
-6133	1448	2	\N	2014-10-25 20:31:55.364673+03
-6134	1447	2	\N	2014-10-25 20:32:03.232605+03
-6135	864	2	\N	2014-10-25 22:27:41.085522+03
-6136	900	2	\N	2014-10-25 22:27:48.659618+03
-6137	780	2	\N	2014-10-25 22:27:56.462817+03
-6138	837	2	\N	2014-10-25 22:28:02.931936+03
-6139	1394	2	\N	2014-10-25 22:28:08.943421+03
-6140	873	2	\N	2014-10-25 22:28:16.618586+03
-6141	778	2	\N	2014-10-25 22:28:22.956578+03
-6142	1659	2	\N	2014-10-25 22:39:28.23436+03
-6144	1849	2	\N	2014-10-25 23:00:37.016264+03
-6145	1852	2	\N	2014-10-28 19:57:41.751563+02
-6146	1853	2	\N	2014-10-28 20:23:48.907733+02
-6147	1854	2	\N	2014-10-28 20:24:58.380434+02
-6148	1855	2	\N	2014-10-28 20:25:08.681569+02
-6151	1859	2	\N	2014-10-29 12:48:22.905378+02
-6152	1860	2	\N	2014-10-30 22:03:33.988542+02
-6157	1865	2	\N	2014-11-03 21:33:49.462196+02
-6158	1866	2	\N	2014-11-03 21:38:54.729983+02
-6159	1867	2	\N	2014-11-03 21:39:31.824693+02
-6160	1868	2	\N	2014-11-03 21:40:02.647787+02
-6161	1869	2	\N	2014-11-05 21:10:08.261088+02
-6162	1870	2	\N	2014-11-05 21:10:38.427296+02
-6164	1872	2	\N	2014-11-08 19:05:48.520641+02
-6165	1868	2	\N	2014-11-08 19:07:32.928999+02
-6166	1868	2	\N	2014-11-08 19:07:58.653299+02
-6167	1873	2	\N	2014-11-09 14:14:33.279838+02
-6168	1433	2	\N	2014-11-09 14:15:02.053975+02
-6170	1875	2	\N	2014-11-09 20:43:57.157494+02
-6171	1876	2	\N	2014-11-09 20:50:09.776581+02
-6172	1876	2	\N	2014-11-09 21:46:07.106741+02
-6173	1876	2	\N	2014-11-09 21:46:46.766703+02
-6174	1876	2	\N	2014-11-12 18:42:47.24628+02
-6175	1876	2	\N	2014-11-12 18:43:00.917409+02
-6176	1876	2	\N	2014-11-12 18:43:51.052257+02
-6177	1876	2	\N	2014-11-12 18:49:19.486465+02
-6178	1876	2	\N	2014-11-12 18:49:50.992411+02
-6182	1880	2	\N	2014-11-12 18:58:13.464317+02
-6183	1881	2	\N	2014-11-12 18:58:13.464317+02
-6184	1876	2	\N	2014-11-12 19:19:20.155903+02
-6185	1880	2	\N	2014-11-12 19:20:04.488842+02
-6186	1882	2	\N	2014-11-12 19:21:49.754499+02
-6187	1882	2	\N	2014-11-12 20:48:55.295948+02
-6188	1876	2	\N	2014-11-13 18:36:19.360925+02
-6189	1876	2	\N	2014-11-13 18:36:40.275356+02
-6190	1876	2	\N	2014-11-13 18:36:53.848561+02
-6191	1876	2	\N	2014-11-13 18:37:04.828162+02
-6192	1876	2	\N	2014-11-13 18:44:14.058824+02
-6193	1880	2	\N	2014-11-14 13:23:46.652293+02
-6196	1884	2	\N	2014-11-15 12:46:51.68956+02
-6197	1885	2	\N	2014-11-15 12:55:58.618287+02
-6200	1647	2	\N	2014-11-15 19:54:17.589811+02
-6201	1647	2	\N	2014-11-15 19:57:05.325517+02
-6202	1587	2	\N	2014-11-15 19:57:11.689531+02
-6204	1888	2	\N	2014-11-15 20:54:18.530252+02
-6209	1893	2	\N	2014-11-15 21:10:00.852505+02
-6210	1894	2	\N	2014-11-16 11:36:20.360008+02
-6211	1895	2	\N	2014-11-16 11:38:31.304748+02
-6212	1896	2	\N	2014-11-16 11:52:22.859107+02
-6214	1896	2	\N	2014-11-16 17:28:25.282664+02
-6215	1898	2	\N	2014-11-18 19:36:00.947451+02
-6217	1900	2	\N	2014-11-18 19:59:41.794255+02
-6218	1901	2	\N	2014-11-18 20:00:50.313385+02
-6219	1902	2	\N	2014-11-18 20:05:55.399398+02
-6220	1903	2	\N	2014-11-18 20:06:23.495804+02
-6221	1225	2	\N	2014-11-20 20:55:40.655878+02
-6222	1904	2	\N	2014-11-21 20:47:35.513987+02
-6223	1434	2	\N	2014-11-21 20:48:05.829054+02
-6224	1571	2	\N	2014-11-21 20:48:27.000088+02
-6225	1885	2	\N	2014-11-21 20:48:44.475673+02
-6226	1905	2	\N	2014-11-21 21:17:50.885382+02
-6227	1436	2	\N	2014-11-21 21:19:06.360097+02
-6228	1798	2	\N	2014-11-21 21:19:19.899746+02
-6229	1425	2	\N	2014-11-21 21:19:42.772209+02
-6230	802	2	\N	2014-11-21 21:20:02.792752+02
-6231	1906	2	\N	2014-11-21 21:20:18.443474+02
-6232	802	2	\N	2014-11-21 21:20:33.430037+02
-6233	1395	2	\N	2014-11-21 21:20:55.244524+02
-6234	1907	2	\N	2014-11-21 21:25:23.260941+02
-6235	879	2	\N	2014-11-21 21:26:01.060638+02
-6236	1089	2	\N	2014-11-21 21:34:19.776611+02
-6237	874	2	\N	2014-11-21 21:34:45.906696+02
-6238	1080	2	\N	2014-11-21 21:35:09.652432+02
-6239	1908	2	\N	2014-11-21 21:35:29.643627+02
-6240	910	2	\N	2014-11-21 21:36:10.21074+02
-6241	1080	2	\N	2014-11-21 21:36:26.556412+02
-6242	911	2	\N	2014-11-21 21:36:37.408083+02
-6243	956	2	\N	2014-11-21 21:36:56.333028+02
-6244	955	2	\N	2014-11-21 21:37:09.845857+02
-6246	1896	2	\N	2014-11-21 21:43:10.139464+02
-6247	1910	2	\N	2014-11-22 17:58:53.151533+02
-6248	1911	2	\N	2014-11-22 17:58:53.151533+02
-6251	1903	2	\N	2014-11-23 17:42:18.707964+02
-6253	1903	2	\N	2014-11-23 18:15:04.669498+02
-6254	1913	2	\N	2014-11-23 18:22:07.34092+02
-6255	1915	2	\N	2014-11-23 18:25:34.975922+02
-6257	1917	2	\N	2014-11-23 18:40:26.695236+02
-6258	1918	2	\N	2014-11-23 18:40:42.249218+02
-6259	1919	2	\N	2014-11-27 21:56:12.900683+02
-6265	1906	2	\N	2014-11-28 22:02:27.025943+02
-6266	1908	2	\N	2014-11-28 22:03:25.613427+02
-6267	1919	2	\N	2014-11-30 11:21:31.130821+02
-6270	1368	2	\N	2014-11-30 18:22:02.736241+02
-6271	1922	2	\N	2014-12-07 14:34:35.538855+02
-6276	1924	2	\N	2014-12-07 21:40:24.739542+02
-6277	1925	2	\N	2014-12-07 21:41:09.94037+02
-6278	1926	2	\N	2014-12-07 21:41:37.63455+02
-6279	1471	2	\N	2014-12-07 21:41:39.584636+02
-6280	1927	2	\N	2014-12-07 21:42:12.893528+02
-6281	1471	2	\N	2014-12-07 21:42:14.781639+02
-6285	1930	2	\N	2014-12-08 21:43:55.101305+02
-6286	1869	2	\N	2014-12-08 21:46:09.685953+02
-6287	1931	2	\N	2014-12-08 21:52:00.685674+02
-6288	1930	2	\N	2014-12-08 21:53:17.580512+02
-6289	1932	2	\N	2014-12-11 22:45:01.994257+02
-6290	1933	2	\N	2014-12-11 22:46:28.273472+02
-6291	1934	2	\N	2014-12-11 22:50:30.21811+02
-6293	1935	2	\N	2014-12-11 22:53:00.765244+02
-6295	1935	2	\N	2014-12-11 22:53:42.569877+02
-6297	1936	2	\N	2014-12-13 21:35:47.599877+02
-6298	1939	2	\N	2014-12-13 21:37:02.820409+02
-6299	1939	2	\N	2014-12-13 21:37:54.352906+02
-6300	1936	2	\N	2014-12-13 21:55:38.627009+02
-6301	1933	2	\N	2014-12-13 21:55:57.253566+02
-6302	1933	2	\N	2014-12-13 21:57:41.570228+02
-6303	1933	2	\N	2014-12-13 22:01:39.804954+02
-6304	1936	2	\N	2014-12-13 22:01:54.801501+02
-6305	1936	2	\N	2014-12-13 22:03:25.347584+02
-6306	1933	2	\N	2014-12-13 22:03:37.415197+02
-6307	1939	2	\N	2014-12-13 22:03:52.016284+02
-6308	1936	2	\N	2014-12-13 22:10:55.202627+02
-6309	1936	2	\N	2014-12-13 22:11:45.388631+02
-6310	1936	2	\N	2014-12-14 11:10:18.568487+02
-6311	1936	2	\N	2014-12-14 11:10:54.616091+02
-6312	1936	2	\N	2014-12-14 11:12:20.116844+02
-6313	1933	2	\N	2014-12-14 11:12:44.366886+02
-6314	1936	2	\N	2014-12-14 11:14:36.987112+02
-6315	1933	2	\N	2014-12-14 11:14:46.937016+02
-6316	1940	2	\N	2014-12-14 11:16:18.397912+02
-6317	1941	2	\N	2014-12-14 17:51:15.587939+02
-6318	1940	2	\N	2014-12-14 19:37:37.036036+02
-6319	1936	2	\N	2014-12-14 19:37:54.381361+02
-6320	1940	2	\N	2014-12-14 19:41:49.794566+02
-6321	1940	2	\N	2014-12-14 19:44:37.781977+02
-6322	1940	2	\N	2014-12-14 19:48:08.98232+02
-6323	1940	2	\N	2014-12-14 19:50:28.583831+02
-6324	1940	2	\N	2014-12-14 20:30:31.46273+02
-6325	1936	2	\N	2014-12-14 20:30:45.990313+02
-6326	1940	2	\N	2014-12-14 20:33:08.50634+02
-6327	1940	2	\N	2014-12-14 20:34:47.73587+02
-6328	1940	2	\N	2014-12-14 20:37:41.082704+02
-6329	1653	2	\N	2014-12-19 21:31:43.967187+02
-6330	1653	2	\N	2014-12-19 21:37:31.746728+02
-6331	1951	2	\N	2014-12-19 21:38:17.300837+02
-6332	725	2	\N	2014-12-19 21:38:20.726452+02
-6333	1952	2	\N	2014-12-19 21:42:56.792366+02
-6334	1870	2	\N	2014-12-19 21:43:03.803839+02
-6335	1906	2	\N	2014-12-20 16:10:55.310323+02
-6338	1869	2	\N	2014-12-20 17:01:25.535753+02
-6339	1869	2	\N	2014-12-20 17:03:12.810766+02
-6340	1869	2	\N	2014-12-20 17:03:22.550854+02
-6341	1628	2	\N	2014-12-20 17:05:00.135486+02
-6342	1869	2	\N	2014-12-20 17:05:08.130568+02
-6343	1626	2	\N	2014-12-20 17:50:11.179188+02
-6344	1615	2	\N	2014-12-20 17:50:33.508978+02
-6345	1954	2	\N	2014-12-20 18:18:17.329483+02
-6346	1954	2	\N	2014-12-20 18:18:27.668631+02
-6349	1225	2	\N	2014-12-21 12:57:50.837529+02
-6350	1433	2	\N	2014-12-21 12:57:59.036844+02
-6351	1954	2	\N	2014-12-21 13:04:30.43023+02
-6355	1956	2	\N	2014-12-21 14:58:01.627945+02
-6356	1383	2	\N	2014-12-21 14:58:04.4436+02
-6357	1383	2	\N	2014-12-21 14:58:18.134114+02
-6387	1958	2	\N	2014-12-21 19:20:00.336409+02
-6388	1958	2	\N	2014-12-21 19:40:10.412709+02
-6389	1958	2	\N	2014-12-21 19:43:18.014602+02
-6393	1962	2	\N	2014-12-24 21:32:53.618984+02
-6400	1964	2	\N	2014-12-25 21:05:49.345482+02
-6411	1317	2	\N	2014-12-27 14:48:10.519499+02
-6415	1966	2	\N	2014-12-27 19:34:56.371248+02
-6418	1966	2	\N	2014-12-31 19:10:29.989911+02
-6420	1968	2	\N	2015-01-03 12:32:10.846571+02
-6422	1970	2	\N	2015-01-03 12:35:21.670372+02
-6423	1971	2	\N	2015-01-04 12:45:51.571627+02
-6425	1971	2	\N	2015-01-04 12:46:35.715575+02
-6426	1971	2	\N	2015-01-04 14:05:54.230775+02
-6428	1975	2	\N	2015-01-04 14:47:53.838979+02
-6430	1977	2	\N	2015-01-04 16:44:50.635763+02
-6431	1975	2	\N	2015-01-04 16:54:32.711408+02
-6432	1975	2	\N	2015-01-04 17:11:52.039507+02
-6433	1975	2	\N	2015-01-04 17:31:46.570967+02
-6434	1975	2	\N	2015-01-07 14:12:48.405815+02
-6435	1975	2	\N	2015-01-07 14:22:19.046581+02
-6436	1978	2	\N	2015-01-07 18:00:22.111119+02
-6437	1979	2	\N	2015-01-07 18:22:39.961593+02
-6438	1980	2	\N	2015-01-07 18:22:48.978415+02
-6439	1981	2	\N	2015-01-07 18:23:19.524712+02
-6440	3	2	\N	2015-01-07 18:23:30.384627+02
-6441	1982	2	\N	2015-01-07 18:30:42.662112+02
-6442	3	2	\N	2015-01-07 18:30:49.411934+02
-6443	3	2	\N	2015-01-07 18:31:24.902432+02
-6444	784	2	\N	2015-01-08 13:21:17.321066+02
-6445	784	2	\N	2015-01-08 13:27:01.529898+02
-6446	784	2	\N	2015-01-08 14:19:17.153858+02
-6447	784	2	\N	2015-01-08 14:20:23.527059+02
-6448	784	2	\N	2015-01-09 10:59:22.101268+02
-6453	1983	2	\N	2015-01-13 17:00:57.932019+02
-6454	1985	2	\N	2015-01-13 17:03:06.725248+02
-6455	1985	2	\N	2015-01-14 21:32:00.651438+02
-6458	1988	2	\N	2015-01-15 21:27:50.402917+02
-6459	1989	2	\N	2015-01-17 15:06:55.170629+02
-6460	1990	2	\N	2015-01-17 19:50:58.298272+02
-6461	1991	2	\N	2015-01-17 19:50:58.298272+02
-6462	1992	2	\N	2015-01-17 19:51:20.956564+02
-6463	1990	2	\N	2015-01-17 21:28:18.900625+02
-6464	1993	2	\N	2015-01-17 21:28:36.972519+02
-6465	1994	2	\N	2015-01-17 21:50:01.04394+02
-6466	1995	2	\N	2015-01-17 21:50:14.61181+02
-6467	1996	2	\N	2015-01-17 21:54:58.910426+02
-6468	1997	2	\N	2015-01-17 21:54:58.910426+02
-6472	2001	2	\N	2015-01-17 21:57:17.28338+02
-6473	2002	2	\N	2015-01-17 21:57:17.28338+02
-6477	2006	2	\N	2015-01-17 22:00:39.986496+02
-6478	2007	2	\N	2015-01-17 22:00:39.986496+02
-6480	2009	2	\N	2015-01-21 21:44:18.418746+02
-6481	1985	2	\N	2015-02-01 13:03:47.123323+02
-6482	2009	2	\N	2015-02-01 13:05:09.626214+02
-6483	2011	2	\N	2015-02-01 13:23:15.549518+02
-6484	1004	2	\N	2015-02-01 13:23:17.930893+02
-6485	2012	2	\N	2015-02-01 13:51:03.67962+02
-6486	1470	2	\N	2015-02-01 13:51:06.125989+02
-6487	2013	2	\N	2015-02-01 15:08:04.506074+02
-6488	2014	2	\N	2015-02-01 15:08:25.548868+02
-6489	2015	2	\N	2015-02-01 15:09:02.223788+02
-6490	2016	2	\N	2015-02-01 15:09:49.640295+02
-6491	2017	2	\N	2015-02-01 15:09:55.959842+02
-6492	2018	2	\N	2015-02-01 15:12:43.612773+02
-6493	2019	2	\N	2015-02-01 15:13:13.911124+02
-6494	2020	2	\N	2015-02-01 15:13:27.313034+02
-6497	2023	2	\N	2015-02-01 15:16:10.834689+02
-6498	2024	2	\N	2015-02-01 15:16:30.308954+02
-6503	2027	2	\N	2015-02-01 15:27:55.689729+02
-6504	2028	2	\N	2015-02-01 15:27:55.689729+02
-6505	2029	2	\N	2015-02-01 19:41:31.921287+02
-6506	2030	2	\N	2015-02-01 19:49:07.587188+02
-6507	2031	2	\N	2015-02-01 19:49:18.380376+02
-6508	2032	2	\N	2015-02-01 19:51:03.621123+02
-6509	1004	2	\N	2015-02-01 19:51:06.683043+02
-6515	2038	2	\N	2015-02-01 19:53:59.085718+02
-6516	2039	2	\N	2015-02-01 19:53:59.085718+02
-6521	2044	2	\N	2015-02-01 19:54:52.686809+02
-6522	2045	2	\N	2015-02-01 19:54:52.686809+02
-6523	2046	2	\N	2015-02-01 19:54:52.686809+02
-6524	2047	2	\N	2015-02-01 19:54:52.686809+02
-6525	2048	2	\N	2015-02-03 20:05:38.797054+02
-6526	2048	2	\N	2015-02-03 20:06:16.781057+02
-6528	2049	2	\N	2015-02-03 21:27:11.659126+02
-6529	2048	2	\N	2015-02-03 21:27:36.200475+02
-6530	2050	2	\N	2015-02-04 21:04:02.527314+02
-6531	2051	2	\N	2015-02-04 21:04:04.474427+02
-6532	2051	2	\N	2015-02-04 21:11:28.094987+02
-6533	2052	2	\N	2015-02-04 21:11:39.281593+02
-6534	2051	2	\N	2015-02-23 21:04:13.639992+02
-6535	1648	2	\N	2015-02-24 14:58:15.754816+02
-6537	2054	2	\N	2015-02-24 21:04:26.838046+02
-6539	2054	2	\N	2015-02-24 21:06:08.284296+02
-6541	2054	2	\N	2015-02-24 21:06:27.830735+02
-6542	2055	2	\N	2015-03-03 16:25:23.003263+02
-6553	2051	2	\N	2015-03-05 21:22:31.156271+02
-6554	2052	2	\N	2015-03-05 21:22:34.187754+02
-6555	2049	2	\N	2015-03-07 13:59:54.391614+02
-6556	2049	2	\N	2015-03-07 14:00:01.858793+02
-6557	2049	2	\N	2015-03-07 14:00:08.905813+02
-6558	2049	2	\N	2015-03-07 17:41:13.176137+02
-6559	2049	2	\N	2015-03-07 17:41:24.454712+02
-6560	2016	2	\N	2015-03-07 19:11:45.990005+02
-6561	1971	2	\N	2015-03-07 20:39:22.05432+02
-6562	1939	2	\N	2015-03-07 20:41:30.911568+02
-6563	1964	2	\N	2015-03-07 20:41:40.386597+02
-6564	1962	2	\N	2015-03-07 20:41:47.24255+02
-6565	2009	2	\N	2015-03-07 20:41:57.590912+02
-6566	1958	2	\N	2015-03-07 20:42:08.257141+02
-6567	2062	2	\N	2015-03-07 20:44:22.388688+02
-6568	1958	2	\N	2015-03-07 20:44:57.143369+02
-6569	1922	2	\N	2015-03-07 21:16:33.311167+02
-6570	1930	2	\N	2015-03-07 21:18:30.204883+02
-6571	1980	2	\N	2015-03-07 21:18:36.892234+02
-6572	1930	2	\N	2015-03-07 21:21:01.745845+02
-6573	1982	2	\N	2015-03-07 21:45:35.899441+02
-6574	1983	2	\N	2015-03-07 21:45:46.115364+02
-6575	1985	2	\N	2015-03-07 21:45:53.837217+02
-6576	2016	2	\N	2015-03-07 21:46:03.965785+02
-6577	1940	2	\N	2015-03-07 21:46:13.798132+02
-6578	1932	2	\N	2015-03-07 21:46:22.868946+02
-6579	1934	2	\N	2015-03-07 21:46:33.42948+02
-6580	1935	2	\N	2015-03-07 21:46:42.582075+02
-6581	1936	2	\N	2015-03-07 21:46:53.561952+02
-6582	1933	2	\N	2015-03-07 21:47:06.74156+02
-6584	1922	2	\N	2015-03-08 18:02:14.423833+02
-6585	1922	2	\N	2015-03-08 18:02:24.288542+02
-6586	1989	2	\N	2015-03-08 18:07:00.091644+02
-6587	1922	2	\N	2015-03-08 18:17:03.971743+02
-6588	1922	2	\N	2015-03-08 18:29:12.5349+02
-6589	2063	2	\N	2015-03-08 18:41:45.468589+02
-6590	1989	2	\N	2015-03-08 18:41:51.822924+02
-6592	2065	2	\N	2015-03-09 14:02:38.899688+02
-6593	2066	2	\N	2015-03-09 17:16:22.759831+02
-6594	2068	2	\N	2015-03-09 19:28:40.834898+02
-6595	1980	2	\N	2015-03-09 19:37:29.594475+02
-6596	1389	2	\N	2015-03-15 19:00:11.360402+02
-6597	1389	2	\N	2015-03-15 19:07:00.022851+02
-6598	1389	2	\N	2015-03-15 19:08:22.540227+02
-6599	2070	2	\N	2015-03-21 15:11:50.495946+02
-6600	1989	2	\N	2015-03-21 15:11:59.182752+02
-6603	2052	2	\N	2015-03-21 16:50:40.821135+02
-6605	2052	2	\N	2015-03-21 16:52:47.683727+02
-6606	2075	2	\N	2015-03-21 17:05:47.83578+02
-6607	2075	2	\N	2015-03-21 17:06:12.331454+02
-6608	2052	2	\N	2015-03-21 17:06:35.32059+02
-6609	2070	2	\N	2015-03-21 17:48:31.664941+02
-6610	2077	2	\N	2015-03-21 17:49:14.645342+02
-6618	2052	2	\N	2015-03-21 18:16:06.930298+02
-6621	2052	2	\N	2015-03-21 18:19:16.455929+02
-6622	2087	2	\N	2015-03-21 18:20:19.713186+02
-6623	2052	2	\N	2015-03-21 18:20:29.187736+02
-6624	2052	2	\N	2015-03-21 19:28:39.349206+02
-6625	2052	2	\N	2015-03-21 19:30:14.844869+02
-6626	2052	2	\N	2015-03-21 19:33:54.902921+02
-6627	2052	2	\N	2015-03-21 19:34:11.317898+02
-6628	2052	2	\N	2015-03-21 19:35:55.581037+02
-6629	2052	2	\N	2015-03-21 19:36:06.902031+02
-6630	2052	2	\N	2015-03-21 19:36:15.834648+02
-6631	2052	2	\N	2015-03-21 19:36:28.227499+02
-6632	2052	2	\N	2015-03-21 19:36:44.271289+02
-6633	2088	2	\N	2015-03-21 19:36:44.271289+02
-6634	2089	2	\N	2015-03-21 19:38:07.835672+02
-6635	2090	2	\N	2015-03-21 19:38:10.203402+02
-6637	2052	2	\N	2015-03-21 19:40:18.868487+02
-6638	2052	2	\N	2015-03-21 19:41:03.761402+02
-6639	2052	2	\N	2015-03-21 19:42:48.725752+02
-6640	2052	2	\N	2015-03-21 19:43:52.346215+02
-6641	2092	2	\N	2015-03-21 20:11:35.939948+02
-6642	2052	2	\N	2015-03-21 20:11:42.394011+02
-6643	2052	2	\N	2015-03-21 20:12:01.524624+02
-6646	2052	2	\N	2015-03-21 21:14:06.180767+02
-6647	2095	2	\N	2015-03-21 22:03:40.435063+02
-6648	2051	2	\N	2015-03-21 22:03:42.699321+02
-6649	2088	2	\N	2015-03-21 22:03:45.19164+02
-6650	2052	2	\N	2015-03-21 22:12:59.222848+02
-6651	971	2	\N	2015-03-22 16:55:09.922468+02
-6652	2096	2	\N	2015-03-22 17:22:28.394236+02
-6653	970	2	\N	2015-03-22 17:22:30.31308+02
-6654	971	2	\N	2015-03-22 17:32:58.675826+02
-6655	2097	2	\N	2015-03-22 17:35:36.969555+02
-6656	2052	2	\N	2015-03-22 17:35:38.710629+02
-6657	2052	2	\N	2015-03-22 17:35:54.667572+02
-6658	2052	2	\N	2015-03-22 17:36:02.394493+02
-6659	1413	2	\N	2015-03-22 21:10:23.96026+02
-6660	2098	2	\N	2015-03-22 21:12:12.040889+02
-6661	1413	2	\N	2015-03-22 21:12:14.574907+02
-6662	953	2	\N	2015-03-23 10:52:07.126828+02
-6663	955	2	\N	2015-03-23 10:52:46.434534+02
-6664	955	2	\N	2015-03-23 10:53:07.107505+02
-6665	971	2	\N	2015-03-23 11:17:09.549645+02
-6666	971	2	\N	2015-03-23 11:17:14.786132+02
-6667	971	2	\N	2015-03-23 22:30:47.611278+02
-6668	2099	2	\N	2015-03-24 19:25:49.743645+02
-6669	2100	2	\N	2015-03-24 19:26:22.746874+02
-6670	2101	2	\N	2015-03-24 19:30:50.825716+02
-6671	1413	2	\N	2015-03-24 21:27:29.027714+02
-6672	1413	2	\N	2015-03-24 21:27:56.025596+02
-6673	2104	2	\N	2015-03-25 22:08:36.018637+02
-6674	2105	2	\N	2015-03-25 22:09:11.121353+02
-6675	2106	2	\N	2015-03-25 22:10:32.26983+02
-6676	2107	2	\N	2015-03-27 21:02:27.365736+02
-6677	1413	2	\N	2015-03-27 22:11:48.664734+02
-6678	1318	2	\N	2015-03-27 22:11:57.175441+02
-6679	2108	2	\N	2015-03-27 22:14:09.702895+02
-6680	1413	2	\N	2015-03-27 22:14:23.177174+02
-6681	1975	2	\N	2015-03-29 14:54:09.090695+03
-6682	1975	2	\N	2015-03-29 14:56:05.558074+03
-6683	2054	2	\N	2015-03-29 18:10:37.298528+03
-6684	2054	2	\N	2015-03-29 18:10:44.494853+03
-6685	2054	2	\N	2015-03-29 18:11:59.351954+03
-6686	894	2	\N	2015-03-29 18:12:33.345883+03
-6687	2108	2	\N	2015-03-29 18:41:14.962865+03
-6688	2108	2	\N	2015-03-29 18:41:28.932911+03
-6689	2108	2	\N	2015-03-29 18:41:35.361837+03
-6693	1578	2	\N	2015-03-29 19:28:18.094577+03
-6694	1563	2	\N	2015-03-29 19:28:26.306719+03
-6695	1560	2	\N	2015-03-29 19:28:31.032916+03
-6696	1649	2	\N	2015-03-29 20:30:21.118741+03
-6698	2111	2	\N	2015-03-29 20:32:08.188477+03
-6699	918	2	\N	2015-03-29 20:45:02.042426+03
-6700	918	2	\N	2015-03-29 20:45:08.391579+03
-6701	917	2	\N	2015-03-29 20:45:13.080299+03
-6702	916	2	\N	2015-03-29 20:45:17.094049+03
-6703	952	2	\N	2015-03-29 20:51:29.823177+03
-6705	988	2	\N	2015-03-29 20:57:38.470567+03
-6707	971	2	\N	2015-03-29 21:04:32.587955+03
-6709	1647	2	\N	2015-03-29 21:11:13.101083+03
-6710	2115	2	\N	2015-03-29 21:11:20.771189+03
-6711	1648	2	\N	2015-03-29 21:19:19.348961+03
-6715	1419	2	\N	2015-03-31 18:55:34.756779+03
-6716	1415	2	\N	2015-03-31 18:55:54.50919+03
-6718	1507	2	\N	2015-03-31 19:11:10.805316+03
-6719	1507	2	\N	2015-03-31 19:11:17.000092+03
-6720	1507	2	\N	2015-03-31 19:11:23.716877+03
-6721	1898	2	\N	2015-03-31 19:19:08.662529+03
-6722	1898	2	\N	2015-03-31 19:19:13.979595+03
-6723	1898	2	\N	2015-03-31 19:19:19.541915+03
-6724	2119	2	\N	2015-03-31 19:31:32.255315+03
-6725	1419	2	\N	2015-03-31 19:31:35.171043+03
-6726	2120	2	\N	2015-03-31 21:42:30.209371+03
-6727	2107	2	\N	2015-04-06 22:18:27.344977+03
-6728	2054	2	\N	2015-04-22 09:31:23.533867+03
-6729	2126	2	\N	2015-04-22 10:21:50.083529+03
-6730	2126	2	\N	2015-04-22 10:34:35.83663+03
-6731	2127	2	\N	2015-04-22 15:08:30.934237+03
-6732	2128	2	\N	2015-04-22 15:09:24.597951+03
-6733	2129	2	\N	2015-04-22 15:30:21.099029+03
-6734	2130	2	\N	2015-04-22 15:30:28.848383+03
-6735	2131	2	\N	2015-04-22 15:33:06.666889+03
-6736	2126	2	\N	2015-04-22 15:33:09.520564+03
-6737	2132	2	\N	2015-04-22 15:34:13.439147+03
-6738	2126	2	\N	2015-04-22 15:34:14.494849+03
-6739	2126	2	\N	2015-04-22 15:34:41.240196+03
-6740	2130	2	\N	2015-04-24 21:16:26.897843+03
-6741	953	2	\N	2015-04-24 21:38:02.133997+03
-6742	955	2	\N	2015-04-24 21:39:08.574084+03
-6743	2108	2	\N	2015-04-25 13:14:21.858762+03
-6745	2135	2	\N	2015-04-25 16:39:24.611492+03
-6746	2128	2	\N	2015-04-25 16:59:29.339712+03
-6747	2136	2	\N	2015-04-25 16:59:52.412523+03
-6748	2137	2	\N	2015-04-25 21:29:39.820793+03
-6749	2138	2	\N	2015-04-25 21:29:47.819244+03
-6750	2139	2	\N	2015-04-25 21:29:55.72108+03
-6751	2144	2	\N	2015-04-26 00:17:08.072699+03
-6752	2145	2	\N	2015-04-26 00:17:08.072699+03
-6753	2146	2	\N	2015-04-26 00:22:46.640907+03
-6754	2147	2	\N	2015-04-26 00:22:46.640907+03
-6755	2148	2	\N	2015-04-26 00:26:59.761945+03
-6756	2149	2	\N	2015-04-26 00:26:59.761945+03
-6757	2150	2	\N	2015-04-26 00:30:11.687983+03
-6758	2151	2	\N	2015-04-26 00:30:11.687983+03
-6759	2152	2	\N	2015-04-26 00:36:42.355592+03
-6760	2153	2	\N	2015-04-26 00:36:42.355592+03
-6761	2154	2	\N	2015-04-26 00:44:52.209962+03
-6762	2155	2	\N	2015-04-26 00:44:52.209962+03
-6763	2156	2	\N	2015-04-26 09:56:13.81422+03
-6764	2157	2	\N	2015-04-26 09:56:13.81422+03
-6765	2158	2	\N	2015-04-26 10:00:13.021078+03
-6766	2159	2	\N	2015-04-26 10:00:13.021078+03
-6767	2160	2	\N	2015-04-26 10:09:07.981749+03
-6768	2161	2	\N	2015-04-26 10:09:07.981749+03
-6769	2162	2	\N	2015-04-26 10:11:20.869074+03
-6770	2163	2	\N	2015-04-26 10:11:20.869074+03
-6771	2164	2	\N	2015-04-26 10:23:35.980962+03
-6772	2165	2	\N	2015-04-26 10:23:35.980962+03
-6774	2167	2	\N	2015-04-26 10:30:42.474899+03
-6775	2168	2	\N	2015-04-26 10:30:42.474899+03
-6778	2171	2	\N	2015-04-26 10:38:49.924523+03
-6779	2172	2	\N	2015-04-26 10:41:15.682562+03
-6780	2173	2	\N	2015-04-26 10:41:15.682562+03
-6781	2174	2	\N	2015-04-26 10:51:18.425172+03
-6782	2175	2	\N	2015-04-26 10:51:18.425172+03
-6783	2176	2	\N	2015-04-26 10:54:26.243589+03
-6784	2177	2	\N	2015-04-26 10:54:26.243589+03
-6785	2178	2	\N	2015-04-26 10:57:26.669326+03
-6786	2179	2	\N	2015-04-26 10:57:26.669326+03
-6787	2180	2	\N	2015-04-26 11:08:04.739521+03
-6788	2181	2	\N	2015-04-26 11:08:04.739521+03
-6789	2182	2	\N	2015-04-26 11:13:10.975009+03
-6790	2183	2	\N	2015-04-26 11:13:10.975009+03
-6791	2184	2	\N	2015-04-26 13:03:25.416787+03
-6792	2185	2	\N	2015-04-26 13:03:25.416787+03
-6793	2186	2	\N	2015-04-26 13:42:49.969814+03
-6794	2187	2	\N	2015-04-26 14:04:42.384772+03
-6795	2188	2	\N	2015-04-26 14:04:42.384772+03
-6796	2189	2	\N	2015-04-26 14:05:26.994527+03
-6797	2190	2	\N	2015-04-26 14:05:26.994527+03
-6798	2186	2	\N	2015-04-26 14:05:29.313624+03
-6801	2197	2	\N	2015-05-03 13:21:34.120955+03
-6802	2197	2	\N	2015-05-03 13:23:12.828981+03
-6803	2197	2	\N	2015-05-03 13:34:38.831852+03
-6804	2197	2	\N	2015-05-03 13:40:51.674186+03
-6805	2199	2	\N	2015-05-03 23:18:19.876372+03
-6806	1780	2	\N	2015-05-03 23:18:33.103558+03
-6807	1368	2	\N	2015-05-04 19:21:58.460934+03
-6808	1368	2	\N	2015-05-04 19:22:20.533133+03
-6809	2200	2	\N	2015-05-04 20:57:01.637182+03
-6810	2201	2	\N	2015-05-04 20:58:33.565049+03
-6811	2203	2	\N	2015-05-04 21:30:33.485239+03
-6812	1003	2	\N	2015-05-08 21:15:22.303904+03
-6813	2205	2	\N	2015-05-08 22:38:40.1563+03
-6814	2206	2	\N	2015-05-08 22:40:57.101857+03
-6815	2207	2	\N	2015-05-08 22:43:00.228497+03
-6816	2208	2	\N	2015-05-08 22:43:46.205549+03
-6817	2209	2	\N	2015-05-09 15:04:04.437709+03
-6818	2210	2	\N	2015-05-09 15:18:42.295591+03
-6819	2211	2	\N	2015-05-09 15:20:41.04877+03
-6820	2212	2	\N	2015-05-09 15:21:16.54612+03
-6821	2213	2	\N	2015-05-09 15:21:20.750661+03
-6822	2214	2	\N	2015-05-09 15:27:46.304009+03
-6823	2215	2	\N	2015-05-09 15:27:52.157735+03
-6824	2216	2	\N	2015-05-09 15:32:20.738122+03
-6825	2216	2	\N	2015-05-09 15:34:43.153612+03
-6826	2216	2	\N	2015-05-09 15:35:37.080548+03
-6827	2216	2	\N	2015-05-09 15:36:20.491648+03
-6828	2216	2	\N	2015-05-09 15:36:28.290218+03
-6829	2217	2	\N	2015-05-09 16:10:30.715652+03
-6830	2218	2	\N	2015-05-09 16:40:29.294581+03
-6831	2216	2	\N	2015-05-09 16:40:47.688279+03
-6832	2219	2	\N	2015-05-09 16:52:43.81748+03
-6833	1550	2	\N	2015-05-09 16:53:04.04708+03
-6834	1008	2	\N	2015-05-09 16:53:15.905297+03
-6836	2218	2	\N	2015-05-09 16:56:24.612587+03
-6837	2221	2	\N	2015-05-09 16:58:37.060459+03
-6838	2216	2	\N	2015-05-09 17:04:04.921556+03
-6839	2216	2	\N	2015-05-09 17:04:48.531212+03
-6840	1563	2	\N	2015-05-09 19:32:44.822595+03
-6841	2222	2	\N	2015-05-09 19:43:25.178079+03
-6842	2215	2	\N	2015-05-09 20:07:16.539791+03
-6843	2216	2	\N	2015-05-09 20:07:46.078918+03
-6844	2223	2	\N	2015-05-09 20:08:53.78535+03
-6845	2224	2	\N	2015-05-09 20:09:23.379411+03
-6846	2225	2	\N	2015-05-09 20:09:44.887962+03
-6847	2226	2	\N	2015-05-09 20:17:22.088876+03
-6848	2227	2	\N	2015-05-09 20:29:08.971941+03
-6849	2228	2	\N	2015-05-09 20:29:24.701653+03
-6850	2229	2	\N	2015-05-09 20:29:40.419576+03
-6851	2224	2	\N	2015-05-09 20:29:49.729598+03
-6852	2230	2	\N	2015-05-09 20:30:09.233291+03
-6853	2231	2	\N	2015-05-09 20:30:23.623593+03
-6854	2232	2	\N	2015-05-09 20:30:35.560504+03
-6855	2233	2	\N	2015-05-09 20:30:51.356148+03
-6856	2234	2	\N	2015-05-09 20:31:09.312334+03
-6857	2235	2	\N	2015-05-09 20:31:21.029136+03
-6858	2236	2	\N	2015-05-09 20:31:43.127575+03
-6859	2237	2	\N	2015-05-09 20:31:57.326798+03
-6860	2238	2	\N	2015-05-09 20:32:20.746647+03
-6861	2239	2	\N	2015-05-09 20:32:35.107871+03
-6862	2240	2	\N	2015-05-09 20:32:50.419187+03
-6863	2241	2	\N	2015-05-09 20:33:01.999568+03
-6864	2242	2	\N	2015-05-09 20:33:16.190303+03
-6865	2236	2	\N	2015-05-09 20:54:08.857766+03
-6866	2216	2	\N	2015-05-09 21:04:14.03464+03
-6867	1578	2	\N	2015-05-09 21:16:42.718164+03
-6868	2243	2	\N	2015-05-10 13:44:27.494956+03
-6869	2244	2	\N	2015-05-10 13:45:29.048699+03
-6870	2245	2	\N	2015-05-10 13:46:40.29071+03
-6871	2246	2	\N	2015-05-10 14:01:26.829403+03
-6872	2247	2	\N	2015-05-10 14:01:57.254972+03
-6873	2248	2	\N	2015-05-10 14:10:42.034833+03
-6874	2249	2	\N	2015-05-10 14:10:53.000133+03
-6875	2254	2	\N	2015-05-10 14:35:53.336283+03
-6876	2255	2	\N	2015-05-10 14:35:53.336283+03
-6877	2256	2	\N	2015-05-10 14:39:45.730714+03
-6878	2257	2	\N	2015-05-10 14:39:45.730714+03
-6879	2258	2	\N	2015-05-10 14:45:11.098493+03
-6880	2259	2	\N	2015-05-10 14:45:11.098493+03
-6881	2260	2	\N	2015-05-10 14:53:32.27851+03
-6882	2261	2	\N	2015-05-10 14:53:32.27851+03
-6883	2262	2	\N	2015-05-10 14:57:13.121414+03
-6884	2263	2	\N	2015-05-10 14:57:13.121414+03
-6885	2264	2	\N	2015-05-10 14:57:55.441966+03
-6886	2265	2	\N	2015-05-10 15:07:20.399588+03
-6887	2266	2	\N	2015-05-10 15:07:20.399588+03
-6888	2267	2	\N	2015-05-10 15:07:27.786314+03
-6889	2268	2	\N	2015-05-10 16:04:17.22685+03
-6890	2269	2	\N	2015-05-10 16:04:56.471262+03
-6891	1318	2	\N	2015-05-10 16:05:16.31159+03
-6893	2271	2	\N	2015-05-10 16:08:32.663974+03
-6894	2272	2	\N	2015-05-10 16:08:35.587577+03
-6895	2273	2	\N	2015-05-10 16:08:47.271902+03
-6896	2274	2	\N	2015-05-10 16:08:47.271902+03
-6897	2275	2	\N	2015-05-10 16:09:34.650716+03
-6898	2276	2	\N	2015-05-10 22:11:18.586994+03
-6899	2277	2	\N	2015-05-10 22:12:40.523328+03
-6900	1314	2	\N	2015-05-10 22:12:56.872348+03
-6901	2278	2	\N	2015-05-10 22:14:48.438204+03
-6902	2279	2	\N	2015-05-10 22:14:48.438204+03
-6903	2280	2	\N	2015-05-10 22:19:21.083289+03
-6904	2280	2	\N	2015-05-13 21:55:52.759278+03
-6905	2275	2	\N	2015-05-13 21:56:48.008072+03
-6906	2267	2	\N	2015-05-13 21:56:54.031403+03
-6907	2264	2	\N	2015-05-13 21:56:59.496539+03
-6908	2281	2	\N	2015-05-16 15:29:57.002389+03
-6909	2282	2	\N	2015-05-16 15:34:53.800182+03
-6910	2283	2	\N	2015-05-16 15:34:53.800182+03
-6911	2284	2	\N	2015-05-16 15:36:09.929045+03
-6912	2285	2	\N	2015-05-16 15:45:33.371911+03
-6913	2286	2	\N	2015-05-16 15:45:33.371911+03
-6914	2287	2	\N	2015-05-16 15:48:18.436182+03
-6915	2288	2	\N	2015-05-16 15:48:18.436182+03
-6916	2289	2	\N	2015-05-17 21:30:51.134604+03
-6917	2280	2	\N	2015-05-17 21:31:00.094313+03
-6918	2290	2	\N	2015-05-17 21:31:39.003456+03
-6919	2280	2	\N	2015-05-17 21:31:48.129633+03
-6920	2284	2	\N	2015-05-17 22:02:03.373006+03
-6921	2284	2	\N	2015-05-17 22:02:31.027832+03
-6922	2291	2	\N	2015-05-18 16:39:17.24427+03
-6923	2284	2	\N	2015-05-18 16:40:09.305094+03
-6924	2284	2	\N	2015-05-18 20:31:39.659544+03
-6925	2284	2	\N	2015-05-18 20:34:34.03653+03
-6926	2284	2	\N	2015-05-18 21:22:46.805573+03
-6927	2292	2	\N	2015-05-24 12:55:28.784478+03
-6928	1212	2	\N	2015-05-24 13:06:21.488837+03
-6929	2293	2	\N	2015-05-24 15:06:40.212091+03
-6930	2294	2	\N	2015-05-24 15:11:44.965777+03
-6931	2295	2	\N	2015-05-24 16:49:53.513439+03
-6932	2296	2	\N	2015-05-24 16:50:41.467323+03
-6933	2297	2	\N	2015-05-24 16:55:00.642026+03
-6934	2299	2	\N	2015-05-24 16:57:39.672043+03
-6935	2300	2	\N	2015-05-24 17:03:51.85238+03
-6936	2088	2	\N	2015-05-24 17:03:55.878998+03
-6937	2301	2	\N	2015-05-24 17:04:54.502108+03
-6938	2088	2	\N	2015-05-24 17:10:16.729607+03
-6939	2088	2	\N	2015-05-24 17:10:29.437025+03
-6940	2088	2	\N	2015-05-24 17:15:30.592241+03
-6941	2302	2	\N	2015-05-24 17:16:33.029089+03
-6942	2075	2	\N	2015-05-24 17:16:41.742578+03
-6943	2303	2	\N	2015-05-24 17:17:17.81127+03
-6944	2088	2	\N	2015-05-24 17:17:21.677682+03
-6945	2305	2	\N	2015-05-24 20:37:07.412723+03
-6946	2052	2	\N	2015-05-24 20:37:10.892479+03
-6947	2088	2	\N	2015-05-24 21:01:25.501241+03
-6948	2052	2	\N	2015-05-24 21:13:25.598747+03
-6949	2306	2	\N	2015-05-24 21:14:39.628922+03
-6950	2052	2	\N	2015-05-24 21:14:43.723121+03
-6951	2280	2	\N	2015-05-24 21:21:32.476216+03
-6952	2280	2	\N	2015-05-24 21:22:00.849383+03
-6953	2280	2	\N	2015-05-24 21:22:09.702717+03
-6954	2307	2	\N	2015-05-24 21:32:02.910902+03
-6955	2308	2	\N	2015-05-24 21:32:24.738611+03
-6956	2309	2	\N	2015-05-24 21:32:31.516248+03
-6957	2310	2	\N	2015-05-24 21:33:17.528061+03
-6958	2311	2	\N	2015-05-24 21:35:46.300244+03
-6959	2312	2	\N	2015-05-24 21:36:06.190691+03
-6960	2312	2	\N	2015-05-24 21:36:27.205265+03
-6961	2313	2	\N	2015-05-25 21:31:05.718794+03
-6962	2312	2	\N	2015-05-25 21:31:08.674137+03
-6963	2314	2	\N	2015-05-26 20:44:11.702313+03
-6964	2315	2	\N	2015-05-26 20:44:48.242189+03
-6965	2316	2	\N	2015-05-26 20:44:48.242189+03
-6966	2317	2	\N	2015-05-26 20:45:01.161364+03
-6967	2284	2	\N	2015-05-28 13:46:35.94219+03
-6968	2317	2	\N	2015-05-28 13:46:45.92498+03
-6969	2280	2	\N	2015-05-28 13:46:51.874219+03
-6970	1507	2	\N	2015-05-31 21:55:12.660877+03
-6971	1507	2	\N	2015-05-31 21:56:27.809825+03
-6972	1439	2	\N	2015-05-31 21:57:11.520889+03
-6973	1507	2	\N	2015-05-31 21:58:33.173778+03
-6974	1507	2	\N	2015-05-31 22:00:02.964614+03
-6975	1507	2	\N	2015-05-31 22:00:38.733485+03
-6976	1507	2	\N	2015-05-31 22:11:01.827304+03
-6977	1507	2	\N	2015-06-01 09:54:54.423199+03
-6978	2284	2	\N	2015-06-01 11:22:28.244232+03
-6979	2319	2	\N	2015-06-01 11:37:24.071069+03
-6980	2320	2	\N	2015-06-01 12:56:01.185317+03
-6986	2327	2	\N	2015-06-02 13:22:30.670092+03
-6987	2328	2	\N	2015-06-02 13:22:36.147873+03
-6988	2329	2	\N	2015-06-02 13:23:35.222007+03
-6989	2330	2	\N	2015-06-02 13:24:32.384898+03
-6990	2331	2	\N	2015-06-02 13:25:52.745886+03
-6991	2332	2	\N	2015-06-02 13:27:31.983851+03
-6992	2333	2	\N	2015-06-02 13:27:36.950926+03
-6993	2334	2	\N	2015-06-02 13:28:43.733459+03
-6994	2335	2	\N	2015-06-02 13:29:10.771807+03
-6995	2336	2	\N	2015-06-02 13:29:57.138464+03
-6996	2337	2	\N	2015-06-02 13:30:11.199071+03
-6997	2338	2	\N	2015-06-02 13:34:47.558077+03
-6998	2339	2	\N	2015-06-02 13:34:50.130325+03
-6999	2340	2	\N	2015-06-02 13:35:46.336511+03
-7000	2341	2	\N	2015-06-02 13:36:09.066506+03
-7001	2342	2	\N	2015-06-02 13:36:09.066506+03
-7002	2343	2	\N	2015-06-02 13:37:26.99598+03
-7003	2344	2	\N	2015-06-02 13:37:26.99598+03
-7004	2345	2	\N	2015-06-02 13:37:42.100766+03
-7023	2345	2	\N	2015-06-06 20:33:35.089301+03
-7024	2366	2	\N	2015-06-06 21:47:05.357423+03
-7025	2367	2	\N	2015-06-06 21:47:08.978477+03
-7026	2368	2	\N	2015-06-06 21:49:00.661472+03
-7027	2369	2	\N	2015-06-06 21:50:18.211354+03
-7028	2370	2	\N	2015-06-06 21:51:07.167429+03
-7029	2371	2	\N	2015-06-06 21:52:21.362863+03
-7030	2372	2	\N	2015-06-06 21:52:25.91268+03
-7031	2367	2	\N	2015-06-06 22:01:59.580344+03
-7032	2373	2	\N	2015-06-06 22:05:50.240364+03
-7033	2374	2	\N	2015-06-06 22:06:07.223567+03
-7034	2375	2	\N	2015-06-06 22:06:55.79185+03
-7035	2376	2	\N	2015-06-06 22:07:46.643073+03
-7036	2377	2	\N	2015-06-06 22:08:11.14074+03
-7037	2378	2	\N	2015-06-06 22:08:11.14074+03
-7038	2379	2	\N	2015-06-06 22:10:53.894076+03
-7039	2380	2	\N	2015-06-06 22:10:53.894076+03
-7040	2381	2	\N	2015-06-06 22:12:04.71986+03
-7041	2382	2	\N	2015-06-06 22:12:17.899878+03
-7042	2372	2	\N	2015-06-06 22:12:34.850437+03
-7043	2383	2	\N	2015-06-06 22:34:30.822368+03
-7044	2384	2	\N	2015-06-06 22:35:06.098136+03
-7045	2385	2	\N	2015-06-06 22:35:22.838833+03
-7046	2382	2	\N	2015-06-06 22:36:33.646314+03
-7048	2382	2	\N	2015-06-07 15:30:58.294045+03
-7049	2247	2	\N	2015-06-07 17:10:29.033956+03
-7050	1413	2	\N	2015-06-07 17:10:56.929199+03
-7051	1318	2	\N	2015-06-07 17:11:36.862031+03
-7052	1314	2	\N	2015-06-07 17:12:28.161782+03
-7053	1431	2	\N	2015-06-07 19:55:54.571452+03
-7054	1898	2	\N	2015-06-07 19:59:40.465993+03
-7055	1898	2	\N	2015-06-07 20:00:47.882499+03
-7056	1432	2	\N	2015-06-07 20:00:59.808075+03
-7057	1608	2	\N	2015-06-07 20:01:30.177316+03
-7058	1609	2	\N	2015-06-07 20:02:19.266681+03
-7059	1769	2	\N	2015-06-07 20:03:05.939338+03
-7060	1780	2	\N	2015-06-07 20:04:36.345782+03
-7061	1873	2	\N	2015-06-07 20:05:07.816356+03
-7062	1898	2	\N	2015-06-07 20:05:26.076509+03
-7063	2199	2	\N	2015-06-07 20:05:57.959925+03
-7064	2246	2	\N	2015-06-07 20:06:32.075272+03
-7065	2246	2	\N	2015-06-07 20:06:41.085651+03
-7066	2269	2	\N	2015-06-07 20:07:23.767588+03
-7067	2277	2	\N	2015-06-07 20:07:57.192127+03
-7068	1426	2	\N	2015-06-07 20:09:52.309668+03
-7069	2389	2	\N	2015-06-07 20:10:03.246206+03
-7070	2390	2	\N	2015-06-07 20:10:21.42447+03
-7071	2391	2	\N	2015-06-07 20:10:54.694938+03
-7072	2392	2	\N	2015-06-07 20:11:12.709328+03
-7073	2393	2	\N	2015-06-07 20:11:33.449675+03
-7074	2394	2	\N	2015-06-07 20:11:54.80775+03
-7075	2395	2	\N	2015-06-07 20:12:24.648998+03
-7076	2396	2	\N	2015-06-07 20:12:47.549001+03
-7077	2397	2	\N	2015-06-07 20:13:09.482196+03
-7078	2398	2	\N	2015-06-07 20:13:26.815118+03
-7079	2399	2	\N	2015-06-07 20:13:43.442647+03
-7080	2400	2	\N	2015-06-07 20:13:57.868779+03
-7081	2401	2	\N	2015-06-07 20:14:15.895967+03
-7082	2402	2	\N	2015-06-07 20:14:42.501203+03
-7083	2403	2	\N	2015-06-07 20:15:33.611845+03
-7084	2404	2	\N	2015-06-07 20:15:53.460657+03
-7085	2405	2	\N	2015-06-07 20:16:10.772685+03
-7086	2406	2	\N	2015-06-07 20:16:32.442601+03
-7087	2407	2	\N	2015-06-07 20:16:56.509083+03
-7088	2408	2	\N	2015-06-07 20:17:19.457924+03
-7089	2409	2	\N	2015-06-07 20:17:39.828441+03
-7090	2410	2	\N	2015-06-07 20:17:59.953522+03
-7091	2411	2	\N	2015-06-07 20:18:15.36941+03
-7092	2412	2	\N	2015-06-07 20:18:33.319787+03
-7093	2413	2	\N	2015-06-07 20:18:53.786993+03
-7094	2414	2	\N	2015-06-07 20:19:17.251882+03
-7095	2415	2	\N	2015-06-07 20:34:54.782206+03
-7096	2416	2	\N	2015-06-07 20:35:11.96143+03
-7097	2417	2	\N	2015-06-07 20:35:33.998015+03
-7098	2418	2	\N	2015-06-07 20:36:01.596002+03
-7099	2419	2	\N	2015-06-07 20:36:15.960332+03
-7100	2420	2	\N	2015-06-07 20:36:35.413228+03
-7101	2421	2	\N	2015-06-07 20:37:30.352425+03
-7102	2422	2	\N	2015-06-07 20:37:53.888785+03
-7103	2423	2	\N	2015-06-07 20:38:10.610447+03
-7104	2424	2	\N	2015-06-07 20:38:59.517394+03
-7105	2425	2	\N	2015-06-07 20:39:26.415211+03
-7106	2426	2	\N	2015-06-07 20:40:05.840226+03
-7107	2427	2	\N	2015-06-07 20:40:46.537019+03
-7108	2428	2	\N	2015-06-07 20:41:01.3009+03
-7109	2429	2	\N	2015-06-07 20:41:17.634439+03
-7110	2430	2	\N	2015-06-07 20:41:36.56949+03
-7111	2431	2	\N	2015-06-07 20:41:54.944525+03
-7112	2432	2	\N	2015-06-07 20:42:11.063081+03
-7113	2433	2	\N	2015-06-10 21:10:55.543668+03
-7114	2434	2	\N	2015-06-10 21:10:58.272269+03
-7115	2434	2	\N	2015-06-10 21:11:16.546457+03
-7116	2435	2	\N	2015-06-10 21:11:49.343497+03
-7117	2436	2	\N	2015-06-10 21:12:20.087946+03
-7119	2437	2	\N	2015-06-10 21:13:28.379702+03
-7120	2434	2	\N	2015-06-10 21:13:35.658848+03
-7118	2434	2	\N	2015-06-10 21:12:30.557424+03
-7121	2434	2	\N	2015-06-13 11:08:16.884538+03
-7122	2438	2	\N	2015-06-13 12:24:23.664338+03
-7123	2439	2	\N	2015-06-13 12:25:12.11639+03
-7124	2440	2	\N	2015-06-13 12:25:55.053099+03
-7125	2439	2	\N	2015-06-13 12:28:23.509307+03
-7126	1431	2	\N	2015-06-13 16:13:14.891511+03
-7127	2269	2	\N	2015-06-13 16:29:21.58833+03
-7128	2391	2	\N	2015-06-13 16:29:38.922876+03
-7130	2442	2	\N	2015-06-13 17:22:11.365048+03
-7163	2317	2	\N	2015-06-13 19:58:33.103367+03
-7164	2451	2	\N	2015-06-13 19:59:50.784052+03
-7165	2452	2	\N	2015-06-13 19:59:50.784052+03
-7166	2317	2	\N	2015-06-13 20:00:28.712308+03
-7167	2317	2	\N	2015-06-13 20:01:26.421434+03
-7168	2317	2	\N	2015-06-13 20:03:24.653457+03
-7176	2451	2	\N	2015-06-14 10:07:32.690694+03
-7177	2451	2	\N	2015-06-14 10:16:32.619194+03
-7178	2451	2	\N	2015-06-14 13:13:57.393431+03
-7179	2451	2	\N	2015-06-14 13:21:50.094038+03
-7180	2451	2	\N	2015-06-14 13:22:37.050016+03
-7181	2451	2	\N	2015-06-14 13:23:13.387606+03
-7182	2451	2	\N	2015-06-14 13:23:25.25704+03
-7183	2457	2	\N	2015-06-14 13:25:18.074212+03
-7184	2451	2	\N	2015-06-14 13:26:56.97373+03
-7185	2458	2	\N	2015-06-14 13:28:59.472857+03
-7186	2459	2	\N	2015-06-14 13:29:40.688494+03
-7187	2457	2	\N	2015-06-14 14:17:22.935487+03
-7199	2463	2	\N	2015-06-14 16:30:22.760587+03
-7201	2463	2	\N	2015-06-14 16:43:36.808614+03
-7202	2465	2	\N	2015-06-14 18:28:13.295968+03
-7203	2466	2	\N	2015-06-14 18:50:25.96227+03
-7204	2467	2	\N	2015-06-14 18:50:57.662486+03
-7205	2468	2	\N	2015-06-17 21:13:39.6663+03
-7206	2469	2	\N	2015-06-17 21:13:39.6663+03
-7207	2469	2	\N	2015-06-17 21:39:31.5421+03
-7208	2470	2	\N	2015-06-17 21:39:43.056809+03
-7211	2296	2	\N	2015-06-17 22:28:24.889672+03
-7212	2296	2	\N	2015-06-17 22:28:44.137455+03
-7213	2296	2	\N	2015-06-17 22:28:55.531055+03
-7214	2296	2	\N	2015-06-17 22:29:04.688414+03
-7217	1190	2	\N	2015-06-18 08:41:45.975909+03
-7218	1190	2	\N	2015-06-18 08:41:55.712142+03
-7219	2475	2	\N	2015-06-18 08:47:40.598128+03
-7229	2484	2	\N	2015-06-18 09:11:44.190988+03
-7232	2486	2	\N	2015-06-19 08:53:30.530081+03
-7235	2489	2	\N	2015-06-19 08:57:56.925224+03
-7236	2490	2	\N	2015-06-19 08:58:47.001543+03
-7237	2491	2	\N	2015-06-19 09:01:01.141859+03
-7239	2493	2	\N	2015-06-19 09:05:15.381515+03
-7241	1010	2	\N	2015-06-19 09:18:51.710345+03
-7244	2129	2	\N	2015-06-19 09:22:37.844576+03
-7248	2137	2	\N	2015-06-19 09:24:18.706637+03
-7250	2248	2	\N	2015-06-19 09:24:53.046897+03
-7252	2484	2	\N	2015-06-20 10:13:59.32685+03
-7253	2501	2	\N	2015-06-20 10:23:36.01186+03
-7254	2490	2	\N	2015-06-20 10:24:30.090794+03
-7255	2502	2	\N	2015-06-20 10:25:23.92051+03
-7256	2490	2	\N	2015-06-20 10:25:26.171733+03
-7257	2503	2	\N	2015-06-20 10:58:18.119129+03
-7259	2505	2	\N	2015-06-20 11:21:58.139735+03
-7260	2506	2	\N	2015-06-20 11:22:00.401736+03
-7261	2507	2	\N	2015-06-20 11:22:46.430212+03
-7262	2506	2	\N	2015-06-20 11:22:51.478424+03
-7263	2508	2	\N	2015-06-20 11:23:54.736317+03
-7264	2506	2	\N	2015-06-20 11:23:56.167951+03
-7265	2345	2	\N	2015-06-20 11:26:36.603828+03
-7266	2345	2	\N	2015-06-20 11:27:18.047841+03
-7268	2345	2	\N	2015-06-20 11:46:46.13788+03
-7269	2510	2	\N	2015-06-20 11:50:12.161837+03
-7270	2511	2	\N	2015-06-20 11:50:13.525526+03
-7272	2463	2	\N	2015-06-20 23:00:10.769493+03
-7273	2467	2	\N	2015-06-20 23:00:18.463896+03
-7274	2459	2	\N	2015-06-20 23:00:44.920864+03
-7275	2458	2	\N	2015-06-20 23:00:51.132288+03
-7276	2457	2	\N	2015-06-20 23:00:57.565186+03
-7277	2451	2	\N	2015-06-20 23:01:04.368039+03
-7278	2451	2	\N	2015-06-20 23:04:17.342527+03
-7279	2457	2	\N	2015-06-20 23:04:23.315461+03
-7280	2458	2	\N	2015-06-20 23:04:30.160097+03
-7281	2459	2	\N	2015-06-20 23:04:35.721205+03
-7282	1896	2	\N	2015-06-21 11:16:22.975624+03
-7285	2459	2	\N	2015-06-21 11:19:17.963777+03
-7286	2458	2	\N	2015-06-21 11:19:23.880837+03
-7287	2457	2	\N	2015-06-21 11:19:29.44712+03
-7288	2451	2	\N	2015-06-21 11:19:35.471458+03
-7289	2467	2	\N	2015-06-21 11:19:54.443461+03
-7290	2463	2	\N	2015-06-21 11:20:00.085347+03
-7291	2465	2	\N	2015-06-21 11:21:33.270335+03
-7292	2513	2	\N	2015-06-23 22:26:54.54596+03
-7293	778	2	\N	2015-06-23 22:31:51.561928+03
-7294	2514	2	\N	2015-06-23 22:34:29.078834+03
-7295	2514	2	\N	2015-06-23 22:36:01.548881+03
-7296	2513	2	\N	2015-06-23 22:42:58.979814+03
-7297	2514	2	\N	2015-06-23 22:46:14.322892+03
-7298	2515	2	\N	2015-06-23 22:48:32.462285+03
-7306	784	2	\N	2015-06-27 17:39:03.474446+03
-7307	784	2	\N	2015-06-27 17:52:48.813097+03
-7308	885	2	\N	2015-06-27 17:53:15.731358+03
-7312	784	2	\N	2015-06-27 19:50:37.220816+03
-7313	784	2	\N	2015-06-27 19:50:45.528129+03
-7314	784	2	\N	2015-06-27 19:50:53.618877+03
-7315	784	2	\N	2015-06-27 19:52:29.5324+03
-7317	2516	2	\N	2015-06-27 20:34:38.335917+03
-7318	2517	2	\N	2015-06-27 21:02:52.190849+03
-7319	2518	2	\N	2015-06-27 22:00:11.577645+03
-7320	784	2	\N	2015-06-27 22:13:51.726755+03
-7321	2519	2	\N	2015-06-27 22:13:51.726755+03
-7322	2520	2	\N	2015-06-27 22:14:31.050053+03
-7323	2521	2	\N	2015-06-27 22:15:06.48124+03
-7324	2522	2	\N	2015-06-27 22:27:54.400494+03
-7325	2523	2	\N	2015-06-27 22:40:18.037224+03
-7326	2524	2	\N	2015-06-27 22:42:17.60206+03
-7327	2525	2	\N	2015-06-27 22:42:37.767083+03
-7328	784	2	\N	2015-06-27 22:49:09.961687+03
-7329	784	2	\N	2015-06-27 22:49:28.712758+03
-7330	784	2	\N	2015-06-27 22:49:40.054287+03
-7331	2526	2	\N	2015-06-28 15:48:24.134048+03
-7332	2527	2	\N	2015-06-28 15:49:06.934643+03
-7333	1930	2	\N	2015-06-28 15:49:08.476175+03
-7334	1930	2	\N	2015-06-28 15:49:15.43238+03
-7335	1286	2	\N	2015-06-28 16:19:06.654271+03
-7336	1284	2	\N	2015-06-28 16:19:08.822984+03
-7337	2528	2	\N	2015-06-28 16:27:58.214962+03
-7338	2529	2	\N	2015-07-04 20:12:31.951644+03
-7339	2530	2	\N	2015-07-04 20:16:08.99227+03
-7340	2531	2	\N	2015-07-04 20:16:08.99227+03
-7341	2532	2	\N	2015-07-04 20:36:07.167824+03
-7342	2533	2	\N	2015-07-04 20:36:07.167824+03
-7343	2534	2	\N	2015-07-04 20:57:32.449165+03
-7344	2491	2	\N	2015-07-04 20:58:12.716739+03
-7345	2535	2	\N	2015-07-04 20:58:36.935951+03
-7346	2536	2	\N	2015-07-04 20:59:39.366864+03
-7347	2491	2	\N	2015-07-04 20:59:49.220324+03
-7348	2537	2	\N	2015-07-04 21:00:02.518034+03
-7349	2538	2	\N	2015-07-04 21:13:08.541103+03
-7350	2539	2	\N	2015-07-04 21:14:30.611204+03
-7351	2540	2	\N	2015-07-04 21:14:32.763289+03
-7352	2541	2	\N	2015-07-04 21:14:50.821175+03
-7354	2542	2	\N	2015-07-04 21:17:54.658173+03
-7358	2543	2	\N	2015-07-04 21:26:56.584606+03
-7359	2544	2	\N	2015-07-04 21:27:23.469843+03
-7361	2545	2	\N	2015-07-04 21:30:18.47115+03
-7362	2546	2	\N	2015-07-04 21:30:37.579131+03
-7363	2545	2	\N	2015-07-04 21:30:38.730906+03
-7364	2547	2	\N	2015-07-04 21:30:51.680567+03
-7365	2548	2	\N	2015-07-04 21:30:51.680567+03
-7367	2451	2	\N	2015-07-05 14:30:51.54628+03
-7368	2457	2	\N	2015-07-05 14:33:01.814653+03
-7369	2458	2	\N	2015-07-05 14:33:47.939925+03
-7370	2459	2	\N	2015-07-05 14:33:59.629688+03
-7371	2451	2	\N	2015-07-05 14:39:43.167129+03
-7372	2467	2	\N	2015-07-05 14:49:52.691681+03
-7373	2463	2	\N	2015-07-05 14:50:06.470488+03
-7374	2549	2	\N	2015-07-05 15:34:32.780638+03
-7376	2434	2	\N	2015-07-05 19:13:53.412323+03
-7377	3	2	\N	2015-07-17 19:31:34.831317+03
-7378	894	2	\N	2015-07-17 19:34:30.132569+03
-7379	2054	2	\N	2015-07-17 19:34:44.345599+03
-7380	2126	2	\N	2015-07-17 19:35:00.154065+03
-7381	2484	2	\N	2015-07-17 19:35:15.872953+03
-7382	2550	2	\N	2015-07-18 10:57:05.728016+03
-7383	1372	2	\N	2015-07-18 10:57:08.110977+03
-7384	1372	2	\N	2015-07-18 10:57:38.113606+03
-7385	2551	2	\N	2015-07-18 11:02:48.147598+03
-7386	2552	2	\N	2015-07-18 11:22:14.245467+03
-7387	2552	2	\N	2015-07-18 11:24:17.241528+03
-7388	2553	2	\N	2015-07-18 11:32:44.472503+03
-7389	2554	2	\N	2015-07-18 11:46:38.401629+03
-7390	2554	2	\N	2015-07-18 11:47:52.858154+03
-7392	2556	2	\N	2015-07-18 11:55:59.961331+03
-7393	1372	2	\N	2015-07-18 11:56:18.816278+03
-7394	1375	2	\N	2015-07-18 11:56:26.8815+03
-7395	2557	2	\N	2015-07-18 12:01:04.237446+03
-7396	887	2	\N	2015-07-18 12:01:06.541839+03
-7397	2376	2	\N	2015-07-18 12:01:31.956124+03
-7398	2556	2	\N	2015-07-18 12:01:52.672293+03
-7399	2558	2	\N	2015-07-19 10:20:48.263335+03
-7400	2559	2	\N	2015-07-19 14:41:19.72071+03
-7401	2560	2	\N	2015-07-19 14:41:25.622087+03
-7402	2561	2	\N	2015-07-19 14:42:40.770503+03
-7403	2562	2	\N	2015-07-19 14:42:45.815524+03
-7404	2563	2	\N	2015-07-19 15:12:51.840188+03
-7405	2564	2	\N	2015-07-19 15:13:34.062285+03
-7406	2565	2	\N	2015-07-19 15:13:36.341158+03
-7407	2566	2	\N	2015-07-19 15:17:50.040034+03
-7408	2567	2	\N	2015-07-19 15:18:18.066263+03
-7409	2568	2	\N	2015-07-19 15:19:23.078636+03
-7410	2569	2	\N	2015-07-19 15:19:33.135472+03
-7411	2570	2	\N	2015-07-19 15:20:45.489438+03
-7412	2571	2	\N	2015-07-19 15:21:40.944498+03
-7413	2572	2	\N	2015-07-19 15:21:50.318605+03
-7414	2573	2	\N	2015-07-19 16:03:41.362252+03
-7415	2574	2	\N	2015-07-19 16:04:11.184096+03
-7416	2575	2	\N	2015-07-19 16:04:13.848246+03
-7417	2576	2	\N	2015-07-19 16:05:08.205201+03
-7418	2577	2	\N	2015-07-19 16:06:12.10907+03
-7419	2578	2	\N	2015-07-19 16:06:39.117569+03
-7420	2579	2	\N	2015-07-19 16:06:40.986562+03
-7421	2580	2	\N	2015-07-19 16:07:27.111556+03
-7422	2581	2	\N	2015-07-19 16:08:00.994992+03
-7423	2582	2	\N	2015-07-19 16:08:03.06528+03
-7424	2583	2	\N	2015-07-19 22:56:54.154484+03
-7425	2584	2	\N	2015-07-19 23:47:28.340347+03
-7426	2585	2	\N	2015-07-19 23:52:14.447269+03
-7427	2586	2	\N	2015-07-19 23:52:36.403304+03
-7428	2587	2	\N	2015-07-19 23:52:50.958041+03
-7429	2588	2	\N	2015-07-19 23:53:14.681932+03
-7430	2589	2	\N	2015-07-19 23:54:00.547115+03
-7431	2590	2	\N	2015-07-19 23:54:44.372371+03
-7432	2591	2	\N	2015-07-19 23:54:52.387429+03
-7433	2593	2	\N	2015-07-19 23:56:11.09679+03
-7434	2594	2	\N	2015-07-19 23:56:44.56359+03
-7435	2595	2	\N	2015-07-19 23:56:46.53373+03
-7436	1932	2	\N	2015-07-20 00:00:04.645587+03
-7437	2596	2	\N	2015-07-20 00:04:50.031308+03
-7438	2597	2	\N	2015-07-20 00:05:29.444039+03
-7439	2598	2	\N	2015-07-20 00:06:05.823851+03
-7440	2599	2	\N	2015-07-20 00:06:07.921437+03
-7443	2602	2	\N	2015-07-20 23:51:41.323724+03
-7444	2603	2	\N	2015-07-20 23:51:41.323724+03
-7445	2604	2	\N	2015-07-20 23:51:41.323724+03
-7446	2605	2	\N	2015-07-20 23:51:41.323724+03
-7449	2608	2	\N	2015-07-20 23:51:41.323724+03
-7453	2612	2	\N	2015-07-20 23:51:41.323724+03
-7454	2613	2	\N	2015-07-20 23:51:41.323724+03
-7458	2617	2	\N	2015-07-20 23:51:41.323724+03
-7472	2631	2	\N	2015-07-20 23:51:41.323724+03
-7473	2632	2	\N	2015-07-20 23:51:41.323724+03
-7474	2633	2	\N	2015-07-20 23:51:41.323724+03
-7475	2634	2	\N	2015-07-20 23:51:41.323724+03
-7476	2635	2	\N	2015-07-20 23:51:41.323724+03
-7477	2636	2	\N	2015-07-20 23:51:41.323724+03
-7478	2637	2	\N	2015-07-20 23:51:41.323724+03
-7479	2638	2	\N	2015-07-20 23:51:41.323724+03
-7483	2642	2	\N	2015-07-20 23:51:41.323724+03
-7484	2643	2	\N	2015-07-20 23:51:41.323724+03
-7487	2646	2	\N	2015-07-20 23:51:41.323724+03
-7488	2647	2	\N	2015-07-20 23:51:41.323724+03
-7489	2648	2	\N	2015-07-20 23:51:41.323724+03
-7490	2649	2	\N	2015-07-20 23:51:41.323724+03
-7491	2650	2	\N	2015-07-20 23:51:41.323724+03
-7492	2651	2	\N	2015-07-20 23:51:41.323724+03
-7493	2652	2	\N	2015-07-20 23:51:41.323724+03
-7494	2653	2	\N	2015-07-20 23:51:41.323724+03
-7495	2654	2	\N	2015-07-20 23:51:41.323724+03
-7496	2655	2	\N	2015-07-20 23:51:41.323724+03
-7498	894	2	\N	2015-07-20 23:59:14.903581+03
-7503	2663	2	\N	2015-07-21 00:42:13.515989+03
-7504	2664	2	\N	2015-07-21 00:44:32.068557+03
-7505	2662	2	\N	2015-07-21 00:45:19.305589+03
-7507	894	2	\N	2015-07-22 09:52:23.690178+03
-7508	885	2	\N	2015-07-22 09:53:01.082145+03
-7509	2665	2	\N	2015-07-22 09:53:01.082145+03
-7510	885	2	\N	2015-07-22 09:53:36.087021+03
-7511	2272	2	\N	2015-07-22 10:46:42.444349+03
-7512	2272	2	\N	2015-07-22 10:47:14.111233+03
-7513	2666	2	\N	2015-07-22 10:50:02.98887+03
-7514	2667	2	\N	2015-07-22 10:50:08.679496+03
-7515	2668	2	\N	2015-07-22 10:51:11.924694+03
-7516	2669	2	\N	2015-07-22 10:51:14.586916+03
-7517	2669	2	\N	2015-07-22 11:46:47.662266+03
-7518	2670	2	\N	2015-07-22 11:49:53.983401+03
-7519	2671	2	\N	2015-07-22 11:53:39.590503+03
-7520	2669	2	\N	2015-07-22 11:53:54.403754+03
-7521	2669	2	\N	2015-07-22 11:54:14.136266+03
-7522	2669	2	\N	2015-07-22 12:24:29.892068+03
-7523	2673	2	\N	2015-07-22 12:28:35.92606+03
-7524	2674	2	\N	2015-07-22 12:28:39.345269+03
-7525	2675	2	\N	2015-07-22 12:44:17.155133+03
-7526	2676	2	\N	2015-07-22 12:45:19.167404+03
-7527	2677	2	\N	2015-07-22 12:45:42.418521+03
-7528	2678	2	\N	2015-07-22 12:45:46.782121+03
-7529	2679	2	\N	2015-07-22 12:46:34.868393+03
-7530	2678	2	\N	2015-07-22 12:47:12.553819+03
-7531	2680	2	\N	2015-07-22 12:47:32.725361+03
-7532	2681	2	\N	2015-07-22 12:47:48.511246+03
-7533	2682	2	\N	2015-07-22 13:40:37.786999+03
-7534	2681	2	\N	2015-07-22 13:40:39.941316+03
-7535	2681	2	\N	2015-07-22 13:40:55.710058+03
-7536	2683	2	\N	2015-07-22 13:41:40.486853+03
-7537	2684	2	\N	2015-07-22 13:41:59.700406+03
-7538	2685	2	\N	2015-07-22 13:42:00.973433+03
-7539	2667	2	\N	2015-07-22 13:42:02.635972+03
-7540	2685	2	\N	2015-07-22 13:46:08.824214+03
-7541	2667	2	\N	2015-07-22 13:46:13.399464+03
-7542	2686	2	\N	2015-07-22 13:47:12.099197+03
-7543	2687	2	\N	2015-07-22 13:47:12.099197+03
-7544	2688	2	\N	2015-07-22 13:50:14.404321+03
-7545	2689	2	\N	2015-07-22 13:50:14.404321+03
-7546	2690	2	\N	2015-07-22 13:53:17.909433+03
-7547	2690	2	\N	2015-07-22 13:53:48.33605+03
-7550	2693	2	\N	2015-07-22 14:07:31.992976+03
-7551	2694	2	\N	2015-07-22 14:08:00.072596+03
-7552	2695	2	\N	2015-07-22 14:08:45.393051+03
-7555	2698	2	\N	2015-07-22 14:13:47.912163+03
-7556	2699	2	\N	2015-07-22 14:14:01.749177+03
-7557	2700	2	\N	2015-07-22 14:14:10.709485+03
-7558	2701	2	\N	2015-07-22 14:14:10.709485+03
-7559	2699	2	\N	2015-07-22 14:16:42.964801+03
-7560	2702	2	\N	2015-07-22 14:17:00.761945+03
-7561	2703	2	\N	2015-07-22 14:17:00.761945+03
-7562	2704	2	\N	2015-07-22 14:19:56.751612+03
-7563	2705	2	\N	2015-07-22 14:19:56.751612+03
-7564	2699	2	\N	2015-07-22 14:20:42.704316+03
-7565	2706	2	\N	2015-07-22 14:21:02.027005+03
-7566	2707	2	\N	2015-07-22 14:21:02.027005+03
-7567	2699	2	\N	2015-07-22 14:21:39.869597+03
-7568	2699	2	\N	2015-07-22 14:21:46.984305+03
-7569	2708	2	\N	2015-07-22 14:21:59.287338+03
-7570	2709	2	\N	2015-07-22 14:21:59.287338+03
-7571	2699	2	\N	2015-07-22 14:22:26.322903+03
-7572	2710	2	\N	2015-07-22 14:22:35.509695+03
-7573	2711	2	\N	2015-07-22 14:22:35.509695+03
-7574	2699	2	\N	2015-07-22 14:23:19.576335+03
-7575	2712	2	\N	2015-07-22 14:23:36.759685+03
-7576	2713	2	\N	2015-07-22 14:23:36.759685+03
-7577	2714	2	\N	2015-07-22 14:30:40.877306+03
-7578	2715	2	\N	2015-07-22 14:32:25.925422+03
-7579	2716	2	\N	2015-07-22 14:32:25.925422+03
-7580	2714	2	\N	2015-07-22 14:32:56.995021+03
-7581	2717	2	\N	2015-07-22 14:33:08.574387+03
-7582	2718	2	\N	2015-07-22 14:33:08.574387+03
-7583	2719	2	\N	2015-07-22 14:50:07.747456+03
-7584	2720	2	\N	2015-07-22 14:50:07.747456+03
-7585	2721	2	\N	2015-07-22 14:53:19.652254+03
-7586	2722	2	\N	2015-07-22 14:53:19.652254+03
-7587	2723	2	\N	2015-07-22 15:02:17.721876+03
-7588	2724	2	\N	2015-07-22 15:02:27.84792+03
-7589	2725	2	\N	2015-07-22 15:02:27.84792+03
-7590	2726	2	\N	2015-07-22 15:04:12.042101+03
-7591	2699	2	\N	2015-07-22 15:04:47.591373+03
-7592	2727	2	\N	2015-07-22 15:05:43.153662+03
-7593	2728	2	\N	2015-07-22 15:05:43.153662+03
-7595	2730	2	\N	2015-07-22 15:19:08.113264+03
-7598	2732	2	\N	2015-07-22 15:38:41.939351+03
-7601	2515	2	\N	2015-07-22 15:57:29.189389+03
-7603	2733	2	\N	2015-07-22 15:58:23.119691+03
-7606	2317	2	\N	2015-07-22 15:59:20.404832+03
-7607	2734	2	\N	2015-07-22 15:59:27.667185+03
-7608	2735	2	\N	2015-07-22 15:59:52.422862+03
-7609	2736	2	\N	2015-07-22 15:59:52.422862+03
-7612	1438	2	\N	2015-07-22 18:57:24.829162+03
-7613	2737	2	\N	2015-07-22 19:50:41.44109+03
-7614	2738	2	\N	2015-07-22 19:50:41.44109+03
-7615	2739	2	\N	2015-07-22 22:10:17.173605+03
-7616	2739	2	\N	2015-07-22 22:27:10.60758+03
-7617	2740	2	\N	2015-10-05 21:56:31.033698+03
-7618	2741	2	\N	2015-10-05 22:00:37.025784+03
-7619	2741	2	\N	2015-10-05 22:01:11.294026+03
-7620	2740	2	\N	2015-10-11 15:30:17.608326+03
-7621	2740	2	\N	2015-10-11 15:49:02.820999+03
-7622	2742	2	\N	2015-10-11 16:29:26.485453+03
-7655	2741	2	\N	2015-10-19 21:00:27.348936+03
-7656	2484	2	\N	2015-10-24 14:58:32.749242+03
-7657	2779	2	\N	2015-10-24 14:58:32.749242+03
-7658	2484	2	\N	2015-10-24 14:59:57.669772+03
-7659	2780	2	\N	2015-10-24 14:59:57.669772+03
-7660	894	2	\N	2015-10-24 15:00:56.289933+03
-7661	2781	2	\N	2015-10-24 15:00:56.289933+03
-7662	885	2	\N	2015-10-24 15:02:23.825848+03
-7663	894	2	\N	2015-10-24 15:06:44.559696+03
-7664	2782	2	\N	2015-10-24 15:06:44.559696+03
-7665	894	2	\N	2015-10-24 15:13:07.98256+03
-7666	2783	2	\N	2015-10-24 15:13:07.98256+03
-7667	894	2	\N	2015-10-24 15:16:03.818888+03
-7668	2784	2	\N	2015-10-24 15:16:03.818888+03
-7670	2786	2	\N	2015-10-24 15:24:48.816087+03
-7671	2787	2	\N	2015-10-24 15:30:54.642902+03
-7672	2739	2	\N	2015-10-31 09:47:11.166446+02
-7673	2739	2	\N	2015-10-31 09:48:54.569182+02
-7674	2739	2	\N	2015-10-31 09:52:21.217177+02
-7675	2739	2	\N	2015-10-31 09:52:28.501825+02
-7676	2739	2	\N	2015-10-31 10:25:38.872091+02
-7677	2593	2	\N	2015-10-31 10:32:28.375294+02
-7678	2788	2	\N	2015-10-31 11:46:02.329007+02
-7679	2741	2	\N	2015-10-31 11:48:54.106885+02
-7698	2813	2	\N	2015-11-22 21:52:45.311354+02
-7699	2814	2	\N	2015-11-22 21:57:07.211721+02
-7700	2739	2	\N	2015-11-22 21:57:09.506917+02
-7701	2739	2	\N	2015-11-22 22:03:49.302367+02
-7702	2815	2	\N	2015-11-29 18:03:23.32558+02
-7703	2816	2	\N	2015-11-29 18:05:24.319676+02
-7704	2818	2	\N	2015-11-29 19:06:37.534692+02
-7705	2820	2	\N	2016-01-02 19:03:39.167822+02
-7706	1930	2	\N	2016-01-02 19:03:41.6491+02
-7707	2821	2	\N	2016-01-02 20:11:21.358279+02
-7708	2822	2	\N	2016-01-02 20:11:24.233178+02
-7709	2823	2	\N	2016-01-02 20:12:21.682793+02
-7710	2824	2	\N	2016-01-02 20:12:46.762385+02
-7711	2825	2	\N	2016-01-02 20:15:08.259398+02
-7712	2824	2	\N	2016-01-02 20:15:26.352748+02
-7713	2826	2	\N	2016-01-02 20:15:55.52191+02
-7714	2824	2	\N	2016-01-02 20:17:19.972235+02
-7715	2822	2	\N	2016-01-02 20:21:41.413863+02
-7716	2827	2	\N	2016-01-02 20:24:24.220398+02
-7717	2828	2	\N	2016-01-02 20:24:24.220398+02
-7718	2829	2	\N	2016-01-02 20:25:00.491155+02
-7719	2830	2	\N	2016-01-02 20:25:43.115841+02
-7720	2831	2	\N	2016-01-02 20:26:37.333884+02
-7721	2832	2	\N	2016-01-02 20:27:25.581765+02
-7722	2833	2	\N	2016-01-02 20:36:13.937348+02
-7723	2834	2	\N	2016-01-02 20:36:20.489746+02
-7724	2834	2	\N	2016-01-02 20:36:41.364121+02
-7725	2835	2	\N	2016-01-02 20:42:25.330155+02
-7726	2836	2	\N	2016-01-02 20:42:56.538052+02
-7727	2837	2	\N	2016-01-02 20:50:50.737933+02
-7728	2838	2	\N	2016-01-02 20:50:50.737933+02
-7729	2831	2	\N	2016-01-02 20:50:54.803525+02
-7730	2839	2	\N	2016-01-02 20:51:13.095185+02
-7731	2840	2	\N	2016-01-02 20:51:13.095185+02
-7732	2841	2	\N	2016-01-02 20:52:40.961629+02
-7733	2540	2	\N	2016-01-02 20:53:36.703713+02
-7734	2842	2	\N	2016-01-02 20:53:48.427475+02
-7735	2843	2	\N	2016-01-02 20:53:48.427475+02
-7736	2844	2	\N	2016-01-02 21:00:05.527737+02
-7737	2845	2	\N	2016-01-02 21:00:05.527737+02
-7738	2846	2	\N	2016-01-02 21:03:59.88429+02
-7739	2847	2	\N	2016-01-02 21:03:59.88429+02
-7740	2848	2	\N	2016-01-02 21:08:47.993297+02
-7741	2849	2	\N	2016-01-02 21:08:47.993297+02
-7742	2850	2	\N	2016-01-02 21:16:40.983488+02
-7743	2851	2	\N	2016-01-02 21:16:40.983488+02
-7744	2852	2	\N	2016-01-02 21:36:46.646531+02
-7745	2853	2	\N	2016-01-02 21:36:49.099159+02
-7746	2854	2	\N	2016-01-02 21:37:14.376182+02
-7747	2855	2	\N	2016-01-02 21:37:14.376182+02
-7748	2853	2	\N	2016-01-02 21:38:33.232425+02
-7749	2853	2	\N	2016-01-02 21:39:02.581845+02
-7752	2857	2	\N	2016-01-02 21:39:38.718674+02
-7759	2841	2	\N	2016-01-02 22:14:54.924705+02
-7750	2853	2	\N	2016-01-02 21:39:16.771773+02
-7754	2859	2	\N	2016-01-02 21:48:34.392885+02
-7760	2835	2	\N	2016-01-02 22:15:05.490599+02
-7769	2860	2	\N	2016-01-02 23:22:02.986231+02
-7770	2861	2	\N	2016-01-02 23:22:02.986231+02
-7771	2862	2	\N	2016-01-02 23:29:14.591921+02
-7772	2863	2	\N	2016-01-02 23:29:43.595496+02
-7773	2864	2	\N	2016-01-02 23:32:59.025447+02
-7774	2865	2	\N	2016-01-02 23:33:17.678918+02
-7775	2866	2	\N	2016-01-02 23:33:24.314299+02
-7776	2867	2	\N	2016-01-02 23:34:03.051927+02
-7777	2824	2	\N	2016-01-02 23:39:00.961892+02
-7778	2868	2	\N	2016-01-30 20:55:14.786454+02
-7779	2869	2	\N	2016-01-30 20:59:30.856249+02
-7780	2830	2	\N	2016-01-30 21:00:27.913502+02
-7781	2830	2	\N	2016-01-30 21:01:18.072032+02
-7782	2830	2	\N	2016-01-30 21:01:36.444194+02
-7783	2830	2	\N	2016-02-06 15:26:53.662979+02
-7784	2830	2	\N	2016-02-06 15:33:10.739181+02
-7785	2830	2	\N	2016-02-06 15:34:22.381065+02
-7786	2830	2	\N	2016-02-06 15:35:20.238203+02
-7787	2830	2	\N	2016-02-06 15:36:19.423459+02
-7788	2830	2	\N	2016-02-06 15:45:57.869458+02
-7789	2830	2	\N	2016-02-06 15:55:27.857802+02
-7790	2830	2	\N	2016-02-06 16:02:20.536632+02
-7791	2830	2	\N	2016-02-06 16:19:02.587853+02
-7792	2830	2	\N	2016-02-06 16:19:14.340638+02
-7793	2830	2	\N	2016-02-06 16:19:40.099469+02
-7794	2870	2	\N	2016-02-07 17:23:20.218116+02
-7795	2871	2	\N	2016-02-07 17:23:20.218116+02
-7799	2873	2	\N	2016-02-07 21:19:25.018357+02
-7800	2874	2	\N	2016-02-07 21:20:02.361201+02
-7801	2875	2	\N	2016-02-07 21:20:21.884033+02
-7802	2876	2	\N	2016-02-07 21:21:03.816914+02
-7803	2877	2	\N	2016-02-07 21:21:07.920879+02
-7804	2788	2	\N	2016-05-09 12:53:56.945117+03
-7805	2878	2	\N	2016-05-09 12:57:37.410132+03
-7806	2879	2	\N	2016-05-09 12:58:01.601364+03
-7807	2875	2	\N	2016-05-09 14:19:09.461648+03
-7808	2879	2	\N	2016-05-09 14:19:09.461648+03
-7809	2875	2	\N	2016-05-09 14:21:24.121089+03
-7810	2879	2	\N	2016-05-09 14:21:24.121089+03
-7811	2877	2	\N	2016-05-09 19:49:23.40543+03
-7812	2877	2	\N	2016-05-09 20:42:10.779147+03
-7813	2877	2	\N	2016-05-09 20:59:03.503884+03
-7814	2877	2	\N	2016-05-09 20:59:20.181507+03
-7815	2880	2	\N	2016-05-14 12:24:09.362992+03
-7816	2881	2	\N	2016-05-14 12:24:17.0673+03
-7817	2882	2	\N	2016-05-14 12:40:37.631348+03
-7818	2883	2	\N	2016-05-14 12:42:08.065152+03
-7822	2887	2	\N	2016-05-14 19:24:38.497791+03
-7823	2882	2	\N	2016-05-14 19:25:04.0458+03
-7824	2888	2	\N	2016-05-14 19:26:49.355068+03
-7825	2889	2	\N	2016-05-14 19:27:41.044427+03
-7826	2888	2	\N	2016-05-14 19:28:16.54874+03
-7827	2889	2	\N	2016-05-14 19:33:22.988649+03
-7828	2131	2	\N	2016-05-15 18:01:05.003665+03
-7829	1932	2	\N	2016-05-15 18:01:28.601998+03
-7830	1939	2	\N	2016-05-15 18:01:28.601998+03
-7831	2131	2	\N	2016-05-15 18:01:28.601998+03
-7832	2890	2	\N	2016-05-15 18:35:21.882133+03
-7847	1849	2	\N	2016-05-22 20:11:06.601318+03
-7848	2903	2	\N	2016-05-22 20:42:01.686171+03
-7850	2888	2	\N	2016-06-12 18:45:48.22505+03
-7851	772	2	\N	2016-06-12 18:46:48.423567+03
-7852	725	2	\N	2016-06-12 18:47:13.092956+03
-7853	784	2	\N	2016-06-12 18:49:28.974684+03
-7854	784	2	\N	2016-06-12 18:51:26.23605+03
-7855	2247	2	\N	2016-06-12 18:52:17.724152+03
-7856	1413	2	\N	2016-06-12 18:52:55.036571+03
-7857	1318	2	\N	2016-06-12 18:53:39.336876+03
-7858	1314	2	\N	2016-06-12 18:54:40.013112+03
-7859	1095	2	\N	2016-06-12 18:57:44.248305+03
-7860	878	2	\N	2016-06-12 18:57:52.02832+03
-7861	2887	2	\N	2016-06-12 19:00:45.455196+03
-7862	2882	2	\N	2016-06-12 19:01:13.039783+03
-7863	2788	2	\N	2016-06-12 19:01:30.584665+03
-7864	2583	2	\N	2016-06-12 19:01:59.143077+03
-7865	2558	2	\N	2016-06-12 19:02:36.175946+03
-7866	2551	2	\N	2016-06-12 19:03:37.898942+03
-7867	2516	2	\N	2016-06-12 19:04:06.271906+03
-7868	2513	2	\N	2016-06-12 19:04:31.460583+03
-7869	2296	2	\N	2016-06-12 19:05:05.227+03
-7870	2292	2	\N	2016-06-12 19:06:37.050125+03
-7871	2276	2	\N	2016-06-12 19:07:27.341086+03
-7872	2268	2	\N	2016-06-12 19:07:46.312418+03
-7873	2244	2	\N	2016-06-12 19:08:11.579054+03
-7874	2243	2	\N	2016-06-12 19:08:39.453799+03
-7875	2217	2	\N	2016-06-12 19:09:02.580116+03
-7876	2135	2	\N	2016-06-12 19:09:39.794735+03
-7877	2127	2	\N	2016-06-12 19:10:08.975875+03
-7878	2108	2	\N	2016-06-12 19:10:27.895665+03
-7879	2276	2	\N	2016-06-12 19:10:41.100754+03
-7880	2100	2	\N	2016-06-12 19:11:17.465277+03
-7881	2099	2	\N	2016-06-12 19:11:33.334036+03
-7882	2049	2	\N	2016-06-12 19:11:50.921234+03
-7883	1968	2	\N	2016-06-12 19:12:07.782103+03
-7884	1941	2	\N	2016-06-12 19:12:30.504714+03
-7885	1894	2	\N	2016-06-12 19:13:06.764103+03
-7886	1884	2	\N	2016-06-12 19:14:14.633068+03
-7887	1849	2	\N	2016-06-12 19:14:36.013047+03
-7888	1799	2	\N	2016-06-12 19:14:52.646537+03
-7889	1797	2	\N	2016-06-12 19:15:54.892109+03
-7890	1548	2	\N	2016-06-12 19:16:37.7143+03
-7891	1521	2	\N	2016-06-12 19:17:04.475532+03
-7892	1435	2	\N	2016-06-12 19:17:55.308631+03
-7893	1433	2	\N	2016-06-12 19:18:27.119556+03
-7894	1424	2	\N	2016-06-12 19:18:54.681198+03
-7895	1393	2	\N	2016-06-12 19:19:41.040229+03
-7896	1317	2	\N	2016-06-12 19:20:07.122053+03
-7897	1313	2	\N	2016-06-12 19:20:43.704349+03
-7898	1268	2	\N	2016-06-12 19:21:17.457024+03
-7899	1225	2	\N	2016-06-12 19:21:42.431685+03
-7900	1211	2	\N	2016-06-12 19:21:57.927763+03
-7901	1207	2	\N	2016-06-12 19:22:13.829139+03
-7902	1198	2	\N	2016-06-12 19:22:32.264053+03
-7903	1190	2	\N	2016-06-12 19:22:54.801074+03
-7904	1189	2	\N	2016-06-12 19:23:36.149132+03
-7905	1088	2	\N	2016-06-12 19:24:03.186521+03
-7906	1081	2	\N	2016-06-12 19:24:18.841926+03
-7907	1007	2	\N	2016-06-12 19:24:41.063226+03
-7908	1003	2	\N	2016-06-12 19:25:01.6884+03
-7909	954	2	\N	2016-06-12 19:25:21.828467+03
-7910	953	2	\N	2016-06-12 19:25:35.283531+03
-7911	909	2	\N	2016-06-12 19:25:55.660588+03
-7912	954	2	\N	2016-06-12 19:26:03.832442+03
-7913	908	2	\N	2016-06-12 19:26:22.461914+03
-7914	901	2	\N	2016-06-12 19:26:39.035505+03
-7915	872	2	\N	2016-06-12 19:26:48.439834+03
-7916	865	2	\N	2016-06-12 19:27:18.908205+03
-7917	788	2	\N	2016-06-12 19:27:47.009299+03
-7918	775	2	\N	2016-06-12 19:28:17.716597+03
-7919	769	2	\N	2016-06-12 19:28:58.268968+03
-7920	764	2	\N	2016-06-12 19:29:16.089449+03
-7921	723	2	\N	2016-06-12 19:29:30.976297+03
-7922	706	2	\N	2016-06-12 19:29:46.837575+03
-7923	283	2	\N	2016-06-12 19:29:57.083572+03
-7924	274	2	\N	2016-06-12 19:30:06.053627+03
-7925	16	2	\N	2016-06-12 19:30:19.35102+03
-7926	10	2	\N	2016-06-12 19:30:32.966151+03
-7927	2887	2	\N	2016-06-12 19:59:55.740881+03
-7928	2904	2	\N	2016-07-20 14:06:08.67873+03
-7929	2905	2	\N	2016-07-20 14:10:25.293083+03
-7930	2906	2	\N	2016-07-20 14:12:46.977203+03
-7931	2907	2	\N	2016-07-20 14:13:24.04758+03
-7932	2908	2	\N	2016-07-20 14:20:43.246273+03
-7933	2909	2	\N	2016-07-20 14:20:49.14851+03
-7934	2910	2	\N	2016-07-20 14:22:07.44694+03
-7935	2911	2	\N	2016-07-20 14:23:23.948148+03
-7936	2912	2	\N	2016-07-20 14:24:01.293302+03
-7937	2913	2	\N	2016-07-20 14:26:50.766235+03
-7938	2914	2	\N	2016-07-20 14:28:10.560806+03
-7939	2915	2	\N	2016-07-20 14:30:22.775294+03
-7940	2916	2	\N	2016-07-20 14:30:53.390238+03
-7941	2917	2	\N	2016-07-20 14:38:36.108707+03
-7942	2918	2	\N	2016-07-20 14:38:42.915773+03
-7943	2919	2	\N	2016-07-20 14:38:46.729876+03
-7944	2920	2	\N	2016-07-20 14:39:36.61497+03
-7945	2921	2	\N	2016-07-20 14:39:38.176003+03
-7946	2922	2	\N	2016-07-20 14:39:52.82041+03
-7947	2923	2	\N	2016-07-20 14:40:13.648703+03
-7948	2924	2	\N	2016-07-20 14:40:54.623667+03
-7949	2925	2	\N	2016-07-20 14:41:00.293457+03
-7950	2926	2	\N	2016-07-20 14:41:48.803631+03
-7951	2927	2	\N	2016-07-20 14:43:05.256139+03
-7952	2928	2	\N	2016-07-20 14:43:33.824253+03
-7953	2929	2	\N	2016-07-20 14:44:28.052377+03
-7954	2930	2	\N	2016-07-20 14:44:29.81447+03
-7955	2931	2	\N	2016-07-20 14:46:29.396249+03
-7956	2932	2	\N	2016-07-20 14:46:31.9847+03
-7957	2933	2	\N	2016-07-20 14:47:52.505562+03
-7958	2934	2	\N	2016-07-20 14:47:52.505562+03
-7959	2935	2	\N	2016-07-20 14:50:12.692976+03
-7960	2936	2	\N	2016-07-20 14:50:45.726861+03
-7961	2937	2	\N	2016-07-20 14:50:45.726861+03
-7962	2938	2	\N	2016-07-20 14:51:07.941337+03
-7963	2939	2	\N	2016-07-20 14:52:16.220684+03
-7964	2940	2	\N	2016-07-20 14:52:29.958196+03
-7965	2941	2	\N	2016-07-20 14:52:55.371491+03
-7966	2942	2	\N	2016-07-20 14:53:10.267919+03
-7967	2943	2	\N	2016-07-20 14:53:46.501814+03
-7968	2944	2	\N	2016-07-20 14:54:07.11485+03
-7969	2905	2	\N	2016-07-20 14:54:27.541294+03
-\.
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: demo_ru; Owner: -
---
-
-SELECT pg_catalog.setval('resource_log_id_seq', 7969, true);
 
 
 --
@@ -60622,7 +54284,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 19, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-309c8478ded6
+c38723878dbe
 \.
 
 
@@ -60823,7 +54485,10 @@ SELECT pg_catalog.setval('calculation_id_seq', 107, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
+COPY campaign (id, resource_id, name, start_dt, status, mail_id, person_category_id) FROM stdin;
+62	3832	asdf asdas	2016-09-18 20:55:00+03	0	5	\N
+63	3833	asdf asdas	2016-09-18 20:55:00+03	0	5	\N
+64	3835	asdf asdas	2016-09-18 20:55:00+03	0	5	\N
 \.
 
 
@@ -60831,7 +54496,7 @@ COPY campaign (id, resource_id, name, subject, plain_content, html_content, star
 -- Name: campaign_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('campaign_id_seq', 23, true);
+SELECT pg_catalog.setval('campaign_id_seq', 64, true);
 
 
 --
@@ -60924,7 +54589,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-09-04T18:58:25"]], "tarif_limit": 1}	lux.travel@gmai.com
+1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-09-18T22:48:05"]], "tarif_limit": 1}	lux.travel@gmai.com
 \.
 
 
@@ -61258,20 +54923,14 @@ SELECT pg_catalog.setval('employee_id_seq', 34, true);
 --
 
 COPY employee_notification (employee_id, notification_id, status) FROM stdin;
-2	18	1
-2	20	1
-2	19	1
-2	21	1
-2	22	1
-2	23	1
-2	24	1
-2	25	1
-7	34	0
-2	26	1
-2	27	1
-2	35	1
-2	36	1
-7	38	0
+2	69	1
+2	70	1
+2	71	0
+2	64	1
+2	65	1
+2	66	1
+2	67	1
+2	68	1
 \.
 
 
@@ -61290,6 +54949,15 @@ COPY employee_passport (employee_id, passport_id) FROM stdin;
 
 COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 2	1
+\.
+
+
+--
+-- Data for Name: employee_subscription; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY employee_subscription (employee_id, resource_id) FROM stdin;
+2	3833
 \.
 
 
@@ -61522,9 +55190,9 @@ COPY lead (id, lead_date, resource_id, advsource_id, customer_id, status, descr)
 66	2016-05-22	2894	5	75	0	\N
 67	2016-05-22	3659	5	75	0	\N
 68	2016-07-18	3678	6	77	3	\N
-69	2016-07-22	3697	6	74	0	\N
 70	2016-07-18	3678	6	77	3	\N
-71	2016-07-18	3699	6	77	3	\N
+69	2016-07-22	3697	6	74	2	\N
+71	2016-07-18	3699	6	77	0	\N
 \.
 
 
@@ -61894,9 +55562,8 @@ SELECT pg_catalog.setval('location_id_seq', 42, true);
 -- Data for Name: mail; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY mail (id, resource_id, name, html_content, descr) FROM stdin;
-2	3718	Test email	\N	Test description
-3	3720	Test email 1	\N	Test description
+COPY mail (id, resource_id, name, html_content, descr, subject) FROM stdin;
+5	3758	sdfsdf sdf	\N	dsdsd fgsdfgdfgsdfgsdfg	sdf sdfsdfsdf
 \.
 
 
@@ -61904,7 +55571,7 @@ COPY mail (id, resource_id, name, html_content, descr) FROM stdin;
 -- Name: mail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('mail_id_seq', 3, true);
+SELECT pg_catalog.setval('mail_id_seq', 5, true);
 
 
 --
@@ -62096,41 +55763,16 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
-3	1945	A reminder of the task #42	Do not forget about task!	2014-12-14 19:51:00.013635+02	\N
-4	1946	A reminder of the task #42	Do not forget about task!	2014-12-14 20:31:00.012771+02	\N
-5	1947	A reminder of the task #40	Do not forget about task!	2014-12-14 20:32:00.061386+02	\N
-6	1948	A reminder of the task #42	Do not forget about task!	2014-12-14 20:34:00.011181+02	\N
-7	1949	A reminder of the task #42	Do not forget about task!	2014-12-14 20:35:00.011903+02	\N
-8	1950	A reminder of the task #42	Do not forget about task!	2014-12-14 20:38:00.01699+02	\N
-9	1959	A reminder of the task #44	Do not forget about task!	2014-12-21 19:21:00.016784+02	\N
-10	1961	Task: #44	Test new scheduler realization	2014-12-21 19:44:00.016315+02	\N
-11	1963	Task: Test	Test	2014-12-24 21:33:00.014126+02	\N
-12	1965	Task: For testing	For testing	2014-12-25 21:06:00.013657+02	\N
-13	1972	Task: Check Payments	Check Payments	2015-01-04 12:46:00.019127+02	\N
-14	1973	Task: Check Payments	Check Payments	2015-01-04 14:06:00.016859+02	\N
-15	1984	Task: Test	Test	2015-01-13 17:01:00.018967+02	\N
-16	1986	Task: Test 2	Test 2	2015-01-13 17:04:00.011637+02	\N
-17	2010	Task: I decided to try to follow the postgres approach as directly as possible and came up with the following migration.	I decided to try to follow the postgres approach as directly as possible and came up with the following migration.	2015-01-21 21:45:00.013037+02	\N
-18	2064	Task: Revert status after testing	Revert status after testing	2015-03-08 18:42:00.01327+02	\N
-19	2067	Task: Notifications testing #2	Notifications testing #2	2015-03-09 17:17:00.020674+02	\N
-20	2069	Task: Test Notification resource link	Test Notification resource link	2015-03-09 19:29:00.018282+02	\N
-21	2076	Task: Call about discounts	Call about discounts	2015-03-21 17:10:00.014771+02	\N
-22	2133	Task: Task For Lastovec	Task For Lastovec	2015-04-22 15:40:00.007831+03	\N
-23	2198	Task: Check reminder	Check reminder	2015-05-03 13:35:00.039271+03	\N
-24	2304	Task: Call about offer	Call about offer	2015-05-24 17:20:00.01303+03	\N
-25	2592	Task: JEasyui 1.4.3 migration	JEasyui 1.4.3 migration	2015-07-19 23:55:00.094469+03	\N
-26	2672	Task: Call to customer!	Call to customer!	2015-07-22 11:55:00.063723+03	\N
-27	2731	Task: Check invoice	Check invoice	2015-07-22 15:20:00.039585+03	\N
-29	2779	Your User profile was changed		2015-10-24 14:58:32.749242+03	\N
-30	2780	Your User profile was changed		2015-10-24 14:59:57.669772+03	\N
-31	2781	Your User profile was changed		2015-10-24 15:00:56.289933+03	\N
-32	2782	Your User profile was changed		2015-10-24 15:06:44.559696+03	\N
-33	2783	Your User profile was changed		2015-10-24 15:13:07.98256+03	\N
-34	2784	Your User profile was changed		2015-10-24 15:16:03.818888+03	\N
-35	2817	Test for notifications 2	Test for notifications 2	2015-11-29 18:06:00.016338+02	\N
-36	2819	Check for notofications	Check for notofications	2015-11-29 19:07:00.054887+02	\N
-38	3706	Ваш профиль был изменен		2016-07-26 22:01:18.920488+03	\N
+COPY notification (id, resource_id, descr, created, url) FROM stdin;
+64	3817	New campaign "dfasdfas sadf" created	2016-09-17 21:10:22.1469+03	\N
+65	3819	New campaign "adfasdf sds" created	2016-09-17 21:11:52.967967+03	\N
+66	3820	Campaign "adfasdf sds" was deleted	2016-09-17 21:12:15.212864+03	\N
+67	3822	New campaign "sdfsd fsdf" created	2016-09-17 21:16:08.362697+03	\N
+68	3824	New campaign "dasd asdasd" created	2016-09-17 21:18:57.067167+03	\N
+69	3826	Campaign "asdf asdfasdf" was changed	2016-09-17 21:31:41.534377+03	\N
+70	3828	New campaign "sadf afasd" created	2016-09-17 21:43:06.698128+03	\N
+71	3834	Campaign "asdf asdas" was changed	2016-09-18 22:44:56.15485+03	\N
+72	3836	New campaign "asdf asdas" created	2016-09-18 22:45:34.72505+03	\N
 \.
 
 
@@ -62138,7 +55780,7 @@ COPY notification (id, resource_id, title, descr, created, url) FROM stdin;
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 38, true);
+SELECT pg_catalog.setval('notification_id_seq', 72, true);
 
 
 --
@@ -62146,13 +55788,8 @@ SELECT pg_catalog.setval('notification_id_seq', 38, true);
 --
 
 COPY notification_resource (notification_id, resource_id) FROM stdin;
-21	2075
-29	2484
-30	2484
-31	894
-32	894
-34	894
-38	894
+71	3833
+72	3835
 \.
 
 
@@ -62177,6 +55814,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 16	2016-08-14	3710	72	6	\N	\N	0
 17	2016-08-14	3714	76	6	\N	\N	3
 15	2016-07-18	3686	77	6	\N	68	3
+18	2016-08-14	3831	76	6	\N	\N	3
 \.
 
 
@@ -62184,7 +55822,7 @@ COPY "order" (id, deal_date, resource_id, customer_id, advsource_id, descr, lead
 -- Name: order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_id_seq', 17, true);
+SELECT pg_catalog.setval('order_id_seq', 18, true);
 
 
 --
@@ -62221,6 +55859,7 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 54	3684	15	5	57	1345.00	1	2016-07-18	TYU-0908732	87	0.00	2.00
 55	3708	16	4	57	100.00	0	\N	\N	100	0.00	0.00
 56	3712	17	5	57	3000.00	1	2016-08-15	\N	101	0.00	0.00
+57	3829	18	5	57	2200.00	0	\N	\N	101	0.00	0.00
 \.
 
 
@@ -62228,7 +55867,7 @@ COPY order_item (id, resource_id, order_id, service_id, currency_id, price, stat
 -- Name: order_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('order_item_id_seq', 56, true);
+SELECT pg_catalog.setval('order_item_id_seq', 57, true);
 
 
 --
@@ -62407,7 +56046,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 134	123	4	{view,close}	\N	all
 137	126	4	{view,edit}	\N	all
 164	152	4	{view,settings}	\N	all
-165	153	4	{view,settings}	\N	all
 233	41	6	{view,add,edit,delete}	\N	all
 234	67	6	{view,add,edit,delete}	\N	all
 236	39	6	{view,add,edit,delete}	\N	all
@@ -62464,7 +56102,6 @@ COPY permision (id, resource_type_id, position_id, permisions, structure_id, sco
 288	149	6	{view,add,edit,delete}	\N	all
 256	2	6	{}	\N	all
 290	152	6	{view,settings}	\N	all
-291	153	6	{view}	\N	all
 75	106	4	{view,add,edit,delete,assign}	\N	all
 24	12	4	{view,add,edit,delete,assign,settings}	\N	all
 146	135	4	{view,add,edit,delete}	\N	all
@@ -62560,7 +56197,6 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 61	2580	Vlad	Chernyavskiy		\N	0	\N	\N	t	\N
 62	2591	Grigoriy	Yarmolenko		1972-10-19	0	\N	3	t	\N
 64	2595	Irina			\N	1	\N	\N	t	\N
-65	2660	Valentin	Gopko		\N	0	\N	3	t	\N
 66	2667	Anatoliy	Fedirko		\N	0	\N	\N	t	\N
 68	2679	Yuriy	Fedirko		2012-04-05	0	\N	\N	t	\N
 67	2678	Anna	Fedirko		\N	1	\N	\N	t	\N
@@ -62571,11 +56207,14 @@ COPY person (id, resource_id, first_name, last_name, second_name, birthday, gend
 71	2830	Helen	Romanuta		1986-07-23	1	\N	3	f	f
 72	2875	Anatoly			\N	\N	\N	\N	f	f
 73	2879	Eugeniy	Lineckiy		\N	\N	\N	\N	f	f
-74	2881	Sergey			\N	\N	\N	\N	f	f
 75	2892	Igor	Vovk		\N	\N	\N	\N	f	f
 76	2898	Ella	Vovk		1994-04-13	1	\N	3	f	f
 77	3676	Artur	Musienko		\N	0	\N	\N	f	f
+79	3791	Rognan			\N	\N	\N	\N	f	f
 78	3683	Julia	Musienko		\N	\N	\N	\N	f	f
+74	2881	Sergey			\N	\N	\N	\N	f	f
+65	2660	Valentin	Gopko		\N	0	\N	3	t	f
+80	3792	Gavriil			\N	\N	\N	\N	f	f
 \.
 
 
@@ -62679,7 +56318,7 @@ COPY person_contact (person_id, contact_id) FROM stdin;
 -- Name: person_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('person_id_seq', 78, true);
+SELECT pg_catalog.setval('person_id_seq', 80, true);
 
 
 --
@@ -62741,6 +56380,8 @@ COPY person_order_item (order_item_id, person_id) FROM stdin;
 56	74
 56	73
 56	72
+57	80
+57	79
 \.
 
 
@@ -62873,2084 +56514,2128 @@ SELECT pg_catalog.setval('region_id_seq', 40, true);
 -- Data for Name: resource; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
-12	12	\N	2
-14	12	\N	2
-16	12	\N	2
-30	12	\N	2
-31	12	\N	2
-32	12	\N	2
-33	12	\N	2
-34	12	\N	2
-35	12	\N	2
-36	12	\N	2
-37	12	\N	2
-38	12	\N	2
-39	12	\N	2
-40	12	\N	2
-43	12	\N	2
-44	12	\N	2
-45	12	\N	2
-83	2	\N	2
-84	2	\N	2
-277	39	\N	2
-913	72	\N	2
-914	72	\N	2
-915	72	\N	2
-916	72	\N	2
-917	72	\N	2
-2909	118	f	2
-2913	2	f	2
-2919	118	f	2
-2955	130	f	2
-3085	145	f	2
-3086	145	f	2
-3087	145	f	2
-3088	145	f	2
-3089	145	f	2
-3090	145	f	2
-3091	145	f	2
-3092	145	f	2
-3093	145	f	2
-3094	145	f	2
-3095	145	f	2
-3096	145	f	2
-3097	145	f	2
-3098	145	f	2
-3099	145	f	2
-3100	145	f	2
-3101	145	f	2
-3102	145	f	2
-3103	145	f	2
-3104	145	f	2
-918	72	\N	2
-919	72	\N	2
-928	73	\N	2
-929	73	\N	2
-930	73	\N	2
-931	73	\N	2
-932	73	\N	2
-933	73	\N	2
-935	73	\N	2
-936	73	\N	2
-937	73	\N	2
-948	73	\N	2
-949	73	\N	2
-950	73	\N	2
-952	73	\N	2
-953	12	\N	2
-954	12	\N	2
-955	65	\N	2
-956	65	\N	2
-957	74	\N	2
-3105	145	f	2
-3106	145	f	2
-3107	145	f	2
-3108	145	f	2
-3109	145	f	2
-3110	145	f	2
-3111	145	f	2
-3112	145	f	2
-3113	145	f	2
-3114	145	f	2
-3115	145	f	2
-3116	145	f	2
-3117	145	f	2
-3118	145	f	2
-3119	145	f	2
-3120	145	f	2
-3121	145	f	2
-3122	145	f	2
-3123	145	f	2
-3124	145	f	2
-3125	145	f	2
-958	74	\N	2
-3126	145	f	2
-3127	145	f	2
-3128	145	f	2
-3129	145	f	2
-3130	145	f	2
-1647	39	f	2
-2266	137	f	2
-2267	134	f	2
-2268	12	f	2
-2269	105	f	2
-1915	111	f	2
-1917	110	f	2
-1949	123	f	2
-1961	123	f	2
-2714	104	f	2
-2715	119	f	2
-2716	119	f	2
-2717	119	f	2
-3131	145	f	2
-3132	145	f	2
-3133	145	f	2
-3134	145	f	2
-3135	145	f	2
-3136	145	f	2
-3137	145	f	2
-3138	145	f	2
-2718	119	f	2
-3139	145	f	2
-3140	145	f	2
-3141	145	f	2
-3142	145	f	2
-3143	145	f	2
-3144	145	f	2
-3145	145	f	2
-3146	145	f	2
-3147	145	f	2
-3148	145	f	2
-3149	145	f	2
-3150	145	f	2
-3151	145	f	2
-3152	145	f	2
-3153	145	f	2
-3154	145	f	2
-3155	145	f	2
-3156	145	f	2
-3157	145	f	2
-3158	145	f	2
-3159	145	f	2
-3160	145	f	2
-3161	145	f	2
-3162	145	f	2
-3163	145	f	2
-3164	145	f	2
-3165	145	f	2
-3166	145	f	2
-3167	145	f	2
-3168	145	f	2
-3169	145	f	2
-3170	145	f	2
-3171	145	f	2
-3172	145	f	2
-3173	145	f	2
-3174	145	f	2
-3175	145	f	2
-3176	145	f	2
-3177	145	f	2
-3178	145	f	2
-3179	145	f	2
-3180	145	f	2
-3612	145	f	2
-3613	145	f	2
-3614	145	f	2
-3658	145	f	2
-2881	69	f	2
-2882	12	f	2
-2883	65	f	2
-278	39	\N	2
-279	39	\N	2
-280	39	\N	2
-281	39	\N	2
-282	39	\N	2
-283	12	\N	2
-286	41	\N	2
-287	41	\N	2
-288	41	\N	2
-289	41	\N	2
-938	73	\N	2
-939	73	\N	2
-961	74	\N	2
-962	74	\N	2
-3266	145	f	2
-3267	145	f	2
-3268	145	f	2
-2891	87	f	2
-2894	130	f	2
-2910	149	f	2
-2912	2	f	2
-2956	145	f	2
-2957	145	f	2
-2958	145	f	2
-3181	145	f	2
-3182	145	f	2
-3183	145	f	2
-3184	145	f	2
-3185	145	f	2
-3186	145	f	2
-3187	145	f	2
-3188	145	f	2
-3189	145	f	2
-3190	145	f	2
-3191	145	f	2
-3192	145	f	2
-3193	145	f	2
-3194	145	f	2
-3195	145	f	2
-3196	145	f	2
-3197	145	f	2
-3198	145	f	2
-3199	145	f	2
-3200	145	f	2
-3201	145	f	2
-3202	145	f	2
-3203	145	f	2
-3204	145	f	2
-3205	145	f	2
-3206	145	f	2
-3207	145	f	2
-963	74	\N	2
-964	74	\N	2
-965	74	\N	2
-966	74	\N	2
-967	74	\N	2
-968	74	\N	2
-969	74	\N	2
-970	74	\N	2
-971	74	\N	2
-973	75	\N	2
-975	75	\N	2
-976	75	\N	2
-977	75	\N	2
-978	75	\N	2
-3208	145	f	2
-3209	145	f	2
-3210	145	f	2
-3211	145	f	2
-3212	145	f	2
-3213	145	f	2
-3214	145	f	2
-3215	145	f	2
-3216	145	f	2
-3217	145	f	2
-3218	145	f	2
-979	75	\N	2
-980	75	\N	2
-981	75	\N	2
-982	75	\N	2
-983	75	\N	2
-984	75	\N	2
-1616	69	f	2
-1619	69	f	2
-1620	87	f	2
-1621	87	f	2
-1622	89	f	2
-1623	90	f	2
-1381	89	f	2
-2439	117	f	2
-2784	123	f	2
-2785	47	f	2
-2786	2	f	2
-2787	2	f	2
-2788	12	f	2
-2813	12	f	2
-2814	87	f	2
-2842	119	f	2
-3219	145	f	2
-3220	145	f	2
-3221	145	f	2
-3222	145	f	2
-3223	145	f	2
-3224	145	f	2
-3225	145	f	2
-3226	145	f	2
-3227	145	f	2
-3228	145	f	2
-3229	145	f	2
-3230	145	f	2
-3231	145	f	2
-3232	145	f	2
-3233	145	f	2
-3234	145	f	2
-3235	145	f	2
-3236	145	f	2
-3237	145	f	2
-3238	145	f	2
-3239	145	f	2
-3240	145	f	2
-3241	145	f	2
-3242	145	f	2
-3243	145	f	2
-3244	145	f	2
-3245	145	f	2
-3246	145	f	2
-3247	145	f	2
-3248	145	f	2
-3249	145	f	2
-3250	145	f	2
-3251	145	f	2
-3252	145	f	2
-3253	145	f	2
-3254	145	f	2
-3255	145	f	2
-3256	145	f	2
-3257	145	f	2
-3258	145	f	2
-3259	145	f	2
-3260	145	f	2
-3261	145	f	2
-3262	145	f	2
-3263	145	f	2
-3264	145	f	2
-3265	145	f	2
-3269	145	f	2
-3270	145	f	2
-3271	145	f	2
-3272	145	f	2
-3273	145	f	2
-3274	145	f	2
-3275	145	f	2
-3276	145	f	2
-3277	145	f	2
-3278	145	f	2
-3279	145	f	2
-3280	145	f	2
-3281	145	f	2
-3282	145	f	2
-3283	145	f	2
-3284	145	f	2
-3285	145	f	2
-3286	145	f	2
-3287	145	f	2
-3288	145	f	2
-3289	145	f	2
-3290	145	f	2
-3291	145	f	2
-3292	145	f	2
-3293	145	f	2
-290	41	\N	2
-291	41	\N	2
-884	70	\N	2
-886	59	\N	2
-943	73	\N	2
-944	73	\N	2
-945	73	\N	2
-946	73	\N	2
-947	73	\N	2
-3368	145	f	2
-2892	69	f	2
-2921	118	f	2
-2959	145	f	2
-2960	145	f	2
-2961	145	f	2
-3294	145	f	2
-3295	145	f	2
-3296	145	f	2
-3297	145	f	2
-3298	145	f	2
-3299	145	f	2
-3300	145	f	2
-3301	145	f	2
-998	65	\N	2
-1005	78	\N	2
-1007	12	\N	2
-1008	65	\N	2
-3302	145	f	2
-1009	79	\N	2
-3303	145	f	2
-3304	145	f	2
-3305	145	f	2
-3306	145	f	2
-3307	145	f	2
-3308	145	f	2
-3309	145	f	2
-3310	145	f	2
-3311	145	f	2
-3312	145	f	2
-3313	145	f	2
-3314	145	f	2
-3315	145	f	2
-3316	145	f	2
-3317	145	f	2
-3318	145	f	2
-3319	145	f	2
-3320	145	f	2
-3321	145	f	2
-3322	145	f	2
-3323	145	f	2
-1325	83	f	2
-1326	84	f	2
-1327	83	f	2
-1328	39	f	2
-3324	145	f	2
-1329	84	f	2
-3325	145	f	2
-3326	145	f	2
-3327	145	f	2
-1330	83	f	2
-1331	83	f	2
-1332	39	f	2
-1333	84	f	2
-1334	83	f	2
-1335	83	f	2
-1339	70	f	2
-1340	39	f	2
-1344	39	f	2
-1345	84	f	2
-1346	83	f	2
-1350	83	f	2
-1351	70	f	2
-1352	39	f	2
-1353	84	f	2
-3328	145	f	2
-3329	145	f	2
-3330	145	f	2
-3331	145	f	2
-3332	145	f	2
-3333	145	f	2
-3334	145	f	2
-3335	145	f	2
-3336	145	f	2
-3337	145	f	2
-3338	145	f	2
-3339	145	f	2
-3340	145	f	2
-3341	145	f	2
-1354	83	f	2
-1355	39	f	2
-1356	84	f	2
-1357	83	f	2
-2231	78	f	2
-2232	78	f	2
-2233	78	f	2
-1639	106	f	2
-1640	87	f	2
-1641	87	f	2
-1642	89	f	2
-1643	89	f	2
-3342	145	f	2
-2047	119	f	2
-3343	145	f	2
-3344	145	f	2
-3345	145	f	2
-3346	145	f	2
-3347	145	f	2
-3348	145	f	2
-3349	145	f	2
-3350	145	f	2
-1764	111	f	2
-1766	111	f	2
-1769	105	f	2
-1771	111	f	2
-1773	111	f	2
-2285	135	f	2
-2292	12	f	2
-2293	145	f	2
-2048	65	f	2
-2049	12	f	2
-2050	87	f	2
-2051	69	f	2
-2052	130	f	2
-2053	47	f	2
-2054	2	f	2
-1906	65	f	2
-1990	106	f	2
-1991	106	f	2
-1992	106	f	2
-2029	119	f	2
-2442	117	f	2
-2546	110	f	2
-2573	69	f	2
-3351	145	f	2
-3352	145	f	2
-3353	145	f	2
-3354	145	f	2
-3355	145	f	2
-3356	145	f	2
-3357	145	f	2
-3358	145	f	2
-3359	145	f	2
-3360	145	f	2
-3361	145	f	2
-3362	145	f	2
-3363	145	f	2
-3364	145	f	2
-3365	145	f	2
-3366	145	f	2
-3367	145	f	2
-3369	145	f	2
-3370	145	f	2
-3371	145	f	2
-3372	145	f	2
-3616	145	f	2
-3617	145	f	2
-3618	145	f	2
-3659	130	f	2
-921	73	\N	2
-1648	84	f	2
-2458	106	f	2
-2556	151	f	2
-2557	151	f	2
-2568	145	f	2
-1649	83	f	2
-1650	87	f	2
-2569	130	f	2
-2570	69	f	2
-3416	145	f	2
-3417	145	f	2
-2893	145	f	2
-2897	83	f	2
-922	73	\N	2
-2914	2	f	2
-923	73	\N	2
-2923	118	f	2
-924	73	\N	2
-2962	130	f	2
-3373	145	f	2
-1651	89	f	2
-1652	90	f	2
-1653	69	f	2
-1657	103	f	2
-925	73	\N	2
-926	73	\N	2
-1659	65	f	2
-1882	106	f	2
-1660	106	f	2
-927	73	\N	2
-2046	119	f	2
-959	74	\N	2
-960	74	\N	2
-1714	110	f	2
-985	75	\N	2
-987	75	\N	2
-3375	145	f	2
-3376	145	f	2
-3377	145	f	2
-1721	110	f	2
-1884	12	f	2
-3378	145	f	2
-1885	65	f	2
-1888	117	f	2
-1893	120	f	2
-1894	12	f	2
-1004	78	\N	2
-1309	90	f	2
-1310	41	f	2
-3379	145	f	2
-3380	145	f	2
-3381	145	f	2
-3382	145	f	2
-3383	145	f	2
-3384	145	f	2
-3385	145	f	2
-3386	145	f	2
-1895	65	f	2
-3387	145	f	2
-3388	145	f	2
-3389	145	f	2
-3390	145	f	2
-1311	41	f	2
-1312	65	f	2
-1313	12	f	2
-1896	65	f	2
-1314	102	f	2
-1317	12	f	2
-3391	145	f	2
-1320	83	f	2
-1321	84	f	2
-1322	83	f	2
-3392	145	f	2
-3393	145	f	2
-1950	123	f	2
-1951	90	f	2
-3394	145	f	2
-3395	145	f	2
-3396	145	f	2
-3397	145	f	2
-3398	145	f	2
-1952	86	f	2
-3399	145	f	2
-3400	145	f	2
-3401	145	f	2
-3402	145	f	2
-3403	145	f	2
-3404	145	f	2
-3405	145	f	2
-3406	145	f	2
-1907	65	f	2
-3407	145	f	2
-1956	87	f	2
-1958	93	f	2
-1959	123	f	2
-2104	135	f	2
-1323	83	f	2
-2105	135	f	2
-2106	135	f	2
-3408	145	f	2
-3409	145	f	2
-2107	12	f	2
-3410	145	f	2
-3411	145	f	2
-3412	145	f	2
-2108	12	f	2
-3413	145	f	2
-2111	83	f	2
-2115	39	f	2
-2119	90	f	2
-2168	137	f	2
-2172	135	f	2
-3414	145	f	2
-2173	137	f	2
-1324	83	f	2
-1358	83	f	2
-1359	84	f	2
-1360	83	f	2
-2452	117	f	2
-2457	106	f	2
-3415	145	f	2
-1361	84	f	2
-1365	39	f	2
-1366	84	f	2
-1367	83	f	2
-1368	65	f	2
-1371	87	f	2
-1373	87	f	2
-1374	90	f	2
-1624	87	f	2
-3418	145	f	2
-3419	145	f	2
-3420	145	f	2
-1625	89	f	2
-1376	89	f	2
-1626	69	f	2
-1378	78	f	2
-1627	69	f	2
-1628	69	f	2
-3421	145	f	2
-3422	145	f	2
-1379	87	f	2
-1634	103	f	2
-1380	87	f	2
-1383	69	f	2
-2260	135	f	2
-2261	142	f	2
-2262	135	f	2
-2263	142	f	2
-2264	134	f	2
-2265	135	f	2
-1780	105	f	2
-1797	12	f	2
-1798	65	f	2
-1799	12	f	2
-1804	118	f	2
-3423	145	f	2
-3424	145	f	2
-3425	145	f	2
-3426	145	f	2
-3427	145	f	2
-3428	145	f	2
-3429	145	f	2
-3430	145	f	2
-3431	145	f	2
-3432	145	f	2
-3433	145	f	2
-3434	145	f	2
-3435	145	f	2
-3436	145	f	2
-3437	145	f	2
-3438	145	f	2
-3439	145	f	2
-2	2	\N	2
-2127	12	f	2
-3	2	\N	2
-10	12	\N	2
-1010	79	\N	2
-1080	65	\N	2
-1081	12	\N	2
-1099	39	\N	2
-2309	69	f	2
-1100	70	\N	2
-2128	65	f	2
-2129	138	f	2
-2130	138	f	2
-2132	118	f	2
-1251	55	f	2
-2440	117	f	2
-2201	104	f	2
-2459	106	f	2
-2463	111	f	2
-2465	120	f	2
-2563	69	f	2
-2564	145	f	2
-2203	104	f	2
-2205	110	f	2
-2234	78	f	2
-2566	69	f	2
-2133	123	f	2
-2567	145	f	2
-2571	145	f	2
-2135	12	f	2
-2572	130	f	2
-2710	119	f	2
-2711	119	f	2
-2712	119	f	2
-2713	119	f	2
-2817	123	f	2
-2836	119	f	2
-2136	65	f	2
-2320	12	f	2
-2327	87	f	2
-2328	69	f	2
-2583	12	f	2
-2329	145	f	2
-2330	145	f	2
-2331	146	f	2
-2837	135	f	2
-2332	146	f	2
-2333	130	f	2
-2838	144	f	2
-2855	119	f	2
-2861	117	f	2
-2862	117	f	2
-2334	104	f	2
-2895	39	f	2
-2335	104	f	2
-2336	104	f	2
-2235	78	f	2
-2236	78	f	2
-2337	104	f	2
-2338	87	f	2
-2339	69	f	2
-2340	69	f	2
-2237	78	f	2
-2238	78	f	2
-2239	78	f	2
-2896	84	f	2
-1774	111	f	2
-1775	59	f	2
-1777	65	f	2
-1778	12	f	2
-2898	69	f	2
-1800	118	f	2
-2294	145	f	2
-1801	118	f	2
-2295	145	f	2
-1802	118	f	2
-2296	12	f	2
-2297	145	f	2
-2899	135	f	2
-2299	146	f	2
-2900	137	f	2
-2902	134	f	2
-2300	145	f	2
-2304	123	f	2
-1910	106	f	2
-1911	106	f	2
-2075	93	f	2
-2076	123	f	2
-2077	12	f	2
-2087	118	f	2
-2088	130	f	2
-2089	87	f	2
-2090	69	f	2
-2092	118	f	2
-2095	87	f	2
-2096	118	f	2
-2915	79	f	2
-2097	118	f	2
-2924	118	f	2
-2307	87	f	2
-2963	145	f	2
-2964	145	f	2
-2120	101	f	2
-2965	145	f	2
-3374	145	f	2
-2126	2	f	2
-3620	149	f	2
-3639	101	f	2
-3660	135	f	2
-3661	137	f	2
-3747	166	f	2
-3748	166	f	2
-3752	166	f	2
-2341	135	f	2
-2342	137	f	2
-2343	135	f	2
-2344	143	f	2
-2030	119	f	2
-2031	119	f	2
-2308	87	f	2
-2032	110	f	2
-2038	119	f	2
-2903	119	f	2
-2514	65	f	2
-2515	148	f	2
-2516	12	f	2
-2871	119	f	2
-2872	55	f	2
-2517	149	f	2
-2518	149	f	2
-2904	103	f	2
-2916	149	f	2
-2925	118	f	2
-2966	145	f	2
-2967	145	f	2
-2968	145	f	2
-2519	47	f	2
-2520	149	f	2
-3440	145	f	2
-3441	145	f	2
-2521	149	f	2
-2522	149	f	2
-2873	87	f	2
-2874	87	f	2
-2875	69	f	2
-2876	145	f	2
-2877	130	f	2
-2878	87	f	2
-2887	12	f	2
-2888	65	f	2
-2889	65	f	2
-1250	55	f	2
-1316	102	f	2
-1336	39	f	2
-1362	83	f	2
-1363	84	f	2
-1364	83	f	2
-1372	69	f	2
-2523	149	f	2
-2524	149	f	2
-1375	69	f	2
-2525	149	f	2
-1382	90	f	2
-2526	149	f	2
-1385	84	f	2
-2527	149	f	2
-1386	83	f	2
-2528	149	f	2
-2529	119	f	2
-2536	110	f	2
-2537	119	f	2
-2538	119	f	2
-2574	145	f	2
-2575	130	f	2
-1387	87	f	2
-1388	90	f	2
-1389	69	f	2
-1390	69	f	2
-1391	90	f	2
-1416	39	f	2
-2270	70	f	2
-2271	140	f	2
-2272	78	f	2
-2273	135	f	2
-2286	137	f	2
-2287	135	f	2
-2288	142	f	2
-2289	104	f	2
-2290	104	f	2
-1424	12	f	2
-1425	65	f	2
-1426	105	f	2
-1431	105	f	2
-1432	105	f	2
-1433	12	f	2
-1434	65	f	2
-2576	69	f	2
-2577	145	f	2
-2578	145	f	2
-2579	130	f	2
-2580	69	f	2
-2581	145	f	2
-2582	130	f	2
-2345	134	f	2
-2366	87	f	2
-3442	145	f	2
-2367	69	f	2
-3443	145	f	2
-3444	145	f	2
-3445	145	f	2
-3446	145	f	2
-3447	145	f	2
-3448	145	f	2
-3449	145	f	2
-3450	145	f	2
-3451	145	f	2
-3452	145	f	2
-3453	145	f	2
-3454	145	f	2
-3455	145	f	2
-3456	145	f	2
-3457	145	f	2
-3458	145	f	2
-3459	145	f	2
-3460	145	f	2
-2368	145	f	2
-2369	146	f	2
-3461	145	f	2
-3462	145	f	2
-3463	145	f	2
-3464	145	f	2
-3465	145	f	2
-3466	145	f	2
-3467	145	f	2
-3468	145	f	2
-3469	145	f	2
-2370	118	f	2
-3470	145	f	2
-3471	145	f	2
-3472	145	f	2
-3473	145	f	2
-2372	130	f	2
-2373	39	f	2
-2648	65	f	2
-2649	65	f	2
-2650	65	f	2
-2429	105	f	2
-2430	105	f	2
-2510	110	f	2
-2511	86	f	2
-2513	12	f	2
-3474	145	f	2
-3475	145	f	2
-3476	145	f	2
-3477	145	f	2
-3478	145	f	2
-3479	145	f	2
-3480	145	f	2
-3481	145	f	2
-3482	145	f	2
-3483	145	f	2
-3484	145	f	2
-3485	145	f	2
-3486	145	f	2
-3487	145	f	2
-3488	145	f	2
-3489	145	f	2
-3490	145	f	2
-3491	145	f	2
-3492	145	f	2
-3493	145	f	2
-3494	145	f	2
-3495	145	f	2
-3496	145	f	2
-3497	145	f	2
-3498	145	f	2
-3499	145	f	2
-3500	145	f	2
-3501	145	f	2
-3502	145	f	2
-3503	145	f	2
-3504	145	f	2
-3505	145	f	2
-3506	145	f	2
-3507	145	f	2
-3508	145	f	2
-3509	145	f	2
-3510	145	f	2
-3511	145	f	2
-3512	145	f	2
-3513	145	f	2
-3514	145	f	2
-3515	145	f	2
-3516	145	f	2
-3517	145	f	2
-3518	145	f	2
-3519	145	f	2
-3520	145	f	2
-2544	148	f	2
-2926	118	f	2
-2969	145	f	2
-2970	145	f	2
-2971	145	f	2
-907	71	\N	2
-908	12	\N	2
-909	12	\N	2
-1041	47	\N	2
-1042	47	\N	2
-1043	47	\N	2
-1044	47	\N	2
-1045	47	\N	2
-3521	145	f	2
-3522	145	f	2
-3523	145	f	2
-3524	145	f	2
-3525	145	f	2
-3526	145	f	2
-3527	145	f	2
-3528	145	f	2
-2589	89	f	2
-2590	90	f	2
-2545	86	f	2
-2547	119	f	2
-2548	119	f	2
-3529	145	f	2
-3530	145	f	2
-3531	145	f	2
-3532	145	f	2
-2591	69	f	2
-2592	123	f	2
-2593	69	f	2
-2594	87	f	2
-2595	69	f	2
-2596	145	f	2
-2376	69	f	2
-2377	135	f	2
-2549	12	f	2
-2378	137	f	2
-2550	87	f	2
-2379	135	f	2
-2551	12	f	2
-2552	65	f	2
-2553	65	f	2
-2554	65	f	2
-2725	119	f	2
-2726	110	f	2
-2727	119	f	2
-2728	119	f	2
-2729	103	f	2
-2731	123	f	2
-2732	148	f	2
-2819	123	f	2
-3533	145	f	2
-3534	145	f	2
-3535	145	f	2
-3536	145	f	2
-3537	145	f	2
-3538	145	f	2
-2380	143	f	2
-3539	145	f	2
-3540	145	f	2
-2382	134	f	2
-2383	104	f	2
-2384	104	f	2
-2385	104	f	2
-2388	103	f	2
-3541	145	f	2
-2389	105	f	2
-3542	145	f	2
-2390	105	f	2
-3543	145	f	2
-2391	105	f	2
-3544	145	f	2
-2396	105	f	2
-3545	145	f	2
-2397	105	f	2
-3546	145	f	2
-2398	105	f	2
-2415	105	f	2
-2416	105	f	2
-2670	146	f	2
-2677	89	f	2
-2678	69	f	2
-2679	69	f	2
-2680	89	f	2
-2681	89	f	2
-2424	105	f	2
-2425	105	f	2
-2426	105	f	2
-2682	149	f	2
-2683	89	f	2
-2427	105	f	2
-3547	145	f	2
-3548	145	f	2
-3549	145	f	2
-3550	145	f	2
-3551	145	f	2
-3552	145	f	2
-3553	145	f	2
-2428	105	f	2
-2684	149	f	2
-2685	89	f	2
-2686	135	f	2
-2431	105	f	2
-2687	137	f	2
-2690	134	f	2
-2693	110	f	2
-3554	145	f	2
-3555	145	f	2
-3556	145	f	2
-3557	145	f	2
-3558	145	f	2
-3559	145	f	2
-3560	145	f	2
-3561	145	f	2
-3562	145	f	2
-3563	145	f	2
-3564	145	f	2
-3565	145	f	2
-3566	145	f	2
-3621	149	f	2
-3622	93	f	\N
-3640	101	f	2
-3662	135	f	2
-3666	135	f	2
-3667	137	f	2
-2694	110	f	2
-2695	86	f	2
-2530	119	f	2
-2531	119	f	2
-3749	166	f	2
-3754	166	f	2
-2532	119	f	2
-2533	119	f	2
-2534	119	f	2
-2535	119	f	2
-2539	110	f	2
-2540	86	f	2
-2541	119	f	2
-2542	148	f	2
-2543	148	f	2
-2820	118	f	2
-2972	145	f	2
-2973	145	f	2
-2974	145	f	2
-2821	87	f	2
-2822	69	f	2
-2823	145	f	2
-1546	106	f	2
-2824	130	f	2
-1547	106	f	2
-1548	12	f	2
-1549	12	f	2
-2825	146	f	2
-2826	118	f	2
-2827	135	f	2
-3623	93	f	\N
-2828	137	f	2
-2841	104	f	2
-2865	78	f	2
-2866	117	f	2
-2867	111	f	2
-3663	135	f	2
-3700	149	f	2
-3707	12	f	2
-1550	65	f	2
-1551	87	f	2
-3721	12	f	2
-1552	87	f	2
-2597	145	f	2
-3731	12	f	2
-3750	166	f	2
-2636	65	f	2
-2637	65	f	2
-3753	166	f	2
-2638	65	f	2
-2392	105	f	2
-2393	105	f	2
-2394	105	f	2
-2395	105	f	2
-2642	65	f	2
-274	12	\N	2
-292	41	\N	2
-306	41	\N	2
-706	12	\N	2
-723	12	\N	2
-725	55	\N	2
-726	55	\N	2
-728	55	\N	2
-734	55	\N	2
-743	55	\N	2
-763	55	\N	2
-764	12	\N	2
-769	12	\N	2
-2643	65	f	2
-2646	65	f	2
-2647	65	f	2
-2651	65	f	2
-2652	65	f	2
-2653	65	f	2
-771	55	\N	2
-772	59	\N	2
-837	65	\N	2
-1046	47	\N	2
-1062	55	\N	2
-1067	78	\N	2
-1068	12	\N	2
-1164	70	\N	2
-1165	39	\N	2
-2654	65	f	2
-2655	65	f	2
-2658	67	f	2
-1168	41	\N	2
-1169	70	\N	2
-1185	39	\N	2
-1195	87	\N	2
-1198	12	\N	2
-1261	89	f	2
-1598	103	f	2
-1807	90	f	2
-1833	118	f	2
-1839	103	f	2
-1435	12	f	2
-1436	65	f	2
-1438	107	f	2
-1439	107	f	2
-1511	101	f	2
-1512	101	f	2
-1513	101	f	2
-1521	12	f	2
-1535	110	f	2
-1536	110	f	2
-1537	110	f	2
-1538	110	f	2
-1539	110	f	2
-1540	110	f	2
-1541	110	f	2
-1542	67	f	2
-2417	105	f	2
-1543	87	f	2
-1544	87	f	2
-1545	87	f	2
-2659	87	f	2
-2661	145	f	2
-2662	130	f	2
-2663	118	f	2
-2418	105	f	2
-2419	105	f	2
-2420	105	f	2
-2421	105	f	2
-2422	105	f	2
-2423	105	f	2
-2698	110	f	2
-2699	86	f	2
-2700	119	f	2
-2701	119	f	2
-2879	69	f	2
-773	12	\N	2
-887	69	\N	2
-2183	137	f	2
-2660	69	f	2
-2664	149	f	2
-2665	149	f	2
-2666	87	f	2
-2667	69	f	2
-2975	145	f	2
-2976	145	f	2
-2977	145	f	2
-3570	145	f	2
-892	67	\N	2
-3571	145	f	2
-3572	145	f	2
-3624	93	f	\N
-3642	110	f	2
-2668	145	f	2
-3646	86	f	2
-3664	135	f	2
-3665	137	f	2
-3701	149	f	2
-3702	149	f	2
-3708	135	f	2
-3709	143	f	2
-3732	166	f	2
-3733	166	f	2
-893	47	\N	2
-894	2	\N	2
-896	39	\N	2
-1011	12	\N	2
-1040	47	\N	2
-1277	55	f	2
-3751	166	f	2
-2669	130	f	2
-2672	123	f	2
-2673	39	f	2
-2839	119	f	2
-2840	119	f	2
-1278	39	f	2
-1283	71	f	2
-1284	69	f	2
-1285	87	f	2
-1286	89	f	2
-1287	84	f	2
-1288	90	f	2
-1289	84	f	2
-1290	39	f	2
-1291	84	f	2
-1292	83	f	2
-1293	69	f	2
-1294	69	f	2
-1304	87	f	2
-1306	90	f	2
-1840	103	f	2
-1849	12	f	2
-1440	103	f	2
-1442	103	f	2
-1447	106	f	2
-1448	106	f	2
-1450	12	f	2
-1452	12	f	2
-1464	87	f	2
-1465	69	f	2
-1467	89	f	2
-1472	69	f	2
-1473	69	f	2
-1485	106	f	2
-1487	103	f	2
-1500	106	f	2
-1502	103	f	2
-1503	103	f	2
-1504	104	f	2
-1505	104	f	2
-1506	104	f	2
-1507	107	f	2
-1509	106	f	2
-1514	101	f	2
-1515	101	f	2
-1516	87	f	2
-1517	87	f	2
-1518	87	f	2
-1519	87	f	2
-1553	79	f	2
-2585	87	f	2
-2586	87	f	2
-2587	87	f	2
-2588	89	f	2
-2633	65	f	2
-2634	65	f	2
-2635	65	f	2
-2174	135	f	2
-2175	137	f	2
-2176	135	f	2
-2177	137	f	2
-2178	135	f	2
-2179	137	f	2
-2180	135	f	2
-2181	137	f	2
-2182	135	f	2
-897	39	\N	2
-898	39	\N	2
-899	39	\N	2
-900	65	\N	2
-2435	146	f	2
-901	12	\N	2
-2450	103	f	2
-902	65	\N	2
-903	71	\N	2
-2451	106	f	2
-2486	101	f	2
-2489	86	f	2
-2490	86	f	2
-2491	86	f	2
-2493	87	f	2
-2501	110	f	2
-2502	110	f	2
-2503	119	f	2
-2505	110	f	2
-2506	86	f	2
-2507	110	f	2
-2508	110	f	2
-2737	106	f	2
-2738	117	f	2
-2739	69	f	2
-2740	12	f	2
-2832	119	f	2
-2863	111	f	2
-2864	140	f	2
-2930	145	f	2
-2933	145	f	2
-2935	130	f	2
-2939	130	f	2
-2940	145	f	2
-2945	130	f	2
-2978	145	f	2
-2979	145	f	2
-2980	145	f	2
-3573	145	f	2
-3574	145	f	2
-3575	145	f	2
-2274	143	f	2
-1962	93	f	\N
-2275	134	f	2
-3643	110	f	2
-2276	12	f	2
-2277	105	f	2
-2278	135	f	2
-2279	144	f	2
-3668	110	f	2
-2280	134	f	2
-2281	104	f	2
-3669	110	f	2
-3671	110	f	2
-3672	86	f	2
-3673	104	f	2
-3674	104	f	2
-3675	87	f	2
-3676	69	f	2
-3677	145	f	2
-3703	149	f	2
-2282	135	f	2
-2284	134	f	2
-3710	134	f	2
-1963	123	f	2
-1964	93	f	2
-1965	123	f	2
-1966	12	f	2
-2098	118	f	2
-2099	12	f	2
-2100	12	f	2
-1978	2	f	2
-2101	65	f	2
-1979	118	f	2
-1985	93	f	2
-1986	123	f	2
-1987	103	f	2
-1988	119	f	2
-1989	12	f	2
-2602	65	f	2
-2603	65	f	2
-2604	65	f	2
-2605	65	f	2
-2608	65	f	2
-2612	65	f	2
-2613	65	f	2
-2617	65	f	2
-2039	119	f	2
-2044	119	f	2
-2156	135	f	2
-2157	137	f	2
-2158	135	f	2
-2159	137	f	2
-2160	135	f	2
-2161	137	f	2
-2162	135	f	2
-2163	137	f	2
-2164	135	f	2
-2165	137	f	2
-2167	135	f	2
-2045	119	f	2
-2399	105	f	2
-2400	105	f	2
-2401	105	f	2
-2402	105	f	2
-2403	105	f	2
-2704	119	f	2
-2705	119	f	2
-3734	71	f	2
-2706	119	f	2
-2707	119	f	2
-2708	119	f	2
-2709	119	f	2
-2434	130	f	2
-775	12	\N	2
-778	65	\N	2
-779	65	\N	2
-780	65	\N	2
-784	47	\N	2
-786	47	\N	2
-788	12	\N	2
-789	67	\N	2
-790	65	\N	2
-791	65	\N	2
-792	65	\N	2
-794	55	\N	2
-800	55	\N	2
-801	55	\N	2
-802	65	\N	2
-2931	145	f	2
-1468	84	f	2
-1469	90	f	2
-1470	83	f	2
-2932	145	f	2
-2942	145	f	2
-2943	145	f	2
-2944	145	f	2
-2981	145	f	2
-3576	145	f	2
-3577	145	f	2
-3578	145	f	2
-1471	69	f	2
-1913	117	f	2
-1510	101	f	2
-1968	12	f	2
-1970	126	f	2
-3645	110	f	2
-1971	93	f	2
-1972	123	f	2
-1973	123	f	2
-1975	65	f	2
-1976	55	f	2
-3647	110	f	2
-1977	12	f	2
-1554	101	f	2
-1556	101	f	2
-1559	87	f	2
-1560	79	f	2
-2137	139	f	2
-2138	139	f	2
-2139	139	f	2
-2144	135	f	2
-2145	137	f	2
-2146	135	f	2
-2147	137	f	2
-3648	110	f	2
-3670	110	f	2
-3678	130	f	2
-3682	83	f	2
-3683	69	f	2
-3686	134	f	2
-3687	119	f	2
-3688	103	f	2
-3689	106	f	2
-3690	117	f	2
-3694	111	f	2
-3704	149	f	2
-3711	12	f	2
-838	65	\N	2
-849	41	\N	2
-851	41	\N	2
-852	41	\N	2
-853	41	\N	2
-854	2	\N	2
-855	2	\N	2
-856	2	\N	2
-857	55	\N	2
-858	55	\N	2
-859	55	\N	2
-860	55	\N	2
-861	55	\N	2
-864	65	\N	2
-865	12	\N	2
-866	65	\N	2
-1307	90	f	2
-1308	90	f	2
-1337	84	f	2
-1338	83	f	2
-1347	39	f	2
-1348	84	f	2
-1349	83	f	2
-1393	12	f	2
-1394	65	f	2
-1395	65	f	2
-1396	104	f	2
-1398	104	f	2
-1400	104	f	2
-1401	104	f	2
-1402	104	f	2
-1403	104	f	2
-1404	87	f	2
-1406	89	f	2
-1407	90	f	2
-1408	69	f	2
-1409	69	f	2
-1410	69	f	2
-1411	69	f	2
-2148	135	f	2
-2149	137	f	2
-2150	135	f	2
-2187	135	f	2
-2188	137	f	2
-2189	135	f	2
-2190	137	f	2
-2674	84	f	2
-2675	83	f	2
-2676	87	f	2
-1413	102	f	2
-1414	90	f	2
-1415	91	f	2
-1417	84	f	2
-1418	90	f	2
-1419	91	f	2
-1420	101	f	2
-2152	135	f	2
-2153	137	f	2
-2154	135	f	2
-2155	137	f	2
-2184	135	f	2
-2185	137	f	2
-2186	134	f	2
-2688	135	f	2
-2880	87	f	2
-904	71	\N	2
-2934	145	f	2
-905	71	\N	2
-906	71	\N	2
-910	65	\N	2
-911	65	\N	2
-912	72	\N	2
-1318	102	f	2
-1319	84	f	2
-2206	110	f	2
-2207	110	f	2
-1607	106	f	2
-1608	105	f	2
-1341	84	f	2
-1609	105	f	2
-2982	145	f	2
-2983	145	f	2
-2984	145	f	2
-2433	145	f	2
-2689	143	f	2
-2558	12	f	2
-2559	151	f	2
-3605	145	f	2
-3627	93	f	\N
-1342	83	f	2
-1343	70	f	2
-1610	87	f	2
-1611	87	f	2
-1612	89	f	2
-1613	89	f	2
-1614	90	f	2
-2560	69	f	2
-2561	145	f	2
-2562	130	f	2
-2733	148	f	2
-3679	93	f	2
-3680	146	f	2
-3693	111	f	2
-3712	135	f	2
-3713	137	f	2
-1615	69	f	2
-2208	110	f	2
-2209	110	f	2
-2210	86	f	2
-2211	110	f	2
-2212	110	f	2
-2213	86	f	2
-2734	119	f	2
-2735	119	f	2
-2843	119	f	2
-1370	90	f	2
-1384	39	f	2
-2283	137	f	2
-1803	118	f	2
-2301	146	f	2
-2302	118	f	2
-1852	119	f	2
-1898	105	f	2
-1900	120	f	2
-1901	120	f	2
-1902	117	f	2
-1903	111	f	2
-1904	65	f	2
-1905	65	f	2
-1561	87	f	2
-1562	87	f	2
-1563	79	f	2
-1564	101	f	2
-2844	119	f	2
-1569	101	f	2
-1570	101	f	2
-1571	65	f	2
-1575	65	f	2
-1576	86	f	2
-2845	119	f	2
-2846	119	f	2
-2847	119	f	2
-2848	119	f	2
-2849	119	f	2
-2850	119	f	2
-2851	119	f	2
-2852	110	f	2
-2853	86	f	2
-2854	119	f	2
-1577	87	f	2
-1578	79	f	2
-1579	110	f	2
-1580	78	f	2
-1581	87	f	2
-1582	89	f	2
-2598	145	f	2
-2599	130	f	2
-2870	119	f	2
-2151	137	f	2
-988	75	\N	2
-1003	12	\N	2
-1060	41	\N	2
-1078	12	\N	2
-1088	12	\N	2
-1089	65	\N	2
-1090	39	\N	2
-1091	84	\N	2
-1093	84	\N	2
-1095	70	\N	2
-1096	39	\N	2
-2936	145	f	2
-2937	145	f	2
-2938	145	f	2
-2985	145	f	2
-2986	145	f	2
-2987	145	f	2
-2988	145	f	2
-2989	145	f	2
-2990	145	f	2
-3582	145	f	2
-3583	145	f	2
-3584	145	f	2
-3585	145	f	2
-3586	145	f	2
-3587	145	f	2
-1922	93	f	\N
-1932	93	f	\N
-1933	93	f	\N
-1939	93	f	\N
-1940	93	f	\N
-3628	93	f	2
-3630	118	f	2
-3681	84	f	2
-3684	135	f	2
-3685	137	f	2
-3706	123	f	7
-3714	134	f	2
-1199	89	\N	2
-1204	87	\N	2
-1205	89	\N	2
-1206	89	\N	2
-1252	59	f	2
-1257	87	f	2
-1258	87	f	2
-1644	90	f	2
-1645	69	f	2
-1646	70	f	2
-1918	119	f	2
-1919	12	f	2
-1924	118	f	2
-1925	89	f	2
-1926	90	f	2
-1927	87	f	2
-1931	118	f	2
-1941	12	f	2
-1945	123	f	2
-1946	123	f	2
-1947	123	f	2
-1948	123	f	2
-1954	12	f	2
-1584	89	f	2
-1585	90	f	2
-1586	69	f	2
-1587	39	f	2
-1588	84	f	2
-1589	84	f	2
-1590	83	f	2
-1591	87	f	2
-1592	89	f	2
-1593	69	f	2
-1597	104	f	2
-2631	65	f	2
-2632	65	f	2
-2702	119	f	2
-2703	119	f	2
-2830	69	f	2
-2831	134	f	2
-2833	110	f	2
-2834	86	f	2
-2835	104	f	2
-2858	103	f	2
-2859	148	f	2
-2860	106	f	2
-885	47	\N	2
-2946	145	f	2
-895	39	\N	2
-940	73	\N	2
-941	73	\N	2
-942	73	\N	2
-1259	87	f	2
-1260	87	f	2
-2200	104	f	2
-2214	110	f	2
-2215	86	f	2
-2216	78	f	2
-2217	12	f	2
-2218	140	f	2
-2219	65	f	2
-2221	140	f	2
-2222	65	f	2
-2223	78	f	2
-2224	78	f	2
-2225	78	f	2
-2226	78	f	2
-2227	78	f	2
-2228	78	f	2
-2229	78	f	2
-2230	78	f	2
-1908	65	f	2
-2055	12	f	2
-2062	93	f	2
-2064	123	f	2
-2065	118	f	2
-2067	123	f	2
-2069	123	f	2
-2070	12	f	2
-2305	145	f	2
-2306	146	f	2
-1993	106	f	2
-2310	145	f	2
-1994	106	f	2
-1995	106	f	2
-1996	106	f	2
-2312	130	f	2
-1997	106	f	2
-2313	145	f	2
-2314	69	f	2
-2000	103	f	2
-2315	135	f	2
-2001	106	f	2
-2316	137	f	2
-2002	106	f	2
-2317	134	f	2
-2005	103	f	2
-2319	104	f	2
-2006	106	f	2
-2007	106	f	2
-2009	93	f	2
-2010	123	f	2
-2011	110	f	2
-2012	118	f	2
-2013	87	f	2
-2014	89	f	2
-2015	90	f	2
-2016	93	f	2
-2017	69	f	2
-2018	87	f	2
-2019	89	f	2
-2947	145	f	2
-2948	145	f	2
-2949	130	f	2
-2991	130	f	2
-3588	145	f	2
-3589	145	f	2
-3590	145	f	2
-3592	145	f	2
-3607	145	f	2
-3629	93	f	2
-3695	93	f	2
-3715	12	f	2
-3716	65	f	2
-2020	69	f	2
-2023	104	f	2
-2024	104	f	2
-2026	103	f	2
-2027	106	f	2
-2028	106	f	2
-2437	146	f	2
-2438	117	f	2
-1880	106	f	2
-1881	106	f	2
-2374	84	f	2
-2375	83	f	2
-2413	105	f	2
-2950	145	f	2
-871	69	\N	2
-872	12	\N	2
-873	65	\N	2
-874	65	\N	2
-876	41	\N	2
-878	70	\N	2
-2857	119	f	2
-879	65	\N	2
-880	70	\N	2
-881	70	\N	2
-882	70	\N	2
-883	70	\N	2
-1079	65	\N	2
-2951	145	f	2
-2952	145	f	2
-2992	145	f	2
-2993	145	f	2
-2994	145	f	2
-2995	145	f	2
-2996	145	f	2
-2997	145	f	2
-2998	145	f	2
-2999	145	f	2
-3000	145	f	2
-3013	145	f	2
-3014	145	f	2
-3015	145	f	2
-3016	145	f	2
-3017	145	f	2
-3018	145	f	2
-3019	145	f	2
-3020	145	f	2
-3021	145	f	2
-3022	145	f	2
-3023	145	f	2
-3024	145	f	2
-3025	145	f	2
-3026	145	f	2
-3027	145	f	2
-3028	145	f	2
-3029	145	f	2
-3030	145	f	2
-3031	145	f	2
-3032	145	f	2
-3033	145	f	2
-3034	145	f	2
-3035	145	f	2
-3036	145	f	2
-3593	145	f	2
-3608	145	f	2
-3609	145	f	2
-3631	118	f	2
-3632	93	f	2
-3633	93	f	2
-1097	84	\N	2
-1101	39	\N	2
-1102	84	\N	2
-1159	78	\N	2
-1170	39	\N	2
-1178	70	\N	2
-1179	39	\N	2
-1189	12	\N	2
-1190	12	\N	2
-1191	86	\N	2
-1192	86	\N	2
-1193	87	\N	2
-1194	87	\N	2
-1200	89	\N	2
-1201	87	\N	2
-1210	90	\N	2
-1211	12	\N	2
-1212	65	\N	2
-1213	90	\N	2
-1214	91	\N	2
-1225	12	\N	2
-1230	93	\N	2
-1243	87	f	2
-1244	87	f	2
-1253	65	f	2
-1263	87	f	2
-3696	145	f	2
-1264	87	f	2
-1265	89	f	2
-1268	12	f	2
-2198	123	f	2
-2199	105	f	2
-2240	78	f	2
-2241	78	f	2
-3697	130	f	2
-2242	78	f	2
-2243	12	f	2
-2244	12	f	2
-2245	65	f	2
-2246	105	f	2
-2247	102	f	2
-2248	141	f	2
-2249	141	f	2
-2254	135	f	2
-2255	142	f	2
-2256	135	f	2
-2257	142	f	2
-2258	135	f	2
-2259	142	f	2
-1853	119	f	2
-1854	119	f	2
-1855	119	f	2
-1859	119	f	2
-1860	119	f	2
-1865	117	f	2
-1866	117	f	2
-1867	117	f	2
-1868	117	f	2
-1869	69	f	2
-1870	78	f	2
-1872	118	f	2
-1873	105	f	2
-1875	106	f	2
-1876	106	f	2
-863	65	\N	2
-870	69	\N	2
-875	70	\N	2
-1207	12	\N	2
-1209	90	\N	2
-1218	39	\N	2
-1221	12	\N	2
-1227	93	\N	2
-1240	41	f	2
-1241	39	f	2
-1249	59	f	2
-1282	87	f	2
-1980	93	f	2
-1981	118	f	2
-1982	93	f	2
-1984	123	f	2
-2404	105	f	2
-2405	105	f	2
-2406	105	f	2
-2407	105	f	2
-2408	105	f	2
-2409	105	f	2
-2410	105	f	2
-2411	105	f	2
-2412	105	f	2
-2414	105	f	2
-2432	105	f	2
-2719	119	f	2
-2720	119	f	2
-2721	119	f	2
-2722	119	f	2
-2723	104	f	2
-2724	119	f	2
-2736	119	f	2
-2741	65	f	2
-2742	12	f	2
-2779	123	f	2
-2780	123	f	2
-2781	123	f	2
-2782	123	f	2
-2783	123	f	2
-2953	130	f	2
-3001	145	f	2
-3002	145	f	2
-3003	145	f	2
-3004	145	f	2
-3005	145	f	2
-3006	145	f	2
-3007	145	f	2
-3008	145	f	2
-3009	145	f	2
-3010	145	f	2
-3011	145	f	2
-3012	145	f	2
-3594	145	f	2
-3610	145	f	2
-1983	93	f	\N
-3698	145	f	2
-3699	130	f	2
-3718	164	f	2
-2954	145	f	2
-3037	145	f	2
-3038	145	f	2
-3039	145	f	2
-3040	145	f	2
-3041	145	f	2
-3042	145	f	2
-3043	145	f	2
-2466	117	f	2
-2467	111	f	2
-2468	119	f	2
-2469	119	f	2
-2470	119	f	2
-2475	90	f	2
-2477	47	f	2
-2484	2	f	2
-3044	145	f	2
-3045	145	f	2
-3046	145	f	2
-3047	145	f	2
-3048	145	f	2
-3049	145	f	2
-3050	145	f	2
-3051	145	f	2
-3052	145	f	2
-3053	145	f	2
-3054	145	f	2
-3055	145	f	2
-3056	145	f	2
-3057	145	f	2
-3058	145	f	2
-3059	145	f	2
-3060	145	f	2
-3061	145	f	2
-3062	145	f	2
-3063	145	f	2
-3064	145	f	2
-3065	145	f	2
-3066	145	f	2
-3067	145	f	2
-3068	145	f	2
-3069	145	f	2
-3070	145	f	2
-3071	145	f	2
-3072	145	f	2
-3073	145	f	2
-3074	145	f	2
-3075	145	f	2
-3076	145	f	2
-3077	145	f	2
-3078	145	f	2
-3079	145	f	2
-3080	145	f	2
-3081	145	f	2
-3082	145	f	2
-3083	145	f	2
-3084	145	f	2
-3596	145	f	2
-3719	118	f	2
-3720	164	f	2
+COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM stdin;
+3812	123	f	2	2016-09-17 20:55:11.314393
+3822	123	f	2	2016-09-17 21:16:08.362697
+3791	69	f	2	2016-09-18 15:22:14.580278
+12	12	\N	2	2016-09-17 18:59:14.72779
+14	12	\N	2	2016-09-17 18:59:14.72779
+16	12	\N	2	2016-09-17 18:59:14.72779
+30	12	\N	2	2016-09-17 18:59:14.72779
+31	12	\N	2	2016-09-17 18:59:14.72779
+32	12	\N	2	2016-09-17 18:59:14.72779
+33	12	\N	2	2016-09-17 18:59:14.72779
+34	12	\N	2	2016-09-17 18:59:14.72779
+35	12	\N	2	2016-09-17 18:59:14.72779
+3813	123	f	2	2016-09-17 20:56:06.726885
+3824	123	f	2	2016-09-17 21:18:57.067167
+2881	69	f	2	2016-09-18 14:30:20.017345
+3792	69	f	2	2016-09-18 15:23:19.848034
+3683	69	f	2	2016-09-18 15:15:49.560984
+3244	145	f	2	2016-09-17 18:59:14.72779
+3245	145	f	2	2016-09-17 18:59:14.72779
+3246	145	f	2	2016-09-17 18:59:14.72779
+3247	145	f	2	2016-09-17 18:59:14.72779
+3248	145	f	2	2016-09-17 18:59:14.72779
+3249	145	f	2	2016-09-17 18:59:14.72779
+3250	145	f	2	2016-09-17 18:59:14.72779
+3251	145	f	2	2016-09-17 18:59:14.72779
+3252	145	f	2	2016-09-17 18:59:14.72779
+3253	145	f	2	2016-09-17 18:59:14.72779
+3254	145	f	2	2016-09-17 18:59:14.72779
+3255	145	f	2	2016-09-17 18:59:14.72779
+3256	145	f	2	2016-09-17 18:59:14.72779
+3257	145	f	2	2016-09-17 18:59:14.72779
+3826	123	f	2	2016-09-17 21:31:41.534377
+3793	156	f	2	2016-09-17 20:41:06.405565
+3815	123	f	2	2016-09-17 21:05:21.636062
+921	73	\N	2	2016-09-17 18:59:14.72779
+3794	123	f	2	2016-09-17 20:21:49.773316
+2	2	\N	2	2016-09-17 18:59:14.72779
+3828	123	f	2	2016-09-17 21:43:06.698128
+2127	12	f	2	2016-09-17 18:59:14.72779
+3	2	\N	2	2016-09-17 18:59:14.72779
+10	12	\N	2	2016-09-17 18:59:14.72779
+1010	79	\N	2	2016-09-17 18:59:14.72779
+1080	65	\N	2	2016-09-17 18:59:14.72779
+1081	12	\N	2	2016-09-17 18:59:14.72779
+1099	39	\N	2	2016-09-17 18:59:14.72779
+2309	69	f	2	2016-09-17 18:59:14.72779
+1100	70	\N	2	2016-09-17 18:59:14.72779
+2128	65	f	2	2016-09-17 18:59:14.72779
+2129	138	f	2	2016-09-17 18:59:14.72779
+2130	138	f	2	2016-09-17 18:59:14.72779
+2132	118	f	2	2016-09-17 18:59:14.72779
+3258	145	f	2	2016-09-17 18:59:14.72779
+3259	145	f	2	2016-09-17 18:59:14.72779
+3260	145	f	2	2016-09-17 18:59:14.72779
+3261	145	f	2	2016-09-17 18:59:14.72779
+3262	145	f	2	2016-09-17 18:59:14.72779
+3263	145	f	2	2016-09-17 18:59:14.72779
+3264	145	f	2	2016-09-17 18:59:14.72779
+3265	145	f	2	2016-09-17 18:59:14.72779
+3269	145	f	2	2016-09-17 18:59:14.72779
+3270	145	f	2	2016-09-17 18:59:14.72779
+3271	145	f	2	2016-09-17 18:59:14.72779
+3272	145	f	2	2016-09-17 18:59:14.72779
+3273	145	f	2	2016-09-17 18:59:14.72779
+3274	145	f	2	2016-09-17 18:59:14.72779
+3275	145	f	2	2016-09-17 18:59:14.72779
+3276	145	f	2	2016-09-17 18:59:14.72779
+3277	145	f	2	2016-09-17 18:59:14.72779
+3278	145	f	2	2016-09-17 18:59:14.72779
+3279	145	f	2	2016-09-17 18:59:14.72779
+3280	145	f	2	2016-09-17 18:59:14.72779
+3281	145	f	2	2016-09-17 18:59:14.72779
+1251	55	f	2	2016-09-17 18:59:14.72779
+2440	117	f	2	2016-09-17 18:59:14.72779
+2201	104	f	2	2016-09-17 18:59:14.72779
+2459	106	f	2	2016-09-17 18:59:14.72779
+2463	111	f	2	2016-09-17 18:59:14.72779
+2465	120	f	2	2016-09-17 18:59:14.72779
+2563	69	f	2	2016-09-17 18:59:14.72779
+2564	145	f	2	2016-09-17 18:59:14.72779
+2203	104	f	2	2016-09-17 18:59:14.72779
+3795	156	f	2	2016-09-17 20:25:39.719594
+3817	123	f	2	2016-09-17 21:10:22.1469
+2898	69	f	2	2016-09-18 15:15:49.560984
+2903	119	f	2	2016-09-17 18:59:14.72779
+3796	123	f	2	2016-09-17 20:25:39.719594
+2892	69	f	2	2016-09-18 15:15:49.560984
+3676	69	f	2	2016-09-18 15:15:57.719358
+3282	145	f	2	2016-09-17 18:59:14.72779
+3283	145	f	2	2016-09-17 18:59:14.72779
+3284	145	f	2	2016-09-17 18:59:14.72779
+3285	145	f	2	2016-09-17 18:59:14.72779
+2544	148	f	2	2016-09-17 18:59:14.72779
+3286	145	f	2	2016-09-17 18:59:14.72779
+3287	145	f	2	2016-09-17 18:59:14.72779
+3288	145	f	2	2016-09-17 18:59:14.72779
+3289	145	f	2	2016-09-17 18:59:14.72779
+3290	145	f	2	2016-09-17 18:59:14.72779
+3291	145	f	2	2016-09-17 18:59:14.72779
+3292	145	f	2	2016-09-17 18:59:14.72779
+3293	145	f	2	2016-09-17 18:59:14.72779
+290	41	\N	2	2016-09-17 18:59:14.72779
+291	41	\N	2	2016-09-17 18:59:14.72779
+884	70	\N	2	2016-09-17 18:59:14.72779
+886	59	\N	2	2016-09-17 18:59:14.72779
+943	73	\N	2	2016-09-17 18:59:14.72779
+944	73	\N	2	2016-09-17 18:59:14.72779
+945	73	\N	2	2016-09-17 18:59:14.72779
+946	73	\N	2	2016-09-17 18:59:14.72779
+947	73	\N	2	2016-09-17 18:59:14.72779
+3368	145	f	2	2016-09-17 18:59:14.72779
+2921	118	f	2	2016-09-17 18:59:14.72779
+2959	145	f	2	2016-09-17 18:59:14.72779
+2960	145	f	2	2016-09-17 18:59:14.72779
+3797	123	f	2	2016-09-17 20:33:51.521862
+3800	123	f	2	2016-09-17 20:34:35.489877
+3819	123	f	2	2016-09-17 21:11:52.967967
+3734	71	f	2	2016-09-18 18:57:04.116131
+3678	130	f	2	2016-09-18 20:46:56.969618
+3697	130	f	2	2016-09-18 20:46:56.969618
+3832	156	f	2	2016-09-18 20:55:44.417818
+2820	118	f	2	2016-09-17 18:59:14.72779
+2972	145	f	2	2016-09-17 18:59:14.72779
+2961	145	f	2	2016-09-17 18:59:14.72779
+3294	145	f	2	2016-09-17 18:59:14.72779
+3295	145	f	2	2016-09-17 18:59:14.72779
+3296	145	f	2	2016-09-17 18:59:14.72779
+3297	145	f	2	2016-09-17 18:59:14.72779
+3298	145	f	2	2016-09-17 18:59:14.72779
+3299	145	f	2	2016-09-17 18:59:14.72779
+3300	145	f	2	2016-09-17 18:59:14.72779
+3301	145	f	2	2016-09-17 18:59:14.72779
+998	65	\N	2	2016-09-17 18:59:14.72779
+1005	78	\N	2	2016-09-17 18:59:14.72779
+1007	12	\N	2	2016-09-17 18:59:14.72779
+1008	65	\N	2	2016-09-17 18:59:14.72779
+3302	145	f	2	2016-09-17 18:59:14.72779
+1009	79	\N	2	2016-09-17 18:59:14.72779
+3303	145	f	2	2016-09-17 18:59:14.72779
+3304	145	f	2	2016-09-17 18:59:14.72779
+3305	145	f	2	2016-09-17 18:59:14.72779
+3306	145	f	2	2016-09-17 18:59:14.72779
+3307	145	f	2	2016-09-17 18:59:14.72779
+3308	145	f	2	2016-09-17 18:59:14.72779
+3309	145	f	2	2016-09-17 18:59:14.72779
+3310	145	f	2	2016-09-17 18:59:14.72779
+3311	145	f	2	2016-09-17 18:59:14.72779
+3312	145	f	2	2016-09-17 18:59:14.72779
+3313	145	f	2	2016-09-17 18:59:14.72779
+3314	145	f	2	2016-09-17 18:59:14.72779
+3315	145	f	2	2016-09-17 18:59:14.72779
+3316	145	f	2	2016-09-17 18:59:14.72779
+3317	145	f	2	2016-09-17 18:59:14.72779
+3318	145	f	2	2016-09-17 18:59:14.72779
+3319	145	f	2	2016-09-17 18:59:14.72779
+3320	145	f	2	2016-09-17 18:59:14.72779
+3321	145	f	2	2016-09-17 18:59:14.72779
+3322	145	f	2	2016-09-17 18:59:14.72779
+3323	145	f	2	2016-09-17 18:59:14.72779
+2973	145	f	2	2016-09-17 18:59:14.72779
+2974	145	f	2	2016-09-17 18:59:14.72779
+2821	87	f	2	2016-09-17 18:59:14.72779
+2822	69	f	2	2016-09-17 18:59:14.72779
+2823	145	f	2	2016-09-17 18:59:14.72779
+1546	106	f	2	2016-09-17 18:59:14.72779
+2824	130	f	2	2016-09-17 18:59:14.72779
+1547	106	f	2	2016-09-17 18:59:14.72779
+1548	12	f	2	2016-09-17 18:59:14.72779
+1549	12	f	2	2016-09-17 18:59:14.72779
+2825	146	f	2	2016-09-17 18:59:14.72779
+2826	118	f	2	2016-09-17 18:59:14.72779
+2660	69	f	2	2016-09-17 19:31:35.557662
+3798	123	f	2	2016-09-17 20:34:31.721316
+1283	71	f	2	2016-09-18 18:50:19.259122
+3829	135	f	2	2016-09-18 20:53:59.117042
+3830	137	f	2	2016-09-18 20:53:59.117042
+3714	134	f	2	2016-09-18 20:54:14.554235
+2879	69	f	2	2016-09-17 18:59:14.72779
+773	12	\N	2	2016-09-17 18:59:14.72779
+1325	83	f	2	2016-09-17 18:59:14.72779
+1326	84	f	2	2016-09-17 18:59:14.72779
+1327	83	f	2	2016-09-17 18:59:14.72779
+1328	39	f	2	2016-09-17 18:59:14.72779
+3324	145	f	2	2016-09-17 18:59:14.72779
+1329	84	f	2	2016-09-17 18:59:14.72779
+887	69	\N	2	2016-09-17 18:59:14.72779
+3325	145	f	2	2016-09-17 18:59:14.72779
+3326	145	f	2	2016-09-17 18:59:14.72779
+3327	145	f	2	2016-09-17 18:59:14.72779
+1330	83	f	2	2016-09-17 18:59:14.72779
+1331	83	f	2	2016-09-17 18:59:14.72779
+1332	39	f	2	2016-09-17 18:59:14.72779
+1333	84	f	2	2016-09-17 18:59:14.72779
+1334	83	f	2	2016-09-17 18:59:14.72779
+1335	83	f	2	2016-09-17 18:59:14.72779
+1339	70	f	2	2016-09-17 18:59:14.72779
+1340	39	f	2	2016-09-17 18:59:14.72779
+1344	39	f	2	2016-09-17 18:59:14.72779
+1345	84	f	2	2016-09-17 18:59:14.72779
+1346	83	f	2	2016-09-17 18:59:14.72779
+1350	83	f	2	2016-09-17 18:59:14.72779
+1351	70	f	2	2016-09-17 18:59:14.72779
+1352	39	f	2	2016-09-17 18:59:14.72779
+1353	84	f	2	2016-09-17 18:59:14.72779
+3328	145	f	2	2016-09-17 18:59:14.72779
+3329	145	f	2	2016-09-17 18:59:14.72779
+3330	145	f	2	2016-09-17 18:59:14.72779
+3331	145	f	2	2016-09-17 18:59:14.72779
+3332	145	f	2	2016-09-17 18:59:14.72779
+3333	145	f	2	2016-09-17 18:59:14.72779
+3334	145	f	2	2016-09-17 18:59:14.72779
+2183	137	f	2	2016-09-17 18:59:14.72779
+3335	145	f	2	2016-09-17 18:59:14.72779
+3336	145	f	2	2016-09-17 18:59:14.72779
+3337	145	f	2	2016-09-17 18:59:14.72779
+3338	145	f	2	2016-09-17 18:59:14.72779
+3339	145	f	2	2016-09-17 18:59:14.72779
+3340	145	f	2	2016-09-17 18:59:14.72779
+3341	145	f	2	2016-09-17 18:59:14.72779
+1354	83	f	2	2016-09-17 18:59:14.72779
+1355	39	f	2	2016-09-17 18:59:14.72779
+1356	84	f	2	2016-09-17 18:59:14.72779
+1357	83	f	2	2016-09-17 18:59:14.72779
+2231	78	f	2	2016-09-17 18:59:14.72779
+2232	78	f	2	2016-09-17 18:59:14.72779
+2233	78	f	2	2016-09-17 18:59:14.72779
+1639	106	f	2	2016-09-17 18:59:14.72779
+1640	87	f	2	2016-09-17 18:59:14.72779
+1641	87	f	2	2016-09-17 18:59:14.72779
+2664	149	f	2	2016-09-17 18:59:14.72779
+2665	149	f	2	2016-09-17 18:59:14.72779
+2666	87	f	2	2016-09-17 18:59:14.72779
+2667	69	f	2	2016-09-17 18:59:14.72779
+2975	145	f	2	2016-09-17 18:59:14.72779
+2976	145	f	2	2016-09-17 18:59:14.72779
+2977	145	f	2	2016-09-17 18:59:14.72779
+3570	145	f	2	2016-09-17 18:59:14.72779
+892	67	\N	2	2016-09-17 18:59:14.72779
+3571	145	f	2	2016-09-17 18:59:14.72779
+3799	123	f	2	2016-09-17 20:34:34.093545
+2902	134	f	2	2016-09-18 20:50:37.105155
+2658	67	f	2	2016-09-18 20:56:57.242299
+897	39	\N	2	2016-09-17 18:59:14.72779
+898	39	\N	2	2016-09-17 18:59:14.72779
+899	39	\N	2	2016-09-17 18:59:14.72779
+900	65	\N	2	2016-09-17 18:59:14.72779
+2435	146	f	2	2016-09-17 18:59:14.72779
+901	12	\N	2	2016-09-17 18:59:14.72779
+1642	89	f	2	2016-09-17 18:59:14.72779
+1643	89	f	2	2016-09-17 18:59:14.72779
+3342	145	f	2	2016-09-17 18:59:14.72779
+2047	119	f	2	2016-09-17 18:59:14.72779
+3343	145	f	2	2016-09-17 18:59:14.72779
+3344	145	f	2	2016-09-17 18:59:14.72779
+3345	145	f	2	2016-09-17 18:59:14.72779
+3346	145	f	2	2016-09-17 18:59:14.72779
+3347	145	f	2	2016-09-17 18:59:14.72779
+3348	145	f	2	2016-09-17 18:59:14.72779
+3349	145	f	2	2016-09-17 18:59:14.72779
+3350	145	f	2	2016-09-17 18:59:14.72779
+1764	111	f	2	2016-09-17 18:59:14.72779
+1766	111	f	2	2016-09-17 18:59:14.72779
+1769	105	f	2	2016-09-17 18:59:14.72779
+1771	111	f	2	2016-09-17 18:59:14.72779
+1773	111	f	2	2016-09-17 18:59:14.72779
+2285	135	f	2	2016-09-17 18:59:14.72779
+2292	12	f	2	2016-09-17 18:59:14.72779
+2293	145	f	2	2016-09-17 18:59:14.72779
+2048	65	f	2	2016-09-17 18:59:14.72779
+2049	12	f	2	2016-09-17 18:59:14.72779
+2050	87	f	2	2016-09-17 18:59:14.72779
+2051	69	f	2	2016-09-17 18:59:14.72779
+2052	130	f	2	2016-09-17 18:59:14.72779
+2053	47	f	2	2016-09-17 18:59:14.72779
+2054	2	f	2	2016-09-17 18:59:14.72779
+1906	65	f	2	2016-09-17 18:59:14.72779
+1990	106	f	2	2016-09-17 18:59:14.72779
+1991	106	f	2	2016-09-17 18:59:14.72779
+1992	106	f	2	2016-09-17 18:59:14.72779
+2450	103	f	2	2016-09-17 18:59:14.72779
+902	65	\N	2	2016-09-17 18:59:14.72779
+903	71	\N	2	2016-09-17 18:59:14.72779
+2451	106	f	2	2016-09-17 18:59:14.72779
+2486	101	f	2	2016-09-17 18:59:14.72779
+2489	86	f	2	2016-09-17 18:59:14.72779
+2490	86	f	2	2016-09-17 18:59:14.72779
+2491	86	f	2	2016-09-17 18:59:14.72779
+2493	87	f	2	2016-09-17 18:59:14.72779
+2501	110	f	2	2016-09-17 18:59:14.72779
+2502	110	f	2	2016-09-17 18:59:14.72779
+2503	119	f	2	2016-09-17 18:59:14.72779
+3801	123	f	2	2016-09-17 20:38:56.398189
+2729	103	f	2	2016-09-18 20:49:30.796952
+2858	103	f	2	2016-09-18 20:49:38.152502
+2280	134	f	2	2016-09-18 20:50:10.774587
+2345	134	f	2	2016-09-18 20:50:10.774587
+2690	134	f	2	2016-09-18 20:50:10.774587
+2831	134	f	2	2016-09-18 20:50:10.774587
+3710	134	f	2	2016-09-18 20:50:10.774587
+2284	134	f	2	2016-09-18 20:51:00.504929
+3831	134	f	2	2016-09-18 20:54:02.724503
+775	12	\N	2	2016-09-17 18:59:14.72779
+778	65	\N	2	2016-09-17 18:59:14.72779
+779	65	\N	2	2016-09-17 18:59:14.72779
+780	65	\N	2	2016-09-17 18:59:14.72779
+784	47	\N	2	2016-09-17 18:59:14.72779
+786	47	\N	2	2016-09-17 18:59:14.72779
+788	12	\N	2	2016-09-17 18:59:14.72779
+2029	119	f	2	2016-09-17 18:59:14.72779
+2442	117	f	2	2016-09-17 18:59:14.72779
+2546	110	f	2	2016-09-17 18:59:14.72779
+2573	69	f	2	2016-09-17 18:59:14.72779
+3351	145	f	2	2016-09-17 18:59:14.72779
+3352	145	f	2	2016-09-17 18:59:14.72779
+3353	145	f	2	2016-09-17 18:59:14.72779
+3354	145	f	2	2016-09-17 18:59:14.72779
+3355	145	f	2	2016-09-17 18:59:14.72779
+3356	145	f	2	2016-09-17 18:59:14.72779
+3357	145	f	2	2016-09-17 18:59:14.72779
+3358	145	f	2	2016-09-17 18:59:14.72779
+3359	145	f	2	2016-09-17 18:59:14.72779
+3360	145	f	2	2016-09-17 18:59:14.72779
+3361	145	f	2	2016-09-17 18:59:14.72779
+3362	145	f	2	2016-09-17 18:59:14.72779
+3363	145	f	2	2016-09-17 18:59:14.72779
+3364	145	f	2	2016-09-17 18:59:14.72779
+3365	145	f	2	2016-09-17 18:59:14.72779
+3366	145	f	2	2016-09-17 18:59:14.72779
+3367	145	f	2	2016-09-17 18:59:14.72779
+3369	145	f	2	2016-09-17 18:59:14.72779
+3370	145	f	2	2016-09-17 18:59:14.72779
+3371	145	f	2	2016-09-17 18:59:14.72779
+3372	145	f	2	2016-09-17 18:59:14.72779
+3616	145	f	2	2016-09-17 18:59:14.72779
+3617	145	f	2	2016-09-17 18:59:14.72779
+3618	145	f	2	2016-09-17 18:59:14.72779
+3659	130	f	2	2016-09-17 18:59:14.72779
+1648	84	f	2	2016-09-17 18:59:14.72779
+2458	106	f	2	2016-09-17 18:59:14.72779
+2556	151	f	2	2016-09-17 18:59:14.72779
+789	67	\N	2	2016-09-17 18:59:14.72779
+790	65	\N	2	2016-09-17 18:59:14.72779
+791	65	\N	2	2016-09-17 18:59:14.72779
+792	65	\N	2	2016-09-17 18:59:14.72779
+794	55	\N	2	2016-09-17 18:59:14.72779
+800	55	\N	2	2016-09-17 18:59:14.72779
+801	55	\N	2	2016-09-17 18:59:14.72779
+802	65	\N	2	2016-09-17 18:59:14.72779
+3802	123	f	2	2016-09-17 20:40:14.646783
+905	71	\N	2	2016-09-18 18:50:19.259122
+906	71	\N	2	2016-09-18 18:50:30.216923
+3833	156	f	2	2016-09-18 22:44:56.15485
+2152	135	f	2	2016-09-17 18:59:14.72779
+2153	137	f	2	2016-09-17 18:59:14.72779
+2154	135	f	2	2016-09-17 18:59:14.72779
+2155	137	f	2	2016-09-17 18:59:14.72779
+2184	135	f	2	2016-09-17 18:59:14.72779
+2185	137	f	2	2016-09-17 18:59:14.72779
+2557	151	f	2	2016-09-17 18:59:14.72779
+2568	145	f	2	2016-09-17 18:59:14.72779
+2186	134	f	2	2016-09-17 18:59:14.72779
+2688	135	f	2	2016-09-17 18:59:14.72779
+2880	87	f	2	2016-09-17 18:59:14.72779
+1649	83	f	2	2016-09-17 18:59:14.72779
+1650	87	f	2	2016-09-17 18:59:14.72779
+2569	130	f	2	2016-09-17 18:59:14.72779
+2570	69	f	2	2016-09-17 18:59:14.72779
+3416	145	f	2	2016-09-17 18:59:14.72779
+3417	145	f	2	2016-09-17 18:59:14.72779
+2893	145	f	2	2016-09-17 18:59:14.72779
+2897	83	f	2	2016-09-17 18:59:14.72779
+922	73	\N	2	2016-09-17 18:59:14.72779
+2914	2	f	2	2016-09-17 18:59:14.72779
+923	73	\N	2	2016-09-17 18:59:14.72779
+2923	118	f	2	2016-09-17 18:59:14.72779
+924	73	\N	2	2016-09-17 18:59:14.72779
+2962	130	f	2	2016-09-17 18:59:14.72779
+3373	145	f	2	2016-09-17 18:59:14.72779
+1651	89	f	2	2016-09-17 18:59:14.72779
+1652	90	f	2	2016-09-17 18:59:14.72779
+1653	69	f	2	2016-09-17 18:59:14.72779
+1657	103	f	2	2016-09-17 18:59:14.72779
+925	73	\N	2	2016-09-17 18:59:14.72779
+926	73	\N	2	2016-09-17 18:59:14.72779
+1659	65	f	2	2016-09-17 18:59:14.72779
+1882	106	f	2	2016-09-17 18:59:14.72779
+1660	106	f	2	2016-09-17 18:59:14.72779
+927	73	\N	2	2016-09-17 18:59:14.72779
+2046	119	f	2	2016-09-17 18:59:14.72779
+959	74	\N	2	2016-09-17 18:59:14.72779
+960	74	\N	2	2016-09-17 18:59:14.72779
+1714	110	f	2	2016-09-17 18:59:14.72779
+985	75	\N	2	2016-09-17 18:59:14.72779
+987	75	\N	2	2016-09-17 18:59:14.72779
+3375	145	f	2	2016-09-17 18:59:14.72779
+3376	145	f	2	2016-09-17 18:59:14.72779
+3377	145	f	2	2016-09-17 18:59:14.72779
+1721	110	f	2	2016-09-17 18:59:14.72779
+904	71	\N	2	2016-09-17 18:59:14.72779
+2934	145	f	2	2016-09-17 18:59:14.72779
+910	65	\N	2	2016-09-17 18:59:14.72779
+911	65	\N	2	2016-09-17 18:59:14.72779
+912	72	\N	2	2016-09-17 18:59:14.72779
+1318	102	f	2	2016-09-17 18:59:14.72779
+1319	84	f	2	2016-09-17 18:59:14.72779
+2206	110	f	2	2016-09-17 18:59:14.72779
+2207	110	f	2	2016-09-17 18:59:14.72779
+1607	106	f	2	2016-09-17 18:59:14.72779
+1608	105	f	2	2016-09-17 18:59:14.72779
+3803	123	f	2	2016-09-17 20:41:06.405565
+3834	123	f	2	2016-09-18 22:44:56.15485
+988	75	\N	2	2016-09-17 18:59:14.72779
+1003	12	\N	2	2016-09-17 18:59:14.72779
+1060	41	\N	2	2016-09-17 18:59:14.72779
+1078	12	\N	2	2016-09-17 18:59:14.72779
+1088	12	\N	2	2016-09-17 18:59:14.72779
+1089	65	\N	2	2016-09-17 18:59:14.72779
+1090	39	\N	2	2016-09-17 18:59:14.72779
+1091	84	\N	2	2016-09-17 18:59:14.72779
+1093	84	\N	2	2016-09-17 18:59:14.72779
+1095	70	\N	2	2016-09-17 18:59:14.72779
+1096	39	\N	2	2016-09-17 18:59:14.72779
+2936	145	f	2	2016-09-17 18:59:14.72779
+2937	145	f	2	2016-09-17 18:59:14.72779
+2938	145	f	2	2016-09-17 18:59:14.72779
+2985	145	f	2	2016-09-17 18:59:14.72779
+1884	12	f	2	2016-09-17 18:59:14.72779
+3378	145	f	2	2016-09-17 18:59:14.72779
+1885	65	f	2	2016-09-17 18:59:14.72779
+1888	117	f	2	2016-09-17 18:59:14.72779
+1893	120	f	2	2016-09-17 18:59:14.72779
+1894	12	f	2	2016-09-17 18:59:14.72779
+1004	78	\N	2	2016-09-17 18:59:14.72779
+1309	90	f	2	2016-09-17 18:59:14.72779
+1310	41	f	2	2016-09-17 18:59:14.72779
+3379	145	f	2	2016-09-17 18:59:14.72779
+3380	145	f	2	2016-09-17 18:59:14.72779
+3381	145	f	2	2016-09-17 18:59:14.72779
+3382	145	f	2	2016-09-17 18:59:14.72779
+3383	145	f	2	2016-09-17 18:59:14.72779
+3384	145	f	2	2016-09-17 18:59:14.72779
+3385	145	f	2	2016-09-17 18:59:14.72779
+3386	145	f	2	2016-09-17 18:59:14.72779
+1895	65	f	2	2016-09-17 18:59:14.72779
+2986	145	f	2	2016-09-17 18:59:14.72779
+2987	145	f	2	2016-09-17 18:59:14.72779
+2988	145	f	2	2016-09-17 18:59:14.72779
+2989	145	f	2	2016-09-17 18:59:14.72779
+2990	145	f	2	2016-09-17 18:59:14.72779
+3582	145	f	2	2016-09-17 18:59:14.72779
+3387	145	f	2	2016-09-17 18:59:14.72779
+3388	145	f	2	2016-09-17 18:59:14.72779
+3389	145	f	2	2016-09-17 18:59:14.72779
+3390	145	f	2	2016-09-17 18:59:14.72779
+1311	41	f	2	2016-09-17 18:59:14.72779
+1312	65	f	2	2016-09-17 18:59:14.72779
+1313	12	f	2	2016-09-17 18:59:14.72779
+1896	65	f	2	2016-09-17 18:59:14.72779
+1314	102	f	2	2016-09-17 18:59:14.72779
+1317	12	f	2	2016-09-17 18:59:14.72779
+3391	145	f	2	2016-09-17 18:59:14.72779
+1320	83	f	2	2016-09-17 18:59:14.72779
+1321	84	f	2	2016-09-17 18:59:14.72779
+1322	83	f	2	2016-09-17 18:59:14.72779
+3392	145	f	2	2016-09-17 18:59:14.72779
+3393	145	f	2	2016-09-17 18:59:14.72779
+1950	123	f	2	2016-09-17 18:59:14.72779
+1951	90	f	2	2016-09-17 18:59:14.72779
+3394	145	f	2	2016-09-17 18:59:14.72779
+3395	145	f	2	2016-09-17 18:59:14.72779
+3396	145	f	2	2016-09-17 18:59:14.72779
+3397	145	f	2	2016-09-17 18:59:14.72779
+3398	145	f	2	2016-09-17 18:59:14.72779
+1952	86	f	2	2016-09-17 18:59:14.72779
+3399	145	f	2	2016-09-17 18:59:14.72779
+3400	145	f	2	2016-09-17 18:59:14.72779
+3401	145	f	2	2016-09-17 18:59:14.72779
+3402	145	f	2	2016-09-17 18:59:14.72779
+3403	145	f	2	2016-09-17 18:59:14.72779
+3404	145	f	2	2016-09-17 18:59:14.72779
+3405	145	f	2	2016-09-17 18:59:14.72779
+3583	145	f	2	2016-09-17 18:59:14.72779
+3584	145	f	2	2016-09-17 18:59:14.72779
+3585	145	f	2	2016-09-17 18:59:14.72779
+3586	145	f	2	2016-09-17 18:59:14.72779
+3587	145	f	2	2016-09-17 18:59:14.72779
+3835	156	f	2	2016-09-18 22:45:34.72505
+885	47	\N	2	2016-09-17 18:59:14.72779
+2946	145	f	2	2016-09-17 18:59:14.72779
+895	39	\N	2	2016-09-17 18:59:14.72779
+940	73	\N	2	2016-09-17 18:59:14.72779
+941	73	\N	2	2016-09-17 18:59:14.72779
+942	73	\N	2	2016-09-17 18:59:14.72779
+1259	87	f	2	2016-09-17 18:59:14.72779
+1260	87	f	2	2016-09-17 18:59:14.72779
+36	12	\N	2	2016-09-17 18:59:14.72779
+37	12	\N	2	2016-09-17 18:59:14.72779
+38	12	\N	2	2016-09-17 18:59:14.72779
+39	12	\N	2	2016-09-17 18:59:14.72779
+40	12	\N	2	2016-09-17 18:59:14.72779
+43	12	\N	2	2016-09-17 18:59:14.72779
+44	12	\N	2	2016-09-17 18:59:14.72779
+45	12	\N	2	2016-09-17 18:59:14.72779
+83	2	\N	2	2016-09-17 18:59:14.72779
+84	2	\N	2	2016-09-17 18:59:14.72779
+277	39	\N	2	2016-09-17 18:59:14.72779
+913	72	\N	2	2016-09-17 18:59:14.72779
+914	72	\N	2	2016-09-17 18:59:14.72779
+915	72	\N	2	2016-09-17 18:59:14.72779
+916	72	\N	2	2016-09-17 18:59:14.72779
+917	72	\N	2	2016-09-17 18:59:14.72779
+2909	118	f	2	2016-09-17 18:59:14.72779
+2913	2	f	2	2016-09-17 18:59:14.72779
+2919	118	f	2	2016-09-17 18:59:14.72779
+2955	130	f	2	2016-09-17 18:59:14.72779
+3085	145	f	2	2016-09-17 18:59:14.72779
+3086	145	f	2	2016-09-17 18:59:14.72779
+3087	145	f	2	2016-09-17 18:59:14.72779
+3088	145	f	2	2016-09-17 18:59:14.72779
+3089	145	f	2	2016-09-17 18:59:14.72779
+3090	145	f	2	2016-09-17 18:59:14.72779
+3091	145	f	2	2016-09-17 18:59:14.72779
+3092	145	f	2	2016-09-17 18:59:14.72779
+3093	145	f	2	2016-09-17 18:59:14.72779
+3094	145	f	2	2016-09-17 18:59:14.72779
+3095	145	f	2	2016-09-17 18:59:14.72779
+3096	145	f	2	2016-09-17 18:59:14.72779
+3097	145	f	2	2016-09-17 18:59:14.72779
+3098	145	f	2	2016-09-17 18:59:14.72779
+3099	145	f	2	2016-09-17 18:59:14.72779
+3100	145	f	2	2016-09-17 18:59:14.72779
+3101	145	f	2	2016-09-17 18:59:14.72779
+3102	145	f	2	2016-09-17 18:59:14.72779
+3103	145	f	2	2016-09-17 18:59:14.72779
+3104	145	f	2	2016-09-17 18:59:14.72779
+918	72	\N	2	2016-09-17 18:59:14.72779
+919	72	\N	2	2016-09-17 18:59:14.72779
+928	73	\N	2	2016-09-17 18:59:14.72779
+929	73	\N	2	2016-09-17 18:59:14.72779
+930	73	\N	2	2016-09-17 18:59:14.72779
+931	73	\N	2	2016-09-17 18:59:14.72779
+932	73	\N	2	2016-09-17 18:59:14.72779
+2200	104	f	2	2016-09-17 18:59:14.72779
+933	73	\N	2	2016-09-17 18:59:14.72779
+935	73	\N	2	2016-09-17 18:59:14.72779
+936	73	\N	2	2016-09-17 18:59:14.72779
+937	73	\N	2	2016-09-17 18:59:14.72779
+948	73	\N	2	2016-09-17 18:59:14.72779
+949	73	\N	2	2016-09-17 18:59:14.72779
+950	73	\N	2	2016-09-17 18:59:14.72779
+952	73	\N	2	2016-09-17 18:59:14.72779
+953	12	\N	2	2016-09-17 18:59:14.72779
+954	12	\N	2	2016-09-17 18:59:14.72779
+955	65	\N	2	2016-09-17 18:59:14.72779
+956	65	\N	2	2016-09-17 18:59:14.72779
+957	74	\N	2	2016-09-17 18:59:14.72779
+2214	110	f	2	2016-09-17 18:59:14.72779
+2215	86	f	2	2016-09-17 18:59:14.72779
+2216	78	f	2	2016-09-17 18:59:14.72779
+2217	12	f	2	2016-09-17 18:59:14.72779
+2218	140	f	2	2016-09-17 18:59:14.72779
+2219	65	f	2	2016-09-17 18:59:14.72779
+3805	123	f	2	2016-09-17 20:43:44.552338
+2267	134	f	2	2016-09-18 20:50:10.774587
+3836	123	f	2	2016-09-18 22:45:34.72505
+1880	106	f	2	2016-09-17 18:59:14.72779
+1881	106	f	2	2016-09-17 18:59:14.72779
+2374	84	f	2	2016-09-17 18:59:14.72779
+2375	83	f	2	2016-09-17 18:59:14.72779
+3105	145	f	2	2016-09-17 18:59:14.72779
+3106	145	f	2	2016-09-17 18:59:14.72779
+3107	145	f	2	2016-09-17 18:59:14.72779
+3108	145	f	2	2016-09-17 18:59:14.72779
+3109	145	f	2	2016-09-17 18:59:14.72779
+3110	145	f	2	2016-09-17 18:59:14.72779
+3111	145	f	2	2016-09-17 18:59:14.72779
+3112	145	f	2	2016-09-17 18:59:14.72779
+3113	145	f	2	2016-09-17 18:59:14.72779
+3114	145	f	2	2016-09-17 18:59:14.72779
+3115	145	f	2	2016-09-17 18:59:14.72779
+3116	145	f	2	2016-09-17 18:59:14.72779
+3117	145	f	2	2016-09-17 18:59:14.72779
+3118	145	f	2	2016-09-17 18:59:14.72779
+3119	145	f	2	2016-09-17 18:59:14.72779
+3120	145	f	2	2016-09-17 18:59:14.72779
+3121	145	f	2	2016-09-17 18:59:14.72779
+3122	145	f	2	2016-09-17 18:59:14.72779
+3123	145	f	2	2016-09-17 18:59:14.72779
+3124	145	f	2	2016-09-17 18:59:14.72779
+3125	145	f	2	2016-09-17 18:59:14.72779
+958	74	\N	2	2016-09-17 18:59:14.72779
+3126	145	f	2	2016-09-17 18:59:14.72779
+3127	145	f	2	2016-09-17 18:59:14.72779
+3128	145	f	2	2016-09-17 18:59:14.72779
+3129	145	f	2	2016-09-17 18:59:14.72779
+3130	145	f	2	2016-09-17 18:59:14.72779
+1647	39	f	2	2016-09-17 18:59:14.72779
+2266	137	f	2	2016-09-17 18:59:14.72779
+2268	12	f	2	2016-09-17 18:59:14.72779
+2269	105	f	2	2016-09-17 18:59:14.72779
+1915	111	f	2	2016-09-17 18:59:14.72779
+2413	105	f	2	2016-09-17 18:59:14.72779
+2950	145	f	2	2016-09-17 18:59:14.72779
+871	69	\N	2	2016-09-17 18:59:14.72779
+872	12	\N	2	2016-09-17 18:59:14.72779
+873	65	\N	2	2016-09-17 18:59:14.72779
+874	65	\N	2	2016-09-17 18:59:14.72779
+3806	123	f	2	2016-09-17 20:45:00.588652
+2894	130	f	2	2016-09-18 20:33:14.226896
+863	65	\N	2	2016-09-17 18:59:14.72779
+870	69	\N	2	2016-09-17 18:59:14.72779
+875	70	\N	2	2016-09-17 18:59:14.72779
+1207	12	\N	2	2016-09-17 18:59:14.72779
+1917	110	f	2	2016-09-17 18:59:14.72779
+1949	123	f	2	2016-09-17 18:59:14.72779
+1961	123	f	2	2016-09-17 18:59:14.72779
+2714	104	f	2	2016-09-17 18:59:14.72779
+2715	119	f	2	2016-09-17 18:59:14.72779
+2716	119	f	2	2016-09-17 18:59:14.72779
+2717	119	f	2	2016-09-17 18:59:14.72779
+3131	145	f	2	2016-09-17 18:59:14.72779
+3132	145	f	2	2016-09-17 18:59:14.72779
+3133	145	f	2	2016-09-17 18:59:14.72779
+3134	145	f	2	2016-09-17 18:59:14.72779
+3135	145	f	2	2016-09-17 18:59:14.72779
+3136	145	f	2	2016-09-17 18:59:14.72779
+3137	145	f	2	2016-09-17 18:59:14.72779
+3138	145	f	2	2016-09-17 18:59:14.72779
+2718	119	f	2	2016-09-17 18:59:14.72779
+3139	145	f	2	2016-09-17 18:59:14.72779
+3140	145	f	2	2016-09-17 18:59:14.72779
+3141	145	f	2	2016-09-17 18:59:14.72779
+3142	145	f	2	2016-09-17 18:59:14.72779
+3143	145	f	2	2016-09-17 18:59:14.72779
+3144	145	f	2	2016-09-17 18:59:14.72779
+3145	145	f	2	2016-09-17 18:59:14.72779
+3146	145	f	2	2016-09-17 18:59:14.72779
+3147	145	f	2	2016-09-17 18:59:14.72779
+3148	145	f	2	2016-09-17 18:59:14.72779
+3149	145	f	2	2016-09-17 18:59:14.72779
+3150	145	f	2	2016-09-17 18:59:14.72779
+3151	145	f	2	2016-09-17 18:59:14.72779
+3152	145	f	2	2016-09-17 18:59:14.72779
+3153	145	f	2	2016-09-17 18:59:14.72779
+3154	145	f	2	2016-09-17 18:59:14.72779
+3155	145	f	2	2016-09-17 18:59:14.72779
+3156	145	f	2	2016-09-17 18:59:14.72779
+3157	145	f	2	2016-09-17 18:59:14.72779
+3158	145	f	2	2016-09-17 18:59:14.72779
+3159	145	f	2	2016-09-17 18:59:14.72779
+3160	145	f	2	2016-09-17 18:59:14.72779
+3161	145	f	2	2016-09-17 18:59:14.72779
+3162	145	f	2	2016-09-17 18:59:14.72779
+3163	145	f	2	2016-09-17 18:59:14.72779
+3164	145	f	2	2016-09-17 18:59:14.72779
+3165	145	f	2	2016-09-17 18:59:14.72779
+3166	145	f	2	2016-09-17 18:59:14.72779
+3167	145	f	2	2016-09-17 18:59:14.72779
+3168	145	f	2	2016-09-17 18:59:14.72779
+3169	145	f	2	2016-09-17 18:59:14.72779
+3170	145	f	2	2016-09-17 18:59:14.72779
+3171	145	f	2	2016-09-17 18:59:14.72779
+3172	145	f	2	2016-09-17 18:59:14.72779
+3173	145	f	2	2016-09-17 18:59:14.72779
+3174	145	f	2	2016-09-17 18:59:14.72779
+3175	145	f	2	2016-09-17 18:59:14.72779
+3176	145	f	2	2016-09-17 18:59:14.72779
+3177	145	f	2	2016-09-17 18:59:14.72779
+3178	145	f	2	2016-09-17 18:59:14.72779
+3179	145	f	2	2016-09-17 18:59:14.72779
+3180	145	f	2	2016-09-17 18:59:14.72779
+3612	145	f	2	2016-09-17 18:59:14.72779
+3613	145	f	2	2016-09-17 18:59:14.72779
+3614	145	f	2	2016-09-17 18:59:14.72779
+3658	145	f	2	2016-09-17 18:59:14.72779
+2882	12	f	2	2016-09-17 18:59:14.72779
+2883	65	f	2	2016-09-17 18:59:14.72779
+278	39	\N	2	2016-09-17 18:59:14.72779
+279	39	\N	2	2016-09-17 18:59:14.72779
+280	39	\N	2	2016-09-17 18:59:14.72779
+281	39	\N	2	2016-09-17 18:59:14.72779
+282	39	\N	2	2016-09-17 18:59:14.72779
+283	12	\N	2	2016-09-17 18:59:14.72779
+286	41	\N	2	2016-09-17 18:59:14.72779
+287	41	\N	2	2016-09-17 18:59:14.72779
+288	41	\N	2	2016-09-17 18:59:14.72779
+289	41	\N	2	2016-09-17 18:59:14.72779
+938	73	\N	2	2016-09-17 18:59:14.72779
+939	73	\N	2	2016-09-17 18:59:14.72779
+961	74	\N	2	2016-09-17 18:59:14.72779
+962	74	\N	2	2016-09-17 18:59:14.72779
+3266	145	f	2	2016-09-17 18:59:14.72779
+3267	145	f	2	2016-09-17 18:59:14.72779
+3268	145	f	2	2016-09-17 18:59:14.72779
+2891	87	f	2	2016-09-17 18:59:14.72779
+2910	149	f	2	2016-09-17 18:59:14.72779
+2912	2	f	2	2016-09-17 18:59:14.72779
+2956	145	f	2	2016-09-17 18:59:14.72779
+2957	145	f	2	2016-09-17 18:59:14.72779
+2958	145	f	2	2016-09-17 18:59:14.72779
+3181	145	f	2	2016-09-17 18:59:14.72779
+3182	145	f	2	2016-09-17 18:59:14.72779
+3183	145	f	2	2016-09-17 18:59:14.72779
+1209	90	\N	2	2016-09-17 18:59:14.72779
+1218	39	\N	2	2016-09-17 18:59:14.72779
+1221	12	\N	2	2016-09-17 18:59:14.72779
+1227	93	\N	2	2016-09-17 18:59:14.72779
+3807	123	f	2	2016-09-17 20:46:10.004569
+3808	123	f	2	2016-09-17 20:46:37.189941
+3809	123	f	2	2016-09-17 20:47:28.897672
+3810	123	f	2	2016-09-17 20:49:34.03298
+2785	47	f	2	2016-09-18 20:56:23.715695
+2954	145	f	2	2016-09-17 18:59:14.72779
+3037	145	f	2	2016-09-17 18:59:14.72779
+3038	145	f	2	2016-09-17 18:59:14.72779
+3184	145	f	2	2016-09-17 18:59:14.72779
+3185	145	f	2	2016-09-17 18:59:14.72779
+3186	145	f	2	2016-09-17 18:59:14.72779
+3187	145	f	2	2016-09-17 18:59:14.72779
+3188	145	f	2	2016-09-17 18:59:14.72779
+3189	145	f	2	2016-09-17 18:59:14.72779
+3190	145	f	2	2016-09-17 18:59:14.72779
+3191	145	f	2	2016-09-17 18:59:14.72779
+3192	145	f	2	2016-09-17 18:59:14.72779
+3193	145	f	2	2016-09-17 18:59:14.72779
+3194	145	f	2	2016-09-17 18:59:14.72779
+3195	145	f	2	2016-09-17 18:59:14.72779
+3196	145	f	2	2016-09-17 18:59:14.72779
+3197	145	f	2	2016-09-17 18:59:14.72779
+3198	145	f	2	2016-09-17 18:59:14.72779
+3199	145	f	2	2016-09-17 18:59:14.72779
+3200	145	f	2	2016-09-17 18:59:14.72779
+3201	145	f	2	2016-09-17 18:59:14.72779
+3202	145	f	2	2016-09-17 18:59:14.72779
+3203	145	f	2	2016-09-17 18:59:14.72779
+3204	145	f	2	2016-09-17 18:59:14.72779
+3205	145	f	2	2016-09-17 18:59:14.72779
+3206	145	f	2	2016-09-17 18:59:14.72779
+3207	145	f	2	2016-09-17 18:59:14.72779
+963	74	\N	2	2016-09-17 18:59:14.72779
+964	74	\N	2	2016-09-17 18:59:14.72779
+965	74	\N	2	2016-09-17 18:59:14.72779
+966	74	\N	2	2016-09-17 18:59:14.72779
+967	74	\N	2	2016-09-17 18:59:14.72779
+968	74	\N	2	2016-09-17 18:59:14.72779
+969	74	\N	2	2016-09-17 18:59:14.72779
+970	74	\N	2	2016-09-17 18:59:14.72779
+971	74	\N	2	2016-09-17 18:59:14.72779
+973	75	\N	2	2016-09-17 18:59:14.72779
+975	75	\N	2	2016-09-17 18:59:14.72779
+976	75	\N	2	2016-09-17 18:59:14.72779
+977	75	\N	2	2016-09-17 18:59:14.72779
+978	75	\N	2	2016-09-17 18:59:14.72779
+3208	145	f	2	2016-09-17 18:59:14.72779
+3209	145	f	2	2016-09-17 18:59:14.72779
+3210	145	f	2	2016-09-17 18:59:14.72779
+3211	145	f	2	2016-09-17 18:59:14.72779
+3212	145	f	2	2016-09-17 18:59:14.72779
+3213	145	f	2	2016-09-17 18:59:14.72779
+3214	145	f	2	2016-09-17 18:59:14.72779
+3215	145	f	2	2016-09-17 18:59:14.72779
+3216	145	f	2	2016-09-17 18:59:14.72779
+3217	145	f	2	2016-09-17 18:59:14.72779
+3218	145	f	2	2016-09-17 18:59:14.72779
+979	75	\N	2	2016-09-17 18:59:14.72779
+980	75	\N	2	2016-09-17 18:59:14.72779
+981	75	\N	2	2016-09-17 18:59:14.72779
+982	75	\N	2	2016-09-17 18:59:14.72779
+983	75	\N	2	2016-09-17 18:59:14.72779
+984	75	\N	2	2016-09-17 18:59:14.72779
+1616	69	f	2	2016-09-17 18:59:14.72779
+1619	69	f	2	2016-09-17 18:59:14.72779
+1620	87	f	2	2016-09-17 18:59:14.72779
+1621	87	f	2	2016-09-17 18:59:14.72779
+1622	89	f	2	2016-09-17 18:59:14.72779
+1623	90	f	2	2016-09-17 18:59:14.72779
+1381	89	f	2	2016-09-17 18:59:14.72779
+2439	117	f	2	2016-09-17 18:59:14.72779
+2784	123	f	2	2016-09-17 18:59:14.72779
+2786	2	f	2	2016-09-17 18:59:14.72779
+2787	2	f	2	2016-09-17 18:59:14.72779
+2788	12	f	2	2016-09-17 18:59:14.72779
+2813	12	f	2	2016-09-17 18:59:14.72779
+2814	87	f	2	2016-09-17 18:59:14.72779
+2842	119	f	2	2016-09-17 18:59:14.72779
+3219	145	f	2	2016-09-17 18:59:14.72779
+3220	145	f	2	2016-09-17 18:59:14.72779
+3221	145	f	2	2016-09-17 18:59:14.72779
+3222	145	f	2	2016-09-17 18:59:14.72779
+3223	145	f	2	2016-09-17 18:59:14.72779
+3224	145	f	2	2016-09-17 18:59:14.72779
+3225	145	f	2	2016-09-17 18:59:14.72779
+3226	145	f	2	2016-09-17 18:59:14.72779
+3227	145	f	2	2016-09-17 18:59:14.72779
+3228	145	f	2	2016-09-17 18:59:14.72779
+3229	145	f	2	2016-09-17 18:59:14.72779
+3230	145	f	2	2016-09-17 18:59:14.72779
+3231	145	f	2	2016-09-17 18:59:14.72779
+3232	145	f	2	2016-09-17 18:59:14.72779
+3233	145	f	2	2016-09-17 18:59:14.72779
+3234	145	f	2	2016-09-17 18:59:14.72779
+3235	145	f	2	2016-09-17 18:59:14.72779
+3236	145	f	2	2016-09-17 18:59:14.72779
+3237	145	f	2	2016-09-17 18:59:14.72779
+3238	145	f	2	2016-09-17 18:59:14.72779
+3239	145	f	2	2016-09-17 18:59:14.72779
+3240	145	f	2	2016-09-17 18:59:14.72779
+3241	145	f	2	2016-09-17 18:59:14.72779
+3242	145	f	2	2016-09-17 18:59:14.72779
+3243	145	f	2	2016-09-17 18:59:14.72779
+3039	145	f	2	2016-09-17 18:59:14.72779
+3040	145	f	2	2016-09-17 18:59:14.72779
+3041	145	f	2	2016-09-17 18:59:14.72779
+3042	145	f	2	2016-09-17 18:59:14.72779
+3043	145	f	2	2016-09-17 18:59:14.72779
+2466	117	f	2	2016-09-17 18:59:14.72779
+3406	145	f	2	2016-09-17 18:59:14.72779
+1907	65	f	2	2016-09-17 18:59:14.72779
+3407	145	f	2	2016-09-17 18:59:14.72779
+1956	87	f	2	2016-09-17 18:59:14.72779
+1958	93	f	2	2016-09-17 18:59:14.72779
+1959	123	f	2	2016-09-17 18:59:14.72779
+2104	135	f	2	2016-09-17 18:59:14.72779
+1323	83	f	2	2016-09-17 18:59:14.72779
+2105	135	f	2	2016-09-17 18:59:14.72779
+2106	135	f	2	2016-09-17 18:59:14.72779
+3408	145	f	2	2016-09-17 18:59:14.72779
+3409	145	f	2	2016-09-17 18:59:14.72779
+2107	12	f	2	2016-09-17 18:59:14.72779
+3410	145	f	2	2016-09-17 18:59:14.72779
+3411	145	f	2	2016-09-17 18:59:14.72779
+3412	145	f	2	2016-09-17 18:59:14.72779
+2108	12	f	2	2016-09-17 18:59:14.72779
+3413	145	f	2	2016-09-17 18:59:14.72779
+2111	83	f	2	2016-09-17 18:59:14.72779
+2115	39	f	2	2016-09-17 18:59:14.72779
+2119	90	f	2	2016-09-17 18:59:14.72779
+2168	137	f	2	2016-09-17 18:59:14.72779
+2172	135	f	2	2016-09-17 18:59:14.72779
+3414	145	f	2	2016-09-17 18:59:14.72779
+2173	137	f	2	2016-09-17 18:59:14.72779
+1324	83	f	2	2016-09-17 18:59:14.72779
+1358	83	f	2	2016-09-17 18:59:14.72779
+1359	84	f	2	2016-09-17 18:59:14.72779
+1360	83	f	2	2016-09-17 18:59:14.72779
+2452	117	f	2	2016-09-17 18:59:14.72779
+2457	106	f	2	2016-09-17 18:59:14.72779
+3415	145	f	2	2016-09-17 18:59:14.72779
+1361	84	f	2	2016-09-17 18:59:14.72779
+1365	39	f	2	2016-09-17 18:59:14.72779
+1366	84	f	2	2016-09-17 18:59:14.72779
+1367	83	f	2	2016-09-17 18:59:14.72779
+1368	65	f	2	2016-09-17 18:59:14.72779
+1371	87	f	2	2016-09-17 18:59:14.72779
+1373	87	f	2	2016-09-17 18:59:14.72779
+1374	90	f	2	2016-09-17 18:59:14.72779
+1624	87	f	2	2016-09-17 18:59:14.72779
+3418	145	f	2	2016-09-17 18:59:14.72779
+3419	145	f	2	2016-09-17 18:59:14.72779
+3420	145	f	2	2016-09-17 18:59:14.72779
+1625	89	f	2	2016-09-17 18:59:14.72779
+1376	89	f	2	2016-09-17 18:59:14.72779
+1626	69	f	2	2016-09-17 18:59:14.72779
+1378	78	f	2	2016-09-17 18:59:14.72779
+1627	69	f	2	2016-09-17 18:59:14.72779
+1628	69	f	2	2016-09-17 18:59:14.72779
+3421	145	f	2	2016-09-17 18:59:14.72779
+3422	145	f	2	2016-09-17 18:59:14.72779
+1379	87	f	2	2016-09-17 18:59:14.72779
+1634	103	f	2	2016-09-17 18:59:14.72779
+1380	87	f	2	2016-09-17 18:59:14.72779
+1383	69	f	2	2016-09-17 18:59:14.72779
+2260	135	f	2	2016-09-17 18:59:14.72779
+2261	142	f	2	2016-09-17 18:59:14.72779
+2262	135	f	2	2016-09-17 18:59:14.72779
+2263	142	f	2	2016-09-17 18:59:14.72779
+2265	135	f	2	2016-09-17 18:59:14.72779
+1780	105	f	2	2016-09-17 18:59:14.72779
+1797	12	f	2	2016-09-17 18:59:14.72779
+1798	65	f	2	2016-09-17 18:59:14.72779
+1799	12	f	2	2016-09-17 18:59:14.72779
+1804	118	f	2	2016-09-17 18:59:14.72779
+3423	145	f	2	2016-09-17 18:59:14.72779
+3424	145	f	2	2016-09-17 18:59:14.72779
+3425	145	f	2	2016-09-17 18:59:14.72779
+3426	145	f	2	2016-09-17 18:59:14.72779
+3427	145	f	2	2016-09-17 18:59:14.72779
+3428	145	f	2	2016-09-17 18:59:14.72779
+3429	145	f	2	2016-09-17 18:59:14.72779
+3430	145	f	2	2016-09-17 18:59:14.72779
+3431	145	f	2	2016-09-17 18:59:14.72779
+3432	145	f	2	2016-09-17 18:59:14.72779
+3433	145	f	2	2016-09-17 18:59:14.72779
+3434	145	f	2	2016-09-17 18:59:14.72779
+3435	145	f	2	2016-09-17 18:59:14.72779
+3436	145	f	2	2016-09-17 18:59:14.72779
+3437	145	f	2	2016-09-17 18:59:14.72779
+3438	145	f	2	2016-09-17 18:59:14.72779
+3439	145	f	2	2016-09-17 18:59:14.72779
+2205	110	f	2	2016-09-17 18:59:14.72779
+2234	78	f	2	2016-09-17 18:59:14.72779
+2566	69	f	2	2016-09-17 18:59:14.72779
+2133	123	f	2	2016-09-17 18:59:14.72779
+2567	145	f	2	2016-09-17 18:59:14.72779
+2571	145	f	2	2016-09-17 18:59:14.72779
+2135	12	f	2	2016-09-17 18:59:14.72779
+2572	130	f	2	2016-09-17 18:59:14.72779
+2710	119	f	2	2016-09-17 18:59:14.72779
+2711	119	f	2	2016-09-17 18:59:14.72779
+2712	119	f	2	2016-09-17 18:59:14.72779
+2713	119	f	2	2016-09-17 18:59:14.72779
+2817	123	f	2	2016-09-17 18:59:14.72779
+2836	119	f	2	2016-09-17 18:59:14.72779
+2136	65	f	2	2016-09-17 18:59:14.72779
+2320	12	f	2	2016-09-17 18:59:14.72779
+2327	87	f	2	2016-09-17 18:59:14.72779
+2328	69	f	2	2016-09-17 18:59:14.72779
+2583	12	f	2	2016-09-17 18:59:14.72779
+2329	145	f	2	2016-09-17 18:59:14.72779
+2330	145	f	2	2016-09-17 18:59:14.72779
+2331	146	f	2	2016-09-17 18:59:14.72779
+2837	135	f	2	2016-09-17 18:59:14.72779
+2332	146	f	2	2016-09-17 18:59:14.72779
+2333	130	f	2	2016-09-17 18:59:14.72779
+2838	144	f	2	2016-09-17 18:59:14.72779
+2855	119	f	2	2016-09-17 18:59:14.72779
+2861	117	f	2	2016-09-17 18:59:14.72779
+2862	117	f	2	2016-09-17 18:59:14.72779
+2334	104	f	2	2016-09-17 18:59:14.72779
+2895	39	f	2	2016-09-17 18:59:14.72779
+2335	104	f	2	2016-09-17 18:59:14.72779
+2336	104	f	2	2016-09-17 18:59:14.72779
+2235	78	f	2	2016-09-17 18:59:14.72779
+2236	78	f	2	2016-09-17 18:59:14.72779
+2337	104	f	2	2016-09-17 18:59:14.72779
+2338	87	f	2	2016-09-17 18:59:14.72779
+2339	69	f	2	2016-09-17 18:59:14.72779
+2340	69	f	2	2016-09-17 18:59:14.72779
+2237	78	f	2	2016-09-17 18:59:14.72779
+2238	78	f	2	2016-09-17 18:59:14.72779
+2239	78	f	2	2016-09-17 18:59:14.72779
+2896	84	f	2	2016-09-17 18:59:14.72779
+1774	111	f	2	2016-09-17 18:59:14.72779
+1777	65	f	2	2016-09-17 18:59:14.72779
+1778	12	f	2	2016-09-17 18:59:14.72779
+1800	118	f	2	2016-09-17 18:59:14.72779
+2294	145	f	2	2016-09-17 18:59:14.72779
+1801	118	f	2	2016-09-17 18:59:14.72779
+2295	145	f	2	2016-09-17 18:59:14.72779
+1802	118	f	2	2016-09-17 18:59:14.72779
+2296	12	f	2	2016-09-17 18:59:14.72779
+2297	145	f	2	2016-09-17 18:59:14.72779
+2899	135	f	2	2016-09-17 18:59:14.72779
+2299	146	f	2	2016-09-17 18:59:14.72779
+2900	137	f	2	2016-09-17 18:59:14.72779
+2300	145	f	2	2016-09-17 18:59:14.72779
+2304	123	f	2	2016-09-17 18:59:14.72779
+1910	106	f	2	2016-09-17 18:59:14.72779
+1911	106	f	2	2016-09-17 18:59:14.72779
+2075	93	f	2	2016-09-17 18:59:14.72779
+2076	123	f	2	2016-09-17 18:59:14.72779
+2077	12	f	2	2016-09-17 18:59:14.72779
+2087	118	f	2	2016-09-17 18:59:14.72779
+2088	130	f	2	2016-09-17 18:59:14.72779
+2089	87	f	2	2016-09-17 18:59:14.72779
+2090	69	f	2	2016-09-17 18:59:14.72779
+2092	118	f	2	2016-09-17 18:59:14.72779
+2095	87	f	2	2016-09-17 18:59:14.72779
+2096	118	f	2	2016-09-17 18:59:14.72779
+2264	134	f	2	2016-09-18 20:50:10.774587
+1775	59	f	2	2016-09-18 21:02:48.623868
+2915	79	f	2	2016-09-17 18:59:14.72779
+2097	118	f	2	2016-09-17 18:59:14.72779
+2924	118	f	2	2016-09-17 18:59:14.72779
+2307	87	f	2	2016-09-17 18:59:14.72779
+2963	145	f	2	2016-09-17 18:59:14.72779
+2964	145	f	2	2016-09-17 18:59:14.72779
+2120	101	f	2	2016-09-17 18:59:14.72779
+2965	145	f	2	2016-09-17 18:59:14.72779
+3374	145	f	2	2016-09-17 18:59:14.72779
+2126	2	f	2	2016-09-17 18:59:14.72779
+3620	149	f	2	2016-09-17 18:59:14.72779
+3639	101	f	2	2016-09-17 18:59:14.72779
+3660	135	f	2	2016-09-17 18:59:14.72779
+3661	137	f	2	2016-09-17 18:59:14.72779
+3747	166	f	2	2016-09-17 18:59:14.72779
+3748	166	f	2	2016-09-17 18:59:14.72779
+3752	166	f	2	2016-09-17 18:59:14.72779
+2341	135	f	2	2016-09-17 18:59:14.72779
+2342	137	f	2	2016-09-17 18:59:14.72779
+2343	135	f	2	2016-09-17 18:59:14.72779
+2344	143	f	2	2016-09-17 18:59:14.72779
+2030	119	f	2	2016-09-17 18:59:14.72779
+2031	119	f	2	2016-09-17 18:59:14.72779
+2308	87	f	2	2016-09-17 18:59:14.72779
+2032	110	f	2	2016-09-17 18:59:14.72779
+2038	119	f	2	2016-09-17 18:59:14.72779
+2514	65	f	2	2016-09-17 18:59:14.72779
+2515	148	f	2	2016-09-17 18:59:14.72779
+2516	12	f	2	2016-09-17 18:59:14.72779
+2871	119	f	2	2016-09-17 18:59:14.72779
+2872	55	f	2	2016-09-17 18:59:14.72779
+2517	149	f	2	2016-09-17 18:59:14.72779
+2518	149	f	2	2016-09-17 18:59:14.72779
+2904	103	f	2	2016-09-17 18:59:14.72779
+2916	149	f	2	2016-09-17 18:59:14.72779
+2925	118	f	2	2016-09-17 18:59:14.72779
+2966	145	f	2	2016-09-17 18:59:14.72779
+2967	145	f	2	2016-09-17 18:59:14.72779
+2968	145	f	2	2016-09-17 18:59:14.72779
+2519	47	f	2	2016-09-17 18:59:14.72779
+2520	149	f	2	2016-09-17 18:59:14.72779
+3440	145	f	2	2016-09-17 18:59:14.72779
+3441	145	f	2	2016-09-17 18:59:14.72779
+2521	149	f	2	2016-09-17 18:59:14.72779
+2522	149	f	2	2016-09-17 18:59:14.72779
+2873	87	f	2	2016-09-17 18:59:14.72779
+2874	87	f	2	2016-09-17 18:59:14.72779
+2875	69	f	2	2016-09-17 18:59:14.72779
+2876	145	f	2	2016-09-17 18:59:14.72779
+2877	130	f	2	2016-09-17 18:59:14.72779
+2878	87	f	2	2016-09-17 18:59:14.72779
+2887	12	f	2	2016-09-17 18:59:14.72779
+2888	65	f	2	2016-09-17 18:59:14.72779
+2889	65	f	2	2016-09-17 18:59:14.72779
+1250	55	f	2	2016-09-17 18:59:14.72779
+1316	102	f	2	2016-09-17 18:59:14.72779
+1336	39	f	2	2016-09-17 18:59:14.72779
+1362	83	f	2	2016-09-17 18:59:14.72779
+1363	84	f	2	2016-09-17 18:59:14.72779
+1364	83	f	2	2016-09-17 18:59:14.72779
+1372	69	f	2	2016-09-17 18:59:14.72779
+2523	149	f	2	2016-09-17 18:59:14.72779
+2524	149	f	2	2016-09-17 18:59:14.72779
+1375	69	f	2	2016-09-17 18:59:14.72779
+2525	149	f	2	2016-09-17 18:59:14.72779
+1382	90	f	2	2016-09-17 18:59:14.72779
+2526	149	f	2	2016-09-17 18:59:14.72779
+1385	84	f	2	2016-09-17 18:59:14.72779
+2527	149	f	2	2016-09-17 18:59:14.72779
+1386	83	f	2	2016-09-17 18:59:14.72779
+2528	149	f	2	2016-09-17 18:59:14.72779
+2529	119	f	2	2016-09-17 18:59:14.72779
+2536	110	f	2	2016-09-17 18:59:14.72779
+2537	119	f	2	2016-09-17 18:59:14.72779
+2538	119	f	2	2016-09-17 18:59:14.72779
+2574	145	f	2	2016-09-17 18:59:14.72779
+2575	130	f	2	2016-09-17 18:59:14.72779
+1387	87	f	2	2016-09-17 18:59:14.72779
+1388	90	f	2	2016-09-17 18:59:14.72779
+1389	69	f	2	2016-09-17 18:59:14.72779
+1390	69	f	2	2016-09-17 18:59:14.72779
+1391	90	f	2	2016-09-17 18:59:14.72779
+1416	39	f	2	2016-09-17 18:59:14.72779
+2270	70	f	2	2016-09-17 18:59:14.72779
+2271	140	f	2	2016-09-17 18:59:14.72779
+2272	78	f	2	2016-09-17 18:59:14.72779
+2273	135	f	2	2016-09-17 18:59:14.72779
+2286	137	f	2	2016-09-17 18:59:14.72779
+2287	135	f	2	2016-09-17 18:59:14.72779
+2288	142	f	2	2016-09-17 18:59:14.72779
+2289	104	f	2	2016-09-17 18:59:14.72779
+2290	104	f	2	2016-09-17 18:59:14.72779
+1424	12	f	2	2016-09-17 18:59:14.72779
+1425	65	f	2	2016-09-17 18:59:14.72779
+1426	105	f	2	2016-09-17 18:59:14.72779
+1431	105	f	2	2016-09-17 18:59:14.72779
+1432	105	f	2	2016-09-17 18:59:14.72779
+1433	12	f	2	2016-09-17 18:59:14.72779
+1434	65	f	2	2016-09-17 18:59:14.72779
+2576	69	f	2	2016-09-17 18:59:14.72779
+2577	145	f	2	2016-09-17 18:59:14.72779
+2578	145	f	2	2016-09-17 18:59:14.72779
+2579	130	f	2	2016-09-17 18:59:14.72779
+2580	69	f	2	2016-09-17 18:59:14.72779
+2581	145	f	2	2016-09-17 18:59:14.72779
+2582	130	f	2	2016-09-17 18:59:14.72779
+2366	87	f	2	2016-09-17 18:59:14.72779
+3442	145	f	2	2016-09-17 18:59:14.72779
+2367	69	f	2	2016-09-17 18:59:14.72779
+3443	145	f	2	2016-09-17 18:59:14.72779
+3444	145	f	2	2016-09-17 18:59:14.72779
+3445	145	f	2	2016-09-17 18:59:14.72779
+3446	145	f	2	2016-09-17 18:59:14.72779
+3447	145	f	2	2016-09-17 18:59:14.72779
+3448	145	f	2	2016-09-17 18:59:14.72779
+3449	145	f	2	2016-09-17 18:59:14.72779
+3450	145	f	2	2016-09-17 18:59:14.72779
+3451	145	f	2	2016-09-17 18:59:14.72779
+3452	145	f	2	2016-09-17 18:59:14.72779
+3453	145	f	2	2016-09-17 18:59:14.72779
+3454	145	f	2	2016-09-17 18:59:14.72779
+3455	145	f	2	2016-09-17 18:59:14.72779
+3456	145	f	2	2016-09-17 18:59:14.72779
+3457	145	f	2	2016-09-17 18:59:14.72779
+3458	145	f	2	2016-09-17 18:59:14.72779
+3459	145	f	2	2016-09-17 18:59:14.72779
+3460	145	f	2	2016-09-17 18:59:14.72779
+2368	145	f	2	2016-09-17 18:59:14.72779
+2369	146	f	2	2016-09-17 18:59:14.72779
+3461	145	f	2	2016-09-17 18:59:14.72779
+3462	145	f	2	2016-09-17 18:59:14.72779
+3463	145	f	2	2016-09-17 18:59:14.72779
+3464	145	f	2	2016-09-17 18:59:14.72779
+3465	145	f	2	2016-09-17 18:59:14.72779
+3466	145	f	2	2016-09-17 18:59:14.72779
+3467	145	f	2	2016-09-17 18:59:14.72779
+3468	145	f	2	2016-09-17 18:59:14.72779
+3469	145	f	2	2016-09-17 18:59:14.72779
+2370	118	f	2	2016-09-17 18:59:14.72779
+3470	145	f	2	2016-09-17 18:59:14.72779
+3471	145	f	2	2016-09-17 18:59:14.72779
+3472	145	f	2	2016-09-17 18:59:14.72779
+3473	145	f	2	2016-09-17 18:59:14.72779
+2372	130	f	2	2016-09-17 18:59:14.72779
+2373	39	f	2	2016-09-17 18:59:14.72779
+2648	65	f	2	2016-09-17 18:59:14.72779
+2649	65	f	2	2016-09-17 18:59:14.72779
+2650	65	f	2	2016-09-17 18:59:14.72779
+2429	105	f	2	2016-09-17 18:59:14.72779
+2430	105	f	2	2016-09-17 18:59:14.72779
+2510	110	f	2	2016-09-17 18:59:14.72779
+2511	86	f	2	2016-09-17 18:59:14.72779
+2513	12	f	2	2016-09-17 18:59:14.72779
+3474	145	f	2	2016-09-17 18:59:14.72779
+3475	145	f	2	2016-09-17 18:59:14.72779
+3476	145	f	2	2016-09-17 18:59:14.72779
+3477	145	f	2	2016-09-17 18:59:14.72779
+3478	145	f	2	2016-09-17 18:59:14.72779
+3479	145	f	2	2016-09-17 18:59:14.72779
+3480	145	f	2	2016-09-17 18:59:14.72779
+3481	145	f	2	2016-09-17 18:59:14.72779
+3482	145	f	2	2016-09-17 18:59:14.72779
+3483	145	f	2	2016-09-17 18:59:14.72779
+3484	145	f	2	2016-09-17 18:59:14.72779
+3485	145	f	2	2016-09-17 18:59:14.72779
+3486	145	f	2	2016-09-17 18:59:14.72779
+3487	145	f	2	2016-09-17 18:59:14.72779
+3488	145	f	2	2016-09-17 18:59:14.72779
+3489	145	f	2	2016-09-17 18:59:14.72779
+3490	145	f	2	2016-09-17 18:59:14.72779
+3491	145	f	2	2016-09-17 18:59:14.72779
+3492	145	f	2	2016-09-17 18:59:14.72779
+3493	145	f	2	2016-09-17 18:59:14.72779
+3494	145	f	2	2016-09-17 18:59:14.72779
+3495	145	f	2	2016-09-17 18:59:14.72779
+3496	145	f	2	2016-09-17 18:59:14.72779
+3497	145	f	2	2016-09-17 18:59:14.72779
+3498	145	f	2	2016-09-17 18:59:14.72779
+3499	145	f	2	2016-09-17 18:59:14.72779
+3500	145	f	2	2016-09-17 18:59:14.72779
+3501	145	f	2	2016-09-17 18:59:14.72779
+3502	145	f	2	2016-09-17 18:59:14.72779
+3503	145	f	2	2016-09-17 18:59:14.72779
+3504	145	f	2	2016-09-17 18:59:14.72779
+3505	145	f	2	2016-09-17 18:59:14.72779
+3506	145	f	2	2016-09-17 18:59:14.72779
+3507	145	f	2	2016-09-17 18:59:14.72779
+3508	145	f	2	2016-09-17 18:59:14.72779
+3509	145	f	2	2016-09-17 18:59:14.72779
+3510	145	f	2	2016-09-17 18:59:14.72779
+3511	145	f	2	2016-09-17 18:59:14.72779
+3512	145	f	2	2016-09-17 18:59:14.72779
+3513	145	f	2	2016-09-17 18:59:14.72779
+3514	145	f	2	2016-09-17 18:59:14.72779
+3515	145	f	2	2016-09-17 18:59:14.72779
+3516	145	f	2	2016-09-17 18:59:14.72779
+3517	145	f	2	2016-09-17 18:59:14.72779
+3518	145	f	2	2016-09-17 18:59:14.72779
+3519	145	f	2	2016-09-17 18:59:14.72779
+3520	145	f	2	2016-09-17 18:59:14.72779
+2926	118	f	2	2016-09-17 18:59:14.72779
+2969	145	f	2	2016-09-17 18:59:14.72779
+2970	145	f	2	2016-09-17 18:59:14.72779
+2971	145	f	2	2016-09-17 18:59:14.72779
+907	71	\N	2	2016-09-17 18:59:14.72779
+908	12	\N	2	2016-09-17 18:59:14.72779
+909	12	\N	2	2016-09-17 18:59:14.72779
+1041	47	\N	2	2016-09-17 18:59:14.72779
+1042	47	\N	2	2016-09-17 18:59:14.72779
+1043	47	\N	2	2016-09-17 18:59:14.72779
+1044	47	\N	2	2016-09-17 18:59:14.72779
+1045	47	\N	2	2016-09-17 18:59:14.72779
+3521	145	f	2	2016-09-17 18:59:14.72779
+3522	145	f	2	2016-09-17 18:59:14.72779
+3523	145	f	2	2016-09-17 18:59:14.72779
+3524	145	f	2	2016-09-17 18:59:14.72779
+3525	145	f	2	2016-09-17 18:59:14.72779
+3526	145	f	2	2016-09-17 18:59:14.72779
+3527	145	f	2	2016-09-17 18:59:14.72779
+3528	145	f	2	2016-09-17 18:59:14.72779
+2589	89	f	2	2016-09-17 18:59:14.72779
+2590	90	f	2	2016-09-17 18:59:14.72779
+2545	86	f	2	2016-09-17 18:59:14.72779
+2547	119	f	2	2016-09-17 18:59:14.72779
+2548	119	f	2	2016-09-17 18:59:14.72779
+3529	145	f	2	2016-09-17 18:59:14.72779
+3530	145	f	2	2016-09-17 18:59:14.72779
+3531	145	f	2	2016-09-17 18:59:14.72779
+3532	145	f	2	2016-09-17 18:59:14.72779
+2591	69	f	2	2016-09-17 18:59:14.72779
+2592	123	f	2	2016-09-17 18:59:14.72779
+2593	69	f	2	2016-09-17 18:59:14.72779
+2594	87	f	2	2016-09-17 18:59:14.72779
+2595	69	f	2	2016-09-17 18:59:14.72779
+2596	145	f	2	2016-09-17 18:59:14.72779
+2376	69	f	2	2016-09-17 18:59:14.72779
+2377	135	f	2	2016-09-17 18:59:14.72779
+2549	12	f	2	2016-09-17 18:59:14.72779
+2378	137	f	2	2016-09-17 18:59:14.72779
+2550	87	f	2	2016-09-17 18:59:14.72779
+2379	135	f	2	2016-09-17 18:59:14.72779
+2551	12	f	2	2016-09-17 18:59:14.72779
+2552	65	f	2	2016-09-17 18:59:14.72779
+2553	65	f	2	2016-09-17 18:59:14.72779
+2554	65	f	2	2016-09-17 18:59:14.72779
+2725	119	f	2	2016-09-17 18:59:14.72779
+2726	110	f	2	2016-09-17 18:59:14.72779
+2727	119	f	2	2016-09-17 18:59:14.72779
+2728	119	f	2	2016-09-17 18:59:14.72779
+2731	123	f	2	2016-09-17 18:59:14.72779
+2732	148	f	2	2016-09-17 18:59:14.72779
+2819	123	f	2	2016-09-17 18:59:14.72779
+3533	145	f	2	2016-09-17 18:59:14.72779
+3534	145	f	2	2016-09-17 18:59:14.72779
+3535	145	f	2	2016-09-17 18:59:14.72779
+3536	145	f	2	2016-09-17 18:59:14.72779
+3537	145	f	2	2016-09-17 18:59:14.72779
+3538	145	f	2	2016-09-17 18:59:14.72779
+2380	143	f	2	2016-09-17 18:59:14.72779
+3539	145	f	2	2016-09-17 18:59:14.72779
+3540	145	f	2	2016-09-17 18:59:14.72779
+2383	104	f	2	2016-09-17 18:59:14.72779
+2384	104	f	2	2016-09-17 18:59:14.72779
+2385	104	f	2	2016-09-17 18:59:14.72779
+2388	103	f	2	2016-09-17 18:59:14.72779
+3541	145	f	2	2016-09-17 18:59:14.72779
+2389	105	f	2	2016-09-17 18:59:14.72779
+3542	145	f	2	2016-09-17 18:59:14.72779
+2390	105	f	2	2016-09-17 18:59:14.72779
+3543	145	f	2	2016-09-17 18:59:14.72779
+2391	105	f	2	2016-09-17 18:59:14.72779
+3544	145	f	2	2016-09-17 18:59:14.72779
+2396	105	f	2	2016-09-17 18:59:14.72779
+3545	145	f	2	2016-09-17 18:59:14.72779
+2397	105	f	2	2016-09-17 18:59:14.72779
+3546	145	f	2	2016-09-17 18:59:14.72779
+2398	105	f	2	2016-09-17 18:59:14.72779
+2415	105	f	2	2016-09-17 18:59:14.72779
+2416	105	f	2	2016-09-17 18:59:14.72779
+2670	146	f	2	2016-09-17 18:59:14.72779
+2677	89	f	2	2016-09-17 18:59:14.72779
+2678	69	f	2	2016-09-17 18:59:14.72779
+2679	69	f	2	2016-09-17 18:59:14.72779
+2680	89	f	2	2016-09-17 18:59:14.72779
+2681	89	f	2	2016-09-17 18:59:14.72779
+2424	105	f	2	2016-09-17 18:59:14.72779
+2425	105	f	2	2016-09-17 18:59:14.72779
+2426	105	f	2	2016-09-17 18:59:14.72779
+2682	149	f	2	2016-09-17 18:59:14.72779
+2683	89	f	2	2016-09-17 18:59:14.72779
+2427	105	f	2	2016-09-17 18:59:14.72779
+3547	145	f	2	2016-09-17 18:59:14.72779
+3548	145	f	2	2016-09-17 18:59:14.72779
+3549	145	f	2	2016-09-17 18:59:14.72779
+3550	145	f	2	2016-09-17 18:59:14.72779
+3551	145	f	2	2016-09-17 18:59:14.72779
+3552	145	f	2	2016-09-17 18:59:14.72779
+3553	145	f	2	2016-09-17 18:59:14.72779
+2428	105	f	2	2016-09-17 18:59:14.72779
+2684	149	f	2	2016-09-17 18:59:14.72779
+2685	89	f	2	2016-09-17 18:59:14.72779
+2686	135	f	2	2016-09-17 18:59:14.72779
+2431	105	f	2	2016-09-17 18:59:14.72779
+2687	137	f	2	2016-09-17 18:59:14.72779
+2693	110	f	2	2016-09-17 18:59:14.72779
+3554	145	f	2	2016-09-17 18:59:14.72779
+3555	145	f	2	2016-09-17 18:59:14.72779
+3556	145	f	2	2016-09-17 18:59:14.72779
+3557	145	f	2	2016-09-17 18:59:14.72779
+3558	145	f	2	2016-09-17 18:59:14.72779
+2382	134	f	2	2016-09-18 20:50:10.774587
+3559	145	f	2	2016-09-17 18:59:14.72779
+3560	145	f	2	2016-09-17 18:59:14.72779
+3561	145	f	2	2016-09-17 18:59:14.72779
+3562	145	f	2	2016-09-17 18:59:14.72779
+3563	145	f	2	2016-09-17 18:59:14.72779
+3564	145	f	2	2016-09-17 18:59:14.72779
+3565	145	f	2	2016-09-17 18:59:14.72779
+3566	145	f	2	2016-09-17 18:59:14.72779
+3621	149	f	2	2016-09-17 18:59:14.72779
+3622	93	f	\N	2016-09-17 18:59:14.72779
+3640	101	f	2	2016-09-17 18:59:14.72779
+3662	135	f	2	2016-09-17 18:59:14.72779
+3666	135	f	2	2016-09-17 18:59:14.72779
+3667	137	f	2	2016-09-17 18:59:14.72779
+2694	110	f	2	2016-09-17 18:59:14.72779
+2695	86	f	2	2016-09-17 18:59:14.72779
+2530	119	f	2	2016-09-17 18:59:14.72779
+2531	119	f	2	2016-09-17 18:59:14.72779
+3749	166	f	2	2016-09-17 18:59:14.72779
+3754	166	f	2	2016-09-17 18:59:14.72779
+2532	119	f	2	2016-09-17 18:59:14.72779
+2533	119	f	2	2016-09-17 18:59:14.72779
+2534	119	f	2	2016-09-17 18:59:14.72779
+2535	119	f	2	2016-09-17 18:59:14.72779
+2539	110	f	2	2016-09-17 18:59:14.72779
+2540	86	f	2	2016-09-17 18:59:14.72779
+2541	119	f	2	2016-09-17 18:59:14.72779
+2542	148	f	2	2016-09-17 18:59:14.72779
+2543	148	f	2	2016-09-17 18:59:14.72779
+2827	135	f	2	2016-09-17 18:59:14.72779
+3623	93	f	\N	2016-09-17 18:59:14.72779
+2828	137	f	2	2016-09-17 18:59:14.72779
+2841	104	f	2	2016-09-17 18:59:14.72779
+2865	78	f	2	2016-09-17 18:59:14.72779
+2867	111	f	2	2016-09-17 18:59:14.72779
+3663	135	f	2	2016-09-17 18:59:14.72779
+3700	149	f	2	2016-09-17 18:59:14.72779
+3707	12	f	2	2016-09-17 18:59:14.72779
+1550	65	f	2	2016-09-17 18:59:14.72779
+1551	87	f	2	2016-09-17 18:59:14.72779
+3721	12	f	2	2016-09-17 18:59:14.72779
+1552	87	f	2	2016-09-17 18:59:14.72779
+2597	145	f	2	2016-09-17 18:59:14.72779
+3731	12	f	2	2016-09-17 18:59:14.72779
+3750	166	f	2	2016-09-17 18:59:14.72779
+2636	65	f	2	2016-09-17 18:59:14.72779
+2637	65	f	2	2016-09-17 18:59:14.72779
+3753	166	f	2	2016-09-17 18:59:14.72779
+2638	65	f	2	2016-09-17 18:59:14.72779
+2392	105	f	2	2016-09-17 18:59:14.72779
+2393	105	f	2	2016-09-17 18:59:14.72779
+2394	105	f	2	2016-09-17 18:59:14.72779
+2395	105	f	2	2016-09-17 18:59:14.72779
+2642	65	f	2	2016-09-17 18:59:14.72779
+274	12	\N	2	2016-09-17 18:59:14.72779
+292	41	\N	2	2016-09-17 18:59:14.72779
+306	41	\N	2	2016-09-17 18:59:14.72779
+706	12	\N	2	2016-09-17 18:59:14.72779
+723	12	\N	2	2016-09-17 18:59:14.72779
+725	55	\N	2	2016-09-17 18:59:14.72779
+726	55	\N	2	2016-09-17 18:59:14.72779
+728	55	\N	2	2016-09-17 18:59:14.72779
+734	55	\N	2	2016-09-17 18:59:14.72779
+743	55	\N	2	2016-09-17 18:59:14.72779
+763	55	\N	2	2016-09-17 18:59:14.72779
+764	12	\N	2	2016-09-17 18:59:14.72779
+769	12	\N	2	2016-09-17 18:59:14.72779
+2643	65	f	2	2016-09-17 18:59:14.72779
+2646	65	f	2	2016-09-17 18:59:14.72779
+2647	65	f	2	2016-09-17 18:59:14.72779
+2651	65	f	2	2016-09-17 18:59:14.72779
+2652	65	f	2	2016-09-17 18:59:14.72779
+2653	65	f	2	2016-09-17 18:59:14.72779
+771	55	\N	2	2016-09-17 18:59:14.72779
+772	59	\N	2	2016-09-17 18:59:14.72779
+837	65	\N	2	2016-09-17 18:59:14.72779
+1046	47	\N	2	2016-09-17 18:59:14.72779
+1062	55	\N	2	2016-09-17 18:59:14.72779
+1067	78	\N	2	2016-09-17 18:59:14.72779
+1068	12	\N	2	2016-09-17 18:59:14.72779
+1164	70	\N	2	2016-09-17 18:59:14.72779
+1165	39	\N	2	2016-09-17 18:59:14.72779
+2654	65	f	2	2016-09-17 18:59:14.72779
+2655	65	f	2	2016-09-17 18:59:14.72779
+1168	41	\N	2	2016-09-17 18:59:14.72779
+1169	70	\N	2	2016-09-17 18:59:14.72779
+1185	39	\N	2	2016-09-17 18:59:14.72779
+1195	87	\N	2	2016-09-17 18:59:14.72779
+1198	12	\N	2	2016-09-17 18:59:14.72779
+1261	89	f	2	2016-09-17 18:59:14.72779
+1598	103	f	2	2016-09-17 18:59:14.72779
+1807	90	f	2	2016-09-17 18:59:14.72779
+1833	118	f	2	2016-09-17 18:59:14.72779
+1839	103	f	2	2016-09-17 18:59:14.72779
+1435	12	f	2	2016-09-17 18:59:14.72779
+1436	65	f	2	2016-09-17 18:59:14.72779
+1438	107	f	2	2016-09-17 18:59:14.72779
+1439	107	f	2	2016-09-17 18:59:14.72779
+1511	101	f	2	2016-09-17 18:59:14.72779
+1512	101	f	2	2016-09-17 18:59:14.72779
+1513	101	f	2	2016-09-17 18:59:14.72779
+1521	12	f	2	2016-09-17 18:59:14.72779
+1535	110	f	2	2016-09-17 18:59:14.72779
+1536	110	f	2	2016-09-17 18:59:14.72779
+1537	110	f	2	2016-09-17 18:59:14.72779
+1538	110	f	2	2016-09-17 18:59:14.72779
+1539	110	f	2	2016-09-17 18:59:14.72779
+1540	110	f	2	2016-09-17 18:59:14.72779
+1541	110	f	2	2016-09-17 18:59:14.72779
+1542	67	f	2	2016-09-17 18:59:14.72779
+2417	105	f	2	2016-09-17 18:59:14.72779
+1543	87	f	2	2016-09-17 18:59:14.72779
+1544	87	f	2	2016-09-17 18:59:14.72779
+1545	87	f	2	2016-09-17 18:59:14.72779
+2659	87	f	2	2016-09-17 18:59:14.72779
+2661	145	f	2	2016-09-17 18:59:14.72779
+2662	130	f	2	2016-09-17 18:59:14.72779
+2663	118	f	2	2016-09-17 18:59:14.72779
+2418	105	f	2	2016-09-17 18:59:14.72779
+2419	105	f	2	2016-09-17 18:59:14.72779
+2420	105	f	2	2016-09-17 18:59:14.72779
+2421	105	f	2	2016-09-17 18:59:14.72779
+2422	105	f	2	2016-09-17 18:59:14.72779
+2423	105	f	2	2016-09-17 18:59:14.72779
+2698	110	f	2	2016-09-17 18:59:14.72779
+2699	86	f	2	2016-09-17 18:59:14.72779
+2700	119	f	2	2016-09-17 18:59:14.72779
+2701	119	f	2	2016-09-17 18:59:14.72779
+3572	145	f	2	2016-09-17 18:59:14.72779
+3624	93	f	\N	2016-09-17 18:59:14.72779
+3642	110	f	2	2016-09-17 18:59:14.72779
+2668	145	f	2	2016-09-17 18:59:14.72779
+3646	86	f	2	2016-09-17 18:59:14.72779
+3664	135	f	2	2016-09-17 18:59:14.72779
+3665	137	f	2	2016-09-17 18:59:14.72779
+3701	149	f	2	2016-09-17 18:59:14.72779
+3702	149	f	2	2016-09-17 18:59:14.72779
+3708	135	f	2	2016-09-17 18:59:14.72779
+3709	143	f	2	2016-09-17 18:59:14.72779
+3732	166	f	2	2016-09-17 18:59:14.72779
+3733	166	f	2	2016-09-17 18:59:14.72779
+893	47	\N	2	2016-09-17 18:59:14.72779
+894	2	\N	2	2016-09-17 18:59:14.72779
+896	39	\N	2	2016-09-17 18:59:14.72779
+1011	12	\N	2	2016-09-17 18:59:14.72779
+1040	47	\N	2	2016-09-17 18:59:14.72779
+1277	55	f	2	2016-09-17 18:59:14.72779
+3751	166	f	2	2016-09-17 18:59:14.72779
+2669	130	f	2	2016-09-17 18:59:14.72779
+2672	123	f	2	2016-09-17 18:59:14.72779
+2673	39	f	2	2016-09-17 18:59:14.72779
+2839	119	f	2	2016-09-17 18:59:14.72779
+2840	119	f	2	2016-09-17 18:59:14.72779
+1278	39	f	2	2016-09-17 18:59:14.72779
+2866	117	f	2	2016-09-18 21:03:59.420289
+1284	69	f	2	2016-09-17 18:59:14.72779
+1285	87	f	2	2016-09-17 18:59:14.72779
+1286	89	f	2	2016-09-17 18:59:14.72779
+1287	84	f	2	2016-09-17 18:59:14.72779
+1288	90	f	2	2016-09-17 18:59:14.72779
+1289	84	f	2	2016-09-17 18:59:14.72779
+1290	39	f	2	2016-09-17 18:59:14.72779
+1291	84	f	2	2016-09-17 18:59:14.72779
+1292	83	f	2	2016-09-17 18:59:14.72779
+1293	69	f	2	2016-09-17 18:59:14.72779
+1294	69	f	2	2016-09-17 18:59:14.72779
+1304	87	f	2	2016-09-17 18:59:14.72779
+1306	90	f	2	2016-09-17 18:59:14.72779
+1840	103	f	2	2016-09-17 18:59:14.72779
+1849	12	f	2	2016-09-17 18:59:14.72779
+1440	103	f	2	2016-09-17 18:59:14.72779
+1442	103	f	2	2016-09-17 18:59:14.72779
+1447	106	f	2	2016-09-17 18:59:14.72779
+1448	106	f	2	2016-09-17 18:59:14.72779
+1450	12	f	2	2016-09-17 18:59:14.72779
+1452	12	f	2	2016-09-17 18:59:14.72779
+1464	87	f	2	2016-09-17 18:59:14.72779
+1465	69	f	2	2016-09-17 18:59:14.72779
+1467	89	f	2	2016-09-17 18:59:14.72779
+1472	69	f	2	2016-09-17 18:59:14.72779
+1473	69	f	2	2016-09-17 18:59:14.72779
+1485	106	f	2	2016-09-17 18:59:14.72779
+1487	103	f	2	2016-09-17 18:59:14.72779
+1500	106	f	2	2016-09-17 18:59:14.72779
+1502	103	f	2	2016-09-17 18:59:14.72779
+1503	103	f	2	2016-09-17 18:59:14.72779
+1504	104	f	2	2016-09-17 18:59:14.72779
+1505	104	f	2	2016-09-17 18:59:14.72779
+1506	104	f	2	2016-09-17 18:59:14.72779
+1507	107	f	2	2016-09-17 18:59:14.72779
+1509	106	f	2	2016-09-17 18:59:14.72779
+1514	101	f	2	2016-09-17 18:59:14.72779
+1515	101	f	2	2016-09-17 18:59:14.72779
+1516	87	f	2	2016-09-17 18:59:14.72779
+1517	87	f	2	2016-09-17 18:59:14.72779
+1518	87	f	2	2016-09-17 18:59:14.72779
+1519	87	f	2	2016-09-17 18:59:14.72779
+1553	79	f	2	2016-09-17 18:59:14.72779
+2585	87	f	2	2016-09-17 18:59:14.72779
+2586	87	f	2	2016-09-17 18:59:14.72779
+2587	87	f	2	2016-09-17 18:59:14.72779
+2588	89	f	2	2016-09-17 18:59:14.72779
+2633	65	f	2	2016-09-17 18:59:14.72779
+2634	65	f	2	2016-09-17 18:59:14.72779
+2635	65	f	2	2016-09-17 18:59:14.72779
+2174	135	f	2	2016-09-17 18:59:14.72779
+2175	137	f	2	2016-09-17 18:59:14.72779
+2176	135	f	2	2016-09-17 18:59:14.72779
+2177	137	f	2	2016-09-17 18:59:14.72779
+2178	135	f	2	2016-09-17 18:59:14.72779
+2179	137	f	2	2016-09-17 18:59:14.72779
+2180	135	f	2	2016-09-17 18:59:14.72779
+2181	137	f	2	2016-09-17 18:59:14.72779
+2182	135	f	2	2016-09-17 18:59:14.72779
+2505	110	f	2	2016-09-17 18:59:14.72779
+2506	86	f	2	2016-09-17 18:59:14.72779
+2507	110	f	2	2016-09-17 18:59:14.72779
+2508	110	f	2	2016-09-17 18:59:14.72779
+2737	106	f	2	2016-09-17 18:59:14.72779
+2738	117	f	2	2016-09-17 18:59:14.72779
+2739	69	f	2	2016-09-17 18:59:14.72779
+2740	12	f	2	2016-09-17 18:59:14.72779
+2832	119	f	2	2016-09-17 18:59:14.72779
+2863	111	f	2	2016-09-17 18:59:14.72779
+2864	140	f	2	2016-09-17 18:59:14.72779
+2930	145	f	2	2016-09-17 18:59:14.72779
+2933	145	f	2	2016-09-17 18:59:14.72779
+2935	130	f	2	2016-09-17 18:59:14.72779
+2939	130	f	2	2016-09-17 18:59:14.72779
+2940	145	f	2	2016-09-17 18:59:14.72779
+2945	130	f	2	2016-09-17 18:59:14.72779
+2978	145	f	2	2016-09-17 18:59:14.72779
+2979	145	f	2	2016-09-17 18:59:14.72779
+2980	145	f	2	2016-09-17 18:59:14.72779
+3573	145	f	2	2016-09-17 18:59:14.72779
+3574	145	f	2	2016-09-17 18:59:14.72779
+3575	145	f	2	2016-09-17 18:59:14.72779
+2274	143	f	2	2016-09-17 18:59:14.72779
+1962	93	f	\N	2016-09-17 18:59:14.72779
+3643	110	f	2	2016-09-17 18:59:14.72779
+2276	12	f	2	2016-09-17 18:59:14.72779
+2277	105	f	2	2016-09-17 18:59:14.72779
+2278	135	f	2	2016-09-17 18:59:14.72779
+2279	144	f	2	2016-09-17 18:59:14.72779
+3668	110	f	2	2016-09-17 18:59:14.72779
+2281	104	f	2	2016-09-17 18:59:14.72779
+3669	110	f	2	2016-09-17 18:59:14.72779
+3671	110	f	2	2016-09-17 18:59:14.72779
+3672	86	f	2	2016-09-17 18:59:14.72779
+3673	104	f	2	2016-09-17 18:59:14.72779
+3674	104	f	2	2016-09-17 18:59:14.72779
+3675	87	f	2	2016-09-17 18:59:14.72779
+3677	145	f	2	2016-09-17 18:59:14.72779
+3703	149	f	2	2016-09-17 18:59:14.72779
+2282	135	f	2	2016-09-17 18:59:14.72779
+1963	123	f	2	2016-09-17 18:59:14.72779
+1964	93	f	2	2016-09-17 18:59:14.72779
+1965	123	f	2	2016-09-17 18:59:14.72779
+1966	12	f	2	2016-09-17 18:59:14.72779
+2098	118	f	2	2016-09-17 18:59:14.72779
+2099	12	f	2	2016-09-17 18:59:14.72779
+2100	12	f	2	2016-09-17 18:59:14.72779
+1978	2	f	2	2016-09-17 18:59:14.72779
+2101	65	f	2	2016-09-17 18:59:14.72779
+1979	118	f	2	2016-09-17 18:59:14.72779
+1985	93	f	2	2016-09-17 18:59:14.72779
+1986	123	f	2	2016-09-17 18:59:14.72779
+1987	103	f	2	2016-09-17 18:59:14.72779
+1988	119	f	2	2016-09-17 18:59:14.72779
+1989	12	f	2	2016-09-17 18:59:14.72779
+2602	65	f	2	2016-09-17 18:59:14.72779
+2603	65	f	2	2016-09-17 18:59:14.72779
+2604	65	f	2	2016-09-17 18:59:14.72779
+2605	65	f	2	2016-09-17 18:59:14.72779
+2608	65	f	2	2016-09-17 18:59:14.72779
+2612	65	f	2	2016-09-17 18:59:14.72779
+2613	65	f	2	2016-09-17 18:59:14.72779
+2617	65	f	2	2016-09-17 18:59:14.72779
+2039	119	f	2	2016-09-17 18:59:14.72779
+2044	119	f	2	2016-09-17 18:59:14.72779
+2156	135	f	2	2016-09-17 18:59:14.72779
+2157	137	f	2	2016-09-17 18:59:14.72779
+2158	135	f	2	2016-09-17 18:59:14.72779
+2159	137	f	2	2016-09-17 18:59:14.72779
+2160	135	f	2	2016-09-17 18:59:14.72779
+2161	137	f	2	2016-09-17 18:59:14.72779
+2162	135	f	2	2016-09-17 18:59:14.72779
+2163	137	f	2	2016-09-17 18:59:14.72779
+2164	135	f	2	2016-09-17 18:59:14.72779
+2165	137	f	2	2016-09-17 18:59:14.72779
+2167	135	f	2	2016-09-17 18:59:14.72779
+2045	119	f	2	2016-09-17 18:59:14.72779
+2399	105	f	2	2016-09-17 18:59:14.72779
+2400	105	f	2	2016-09-17 18:59:14.72779
+2401	105	f	2	2016-09-17 18:59:14.72779
+2402	105	f	2	2016-09-17 18:59:14.72779
+2403	105	f	2	2016-09-17 18:59:14.72779
+2704	119	f	2	2016-09-17 18:59:14.72779
+2705	119	f	2	2016-09-17 18:59:14.72779
+3770	123	f	2	2016-09-17 18:59:14.72779
+2706	119	f	2	2016-09-17 18:59:14.72779
+2707	119	f	2	2016-09-17 18:59:14.72779
+2708	119	f	2	2016-09-17 18:59:14.72779
+3784	123	f	2	2016-09-17 18:59:14.72779
+3786	123	f	2	2016-09-17 18:59:14.72779
+2709	119	f	2	2016-09-17 18:59:14.72779
+2275	134	f	2	2016-09-18 20:50:10.774587
+2434	130	f	2	2016-09-17 18:59:14.72779
+2931	145	f	2	2016-09-17 18:59:14.72779
+1468	84	f	2	2016-09-17 18:59:14.72779
+1469	90	f	2	2016-09-17 18:59:14.72779
+1470	83	f	2	2016-09-17 18:59:14.72779
+2932	145	f	2	2016-09-17 18:59:14.72779
+2942	145	f	2	2016-09-17 18:59:14.72779
+2943	145	f	2	2016-09-17 18:59:14.72779
+2944	145	f	2	2016-09-17 18:59:14.72779
+2981	145	f	2	2016-09-17 18:59:14.72779
+3576	145	f	2	2016-09-17 18:59:14.72779
+3577	145	f	2	2016-09-17 18:59:14.72779
+3578	145	f	2	2016-09-17 18:59:14.72779
+1471	69	f	2	2016-09-17 18:59:14.72779
+1913	117	f	2	2016-09-17 18:59:14.72779
+1510	101	f	2	2016-09-17 18:59:14.72779
+1968	12	f	2	2016-09-17 18:59:14.72779
+1970	126	f	2	2016-09-17 18:59:14.72779
+3645	110	f	2	2016-09-17 18:59:14.72779
+1971	93	f	2	2016-09-17 18:59:14.72779
+1972	123	f	2	2016-09-17 18:59:14.72779
+1973	123	f	2	2016-09-17 18:59:14.72779
+1975	65	f	2	2016-09-17 18:59:14.72779
+3647	110	f	2	2016-09-17 18:59:14.72779
+1977	12	f	2	2016-09-17 18:59:14.72779
+1554	101	f	2	2016-09-17 18:59:14.72779
+1556	101	f	2	2016-09-17 18:59:14.72779
+1559	87	f	2	2016-09-17 18:59:14.72779
+1560	79	f	2	2016-09-17 18:59:14.72779
+2137	139	f	2	2016-09-17 18:59:14.72779
+2138	139	f	2	2016-09-17 18:59:14.72779
+2139	139	f	2	2016-09-17 18:59:14.72779
+2144	135	f	2	2016-09-17 18:59:14.72779
+2145	137	f	2	2016-09-17 18:59:14.72779
+2146	135	f	2	2016-09-17 18:59:14.72779
+2147	137	f	2	2016-09-17 18:59:14.72779
+3648	110	f	2	2016-09-17 18:59:14.72779
+3670	110	f	2	2016-09-17 18:59:14.72779
+3682	83	f	2	2016-09-17 18:59:14.72779
+3687	119	f	2	2016-09-17 18:59:14.72779
+3688	103	f	2	2016-09-17 18:59:14.72779
+3690	117	f	2	2016-09-17 18:59:14.72779
+3694	111	f	2	2016-09-17 18:59:14.72779
+3704	149	f	2	2016-09-17 18:59:14.72779
+3711	12	f	2	2016-09-17 18:59:14.72779
+838	65	\N	2	2016-09-17 18:59:14.72779
+849	41	\N	2	2016-09-17 18:59:14.72779
+851	41	\N	2	2016-09-17 18:59:14.72779
+852	41	\N	2	2016-09-17 18:59:14.72779
+853	41	\N	2	2016-09-17 18:59:14.72779
+854	2	\N	2	2016-09-17 18:59:14.72779
+855	2	\N	2	2016-09-17 18:59:14.72779
+856	2	\N	2	2016-09-17 18:59:14.72779
+857	55	\N	2	2016-09-17 18:59:14.72779
+858	55	\N	2	2016-09-17 18:59:14.72779
+859	55	\N	2	2016-09-17 18:59:14.72779
+860	55	\N	2	2016-09-17 18:59:14.72779
+861	55	\N	2	2016-09-17 18:59:14.72779
+864	65	\N	2	2016-09-17 18:59:14.72779
+865	12	\N	2	2016-09-17 18:59:14.72779
+866	65	\N	2	2016-09-17 18:59:14.72779
+1307	90	f	2	2016-09-17 18:59:14.72779
+1308	90	f	2	2016-09-17 18:59:14.72779
+1337	84	f	2	2016-09-17 18:59:14.72779
+1338	83	f	2	2016-09-17 18:59:14.72779
+1347	39	f	2	2016-09-17 18:59:14.72779
+1348	84	f	2	2016-09-17 18:59:14.72779
+1349	83	f	2	2016-09-17 18:59:14.72779
+1393	12	f	2	2016-09-17 18:59:14.72779
+1394	65	f	2	2016-09-17 18:59:14.72779
+1395	65	f	2	2016-09-17 18:59:14.72779
+1396	104	f	2	2016-09-17 18:59:14.72779
+1398	104	f	2	2016-09-17 18:59:14.72779
+1400	104	f	2	2016-09-17 18:59:14.72779
+1401	104	f	2	2016-09-17 18:59:14.72779
+1402	104	f	2	2016-09-17 18:59:14.72779
+1403	104	f	2	2016-09-17 18:59:14.72779
+1404	87	f	2	2016-09-17 18:59:14.72779
+1406	89	f	2	2016-09-17 18:59:14.72779
+1407	90	f	2	2016-09-17 18:59:14.72779
+1408	69	f	2	2016-09-17 18:59:14.72779
+1409	69	f	2	2016-09-17 18:59:14.72779
+1410	69	f	2	2016-09-17 18:59:14.72779
+1411	69	f	2	2016-09-17 18:59:14.72779
+2148	135	f	2	2016-09-17 18:59:14.72779
+2149	137	f	2	2016-09-17 18:59:14.72779
+2150	135	f	2	2016-09-17 18:59:14.72779
+2187	135	f	2	2016-09-17 18:59:14.72779
+2188	137	f	2	2016-09-17 18:59:14.72779
+2189	135	f	2	2016-09-17 18:59:14.72779
+2190	137	f	2	2016-09-17 18:59:14.72779
+2674	84	f	2	2016-09-17 18:59:14.72779
+2675	83	f	2	2016-09-17 18:59:14.72779
+2676	87	f	2	2016-09-17 18:59:14.72779
+1413	102	f	2	2016-09-17 18:59:14.72779
+1414	90	f	2	2016-09-17 18:59:14.72779
+1415	91	f	2	2016-09-17 18:59:14.72779
+1417	84	f	2	2016-09-17 18:59:14.72779
+1418	90	f	2	2016-09-17 18:59:14.72779
+1419	91	f	2	2016-09-17 18:59:14.72779
+1420	101	f	2	2016-09-17 18:59:14.72779
+1341	84	f	2	2016-09-17 18:59:14.72779
+1609	105	f	2	2016-09-17 18:59:14.72779
+2982	145	f	2	2016-09-17 18:59:14.72779
+2983	145	f	2	2016-09-17 18:59:14.72779
+2984	145	f	2	2016-09-17 18:59:14.72779
+2433	145	f	2	2016-09-17 18:59:14.72779
+2689	143	f	2	2016-09-17 18:59:14.72779
+2558	12	f	2	2016-09-17 18:59:14.72779
+2559	151	f	2	2016-09-17 18:59:14.72779
+3605	145	f	2	2016-09-17 18:59:14.72779
+3627	93	f	\N	2016-09-17 18:59:14.72779
+1342	83	f	2	2016-09-17 18:59:14.72779
+1343	70	f	2	2016-09-17 18:59:14.72779
+1610	87	f	2	2016-09-17 18:59:14.72779
+1611	87	f	2	2016-09-17 18:59:14.72779
+1612	89	f	2	2016-09-17 18:59:14.72779
+1613	89	f	2	2016-09-17 18:59:14.72779
+1614	90	f	2	2016-09-17 18:59:14.72779
+2560	69	f	2	2016-09-17 18:59:14.72779
+2561	145	f	2	2016-09-17 18:59:14.72779
+2562	130	f	2	2016-09-17 18:59:14.72779
+2733	148	f	2	2016-09-17 18:59:14.72779
+3679	93	f	2	2016-09-17 18:59:14.72779
+3680	146	f	2	2016-09-17 18:59:14.72779
+3693	111	f	2	2016-09-17 18:59:14.72779
+3712	135	f	2	2016-09-17 18:59:14.72779
+3713	137	f	2	2016-09-17 18:59:14.72779
+1615	69	f	2	2016-09-17 18:59:14.72779
+2208	110	f	2	2016-09-17 18:59:14.72779
+2209	110	f	2	2016-09-17 18:59:14.72779
+2210	86	f	2	2016-09-17 18:59:14.72779
+2211	110	f	2	2016-09-17 18:59:14.72779
+2212	110	f	2	2016-09-17 18:59:14.72779
+2213	86	f	2	2016-09-17 18:59:14.72779
+3788	123	f	2	2016-09-17 18:59:14.72779
+2734	119	f	2	2016-09-17 18:59:14.72779
+2735	119	f	2	2016-09-17 18:59:14.72779
+2843	119	f	2	2016-09-17 18:59:14.72779
+3790	123	f	2	2016-09-17 18:59:14.72779
+1370	90	f	2	2016-09-17 18:59:14.72779
+1384	39	f	2	2016-09-17 18:59:14.72779
+2283	137	f	2	2016-09-17 18:59:14.72779
+1803	118	f	2	2016-09-17 18:59:14.72779
+2301	146	f	2	2016-09-17 18:59:14.72779
+2302	118	f	2	2016-09-17 18:59:14.72779
+1852	119	f	2	2016-09-17 18:59:14.72779
+1898	105	f	2	2016-09-17 18:59:14.72779
+1900	120	f	2	2016-09-17 18:59:14.72779
+1901	120	f	2	2016-09-17 18:59:14.72779
+1902	117	f	2	2016-09-17 18:59:14.72779
+1903	111	f	2	2016-09-17 18:59:14.72779
+3686	134	f	2	2016-09-18 20:50:37.105155
+1976	55	f	2	2016-09-18 20:58:32.828228
+3689	106	f	2	2016-09-18 21:04:36.853769
+1904	65	f	2	2016-09-17 18:59:14.72779
+1905	65	f	2	2016-09-17 18:59:14.72779
+1561	87	f	2	2016-09-17 18:59:14.72779
+1562	87	f	2	2016-09-17 18:59:14.72779
+1563	79	f	2	2016-09-17 18:59:14.72779
+1564	101	f	2	2016-09-17 18:59:14.72779
+2844	119	f	2	2016-09-17 18:59:14.72779
+1569	101	f	2	2016-09-17 18:59:14.72779
+1570	101	f	2	2016-09-17 18:59:14.72779
+1571	65	f	2	2016-09-17 18:59:14.72779
+1575	65	f	2	2016-09-17 18:59:14.72779
+1576	86	f	2	2016-09-17 18:59:14.72779
+2845	119	f	2	2016-09-17 18:59:14.72779
+2846	119	f	2	2016-09-17 18:59:14.72779
+2847	119	f	2	2016-09-17 18:59:14.72779
+2848	119	f	2	2016-09-17 18:59:14.72779
+2849	119	f	2	2016-09-17 18:59:14.72779
+2850	119	f	2	2016-09-17 18:59:14.72779
+2851	119	f	2	2016-09-17 18:59:14.72779
+2852	110	f	2	2016-09-17 18:59:14.72779
+2853	86	f	2	2016-09-17 18:59:14.72779
+2854	119	f	2	2016-09-17 18:59:14.72779
+1577	87	f	2	2016-09-17 18:59:14.72779
+1578	79	f	2	2016-09-17 18:59:14.72779
+1579	110	f	2	2016-09-17 18:59:14.72779
+1580	78	f	2	2016-09-17 18:59:14.72779
+1581	87	f	2	2016-09-17 18:59:14.72779
+1582	89	f	2	2016-09-17 18:59:14.72779
+2598	145	f	2	2016-09-17 18:59:14.72779
+2599	130	f	2	2016-09-17 18:59:14.72779
+2870	119	f	2	2016-09-17 18:59:14.72779
+2151	137	f	2	2016-09-17 18:59:14.72779
+1922	93	f	\N	2016-09-17 18:59:14.72779
+1932	93	f	\N	2016-09-17 18:59:14.72779
+1933	93	f	\N	2016-09-17 18:59:14.72779
+1939	93	f	\N	2016-09-17 18:59:14.72779
+1940	93	f	\N	2016-09-17 18:59:14.72779
+3628	93	f	2	2016-09-17 18:59:14.72779
+3630	118	f	2	2016-09-17 18:59:14.72779
+3681	84	f	2	2016-09-17 18:59:14.72779
+3684	135	f	2	2016-09-17 18:59:14.72779
+3685	137	f	2	2016-09-17 18:59:14.72779
+3706	123	f	7	2016-09-17 18:59:14.72779
+1199	89	\N	2	2016-09-17 18:59:14.72779
+1204	87	\N	2	2016-09-17 18:59:14.72779
+1205	89	\N	2	2016-09-17 18:59:14.72779
+1206	89	\N	2	2016-09-17 18:59:14.72779
+1257	87	f	2	2016-09-17 18:59:14.72779
+1258	87	f	2	2016-09-17 18:59:14.72779
+1644	90	f	2	2016-09-17 18:59:14.72779
+1645	69	f	2	2016-09-17 18:59:14.72779
+3758	164	f	2	2016-09-17 18:59:14.72779
+1646	70	f	2	2016-09-17 18:59:14.72779
+1918	119	f	2	2016-09-17 18:59:14.72779
+1919	12	f	2	2016-09-17 18:59:14.72779
+1924	118	f	2	2016-09-17 18:59:14.72779
+1925	89	f	2	2016-09-17 18:59:14.72779
+1926	90	f	2	2016-09-17 18:59:14.72779
+1927	87	f	2	2016-09-17 18:59:14.72779
+1931	118	f	2	2016-09-17 18:59:14.72779
+1941	12	f	2	2016-09-17 18:59:14.72779
+1945	123	f	2	2016-09-17 18:59:14.72779
+1946	123	f	2	2016-09-17 18:59:14.72779
+1947	123	f	2	2016-09-17 18:59:14.72779
+1948	123	f	2	2016-09-17 18:59:14.72779
+1954	12	f	2	2016-09-17 18:59:14.72779
+1584	89	f	2	2016-09-17 18:59:14.72779
+1585	90	f	2	2016-09-17 18:59:14.72779
+1586	69	f	2	2016-09-17 18:59:14.72779
+1587	39	f	2	2016-09-17 18:59:14.72779
+1588	84	f	2	2016-09-17 18:59:14.72779
+1589	84	f	2	2016-09-17 18:59:14.72779
+1590	83	f	2	2016-09-17 18:59:14.72779
+1591	87	f	2	2016-09-17 18:59:14.72779
+1592	89	f	2	2016-09-17 18:59:14.72779
+1593	69	f	2	2016-09-17 18:59:14.72779
+1597	104	f	2	2016-09-17 18:59:14.72779
+2631	65	f	2	2016-09-17 18:59:14.72779
+2632	65	f	2	2016-09-17 18:59:14.72779
+2702	119	f	2	2016-09-17 18:59:14.72779
+2703	119	f	2	2016-09-17 18:59:14.72779
+2830	69	f	2	2016-09-17 18:59:14.72779
+2833	110	f	2	2016-09-17 18:59:14.72779
+2834	86	f	2	2016-09-17 18:59:14.72779
+2835	104	f	2	2016-09-17 18:59:14.72779
+2859	148	f	2	2016-09-17 18:59:14.72779
+2860	106	f	2	2016-09-17 18:59:14.72779
+2221	140	f	2	2016-09-17 18:59:14.72779
+2222	65	f	2	2016-09-17 18:59:14.72779
+2223	78	f	2	2016-09-17 18:59:14.72779
+2224	78	f	2	2016-09-17 18:59:14.72779
+2225	78	f	2	2016-09-17 18:59:14.72779
+2226	78	f	2	2016-09-17 18:59:14.72779
+2227	78	f	2	2016-09-17 18:59:14.72779
+2228	78	f	2	2016-09-17 18:59:14.72779
+2229	78	f	2	2016-09-17 18:59:14.72779
+2230	78	f	2	2016-09-17 18:59:14.72779
+1908	65	f	2	2016-09-17 18:59:14.72779
+2055	12	f	2	2016-09-17 18:59:14.72779
+2064	123	f	2	2016-09-17 18:59:14.72779
+2065	118	f	2	2016-09-17 18:59:14.72779
+2067	123	f	2	2016-09-17 18:59:14.72779
+2069	123	f	2	2016-09-17 18:59:14.72779
+2070	12	f	2	2016-09-17 18:59:14.72779
+2305	145	f	2	2016-09-17 18:59:14.72779
+2306	146	f	2	2016-09-17 18:59:14.72779
+1993	106	f	2	2016-09-17 18:59:14.72779
+2310	145	f	2	2016-09-17 18:59:14.72779
+1994	106	f	2	2016-09-17 18:59:14.72779
+1995	106	f	2	2016-09-17 18:59:14.72779
+1996	106	f	2	2016-09-17 18:59:14.72779
+2312	130	f	2	2016-09-17 18:59:14.72779
+1997	106	f	2	2016-09-17 18:59:14.72779
+2313	145	f	2	2016-09-17 18:59:14.72779
+2314	69	f	2	2016-09-17 18:59:14.72779
+2000	103	f	2	2016-09-17 18:59:14.72779
+2315	135	f	2	2016-09-17 18:59:14.72779
+2001	106	f	2	2016-09-17 18:59:14.72779
+2316	137	f	2	2016-09-17 18:59:14.72779
+2002	106	f	2	2016-09-17 18:59:14.72779
+2005	103	f	2	2016-09-17 18:59:14.72779
+2319	104	f	2	2016-09-17 18:59:14.72779
+2006	106	f	2	2016-09-17 18:59:14.72779
+2007	106	f	2	2016-09-17 18:59:14.72779
+2009	93	f	2	2016-09-17 18:59:14.72779
+2010	123	f	2	2016-09-17 18:59:14.72779
+2011	110	f	2	2016-09-17 18:59:14.72779
+2012	118	f	2	2016-09-17 18:59:14.72779
+2013	87	f	2	2016-09-17 18:59:14.72779
+2014	89	f	2	2016-09-17 18:59:14.72779
+2015	90	f	2	2016-09-17 18:59:14.72779
+2016	93	f	2	2016-09-17 18:59:14.72779
+2017	69	f	2	2016-09-17 18:59:14.72779
+2018	87	f	2	2016-09-17 18:59:14.72779
+2019	89	f	2	2016-09-17 18:59:14.72779
+2947	145	f	2	2016-09-17 18:59:14.72779
+2948	145	f	2	2016-09-17 18:59:14.72779
+2949	130	f	2	2016-09-17 18:59:14.72779
+2991	130	f	2	2016-09-17 18:59:14.72779
+3588	145	f	2	2016-09-17 18:59:14.72779
+3589	145	f	2	2016-09-17 18:59:14.72779
+3590	145	f	2	2016-09-17 18:59:14.72779
+3592	145	f	2	2016-09-17 18:59:14.72779
+3607	145	f	2	2016-09-17 18:59:14.72779
+3629	93	f	2	2016-09-17 18:59:14.72779
+3695	93	f	2	2016-09-17 18:59:14.72779
+3716	65	f	2	2016-09-17 18:59:14.72779
+2020	69	f	2	2016-09-17 18:59:14.72779
+2023	104	f	2	2016-09-17 18:59:14.72779
+2024	104	f	2	2016-09-17 18:59:14.72779
+2317	134	f	2	2016-09-18 20:50:10.774587
+1252	59	f	2	2016-09-18 21:03:00.257312
+3715	12	f	2	2016-09-18 21:38:39.922035
+2062	93	f	2	2016-09-18 22:22:07.376365
+2026	103	f	2	2016-09-17 18:59:14.72779
+2027	106	f	2	2016-09-17 18:59:14.72779
+2028	106	f	2	2016-09-17 18:59:14.72779
+2437	146	f	2	2016-09-17 18:59:14.72779
+2438	117	f	2	2016-09-17 18:59:14.72779
+876	41	\N	2	2016-09-17 18:59:14.72779
+878	70	\N	2	2016-09-17 18:59:14.72779
+2857	119	f	2	2016-09-17 18:59:14.72779
+879	65	\N	2	2016-09-17 18:59:14.72779
+880	70	\N	2	2016-09-17 18:59:14.72779
+881	70	\N	2	2016-09-17 18:59:14.72779
+882	70	\N	2	2016-09-17 18:59:14.72779
+883	70	\N	2	2016-09-17 18:59:14.72779
+1079	65	\N	2	2016-09-17 18:59:14.72779
+2951	145	f	2	2016-09-17 18:59:14.72779
+2952	145	f	2	2016-09-17 18:59:14.72779
+2992	145	f	2	2016-09-17 18:59:14.72779
+2993	145	f	2	2016-09-17 18:59:14.72779
+2994	145	f	2	2016-09-17 18:59:14.72779
+2995	145	f	2	2016-09-17 18:59:14.72779
+2996	145	f	2	2016-09-17 18:59:14.72779
+2997	145	f	2	2016-09-17 18:59:14.72779
+2998	145	f	2	2016-09-17 18:59:14.72779
+2999	145	f	2	2016-09-17 18:59:14.72779
+3000	145	f	2	2016-09-17 18:59:14.72779
+3013	145	f	2	2016-09-17 18:59:14.72779
+3014	145	f	2	2016-09-17 18:59:14.72779
+3015	145	f	2	2016-09-17 18:59:14.72779
+3016	145	f	2	2016-09-17 18:59:14.72779
+3017	145	f	2	2016-09-17 18:59:14.72779
+3018	145	f	2	2016-09-17 18:59:14.72779
+3019	145	f	2	2016-09-17 18:59:14.72779
+3020	145	f	2	2016-09-17 18:59:14.72779
+3021	145	f	2	2016-09-17 18:59:14.72779
+3022	145	f	2	2016-09-17 18:59:14.72779
+3023	145	f	2	2016-09-17 18:59:14.72779
+3024	145	f	2	2016-09-17 18:59:14.72779
+3025	145	f	2	2016-09-17 18:59:14.72779
+3026	145	f	2	2016-09-17 18:59:14.72779
+3027	145	f	2	2016-09-17 18:59:14.72779
+3028	145	f	2	2016-09-17 18:59:14.72779
+3029	145	f	2	2016-09-17 18:59:14.72779
+3030	145	f	2	2016-09-17 18:59:14.72779
+3031	145	f	2	2016-09-17 18:59:14.72779
+3032	145	f	2	2016-09-17 18:59:14.72779
+3033	145	f	2	2016-09-17 18:59:14.72779
+3034	145	f	2	2016-09-17 18:59:14.72779
+3035	145	f	2	2016-09-17 18:59:14.72779
+3036	145	f	2	2016-09-17 18:59:14.72779
+3593	145	f	2	2016-09-17 18:59:14.72779
+3608	145	f	2	2016-09-17 18:59:14.72779
+3609	145	f	2	2016-09-17 18:59:14.72779
+3631	118	f	2	2016-09-17 18:59:14.72779
+3632	93	f	2	2016-09-17 18:59:14.72779
+3633	93	f	2	2016-09-17 18:59:14.72779
+1097	84	\N	2	2016-09-17 18:59:14.72779
+1101	39	\N	2	2016-09-17 18:59:14.72779
+1102	84	\N	2	2016-09-17 18:59:14.72779
+1159	78	\N	2	2016-09-17 18:59:14.72779
+1170	39	\N	2	2016-09-17 18:59:14.72779
+1178	70	\N	2	2016-09-17 18:59:14.72779
+1179	39	\N	2	2016-09-17 18:59:14.72779
+1189	12	\N	2	2016-09-17 18:59:14.72779
+1190	12	\N	2	2016-09-17 18:59:14.72779
+1191	86	\N	2	2016-09-17 18:59:14.72779
+1192	86	\N	2	2016-09-17 18:59:14.72779
+1193	87	\N	2	2016-09-17 18:59:14.72779
+1194	87	\N	2	2016-09-17 18:59:14.72779
+1200	89	\N	2	2016-09-17 18:59:14.72779
+1201	87	\N	2	2016-09-17 18:59:14.72779
+1210	90	\N	2	2016-09-17 18:59:14.72779
+1211	12	\N	2	2016-09-17 18:59:14.72779
+1212	65	\N	2	2016-09-17 18:59:14.72779
+1213	90	\N	2	2016-09-17 18:59:14.72779
+1214	91	\N	2	2016-09-17 18:59:14.72779
+1225	12	\N	2	2016-09-17 18:59:14.72779
+1230	93	\N	2	2016-09-17 18:59:14.72779
+1243	87	f	2	2016-09-17 18:59:14.72779
+1244	87	f	2	2016-09-17 18:59:14.72779
+1253	65	f	2	2016-09-17 18:59:14.72779
+1263	87	f	2	2016-09-17 18:59:14.72779
+3696	145	f	2	2016-09-17 18:59:14.72779
+1264	87	f	2	2016-09-17 18:59:14.72779
+1265	89	f	2	2016-09-17 18:59:14.72779
+1268	12	f	2	2016-09-17 18:59:14.72779
+2198	123	f	2	2016-09-17 18:59:14.72779
+2199	105	f	2	2016-09-17 18:59:14.72779
+2240	78	f	2	2016-09-17 18:59:14.72779
+2241	78	f	2	2016-09-17 18:59:14.72779
+2242	78	f	2	2016-09-17 18:59:14.72779
+2243	12	f	2	2016-09-17 18:59:14.72779
+2244	12	f	2	2016-09-17 18:59:14.72779
+2245	65	f	2	2016-09-17 18:59:14.72779
+2246	105	f	2	2016-09-17 18:59:14.72779
+2247	102	f	2	2016-09-17 18:59:14.72779
+2248	141	f	2	2016-09-17 18:59:14.72779
+2249	141	f	2	2016-09-17 18:59:14.72779
+2254	135	f	2	2016-09-17 18:59:14.72779
+2255	142	f	2	2016-09-17 18:59:14.72779
+2256	135	f	2	2016-09-17 18:59:14.72779
+2257	142	f	2	2016-09-17 18:59:14.72779
+2258	135	f	2	2016-09-17 18:59:14.72779
+2259	142	f	2	2016-09-17 18:59:14.72779
+1853	119	f	2	2016-09-17 18:59:14.72779
+1854	119	f	2	2016-09-17 18:59:14.72779
+1855	119	f	2	2016-09-17 18:59:14.72779
+1859	119	f	2	2016-09-17 18:59:14.72779
+1860	119	f	2	2016-09-17 18:59:14.72779
+1865	117	f	2	2016-09-17 18:59:14.72779
+1866	117	f	2	2016-09-17 18:59:14.72779
+1867	117	f	2	2016-09-17 18:59:14.72779
+1868	117	f	2	2016-09-17 18:59:14.72779
+1869	69	f	2	2016-09-17 18:59:14.72779
+1870	78	f	2	2016-09-17 18:59:14.72779
+1872	118	f	2	2016-09-17 18:59:14.72779
+1873	105	f	2	2016-09-17 18:59:14.72779
+1875	106	f	2	2016-09-17 18:59:14.72779
+1876	106	f	2	2016-09-17 18:59:14.72779
+1240	41	f	2	2016-09-17 18:59:14.72779
+1241	39	f	2	2016-09-17 18:59:14.72779
+1249	59	f	2	2016-09-17 18:59:14.72779
+1282	87	f	2	2016-09-17 18:59:14.72779
+1980	93	f	2	2016-09-17 18:59:14.72779
+1981	118	f	2	2016-09-17 18:59:14.72779
+1982	93	f	2	2016-09-17 18:59:14.72779
+1984	123	f	2	2016-09-17 18:59:14.72779
+2404	105	f	2	2016-09-17 18:59:14.72779
+2405	105	f	2	2016-09-17 18:59:14.72779
+2406	105	f	2	2016-09-17 18:59:14.72779
+2407	105	f	2	2016-09-17 18:59:14.72779
+2408	105	f	2	2016-09-17 18:59:14.72779
+2409	105	f	2	2016-09-17 18:59:14.72779
+2410	105	f	2	2016-09-17 18:59:14.72779
+2411	105	f	2	2016-09-17 18:59:14.72779
+2412	105	f	2	2016-09-17 18:59:14.72779
+2414	105	f	2	2016-09-17 18:59:14.72779
+2432	105	f	2	2016-09-17 18:59:14.72779
+2719	119	f	2	2016-09-17 18:59:14.72779
+2720	119	f	2	2016-09-17 18:59:14.72779
+2721	119	f	2	2016-09-17 18:59:14.72779
+2722	119	f	2	2016-09-17 18:59:14.72779
+2723	104	f	2	2016-09-17 18:59:14.72779
+2724	119	f	2	2016-09-17 18:59:14.72779
+2736	119	f	2	2016-09-17 18:59:14.72779
+2741	65	f	2	2016-09-17 18:59:14.72779
+2742	12	f	2	2016-09-17 18:59:14.72779
+2779	123	f	2	2016-09-17 18:59:14.72779
+2780	123	f	2	2016-09-17 18:59:14.72779
+2781	123	f	2	2016-09-17 18:59:14.72779
+2782	123	f	2	2016-09-17 18:59:14.72779
+2783	123	f	2	2016-09-17 18:59:14.72779
+2953	130	f	2	2016-09-17 18:59:14.72779
+3001	145	f	2	2016-09-17 18:59:14.72779
+3002	145	f	2	2016-09-17 18:59:14.72779
+3003	145	f	2	2016-09-17 18:59:14.72779
+3004	145	f	2	2016-09-17 18:59:14.72779
+3005	145	f	2	2016-09-17 18:59:14.72779
+3006	145	f	2	2016-09-17 18:59:14.72779
+3007	145	f	2	2016-09-17 18:59:14.72779
+3008	145	f	2	2016-09-17 18:59:14.72779
+3009	145	f	2	2016-09-17 18:59:14.72779
+3010	145	f	2	2016-09-17 18:59:14.72779
+3011	145	f	2	2016-09-17 18:59:14.72779
+3012	145	f	2	2016-09-17 18:59:14.72779
+3594	145	f	2	2016-09-17 18:59:14.72779
+3610	145	f	2	2016-09-17 18:59:14.72779
+1983	93	f	\N	2016-09-17 18:59:14.72779
+3698	145	f	2	2016-09-17 18:59:14.72779
+3718	164	f	2	2016-09-17 18:59:14.72779
+2467	111	f	2	2016-09-17 18:59:14.72779
+2468	119	f	2	2016-09-17 18:59:14.72779
+2469	119	f	2	2016-09-17 18:59:14.72779
+2470	119	f	2	2016-09-17 18:59:14.72779
+2475	90	f	2	2016-09-17 18:59:14.72779
+2477	47	f	2	2016-09-17 18:59:14.72779
+2484	2	f	2	2016-09-17 18:59:14.72779
+3044	145	f	2	2016-09-17 18:59:14.72779
+3045	145	f	2	2016-09-17 18:59:14.72779
+3046	145	f	2	2016-09-17 18:59:14.72779
+3047	145	f	2	2016-09-17 18:59:14.72779
+3048	145	f	2	2016-09-17 18:59:14.72779
+3049	145	f	2	2016-09-17 18:59:14.72779
+3050	145	f	2	2016-09-17 18:59:14.72779
+3051	145	f	2	2016-09-17 18:59:14.72779
+3052	145	f	2	2016-09-17 18:59:14.72779
+3053	145	f	2	2016-09-17 18:59:14.72779
+3054	145	f	2	2016-09-17 18:59:14.72779
+3055	145	f	2	2016-09-17 18:59:14.72779
+3056	145	f	2	2016-09-17 18:59:14.72779
+3057	145	f	2	2016-09-17 18:59:14.72779
+3058	145	f	2	2016-09-17 18:59:14.72779
+3059	145	f	2	2016-09-17 18:59:14.72779
+3060	145	f	2	2016-09-17 18:59:14.72779
+3061	145	f	2	2016-09-17 18:59:14.72779
+3062	145	f	2	2016-09-17 18:59:14.72779
+3063	145	f	2	2016-09-17 18:59:14.72779
+3064	145	f	2	2016-09-17 18:59:14.72779
+3065	145	f	2	2016-09-17 18:59:14.72779
+3066	145	f	2	2016-09-17 18:59:14.72779
+3067	145	f	2	2016-09-17 18:59:14.72779
+3068	145	f	2	2016-09-17 18:59:14.72779
+3069	145	f	2	2016-09-17 18:59:14.72779
+3070	145	f	2	2016-09-17 18:59:14.72779
+3071	145	f	2	2016-09-17 18:59:14.72779
+3072	145	f	2	2016-09-17 18:59:14.72779
+3073	145	f	2	2016-09-17 18:59:14.72779
+3074	145	f	2	2016-09-17 18:59:14.72779
+3075	145	f	2	2016-09-17 18:59:14.72779
+3076	145	f	2	2016-09-17 18:59:14.72779
+3077	145	f	2	2016-09-17 18:59:14.72779
+3078	145	f	2	2016-09-17 18:59:14.72779
+3079	145	f	2	2016-09-17 18:59:14.72779
+3080	145	f	2	2016-09-17 18:59:14.72779
+3081	145	f	2	2016-09-17 18:59:14.72779
+3082	145	f	2	2016-09-17 18:59:14.72779
+3083	145	f	2	2016-09-17 18:59:14.72779
+3084	145	f	2	2016-09-17 18:59:14.72779
+3596	145	f	2	2016-09-17 18:59:14.72779
+3719	118	f	2	2016-09-17 18:59:14.72779
+3720	164	f	2	2016-09-17 18:59:14.72779
+3811	123	f	2	2016-09-17 20:53:34.136044
+3699	130	f	2	2016-09-18 20:33:03.364449
+3820	123	f	2	2016-09-17 21:12:15.212864
 \.
 
 
@@ -64958,3594 +58643,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id) FROM stdin;
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 3754, true);
-
-
---
--- Data for Name: resource_log; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
-142	83	2	\N	2013-12-07 16:38:38.11618+02
-143	84	2	\N	2013-12-07 16:39:56.788641+02
-144	3	2	\N	2013-12-07 16:41:27.65259+02
-145	2	2	\N	2013-12-07 16:41:31.748494+02
-146	83	2	\N	2013-12-07 16:58:05.802634+02
-147	83	2	\N	2013-12-07 17:00:14.544264+02
-4836	794	2	\N	2014-02-05 19:54:07.5415+02
-5406	1192	2	\N	2014-04-06 19:21:11.278173+03
-5407	1005	2	\N	2014-04-06 19:21:55.315341+03
-4845	283	2	\N	2014-02-06 11:38:41.090464+02
-2	10	2	\N	2013-11-16 19:00:14.24272+02
-4	12	2	\N	2013-11-16 19:00:15.497284+02
-6	14	2	\N	2013-11-16 19:00:16.696731+02
-8	16	2	\N	2013-11-16 19:00:17.960761+02
-5427	1204	2	\N	2014-04-09 18:54:09.146902+03
-12	30	2	\N	2013-11-23 19:26:00.193553+02
-13	30	2	\N	2013-11-23 22:02:37.363677+02
-14	10	2	\N	2013-11-23 22:11:01.634598+02
-15	30	2	\N	2013-11-23 22:11:14.939938+02
-16	30	2	\N	2013-11-23 22:11:38.396085+02
-19	30	2	\N	2013-11-24 10:30:59.830287+02
-20	30	2	\N	2013-11-24 10:31:22.936737+02
-21	30	2	\N	2013-11-24 10:38:08.07328+02
-22	30	2	\N	2013-11-24 10:38:10.703187+02
-23	30	2	\N	2013-11-24 10:38:11.896934+02
-24	30	2	\N	2013-11-24 10:42:19.397852+02
-25	30	2	\N	2013-11-24 10:42:50.772172+02
-26	30	2	\N	2013-11-24 10:45:56.399572+02
-27	30	2	\N	2013-11-24 10:48:29.950669+02
-28	30	2	\N	2013-11-24 10:49:23.616693+02
-29	30	2	\N	2013-11-24 10:50:05.878643+02
-30	30	2	\N	2013-11-24 10:51:02.465585+02
-31	30	2	\N	2013-11-24 10:54:21.011765+02
-32	30	2	\N	2013-11-24 10:54:28.775552+02
-33	30	2	\N	2013-11-24 10:58:34.152869+02
-34	30	2	\N	2013-11-24 10:58:36.766104+02
-35	30	2	\N	2013-11-24 10:58:38.767749+02
-36	30	2	\N	2013-11-24 10:58:42.533162+02
-37	30	2	\N	2013-11-24 10:58:43.55758+02
-38	30	2	\N	2013-11-24 10:58:47.40587+02
-39	30	2	\N	2013-11-24 11:00:56.130675+02
-40	30	2	\N	2013-11-24 11:01:17.637578+02
-41	30	2	\N	2013-11-24 11:01:20.639413+02
-42	30	2	\N	2013-11-24 11:01:25.957588+02
-43	30	2	\N	2013-11-24 11:01:28.015301+02
-44	30	2	\N	2013-11-24 11:01:49.505153+02
-45	30	2	\N	2013-11-24 11:01:54.465064+02
-46	30	2	\N	2013-11-24 11:01:56.828797+02
-47	30	2	\N	2013-11-24 11:02:00.873006+02
-48	30	2	\N	2013-11-24 11:02:06.385907+02
-49	30	2	\N	2013-11-24 11:02:08.474309+02
-50	30	2	\N	2013-11-24 11:02:11.823259+02
-51	30	2	\N	2013-11-24 11:02:15.084044+02
-52	30	2	\N	2013-11-24 11:23:59.150304+02
-53	30	2	\N	2013-11-24 12:41:22.004561+02
-54	30	2	\N	2013-11-24 12:41:27.704243+02
-55	30	2	\N	2013-11-24 12:41:32.588516+02
-5430	1207	2	\N	2014-04-09 20:43:13.852066+03
-5459	1227	2	\N	2014-04-19 13:04:24.512333+03
-5467	1230	2	\N	2014-04-23 11:53:28.979784+03
-5468	1230	2	\N	2014-04-23 11:53:45.572462+03
-5537	1306	2	\N	2014-04-30 11:04:50.581045+03
-66	16	2	\N	2013-11-30 12:57:27.26941+02
-67	31	2	\N	2013-11-30 14:25:42.040654+02
-68	32	2	\N	2013-11-30 14:27:55.708736+02
-69	33	2	\N	2013-11-30 14:28:30.596329+02
-70	34	2	\N	2013-11-30 14:29:07.205192+02
-71	35	2	\N	2013-11-30 14:30:10.653134+02
-72	36	2	\N	2013-11-30 14:31:39.751221+02
-73	37	2	\N	2013-11-30 14:32:36.035677+02
-74	38	2	\N	2013-11-30 14:55:27.691288+02
-75	39	2	\N	2013-11-30 14:58:07.249714+02
-76	40	2	\N	2013-11-30 14:58:34.364695+02
-79	43	2	\N	2013-11-30 15:08:29.574538+02
-80	43	2	\N	2013-11-30 15:08:52.114395+02
-81	43	2	\N	2013-11-30 15:09:21.51485+02
-82	44	2	\N	2013-11-30 15:09:54.961188+02
-83	45	2	\N	2013-12-01 13:04:27.697583+02
-84	45	2	\N	2013-12-01 13:04:40.716328+02
-85	14	2	\N	2013-12-01 14:31:19.374571+02
-87	12	2	\N	2013-12-01 18:21:35.266219+02
-104	10	2	\N	2013-12-02 20:43:38.334769+02
-130	10	2	\N	2013-12-06 21:10:25.807719+02
-4796	769	2	\N	2014-01-22 22:21:45.451623+02
-4820	16	2	\N	2014-02-01 21:09:43.821944+02
-5408	1192	2	\N	2014-04-06 19:22:16.361504+03
-5409	1005	2	\N	2014-04-06 19:22:18.74271+03
-4822	784	2	\N	2014-02-01 21:23:07.460721+02
-4823	786	2	\N	2014-02-01 21:23:12.871915+02
-5410	1193	2	\N	2014-04-06 19:30:25.125445+03
-5411	1194	2	\N	2014-04-06 19:30:51.85642+03
-5412	1195	2	\N	2014-04-06 19:32:30.207073+03
-5428	1205	2	\N	2014-04-09 19:17:37.483997+03
-5431	1209	2	\N	2014-04-09 20:49:45.884539+03
-4843	800	2	\N	2014-02-05 19:58:31.619612+02
-4844	801	2	\N	2014-02-05 19:58:49.632624+02
-4951	885	2	\N	2014-02-14 21:23:40.101298+02
-4952	885	2	\N	2014-02-14 21:25:13.866935+02
-4974	849	2	\N	2014-02-23 22:41:46.113064+02
-4977	884	2	\N	2014-02-23 22:42:22.595852+02
-5143	1003	2	\N	2014-03-04 21:05:09.565466+02
-5144	1004	2	\N	2014-03-04 21:08:53.227171+02
-5145	1005	2	\N	2014-03-04 21:09:15.542733+02
-5471	1240	2	\N	2014-04-26 13:10:19.27836+03
-5538	1307	2	\N	2014-04-30 11:08:33.655971+03
-5544	1313	2	\N	2014-05-16 22:03:29.897662+03
-361	274	2	\N	2013-12-14 17:16:08.962259+02
-365	277	2	\N	2013-12-14 18:56:05.189747+02
-366	278	2	\N	2013-12-14 18:56:17.77025+02
-367	279	2	\N	2013-12-14 18:56:45.919492+02
-368	280	2	\N	2013-12-14 19:10:07.617582+02
-369	281	2	\N	2013-12-14 19:10:25.311427+02
-370	281	2	\N	2013-12-14 19:10:59.35028+02
-371	281	2	\N	2013-12-14 19:12:14.211139+02
-372	282	2	\N	2013-12-14 19:14:22.861495+02
-373	278	2	\N	2013-12-14 19:14:33.853691+02
-374	282	2	\N	2013-12-14 19:14:41.964012+02
-375	283	2	\N	2013-12-14 19:16:35.738242+02
-4882	706	2	\N	2014-02-08 19:59:59.160282+02
-377	283	2	\N	2013-12-14 19:18:21.622933+02
-4953	886	2	\N	2014-02-14 21:25:53.089098+02
-4978	893	2	\N	2014-02-24 11:11:03.613711+02
-5147	1004	2	\N	2014-03-04 21:17:22.306545+02
-5148	1004	2	\N	2014-03-04 21:23:04.343461+02
-386	286	2	\N	2013-12-14 20:46:34.653533+02
-387	287	2	\N	2013-12-14 20:46:47.37835+02
-388	288	2	\N	2013-12-14 20:47:08.024243+02
-389	289	2	\N	2013-12-14 20:47:28.256516+02
-390	290	2	\N	2013-12-14 20:52:40.953492+02
-391	291	2	\N	2013-12-14 20:53:08.057165+02
-392	292	2	\N	2013-12-14 20:53:33.598708+02
-5149	1004	2	\N	2014-03-04 21:23:17.093243+02
-5150	1004	2	\N	2014-03-04 21:23:25.611509+02
-4799	771	2	\N	2014-01-25 16:05:28.799345+02
-4800	771	2	\N	2014-01-25 16:05:38.705799+02
-4801	772	2	\N	2014-01-25 16:06:28.321244+02
-4826	788	2	\N	2014-02-01 22:03:21.899916+02
-5151	1004	2	\N	2014-03-04 21:23:52.466966+02
-5152	1004	2	\N	2014-03-04 21:24:11.351815+02
-5153	1004	2	\N	2014-03-04 21:24:20.614224+02
-5429	1206	2	\N	2014-04-09 19:21:09.215561+03
-5154	1004	2	\N	2014-03-04 21:35:47.600889+02
-5155	1004	2	\N	2014-03-04 21:36:05.835492+02
-5156	1004	2	\N	2014-03-04 21:36:16.322673+02
-5432	1210	2	\N	2014-04-12 13:10:08.842351+03
-5472	1241	2	\N	2014-04-26 19:16:28.009797+03
-5539	1308	2	\N	2014-04-30 11:20:34.938154+03
-5545	1314	2	\N	2014-05-17 13:42:16.369317+03
-422	306	2	\N	2013-12-15 21:45:32.990838+02
-4802	773	2	\N	2014-01-25 23:45:37.762081+02
-4827	789	2	\N	2014-02-02 16:45:11.830435+02
-4954	887	2	\N	2014-02-15 12:32:09.199652+02
-5415	1198	2	\N	2014-04-08 09:35:59.21042+03
-4979	885	2	\N	2014-02-24 12:50:26.694026+02
-4980	786	2	\N	2014-02-24 12:50:29.953348+02
-4981	784	2	\N	2014-02-24 12:50:33.322359+02
-5157	1004	2	\N	2014-03-07 22:30:15.652582+02
-5230	894	2	\N	2014-03-16 11:54:19.683752+02
-5231	894	2	\N	2014-03-16 11:54:28.171778+02
-5232	894	2	\N	2014-03-16 11:54:33.774318+02
-5270	1004	2	\N	2014-03-17 10:50:39.781432+02
-5465	1230	2	\N	2014-04-19 21:03:03.225866+03
-5508	1277	2	\N	2014-04-29 10:08:17.485661+03
-5509	1278	2	\N	2014-04-29 10:09:19.421905+03
-5540	1309	2	\N	2014-04-30 11:32:51.070911+03
-5547	1316	2	\N	2014-05-17 14:00:25.111543+03
-4927	865	2	\N	2014-02-09 13:26:19.008763+02
-4804	775	2	\N	2014-01-26 15:30:50.636495+02
-4828	3	2	\N	2014-02-02 17:45:50.239397+02
-5416	1199	2	\N	2014-04-08 10:15:32.411146+03
-5434	1211	2	\N	2014-04-12 14:16:34.33498+03
-5435	1211	2	\N	2014-04-12 14:16:53.40729+03
-4982	895	2	\N	2014-02-25 19:06:42.158245+02
-5158	1007	2	\N	2014-03-08 10:30:25.61786+02
-5198	3	2	\N	2014-03-11 13:14:05.142514+02
-5233	1060	2	\N	2014-03-16 12:26:38.52955+02
-5437	1213	2	\N	2014-04-12 14:32:08.840037+03
-5466	1227	2	\N	2014-04-19 21:37:55.580038+03
-5474	1243	2	\N	2014-04-26 22:38:44.326007+03
-5541	1310	2	\N	2014-04-30 22:45:27.579715+03
-5548	1317	2	\N	2014-05-17 14:54:57.813145+03
-5549	1318	2	\N	2014-05-17 15:24:32.954365+03
-5550	1319	2	\N	2014-05-17 15:53:28.880817+03
-5551	1320	2	\N	2014-05-17 15:53:34.139717+03
-5552	1321	2	\N	2014-05-17 15:55:03.155317+03
-5553	1322	2	\N	2014-05-17 15:55:07.534203+03
-5557	1326	2	\N	2014-05-17 15:59:13.891973+03
-5558	1327	2	\N	2014-05-17 15:59:17.045556+03
-5559	1328	2	\N	2014-05-17 16:00:04.660539+03
-5560	1329	2	\N	2014-05-17 16:00:08.901641+03
-5561	1330	2	\N	2014-05-17 16:00:10.337355+03
-5566	1335	2	\N	2014-05-17 16:02:19.447311+03
-5570	1339	2	\N	2014-05-17 16:06:26.675372+03
-5571	1340	2	\N	2014-05-17 16:06:28.503991+03
-5572	1341	2	\N	2014-05-17 16:06:29.727144+03
-5573	1342	2	\N	2014-05-17 16:06:31.81672+03
-5574	1343	2	\N	2014-05-17 16:07:44.265465+03
-5575	1344	2	\N	2014-05-17 16:07:45.972655+03
-5576	1345	2	\N	2014-05-17 16:07:47.259172+03
-5577	1346	2	\N	2014-05-17 16:07:49.146563+03
-5581	1350	2	\N	2014-05-17 16:09:55.923893+03
-5582	1351	2	\N	2014-05-17 16:13:13.017272+03
-5583	1352	2	\N	2014-05-17 16:13:14.609527+03
-5584	1353	2	\N	2014-05-17 16:13:16.568079+03
-5585	1354	2	\N	2014-05-17 16:13:17.732756+03
-5370	1159	2	\N	2014-04-02 19:52:15.193771+03
-4888	786	2	\N	2014-02-08 21:26:45.138217+02
-5417	1200	2	\N	2014-04-08 10:35:59.014802+03
-4890	784	2	\N	2014-02-08 21:26:51.98617+02
-4929	870	2	\N	2014-02-09 14:57:54.403714+02
-4967	892	2	\N	2014-02-22 17:14:02.512772+02
-4983	896	2	\N	2014-02-25 19:37:56.226615+02
-4984	897	2	\N	2014-02-25 19:38:21.395798+02
-4985	898	2	\N	2014-02-25 19:38:30.353048+02
-4986	899	2	\N	2014-02-25 19:39:23.588225+02
-4988	901	2	\N	2014-02-25 19:47:57.884012+02
-5160	1009	2	\N	2014-03-08 10:49:52.0599+02
-5199	3	2	\N	2014-03-12 12:05:31.953558+02
-5438	1214	2	\N	2014-04-12 14:36:07.046988+03
-5475	1244	2	\N	2014-04-26 22:39:00.40778+03
-5542	1311	2	\N	2014-04-30 22:45:36.089534+03
-5554	1323	2	\N	2014-05-17 15:55:54.008685+03
-5555	1324	2	\N	2014-05-17 15:56:55.63522+03
-5556	1325	2	\N	2014-05-17 15:58:29.508912+03
-5562	1331	2	\N	2014-05-17 16:00:49.21287+03
-5563	1332	2	\N	2014-05-17 16:01:46.175183+03
-5564	1333	2	\N	2014-05-17 16:01:47.950656+03
-5565	1334	2	\N	2014-05-17 16:01:48.837764+03
-5567	1336	2	\N	2014-05-17 16:03:41.796945+03
-5568	1337	2	\N	2014-05-17 16:04:32.839289+03
-5569	1338	2	\N	2014-05-17 16:04:34.363533+03
-5578	1347	2	\N	2014-05-17 16:08:39.18466+03
-5579	1348	2	\N	2014-05-17 16:08:56.863828+03
-5580	1349	2	\N	2014-05-17 16:08:58.291349+03
-4894	849	2	\N	2014-02-08 21:32:14.802948+02
-4896	851	2	\N	2014-02-08 21:32:32.471247+02
-4897	852	2	\N	2014-02-08 21:36:44.493917+02
-4930	871	2	\N	2014-02-09 16:04:05.85568+02
-4968	892	2	\N	2014-02-22 17:18:17.771894+02
-5161	1009	2	\N	2014-03-08 10:52:32.854366+02
-5162	1009	2	\N	2014-03-08 10:52:45.635015+02
-5163	1009	2	\N	2014-03-08 10:52:53.515357+02
-5164	1009	2	\N	2014-03-08 10:52:58.740536+02
-5165	1010	2	\N	2014-03-08 10:54:40.946487+02
-5166	1010	2	\N	2014-03-08 10:54:50.928085+02
-5200	3	2	\N	2014-03-12 12:14:05.203771+02
-5235	897	2	\N	2014-03-16 12:53:37.56753+02
-5278	1067	2	\N	2014-03-18 19:51:01.87448+02
-5375	1164	2	\N	2014-04-02 20:56:42.084197+03
-5376	1165	2	\N	2014-04-02 20:56:48.393173+03
-5419	1201	2	\N	2014-04-08 10:38:31.154572+03
-5440	1214	2	\N	2014-04-12 14:39:05.532456+03
-5442	1214	2	\N	2014-04-12 14:43:11.754556+03
-5513	1282	2	\N	2014-04-29 10:43:05.718429+03
-5586	1355	2	\N	2014-05-17 16:14:39.7443+03
-5587	1356	2	\N	2014-05-17 16:14:41.182697+03
-5588	1357	2	\N	2014-05-17 16:14:43.239633+03
-5590	1359	2	\N	2014-05-17 16:15:43.442935+03
-5591	1360	2	\N	2014-05-17 16:15:45.790483+03
-5596	1365	2	\N	2014-05-17 16:20:21.389915+03
-5597	1366	2	\N	2014-05-17 16:20:22.473385+03
-5598	1367	2	\N	2014-05-17 16:20:23.843632+03
-4898	853	2	\N	2014-02-08 21:39:09.10029+02
-4812	784	2	\N	2014-01-26 21:12:24.209136+02
-4813	784	2	\N	2014-01-26 21:13:10.546575+02
-4814	784	2	\N	2014-01-26 21:13:20.058093+02
-4815	784	2	\N	2014-01-26 21:13:24.693933+02
-4817	786	2	\N	2014-01-26 21:15:00.370561+02
-4818	784	2	\N	2014-01-26 21:20:14.635984+02
-4819	784	2	\N	2014-01-26 21:20:34.941868+02
-4931	274	2	\N	2014-02-10 08:49:31.501202+02
-4969	893	2	\N	2014-02-22 17:26:37.296722+02
-4970	894	2	\N	2014-02-22 17:27:40.771678+02
-4991	903	2	\N	2014-02-25 22:43:46.101171+02
-4992	904	2	\N	2014-02-25 22:43:53.30222+02
-4993	905	2	\N	2014-02-25 22:44:00.024066+02
-4994	906	2	\N	2014-02-25 22:44:13.035203+02
-4995	907	2	\N	2014-02-25 22:44:59.159297+02
-5167	1009	2	\N	2014-03-08 10:57:02.535973+02
-5168	1010	2	\N	2014-03-08 10:57:07.365849+02
-5201	3	2	\N	2014-03-12 12:29:57.686858+02
-5202	3	2	\N	2014-03-12 12:30:07.270368+02
-5203	3	2	\N	2014-03-12 12:30:09.982217+02
-5204	3	2	\N	2014-03-12 12:32:22.25189+02
-5205	894	2	\N	2014-03-12 12:32:26.366205+02
-5236	919	2	\N	2014-03-16 13:33:07.651832+02
-5444	1218	2	\N	2014-04-12 15:00:38.646853+03
-5447	1214	2	\N	2014-04-12 15:02:33.59771+03
-5514	1283	2	\N	2014-04-29 12:06:08.689068+03
-5515	1284	2	\N	2014-04-29 12:07:06.357367+03
-5518	1287	2	\N	2014-04-29 12:09:55.486785+03
-5520	1289	2	\N	2014-04-29 12:11:36.874588+03
-5589	1358	2	\N	2014-05-17 16:15:09.836615+03
-5592	1361	2	\N	2014-05-17 16:16:33.155307+03
-5593	1362	2	\N	2014-05-17 16:16:42.585648+03
-5594	1363	2	\N	2014-05-17 16:18:45.312153+03
-5595	1364	2	\N	2014-05-17 16:18:46.752544+03
-4932	872	2	\N	2014-02-10 14:29:53.759164+02
-4996	908	2	\N	2014-02-25 23:15:44.304324+02
-4997	909	2	\N	2014-02-25 23:16:53.455486+02
-5000	912	2	\N	2014-02-25 23:21:05.038132+02
-5001	913	2	\N	2014-02-25 23:21:10.720503+02
-5002	914	2	\N	2014-02-25 23:21:15.803027+02
-5003	915	2	\N	2014-02-25 23:21:21.245593+02
-5004	916	2	\N	2014-02-25 23:21:27.843749+02
-5005	917	2	\N	2014-02-25 23:21:40.705852+02
-5006	918	2	\N	2014-02-25 23:21:45.161533+02
-5007	918	2	\N	2014-02-25 23:21:53.74917+02
-5008	918	2	\N	2014-02-25 23:21:57.599668+02
-5009	919	2	\N	2014-02-25 23:22:22.789803+02
-5011	921	2	\N	2014-02-25 23:22:59.534922+02
-5012	922	2	\N	2014-02-25 23:23:04.765473+02
-5013	923	2	\N	2014-02-25 23:23:16.649188+02
-5014	924	2	\N	2014-02-25 23:23:30.151925+02
-5015	925	2	\N	2014-02-25 23:25:11.120354+02
-5016	926	2	\N	2014-02-25 23:26:11.314153+02
-5017	927	2	\N	2014-02-25 23:26:34.378644+02
-5018	928	2	\N	2014-02-25 23:26:49.163639+02
-5019	929	2	\N	2014-02-25 23:27:07.84413+02
-5020	930	2	\N	2014-02-25 23:27:30.797684+02
-5021	931	2	\N	2014-02-25 23:27:45.611037+02
-5022	932	2	\N	2014-02-25 23:28:05.678992+02
-5023	933	2	\N	2014-02-25 23:28:21.001129+02
-5025	935	2	\N	2014-02-25 23:28:49.565248+02
-5026	936	2	\N	2014-02-25 23:29:05.034117+02
-5027	937	2	\N	2014-02-25 23:29:16.11101+02
-5028	938	2	\N	2014-02-25 23:29:28.82178+02
-5029	939	2	\N	2014-02-25 23:29:41.159219+02
-5030	940	2	\N	2014-02-25 23:29:57.589154+02
-5031	941	2	\N	2014-02-25 23:30:12.260571+02
-5032	942	2	\N	2014-02-25 23:30:25.705958+02
-5033	943	2	\N	2014-02-25 23:30:39.278491+02
-5034	944	2	\N	2014-02-25 23:30:54.230938+02
-5035	945	2	\N	2014-02-25 23:31:08.136642+02
-5036	946	2	\N	2014-02-25 23:31:21.084682+02
-5037	947	2	\N	2014-02-25 23:31:35.443235+02
-5038	948	2	\N	2014-02-25 23:31:50.036032+02
-5039	949	2	\N	2014-02-25 23:32:16.232207+02
-5040	950	2	\N	2014-02-25 23:32:51.784126+02
-5169	1011	2	\N	2014-03-08 15:10:44.638516+02
-5206	3	2	\N	2014-03-12 13:00:24.217557+02
-5207	3	2	\N	2014-03-12 13:00:34.025605+02
-5238	1062	2	\N	2014-03-16 15:10:44.294343+02
-5239	1062	2	\N	2014-03-16 15:11:01.269428+02
-5240	858	2	\N	2014-03-16 15:11:06.875279+02
-5241	903	2	\N	2014-03-16 15:12:25.130202+02
-5379	1168	2	\N	2014-04-03 12:39:52.988369+03
-5380	1169	2	\N	2014-04-03 12:49:06.139328+03
-5448	1221	2	\N	2014-04-12 16:44:14.810824+03
-5516	1285	2	\N	2014-04-29 12:08:23.116251+03
-5517	1286	2	\N	2014-04-29 12:09:10.712444+03
-5522	1291	2	\N	2014-04-29 12:13:37.203069+03
-5523	1292	2	\N	2014-04-29 12:14:34.180203+03
-4900	854	2	\N	2014-02-08 21:47:34.439997+02
-4901	855	2	\N	2014-02-08 21:54:55.399628+02
-4936	875	2	\N	2014-02-10 15:58:53.177719+02
-4937	875	2	\N	2014-02-10 15:59:03.43204+02
-5042	952	2	\N	2014-02-25 23:33:14.57009+02
-5043	939	2	\N	2014-02-25 23:33:37.281163+02
-5044	938	2	\N	2014-02-25 23:33:44.033176+02
-5045	937	2	\N	2014-02-25 23:33:51.697991+02
-5046	936	2	\N	2014-02-25 23:33:56.981908+02
-5047	935	2	\N	2014-02-25 23:34:03.037741+02
-5049	933	2	\N	2014-02-25 23:34:27.937885+02
-5050	932	2	\N	2014-02-25 23:34:34.767736+02
-5051	931	2	\N	2014-02-25 23:34:39.075165+02
-5052	930	2	\N	2014-02-25 23:34:43.896812+02
-5053	929	2	\N	2014-02-25 23:34:48.70472+02
-5054	928	2	\N	2014-02-25 23:34:54.494127+02
-5055	927	2	\N	2014-02-25 23:35:00.125101+02
-5056	926	2	\N	2014-02-25 23:35:05.399995+02
-5057	925	2	\N	2014-02-25 23:35:10.409443+02
-5058	924	2	\N	2014-02-25 23:35:16.447517+02
-5059	923	2	\N	2014-02-25 23:35:21.959285+02
-5060	922	2	\N	2014-02-25 23:35:27.383937+02
-5061	921	2	\N	2014-02-25 23:35:31.660307+02
-5063	919	2	\N	2014-02-25 23:35:43.645366+02
-5064	918	2	\N	2014-02-25 23:35:47.480218+02
-5065	917	2	\N	2014-02-25 23:35:52.042922+02
-5066	916	2	\N	2014-02-25 23:35:57.409224+02
-5067	915	2	\N	2014-02-25 23:36:01.802966+02
-5068	914	2	\N	2014-02-25 23:36:05.670476+02
-5069	913	2	\N	2014-02-25 23:36:10.129284+02
-5070	912	2	\N	2014-02-25 23:36:14.468359+02
-5208	1040	2	\N	2014-03-12 20:50:33.871251+02
-5209	1041	2	\N	2014-03-12 20:50:55.466763+02
-5210	1041	2	\N	2014-03-12 20:51:02.123714+02
-5211	1042	2	\N	2014-03-12 20:53:03.003465+02
-5212	1043	2	\N	2014-03-12 20:53:27.910983+02
-5213	1044	2	\N	2014-03-12 20:53:45.921718+02
-5214	1045	2	\N	2014-03-12 20:54:23.054095+02
-5215	1046	2	\N	2014-03-12 20:55:03.071619+02
-5286	1078	2	\N	2014-03-20 21:22:51.030666+02
-5381	1170	2	\N	2014-04-03 12:49:07.793292+03
-5519	1288	2	\N	2014-04-29 12:10:21.572462+03
-5521	1290	2	\N	2014-04-29 12:13:35.434847+03
-5603	1372	2	\N	2014-05-17 18:47:30.594446+03
-5606	1375	2	\N	2014-05-17 18:55:21.896666+03
-5613	1382	2	\N	2014-05-17 19:04:51.767284+03
-5619	1388	2	\N	2014-05-17 19:09:44.578209+03
-5622	1391	2	\N	2014-05-17 19:12:29.996417+03
-4902	856	2	\N	2014-02-08 21:59:04.719245+02
-4938	876	2	\N	2014-02-10 16:19:24.400952+02
-5071	953	2	\N	2014-02-26 23:25:15.548581+02
-5072	954	2	\N	2014-02-26 23:25:55.407709+02
-5075	957	2	\N	2014-02-26 23:28:34.003373+02
-5076	958	2	\N	2014-02-26 23:28:45.594179+02
-5077	959	2	\N	2014-02-26 23:28:57.004231+02
-5078	960	2	\N	2014-02-26 23:29:08.086342+02
-5079	961	2	\N	2014-02-26 23:29:17.646283+02
-5080	962	2	\N	2014-02-26 23:29:26.175631+02
-5081	963	2	\N	2014-02-26 23:29:35.761623+02
-5082	964	2	\N	2014-02-26 23:29:46.892804+02
-5083	965	2	\N	2014-02-26 23:29:54.140342+02
-5084	966	2	\N	2014-02-26 23:30:01.375033+02
-5085	967	2	\N	2014-02-26 23:30:08.774222+02
-5086	968	2	\N	2014-02-26 23:30:17.802323+02
-5087	969	2	\N	2014-02-26 23:30:29.097872+02
-5088	970	2	\N	2014-02-26 23:30:38.081009+02
-5089	971	2	\N	2014-02-26 23:30:52.902609+02
-5091	973	2	\N	2014-02-26 23:31:31.71567+02
-5093	975	2	\N	2014-02-26 23:32:13.646357+02
-5094	976	2	\N	2014-02-26 23:32:24.624636+02
-5095	977	2	\N	2014-02-26 23:32:34.606814+02
-5096	978	2	\N	2014-02-26 23:32:43.318943+02
-5097	979	2	\N	2014-02-26 23:32:54.081989+02
-5098	980	2	\N	2014-02-26 23:33:04.823892+02
-5099	981	2	\N	2014-02-26 23:33:16.574818+02
-5100	982	2	\N	2014-02-26 23:33:28.270884+02
-5101	983	2	\N	2014-02-26 23:33:40.854578+02
-5102	984	2	\N	2014-02-26 23:33:57.05943+02
-5103	985	2	\N	2014-02-26 23:34:08.238483+02
-5105	987	2	\N	2014-02-26 23:34:29.757456+02
-5106	988	2	\N	2014-02-26 23:34:37.99873+02
-5216	3	2	\N	2014-03-12 21:55:10.706584+02
-5287	1079	2	\N	2014-03-22 12:57:07.526655+02
-5480	1249	2	\N	2014-04-27 01:02:16.23036+03
-5481	1250	2	\N	2014-04-27 01:02:43.699513+03
-5482	1251	2	\N	2014-04-27 01:03:00.011092+03
-5483	1252	2	\N	2014-04-27 01:03:22.219667+03
-5524	1293	2	\N	2014-04-29 12:17:51.658135+03
-5525	1294	2	\N	2014-04-29 12:18:27.913053+03
-5601	1370	2	\N	2014-05-17 18:45:54.451262+03
-5602	1371	2	\N	2014-05-17 18:47:17.628356+03
-5604	1373	2	\N	2014-05-17 18:54:01.477094+03
-5607	1376	2	\N	2014-05-17 18:56:40.07768+03
-5609	1378	2	\N	2014-05-17 19:02:40.402053+03
-5616	1385	2	\N	2014-05-17 19:07:13.667811+03
-5617	1386	2	\N	2014-05-17 19:07:36.068126+03
-5621	1390	2	\N	2014-05-17 19:11:55.084234+03
-4789	763	2	\N	2014-01-12 19:51:49.157909+02
-4903	854	2	\N	2014-02-08 22:16:58.906498+02
-4904	3	2	\N	2014-02-08 22:17:06.939369+02
-4905	854	2	\N	2014-02-08 22:20:32.280238+02
-4906	784	2	\N	2014-02-08 22:21:01.290541+02
-4908	786	2	\N	2014-02-08 22:21:09.110319+02
-5484	1253	2	\N	2014-04-28 00:03:49.599015+03
-5289	1081	2	\N	2014-03-22 17:57:05.076581+02
-5605	1374	2	\N	2014-05-17 18:55:03.070735+03
-5611	1380	2	\N	2014-05-17 19:03:57.212913+03
-5614	1383	2	\N	2014-05-17 19:04:59.867959+03
-5618	1387	2	\N	2014-05-17 19:09:22.594353+03
-5624	1393	2	\N	2014-05-18 10:14:28.009945+03
-4790	764	2	\N	2014-01-12 20:33:53.3138+02
-4909	723	2	\N	2014-02-08 22:28:37.868751+02
-4940	878	2	\N	2014-02-10 16:40:47.442615+02
-5610	1379	2	\N	2014-05-17 19:03:38.443538+03
-5612	1381	2	\N	2014-05-17 19:04:17.238286+03
-5615	1384	2	\N	2014-05-17 19:07:10.869783+03
-5620	1389	2	\N	2014-05-17 19:09:47.55779+03
-4910	857	2	\N	2014-02-09 00:41:07.487567+02
-4911	858	2	\N	2014-02-09 00:41:26.234037+02
-4912	859	2	\N	2014-02-09 00:41:48.428505+02
-4913	860	2	\N	2014-02-09 00:42:12.938208+02
-4914	857	2	\N	2014-02-09 00:42:31.066281+02
-4915	861	2	\N	2014-02-09 00:42:52.234296+02
-5291	1088	2	\N	2014-03-22 18:51:18.985681+02
-5292	1081	2	\N	2014-03-22 18:51:44.158872+02
-5458	1225	2	\N	2014-04-13 12:01:26.796233+03
-5627	1396	2	\N	2014-05-18 11:58:47.293591+03
-4917	764	2	\N	2014-02-09 00:53:58.264629+02
-4918	769	2	\N	2014-02-09 00:57:04.796409+02
-4919	775	2	\N	2014-02-09 00:57:24.917548+02
-4920	788	2	\N	2014-02-09 00:57:42.02056+02
-4942	878	2	\N	2014-02-10 22:47:18.374976+02
-4943	880	2	\N	2014-02-10 22:48:37.279277+02
-4944	881	2	\N	2014-02-10 22:49:24.829434+02
-4945	882	2	\N	2014-02-10 22:49:56.066237+02
-4946	883	2	\N	2014-02-10 22:50:06.121122+02
-4947	884	2	\N	2014-02-10 22:50:26.035905+02
-4948	884	2	\N	2014-02-10 22:53:06.689693+02
-5294	1090	2	\N	2014-03-22 20:34:50.666418+02
-5295	1091	2	\N	2014-03-22 20:36:11.95663+02
-5298	1093	2	\N	2014-03-22 20:40:16.040605+02
-5629	1398	2	\N	2014-05-18 12:12:21.975254+03
-4949	764	2	\N	2014-02-11 19:47:14.055452+02
-5488	1257	2	\N	2014-04-28 12:34:34.363475+03
-5300	1095	2	\N	2014-03-22 20:52:34.596466+02
-5301	1096	2	\N	2014-03-22 20:52:44.740475+02
-5302	1097	2	\N	2014-03-22 20:53:03.099066+02
-5489	1258	2	\N	2014-04-28 12:34:55.433659+03
-5304	1099	2	\N	2014-03-22 20:57:07.889521+02
-5535	1304	2	\N	2014-04-29 16:15:23.221696+03
-5389	1178	2	\N	2014-04-05 19:40:06.274566+03
-5390	1179	2	\N	2014-04-05 19:40:10.823684+03
-5490	1259	2	\N	2014-04-28 12:58:44.196537+03
-5305	1100	2	\N	2014-03-22 21:00:41.76813+02
-5306	1101	2	\N	2014-03-22 21:00:48.529148+02
-5307	1102	2	\N	2014-03-22 21:01:34.517288+02
-5491	1260	2	\N	2014-04-28 12:59:00.104464+03
-5631	1400	2	\N	2014-05-18 13:37:21.801854+03
-5632	1401	2	\N	2014-05-18 13:37:41.402585+03
-5633	1402	2	\N	2014-05-18 13:44:45.628784+03
-5492	1261	2	\N	2014-04-28 13:04:58.29173+03
-5634	1403	2	\N	2014-05-18 15:48:34.956287+03
-5256	1067	2	\N	2014-03-16 19:34:31.935568+02
-5494	1263	2	\N	2014-04-28 13:08:06.602496+03
-5635	1404	2	\N	2014-05-18 19:18:07.615122+03
-5636	1406	2	\N	2014-05-18 19:18:56.831097+03
-5639	1409	2	\N	2014-05-18 19:22:05.971396+03
-5394	1185	2	\N	2014-04-05 20:56:20.797318+03
-5257	1067	2	\N	2014-03-16 19:55:56.894484+02
-5495	1264	2	\N	2014-04-28 13:08:25.610345+03
-5637	1407	2	\N	2014-05-18 19:19:36.399614+03
-5641	1411	2	\N	2014-05-18 19:23:45.119721+03
-5496	1265	2	\N	2014-04-28 13:08:54.519921+03
-5638	1408	2	\N	2014-05-18 19:19:43.401474+03
-5258	1067	2	\N	2014-03-16 20:09:16.532934+02
-5311	1097	2	\N	2014-03-24 19:59:44.290142+02
-5640	1410	2	\N	2014-05-18 19:23:00.415796+03
-5643	1413	2	\N	2014-05-20 21:26:27.311927+03
-5259	1068	2	\N	2014-03-16 20:15:31.769185+02
-5499	1268	2	\N	2014-04-28 23:55:09.591646+03
-5644	1414	2	\N	2014-05-24 17:02:57.354915+03
-5645	1415	2	\N	2014-05-24 17:03:02.922541+03
-5646	1416	2	\N	2014-05-24 17:06:48.542492+03
-5647	1417	2	\N	2014-05-24 17:06:51.402853+03
-5648	1418	2	\N	2014-05-24 17:07:25.101929+03
-5649	1419	2	\N	2014-05-24 17:07:29.075778+03
-5650	1420	2	\N	2014-05-24 17:24:17.546972+03
-4120	16	2	\N	2014-01-01 13:19:09.979922+02
-4131	14	2	\N	2014-01-01 18:45:07.902745+02
-4144	706	2	\N	2014-01-03 16:12:41.015146+02
-4145	706	2	\N	2014-01-03 16:13:23.197097+02
-5402	1189	2	\N	2014-04-06 18:46:40.132797+03
-5403	1190	2	\N	2014-04-06 18:47:22.030146+03
-5138	865	2	\N	2014-03-03 21:09:34.254642+02
-5404	1191	2	\N	2014-04-06 18:53:34.002074+03
-5263	1009	2	\N	2014-03-16 21:40:10.728496+02
-5264	1009	2	\N	2014-03-16 21:44:11.742442+02
-5405	1192	2	\N	2014-04-06 19:20:55.890208+03
-5140	865	2	\N	2014-03-03 21:57:11.59945+02
-5265	1004	2	\N	2014-03-17 10:29:17.115979+02
-5266	1004	2	\N	2014-03-17 10:29:24.701637+02
-4744	723	2	\N	2014-01-04 23:58:55.624453+02
-4746	725	2	\N	2014-01-05 01:09:00.405742+02
-4747	726	2	\N	2014-01-05 01:09:15.602018+02
-4749	728	2	\N	2014-01-05 01:13:50.125212+02
-4756	734	2	\N	2014-01-05 12:36:48.48575+02
-4765	743	2	\N	2014-01-05 13:20:17.173661+02
-5654	1424	2	\N	2014-06-01 10:25:44.71461+03
-5656	1426	2	\N	2014-06-01 12:15:53.295347+03
-5661	1431	2	\N	2014-06-07 15:12:11.693366+03
-5662	1432	2	\N	2014-06-07 15:12:40.323386+03
-5663	1433	2	\N	2014-06-07 17:43:14.620483+03
-5665	1435	2	\N	2014-06-07 21:01:18.691193+03
-5667	1438	2	\N	2014-06-07 21:11:01.089928+03
-5668	1439	2	\N	2014-06-07 21:11:46.797584+03
-5669	1440	2	\N	2014-06-07 22:15:09.567299+03
-5671	1442	2	\N	2014-06-07 22:16:04.586659+03
-5676	1447	2	\N	2014-06-08 21:25:14.638119+03
-5677	1448	2	\N	2014-06-08 21:25:35.09515+03
-5679	1450	2	\N	2014-06-09 15:50:23.760428+03
-5681	1452	2	\N	2014-06-09 17:20:44.311452+03
-5693	1464	2	\N	2014-06-14 17:55:00.252916+03
-5694	1465	2	\N	2014-06-14 17:55:08.213215+03
-5695	1467	2	\N	2014-06-14 17:56:52.935007+03
-5696	1468	2	\N	2014-06-14 17:58:15.339465+03
-5697	1469	2	\N	2014-06-14 17:58:37.034547+03
-5698	1470	2	\N	2014-06-14 18:00:56.71432+03
-5699	1471	2	\N	2014-06-14 18:02:10.63169+03
-5700	1472	2	\N	2014-06-14 18:02:54.98084+03
-5701	1473	2	\N	2014-06-14 18:03:27.411198+03
-5713	1485	2	\N	2014-06-15 15:17:28.256792+03
-5715	1487	2	\N	2014-06-16 14:42:17.062016+03
-5728	1500	2	\N	2014-06-18 16:59:05.631362+03
-5730	1502	2	\N	2014-06-22 19:40:05.464875+03
-5731	1503	2	\N	2014-06-22 19:40:20.79663+03
-5732	1504	2	\N	2014-06-22 19:42:44.939368+03
-5733	1505	2	\N	2014-06-22 19:43:05.103699+03
-5734	1506	2	\N	2014-06-22 19:43:23.157992+03
-5735	1507	2	\N	2014-06-22 19:46:21.388635+03
-5737	1509	2	\N	2014-06-22 21:15:50.586549+03
-5738	1510	2	\N	2014-06-24 20:30:44.36129+03
-5739	1511	2	\N	2014-06-25 19:21:08.001771+03
-5740	1512	2	\N	2014-06-25 19:37:43.544622+03
-5741	1513	2	\N	2014-06-25 19:38:23.293423+03
-5742	1514	2	\N	2014-06-25 19:38:46.712804+03
-5743	1515	2	\N	2014-06-25 19:39:14.757449+03
-5744	1516	2	\N	2014-06-25 20:37:42.602785+03
-5745	1517	2	\N	2014-06-25 20:54:09.96009+03
-5746	1518	2	\N	2014-06-25 20:54:50.943042+03
-5747	1519	2	\N	2014-06-25 20:55:06.988343+03
-5749	1521	2	\N	2014-06-26 21:02:19.488826+03
-5750	1535	2	\N	2014-06-28 17:17:15.295903+03
-5751	1536	2	\N	2014-06-28 17:31:39.626186+03
-5752	1537	2	\N	2014-06-28 20:56:05.816704+03
-5753	1538	2	\N	2014-06-28 20:57:41.600837+03
-5754	1539	2	\N	2014-06-28 20:59:59.522314+03
-5755	1540	2	\N	2014-06-28 21:00:26.365557+03
-5756	1541	2	\N	2014-06-28 21:00:51.086753+03
-5757	1542	2	\N	2014-06-28 21:18:20.602573+03
-5758	1543	2	\N	2014-06-28 21:25:57.336069+03
-5759	1544	2	\N	2014-06-28 21:26:14.894807+03
-5760	1545	2	\N	2014-06-28 21:26:35.413657+03
-5761	1546	2	\N	2014-07-02 23:01:03.321441+03
-5762	1547	2	\N	2014-07-02 23:03:30.755887+03
-5763	1548	2	\N	2014-07-26 18:07:46.336433+03
-5764	1549	2	\N	2014-08-16 20:09:11.73959+03
-5766	1551	2	\N	2014-08-16 20:23:59.980051+03
-5767	1552	2	\N	2014-08-16 20:24:12.305446+03
-5768	1553	2	\N	2014-08-16 20:24:15.930016+03
-5769	1554	2	\N	2014-08-16 20:25:09.403552+03
-5771	1556	2	\N	2014-08-16 20:51:19.103778+03
-5773	1559	2	\N	2014-08-16 21:13:14.302214+03
-5774	1560	2	\N	2014-08-16 21:13:18.107616+03
-5775	1561	2	\N	2014-08-16 21:22:35.752473+03
-5776	1562	2	\N	2014-08-16 21:23:02.397566+03
-5777	1563	2	\N	2014-08-16 21:23:05.499294+03
-5778	1564	2	\N	2014-08-16 21:24:08.813965+03
-5783	1569	2	\N	2014-08-17 11:07:53.713228+03
-5784	1570	2	\N	2014-08-17 11:09:10.292392+03
-5790	1576	2	\N	2014-08-22 22:48:58.176695+03
-5791	1577	2	\N	2014-08-22 22:49:31.584667+03
-5792	1578	2	\N	2014-08-22 22:49:35.101959+03
-5793	1579	2	\N	2014-08-22 22:50:20.197271+03
-5794	1580	2	\N	2014-08-22 22:50:49.188036+03
-5795	1581	2	\N	2014-08-22 22:51:29.357367+03
-5796	1582	2	\N	2014-08-22 22:52:03.171722+03
-5797	1584	2	\N	2014-08-22 22:58:38.326467+03
-5798	1585	2	\N	2014-08-22 22:59:28.534906+03
-5799	1586	2	\N	2014-08-22 22:59:41.71816+03
-5800	1587	2	\N	2014-08-22 23:01:39.676197+03
-5801	1588	2	\N	2014-08-22 23:02:11.872661+03
-5802	1589	2	\N	2014-08-22 23:04:10.670971+03
-5803	1590	2	\N	2014-08-22 23:04:40.181387+03
-5804	1591	2	\N	2014-08-22 23:05:46.128053+03
-5805	1592	2	\N	2014-08-22 23:06:07.780481+03
-5806	1593	2	\N	2014-08-22 23:06:12.342153+03
-5810	1597	2	\N	2014-08-22 23:14:17.280337+03
-5811	1598	2	\N	2014-08-22 23:35:58.491964+03
-5820	1607	2	\N	2014-08-23 13:37:30.044239+03
-5821	1608	2	\N	2014-08-23 16:14:22.910225+03
-5822	1609	2	\N	2014-08-23 16:16:24.823791+03
-5823	1610	2	\N	2014-08-24 14:10:51.002759+03
-5824	1611	2	\N	2014-08-24 14:11:19.783792+03
-5825	1612	2	\N	2014-08-24 14:11:36.729128+03
-5826	1613	2	\N	2014-08-24 14:11:54.849623+03
-5827	1614	2	\N	2014-08-24 14:48:54.04485+03
-5828	1615	2	\N	2014-08-24 14:48:55.715304+03
-5829	1616	2	\N	2014-08-24 14:49:59.373945+03
-5832	1619	2	\N	2014-08-24 15:01:16.140346+03
-5833	1620	2	\N	2014-08-24 15:02:15.884894+03
-5834	1621	2	\N	2014-08-24 15:02:43.162974+03
-5835	1622	2	\N	2014-08-24 15:03:06.67481+03
-5836	1623	2	\N	2014-08-24 15:03:53.276198+03
-5837	1624	2	\N	2014-08-24 15:08:02.737031+03
-5838	1625	2	\N	2014-08-24 15:08:18.61161+03
-5839	1626	2	\N	2014-08-24 15:08:29.0077+03
-5840	1627	2	\N	2014-08-24 15:10:13.736496+03
-5841	1628	2	\N	2014-08-24 15:10:44.233145+03
-5847	1634	2	\N	2014-08-24 15:21:09.48427+03
-5852	1639	2	\N	2014-08-25 15:20:24.884947+03
-5853	1640	2	\N	2014-08-26 19:55:53.569882+03
-5854	1641	2	\N	2014-08-26 19:56:28.320221+03
-5858	1645	2	\N	2014-08-26 20:01:19.187139+03
-5860	1647	2	\N	2014-08-26 20:04:08.078366+03
-5862	1649	2	\N	2014-08-26 20:04:48.124422+03
-5855	1642	2	\N	2014-08-26 19:56:46.695581+03
-5856	1643	2	\N	2014-08-26 19:57:13.160198+03
-5857	1644	2	\N	2014-08-26 20:01:16.129984+03
-5859	1646	2	\N	2014-08-26 20:04:06.105786+03
-5861	1648	2	\N	2014-08-26 20:04:09.378364+03
-5863	1650	2	\N	2014-08-26 20:06:13.193356+03
-5864	1651	2	\N	2014-08-26 20:06:36.249641+03
-5865	1652	2	\N	2014-08-26 20:07:23.412381+03
-5866	1653	2	\N	2014-08-26 20:07:31.899383+03
-5870	1657	2	\N	2014-08-26 20:13:28.887297+03
-5873	1660	2	\N	2014-08-31 16:37:37.888486+03
-5919	1714	2	\N	2014-09-14 13:27:15.677766+03
-5926	1721	2	\N	2014-09-14 14:49:51.512979+03
-5967	1764	2	\N	2014-09-14 21:51:09.963908+03
-5968	1766	2	\N	2014-09-28 17:08:27.946698+03
-5971	1769	2	\N	2014-10-01 20:37:18.107894+03
-5972	1771	2	\N	2014-10-01 21:39:17.299667+03
-5973	1773	2	\N	2014-10-01 22:04:03.074823+03
-5974	1774	2	\N	2014-10-01 22:17:44.949656+03
-5975	1775	2	\N	2014-10-03 20:21:54.06353+03
-5977	1777	2	\N	2014-10-03 20:35:01.628264+03
-5978	1778	2	\N	2014-10-04 21:45:17.702702+03
-5980	1780	2	\N	2014-10-05 12:49:28.270538+03
-5982	1797	2	\N	2014-10-05 21:08:02.025119+03
-5983	1798	2	\N	2014-10-05 22:07:40.176836+03
-5984	1799	2	\N	2014-10-09 20:49:57.476724+03
-5985	1800	2	\N	2014-10-09 21:44:48.304991+03
-5986	1801	2	\N	2014-10-09 21:45:57.042916+03
-5987	1802	2	\N	2014-10-09 21:51:36.274928+03
-5988	1797	2	\N	2014-10-09 21:58:44.274487+03
-5989	1803	2	\N	2014-10-10 21:20:08.467997+03
-5990	1804	2	\N	2014-10-10 21:48:32.795064+03
-5991	1797	2	\N	2014-10-10 21:48:40.224687+03
-5994	1797	2	\N	2014-10-10 22:43:03.886027+03
-5995	1807	2	\N	2014-10-12 12:18:58.609492+03
-5996	1419	2	\N	2014-10-12 12:21:41.297126+03
-5999	1419	2	\N	2014-10-12 14:03:13.921521+03
-6000	1419	2	\N	2014-10-12 14:03:56.458732+03
-6002	1797	2	\N	2014-10-12 14:08:19.225786+03
-6003	1797	2	\N	2014-10-12 14:08:29.322661+03
-6005	1797	2	\N	2014-10-12 14:09:47.667654+03
-6006	1797	2	\N	2014-10-12 14:10:15.511498+03
-6008	894	2	\N	2014-10-12 14:15:30.839116+03
-6010	894	2	\N	2014-10-12 14:15:50.178579+03
-6011	894	2	\N	2014-10-12 14:16:00.712168+03
-6014	1507	2	\N	2014-10-12 14:21:53.792753+03
-6015	1507	2	\N	2014-10-12 14:22:06.118134+03
-6016	1439	2	\N	2014-10-12 14:22:17.008412+03
-6017	1438	2	\N	2014-10-12 14:22:21.965321+03
-6020	1780	2	\N	2014-10-12 14:25:19.014258+03
-6021	1780	2	\N	2014-10-12 14:25:28.403238+03
-6022	1780	2	\N	2014-10-12 14:25:37.930302+03
-6025	1413	2	\N	2014-10-12 14:31:06.237149+03
-6026	1413	2	\N	2014-10-12 14:31:16.507549+03
-6029	1415	2	\N	2014-10-12 14:34:22.672887+03
-6030	1415	2	\N	2014-10-12 14:34:32.05391+03
-6043	1657	2	\N	2014-10-12 15:41:58.778177+03
-6045	1657	2	\N	2014-10-12 15:42:13.36551+03
-6046	1657	2	\N	2014-10-12 15:42:24.726059+03
-6050	1653	2	\N	2014-10-12 16:27:20.425954+03
-6051	1653	2	\N	2014-10-12 16:27:45.783221+03
-6053	1283	2	\N	2014-10-12 16:28:08.925372+03
-6054	1283	2	\N	2014-10-12 16:28:17.376186+03
-6055	1833	2	\N	2014-10-12 16:29:10.045595+03
-6056	784	2	\N	2014-10-12 16:29:11.936722+03
-6061	1542	2	\N	2014-10-12 17:31:06.178463+03
-6063	861	2	\N	2014-10-12 20:54:52.692696+03
-6064	861	2	\N	2014-10-12 20:55:02.552131+03
-6066	998	2	\N	2014-10-18 11:46:31.67705+03
-6075	1657	2	\N	2014-10-18 23:25:55.139592+03
-6076	1657	2	\N	2014-10-18 23:26:04.397861+03
-6077	1839	2	\N	2014-10-18 23:26:44.642232+03
-6078	1634	2	\N	2014-10-18 23:26:52.975425+03
-6079	1598	2	\N	2014-10-18 23:27:05.648811+03
-6080	1502	2	\N	2014-10-18 23:27:11.743763+03
-6081	1503	2	\N	2014-10-18 23:27:18.622533+03
-6082	1440	2	\N	2014-10-18 23:27:25.765119+03
-6083	1442	2	\N	2014-10-18 23:27:32.509568+03
-6084	1840	2	\N	2014-10-18 23:35:01.43267+03
-6114	1598	2	\N	2014-10-25 20:24:45.191774+03
-6115	1840	2	\N	2014-10-25 20:25:16.419372+03
-6116	1839	2	\N	2014-10-25 20:25:25.421645+03
-6117	1657	2	\N	2014-10-25 20:25:34.041679+03
-6118	1634	2	\N	2014-10-25 20:25:41.778509+03
-6119	1598	2	\N	2014-10-25 20:25:49.974159+03
-6120	1503	2	\N	2014-10-25 20:25:56.790041+03
-6121	1502	2	\N	2014-10-25 20:26:11.552957+03
-6122	1487	2	\N	2014-10-25 20:26:20.033323+03
-6123	1442	2	\N	2014-10-25 20:26:26.124436+03
-6124	1440	2	\N	2014-10-25 20:26:33.450119+03
-6125	1660	2	\N	2014-10-25 20:27:51.453322+03
-6126	1639	2	\N	2014-10-25 20:27:59.032748+03
-6127	1607	2	\N	2014-10-25 20:28:26.48561+03
-6128	1547	2	\N	2014-10-25 20:31:18.593123+03
-6129	1546	2	\N	2014-10-25 20:31:27.322575+03
-6130	1509	2	\N	2014-10-25 20:31:34.596003+03
-6131	1500	2	\N	2014-10-25 20:31:41.235636+03
-6132	1485	2	\N	2014-10-25 20:31:48.295128+03
-6133	1448	2	\N	2014-10-25 20:31:55.364673+03
-6134	1447	2	\N	2014-10-25 20:32:03.232605+03
-6135	864	2	\N	2014-10-25 22:27:41.085522+03
-6136	900	2	\N	2014-10-25 22:27:48.659618+03
-6137	780	2	\N	2014-10-25 22:27:56.462817+03
-6138	837	2	\N	2014-10-25 22:28:02.931936+03
-6139	1394	2	\N	2014-10-25 22:28:08.943421+03
-6140	873	2	\N	2014-10-25 22:28:16.618586+03
-6141	778	2	\N	2014-10-25 22:28:22.956578+03
-6142	1659	2	\N	2014-10-25 22:39:28.23436+03
-6144	1849	2	\N	2014-10-25 23:00:37.016264+03
-6145	1852	2	\N	2014-10-28 19:57:41.751563+02
-6146	1853	2	\N	2014-10-28 20:23:48.907733+02
-6147	1854	2	\N	2014-10-28 20:24:58.380434+02
-6148	1855	2	\N	2014-10-28 20:25:08.681569+02
-6151	1859	2	\N	2014-10-29 12:48:22.905378+02
-6152	1860	2	\N	2014-10-30 22:03:33.988542+02
-6157	1865	2	\N	2014-11-03 21:33:49.462196+02
-6158	1866	2	\N	2014-11-03 21:38:54.729983+02
-6159	1867	2	\N	2014-11-03 21:39:31.824693+02
-6160	1868	2	\N	2014-11-03 21:40:02.647787+02
-6161	1869	2	\N	2014-11-05 21:10:08.261088+02
-6162	1870	2	\N	2014-11-05 21:10:38.427296+02
-6164	1872	2	\N	2014-11-08 19:05:48.520641+02
-6165	1868	2	\N	2014-11-08 19:07:32.928999+02
-6166	1868	2	\N	2014-11-08 19:07:58.653299+02
-6167	1873	2	\N	2014-11-09 14:14:33.279838+02
-6168	1433	2	\N	2014-11-09 14:15:02.053975+02
-6170	1875	2	\N	2014-11-09 20:43:57.157494+02
-6171	1876	2	\N	2014-11-09 20:50:09.776581+02
-6172	1876	2	\N	2014-11-09 21:46:07.106741+02
-6173	1876	2	\N	2014-11-09 21:46:46.766703+02
-6174	1876	2	\N	2014-11-12 18:42:47.24628+02
-6175	1876	2	\N	2014-11-12 18:43:00.917409+02
-6176	1876	2	\N	2014-11-12 18:43:51.052257+02
-6177	1876	2	\N	2014-11-12 18:49:19.486465+02
-6178	1876	2	\N	2014-11-12 18:49:50.992411+02
-6182	1880	2	\N	2014-11-12 18:58:13.464317+02
-6183	1881	2	\N	2014-11-12 18:58:13.464317+02
-6184	1876	2	\N	2014-11-12 19:19:20.155903+02
-6185	1880	2	\N	2014-11-12 19:20:04.488842+02
-6186	1882	2	\N	2014-11-12 19:21:49.754499+02
-6187	1882	2	\N	2014-11-12 20:48:55.295948+02
-6188	1876	2	\N	2014-11-13 18:36:19.360925+02
-6189	1876	2	\N	2014-11-13 18:36:40.275356+02
-6190	1876	2	\N	2014-11-13 18:36:53.848561+02
-6191	1876	2	\N	2014-11-13 18:37:04.828162+02
-6192	1876	2	\N	2014-11-13 18:44:14.058824+02
-6193	1880	2	\N	2014-11-14 13:23:46.652293+02
-6196	1884	2	\N	2014-11-15 12:46:51.68956+02
-6197	1885	2	\N	2014-11-15 12:55:58.618287+02
-6200	1647	2	\N	2014-11-15 19:54:17.589811+02
-6201	1647	2	\N	2014-11-15 19:57:05.325517+02
-6202	1587	2	\N	2014-11-15 19:57:11.689531+02
-6204	1888	2	\N	2014-11-15 20:54:18.530252+02
-6209	1893	2	\N	2014-11-15 21:10:00.852505+02
-6210	1894	2	\N	2014-11-16 11:36:20.360008+02
-6211	1895	2	\N	2014-11-16 11:38:31.304748+02
-6212	1896	2	\N	2014-11-16 11:52:22.859107+02
-6214	1896	2	\N	2014-11-16 17:28:25.282664+02
-6215	1898	2	\N	2014-11-18 19:36:00.947451+02
-6217	1900	2	\N	2014-11-18 19:59:41.794255+02
-6218	1901	2	\N	2014-11-18 20:00:50.313385+02
-6219	1902	2	\N	2014-11-18 20:05:55.399398+02
-6220	1903	2	\N	2014-11-18 20:06:23.495804+02
-6221	1225	2	\N	2014-11-20 20:55:40.655878+02
-6222	1904	2	\N	2014-11-21 20:47:35.513987+02
-6223	1434	2	\N	2014-11-21 20:48:05.829054+02
-6224	1571	2	\N	2014-11-21 20:48:27.000088+02
-6225	1885	2	\N	2014-11-21 20:48:44.475673+02
-6226	1905	2	\N	2014-11-21 21:17:50.885382+02
-6227	1436	2	\N	2014-11-21 21:19:06.360097+02
-6228	1798	2	\N	2014-11-21 21:19:19.899746+02
-6229	1425	2	\N	2014-11-21 21:19:42.772209+02
-6230	802	2	\N	2014-11-21 21:20:02.792752+02
-6231	1906	2	\N	2014-11-21 21:20:18.443474+02
-6232	802	2	\N	2014-11-21 21:20:33.430037+02
-6233	1395	2	\N	2014-11-21 21:20:55.244524+02
-6234	1907	2	\N	2014-11-21 21:25:23.260941+02
-6235	879	2	\N	2014-11-21 21:26:01.060638+02
-6236	1089	2	\N	2014-11-21 21:34:19.776611+02
-6237	874	2	\N	2014-11-21 21:34:45.906696+02
-6238	1080	2	\N	2014-11-21 21:35:09.652432+02
-6239	1908	2	\N	2014-11-21 21:35:29.643627+02
-6240	910	2	\N	2014-11-21 21:36:10.21074+02
-6241	1080	2	\N	2014-11-21 21:36:26.556412+02
-6242	911	2	\N	2014-11-21 21:36:37.408083+02
-6243	956	2	\N	2014-11-21 21:36:56.333028+02
-6244	955	2	\N	2014-11-21 21:37:09.845857+02
-6246	1896	2	\N	2014-11-21 21:43:10.139464+02
-6247	1910	2	\N	2014-11-22 17:58:53.151533+02
-6248	1911	2	\N	2014-11-22 17:58:53.151533+02
-6251	1903	2	\N	2014-11-23 17:42:18.707964+02
-6253	1903	2	\N	2014-11-23 18:15:04.669498+02
-6254	1913	2	\N	2014-11-23 18:22:07.34092+02
-6255	1915	2	\N	2014-11-23 18:25:34.975922+02
-6257	1917	2	\N	2014-11-23 18:40:26.695236+02
-6258	1918	2	\N	2014-11-23 18:40:42.249218+02
-6259	1919	2	\N	2014-11-27 21:56:12.900683+02
-6265	1906	2	\N	2014-11-28 22:02:27.025943+02
-6266	1908	2	\N	2014-11-28 22:03:25.613427+02
-6267	1919	2	\N	2014-11-30 11:21:31.130821+02
-6270	1368	2	\N	2014-11-30 18:22:02.736241+02
-6271	1922	2	\N	2014-12-07 14:34:35.538855+02
-6276	1924	2	\N	2014-12-07 21:40:24.739542+02
-6277	1925	2	\N	2014-12-07 21:41:09.94037+02
-6278	1926	2	\N	2014-12-07 21:41:37.63455+02
-6279	1471	2	\N	2014-12-07 21:41:39.584636+02
-6280	1927	2	\N	2014-12-07 21:42:12.893528+02
-6281	1471	2	\N	2014-12-07 21:42:14.781639+02
-6286	1869	2	\N	2014-12-08 21:46:09.685953+02
-6287	1931	2	\N	2014-12-08 21:52:00.685674+02
-6289	1932	2	\N	2014-12-11 22:45:01.994257+02
-6290	1933	2	\N	2014-12-11 22:46:28.273472+02
-6298	1939	2	\N	2014-12-13 21:37:02.820409+02
-6299	1939	2	\N	2014-12-13 21:37:54.352906+02
-6301	1933	2	\N	2014-12-13 21:55:57.253566+02
-6302	1933	2	\N	2014-12-13 21:57:41.570228+02
-6303	1933	2	\N	2014-12-13 22:01:39.804954+02
-6306	1933	2	\N	2014-12-13 22:03:37.415197+02
-6307	1939	2	\N	2014-12-13 22:03:52.016284+02
-6313	1933	2	\N	2014-12-14 11:12:44.366886+02
-6315	1933	2	\N	2014-12-14 11:14:46.937016+02
-6316	1940	2	\N	2014-12-14 11:16:18.397912+02
-6317	1941	2	\N	2014-12-14 17:51:15.587939+02
-6318	1940	2	\N	2014-12-14 19:37:37.036036+02
-6320	1940	2	\N	2014-12-14 19:41:49.794566+02
-6321	1940	2	\N	2014-12-14 19:44:37.781977+02
-6322	1940	2	\N	2014-12-14 19:48:08.98232+02
-6323	1940	2	\N	2014-12-14 19:50:28.583831+02
-6324	1940	2	\N	2014-12-14 20:30:31.46273+02
-6326	1940	2	\N	2014-12-14 20:33:08.50634+02
-6327	1940	2	\N	2014-12-14 20:34:47.73587+02
-6328	1940	2	\N	2014-12-14 20:37:41.082704+02
-6329	1653	2	\N	2014-12-19 21:31:43.967187+02
-6330	1653	2	\N	2014-12-19 21:37:31.746728+02
-6331	1951	2	\N	2014-12-19 21:38:17.300837+02
-6332	725	2	\N	2014-12-19 21:38:20.726452+02
-6333	1952	2	\N	2014-12-19 21:42:56.792366+02
-6334	1870	2	\N	2014-12-19 21:43:03.803839+02
-6335	1906	2	\N	2014-12-20 16:10:55.310323+02
-6338	1869	2	\N	2014-12-20 17:01:25.535753+02
-6339	1869	2	\N	2014-12-20 17:03:12.810766+02
-6340	1869	2	\N	2014-12-20 17:03:22.550854+02
-6341	1628	2	\N	2014-12-20 17:05:00.135486+02
-6342	1869	2	\N	2014-12-20 17:05:08.130568+02
-6343	1626	2	\N	2014-12-20 17:50:11.179188+02
-6344	1615	2	\N	2014-12-20 17:50:33.508978+02
-6345	1954	2	\N	2014-12-20 18:18:17.329483+02
-6346	1954	2	\N	2014-12-20 18:18:27.668631+02
-6349	1225	2	\N	2014-12-21 12:57:50.837529+02
-6350	1433	2	\N	2014-12-21 12:57:59.036844+02
-6351	1954	2	\N	2014-12-21 13:04:30.43023+02
-6355	1956	2	\N	2014-12-21 14:58:01.627945+02
-6356	1383	2	\N	2014-12-21 14:58:04.4436+02
-6357	1383	2	\N	2014-12-21 14:58:18.134114+02
-6387	1958	2	\N	2014-12-21 19:20:00.336409+02
-6388	1958	2	\N	2014-12-21 19:40:10.412709+02
-6389	1958	2	\N	2014-12-21 19:43:18.014602+02
-6393	1962	2	\N	2014-12-24 21:32:53.618984+02
-6400	1964	2	\N	2014-12-25 21:05:49.345482+02
-6411	1317	2	\N	2014-12-27 14:48:10.519499+02
-6412	1840	2	\N	2014-12-27 16:05:27.016889+02
-6413	1840	2	\N	2014-12-27 16:32:05.180181+02
-6414	1840	2	\N	2014-12-27 16:45:52.831401+02
-6415	1966	2	\N	2014-12-27 19:34:56.371248+02
-6418	1966	2	\N	2014-12-31 19:10:29.989911+02
-6420	1968	2	\N	2015-01-03 12:32:10.846571+02
-6422	1970	2	\N	2015-01-03 12:35:21.670372+02
-6423	1971	2	\N	2015-01-04 12:45:51.571627+02
-6424	1840	2	\N	2015-01-04 12:45:53.947837+02
-6425	1971	2	\N	2015-01-04 12:46:35.715575+02
-6426	1971	2	\N	2015-01-04 14:05:54.230775+02
-6428	1975	2	\N	2015-01-04 14:47:53.838979+02
-6429	1976	2	\N	2015-01-04 15:06:13.604725+02
-6430	1977	2	\N	2015-01-04 16:44:50.635763+02
-6431	1975	2	\N	2015-01-04 16:54:32.711408+02
-6432	1975	2	\N	2015-01-04 17:11:52.039507+02
-6433	1975	2	\N	2015-01-04 17:31:46.570967+02
-6434	1975	2	\N	2015-01-07 14:12:48.405815+02
-6435	1975	2	\N	2015-01-07 14:22:19.046581+02
-6436	1978	2	\N	2015-01-07 18:00:22.111119+02
-6437	1979	2	\N	2015-01-07 18:22:39.961593+02
-6438	1980	2	\N	2015-01-07 18:22:48.978415+02
-6439	1981	2	\N	2015-01-07 18:23:19.524712+02
-6440	3	2	\N	2015-01-07 18:23:30.384627+02
-6441	1982	2	\N	2015-01-07 18:30:42.662112+02
-6442	3	2	\N	2015-01-07 18:30:49.411934+02
-6443	3	2	\N	2015-01-07 18:31:24.902432+02
-6444	784	2	\N	2015-01-08 13:21:17.321066+02
-6445	784	2	\N	2015-01-08 13:27:01.529898+02
-6446	784	2	\N	2015-01-08 14:19:17.153858+02
-6447	784	2	\N	2015-01-08 14:20:23.527059+02
-6448	784	2	\N	2015-01-09 10:59:22.101268+02
-6449	1046	2	\N	2015-01-12 22:16:18.421621+02
-6450	1046	2	\N	2015-01-12 22:16:29.774766+02
-6451	1046	2	\N	2015-01-12 22:18:02.620143+02
-6452	1046	2	\N	2015-01-13 17:00:13.07184+02
-6453	1983	2	\N	2015-01-13 17:00:57.932019+02
-6454	1985	2	\N	2015-01-13 17:03:06.725248+02
-6455	1985	2	\N	2015-01-14 21:32:00.651438+02
-6456	1046	2	\N	2015-01-14 21:35:47.291833+02
-6457	1987	2	\N	2015-01-15 20:30:02.464255+02
-6458	1988	2	\N	2015-01-15 21:27:50.402917+02
-6459	1989	2	\N	2015-01-17 15:06:55.170629+02
-6460	1990	2	\N	2015-01-17 19:50:58.298272+02
-6461	1991	2	\N	2015-01-17 19:50:58.298272+02
-6462	1992	2	\N	2015-01-17 19:51:20.956564+02
-6463	1990	2	\N	2015-01-17 21:28:18.900625+02
-6464	1993	2	\N	2015-01-17 21:28:36.972519+02
-6465	1994	2	\N	2015-01-17 21:50:01.04394+02
-6466	1995	2	\N	2015-01-17 21:50:14.61181+02
-6467	1996	2	\N	2015-01-17 21:54:58.910426+02
-6468	1997	2	\N	2015-01-17 21:54:58.910426+02
-6471	2000	2	\N	2015-01-17 21:56:46.645017+02
-6472	2001	2	\N	2015-01-17 21:57:17.28338+02
-6473	2002	2	\N	2015-01-17 21:57:17.28338+02
-6476	2005	2	\N	2015-01-17 22:00:19.139836+02
-6477	2006	2	\N	2015-01-17 22:00:39.986496+02
-6478	2007	2	\N	2015-01-17 22:00:39.986496+02
-6479	2000	2	\N	2015-01-17 22:01:41.277766+02
-6480	2009	2	\N	2015-01-21 21:44:18.418746+02
-6481	1985	2	\N	2015-02-01 13:03:47.123323+02
-6482	2009	2	\N	2015-02-01 13:05:09.626214+02
-6483	2011	2	\N	2015-02-01 13:23:15.549518+02
-6484	1004	2	\N	2015-02-01 13:23:17.930893+02
-6485	2012	2	\N	2015-02-01 13:51:03.67962+02
-6486	1470	2	\N	2015-02-01 13:51:06.125989+02
-6487	2013	2	\N	2015-02-01 15:08:04.506074+02
-6488	2014	2	\N	2015-02-01 15:08:25.548868+02
-6489	2015	2	\N	2015-02-01 15:09:02.223788+02
-6490	2016	2	\N	2015-02-01 15:09:49.640295+02
-6491	2017	2	\N	2015-02-01 15:09:55.959842+02
-6492	2018	2	\N	2015-02-01 15:12:43.612773+02
-6493	2019	2	\N	2015-02-01 15:13:13.911124+02
-6494	2020	2	\N	2015-02-01 15:13:27.313034+02
-6497	2023	2	\N	2015-02-01 15:16:10.834689+02
-6498	2024	2	\N	2015-02-01 15:16:30.308954+02
-6501	2026	2	\N	2015-02-01 15:27:12.501194+02
-6502	2026	2	\N	2015-02-01 15:27:30.084405+02
-6503	2027	2	\N	2015-02-01 15:27:55.689729+02
-6504	2028	2	\N	2015-02-01 15:27:55.689729+02
-6505	2029	2	\N	2015-02-01 19:41:31.921287+02
-6506	2030	2	\N	2015-02-01 19:49:07.587188+02
-6507	2031	2	\N	2015-02-01 19:49:18.380376+02
-6508	2032	2	\N	2015-02-01 19:51:03.621123+02
-6509	1004	2	\N	2015-02-01 19:51:06.683043+02
-6515	2038	2	\N	2015-02-01 19:53:59.085718+02
-6516	2039	2	\N	2015-02-01 19:53:59.085718+02
-6521	2044	2	\N	2015-02-01 19:54:52.686809+02
-6522	2045	2	\N	2015-02-01 19:54:52.686809+02
-6523	2046	2	\N	2015-02-01 19:54:52.686809+02
-6524	2047	2	\N	2015-02-01 19:54:52.686809+02
-6525	2048	2	\N	2015-02-03 20:05:38.797054+02
-6526	2048	2	\N	2015-02-03 20:06:16.781057+02
-6528	2049	2	\N	2015-02-03 21:27:11.659126+02
-6529	2048	2	\N	2015-02-03 21:27:36.200475+02
-6530	2050	2	\N	2015-02-04 21:04:02.527314+02
-6531	2051	2	\N	2015-02-04 21:04:04.474427+02
-6532	2051	2	\N	2015-02-04 21:11:28.094987+02
-6533	2052	2	\N	2015-02-04 21:11:39.281593+02
-6534	2051	2	\N	2015-02-23 21:04:13.639992+02
-6535	1648	2	\N	2015-02-24 14:58:15.754816+02
-6536	2053	2	\N	2015-02-24 21:04:03.673911+02
-6537	2054	2	\N	2015-02-24 21:04:26.838046+02
-6538	2053	2	\N	2015-02-24 21:06:05.145287+02
-6539	2054	2	\N	2015-02-24 21:06:08.284296+02
-6540	2053	2	\N	2015-02-24 21:06:25.905562+02
-6541	2054	2	\N	2015-02-24 21:06:27.830735+02
-6542	2055	2	\N	2015-03-03 16:25:23.003263+02
-6553	2051	2	\N	2015-03-05 21:22:31.156271+02
-6554	2052	2	\N	2015-03-05 21:22:34.187754+02
-6555	2049	2	\N	2015-03-07 13:59:54.391614+02
-6556	2049	2	\N	2015-03-07 14:00:01.858793+02
-6557	2049	2	\N	2015-03-07 14:00:08.905813+02
-6558	2049	2	\N	2015-03-07 17:41:13.176137+02
-6559	2049	2	\N	2015-03-07 17:41:24.454712+02
-6560	2016	2	\N	2015-03-07 19:11:45.990005+02
-6561	1971	2	\N	2015-03-07 20:39:22.05432+02
-6562	1939	2	\N	2015-03-07 20:41:30.911568+02
-6563	1964	2	\N	2015-03-07 20:41:40.386597+02
-6564	1962	2	\N	2015-03-07 20:41:47.24255+02
-6565	2009	2	\N	2015-03-07 20:41:57.590912+02
-6566	1958	2	\N	2015-03-07 20:42:08.257141+02
-6567	2062	2	\N	2015-03-07 20:44:22.388688+02
-6568	1958	2	\N	2015-03-07 20:44:57.143369+02
-6569	1922	2	\N	2015-03-07 21:16:33.311167+02
-6571	1980	2	\N	2015-03-07 21:18:36.892234+02
-6573	1982	2	\N	2015-03-07 21:45:35.899441+02
-6574	1983	2	\N	2015-03-07 21:45:46.115364+02
-6575	1985	2	\N	2015-03-07 21:45:53.837217+02
-6576	2016	2	\N	2015-03-07 21:46:03.965785+02
-6577	1940	2	\N	2015-03-07 21:46:13.798132+02
-6578	1932	2	\N	2015-03-07 21:46:22.868946+02
-6582	1933	2	\N	2015-03-07 21:47:06.74156+02
-6584	1922	2	\N	2015-03-08 18:02:14.423833+02
-6585	1922	2	\N	2015-03-08 18:02:24.288542+02
-6586	1989	2	\N	2015-03-08 18:07:00.091644+02
-6587	1922	2	\N	2015-03-08 18:17:03.971743+02
-6588	1922	2	\N	2015-03-08 18:29:12.5349+02
-6590	1989	2	\N	2015-03-08 18:41:51.822924+02
-6592	2065	2	\N	2015-03-09 14:02:38.899688+02
-6595	1980	2	\N	2015-03-09 19:37:29.594475+02
-6596	1389	2	\N	2015-03-15 19:00:11.360402+02
-6597	1389	2	\N	2015-03-15 19:07:00.022851+02
-6598	1389	2	\N	2015-03-15 19:08:22.540227+02
-6599	2070	2	\N	2015-03-21 15:11:50.495946+02
-6600	1989	2	\N	2015-03-21 15:11:59.182752+02
-6603	2052	2	\N	2015-03-21 16:50:40.821135+02
-6605	2052	2	\N	2015-03-21 16:52:47.683727+02
-6606	2075	2	\N	2015-03-21 17:05:47.83578+02
-6607	2075	2	\N	2015-03-21 17:06:12.331454+02
-6608	2052	2	\N	2015-03-21 17:06:35.32059+02
-6609	2070	2	\N	2015-03-21 17:48:31.664941+02
-6610	2077	2	\N	2015-03-21 17:49:14.645342+02
-6618	2052	2	\N	2015-03-21 18:16:06.930298+02
-6621	2052	2	\N	2015-03-21 18:19:16.455929+02
-6622	2087	2	\N	2015-03-21 18:20:19.713186+02
-6623	2052	2	\N	2015-03-21 18:20:29.187736+02
-6624	2052	2	\N	2015-03-21 19:28:39.349206+02
-6625	2052	2	\N	2015-03-21 19:30:14.844869+02
-6626	2052	2	\N	2015-03-21 19:33:54.902921+02
-6627	2052	2	\N	2015-03-21 19:34:11.317898+02
-6628	2052	2	\N	2015-03-21 19:35:55.581037+02
-6629	2052	2	\N	2015-03-21 19:36:06.902031+02
-6630	2052	2	\N	2015-03-21 19:36:15.834648+02
-6631	2052	2	\N	2015-03-21 19:36:28.227499+02
-6632	2052	2	\N	2015-03-21 19:36:44.271289+02
-6633	2088	2	\N	2015-03-21 19:36:44.271289+02
-6634	2089	2	\N	2015-03-21 19:38:07.835672+02
-6635	2090	2	\N	2015-03-21 19:38:10.203402+02
-6637	2052	2	\N	2015-03-21 19:40:18.868487+02
-6638	2052	2	\N	2015-03-21 19:41:03.761402+02
-6639	2052	2	\N	2015-03-21 19:42:48.725752+02
-6640	2052	2	\N	2015-03-21 19:43:52.346215+02
-6641	2092	2	\N	2015-03-21 20:11:35.939948+02
-6642	2052	2	\N	2015-03-21 20:11:42.394011+02
-6643	2052	2	\N	2015-03-21 20:12:01.524624+02
-6646	2052	2	\N	2015-03-21 21:14:06.180767+02
-6647	2095	2	\N	2015-03-21 22:03:40.435063+02
-6648	2051	2	\N	2015-03-21 22:03:42.699321+02
-6649	2088	2	\N	2015-03-21 22:03:45.19164+02
-6650	2052	2	\N	2015-03-21 22:12:59.222848+02
-6651	971	2	\N	2015-03-22 16:55:09.922468+02
-6652	2096	2	\N	2015-03-22 17:22:28.394236+02
-6653	970	2	\N	2015-03-22 17:22:30.31308+02
-6654	971	2	\N	2015-03-22 17:32:58.675826+02
-6655	2097	2	\N	2015-03-22 17:35:36.969555+02
-6656	2052	2	\N	2015-03-22 17:35:38.710629+02
-6657	2052	2	\N	2015-03-22 17:35:54.667572+02
-6658	2052	2	\N	2015-03-22 17:36:02.394493+02
-6659	1413	2	\N	2015-03-22 21:10:23.96026+02
-6660	2098	2	\N	2015-03-22 21:12:12.040889+02
-6661	1413	2	\N	2015-03-22 21:12:14.574907+02
-6662	953	2	\N	2015-03-23 10:52:07.126828+02
-6663	955	2	\N	2015-03-23 10:52:46.434534+02
-6664	955	2	\N	2015-03-23 10:53:07.107505+02
-6665	971	2	\N	2015-03-23 11:17:09.549645+02
-6666	971	2	\N	2015-03-23 11:17:14.786132+02
-6667	971	2	\N	2015-03-23 22:30:47.611278+02
-6668	2099	2	\N	2015-03-24 19:25:49.743645+02
-6669	2100	2	\N	2015-03-24 19:26:22.746874+02
-6670	2101	2	\N	2015-03-24 19:30:50.825716+02
-6671	1413	2	\N	2015-03-24 21:27:29.027714+02
-6672	1413	2	\N	2015-03-24 21:27:56.025596+02
-6673	2104	2	\N	2015-03-25 22:08:36.018637+02
-6674	2105	2	\N	2015-03-25 22:09:11.121353+02
-6675	2106	2	\N	2015-03-25 22:10:32.26983+02
-6676	2107	2	\N	2015-03-27 21:02:27.365736+02
-6677	1413	2	\N	2015-03-27 22:11:48.664734+02
-6678	1318	2	\N	2015-03-27 22:11:57.175441+02
-6679	2108	2	\N	2015-03-27 22:14:09.702895+02
-6680	1413	2	\N	2015-03-27 22:14:23.177174+02
-6681	1975	2	\N	2015-03-29 14:54:09.090695+03
-6682	1975	2	\N	2015-03-29 14:56:05.558074+03
-6683	2054	2	\N	2015-03-29 18:10:37.298528+03
-6684	2054	2	\N	2015-03-29 18:10:44.494853+03
-6685	2054	2	\N	2015-03-29 18:11:59.351954+03
-6686	894	2	\N	2015-03-29 18:12:33.345883+03
-6687	2108	2	\N	2015-03-29 18:41:14.962865+03
-6688	2108	2	\N	2015-03-29 18:41:28.932911+03
-6689	2108	2	\N	2015-03-29 18:41:35.361837+03
-6693	1578	2	\N	2015-03-29 19:28:18.094577+03
-6694	1563	2	\N	2015-03-29 19:28:26.306719+03
-6695	1560	2	\N	2015-03-29 19:28:31.032916+03
-6696	1649	2	\N	2015-03-29 20:30:21.118741+03
-6698	2111	2	\N	2015-03-29 20:32:08.188477+03
-6699	918	2	\N	2015-03-29 20:45:02.042426+03
-6700	918	2	\N	2015-03-29 20:45:08.391579+03
-6701	917	2	\N	2015-03-29 20:45:13.080299+03
-6702	916	2	\N	2015-03-29 20:45:17.094049+03
-6703	952	2	\N	2015-03-29 20:51:29.823177+03
-6705	988	2	\N	2015-03-29 20:57:38.470567+03
-6707	971	2	\N	2015-03-29 21:04:32.587955+03
-6709	1647	2	\N	2015-03-29 21:11:13.101083+03
-6710	2115	2	\N	2015-03-29 21:11:20.771189+03
-6711	1648	2	\N	2015-03-29 21:19:19.348961+03
-6713	1646	2	\N	2015-03-29 21:25:36.400114+03
-6715	1419	2	\N	2015-03-31 18:55:34.756779+03
-6716	1415	2	\N	2015-03-31 18:55:54.50919+03
-6718	1507	2	\N	2015-03-31 19:11:10.805316+03
-6719	1507	2	\N	2015-03-31 19:11:17.000092+03
-6720	1507	2	\N	2015-03-31 19:11:23.716877+03
-6721	1898	2	\N	2015-03-31 19:19:08.662529+03
-6722	1898	2	\N	2015-03-31 19:19:13.979595+03
-6723	1898	2	\N	2015-03-31 19:19:19.541915+03
-6724	2119	2	\N	2015-03-31 19:31:32.255315+03
-6725	1419	2	\N	2015-03-31 19:31:35.171043+03
-6726	2120	2	\N	2015-03-31 21:42:30.209371+03
-6727	2107	2	\N	2015-04-06 22:18:27.344977+03
-6728	2054	2	\N	2015-04-22 09:31:23.533867+03
-6729	2126	2	\N	2015-04-22 10:21:50.083529+03
-6730	2126	2	\N	2015-04-22 10:34:35.83663+03
-6731	2127	2	\N	2015-04-22 15:08:30.934237+03
-6732	2128	2	\N	2015-04-22 15:09:24.597951+03
-6733	2129	2	\N	2015-04-22 15:30:21.099029+03
-6734	2130	2	\N	2015-04-22 15:30:28.848383+03
-6736	2126	2	\N	2015-04-22 15:33:09.520564+03
-6737	2132	2	\N	2015-04-22 15:34:13.439147+03
-6738	2126	2	\N	2015-04-22 15:34:14.494849+03
-6739	2126	2	\N	2015-04-22 15:34:41.240196+03
-6740	2130	2	\N	2015-04-24 21:16:26.897843+03
-6741	953	2	\N	2015-04-24 21:38:02.133997+03
-6742	955	2	\N	2015-04-24 21:39:08.574084+03
-6743	2108	2	\N	2015-04-25 13:14:21.858762+03
-6745	2135	2	\N	2015-04-25 16:39:24.611492+03
-6746	2128	2	\N	2015-04-25 16:59:29.339712+03
-6747	2136	2	\N	2015-04-25 16:59:52.412523+03
-6748	2137	2	\N	2015-04-25 21:29:39.820793+03
-6749	2138	2	\N	2015-04-25 21:29:47.819244+03
-6750	2139	2	\N	2015-04-25 21:29:55.72108+03
-6751	2144	2	\N	2015-04-26 00:17:08.072699+03
-6752	2145	2	\N	2015-04-26 00:17:08.072699+03
-6753	2146	2	\N	2015-04-26 00:22:46.640907+03
-6754	2147	2	\N	2015-04-26 00:22:46.640907+03
-6755	2148	2	\N	2015-04-26 00:26:59.761945+03
-6756	2149	2	\N	2015-04-26 00:26:59.761945+03
-6757	2150	2	\N	2015-04-26 00:30:11.687983+03
-6758	2151	2	\N	2015-04-26 00:30:11.687983+03
-6759	2152	2	\N	2015-04-26 00:36:42.355592+03
-6760	2153	2	\N	2015-04-26 00:36:42.355592+03
-6761	2154	2	\N	2015-04-26 00:44:52.209962+03
-6762	2155	2	\N	2015-04-26 00:44:52.209962+03
-6763	2156	2	\N	2015-04-26 09:56:13.81422+03
-6764	2157	2	\N	2015-04-26 09:56:13.81422+03
-6765	2158	2	\N	2015-04-26 10:00:13.021078+03
-6766	2159	2	\N	2015-04-26 10:00:13.021078+03
-6767	2160	2	\N	2015-04-26 10:09:07.981749+03
-6768	2161	2	\N	2015-04-26 10:09:07.981749+03
-6769	2162	2	\N	2015-04-26 10:11:20.869074+03
-6770	2163	2	\N	2015-04-26 10:11:20.869074+03
-6771	2164	2	\N	2015-04-26 10:23:35.980962+03
-6772	2165	2	\N	2015-04-26 10:23:35.980962+03
-6774	2167	2	\N	2015-04-26 10:30:42.474899+03
-6775	2168	2	\N	2015-04-26 10:30:42.474899+03
-6779	2172	2	\N	2015-04-26 10:41:15.682562+03
-6780	2173	2	\N	2015-04-26 10:41:15.682562+03
-6781	2174	2	\N	2015-04-26 10:51:18.425172+03
-6782	2175	2	\N	2015-04-26 10:51:18.425172+03
-6783	2176	2	\N	2015-04-26 10:54:26.243589+03
-6784	2177	2	\N	2015-04-26 10:54:26.243589+03
-6785	2178	2	\N	2015-04-26 10:57:26.669326+03
-6786	2179	2	\N	2015-04-26 10:57:26.669326+03
-6787	2180	2	\N	2015-04-26 11:08:04.739521+03
-6788	2181	2	\N	2015-04-26 11:08:04.739521+03
-6789	2182	2	\N	2015-04-26 11:13:10.975009+03
-6790	2183	2	\N	2015-04-26 11:13:10.975009+03
-6791	2184	2	\N	2015-04-26 13:03:25.416787+03
-6792	2185	2	\N	2015-04-26 13:03:25.416787+03
-6793	2186	2	\N	2015-04-26 13:42:49.969814+03
-6794	2187	2	\N	2015-04-26 14:04:42.384772+03
-6795	2188	2	\N	2015-04-26 14:04:42.384772+03
-6796	2189	2	\N	2015-04-26 14:05:26.994527+03
-6797	2190	2	\N	2015-04-26 14:05:26.994527+03
-6798	2186	2	\N	2015-04-26 14:05:29.313624+03
-6805	2199	2	\N	2015-05-03 23:18:19.876372+03
-6806	1780	2	\N	2015-05-03 23:18:33.103558+03
-6807	1368	2	\N	2015-05-04 19:21:58.460934+03
-6808	1368	2	\N	2015-05-04 19:22:20.533133+03
-6809	2200	2	\N	2015-05-04 20:57:01.637182+03
-6810	2201	2	\N	2015-05-04 20:58:33.565049+03
-6811	2203	2	\N	2015-05-04 21:30:33.485239+03
-6812	1003	2	\N	2015-05-08 21:15:22.303904+03
-6813	2205	2	\N	2015-05-08 22:38:40.1563+03
-6814	2206	2	\N	2015-05-08 22:40:57.101857+03
-6815	2207	2	\N	2015-05-08 22:43:00.228497+03
-6816	2208	2	\N	2015-05-08 22:43:46.205549+03
-6817	2209	2	\N	2015-05-09 15:04:04.437709+03
-6818	2210	2	\N	2015-05-09 15:18:42.295591+03
-6819	2211	2	\N	2015-05-09 15:20:41.04877+03
-6820	2212	2	\N	2015-05-09 15:21:16.54612+03
-6821	2213	2	\N	2015-05-09 15:21:20.750661+03
-6822	2214	2	\N	2015-05-09 15:27:46.304009+03
-6823	2215	2	\N	2015-05-09 15:27:52.157735+03
-6824	2216	2	\N	2015-05-09 15:32:20.738122+03
-6825	2216	2	\N	2015-05-09 15:34:43.153612+03
-6826	2216	2	\N	2015-05-09 15:35:37.080548+03
-6827	2216	2	\N	2015-05-09 15:36:20.491648+03
-6828	2216	2	\N	2015-05-09 15:36:28.290218+03
-6829	2217	2	\N	2015-05-09 16:10:30.715652+03
-6830	2218	2	\N	2015-05-09 16:40:29.294581+03
-6831	2216	2	\N	2015-05-09 16:40:47.688279+03
-6832	2219	2	\N	2015-05-09 16:52:43.81748+03
-6833	1550	2	\N	2015-05-09 16:53:04.04708+03
-6834	1008	2	\N	2015-05-09 16:53:15.905297+03
-6836	2218	2	\N	2015-05-09 16:56:24.612587+03
-6837	2221	2	\N	2015-05-09 16:58:37.060459+03
-6838	2216	2	\N	2015-05-09 17:04:04.921556+03
-6839	2216	2	\N	2015-05-09 17:04:48.531212+03
-6840	1563	2	\N	2015-05-09 19:32:44.822595+03
-6841	2222	2	\N	2015-05-09 19:43:25.178079+03
-6842	2215	2	\N	2015-05-09 20:07:16.539791+03
-6843	2216	2	\N	2015-05-09 20:07:46.078918+03
-6844	2223	2	\N	2015-05-09 20:08:53.78535+03
-6845	2224	2	\N	2015-05-09 20:09:23.379411+03
-6846	2225	2	\N	2015-05-09 20:09:44.887962+03
-6847	2226	2	\N	2015-05-09 20:17:22.088876+03
-6848	2227	2	\N	2015-05-09 20:29:08.971941+03
-6849	2228	2	\N	2015-05-09 20:29:24.701653+03
-6850	2229	2	\N	2015-05-09 20:29:40.419576+03
-6851	2224	2	\N	2015-05-09 20:29:49.729598+03
-6852	2230	2	\N	2015-05-09 20:30:09.233291+03
-6853	2231	2	\N	2015-05-09 20:30:23.623593+03
-6854	2232	2	\N	2015-05-09 20:30:35.560504+03
-6855	2233	2	\N	2015-05-09 20:30:51.356148+03
-6856	2234	2	\N	2015-05-09 20:31:09.312334+03
-6857	2235	2	\N	2015-05-09 20:31:21.029136+03
-6858	2236	2	\N	2015-05-09 20:31:43.127575+03
-6859	2237	2	\N	2015-05-09 20:31:57.326798+03
-6860	2238	2	\N	2015-05-09 20:32:20.746647+03
-6861	2239	2	\N	2015-05-09 20:32:35.107871+03
-6862	2240	2	\N	2015-05-09 20:32:50.419187+03
-6863	2241	2	\N	2015-05-09 20:33:01.999568+03
-6864	2242	2	\N	2015-05-09 20:33:16.190303+03
-6865	2236	2	\N	2015-05-09 20:54:08.857766+03
-6866	2216	2	\N	2015-05-09 21:04:14.03464+03
-6867	1578	2	\N	2015-05-09 21:16:42.718164+03
-6868	2243	2	\N	2015-05-10 13:44:27.494956+03
-6869	2244	2	\N	2015-05-10 13:45:29.048699+03
-6870	2245	2	\N	2015-05-10 13:46:40.29071+03
-6871	2246	2	\N	2015-05-10 14:01:26.829403+03
-6872	2247	2	\N	2015-05-10 14:01:57.254972+03
-6873	2248	2	\N	2015-05-10 14:10:42.034833+03
-6874	2249	2	\N	2015-05-10 14:10:53.000133+03
-6875	2254	2	\N	2015-05-10 14:35:53.336283+03
-6876	2255	2	\N	2015-05-10 14:35:53.336283+03
-6877	2256	2	\N	2015-05-10 14:39:45.730714+03
-6878	2257	2	\N	2015-05-10 14:39:45.730714+03
-6879	2258	2	\N	2015-05-10 14:45:11.098493+03
-6880	2259	2	\N	2015-05-10 14:45:11.098493+03
-6881	2260	2	\N	2015-05-10 14:53:32.27851+03
-6882	2261	2	\N	2015-05-10 14:53:32.27851+03
-6883	2262	2	\N	2015-05-10 14:57:13.121414+03
-6884	2263	2	\N	2015-05-10 14:57:13.121414+03
-6885	2264	2	\N	2015-05-10 14:57:55.441966+03
-6886	2265	2	\N	2015-05-10 15:07:20.399588+03
-6887	2266	2	\N	2015-05-10 15:07:20.399588+03
-6888	2267	2	\N	2015-05-10 15:07:27.786314+03
-6889	2268	2	\N	2015-05-10 16:04:17.22685+03
-6890	2269	2	\N	2015-05-10 16:04:56.471262+03
-6891	1318	2	\N	2015-05-10 16:05:16.31159+03
-6892	2270	2	\N	2015-05-10 16:07:24.626275+03
-6893	2271	2	\N	2015-05-10 16:08:32.663974+03
-6894	2272	2	\N	2015-05-10 16:08:35.587577+03
-6895	2273	2	\N	2015-05-10 16:08:47.271902+03
-6896	2274	2	\N	2015-05-10 16:08:47.271902+03
-6897	2275	2	\N	2015-05-10 16:09:34.650716+03
-6898	2276	2	\N	2015-05-10 22:11:18.586994+03
-6899	2277	2	\N	2015-05-10 22:12:40.523328+03
-6900	1314	2	\N	2015-05-10 22:12:56.872348+03
-6901	2278	2	\N	2015-05-10 22:14:48.438204+03
-6902	2279	2	\N	2015-05-10 22:14:48.438204+03
-6903	2280	2	\N	2015-05-10 22:19:21.083289+03
-6904	2280	2	\N	2015-05-13 21:55:52.759278+03
-6905	2275	2	\N	2015-05-13 21:56:48.008072+03
-6906	2267	2	\N	2015-05-13 21:56:54.031403+03
-6907	2264	2	\N	2015-05-13 21:56:59.496539+03
-6908	2281	2	\N	2015-05-16 15:29:57.002389+03
-6909	2282	2	\N	2015-05-16 15:34:53.800182+03
-6910	2283	2	\N	2015-05-16 15:34:53.800182+03
-6911	2284	2	\N	2015-05-16 15:36:09.929045+03
-6912	2285	2	\N	2015-05-16 15:45:33.371911+03
-6913	2286	2	\N	2015-05-16 15:45:33.371911+03
-6914	2287	2	\N	2015-05-16 15:48:18.436182+03
-6915	2288	2	\N	2015-05-16 15:48:18.436182+03
-6916	2289	2	\N	2015-05-17 21:30:51.134604+03
-6917	2280	2	\N	2015-05-17 21:31:00.094313+03
-6918	2290	2	\N	2015-05-17 21:31:39.003456+03
-6919	2280	2	\N	2015-05-17 21:31:48.129633+03
-6920	2284	2	\N	2015-05-17 22:02:03.373006+03
-6921	2284	2	\N	2015-05-17 22:02:31.027832+03
-6923	2284	2	\N	2015-05-18 16:40:09.305094+03
-6924	2284	2	\N	2015-05-18 20:31:39.659544+03
-6925	2284	2	\N	2015-05-18 20:34:34.03653+03
-6926	2284	2	\N	2015-05-18 21:22:46.805573+03
-6927	2292	2	\N	2015-05-24 12:55:28.784478+03
-6928	1212	2	\N	2015-05-24 13:06:21.488837+03
-6929	2293	2	\N	2015-05-24 15:06:40.212091+03
-6930	2294	2	\N	2015-05-24 15:11:44.965777+03
-6931	2295	2	\N	2015-05-24 16:49:53.513439+03
-6932	2296	2	\N	2015-05-24 16:50:41.467323+03
-6933	2297	2	\N	2015-05-24 16:55:00.642026+03
-6934	2299	2	\N	2015-05-24 16:57:39.672043+03
-6935	2300	2	\N	2015-05-24 17:03:51.85238+03
-6936	2088	2	\N	2015-05-24 17:03:55.878998+03
-6937	2301	2	\N	2015-05-24 17:04:54.502108+03
-6938	2088	2	\N	2015-05-24 17:10:16.729607+03
-6939	2088	2	\N	2015-05-24 17:10:29.437025+03
-6940	2088	2	\N	2015-05-24 17:15:30.592241+03
-6941	2302	2	\N	2015-05-24 17:16:33.029089+03
-6942	2075	2	\N	2015-05-24 17:16:41.742578+03
-6944	2088	2	\N	2015-05-24 17:17:21.677682+03
-6945	2305	2	\N	2015-05-24 20:37:07.412723+03
-6946	2052	2	\N	2015-05-24 20:37:10.892479+03
-6947	2088	2	\N	2015-05-24 21:01:25.501241+03
-6948	2052	2	\N	2015-05-24 21:13:25.598747+03
-6949	2306	2	\N	2015-05-24 21:14:39.628922+03
-6950	2052	2	\N	2015-05-24 21:14:43.723121+03
-6951	2280	2	\N	2015-05-24 21:21:32.476216+03
-6952	2280	2	\N	2015-05-24 21:22:00.849383+03
-6953	2280	2	\N	2015-05-24 21:22:09.702717+03
-6954	2307	2	\N	2015-05-24 21:32:02.910902+03
-6955	2308	2	\N	2015-05-24 21:32:24.738611+03
-6956	2309	2	\N	2015-05-24 21:32:31.516248+03
-6957	2310	2	\N	2015-05-24 21:33:17.528061+03
-6959	2312	2	\N	2015-05-24 21:36:06.190691+03
-6960	2312	2	\N	2015-05-24 21:36:27.205265+03
-6961	2313	2	\N	2015-05-25 21:31:05.718794+03
-6962	2312	2	\N	2015-05-25 21:31:08.674137+03
-6963	2314	2	\N	2015-05-26 20:44:11.702313+03
-6964	2315	2	\N	2015-05-26 20:44:48.242189+03
-6965	2316	2	\N	2015-05-26 20:44:48.242189+03
-6966	2317	2	\N	2015-05-26 20:45:01.161364+03
-6967	2284	2	\N	2015-05-28 13:46:35.94219+03
-6968	2317	2	\N	2015-05-28 13:46:45.92498+03
-6969	2280	2	\N	2015-05-28 13:46:51.874219+03
-6970	1507	2	\N	2015-05-31 21:55:12.660877+03
-6971	1507	2	\N	2015-05-31 21:56:27.809825+03
-6972	1439	2	\N	2015-05-31 21:57:11.520889+03
-6973	1507	2	\N	2015-05-31 21:58:33.173778+03
-6974	1507	2	\N	2015-05-31 22:00:02.964614+03
-6975	1507	2	\N	2015-05-31 22:00:38.733485+03
-6976	1507	2	\N	2015-05-31 22:11:01.827304+03
-6977	1507	2	\N	2015-06-01 09:54:54.423199+03
-6978	2284	2	\N	2015-06-01 11:22:28.244232+03
-6979	2319	2	\N	2015-06-01 11:37:24.071069+03
-6980	2320	2	\N	2015-06-01 12:56:01.185317+03
-6986	2327	2	\N	2015-06-02 13:22:30.670092+03
-6987	2328	2	\N	2015-06-02 13:22:36.147873+03
-6988	2329	2	\N	2015-06-02 13:23:35.222007+03
-6989	2330	2	\N	2015-06-02 13:24:32.384898+03
-6990	2331	2	\N	2015-06-02 13:25:52.745886+03
-6991	2332	2	\N	2015-06-02 13:27:31.983851+03
-6992	2333	2	\N	2015-06-02 13:27:36.950926+03
-6993	2334	2	\N	2015-06-02 13:28:43.733459+03
-6994	2335	2	\N	2015-06-02 13:29:10.771807+03
-6995	2336	2	\N	2015-06-02 13:29:57.138464+03
-6996	2337	2	\N	2015-06-02 13:30:11.199071+03
-6997	2338	2	\N	2015-06-02 13:34:47.558077+03
-6998	2339	2	\N	2015-06-02 13:34:50.130325+03
-6999	2340	2	\N	2015-06-02 13:35:46.336511+03
-7000	2341	2	\N	2015-06-02 13:36:09.066506+03
-7001	2342	2	\N	2015-06-02 13:36:09.066506+03
-7002	2343	2	\N	2015-06-02 13:37:26.99598+03
-7003	2344	2	\N	2015-06-02 13:37:26.99598+03
-7004	2345	2	\N	2015-06-02 13:37:42.100766+03
-7023	2345	2	\N	2015-06-06 20:33:35.089301+03
-7024	2366	2	\N	2015-06-06 21:47:05.357423+03
-7025	2367	2	\N	2015-06-06 21:47:08.978477+03
-7026	2368	2	\N	2015-06-06 21:49:00.661472+03
-7027	2369	2	\N	2015-06-06 21:50:18.211354+03
-7028	2370	2	\N	2015-06-06 21:51:07.167429+03
-7030	2372	2	\N	2015-06-06 21:52:25.91268+03
-7031	2367	2	\N	2015-06-06 22:01:59.580344+03
-7032	2373	2	\N	2015-06-06 22:05:50.240364+03
-7033	2374	2	\N	2015-06-06 22:06:07.223567+03
-7034	2375	2	\N	2015-06-06 22:06:55.79185+03
-7035	2376	2	\N	2015-06-06 22:07:46.643073+03
-7036	2377	2	\N	2015-06-06 22:08:11.14074+03
-7037	2378	2	\N	2015-06-06 22:08:11.14074+03
-7038	2379	2	\N	2015-06-06 22:10:53.894076+03
-7039	2380	2	\N	2015-06-06 22:10:53.894076+03
-7041	2382	2	\N	2015-06-06 22:12:17.899878+03
-7042	2372	2	\N	2015-06-06 22:12:34.850437+03
-7043	2383	2	\N	2015-06-06 22:34:30.822368+03
-7044	2384	2	\N	2015-06-06 22:35:06.098136+03
-7045	2385	2	\N	2015-06-06 22:35:22.838833+03
-7046	2382	2	\N	2015-06-06 22:36:33.646314+03
-7047	2388	2	\N	2015-06-06 22:43:36.614024+03
-7048	2382	2	\N	2015-06-07 15:30:58.294045+03
-7049	2247	2	\N	2015-06-07 17:10:29.033956+03
-7050	1413	2	\N	2015-06-07 17:10:56.929199+03
-7051	1318	2	\N	2015-06-07 17:11:36.862031+03
-7052	1314	2	\N	2015-06-07 17:12:28.161782+03
-7053	1431	2	\N	2015-06-07 19:55:54.571452+03
-7054	1898	2	\N	2015-06-07 19:59:40.465993+03
-7055	1898	2	\N	2015-06-07 20:00:47.882499+03
-7056	1432	2	\N	2015-06-07 20:00:59.808075+03
-7057	1608	2	\N	2015-06-07 20:01:30.177316+03
-7058	1609	2	\N	2015-06-07 20:02:19.266681+03
-7059	1769	2	\N	2015-06-07 20:03:05.939338+03
-7060	1780	2	\N	2015-06-07 20:04:36.345782+03
-7061	1873	2	\N	2015-06-07 20:05:07.816356+03
-7062	1898	2	\N	2015-06-07 20:05:26.076509+03
-7063	2199	2	\N	2015-06-07 20:05:57.959925+03
-7064	2246	2	\N	2015-06-07 20:06:32.075272+03
-7065	2246	2	\N	2015-06-07 20:06:41.085651+03
-7066	2269	2	\N	2015-06-07 20:07:23.767588+03
-7067	2277	2	\N	2015-06-07 20:07:57.192127+03
-7068	1426	2	\N	2015-06-07 20:09:52.309668+03
-7069	2389	2	\N	2015-06-07 20:10:03.246206+03
-7070	2390	2	\N	2015-06-07 20:10:21.42447+03
-7071	2391	2	\N	2015-06-07 20:10:54.694938+03
-7072	2392	2	\N	2015-06-07 20:11:12.709328+03
-7073	2393	2	\N	2015-06-07 20:11:33.449675+03
-7074	2394	2	\N	2015-06-07 20:11:54.80775+03
-7075	2395	2	\N	2015-06-07 20:12:24.648998+03
-7076	2396	2	\N	2015-06-07 20:12:47.549001+03
-7077	2397	2	\N	2015-06-07 20:13:09.482196+03
-7078	2398	2	\N	2015-06-07 20:13:26.815118+03
-7079	2399	2	\N	2015-06-07 20:13:43.442647+03
-7080	2400	2	\N	2015-06-07 20:13:57.868779+03
-7081	2401	2	\N	2015-06-07 20:14:15.895967+03
-7082	2402	2	\N	2015-06-07 20:14:42.501203+03
-7083	2403	2	\N	2015-06-07 20:15:33.611845+03
-7084	2404	2	\N	2015-06-07 20:15:53.460657+03
-7085	2405	2	\N	2015-06-07 20:16:10.772685+03
-7086	2406	2	\N	2015-06-07 20:16:32.442601+03
-7087	2407	2	\N	2015-06-07 20:16:56.509083+03
-7088	2408	2	\N	2015-06-07 20:17:19.457924+03
-7089	2409	2	\N	2015-06-07 20:17:39.828441+03
-7090	2410	2	\N	2015-06-07 20:17:59.953522+03
-7091	2411	2	\N	2015-06-07 20:18:15.36941+03
-7092	2412	2	\N	2015-06-07 20:18:33.319787+03
-7093	2413	2	\N	2015-06-07 20:18:53.786993+03
-7094	2414	2	\N	2015-06-07 20:19:17.251882+03
-7095	2415	2	\N	2015-06-07 20:34:54.782206+03
-7096	2416	2	\N	2015-06-07 20:35:11.96143+03
-7097	2417	2	\N	2015-06-07 20:35:33.998015+03
-7098	2418	2	\N	2015-06-07 20:36:01.596002+03
-7099	2419	2	\N	2015-06-07 20:36:15.960332+03
-7100	2420	2	\N	2015-06-07 20:36:35.413228+03
-7101	2421	2	\N	2015-06-07 20:37:30.352425+03
-7102	2422	2	\N	2015-06-07 20:37:53.888785+03
-7103	2423	2	\N	2015-06-07 20:38:10.610447+03
-7104	2424	2	\N	2015-06-07 20:38:59.517394+03
-7105	2425	2	\N	2015-06-07 20:39:26.415211+03
-7106	2426	2	\N	2015-06-07 20:40:05.840226+03
-7107	2427	2	\N	2015-06-07 20:40:46.537019+03
-7108	2428	2	\N	2015-06-07 20:41:01.3009+03
-7109	2429	2	\N	2015-06-07 20:41:17.634439+03
-7110	2430	2	\N	2015-06-07 20:41:36.56949+03
-7111	2431	2	\N	2015-06-07 20:41:54.944525+03
-7112	2432	2	\N	2015-06-07 20:42:11.063081+03
-7113	2433	2	\N	2015-06-10 21:10:55.543668+03
-7114	2434	2	\N	2015-06-10 21:10:58.272269+03
-7115	2434	2	\N	2015-06-10 21:11:16.546457+03
-7116	2435	2	\N	2015-06-10 21:11:49.343497+03
-7119	2437	2	\N	2015-06-10 21:13:28.379702+03
-7120	2434	2	\N	2015-06-10 21:13:35.658848+03
-7118	2434	2	\N	2015-06-10 21:12:30.557424+03
-7121	2434	2	\N	2015-06-13 11:08:16.884538+03
-7122	2438	2	\N	2015-06-13 12:24:23.664338+03
-7123	2439	2	\N	2015-06-13 12:25:12.11639+03
-7124	2440	2	\N	2015-06-13 12:25:55.053099+03
-7125	2439	2	\N	2015-06-13 12:28:23.509307+03
-7126	1431	2	\N	2015-06-13 16:13:14.891511+03
-7127	2269	2	\N	2015-06-13 16:29:21.58833+03
-7128	2391	2	\N	2015-06-13 16:29:38.922876+03
-7130	2442	2	\N	2015-06-13 17:22:11.365048+03
-7162	2450	2	\N	2015-06-13 19:58:22.391173+03
-7163	2317	2	\N	2015-06-13 19:58:33.103367+03
-7164	2451	2	\N	2015-06-13 19:59:50.784052+03
-7165	2452	2	\N	2015-06-13 19:59:50.784052+03
-7166	2317	2	\N	2015-06-13 20:00:28.712308+03
-7167	2317	2	\N	2015-06-13 20:01:26.421434+03
-7168	2317	2	\N	2015-06-13 20:03:24.653457+03
-7176	2451	2	\N	2015-06-14 10:07:32.690694+03
-7177	2451	2	\N	2015-06-14 10:16:32.619194+03
-7178	2451	2	\N	2015-06-14 13:13:57.393431+03
-7179	2451	2	\N	2015-06-14 13:21:50.094038+03
-7180	2451	2	\N	2015-06-14 13:22:37.050016+03
-7181	2451	2	\N	2015-06-14 13:23:13.387606+03
-7182	2451	2	\N	2015-06-14 13:23:25.25704+03
-7183	2457	2	\N	2015-06-14 13:25:18.074212+03
-7184	2451	2	\N	2015-06-14 13:26:56.97373+03
-7185	2458	2	\N	2015-06-14 13:28:59.472857+03
-7186	2459	2	\N	2015-06-14 13:29:40.688494+03
-7187	2457	2	\N	2015-06-14 14:17:22.935487+03
-7199	2463	2	\N	2015-06-14 16:30:22.760587+03
-7201	2463	2	\N	2015-06-14 16:43:36.808614+03
-7202	2465	2	\N	2015-06-14 18:28:13.295968+03
-7203	2466	2	\N	2015-06-14 18:50:25.96227+03
-7204	2467	2	\N	2015-06-14 18:50:57.662486+03
-7205	2468	2	\N	2015-06-17 21:13:39.6663+03
-7206	2469	2	\N	2015-06-17 21:13:39.6663+03
-7207	2469	2	\N	2015-06-17 21:39:31.5421+03
-7208	2470	2	\N	2015-06-17 21:39:43.056809+03
-7211	2296	2	\N	2015-06-17 22:28:24.889672+03
-7212	2296	2	\N	2015-06-17 22:28:44.137455+03
-7213	2296	2	\N	2015-06-17 22:28:55.531055+03
-7214	2296	2	\N	2015-06-17 22:29:04.688414+03
-7217	1190	2	\N	2015-06-18 08:41:45.975909+03
-7218	1190	2	\N	2015-06-18 08:41:55.712142+03
-7219	2475	2	\N	2015-06-18 08:47:40.598128+03
-7221	1043	2	\N	2015-06-18 08:49:28.676473+03
-7222	2477	2	\N	2015-06-18 08:53:01.574753+03
-7229	2484	2	\N	2015-06-18 09:11:44.190988+03
-7230	2477	2	\N	2015-06-18 09:15:16.231618+03
-7232	2486	2	\N	2015-06-19 08:53:30.530081+03
-7235	2489	2	\N	2015-06-19 08:57:56.925224+03
-7236	2490	2	\N	2015-06-19 08:58:47.001543+03
-7237	2491	2	\N	2015-06-19 09:01:01.141859+03
-7239	2493	2	\N	2015-06-19 09:05:15.381515+03
-7241	1010	2	\N	2015-06-19 09:18:51.710345+03
-7244	2129	2	\N	2015-06-19 09:22:37.844576+03
-7248	2137	2	\N	2015-06-19 09:24:18.706637+03
-7250	2248	2	\N	2015-06-19 09:24:53.046897+03
-7251	2477	2	\N	2015-06-20 10:13:49.575046+03
-7252	2484	2	\N	2015-06-20 10:13:59.32685+03
-7253	2501	2	\N	2015-06-20 10:23:36.01186+03
-7254	2490	2	\N	2015-06-20 10:24:30.090794+03
-7255	2502	2	\N	2015-06-20 10:25:23.92051+03
-7256	2490	2	\N	2015-06-20 10:25:26.171733+03
-7257	2503	2	\N	2015-06-20 10:58:18.119129+03
-7259	2505	2	\N	2015-06-20 11:21:58.139735+03
-7260	2506	2	\N	2015-06-20 11:22:00.401736+03
-7261	2507	2	\N	2015-06-20 11:22:46.430212+03
-7262	2506	2	\N	2015-06-20 11:22:51.478424+03
-7263	2508	2	\N	2015-06-20 11:23:54.736317+03
-7264	2506	2	\N	2015-06-20 11:23:56.167951+03
-7265	2345	2	\N	2015-06-20 11:26:36.603828+03
-7266	2345	2	\N	2015-06-20 11:27:18.047841+03
-7268	2345	2	\N	2015-06-20 11:46:46.13788+03
-7269	2510	2	\N	2015-06-20 11:50:12.161837+03
-7270	2511	2	\N	2015-06-20 11:50:13.525526+03
-7272	2463	2	\N	2015-06-20 23:00:10.769493+03
-7273	2467	2	\N	2015-06-20 23:00:18.463896+03
-7274	2459	2	\N	2015-06-20 23:00:44.920864+03
-7275	2458	2	\N	2015-06-20 23:00:51.132288+03
-7276	2457	2	\N	2015-06-20 23:00:57.565186+03
-7277	2451	2	\N	2015-06-20 23:01:04.368039+03
-7278	2451	2	\N	2015-06-20 23:04:17.342527+03
-7279	2457	2	\N	2015-06-20 23:04:23.315461+03
-7280	2458	2	\N	2015-06-20 23:04:30.160097+03
-7281	2459	2	\N	2015-06-20 23:04:35.721205+03
-7282	1896	2	\N	2015-06-21 11:16:22.975624+03
-7285	2459	2	\N	2015-06-21 11:19:17.963777+03
-7286	2458	2	\N	2015-06-21 11:19:23.880837+03
-7287	2457	2	\N	2015-06-21 11:19:29.44712+03
-7288	2451	2	\N	2015-06-21 11:19:35.471458+03
-7289	2467	2	\N	2015-06-21 11:19:54.443461+03
-7290	2463	2	\N	2015-06-21 11:20:00.085347+03
-7291	2465	2	\N	2015-06-21 11:21:33.270335+03
-7292	2513	2	\N	2015-06-23 22:26:54.54596+03
-7293	778	2	\N	2015-06-23 22:31:51.561928+03
-7294	2514	2	\N	2015-06-23 22:34:29.078834+03
-7295	2514	2	\N	2015-06-23 22:36:01.548881+03
-7296	2513	2	\N	2015-06-23 22:42:58.979814+03
-7297	2514	2	\N	2015-06-23 22:46:14.322892+03
-7298	2515	2	\N	2015-06-23 22:48:32.462285+03
-7299	2477	2	\N	2015-06-27 16:53:47.400114+03
-7300	2477	2	\N	2015-06-27 17:29:32.884456+03
-7301	2477	2	\N	2015-06-27 17:32:15.776144+03
-7302	2477	2	\N	2015-06-27 17:33:05.384003+03
-7303	2477	2	\N	2015-06-27 17:35:05.607746+03
-7304	2477	2	\N	2015-06-27 17:36:45.346277+03
-7305	2477	2	\N	2015-06-27 17:38:01.404518+03
-7306	784	2	\N	2015-06-27 17:39:03.474446+03
-7307	784	2	\N	2015-06-27 17:52:48.813097+03
-7308	885	2	\N	2015-06-27 17:53:15.731358+03
-7309	2053	2	\N	2015-06-27 17:58:30.465951+03
-7310	2477	2	\N	2015-06-27 19:15:20.180008+03
-7311	2477	2	\N	2015-06-27 19:49:02.708272+03
-7312	784	2	\N	2015-06-27 19:50:37.220816+03
-7313	784	2	\N	2015-06-27 19:50:45.528129+03
-7314	784	2	\N	2015-06-27 19:50:53.618877+03
-7315	784	2	\N	2015-06-27 19:52:29.5324+03
-7316	2477	2	\N	2015-06-27 19:52:36.102154+03
-7317	2516	2	\N	2015-06-27 20:34:38.335917+03
-7318	2517	2	\N	2015-06-27 21:02:52.190849+03
-7319	2518	2	\N	2015-06-27 22:00:11.577645+03
-7320	784	2	\N	2015-06-27 22:13:51.726755+03
-7321	2519	2	\N	2015-06-27 22:13:51.726755+03
-7322	2520	2	\N	2015-06-27 22:14:31.050053+03
-7323	2521	2	\N	2015-06-27 22:15:06.48124+03
-7324	2522	2	\N	2015-06-27 22:27:54.400494+03
-7325	2523	2	\N	2015-06-27 22:40:18.037224+03
-7326	2524	2	\N	2015-06-27 22:42:17.60206+03
-7327	2525	2	\N	2015-06-27 22:42:37.767083+03
-7328	784	2	\N	2015-06-27 22:49:09.961687+03
-7329	784	2	\N	2015-06-27 22:49:28.712758+03
-7330	784	2	\N	2015-06-27 22:49:40.054287+03
-7331	2526	2	\N	2015-06-28 15:48:24.134048+03
-7332	2527	2	\N	2015-06-28 15:49:06.934643+03
-7335	1286	2	\N	2015-06-28 16:19:06.654271+03
-7336	1284	2	\N	2015-06-28 16:19:08.822984+03
-7337	2528	2	\N	2015-06-28 16:27:58.214962+03
-7338	2529	2	\N	2015-07-04 20:12:31.951644+03
-7339	2530	2	\N	2015-07-04 20:16:08.99227+03
-7340	2531	2	\N	2015-07-04 20:16:08.99227+03
-7341	2532	2	\N	2015-07-04 20:36:07.167824+03
-7342	2533	2	\N	2015-07-04 20:36:07.167824+03
-7343	2534	2	\N	2015-07-04 20:57:32.449165+03
-7344	2491	2	\N	2015-07-04 20:58:12.716739+03
-7345	2535	2	\N	2015-07-04 20:58:36.935951+03
-7346	2536	2	\N	2015-07-04 20:59:39.366864+03
-7347	2491	2	\N	2015-07-04 20:59:49.220324+03
-7348	2537	2	\N	2015-07-04 21:00:02.518034+03
-7349	2538	2	\N	2015-07-04 21:13:08.541103+03
-7350	2539	2	\N	2015-07-04 21:14:30.611204+03
-7351	2540	2	\N	2015-07-04 21:14:32.763289+03
-7352	2541	2	\N	2015-07-04 21:14:50.821175+03
-7353	2450	2	\N	2015-07-04 21:16:23.905581+03
-7354	2542	2	\N	2015-07-04 21:17:54.658173+03
-7355	2450	2	\N	2015-07-04 21:20:36.496307+03
-7356	2450	2	\N	2015-07-04 21:22:20.163177+03
-7357	2450	2	\N	2015-07-04 21:25:41.863118+03
-7358	2543	2	\N	2015-07-04 21:26:56.584606+03
-7359	2544	2	\N	2015-07-04 21:27:23.469843+03
-7360	2388	2	\N	2015-07-04 21:27:31.474854+03
-7361	2545	2	\N	2015-07-04 21:30:18.47115+03
-7362	2546	2	\N	2015-07-04 21:30:37.579131+03
-7363	2545	2	\N	2015-07-04 21:30:38.730906+03
-7364	2547	2	\N	2015-07-04 21:30:51.680567+03
-7365	2548	2	\N	2015-07-04 21:30:51.680567+03
-7366	2388	2	\N	2015-07-04 21:31:14.422776+03
-7367	2451	2	\N	2015-07-05 14:30:51.54628+03
-7368	2457	2	\N	2015-07-05 14:33:01.814653+03
-7369	2458	2	\N	2015-07-05 14:33:47.939925+03
-7370	2459	2	\N	2015-07-05 14:33:59.629688+03
-7371	2451	2	\N	2015-07-05 14:39:43.167129+03
-7372	2467	2	\N	2015-07-05 14:49:52.691681+03
-7373	2463	2	\N	2015-07-05 14:50:06.470488+03
-7374	2549	2	\N	2015-07-05 15:34:32.780638+03
-7376	2434	2	\N	2015-07-05 19:13:53.412323+03
-7377	3	2	\N	2015-07-17 19:31:34.831317+03
-7378	894	2	\N	2015-07-17 19:34:30.132569+03
-7379	2054	2	\N	2015-07-17 19:34:44.345599+03
-7380	2126	2	\N	2015-07-17 19:35:00.154065+03
-7381	2484	2	\N	2015-07-17 19:35:15.872953+03
-7382	2550	2	\N	2015-07-18 10:57:05.728016+03
-7383	1372	2	\N	2015-07-18 10:57:08.110977+03
-7384	1372	2	\N	2015-07-18 10:57:38.113606+03
-7385	2551	2	\N	2015-07-18 11:02:48.147598+03
-7386	2552	2	\N	2015-07-18 11:22:14.245467+03
-7387	2552	2	\N	2015-07-18 11:24:17.241528+03
-7388	2553	2	\N	2015-07-18 11:32:44.472503+03
-7389	2554	2	\N	2015-07-18 11:46:38.401629+03
-7390	2554	2	\N	2015-07-18 11:47:52.858154+03
-7392	2556	2	\N	2015-07-18 11:55:59.961331+03
-7393	1372	2	\N	2015-07-18 11:56:18.816278+03
-7394	1375	2	\N	2015-07-18 11:56:26.8815+03
-7395	2557	2	\N	2015-07-18 12:01:04.237446+03
-7396	887	2	\N	2015-07-18 12:01:06.541839+03
-7397	2376	2	\N	2015-07-18 12:01:31.956124+03
-7398	2556	2	\N	2015-07-18 12:01:52.672293+03
-7399	2558	2	\N	2015-07-19 10:20:48.263335+03
-7400	2559	2	\N	2015-07-19 14:41:19.72071+03
-7401	2560	2	\N	2015-07-19 14:41:25.622087+03
-7402	2561	2	\N	2015-07-19 14:42:40.770503+03
-7403	2562	2	\N	2015-07-19 14:42:45.815524+03
-7404	2563	2	\N	2015-07-19 15:12:51.840188+03
-7405	2564	2	\N	2015-07-19 15:13:34.062285+03
-7407	2566	2	\N	2015-07-19 15:17:50.040034+03
-7408	2567	2	\N	2015-07-19 15:18:18.066263+03
-7409	2568	2	\N	2015-07-19 15:19:23.078636+03
-7410	2569	2	\N	2015-07-19 15:19:33.135472+03
-7411	2570	2	\N	2015-07-19 15:20:45.489438+03
-7412	2571	2	\N	2015-07-19 15:21:40.944498+03
-7413	2572	2	\N	2015-07-19 15:21:50.318605+03
-7414	2573	2	\N	2015-07-19 16:03:41.362252+03
-7415	2574	2	\N	2015-07-19 16:04:11.184096+03
-7416	2575	2	\N	2015-07-19 16:04:13.848246+03
-7417	2576	2	\N	2015-07-19 16:05:08.205201+03
-7418	2577	2	\N	2015-07-19 16:06:12.10907+03
-7419	2578	2	\N	2015-07-19 16:06:39.117569+03
-7420	2579	2	\N	2015-07-19 16:06:40.986562+03
-7421	2580	2	\N	2015-07-19 16:07:27.111556+03
-7422	2581	2	\N	2015-07-19 16:08:00.994992+03
-7423	2582	2	\N	2015-07-19 16:08:03.06528+03
-7424	2583	2	\N	2015-07-19 22:56:54.154484+03
-7426	2585	2	\N	2015-07-19 23:52:14.447269+03
-7427	2586	2	\N	2015-07-19 23:52:36.403304+03
-7428	2587	2	\N	2015-07-19 23:52:50.958041+03
-7429	2588	2	\N	2015-07-19 23:53:14.681932+03
-7430	2589	2	\N	2015-07-19 23:54:00.547115+03
-7431	2590	2	\N	2015-07-19 23:54:44.372371+03
-7432	2591	2	\N	2015-07-19 23:54:52.387429+03
-7433	2593	2	\N	2015-07-19 23:56:11.09679+03
-7434	2594	2	\N	2015-07-19 23:56:44.56359+03
-7435	2595	2	\N	2015-07-19 23:56:46.53373+03
-7436	1932	2	\N	2015-07-20 00:00:04.645587+03
-7437	2596	2	\N	2015-07-20 00:04:50.031308+03
-7438	2597	2	\N	2015-07-20 00:05:29.444039+03
-7439	2598	2	\N	2015-07-20 00:06:05.823851+03
-7440	2599	2	\N	2015-07-20 00:06:07.921437+03
-7443	2602	2	\N	2015-07-20 23:51:41.323724+03
-7444	2603	2	\N	2015-07-20 23:51:41.323724+03
-7445	2604	2	\N	2015-07-20 23:51:41.323724+03
-7446	2605	2	\N	2015-07-20 23:51:41.323724+03
-7449	2608	2	\N	2015-07-20 23:51:41.323724+03
-7453	2612	2	\N	2015-07-20 23:51:41.323724+03
-7454	2613	2	\N	2015-07-20 23:51:41.323724+03
-7458	2617	2	\N	2015-07-20 23:51:41.323724+03
-7472	2631	2	\N	2015-07-20 23:51:41.323724+03
-7473	2632	2	\N	2015-07-20 23:51:41.323724+03
-7474	2633	2	\N	2015-07-20 23:51:41.323724+03
-7475	2634	2	\N	2015-07-20 23:51:41.323724+03
-7476	2635	2	\N	2015-07-20 23:51:41.323724+03
-7477	2636	2	\N	2015-07-20 23:51:41.323724+03
-7478	2637	2	\N	2015-07-20 23:51:41.323724+03
-7479	2638	2	\N	2015-07-20 23:51:41.323724+03
-7483	2642	2	\N	2015-07-20 23:51:41.323724+03
-7484	2643	2	\N	2015-07-20 23:51:41.323724+03
-7487	2646	2	\N	2015-07-20 23:51:41.323724+03
-7488	2647	2	\N	2015-07-20 23:51:41.323724+03
-7489	2648	2	\N	2015-07-20 23:51:41.323724+03
-7490	2649	2	\N	2015-07-20 23:51:41.323724+03
-7491	2650	2	\N	2015-07-20 23:51:41.323724+03
-7492	2651	2	\N	2015-07-20 23:51:41.323724+03
-7493	2652	2	\N	2015-07-20 23:51:41.323724+03
-7494	2653	2	\N	2015-07-20 23:51:41.323724+03
-7495	2654	2	\N	2015-07-20 23:51:41.323724+03
-7496	2655	2	\N	2015-07-20 23:51:41.323724+03
-7497	2658	2	\N	2015-07-20 23:58:46.110129+03
-7498	894	2	\N	2015-07-20 23:59:14.903581+03
-7499	2659	7	\N	2015-07-21 00:38:27.04357+03
-7500	2660	7	\N	2015-07-21 00:38:31.047891+03
-7501	2661	7	\N	2015-07-21 00:40:04.89713+03
-7502	2662	7	\N	2015-07-21 00:40:08.316954+03
-7503	2663	2	\N	2015-07-21 00:42:13.515989+03
-7504	2664	2	\N	2015-07-21 00:44:32.068557+03
-7505	2662	2	\N	2015-07-21 00:45:19.305589+03
-7506	2662	7	\N	2015-07-21 00:47:09.218984+03
-7507	894	2	\N	2015-07-22 09:52:23.690178+03
-7508	885	2	\N	2015-07-22 09:53:01.082145+03
-7509	2665	2	\N	2015-07-22 09:53:01.082145+03
-7510	885	2	\N	2015-07-22 09:53:36.087021+03
-7511	2272	2	\N	2015-07-22 10:46:42.444349+03
-7512	2272	2	\N	2015-07-22 10:47:14.111233+03
-7513	2666	2	\N	2015-07-22 10:50:02.98887+03
-7514	2667	2	\N	2015-07-22 10:50:08.679496+03
-7515	2668	2	\N	2015-07-22 10:51:11.924694+03
-7516	2669	2	\N	2015-07-22 10:51:14.586916+03
-7517	2669	2	\N	2015-07-22 11:46:47.662266+03
-7518	2670	2	\N	2015-07-22 11:49:53.983401+03
-7520	2669	2	\N	2015-07-22 11:53:54.403754+03
-7521	2669	2	\N	2015-07-22 11:54:14.136266+03
-7522	2669	2	\N	2015-07-22 12:24:29.892068+03
-7523	2673	2	\N	2015-07-22 12:28:35.92606+03
-7524	2674	2	\N	2015-07-22 12:28:39.345269+03
-7525	2675	2	\N	2015-07-22 12:44:17.155133+03
-7526	2676	2	\N	2015-07-22 12:45:19.167404+03
-7527	2677	2	\N	2015-07-22 12:45:42.418521+03
-7528	2678	2	\N	2015-07-22 12:45:46.782121+03
-7529	2679	2	\N	2015-07-22 12:46:34.868393+03
-7530	2678	2	\N	2015-07-22 12:47:12.553819+03
-7531	2680	2	\N	2015-07-22 12:47:32.725361+03
-7532	2681	2	\N	2015-07-22 12:47:48.511246+03
-7533	2682	2	\N	2015-07-22 13:40:37.786999+03
-7534	2681	2	\N	2015-07-22 13:40:39.941316+03
-7535	2681	2	\N	2015-07-22 13:40:55.710058+03
-7536	2683	2	\N	2015-07-22 13:41:40.486853+03
-7537	2684	2	\N	2015-07-22 13:41:59.700406+03
-7538	2685	2	\N	2015-07-22 13:42:00.973433+03
-7539	2667	2	\N	2015-07-22 13:42:02.635972+03
-7540	2685	2	\N	2015-07-22 13:46:08.824214+03
-7541	2667	2	\N	2015-07-22 13:46:13.399464+03
-7542	2686	2	\N	2015-07-22 13:47:12.099197+03
-7543	2687	2	\N	2015-07-22 13:47:12.099197+03
-7544	2688	2	\N	2015-07-22 13:50:14.404321+03
-7545	2689	2	\N	2015-07-22 13:50:14.404321+03
-7546	2690	2	\N	2015-07-22 13:53:17.909433+03
-7547	2690	2	\N	2015-07-22 13:53:48.33605+03
-7550	2693	2	\N	2015-07-22 14:07:31.992976+03
-7551	2694	2	\N	2015-07-22 14:08:00.072596+03
-7552	2695	2	\N	2015-07-22 14:08:45.393051+03
-7555	2698	2	\N	2015-07-22 14:13:47.912163+03
-7556	2699	2	\N	2015-07-22 14:14:01.749177+03
-7557	2700	2	\N	2015-07-22 14:14:10.709485+03
-7558	2701	2	\N	2015-07-22 14:14:10.709485+03
-7559	2699	2	\N	2015-07-22 14:16:42.964801+03
-7560	2702	2	\N	2015-07-22 14:17:00.761945+03
-7561	2703	2	\N	2015-07-22 14:17:00.761945+03
-7562	2704	2	\N	2015-07-22 14:19:56.751612+03
-7563	2705	2	\N	2015-07-22 14:19:56.751612+03
-7564	2699	2	\N	2015-07-22 14:20:42.704316+03
-7565	2706	2	\N	2015-07-22 14:21:02.027005+03
-7566	2707	2	\N	2015-07-22 14:21:02.027005+03
-7567	2699	2	\N	2015-07-22 14:21:39.869597+03
-7568	2699	2	\N	2015-07-22 14:21:46.984305+03
-7569	2708	2	\N	2015-07-22 14:21:59.287338+03
-7570	2709	2	\N	2015-07-22 14:21:59.287338+03
-7571	2699	2	\N	2015-07-22 14:22:26.322903+03
-7572	2710	2	\N	2015-07-22 14:22:35.509695+03
-7573	2711	2	\N	2015-07-22 14:22:35.509695+03
-7574	2699	2	\N	2015-07-22 14:23:19.576335+03
-7575	2712	2	\N	2015-07-22 14:23:36.759685+03
-7576	2713	2	\N	2015-07-22 14:23:36.759685+03
-7577	2714	2	\N	2015-07-22 14:30:40.877306+03
-7578	2715	2	\N	2015-07-22 14:32:25.925422+03
-7579	2716	2	\N	2015-07-22 14:32:25.925422+03
-7580	2714	2	\N	2015-07-22 14:32:56.995021+03
-7581	2717	2	\N	2015-07-22 14:33:08.574387+03
-7582	2718	2	\N	2015-07-22 14:33:08.574387+03
-7583	2719	2	\N	2015-07-22 14:50:07.747456+03
-7584	2720	2	\N	2015-07-22 14:50:07.747456+03
-7585	2721	2	\N	2015-07-22 14:53:19.652254+03
-7586	2722	2	\N	2015-07-22 14:53:19.652254+03
-7587	2723	2	\N	2015-07-22 15:02:17.721876+03
-7588	2724	2	\N	2015-07-22 15:02:27.84792+03
-7589	2725	2	\N	2015-07-22 15:02:27.84792+03
-7590	2726	2	\N	2015-07-22 15:04:12.042101+03
-7591	2699	2	\N	2015-07-22 15:04:47.591373+03
-7592	2727	2	\N	2015-07-22 15:05:43.153662+03
-7593	2728	2	\N	2015-07-22 15:05:43.153662+03
-7594	2729	2	\N	2015-07-22 15:13:21.269737+03
-7596	2729	2	\N	2015-07-22 15:19:11.19218+03
-7597	2729	2	\N	2015-07-22 15:35:51.754061+03
-7598	2732	2	\N	2015-07-22 15:38:41.939351+03
-7599	2729	2	\N	2015-07-22 15:40:32.555996+03
-7600	2729	2	\N	2015-07-22 15:55:13.336651+03
-7601	2515	2	\N	2015-07-22 15:57:29.189389+03
-7602	2729	2	\N	2015-07-22 15:57:36.719306+03
-7603	2733	2	\N	2015-07-22 15:58:23.119691+03
-7604	2729	2	\N	2015-07-22 15:58:35.528196+03
-7605	2450	2	\N	2015-07-22 15:58:59.916186+03
-7606	2317	2	\N	2015-07-22 15:59:20.404832+03
-7607	2734	2	\N	2015-07-22 15:59:27.667185+03
-7608	2735	2	\N	2015-07-22 15:59:52.422862+03
-7609	2736	2	\N	2015-07-22 15:59:52.422862+03
-7610	2388	2	\N	2015-07-22 16:00:09.725539+03
-7611	2450	2	\N	2015-07-22 16:00:21.306194+03
-7612	1438	2	\N	2015-07-22 18:57:24.829162+03
-7613	2737	2	\N	2015-07-22 19:50:41.44109+03
-7614	2738	2	\N	2015-07-22 19:50:41.44109+03
-7615	2739	2	\N	2015-07-22 22:10:17.173605+03
-7616	2739	2	\N	2015-07-22 22:27:10.60758+03
-7617	2740	2	\N	2015-10-05 21:56:31.033698+03
-7618	2741	2	\N	2015-10-05 22:00:37.025784+03
-7619	2741	2	\N	2015-10-05 22:01:11.294026+03
-7620	2740	2	\N	2015-10-11 15:30:17.608326+03
-7621	2740	2	\N	2015-10-11 15:49:02.820999+03
-7622	2742	2	\N	2015-10-11 16:29:26.485453+03
-7655	2741	2	\N	2015-10-19 21:00:27.348936+03
-7656	2484	2	\N	2015-10-24 14:58:32.749242+03
-7657	2779	2	\N	2015-10-24 14:58:32.749242+03
-7658	2484	2	\N	2015-10-24 14:59:57.669772+03
-7659	2780	2	\N	2015-10-24 14:59:57.669772+03
-7660	894	2	\N	2015-10-24 15:00:56.289933+03
-7661	2781	2	\N	2015-10-24 15:00:56.289933+03
-7662	885	2	\N	2015-10-24 15:02:23.825848+03
-7663	894	2	\N	2015-10-24 15:06:44.559696+03
-7664	2782	2	\N	2015-10-24 15:06:44.559696+03
-7665	894	2	\N	2015-10-24 15:13:07.98256+03
-7666	2783	2	\N	2015-10-24 15:13:07.98256+03
-7667	894	2	\N	2015-10-24 15:16:03.818888+03
-7668	2784	2	\N	2015-10-24 15:16:03.818888+03
-7669	2785	2	\N	2015-10-24 15:23:48.170652+03
-7670	2786	2	\N	2015-10-24 15:24:48.816087+03
-7671	2787	2	\N	2015-10-24 15:30:54.642902+03
-7672	2739	2	\N	2015-10-31 09:47:11.166446+02
-7673	2739	2	\N	2015-10-31 09:48:54.569182+02
-7674	2739	2	\N	2015-10-31 09:52:21.217177+02
-7675	2739	2	\N	2015-10-31 09:52:28.501825+02
-7676	2739	2	\N	2015-10-31 10:25:38.872091+02
-7677	2593	2	\N	2015-10-31 10:32:28.375294+02
-7678	2788	2	\N	2015-10-31 11:46:02.329007+02
-7679	2741	2	\N	2015-10-31 11:48:54.106885+02
-7698	2813	2	\N	2015-11-22 21:52:45.311354+02
-7699	2814	2	\N	2015-11-22 21:57:07.211721+02
-7700	2739	2	\N	2015-11-22 21:57:09.506917+02
-7701	2739	2	\N	2015-11-22 22:03:49.302367+02
-7705	2820	2	\N	2016-01-02 19:03:39.167822+02
-7707	2821	2	\N	2016-01-02 20:11:21.358279+02
-7708	2822	2	\N	2016-01-02 20:11:24.233178+02
-7709	2823	2	\N	2016-01-02 20:12:21.682793+02
-7710	2824	2	\N	2016-01-02 20:12:46.762385+02
-7711	2825	2	\N	2016-01-02 20:15:08.259398+02
-7712	2824	2	\N	2016-01-02 20:15:26.352748+02
-7713	2826	2	\N	2016-01-02 20:15:55.52191+02
-7714	2824	2	\N	2016-01-02 20:17:19.972235+02
-7715	2822	2	\N	2016-01-02 20:21:41.413863+02
-7716	2827	2	\N	2016-01-02 20:24:24.220398+02
-7717	2828	2	\N	2016-01-02 20:24:24.220398+02
-7719	2830	2	\N	2016-01-02 20:25:43.115841+02
-7720	2831	2	\N	2016-01-02 20:26:37.333884+02
-7721	2832	2	\N	2016-01-02 20:27:25.581765+02
-7722	2833	2	\N	2016-01-02 20:36:13.937348+02
-7723	2834	2	\N	2016-01-02 20:36:20.489746+02
-7724	2834	2	\N	2016-01-02 20:36:41.364121+02
-7725	2835	2	\N	2016-01-02 20:42:25.330155+02
-7726	2836	2	\N	2016-01-02 20:42:56.538052+02
-7727	2837	2	\N	2016-01-02 20:50:50.737933+02
-7728	2838	2	\N	2016-01-02 20:50:50.737933+02
-7729	2831	2	\N	2016-01-02 20:50:54.803525+02
-7730	2839	2	\N	2016-01-02 20:51:13.095185+02
-7731	2840	2	\N	2016-01-02 20:51:13.095185+02
-7732	2841	2	\N	2016-01-02 20:52:40.961629+02
-7733	2540	2	\N	2016-01-02 20:53:36.703713+02
-7734	2842	2	\N	2016-01-02 20:53:48.427475+02
-7735	2843	2	\N	2016-01-02 20:53:48.427475+02
-7736	2844	2	\N	2016-01-02 21:00:05.527737+02
-7737	2845	2	\N	2016-01-02 21:00:05.527737+02
-7738	2846	2	\N	2016-01-02 21:03:59.88429+02
-7739	2847	2	\N	2016-01-02 21:03:59.88429+02
-7740	2848	2	\N	2016-01-02 21:08:47.993297+02
-7741	2849	2	\N	2016-01-02 21:08:47.993297+02
-7742	2850	2	\N	2016-01-02 21:16:40.983488+02
-7743	2851	2	\N	2016-01-02 21:16:40.983488+02
-7744	2852	2	\N	2016-01-02 21:36:46.646531+02
-7745	2853	2	\N	2016-01-02 21:36:49.099159+02
-7746	2854	2	\N	2016-01-02 21:37:14.376182+02
-7747	2855	2	\N	2016-01-02 21:37:14.376182+02
-7748	2853	2	\N	2016-01-02 21:38:33.232425+02
-7749	2853	2	\N	2016-01-02 21:39:02.581845+02
-7752	2857	2	\N	2016-01-02 21:39:38.718674+02
-7755	2858	2	\N	2016-01-02 21:48:47.109583+02
-7756	2858	2	\N	2016-01-02 21:49:26.302355+02
-7757	2858	2	\N	2016-01-02 21:50:13.774213+02
-7759	2841	2	\N	2016-01-02 22:14:54.924705+02
-7763	2858	2	\N	2016-01-02 22:21:07.90205+02
-7750	2853	2	\N	2016-01-02 21:39:16.771773+02
-7753	2858	2	\N	2016-01-02 21:43:29.317483+02
-7754	2859	2	\N	2016-01-02 21:48:34.392885+02
-7758	2858	2	\N	2016-01-02 21:50:34.02702+02
-7760	2835	2	\N	2016-01-02 22:15:05.490599+02
-7761	2858	2	\N	2016-01-02 22:15:28.276336+02
-7762	2858	2	\N	2016-01-02 22:20:37.944351+02
-7764	2858	2	\N	2016-01-02 22:23:01.500364+02
-7765	2858	2	\N	2016-01-02 22:24:07.265807+02
-7766	2858	2	\N	2016-01-02 22:57:12.346032+02
-7767	2858	2	\N	2016-01-02 22:57:27.435802+02
-7768	2858	2	\N	2016-01-02 22:58:10.983876+02
-7769	2860	2	\N	2016-01-02 23:22:02.986231+02
-7770	2861	2	\N	2016-01-02 23:22:02.986231+02
-7771	2862	2	\N	2016-01-02 23:29:14.591921+02
-7772	2863	2	\N	2016-01-02 23:29:43.595496+02
-7773	2864	2	\N	2016-01-02 23:32:59.025447+02
-7774	2865	2	\N	2016-01-02 23:33:17.678918+02
-7775	2866	2	\N	2016-01-02 23:33:24.314299+02
-7776	2867	2	\N	2016-01-02 23:34:03.051927+02
-7777	2824	2	\N	2016-01-02 23:39:00.961892+02
-7780	2830	2	\N	2016-01-30 21:00:27.913502+02
-7781	2830	2	\N	2016-01-30 21:01:18.072032+02
-7782	2830	2	\N	2016-01-30 21:01:36.444194+02
-7783	2830	2	\N	2016-02-06 15:26:53.662979+02
-7784	2830	2	\N	2016-02-06 15:33:10.739181+02
-7785	2830	2	\N	2016-02-06 15:34:22.381065+02
-7786	2830	2	\N	2016-02-06 15:35:20.238203+02
-7787	2830	2	\N	2016-02-06 15:36:19.423459+02
-7788	2830	2	\N	2016-02-06 15:45:57.869458+02
-7789	2830	2	\N	2016-02-06 15:55:27.857802+02
-7790	2830	2	\N	2016-02-06 16:02:20.536632+02
-7791	2830	2	\N	2016-02-06 16:19:02.587853+02
-7792	2830	2	\N	2016-02-06 16:19:14.340638+02
-7793	2830	2	\N	2016-02-06 16:19:40.099469+02
-7794	2870	2	\N	2016-02-07 17:23:20.218116+02
-7795	2871	2	\N	2016-02-07 17:23:20.218116+02
-7796	2872	2	\N	2016-02-07 21:04:30.754221+02
-7797	2872	2	\N	2016-02-07 21:05:54.259693+02
-7798	2872	2	\N	2016-02-07 21:07:48.965918+02
-7799	2873	2	\N	2016-02-07 21:19:25.018357+02
-7800	2874	2	\N	2016-02-07 21:20:02.361201+02
-7801	2875	2	\N	2016-02-07 21:20:21.884033+02
-7802	2876	2	\N	2016-02-07 21:21:03.816914+02
-7803	2877	2	\N	2016-02-07 21:21:07.920879+02
-7804	2788	2	\N	2016-05-09 12:53:56.945117+03
-7805	2878	2	\N	2016-05-09 12:57:37.410132+03
-7806	2879	2	\N	2016-05-09 12:58:01.601364+03
-7807	2875	2	\N	2016-05-09 14:19:09.461648+03
-7808	2879	2	\N	2016-05-09 14:19:09.461648+03
-7809	2875	2	\N	2016-05-09 14:21:24.121089+03
-7810	2879	2	\N	2016-05-09 14:21:24.121089+03
-7811	2877	2	\N	2016-05-09 19:49:23.40543+03
-7812	2877	2	\N	2016-05-09 20:42:10.779147+03
-7813	2877	2	\N	2016-05-09 20:59:03.503884+03
-7814	2877	2	\N	2016-05-09 20:59:20.181507+03
-7815	2880	2	\N	2016-05-14 12:24:09.362992+03
-7816	2881	2	\N	2016-05-14 12:24:17.0673+03
-7817	2882	2	\N	2016-05-14 12:40:37.631348+03
-7818	2883	2	\N	2016-05-14 12:42:08.065152+03
-7822	2887	2	\N	2016-05-14 19:24:38.497791+03
-7823	2882	2	\N	2016-05-14 19:25:04.0458+03
-7824	2888	2	\N	2016-05-14 19:26:49.355068+03
-7825	2889	2	\N	2016-05-14 19:27:41.044427+03
-7826	2888	2	\N	2016-05-14 19:28:16.54874+03
-7827	2889	2	\N	2016-05-14 19:33:22.988649+03
-7829	1932	2	\N	2016-05-15 18:01:28.601998+03
-7830	1939	2	\N	2016-05-15 18:01:28.601998+03
-7833	2891	7	\N	2016-05-22 19:55:08.969532+03
-7834	2892	7	\N	2016-05-22 19:55:14.973042+03
-7835	2893	7	\N	2016-05-22 19:56:54.291848+03
-7836	2894	7	\N	2016-05-22 19:57:34.361739+03
-7837	2895	7	\N	2016-05-22 20:02:06.06185+03
-7838	2896	7	\N	2016-05-22 20:02:08.989653+03
-7839	2897	7	\N	2016-05-22 20:02:51.686319+03
-7840	2898	7	\N	2016-05-22 20:04:51.844389+03
-7841	2899	7	\N	2016-05-22 20:05:17.325444+03
-7842	2900	7	\N	2016-05-22 20:05:17.325444+03
-7844	2902	7	\N	2016-05-22 20:06:48.112563+03
-7845	2902	7	\N	2016-05-22 20:07:40.428098+03
-7846	2902	7	\N	2016-05-22 20:07:58.637089+03
-7847	1849	2	\N	2016-05-22 20:11:06.601318+03
-7848	2903	2	\N	2016-05-22 20:42:01.686171+03
-7849	2904	2	\N	2016-05-22 20:43:32.285069+03
-7858	2887	2	\N	2016-06-20 11:34:01.085463+03
-7859	2909	2	\N	2016-06-20 12:26:00.939764+03
-7860	2910	2	\N	2016-06-20 12:26:29.268002+03
-7862	2887	2	\N	2016-06-20 12:27:37.92458+03
-7863	2912	2	\N	2016-06-20 12:38:09.013321+03
-7864	2913	2	\N	2016-06-20 13:20:01.073862+03
-7865	2914	2	\N	2016-06-20 14:11:04.911508+03
-7866	2912	2	\N	2016-06-20 15:20:01.64695+03
-7867	2912	2	\N	2016-06-20 15:20:15.219041+03
-7868	2912	2	\N	2016-06-20 15:32:44.861221+03
-7869	2912	2	\N	2016-06-20 15:33:07.606499+03
-7870	2912	2	\N	2016-06-20 16:02:21.203464+03
-7871	2915	2	\N	2016-06-20 16:06:07.075108+03
-7872	2785	2	\N	2016-06-20 16:35:58.751634+03
-7873	2916	2	\N	2016-06-20 16:35:58.751634+03
-7874	2785	2	\N	2016-06-20 16:36:09.547187+03
-7877	2859	2	\N	2016-06-20 18:03:05.509688+03
-7878	1542	2	\N	2016-06-27 22:07:41.304565+03
-7879	2919	2	\N	2016-07-17 15:53:00.533693+03
-7880	2658	2	\N	2016-07-17 15:53:03.822052+03
-7881	2658	2	\N	2016-07-17 15:53:22.995918+03
-7883	2921	2	\N	2016-07-17 15:57:03.063727+03
-7885	2923	2	\N	2016-07-17 15:57:38.125422+03
-7886	2658	2	\N	2016-07-17 15:57:40.419292+03
-7887	2658	2	\N	2016-07-17 15:59:58.834721+03
-7888	2658	2	\N	2016-07-17 16:01:15.697493+03
-7889	2658	2	\N	2016-07-17 16:01:28.050755+03
-7890	2924	2	\N	2016-07-17 16:02:08.858252+03
-7891	2658	2	\N	2016-07-17 16:02:10.643204+03
-7892	2658	2	\N	2016-07-17 16:23:27.014208+03
-7893	2925	2	\N	2016-07-17 16:27:22.852465+03
-7894	2926	2	\N	2016-07-17 16:27:39.783198+03
-7895	2658	2	\N	2016-07-17 16:27:41.582264+03
-7899	2930	2	\N	2016-07-17 19:09:30.834678+03
-7900	2931	2	\N	2016-07-17 19:09:45.474753+03
-7901	2932	2	\N	2016-07-17 19:09:56.538156+03
-7902	2933	2	\N	2016-07-17 19:10:06.7265+03
-7903	2934	2	\N	2016-07-17 19:11:15.719986+03
-7904	2935	2	\N	2016-07-17 19:11:20.977505+03
-7905	2936	2	\N	2016-07-17 19:11:44.819805+03
-7906	2937	2	\N	2016-07-17 19:11:44.819805+03
-7907	2938	2	\N	2016-07-17 19:11:44.819805+03
-7908	2939	2	\N	2016-07-17 19:11:56.506982+03
-7909	2940	2	\N	2016-07-17 19:12:24.362788+03
-7911	2942	2	\N	2016-07-17 19:12:40.741111+03
-7912	2943	2	\N	2016-07-17 19:12:40.741111+03
-7913	2944	2	\N	2016-07-17 19:12:40.741111+03
-7914	2945	2	\N	2016-07-17 19:12:45.01282+03
-7915	2946	2	\N	2016-07-17 19:17:12.257123+03
-7916	2947	2	\N	2016-07-17 19:17:12.257123+03
-7917	2948	2	\N	2016-07-17 19:17:12.257123+03
-7918	2946	2	\N	2016-07-17 19:17:12.257123+03
-7919	2947	2	\N	2016-07-17 19:17:12.257123+03
-7920	2948	2	\N	2016-07-17 19:17:12.257123+03
-7921	2949	2	\N	2016-07-17 19:17:23.705373+03
-7922	2950	2	\N	2016-07-17 19:18:32.695032+03
-7923	2951	2	\N	2016-07-17 19:18:32.695032+03
-7924	2952	2	\N	2016-07-17 19:18:32.695032+03
-7925	2950	2	\N	2016-07-17 19:18:32.695032+03
-7926	2951	2	\N	2016-07-17 19:18:32.695032+03
-7927	2952	2	\N	2016-07-17 19:18:32.695032+03
-7928	2953	2	\N	2016-07-17 19:18:41.475223+03
-7929	2954	2	\N	2016-07-17 19:19:39.761987+03
-7930	2955	2	\N	2016-07-17 19:19:41.856204+03
-7931	2956	2	\N	2016-07-17 19:44:29.249691+03
-7932	2957	2	\N	2016-07-17 19:44:29.249691+03
-7933	2958	2	\N	2016-07-17 19:44:29.249691+03
-7934	2956	2	\N	2016-07-17 19:44:29.249691+03
-7935	2957	2	\N	2016-07-17 19:44:29.249691+03
-7936	2958	2	\N	2016-07-17 19:44:29.249691+03
-7937	2959	2	\N	2016-07-17 19:44:45.541927+03
-7938	2960	2	\N	2016-07-17 19:44:45.541927+03
-7939	2961	2	\N	2016-07-17 19:44:45.541927+03
-7940	2959	2	\N	2016-07-17 19:44:45.541927+03
-7941	2960	2	\N	2016-07-17 19:44:45.541927+03
-7942	2961	2	\N	2016-07-17 19:44:45.541927+03
-7943	2962	2	\N	2016-07-17 19:44:53.008531+03
-7944	2963	2	\N	2016-07-17 19:48:37.057009+03
-7945	2964	2	\N	2016-07-17 19:48:37.057009+03
-7946	2965	2	\N	2016-07-17 19:48:37.057009+03
-7947	2963	2	\N	2016-07-17 19:48:37.057009+03
-7948	2964	2	\N	2016-07-17 19:48:37.057009+03
-7949	2965	2	\N	2016-07-17 19:48:37.057009+03
-7950	2966	2	\N	2016-07-17 19:49:55.098489+03
-7951	2967	2	\N	2016-07-17 19:49:55.098489+03
-7952	2968	2	\N	2016-07-17 19:49:55.098489+03
-7953	2969	2	\N	2016-07-17 19:51:50.075187+03
-7954	2970	2	\N	2016-07-17 19:51:50.075187+03
-7955	2971	2	\N	2016-07-17 19:51:50.075187+03
-7956	2972	2	\N	2016-07-17 19:53:36.417745+03
-7957	2973	2	\N	2016-07-17 19:53:36.417745+03
-7958	2974	2	\N	2016-07-17 19:53:36.417745+03
-7959	2975	2	\N	2016-07-17 19:55:12.035104+03
-7960	2976	2	\N	2016-07-17 19:55:12.035104+03
-7961	2977	2	\N	2016-07-17 19:55:12.035104+03
-7962	2975	2	\N	2016-07-17 19:55:12.035104+03
-7963	2976	2	\N	2016-07-17 19:55:12.035104+03
-7964	2977	2	\N	2016-07-17 19:55:12.035104+03
-7965	2978	2	\N	2016-07-17 19:59:51.07105+03
-7966	2979	2	\N	2016-07-17 19:59:51.07105+03
-7967	2980	2	\N	2016-07-17 19:59:51.07105+03
-7968	2981	2	\N	2016-07-17 20:00:36.447131+03
-7969	2982	2	\N	2016-07-17 20:18:29.34352+03
-7970	2983	2	\N	2016-07-17 20:18:29.34352+03
-7971	2984	2	\N	2016-07-17 20:18:29.34352+03
-7972	2982	2	\N	2016-07-17 20:18:29.34352+03
-7973	2983	2	\N	2016-07-17 20:18:29.34352+03
-7974	2984	2	\N	2016-07-17 20:18:29.34352+03
-7975	2985	2	\N	2016-07-17 20:22:21.070941+03
-7976	2986	2	\N	2016-07-17 20:22:21.070941+03
-7977	2987	2	\N	2016-07-17 20:22:21.070941+03
-7978	2985	2	\N	2016-07-17 20:22:21.070941+03
-7979	2986	2	\N	2016-07-17 20:22:21.070941+03
-7980	2987	2	\N	2016-07-17 20:22:21.070941+03
-7981	2988	2	\N	2016-07-17 20:23:21.19496+03
-7982	2989	2	\N	2016-07-17 20:23:21.19496+03
-7983	2990	2	\N	2016-07-17 20:23:21.19496+03
-7984	2988	2	\N	2016-07-17 20:23:21.19496+03
-7985	2989	2	\N	2016-07-17 20:23:21.19496+03
-7986	2990	2	\N	2016-07-17 20:23:21.19496+03
-7987	2991	2	\N	2016-07-17 20:23:31.872753+03
-7988	2992	2	\N	2016-07-17 20:37:54.911856+03
-7989	2993	2	\N	2016-07-17 20:37:54.911856+03
-7990	2994	2	\N	2016-07-17 20:37:54.911856+03
-7991	2992	2	\N	2016-07-17 20:37:54.911856+03
-7992	2993	2	\N	2016-07-17 20:37:54.911856+03
-7993	2994	2	\N	2016-07-17 20:37:54.911856+03
-7994	2995	2	\N	2016-07-17 20:40:11.322545+03
-7995	2996	2	\N	2016-07-17 20:40:11.322545+03
-7996	2997	2	\N	2016-07-17 20:40:11.322545+03
-7997	2998	2	\N	2016-07-17 20:40:11.322545+03
-7998	2999	2	\N	2016-07-17 20:40:11.322545+03
-7999	3000	2	\N	2016-07-17 20:40:11.322545+03
-8000	2995	2	\N	2016-07-17 20:40:11.322545+03
-8001	2996	2	\N	2016-07-17 20:40:11.322545+03
-8002	2997	2	\N	2016-07-17 20:40:11.322545+03
-8003	2998	2	\N	2016-07-17 20:40:11.322545+03
-8004	2999	2	\N	2016-07-17 20:40:11.322545+03
-8005	3000	2	\N	2016-07-17 20:40:11.322545+03
-8006	3001	2	\N	2016-07-17 20:40:31.998753+03
-8007	3002	2	\N	2016-07-17 20:40:31.998753+03
-8008	3003	2	\N	2016-07-17 20:40:31.998753+03
-8009	3004	2	\N	2016-07-17 20:40:31.998753+03
-8010	3005	2	\N	2016-07-17 20:40:31.998753+03
-8011	3006	2	\N	2016-07-17 20:40:31.998753+03
-8012	3007	2	\N	2016-07-17 20:40:31.998753+03
-8013	3008	2	\N	2016-07-17 20:40:31.998753+03
-8014	3009	2	\N	2016-07-17 20:40:31.998753+03
-8015	3010	2	\N	2016-07-17 20:40:31.998753+03
-8016	3011	2	\N	2016-07-17 20:40:31.998753+03
-8017	3012	2	\N	2016-07-17 20:40:31.998753+03
-8018	3001	2	\N	2016-07-17 20:40:31.998753+03
-8019	3002	2	\N	2016-07-17 20:40:31.998753+03
-8020	3003	2	\N	2016-07-17 20:40:31.998753+03
-8021	3004	2	\N	2016-07-17 20:40:31.998753+03
-8022	3005	2	\N	2016-07-17 20:40:31.998753+03
-8023	3006	2	\N	2016-07-17 20:40:31.998753+03
-8024	3007	2	\N	2016-07-17 20:40:31.998753+03
-8025	3008	2	\N	2016-07-17 20:40:31.998753+03
-8026	3009	2	\N	2016-07-17 20:40:31.998753+03
-8027	3010	2	\N	2016-07-17 20:40:31.998753+03
-8028	3011	2	\N	2016-07-17 20:40:31.998753+03
-8029	3012	2	\N	2016-07-17 20:40:31.998753+03
-8030	3013	2	\N	2016-07-17 20:40:55.934302+03
-8031	3014	2	\N	2016-07-17 20:40:55.934302+03
-8032	3015	2	\N	2016-07-17 20:40:55.934302+03
-8033	3016	2	\N	2016-07-17 20:40:55.934302+03
-8034	3017	2	\N	2016-07-17 20:40:55.934302+03
-8035	3018	2	\N	2016-07-17 20:40:55.934302+03
-8036	3019	2	\N	2016-07-17 20:40:55.934302+03
-8037	3020	2	\N	2016-07-17 20:40:55.934302+03
-8038	3021	2	\N	2016-07-17 20:40:55.934302+03
-8039	3022	2	\N	2016-07-17 20:40:55.934302+03
-8040	3023	2	\N	2016-07-17 20:40:55.934302+03
-8041	3024	2	\N	2016-07-17 20:40:55.934302+03
-8042	3025	2	\N	2016-07-17 20:40:55.934302+03
-8043	3026	2	\N	2016-07-17 20:40:55.934302+03
-8044	3027	2	\N	2016-07-17 20:40:55.934302+03
-8045	3028	2	\N	2016-07-17 20:40:55.934302+03
-8046	3029	2	\N	2016-07-17 20:40:55.934302+03
-8047	3030	2	\N	2016-07-17 20:40:55.934302+03
-8048	3031	2	\N	2016-07-17 20:40:55.934302+03
-8049	3032	2	\N	2016-07-17 20:40:55.934302+03
-8050	3033	2	\N	2016-07-17 20:40:55.934302+03
-8051	3034	2	\N	2016-07-17 20:40:55.934302+03
-8052	3035	2	\N	2016-07-17 20:40:55.934302+03
-8053	3036	2	\N	2016-07-17 20:40:55.934302+03
-8054	3013	2	\N	2016-07-17 20:40:55.934302+03
-8055	3014	2	\N	2016-07-17 20:40:55.934302+03
-8056	3015	2	\N	2016-07-17 20:40:55.934302+03
-8057	3016	2	\N	2016-07-17 20:40:55.934302+03
-8058	3017	2	\N	2016-07-17 20:40:55.934302+03
-8059	3018	2	\N	2016-07-17 20:40:55.934302+03
-8060	3019	2	\N	2016-07-17 20:40:55.934302+03
-8061	3020	2	\N	2016-07-17 20:40:55.934302+03
-8062	3021	2	\N	2016-07-17 20:40:55.934302+03
-8063	3022	2	\N	2016-07-17 20:40:55.934302+03
-8064	3023	2	\N	2016-07-17 20:40:55.934302+03
-8065	3024	2	\N	2016-07-17 20:40:55.934302+03
-8066	3025	2	\N	2016-07-17 20:40:55.934302+03
-8067	3026	2	\N	2016-07-17 20:40:55.934302+03
-8068	3027	2	\N	2016-07-17 20:40:55.934302+03
-8069	3028	2	\N	2016-07-17 20:40:55.934302+03
-8070	3029	2	\N	2016-07-17 20:40:55.934302+03
-8071	3030	2	\N	2016-07-17 20:40:55.934302+03
-8072	3031	2	\N	2016-07-17 20:40:55.934302+03
-8073	3032	2	\N	2016-07-17 20:40:55.934302+03
-8074	3033	2	\N	2016-07-17 20:40:55.934302+03
-8075	3034	2	\N	2016-07-17 20:40:55.934302+03
-8076	3035	2	\N	2016-07-17 20:40:55.934302+03
-8077	3036	2	\N	2016-07-17 20:40:55.934302+03
-8078	3037	2	\N	2016-07-17 20:43:12.081292+03
-8079	3038	2	\N	2016-07-17 20:43:12.081292+03
-8080	3039	2	\N	2016-07-17 20:43:12.081292+03
-8081	3040	2	\N	2016-07-17 20:43:12.081292+03
-8082	3041	2	\N	2016-07-17 20:43:12.081292+03
-8083	3042	2	\N	2016-07-17 20:43:12.081292+03
-8084	3043	2	\N	2016-07-17 20:43:12.081292+03
-8085	3044	2	\N	2016-07-17 20:43:12.081292+03
-8086	3045	2	\N	2016-07-17 20:43:12.081292+03
-8087	3046	2	\N	2016-07-17 20:43:12.081292+03
-8088	3047	2	\N	2016-07-17 20:43:12.081292+03
-8089	3048	2	\N	2016-07-17 20:43:12.081292+03
-8090	3049	2	\N	2016-07-17 20:43:12.081292+03
-8091	3050	2	\N	2016-07-17 20:43:12.081292+03
-8092	3051	2	\N	2016-07-17 20:43:12.081292+03
-8093	3052	2	\N	2016-07-17 20:43:12.081292+03
-8094	3053	2	\N	2016-07-17 20:43:12.081292+03
-8095	3054	2	\N	2016-07-17 20:43:12.081292+03
-8096	3055	2	\N	2016-07-17 20:43:12.081292+03
-8097	3056	2	\N	2016-07-17 20:43:12.081292+03
-8098	3057	2	\N	2016-07-17 20:43:12.081292+03
-8099	3058	2	\N	2016-07-17 20:43:12.081292+03
-8100	3059	2	\N	2016-07-17 20:43:12.081292+03
-8101	3060	2	\N	2016-07-17 20:43:12.081292+03
-8102	3061	2	\N	2016-07-17 20:43:12.081292+03
-8103	3062	2	\N	2016-07-17 20:43:12.081292+03
-8104	3063	2	\N	2016-07-17 20:43:12.081292+03
-8105	3064	2	\N	2016-07-17 20:43:12.081292+03
-8106	3065	2	\N	2016-07-17 20:43:12.081292+03
-8107	3066	2	\N	2016-07-17 20:43:12.081292+03
-8108	3067	2	\N	2016-07-17 20:43:12.081292+03
-8109	3068	2	\N	2016-07-17 20:43:12.081292+03
-8110	3069	2	\N	2016-07-17 20:43:12.081292+03
-8111	3070	2	\N	2016-07-17 20:43:12.081292+03
-8112	3071	2	\N	2016-07-17 20:43:12.081292+03
-8113	3072	2	\N	2016-07-17 20:43:12.081292+03
-8114	3073	2	\N	2016-07-17 20:43:12.081292+03
-8115	3074	2	\N	2016-07-17 20:43:12.081292+03
-8116	3075	2	\N	2016-07-17 20:43:12.081292+03
-8117	3076	2	\N	2016-07-17 20:43:12.081292+03
-8118	3077	2	\N	2016-07-17 20:43:12.081292+03
-8119	3078	2	\N	2016-07-17 20:43:12.081292+03
-8120	3079	2	\N	2016-07-17 20:43:12.081292+03
-8121	3080	2	\N	2016-07-17 20:43:12.081292+03
-8122	3081	2	\N	2016-07-17 20:43:12.081292+03
-8123	3082	2	\N	2016-07-17 20:43:12.081292+03
-8124	3083	2	\N	2016-07-17 20:43:12.081292+03
-8125	3084	2	\N	2016-07-17 20:43:12.081292+03
-8126	3037	2	\N	2016-07-17 20:43:12.081292+03
-8127	3038	2	\N	2016-07-17 20:43:12.081292+03
-8128	3039	2	\N	2016-07-17 20:43:12.081292+03
-8129	3040	2	\N	2016-07-17 20:43:12.081292+03
-8130	3041	2	\N	2016-07-17 20:43:12.081292+03
-8131	3042	2	\N	2016-07-17 20:43:12.081292+03
-8132	3043	2	\N	2016-07-17 20:43:12.081292+03
-8133	3044	2	\N	2016-07-17 20:43:12.081292+03
-8134	3045	2	\N	2016-07-17 20:43:12.081292+03
-8135	3046	2	\N	2016-07-17 20:43:12.081292+03
-8136	3047	2	\N	2016-07-17 20:43:12.081292+03
-8137	3048	2	\N	2016-07-17 20:43:12.081292+03
-8138	3049	2	\N	2016-07-17 20:43:12.081292+03
-8139	3050	2	\N	2016-07-17 20:43:12.081292+03
-8140	3051	2	\N	2016-07-17 20:43:12.081292+03
-8141	3052	2	\N	2016-07-17 20:43:12.081292+03
-8142	3053	2	\N	2016-07-17 20:43:12.081292+03
-8143	3054	2	\N	2016-07-17 20:43:12.081292+03
-8144	3055	2	\N	2016-07-17 20:43:12.081292+03
-8145	3056	2	\N	2016-07-17 20:43:12.081292+03
-8146	3057	2	\N	2016-07-17 20:43:12.081292+03
-8147	3058	2	\N	2016-07-17 20:43:12.081292+03
-8148	3059	2	\N	2016-07-17 20:43:12.081292+03
-8149	3060	2	\N	2016-07-17 20:43:12.081292+03
-8150	3061	2	\N	2016-07-17 20:43:12.081292+03
-8151	3062	2	\N	2016-07-17 20:43:12.081292+03
-8152	3063	2	\N	2016-07-17 20:43:12.081292+03
-8153	3064	2	\N	2016-07-17 20:43:12.081292+03
-8154	3065	2	\N	2016-07-17 20:43:12.081292+03
-8155	3066	2	\N	2016-07-17 20:43:12.081292+03
-8156	3067	2	\N	2016-07-17 20:43:12.081292+03
-8157	3068	2	\N	2016-07-17 20:43:12.081292+03
-8158	3069	2	\N	2016-07-17 20:43:12.081292+03
-8159	3070	2	\N	2016-07-17 20:43:12.081292+03
-8160	3071	2	\N	2016-07-17 20:43:12.081292+03
-8161	3072	2	\N	2016-07-17 20:43:12.081292+03
-8162	3073	2	\N	2016-07-17 20:43:12.081292+03
-8163	3074	2	\N	2016-07-17 20:43:12.081292+03
-8164	3075	2	\N	2016-07-17 20:43:12.081292+03
-8165	3076	2	\N	2016-07-17 20:43:12.081292+03
-8166	3077	2	\N	2016-07-17 20:43:12.081292+03
-8167	3078	2	\N	2016-07-17 20:43:12.081292+03
-8168	3079	2	\N	2016-07-17 20:43:12.081292+03
-8169	3080	2	\N	2016-07-17 20:43:12.081292+03
-8170	3081	2	\N	2016-07-17 20:43:12.081292+03
-8171	3082	2	\N	2016-07-17 20:43:12.081292+03
-8172	3083	2	\N	2016-07-17 20:43:12.081292+03
-8173	3084	2	\N	2016-07-17 20:43:12.081292+03
-8174	3085	2	\N	2016-07-17 20:43:36.797856+03
-8175	3086	2	\N	2016-07-17 20:43:36.797856+03
-8176	3087	2	\N	2016-07-17 20:43:36.797856+03
-8177	3088	2	\N	2016-07-17 20:43:36.797856+03
-8178	3089	2	\N	2016-07-17 20:43:36.797856+03
-8179	3090	2	\N	2016-07-17 20:43:36.797856+03
-8180	3091	2	\N	2016-07-17 20:43:36.797856+03
-8181	3092	2	\N	2016-07-17 20:43:36.797856+03
-8182	3093	2	\N	2016-07-17 20:43:36.797856+03
-8183	3094	2	\N	2016-07-17 20:43:36.797856+03
-8184	3095	2	\N	2016-07-17 20:43:36.797856+03
-8185	3096	2	\N	2016-07-17 20:43:36.797856+03
-8186	3097	2	\N	2016-07-17 20:43:36.797856+03
-8187	3098	2	\N	2016-07-17 20:43:36.797856+03
-8188	3099	2	\N	2016-07-17 20:43:36.797856+03
-8189	3100	2	\N	2016-07-17 20:43:36.797856+03
-8190	3101	2	\N	2016-07-17 20:43:36.797856+03
-8191	3102	2	\N	2016-07-17 20:43:36.797856+03
-8192	3103	2	\N	2016-07-17 20:43:36.797856+03
-8193	3104	2	\N	2016-07-17 20:43:36.797856+03
-8194	3105	2	\N	2016-07-17 20:43:36.797856+03
-8195	3106	2	\N	2016-07-17 20:43:36.797856+03
-8196	3107	2	\N	2016-07-17 20:43:36.797856+03
-8197	3108	2	\N	2016-07-17 20:43:36.797856+03
-8198	3109	2	\N	2016-07-17 20:43:36.797856+03
-8199	3110	2	\N	2016-07-17 20:43:36.797856+03
-8200	3111	2	\N	2016-07-17 20:43:36.797856+03
-8201	3112	2	\N	2016-07-17 20:43:36.797856+03
-8202	3113	2	\N	2016-07-17 20:43:36.797856+03
-8203	3114	2	\N	2016-07-17 20:43:36.797856+03
-8204	3115	2	\N	2016-07-17 20:43:36.797856+03
-8205	3116	2	\N	2016-07-17 20:43:36.797856+03
-8206	3117	2	\N	2016-07-17 20:43:36.797856+03
-8207	3118	2	\N	2016-07-17 20:43:36.797856+03
-8208	3119	2	\N	2016-07-17 20:43:36.797856+03
-8209	3120	2	\N	2016-07-17 20:43:36.797856+03
-8210	3121	2	\N	2016-07-17 20:43:36.797856+03
-8211	3122	2	\N	2016-07-17 20:43:36.797856+03
-8212	3123	2	\N	2016-07-17 20:43:36.797856+03
-8213	3124	2	\N	2016-07-17 20:43:36.797856+03
-8214	3125	2	\N	2016-07-17 20:43:36.797856+03
-8215	3126	2	\N	2016-07-17 20:43:36.797856+03
-8216	3127	2	\N	2016-07-17 20:43:36.797856+03
-8217	3128	2	\N	2016-07-17 20:43:36.797856+03
-8218	3129	2	\N	2016-07-17 20:43:36.797856+03
-8219	3130	2	\N	2016-07-17 20:43:36.797856+03
-8220	3131	2	\N	2016-07-17 20:43:36.797856+03
-8221	3132	2	\N	2016-07-17 20:43:36.797856+03
-8222	3133	2	\N	2016-07-17 20:43:36.797856+03
-8223	3134	2	\N	2016-07-17 20:43:36.797856+03
-8224	3135	2	\N	2016-07-17 20:43:36.797856+03
-8225	3136	2	\N	2016-07-17 20:43:36.797856+03
-8226	3137	2	\N	2016-07-17 20:43:36.797856+03
-8227	3138	2	\N	2016-07-17 20:43:36.797856+03
-8228	3139	2	\N	2016-07-17 20:43:36.797856+03
-8229	3140	2	\N	2016-07-17 20:43:36.797856+03
-8230	3141	2	\N	2016-07-17 20:43:36.797856+03
-8231	3142	2	\N	2016-07-17 20:43:36.797856+03
-8232	3143	2	\N	2016-07-17 20:43:36.797856+03
-8233	3144	2	\N	2016-07-17 20:43:36.797856+03
-8234	3145	2	\N	2016-07-17 20:43:36.797856+03
-8235	3146	2	\N	2016-07-17 20:43:36.797856+03
-8236	3147	2	\N	2016-07-17 20:43:36.797856+03
-8237	3148	2	\N	2016-07-17 20:43:36.797856+03
-8238	3149	2	\N	2016-07-17 20:43:36.797856+03
-8239	3150	2	\N	2016-07-17 20:43:36.797856+03
-8240	3151	2	\N	2016-07-17 20:43:36.797856+03
-8241	3152	2	\N	2016-07-17 20:43:36.797856+03
-8242	3153	2	\N	2016-07-17 20:43:36.797856+03
-8243	3154	2	\N	2016-07-17 20:43:36.797856+03
-8244	3155	2	\N	2016-07-17 20:43:36.797856+03
-8245	3156	2	\N	2016-07-17 20:43:36.797856+03
-8246	3157	2	\N	2016-07-17 20:43:36.797856+03
-8247	3158	2	\N	2016-07-17 20:43:36.797856+03
-8248	3159	2	\N	2016-07-17 20:43:36.797856+03
-8249	3160	2	\N	2016-07-17 20:43:36.797856+03
-8250	3161	2	\N	2016-07-17 20:43:36.797856+03
-8251	3162	2	\N	2016-07-17 20:43:36.797856+03
-8252	3163	2	\N	2016-07-17 20:43:36.797856+03
-8253	3164	2	\N	2016-07-17 20:43:36.797856+03
-8254	3165	2	\N	2016-07-17 20:43:36.797856+03
-8255	3166	2	\N	2016-07-17 20:43:36.797856+03
-8256	3167	2	\N	2016-07-17 20:43:36.797856+03
-8257	3168	2	\N	2016-07-17 20:43:36.797856+03
-8258	3169	2	\N	2016-07-17 20:43:36.797856+03
-8259	3170	2	\N	2016-07-17 20:43:36.797856+03
-8260	3171	2	\N	2016-07-17 20:43:36.797856+03
-8261	3172	2	\N	2016-07-17 20:43:36.797856+03
-8262	3173	2	\N	2016-07-17 20:43:36.797856+03
-8263	3174	2	\N	2016-07-17 20:43:36.797856+03
-8264	3175	2	\N	2016-07-17 20:43:36.797856+03
-8265	3176	2	\N	2016-07-17 20:43:36.797856+03
-8266	3177	2	\N	2016-07-17 20:43:36.797856+03
-8267	3178	2	\N	2016-07-17 20:43:36.797856+03
-8268	3179	2	\N	2016-07-17 20:43:36.797856+03
-8269	3180	2	\N	2016-07-17 20:43:36.797856+03
-8270	3085	2	\N	2016-07-17 20:43:36.797856+03
-8271	3086	2	\N	2016-07-17 20:43:36.797856+03
-8272	3087	2	\N	2016-07-17 20:43:36.797856+03
-8273	3088	2	\N	2016-07-17 20:43:36.797856+03
-8274	3089	2	\N	2016-07-17 20:43:36.797856+03
-8275	3090	2	\N	2016-07-17 20:43:36.797856+03
-8276	3091	2	\N	2016-07-17 20:43:36.797856+03
-8277	3092	2	\N	2016-07-17 20:43:36.797856+03
-8278	3093	2	\N	2016-07-17 20:43:36.797856+03
-8279	3094	2	\N	2016-07-17 20:43:36.797856+03
-8280	3095	2	\N	2016-07-17 20:43:36.797856+03
-8281	3096	2	\N	2016-07-17 20:43:36.797856+03
-8282	3097	2	\N	2016-07-17 20:43:36.797856+03
-8283	3098	2	\N	2016-07-17 20:43:36.797856+03
-8284	3099	2	\N	2016-07-17 20:43:36.797856+03
-8285	3100	2	\N	2016-07-17 20:43:36.797856+03
-8286	3101	2	\N	2016-07-17 20:43:36.797856+03
-8287	3102	2	\N	2016-07-17 20:43:36.797856+03
-8288	3103	2	\N	2016-07-17 20:43:36.797856+03
-8289	3104	2	\N	2016-07-17 20:43:36.797856+03
-8290	3105	2	\N	2016-07-17 20:43:36.797856+03
-8291	3106	2	\N	2016-07-17 20:43:36.797856+03
-8292	3107	2	\N	2016-07-17 20:43:36.797856+03
-8293	3108	2	\N	2016-07-17 20:43:36.797856+03
-8294	3109	2	\N	2016-07-17 20:43:36.797856+03
-8295	3110	2	\N	2016-07-17 20:43:36.797856+03
-8296	3111	2	\N	2016-07-17 20:43:36.797856+03
-8297	3112	2	\N	2016-07-17 20:43:36.797856+03
-8298	3113	2	\N	2016-07-17 20:43:36.797856+03
-8299	3114	2	\N	2016-07-17 20:43:36.797856+03
-8300	3115	2	\N	2016-07-17 20:43:36.797856+03
-8301	3116	2	\N	2016-07-17 20:43:36.797856+03
-8302	3117	2	\N	2016-07-17 20:43:36.797856+03
-8303	3118	2	\N	2016-07-17 20:43:36.797856+03
-8304	3119	2	\N	2016-07-17 20:43:36.797856+03
-8305	3120	2	\N	2016-07-17 20:43:36.797856+03
-8306	3121	2	\N	2016-07-17 20:43:36.797856+03
-8307	3122	2	\N	2016-07-17 20:43:36.797856+03
-8308	3123	2	\N	2016-07-17 20:43:36.797856+03
-8309	3124	2	\N	2016-07-17 20:43:36.797856+03
-8310	3125	2	\N	2016-07-17 20:43:36.797856+03
-8311	3126	2	\N	2016-07-17 20:43:36.797856+03
-8312	3127	2	\N	2016-07-17 20:43:36.797856+03
-8313	3128	2	\N	2016-07-17 20:43:36.797856+03
-8314	3129	2	\N	2016-07-17 20:43:36.797856+03
-8315	3130	2	\N	2016-07-17 20:43:36.797856+03
-8316	3131	2	\N	2016-07-17 20:43:36.797856+03
-8317	3132	2	\N	2016-07-17 20:43:36.797856+03
-8318	3133	2	\N	2016-07-17 20:43:36.797856+03
-8319	3134	2	\N	2016-07-17 20:43:36.797856+03
-8320	3135	2	\N	2016-07-17 20:43:36.797856+03
-8321	3136	2	\N	2016-07-17 20:43:36.797856+03
-8322	3137	2	\N	2016-07-17 20:43:36.797856+03
-8323	3138	2	\N	2016-07-17 20:43:36.797856+03
-8324	3139	2	\N	2016-07-17 20:43:36.797856+03
-8325	3140	2	\N	2016-07-17 20:43:36.797856+03
-8326	3141	2	\N	2016-07-17 20:43:36.797856+03
-8327	3142	2	\N	2016-07-17 20:43:36.797856+03
-8328	3143	2	\N	2016-07-17 20:43:36.797856+03
-8329	3144	2	\N	2016-07-17 20:43:36.797856+03
-8330	3145	2	\N	2016-07-17 20:43:36.797856+03
-8331	3146	2	\N	2016-07-17 20:43:36.797856+03
-8332	3147	2	\N	2016-07-17 20:43:36.797856+03
-8333	3148	2	\N	2016-07-17 20:43:36.797856+03
-8334	3149	2	\N	2016-07-17 20:43:36.797856+03
-8335	3150	2	\N	2016-07-17 20:43:36.797856+03
-8336	3151	2	\N	2016-07-17 20:43:36.797856+03
-8337	3152	2	\N	2016-07-17 20:43:36.797856+03
-8338	3153	2	\N	2016-07-17 20:43:36.797856+03
-8339	3154	2	\N	2016-07-17 20:43:36.797856+03
-8340	3155	2	\N	2016-07-17 20:43:36.797856+03
-8341	3156	2	\N	2016-07-17 20:43:36.797856+03
-8342	3157	2	\N	2016-07-17 20:43:36.797856+03
-8343	3158	2	\N	2016-07-17 20:43:36.797856+03
-8344	3159	2	\N	2016-07-17 20:43:36.797856+03
-8345	3160	2	\N	2016-07-17 20:43:36.797856+03
-8346	3161	2	\N	2016-07-17 20:43:36.797856+03
-8347	3162	2	\N	2016-07-17 20:43:36.797856+03
-8348	3163	2	\N	2016-07-17 20:43:36.797856+03
-8349	3164	2	\N	2016-07-17 20:43:36.797856+03
-8350	3165	2	\N	2016-07-17 20:43:36.797856+03
-8351	3166	2	\N	2016-07-17 20:43:36.797856+03
-8352	3167	2	\N	2016-07-17 20:43:36.797856+03
-8353	3168	2	\N	2016-07-17 20:43:36.797856+03
-8354	3169	2	\N	2016-07-17 20:43:36.797856+03
-8355	3170	2	\N	2016-07-17 20:43:36.797856+03
-8356	3171	2	\N	2016-07-17 20:43:36.797856+03
-8357	3172	2	\N	2016-07-17 20:43:36.797856+03
-8358	3173	2	\N	2016-07-17 20:43:36.797856+03
-8359	3174	2	\N	2016-07-17 20:43:36.797856+03
-8360	3175	2	\N	2016-07-17 20:43:36.797856+03
-8361	3176	2	\N	2016-07-17 20:43:36.797856+03
-8362	3177	2	\N	2016-07-17 20:43:36.797856+03
-8363	3178	2	\N	2016-07-17 20:43:36.797856+03
-8364	3179	2	\N	2016-07-17 20:43:36.797856+03
-8365	3180	2	\N	2016-07-17 20:43:36.797856+03
-8366	3181	2	\N	2016-07-17 20:44:31.462356+03
-8367	3182	2	\N	2016-07-17 20:44:31.462356+03
-8368	3183	2	\N	2016-07-17 20:44:31.462356+03
-8369	3184	2	\N	2016-07-17 20:44:31.462356+03
-8370	3185	2	\N	2016-07-17 20:44:31.462356+03
-8371	3186	2	\N	2016-07-17 20:44:31.462356+03
-8372	3187	2	\N	2016-07-17 20:44:31.462356+03
-8373	3188	2	\N	2016-07-17 20:44:31.462356+03
-8374	3189	2	\N	2016-07-17 20:44:31.462356+03
-8375	3190	2	\N	2016-07-17 20:44:31.462356+03
-8376	3191	2	\N	2016-07-17 20:44:31.462356+03
-8377	3192	2	\N	2016-07-17 20:44:31.462356+03
-8378	3193	2	\N	2016-07-17 20:44:31.462356+03
-8379	3194	2	\N	2016-07-17 20:44:31.462356+03
-8380	3195	2	\N	2016-07-17 20:44:31.462356+03
-8381	3196	2	\N	2016-07-17 20:44:31.462356+03
-8382	3197	2	\N	2016-07-17 20:44:31.462356+03
-8383	3198	2	\N	2016-07-17 20:44:31.462356+03
-8384	3199	2	\N	2016-07-17 20:44:31.462356+03
-8385	3200	2	\N	2016-07-17 20:44:31.462356+03
-8386	3201	2	\N	2016-07-17 20:44:31.462356+03
-8387	3202	2	\N	2016-07-17 20:44:31.462356+03
-8388	3203	2	\N	2016-07-17 20:44:31.462356+03
-8389	3204	2	\N	2016-07-17 20:44:31.462356+03
-8390	3205	2	\N	2016-07-17 20:44:31.462356+03
-8391	3206	2	\N	2016-07-17 20:44:31.462356+03
-8392	3207	2	\N	2016-07-17 20:44:31.462356+03
-8393	3208	2	\N	2016-07-17 20:44:31.462356+03
-8394	3209	2	\N	2016-07-17 20:44:31.462356+03
-8395	3210	2	\N	2016-07-17 20:44:31.462356+03
-8396	3211	2	\N	2016-07-17 20:44:31.462356+03
-8397	3212	2	\N	2016-07-17 20:44:31.462356+03
-8398	3213	2	\N	2016-07-17 20:44:31.462356+03
-8399	3214	2	\N	2016-07-17 20:44:31.462356+03
-8400	3215	2	\N	2016-07-17 20:44:31.462356+03
-8401	3216	2	\N	2016-07-17 20:44:31.462356+03
-8402	3217	2	\N	2016-07-17 20:44:31.462356+03
-8403	3218	2	\N	2016-07-17 20:44:31.462356+03
-8404	3219	2	\N	2016-07-17 20:44:31.462356+03
-8405	3220	2	\N	2016-07-17 20:44:31.462356+03
-8406	3221	2	\N	2016-07-17 20:44:31.462356+03
-8407	3222	2	\N	2016-07-17 20:44:31.462356+03
-8408	3223	2	\N	2016-07-17 20:44:31.462356+03
-8409	3224	2	\N	2016-07-17 20:44:31.462356+03
-8410	3225	2	\N	2016-07-17 20:44:31.462356+03
-8411	3226	2	\N	2016-07-17 20:44:31.462356+03
-8412	3227	2	\N	2016-07-17 20:44:31.462356+03
-8413	3228	2	\N	2016-07-17 20:44:31.462356+03
-8414	3229	2	\N	2016-07-17 20:44:31.462356+03
-8415	3230	2	\N	2016-07-17 20:44:31.462356+03
-8416	3231	2	\N	2016-07-17 20:44:31.462356+03
-8417	3232	2	\N	2016-07-17 20:44:31.462356+03
-8418	3233	2	\N	2016-07-17 20:44:31.462356+03
-8419	3234	2	\N	2016-07-17 20:44:31.462356+03
-8420	3235	2	\N	2016-07-17 20:44:31.462356+03
-8421	3236	2	\N	2016-07-17 20:44:31.462356+03
-8422	3237	2	\N	2016-07-17 20:44:31.462356+03
-8423	3238	2	\N	2016-07-17 20:44:31.462356+03
-8424	3239	2	\N	2016-07-17 20:44:31.462356+03
-8425	3240	2	\N	2016-07-17 20:44:31.462356+03
-8426	3241	2	\N	2016-07-17 20:44:31.462356+03
-8427	3242	2	\N	2016-07-17 20:44:31.462356+03
-8428	3243	2	\N	2016-07-17 20:44:31.462356+03
-8429	3244	2	\N	2016-07-17 20:44:31.462356+03
-8430	3245	2	\N	2016-07-17 20:44:31.462356+03
-8431	3246	2	\N	2016-07-17 20:44:31.462356+03
-8432	3247	2	\N	2016-07-17 20:44:31.462356+03
-8433	3248	2	\N	2016-07-17 20:44:31.462356+03
-8434	3249	2	\N	2016-07-17 20:44:31.462356+03
-8435	3250	2	\N	2016-07-17 20:44:31.462356+03
-8436	3251	2	\N	2016-07-17 20:44:31.462356+03
-8437	3252	2	\N	2016-07-17 20:44:31.462356+03
-8438	3253	2	\N	2016-07-17 20:44:31.462356+03
-8439	3254	2	\N	2016-07-17 20:44:31.462356+03
-8440	3255	2	\N	2016-07-17 20:44:31.462356+03
-8441	3256	2	\N	2016-07-17 20:44:31.462356+03
-8442	3257	2	\N	2016-07-17 20:44:31.462356+03
-8443	3258	2	\N	2016-07-17 20:44:31.462356+03
-8444	3259	2	\N	2016-07-17 20:44:31.462356+03
-8445	3260	2	\N	2016-07-17 20:44:31.462356+03
-8446	3261	2	\N	2016-07-17 20:44:31.462356+03
-8447	3262	2	\N	2016-07-17 20:44:31.462356+03
-8448	3263	2	\N	2016-07-17 20:44:31.462356+03
-8449	3264	2	\N	2016-07-17 20:44:31.462356+03
-8450	3265	2	\N	2016-07-17 20:44:31.462356+03
-8451	3266	2	\N	2016-07-17 20:44:31.462356+03
-8452	3267	2	\N	2016-07-17 20:44:31.462356+03
-8453	3268	2	\N	2016-07-17 20:44:31.462356+03
-8454	3269	2	\N	2016-07-17 20:44:31.462356+03
-8455	3270	2	\N	2016-07-17 20:44:31.462356+03
-8456	3271	2	\N	2016-07-17 20:44:31.462356+03
-8457	3272	2	\N	2016-07-17 20:44:31.462356+03
-8458	3273	2	\N	2016-07-17 20:44:31.462356+03
-8459	3274	2	\N	2016-07-17 20:44:31.462356+03
-8460	3275	2	\N	2016-07-17 20:44:31.462356+03
-8461	3276	2	\N	2016-07-17 20:44:31.462356+03
-8462	3277	2	\N	2016-07-17 20:44:31.462356+03
-8463	3278	2	\N	2016-07-17 20:44:31.462356+03
-8464	3279	2	\N	2016-07-17 20:44:31.462356+03
-8465	3280	2	\N	2016-07-17 20:44:31.462356+03
-8466	3281	2	\N	2016-07-17 20:44:31.462356+03
-8467	3282	2	\N	2016-07-17 20:44:31.462356+03
-8468	3283	2	\N	2016-07-17 20:44:31.462356+03
-8469	3284	2	\N	2016-07-17 20:44:31.462356+03
-8470	3285	2	\N	2016-07-17 20:44:31.462356+03
-8471	3286	2	\N	2016-07-17 20:44:31.462356+03
-8472	3287	2	\N	2016-07-17 20:44:31.462356+03
-8473	3288	2	\N	2016-07-17 20:44:31.462356+03
-8474	3289	2	\N	2016-07-17 20:44:31.462356+03
-8475	3290	2	\N	2016-07-17 20:44:31.462356+03
-8476	3291	2	\N	2016-07-17 20:44:31.462356+03
-8477	3292	2	\N	2016-07-17 20:44:31.462356+03
-8478	3293	2	\N	2016-07-17 20:44:31.462356+03
-8479	3294	2	\N	2016-07-17 20:44:31.462356+03
-8480	3295	2	\N	2016-07-17 20:44:31.462356+03
-8481	3296	2	\N	2016-07-17 20:44:31.462356+03
-8482	3297	2	\N	2016-07-17 20:44:31.462356+03
-8483	3298	2	\N	2016-07-17 20:44:31.462356+03
-8484	3299	2	\N	2016-07-17 20:44:31.462356+03
-8485	3300	2	\N	2016-07-17 20:44:31.462356+03
-8486	3301	2	\N	2016-07-17 20:44:31.462356+03
-8487	3302	2	\N	2016-07-17 20:44:31.462356+03
-8488	3303	2	\N	2016-07-17 20:44:31.462356+03
-8489	3304	2	\N	2016-07-17 20:44:31.462356+03
-8490	3305	2	\N	2016-07-17 20:44:31.462356+03
-8491	3306	2	\N	2016-07-17 20:44:31.462356+03
-8492	3307	2	\N	2016-07-17 20:44:31.462356+03
-8493	3308	2	\N	2016-07-17 20:44:31.462356+03
-8494	3309	2	\N	2016-07-17 20:44:31.462356+03
-8495	3310	2	\N	2016-07-17 20:44:31.462356+03
-8496	3311	2	\N	2016-07-17 20:44:31.462356+03
-8497	3312	2	\N	2016-07-17 20:44:31.462356+03
-8498	3313	2	\N	2016-07-17 20:44:31.462356+03
-8499	3314	2	\N	2016-07-17 20:44:31.462356+03
-8500	3315	2	\N	2016-07-17 20:44:31.462356+03
-8501	3316	2	\N	2016-07-17 20:44:31.462356+03
-8502	3317	2	\N	2016-07-17 20:44:31.462356+03
-8503	3318	2	\N	2016-07-17 20:44:31.462356+03
-8504	3319	2	\N	2016-07-17 20:44:31.462356+03
-8505	3320	2	\N	2016-07-17 20:44:31.462356+03
-8506	3321	2	\N	2016-07-17 20:44:31.462356+03
-8507	3322	2	\N	2016-07-17 20:44:31.462356+03
-8508	3323	2	\N	2016-07-17 20:44:31.462356+03
-8509	3324	2	\N	2016-07-17 20:44:31.462356+03
-8510	3325	2	\N	2016-07-17 20:44:31.462356+03
-8511	3326	2	\N	2016-07-17 20:44:31.462356+03
-8512	3327	2	\N	2016-07-17 20:44:31.462356+03
-8513	3328	2	\N	2016-07-17 20:44:31.462356+03
-8514	3329	2	\N	2016-07-17 20:44:31.462356+03
-8515	3330	2	\N	2016-07-17 20:44:31.462356+03
-8516	3331	2	\N	2016-07-17 20:44:31.462356+03
-8517	3332	2	\N	2016-07-17 20:44:31.462356+03
-8518	3333	2	\N	2016-07-17 20:44:31.462356+03
-8519	3334	2	\N	2016-07-17 20:44:31.462356+03
-8520	3335	2	\N	2016-07-17 20:44:31.462356+03
-8521	3336	2	\N	2016-07-17 20:44:31.462356+03
-8522	3337	2	\N	2016-07-17 20:44:31.462356+03
-8523	3338	2	\N	2016-07-17 20:44:31.462356+03
-8524	3339	2	\N	2016-07-17 20:44:31.462356+03
-8525	3340	2	\N	2016-07-17 20:44:31.462356+03
-8526	3341	2	\N	2016-07-17 20:44:31.462356+03
-8527	3342	2	\N	2016-07-17 20:44:31.462356+03
-8528	3343	2	\N	2016-07-17 20:44:31.462356+03
-8529	3344	2	\N	2016-07-17 20:44:31.462356+03
-8530	3345	2	\N	2016-07-17 20:44:31.462356+03
-8531	3346	2	\N	2016-07-17 20:44:31.462356+03
-8532	3347	2	\N	2016-07-17 20:44:31.462356+03
-8533	3348	2	\N	2016-07-17 20:44:31.462356+03
-8534	3349	2	\N	2016-07-17 20:44:31.462356+03
-8535	3350	2	\N	2016-07-17 20:44:31.462356+03
-8536	3351	2	\N	2016-07-17 20:44:31.462356+03
-8537	3352	2	\N	2016-07-17 20:44:31.462356+03
-8538	3353	2	\N	2016-07-17 20:44:31.462356+03
-8539	3354	2	\N	2016-07-17 20:44:31.462356+03
-8540	3355	2	\N	2016-07-17 20:44:31.462356+03
-8541	3356	2	\N	2016-07-17 20:44:31.462356+03
-8542	3357	2	\N	2016-07-17 20:44:31.462356+03
-8543	3358	2	\N	2016-07-17 20:44:31.462356+03
-8544	3359	2	\N	2016-07-17 20:44:31.462356+03
-8545	3360	2	\N	2016-07-17 20:44:31.462356+03
-8546	3361	2	\N	2016-07-17 20:44:31.462356+03
-8547	3362	2	\N	2016-07-17 20:44:31.462356+03
-8548	3363	2	\N	2016-07-17 20:44:31.462356+03
-8549	3364	2	\N	2016-07-17 20:44:31.462356+03
-8550	3365	2	\N	2016-07-17 20:44:31.462356+03
-8551	3366	2	\N	2016-07-17 20:44:31.462356+03
-8552	3367	2	\N	2016-07-17 20:44:31.462356+03
-8553	3368	2	\N	2016-07-17 20:44:31.462356+03
-8554	3369	2	\N	2016-07-17 20:44:31.462356+03
-8555	3370	2	\N	2016-07-17 20:44:31.462356+03
-8556	3371	2	\N	2016-07-17 20:44:31.462356+03
-8557	3372	2	\N	2016-07-17 20:44:31.462356+03
-8558	3181	2	\N	2016-07-17 20:44:31.462356+03
-8559	3182	2	\N	2016-07-17 20:44:31.462356+03
-8560	3183	2	\N	2016-07-17 20:44:31.462356+03
-8561	3184	2	\N	2016-07-17 20:44:31.462356+03
-8562	3185	2	\N	2016-07-17 20:44:31.462356+03
-8563	3186	2	\N	2016-07-17 20:44:31.462356+03
-8564	3187	2	\N	2016-07-17 20:44:31.462356+03
-8565	3188	2	\N	2016-07-17 20:44:31.462356+03
-8566	3189	2	\N	2016-07-17 20:44:31.462356+03
-8567	3190	2	\N	2016-07-17 20:44:31.462356+03
-8568	3191	2	\N	2016-07-17 20:44:31.462356+03
-8569	3192	2	\N	2016-07-17 20:44:31.462356+03
-8570	3193	2	\N	2016-07-17 20:44:31.462356+03
-8571	3194	2	\N	2016-07-17 20:44:31.462356+03
-8572	3195	2	\N	2016-07-17 20:44:31.462356+03
-8573	3196	2	\N	2016-07-17 20:44:31.462356+03
-8574	3197	2	\N	2016-07-17 20:44:31.462356+03
-8575	3198	2	\N	2016-07-17 20:44:31.462356+03
-8576	3199	2	\N	2016-07-17 20:44:31.462356+03
-8577	3200	2	\N	2016-07-17 20:44:31.462356+03
-8578	3201	2	\N	2016-07-17 20:44:31.462356+03
-8579	3202	2	\N	2016-07-17 20:44:31.462356+03
-8580	3203	2	\N	2016-07-17 20:44:31.462356+03
-8581	3204	2	\N	2016-07-17 20:44:31.462356+03
-8582	3205	2	\N	2016-07-17 20:44:31.462356+03
-8583	3206	2	\N	2016-07-17 20:44:31.462356+03
-8584	3207	2	\N	2016-07-17 20:44:31.462356+03
-8585	3208	2	\N	2016-07-17 20:44:31.462356+03
-8586	3209	2	\N	2016-07-17 20:44:31.462356+03
-8587	3210	2	\N	2016-07-17 20:44:31.462356+03
-8588	3211	2	\N	2016-07-17 20:44:31.462356+03
-8589	3212	2	\N	2016-07-17 20:44:31.462356+03
-8590	3213	2	\N	2016-07-17 20:44:31.462356+03
-8591	3214	2	\N	2016-07-17 20:44:31.462356+03
-8592	3215	2	\N	2016-07-17 20:44:31.462356+03
-8593	3216	2	\N	2016-07-17 20:44:31.462356+03
-8594	3217	2	\N	2016-07-17 20:44:31.462356+03
-8595	3218	2	\N	2016-07-17 20:44:31.462356+03
-8596	3219	2	\N	2016-07-17 20:44:31.462356+03
-8597	3220	2	\N	2016-07-17 20:44:31.462356+03
-8598	3221	2	\N	2016-07-17 20:44:31.462356+03
-8599	3222	2	\N	2016-07-17 20:44:31.462356+03
-8600	3223	2	\N	2016-07-17 20:44:31.462356+03
-8601	3224	2	\N	2016-07-17 20:44:31.462356+03
-8602	3225	2	\N	2016-07-17 20:44:31.462356+03
-8603	3226	2	\N	2016-07-17 20:44:31.462356+03
-8604	3227	2	\N	2016-07-17 20:44:31.462356+03
-8605	3228	2	\N	2016-07-17 20:44:31.462356+03
-8606	3229	2	\N	2016-07-17 20:44:31.462356+03
-8607	3230	2	\N	2016-07-17 20:44:31.462356+03
-8608	3231	2	\N	2016-07-17 20:44:31.462356+03
-8609	3232	2	\N	2016-07-17 20:44:31.462356+03
-8610	3233	2	\N	2016-07-17 20:44:31.462356+03
-8611	3234	2	\N	2016-07-17 20:44:31.462356+03
-8612	3235	2	\N	2016-07-17 20:44:31.462356+03
-8613	3236	2	\N	2016-07-17 20:44:31.462356+03
-8614	3237	2	\N	2016-07-17 20:44:31.462356+03
-8615	3238	2	\N	2016-07-17 20:44:31.462356+03
-8616	3239	2	\N	2016-07-17 20:44:31.462356+03
-8617	3240	2	\N	2016-07-17 20:44:31.462356+03
-8618	3241	2	\N	2016-07-17 20:44:31.462356+03
-8619	3242	2	\N	2016-07-17 20:44:31.462356+03
-8620	3243	2	\N	2016-07-17 20:44:31.462356+03
-8621	3244	2	\N	2016-07-17 20:44:31.462356+03
-8622	3245	2	\N	2016-07-17 20:44:31.462356+03
-8623	3246	2	\N	2016-07-17 20:44:31.462356+03
-8624	3247	2	\N	2016-07-17 20:44:31.462356+03
-8625	3248	2	\N	2016-07-17 20:44:31.462356+03
-8626	3249	2	\N	2016-07-17 20:44:31.462356+03
-8627	3250	2	\N	2016-07-17 20:44:31.462356+03
-8628	3251	2	\N	2016-07-17 20:44:31.462356+03
-8629	3252	2	\N	2016-07-17 20:44:31.462356+03
-8630	3253	2	\N	2016-07-17 20:44:31.462356+03
-8631	3254	2	\N	2016-07-17 20:44:31.462356+03
-8632	3255	2	\N	2016-07-17 20:44:31.462356+03
-8633	3256	2	\N	2016-07-17 20:44:31.462356+03
-8634	3257	2	\N	2016-07-17 20:44:31.462356+03
-8635	3258	2	\N	2016-07-17 20:44:31.462356+03
-8636	3259	2	\N	2016-07-17 20:44:31.462356+03
-8637	3260	2	\N	2016-07-17 20:44:31.462356+03
-8638	3261	2	\N	2016-07-17 20:44:31.462356+03
-8639	3262	2	\N	2016-07-17 20:44:31.462356+03
-8640	3263	2	\N	2016-07-17 20:44:31.462356+03
-8641	3264	2	\N	2016-07-17 20:44:31.462356+03
-8642	3265	2	\N	2016-07-17 20:44:31.462356+03
-8643	3266	2	\N	2016-07-17 20:44:31.462356+03
-8644	3267	2	\N	2016-07-17 20:44:31.462356+03
-8645	3268	2	\N	2016-07-17 20:44:31.462356+03
-8646	3269	2	\N	2016-07-17 20:44:31.462356+03
-8647	3270	2	\N	2016-07-17 20:44:31.462356+03
-8648	3271	2	\N	2016-07-17 20:44:31.462356+03
-8649	3272	2	\N	2016-07-17 20:44:31.462356+03
-8650	3273	2	\N	2016-07-17 20:44:31.462356+03
-8651	3274	2	\N	2016-07-17 20:44:31.462356+03
-8652	3275	2	\N	2016-07-17 20:44:31.462356+03
-8653	3276	2	\N	2016-07-17 20:44:31.462356+03
-8654	3277	2	\N	2016-07-17 20:44:31.462356+03
-8655	3278	2	\N	2016-07-17 20:44:31.462356+03
-8656	3279	2	\N	2016-07-17 20:44:31.462356+03
-8657	3280	2	\N	2016-07-17 20:44:31.462356+03
-8658	3281	2	\N	2016-07-17 20:44:31.462356+03
-8659	3282	2	\N	2016-07-17 20:44:31.462356+03
-8660	3283	2	\N	2016-07-17 20:44:31.462356+03
-8661	3284	2	\N	2016-07-17 20:44:31.462356+03
-8662	3285	2	\N	2016-07-17 20:44:31.462356+03
-8663	3286	2	\N	2016-07-17 20:44:31.462356+03
-8664	3287	2	\N	2016-07-17 20:44:31.462356+03
-8665	3288	2	\N	2016-07-17 20:44:31.462356+03
-8666	3289	2	\N	2016-07-17 20:44:31.462356+03
-8667	3290	2	\N	2016-07-17 20:44:31.462356+03
-8668	3291	2	\N	2016-07-17 20:44:31.462356+03
-8669	3292	2	\N	2016-07-17 20:44:31.462356+03
-8670	3293	2	\N	2016-07-17 20:44:31.462356+03
-8671	3294	2	\N	2016-07-17 20:44:31.462356+03
-8672	3295	2	\N	2016-07-17 20:44:31.462356+03
-8673	3296	2	\N	2016-07-17 20:44:31.462356+03
-8674	3297	2	\N	2016-07-17 20:44:31.462356+03
-8675	3298	2	\N	2016-07-17 20:44:31.462356+03
-8676	3299	2	\N	2016-07-17 20:44:31.462356+03
-8677	3300	2	\N	2016-07-17 20:44:31.462356+03
-8678	3301	2	\N	2016-07-17 20:44:31.462356+03
-8679	3302	2	\N	2016-07-17 20:44:31.462356+03
-8680	3303	2	\N	2016-07-17 20:44:31.462356+03
-8681	3304	2	\N	2016-07-17 20:44:31.462356+03
-8682	3305	2	\N	2016-07-17 20:44:31.462356+03
-8683	3306	2	\N	2016-07-17 20:44:31.462356+03
-8684	3307	2	\N	2016-07-17 20:44:31.462356+03
-8685	3308	2	\N	2016-07-17 20:44:31.462356+03
-8686	3309	2	\N	2016-07-17 20:44:31.462356+03
-8687	3310	2	\N	2016-07-17 20:44:31.462356+03
-8688	3311	2	\N	2016-07-17 20:44:31.462356+03
-8689	3312	2	\N	2016-07-17 20:44:31.462356+03
-8690	3313	2	\N	2016-07-17 20:44:31.462356+03
-8691	3314	2	\N	2016-07-17 20:44:31.462356+03
-8692	3315	2	\N	2016-07-17 20:44:31.462356+03
-8693	3316	2	\N	2016-07-17 20:44:31.462356+03
-8694	3317	2	\N	2016-07-17 20:44:31.462356+03
-8695	3318	2	\N	2016-07-17 20:44:31.462356+03
-8696	3319	2	\N	2016-07-17 20:44:31.462356+03
-8697	3320	2	\N	2016-07-17 20:44:31.462356+03
-8698	3321	2	\N	2016-07-17 20:44:31.462356+03
-8699	3322	2	\N	2016-07-17 20:44:31.462356+03
-8700	3323	2	\N	2016-07-17 20:44:31.462356+03
-8701	3324	2	\N	2016-07-17 20:44:31.462356+03
-8702	3325	2	\N	2016-07-17 20:44:31.462356+03
-8703	3326	2	\N	2016-07-17 20:44:31.462356+03
-8704	3327	2	\N	2016-07-17 20:44:31.462356+03
-8705	3328	2	\N	2016-07-17 20:44:31.462356+03
-8706	3329	2	\N	2016-07-17 20:44:31.462356+03
-8707	3330	2	\N	2016-07-17 20:44:31.462356+03
-8708	3331	2	\N	2016-07-17 20:44:31.462356+03
-8709	3332	2	\N	2016-07-17 20:44:31.462356+03
-8710	3333	2	\N	2016-07-17 20:44:31.462356+03
-8711	3334	2	\N	2016-07-17 20:44:31.462356+03
-8712	3335	2	\N	2016-07-17 20:44:31.462356+03
-8713	3336	2	\N	2016-07-17 20:44:31.462356+03
-8714	3337	2	\N	2016-07-17 20:44:31.462356+03
-8715	3338	2	\N	2016-07-17 20:44:31.462356+03
-8716	3339	2	\N	2016-07-17 20:44:31.462356+03
-8717	3340	2	\N	2016-07-17 20:44:31.462356+03
-8718	3341	2	\N	2016-07-17 20:44:31.462356+03
-8719	3342	2	\N	2016-07-17 20:44:31.462356+03
-8720	3343	2	\N	2016-07-17 20:44:31.462356+03
-8721	3344	2	\N	2016-07-17 20:44:31.462356+03
-8722	3345	2	\N	2016-07-17 20:44:31.462356+03
-8723	3346	2	\N	2016-07-17 20:44:31.462356+03
-8724	3347	2	\N	2016-07-17 20:44:31.462356+03
-8725	3348	2	\N	2016-07-17 20:44:31.462356+03
-8726	3349	2	\N	2016-07-17 20:44:31.462356+03
-8727	3350	2	\N	2016-07-17 20:44:31.462356+03
-8728	3351	2	\N	2016-07-17 20:44:31.462356+03
-8729	3352	2	\N	2016-07-17 20:44:31.462356+03
-8730	3353	2	\N	2016-07-17 20:44:31.462356+03
-8731	3354	2	\N	2016-07-17 20:44:31.462356+03
-8732	3355	2	\N	2016-07-17 20:44:31.462356+03
-8733	3356	2	\N	2016-07-17 20:44:31.462356+03
-8734	3357	2	\N	2016-07-17 20:44:31.462356+03
-8735	3358	2	\N	2016-07-17 20:44:31.462356+03
-8736	3359	2	\N	2016-07-17 20:44:31.462356+03
-8737	3360	2	\N	2016-07-17 20:44:31.462356+03
-8738	3361	2	\N	2016-07-17 20:44:31.462356+03
-8739	3362	2	\N	2016-07-17 20:44:31.462356+03
-8740	3363	2	\N	2016-07-17 20:44:31.462356+03
-8741	3364	2	\N	2016-07-17 20:44:31.462356+03
-8742	3365	2	\N	2016-07-17 20:44:31.462356+03
-8743	3366	2	\N	2016-07-17 20:44:31.462356+03
-8744	3367	2	\N	2016-07-17 20:44:31.462356+03
-8745	3368	2	\N	2016-07-17 20:44:31.462356+03
-8746	3369	2	\N	2016-07-17 20:44:31.462356+03
-8747	3370	2	\N	2016-07-17 20:44:31.462356+03
-8748	3371	2	\N	2016-07-17 20:44:31.462356+03
-8749	3372	2	\N	2016-07-17 20:44:31.462356+03
-8750	3373	2	\N	2016-07-17 20:46:12.319426+03
-8751	3374	2	\N	2016-07-17 20:46:26.521028+03
-8752	3375	2	\N	2016-07-17 20:46:48.023232+03
-8753	3376	2	\N	2016-07-17 20:46:48.023232+03
-8754	3377	2	\N	2016-07-17 20:46:48.023232+03
-8755	3378	2	\N	2016-07-17 20:46:48.023232+03
-8756	3379	2	\N	2016-07-17 20:46:48.023232+03
-8757	3380	2	\N	2016-07-17 20:46:48.023232+03
-8758	3381	2	\N	2016-07-17 20:46:48.023232+03
-8759	3382	2	\N	2016-07-17 20:46:48.023232+03
-8760	3383	2	\N	2016-07-17 20:46:48.023232+03
-8761	3384	2	\N	2016-07-17 20:46:48.023232+03
-8762	3385	2	\N	2016-07-17 20:46:48.023232+03
-8763	3386	2	\N	2016-07-17 20:46:48.023232+03
-8764	3387	2	\N	2016-07-17 20:46:48.023232+03
-8765	3388	2	\N	2016-07-17 20:46:48.023232+03
-8766	3389	2	\N	2016-07-17 20:46:48.023232+03
-8767	3390	2	\N	2016-07-17 20:46:48.023232+03
-8768	3391	2	\N	2016-07-17 20:46:48.023232+03
-8769	3392	2	\N	2016-07-17 20:46:48.023232+03
-8770	3393	2	\N	2016-07-17 20:46:48.023232+03
-8771	3394	2	\N	2016-07-17 20:46:48.023232+03
-8772	3395	2	\N	2016-07-17 20:46:48.023232+03
-8773	3396	2	\N	2016-07-17 20:46:48.023232+03
-8774	3397	2	\N	2016-07-17 20:46:48.023232+03
-8775	3398	2	\N	2016-07-17 20:46:48.023232+03
-8776	3399	2	\N	2016-07-17 20:46:48.023232+03
-8777	3400	2	\N	2016-07-17 20:46:48.023232+03
-8778	3401	2	\N	2016-07-17 20:46:48.023232+03
-8779	3402	2	\N	2016-07-17 20:46:48.023232+03
-8780	3403	2	\N	2016-07-17 20:46:48.023232+03
-8781	3404	2	\N	2016-07-17 20:46:48.023232+03
-8782	3405	2	\N	2016-07-17 20:46:48.023232+03
-8783	3406	2	\N	2016-07-17 20:46:48.023232+03
-8784	3407	2	\N	2016-07-17 20:46:48.023232+03
-8785	3408	2	\N	2016-07-17 20:46:48.023232+03
-8786	3409	2	\N	2016-07-17 20:46:48.023232+03
-8787	3410	2	\N	2016-07-17 20:46:48.023232+03
-8788	3411	2	\N	2016-07-17 20:46:48.023232+03
-8789	3412	2	\N	2016-07-17 20:46:48.023232+03
-8790	3413	2	\N	2016-07-17 20:46:48.023232+03
-8791	3414	2	\N	2016-07-17 20:46:48.023232+03
-8792	3415	2	\N	2016-07-17 20:46:48.023232+03
-8793	3416	2	\N	2016-07-17 20:46:48.023232+03
-8794	3417	2	\N	2016-07-17 20:46:48.023232+03
-8795	3418	2	\N	2016-07-17 20:46:48.023232+03
-8796	3419	2	\N	2016-07-17 20:46:48.023232+03
-8797	3420	2	\N	2016-07-17 20:46:48.023232+03
-8798	3421	2	\N	2016-07-17 20:46:48.023232+03
-8799	3422	2	\N	2016-07-17 20:46:48.023232+03
-8800	3423	2	\N	2016-07-17 20:46:48.023232+03
-8801	3424	2	\N	2016-07-17 20:46:48.023232+03
-8802	3425	2	\N	2016-07-17 20:46:48.023232+03
-8803	3426	2	\N	2016-07-17 20:46:48.023232+03
-8804	3427	2	\N	2016-07-17 20:46:48.023232+03
-8805	3428	2	\N	2016-07-17 20:46:48.023232+03
-8806	3429	2	\N	2016-07-17 20:46:48.023232+03
-8807	3430	2	\N	2016-07-17 20:46:48.023232+03
-8808	3431	2	\N	2016-07-17 20:46:48.023232+03
-8809	3432	2	\N	2016-07-17 20:46:48.023232+03
-8810	3433	2	\N	2016-07-17 20:46:48.023232+03
-8811	3434	2	\N	2016-07-17 20:46:48.023232+03
-8812	3435	2	\N	2016-07-17 20:46:48.023232+03
-8813	3436	2	\N	2016-07-17 20:46:48.023232+03
-8814	3437	2	\N	2016-07-17 20:46:48.023232+03
-8815	3438	2	\N	2016-07-17 20:46:48.023232+03
-8816	3439	2	\N	2016-07-17 20:46:48.023232+03
-8817	3440	2	\N	2016-07-17 20:46:48.023232+03
-8818	3441	2	\N	2016-07-17 20:46:48.023232+03
-8819	3442	2	\N	2016-07-17 20:46:48.023232+03
-8820	3443	2	\N	2016-07-17 20:46:48.023232+03
-8821	3444	2	\N	2016-07-17 20:46:48.023232+03
-8822	3445	2	\N	2016-07-17 20:46:48.023232+03
-8823	3446	2	\N	2016-07-17 20:46:48.023232+03
-8824	3447	2	\N	2016-07-17 20:46:48.023232+03
-8825	3448	2	\N	2016-07-17 20:46:48.023232+03
-8826	3449	2	\N	2016-07-17 20:46:48.023232+03
-8827	3450	2	\N	2016-07-17 20:46:48.023232+03
-8828	3451	2	\N	2016-07-17 20:46:48.023232+03
-8829	3452	2	\N	2016-07-17 20:46:48.023232+03
-8830	3453	2	\N	2016-07-17 20:46:48.023232+03
-8831	3454	2	\N	2016-07-17 20:46:48.023232+03
-8832	3455	2	\N	2016-07-17 20:46:48.023232+03
-8833	3456	2	\N	2016-07-17 20:46:48.023232+03
-8834	3457	2	\N	2016-07-17 20:46:48.023232+03
-8835	3458	2	\N	2016-07-17 20:46:48.023232+03
-8836	3459	2	\N	2016-07-17 20:46:48.023232+03
-8837	3460	2	\N	2016-07-17 20:46:48.023232+03
-8838	3461	2	\N	2016-07-17 20:46:48.023232+03
-8839	3462	2	\N	2016-07-17 20:46:48.023232+03
-8840	3463	2	\N	2016-07-17 20:46:48.023232+03
-8841	3464	2	\N	2016-07-17 20:46:48.023232+03
-8842	3465	2	\N	2016-07-17 20:46:48.023232+03
-8843	3466	2	\N	2016-07-17 20:46:48.023232+03
-8844	3467	2	\N	2016-07-17 20:46:48.023232+03
-8845	3468	2	\N	2016-07-17 20:46:48.023232+03
-8846	3469	2	\N	2016-07-17 20:46:48.023232+03
-8847	3470	2	\N	2016-07-17 20:46:48.023232+03
-8848	3471	2	\N	2016-07-17 20:46:48.023232+03
-8849	3472	2	\N	2016-07-17 20:46:48.023232+03
-8850	3473	2	\N	2016-07-17 20:46:48.023232+03
-8851	3474	2	\N	2016-07-17 20:46:48.023232+03
-8852	3475	2	\N	2016-07-17 20:46:48.023232+03
-8853	3476	2	\N	2016-07-17 20:46:48.023232+03
-8854	3477	2	\N	2016-07-17 20:46:48.023232+03
-8855	3478	2	\N	2016-07-17 20:46:48.023232+03
-8856	3479	2	\N	2016-07-17 20:46:48.023232+03
-8857	3480	2	\N	2016-07-17 20:46:48.023232+03
-8858	3481	2	\N	2016-07-17 20:46:48.023232+03
-8859	3482	2	\N	2016-07-17 20:46:48.023232+03
-8860	3483	2	\N	2016-07-17 20:46:48.023232+03
-8861	3484	2	\N	2016-07-17 20:46:48.023232+03
-8862	3485	2	\N	2016-07-17 20:46:48.023232+03
-8863	3486	2	\N	2016-07-17 20:46:48.023232+03
-8864	3487	2	\N	2016-07-17 20:46:48.023232+03
-8865	3488	2	\N	2016-07-17 20:46:48.023232+03
-8866	3489	2	\N	2016-07-17 20:46:48.023232+03
-8867	3490	2	\N	2016-07-17 20:46:48.023232+03
-8868	3491	2	\N	2016-07-17 20:46:48.023232+03
-8869	3492	2	\N	2016-07-17 20:46:48.023232+03
-8870	3493	2	\N	2016-07-17 20:46:48.023232+03
-8871	3494	2	\N	2016-07-17 20:46:48.023232+03
-8872	3495	2	\N	2016-07-17 20:46:48.023232+03
-8873	3496	2	\N	2016-07-17 20:46:48.023232+03
-8874	3497	2	\N	2016-07-17 20:46:48.023232+03
-8875	3498	2	\N	2016-07-17 20:46:48.023232+03
-8876	3499	2	\N	2016-07-17 20:46:48.023232+03
-8877	3500	2	\N	2016-07-17 20:46:48.023232+03
-8878	3501	2	\N	2016-07-17 20:46:48.023232+03
-8879	3502	2	\N	2016-07-17 20:46:48.023232+03
-8880	3503	2	\N	2016-07-17 20:46:48.023232+03
-8881	3504	2	\N	2016-07-17 20:46:48.023232+03
-8882	3505	2	\N	2016-07-17 20:46:48.023232+03
-8883	3506	2	\N	2016-07-17 20:46:48.023232+03
-8884	3507	2	\N	2016-07-17 20:46:48.023232+03
-8885	3508	2	\N	2016-07-17 20:46:48.023232+03
-8886	3509	2	\N	2016-07-17 20:46:48.023232+03
-8887	3510	2	\N	2016-07-17 20:46:48.023232+03
-8888	3511	2	\N	2016-07-17 20:46:48.023232+03
-8889	3512	2	\N	2016-07-17 20:46:48.023232+03
-8890	3513	2	\N	2016-07-17 20:46:48.023232+03
-8891	3514	2	\N	2016-07-17 20:46:48.023232+03
-8892	3515	2	\N	2016-07-17 20:46:48.023232+03
-8893	3516	2	\N	2016-07-17 20:46:48.023232+03
-8894	3517	2	\N	2016-07-17 20:46:48.023232+03
-8895	3518	2	\N	2016-07-17 20:46:48.023232+03
-8896	3519	2	\N	2016-07-17 20:46:48.023232+03
-8897	3520	2	\N	2016-07-17 20:46:48.023232+03
-8898	3521	2	\N	2016-07-17 20:46:48.023232+03
-8899	3522	2	\N	2016-07-17 20:46:48.023232+03
-8900	3523	2	\N	2016-07-17 20:46:48.023232+03
-8901	3524	2	\N	2016-07-17 20:46:48.023232+03
-8902	3525	2	\N	2016-07-17 20:46:48.023232+03
-8903	3526	2	\N	2016-07-17 20:46:48.023232+03
-8904	3527	2	\N	2016-07-17 20:46:48.023232+03
-8905	3528	2	\N	2016-07-17 20:46:48.023232+03
-8906	3529	2	\N	2016-07-17 20:46:48.023232+03
-8907	3530	2	\N	2016-07-17 20:46:48.023232+03
-8908	3531	2	\N	2016-07-17 20:46:48.023232+03
-8909	3532	2	\N	2016-07-17 20:46:48.023232+03
-8910	3533	2	\N	2016-07-17 20:46:48.023232+03
-8911	3534	2	\N	2016-07-17 20:46:48.023232+03
-8912	3535	2	\N	2016-07-17 20:46:48.023232+03
-8913	3536	2	\N	2016-07-17 20:46:48.023232+03
-8914	3537	2	\N	2016-07-17 20:46:48.023232+03
-8915	3538	2	\N	2016-07-17 20:46:48.023232+03
-8916	3539	2	\N	2016-07-17 20:46:48.023232+03
-8917	3540	2	\N	2016-07-17 20:46:48.023232+03
-8918	3541	2	\N	2016-07-17 20:46:48.023232+03
-8919	3542	2	\N	2016-07-17 20:46:48.023232+03
-8920	3543	2	\N	2016-07-17 20:46:48.023232+03
-8921	3544	2	\N	2016-07-17 20:46:48.023232+03
-8922	3545	2	\N	2016-07-17 20:46:48.023232+03
-8923	3546	2	\N	2016-07-17 20:46:48.023232+03
-8924	3547	2	\N	2016-07-17 20:46:48.023232+03
-8925	3548	2	\N	2016-07-17 20:46:48.023232+03
-8926	3549	2	\N	2016-07-17 20:46:48.023232+03
-8927	3550	2	\N	2016-07-17 20:46:48.023232+03
-8928	3551	2	\N	2016-07-17 20:46:48.023232+03
-8929	3552	2	\N	2016-07-17 20:46:48.023232+03
-8930	3553	2	\N	2016-07-17 20:46:48.023232+03
-8931	3554	2	\N	2016-07-17 20:46:48.023232+03
-8932	3555	2	\N	2016-07-17 20:46:48.023232+03
-8933	3556	2	\N	2016-07-17 20:46:48.023232+03
-8934	3557	2	\N	2016-07-17 20:46:48.023232+03
-8935	3558	2	\N	2016-07-17 20:46:48.023232+03
-8936	3559	2	\N	2016-07-17 20:46:48.023232+03
-8937	3560	2	\N	2016-07-17 20:46:48.023232+03
-8938	3561	2	\N	2016-07-17 20:46:48.023232+03
-8939	3562	2	\N	2016-07-17 20:46:48.023232+03
-8940	3563	2	\N	2016-07-17 20:46:48.023232+03
-8941	3564	2	\N	2016-07-17 20:46:48.023232+03
-8942	3565	2	\N	2016-07-17 20:46:48.023232+03
-8943	3566	2	\N	2016-07-17 20:46:48.023232+03
-8944	3375	2	\N	2016-07-17 20:46:48.023232+03
-8945	3376	2	\N	2016-07-17 20:46:48.023232+03
-8946	3377	2	\N	2016-07-17 20:46:48.023232+03
-8947	3378	2	\N	2016-07-17 20:46:48.023232+03
-8948	3379	2	\N	2016-07-17 20:46:48.023232+03
-8949	3380	2	\N	2016-07-17 20:46:48.023232+03
-8950	3381	2	\N	2016-07-17 20:46:48.023232+03
-8951	3382	2	\N	2016-07-17 20:46:48.023232+03
-8952	3383	2	\N	2016-07-17 20:46:48.023232+03
-8953	3384	2	\N	2016-07-17 20:46:48.023232+03
-8954	3385	2	\N	2016-07-17 20:46:48.023232+03
-8955	3386	2	\N	2016-07-17 20:46:48.023232+03
-8956	3387	2	\N	2016-07-17 20:46:48.023232+03
-8957	3388	2	\N	2016-07-17 20:46:48.023232+03
-8958	3389	2	\N	2016-07-17 20:46:48.023232+03
-8959	3390	2	\N	2016-07-17 20:46:48.023232+03
-8960	3391	2	\N	2016-07-17 20:46:48.023232+03
-8961	3392	2	\N	2016-07-17 20:46:48.023232+03
-8962	3393	2	\N	2016-07-17 20:46:48.023232+03
-8963	3394	2	\N	2016-07-17 20:46:48.023232+03
-8964	3395	2	\N	2016-07-17 20:46:48.023232+03
-8965	3396	2	\N	2016-07-17 20:46:48.023232+03
-8966	3397	2	\N	2016-07-17 20:46:48.023232+03
-8967	3398	2	\N	2016-07-17 20:46:48.023232+03
-8968	3399	2	\N	2016-07-17 20:46:48.023232+03
-8969	3400	2	\N	2016-07-17 20:46:48.023232+03
-8970	3401	2	\N	2016-07-17 20:46:48.023232+03
-8971	3402	2	\N	2016-07-17 20:46:48.023232+03
-8972	3403	2	\N	2016-07-17 20:46:48.023232+03
-8973	3404	2	\N	2016-07-17 20:46:48.023232+03
-8974	3405	2	\N	2016-07-17 20:46:48.023232+03
-8975	3406	2	\N	2016-07-17 20:46:48.023232+03
-8976	3407	2	\N	2016-07-17 20:46:48.023232+03
-8977	3408	2	\N	2016-07-17 20:46:48.023232+03
-8978	3409	2	\N	2016-07-17 20:46:48.023232+03
-8979	3410	2	\N	2016-07-17 20:46:48.023232+03
-8980	3411	2	\N	2016-07-17 20:46:48.023232+03
-8981	3412	2	\N	2016-07-17 20:46:48.023232+03
-8982	3413	2	\N	2016-07-17 20:46:48.023232+03
-8983	3414	2	\N	2016-07-17 20:46:48.023232+03
-8984	3415	2	\N	2016-07-17 20:46:48.023232+03
-8985	3416	2	\N	2016-07-17 20:46:48.023232+03
-8986	3417	2	\N	2016-07-17 20:46:48.023232+03
-8987	3418	2	\N	2016-07-17 20:46:48.023232+03
-8988	3419	2	\N	2016-07-17 20:46:48.023232+03
-8989	3420	2	\N	2016-07-17 20:46:48.023232+03
-8990	3421	2	\N	2016-07-17 20:46:48.023232+03
-8991	3422	2	\N	2016-07-17 20:46:48.023232+03
-8992	3423	2	\N	2016-07-17 20:46:48.023232+03
-8993	3424	2	\N	2016-07-17 20:46:48.023232+03
-8994	3425	2	\N	2016-07-17 20:46:48.023232+03
-8995	3426	2	\N	2016-07-17 20:46:48.023232+03
-8996	3427	2	\N	2016-07-17 20:46:48.023232+03
-8997	3428	2	\N	2016-07-17 20:46:48.023232+03
-8998	3429	2	\N	2016-07-17 20:46:48.023232+03
-8999	3430	2	\N	2016-07-17 20:46:48.023232+03
-9000	3431	2	\N	2016-07-17 20:46:48.023232+03
-9001	3432	2	\N	2016-07-17 20:46:48.023232+03
-9002	3433	2	\N	2016-07-17 20:46:48.023232+03
-9003	3434	2	\N	2016-07-17 20:46:48.023232+03
-9004	3435	2	\N	2016-07-17 20:46:48.023232+03
-9005	3436	2	\N	2016-07-17 20:46:48.023232+03
-9006	3437	2	\N	2016-07-17 20:46:48.023232+03
-9007	3438	2	\N	2016-07-17 20:46:48.023232+03
-9008	3439	2	\N	2016-07-17 20:46:48.023232+03
-9009	3440	2	\N	2016-07-17 20:46:48.023232+03
-9010	3441	2	\N	2016-07-17 20:46:48.023232+03
-9011	3442	2	\N	2016-07-17 20:46:48.023232+03
-9012	3443	2	\N	2016-07-17 20:46:48.023232+03
-9013	3444	2	\N	2016-07-17 20:46:48.023232+03
-9014	3445	2	\N	2016-07-17 20:46:48.023232+03
-9015	3446	2	\N	2016-07-17 20:46:48.023232+03
-9016	3447	2	\N	2016-07-17 20:46:48.023232+03
-9017	3448	2	\N	2016-07-17 20:46:48.023232+03
-9018	3449	2	\N	2016-07-17 20:46:48.023232+03
-9019	3450	2	\N	2016-07-17 20:46:48.023232+03
-9020	3451	2	\N	2016-07-17 20:46:48.023232+03
-9021	3452	2	\N	2016-07-17 20:46:48.023232+03
-9022	3453	2	\N	2016-07-17 20:46:48.023232+03
-9023	3454	2	\N	2016-07-17 20:46:48.023232+03
-9024	3455	2	\N	2016-07-17 20:46:48.023232+03
-9025	3456	2	\N	2016-07-17 20:46:48.023232+03
-9026	3457	2	\N	2016-07-17 20:46:48.023232+03
-9027	3458	2	\N	2016-07-17 20:46:48.023232+03
-9028	3459	2	\N	2016-07-17 20:46:48.023232+03
-9029	3460	2	\N	2016-07-17 20:46:48.023232+03
-9030	3461	2	\N	2016-07-17 20:46:48.023232+03
-9031	3462	2	\N	2016-07-17 20:46:48.023232+03
-9032	3463	2	\N	2016-07-17 20:46:48.023232+03
-9033	3464	2	\N	2016-07-17 20:46:48.023232+03
-9034	3465	2	\N	2016-07-17 20:46:48.023232+03
-9035	3466	2	\N	2016-07-17 20:46:48.023232+03
-9036	3467	2	\N	2016-07-17 20:46:48.023232+03
-9037	3468	2	\N	2016-07-17 20:46:48.023232+03
-9038	3469	2	\N	2016-07-17 20:46:48.023232+03
-9039	3470	2	\N	2016-07-17 20:46:48.023232+03
-9040	3471	2	\N	2016-07-17 20:46:48.023232+03
-9041	3472	2	\N	2016-07-17 20:46:48.023232+03
-9042	3473	2	\N	2016-07-17 20:46:48.023232+03
-9043	3474	2	\N	2016-07-17 20:46:48.023232+03
-9044	3475	2	\N	2016-07-17 20:46:48.023232+03
-9045	3476	2	\N	2016-07-17 20:46:48.023232+03
-9046	3477	2	\N	2016-07-17 20:46:48.023232+03
-9047	3478	2	\N	2016-07-17 20:46:48.023232+03
-9048	3479	2	\N	2016-07-17 20:46:48.023232+03
-9049	3480	2	\N	2016-07-17 20:46:48.023232+03
-9050	3481	2	\N	2016-07-17 20:46:48.023232+03
-9051	3482	2	\N	2016-07-17 20:46:48.023232+03
-9052	3483	2	\N	2016-07-17 20:46:48.023232+03
-9053	3484	2	\N	2016-07-17 20:46:48.023232+03
-9054	3485	2	\N	2016-07-17 20:46:48.023232+03
-9055	3486	2	\N	2016-07-17 20:46:48.023232+03
-9056	3487	2	\N	2016-07-17 20:46:48.023232+03
-9057	3488	2	\N	2016-07-17 20:46:48.023232+03
-9058	3489	2	\N	2016-07-17 20:46:48.023232+03
-9059	3490	2	\N	2016-07-17 20:46:48.023232+03
-9060	3491	2	\N	2016-07-17 20:46:48.023232+03
-9061	3492	2	\N	2016-07-17 20:46:48.023232+03
-9062	3493	2	\N	2016-07-17 20:46:48.023232+03
-9063	3494	2	\N	2016-07-17 20:46:48.023232+03
-9064	3495	2	\N	2016-07-17 20:46:48.023232+03
-9065	3496	2	\N	2016-07-17 20:46:48.023232+03
-9066	3497	2	\N	2016-07-17 20:46:48.023232+03
-9067	3498	2	\N	2016-07-17 20:46:48.023232+03
-9068	3499	2	\N	2016-07-17 20:46:48.023232+03
-9069	3500	2	\N	2016-07-17 20:46:48.023232+03
-9070	3501	2	\N	2016-07-17 20:46:48.023232+03
-9071	3502	2	\N	2016-07-17 20:46:48.023232+03
-9072	3503	2	\N	2016-07-17 20:46:48.023232+03
-9073	3504	2	\N	2016-07-17 20:46:48.023232+03
-9074	3505	2	\N	2016-07-17 20:46:48.023232+03
-9075	3506	2	\N	2016-07-17 20:46:48.023232+03
-9076	3507	2	\N	2016-07-17 20:46:48.023232+03
-9077	3508	2	\N	2016-07-17 20:46:48.023232+03
-9078	3509	2	\N	2016-07-17 20:46:48.023232+03
-9079	3510	2	\N	2016-07-17 20:46:48.023232+03
-9080	3511	2	\N	2016-07-17 20:46:48.023232+03
-9081	3512	2	\N	2016-07-17 20:46:48.023232+03
-9082	3513	2	\N	2016-07-17 20:46:48.023232+03
-9083	3514	2	\N	2016-07-17 20:46:48.023232+03
-9084	3515	2	\N	2016-07-17 20:46:48.023232+03
-9085	3516	2	\N	2016-07-17 20:46:48.023232+03
-9086	3517	2	\N	2016-07-17 20:46:48.023232+03
-9087	3518	2	\N	2016-07-17 20:46:48.023232+03
-9088	3519	2	\N	2016-07-17 20:46:48.023232+03
-9089	3520	2	\N	2016-07-17 20:46:48.023232+03
-9090	3521	2	\N	2016-07-17 20:46:48.023232+03
-9091	3522	2	\N	2016-07-17 20:46:48.023232+03
-9092	3523	2	\N	2016-07-17 20:46:48.023232+03
-9093	3524	2	\N	2016-07-17 20:46:48.023232+03
-9094	3525	2	\N	2016-07-17 20:46:48.023232+03
-9095	3526	2	\N	2016-07-17 20:46:48.023232+03
-9096	3527	2	\N	2016-07-17 20:46:48.023232+03
-9097	3528	2	\N	2016-07-17 20:46:48.023232+03
-9098	3529	2	\N	2016-07-17 20:46:48.023232+03
-9099	3530	2	\N	2016-07-17 20:46:48.023232+03
-9100	3531	2	\N	2016-07-17 20:46:48.023232+03
-9101	3532	2	\N	2016-07-17 20:46:48.023232+03
-9102	3533	2	\N	2016-07-17 20:46:48.023232+03
-9103	3534	2	\N	2016-07-17 20:46:48.023232+03
-9104	3535	2	\N	2016-07-17 20:46:48.023232+03
-9105	3536	2	\N	2016-07-17 20:46:48.023232+03
-9106	3537	2	\N	2016-07-17 20:46:48.023232+03
-9107	3538	2	\N	2016-07-17 20:46:48.023232+03
-9108	3539	2	\N	2016-07-17 20:46:48.023232+03
-9109	3540	2	\N	2016-07-17 20:46:48.023232+03
-9110	3541	2	\N	2016-07-17 20:46:48.023232+03
-9111	3542	2	\N	2016-07-17 20:46:48.023232+03
-9112	3543	2	\N	2016-07-17 20:46:48.023232+03
-9113	3544	2	\N	2016-07-17 20:46:48.023232+03
-9114	3545	2	\N	2016-07-17 20:46:48.023232+03
-9115	3546	2	\N	2016-07-17 20:46:48.023232+03
-9116	3547	2	\N	2016-07-17 20:46:48.023232+03
-9117	3548	2	\N	2016-07-17 20:46:48.023232+03
-9118	3549	2	\N	2016-07-17 20:46:48.023232+03
-9119	3550	2	\N	2016-07-17 20:46:48.023232+03
-9120	3551	2	\N	2016-07-17 20:46:48.023232+03
-9121	3552	2	\N	2016-07-17 20:46:48.023232+03
-9122	3553	2	\N	2016-07-17 20:46:48.023232+03
-9123	3554	2	\N	2016-07-17 20:46:48.023232+03
-9124	3555	2	\N	2016-07-17 20:46:48.023232+03
-9125	3556	2	\N	2016-07-17 20:46:48.023232+03
-9126	3557	2	\N	2016-07-17 20:46:48.023232+03
-9127	3558	2	\N	2016-07-17 20:46:48.023232+03
-9128	3559	2	\N	2016-07-17 20:46:48.023232+03
-9129	3560	2	\N	2016-07-17 20:46:48.023232+03
-9130	3561	2	\N	2016-07-17 20:46:48.023232+03
-9131	3562	2	\N	2016-07-17 20:46:48.023232+03
-9132	3563	2	\N	2016-07-17 20:46:48.023232+03
-9133	3564	2	\N	2016-07-17 20:46:48.023232+03
-9134	3565	2	\N	2016-07-17 20:46:48.023232+03
-9135	3566	2	\N	2016-07-17 20:46:48.023232+03
-9136	2599	2	\N	2016-07-17 20:48:04.661938+03
-9137	3570	2	\N	2016-07-17 21:02:17.675936+03
-9138	3571	2	\N	2016-07-17 21:02:17.675936+03
-9139	3572	2	\N	2016-07-17 21:02:17.675936+03
-9140	3570	2	\N	2016-07-17 21:02:17.675936+03
-9141	3571	2	\N	2016-07-17 21:02:17.675936+03
-9142	3572	2	\N	2016-07-17 21:02:17.675936+03
-9143	3573	2	\N	2016-07-17 21:05:22.570637+03
-9144	3574	2	\N	2016-07-17 21:05:22.570637+03
-9145	3575	2	\N	2016-07-17 21:05:22.570637+03
-9146	3576	2	\N	2016-07-17 21:08:27.561499+03
-9147	3577	2	\N	2016-07-17 21:08:27.561499+03
-9148	3578	2	\N	2016-07-17 21:08:27.561499+03
-9149	3576	2	\N	2016-07-17 21:08:27.561499+03
-9150	3577	2	\N	2016-07-17 21:08:27.561499+03
-9151	3578	2	\N	2016-07-17 21:08:27.561499+03
-9152	3582	2	\N	2016-07-17 21:12:05.642895+03
-9153	3583	2	\N	2016-07-17 21:12:05.642895+03
-9154	3584	2	\N	2016-07-17 21:12:05.642895+03
-9155	3582	2	\N	2016-07-17 21:12:05.642895+03
-9156	3583	2	\N	2016-07-17 21:12:05.642895+03
-9157	3584	2	\N	2016-07-17 21:12:05.642895+03
-9158	3585	2	\N	2016-07-17 21:12:21.726146+03
-9159	3586	2	\N	2016-07-17 21:12:21.726146+03
-9160	3587	2	\N	2016-07-17 21:12:21.726146+03
-9161	3585	2	\N	2016-07-17 21:12:21.726146+03
-9162	3586	2	\N	2016-07-17 21:12:21.726146+03
-9163	3587	2	\N	2016-07-17 21:12:21.726146+03
-9164	3588	2	\N	2016-07-17 21:17:10.901576+03
-9165	3589	2	\N	2016-07-17 21:17:10.901576+03
-9166	3590	2	\N	2016-07-17 21:17:10.901576+03
-9167	3588	2	\N	2016-07-17 21:17:10.901576+03
-9168	3589	2	\N	2016-07-17 21:17:10.901576+03
-9169	3590	2	\N	2016-07-17 21:17:10.901576+03
-9171	3592	2	\N	2016-07-17 21:21:20.394001+03
-9172	3592	2	\N	2016-07-17 21:21:20.394001+03
-9173	3593	2	\N	2016-07-17 21:29:08.916392+03
-9174	3593	2	\N	2016-07-17 21:29:08.916392+03
-9175	3594	2	\N	2016-07-17 21:30:30.908087+03
-9176	3594	2	\N	2016-07-17 21:30:30.908087+03
-9178	3596	2	\N	2016-07-17 21:33:36.141508+03
-9179	3596	2	\N	2016-07-17 21:33:36.141508+03
-9184	3605	2	\N	2016-07-17 22:25:59.358206+03
-9185	3605	2	\N	2016-07-17 22:25:59.358206+03
-9186	3607	2	\N	2016-07-17 22:31:21.662461+03
-9187	3607	2	\N	2016-07-17 22:31:21.662461+03
-9188	3608	2	\N	2016-07-17 22:32:13.581054+03
-9189	3608	2	\N	2016-07-17 22:32:13.581054+03
-9190	3609	2	\N	2016-07-17 22:32:27.009091+03
-9191	3609	2	\N	2016-07-17 22:32:27.009091+03
-9192	3610	2	\N	2016-07-17 22:33:37.722643+03
-9193	3610	2	\N	2016-07-17 22:33:37.722643+03
-9194	3612	2	\N	2016-07-17 22:35:13.336053+03
-9195	3612	2	\N	2016-07-17 22:35:13.336053+03
-9196	3613	2	\N	2016-07-17 22:35:45.25705+03
-9197	3614	2	\N	2016-07-17 22:35:45.25705+03
-9198	3613	2	\N	2016-07-17 22:35:45.25705+03
-9199	3614	2	\N	2016-07-17 22:35:45.25705+03
-9201	3616	2	\N	2016-07-17 22:36:08.778333+03
-9202	3617	2	\N	2016-07-17 22:36:08.778333+03
-9203	3618	2	\N	2016-07-17 22:36:08.778333+03
-9204	3616	2	\N	2016-07-17 22:36:08.778333+03
-9205	3617	2	\N	2016-07-17 22:36:08.778333+03
-9206	3618	2	\N	2016-07-17 22:36:08.778333+03
-9208	3620	2	\N	2016-07-18 12:29:57.722776+03
-9209	3621	2	\N	2016-07-18 12:30:24.354102+03
-9210	3622	2	\N	2016-07-18 12:34:29.004462+03
-9211	3623	2	\N	2016-07-18 12:41:00.617011+03
-9212	3623	2	\N	2016-07-18 12:43:21.147788+03
-9213	3622	2	\N	2016-07-18 12:43:38.756454+03
-9214	3624	2	\N	2016-07-18 12:44:26.407128+03
-9217	3624	2	\N	2016-07-18 12:46:52.495098+03
-9218	1922	2	\N	2016-07-18 12:47:32.820453+03
-9219	1983	2	\N	2016-07-18 12:47:54.267133+03
-9220	1962	2	\N	2016-07-18 12:48:41.656842+03
-9221	1932	2	\N	2016-07-18 12:54:57.158012+03
-9222	1933	2	\N	2016-07-18 12:55:17.340595+03
-9223	1939	2	\N	2016-07-18 12:58:10.209253+03
-9224	3627	2	\N	2016-07-18 13:00:13.242889+03
-9225	3627	2	\N	2016-07-18 13:01:09.417903+03
-9226	1940	2	\N	2016-07-18 13:02:43.509957+03
-9227	3628	2	\N	2016-07-18 13:08:25.073278+03
-9228	1958	2	\N	2016-07-18 13:08:44.410771+03
-9229	1958	2	\N	2016-07-18 13:09:04.744269+03
-9230	1958	2	\N	2016-07-18 13:12:03.429991+03
-9231	3629	2	\N	2016-07-18 13:19:47.090059+03
-9232	3630	2	\N	2016-07-18 13:21:53.332214+03
-9233	3631	2	\N	2016-07-18 13:22:01.281437+03
-9234	3632	2	\N	2016-07-18 13:22:21.806846+03
-9235	3633	2	\N	2016-07-18 13:22:28.357783+03
-9236	2912	2	\N	2016-07-18 14:12:15.22966+03
-9238	3639	2	\N	2016-07-18 14:13:21.815056+03
-9239	3640	2	\N	2016-07-18 14:13:28.291542+03
-9240	2887	2	\N	2016-07-18 14:51:59.504724+03
-9242	3642	2	\N	2016-07-18 15:27:05.35429+03
-9243	3642	2	\N	2016-07-18 15:27:05.35429+03
-9244	3643	2	\N	2016-07-18 15:27:30.300315+03
-9245	3643	2	\N	2016-07-18 15:27:30.300315+03
-9247	3645	2	\N	2016-07-18 15:27:54.945725+03
-9248	3645	2	\N	2016-07-18 15:27:54.945725+03
-9249	3646	2	\N	2016-07-18 15:27:58.438715+03
-9250	3647	2	\N	2016-07-18 15:37:00.879253+03
-9251	3648	2	\N	2016-07-18 15:37:00.879253+03
-9252	3647	2	\N	2016-07-18 15:37:00.879253+03
-9253	3648	2	\N	2016-07-18 15:37:00.879253+03
-9261	3658	2	\N	2016-07-18 19:11:35.788936+03
-9262	3658	2	\N	2016-07-18 19:11:35.788936+03
-9263	3659	2	\N	2016-07-18 19:11:44.065391+03
-9264	3660	2	\N	2016-07-18 19:40:02.195879+03
-9265	3661	2	\N	2016-07-18 19:40:02.195879+03
-9266	3662	2	\N	2016-07-18 19:51:19.833083+03
-9267	3662	2	\N	2016-07-18 19:51:19.833083+03
-9268	3663	2	\N	2016-07-18 19:51:37.036363+03
-9269	3663	2	\N	2016-07-18 19:51:37.036363+03
-9270	3664	2	\N	2016-07-18 19:55:57.655398+03
-9271	3665	2	\N	2016-07-18 19:55:57.655398+03
-9272	3666	2	\N	2016-07-18 19:57:43.344153+03
-9273	3667	2	\N	2016-07-18 19:57:43.344153+03
-9274	3668	2	\N	2016-07-18 21:03:25.710082+03
-9275	3668	2	\N	2016-07-18 21:03:25.710082+03
-9276	3669	2	\N	2016-07-18 21:04:21.413092+03
-9277	3670	2	\N	2016-07-18 21:04:40.623581+03
-9278	3671	2	\N	2016-07-18 21:04:59.792668+03
-9279	3672	2	\N	2016-07-18 21:05:02.91989+03
-9280	3673	2	\N	2016-07-18 21:06:39.104567+03
-9281	3674	2	\N	2016-07-18 21:06:55.570741+03
-9282	3675	2	\N	2016-07-18 21:07:48.916968+03
-9283	3676	2	\N	2016-07-18 21:08:00.243833+03
-9284	3677	2	\N	2016-07-18 21:08:22.488718+03
-9285	3678	2	\N	2016-07-18 21:08:26.526063+03
-9286	3679	2	\N	2016-07-18 21:09:34.242752+03
-9287	3678	2	\N	2016-07-18 21:09:36.66136+03
-9288	3680	2	\N	2016-07-18 21:14:54.717502+03
-9289	3678	2	\N	2016-07-18 21:14:59.994018+03
-9290	3678	2	\N	2016-07-18 21:16:18.222388+03
-9291	3681	2	\N	2016-07-18 21:18:05.711913+03
-9292	3682	2	\N	2016-07-18 21:18:51.796771+03
-9293	3683	2	\N	2016-07-18 21:20:29.357465+03
-9294	3684	2	\N	2016-07-18 21:20:52.829476+03
-9295	3685	2	\N	2016-07-18 21:20:52.829476+03
-9296	3686	2	\N	2016-07-18 21:21:38.146958+03
-9297	3686	2	\N	2016-07-18 21:22:06.030007+03
-9298	3687	2	\N	2016-07-18 21:22:21.765401+03
-9299	3688	2	\N	2016-07-18 21:30:16.633492+03
-9300	3689	2	\N	2016-07-18 21:57:26.693111+03
-9301	3690	2	\N	2016-07-18 21:57:26.693111+03
-9302	3689	2	\N	2016-07-18 21:58:12.214847+03
-9307	3693	2	\N	2016-07-18 22:11:41.812087+03
-9308	3694	2	\N	2016-07-18 22:12:20.422263+03
-9309	3695	2	\N	2016-07-18 22:15:56.389648+03
-9310	3694	2	\N	2016-07-18 22:15:59.504984+03
-9311	3696	2	\N	2016-07-22 10:45:15.542424+03
-9312	3697	2	\N	2016-07-22 10:45:17.115079+03
-9313	3698	2	\N	2016-07-22 10:45:23.27547+03
-9314	3698	2	\N	2016-07-22 10:45:23.27547+03
-9315	3699	2	\N	2016-07-22 10:45:30.507714+03
-9316	784	2	\N	2016-07-25 21:43:58.280137+03
-9317	3700	2	\N	2016-07-25 21:43:58.280137+03
-9318	784	2	\N	2016-07-25 21:46:22.145031+03
-9319	3701	2	\N	2016-07-25 21:46:22.145031+03
-9320	784	2	\N	2016-07-25 21:47:08.051175+03
-9321	784	2	\N	2016-07-25 21:47:21.64686+03
-9322	3702	2	\N	2016-07-25 21:47:21.64686+03
-9323	2785	2	\N	2016-07-25 22:14:47.617663+03
-9324	3703	2	\N	2016-07-25 22:14:47.617663+03
-9325	2785	2	\N	2016-07-25 22:15:26.53667+03
-9326	3704	2	\N	2016-07-25 22:15:26.53667+03
-9327	894	2	\N	2016-07-26 22:01:18.920488+03
-9328	3706	2	\N	2016-07-26 22:01:18.920488+03
-9329	3707	2	\N	2016-08-14 18:56:05.977918+03
-9330	3708	2	\N	2016-08-14 19:03:10.857337+03
-9331	3709	2	\N	2016-08-14 19:03:10.857337+03
-9332	3710	2	\N	2016-08-14 19:03:14.314573+03
-9333	3711	2	\N	2016-08-14 20:26:08.688244+03
-9334	3712	2	\N	2016-08-14 21:15:15.531012+03
-9335	3713	2	\N	2016-08-14 21:15:15.531012+03
-9336	3714	2	\N	2016-08-14 21:16:25.559207+03
-9337	3714	2	\N	2016-08-14 21:16:37.51235+03
-9338	3686	2	\N	2016-08-14 21:31:59.787809+03
-9339	3715	2	\N	2016-08-15 20:28:51.674304+03
-9340	3716	2	\N	2016-08-15 20:30:10.176092+03
-9341	2741	2	\N	2016-08-15 20:30:38.225402+03
-9342	3716	2	\N	2016-08-15 20:31:03.08536+03
-9343	3718	2	\N	2016-08-15 20:42:14.870527+03
-9344	3718	2	\N	2016-08-15 20:54:06.940755+03
-9345	3719	2	\N	2016-08-15 20:57:54.464142+03
-9346	3718	2	\N	2016-08-15 20:57:57.245736+03
-9347	3720	2	\N	2016-08-15 20:58:42.127593+03
-9348	3718	2	\N	2016-08-15 21:18:53.667685+03
-9349	2912	2	\N	2016-08-27 21:26:40.91456+03
-9350	2912	2	\N	2016-08-27 21:31:28.135513+03
-9351	2912	2	\N	2016-08-27 21:31:46.027601+03
-9352	2912	2	\N	2016-08-27 21:33:20.124147+03
-9353	2912	2	\N	2016-08-27 21:34:09.147611+03
-9354	2912	2	\N	2016-08-27 21:48:34.902922+03
-9355	2912	2	\N	2016-08-27 21:52:21.071017+03
-9356	2912	2	\N	2016-08-27 21:52:52.73815+03
-9357	2912	2	\N	2016-08-27 22:01:45.544281+03
-9358	2912	2	\N	2016-08-27 22:04:44.859232+03
-9359	3721	2	\N	2016-08-28 16:55:22.748938+03
-9369	3731	2	\N	2016-09-03 18:16:12.222632+03
-9370	3732	2	\N	2016-09-03 20:47:56.689715+03
-9371	3733	2	\N	2016-09-03 20:48:05.472617+03
-9372	3683	2	\N	2016-09-03 20:49:50.534429+03
-9373	3734	2	\N	2016-09-04 12:40:39.029924+03
-9386	3747	2	\N	2016-09-04 17:39:08.071747+03
-9387	3748	2	\N	2016-09-04 17:42:17.365537+03
-9388	3749	2	\N	2016-09-04 17:42:30.613123+03
-9389	3750	2	\N	2016-09-04 17:42:39.06705+03
-9390	3751	2	\N	2016-09-04 18:09:51.063212+03
-9391	3752	2	\N	2016-09-04 18:10:07.743409+03
-9392	3753	2	\N	2016-09-04 18:10:15.921856+03
-9393	3754	2	\N	2016-09-04 18:13:53.544519+03
-9394	3683	2	\N	2016-09-04 18:41:46.535765+03
-9395	3683	2	\N	2016-09-04 18:43:15.40989+03
-9396	3683	2	\N	2016-09-04 18:44:21.567608+03
-9397	3683	2	\N	2016-09-04 18:44:44.396836+03
-9398	3683	2	\N	2016-09-04 18:52:21.038737+03
-9399	3683	2	\N	2016-09-04 18:54:11.707704+03
-9400	3683	2	\N	2016-09-04 18:55:55.405957+03
-\.
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('resource_log_id_seq', 9400, true);
+SELECT pg_catalog.setval('resource_id_seq', 3836, true);
 
 
 --
@@ -68604,7 +58702,6 @@ COPY resource_type (id, resource_id, name, humanize, resource_name, module, desc
 146	2296	leads_offers	Leads Offers	LeadsOffersResource	travelcrm.resources.leads_offers	Leads Offers	null	0
 152	2558	leads_stats	Leads Stats	LeadsStatsResource	travelcrm.resources.leads_stats	Portlet with leads statistics	{"column_index": 0}	0
 120	1884	crosspayments	Cross Payments	CrosspaymentsResource	travelcrm.resources.crosspayments	Cross payments between accounts and subaccounts. This document is for balance corrections to.	null	0
-153	2583	activities	Activities	ActivitiesResource	travelcrm.resources.activities	My last activities	{"column_index": 1}	0
 123	1941	notifications	Notifications	NotificationsResource	travelcrm.resources.notifications	Employee Notifications	null	0
 138	2127	transfers	Transfers	TransfersResource	travelcrm.resources.transfers	Transfers for tours	null	0
 139	2135	transports	Transports	TransportsResource	travelcrm.resources.transports	Transports Types List	null	0
@@ -68948,6 +59045,7 @@ SELECT pg_catalog.setval('tag_id_seq', 19, true);
 
 COPY tag_resource (tag_id, resource_id) FROM stdin;
 14	3683
+18	3792
 \.
 
 
@@ -69108,6 +59206,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 33	3667	15	41	41	11	10	33	2	0	2016-06-18	2016-06-25	tour to Bodrum	1	1	\N	TYOII-089873	TYU12128-09
 34	3685	15	42	42	\N	16	\N	2	0	2016-07-30	2016-08-06	Тип номера: Standard 2 Расположен : - Линия :вторая Подогреваемый бассейн : - От центра / от аэропорта :50 / 40Количество номеров :668 Интернет : есть Территория отеля : 42 000 кв.м.	1	1	\N	MAU6782	MAU987897
 35	3713	14	30	32	13	\N	\N	2	1	2016-08-21	2016-08-28	\N	1	1	\N	\N	\N
+36	3830	14	41	41	10	15	30	2	1	2016-09-22	2016-09-30	\N	1	1	\N	dzfdsg sdfg	RTREWR
 \.
 
 
@@ -69115,7 +59214,7 @@ COPY tour (id, resource_id, start_location_id, end_location_id, hotel_id, accomo
 -- Name: tour_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('tour_id_seq1', 35, true);
+SELECT pg_catalog.setval('tour_id_seq1', 36, true);
 
 
 --
@@ -69137,6 +59236,7 @@ COPY tour_order_item (order_item_id, tour_id) FROM stdin;
 53	33
 54	34
 56	35
+57	36
 \.
 
 
@@ -69386,7 +59486,7 @@ SELECT pg_catalog.setval('advsource_id_seq', 1, true);
 --
 
 COPY alembic_version (version_num) FROM stdin;
-309c8478ded6
+c38723878dbe
 \.
 
 
@@ -69489,7 +59589,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 1, true);
 -- Data for Name: campaign; Type: TABLE DATA; Schema: test; Owner: -
 --
 
-COPY campaign (id, resource_id, name, subject, plain_content, html_content, start_dt, status) FROM stdin;
+COPY campaign (id, resource_id, name, start_dt, status, mail_id, person_category_id) FROM stdin;
 \.
 
 
@@ -69759,6 +59859,14 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 
 
 --
+-- Data for Name: employee_subscription; Type: TABLE DATA; Schema: test; Owner: -
+--
+
+COPY employee_subscription (employee_id, resource_id) FROM stdin;
+\.
+
+
+--
 -- Data for Name: employee_upload; Type: TABLE DATA; Schema: test; Owner: -
 --
 
@@ -69928,7 +60036,7 @@ SELECT pg_catalog.setval('location_id_seq', 1, true);
 -- Data for Name: mail; Type: TABLE DATA; Schema: test; Owner: -
 --
 
-COPY mail (id, resource_id, name, html_content, descr) FROM stdin;
+COPY mail (id, resource_id, name, html_content, descr, subject) FROM stdin;
 \.
 
 
@@ -70078,7 +60186,7 @@ COPY note_upload (note_id, upload_id) FROM stdin;
 -- Data for Name: notification; Type: TABLE DATA; Schema: test; Owner: -
 --
 
-COPY notification (id, resource_id, title, descr, url, created) FROM stdin;
+COPY notification (id, resource_id, descr, url, created) FROM stdin;
 \.
 
 
@@ -70465,1338 +60573,1338 @@ SELECT pg_catalog.setval('region_id_seq', 1, true);
 -- Data for Name: resource; Type: TABLE DATA; Schema: test; Owner: -
 --
 
-COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
-12	12	2	\N
-14	12	2	\N
-16	12	2	\N
-30	12	2	\N
-31	12	2	\N
-32	12	2	\N
-33	12	2	\N
-34	12	2	\N
-35	12	2	\N
-36	12	2	\N
-37	12	2	\N
-38	12	2	\N
-39	12	2	\N
-40	12	2	\N
-43	12	2	\N
-44	12	2	\N
-45	12	2	\N
-83	2	2	\N
-84	2	2	\N
-277	39	2	\N
-913	72	2	\N
-914	72	2	\N
-915	72	2	\N
-916	72	2	\N
-917	72	2	\N
-2890	93	2	f
-918	72	2	\N
-919	72	2	\N
-928	73	2	\N
-929	73	2	\N
-930	73	2	\N
-931	73	2	\N
-932	73	2	\N
-933	73	2	\N
-935	73	2	\N
-936	73	2	\N
-937	73	2	\N
-948	73	2	\N
-949	73	2	\N
-950	73	2	\N
-952	73	2	\N
-953	12	2	\N
-954	12	2	\N
-955	65	2	\N
-956	65	2	\N
-957	74	2	\N
-958	74	2	\N
-1647	39	2	f
-2266	137	2	f
-2267	134	2	f
-2268	12	2	f
-2269	105	2	f
-1915	111	2	f
-1917	110	2	f
-1949	123	2	f
-1961	123	2	f
-2714	104	2	f
-2715	119	2	f
-2716	119	2	f
-2717	119	2	f
-2718	119	2	f
-2881	69	2	f
-2882	12	2	f
-2883	65	2	f
-278	39	2	\N
-279	39	2	\N
-280	39	2	\N
-281	39	2	\N
-282	39	2	\N
-283	12	2	\N
-286	41	2	\N
-287	41	2	\N
-288	41	2	\N
-289	41	2	\N
-938	73	2	\N
-939	73	2	\N
-961	74	2	\N
-962	74	2	\N
-2891	87	7	f
-2894	130	7	f
-2901	93	7	f
-963	74	2	\N
-964	74	2	\N
-965	74	2	\N
-966	74	2	\N
-967	74	2	\N
-968	74	2	\N
-969	74	2	\N
-970	74	2	\N
-971	74	2	\N
-973	75	2	\N
-975	75	2	\N
-976	75	2	\N
-977	75	2	\N
-978	75	2	\N
-979	75	2	\N
-980	75	2	\N
-981	75	2	\N
-982	75	2	\N
-983	75	2	\N
-984	75	2	\N
-1616	69	2	f
-1619	69	2	f
-1620	87	2	f
-1621	87	2	f
-1622	89	2	f
-1623	90	2	f
-1381	89	2	f
-2439	117	2	f
-2784	123	2	f
-2785	47	2	f
-2786	2	2	f
-2787	2	2	f
-2788	12	2	f
-2813	12	2	f
-2814	87	2	f
-2815	93	2	f
-2842	119	2	f
-290	41	2	\N
-291	41	2	\N
-884	70	2	\N
-886	59	2	\N
-943	73	2	\N
-944	73	2	\N
-945	73	2	\N
-946	73	2	\N
-947	73	2	\N
-2892	69	7	f
-998	65	2	\N
-1005	78	2	\N
-1007	12	2	\N
-1008	65	2	\N
-1009	79	2	\N
-1325	83	2	f
-1326	84	2	f
-1327	83	2	f
-1328	39	2	f
-1329	84	2	f
-1330	83	2	f
-1331	83	2	f
-1332	39	2	f
-1333	84	2	f
-1334	83	2	f
-1335	83	2	f
-1339	70	2	f
-1340	39	2	f
-1344	39	2	f
-1345	84	2	f
-1346	83	2	f
-1350	83	2	f
-1351	70	2	f
-1352	39	2	f
-1353	84	2	f
-1354	83	2	f
-1355	39	2	f
-1356	84	2	f
-1357	83	2	f
-2231	78	2	f
-2232	78	2	f
-2233	78	2	f
-1639	106	2	f
-1640	87	2	f
-1641	87	2	f
-1642	89	2	f
-1643	89	2	f
-2047	119	2	f
-1764	111	2	f
-1766	111	2	f
-1769	105	2	f
-1771	111	2	f
-1773	111	2	f
-2285	135	2	f
-2291	93	2	f
-2292	12	2	f
-2293	145	2	f
-2048	65	2	f
-2049	12	2	f
-2050	87	2	f
-2051	69	2	f
-2052	130	2	f
-2053	47	2	f
-2054	2	2	f
-1906	65	2	f
-1990	106	2	f
-1991	106	2	f
-1992	106	2	f
-2029	119	2	f
-2442	117	2	f
-2546	110	2	f
-2573	69	2	f
-921	73	2	\N
-1648	84	2	f
-2458	106	2	f
-2556	151	2	f
-2557	151	2	f
-2568	145	2	f
-1649	83	2	f
-1650	87	2	f
-2569	130	2	f
-2570	69	2	f
-2893	145	7	f
-2897	83	7	f
-922	73	2	\N
-923	73	2	\N
-924	73	2	\N
-1651	89	2	f
-1652	90	2	f
-1653	69	2	f
-1657	103	2	f
-925	73	2	\N
-926	73	2	\N
-1659	65	2	f
-1882	106	2	f
-1660	106	2	f
-927	73	2	\N
-2046	119	2	f
-959	74	2	\N
-960	74	2	\N
-1714	110	2	f
-985	75	2	\N
-987	75	2	\N
-1721	110	2	f
-1884	12	2	f
-1885	65	2	f
-1888	117	2	f
-1893	120	2	f
-1894	12	2	f
-1004	78	2	\N
-1309	90	2	f
-1310	41	2	f
-1895	65	2	f
-1311	41	2	f
-1312	65	2	f
-1313	12	2	f
-1896	65	2	f
-1314	102	2	f
-1317	12	2	f
-1320	83	2	f
-1321	84	2	f
-1322	83	2	f
-1950	123	2	f
-1951	90	2	f
-1952	86	2	f
-1907	65	2	f
-1956	87	2	f
-1958	93	2	f
-1959	123	2	f
-2104	135	2	f
-1323	83	2	f
-2105	135	2	f
-2106	135	2	f
-2107	12	2	f
-2108	12	2	f
-2111	83	2	f
-2115	39	2	f
-2119	90	2	f
-2168	137	2	f
-2171	93	2	f
-2172	135	2	f
-2173	137	2	f
-1324	83	2	f
-1358	83	2	f
-1359	84	2	f
-1360	83	2	f
-2452	117	2	f
-2457	106	2	f
-1361	84	2	f
-1365	39	2	f
-1366	84	2	f
-1367	83	2	f
-1368	65	2	f
-1371	87	2	f
-1373	87	2	f
-1374	90	2	f
-1624	87	2	f
-1625	89	2	f
-1376	89	2	f
-1626	69	2	f
-1378	78	2	f
-1627	69	2	f
-1628	69	2	f
-1379	87	2	f
-1634	103	2	f
-1380	87	2	f
-1383	69	2	f
-2260	135	2	f
-2261	142	2	f
-2262	135	2	f
-2263	142	2	f
-2264	134	2	f
-2265	135	2	f
-1780	105	2	f
-1797	12	2	f
-1798	65	2	f
-1799	12	2	f
-1804	118	2	f
-2	2	2	\N
-2127	12	2	f
-2131	93	7	f
-2895	39	7	f
-3	2	2	\N
-10	12	2	\N
-1010	79	2	\N
-2896	84	7	f
-1080	65	2	\N
-1081	12	2	\N
-2898	69	7	f
-1099	39	2	\N
-2899	135	7	f
-2900	137	7	f
-2309	69	2	f
-1100	70	2	\N
-2128	65	2	f
-2902	134	7	f
-2129	138	2	f
-2130	138	2	f
-2132	118	2	f
-1251	55	2	f
-2440	117	2	f
-2201	104	2	f
-2459	106	2	f
-2463	111	2	f
-2465	120	2	f
-2563	69	2	f
-2564	145	2	f
-2565	130	2	f
-2203	104	2	f
-2205	110	2	f
-2234	78	2	f
-2566	69	2	f
-2133	123	2	f
-2567	145	2	f
-2571	145	2	f
-2135	12	2	f
-2572	130	2	f
-2710	119	2	f
-2711	119	2	f
-2712	119	2	f
-2713	119	2	f
-2816	93	2	f
-2817	123	2	f
-2836	119	2	f
-2136	65	2	f
-2320	12	2	f
-2327	87	2	f
-2328	69	2	f
-2583	12	2	f
-2329	145	2	f
-2330	145	2	f
-2331	146	2	f
-2837	135	2	f
-2332	146	2	f
-2333	130	2	f
-2838	144	2	f
-2855	119	2	f
-2861	117	2	f
-2862	117	2	f
-2334	104	2	f
-2335	104	2	f
-2336	104	2	f
-2235	78	2	f
-2236	78	2	f
-2337	104	2	f
-2338	87	2	f
-2339	69	2	f
-2340	69	2	f
-2237	78	2	f
-2238	78	2	f
-2239	78	2	f
-1774	111	2	f
-1775	59	2	f
-1777	65	2	f
-1778	12	2	f
-1800	118	2	f
-2294	145	2	f
-1801	118	2	f
-2295	145	2	f
-1802	118	2	f
-2296	12	2	f
-2297	145	2	f
-2299	146	2	f
-2300	145	2	f
-2304	123	2	f
-1910	106	2	f
-1911	106	2	f
-2075	93	2	f
-2076	123	2	f
-2077	12	2	f
-2087	118	2	f
-2088	130	2	f
-2089	87	2	f
-2090	69	2	f
-2092	118	2	f
-2095	87	2	f
-2096	118	2	f
-2097	118	2	f
-2307	87	2	f
-2120	101	2	f
-2126	2	2	f
-2341	135	2	f
-2342	137	2	f
-2343	135	2	f
-2344	143	2	f
-2030	119	2	f
-2031	119	2	f
-2308	87	2	f
-2032	110	2	f
-2038	119	2	f
-2903	119	2	f
-2514	65	2	f
-2515	148	2	f
-2516	12	2	f
-2871	119	2	f
-2872	55	2	f
-2517	149	2	f
-2518	149	2	f
-2904	103	2	f
-2519	47	2	f
-2520	149	2	f
-2521	149	2	f
-2522	149	2	f
-2873	87	2	f
-2874	87	2	f
-2875	69	2	f
-2876	145	2	f
-2877	130	2	f
-2878	87	2	f
-2887	12	2	f
-2888	65	2	f
-2889	65	2	f
-1250	55	2	f
-1316	102	2	f
-1336	39	2	f
-1362	83	2	f
-1363	84	2	f
-1364	83	2	f
-1372	69	2	f
-2523	149	2	f
-2524	149	2	f
-1375	69	2	f
-2525	149	2	f
-1382	90	2	f
-2526	149	2	f
-1385	84	2	f
-2527	149	2	f
-1386	83	2	f
-2528	149	2	f
-2529	119	2	f
-2536	110	2	f
-2537	119	2	f
-2538	119	2	f
-2574	145	2	f
-2575	130	2	f
-1387	87	2	f
-1388	90	2	f
-1389	69	2	f
-1390	69	2	f
-1391	90	2	f
-1416	39	2	f
-2270	70	2	f
-2271	140	2	f
-2272	78	2	f
-2273	135	2	f
-2286	137	2	f
-2287	135	2	f
-2288	142	2	f
-2289	104	2	f
-2290	104	2	f
-1424	12	2	f
-1425	65	2	f
-1426	105	2	f
-1431	105	2	f
-1432	105	2	f
-1433	12	2	f
-1434	65	2	f
-2576	69	2	f
-2577	145	2	f
-2578	145	2	f
-2579	130	2	f
-2580	69	2	f
-2581	145	2	f
-2582	130	2	f
-2345	134	2	f
-2366	87	2	f
-2367	69	2	f
-2368	145	2	f
-2369	146	2	f
-2370	118	2	f
-2371	93	2	f
-2372	130	2	f
-2373	39	2	f
-2648	65	2	f
-2649	65	2	f
-2650	65	2	f
-2429	105	2	f
-2430	105	2	f
-2510	110	2	f
-2511	86	2	f
-2513	12	2	f
-2544	148	2	f
-907	71	2	\N
-908	12	2	\N
-909	12	2	\N
-1041	47	2	\N
-1042	47	2	\N
-1043	47	2	\N
-1044	47	2	\N
-1045	47	2	\N
-2589	89	2	f
-2590	90	2	f
-2545	86	2	f
-2547	119	2	f
-2548	119	2	f
-2591	69	2	f
-2592	123	2	f
-2593	69	2	f
-2594	87	2	f
-2595	69	2	f
-2596	145	2	f
-2376	69	2	f
-2377	135	2	f
-2549	12	2	f
-2378	137	2	f
-2550	87	2	f
-2379	135	2	f
-2551	12	2	f
-2552	65	2	f
-2553	65	2	f
-2554	65	2	f
-2725	119	2	f
-2726	110	2	f
-2727	119	2	f
-2728	119	2	f
-2729	103	2	f
-2730	93	2	f
-2731	123	2	f
-2732	148	2	f
-2818	93	2	f
-2819	123	2	f
-2380	143	2	f
-2381	93	2	f
-2382	134	2	f
-2383	104	2	f
-2384	104	2	f
-2385	104	2	f
-2388	103	2	f
-2389	105	2	f
-2390	105	2	f
-2391	105	2	f
-2396	105	2	f
-2397	105	2	f
-2398	105	2	f
-2415	105	2	f
-2416	105	2	f
-2670	146	2	f
-2677	89	2	f
-2678	69	2	f
-2679	69	2	f
-2680	89	2	f
-2681	89	2	f
-2424	105	2	f
-2425	105	2	f
-2426	105	2	f
-2682	149	2	f
-2683	89	2	f
-2427	105	2	f
-2428	105	2	f
-2684	149	2	f
-2685	89	2	f
-2686	135	2	f
-2431	105	2	f
-2687	137	2	f
-2690	134	2	f
-2693	110	2	f
-2694	110	2	f
-2695	86	2	f
-2530	119	2	f
-2531	119	2	f
-2532	119	2	f
-2533	119	2	f
-2534	119	2	f
-2535	119	2	f
-2539	110	2	f
-2540	86	2	f
-2541	119	2	f
-2542	148	2	f
-2543	148	2	f
-2820	118	2	f
-2821	87	2	f
-2822	69	2	f
-2823	145	2	f
-1546	106	2	f
-2824	130	2	f
-1547	106	2	f
-1548	12	2	f
-1549	12	2	f
-2825	146	2	f
-2826	118	2	f
-2827	135	2	f
-2828	137	2	f
-2841	104	2	f
-2865	78	2	f
-2866	117	2	f
-2867	111	2	f
-1550	65	2	f
-1551	87	2	f
-1552	87	2	f
-2597	145	2	f
-2636	65	2	f
-2637	65	2	f
-2638	65	2	f
-2392	105	2	f
-2393	105	2	f
-2394	105	2	f
-2395	105	2	f
-2642	65	2	f
-274	12	2	\N
-292	41	2	\N
-306	41	2	\N
-706	12	2	\N
-723	12	2	\N
-725	55	2	\N
-726	55	2	\N
-728	55	2	\N
-734	55	2	\N
-743	55	2	\N
-763	55	2	\N
-764	12	2	\N
-769	12	2	\N
-2643	65	2	f
-2646	65	2	f
-2647	65	2	f
-2651	65	2	f
-2652	65	2	f
-2653	65	2	f
-771	55	2	\N
-772	59	2	\N
-837	65	2	\N
-1046	47	2	\N
-1062	55	2	\N
-1067	78	2	\N
-1068	12	2	\N
-1164	70	2	\N
-1165	39	2	\N
-2654	65	2	f
-2655	65	2	f
-2658	67	2	f
-1168	41	2	\N
-1169	70	2	\N
-1185	39	2	\N
-1195	87	2	\N
-1198	12	2	\N
-1261	89	2	f
-1598	103	2	f
-1807	90	2	f
-1833	118	2	f
-1839	103	2	f
-1435	12	2	f
-1436	65	2	f
-1438	107	2	f
-1439	107	2	f
-1511	101	2	f
-1512	101	2	f
-1513	101	2	f
-1521	12	2	f
-1535	110	2	f
-1536	110	2	f
-1537	110	2	f
-1538	110	2	f
-1539	110	2	f
-1540	110	2	f
-1541	110	2	f
-1542	67	2	f
-2417	105	2	f
-1543	87	2	f
-1544	87	2	f
-1545	87	2	f
-2659	87	2	f
-2661	145	2	f
-2662	130	2	f
-2663	118	2	f
-2418	105	2	f
-2419	105	2	f
-2420	105	2	f
-2421	105	2	f
-2422	105	2	f
-2423	105	2	f
-2698	110	2	f
-2699	86	2	f
-2700	119	2	f
-2701	119	2	f
-2879	69	2	f
-773	12	2	\N
-887	69	2	\N
-2183	137	2	f
-2660	69	2	f
-2664	149	2	f
-2665	149	2	f
-2666	87	2	f
-2667	69	2	f
-892	67	2	\N
-2668	145	2	f
-893	47	2	\N
-894	2	2	\N
-896	39	2	\N
-1011	12	2	\N
-1040	47	2	\N
-1277	55	2	f
-2669	130	2	f
-2671	93	2	f
-2672	123	2	f
-2673	39	2	f
-2839	119	2	f
-2840	119	2	f
-1278	39	2	f
-1283	71	2	f
-1284	69	2	f
-1285	87	2	f
-1286	89	2	f
-1287	84	2	f
-1288	90	2	f
-1289	84	2	f
-1290	39	2	f
-1291	84	2	f
-1292	83	2	f
-1293	69	2	f
-1294	69	2	f
-1304	87	2	f
-1306	90	2	f
-1840	103	2	f
-1849	12	2	f
-1440	103	2	f
-1442	103	2	f
-1447	106	2	f
-1448	106	2	f
-1450	12	2	f
-1452	12	2	f
-1464	87	2	f
-1465	69	2	f
-1467	89	2	f
-1472	69	2	f
-1473	69	2	f
-1485	106	2	f
-1487	103	2	f
-1500	106	2	f
-1502	103	2	f
-1503	103	2	f
-1504	104	2	f
-1505	104	2	f
-1506	104	2	f
-1507	107	2	f
-1509	106	2	f
-1514	101	2	f
-1515	101	2	f
-1516	87	2	f
-1517	87	2	f
-1518	87	2	f
-1519	87	2	f
-1553	79	2	f
-2584	93	2	f
-2585	87	2	f
-2586	87	2	f
-2587	87	2	f
-2588	89	2	f
-2633	65	2	f
-2634	65	2	f
-2635	65	2	f
-2174	135	2	f
-2175	137	2	f
-2176	135	2	f
-2177	137	2	f
-2178	135	2	f
-2179	137	2	f
-2180	135	2	f
-2181	137	2	f
-2182	135	2	f
-897	39	2	\N
-898	39	2	\N
-899	39	2	\N
-900	65	2	\N
-2435	146	2	f
-901	12	2	\N
-2450	103	2	f
-902	65	2	\N
-903	71	2	\N
-2451	106	2	f
-2486	101	2	f
-2489	86	2	f
-2490	86	2	f
-2491	86	2	f
-2493	87	2	f
-2501	110	2	f
-2502	110	2	f
-2503	119	2	f
-2505	110	2	f
-2506	86	2	f
-2507	110	2	f
-2508	110	2	f
-2737	106	2	f
-2738	117	2	f
-2739	69	2	f
-2740	12	2	f
-2832	119	2	f
-2863	111	2	f
-2864	140	2	f
-2274	143	2	f
-2275	134	2	f
-2276	12	2	f
-2277	105	2	f
-2278	135	2	f
-2279	144	2	f
-2280	134	2	f
-2281	104	2	f
-2282	135	2	f
-2284	134	2	f
-1962	93	2	f
-1963	123	2	f
-1964	93	2	f
-1965	123	2	f
-1966	12	2	f
-2098	118	2	f
-2099	12	2	f
-2100	12	2	f
-1978	2	2	f
-2101	65	2	f
-1979	118	2	f
-1985	93	2	f
-1986	123	2	f
-1987	103	2	f
-1988	119	2	f
-1989	12	2	f
-2602	65	2	f
-2603	65	2	f
-2604	65	2	f
-2605	65	2	f
-2608	65	2	f
-2612	65	2	f
-2613	65	2	f
-2617	65	2	f
-2039	119	2	f
-2044	119	2	f
-2156	135	2	f
-2157	137	2	f
-2158	135	2	f
-2159	137	2	f
-2160	135	2	f
-2161	137	2	f
-2162	135	2	f
-2163	137	2	f
-2164	135	2	f
-2165	137	2	f
-2167	135	2	f
-2045	119	2	f
-2399	105	2	f
-2400	105	2	f
-2401	105	2	f
-2402	105	2	f
-2403	105	2	f
-2704	119	2	f
-2705	119	2	f
-2706	119	2	f
-2707	119	2	f
-2708	119	2	f
-2709	119	2	f
-2434	130	2	f
-775	12	2	\N
-778	65	2	\N
-779	65	2	\N
-780	65	2	\N
-784	47	2	\N
-786	47	2	\N
-788	12	2	\N
-789	67	2	\N
-790	65	2	\N
-791	65	2	\N
-792	65	2	\N
-794	55	2	\N
-800	55	2	\N
-801	55	2	\N
-802	65	2	\N
-1468	84	2	f
-1469	90	2	f
-1470	83	2	f
-1471	69	2	f
-1913	117	2	f
-1510	101	2	f
-1968	12	2	f
-1970	126	2	f
-1971	93	2	f
-1972	123	2	f
-1973	123	2	f
-1975	65	2	f
-1976	55	2	f
-1977	12	2	f
-1554	101	2	f
-1556	101	2	f
-1559	87	2	f
-1560	79	2	f
-2137	139	2	f
-2138	139	2	f
-2139	139	2	f
-2144	135	2	f
-2145	137	2	f
-2146	135	2	f
-2147	137	2	f
-838	65	2	\N
-849	41	2	\N
-851	41	2	\N
-852	41	2	\N
-853	41	2	\N
-854	2	2	\N
-855	2	2	\N
-856	2	2	\N
-857	55	2	\N
-858	55	2	\N
-859	55	2	\N
-860	55	2	\N
-861	55	2	\N
-864	65	2	\N
-865	12	2	\N
-866	65	2	\N
-1307	90	2	f
-1308	90	2	f
-1337	84	2	f
-1338	83	2	f
-1347	39	2	f
-1348	84	2	f
-1349	83	2	f
-1393	12	2	f
-1394	65	2	f
-1395	65	2	f
-1396	104	2	f
-1398	104	2	f
-1400	104	2	f
-1401	104	2	f
-1402	104	2	f
-1403	104	2	f
-1404	87	2	f
-1406	89	2	f
-1407	90	2	f
-1408	69	2	f
-1409	69	2	f
-1410	69	2	f
-1411	69	2	f
-2148	135	2	f
-2149	137	2	f
-2150	135	2	f
-2187	135	2	f
-2188	137	2	f
-2189	135	2	f
-2190	137	2	f
-2674	84	2	f
-2675	83	2	f
-2676	87	2	f
-1413	102	2	f
-1414	90	2	f
-1415	91	2	f
-1417	84	2	f
-1418	90	2	f
-1419	91	2	f
-1420	101	2	f
-2152	135	2	f
-2153	137	2	f
-2154	135	2	f
-2155	137	2	f
-2184	135	2	f
-2185	137	2	f
-2186	134	2	f
-2688	135	2	f
-2880	87	2	f
-904	71	2	\N
-905	71	2	\N
-906	71	2	\N
-910	65	2	\N
-911	65	2	\N
-912	72	2	\N
-1318	102	2	f
-1319	84	2	f
-2206	110	2	f
-2207	110	2	f
-1607	106	2	f
-1608	105	2	f
-1341	84	2	f
-1609	105	2	f
-2433	145	2	f
-2689	143	2	f
-2558	12	2	f
-2559	151	2	f
-1342	83	2	f
-1343	70	2	f
-1610	87	2	f
-1611	87	2	f
-1612	89	2	f
-1613	89	2	f
-1614	90	2	f
-2560	69	2	f
-2561	145	2	f
-2562	130	2	f
-2733	148	2	f
-1615	69	2	f
-2208	110	2	f
-2209	110	2	f
-2210	86	2	f
-2211	110	2	f
-2212	110	2	f
-2213	86	2	f
-2734	119	2	f
-2735	119	2	f
-2843	119	2	f
-1370	90	2	f
-1384	39	2	f
-2283	137	2	f
-1803	118	2	f
-2301	146	2	f
-2302	118	2	f
-2303	93	2	f
-1852	119	2	f
-1898	105	2	f
-1900	120	2	f
-1901	120	2	f
-1902	117	2	f
-1903	111	2	f
-1904	65	2	f
-1905	65	2	f
-1561	87	2	f
-1562	87	2	f
-1563	79	2	f
-1564	101	2	f
-2844	119	2	f
-1569	101	2	f
-1570	101	2	f
-1571	65	2	f
-1575	65	2	f
-1576	86	2	f
-2845	119	2	f
-2846	119	2	f
-2847	119	2	f
-2848	119	2	f
-2849	119	2	f
-2850	119	2	f
-2851	119	2	f
-2852	110	2	f
-2853	86	2	f
-2854	119	2	f
-1577	87	2	f
-1578	79	2	f
-1579	110	2	f
-1580	78	2	f
-1581	87	2	f
-1582	89	2	f
-2598	145	2	f
-2599	130	2	f
-2868	93	2	f
-2869	93	2	f
-2870	119	2	f
-2151	137	2	f
-988	75	2	\N
-1003	12	2	\N
-1060	41	2	\N
-1078	12	2	\N
-1088	12	2	\N
-1089	65	2	\N
-1090	39	2	\N
-1091	84	2	\N
-1093	84	2	\N
-1095	70	2	\N
-1096	39	2	\N
-1932	93	7	f
-1939	93	7	f
-1199	89	2	\N
-1204	87	2	\N
-1205	89	2	\N
-1206	89	2	\N
-1252	59	2	f
-1257	87	2	f
-1258	87	2	f
-1644	90	2	f
-1645	69	2	f
-1646	70	2	f
-1918	119	2	f
-1919	12	2	f
-1922	93	2	f
-1924	118	2	f
-1925	89	2	f
-1926	90	2	f
-1927	87	2	f
-1930	93	2	f
-1931	118	2	f
-1933	93	2	f
-1934	93	2	f
-1935	93	2	f
-1936	93	2	f
-1940	93	2	f
-1941	12	2	f
-1945	123	2	f
-1946	123	2	f
-1947	123	2	f
-1948	123	2	f
-1954	12	2	f
-1584	89	2	f
-1585	90	2	f
-1586	69	2	f
-1587	39	2	f
-1588	84	2	f
-1589	84	2	f
-1590	83	2	f
-1591	87	2	f
-1592	89	2	f
-1593	69	2	f
-1597	104	2	f
-2631	65	2	f
-2632	65	2	f
-2702	119	2	f
-2703	119	2	f
-2829	93	2	f
-2830	69	2	f
-2831	134	2	f
-2833	110	2	f
-2834	86	2	f
-2835	104	2	f
-2858	103	2	f
-2859	148	2	f
-2860	106	2	f
-885	47	2	\N
-895	39	2	\N
-940	73	2	\N
-941	73	2	\N
-942	73	2	\N
-1259	87	2	f
-1260	87	2	f
-2200	104	2	f
-2214	110	2	f
-2215	86	2	f
-2216	78	2	f
-2217	12	2	f
-2218	140	2	f
-2219	65	2	f
-2221	140	2	f
-2222	65	2	f
-2223	78	2	f
-2224	78	2	f
-2225	78	2	f
-2226	78	2	f
-2227	78	2	f
-2228	78	2	f
-2229	78	2	f
-2230	78	2	f
-1908	65	2	f
-2055	12	2	f
-2062	93	2	f
-2063	93	2	f
-2064	123	2	f
-2065	118	2	f
-2066	93	2	f
-2067	123	2	f
-2068	93	2	f
-2069	123	2	f
-2070	12	2	f
-2305	145	2	f
-2306	146	2	f
-1993	106	2	f
-2310	145	2	f
-1994	106	2	f
-2311	93	2	f
-1995	106	2	f
-1996	106	2	f
-2312	130	2	f
-1997	106	2	f
-2313	145	2	f
-2314	69	2	f
-2000	103	2	f
-2315	135	2	f
-2001	106	2	f
-2316	137	2	f
-2002	106	2	f
-2317	134	2	f
-2005	103	2	f
-2319	104	2	f
-2006	106	2	f
-2007	106	2	f
-2009	93	2	f
-2010	123	2	f
-2011	110	2	f
-2012	118	2	f
-2013	87	2	f
-2014	89	2	f
-2015	90	2	f
-2016	93	2	f
-2017	69	2	f
-2018	87	2	f
-2019	89	2	f
-2020	69	2	f
-2023	104	2	f
-2024	104	2	f
-2026	103	2	f
-2027	106	2	f
-2028	106	2	f
-2436	93	2	f
-2437	146	2	f
-2438	117	2	f
-1880	106	2	f
-1881	106	2	f
-2374	84	2	f
-2375	83	2	f
-2413	105	2	f
-871	69	2	\N
-872	12	2	\N
-873	65	2	\N
-874	65	2	\N
-876	41	2	\N
-878	70	2	\N
-2857	119	2	f
-879	65	2	\N
-880	70	2	\N
-881	70	2	\N
-882	70	2	\N
-883	70	2	\N
-1079	65	2	\N
-1097	84	2	\N
-1101	39	2	\N
-1102	84	2	\N
-1159	78	2	\N
-1170	39	2	\N
-1178	70	2	\N
-1179	39	2	\N
-1189	12	2	\N
-1190	12	2	\N
-1191	86	2	\N
-1192	86	2	\N
-1193	87	2	\N
-1194	87	2	\N
-1200	89	2	\N
-1201	87	2	\N
-1210	90	2	\N
-1211	12	2	\N
-1212	65	2	\N
-1213	90	2	\N
-1214	91	2	\N
-1225	12	2	\N
-1230	93	2	\N
-1243	87	2	f
-1244	87	2	f
-1253	65	2	f
-1263	87	2	f
-1264	87	2	f
-1265	89	2	f
-1268	12	2	f
-2197	93	2	f
-2198	123	2	f
-2199	105	2	f
-2240	78	2	f
-2241	78	2	f
-2242	78	2	f
-2243	12	2	f
-2244	12	2	f
-2245	65	2	f
-2246	105	2	f
-2247	102	2	f
-2248	141	2	f
-2249	141	2	f
-2254	135	2	f
-2255	142	2	f
-2256	135	2	f
-2257	142	2	f
-2258	135	2	f
-2259	142	2	f
-1853	119	2	f
-1854	119	2	f
-1855	119	2	f
-1859	119	2	f
-1860	119	2	f
-1865	117	2	f
-1866	117	2	f
-1867	117	2	f
-1868	117	2	f
-1869	69	2	f
-1870	78	2	f
-1872	118	2	f
-1873	105	2	f
-1875	106	2	f
-1876	106	2	f
-863	65	2	\N
-870	69	2	\N
-875	70	2	\N
-1207	12	2	\N
-1209	90	2	\N
-1218	39	2	\N
-1221	12	2	\N
-1227	93	2	\N
-1240	41	2	f
-1241	39	2	f
-1249	59	2	f
-1282	87	2	f
-1980	93	2	f
-1981	118	2	f
-1982	93	2	f
-1983	93	2	f
-1984	123	2	f
-2404	105	2	f
-2405	105	2	f
-2406	105	2	f
-2407	105	2	f
-2408	105	2	f
-2409	105	2	f
-2410	105	2	f
-2411	105	2	f
-2412	105	2	f
-2414	105	2	f
-2432	105	2	f
-2719	119	2	f
-2720	119	2	f
-2721	119	2	f
-2722	119	2	f
-2723	104	2	f
-2724	119	2	f
-2736	119	2	f
-2741	65	2	f
-2742	12	2	f
-2779	123	2	f
-2780	123	2	f
-2781	123	2	f
-2782	123	2	f
-2783	123	2	f
-2466	117	2	f
-2467	111	2	f
-2468	119	2	f
-2469	119	2	f
-2470	119	2	f
-2475	90	2	f
-2477	47	2	f
-2484	2	2	f
+COPY resource (id, resource_type_id, maintainer_id, protected, modifydt) FROM stdin;
+12	12	2	\N	\N
+14	12	2	\N	\N
+16	12	2	\N	\N
+30	12	2	\N	\N
+31	12	2	\N	\N
+32	12	2	\N	\N
+33	12	2	\N	\N
+34	12	2	\N	\N
+35	12	2	\N	\N
+36	12	2	\N	\N
+37	12	2	\N	\N
+38	12	2	\N	\N
+39	12	2	\N	\N
+40	12	2	\N	\N
+43	12	2	\N	\N
+44	12	2	\N	\N
+45	12	2	\N	\N
+83	2	2	\N	\N
+84	2	2	\N	\N
+277	39	2	\N	\N
+913	72	2	\N	\N
+914	72	2	\N	\N
+915	72	2	\N	\N
+916	72	2	\N	\N
+917	72	2	\N	\N
+2890	93	2	f	\N
+918	72	2	\N	\N
+919	72	2	\N	\N
+928	73	2	\N	\N
+929	73	2	\N	\N
+930	73	2	\N	\N
+931	73	2	\N	\N
+932	73	2	\N	\N
+933	73	2	\N	\N
+935	73	2	\N	\N
+936	73	2	\N	\N
+937	73	2	\N	\N
+948	73	2	\N	\N
+949	73	2	\N	\N
+950	73	2	\N	\N
+952	73	2	\N	\N
+953	12	2	\N	\N
+954	12	2	\N	\N
+955	65	2	\N	\N
+956	65	2	\N	\N
+957	74	2	\N	\N
+958	74	2	\N	\N
+1647	39	2	f	\N
+2266	137	2	f	\N
+2267	134	2	f	\N
+2268	12	2	f	\N
+2269	105	2	f	\N
+1915	111	2	f	\N
+1917	110	2	f	\N
+1949	123	2	f	\N
+1961	123	2	f	\N
+2714	104	2	f	\N
+2715	119	2	f	\N
+2716	119	2	f	\N
+2717	119	2	f	\N
+2718	119	2	f	\N
+2881	69	2	f	\N
+2882	12	2	f	\N
+2883	65	2	f	\N
+278	39	2	\N	\N
+279	39	2	\N	\N
+280	39	2	\N	\N
+281	39	2	\N	\N
+282	39	2	\N	\N
+283	12	2	\N	\N
+286	41	2	\N	\N
+287	41	2	\N	\N
+288	41	2	\N	\N
+289	41	2	\N	\N
+938	73	2	\N	\N
+939	73	2	\N	\N
+961	74	2	\N	\N
+962	74	2	\N	\N
+2891	87	7	f	\N
+2894	130	7	f	\N
+2901	93	7	f	\N
+963	74	2	\N	\N
+964	74	2	\N	\N
+965	74	2	\N	\N
+966	74	2	\N	\N
+967	74	2	\N	\N
+968	74	2	\N	\N
+969	74	2	\N	\N
+970	74	2	\N	\N
+971	74	2	\N	\N
+973	75	2	\N	\N
+975	75	2	\N	\N
+976	75	2	\N	\N
+977	75	2	\N	\N
+978	75	2	\N	\N
+979	75	2	\N	\N
+980	75	2	\N	\N
+981	75	2	\N	\N
+982	75	2	\N	\N
+983	75	2	\N	\N
+984	75	2	\N	\N
+1616	69	2	f	\N
+1619	69	2	f	\N
+1620	87	2	f	\N
+1621	87	2	f	\N
+1622	89	2	f	\N
+1623	90	2	f	\N
+1381	89	2	f	\N
+2439	117	2	f	\N
+2784	123	2	f	\N
+2785	47	2	f	\N
+2786	2	2	f	\N
+2787	2	2	f	\N
+2788	12	2	f	\N
+2813	12	2	f	\N
+2814	87	2	f	\N
+2815	93	2	f	\N
+2842	119	2	f	\N
+290	41	2	\N	\N
+291	41	2	\N	\N
+884	70	2	\N	\N
+886	59	2	\N	\N
+943	73	2	\N	\N
+944	73	2	\N	\N
+945	73	2	\N	\N
+946	73	2	\N	\N
+947	73	2	\N	\N
+2892	69	7	f	\N
+998	65	2	\N	\N
+1005	78	2	\N	\N
+1007	12	2	\N	\N
+1008	65	2	\N	\N
+1009	79	2	\N	\N
+1325	83	2	f	\N
+1326	84	2	f	\N
+1327	83	2	f	\N
+1328	39	2	f	\N
+1329	84	2	f	\N
+1330	83	2	f	\N
+1331	83	2	f	\N
+1332	39	2	f	\N
+1333	84	2	f	\N
+1334	83	2	f	\N
+1335	83	2	f	\N
+1339	70	2	f	\N
+1340	39	2	f	\N
+1344	39	2	f	\N
+1345	84	2	f	\N
+1346	83	2	f	\N
+1350	83	2	f	\N
+1351	70	2	f	\N
+1352	39	2	f	\N
+1353	84	2	f	\N
+1354	83	2	f	\N
+1355	39	2	f	\N
+1356	84	2	f	\N
+1357	83	2	f	\N
+2231	78	2	f	\N
+2232	78	2	f	\N
+2233	78	2	f	\N
+1639	106	2	f	\N
+1640	87	2	f	\N
+1641	87	2	f	\N
+1642	89	2	f	\N
+1643	89	2	f	\N
+2047	119	2	f	\N
+1764	111	2	f	\N
+1766	111	2	f	\N
+1769	105	2	f	\N
+1771	111	2	f	\N
+1773	111	2	f	\N
+2285	135	2	f	\N
+2291	93	2	f	\N
+2292	12	2	f	\N
+2293	145	2	f	\N
+2048	65	2	f	\N
+2049	12	2	f	\N
+2050	87	2	f	\N
+2051	69	2	f	\N
+2052	130	2	f	\N
+2053	47	2	f	\N
+2054	2	2	f	\N
+1906	65	2	f	\N
+1990	106	2	f	\N
+1991	106	2	f	\N
+1992	106	2	f	\N
+2029	119	2	f	\N
+2442	117	2	f	\N
+2546	110	2	f	\N
+2573	69	2	f	\N
+921	73	2	\N	\N
+1648	84	2	f	\N
+2458	106	2	f	\N
+2556	151	2	f	\N
+2557	151	2	f	\N
+2568	145	2	f	\N
+1649	83	2	f	\N
+1650	87	2	f	\N
+2569	130	2	f	\N
+2570	69	2	f	\N
+2893	145	7	f	\N
+2897	83	7	f	\N
+922	73	2	\N	\N
+923	73	2	\N	\N
+924	73	2	\N	\N
+1651	89	2	f	\N
+1652	90	2	f	\N
+1653	69	2	f	\N
+1657	103	2	f	\N
+925	73	2	\N	\N
+926	73	2	\N	\N
+1659	65	2	f	\N
+1882	106	2	f	\N
+1660	106	2	f	\N
+927	73	2	\N	\N
+2046	119	2	f	\N
+959	74	2	\N	\N
+960	74	2	\N	\N
+1714	110	2	f	\N
+985	75	2	\N	\N
+987	75	2	\N	\N
+1721	110	2	f	\N
+1884	12	2	f	\N
+1885	65	2	f	\N
+1888	117	2	f	\N
+1893	120	2	f	\N
+1894	12	2	f	\N
+1004	78	2	\N	\N
+1309	90	2	f	\N
+1310	41	2	f	\N
+1895	65	2	f	\N
+1311	41	2	f	\N
+1312	65	2	f	\N
+1313	12	2	f	\N
+1896	65	2	f	\N
+1314	102	2	f	\N
+1317	12	2	f	\N
+1320	83	2	f	\N
+1321	84	2	f	\N
+1322	83	2	f	\N
+1950	123	2	f	\N
+1951	90	2	f	\N
+1952	86	2	f	\N
+1907	65	2	f	\N
+1956	87	2	f	\N
+1958	93	2	f	\N
+1959	123	2	f	\N
+2104	135	2	f	\N
+1323	83	2	f	\N
+2105	135	2	f	\N
+2106	135	2	f	\N
+2107	12	2	f	\N
+2108	12	2	f	\N
+2111	83	2	f	\N
+2115	39	2	f	\N
+2119	90	2	f	\N
+2168	137	2	f	\N
+2171	93	2	f	\N
+2172	135	2	f	\N
+2173	137	2	f	\N
+1324	83	2	f	\N
+1358	83	2	f	\N
+1359	84	2	f	\N
+1360	83	2	f	\N
+2452	117	2	f	\N
+2457	106	2	f	\N
+1361	84	2	f	\N
+1365	39	2	f	\N
+1366	84	2	f	\N
+1367	83	2	f	\N
+1368	65	2	f	\N
+1371	87	2	f	\N
+1373	87	2	f	\N
+1374	90	2	f	\N
+1624	87	2	f	\N
+1625	89	2	f	\N
+1376	89	2	f	\N
+1626	69	2	f	\N
+1378	78	2	f	\N
+1627	69	2	f	\N
+1628	69	2	f	\N
+1379	87	2	f	\N
+1634	103	2	f	\N
+1380	87	2	f	\N
+1383	69	2	f	\N
+2260	135	2	f	\N
+2261	142	2	f	\N
+2262	135	2	f	\N
+2263	142	2	f	\N
+2264	134	2	f	\N
+2265	135	2	f	\N
+1780	105	2	f	\N
+1797	12	2	f	\N
+1798	65	2	f	\N
+1799	12	2	f	\N
+1804	118	2	f	\N
+2	2	2	\N	\N
+2127	12	2	f	\N
+2131	93	7	f	\N
+2895	39	7	f	\N
+3	2	2	\N	\N
+10	12	2	\N	\N
+1010	79	2	\N	\N
+2896	84	7	f	\N
+1080	65	2	\N	\N
+1081	12	2	\N	\N
+2898	69	7	f	\N
+1099	39	2	\N	\N
+2899	135	7	f	\N
+2900	137	7	f	\N
+2309	69	2	f	\N
+1100	70	2	\N	\N
+2128	65	2	f	\N
+2902	134	7	f	\N
+2129	138	2	f	\N
+2130	138	2	f	\N
+2132	118	2	f	\N
+1251	55	2	f	\N
+2440	117	2	f	\N
+2201	104	2	f	\N
+2459	106	2	f	\N
+2463	111	2	f	\N
+2465	120	2	f	\N
+2563	69	2	f	\N
+2564	145	2	f	\N
+2565	130	2	f	\N
+2203	104	2	f	\N
+2205	110	2	f	\N
+2234	78	2	f	\N
+2566	69	2	f	\N
+2133	123	2	f	\N
+2567	145	2	f	\N
+2571	145	2	f	\N
+2135	12	2	f	\N
+2572	130	2	f	\N
+2710	119	2	f	\N
+2711	119	2	f	\N
+2712	119	2	f	\N
+2713	119	2	f	\N
+2816	93	2	f	\N
+2817	123	2	f	\N
+2836	119	2	f	\N
+2136	65	2	f	\N
+2320	12	2	f	\N
+2327	87	2	f	\N
+2328	69	2	f	\N
+2583	12	2	f	\N
+2329	145	2	f	\N
+2330	145	2	f	\N
+2331	146	2	f	\N
+2837	135	2	f	\N
+2332	146	2	f	\N
+2333	130	2	f	\N
+2838	144	2	f	\N
+2855	119	2	f	\N
+2861	117	2	f	\N
+2862	117	2	f	\N
+2334	104	2	f	\N
+2335	104	2	f	\N
+2336	104	2	f	\N
+2235	78	2	f	\N
+2236	78	2	f	\N
+2337	104	2	f	\N
+2338	87	2	f	\N
+2339	69	2	f	\N
+2340	69	2	f	\N
+2237	78	2	f	\N
+2238	78	2	f	\N
+2239	78	2	f	\N
+1774	111	2	f	\N
+1775	59	2	f	\N
+1777	65	2	f	\N
+1778	12	2	f	\N
+1800	118	2	f	\N
+2294	145	2	f	\N
+1801	118	2	f	\N
+2295	145	2	f	\N
+1802	118	2	f	\N
+2296	12	2	f	\N
+2297	145	2	f	\N
+2299	146	2	f	\N
+2300	145	2	f	\N
+2304	123	2	f	\N
+1910	106	2	f	\N
+1911	106	2	f	\N
+2075	93	2	f	\N
+2076	123	2	f	\N
+2077	12	2	f	\N
+2087	118	2	f	\N
+2088	130	2	f	\N
+2089	87	2	f	\N
+2090	69	2	f	\N
+2092	118	2	f	\N
+2095	87	2	f	\N
+2096	118	2	f	\N
+2097	118	2	f	\N
+2307	87	2	f	\N
+2120	101	2	f	\N
+2126	2	2	f	\N
+2341	135	2	f	\N
+2342	137	2	f	\N
+2343	135	2	f	\N
+2344	143	2	f	\N
+2030	119	2	f	\N
+2031	119	2	f	\N
+2308	87	2	f	\N
+2032	110	2	f	\N
+2038	119	2	f	\N
+2903	119	2	f	\N
+2514	65	2	f	\N
+2515	148	2	f	\N
+2516	12	2	f	\N
+2871	119	2	f	\N
+2872	55	2	f	\N
+2517	149	2	f	\N
+2518	149	2	f	\N
+2904	103	2	f	\N
+2519	47	2	f	\N
+2520	149	2	f	\N
+2521	149	2	f	\N
+2522	149	2	f	\N
+2873	87	2	f	\N
+2874	87	2	f	\N
+2875	69	2	f	\N
+2876	145	2	f	\N
+2877	130	2	f	\N
+2878	87	2	f	\N
+2887	12	2	f	\N
+2888	65	2	f	\N
+2889	65	2	f	\N
+1250	55	2	f	\N
+1316	102	2	f	\N
+1336	39	2	f	\N
+1362	83	2	f	\N
+1363	84	2	f	\N
+1364	83	2	f	\N
+1372	69	2	f	\N
+2523	149	2	f	\N
+2524	149	2	f	\N
+1375	69	2	f	\N
+2525	149	2	f	\N
+1382	90	2	f	\N
+2526	149	2	f	\N
+1385	84	2	f	\N
+2527	149	2	f	\N
+1386	83	2	f	\N
+2528	149	2	f	\N
+2529	119	2	f	\N
+2536	110	2	f	\N
+2537	119	2	f	\N
+2538	119	2	f	\N
+2574	145	2	f	\N
+2575	130	2	f	\N
+1387	87	2	f	\N
+1388	90	2	f	\N
+1389	69	2	f	\N
+1390	69	2	f	\N
+1391	90	2	f	\N
+1416	39	2	f	\N
+2270	70	2	f	\N
+2271	140	2	f	\N
+2272	78	2	f	\N
+2273	135	2	f	\N
+2286	137	2	f	\N
+2287	135	2	f	\N
+2288	142	2	f	\N
+2289	104	2	f	\N
+2290	104	2	f	\N
+1424	12	2	f	\N
+1425	65	2	f	\N
+1426	105	2	f	\N
+1431	105	2	f	\N
+1432	105	2	f	\N
+1433	12	2	f	\N
+1434	65	2	f	\N
+2576	69	2	f	\N
+2577	145	2	f	\N
+2578	145	2	f	\N
+2579	130	2	f	\N
+2580	69	2	f	\N
+2581	145	2	f	\N
+2582	130	2	f	\N
+2345	134	2	f	\N
+2366	87	2	f	\N
+2367	69	2	f	\N
+2368	145	2	f	\N
+2369	146	2	f	\N
+2370	118	2	f	\N
+2371	93	2	f	\N
+2372	130	2	f	\N
+2373	39	2	f	\N
+2648	65	2	f	\N
+2649	65	2	f	\N
+2650	65	2	f	\N
+2429	105	2	f	\N
+2430	105	2	f	\N
+2510	110	2	f	\N
+2511	86	2	f	\N
+2513	12	2	f	\N
+2544	148	2	f	\N
+907	71	2	\N	\N
+908	12	2	\N	\N
+909	12	2	\N	\N
+1041	47	2	\N	\N
+1042	47	2	\N	\N
+1043	47	2	\N	\N
+1044	47	2	\N	\N
+1045	47	2	\N	\N
+2589	89	2	f	\N
+2590	90	2	f	\N
+2545	86	2	f	\N
+2547	119	2	f	\N
+2548	119	2	f	\N
+2591	69	2	f	\N
+2592	123	2	f	\N
+2593	69	2	f	\N
+2594	87	2	f	\N
+2595	69	2	f	\N
+2596	145	2	f	\N
+2376	69	2	f	\N
+2377	135	2	f	\N
+2549	12	2	f	\N
+2378	137	2	f	\N
+2550	87	2	f	\N
+2379	135	2	f	\N
+2551	12	2	f	\N
+2552	65	2	f	\N
+2553	65	2	f	\N
+2554	65	2	f	\N
+2725	119	2	f	\N
+2726	110	2	f	\N
+2727	119	2	f	\N
+2728	119	2	f	\N
+2729	103	2	f	\N
+2730	93	2	f	\N
+2731	123	2	f	\N
+2732	148	2	f	\N
+2818	93	2	f	\N
+2819	123	2	f	\N
+2380	143	2	f	\N
+2381	93	2	f	\N
+2382	134	2	f	\N
+2383	104	2	f	\N
+2384	104	2	f	\N
+2385	104	2	f	\N
+2388	103	2	f	\N
+2389	105	2	f	\N
+2390	105	2	f	\N
+2391	105	2	f	\N
+2396	105	2	f	\N
+2397	105	2	f	\N
+2398	105	2	f	\N
+2415	105	2	f	\N
+2416	105	2	f	\N
+2670	146	2	f	\N
+2677	89	2	f	\N
+2678	69	2	f	\N
+2679	69	2	f	\N
+2680	89	2	f	\N
+2681	89	2	f	\N
+2424	105	2	f	\N
+2425	105	2	f	\N
+2426	105	2	f	\N
+2682	149	2	f	\N
+2683	89	2	f	\N
+2427	105	2	f	\N
+2428	105	2	f	\N
+2684	149	2	f	\N
+2685	89	2	f	\N
+2686	135	2	f	\N
+2431	105	2	f	\N
+2687	137	2	f	\N
+2690	134	2	f	\N
+2693	110	2	f	\N
+2694	110	2	f	\N
+2695	86	2	f	\N
+2530	119	2	f	\N
+2531	119	2	f	\N
+2532	119	2	f	\N
+2533	119	2	f	\N
+2534	119	2	f	\N
+2535	119	2	f	\N
+2539	110	2	f	\N
+2540	86	2	f	\N
+2541	119	2	f	\N
+2542	148	2	f	\N
+2543	148	2	f	\N
+2820	118	2	f	\N
+2821	87	2	f	\N
+2822	69	2	f	\N
+2823	145	2	f	\N
+1546	106	2	f	\N
+2824	130	2	f	\N
+1547	106	2	f	\N
+1548	12	2	f	\N
+1549	12	2	f	\N
+2825	146	2	f	\N
+2826	118	2	f	\N
+2827	135	2	f	\N
+2828	137	2	f	\N
+2841	104	2	f	\N
+2865	78	2	f	\N
+2866	117	2	f	\N
+2867	111	2	f	\N
+1550	65	2	f	\N
+1551	87	2	f	\N
+1552	87	2	f	\N
+2597	145	2	f	\N
+2636	65	2	f	\N
+2637	65	2	f	\N
+2638	65	2	f	\N
+2392	105	2	f	\N
+2393	105	2	f	\N
+2394	105	2	f	\N
+2395	105	2	f	\N
+2642	65	2	f	\N
+274	12	2	\N	\N
+292	41	2	\N	\N
+306	41	2	\N	\N
+706	12	2	\N	\N
+723	12	2	\N	\N
+725	55	2	\N	\N
+726	55	2	\N	\N
+728	55	2	\N	\N
+734	55	2	\N	\N
+743	55	2	\N	\N
+763	55	2	\N	\N
+764	12	2	\N	\N
+769	12	2	\N	\N
+2643	65	2	f	\N
+2646	65	2	f	\N
+2647	65	2	f	\N
+2651	65	2	f	\N
+2652	65	2	f	\N
+2653	65	2	f	\N
+771	55	2	\N	\N
+772	59	2	\N	\N
+837	65	2	\N	\N
+1046	47	2	\N	\N
+1062	55	2	\N	\N
+1067	78	2	\N	\N
+1068	12	2	\N	\N
+1164	70	2	\N	\N
+1165	39	2	\N	\N
+2654	65	2	f	\N
+2655	65	2	f	\N
+2658	67	2	f	\N
+1168	41	2	\N	\N
+1169	70	2	\N	\N
+1185	39	2	\N	\N
+1195	87	2	\N	\N
+1198	12	2	\N	\N
+1261	89	2	f	\N
+1598	103	2	f	\N
+1807	90	2	f	\N
+1833	118	2	f	\N
+1839	103	2	f	\N
+1435	12	2	f	\N
+1436	65	2	f	\N
+1438	107	2	f	\N
+1439	107	2	f	\N
+1511	101	2	f	\N
+1512	101	2	f	\N
+1513	101	2	f	\N
+1521	12	2	f	\N
+1535	110	2	f	\N
+1536	110	2	f	\N
+1537	110	2	f	\N
+1538	110	2	f	\N
+1539	110	2	f	\N
+1540	110	2	f	\N
+1541	110	2	f	\N
+1542	67	2	f	\N
+2417	105	2	f	\N
+1543	87	2	f	\N
+1544	87	2	f	\N
+1545	87	2	f	\N
+2659	87	2	f	\N
+2661	145	2	f	\N
+2662	130	2	f	\N
+2663	118	2	f	\N
+2418	105	2	f	\N
+2419	105	2	f	\N
+2420	105	2	f	\N
+2421	105	2	f	\N
+2422	105	2	f	\N
+2423	105	2	f	\N
+2698	110	2	f	\N
+2699	86	2	f	\N
+2700	119	2	f	\N
+2701	119	2	f	\N
+2879	69	2	f	\N
+773	12	2	\N	\N
+887	69	2	\N	\N
+2183	137	2	f	\N
+2660	69	2	f	\N
+2664	149	2	f	\N
+2665	149	2	f	\N
+2666	87	2	f	\N
+2667	69	2	f	\N
+892	67	2	\N	\N
+2668	145	2	f	\N
+893	47	2	\N	\N
+894	2	2	\N	\N
+896	39	2	\N	\N
+1011	12	2	\N	\N
+1040	47	2	\N	\N
+1277	55	2	f	\N
+2669	130	2	f	\N
+2671	93	2	f	\N
+2672	123	2	f	\N
+2673	39	2	f	\N
+2839	119	2	f	\N
+2840	119	2	f	\N
+1278	39	2	f	\N
+1283	71	2	f	\N
+1284	69	2	f	\N
+1285	87	2	f	\N
+1286	89	2	f	\N
+1287	84	2	f	\N
+1288	90	2	f	\N
+1289	84	2	f	\N
+1290	39	2	f	\N
+1291	84	2	f	\N
+1292	83	2	f	\N
+1293	69	2	f	\N
+1294	69	2	f	\N
+1304	87	2	f	\N
+1306	90	2	f	\N
+1840	103	2	f	\N
+1849	12	2	f	\N
+1440	103	2	f	\N
+1442	103	2	f	\N
+1447	106	2	f	\N
+1448	106	2	f	\N
+1450	12	2	f	\N
+1452	12	2	f	\N
+1464	87	2	f	\N
+1465	69	2	f	\N
+1467	89	2	f	\N
+1472	69	2	f	\N
+1473	69	2	f	\N
+1485	106	2	f	\N
+1487	103	2	f	\N
+1500	106	2	f	\N
+1502	103	2	f	\N
+1503	103	2	f	\N
+1504	104	2	f	\N
+1505	104	2	f	\N
+1506	104	2	f	\N
+1507	107	2	f	\N
+1509	106	2	f	\N
+1514	101	2	f	\N
+1515	101	2	f	\N
+1516	87	2	f	\N
+1517	87	2	f	\N
+1518	87	2	f	\N
+1519	87	2	f	\N
+1553	79	2	f	\N
+2584	93	2	f	\N
+2585	87	2	f	\N
+2586	87	2	f	\N
+2587	87	2	f	\N
+2588	89	2	f	\N
+2633	65	2	f	\N
+2634	65	2	f	\N
+2635	65	2	f	\N
+2174	135	2	f	\N
+2175	137	2	f	\N
+2176	135	2	f	\N
+2177	137	2	f	\N
+2178	135	2	f	\N
+2179	137	2	f	\N
+2180	135	2	f	\N
+2181	137	2	f	\N
+2182	135	2	f	\N
+897	39	2	\N	\N
+898	39	2	\N	\N
+899	39	2	\N	\N
+900	65	2	\N	\N
+2435	146	2	f	\N
+901	12	2	\N	\N
+2450	103	2	f	\N
+902	65	2	\N	\N
+903	71	2	\N	\N
+2451	106	2	f	\N
+2486	101	2	f	\N
+2489	86	2	f	\N
+2490	86	2	f	\N
+2491	86	2	f	\N
+2493	87	2	f	\N
+2501	110	2	f	\N
+2502	110	2	f	\N
+2503	119	2	f	\N
+2505	110	2	f	\N
+2506	86	2	f	\N
+2507	110	2	f	\N
+2508	110	2	f	\N
+2737	106	2	f	\N
+2738	117	2	f	\N
+2739	69	2	f	\N
+2740	12	2	f	\N
+2832	119	2	f	\N
+2863	111	2	f	\N
+2864	140	2	f	\N
+2274	143	2	f	\N
+2275	134	2	f	\N
+2276	12	2	f	\N
+2277	105	2	f	\N
+2278	135	2	f	\N
+2279	144	2	f	\N
+2280	134	2	f	\N
+2281	104	2	f	\N
+2282	135	2	f	\N
+2284	134	2	f	\N
+1962	93	2	f	\N
+1963	123	2	f	\N
+1964	93	2	f	\N
+1965	123	2	f	\N
+1966	12	2	f	\N
+2098	118	2	f	\N
+2099	12	2	f	\N
+2100	12	2	f	\N
+1978	2	2	f	\N
+2101	65	2	f	\N
+1979	118	2	f	\N
+1985	93	2	f	\N
+1986	123	2	f	\N
+1987	103	2	f	\N
+1988	119	2	f	\N
+1989	12	2	f	\N
+2602	65	2	f	\N
+2603	65	2	f	\N
+2604	65	2	f	\N
+2605	65	2	f	\N
+2608	65	2	f	\N
+2612	65	2	f	\N
+2613	65	2	f	\N
+2617	65	2	f	\N
+2039	119	2	f	\N
+2044	119	2	f	\N
+2156	135	2	f	\N
+2157	137	2	f	\N
+2158	135	2	f	\N
+2159	137	2	f	\N
+2160	135	2	f	\N
+2161	137	2	f	\N
+2162	135	2	f	\N
+2163	137	2	f	\N
+2164	135	2	f	\N
+2165	137	2	f	\N
+2167	135	2	f	\N
+2045	119	2	f	\N
+2399	105	2	f	\N
+2400	105	2	f	\N
+2401	105	2	f	\N
+2402	105	2	f	\N
+2403	105	2	f	\N
+2704	119	2	f	\N
+2705	119	2	f	\N
+2706	119	2	f	\N
+2707	119	2	f	\N
+2708	119	2	f	\N
+2709	119	2	f	\N
+2434	130	2	f	\N
+775	12	2	\N	\N
+778	65	2	\N	\N
+779	65	2	\N	\N
+780	65	2	\N	\N
+784	47	2	\N	\N
+786	47	2	\N	\N
+788	12	2	\N	\N
+789	67	2	\N	\N
+790	65	2	\N	\N
+791	65	2	\N	\N
+792	65	2	\N	\N
+794	55	2	\N	\N
+800	55	2	\N	\N
+801	55	2	\N	\N
+802	65	2	\N	\N
+1468	84	2	f	\N
+1469	90	2	f	\N
+1470	83	2	f	\N
+1471	69	2	f	\N
+1913	117	2	f	\N
+1510	101	2	f	\N
+1968	12	2	f	\N
+1970	126	2	f	\N
+1971	93	2	f	\N
+1972	123	2	f	\N
+1973	123	2	f	\N
+1975	65	2	f	\N
+1976	55	2	f	\N
+1977	12	2	f	\N
+1554	101	2	f	\N
+1556	101	2	f	\N
+1559	87	2	f	\N
+1560	79	2	f	\N
+2137	139	2	f	\N
+2138	139	2	f	\N
+2139	139	2	f	\N
+2144	135	2	f	\N
+2145	137	2	f	\N
+2146	135	2	f	\N
+2147	137	2	f	\N
+838	65	2	\N	\N
+849	41	2	\N	\N
+851	41	2	\N	\N
+852	41	2	\N	\N
+853	41	2	\N	\N
+854	2	2	\N	\N
+855	2	2	\N	\N
+856	2	2	\N	\N
+857	55	2	\N	\N
+858	55	2	\N	\N
+859	55	2	\N	\N
+860	55	2	\N	\N
+861	55	2	\N	\N
+864	65	2	\N	\N
+865	12	2	\N	\N
+866	65	2	\N	\N
+1307	90	2	f	\N
+1308	90	2	f	\N
+1337	84	2	f	\N
+1338	83	2	f	\N
+1347	39	2	f	\N
+1348	84	2	f	\N
+1349	83	2	f	\N
+1393	12	2	f	\N
+1394	65	2	f	\N
+1395	65	2	f	\N
+1396	104	2	f	\N
+1398	104	2	f	\N
+1400	104	2	f	\N
+1401	104	2	f	\N
+1402	104	2	f	\N
+1403	104	2	f	\N
+1404	87	2	f	\N
+1406	89	2	f	\N
+1407	90	2	f	\N
+1408	69	2	f	\N
+1409	69	2	f	\N
+1410	69	2	f	\N
+1411	69	2	f	\N
+2148	135	2	f	\N
+2149	137	2	f	\N
+2150	135	2	f	\N
+2187	135	2	f	\N
+2188	137	2	f	\N
+2189	135	2	f	\N
+2190	137	2	f	\N
+2674	84	2	f	\N
+2675	83	2	f	\N
+2676	87	2	f	\N
+1413	102	2	f	\N
+1414	90	2	f	\N
+1415	91	2	f	\N
+1417	84	2	f	\N
+1418	90	2	f	\N
+1419	91	2	f	\N
+1420	101	2	f	\N
+2152	135	2	f	\N
+2153	137	2	f	\N
+2154	135	2	f	\N
+2155	137	2	f	\N
+2184	135	2	f	\N
+2185	137	2	f	\N
+2186	134	2	f	\N
+2688	135	2	f	\N
+2880	87	2	f	\N
+904	71	2	\N	\N
+905	71	2	\N	\N
+906	71	2	\N	\N
+910	65	2	\N	\N
+911	65	2	\N	\N
+912	72	2	\N	\N
+1318	102	2	f	\N
+1319	84	2	f	\N
+2206	110	2	f	\N
+2207	110	2	f	\N
+1607	106	2	f	\N
+1608	105	2	f	\N
+1341	84	2	f	\N
+1609	105	2	f	\N
+2433	145	2	f	\N
+2689	143	2	f	\N
+2558	12	2	f	\N
+2559	151	2	f	\N
+1342	83	2	f	\N
+1343	70	2	f	\N
+1610	87	2	f	\N
+1611	87	2	f	\N
+1612	89	2	f	\N
+1613	89	2	f	\N
+1614	90	2	f	\N
+2560	69	2	f	\N
+2561	145	2	f	\N
+2562	130	2	f	\N
+2733	148	2	f	\N
+1615	69	2	f	\N
+2208	110	2	f	\N
+2209	110	2	f	\N
+2210	86	2	f	\N
+2211	110	2	f	\N
+2212	110	2	f	\N
+2213	86	2	f	\N
+2734	119	2	f	\N
+2735	119	2	f	\N
+2843	119	2	f	\N
+1370	90	2	f	\N
+1384	39	2	f	\N
+2283	137	2	f	\N
+1803	118	2	f	\N
+2301	146	2	f	\N
+2302	118	2	f	\N
+2303	93	2	f	\N
+1852	119	2	f	\N
+1898	105	2	f	\N
+1900	120	2	f	\N
+1901	120	2	f	\N
+1902	117	2	f	\N
+1903	111	2	f	\N
+1904	65	2	f	\N
+1905	65	2	f	\N
+1561	87	2	f	\N
+1562	87	2	f	\N
+1563	79	2	f	\N
+1564	101	2	f	\N
+2844	119	2	f	\N
+1569	101	2	f	\N
+1570	101	2	f	\N
+1571	65	2	f	\N
+1575	65	2	f	\N
+1576	86	2	f	\N
+2845	119	2	f	\N
+2846	119	2	f	\N
+2847	119	2	f	\N
+2848	119	2	f	\N
+2849	119	2	f	\N
+2850	119	2	f	\N
+2851	119	2	f	\N
+2852	110	2	f	\N
+2853	86	2	f	\N
+2854	119	2	f	\N
+1577	87	2	f	\N
+1578	79	2	f	\N
+1579	110	2	f	\N
+1580	78	2	f	\N
+1581	87	2	f	\N
+1582	89	2	f	\N
+2598	145	2	f	\N
+2599	130	2	f	\N
+2868	93	2	f	\N
+2869	93	2	f	\N
+2870	119	2	f	\N
+2151	137	2	f	\N
+988	75	2	\N	\N
+1003	12	2	\N	\N
+1060	41	2	\N	\N
+1078	12	2	\N	\N
+1088	12	2	\N	\N
+1089	65	2	\N	\N
+1090	39	2	\N	\N
+1091	84	2	\N	\N
+1093	84	2	\N	\N
+1095	70	2	\N	\N
+1096	39	2	\N	\N
+1932	93	7	f	\N
+1939	93	7	f	\N
+1199	89	2	\N	\N
+1204	87	2	\N	\N
+1205	89	2	\N	\N
+1206	89	2	\N	\N
+1252	59	2	f	\N
+1257	87	2	f	\N
+1258	87	2	f	\N
+1644	90	2	f	\N
+1645	69	2	f	\N
+1646	70	2	f	\N
+1918	119	2	f	\N
+1919	12	2	f	\N
+1922	93	2	f	\N
+1924	118	2	f	\N
+1925	89	2	f	\N
+1926	90	2	f	\N
+1927	87	2	f	\N
+1930	93	2	f	\N
+1931	118	2	f	\N
+1933	93	2	f	\N
+1934	93	2	f	\N
+1935	93	2	f	\N
+1936	93	2	f	\N
+1940	93	2	f	\N
+1941	12	2	f	\N
+1945	123	2	f	\N
+1946	123	2	f	\N
+1947	123	2	f	\N
+1948	123	2	f	\N
+1954	12	2	f	\N
+1584	89	2	f	\N
+1585	90	2	f	\N
+1586	69	2	f	\N
+1587	39	2	f	\N
+1588	84	2	f	\N
+1589	84	2	f	\N
+1590	83	2	f	\N
+1591	87	2	f	\N
+1592	89	2	f	\N
+1593	69	2	f	\N
+1597	104	2	f	\N
+2631	65	2	f	\N
+2632	65	2	f	\N
+2702	119	2	f	\N
+2703	119	2	f	\N
+2829	93	2	f	\N
+2830	69	2	f	\N
+2831	134	2	f	\N
+2833	110	2	f	\N
+2834	86	2	f	\N
+2835	104	2	f	\N
+2858	103	2	f	\N
+2859	148	2	f	\N
+2860	106	2	f	\N
+885	47	2	\N	\N
+895	39	2	\N	\N
+940	73	2	\N	\N
+941	73	2	\N	\N
+942	73	2	\N	\N
+1259	87	2	f	\N
+1260	87	2	f	\N
+2200	104	2	f	\N
+2214	110	2	f	\N
+2215	86	2	f	\N
+2216	78	2	f	\N
+2217	12	2	f	\N
+2218	140	2	f	\N
+2219	65	2	f	\N
+2221	140	2	f	\N
+2222	65	2	f	\N
+2223	78	2	f	\N
+2224	78	2	f	\N
+2225	78	2	f	\N
+2226	78	2	f	\N
+2227	78	2	f	\N
+2228	78	2	f	\N
+2229	78	2	f	\N
+2230	78	2	f	\N
+1908	65	2	f	\N
+2055	12	2	f	\N
+2062	93	2	f	\N
+2063	93	2	f	\N
+2064	123	2	f	\N
+2065	118	2	f	\N
+2066	93	2	f	\N
+2067	123	2	f	\N
+2068	93	2	f	\N
+2069	123	2	f	\N
+2070	12	2	f	\N
+2305	145	2	f	\N
+2306	146	2	f	\N
+1993	106	2	f	\N
+2310	145	2	f	\N
+1994	106	2	f	\N
+2311	93	2	f	\N
+1995	106	2	f	\N
+1996	106	2	f	\N
+2312	130	2	f	\N
+1997	106	2	f	\N
+2313	145	2	f	\N
+2314	69	2	f	\N
+2000	103	2	f	\N
+2315	135	2	f	\N
+2001	106	2	f	\N
+2316	137	2	f	\N
+2002	106	2	f	\N
+2317	134	2	f	\N
+2005	103	2	f	\N
+2319	104	2	f	\N
+2006	106	2	f	\N
+2007	106	2	f	\N
+2009	93	2	f	\N
+2010	123	2	f	\N
+2011	110	2	f	\N
+2012	118	2	f	\N
+2013	87	2	f	\N
+2014	89	2	f	\N
+2015	90	2	f	\N
+2016	93	2	f	\N
+2017	69	2	f	\N
+2018	87	2	f	\N
+2019	89	2	f	\N
+2020	69	2	f	\N
+2023	104	2	f	\N
+2024	104	2	f	\N
+2026	103	2	f	\N
+2027	106	2	f	\N
+2028	106	2	f	\N
+2436	93	2	f	\N
+2437	146	2	f	\N
+2438	117	2	f	\N
+1880	106	2	f	\N
+1881	106	2	f	\N
+2374	84	2	f	\N
+2375	83	2	f	\N
+2413	105	2	f	\N
+871	69	2	\N	\N
+872	12	2	\N	\N
+873	65	2	\N	\N
+874	65	2	\N	\N
+876	41	2	\N	\N
+878	70	2	\N	\N
+2857	119	2	f	\N
+879	65	2	\N	\N
+880	70	2	\N	\N
+881	70	2	\N	\N
+882	70	2	\N	\N
+883	70	2	\N	\N
+1079	65	2	\N	\N
+1097	84	2	\N	\N
+1101	39	2	\N	\N
+1102	84	2	\N	\N
+1159	78	2	\N	\N
+1170	39	2	\N	\N
+1178	70	2	\N	\N
+1179	39	2	\N	\N
+1189	12	2	\N	\N
+1190	12	2	\N	\N
+1191	86	2	\N	\N
+1192	86	2	\N	\N
+1193	87	2	\N	\N
+1194	87	2	\N	\N
+1200	89	2	\N	\N
+1201	87	2	\N	\N
+1210	90	2	\N	\N
+1211	12	2	\N	\N
+1212	65	2	\N	\N
+1213	90	2	\N	\N
+1214	91	2	\N	\N
+1225	12	2	\N	\N
+1230	93	2	\N	\N
+1243	87	2	f	\N
+1244	87	2	f	\N
+1253	65	2	f	\N
+1263	87	2	f	\N
+1264	87	2	f	\N
+1265	89	2	f	\N
+1268	12	2	f	\N
+2197	93	2	f	\N
+2198	123	2	f	\N
+2199	105	2	f	\N
+2240	78	2	f	\N
+2241	78	2	f	\N
+2242	78	2	f	\N
+2243	12	2	f	\N
+2244	12	2	f	\N
+2245	65	2	f	\N
+2246	105	2	f	\N
+2247	102	2	f	\N
+2248	141	2	f	\N
+2249	141	2	f	\N
+2254	135	2	f	\N
+2255	142	2	f	\N
+2256	135	2	f	\N
+2257	142	2	f	\N
+2258	135	2	f	\N
+2259	142	2	f	\N
+1853	119	2	f	\N
+1854	119	2	f	\N
+1855	119	2	f	\N
+1859	119	2	f	\N
+1860	119	2	f	\N
+1865	117	2	f	\N
+1866	117	2	f	\N
+1867	117	2	f	\N
+1868	117	2	f	\N
+1869	69	2	f	\N
+1870	78	2	f	\N
+1872	118	2	f	\N
+1873	105	2	f	\N
+1875	106	2	f	\N
+1876	106	2	f	\N
+863	65	2	\N	\N
+870	69	2	\N	\N
+875	70	2	\N	\N
+1207	12	2	\N	\N
+1209	90	2	\N	\N
+1218	39	2	\N	\N
+1221	12	2	\N	\N
+1227	93	2	\N	\N
+1240	41	2	f	\N
+1241	39	2	f	\N
+1249	59	2	f	\N
+1282	87	2	f	\N
+1980	93	2	f	\N
+1981	118	2	f	\N
+1982	93	2	f	\N
+1983	93	2	f	\N
+1984	123	2	f	\N
+2404	105	2	f	\N
+2405	105	2	f	\N
+2406	105	2	f	\N
+2407	105	2	f	\N
+2408	105	2	f	\N
+2409	105	2	f	\N
+2410	105	2	f	\N
+2411	105	2	f	\N
+2412	105	2	f	\N
+2414	105	2	f	\N
+2432	105	2	f	\N
+2719	119	2	f	\N
+2720	119	2	f	\N
+2721	119	2	f	\N
+2722	119	2	f	\N
+2723	104	2	f	\N
+2724	119	2	f	\N
+2736	119	2	f	\N
+2741	65	2	f	\N
+2742	12	2	f	\N
+2779	123	2	f	\N
+2780	123	2	f	\N
+2781	123	2	f	\N
+2782	123	2	f	\N
+2783	123	2	f	\N
+2466	117	2	f	\N
+2467	111	2	f	\N
+2468	119	2	f	\N
+2469	119	2	f	\N
+2470	119	2	f	\N
+2475	90	2	f	\N
+2477	47	2	f	\N
+2484	2	2	f	\N
 \.
 
 
@@ -71805,2158 +61913,6 @@ COPY resource (id, resource_type_id, maintainer_id, protected) FROM stdin;
 --
 
 SELECT pg_catalog.setval('resource_id_seq', 2904, true);
-
-
---
--- Data for Name: resource_log; Type: TABLE DATA; Schema: test; Owner: -
---
-
-COPY resource_log (id, resource_id, employee_id, comment, modifydt) FROM stdin;
-142	83	2	\N	2013-12-07 16:38:38.11618+02
-143	84	2	\N	2013-12-07 16:39:56.788641+02
-144	3	2	\N	2013-12-07 16:41:27.65259+02
-145	2	2	\N	2013-12-07 16:41:31.748494+02
-146	83	2	\N	2013-12-07 16:58:05.802634+02
-147	83	2	\N	2013-12-07 17:00:14.544264+02
-4836	794	2	\N	2014-02-05 19:54:07.5415+02
-5406	1192	2	\N	2014-04-06 19:21:11.278173+03
-5407	1005	2	\N	2014-04-06 19:21:55.315341+03
-4845	283	2	\N	2014-02-06 11:38:41.090464+02
-2	10	2	\N	2013-11-16 19:00:14.24272+02
-4	12	2	\N	2013-11-16 19:00:15.497284+02
-6	14	2	\N	2013-11-16 19:00:16.696731+02
-8	16	2	\N	2013-11-16 19:00:17.960761+02
-5427	1204	2	\N	2014-04-09 18:54:09.146902+03
-12	30	2	\N	2013-11-23 19:26:00.193553+02
-13	30	2	\N	2013-11-23 22:02:37.363677+02
-14	10	2	\N	2013-11-23 22:11:01.634598+02
-15	30	2	\N	2013-11-23 22:11:14.939938+02
-16	30	2	\N	2013-11-23 22:11:38.396085+02
-19	30	2	\N	2013-11-24 10:30:59.830287+02
-20	30	2	\N	2013-11-24 10:31:22.936737+02
-21	30	2	\N	2013-11-24 10:38:08.07328+02
-22	30	2	\N	2013-11-24 10:38:10.703187+02
-23	30	2	\N	2013-11-24 10:38:11.896934+02
-24	30	2	\N	2013-11-24 10:42:19.397852+02
-25	30	2	\N	2013-11-24 10:42:50.772172+02
-26	30	2	\N	2013-11-24 10:45:56.399572+02
-27	30	2	\N	2013-11-24 10:48:29.950669+02
-28	30	2	\N	2013-11-24 10:49:23.616693+02
-29	30	2	\N	2013-11-24 10:50:05.878643+02
-30	30	2	\N	2013-11-24 10:51:02.465585+02
-31	30	2	\N	2013-11-24 10:54:21.011765+02
-32	30	2	\N	2013-11-24 10:54:28.775552+02
-33	30	2	\N	2013-11-24 10:58:34.152869+02
-34	30	2	\N	2013-11-24 10:58:36.766104+02
-35	30	2	\N	2013-11-24 10:58:38.767749+02
-36	30	2	\N	2013-11-24 10:58:42.533162+02
-37	30	2	\N	2013-11-24 10:58:43.55758+02
-38	30	2	\N	2013-11-24 10:58:47.40587+02
-39	30	2	\N	2013-11-24 11:00:56.130675+02
-40	30	2	\N	2013-11-24 11:01:17.637578+02
-41	30	2	\N	2013-11-24 11:01:20.639413+02
-42	30	2	\N	2013-11-24 11:01:25.957588+02
-43	30	2	\N	2013-11-24 11:01:28.015301+02
-44	30	2	\N	2013-11-24 11:01:49.505153+02
-45	30	2	\N	2013-11-24 11:01:54.465064+02
-46	30	2	\N	2013-11-24 11:01:56.828797+02
-47	30	2	\N	2013-11-24 11:02:00.873006+02
-48	30	2	\N	2013-11-24 11:02:06.385907+02
-49	30	2	\N	2013-11-24 11:02:08.474309+02
-50	30	2	\N	2013-11-24 11:02:11.823259+02
-51	30	2	\N	2013-11-24 11:02:15.084044+02
-52	30	2	\N	2013-11-24 11:23:59.150304+02
-53	30	2	\N	2013-11-24 12:41:22.004561+02
-54	30	2	\N	2013-11-24 12:41:27.704243+02
-55	30	2	\N	2013-11-24 12:41:32.588516+02
-5430	1207	2	\N	2014-04-09 20:43:13.852066+03
-5459	1227	2	\N	2014-04-19 13:04:24.512333+03
-5467	1230	2	\N	2014-04-23 11:53:28.979784+03
-5468	1230	2	\N	2014-04-23 11:53:45.572462+03
-5537	1306	2	\N	2014-04-30 11:04:50.581045+03
-66	16	2	\N	2013-11-30 12:57:27.26941+02
-67	31	2	\N	2013-11-30 14:25:42.040654+02
-68	32	2	\N	2013-11-30 14:27:55.708736+02
-69	33	2	\N	2013-11-30 14:28:30.596329+02
-70	34	2	\N	2013-11-30 14:29:07.205192+02
-71	35	2	\N	2013-11-30 14:30:10.653134+02
-72	36	2	\N	2013-11-30 14:31:39.751221+02
-73	37	2	\N	2013-11-30 14:32:36.035677+02
-74	38	2	\N	2013-11-30 14:55:27.691288+02
-75	39	2	\N	2013-11-30 14:58:07.249714+02
-76	40	2	\N	2013-11-30 14:58:34.364695+02
-79	43	2	\N	2013-11-30 15:08:29.574538+02
-80	43	2	\N	2013-11-30 15:08:52.114395+02
-81	43	2	\N	2013-11-30 15:09:21.51485+02
-82	44	2	\N	2013-11-30 15:09:54.961188+02
-83	45	2	\N	2013-12-01 13:04:27.697583+02
-84	45	2	\N	2013-12-01 13:04:40.716328+02
-85	14	2	\N	2013-12-01 14:31:19.374571+02
-87	12	2	\N	2013-12-01 18:21:35.266219+02
-104	10	2	\N	2013-12-02 20:43:38.334769+02
-130	10	2	\N	2013-12-06 21:10:25.807719+02
-4796	769	2	\N	2014-01-22 22:21:45.451623+02
-4820	16	2	\N	2014-02-01 21:09:43.821944+02
-5408	1192	2	\N	2014-04-06 19:22:16.361504+03
-5409	1005	2	\N	2014-04-06 19:22:18.74271+03
-4822	784	2	\N	2014-02-01 21:23:07.460721+02
-4823	786	2	\N	2014-02-01 21:23:12.871915+02
-5410	1193	2	\N	2014-04-06 19:30:25.125445+03
-5411	1194	2	\N	2014-04-06 19:30:51.85642+03
-5412	1195	2	\N	2014-04-06 19:32:30.207073+03
-5428	1205	2	\N	2014-04-09 19:17:37.483997+03
-5431	1209	2	\N	2014-04-09 20:49:45.884539+03
-4843	800	2	\N	2014-02-05 19:58:31.619612+02
-4844	801	2	\N	2014-02-05 19:58:49.632624+02
-4951	885	2	\N	2014-02-14 21:23:40.101298+02
-4952	885	2	\N	2014-02-14 21:25:13.866935+02
-4974	849	2	\N	2014-02-23 22:41:46.113064+02
-4977	884	2	\N	2014-02-23 22:42:22.595852+02
-5143	1003	2	\N	2014-03-04 21:05:09.565466+02
-5144	1004	2	\N	2014-03-04 21:08:53.227171+02
-5145	1005	2	\N	2014-03-04 21:09:15.542733+02
-5471	1240	2	\N	2014-04-26 13:10:19.27836+03
-5538	1307	2	\N	2014-04-30 11:08:33.655971+03
-5544	1313	2	\N	2014-05-16 22:03:29.897662+03
-361	274	2	\N	2013-12-14 17:16:08.962259+02
-365	277	2	\N	2013-12-14 18:56:05.189747+02
-366	278	2	\N	2013-12-14 18:56:17.77025+02
-367	279	2	\N	2013-12-14 18:56:45.919492+02
-368	280	2	\N	2013-12-14 19:10:07.617582+02
-369	281	2	\N	2013-12-14 19:10:25.311427+02
-370	281	2	\N	2013-12-14 19:10:59.35028+02
-371	281	2	\N	2013-12-14 19:12:14.211139+02
-372	282	2	\N	2013-12-14 19:14:22.861495+02
-373	278	2	\N	2013-12-14 19:14:33.853691+02
-374	282	2	\N	2013-12-14 19:14:41.964012+02
-375	283	2	\N	2013-12-14 19:16:35.738242+02
-4882	706	2	\N	2014-02-08 19:59:59.160282+02
-377	283	2	\N	2013-12-14 19:18:21.622933+02
-4953	886	2	\N	2014-02-14 21:25:53.089098+02
-4978	893	2	\N	2014-02-24 11:11:03.613711+02
-5147	1004	2	\N	2014-03-04 21:17:22.306545+02
-5148	1004	2	\N	2014-03-04 21:23:04.343461+02
-386	286	2	\N	2013-12-14 20:46:34.653533+02
-387	287	2	\N	2013-12-14 20:46:47.37835+02
-388	288	2	\N	2013-12-14 20:47:08.024243+02
-389	289	2	\N	2013-12-14 20:47:28.256516+02
-390	290	2	\N	2013-12-14 20:52:40.953492+02
-391	291	2	\N	2013-12-14 20:53:08.057165+02
-392	292	2	\N	2013-12-14 20:53:33.598708+02
-5149	1004	2	\N	2014-03-04 21:23:17.093243+02
-5150	1004	2	\N	2014-03-04 21:23:25.611509+02
-4799	771	2	\N	2014-01-25 16:05:28.799345+02
-4800	771	2	\N	2014-01-25 16:05:38.705799+02
-4801	772	2	\N	2014-01-25 16:06:28.321244+02
-4826	788	2	\N	2014-02-01 22:03:21.899916+02
-5151	1004	2	\N	2014-03-04 21:23:52.466966+02
-5152	1004	2	\N	2014-03-04 21:24:11.351815+02
-5153	1004	2	\N	2014-03-04 21:24:20.614224+02
-5429	1206	2	\N	2014-04-09 19:21:09.215561+03
-5154	1004	2	\N	2014-03-04 21:35:47.600889+02
-5155	1004	2	\N	2014-03-04 21:36:05.835492+02
-5156	1004	2	\N	2014-03-04 21:36:16.322673+02
-5432	1210	2	\N	2014-04-12 13:10:08.842351+03
-5472	1241	2	\N	2014-04-26 19:16:28.009797+03
-5539	1308	2	\N	2014-04-30 11:20:34.938154+03
-5545	1314	2	\N	2014-05-17 13:42:16.369317+03
-422	306	2	\N	2013-12-15 21:45:32.990838+02
-4802	773	2	\N	2014-01-25 23:45:37.762081+02
-4827	789	2	\N	2014-02-02 16:45:11.830435+02
-4954	887	2	\N	2014-02-15 12:32:09.199652+02
-5415	1198	2	\N	2014-04-08 09:35:59.21042+03
-4979	885	2	\N	2014-02-24 12:50:26.694026+02
-4980	786	2	\N	2014-02-24 12:50:29.953348+02
-4981	784	2	\N	2014-02-24 12:50:33.322359+02
-5157	1004	2	\N	2014-03-07 22:30:15.652582+02
-5230	894	2	\N	2014-03-16 11:54:19.683752+02
-5231	894	2	\N	2014-03-16 11:54:28.171778+02
-5232	894	2	\N	2014-03-16 11:54:33.774318+02
-5270	1004	2	\N	2014-03-17 10:50:39.781432+02
-5465	1230	2	\N	2014-04-19 21:03:03.225866+03
-5508	1277	2	\N	2014-04-29 10:08:17.485661+03
-5509	1278	2	\N	2014-04-29 10:09:19.421905+03
-5540	1309	2	\N	2014-04-30 11:32:51.070911+03
-5547	1316	2	\N	2014-05-17 14:00:25.111543+03
-4927	865	2	\N	2014-02-09 13:26:19.008763+02
-4804	775	2	\N	2014-01-26 15:30:50.636495+02
-4828	3	2	\N	2014-02-02 17:45:50.239397+02
-5416	1199	2	\N	2014-04-08 10:15:32.411146+03
-5434	1211	2	\N	2014-04-12 14:16:34.33498+03
-5435	1211	2	\N	2014-04-12 14:16:53.40729+03
-4982	895	2	\N	2014-02-25 19:06:42.158245+02
-5158	1007	2	\N	2014-03-08 10:30:25.61786+02
-5198	3	2	\N	2014-03-11 13:14:05.142514+02
-5233	1060	2	\N	2014-03-16 12:26:38.52955+02
-5437	1213	2	\N	2014-04-12 14:32:08.840037+03
-5466	1227	2	\N	2014-04-19 21:37:55.580038+03
-5474	1243	2	\N	2014-04-26 22:38:44.326007+03
-5541	1310	2	\N	2014-04-30 22:45:27.579715+03
-5548	1317	2	\N	2014-05-17 14:54:57.813145+03
-5549	1318	2	\N	2014-05-17 15:24:32.954365+03
-5550	1319	2	\N	2014-05-17 15:53:28.880817+03
-5551	1320	2	\N	2014-05-17 15:53:34.139717+03
-5552	1321	2	\N	2014-05-17 15:55:03.155317+03
-5553	1322	2	\N	2014-05-17 15:55:07.534203+03
-5557	1326	2	\N	2014-05-17 15:59:13.891973+03
-5558	1327	2	\N	2014-05-17 15:59:17.045556+03
-5559	1328	2	\N	2014-05-17 16:00:04.660539+03
-5560	1329	2	\N	2014-05-17 16:00:08.901641+03
-5561	1330	2	\N	2014-05-17 16:00:10.337355+03
-5566	1335	2	\N	2014-05-17 16:02:19.447311+03
-5570	1339	2	\N	2014-05-17 16:06:26.675372+03
-5571	1340	2	\N	2014-05-17 16:06:28.503991+03
-5572	1341	2	\N	2014-05-17 16:06:29.727144+03
-5573	1342	2	\N	2014-05-17 16:06:31.81672+03
-5574	1343	2	\N	2014-05-17 16:07:44.265465+03
-5575	1344	2	\N	2014-05-17 16:07:45.972655+03
-5576	1345	2	\N	2014-05-17 16:07:47.259172+03
-5577	1346	2	\N	2014-05-17 16:07:49.146563+03
-5581	1350	2	\N	2014-05-17 16:09:55.923893+03
-5582	1351	2	\N	2014-05-17 16:13:13.017272+03
-5583	1352	2	\N	2014-05-17 16:13:14.609527+03
-5584	1353	2	\N	2014-05-17 16:13:16.568079+03
-5585	1354	2	\N	2014-05-17 16:13:17.732756+03
-5370	1159	2	\N	2014-04-02 19:52:15.193771+03
-4888	786	2	\N	2014-02-08 21:26:45.138217+02
-5417	1200	2	\N	2014-04-08 10:35:59.014802+03
-4890	784	2	\N	2014-02-08 21:26:51.98617+02
-4929	870	2	\N	2014-02-09 14:57:54.403714+02
-4967	892	2	\N	2014-02-22 17:14:02.512772+02
-4983	896	2	\N	2014-02-25 19:37:56.226615+02
-4984	897	2	\N	2014-02-25 19:38:21.395798+02
-4985	898	2	\N	2014-02-25 19:38:30.353048+02
-4986	899	2	\N	2014-02-25 19:39:23.588225+02
-4988	901	2	\N	2014-02-25 19:47:57.884012+02
-5160	1009	2	\N	2014-03-08 10:49:52.0599+02
-5199	3	2	\N	2014-03-12 12:05:31.953558+02
-5438	1214	2	\N	2014-04-12 14:36:07.046988+03
-5475	1244	2	\N	2014-04-26 22:39:00.40778+03
-5542	1311	2	\N	2014-04-30 22:45:36.089534+03
-5554	1323	2	\N	2014-05-17 15:55:54.008685+03
-5555	1324	2	\N	2014-05-17 15:56:55.63522+03
-5556	1325	2	\N	2014-05-17 15:58:29.508912+03
-5562	1331	2	\N	2014-05-17 16:00:49.21287+03
-5563	1332	2	\N	2014-05-17 16:01:46.175183+03
-5564	1333	2	\N	2014-05-17 16:01:47.950656+03
-5565	1334	2	\N	2014-05-17 16:01:48.837764+03
-5567	1336	2	\N	2014-05-17 16:03:41.796945+03
-5568	1337	2	\N	2014-05-17 16:04:32.839289+03
-5569	1338	2	\N	2014-05-17 16:04:34.363533+03
-5578	1347	2	\N	2014-05-17 16:08:39.18466+03
-5579	1348	2	\N	2014-05-17 16:08:56.863828+03
-5580	1349	2	\N	2014-05-17 16:08:58.291349+03
-4894	849	2	\N	2014-02-08 21:32:14.802948+02
-4896	851	2	\N	2014-02-08 21:32:32.471247+02
-4897	852	2	\N	2014-02-08 21:36:44.493917+02
-4930	871	2	\N	2014-02-09 16:04:05.85568+02
-4968	892	2	\N	2014-02-22 17:18:17.771894+02
-5161	1009	2	\N	2014-03-08 10:52:32.854366+02
-5162	1009	2	\N	2014-03-08 10:52:45.635015+02
-5163	1009	2	\N	2014-03-08 10:52:53.515357+02
-5164	1009	2	\N	2014-03-08 10:52:58.740536+02
-5165	1010	2	\N	2014-03-08 10:54:40.946487+02
-5166	1010	2	\N	2014-03-08 10:54:50.928085+02
-5200	3	2	\N	2014-03-12 12:14:05.203771+02
-5235	897	2	\N	2014-03-16 12:53:37.56753+02
-5278	1067	2	\N	2014-03-18 19:51:01.87448+02
-5375	1164	2	\N	2014-04-02 20:56:42.084197+03
-5376	1165	2	\N	2014-04-02 20:56:48.393173+03
-5419	1201	2	\N	2014-04-08 10:38:31.154572+03
-5440	1214	2	\N	2014-04-12 14:39:05.532456+03
-5442	1214	2	\N	2014-04-12 14:43:11.754556+03
-5513	1282	2	\N	2014-04-29 10:43:05.718429+03
-5586	1355	2	\N	2014-05-17 16:14:39.7443+03
-5587	1356	2	\N	2014-05-17 16:14:41.182697+03
-5588	1357	2	\N	2014-05-17 16:14:43.239633+03
-5590	1359	2	\N	2014-05-17 16:15:43.442935+03
-5591	1360	2	\N	2014-05-17 16:15:45.790483+03
-5596	1365	2	\N	2014-05-17 16:20:21.389915+03
-5597	1366	2	\N	2014-05-17 16:20:22.473385+03
-5598	1367	2	\N	2014-05-17 16:20:23.843632+03
-4898	853	2	\N	2014-02-08 21:39:09.10029+02
-4812	784	2	\N	2014-01-26 21:12:24.209136+02
-4813	784	2	\N	2014-01-26 21:13:10.546575+02
-4814	784	2	\N	2014-01-26 21:13:20.058093+02
-4815	784	2	\N	2014-01-26 21:13:24.693933+02
-4817	786	2	\N	2014-01-26 21:15:00.370561+02
-4818	784	2	\N	2014-01-26 21:20:14.635984+02
-4819	784	2	\N	2014-01-26 21:20:34.941868+02
-4931	274	2	\N	2014-02-10 08:49:31.501202+02
-4969	893	2	\N	2014-02-22 17:26:37.296722+02
-4970	894	2	\N	2014-02-22 17:27:40.771678+02
-4991	903	2	\N	2014-02-25 22:43:46.101171+02
-4992	904	2	\N	2014-02-25 22:43:53.30222+02
-4993	905	2	\N	2014-02-25 22:44:00.024066+02
-4994	906	2	\N	2014-02-25 22:44:13.035203+02
-4995	907	2	\N	2014-02-25 22:44:59.159297+02
-5167	1009	2	\N	2014-03-08 10:57:02.535973+02
-5168	1010	2	\N	2014-03-08 10:57:07.365849+02
-5201	3	2	\N	2014-03-12 12:29:57.686858+02
-5202	3	2	\N	2014-03-12 12:30:07.270368+02
-5203	3	2	\N	2014-03-12 12:30:09.982217+02
-5204	3	2	\N	2014-03-12 12:32:22.25189+02
-5205	894	2	\N	2014-03-12 12:32:26.366205+02
-5236	919	2	\N	2014-03-16 13:33:07.651832+02
-5444	1218	2	\N	2014-04-12 15:00:38.646853+03
-5447	1214	2	\N	2014-04-12 15:02:33.59771+03
-5514	1283	2	\N	2014-04-29 12:06:08.689068+03
-5515	1284	2	\N	2014-04-29 12:07:06.357367+03
-5518	1287	2	\N	2014-04-29 12:09:55.486785+03
-5520	1289	2	\N	2014-04-29 12:11:36.874588+03
-5589	1358	2	\N	2014-05-17 16:15:09.836615+03
-5592	1361	2	\N	2014-05-17 16:16:33.155307+03
-5593	1362	2	\N	2014-05-17 16:16:42.585648+03
-5594	1363	2	\N	2014-05-17 16:18:45.312153+03
-5595	1364	2	\N	2014-05-17 16:18:46.752544+03
-4932	872	2	\N	2014-02-10 14:29:53.759164+02
-4996	908	2	\N	2014-02-25 23:15:44.304324+02
-4997	909	2	\N	2014-02-25 23:16:53.455486+02
-5000	912	2	\N	2014-02-25 23:21:05.038132+02
-5001	913	2	\N	2014-02-25 23:21:10.720503+02
-5002	914	2	\N	2014-02-25 23:21:15.803027+02
-5003	915	2	\N	2014-02-25 23:21:21.245593+02
-5004	916	2	\N	2014-02-25 23:21:27.843749+02
-5005	917	2	\N	2014-02-25 23:21:40.705852+02
-5006	918	2	\N	2014-02-25 23:21:45.161533+02
-5007	918	2	\N	2014-02-25 23:21:53.74917+02
-5008	918	2	\N	2014-02-25 23:21:57.599668+02
-5009	919	2	\N	2014-02-25 23:22:22.789803+02
-5011	921	2	\N	2014-02-25 23:22:59.534922+02
-5012	922	2	\N	2014-02-25 23:23:04.765473+02
-5013	923	2	\N	2014-02-25 23:23:16.649188+02
-5014	924	2	\N	2014-02-25 23:23:30.151925+02
-5015	925	2	\N	2014-02-25 23:25:11.120354+02
-5016	926	2	\N	2014-02-25 23:26:11.314153+02
-5017	927	2	\N	2014-02-25 23:26:34.378644+02
-5018	928	2	\N	2014-02-25 23:26:49.163639+02
-5019	929	2	\N	2014-02-25 23:27:07.84413+02
-5020	930	2	\N	2014-02-25 23:27:30.797684+02
-5021	931	2	\N	2014-02-25 23:27:45.611037+02
-5022	932	2	\N	2014-02-25 23:28:05.678992+02
-5023	933	2	\N	2014-02-25 23:28:21.001129+02
-5025	935	2	\N	2014-02-25 23:28:49.565248+02
-5026	936	2	\N	2014-02-25 23:29:05.034117+02
-5027	937	2	\N	2014-02-25 23:29:16.11101+02
-5028	938	2	\N	2014-02-25 23:29:28.82178+02
-5029	939	2	\N	2014-02-25 23:29:41.159219+02
-5030	940	2	\N	2014-02-25 23:29:57.589154+02
-5031	941	2	\N	2014-02-25 23:30:12.260571+02
-5032	942	2	\N	2014-02-25 23:30:25.705958+02
-5033	943	2	\N	2014-02-25 23:30:39.278491+02
-5034	944	2	\N	2014-02-25 23:30:54.230938+02
-5035	945	2	\N	2014-02-25 23:31:08.136642+02
-5036	946	2	\N	2014-02-25 23:31:21.084682+02
-5037	947	2	\N	2014-02-25 23:31:35.443235+02
-5038	948	2	\N	2014-02-25 23:31:50.036032+02
-5039	949	2	\N	2014-02-25 23:32:16.232207+02
-5040	950	2	\N	2014-02-25 23:32:51.784126+02
-5169	1011	2	\N	2014-03-08 15:10:44.638516+02
-5206	3	2	\N	2014-03-12 13:00:24.217557+02
-5207	3	2	\N	2014-03-12 13:00:34.025605+02
-5238	1062	2	\N	2014-03-16 15:10:44.294343+02
-5239	1062	2	\N	2014-03-16 15:11:01.269428+02
-5240	858	2	\N	2014-03-16 15:11:06.875279+02
-5241	903	2	\N	2014-03-16 15:12:25.130202+02
-5379	1168	2	\N	2014-04-03 12:39:52.988369+03
-5380	1169	2	\N	2014-04-03 12:49:06.139328+03
-5448	1221	2	\N	2014-04-12 16:44:14.810824+03
-5516	1285	2	\N	2014-04-29 12:08:23.116251+03
-5517	1286	2	\N	2014-04-29 12:09:10.712444+03
-5522	1291	2	\N	2014-04-29 12:13:37.203069+03
-5523	1292	2	\N	2014-04-29 12:14:34.180203+03
-4900	854	2	\N	2014-02-08 21:47:34.439997+02
-4901	855	2	\N	2014-02-08 21:54:55.399628+02
-4936	875	2	\N	2014-02-10 15:58:53.177719+02
-4937	875	2	\N	2014-02-10 15:59:03.43204+02
-5042	952	2	\N	2014-02-25 23:33:14.57009+02
-5043	939	2	\N	2014-02-25 23:33:37.281163+02
-5044	938	2	\N	2014-02-25 23:33:44.033176+02
-5045	937	2	\N	2014-02-25 23:33:51.697991+02
-5046	936	2	\N	2014-02-25 23:33:56.981908+02
-5047	935	2	\N	2014-02-25 23:34:03.037741+02
-5049	933	2	\N	2014-02-25 23:34:27.937885+02
-5050	932	2	\N	2014-02-25 23:34:34.767736+02
-5051	931	2	\N	2014-02-25 23:34:39.075165+02
-5052	930	2	\N	2014-02-25 23:34:43.896812+02
-5053	929	2	\N	2014-02-25 23:34:48.70472+02
-5054	928	2	\N	2014-02-25 23:34:54.494127+02
-5055	927	2	\N	2014-02-25 23:35:00.125101+02
-5056	926	2	\N	2014-02-25 23:35:05.399995+02
-5057	925	2	\N	2014-02-25 23:35:10.409443+02
-5058	924	2	\N	2014-02-25 23:35:16.447517+02
-5059	923	2	\N	2014-02-25 23:35:21.959285+02
-5060	922	2	\N	2014-02-25 23:35:27.383937+02
-5061	921	2	\N	2014-02-25 23:35:31.660307+02
-5063	919	2	\N	2014-02-25 23:35:43.645366+02
-5064	918	2	\N	2014-02-25 23:35:47.480218+02
-5065	917	2	\N	2014-02-25 23:35:52.042922+02
-5066	916	2	\N	2014-02-25 23:35:57.409224+02
-5067	915	2	\N	2014-02-25 23:36:01.802966+02
-5068	914	2	\N	2014-02-25 23:36:05.670476+02
-5069	913	2	\N	2014-02-25 23:36:10.129284+02
-5070	912	2	\N	2014-02-25 23:36:14.468359+02
-5208	1040	2	\N	2014-03-12 20:50:33.871251+02
-5209	1041	2	\N	2014-03-12 20:50:55.466763+02
-5210	1041	2	\N	2014-03-12 20:51:02.123714+02
-5211	1042	2	\N	2014-03-12 20:53:03.003465+02
-5212	1043	2	\N	2014-03-12 20:53:27.910983+02
-5213	1044	2	\N	2014-03-12 20:53:45.921718+02
-5214	1045	2	\N	2014-03-12 20:54:23.054095+02
-5215	1046	2	\N	2014-03-12 20:55:03.071619+02
-5286	1078	2	\N	2014-03-20 21:22:51.030666+02
-5381	1170	2	\N	2014-04-03 12:49:07.793292+03
-5519	1288	2	\N	2014-04-29 12:10:21.572462+03
-5521	1290	2	\N	2014-04-29 12:13:35.434847+03
-5603	1372	2	\N	2014-05-17 18:47:30.594446+03
-5606	1375	2	\N	2014-05-17 18:55:21.896666+03
-5613	1382	2	\N	2014-05-17 19:04:51.767284+03
-5619	1388	2	\N	2014-05-17 19:09:44.578209+03
-5622	1391	2	\N	2014-05-17 19:12:29.996417+03
-4902	856	2	\N	2014-02-08 21:59:04.719245+02
-4938	876	2	\N	2014-02-10 16:19:24.400952+02
-5071	953	2	\N	2014-02-26 23:25:15.548581+02
-5072	954	2	\N	2014-02-26 23:25:55.407709+02
-5075	957	2	\N	2014-02-26 23:28:34.003373+02
-5076	958	2	\N	2014-02-26 23:28:45.594179+02
-5077	959	2	\N	2014-02-26 23:28:57.004231+02
-5078	960	2	\N	2014-02-26 23:29:08.086342+02
-5079	961	2	\N	2014-02-26 23:29:17.646283+02
-5080	962	2	\N	2014-02-26 23:29:26.175631+02
-5081	963	2	\N	2014-02-26 23:29:35.761623+02
-5082	964	2	\N	2014-02-26 23:29:46.892804+02
-5083	965	2	\N	2014-02-26 23:29:54.140342+02
-5084	966	2	\N	2014-02-26 23:30:01.375033+02
-5085	967	2	\N	2014-02-26 23:30:08.774222+02
-5086	968	2	\N	2014-02-26 23:30:17.802323+02
-5087	969	2	\N	2014-02-26 23:30:29.097872+02
-5088	970	2	\N	2014-02-26 23:30:38.081009+02
-5089	971	2	\N	2014-02-26 23:30:52.902609+02
-5091	973	2	\N	2014-02-26 23:31:31.71567+02
-5093	975	2	\N	2014-02-26 23:32:13.646357+02
-5094	976	2	\N	2014-02-26 23:32:24.624636+02
-5095	977	2	\N	2014-02-26 23:32:34.606814+02
-5096	978	2	\N	2014-02-26 23:32:43.318943+02
-5097	979	2	\N	2014-02-26 23:32:54.081989+02
-5098	980	2	\N	2014-02-26 23:33:04.823892+02
-5099	981	2	\N	2014-02-26 23:33:16.574818+02
-5100	982	2	\N	2014-02-26 23:33:28.270884+02
-5101	983	2	\N	2014-02-26 23:33:40.854578+02
-5102	984	2	\N	2014-02-26 23:33:57.05943+02
-5103	985	2	\N	2014-02-26 23:34:08.238483+02
-5105	987	2	\N	2014-02-26 23:34:29.757456+02
-5106	988	2	\N	2014-02-26 23:34:37.99873+02
-5216	3	2	\N	2014-03-12 21:55:10.706584+02
-5287	1079	2	\N	2014-03-22 12:57:07.526655+02
-5480	1249	2	\N	2014-04-27 01:02:16.23036+03
-5481	1250	2	\N	2014-04-27 01:02:43.699513+03
-5482	1251	2	\N	2014-04-27 01:03:00.011092+03
-5483	1252	2	\N	2014-04-27 01:03:22.219667+03
-5524	1293	2	\N	2014-04-29 12:17:51.658135+03
-5525	1294	2	\N	2014-04-29 12:18:27.913053+03
-5601	1370	2	\N	2014-05-17 18:45:54.451262+03
-5602	1371	2	\N	2014-05-17 18:47:17.628356+03
-5604	1373	2	\N	2014-05-17 18:54:01.477094+03
-5607	1376	2	\N	2014-05-17 18:56:40.07768+03
-5609	1378	2	\N	2014-05-17 19:02:40.402053+03
-5616	1385	2	\N	2014-05-17 19:07:13.667811+03
-5617	1386	2	\N	2014-05-17 19:07:36.068126+03
-5621	1390	2	\N	2014-05-17 19:11:55.084234+03
-4789	763	2	\N	2014-01-12 19:51:49.157909+02
-4903	854	2	\N	2014-02-08 22:16:58.906498+02
-4904	3	2	\N	2014-02-08 22:17:06.939369+02
-4905	854	2	\N	2014-02-08 22:20:32.280238+02
-4906	784	2	\N	2014-02-08 22:21:01.290541+02
-4908	786	2	\N	2014-02-08 22:21:09.110319+02
-5484	1253	2	\N	2014-04-28 00:03:49.599015+03
-5289	1081	2	\N	2014-03-22 17:57:05.076581+02
-5605	1374	2	\N	2014-05-17 18:55:03.070735+03
-5611	1380	2	\N	2014-05-17 19:03:57.212913+03
-5614	1383	2	\N	2014-05-17 19:04:59.867959+03
-5618	1387	2	\N	2014-05-17 19:09:22.594353+03
-5624	1393	2	\N	2014-05-18 10:14:28.009945+03
-4790	764	2	\N	2014-01-12 20:33:53.3138+02
-4909	723	2	\N	2014-02-08 22:28:37.868751+02
-4940	878	2	\N	2014-02-10 16:40:47.442615+02
-5610	1379	2	\N	2014-05-17 19:03:38.443538+03
-5612	1381	2	\N	2014-05-17 19:04:17.238286+03
-5615	1384	2	\N	2014-05-17 19:07:10.869783+03
-5620	1389	2	\N	2014-05-17 19:09:47.55779+03
-4910	857	2	\N	2014-02-09 00:41:07.487567+02
-4911	858	2	\N	2014-02-09 00:41:26.234037+02
-4912	859	2	\N	2014-02-09 00:41:48.428505+02
-4913	860	2	\N	2014-02-09 00:42:12.938208+02
-4914	857	2	\N	2014-02-09 00:42:31.066281+02
-4915	861	2	\N	2014-02-09 00:42:52.234296+02
-5291	1088	2	\N	2014-03-22 18:51:18.985681+02
-5292	1081	2	\N	2014-03-22 18:51:44.158872+02
-5458	1225	2	\N	2014-04-13 12:01:26.796233+03
-5627	1396	2	\N	2014-05-18 11:58:47.293591+03
-4917	764	2	\N	2014-02-09 00:53:58.264629+02
-4918	769	2	\N	2014-02-09 00:57:04.796409+02
-4919	775	2	\N	2014-02-09 00:57:24.917548+02
-4920	788	2	\N	2014-02-09 00:57:42.02056+02
-4942	878	2	\N	2014-02-10 22:47:18.374976+02
-4943	880	2	\N	2014-02-10 22:48:37.279277+02
-4944	881	2	\N	2014-02-10 22:49:24.829434+02
-4945	882	2	\N	2014-02-10 22:49:56.066237+02
-4946	883	2	\N	2014-02-10 22:50:06.121122+02
-4947	884	2	\N	2014-02-10 22:50:26.035905+02
-4948	884	2	\N	2014-02-10 22:53:06.689693+02
-5294	1090	2	\N	2014-03-22 20:34:50.666418+02
-5295	1091	2	\N	2014-03-22 20:36:11.95663+02
-5298	1093	2	\N	2014-03-22 20:40:16.040605+02
-5629	1398	2	\N	2014-05-18 12:12:21.975254+03
-4949	764	2	\N	2014-02-11 19:47:14.055452+02
-5488	1257	2	\N	2014-04-28 12:34:34.363475+03
-5300	1095	2	\N	2014-03-22 20:52:34.596466+02
-5301	1096	2	\N	2014-03-22 20:52:44.740475+02
-5302	1097	2	\N	2014-03-22 20:53:03.099066+02
-5489	1258	2	\N	2014-04-28 12:34:55.433659+03
-5304	1099	2	\N	2014-03-22 20:57:07.889521+02
-5535	1304	2	\N	2014-04-29 16:15:23.221696+03
-5389	1178	2	\N	2014-04-05 19:40:06.274566+03
-5390	1179	2	\N	2014-04-05 19:40:10.823684+03
-5490	1259	2	\N	2014-04-28 12:58:44.196537+03
-5305	1100	2	\N	2014-03-22 21:00:41.76813+02
-5306	1101	2	\N	2014-03-22 21:00:48.529148+02
-5307	1102	2	\N	2014-03-22 21:01:34.517288+02
-5491	1260	2	\N	2014-04-28 12:59:00.104464+03
-5631	1400	2	\N	2014-05-18 13:37:21.801854+03
-5632	1401	2	\N	2014-05-18 13:37:41.402585+03
-5633	1402	2	\N	2014-05-18 13:44:45.628784+03
-5492	1261	2	\N	2014-04-28 13:04:58.29173+03
-5634	1403	2	\N	2014-05-18 15:48:34.956287+03
-5256	1067	2	\N	2014-03-16 19:34:31.935568+02
-5494	1263	2	\N	2014-04-28 13:08:06.602496+03
-5635	1404	2	\N	2014-05-18 19:18:07.615122+03
-5636	1406	2	\N	2014-05-18 19:18:56.831097+03
-5639	1409	2	\N	2014-05-18 19:22:05.971396+03
-5394	1185	2	\N	2014-04-05 20:56:20.797318+03
-5257	1067	2	\N	2014-03-16 19:55:56.894484+02
-5495	1264	2	\N	2014-04-28 13:08:25.610345+03
-5637	1407	2	\N	2014-05-18 19:19:36.399614+03
-5641	1411	2	\N	2014-05-18 19:23:45.119721+03
-5496	1265	2	\N	2014-04-28 13:08:54.519921+03
-5638	1408	2	\N	2014-05-18 19:19:43.401474+03
-5258	1067	2	\N	2014-03-16 20:09:16.532934+02
-5311	1097	2	\N	2014-03-24 19:59:44.290142+02
-5640	1410	2	\N	2014-05-18 19:23:00.415796+03
-5643	1413	2	\N	2014-05-20 21:26:27.311927+03
-5259	1068	2	\N	2014-03-16 20:15:31.769185+02
-5499	1268	2	\N	2014-04-28 23:55:09.591646+03
-5644	1414	2	\N	2014-05-24 17:02:57.354915+03
-5645	1415	2	\N	2014-05-24 17:03:02.922541+03
-5646	1416	2	\N	2014-05-24 17:06:48.542492+03
-5647	1417	2	\N	2014-05-24 17:06:51.402853+03
-5648	1418	2	\N	2014-05-24 17:07:25.101929+03
-5649	1419	2	\N	2014-05-24 17:07:29.075778+03
-5650	1420	2	\N	2014-05-24 17:24:17.546972+03
-4120	16	2	\N	2014-01-01 13:19:09.979922+02
-4131	14	2	\N	2014-01-01 18:45:07.902745+02
-4144	706	2	\N	2014-01-03 16:12:41.015146+02
-4145	706	2	\N	2014-01-03 16:13:23.197097+02
-5402	1189	2	\N	2014-04-06 18:46:40.132797+03
-5403	1190	2	\N	2014-04-06 18:47:22.030146+03
-5138	865	2	\N	2014-03-03 21:09:34.254642+02
-5404	1191	2	\N	2014-04-06 18:53:34.002074+03
-5263	1009	2	\N	2014-03-16 21:40:10.728496+02
-5264	1009	2	\N	2014-03-16 21:44:11.742442+02
-5405	1192	2	\N	2014-04-06 19:20:55.890208+03
-5140	865	2	\N	2014-03-03 21:57:11.59945+02
-5265	1004	2	\N	2014-03-17 10:29:17.115979+02
-5266	1004	2	\N	2014-03-17 10:29:24.701637+02
-4744	723	2	\N	2014-01-04 23:58:55.624453+02
-4746	725	2	\N	2014-01-05 01:09:00.405742+02
-4747	726	2	\N	2014-01-05 01:09:15.602018+02
-4749	728	2	\N	2014-01-05 01:13:50.125212+02
-4756	734	2	\N	2014-01-05 12:36:48.48575+02
-4765	743	2	\N	2014-01-05 13:20:17.173661+02
-5654	1424	2	\N	2014-06-01 10:25:44.71461+03
-5656	1426	2	\N	2014-06-01 12:15:53.295347+03
-5661	1431	2	\N	2014-06-07 15:12:11.693366+03
-5662	1432	2	\N	2014-06-07 15:12:40.323386+03
-5663	1433	2	\N	2014-06-07 17:43:14.620483+03
-5665	1435	2	\N	2014-06-07 21:01:18.691193+03
-5667	1438	2	\N	2014-06-07 21:11:01.089928+03
-5668	1439	2	\N	2014-06-07 21:11:46.797584+03
-5669	1440	2	\N	2014-06-07 22:15:09.567299+03
-5671	1442	2	\N	2014-06-07 22:16:04.586659+03
-5676	1447	2	\N	2014-06-08 21:25:14.638119+03
-5677	1448	2	\N	2014-06-08 21:25:35.09515+03
-5679	1450	2	\N	2014-06-09 15:50:23.760428+03
-5681	1452	2	\N	2014-06-09 17:20:44.311452+03
-5693	1464	2	\N	2014-06-14 17:55:00.252916+03
-5694	1465	2	\N	2014-06-14 17:55:08.213215+03
-5695	1467	2	\N	2014-06-14 17:56:52.935007+03
-5696	1468	2	\N	2014-06-14 17:58:15.339465+03
-5697	1469	2	\N	2014-06-14 17:58:37.034547+03
-5698	1470	2	\N	2014-06-14 18:00:56.71432+03
-5699	1471	2	\N	2014-06-14 18:02:10.63169+03
-5700	1472	2	\N	2014-06-14 18:02:54.98084+03
-5701	1473	2	\N	2014-06-14 18:03:27.411198+03
-5713	1485	2	\N	2014-06-15 15:17:28.256792+03
-5715	1487	2	\N	2014-06-16 14:42:17.062016+03
-5728	1500	2	\N	2014-06-18 16:59:05.631362+03
-5730	1502	2	\N	2014-06-22 19:40:05.464875+03
-5731	1503	2	\N	2014-06-22 19:40:20.79663+03
-5732	1504	2	\N	2014-06-22 19:42:44.939368+03
-5733	1505	2	\N	2014-06-22 19:43:05.103699+03
-5734	1506	2	\N	2014-06-22 19:43:23.157992+03
-5735	1507	2	\N	2014-06-22 19:46:21.388635+03
-5737	1509	2	\N	2014-06-22 21:15:50.586549+03
-5738	1510	2	\N	2014-06-24 20:30:44.36129+03
-5739	1511	2	\N	2014-06-25 19:21:08.001771+03
-5740	1512	2	\N	2014-06-25 19:37:43.544622+03
-5741	1513	2	\N	2014-06-25 19:38:23.293423+03
-5742	1514	2	\N	2014-06-25 19:38:46.712804+03
-5743	1515	2	\N	2014-06-25 19:39:14.757449+03
-5744	1516	2	\N	2014-06-25 20:37:42.602785+03
-5745	1517	2	\N	2014-06-25 20:54:09.96009+03
-5746	1518	2	\N	2014-06-25 20:54:50.943042+03
-5747	1519	2	\N	2014-06-25 20:55:06.988343+03
-5749	1521	2	\N	2014-06-26 21:02:19.488826+03
-5750	1535	2	\N	2014-06-28 17:17:15.295903+03
-5751	1536	2	\N	2014-06-28 17:31:39.626186+03
-5752	1537	2	\N	2014-06-28 20:56:05.816704+03
-5753	1538	2	\N	2014-06-28 20:57:41.600837+03
-5754	1539	2	\N	2014-06-28 20:59:59.522314+03
-5755	1540	2	\N	2014-06-28 21:00:26.365557+03
-5756	1541	2	\N	2014-06-28 21:00:51.086753+03
-5757	1542	2	\N	2014-06-28 21:18:20.602573+03
-5758	1543	2	\N	2014-06-28 21:25:57.336069+03
-5759	1544	2	\N	2014-06-28 21:26:14.894807+03
-5760	1545	2	\N	2014-06-28 21:26:35.413657+03
-5761	1546	2	\N	2014-07-02 23:01:03.321441+03
-5762	1547	2	\N	2014-07-02 23:03:30.755887+03
-5763	1548	2	\N	2014-07-26 18:07:46.336433+03
-5764	1549	2	\N	2014-08-16 20:09:11.73959+03
-5766	1551	2	\N	2014-08-16 20:23:59.980051+03
-5767	1552	2	\N	2014-08-16 20:24:12.305446+03
-5768	1553	2	\N	2014-08-16 20:24:15.930016+03
-5769	1554	2	\N	2014-08-16 20:25:09.403552+03
-5771	1556	2	\N	2014-08-16 20:51:19.103778+03
-5773	1559	2	\N	2014-08-16 21:13:14.302214+03
-5774	1560	2	\N	2014-08-16 21:13:18.107616+03
-5775	1561	2	\N	2014-08-16 21:22:35.752473+03
-5776	1562	2	\N	2014-08-16 21:23:02.397566+03
-5777	1563	2	\N	2014-08-16 21:23:05.499294+03
-5778	1564	2	\N	2014-08-16 21:24:08.813965+03
-5783	1569	2	\N	2014-08-17 11:07:53.713228+03
-5784	1570	2	\N	2014-08-17 11:09:10.292392+03
-5790	1576	2	\N	2014-08-22 22:48:58.176695+03
-5791	1577	2	\N	2014-08-22 22:49:31.584667+03
-5792	1578	2	\N	2014-08-22 22:49:35.101959+03
-5793	1579	2	\N	2014-08-22 22:50:20.197271+03
-5794	1580	2	\N	2014-08-22 22:50:49.188036+03
-5795	1581	2	\N	2014-08-22 22:51:29.357367+03
-5796	1582	2	\N	2014-08-22 22:52:03.171722+03
-5797	1584	2	\N	2014-08-22 22:58:38.326467+03
-5798	1585	2	\N	2014-08-22 22:59:28.534906+03
-5799	1586	2	\N	2014-08-22 22:59:41.71816+03
-5800	1587	2	\N	2014-08-22 23:01:39.676197+03
-5801	1588	2	\N	2014-08-22 23:02:11.872661+03
-5802	1589	2	\N	2014-08-22 23:04:10.670971+03
-5803	1590	2	\N	2014-08-22 23:04:40.181387+03
-5804	1591	2	\N	2014-08-22 23:05:46.128053+03
-5805	1592	2	\N	2014-08-22 23:06:07.780481+03
-5806	1593	2	\N	2014-08-22 23:06:12.342153+03
-5810	1597	2	\N	2014-08-22 23:14:17.280337+03
-5811	1598	2	\N	2014-08-22 23:35:58.491964+03
-5820	1607	2	\N	2014-08-23 13:37:30.044239+03
-5821	1608	2	\N	2014-08-23 16:14:22.910225+03
-5822	1609	2	\N	2014-08-23 16:16:24.823791+03
-5823	1610	2	\N	2014-08-24 14:10:51.002759+03
-5824	1611	2	\N	2014-08-24 14:11:19.783792+03
-5825	1612	2	\N	2014-08-24 14:11:36.729128+03
-5826	1613	2	\N	2014-08-24 14:11:54.849623+03
-5827	1614	2	\N	2014-08-24 14:48:54.04485+03
-5828	1615	2	\N	2014-08-24 14:48:55.715304+03
-5829	1616	2	\N	2014-08-24 14:49:59.373945+03
-5832	1619	2	\N	2014-08-24 15:01:16.140346+03
-5833	1620	2	\N	2014-08-24 15:02:15.884894+03
-5834	1621	2	\N	2014-08-24 15:02:43.162974+03
-5835	1622	2	\N	2014-08-24 15:03:06.67481+03
-5836	1623	2	\N	2014-08-24 15:03:53.276198+03
-5837	1624	2	\N	2014-08-24 15:08:02.737031+03
-5838	1625	2	\N	2014-08-24 15:08:18.61161+03
-5839	1626	2	\N	2014-08-24 15:08:29.0077+03
-5840	1627	2	\N	2014-08-24 15:10:13.736496+03
-5841	1628	2	\N	2014-08-24 15:10:44.233145+03
-5847	1634	2	\N	2014-08-24 15:21:09.48427+03
-5852	1639	2	\N	2014-08-25 15:20:24.884947+03
-5853	1640	2	\N	2014-08-26 19:55:53.569882+03
-5854	1641	2	\N	2014-08-26 19:56:28.320221+03
-5858	1645	2	\N	2014-08-26 20:01:19.187139+03
-5860	1647	2	\N	2014-08-26 20:04:08.078366+03
-5862	1649	2	\N	2014-08-26 20:04:48.124422+03
-5855	1642	2	\N	2014-08-26 19:56:46.695581+03
-5856	1643	2	\N	2014-08-26 19:57:13.160198+03
-5857	1644	2	\N	2014-08-26 20:01:16.129984+03
-5859	1646	2	\N	2014-08-26 20:04:06.105786+03
-5861	1648	2	\N	2014-08-26 20:04:09.378364+03
-5863	1650	2	\N	2014-08-26 20:06:13.193356+03
-5864	1651	2	\N	2014-08-26 20:06:36.249641+03
-5865	1652	2	\N	2014-08-26 20:07:23.412381+03
-5866	1653	2	\N	2014-08-26 20:07:31.899383+03
-5870	1657	2	\N	2014-08-26 20:13:28.887297+03
-5873	1660	2	\N	2014-08-31 16:37:37.888486+03
-5919	1714	2	\N	2014-09-14 13:27:15.677766+03
-5926	1721	2	\N	2014-09-14 14:49:51.512979+03
-5967	1764	2	\N	2014-09-14 21:51:09.963908+03
-5968	1766	2	\N	2014-09-28 17:08:27.946698+03
-5971	1769	2	\N	2014-10-01 20:37:18.107894+03
-5972	1771	2	\N	2014-10-01 21:39:17.299667+03
-5973	1773	2	\N	2014-10-01 22:04:03.074823+03
-5974	1774	2	\N	2014-10-01 22:17:44.949656+03
-5975	1775	2	\N	2014-10-03 20:21:54.06353+03
-5977	1777	2	\N	2014-10-03 20:35:01.628264+03
-5978	1778	2	\N	2014-10-04 21:45:17.702702+03
-5980	1780	2	\N	2014-10-05 12:49:28.270538+03
-5982	1797	2	\N	2014-10-05 21:08:02.025119+03
-5983	1798	2	\N	2014-10-05 22:07:40.176836+03
-5984	1799	2	\N	2014-10-09 20:49:57.476724+03
-5985	1800	2	\N	2014-10-09 21:44:48.304991+03
-5986	1801	2	\N	2014-10-09 21:45:57.042916+03
-5987	1802	2	\N	2014-10-09 21:51:36.274928+03
-5988	1797	2	\N	2014-10-09 21:58:44.274487+03
-5989	1803	2	\N	2014-10-10 21:20:08.467997+03
-5990	1804	2	\N	2014-10-10 21:48:32.795064+03
-5991	1797	2	\N	2014-10-10 21:48:40.224687+03
-5994	1797	2	\N	2014-10-10 22:43:03.886027+03
-5995	1807	2	\N	2014-10-12 12:18:58.609492+03
-5996	1419	2	\N	2014-10-12 12:21:41.297126+03
-5999	1419	2	\N	2014-10-12 14:03:13.921521+03
-6000	1419	2	\N	2014-10-12 14:03:56.458732+03
-6002	1797	2	\N	2014-10-12 14:08:19.225786+03
-6003	1797	2	\N	2014-10-12 14:08:29.322661+03
-6005	1797	2	\N	2014-10-12 14:09:47.667654+03
-6006	1797	2	\N	2014-10-12 14:10:15.511498+03
-6008	894	2	\N	2014-10-12 14:15:30.839116+03
-6010	894	2	\N	2014-10-12 14:15:50.178579+03
-6011	894	2	\N	2014-10-12 14:16:00.712168+03
-6014	1507	2	\N	2014-10-12 14:21:53.792753+03
-6015	1507	2	\N	2014-10-12 14:22:06.118134+03
-6016	1439	2	\N	2014-10-12 14:22:17.008412+03
-6017	1438	2	\N	2014-10-12 14:22:21.965321+03
-6020	1780	2	\N	2014-10-12 14:25:19.014258+03
-6021	1780	2	\N	2014-10-12 14:25:28.403238+03
-6022	1780	2	\N	2014-10-12 14:25:37.930302+03
-6025	1413	2	\N	2014-10-12 14:31:06.237149+03
-6026	1413	2	\N	2014-10-12 14:31:16.507549+03
-6029	1415	2	\N	2014-10-12 14:34:22.672887+03
-6030	1415	2	\N	2014-10-12 14:34:32.05391+03
-6043	1657	2	\N	2014-10-12 15:41:58.778177+03
-6045	1657	2	\N	2014-10-12 15:42:13.36551+03
-6046	1657	2	\N	2014-10-12 15:42:24.726059+03
-6050	1653	2	\N	2014-10-12 16:27:20.425954+03
-6051	1653	2	\N	2014-10-12 16:27:45.783221+03
-6053	1283	2	\N	2014-10-12 16:28:08.925372+03
-6054	1283	2	\N	2014-10-12 16:28:17.376186+03
-6055	1833	2	\N	2014-10-12 16:29:10.045595+03
-6056	784	2	\N	2014-10-12 16:29:11.936722+03
-6061	1542	2	\N	2014-10-12 17:31:06.178463+03
-6063	861	2	\N	2014-10-12 20:54:52.692696+03
-6064	861	2	\N	2014-10-12 20:55:02.552131+03
-6066	998	2	\N	2014-10-18 11:46:31.67705+03
-6075	1657	2	\N	2014-10-18 23:25:55.139592+03
-6076	1657	2	\N	2014-10-18 23:26:04.397861+03
-6077	1839	2	\N	2014-10-18 23:26:44.642232+03
-6078	1634	2	\N	2014-10-18 23:26:52.975425+03
-6079	1598	2	\N	2014-10-18 23:27:05.648811+03
-6080	1502	2	\N	2014-10-18 23:27:11.743763+03
-6081	1503	2	\N	2014-10-18 23:27:18.622533+03
-6082	1440	2	\N	2014-10-18 23:27:25.765119+03
-6083	1442	2	\N	2014-10-18 23:27:32.509568+03
-6084	1840	2	\N	2014-10-18 23:35:01.43267+03
-6114	1598	2	\N	2014-10-25 20:24:45.191774+03
-6115	1840	2	\N	2014-10-25 20:25:16.419372+03
-6116	1839	2	\N	2014-10-25 20:25:25.421645+03
-6117	1657	2	\N	2014-10-25 20:25:34.041679+03
-6118	1634	2	\N	2014-10-25 20:25:41.778509+03
-6119	1598	2	\N	2014-10-25 20:25:49.974159+03
-6120	1503	2	\N	2014-10-25 20:25:56.790041+03
-6121	1502	2	\N	2014-10-25 20:26:11.552957+03
-6122	1487	2	\N	2014-10-25 20:26:20.033323+03
-6123	1442	2	\N	2014-10-25 20:26:26.124436+03
-6124	1440	2	\N	2014-10-25 20:26:33.450119+03
-6125	1660	2	\N	2014-10-25 20:27:51.453322+03
-6126	1639	2	\N	2014-10-25 20:27:59.032748+03
-6127	1607	2	\N	2014-10-25 20:28:26.48561+03
-6128	1547	2	\N	2014-10-25 20:31:18.593123+03
-6129	1546	2	\N	2014-10-25 20:31:27.322575+03
-6130	1509	2	\N	2014-10-25 20:31:34.596003+03
-6131	1500	2	\N	2014-10-25 20:31:41.235636+03
-6132	1485	2	\N	2014-10-25 20:31:48.295128+03
-6133	1448	2	\N	2014-10-25 20:31:55.364673+03
-6134	1447	2	\N	2014-10-25 20:32:03.232605+03
-6135	864	2	\N	2014-10-25 22:27:41.085522+03
-6136	900	2	\N	2014-10-25 22:27:48.659618+03
-6137	780	2	\N	2014-10-25 22:27:56.462817+03
-6138	837	2	\N	2014-10-25 22:28:02.931936+03
-6139	1394	2	\N	2014-10-25 22:28:08.943421+03
-6140	873	2	\N	2014-10-25 22:28:16.618586+03
-6141	778	2	\N	2014-10-25 22:28:22.956578+03
-6142	1659	2	\N	2014-10-25 22:39:28.23436+03
-6144	1849	2	\N	2014-10-25 23:00:37.016264+03
-6145	1852	2	\N	2014-10-28 19:57:41.751563+02
-6146	1853	2	\N	2014-10-28 20:23:48.907733+02
-6147	1854	2	\N	2014-10-28 20:24:58.380434+02
-6148	1855	2	\N	2014-10-28 20:25:08.681569+02
-6151	1859	2	\N	2014-10-29 12:48:22.905378+02
-6152	1860	2	\N	2014-10-30 22:03:33.988542+02
-6157	1865	2	\N	2014-11-03 21:33:49.462196+02
-6158	1866	2	\N	2014-11-03 21:38:54.729983+02
-6159	1867	2	\N	2014-11-03 21:39:31.824693+02
-6160	1868	2	\N	2014-11-03 21:40:02.647787+02
-6161	1869	2	\N	2014-11-05 21:10:08.261088+02
-6162	1870	2	\N	2014-11-05 21:10:38.427296+02
-6164	1872	2	\N	2014-11-08 19:05:48.520641+02
-6165	1868	2	\N	2014-11-08 19:07:32.928999+02
-6166	1868	2	\N	2014-11-08 19:07:58.653299+02
-6167	1873	2	\N	2014-11-09 14:14:33.279838+02
-6168	1433	2	\N	2014-11-09 14:15:02.053975+02
-6170	1875	2	\N	2014-11-09 20:43:57.157494+02
-6171	1876	2	\N	2014-11-09 20:50:09.776581+02
-6172	1876	2	\N	2014-11-09 21:46:07.106741+02
-6173	1876	2	\N	2014-11-09 21:46:46.766703+02
-6174	1876	2	\N	2014-11-12 18:42:47.24628+02
-6175	1876	2	\N	2014-11-12 18:43:00.917409+02
-6176	1876	2	\N	2014-11-12 18:43:51.052257+02
-6177	1876	2	\N	2014-11-12 18:49:19.486465+02
-6178	1876	2	\N	2014-11-12 18:49:50.992411+02
-6182	1880	2	\N	2014-11-12 18:58:13.464317+02
-6183	1881	2	\N	2014-11-12 18:58:13.464317+02
-6184	1876	2	\N	2014-11-12 19:19:20.155903+02
-6185	1880	2	\N	2014-11-12 19:20:04.488842+02
-6186	1882	2	\N	2014-11-12 19:21:49.754499+02
-6187	1882	2	\N	2014-11-12 20:48:55.295948+02
-6188	1876	2	\N	2014-11-13 18:36:19.360925+02
-6189	1876	2	\N	2014-11-13 18:36:40.275356+02
-6190	1876	2	\N	2014-11-13 18:36:53.848561+02
-6191	1876	2	\N	2014-11-13 18:37:04.828162+02
-6192	1876	2	\N	2014-11-13 18:44:14.058824+02
-6193	1880	2	\N	2014-11-14 13:23:46.652293+02
-6196	1884	2	\N	2014-11-15 12:46:51.68956+02
-6197	1885	2	\N	2014-11-15 12:55:58.618287+02
-6200	1647	2	\N	2014-11-15 19:54:17.589811+02
-6201	1647	2	\N	2014-11-15 19:57:05.325517+02
-6202	1587	2	\N	2014-11-15 19:57:11.689531+02
-6204	1888	2	\N	2014-11-15 20:54:18.530252+02
-6209	1893	2	\N	2014-11-15 21:10:00.852505+02
-6210	1894	2	\N	2014-11-16 11:36:20.360008+02
-6211	1895	2	\N	2014-11-16 11:38:31.304748+02
-6212	1896	2	\N	2014-11-16 11:52:22.859107+02
-6214	1896	2	\N	2014-11-16 17:28:25.282664+02
-6215	1898	2	\N	2014-11-18 19:36:00.947451+02
-6217	1900	2	\N	2014-11-18 19:59:41.794255+02
-6218	1901	2	\N	2014-11-18 20:00:50.313385+02
-6219	1902	2	\N	2014-11-18 20:05:55.399398+02
-6220	1903	2	\N	2014-11-18 20:06:23.495804+02
-6221	1225	2	\N	2014-11-20 20:55:40.655878+02
-6222	1904	2	\N	2014-11-21 20:47:35.513987+02
-6223	1434	2	\N	2014-11-21 20:48:05.829054+02
-6224	1571	2	\N	2014-11-21 20:48:27.000088+02
-6225	1885	2	\N	2014-11-21 20:48:44.475673+02
-6226	1905	2	\N	2014-11-21 21:17:50.885382+02
-6227	1436	2	\N	2014-11-21 21:19:06.360097+02
-6228	1798	2	\N	2014-11-21 21:19:19.899746+02
-6229	1425	2	\N	2014-11-21 21:19:42.772209+02
-6230	802	2	\N	2014-11-21 21:20:02.792752+02
-6231	1906	2	\N	2014-11-21 21:20:18.443474+02
-6232	802	2	\N	2014-11-21 21:20:33.430037+02
-6233	1395	2	\N	2014-11-21 21:20:55.244524+02
-6234	1907	2	\N	2014-11-21 21:25:23.260941+02
-6235	879	2	\N	2014-11-21 21:26:01.060638+02
-6236	1089	2	\N	2014-11-21 21:34:19.776611+02
-6237	874	2	\N	2014-11-21 21:34:45.906696+02
-6238	1080	2	\N	2014-11-21 21:35:09.652432+02
-6239	1908	2	\N	2014-11-21 21:35:29.643627+02
-6240	910	2	\N	2014-11-21 21:36:10.21074+02
-6241	1080	2	\N	2014-11-21 21:36:26.556412+02
-6242	911	2	\N	2014-11-21 21:36:37.408083+02
-6243	956	2	\N	2014-11-21 21:36:56.333028+02
-6244	955	2	\N	2014-11-21 21:37:09.845857+02
-6246	1896	2	\N	2014-11-21 21:43:10.139464+02
-6247	1910	2	\N	2014-11-22 17:58:53.151533+02
-6248	1911	2	\N	2014-11-22 17:58:53.151533+02
-6251	1903	2	\N	2014-11-23 17:42:18.707964+02
-6253	1903	2	\N	2014-11-23 18:15:04.669498+02
-6254	1913	2	\N	2014-11-23 18:22:07.34092+02
-6255	1915	2	\N	2014-11-23 18:25:34.975922+02
-6257	1917	2	\N	2014-11-23 18:40:26.695236+02
-6258	1918	2	\N	2014-11-23 18:40:42.249218+02
-6259	1919	2	\N	2014-11-27 21:56:12.900683+02
-6265	1906	2	\N	2014-11-28 22:02:27.025943+02
-6266	1908	2	\N	2014-11-28 22:03:25.613427+02
-6267	1919	2	\N	2014-11-30 11:21:31.130821+02
-6270	1368	2	\N	2014-11-30 18:22:02.736241+02
-6271	1922	2	\N	2014-12-07 14:34:35.538855+02
-6276	1924	2	\N	2014-12-07 21:40:24.739542+02
-6277	1925	2	\N	2014-12-07 21:41:09.94037+02
-6278	1926	2	\N	2014-12-07 21:41:37.63455+02
-6279	1471	2	\N	2014-12-07 21:41:39.584636+02
-6280	1927	2	\N	2014-12-07 21:42:12.893528+02
-6281	1471	2	\N	2014-12-07 21:42:14.781639+02
-6285	1930	2	\N	2014-12-08 21:43:55.101305+02
-6286	1869	2	\N	2014-12-08 21:46:09.685953+02
-6287	1931	2	\N	2014-12-08 21:52:00.685674+02
-6288	1930	2	\N	2014-12-08 21:53:17.580512+02
-6289	1932	2	\N	2014-12-11 22:45:01.994257+02
-6290	1933	2	\N	2014-12-11 22:46:28.273472+02
-6291	1934	2	\N	2014-12-11 22:50:30.21811+02
-6293	1935	2	\N	2014-12-11 22:53:00.765244+02
-6295	1935	2	\N	2014-12-11 22:53:42.569877+02
-6297	1936	2	\N	2014-12-13 21:35:47.599877+02
-6298	1939	2	\N	2014-12-13 21:37:02.820409+02
-6299	1939	2	\N	2014-12-13 21:37:54.352906+02
-6300	1936	2	\N	2014-12-13 21:55:38.627009+02
-6301	1933	2	\N	2014-12-13 21:55:57.253566+02
-6302	1933	2	\N	2014-12-13 21:57:41.570228+02
-6303	1933	2	\N	2014-12-13 22:01:39.804954+02
-6304	1936	2	\N	2014-12-13 22:01:54.801501+02
-6305	1936	2	\N	2014-12-13 22:03:25.347584+02
-6306	1933	2	\N	2014-12-13 22:03:37.415197+02
-6307	1939	2	\N	2014-12-13 22:03:52.016284+02
-6308	1936	2	\N	2014-12-13 22:10:55.202627+02
-6309	1936	2	\N	2014-12-13 22:11:45.388631+02
-6310	1936	2	\N	2014-12-14 11:10:18.568487+02
-6311	1936	2	\N	2014-12-14 11:10:54.616091+02
-6312	1936	2	\N	2014-12-14 11:12:20.116844+02
-6313	1933	2	\N	2014-12-14 11:12:44.366886+02
-6314	1936	2	\N	2014-12-14 11:14:36.987112+02
-6315	1933	2	\N	2014-12-14 11:14:46.937016+02
-6316	1940	2	\N	2014-12-14 11:16:18.397912+02
-6317	1941	2	\N	2014-12-14 17:51:15.587939+02
-6318	1940	2	\N	2014-12-14 19:37:37.036036+02
-6319	1936	2	\N	2014-12-14 19:37:54.381361+02
-6320	1940	2	\N	2014-12-14 19:41:49.794566+02
-6321	1940	2	\N	2014-12-14 19:44:37.781977+02
-6322	1940	2	\N	2014-12-14 19:48:08.98232+02
-6323	1940	2	\N	2014-12-14 19:50:28.583831+02
-6324	1940	2	\N	2014-12-14 20:30:31.46273+02
-6325	1936	2	\N	2014-12-14 20:30:45.990313+02
-6326	1940	2	\N	2014-12-14 20:33:08.50634+02
-6327	1940	2	\N	2014-12-14 20:34:47.73587+02
-6328	1940	2	\N	2014-12-14 20:37:41.082704+02
-6329	1653	2	\N	2014-12-19 21:31:43.967187+02
-6330	1653	2	\N	2014-12-19 21:37:31.746728+02
-6331	1951	2	\N	2014-12-19 21:38:17.300837+02
-6332	725	2	\N	2014-12-19 21:38:20.726452+02
-6333	1952	2	\N	2014-12-19 21:42:56.792366+02
-6334	1870	2	\N	2014-12-19 21:43:03.803839+02
-6335	1906	2	\N	2014-12-20 16:10:55.310323+02
-6338	1869	2	\N	2014-12-20 17:01:25.535753+02
-6339	1869	2	\N	2014-12-20 17:03:12.810766+02
-6340	1869	2	\N	2014-12-20 17:03:22.550854+02
-6341	1628	2	\N	2014-12-20 17:05:00.135486+02
-6342	1869	2	\N	2014-12-20 17:05:08.130568+02
-6343	1626	2	\N	2014-12-20 17:50:11.179188+02
-6344	1615	2	\N	2014-12-20 17:50:33.508978+02
-6345	1954	2	\N	2014-12-20 18:18:17.329483+02
-6346	1954	2	\N	2014-12-20 18:18:27.668631+02
-6349	1225	2	\N	2014-12-21 12:57:50.837529+02
-6350	1433	2	\N	2014-12-21 12:57:59.036844+02
-6351	1954	2	\N	2014-12-21 13:04:30.43023+02
-6355	1956	2	\N	2014-12-21 14:58:01.627945+02
-6356	1383	2	\N	2014-12-21 14:58:04.4436+02
-6357	1383	2	\N	2014-12-21 14:58:18.134114+02
-6387	1958	2	\N	2014-12-21 19:20:00.336409+02
-6388	1958	2	\N	2014-12-21 19:40:10.412709+02
-6389	1958	2	\N	2014-12-21 19:43:18.014602+02
-6393	1962	2	\N	2014-12-24 21:32:53.618984+02
-6400	1964	2	\N	2014-12-25 21:05:49.345482+02
-6411	1317	2	\N	2014-12-27 14:48:10.519499+02
-6412	1840	2	\N	2014-12-27 16:05:27.016889+02
-6413	1840	2	\N	2014-12-27 16:32:05.180181+02
-6414	1840	2	\N	2014-12-27 16:45:52.831401+02
-6415	1966	2	\N	2014-12-27 19:34:56.371248+02
-6418	1966	2	\N	2014-12-31 19:10:29.989911+02
-6420	1968	2	\N	2015-01-03 12:32:10.846571+02
-6422	1970	2	\N	2015-01-03 12:35:21.670372+02
-6423	1971	2	\N	2015-01-04 12:45:51.571627+02
-6424	1840	2	\N	2015-01-04 12:45:53.947837+02
-6425	1971	2	\N	2015-01-04 12:46:35.715575+02
-6426	1971	2	\N	2015-01-04 14:05:54.230775+02
-6428	1975	2	\N	2015-01-04 14:47:53.838979+02
-6429	1976	2	\N	2015-01-04 15:06:13.604725+02
-6430	1977	2	\N	2015-01-04 16:44:50.635763+02
-6431	1975	2	\N	2015-01-04 16:54:32.711408+02
-6432	1975	2	\N	2015-01-04 17:11:52.039507+02
-6433	1975	2	\N	2015-01-04 17:31:46.570967+02
-6434	1975	2	\N	2015-01-07 14:12:48.405815+02
-6435	1975	2	\N	2015-01-07 14:22:19.046581+02
-6436	1978	2	\N	2015-01-07 18:00:22.111119+02
-6437	1979	2	\N	2015-01-07 18:22:39.961593+02
-6438	1980	2	\N	2015-01-07 18:22:48.978415+02
-6439	1981	2	\N	2015-01-07 18:23:19.524712+02
-6440	3	2	\N	2015-01-07 18:23:30.384627+02
-6441	1982	2	\N	2015-01-07 18:30:42.662112+02
-6442	3	2	\N	2015-01-07 18:30:49.411934+02
-6443	3	2	\N	2015-01-07 18:31:24.902432+02
-6444	784	2	\N	2015-01-08 13:21:17.321066+02
-6445	784	2	\N	2015-01-08 13:27:01.529898+02
-6446	784	2	\N	2015-01-08 14:19:17.153858+02
-6447	784	2	\N	2015-01-08 14:20:23.527059+02
-6448	784	2	\N	2015-01-09 10:59:22.101268+02
-6449	1046	2	\N	2015-01-12 22:16:18.421621+02
-6450	1046	2	\N	2015-01-12 22:16:29.774766+02
-6451	1046	2	\N	2015-01-12 22:18:02.620143+02
-6452	1046	2	\N	2015-01-13 17:00:13.07184+02
-6453	1983	2	\N	2015-01-13 17:00:57.932019+02
-6454	1985	2	\N	2015-01-13 17:03:06.725248+02
-6455	1985	2	\N	2015-01-14 21:32:00.651438+02
-6456	1046	2	\N	2015-01-14 21:35:47.291833+02
-6457	1987	2	\N	2015-01-15 20:30:02.464255+02
-6458	1988	2	\N	2015-01-15 21:27:50.402917+02
-6459	1989	2	\N	2015-01-17 15:06:55.170629+02
-6460	1990	2	\N	2015-01-17 19:50:58.298272+02
-6461	1991	2	\N	2015-01-17 19:50:58.298272+02
-6462	1992	2	\N	2015-01-17 19:51:20.956564+02
-6463	1990	2	\N	2015-01-17 21:28:18.900625+02
-6464	1993	2	\N	2015-01-17 21:28:36.972519+02
-6465	1994	2	\N	2015-01-17 21:50:01.04394+02
-6466	1995	2	\N	2015-01-17 21:50:14.61181+02
-6467	1996	2	\N	2015-01-17 21:54:58.910426+02
-6468	1997	2	\N	2015-01-17 21:54:58.910426+02
-6471	2000	2	\N	2015-01-17 21:56:46.645017+02
-6472	2001	2	\N	2015-01-17 21:57:17.28338+02
-6473	2002	2	\N	2015-01-17 21:57:17.28338+02
-6476	2005	2	\N	2015-01-17 22:00:19.139836+02
-6477	2006	2	\N	2015-01-17 22:00:39.986496+02
-6478	2007	2	\N	2015-01-17 22:00:39.986496+02
-6479	2000	2	\N	2015-01-17 22:01:41.277766+02
-6480	2009	2	\N	2015-01-21 21:44:18.418746+02
-6481	1985	2	\N	2015-02-01 13:03:47.123323+02
-6482	2009	2	\N	2015-02-01 13:05:09.626214+02
-6483	2011	2	\N	2015-02-01 13:23:15.549518+02
-6484	1004	2	\N	2015-02-01 13:23:17.930893+02
-6485	2012	2	\N	2015-02-01 13:51:03.67962+02
-6486	1470	2	\N	2015-02-01 13:51:06.125989+02
-6487	2013	2	\N	2015-02-01 15:08:04.506074+02
-6488	2014	2	\N	2015-02-01 15:08:25.548868+02
-6489	2015	2	\N	2015-02-01 15:09:02.223788+02
-6490	2016	2	\N	2015-02-01 15:09:49.640295+02
-6491	2017	2	\N	2015-02-01 15:09:55.959842+02
-6492	2018	2	\N	2015-02-01 15:12:43.612773+02
-6493	2019	2	\N	2015-02-01 15:13:13.911124+02
-6494	2020	2	\N	2015-02-01 15:13:27.313034+02
-6497	2023	2	\N	2015-02-01 15:16:10.834689+02
-6498	2024	2	\N	2015-02-01 15:16:30.308954+02
-6501	2026	2	\N	2015-02-01 15:27:12.501194+02
-6502	2026	2	\N	2015-02-01 15:27:30.084405+02
-6503	2027	2	\N	2015-02-01 15:27:55.689729+02
-6504	2028	2	\N	2015-02-01 15:27:55.689729+02
-6505	2029	2	\N	2015-02-01 19:41:31.921287+02
-6506	2030	2	\N	2015-02-01 19:49:07.587188+02
-6507	2031	2	\N	2015-02-01 19:49:18.380376+02
-6508	2032	2	\N	2015-02-01 19:51:03.621123+02
-6509	1004	2	\N	2015-02-01 19:51:06.683043+02
-6515	2038	2	\N	2015-02-01 19:53:59.085718+02
-6516	2039	2	\N	2015-02-01 19:53:59.085718+02
-6521	2044	2	\N	2015-02-01 19:54:52.686809+02
-6522	2045	2	\N	2015-02-01 19:54:52.686809+02
-6523	2046	2	\N	2015-02-01 19:54:52.686809+02
-6524	2047	2	\N	2015-02-01 19:54:52.686809+02
-6525	2048	2	\N	2015-02-03 20:05:38.797054+02
-6526	2048	2	\N	2015-02-03 20:06:16.781057+02
-6528	2049	2	\N	2015-02-03 21:27:11.659126+02
-6529	2048	2	\N	2015-02-03 21:27:36.200475+02
-6530	2050	2	\N	2015-02-04 21:04:02.527314+02
-6531	2051	2	\N	2015-02-04 21:04:04.474427+02
-6532	2051	2	\N	2015-02-04 21:11:28.094987+02
-6533	2052	2	\N	2015-02-04 21:11:39.281593+02
-6534	2051	2	\N	2015-02-23 21:04:13.639992+02
-6535	1648	2	\N	2015-02-24 14:58:15.754816+02
-6536	2053	2	\N	2015-02-24 21:04:03.673911+02
-6537	2054	2	\N	2015-02-24 21:04:26.838046+02
-6538	2053	2	\N	2015-02-24 21:06:05.145287+02
-6539	2054	2	\N	2015-02-24 21:06:08.284296+02
-6540	2053	2	\N	2015-02-24 21:06:25.905562+02
-6541	2054	2	\N	2015-02-24 21:06:27.830735+02
-6542	2055	2	\N	2015-03-03 16:25:23.003263+02
-6553	2051	2	\N	2015-03-05 21:22:31.156271+02
-6554	2052	2	\N	2015-03-05 21:22:34.187754+02
-6555	2049	2	\N	2015-03-07 13:59:54.391614+02
-6556	2049	2	\N	2015-03-07 14:00:01.858793+02
-6557	2049	2	\N	2015-03-07 14:00:08.905813+02
-6558	2049	2	\N	2015-03-07 17:41:13.176137+02
-6559	2049	2	\N	2015-03-07 17:41:24.454712+02
-6560	2016	2	\N	2015-03-07 19:11:45.990005+02
-6561	1971	2	\N	2015-03-07 20:39:22.05432+02
-6562	1939	2	\N	2015-03-07 20:41:30.911568+02
-6563	1964	2	\N	2015-03-07 20:41:40.386597+02
-6564	1962	2	\N	2015-03-07 20:41:47.24255+02
-6565	2009	2	\N	2015-03-07 20:41:57.590912+02
-6566	1958	2	\N	2015-03-07 20:42:08.257141+02
-6567	2062	2	\N	2015-03-07 20:44:22.388688+02
-6568	1958	2	\N	2015-03-07 20:44:57.143369+02
-6569	1922	2	\N	2015-03-07 21:16:33.311167+02
-6570	1930	2	\N	2015-03-07 21:18:30.204883+02
-6571	1980	2	\N	2015-03-07 21:18:36.892234+02
-6572	1930	2	\N	2015-03-07 21:21:01.745845+02
-6573	1982	2	\N	2015-03-07 21:45:35.899441+02
-6574	1983	2	\N	2015-03-07 21:45:46.115364+02
-6575	1985	2	\N	2015-03-07 21:45:53.837217+02
-6576	2016	2	\N	2015-03-07 21:46:03.965785+02
-6577	1940	2	\N	2015-03-07 21:46:13.798132+02
-6578	1932	2	\N	2015-03-07 21:46:22.868946+02
-6579	1934	2	\N	2015-03-07 21:46:33.42948+02
-6580	1935	2	\N	2015-03-07 21:46:42.582075+02
-6581	1936	2	\N	2015-03-07 21:46:53.561952+02
-6582	1933	2	\N	2015-03-07 21:47:06.74156+02
-6584	1922	2	\N	2015-03-08 18:02:14.423833+02
-6585	1922	2	\N	2015-03-08 18:02:24.288542+02
-6586	1989	2	\N	2015-03-08 18:07:00.091644+02
-6587	1922	2	\N	2015-03-08 18:17:03.971743+02
-6588	1922	2	\N	2015-03-08 18:29:12.5349+02
-6589	2063	2	\N	2015-03-08 18:41:45.468589+02
-6590	1989	2	\N	2015-03-08 18:41:51.822924+02
-6592	2065	2	\N	2015-03-09 14:02:38.899688+02
-6593	2066	2	\N	2015-03-09 17:16:22.759831+02
-6594	2068	2	\N	2015-03-09 19:28:40.834898+02
-6595	1980	2	\N	2015-03-09 19:37:29.594475+02
-6596	1389	2	\N	2015-03-15 19:00:11.360402+02
-6597	1389	2	\N	2015-03-15 19:07:00.022851+02
-6598	1389	2	\N	2015-03-15 19:08:22.540227+02
-6599	2070	2	\N	2015-03-21 15:11:50.495946+02
-6600	1989	2	\N	2015-03-21 15:11:59.182752+02
-6603	2052	2	\N	2015-03-21 16:50:40.821135+02
-6605	2052	2	\N	2015-03-21 16:52:47.683727+02
-6606	2075	2	\N	2015-03-21 17:05:47.83578+02
-6607	2075	2	\N	2015-03-21 17:06:12.331454+02
-6608	2052	2	\N	2015-03-21 17:06:35.32059+02
-6609	2070	2	\N	2015-03-21 17:48:31.664941+02
-6610	2077	2	\N	2015-03-21 17:49:14.645342+02
-6618	2052	2	\N	2015-03-21 18:16:06.930298+02
-6621	2052	2	\N	2015-03-21 18:19:16.455929+02
-6622	2087	2	\N	2015-03-21 18:20:19.713186+02
-6623	2052	2	\N	2015-03-21 18:20:29.187736+02
-6624	2052	2	\N	2015-03-21 19:28:39.349206+02
-6625	2052	2	\N	2015-03-21 19:30:14.844869+02
-6626	2052	2	\N	2015-03-21 19:33:54.902921+02
-6627	2052	2	\N	2015-03-21 19:34:11.317898+02
-6628	2052	2	\N	2015-03-21 19:35:55.581037+02
-6629	2052	2	\N	2015-03-21 19:36:06.902031+02
-6630	2052	2	\N	2015-03-21 19:36:15.834648+02
-6631	2052	2	\N	2015-03-21 19:36:28.227499+02
-6632	2052	2	\N	2015-03-21 19:36:44.271289+02
-6633	2088	2	\N	2015-03-21 19:36:44.271289+02
-6634	2089	2	\N	2015-03-21 19:38:07.835672+02
-6635	2090	2	\N	2015-03-21 19:38:10.203402+02
-6637	2052	2	\N	2015-03-21 19:40:18.868487+02
-6638	2052	2	\N	2015-03-21 19:41:03.761402+02
-6639	2052	2	\N	2015-03-21 19:42:48.725752+02
-6640	2052	2	\N	2015-03-21 19:43:52.346215+02
-6641	2092	2	\N	2015-03-21 20:11:35.939948+02
-6642	2052	2	\N	2015-03-21 20:11:42.394011+02
-6643	2052	2	\N	2015-03-21 20:12:01.524624+02
-6646	2052	2	\N	2015-03-21 21:14:06.180767+02
-6647	2095	2	\N	2015-03-21 22:03:40.435063+02
-6648	2051	2	\N	2015-03-21 22:03:42.699321+02
-6649	2088	2	\N	2015-03-21 22:03:45.19164+02
-6650	2052	2	\N	2015-03-21 22:12:59.222848+02
-6651	971	2	\N	2015-03-22 16:55:09.922468+02
-6652	2096	2	\N	2015-03-22 17:22:28.394236+02
-6653	970	2	\N	2015-03-22 17:22:30.31308+02
-6654	971	2	\N	2015-03-22 17:32:58.675826+02
-6655	2097	2	\N	2015-03-22 17:35:36.969555+02
-6656	2052	2	\N	2015-03-22 17:35:38.710629+02
-6657	2052	2	\N	2015-03-22 17:35:54.667572+02
-6658	2052	2	\N	2015-03-22 17:36:02.394493+02
-6659	1413	2	\N	2015-03-22 21:10:23.96026+02
-6660	2098	2	\N	2015-03-22 21:12:12.040889+02
-6661	1413	2	\N	2015-03-22 21:12:14.574907+02
-6662	953	2	\N	2015-03-23 10:52:07.126828+02
-6663	955	2	\N	2015-03-23 10:52:46.434534+02
-6664	955	2	\N	2015-03-23 10:53:07.107505+02
-6665	971	2	\N	2015-03-23 11:17:09.549645+02
-6666	971	2	\N	2015-03-23 11:17:14.786132+02
-6667	971	2	\N	2015-03-23 22:30:47.611278+02
-6668	2099	2	\N	2015-03-24 19:25:49.743645+02
-6669	2100	2	\N	2015-03-24 19:26:22.746874+02
-6670	2101	2	\N	2015-03-24 19:30:50.825716+02
-6671	1413	2	\N	2015-03-24 21:27:29.027714+02
-6672	1413	2	\N	2015-03-24 21:27:56.025596+02
-6673	2104	2	\N	2015-03-25 22:08:36.018637+02
-6674	2105	2	\N	2015-03-25 22:09:11.121353+02
-6675	2106	2	\N	2015-03-25 22:10:32.26983+02
-6676	2107	2	\N	2015-03-27 21:02:27.365736+02
-6677	1413	2	\N	2015-03-27 22:11:48.664734+02
-6678	1318	2	\N	2015-03-27 22:11:57.175441+02
-6679	2108	2	\N	2015-03-27 22:14:09.702895+02
-6680	1413	2	\N	2015-03-27 22:14:23.177174+02
-6681	1975	2	\N	2015-03-29 14:54:09.090695+03
-6682	1975	2	\N	2015-03-29 14:56:05.558074+03
-6683	2054	2	\N	2015-03-29 18:10:37.298528+03
-6684	2054	2	\N	2015-03-29 18:10:44.494853+03
-6685	2054	2	\N	2015-03-29 18:11:59.351954+03
-6686	894	2	\N	2015-03-29 18:12:33.345883+03
-6687	2108	2	\N	2015-03-29 18:41:14.962865+03
-6688	2108	2	\N	2015-03-29 18:41:28.932911+03
-6689	2108	2	\N	2015-03-29 18:41:35.361837+03
-6693	1578	2	\N	2015-03-29 19:28:18.094577+03
-6694	1563	2	\N	2015-03-29 19:28:26.306719+03
-6695	1560	2	\N	2015-03-29 19:28:31.032916+03
-6696	1649	2	\N	2015-03-29 20:30:21.118741+03
-6698	2111	2	\N	2015-03-29 20:32:08.188477+03
-6699	918	2	\N	2015-03-29 20:45:02.042426+03
-6700	918	2	\N	2015-03-29 20:45:08.391579+03
-6701	917	2	\N	2015-03-29 20:45:13.080299+03
-6702	916	2	\N	2015-03-29 20:45:17.094049+03
-6703	952	2	\N	2015-03-29 20:51:29.823177+03
-6705	988	2	\N	2015-03-29 20:57:38.470567+03
-6707	971	2	\N	2015-03-29 21:04:32.587955+03
-6709	1647	2	\N	2015-03-29 21:11:13.101083+03
-6710	2115	2	\N	2015-03-29 21:11:20.771189+03
-6711	1648	2	\N	2015-03-29 21:19:19.348961+03
-6713	1646	2	\N	2015-03-29 21:25:36.400114+03
-6715	1419	2	\N	2015-03-31 18:55:34.756779+03
-6716	1415	2	\N	2015-03-31 18:55:54.50919+03
-6718	1507	2	\N	2015-03-31 19:11:10.805316+03
-6719	1507	2	\N	2015-03-31 19:11:17.000092+03
-6720	1507	2	\N	2015-03-31 19:11:23.716877+03
-6721	1898	2	\N	2015-03-31 19:19:08.662529+03
-6722	1898	2	\N	2015-03-31 19:19:13.979595+03
-6723	1898	2	\N	2015-03-31 19:19:19.541915+03
-6724	2119	2	\N	2015-03-31 19:31:32.255315+03
-6725	1419	2	\N	2015-03-31 19:31:35.171043+03
-6726	2120	2	\N	2015-03-31 21:42:30.209371+03
-6727	2107	2	\N	2015-04-06 22:18:27.344977+03
-6728	2054	2	\N	2015-04-22 09:31:23.533867+03
-6729	2126	2	\N	2015-04-22 10:21:50.083529+03
-6730	2126	2	\N	2015-04-22 10:34:35.83663+03
-6731	2127	2	\N	2015-04-22 15:08:30.934237+03
-6732	2128	2	\N	2015-04-22 15:09:24.597951+03
-6733	2129	2	\N	2015-04-22 15:30:21.099029+03
-6734	2130	2	\N	2015-04-22 15:30:28.848383+03
-6735	2131	2	\N	2015-04-22 15:33:06.666889+03
-6736	2126	2	\N	2015-04-22 15:33:09.520564+03
-6737	2132	2	\N	2015-04-22 15:34:13.439147+03
-6738	2126	2	\N	2015-04-22 15:34:14.494849+03
-6739	2126	2	\N	2015-04-22 15:34:41.240196+03
-6740	2130	2	\N	2015-04-24 21:16:26.897843+03
-6741	953	2	\N	2015-04-24 21:38:02.133997+03
-6742	955	2	\N	2015-04-24 21:39:08.574084+03
-6743	2108	2	\N	2015-04-25 13:14:21.858762+03
-6745	2135	2	\N	2015-04-25 16:39:24.611492+03
-6746	2128	2	\N	2015-04-25 16:59:29.339712+03
-6747	2136	2	\N	2015-04-25 16:59:52.412523+03
-6748	2137	2	\N	2015-04-25 21:29:39.820793+03
-6749	2138	2	\N	2015-04-25 21:29:47.819244+03
-6750	2139	2	\N	2015-04-25 21:29:55.72108+03
-6751	2144	2	\N	2015-04-26 00:17:08.072699+03
-6752	2145	2	\N	2015-04-26 00:17:08.072699+03
-6753	2146	2	\N	2015-04-26 00:22:46.640907+03
-6754	2147	2	\N	2015-04-26 00:22:46.640907+03
-6755	2148	2	\N	2015-04-26 00:26:59.761945+03
-6756	2149	2	\N	2015-04-26 00:26:59.761945+03
-6757	2150	2	\N	2015-04-26 00:30:11.687983+03
-6758	2151	2	\N	2015-04-26 00:30:11.687983+03
-6759	2152	2	\N	2015-04-26 00:36:42.355592+03
-6760	2153	2	\N	2015-04-26 00:36:42.355592+03
-6761	2154	2	\N	2015-04-26 00:44:52.209962+03
-6762	2155	2	\N	2015-04-26 00:44:52.209962+03
-6763	2156	2	\N	2015-04-26 09:56:13.81422+03
-6764	2157	2	\N	2015-04-26 09:56:13.81422+03
-6765	2158	2	\N	2015-04-26 10:00:13.021078+03
-6766	2159	2	\N	2015-04-26 10:00:13.021078+03
-6767	2160	2	\N	2015-04-26 10:09:07.981749+03
-6768	2161	2	\N	2015-04-26 10:09:07.981749+03
-6769	2162	2	\N	2015-04-26 10:11:20.869074+03
-6770	2163	2	\N	2015-04-26 10:11:20.869074+03
-6771	2164	2	\N	2015-04-26 10:23:35.980962+03
-6772	2165	2	\N	2015-04-26 10:23:35.980962+03
-6774	2167	2	\N	2015-04-26 10:30:42.474899+03
-6775	2168	2	\N	2015-04-26 10:30:42.474899+03
-6778	2171	2	\N	2015-04-26 10:38:49.924523+03
-6779	2172	2	\N	2015-04-26 10:41:15.682562+03
-6780	2173	2	\N	2015-04-26 10:41:15.682562+03
-6781	2174	2	\N	2015-04-26 10:51:18.425172+03
-6782	2175	2	\N	2015-04-26 10:51:18.425172+03
-6783	2176	2	\N	2015-04-26 10:54:26.243589+03
-6784	2177	2	\N	2015-04-26 10:54:26.243589+03
-6785	2178	2	\N	2015-04-26 10:57:26.669326+03
-6786	2179	2	\N	2015-04-26 10:57:26.669326+03
-6787	2180	2	\N	2015-04-26 11:08:04.739521+03
-6788	2181	2	\N	2015-04-26 11:08:04.739521+03
-6789	2182	2	\N	2015-04-26 11:13:10.975009+03
-6790	2183	2	\N	2015-04-26 11:13:10.975009+03
-6791	2184	2	\N	2015-04-26 13:03:25.416787+03
-6792	2185	2	\N	2015-04-26 13:03:25.416787+03
-6793	2186	2	\N	2015-04-26 13:42:49.969814+03
-6794	2187	2	\N	2015-04-26 14:04:42.384772+03
-6795	2188	2	\N	2015-04-26 14:04:42.384772+03
-6796	2189	2	\N	2015-04-26 14:05:26.994527+03
-6797	2190	2	\N	2015-04-26 14:05:26.994527+03
-6798	2186	2	\N	2015-04-26 14:05:29.313624+03
-6801	2197	2	\N	2015-05-03 13:21:34.120955+03
-6802	2197	2	\N	2015-05-03 13:23:12.828981+03
-6803	2197	2	\N	2015-05-03 13:34:38.831852+03
-6804	2197	2	\N	2015-05-03 13:40:51.674186+03
-6805	2199	2	\N	2015-05-03 23:18:19.876372+03
-6806	1780	2	\N	2015-05-03 23:18:33.103558+03
-6807	1368	2	\N	2015-05-04 19:21:58.460934+03
-6808	1368	2	\N	2015-05-04 19:22:20.533133+03
-6809	2200	2	\N	2015-05-04 20:57:01.637182+03
-6810	2201	2	\N	2015-05-04 20:58:33.565049+03
-6811	2203	2	\N	2015-05-04 21:30:33.485239+03
-6812	1003	2	\N	2015-05-08 21:15:22.303904+03
-6813	2205	2	\N	2015-05-08 22:38:40.1563+03
-6814	2206	2	\N	2015-05-08 22:40:57.101857+03
-6815	2207	2	\N	2015-05-08 22:43:00.228497+03
-6816	2208	2	\N	2015-05-08 22:43:46.205549+03
-6817	2209	2	\N	2015-05-09 15:04:04.437709+03
-6818	2210	2	\N	2015-05-09 15:18:42.295591+03
-6819	2211	2	\N	2015-05-09 15:20:41.04877+03
-6820	2212	2	\N	2015-05-09 15:21:16.54612+03
-6821	2213	2	\N	2015-05-09 15:21:20.750661+03
-6822	2214	2	\N	2015-05-09 15:27:46.304009+03
-6823	2215	2	\N	2015-05-09 15:27:52.157735+03
-6824	2216	2	\N	2015-05-09 15:32:20.738122+03
-6825	2216	2	\N	2015-05-09 15:34:43.153612+03
-6826	2216	2	\N	2015-05-09 15:35:37.080548+03
-6827	2216	2	\N	2015-05-09 15:36:20.491648+03
-6828	2216	2	\N	2015-05-09 15:36:28.290218+03
-6829	2217	2	\N	2015-05-09 16:10:30.715652+03
-6830	2218	2	\N	2015-05-09 16:40:29.294581+03
-6831	2216	2	\N	2015-05-09 16:40:47.688279+03
-6832	2219	2	\N	2015-05-09 16:52:43.81748+03
-6833	1550	2	\N	2015-05-09 16:53:04.04708+03
-6834	1008	2	\N	2015-05-09 16:53:15.905297+03
-6836	2218	2	\N	2015-05-09 16:56:24.612587+03
-6837	2221	2	\N	2015-05-09 16:58:37.060459+03
-6838	2216	2	\N	2015-05-09 17:04:04.921556+03
-6839	2216	2	\N	2015-05-09 17:04:48.531212+03
-6840	1563	2	\N	2015-05-09 19:32:44.822595+03
-6841	2222	2	\N	2015-05-09 19:43:25.178079+03
-6842	2215	2	\N	2015-05-09 20:07:16.539791+03
-6843	2216	2	\N	2015-05-09 20:07:46.078918+03
-6844	2223	2	\N	2015-05-09 20:08:53.78535+03
-6845	2224	2	\N	2015-05-09 20:09:23.379411+03
-6846	2225	2	\N	2015-05-09 20:09:44.887962+03
-6847	2226	2	\N	2015-05-09 20:17:22.088876+03
-6848	2227	2	\N	2015-05-09 20:29:08.971941+03
-6849	2228	2	\N	2015-05-09 20:29:24.701653+03
-6850	2229	2	\N	2015-05-09 20:29:40.419576+03
-6851	2224	2	\N	2015-05-09 20:29:49.729598+03
-6852	2230	2	\N	2015-05-09 20:30:09.233291+03
-6853	2231	2	\N	2015-05-09 20:30:23.623593+03
-6854	2232	2	\N	2015-05-09 20:30:35.560504+03
-6855	2233	2	\N	2015-05-09 20:30:51.356148+03
-6856	2234	2	\N	2015-05-09 20:31:09.312334+03
-6857	2235	2	\N	2015-05-09 20:31:21.029136+03
-6858	2236	2	\N	2015-05-09 20:31:43.127575+03
-6859	2237	2	\N	2015-05-09 20:31:57.326798+03
-6860	2238	2	\N	2015-05-09 20:32:20.746647+03
-6861	2239	2	\N	2015-05-09 20:32:35.107871+03
-6862	2240	2	\N	2015-05-09 20:32:50.419187+03
-6863	2241	2	\N	2015-05-09 20:33:01.999568+03
-6864	2242	2	\N	2015-05-09 20:33:16.190303+03
-6865	2236	2	\N	2015-05-09 20:54:08.857766+03
-6866	2216	2	\N	2015-05-09 21:04:14.03464+03
-6867	1578	2	\N	2015-05-09 21:16:42.718164+03
-6868	2243	2	\N	2015-05-10 13:44:27.494956+03
-6869	2244	2	\N	2015-05-10 13:45:29.048699+03
-6870	2245	2	\N	2015-05-10 13:46:40.29071+03
-6871	2246	2	\N	2015-05-10 14:01:26.829403+03
-6872	2247	2	\N	2015-05-10 14:01:57.254972+03
-6873	2248	2	\N	2015-05-10 14:10:42.034833+03
-6874	2249	2	\N	2015-05-10 14:10:53.000133+03
-6875	2254	2	\N	2015-05-10 14:35:53.336283+03
-6876	2255	2	\N	2015-05-10 14:35:53.336283+03
-6877	2256	2	\N	2015-05-10 14:39:45.730714+03
-6878	2257	2	\N	2015-05-10 14:39:45.730714+03
-6879	2258	2	\N	2015-05-10 14:45:11.098493+03
-6880	2259	2	\N	2015-05-10 14:45:11.098493+03
-6881	2260	2	\N	2015-05-10 14:53:32.27851+03
-6882	2261	2	\N	2015-05-10 14:53:32.27851+03
-6883	2262	2	\N	2015-05-10 14:57:13.121414+03
-6884	2263	2	\N	2015-05-10 14:57:13.121414+03
-6885	2264	2	\N	2015-05-10 14:57:55.441966+03
-6886	2265	2	\N	2015-05-10 15:07:20.399588+03
-6887	2266	2	\N	2015-05-10 15:07:20.399588+03
-6888	2267	2	\N	2015-05-10 15:07:27.786314+03
-6889	2268	2	\N	2015-05-10 16:04:17.22685+03
-6890	2269	2	\N	2015-05-10 16:04:56.471262+03
-6891	1318	2	\N	2015-05-10 16:05:16.31159+03
-6892	2270	2	\N	2015-05-10 16:07:24.626275+03
-6893	2271	2	\N	2015-05-10 16:08:32.663974+03
-6894	2272	2	\N	2015-05-10 16:08:35.587577+03
-6895	2273	2	\N	2015-05-10 16:08:47.271902+03
-6896	2274	2	\N	2015-05-10 16:08:47.271902+03
-6897	2275	2	\N	2015-05-10 16:09:34.650716+03
-6898	2276	2	\N	2015-05-10 22:11:18.586994+03
-6899	2277	2	\N	2015-05-10 22:12:40.523328+03
-6900	1314	2	\N	2015-05-10 22:12:56.872348+03
-6901	2278	2	\N	2015-05-10 22:14:48.438204+03
-6902	2279	2	\N	2015-05-10 22:14:48.438204+03
-6903	2280	2	\N	2015-05-10 22:19:21.083289+03
-6904	2280	2	\N	2015-05-13 21:55:52.759278+03
-6905	2275	2	\N	2015-05-13 21:56:48.008072+03
-6906	2267	2	\N	2015-05-13 21:56:54.031403+03
-6907	2264	2	\N	2015-05-13 21:56:59.496539+03
-6908	2281	2	\N	2015-05-16 15:29:57.002389+03
-6909	2282	2	\N	2015-05-16 15:34:53.800182+03
-6910	2283	2	\N	2015-05-16 15:34:53.800182+03
-6911	2284	2	\N	2015-05-16 15:36:09.929045+03
-6912	2285	2	\N	2015-05-16 15:45:33.371911+03
-6913	2286	2	\N	2015-05-16 15:45:33.371911+03
-6914	2287	2	\N	2015-05-16 15:48:18.436182+03
-6915	2288	2	\N	2015-05-16 15:48:18.436182+03
-6916	2289	2	\N	2015-05-17 21:30:51.134604+03
-6917	2280	2	\N	2015-05-17 21:31:00.094313+03
-6918	2290	2	\N	2015-05-17 21:31:39.003456+03
-6919	2280	2	\N	2015-05-17 21:31:48.129633+03
-6920	2284	2	\N	2015-05-17 22:02:03.373006+03
-6921	2284	2	\N	2015-05-17 22:02:31.027832+03
-6922	2291	2	\N	2015-05-18 16:39:17.24427+03
-6923	2284	2	\N	2015-05-18 16:40:09.305094+03
-6924	2284	2	\N	2015-05-18 20:31:39.659544+03
-6925	2284	2	\N	2015-05-18 20:34:34.03653+03
-6926	2284	2	\N	2015-05-18 21:22:46.805573+03
-6927	2292	2	\N	2015-05-24 12:55:28.784478+03
-6928	1212	2	\N	2015-05-24 13:06:21.488837+03
-6929	2293	2	\N	2015-05-24 15:06:40.212091+03
-6930	2294	2	\N	2015-05-24 15:11:44.965777+03
-6931	2295	2	\N	2015-05-24 16:49:53.513439+03
-6932	2296	2	\N	2015-05-24 16:50:41.467323+03
-6933	2297	2	\N	2015-05-24 16:55:00.642026+03
-6934	2299	2	\N	2015-05-24 16:57:39.672043+03
-6935	2300	2	\N	2015-05-24 17:03:51.85238+03
-6936	2088	2	\N	2015-05-24 17:03:55.878998+03
-6937	2301	2	\N	2015-05-24 17:04:54.502108+03
-6938	2088	2	\N	2015-05-24 17:10:16.729607+03
-6939	2088	2	\N	2015-05-24 17:10:29.437025+03
-6940	2088	2	\N	2015-05-24 17:15:30.592241+03
-6941	2302	2	\N	2015-05-24 17:16:33.029089+03
-6942	2075	2	\N	2015-05-24 17:16:41.742578+03
-6943	2303	2	\N	2015-05-24 17:17:17.81127+03
-6944	2088	2	\N	2015-05-24 17:17:21.677682+03
-6945	2305	2	\N	2015-05-24 20:37:07.412723+03
-6946	2052	2	\N	2015-05-24 20:37:10.892479+03
-6947	2088	2	\N	2015-05-24 21:01:25.501241+03
-6948	2052	2	\N	2015-05-24 21:13:25.598747+03
-6949	2306	2	\N	2015-05-24 21:14:39.628922+03
-6950	2052	2	\N	2015-05-24 21:14:43.723121+03
-6951	2280	2	\N	2015-05-24 21:21:32.476216+03
-6952	2280	2	\N	2015-05-24 21:22:00.849383+03
-6953	2280	2	\N	2015-05-24 21:22:09.702717+03
-6954	2307	2	\N	2015-05-24 21:32:02.910902+03
-6955	2308	2	\N	2015-05-24 21:32:24.738611+03
-6956	2309	2	\N	2015-05-24 21:32:31.516248+03
-6957	2310	2	\N	2015-05-24 21:33:17.528061+03
-6958	2311	2	\N	2015-05-24 21:35:46.300244+03
-6959	2312	2	\N	2015-05-24 21:36:06.190691+03
-6960	2312	2	\N	2015-05-24 21:36:27.205265+03
-6961	2313	2	\N	2015-05-25 21:31:05.718794+03
-6962	2312	2	\N	2015-05-25 21:31:08.674137+03
-6963	2314	2	\N	2015-05-26 20:44:11.702313+03
-6964	2315	2	\N	2015-05-26 20:44:48.242189+03
-6965	2316	2	\N	2015-05-26 20:44:48.242189+03
-6966	2317	2	\N	2015-05-26 20:45:01.161364+03
-6967	2284	2	\N	2015-05-28 13:46:35.94219+03
-6968	2317	2	\N	2015-05-28 13:46:45.92498+03
-6969	2280	2	\N	2015-05-28 13:46:51.874219+03
-6970	1507	2	\N	2015-05-31 21:55:12.660877+03
-6971	1507	2	\N	2015-05-31 21:56:27.809825+03
-6972	1439	2	\N	2015-05-31 21:57:11.520889+03
-6973	1507	2	\N	2015-05-31 21:58:33.173778+03
-6974	1507	2	\N	2015-05-31 22:00:02.964614+03
-6975	1507	2	\N	2015-05-31 22:00:38.733485+03
-6976	1507	2	\N	2015-05-31 22:11:01.827304+03
-6977	1507	2	\N	2015-06-01 09:54:54.423199+03
-6978	2284	2	\N	2015-06-01 11:22:28.244232+03
-6979	2319	2	\N	2015-06-01 11:37:24.071069+03
-6980	2320	2	\N	2015-06-01 12:56:01.185317+03
-6986	2327	2	\N	2015-06-02 13:22:30.670092+03
-6987	2328	2	\N	2015-06-02 13:22:36.147873+03
-6988	2329	2	\N	2015-06-02 13:23:35.222007+03
-6989	2330	2	\N	2015-06-02 13:24:32.384898+03
-6990	2331	2	\N	2015-06-02 13:25:52.745886+03
-6991	2332	2	\N	2015-06-02 13:27:31.983851+03
-6992	2333	2	\N	2015-06-02 13:27:36.950926+03
-6993	2334	2	\N	2015-06-02 13:28:43.733459+03
-6994	2335	2	\N	2015-06-02 13:29:10.771807+03
-6995	2336	2	\N	2015-06-02 13:29:57.138464+03
-6996	2337	2	\N	2015-06-02 13:30:11.199071+03
-6997	2338	2	\N	2015-06-02 13:34:47.558077+03
-6998	2339	2	\N	2015-06-02 13:34:50.130325+03
-6999	2340	2	\N	2015-06-02 13:35:46.336511+03
-7000	2341	2	\N	2015-06-02 13:36:09.066506+03
-7001	2342	2	\N	2015-06-02 13:36:09.066506+03
-7002	2343	2	\N	2015-06-02 13:37:26.99598+03
-7003	2344	2	\N	2015-06-02 13:37:26.99598+03
-7004	2345	2	\N	2015-06-02 13:37:42.100766+03
-7023	2345	2	\N	2015-06-06 20:33:35.089301+03
-7024	2366	2	\N	2015-06-06 21:47:05.357423+03
-7025	2367	2	\N	2015-06-06 21:47:08.978477+03
-7026	2368	2	\N	2015-06-06 21:49:00.661472+03
-7027	2369	2	\N	2015-06-06 21:50:18.211354+03
-7028	2370	2	\N	2015-06-06 21:51:07.167429+03
-7029	2371	2	\N	2015-06-06 21:52:21.362863+03
-7030	2372	2	\N	2015-06-06 21:52:25.91268+03
-7031	2367	2	\N	2015-06-06 22:01:59.580344+03
-7032	2373	2	\N	2015-06-06 22:05:50.240364+03
-7033	2374	2	\N	2015-06-06 22:06:07.223567+03
-7034	2375	2	\N	2015-06-06 22:06:55.79185+03
-7035	2376	2	\N	2015-06-06 22:07:46.643073+03
-7036	2377	2	\N	2015-06-06 22:08:11.14074+03
-7037	2378	2	\N	2015-06-06 22:08:11.14074+03
-7038	2379	2	\N	2015-06-06 22:10:53.894076+03
-7039	2380	2	\N	2015-06-06 22:10:53.894076+03
-7040	2381	2	\N	2015-06-06 22:12:04.71986+03
-7041	2382	2	\N	2015-06-06 22:12:17.899878+03
-7042	2372	2	\N	2015-06-06 22:12:34.850437+03
-7043	2383	2	\N	2015-06-06 22:34:30.822368+03
-7044	2384	2	\N	2015-06-06 22:35:06.098136+03
-7045	2385	2	\N	2015-06-06 22:35:22.838833+03
-7046	2382	2	\N	2015-06-06 22:36:33.646314+03
-7047	2388	2	\N	2015-06-06 22:43:36.614024+03
-7048	2382	2	\N	2015-06-07 15:30:58.294045+03
-7049	2247	2	\N	2015-06-07 17:10:29.033956+03
-7050	1413	2	\N	2015-06-07 17:10:56.929199+03
-7051	1318	2	\N	2015-06-07 17:11:36.862031+03
-7052	1314	2	\N	2015-06-07 17:12:28.161782+03
-7053	1431	2	\N	2015-06-07 19:55:54.571452+03
-7054	1898	2	\N	2015-06-07 19:59:40.465993+03
-7055	1898	2	\N	2015-06-07 20:00:47.882499+03
-7056	1432	2	\N	2015-06-07 20:00:59.808075+03
-7057	1608	2	\N	2015-06-07 20:01:30.177316+03
-7058	1609	2	\N	2015-06-07 20:02:19.266681+03
-7059	1769	2	\N	2015-06-07 20:03:05.939338+03
-7060	1780	2	\N	2015-06-07 20:04:36.345782+03
-7061	1873	2	\N	2015-06-07 20:05:07.816356+03
-7062	1898	2	\N	2015-06-07 20:05:26.076509+03
-7063	2199	2	\N	2015-06-07 20:05:57.959925+03
-7064	2246	2	\N	2015-06-07 20:06:32.075272+03
-7065	2246	2	\N	2015-06-07 20:06:41.085651+03
-7066	2269	2	\N	2015-06-07 20:07:23.767588+03
-7067	2277	2	\N	2015-06-07 20:07:57.192127+03
-7068	1426	2	\N	2015-06-07 20:09:52.309668+03
-7069	2389	2	\N	2015-06-07 20:10:03.246206+03
-7070	2390	2	\N	2015-06-07 20:10:21.42447+03
-7071	2391	2	\N	2015-06-07 20:10:54.694938+03
-7072	2392	2	\N	2015-06-07 20:11:12.709328+03
-7073	2393	2	\N	2015-06-07 20:11:33.449675+03
-7074	2394	2	\N	2015-06-07 20:11:54.80775+03
-7075	2395	2	\N	2015-06-07 20:12:24.648998+03
-7076	2396	2	\N	2015-06-07 20:12:47.549001+03
-7077	2397	2	\N	2015-06-07 20:13:09.482196+03
-7078	2398	2	\N	2015-06-07 20:13:26.815118+03
-7079	2399	2	\N	2015-06-07 20:13:43.442647+03
-7080	2400	2	\N	2015-06-07 20:13:57.868779+03
-7081	2401	2	\N	2015-06-07 20:14:15.895967+03
-7082	2402	2	\N	2015-06-07 20:14:42.501203+03
-7083	2403	2	\N	2015-06-07 20:15:33.611845+03
-7084	2404	2	\N	2015-06-07 20:15:53.460657+03
-7085	2405	2	\N	2015-06-07 20:16:10.772685+03
-7086	2406	2	\N	2015-06-07 20:16:32.442601+03
-7087	2407	2	\N	2015-06-07 20:16:56.509083+03
-7088	2408	2	\N	2015-06-07 20:17:19.457924+03
-7089	2409	2	\N	2015-06-07 20:17:39.828441+03
-7090	2410	2	\N	2015-06-07 20:17:59.953522+03
-7091	2411	2	\N	2015-06-07 20:18:15.36941+03
-7092	2412	2	\N	2015-06-07 20:18:33.319787+03
-7093	2413	2	\N	2015-06-07 20:18:53.786993+03
-7094	2414	2	\N	2015-06-07 20:19:17.251882+03
-7095	2415	2	\N	2015-06-07 20:34:54.782206+03
-7096	2416	2	\N	2015-06-07 20:35:11.96143+03
-7097	2417	2	\N	2015-06-07 20:35:33.998015+03
-7098	2418	2	\N	2015-06-07 20:36:01.596002+03
-7099	2419	2	\N	2015-06-07 20:36:15.960332+03
-7100	2420	2	\N	2015-06-07 20:36:35.413228+03
-7101	2421	2	\N	2015-06-07 20:37:30.352425+03
-7102	2422	2	\N	2015-06-07 20:37:53.888785+03
-7103	2423	2	\N	2015-06-07 20:38:10.610447+03
-7104	2424	2	\N	2015-06-07 20:38:59.517394+03
-7105	2425	2	\N	2015-06-07 20:39:26.415211+03
-7106	2426	2	\N	2015-06-07 20:40:05.840226+03
-7107	2427	2	\N	2015-06-07 20:40:46.537019+03
-7108	2428	2	\N	2015-06-07 20:41:01.3009+03
-7109	2429	2	\N	2015-06-07 20:41:17.634439+03
-7110	2430	2	\N	2015-06-07 20:41:36.56949+03
-7111	2431	2	\N	2015-06-07 20:41:54.944525+03
-7112	2432	2	\N	2015-06-07 20:42:11.063081+03
-7113	2433	2	\N	2015-06-10 21:10:55.543668+03
-7114	2434	2	\N	2015-06-10 21:10:58.272269+03
-7115	2434	2	\N	2015-06-10 21:11:16.546457+03
-7116	2435	2	\N	2015-06-10 21:11:49.343497+03
-7117	2436	2	\N	2015-06-10 21:12:20.087946+03
-7119	2437	2	\N	2015-06-10 21:13:28.379702+03
-7120	2434	2	\N	2015-06-10 21:13:35.658848+03
-7118	2434	2	\N	2015-06-10 21:12:30.557424+03
-7121	2434	2	\N	2015-06-13 11:08:16.884538+03
-7122	2438	2	\N	2015-06-13 12:24:23.664338+03
-7123	2439	2	\N	2015-06-13 12:25:12.11639+03
-7124	2440	2	\N	2015-06-13 12:25:55.053099+03
-7125	2439	2	\N	2015-06-13 12:28:23.509307+03
-7126	1431	2	\N	2015-06-13 16:13:14.891511+03
-7127	2269	2	\N	2015-06-13 16:29:21.58833+03
-7128	2391	2	\N	2015-06-13 16:29:38.922876+03
-7130	2442	2	\N	2015-06-13 17:22:11.365048+03
-7162	2450	2	\N	2015-06-13 19:58:22.391173+03
-7163	2317	2	\N	2015-06-13 19:58:33.103367+03
-7164	2451	2	\N	2015-06-13 19:59:50.784052+03
-7165	2452	2	\N	2015-06-13 19:59:50.784052+03
-7166	2317	2	\N	2015-06-13 20:00:28.712308+03
-7167	2317	2	\N	2015-06-13 20:01:26.421434+03
-7168	2317	2	\N	2015-06-13 20:03:24.653457+03
-7176	2451	2	\N	2015-06-14 10:07:32.690694+03
-7177	2451	2	\N	2015-06-14 10:16:32.619194+03
-7178	2451	2	\N	2015-06-14 13:13:57.393431+03
-7179	2451	2	\N	2015-06-14 13:21:50.094038+03
-7180	2451	2	\N	2015-06-14 13:22:37.050016+03
-7181	2451	2	\N	2015-06-14 13:23:13.387606+03
-7182	2451	2	\N	2015-06-14 13:23:25.25704+03
-7183	2457	2	\N	2015-06-14 13:25:18.074212+03
-7184	2451	2	\N	2015-06-14 13:26:56.97373+03
-7185	2458	2	\N	2015-06-14 13:28:59.472857+03
-7186	2459	2	\N	2015-06-14 13:29:40.688494+03
-7187	2457	2	\N	2015-06-14 14:17:22.935487+03
-7199	2463	2	\N	2015-06-14 16:30:22.760587+03
-7201	2463	2	\N	2015-06-14 16:43:36.808614+03
-7202	2465	2	\N	2015-06-14 18:28:13.295968+03
-7203	2466	2	\N	2015-06-14 18:50:25.96227+03
-7204	2467	2	\N	2015-06-14 18:50:57.662486+03
-7205	2468	2	\N	2015-06-17 21:13:39.6663+03
-7206	2469	2	\N	2015-06-17 21:13:39.6663+03
-7207	2469	2	\N	2015-06-17 21:39:31.5421+03
-7208	2470	2	\N	2015-06-17 21:39:43.056809+03
-7211	2296	2	\N	2015-06-17 22:28:24.889672+03
-7212	2296	2	\N	2015-06-17 22:28:44.137455+03
-7213	2296	2	\N	2015-06-17 22:28:55.531055+03
-7214	2296	2	\N	2015-06-17 22:29:04.688414+03
-7217	1190	2	\N	2015-06-18 08:41:45.975909+03
-7218	1190	2	\N	2015-06-18 08:41:55.712142+03
-7219	2475	2	\N	2015-06-18 08:47:40.598128+03
-7221	1043	2	\N	2015-06-18 08:49:28.676473+03
-7222	2477	2	\N	2015-06-18 08:53:01.574753+03
-7229	2484	2	\N	2015-06-18 09:11:44.190988+03
-7230	2477	2	\N	2015-06-18 09:15:16.231618+03
-7232	2486	2	\N	2015-06-19 08:53:30.530081+03
-7235	2489	2	\N	2015-06-19 08:57:56.925224+03
-7236	2490	2	\N	2015-06-19 08:58:47.001543+03
-7237	2491	2	\N	2015-06-19 09:01:01.141859+03
-7239	2493	2	\N	2015-06-19 09:05:15.381515+03
-7241	1010	2	\N	2015-06-19 09:18:51.710345+03
-7244	2129	2	\N	2015-06-19 09:22:37.844576+03
-7248	2137	2	\N	2015-06-19 09:24:18.706637+03
-7250	2248	2	\N	2015-06-19 09:24:53.046897+03
-7251	2477	2	\N	2015-06-20 10:13:49.575046+03
-7252	2484	2	\N	2015-06-20 10:13:59.32685+03
-7253	2501	2	\N	2015-06-20 10:23:36.01186+03
-7254	2490	2	\N	2015-06-20 10:24:30.090794+03
-7255	2502	2	\N	2015-06-20 10:25:23.92051+03
-7256	2490	2	\N	2015-06-20 10:25:26.171733+03
-7257	2503	2	\N	2015-06-20 10:58:18.119129+03
-7259	2505	2	\N	2015-06-20 11:21:58.139735+03
-7260	2506	2	\N	2015-06-20 11:22:00.401736+03
-7261	2507	2	\N	2015-06-20 11:22:46.430212+03
-7262	2506	2	\N	2015-06-20 11:22:51.478424+03
-7263	2508	2	\N	2015-06-20 11:23:54.736317+03
-7264	2506	2	\N	2015-06-20 11:23:56.167951+03
-7265	2345	2	\N	2015-06-20 11:26:36.603828+03
-7266	2345	2	\N	2015-06-20 11:27:18.047841+03
-7268	2345	2	\N	2015-06-20 11:46:46.13788+03
-7269	2510	2	\N	2015-06-20 11:50:12.161837+03
-7270	2511	2	\N	2015-06-20 11:50:13.525526+03
-7272	2463	2	\N	2015-06-20 23:00:10.769493+03
-7273	2467	2	\N	2015-06-20 23:00:18.463896+03
-7274	2459	2	\N	2015-06-20 23:00:44.920864+03
-7275	2458	2	\N	2015-06-20 23:00:51.132288+03
-7276	2457	2	\N	2015-06-20 23:00:57.565186+03
-7277	2451	2	\N	2015-06-20 23:01:04.368039+03
-7278	2451	2	\N	2015-06-20 23:04:17.342527+03
-7279	2457	2	\N	2015-06-20 23:04:23.315461+03
-7280	2458	2	\N	2015-06-20 23:04:30.160097+03
-7281	2459	2	\N	2015-06-20 23:04:35.721205+03
-7282	1896	2	\N	2015-06-21 11:16:22.975624+03
-7285	2459	2	\N	2015-06-21 11:19:17.963777+03
-7286	2458	2	\N	2015-06-21 11:19:23.880837+03
-7287	2457	2	\N	2015-06-21 11:19:29.44712+03
-7288	2451	2	\N	2015-06-21 11:19:35.471458+03
-7289	2467	2	\N	2015-06-21 11:19:54.443461+03
-7290	2463	2	\N	2015-06-21 11:20:00.085347+03
-7291	2465	2	\N	2015-06-21 11:21:33.270335+03
-7292	2513	2	\N	2015-06-23 22:26:54.54596+03
-7293	778	2	\N	2015-06-23 22:31:51.561928+03
-7294	2514	2	\N	2015-06-23 22:34:29.078834+03
-7295	2514	2	\N	2015-06-23 22:36:01.548881+03
-7296	2513	2	\N	2015-06-23 22:42:58.979814+03
-7297	2514	2	\N	2015-06-23 22:46:14.322892+03
-7298	2515	2	\N	2015-06-23 22:48:32.462285+03
-7299	2477	2	\N	2015-06-27 16:53:47.400114+03
-7300	2477	2	\N	2015-06-27 17:29:32.884456+03
-7301	2477	2	\N	2015-06-27 17:32:15.776144+03
-7302	2477	2	\N	2015-06-27 17:33:05.384003+03
-7303	2477	2	\N	2015-06-27 17:35:05.607746+03
-7304	2477	2	\N	2015-06-27 17:36:45.346277+03
-7305	2477	2	\N	2015-06-27 17:38:01.404518+03
-7306	784	2	\N	2015-06-27 17:39:03.474446+03
-7307	784	2	\N	2015-06-27 17:52:48.813097+03
-7308	885	2	\N	2015-06-27 17:53:15.731358+03
-7309	2053	2	\N	2015-06-27 17:58:30.465951+03
-7310	2477	2	\N	2015-06-27 19:15:20.180008+03
-7311	2477	2	\N	2015-06-27 19:49:02.708272+03
-7312	784	2	\N	2015-06-27 19:50:37.220816+03
-7313	784	2	\N	2015-06-27 19:50:45.528129+03
-7314	784	2	\N	2015-06-27 19:50:53.618877+03
-7315	784	2	\N	2015-06-27 19:52:29.5324+03
-7316	2477	2	\N	2015-06-27 19:52:36.102154+03
-7317	2516	2	\N	2015-06-27 20:34:38.335917+03
-7318	2517	2	\N	2015-06-27 21:02:52.190849+03
-7319	2518	2	\N	2015-06-27 22:00:11.577645+03
-7320	784	2	\N	2015-06-27 22:13:51.726755+03
-7321	2519	2	\N	2015-06-27 22:13:51.726755+03
-7322	2520	2	\N	2015-06-27 22:14:31.050053+03
-7323	2521	2	\N	2015-06-27 22:15:06.48124+03
-7324	2522	2	\N	2015-06-27 22:27:54.400494+03
-7325	2523	2	\N	2015-06-27 22:40:18.037224+03
-7326	2524	2	\N	2015-06-27 22:42:17.60206+03
-7327	2525	2	\N	2015-06-27 22:42:37.767083+03
-7328	784	2	\N	2015-06-27 22:49:09.961687+03
-7329	784	2	\N	2015-06-27 22:49:28.712758+03
-7330	784	2	\N	2015-06-27 22:49:40.054287+03
-7331	2526	2	\N	2015-06-28 15:48:24.134048+03
-7332	2527	2	\N	2015-06-28 15:49:06.934643+03
-7333	1930	2	\N	2015-06-28 15:49:08.476175+03
-7334	1930	2	\N	2015-06-28 15:49:15.43238+03
-7335	1286	2	\N	2015-06-28 16:19:06.654271+03
-7336	1284	2	\N	2015-06-28 16:19:08.822984+03
-7337	2528	2	\N	2015-06-28 16:27:58.214962+03
-7338	2529	2	\N	2015-07-04 20:12:31.951644+03
-7339	2530	2	\N	2015-07-04 20:16:08.99227+03
-7340	2531	2	\N	2015-07-04 20:16:08.99227+03
-7341	2532	2	\N	2015-07-04 20:36:07.167824+03
-7342	2533	2	\N	2015-07-04 20:36:07.167824+03
-7343	2534	2	\N	2015-07-04 20:57:32.449165+03
-7344	2491	2	\N	2015-07-04 20:58:12.716739+03
-7345	2535	2	\N	2015-07-04 20:58:36.935951+03
-7346	2536	2	\N	2015-07-04 20:59:39.366864+03
-7347	2491	2	\N	2015-07-04 20:59:49.220324+03
-7348	2537	2	\N	2015-07-04 21:00:02.518034+03
-7349	2538	2	\N	2015-07-04 21:13:08.541103+03
-7350	2539	2	\N	2015-07-04 21:14:30.611204+03
-7351	2540	2	\N	2015-07-04 21:14:32.763289+03
-7352	2541	2	\N	2015-07-04 21:14:50.821175+03
-7353	2450	2	\N	2015-07-04 21:16:23.905581+03
-7354	2542	2	\N	2015-07-04 21:17:54.658173+03
-7355	2450	2	\N	2015-07-04 21:20:36.496307+03
-7356	2450	2	\N	2015-07-04 21:22:20.163177+03
-7357	2450	2	\N	2015-07-04 21:25:41.863118+03
-7358	2543	2	\N	2015-07-04 21:26:56.584606+03
-7359	2544	2	\N	2015-07-04 21:27:23.469843+03
-7360	2388	2	\N	2015-07-04 21:27:31.474854+03
-7361	2545	2	\N	2015-07-04 21:30:18.47115+03
-7362	2546	2	\N	2015-07-04 21:30:37.579131+03
-7363	2545	2	\N	2015-07-04 21:30:38.730906+03
-7364	2547	2	\N	2015-07-04 21:30:51.680567+03
-7365	2548	2	\N	2015-07-04 21:30:51.680567+03
-7366	2388	2	\N	2015-07-04 21:31:14.422776+03
-7367	2451	2	\N	2015-07-05 14:30:51.54628+03
-7368	2457	2	\N	2015-07-05 14:33:01.814653+03
-7369	2458	2	\N	2015-07-05 14:33:47.939925+03
-7370	2459	2	\N	2015-07-05 14:33:59.629688+03
-7371	2451	2	\N	2015-07-05 14:39:43.167129+03
-7372	2467	2	\N	2015-07-05 14:49:52.691681+03
-7373	2463	2	\N	2015-07-05 14:50:06.470488+03
-7374	2549	2	\N	2015-07-05 15:34:32.780638+03
-7376	2434	2	\N	2015-07-05 19:13:53.412323+03
-7377	3	2	\N	2015-07-17 19:31:34.831317+03
-7378	894	2	\N	2015-07-17 19:34:30.132569+03
-7379	2054	2	\N	2015-07-17 19:34:44.345599+03
-7380	2126	2	\N	2015-07-17 19:35:00.154065+03
-7381	2484	2	\N	2015-07-17 19:35:15.872953+03
-7382	2550	2	\N	2015-07-18 10:57:05.728016+03
-7383	1372	2	\N	2015-07-18 10:57:08.110977+03
-7384	1372	2	\N	2015-07-18 10:57:38.113606+03
-7385	2551	2	\N	2015-07-18 11:02:48.147598+03
-7386	2552	2	\N	2015-07-18 11:22:14.245467+03
-7387	2552	2	\N	2015-07-18 11:24:17.241528+03
-7388	2553	2	\N	2015-07-18 11:32:44.472503+03
-7389	2554	2	\N	2015-07-18 11:46:38.401629+03
-7390	2554	2	\N	2015-07-18 11:47:52.858154+03
-7392	2556	2	\N	2015-07-18 11:55:59.961331+03
-7393	1372	2	\N	2015-07-18 11:56:18.816278+03
-7394	1375	2	\N	2015-07-18 11:56:26.8815+03
-7395	2557	2	\N	2015-07-18 12:01:04.237446+03
-7396	887	2	\N	2015-07-18 12:01:06.541839+03
-7397	2376	2	\N	2015-07-18 12:01:31.956124+03
-7398	2556	2	\N	2015-07-18 12:01:52.672293+03
-7399	2558	2	\N	2015-07-19 10:20:48.263335+03
-7400	2559	2	\N	2015-07-19 14:41:19.72071+03
-7401	2560	2	\N	2015-07-19 14:41:25.622087+03
-7402	2561	2	\N	2015-07-19 14:42:40.770503+03
-7403	2562	2	\N	2015-07-19 14:42:45.815524+03
-7404	2563	2	\N	2015-07-19 15:12:51.840188+03
-7405	2564	2	\N	2015-07-19 15:13:34.062285+03
-7406	2565	2	\N	2015-07-19 15:13:36.341158+03
-7407	2566	2	\N	2015-07-19 15:17:50.040034+03
-7408	2567	2	\N	2015-07-19 15:18:18.066263+03
-7409	2568	2	\N	2015-07-19 15:19:23.078636+03
-7410	2569	2	\N	2015-07-19 15:19:33.135472+03
-7411	2570	2	\N	2015-07-19 15:20:45.489438+03
-7412	2571	2	\N	2015-07-19 15:21:40.944498+03
-7413	2572	2	\N	2015-07-19 15:21:50.318605+03
-7414	2573	2	\N	2015-07-19 16:03:41.362252+03
-7415	2574	2	\N	2015-07-19 16:04:11.184096+03
-7416	2575	2	\N	2015-07-19 16:04:13.848246+03
-7417	2576	2	\N	2015-07-19 16:05:08.205201+03
-7418	2577	2	\N	2015-07-19 16:06:12.10907+03
-7419	2578	2	\N	2015-07-19 16:06:39.117569+03
-7420	2579	2	\N	2015-07-19 16:06:40.986562+03
-7421	2580	2	\N	2015-07-19 16:07:27.111556+03
-7422	2581	2	\N	2015-07-19 16:08:00.994992+03
-7423	2582	2	\N	2015-07-19 16:08:03.06528+03
-7424	2583	2	\N	2015-07-19 22:56:54.154484+03
-7425	2584	2	\N	2015-07-19 23:47:28.340347+03
-7426	2585	2	\N	2015-07-19 23:52:14.447269+03
-7427	2586	2	\N	2015-07-19 23:52:36.403304+03
-7428	2587	2	\N	2015-07-19 23:52:50.958041+03
-7429	2588	2	\N	2015-07-19 23:53:14.681932+03
-7430	2589	2	\N	2015-07-19 23:54:00.547115+03
-7431	2590	2	\N	2015-07-19 23:54:44.372371+03
-7432	2591	2	\N	2015-07-19 23:54:52.387429+03
-7433	2593	2	\N	2015-07-19 23:56:11.09679+03
-7434	2594	2	\N	2015-07-19 23:56:44.56359+03
-7435	2595	2	\N	2015-07-19 23:56:46.53373+03
-7436	1932	2	\N	2015-07-20 00:00:04.645587+03
-7437	2596	2	\N	2015-07-20 00:04:50.031308+03
-7438	2597	2	\N	2015-07-20 00:05:29.444039+03
-7439	2598	2	\N	2015-07-20 00:06:05.823851+03
-7440	2599	2	\N	2015-07-20 00:06:07.921437+03
-7443	2602	2	\N	2015-07-20 23:51:41.323724+03
-7444	2603	2	\N	2015-07-20 23:51:41.323724+03
-7445	2604	2	\N	2015-07-20 23:51:41.323724+03
-7446	2605	2	\N	2015-07-20 23:51:41.323724+03
-7449	2608	2	\N	2015-07-20 23:51:41.323724+03
-7453	2612	2	\N	2015-07-20 23:51:41.323724+03
-7454	2613	2	\N	2015-07-20 23:51:41.323724+03
-7458	2617	2	\N	2015-07-20 23:51:41.323724+03
-7472	2631	2	\N	2015-07-20 23:51:41.323724+03
-7473	2632	2	\N	2015-07-20 23:51:41.323724+03
-7474	2633	2	\N	2015-07-20 23:51:41.323724+03
-7475	2634	2	\N	2015-07-20 23:51:41.323724+03
-7476	2635	2	\N	2015-07-20 23:51:41.323724+03
-7477	2636	2	\N	2015-07-20 23:51:41.323724+03
-7478	2637	2	\N	2015-07-20 23:51:41.323724+03
-7479	2638	2	\N	2015-07-20 23:51:41.323724+03
-7483	2642	2	\N	2015-07-20 23:51:41.323724+03
-7484	2643	2	\N	2015-07-20 23:51:41.323724+03
-7487	2646	2	\N	2015-07-20 23:51:41.323724+03
-7488	2647	2	\N	2015-07-20 23:51:41.323724+03
-7489	2648	2	\N	2015-07-20 23:51:41.323724+03
-7490	2649	2	\N	2015-07-20 23:51:41.323724+03
-7491	2650	2	\N	2015-07-20 23:51:41.323724+03
-7492	2651	2	\N	2015-07-20 23:51:41.323724+03
-7493	2652	2	\N	2015-07-20 23:51:41.323724+03
-7494	2653	2	\N	2015-07-20 23:51:41.323724+03
-7495	2654	2	\N	2015-07-20 23:51:41.323724+03
-7496	2655	2	\N	2015-07-20 23:51:41.323724+03
-7497	2658	2	\N	2015-07-20 23:58:46.110129+03
-7498	894	2	\N	2015-07-20 23:59:14.903581+03
-7499	2659	7	\N	2015-07-21 00:38:27.04357+03
-7500	2660	7	\N	2015-07-21 00:38:31.047891+03
-7501	2661	7	\N	2015-07-21 00:40:04.89713+03
-7502	2662	7	\N	2015-07-21 00:40:08.316954+03
-7503	2663	2	\N	2015-07-21 00:42:13.515989+03
-7504	2664	2	\N	2015-07-21 00:44:32.068557+03
-7505	2662	2	\N	2015-07-21 00:45:19.305589+03
-7506	2662	7	\N	2015-07-21 00:47:09.218984+03
-7507	894	2	\N	2015-07-22 09:52:23.690178+03
-7508	885	2	\N	2015-07-22 09:53:01.082145+03
-7509	2665	2	\N	2015-07-22 09:53:01.082145+03
-7510	885	2	\N	2015-07-22 09:53:36.087021+03
-7511	2272	2	\N	2015-07-22 10:46:42.444349+03
-7512	2272	2	\N	2015-07-22 10:47:14.111233+03
-7513	2666	2	\N	2015-07-22 10:50:02.98887+03
-7514	2667	2	\N	2015-07-22 10:50:08.679496+03
-7515	2668	2	\N	2015-07-22 10:51:11.924694+03
-7516	2669	2	\N	2015-07-22 10:51:14.586916+03
-7517	2669	2	\N	2015-07-22 11:46:47.662266+03
-7518	2670	2	\N	2015-07-22 11:49:53.983401+03
-7519	2671	2	\N	2015-07-22 11:53:39.590503+03
-7520	2669	2	\N	2015-07-22 11:53:54.403754+03
-7521	2669	2	\N	2015-07-22 11:54:14.136266+03
-7522	2669	2	\N	2015-07-22 12:24:29.892068+03
-7523	2673	2	\N	2015-07-22 12:28:35.92606+03
-7524	2674	2	\N	2015-07-22 12:28:39.345269+03
-7525	2675	2	\N	2015-07-22 12:44:17.155133+03
-7526	2676	2	\N	2015-07-22 12:45:19.167404+03
-7527	2677	2	\N	2015-07-22 12:45:42.418521+03
-7528	2678	2	\N	2015-07-22 12:45:46.782121+03
-7529	2679	2	\N	2015-07-22 12:46:34.868393+03
-7530	2678	2	\N	2015-07-22 12:47:12.553819+03
-7531	2680	2	\N	2015-07-22 12:47:32.725361+03
-7532	2681	2	\N	2015-07-22 12:47:48.511246+03
-7533	2682	2	\N	2015-07-22 13:40:37.786999+03
-7534	2681	2	\N	2015-07-22 13:40:39.941316+03
-7535	2681	2	\N	2015-07-22 13:40:55.710058+03
-7536	2683	2	\N	2015-07-22 13:41:40.486853+03
-7537	2684	2	\N	2015-07-22 13:41:59.700406+03
-7538	2685	2	\N	2015-07-22 13:42:00.973433+03
-7539	2667	2	\N	2015-07-22 13:42:02.635972+03
-7540	2685	2	\N	2015-07-22 13:46:08.824214+03
-7541	2667	2	\N	2015-07-22 13:46:13.399464+03
-7542	2686	2	\N	2015-07-22 13:47:12.099197+03
-7543	2687	2	\N	2015-07-22 13:47:12.099197+03
-7544	2688	2	\N	2015-07-22 13:50:14.404321+03
-7545	2689	2	\N	2015-07-22 13:50:14.404321+03
-7546	2690	2	\N	2015-07-22 13:53:17.909433+03
-7547	2690	2	\N	2015-07-22 13:53:48.33605+03
-7550	2693	2	\N	2015-07-22 14:07:31.992976+03
-7551	2694	2	\N	2015-07-22 14:08:00.072596+03
-7552	2695	2	\N	2015-07-22 14:08:45.393051+03
-7555	2698	2	\N	2015-07-22 14:13:47.912163+03
-7556	2699	2	\N	2015-07-22 14:14:01.749177+03
-7557	2700	2	\N	2015-07-22 14:14:10.709485+03
-7558	2701	2	\N	2015-07-22 14:14:10.709485+03
-7559	2699	2	\N	2015-07-22 14:16:42.964801+03
-7560	2702	2	\N	2015-07-22 14:17:00.761945+03
-7561	2703	2	\N	2015-07-22 14:17:00.761945+03
-7562	2704	2	\N	2015-07-22 14:19:56.751612+03
-7563	2705	2	\N	2015-07-22 14:19:56.751612+03
-7564	2699	2	\N	2015-07-22 14:20:42.704316+03
-7565	2706	2	\N	2015-07-22 14:21:02.027005+03
-7566	2707	2	\N	2015-07-22 14:21:02.027005+03
-7567	2699	2	\N	2015-07-22 14:21:39.869597+03
-7568	2699	2	\N	2015-07-22 14:21:46.984305+03
-7569	2708	2	\N	2015-07-22 14:21:59.287338+03
-7570	2709	2	\N	2015-07-22 14:21:59.287338+03
-7571	2699	2	\N	2015-07-22 14:22:26.322903+03
-7572	2710	2	\N	2015-07-22 14:22:35.509695+03
-7573	2711	2	\N	2015-07-22 14:22:35.509695+03
-7574	2699	2	\N	2015-07-22 14:23:19.576335+03
-7575	2712	2	\N	2015-07-22 14:23:36.759685+03
-7576	2713	2	\N	2015-07-22 14:23:36.759685+03
-7577	2714	2	\N	2015-07-22 14:30:40.877306+03
-7578	2715	2	\N	2015-07-22 14:32:25.925422+03
-7579	2716	2	\N	2015-07-22 14:32:25.925422+03
-7580	2714	2	\N	2015-07-22 14:32:56.995021+03
-7581	2717	2	\N	2015-07-22 14:33:08.574387+03
-7582	2718	2	\N	2015-07-22 14:33:08.574387+03
-7583	2719	2	\N	2015-07-22 14:50:07.747456+03
-7584	2720	2	\N	2015-07-22 14:50:07.747456+03
-7585	2721	2	\N	2015-07-22 14:53:19.652254+03
-7586	2722	2	\N	2015-07-22 14:53:19.652254+03
-7587	2723	2	\N	2015-07-22 15:02:17.721876+03
-7588	2724	2	\N	2015-07-22 15:02:27.84792+03
-7589	2725	2	\N	2015-07-22 15:02:27.84792+03
-7590	2726	2	\N	2015-07-22 15:04:12.042101+03
-7591	2699	2	\N	2015-07-22 15:04:47.591373+03
-7592	2727	2	\N	2015-07-22 15:05:43.153662+03
-7593	2728	2	\N	2015-07-22 15:05:43.153662+03
-7594	2729	2	\N	2015-07-22 15:13:21.269737+03
-7595	2730	2	\N	2015-07-22 15:19:08.113264+03
-7596	2729	2	\N	2015-07-22 15:19:11.19218+03
-7597	2729	2	\N	2015-07-22 15:35:51.754061+03
-7598	2732	2	\N	2015-07-22 15:38:41.939351+03
-7599	2729	2	\N	2015-07-22 15:40:32.555996+03
-7600	2729	2	\N	2015-07-22 15:55:13.336651+03
-7601	2515	2	\N	2015-07-22 15:57:29.189389+03
-7602	2729	2	\N	2015-07-22 15:57:36.719306+03
-7603	2733	2	\N	2015-07-22 15:58:23.119691+03
-7604	2729	2	\N	2015-07-22 15:58:35.528196+03
-7605	2450	2	\N	2015-07-22 15:58:59.916186+03
-7606	2317	2	\N	2015-07-22 15:59:20.404832+03
-7607	2734	2	\N	2015-07-22 15:59:27.667185+03
-7608	2735	2	\N	2015-07-22 15:59:52.422862+03
-7609	2736	2	\N	2015-07-22 15:59:52.422862+03
-7610	2388	2	\N	2015-07-22 16:00:09.725539+03
-7611	2450	2	\N	2015-07-22 16:00:21.306194+03
-7612	1438	2	\N	2015-07-22 18:57:24.829162+03
-7613	2737	2	\N	2015-07-22 19:50:41.44109+03
-7614	2738	2	\N	2015-07-22 19:50:41.44109+03
-7615	2739	2	\N	2015-07-22 22:10:17.173605+03
-7616	2739	2	\N	2015-07-22 22:27:10.60758+03
-7617	2740	2	\N	2015-10-05 21:56:31.033698+03
-7618	2741	2	\N	2015-10-05 22:00:37.025784+03
-7619	2741	2	\N	2015-10-05 22:01:11.294026+03
-7620	2740	2	\N	2015-10-11 15:30:17.608326+03
-7621	2740	2	\N	2015-10-11 15:49:02.820999+03
-7622	2742	2	\N	2015-10-11 16:29:26.485453+03
-7655	2741	2	\N	2015-10-19 21:00:27.348936+03
-7656	2484	2	\N	2015-10-24 14:58:32.749242+03
-7657	2779	2	\N	2015-10-24 14:58:32.749242+03
-7658	2484	2	\N	2015-10-24 14:59:57.669772+03
-7659	2780	2	\N	2015-10-24 14:59:57.669772+03
-7660	894	2	\N	2015-10-24 15:00:56.289933+03
-7661	2781	2	\N	2015-10-24 15:00:56.289933+03
-7662	885	2	\N	2015-10-24 15:02:23.825848+03
-7663	894	2	\N	2015-10-24 15:06:44.559696+03
-7664	2782	2	\N	2015-10-24 15:06:44.559696+03
-7665	894	2	\N	2015-10-24 15:13:07.98256+03
-7666	2783	2	\N	2015-10-24 15:13:07.98256+03
-7667	894	2	\N	2015-10-24 15:16:03.818888+03
-7668	2784	2	\N	2015-10-24 15:16:03.818888+03
-7669	2785	2	\N	2015-10-24 15:23:48.170652+03
-7670	2786	2	\N	2015-10-24 15:24:48.816087+03
-7671	2787	2	\N	2015-10-24 15:30:54.642902+03
-7672	2739	2	\N	2015-10-31 09:47:11.166446+02
-7673	2739	2	\N	2015-10-31 09:48:54.569182+02
-7674	2739	2	\N	2015-10-31 09:52:21.217177+02
-7675	2739	2	\N	2015-10-31 09:52:28.501825+02
-7676	2739	2	\N	2015-10-31 10:25:38.872091+02
-7677	2593	2	\N	2015-10-31 10:32:28.375294+02
-7678	2788	2	\N	2015-10-31 11:46:02.329007+02
-7679	2741	2	\N	2015-10-31 11:48:54.106885+02
-7698	2813	2	\N	2015-11-22 21:52:45.311354+02
-7699	2814	2	\N	2015-11-22 21:57:07.211721+02
-7700	2739	2	\N	2015-11-22 21:57:09.506917+02
-7701	2739	2	\N	2015-11-22 22:03:49.302367+02
-7702	2815	2	\N	2015-11-29 18:03:23.32558+02
-7703	2816	2	\N	2015-11-29 18:05:24.319676+02
-7704	2818	2	\N	2015-11-29 19:06:37.534692+02
-7705	2820	2	\N	2016-01-02 19:03:39.167822+02
-7706	1930	2	\N	2016-01-02 19:03:41.6491+02
-7707	2821	2	\N	2016-01-02 20:11:21.358279+02
-7708	2822	2	\N	2016-01-02 20:11:24.233178+02
-7709	2823	2	\N	2016-01-02 20:12:21.682793+02
-7710	2824	2	\N	2016-01-02 20:12:46.762385+02
-7711	2825	2	\N	2016-01-02 20:15:08.259398+02
-7712	2824	2	\N	2016-01-02 20:15:26.352748+02
-7713	2826	2	\N	2016-01-02 20:15:55.52191+02
-7714	2824	2	\N	2016-01-02 20:17:19.972235+02
-7715	2822	2	\N	2016-01-02 20:21:41.413863+02
-7716	2827	2	\N	2016-01-02 20:24:24.220398+02
-7717	2828	2	\N	2016-01-02 20:24:24.220398+02
-7718	2829	2	\N	2016-01-02 20:25:00.491155+02
-7719	2830	2	\N	2016-01-02 20:25:43.115841+02
-7720	2831	2	\N	2016-01-02 20:26:37.333884+02
-7721	2832	2	\N	2016-01-02 20:27:25.581765+02
-7722	2833	2	\N	2016-01-02 20:36:13.937348+02
-7723	2834	2	\N	2016-01-02 20:36:20.489746+02
-7724	2834	2	\N	2016-01-02 20:36:41.364121+02
-7725	2835	2	\N	2016-01-02 20:42:25.330155+02
-7726	2836	2	\N	2016-01-02 20:42:56.538052+02
-7727	2837	2	\N	2016-01-02 20:50:50.737933+02
-7728	2838	2	\N	2016-01-02 20:50:50.737933+02
-7729	2831	2	\N	2016-01-02 20:50:54.803525+02
-7730	2839	2	\N	2016-01-02 20:51:13.095185+02
-7731	2840	2	\N	2016-01-02 20:51:13.095185+02
-7732	2841	2	\N	2016-01-02 20:52:40.961629+02
-7733	2540	2	\N	2016-01-02 20:53:36.703713+02
-7734	2842	2	\N	2016-01-02 20:53:48.427475+02
-7735	2843	2	\N	2016-01-02 20:53:48.427475+02
-7736	2844	2	\N	2016-01-02 21:00:05.527737+02
-7737	2845	2	\N	2016-01-02 21:00:05.527737+02
-7738	2846	2	\N	2016-01-02 21:03:59.88429+02
-7739	2847	2	\N	2016-01-02 21:03:59.88429+02
-7740	2848	2	\N	2016-01-02 21:08:47.993297+02
-7741	2849	2	\N	2016-01-02 21:08:47.993297+02
-7742	2850	2	\N	2016-01-02 21:16:40.983488+02
-7743	2851	2	\N	2016-01-02 21:16:40.983488+02
-7744	2852	2	\N	2016-01-02 21:36:46.646531+02
-7745	2853	2	\N	2016-01-02 21:36:49.099159+02
-7746	2854	2	\N	2016-01-02 21:37:14.376182+02
-7747	2855	2	\N	2016-01-02 21:37:14.376182+02
-7748	2853	2	\N	2016-01-02 21:38:33.232425+02
-7749	2853	2	\N	2016-01-02 21:39:02.581845+02
-7752	2857	2	\N	2016-01-02 21:39:38.718674+02
-7755	2858	2	\N	2016-01-02 21:48:47.109583+02
-7756	2858	2	\N	2016-01-02 21:49:26.302355+02
-7757	2858	2	\N	2016-01-02 21:50:13.774213+02
-7759	2841	2	\N	2016-01-02 22:14:54.924705+02
-7763	2858	2	\N	2016-01-02 22:21:07.90205+02
-7750	2853	2	\N	2016-01-02 21:39:16.771773+02
-7753	2858	2	\N	2016-01-02 21:43:29.317483+02
-7754	2859	2	\N	2016-01-02 21:48:34.392885+02
-7758	2858	2	\N	2016-01-02 21:50:34.02702+02
-7760	2835	2	\N	2016-01-02 22:15:05.490599+02
-7761	2858	2	\N	2016-01-02 22:15:28.276336+02
-7762	2858	2	\N	2016-01-02 22:20:37.944351+02
-7764	2858	2	\N	2016-01-02 22:23:01.500364+02
-7765	2858	2	\N	2016-01-02 22:24:07.265807+02
-7766	2858	2	\N	2016-01-02 22:57:12.346032+02
-7767	2858	2	\N	2016-01-02 22:57:27.435802+02
-7768	2858	2	\N	2016-01-02 22:58:10.983876+02
-7769	2860	2	\N	2016-01-02 23:22:02.986231+02
-7770	2861	2	\N	2016-01-02 23:22:02.986231+02
-7771	2862	2	\N	2016-01-02 23:29:14.591921+02
-7772	2863	2	\N	2016-01-02 23:29:43.595496+02
-7773	2864	2	\N	2016-01-02 23:32:59.025447+02
-7774	2865	2	\N	2016-01-02 23:33:17.678918+02
-7775	2866	2	\N	2016-01-02 23:33:24.314299+02
-7776	2867	2	\N	2016-01-02 23:34:03.051927+02
-7777	2824	2	\N	2016-01-02 23:39:00.961892+02
-7778	2868	2	\N	2016-01-30 20:55:14.786454+02
-7779	2869	2	\N	2016-01-30 20:59:30.856249+02
-7780	2830	2	\N	2016-01-30 21:00:27.913502+02
-7781	2830	2	\N	2016-01-30 21:01:18.072032+02
-7782	2830	2	\N	2016-01-30 21:01:36.444194+02
-7783	2830	2	\N	2016-02-06 15:26:53.662979+02
-7784	2830	2	\N	2016-02-06 15:33:10.739181+02
-7785	2830	2	\N	2016-02-06 15:34:22.381065+02
-7786	2830	2	\N	2016-02-06 15:35:20.238203+02
-7787	2830	2	\N	2016-02-06 15:36:19.423459+02
-7788	2830	2	\N	2016-02-06 15:45:57.869458+02
-7789	2830	2	\N	2016-02-06 15:55:27.857802+02
-7790	2830	2	\N	2016-02-06 16:02:20.536632+02
-7791	2830	2	\N	2016-02-06 16:19:02.587853+02
-7792	2830	2	\N	2016-02-06 16:19:14.340638+02
-7793	2830	2	\N	2016-02-06 16:19:40.099469+02
-7794	2870	2	\N	2016-02-07 17:23:20.218116+02
-7795	2871	2	\N	2016-02-07 17:23:20.218116+02
-7796	2872	2	\N	2016-02-07 21:04:30.754221+02
-7797	2872	2	\N	2016-02-07 21:05:54.259693+02
-7798	2872	2	\N	2016-02-07 21:07:48.965918+02
-7799	2873	2	\N	2016-02-07 21:19:25.018357+02
-7800	2874	2	\N	2016-02-07 21:20:02.361201+02
-7801	2875	2	\N	2016-02-07 21:20:21.884033+02
-7802	2876	2	\N	2016-02-07 21:21:03.816914+02
-7803	2877	2	\N	2016-02-07 21:21:07.920879+02
-7804	2788	2	\N	2016-05-09 12:53:56.945117+03
-7805	2878	2	\N	2016-05-09 12:57:37.410132+03
-7806	2879	2	\N	2016-05-09 12:58:01.601364+03
-7807	2875	2	\N	2016-05-09 14:19:09.461648+03
-7808	2879	2	\N	2016-05-09 14:19:09.461648+03
-7809	2875	2	\N	2016-05-09 14:21:24.121089+03
-7810	2879	2	\N	2016-05-09 14:21:24.121089+03
-7811	2877	2	\N	2016-05-09 19:49:23.40543+03
-7812	2877	2	\N	2016-05-09 20:42:10.779147+03
-7813	2877	2	\N	2016-05-09 20:59:03.503884+03
-7814	2877	2	\N	2016-05-09 20:59:20.181507+03
-7815	2880	2	\N	2016-05-14 12:24:09.362992+03
-7816	2881	2	\N	2016-05-14 12:24:17.0673+03
-7817	2882	2	\N	2016-05-14 12:40:37.631348+03
-7818	2883	2	\N	2016-05-14 12:42:08.065152+03
-7822	2887	2	\N	2016-05-14 19:24:38.497791+03
-7823	2882	2	\N	2016-05-14 19:25:04.0458+03
-7824	2888	2	\N	2016-05-14 19:26:49.355068+03
-7825	2889	2	\N	2016-05-14 19:27:41.044427+03
-7826	2888	2	\N	2016-05-14 19:28:16.54874+03
-7827	2889	2	\N	2016-05-14 19:33:22.988649+03
-7828	2131	2	\N	2016-05-15 18:01:05.003665+03
-7829	1932	2	\N	2016-05-15 18:01:28.601998+03
-7830	1939	2	\N	2016-05-15 18:01:28.601998+03
-7831	2131	2	\N	2016-05-15 18:01:28.601998+03
-7832	2890	2	\N	2016-05-15 18:35:21.882133+03
-7833	2891	7	\N	2016-05-22 19:55:08.969532+03
-7834	2892	7	\N	2016-05-22 19:55:14.973042+03
-7835	2893	7	\N	2016-05-22 19:56:54.291848+03
-7836	2894	7	\N	2016-05-22 19:57:34.361739+03
-7837	2895	7	\N	2016-05-22 20:02:06.06185+03
-7838	2896	7	\N	2016-05-22 20:02:08.989653+03
-7839	2897	7	\N	2016-05-22 20:02:51.686319+03
-7840	2898	7	\N	2016-05-22 20:04:51.844389+03
-7841	2899	7	\N	2016-05-22 20:05:17.325444+03
-7842	2900	7	\N	2016-05-22 20:05:17.325444+03
-7843	2901	7	\N	2016-05-22 20:06:02.253214+03
-7844	2902	7	\N	2016-05-22 20:06:48.112563+03
-7845	2902	7	\N	2016-05-22 20:07:40.428098+03
-7846	2902	7	\N	2016-05-22 20:07:58.637089+03
-7847	1849	2	\N	2016-05-22 20:11:06.601318+03
-7848	2903	2	\N	2016-05-22 20:42:01.686171+03
-7849	2904	2	\N	2016-05-22 20:43:32.285069+03
-\.
-
-
---
--- Name: resource_log_id_seq; Type: SEQUENCE SET; Schema: test; Owner: -
---
-
-SELECT pg_catalog.setval('resource_log_id_seq', 7849, true);
 
 
 --
@@ -78734,6 +66690,14 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: employee_subscription_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT employee_subscription_pkey PRIMARY KEY (employee_id, resource_id);
+
+
+--
 -- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
 --
 
@@ -79011,14 +66975,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT region_pkey PRIMARY KEY (id);
-
-
---
--- Name: resource_log_pkey; Type: CONSTRAINT; Schema: company_en; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT resource_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -79784,6 +67740,14 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: employee_subscription_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT employee_subscription_pkey PRIMARY KEY (employee_id, resource_id);
+
+
+--
 -- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
 --
 
@@ -80061,14 +68025,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT region_pkey PRIMARY KEY (id);
-
-
---
--- Name: resource_log_pkey; Type: CONSTRAINT; Schema: company_ru; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT resource_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -80834,6 +68790,14 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: employee_subscription_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT employee_subscription_pkey PRIMARY KEY (employee_id, resource_id);
+
+
+--
 -- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
 --
 
@@ -81111,14 +69075,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT region_pkey PRIMARY KEY (id);
-
-
---
--- Name: resource_log_pkey; Type: CONSTRAINT; Schema: demo_ru; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT resource_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -81868,6 +69824,14 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: employee_subscription_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT employee_subscription_pkey PRIMARY KEY (employee_id, resource_id);
+
+
+--
 -- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -82153,14 +70117,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT region_pk PRIMARY KEY (id);
-
-
---
--- Name: resource_log_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT resource_log_pk PRIMARY KEY (id);
 
 
 --
@@ -82934,6 +70890,14 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: employee_subscription_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT employee_subscription_pkey PRIMARY KEY (employee_id, resource_id);
+
+
+--
 -- Name: employee_upload_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
 --
 
@@ -83211,14 +71175,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT region_pkey PRIMARY KEY (id);
-
-
---
--- Name: resource_log_pkey; Type: CONSTRAINT; Schema: test; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT resource_log_pkey PRIMARY KEY (id);
 
 
 --
@@ -90987,19 +78943,19 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: fk_employee_id_employee_subscription; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_employee_id_employee_subscription FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
     ADD CONSTRAINT fk_employee_id_employee_upload FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company_en; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -91120,6 +79076,14 @@ ALTER TABLE ONLY address
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_mail_id_campaign; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_mail_id_campaign FOREIGN KEY (mail_id) REFERENCES mail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -91288,6 +79252,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_category_id_campaign; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_person_category_id_campaign FOREIGN KEY (person_category_id) REFERENCES person_category(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -91563,6 +79535,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: fk_resource_id_employee_subscription; Type: FK CONSTRAINT; Schema: company_en; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_resource_id_employee_subscription FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company_en; Owner: -
 --
 
@@ -91744,14 +79724,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company_en; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -92701,19 +80673,19 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: fk_employee_id_employee_subscription; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_employee_id_employee_subscription FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
     ADD CONSTRAINT fk_employee_id_employee_upload FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -92834,6 +80806,14 @@ ALTER TABLE ONLY address
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_mail_id_campaign; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_mail_id_campaign FOREIGN KEY (mail_id) REFERENCES mail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -93002,6 +80982,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_category_id_campaign; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_person_category_id_campaign FOREIGN KEY (person_category_id) REFERENCES person_category(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -93277,6 +81265,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: fk_resource_id_employee_subscription; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_resource_id_employee_subscription FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
 --
 
@@ -93458,14 +81454,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: company_ru; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -94415,19 +82403,19 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: fk_employee_id_employee_subscription; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_employee_id_employee_subscription FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
     ADD CONSTRAINT fk_employee_id_employee_upload FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -94548,6 +82536,14 @@ ALTER TABLE ONLY address
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_mail_id_campaign; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_mail_id_campaign FOREIGN KEY (mail_id) REFERENCES mail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -94716,6 +82712,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_category_id_campaign; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_person_category_id_campaign FOREIGN KEY (person_category_id) REFERENCES person_category(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -94991,6 +82995,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: fk_resource_id_employee_subscription; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_resource_id_employee_subscription FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
 --
 
@@ -95172,14 +83184,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: demo_ru; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -96137,19 +84141,19 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: fk_employee_id_employee_subscription; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_employee_id_employee_subscription FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
     ADD CONSTRAINT fk_employee_id_employee_upload FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -96270,6 +84274,14 @@ ALTER TABLE ONLY address
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_mail_id_campaign; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_mail_id_campaign FOREIGN KEY (mail_id) REFERENCES mail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -96430,6 +84442,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_category_id_campaign; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_person_category_id_campaign FOREIGN KEY (person_category_id) REFERENCES person_category(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -96689,6 +84709,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: fk_resource_id_employee_subscription; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_resource_id_employee_subscription FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -96878,14 +84906,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -97843,19 +85863,19 @@ ALTER TABLE ONLY employee_subaccount
 
 
 --
+-- Name: fk_employee_id_employee_subscription; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_employee_id_employee_subscription FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_employee_id_employee_upload; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
 ALTER TABLE ONLY employee_upload
     ADD CONSTRAINT fk_employee_id_employee_upload FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_employee_id_resource_log; Type: FK CONSTRAINT; Schema: test; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_employee_id_resource_log FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -97976,6 +85996,14 @@ ALTER TABLE ONLY address
 
 ALTER TABLE ONLY hotel
     ADD CONSTRAINT fk_location_id_hotel FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_mail_id_campaign; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_mail_id_campaign FOREIGN KEY (mail_id) REFERENCES mail(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -98144,6 +86172,14 @@ ALTER TABLE ONLY person_passport
 
 ALTER TABLE ONLY permision
     ADD CONSTRAINT fk_permision_structure_id FOREIGN KEY (structure_id) REFERENCES structure(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
+-- Name: fk_person_category_id_campaign; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY campaign
+    ADD CONSTRAINT fk_person_category_id_campaign FOREIGN KEY (person_category_id) REFERENCES person_category(id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 --
@@ -98419,6 +86455,14 @@ ALTER TABLE ONLY employee
 
 
 --
+-- Name: fk_resource_id_employee_subscription; Type: FK CONSTRAINT; Schema: test; Owner: -
+--
+
+ALTER TABLE ONLY employee_subscription
+    ADD CONSTRAINT fk_resource_id_employee_subscription FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+--
 -- Name: fk_resource_id_foodcat; Type: FK CONSTRAINT; Schema: test; Owner: -
 --
 
@@ -98600,14 +86644,6 @@ ALTER TABLE ONLY "position"
 
 ALTER TABLE ONLY region
     ADD CONSTRAINT fk_resource_id_region FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE RESTRICT;
-
-
---
--- Name: fk_resource_id_resource_log; Type: FK CONSTRAINT; Schema: test; Owner: -
---
-
-ALTER TABLE ONLY resource_log
-    ADD CONSTRAINT fk_resource_id_resource_log FOREIGN KEY (resource_id) REFERENCES resource(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
