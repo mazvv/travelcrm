@@ -137,7 +137,7 @@ class MailsView(BaseView):
         form = MailForm(self.request)
         if form.validate():
             form.submit(mail)
-            event = ResourceChanged(self.request, main)
+            event = ResourceChanged(self.request, mail)
             event.registry()
             return {
                 'success_message': _(u'Saved'),

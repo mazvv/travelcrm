@@ -54486,7 +54486,7 @@ SELECT pg_catalog.setval('calculation_id_seq', 107, true);
 --
 
 COPY campaign (id, resource_id, name, start_dt, status, mail_id, person_category_id) FROM stdin;
-69	3846	sdfg sdfsdfg	2016-10-02 14:58:00+03	0	5	\N
+69	3846	For testing	2016-10-02 19:36:00+03	2	5	\N
 \.
 
 
@@ -54587,7 +54587,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev", "tarif_ips": [["127.0.0.1", "2016-10-02T18:45:35"]], "tarif_limit": 1}	lux.travel@gmai.com
+1	1970	Lux Travel Inc.	56	{"locale": "en", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
 \.
 
 
@@ -54932,11 +54932,28 @@ COPY employee_notification (employee_id, notification_id, status) FROM stdin;
 2	81	1
 2	82	1
 2	84	1
+2	87	1
+2	88	1
+2	89	1
+2	90	1
+2	91	1
+2	92	1
+2	93	1
 2	64	1
 2	65	1
 2	66	1
 2	67	1
 2	68	1
+2	94	1
+2	95	1
+2	96	1
+2	97	1
+2	98	1
+2	99	1
+2	100	1
+2	101	1
+2	102	1
+2	103	1
 \.
 
 
@@ -54965,6 +54982,7 @@ COPY employee_subaccount (employee_id, subaccount_id) FROM stdin;
 COPY employee_subscription (employee_id, resource_id) FROM stdin;
 2	3846
 2	3855
+2	3758
 \.
 
 
@@ -55570,7 +55588,7 @@ SELECT pg_catalog.setval('location_id_seq', 42, true);
 --
 
 COPY mail (id, resource_id, name, html_content, descr, subject) FROM stdin;
-5	3758	sdfsdf sdf	\N	dsdsd fgsdfgdfgsdfgsdfg	sdf sdfsdfsdf
+5	3758	Test template	Hello	this is for test purpose only	Test mail
 \.
 
 
@@ -55793,6 +55811,24 @@ COPY notification (id, resource_id, descr, created, url) FROM stdin;
 83	3857	Resource "Persons" was changed by Doe John	2016-10-02 16:30:12.797129+03	\N
 84	3858	Resource "Persons" was changed by Doe John	2016-10-02 16:30:29.557654+03	\N
 85	3859	Resource "Tasks" was changed by Doe John	2016-10-02 17:48:25.829152+03	\N
+86	3860	Resource "Mails" was changed by Doe John	2016-10-02 18:52:35.049405+03	\N
+87	3861	Resource "Campaigns" was changed by Doe John	2016-10-02 18:53:35.742358+03	\N
+88	3862	Resource "Campaigns" was changed by Doe John	2016-10-02 18:55:00.986014+03	\N
+89	3863	Resource "Campaigns" was changed by Doe John	2016-10-02 18:56:08.275114+03	\N
+90	3864	Resource "Campaigns" was changed by Doe John	2016-10-02 18:59:24.879113+03	\N
+91	3865	Resource "Campaigns" was changed by Doe John	2016-10-02 19:01:43.741615+03	\N
+92	3866	Resource "Campaigns" was changed by Doe John	2016-10-02 19:09:13.830533+03	\N
+93	3867	Resource "Campaigns" was changed by Doe John	2016-10-02 19:10:47.617632+03	\N
+94	3868	Resource "Campaigns" was changed by Doe John	2016-10-02 19:13:44.987473+03	\N
+95	3869	Resource "Campaigns" was changed by Doe John	2016-10-02 19:20:09.146623+03	\N
+96	3870	Resource "Campaigns" was changed by Doe John	2016-10-02 19:25:59.247648+03	\N
+97	3871	Resource "Campaigns" was changed by Doe John	2016-10-02 19:26:41.753543+03	\N
+98	3872	Resource "Campaigns" was changed by Doe John	2016-10-02 19:27:40.950864+03	\N
+99	3873	Resource "Campaigns" was changed by Doe John	2016-10-02 19:29:43.36682+03	\N
+100	3874	Resource "Campaigns" was changed by Doe John	2016-10-02 19:30:49.229692+03	\N
+101	3875	Resource "Campaigns" was changed by Doe John	2016-10-02 19:32:08.744846+03	\N
+102	3876	Resource "Campaigns" was changed by Doe John	2016-10-02 19:32:27.080841+03	\N
+103	3877	Resource "Campaigns" was changed by Doe John	2016-10-02 19:35:32.189647+03	\N
 \.
 
 
@@ -55800,7 +55836,7 @@ COPY notification (id, resource_id, descr, created, url) FROM stdin;
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 85, true);
+SELECT pg_catalog.setval('notification_id_seq', 103, true);
 
 
 --
@@ -55816,6 +55852,24 @@ COPY notification_resource (notification_id, resource_id) FROM stdin;
 83	3792
 84	3792
 85	3679
+86	3758
+87	3846
+88	3846
+89	3846
+90	3846
+91	3846
+92	3846
+93	3846
+94	3846
+95	3846
+96	3846
+97	3846
+98	3846
+99	3846
+100	3846
+101	3846
+102	3846
+103	3846
 \.
 
 
@@ -56544,6 +56598,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3812	123	f	2	2016-09-17 20:55:11.314393
 3822	123	f	2	2016-09-17 21:16:08.362697
 3791	69	f	2	2016-09-18 15:22:14.580278
+3866	123	f	2	2016-10-02 19:09:13.830533
 12	12	\N	2	2016-09-17 18:59:14.72779
 14	12	\N	2	2016-09-17 18:59:14.72779
 16	12	\N	2	2016-09-17 18:59:14.72779
@@ -56558,9 +56613,11 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 2881	69	f	2	2016-09-18 14:30:20.017345
 3838	123	f	2	2016-09-25 19:27:20.080296
 3792	69	f	2	2016-10-02 18:12:17.772738
+3867	123	f	2	2016-10-02 19:10:47.617632
 3683	69	f	2	2016-09-18 15:15:49.560984
 3840	123	f	2	2016-09-25 19:34:56.310765
 3844	123	f	2	2016-10-02 14:53:43.077575
+3868	123	f	2	2016-10-02 19:13:44.987473
 3244	145	f	2	2016-09-17 18:59:14.72779
 3245	145	f	2	2016-09-17 18:59:14.72779
 3246	145	f	2	2016-09-17 18:59:14.72779
@@ -56580,12 +56637,14 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3845	123	f	2	2016-10-02 14:57:12.118256
 3793	156	f	2	2016-09-17 20:41:06.405565
 3815	123	f	2	2016-09-17 21:05:21.636062
-3846	156	f	2	2016-10-02 15:03:29.597278
+3869	123	f	2	2016-10-02 19:20:09.146623
+3846	156	f	2	2016-10-02 19:35:32.189647
 921	73	\N	2	2016-09-17 18:59:14.72779
 3794	123	f	2	2016-09-17 20:21:49.773316
 2	2	\N	2	2016-09-17 18:59:14.72779
 3828	123	f	2	2016-09-17 21:43:06.698128
 3847	123	f	2	2016-10-02 14:58:18.584663
+3870	123	f	2	2016-10-02 19:25:59.247648
 2127	12	f	2	2016-09-17 18:59:14.72779
 3	2	\N	2	2016-09-17 18:59:14.72779
 10	12	\N	2	2016-09-17 18:59:14.72779
@@ -56634,11 +56693,13 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 2898	69	f	2	2016-09-18 15:15:49.560984
 3848	123	f	2	2016-10-02 15:01:08.929
 3849	123	f	2	2016-10-02 15:02:59.880731
+3871	123	f	2	2016-10-02 19:26:41.753543
 2903	119	f	2	2016-09-17 18:59:14.72779
 3796	123	f	2	2016-09-17 20:25:39.719594
 2892	69	f	2	2016-09-18 15:15:49.560984
 3676	69	f	2	2016-09-18 15:15:57.719358
 3850	123	f	2	2016-10-02 15:03:29.597278
+3872	123	f	2	2016-10-02 19:27:40.950864
 3282	145	f	2	2016-09-17 18:59:14.72779
 3283	145	f	2	2016-09-17 18:59:14.72779
 3284	145	f	2	2016-09-17 18:59:14.72779
@@ -56671,6 +56732,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3734	71	f	2	2016-09-18 18:57:04.116131
 3678	130	f	2	2016-09-18 20:46:56.969618
 3697	130	f	2	2016-09-18 20:46:56.969618
+3873	123	f	2	2016-10-02 19:29:43.36682
 2820	118	f	2	2016-09-17 18:59:14.72779
 2972	145	f	2	2016-09-17 18:59:14.72779
 2961	145	f	2	2016-09-17 18:59:14.72779
@@ -56727,6 +56789,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3829	135	f	2	2016-09-18 20:53:59.117042
 3830	137	f	2	2016-09-18 20:53:59.117042
 3714	134	f	2	2016-09-18 20:54:14.554235
+3874	123	f	2	2016-10-02 19:30:49.229692
 2879	69	f	2	2016-09-17 18:59:14.72779
 773	12	\N	2	2016-09-17 18:59:14.72779
 1325	83	f	2	2016-09-17 18:59:14.72779
@@ -56792,6 +56855,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3799	123	f	2	2016-09-17 20:34:34.093545
 2902	134	f	2	2016-09-18 20:50:37.105155
 2658	67	f	2	2016-09-18 20:56:57.242299
+3875	123	f	2	2016-10-02 19:32:08.744846
 897	39	\N	2	2016-09-17 18:59:14.72779
 898	39	\N	2	2016-09-17 18:59:14.72779
 899	39	\N	2	2016-09-17 18:59:14.72779
@@ -56852,6 +56916,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 2284	134	f	2	2016-09-18 20:51:00.504929
 3831	134	f	2	2016-09-18 20:54:02.724503
 3855	93	f	2	2016-10-02 15:14:50.598109
+3876	123	f	2	2016-10-02 19:32:27.080841
 775	12	\N	2	2016-09-17 18:59:14.72779
 778	65	\N	2	2016-09-17 18:59:14.72779
 779	65	\N	2	2016-09-17 18:59:14.72779
@@ -56903,6 +56968,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 905	71	\N	2	2016-09-18 18:50:19.259122
 906	71	\N	2	2016-09-18 18:50:30.216923
 3856	123	f	2	2016-10-02 15:14:50.598109
+3877	123	f	2	2016-10-02 19:35:32.189647
 2152	135	f	2	2016-09-17 18:59:14.72779
 2153	137	f	2	2016-09-17 18:59:14.72779
 2154	135	f	2	2016-09-17 18:59:14.72779
@@ -57162,6 +57228,8 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 874	65	\N	2	2016-09-17 18:59:14.72779
 3806	123	f	2	2016-09-17 20:45:00.588652
 2894	130	f	2	2016-09-18 20:33:14.226896
+3860	123	f	2	2016-10-02 18:52:35.049405
+3862	123	f	2	2016-10-02 18:55:00.986014
 863	65	\N	2	2016-09-17 18:59:14.72779
 870	69	\N	2	2016-09-17 18:59:14.72779
 875	70	\N	2	2016-09-17 18:59:14.72779
@@ -57265,6 +57333,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3809	123	f	2	2016-09-17 20:47:28.897672
 3810	123	f	2	2016-09-17 20:49:34.03298
 2785	47	f	2	2016-09-18 20:56:23.715695
+3861	123	f	2	2016-10-02 18:53:35.742358
 2954	145	f	2	2016-09-17 18:59:14.72779
 3037	145	f	2	2016-09-17 18:59:14.72779
 3038	145	f	2	2016-09-17 18:59:14.72779
@@ -58348,7 +58417,6 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 1258	87	f	2	2016-09-17 18:59:14.72779
 1644	90	f	2	2016-09-17 18:59:14.72779
 1645	69	f	2	2016-09-17 18:59:14.72779
-3758	164	f	2	2016-09-17 18:59:14.72779
 1646	70	f	2	2016-09-17 18:59:14.72779
 1918	119	f	2	2016-09-17 18:59:14.72779
 1919	12	f	2	2016-09-17 18:59:14.72779
@@ -58447,6 +58515,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 2020	69	f	2	2016-09-17 18:59:14.72779
 2023	104	f	2	2016-09-17 18:59:14.72779
 2024	104	f	2	2016-09-17 18:59:14.72779
+3758	164	f	2	2016-10-02 18:52:45.07731
 2317	134	f	2	2016-09-18 20:50:10.774587
 1252	59	f	2	2016-09-18 21:03:00.257312
 3715	12	f	2	2016-09-18 21:38:39.922035
@@ -58673,6 +58742,9 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 3720	164	f	2	2016-09-17 18:59:14.72779
 3811	123	f	2	2016-09-17 20:53:34.136044
 3699	130	f	2	2016-09-18 20:33:03.364449
+3863	123	f	2	2016-10-02 18:56:08.275114
+3864	123	f	2	2016-10-02 18:59:24.879113
+3865	123	f	2	2016-10-02 19:01:43.741615
 3820	123	f	2	2016-09-17 21:12:15.212864
 \.
 
@@ -58681,7 +58753,7 @@ COPY resource (id, resource_type_id, protected, maintainer_id, modifydt) FROM st
 -- Name: resource_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('resource_id_seq', 3859, true);
+SELECT pg_catalog.setval('resource_id_seq', 3877, true);
 
 
 --

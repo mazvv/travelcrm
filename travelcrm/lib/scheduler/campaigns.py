@@ -12,7 +12,7 @@ from ...models.person import Person
 from ...lib.scheduler import scheduler
 from ...lib.bl.campaigns import get_mailer
 from ...lib.utils.scheduler_utils import (
-    bucket, gen_task_id, scopped_task
+    bucket, gen_task_id, scopped_task, transactional
 )
 
 
@@ -22,20 +22,25 @@ BUCKET_SIZE = 10
 
 
 def _gen_task_id(campaign_id):
-    return gen_task_id('camp_' + str(campaign_id))
+    return gen_task_id('camp' + str(campaign_id))
 
 
 @scopped_task
+@transactional
 def _send_message(campaign_id, contacts):
     campaign = Campaign.get(campaign_id)
     mailer = get_mailer()
     for email in contacts:
+        log.info('Send email to %s' % email)
         message = Message(
             subject=campaign.mail.subject,
             recipients=(email,),
             html=campaign.mail.html_content
         )
-        mailer.send_immediately(message)
+        try:
+            mailer.send_immediately(message)
+        except Exception as e:
+            log.exception(e)
     campaign.set_status_ready()
 
 
@@ -60,7 +65,7 @@ def schedule_campaign(campaign_id):
         _send_message,
         trigger='date',
         id=_gen_task_id(campaign_id),
-        replace_existing=True,
+        replace_existing=False,
         run_date=campaign.start_dt,
         args=[campaign_id, contacts],
     )

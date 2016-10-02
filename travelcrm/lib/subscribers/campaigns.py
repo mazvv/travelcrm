@@ -19,6 +19,7 @@ def campaign_created(event):
 
 @subscriber(CampaignChanged)
 def campaign_changed(event):
+    remove_job(event.obj.id)
     schedule_campaign(event.obj.id)
 
 
