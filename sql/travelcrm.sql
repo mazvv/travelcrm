@@ -54587,7 +54587,7 @@ SELECT pg_catalog.setval('companies_positions_id_seq', 8, true);
 --
 
 COPY company (id, resource_id, name, currency_id, settings, email) FROM stdin;
-1	1970	Lux Travel Inc.	56	{"locale": "en", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
+1	1970	Lux Travel Inc.	56	{"locale": "ru", "timezone": "Europe/Kiev"}	lux.travel@gmai.com
 \.
 
 
