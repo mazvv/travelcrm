@@ -15,6 +15,11 @@ from ..forms.hotels import (
     HotelSearchForm,
     HotelAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class HotelsView(BaseView):
             hotel = form.submit()
             DBSession.add(hotel)
             DBSession.flush()
+            event = ResourceCreated(self.request, hotel)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': hotel.id
@@ -130,6 +137,8 @@ class HotelsView(BaseView):
         form = HotelForm(self.request)
         if form.validate():
             form.submit(hotel)
+            event = ResourceChanged(self.request, hotel)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': hotel.id
@@ -191,6 +200,8 @@ class HotelsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

@@ -14,6 +14,11 @@ from ..forms.accounts_items import (
     AccountItemForm,
     AccountItemSearchForm
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -92,6 +97,8 @@ class AccountsItemsView(BaseView):
             account_item = form.submit()
             DBSession.add(account_item)
             DBSession.flush()
+            event = ResourceCreated(self.request, account_item)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': account_item.id
@@ -126,6 +133,8 @@ class AccountsItemsView(BaseView):
         form = AccountItemForm(self.request)
         if form.validate():
             form.submit(account_item)
+            event = ResourceChanged(self.request, account_item)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': account_item.id
@@ -187,6 +196,8 @@ class AccountsItemsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

@@ -15,6 +15,11 @@ from ..forms.accounts import (
     AccountSearchForm,
     AccountAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class AccountsView(BaseView):
             account = form.submit()
             DBSession.add(account)
             DBSession.flush()
+            event = ResourceCreated(self.request, account)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': account.id
@@ -130,6 +137,8 @@ class AccountsView(BaseView):
         form = AccountForm(self.request)
         if form.validate():
             form.submit(account)
+            event = ResourceChanged(self.request, account)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': account.id
@@ -192,6 +201,8 @@ class AccountsView(BaseView):
                 try:
                     DBSession.delete(item)
                     DBSession.flush()
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 except Exception as e:
                     errors=True
                     DBSession.rollback()

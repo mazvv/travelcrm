@@ -22,6 +22,11 @@ from ..forms.orders import (
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..lib.bl.employees import get_employee_structure
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -105,6 +110,8 @@ class OrdersView(BaseView):
             order = form.submit()
             DBSession.add(order)
             DBSession.flush()
+            event = ResourceCreated(self.request, order)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': order.id
@@ -139,6 +146,8 @@ class OrdersView(BaseView):
         form = OrderForm(self.request)
         if form.validate():
             form.submit(order)
+            event = ResourceChanged(self.request, order)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': order.id
@@ -206,16 +215,18 @@ class OrdersView(BaseView):
         errors = False
         ids = self.request.params.getall('id')
         if ids:
-            items = DBSession.query(Order).filter(
-                Order.id.in_(ids)
-            )
-            for item in items:
-                try:
+            try:
+                items = DBSession.query(Order).filter(
+                    Order.id.in_(ids)
+                )
+                for item in items:
                     DBSession.delete(item)
-                    DBSession.flush()
-                except:
-                    errors=True
-                    DBSession.rollback()
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
+                DBSession.flush()
+            except:
+                errors=True
+                DBSession.rollback()
         if errors:
             return {
                 'error_message': _(

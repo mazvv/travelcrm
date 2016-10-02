@@ -15,6 +15,11 @@ from ..forms.bpersons import (
     BPersonSearchForm,
     BPersonAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class BPersonsView(BaseView):
             bperson = form.submit()
             DBSession.add(bperson)
             DBSession.flush()
+            event = ResourceCreated(self.request, bperson)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': bperson.id
@@ -130,6 +137,8 @@ class BPersonsView(BaseView):
         form = BPersonForm(self.request)
         if form.validate():
             form.submit(bperson)
+            event = ResourceCreated(self.request, bperson)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': bperson.id
@@ -203,6 +212,8 @@ class BPersonsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceCreated(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

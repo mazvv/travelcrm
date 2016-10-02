@@ -15,6 +15,11 @@ from ..forms.locations import (
     LocationSearchForm,
     LocationAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class LocationsView(BaseView):
             location = form.submit()
             DBSession.add(location)
             DBSession.flush()
+            event = ResourceCreated(self.request, location)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': location.id
@@ -130,6 +137,8 @@ class LocationsView(BaseView):
         form = LocationForm(self.request)
         if form.validate():
             form.submit(location)
+            event = ResourceChanged(self.request, location)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': location.id
@@ -191,6 +200,8 @@ class LocationsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

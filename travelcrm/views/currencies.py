@@ -15,6 +15,11 @@ from ..forms.currencies import (
     CurrencySearchForm,
     CurrencyAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class CurrenciesView(BaseView):
             currency = form.submit()
             DBSession.add(currency)
             DBSession.flush()
+            event = ResourceCreated(self.request, currency)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': currency.id
@@ -130,6 +137,8 @@ class CurrenciesView(BaseView):
         form = CurrencyForm(self.request)
         if form.validate():
             form.submit(currency)
+            event = ResourceChanged(self.request, currency)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': currency.id
@@ -191,6 +200,8 @@ class CurrenciesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

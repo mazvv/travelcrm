@@ -16,6 +16,11 @@ from ..forms.navigations import (
     NavigationAssignForm,
     NavigationCopyForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -99,6 +104,8 @@ class NavigationsView(BaseView):
         if form.validate():
             navigation = form.submit()
             DBSession.add(navigation)
+            event = ResourceCreated(self.request, navigation)
+            event.registry()
             return {'success_message': _(u'Saved')}
         else:
             return {
@@ -134,6 +141,8 @@ class NavigationsView(BaseView):
         form = NavigationForm(self.request)
         if form.validate():
             form.submit(navigation)
+            event = ResourceChanged(self.request, navigation)
+            event.registry()
             return {'success_message': _(u'Saved')}
         else:
             return {
@@ -169,6 +178,8 @@ class NavigationsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

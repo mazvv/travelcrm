@@ -15,6 +15,11 @@ from ..forms.banks import (
     BankSearchForm,
     BankAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class BanksView(BaseView):
             bank = form.submit()
             DBSession.add(bank)
             DBSession.flush()
+            event = ResourceCreated(self.request, bank)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': bank.id
@@ -130,6 +137,8 @@ class BanksView(BaseView):
         form = BankForm(self.request)
         if form.validate():
             form.submit(bank)
+            event = ResourceChanged(self.request, bank)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': bank.id
@@ -191,6 +200,8 @@ class BanksView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

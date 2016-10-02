@@ -15,6 +15,11 @@ from ..forms.advsources import (
     AdvsourceSearchForm,
     AdvsourceAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class AdvsourcesView(BaseView):
             advsource = form.submit()
             DBSession.add(advsource)
             DBSession.flush()
+            event = ResourceCreated(self.request, advsource)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': advsource.id
@@ -130,6 +137,8 @@ class AdvsourcesView(BaseView):
         form = AdvsourceForm(self.request)
         if form.validate():
             form.submit(advsource)
+            event = ResourceChanged(self.request, advsource)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': advsource.id
@@ -191,6 +200,8 @@ class AdvsourcesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

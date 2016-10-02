@@ -16,6 +16,11 @@ from ..forms.regions import (
     RegionSearchForm,
     RegionAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class RegionsView(BaseView):
             region = form.submit()
             DBSession.add(region)
             DBSession.flush()
+            event = ResourceCreated(self.request, region)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': region.id
@@ -131,6 +138,8 @@ class RegionsView(BaseView):
         form = RegionForm(self.request)
         if form.validate():
             form.submit(region)
+            event = ResourceChanged(self.request, region)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': region.id
@@ -192,6 +201,8 @@ class RegionsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

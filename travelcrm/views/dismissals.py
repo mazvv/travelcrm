@@ -15,6 +15,12 @@ from travelcrm.forms.dismissals import (
     DismissalSearchForm,
     DismissalAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
+
 
 log = logging.getLogger(__name__)
 
@@ -95,6 +101,8 @@ class DismissalsView(BaseView):
             dismissal = form.submit()
             DBSession.add(dismissal)
             DBSession.flush()
+            event = ResourceCreated(self.request, dismissal)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': dismissal.id
@@ -129,6 +137,8 @@ class DismissalsView(BaseView):
         form = DismissalForm(self.request)
         if form.validate():
             form.submit(dismissal)
+            event = ResourceChanged(self.request, dismissal)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': dismissal.id
@@ -190,6 +200,8 @@ class DismissalsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

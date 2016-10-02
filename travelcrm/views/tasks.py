@@ -18,8 +18,10 @@ from ..forms.tasks import (
 )
 from ..lib.events.tasks import (
     TaskCreated,
-    TaskEdited,
-    TaskDeleted
+)
+from ..lib.events.resources import (
+    ResourceChanged,
+    ResourceDeleted
 )
 
 
@@ -119,7 +121,7 @@ class TasksView(BaseView):
             DBSession.flush()
 
             event = TaskCreated(self.request, task)
-            self.request.registry.notify(event)
+            event.registry()
 
             return {
                 'success_message': _(u'Saved'),
@@ -155,8 +157,8 @@ class TasksView(BaseView):
         form = TaskForm(self.request)
         if form.validate():
             form.submit(task)
-            event = TaskEdited(self.request, task)
-            self.request.registry.notify(event)
+            event = ResourceChanged(self.request, task)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': task.id
@@ -235,8 +237,8 @@ class TasksView(BaseView):
                 items = DBSession.query(Task).filter(Task.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
-                    event = TaskDeleted(self.request, item)
-                    self.request.registry.notify(event)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

@@ -15,6 +15,11 @@ from travelcrm.forms.countries import (
     CountrySearchForm,
     CountryAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class CountriesView(BaseView):
             country = form.submit()
             DBSession.add(country)
             DBSession.flush()
+            event = ResourceCreated(self.request, country)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': country.id
@@ -130,6 +137,8 @@ class CountriesView(BaseView):
         form = CountryForm(self.request)
         if form.validate():
             form.submit(country)
+            event = ResourceChanged(self.request, country)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': country.id
@@ -191,6 +200,8 @@ class CountriesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

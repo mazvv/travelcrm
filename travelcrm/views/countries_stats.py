@@ -1,7 +1,6 @@
 # -*-coding: utf-8-*-
 
 import logging
-from datetime import datetime, timedelta
 from pyramid.view import view_config, view_defaults
 
 from ..resources.countries_stats import CountriesStatsResource
@@ -10,9 +9,7 @@ from ..forms.countries_stats import (
     CountriesStatsSettingsForm
 )
 from . import BaseView
-from ..lib.bl.charts import get_settings
 from ..lib.utils.resources_utils import get_resource_type_by_resource
-from ..lib.utils.common_utils import serialize
 from ..lib.utils.common_utils import translate as _
 
 

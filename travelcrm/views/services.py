@@ -16,6 +16,11 @@ from ..forms.services import (
     ServiceSearchForm,
     ServiceAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class ServicesView(BaseView):
             service = form.submit()
             DBSession.add(service)
             DBSession.flush()
+            event = ResourceCreated(self.request, service)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': service.id
@@ -131,6 +138,8 @@ class ServicesView(BaseView):
         form = ServiceForm(self.request)
         if form.validate():
             form.submit(service)
+            event = ResourceChanged(self.request, service)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': service.id
@@ -192,6 +201,8 @@ class ServicesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

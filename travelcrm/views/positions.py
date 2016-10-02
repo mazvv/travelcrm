@@ -16,6 +16,11 @@ from ..forms.positions import (
     PositionSearchForm,
     PositionAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class PositionsView(BaseView):
             position = form.submit()
             DBSession.add(position)
             DBSession.flush()
+            event = ResourceCreated(self.request, position)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': position.id
@@ -131,6 +138,8 @@ class PositionsView(BaseView):
         form = PositionForm(self.request)
         if form.validate():
             form.submit(position)
+            event = ResourceChanged(self.request, position)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': position.id
@@ -190,6 +199,8 @@ class PositionsView(BaseView):
                 items = DBSession.query(Position).filter(Position.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except Exception as e:
                 log.exception(e)

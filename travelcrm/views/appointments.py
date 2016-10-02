@@ -15,6 +15,12 @@ from travelcrm.forms.appointments import (
     AppointmentSearchForm,
     AppointmentAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
+
 
 log = logging.getLogger(__name__)
 
@@ -95,6 +101,8 @@ class AppointmentsView(BaseView):
             appointment = form.submit()
             DBSession.add(appointment)
             DBSession.flush()
+            event = ResourceCreated(self.request, appointment)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': appointment.id
@@ -129,6 +137,8 @@ class AppointmentsView(BaseView):
         form = AppointmentForm(self.request)
         if form.validate():
             form.submit(appointment)
+            event = ResourceChanged(self.request, appointment)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': appointment.id
@@ -190,6 +200,8 @@ class AppointmentsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

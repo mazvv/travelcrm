@@ -16,6 +16,11 @@ from ..forms.transfers import (
     TransferSearchForm,
     TransferAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class TransfersView(BaseView):
             transfer = form.submit()
             DBSession.add(transfer)
             DBSession.flush()
+            event = ResourceCreated(self.request, transfer)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': transfer.id
@@ -131,6 +138,8 @@ class TransfersView(BaseView):
         form = TransferForm(self.request)
         if form.validate():
             form.submit(transfer)
+            event = ResourceChanged(self.request, transfer)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': transfer.id
@@ -192,6 +201,8 @@ class TransfersView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

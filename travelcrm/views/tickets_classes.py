@@ -16,6 +16,11 @@ from ..forms.tickets_classes import (
     TicketClassSearchForm,
     TicketClassAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class TicketsClassesView(BaseView):
             ticket_class = form.submit()
             DBSession.add(ticket_class)
             DBSession.flush()
+            event = ResourceCreated(self.request, ticket_class)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': ticket_class.id
@@ -131,6 +138,8 @@ class TicketsClassesView(BaseView):
         form = TicketClassForm(self.request)
         if form.validate():
             form.submit(ticket_class)
+            event = ResourceChanged(self.request, ticket_class)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': ticket_class.id
@@ -192,6 +201,8 @@ class TicketsClassesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

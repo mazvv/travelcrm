@@ -15,6 +15,11 @@ from ..forms.structures import (
     StructureSearchForm,
     StructureAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -92,6 +97,8 @@ class StructuresView(BaseView):
         if form.validate():
             structure = form.submit()
             DBSession.add(structure)
+            event = ResourceCreated(self.request, structure)
+            event.registry()
             return {'success_message': _(u'Saved')}
         else:
             return {
@@ -123,6 +130,8 @@ class StructuresView(BaseView):
         form = StructureForm(self.request)
         if form.validate():
             form.submit(structure)
+            event = ResourceChanged(self.request, structure)
+            event.registry()
             return {'success_message': _(u'Saved')}
         else:
             return {
@@ -181,6 +190,8 @@ class StructuresView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except Exception as e:
                 log.exception(e)

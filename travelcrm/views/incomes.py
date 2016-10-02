@@ -15,6 +15,11 @@ from ..forms.incomes import (
     IncomeSearchForm,
     IncomeAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class IncomesView(BaseView):
             income = form.submit()
             DBSession.add(income)
             DBSession.flush()
+            event = ResourceCreated(self.request, income)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': income.id
@@ -130,6 +137,8 @@ class IncomesView(BaseView):
         form = IncomeForm(self.request)
         if form.validate():
             form.submit(income)
+            event = ResourceChanged(self.request, income)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': income.id
@@ -204,6 +213,8 @@ class IncomesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, Income)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

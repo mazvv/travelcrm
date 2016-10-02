@@ -15,6 +15,11 @@ from ..forms.hotelcats import (
     HotelcatSearchForm,
     HotelcatAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class HotelcatsView(BaseView):
             hotelcat = form.submit()
             DBSession.add(hotelcat)
             DBSession.flush()
+            event = ResourceCreated(self.request, hotelcat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': hotelcat.id
@@ -130,6 +137,8 @@ class HotelcatsView(BaseView):
         form = HotelcatForm(self.request)
         if form.validate():
             form.submit(hotelcat)
+            event = ResourceChanged(self.request, hotelcat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': hotelcat.id
@@ -191,6 +200,8 @@ class HotelcatsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

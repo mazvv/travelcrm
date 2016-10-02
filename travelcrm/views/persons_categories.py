@@ -16,6 +16,11 @@ from ..forms.persons_categories import (
     PersonCategorySearchForm,
     PersonCategoryAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class PersonsCategoriesView(BaseView):
             person_category = form.submit()
             DBSession.add(person_category)
             DBSession.flush()
+            event = ResourceCreated(self.request, person_category)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': person_category.id
@@ -131,6 +138,8 @@ class PersonsCategoriesView(BaseView):
         form = PersonCategoryForm(self.request)
         if form.validate():
             form.submit(person_category)
+            event = ResourceChanged(self.request, person_category)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': person_category.id
@@ -192,6 +201,8 @@ class PersonsCategoriesView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

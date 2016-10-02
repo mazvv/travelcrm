@@ -18,6 +18,11 @@ from ..forms.suppliers import (
     SupplierSearchForm,
     SupplierAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -99,6 +104,8 @@ class SuppliersView(BaseView):
             supplier = form.submit()
             DBSession.add(supplier)
             DBSession.flush()
+            event = ResourceCreated(self.request, supplier)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': supplier.id
@@ -133,6 +140,8 @@ class SuppliersView(BaseView):
         form = SupplierForm(self.request)
         if form.validate():
             form.submit(supplier)
+            event = ResourceChanged(self.request, supplier)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': supplier.id,
@@ -206,6 +215,8 @@ class SuppliersView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

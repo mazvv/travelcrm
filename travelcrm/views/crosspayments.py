@@ -15,6 +15,11 @@ from ..forms.crosspayments import (
     CrosspaymentSearchForm,
     CrosspaymentAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class CrosspaymentsView(BaseView):
             crosspayment = form.submit()
             DBSession.add(crosspayment)
             DBSession.flush()
+            event = ResourceCreated(self.request, crosspayment)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': crosspayment.id
@@ -130,6 +137,8 @@ class CrosspaymentsView(BaseView):
         form = CrosspaymentForm(self.request)
         if form.validate():
             form.submit(crosspayment)
+            event = ResourceChanged(self.request, crosspayment)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': crosspayment.id
@@ -206,6 +215,8 @@ class CrosspaymentsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

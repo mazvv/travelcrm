@@ -15,6 +15,11 @@ from ..forms.foodcats import (
     FoodcatSearchForm,
     FoodcatAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class FoodcatsView(BaseView):
             foodcat = form.submit()
             DBSession.add(foodcat)
             DBSession.flush()
+            event = ResourceCreated(self.request, foodcat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': foodcat.id
@@ -130,6 +137,8 @@ class FoodcatsView(BaseView):
         form = FoodcatForm(self.request)
         if form.validate():
             form.submit(foodcat)
+            event = ResourceChanged(self.request, foodcat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': foodcat.id
@@ -191,6 +200,8 @@ class FoodcatsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

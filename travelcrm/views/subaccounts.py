@@ -16,6 +16,11 @@ from ..forms.subaccounts import (
     SubaccountSearchForm,
     SubaccountAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class SubaccountsView(BaseView):
             subaccount, source = form.submit()
             DBSession.add(source)
             DBSession.flush()
+            event = ResourceCreated(self.request, subaccount)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': subaccount.id
@@ -133,6 +140,8 @@ class SubaccountsView(BaseView):
         form = SubaccountForm(self.request)
         if form.validate():
             form.submit(subaccount)
+            event = ResourceChanged(self.request, subaccount)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': subaccount.id
@@ -211,6 +220,8 @@ class SubaccountsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

@@ -29,6 +29,7 @@ def _add_notification(descr, resource_id):
                 u'Can\'t create notification for resource #%s, its not exists'
                 % resource_id
             )
+            return
         notification = Notification(
             descr=descr,
             notification_resource=resource,
@@ -40,13 +41,12 @@ def _add_notification(descr, resource_id):
 
 
 @after_commit
-def add_notification(descr, resource_id):
-    resource = Resource.get(resource_id)
+def add_notification(descr, resource_id, dt=None):
     scheduler.add_job(
         _add_notification,
         id=gen_task_id(),
         trigger='date',
         replace_existing=True,
-        run_date=datetime.now(pytz.utc),
-        args=[descr, resource.id],
+        run_date=(dt or datetime.now(pytz.utc)),
+        args=[descr, resource_id],
     )

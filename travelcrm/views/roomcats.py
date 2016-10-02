@@ -16,6 +16,11 @@ from ..forms.roomcats import (
     RoomcatSearchForm,
     RoomcatAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class RoomcatsView(BaseView):
             roomcat = form.submit()
             DBSession.add(roomcat)
             DBSession.flush()
+            event = ResourceCreated(self.request, roomcat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': roomcat.id
@@ -131,6 +138,8 @@ class RoomcatsView(BaseView):
         form = RoomcatForm(self.request)
         if form.validate():
             form.submit(roomcat)
+            event = ResourceChanged(self.request, roomcat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': roomcat.id
@@ -192,6 +201,8 @@ class RoomcatsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

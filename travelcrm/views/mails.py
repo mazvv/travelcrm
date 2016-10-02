@@ -15,6 +15,11 @@ from ..forms.mails import (
     MailSearchForm,
     MailAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -96,6 +101,8 @@ class MailsView(BaseView):
             mail = form.submit()
             DBSession.add(mail)
             DBSession.flush()
+            event = ResourceCreated(self.request, mail)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': mail.id
@@ -130,6 +137,8 @@ class MailsView(BaseView):
         form = MailForm(self.request)
         if form.validate():
             form.submit(mail)
+            event = ResourceChanged(self.request, main)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': mail.id
@@ -203,6 +212,8 @@ class MailsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

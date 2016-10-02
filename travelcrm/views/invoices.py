@@ -23,6 +23,11 @@ from ..forms.invoices import (
 from ..lib.utils.resources_utils import get_resource_type_by_resource
 from ..lib.utils.security_utils import get_auth_employee
 from ..lib.bl.employees import get_employee_structure
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 log = logging.getLogger(__name__)
 
@@ -111,6 +116,8 @@ class InvoicesView(BaseView):
             invoice = form.submit()
             DBSession.add(invoice)
             DBSession.flush()
+            event = ResourceCreated(self.request, invoice)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': invoice.id
@@ -145,6 +152,8 @@ class InvoicesView(BaseView):
         form = InvoiceForm(self.request)
         if form.validate():
             form.submit(invoice)
+            event = ResourceChanged(self.request, invoice)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': invoice.id
@@ -219,6 +228,8 @@ class InvoicesView(BaseView):
                 try:
                     DBSession.delete(item)
                     DBSession.flush()
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 except:
                     errors=True
                     DBSession.rollback()

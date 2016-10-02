@@ -1,17 +1,18 @@
 #-*-coding:utf-8-*-
 
-class _TaskMixinEvent(object):
-    def __init__(self, request, task):
-        self.request = request
-        self.task = task
+from .resources import ResourceCreated
+from ..utils.security_utils import get_auth_employee
+from ..utils.common_utils import translate as _
 
 
-class TaskCreated(_TaskMixinEvent):
-    pass
+class TaskCreated(ResourceCreated):
 
-class TaskEdited(_TaskMixinEvent):
-    pass
-
-
-class TaskDeleted(_TaskMixinEvent):
-    pass
+    @property
+    def descr(self):
+        return (
+            _(u'New task "%s" was created by %s')
+            % (
+               self.obj.title,
+               get_auth_employee(self.request).name
+            )
+        )

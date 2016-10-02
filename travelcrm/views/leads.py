@@ -17,10 +17,10 @@ from ..forms.leads import (
     LeadSearchForm,
     LeadAssignForm,
 )
-from ..lib.events.leads import (
-    LeadCreated,
-    LeadEdited,
-    LeadDeleted,
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
 )
 
 
@@ -103,8 +103,8 @@ class LeadsView(BaseView):
             lead = form.submit()
             DBSession.add(lead)
             DBSession.flush()
-            event = LeadCreated(self.request, lead)
-            self.request.registry.notify(event)
+            event = ResourceCreated(self.request, lead)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': lead.id
@@ -139,8 +139,8 @@ class LeadsView(BaseView):
         form = LeadForm(self.request)
         if form.validate():
             form.submit(lead)
-            event = LeadEdited(self.request, lead)
-            self.request.registry.notify(event)
+            event = ResourceChanged(self.request, lead)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': lead.id
@@ -232,8 +232,8 @@ class LeadsView(BaseView):
                 items = DBSession.query(Lead).filter(Lead.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
-                    event = LeadDeleted(self.request, item)
-                    self.request.registry.notify(event)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

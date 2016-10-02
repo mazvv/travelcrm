@@ -18,6 +18,11 @@ from ..forms.outgoings import (
     OutgoingSearchForm,
     OutgoingAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -102,6 +107,8 @@ class OutgoingsView(BaseView):
             outgoing = form.submit()
             DBSession.add(outgoing)
             DBSession.flush()
+            event = ResourceCreated(self.request, outgoing)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': outgoing.id
@@ -140,6 +147,8 @@ class OutgoingsView(BaseView):
         form = OutgoingForm(self.request)
         if form.validate():
             form.submit(outgoing)
+            event = ResourceChanged(self.request, outgoing)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': outgoing.id
@@ -216,6 +225,8 @@ class OutgoingsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

@@ -16,6 +16,11 @@ from ..forms.vats import (
     VatSearchForm,
     VatAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class VatsView(BaseView):
             vat = form.submit()
             DBSession.add(vat)
             DBSession.flush()
+            event = ResourceCreated(self.request, vat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': vat.id
@@ -131,6 +138,8 @@ class VatsView(BaseView):
         form = VatForm(self.request)
         if form.validate():
             form.submit(vat)
+            event = ResourceChanged(self.request, vat)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': vat.id
@@ -192,6 +201,8 @@ class VatsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

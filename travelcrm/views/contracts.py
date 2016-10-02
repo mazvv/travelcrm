@@ -16,6 +16,11 @@ from ..forms.contracts import (
     ContractSearchForm,
     ContractAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class ContractsView(BaseView):
             contract = form.submit()
             DBSession.add(contract)
             DBSession.flush()
+            event = ResourceCreated(self.request, contract)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': contract.id
@@ -131,6 +138,8 @@ class ContractsView(BaseView):
         form = ContractForm(self.request)
         if form.validate():
             form.submit(contract)
+            event = ResourceChanged(self.request, contract)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': contract.id
@@ -206,6 +215,8 @@ class ContractsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True

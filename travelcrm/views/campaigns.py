@@ -20,8 +20,13 @@ from ..forms.campaigns import (
 )
 from ..lib.events.campaigns import (
     CampaignCreated,
-    CampaignEdited,
+    CampaignChanged,
     CampaignDeleted,
+)
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
 )
 
 
@@ -106,6 +111,8 @@ class CampaignsView(BaseView):
             DBSession.flush()
             event = CampaignCreated(self.request, campaign)
             event.registry()
+            event = ResourceCreated(self.request, campaign)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': campaign.id
@@ -140,7 +147,9 @@ class CampaignsView(BaseView):
         form = CampaignForm(self.request)
         if form.validate():
             form.submit(campaign)
-            event = CampaignEdited(self.request, campaign)
+            event = CampaignChanged(self.request, campaign)
+            event.registry()
+            event = ResourceChanged(self.request, campaign)
             event.registry()
             return {
                 'success_message': _(u'Saved'),
@@ -204,6 +213,8 @@ class CampaignsView(BaseView):
                 for item in items:
                     DBSession.delete(item)
                     event = CampaignDeleted(self.request, item)
+                    event.registry()
+                    event = ResourceDeleted(self.request, item)
                     event.registry()
                 DBSession.flush()
             except Exception, e:

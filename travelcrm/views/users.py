@@ -21,10 +21,11 @@ from ..forms.users import (
 )
 from ..lib.events.users import (
     UserCreated,
-    UserEdited,
-    UserDeleted
 )
-
+from ..lib.events.resources import (
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 log = logging.getLogger(__name__)
 
@@ -108,7 +109,7 @@ class UsersView(BaseView):
             DBSession.flush()
 
             event = UserCreated(self.request, user)
-            self.request.registry.notify(event)
+            event.registry()
 
             return {
                 'success_message': _(u'Saved'),
@@ -145,8 +146,8 @@ class UsersView(BaseView):
         if form.validate():
             form.submit(user)
 
-            event = UserEdited(self.request, user)
-            self.request.registry.notify(event)
+            event = ResourceChanged(self.request, user)
+            event.registry()
 
             return {
                 'success_message': _(u'Saved'),
@@ -207,8 +208,8 @@ class UsersView(BaseView):
                 items = DBSession.query(User).filter(User.id.in_(ids))
                 for item in items:
                     DBSession.delete(item)
-                    event = UserDeleted(self.request, item)
-                    self.request.registry.notify(event)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True
@@ -277,8 +278,8 @@ class UsersView(BaseView):
         if form.validate():
             form.submit(user)
 
-            event = UserEdited(self.request, user)
-            self.request.registry.notify(event)
+            event = ResourceChanged(self.request, user)
+            event.registry()
 
             return {
                 'success_message': _(u'Saved'),

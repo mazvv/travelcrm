@@ -16,6 +16,11 @@ from ..forms.transports import (
     TransportSearchForm,
     TransportAssignForm,
 )
+from ..lib.events.resources import (
+    ResourceCreated,
+    ResourceChanged,
+    ResourceDeleted,
+)
 
 
 log = logging.getLogger(__name__)
@@ -97,6 +102,8 @@ class TransportsView(BaseView):
             transport = form.submit()
             DBSession.add(transport)
             DBSession.flush()
+            event = ResourceCreated(self.request, transport)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': transport.id
@@ -131,6 +138,8 @@ class TransportsView(BaseView):
         form = TransportForm(self.request)
         if form.validate():
             form.submit(transport)
+            event = ResourceChanged(self.request, transport)
+            event.registry()
             return {
                 'success_message': _(u'Saved'),
                 'response': transport.id
@@ -192,6 +201,8 @@ class TransportsView(BaseView):
                 )
                 for item in items:
                     DBSession.delete(item)
+                    event = ResourceDeleted(self.request, item)
+                    event.registry()
                 DBSession.flush()
             except:
                 errors=True
