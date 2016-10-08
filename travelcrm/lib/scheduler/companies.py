@@ -13,7 +13,9 @@ from pyramid.renderers import render
 
 from ...models import DBSession
 from ...models.company import Company
+from ...models.user import User
 from ...lib.scheduler import scheduler
+from ...lib.utils.sql_utils import set_search_path
 from ...lib.utils.common_utils import gen_id
 from ...lib.utils.companies_utils import (
     create_company_schema, generate_company_schema
@@ -55,9 +57,11 @@ def _notification_callback(
 
     if event.code == EVENT_JOB_EXECUTED:
         subject = _(u'Company created')
+        set_search_path(subdomain)
+        user = DBSession.query(User).first()
         html = render(
             'travelcrm:templates/companies/email_success.mako',
-            {'subdomain': subdomain},
+            {'subdomain': subdomain, 'user': user},
             request=request,
         )
     mailer = mailer_factory_from_settings(request.registry.settings)
