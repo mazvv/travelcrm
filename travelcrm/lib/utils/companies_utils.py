@@ -7,6 +7,7 @@ from sqlalchemy.schema import CreateSchema
 
 from ...models import DBSession, Base
 from ...models.company import Company
+from ...models.user import User
 from ...lib import EnumInt
 from ..utils.sql_utils import (
     set_search_path,
@@ -17,6 +18,7 @@ from ..utils.common_utils import (
     get_public_domain as u_get_public_domain, 
     get_public_subdomain,
     get_multicompanies,
+    gen_id
 )
 
 
@@ -26,7 +28,7 @@ SOURCE_SCHEMA = 'company'
 SEQUENCE_NAME = 'companies_counter'
 TABLES = (
     'appointment', 'company', 'country', 'currency', 'employee', 
-    'navigation', 'permision', 'resource', 'resource_log', 'position',
+    'navigation', 'permision', 'resource', 'position',
     'resource_type', 'service', 'structure', 'user'
 )
 
@@ -86,6 +88,11 @@ def transfer_data(schema_name, locale=None):
                 % (table.name, max_id[0] or 1)
             )
         DBSession.execute('alter table "%s" enable trigger all' % table.name)
+
+    # set new users passwords
+    users = DBSession.query(User).all()
+    for user in users:
+        user.password = gen_id()
 
 
 def get_public_domain():

@@ -60,7 +60,6 @@ def _notification_callback(
             {'subdomain': subdomain},
             request=request,
         )
-
     mailer = mailer_factory_from_settings(request.registry.settings)
     message = Message(
         subject=subject,
